@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, SimpleChanges, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as L from 'leaflet';
 import { Excursion } from './excursion.model';
@@ -9,13 +9,25 @@ import { Excursion } from './excursion.model';
   imports: [CommonModule],
   template: `<div id="map" class="h-full w-full rounded-lg shadow-md border"></div>`
 })
-export class MapComponent implements OnChanges, AfterViewInit {
+export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
+  private host = inject(ElementRef<HTMLElement>);
   @Input() excursions: Excursion[] = [];
   private map!: L.Map;
   private markers: L.Marker[] = [];
+  private resizeObserver?: ResizeObserver;
 
   ngAfterViewInit() {
     this.initMap();
+    if (typeof ResizeObserver === 'undefined') {
+      return;
+    }
+    this.resizeObserver = new ResizeObserver(() => this.map.invalidateSize());
+    this.resizeObserver.observe(this.host.nativeElement);
+  }
+
+  ngOnDestroy() {
+    this.resizeObserver?.disconnect();
+    this.map?.remove();
   }
 
   ngOnChanges(changes: SimpleChanges) {

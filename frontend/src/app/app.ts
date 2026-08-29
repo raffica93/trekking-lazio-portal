@@ -20,7 +20,7 @@ registerLocaleData(localeIt);
   template: `
     <div class="flex h-dvh flex-col overflow-hidden bg-stone-100 text-slate-900">
       <!-- Header -->
-      <header class="z-10 border-b border-emerald-950/20 bg-emerald-900 px-3 py-3 text-white shadow-lg md:px-6">
+      <header class="z-20 border-b border-emerald-950/20 bg-emerald-900 px-3 py-3 text-white shadow-lg md:px-6">
         <div class="mx-auto flex max-w-screen-2xl items-center justify-between gap-3">
           <div class="flex min-w-0 items-center gap-2">
             <span class="truncate text-lg font-black tracking-[-0.04em] md:text-2xl">TREKKING LAZIO</span>
@@ -44,6 +44,23 @@ registerLocaleData(localeIt);
           </nav>
         </div>
       </header>
+
+      <!-- Filters sit under the header and push calendar/map down -->
+      <section
+        class="z-10 w-full shrink-0 border-b border-stone-200 bg-white"
+        aria-label="Filtri"
+      >
+        <div class="mx-auto flex w-full max-w-screen-2xl flex-col gap-2 px-3 py-3 md:flex-row md:items-center md:gap-4 md:px-6">
+          <p class="text-[10px] font-black uppercase tracking-[0.18em] text-slate-500">Difficoltà del percorso</p>
+          <div class="flex min-w-0 flex-wrap gap-1.5" role="group" aria-label="Filtra per difficoltà">
+            <button type="button" class="filter-chip" [class.filter-chip-active]="activeCategory === 'all'" (click)="resetFilters()">Tutte</button>
+            <button type="button" class="filter-chip" [class.filter-chip-active]="activeCategory === 'T'" (click)="filterByCategory('T')">T</button>
+            <button type="button" class="filter-chip" [class.filter-chip-active]="activeCategory === 'E'" (click)="filterByCategory('E')">E</button>
+            <button type="button" class="filter-chip" [class.filter-chip-active]="activeCategory === 'EE'" (click)="filterByCategory('EE')">EE</button>
+            <button type="button" class="filter-chip" [class.filter-chip-active]="activeCategory === 'EEA'" (click)="filterByCategory('EEA')">EEA</button>
+          </div>
+        </div>
+      </section>
 
       <!-- Main Content -->
       <main class="flex min-h-0 flex-1 overflow-hidden">
@@ -86,20 +103,6 @@ registerLocaleData(localeIt);
           [ngClass]="activeView === 'map' ? 'flex' : 'hidden md:flex'"
         >
           <app-map [excursions]="excursions" class="h-full w-full"></app-map>
-          
-          <!-- Quick filters overlay -->
-          <div class="absolute left-3 right-3 top-3 z-[1000] md:left-auto md:right-4 md:top-4">
-             <div class="rounded-xl border border-white/70 bg-white/95 p-3 shadow-xl backdrop-blur md:w-72">
-                <h4 class="mb-2 text-[10px] font-black uppercase tracking-[0.18em] text-slate-500">Difficoltà del percorso</h4>
-                <div class="flex flex-wrap gap-1.5" aria-label="Filtra per difficoltà">
-                   <button type="button" class="filter-chip" [class.filter-chip-active]="activeCategory === 'all'" (click)="resetFilters()">Tutte</button>
-                   <button type="button" class="filter-chip" [class.filter-chip-active]="activeCategory === 'T'" (click)="filterByCategory('T')">T</button>
-                   <button type="button" class="filter-chip" [class.filter-chip-active]="activeCategory === 'E'" (click)="filterByCategory('E')">E</button>
-                   <button type="button" class="filter-chip" [class.filter-chip-active]="activeCategory === 'EE'" (click)="filterByCategory('EE')">EE</button>
-                   <button type="button" class="filter-chip" [class.filter-chip-active]="activeCategory === 'EEA'" (click)="filterByCategory('EEA')">EEA</button>
-                </div>
-             </div>
-          </div>
         </section>
       </main>
     </div>
@@ -114,7 +117,8 @@ registerLocaleData(localeIt);
       border: 1px solid rgb(203 213 225);
       border-radius: 9999px;
       background: white;
-      padding: 0.35rem 0.7rem;
+      min-height: 2rem;
+      padding: 0.4rem 0.85rem;
       color: rgb(51 65 85);
       font-size: 0.75rem;
       font-weight: 800;

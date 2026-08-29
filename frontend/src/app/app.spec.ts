@@ -40,10 +40,23 @@ describe('App', () => {
     });
 
     const app = fixture.componentInstance;
+    const compiled = fixture.nativeElement as HTMLElement;
+    const header = compiled.querySelector('header');
+    const filters = compiled.querySelector('[aria-label="Filtri"]');
+
     expect(app.allExcursions[0].link).toBe('https://example.com/e');
-    app.filterByCategory('EEA');
+    expect(filters).toBeTruthy();
+    expect(header?.nextElementSibling).toBe(filters);
+    expect(compiled.querySelector('app-map')?.querySelector('[aria-label="Filtri"]')).toBeNull();
+
+    const eea = Array.from(compiled.querySelectorAll('button')).find(button => button.textContent?.trim() === 'EEA') as HTMLButtonElement | undefined;
+    eea?.click();
+    fixture.detectChanges();
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['2']);
+    expect(eea?.classList.contains('filter-chip-active')).toBe(true);
+
     app.setView('map');
     expect(app.activeView).toBe('map');
+    expect(header?.nextElementSibling).toBe(filters);
   });
 });
