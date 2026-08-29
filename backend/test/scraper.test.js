@@ -25,3 +25,18 @@ test('parses a CAI Roma excursion table', () => {
   assert.equal(result[0].category, 'EE');
   assert.match(result[0].link, /\?p=123$/);
 });
+
+test('ignores past excursions and keeps the year from the month heading', () => {
+  const html = `
+    <table>
+      <tr><th>DICEMBRE 2026</th></tr>
+      <tr><td>Data/Mezzo</td><td>Percorso</td><td>Difficoltà</td><td>Accompagnatori</td><td>Note</td></tr>
+      <tr><td>dom 20 dic<br>auto</td><td>Simbruini<br>Monte Autore</td><td>E</td><td></td><td></td></tr>
+    </table>`;
+
+  const result = parseCaiRomaHtml(html, {
+    now: DateTime.fromISO('2026-01-01', { zone: 'Europe/Rome' })
+  });
+
+  assert.equal(result[0].date, '2026-12-20');
+});

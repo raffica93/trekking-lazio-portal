@@ -4,6 +4,8 @@ const crypto = require('node:crypto');
 const { DateTime } = require('luxon');
 
 const CAI_ROMA_URL = 'https://www.cairoma.it/?page_id=582';
+const DEFAULT_TIMEOUT_MS = 20_000;
+const DEFAULT_RETRIES = 3;
 
 const MONTHS = {
   GEN: 1, GENNAIO: 1, FEB: 2, FEBBRAIO: 2, MAR: 3, MARZO: 3,
@@ -91,12 +93,39 @@ function parseCaiRomaHtml(html, { now = DateTime.now() } = {}) {
     .sort((a, b) => a.date.localeCompare(b.date));
 }
 
-async function scrapeCaiRoma() {
-  const { data } = await axios.get(CAI_ROMA_URL, {
-    timeout: 15_000,
-    headers: { 'User-Agent': 'TrekkingLazioPortal/1.0 (+scheduled public-data refresh)' }
-  });
-  return parseCaiRomaHtml(data);
+async function scrapeCaiRoma({ retries = DEFAULT_RETRIES, timeout = DEFAULT_TIMEOUT_MS, now } = {}) {
+  let lastError;
+
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
+    try {
+      const response = await axios.get(CAI_ROMA_URL, {
+        timeout,
+        responseType: 'text',
+        validateStatus: (status) => status >= 200 && status < 300,
+        headers: {
+          Accept: 'text/html,application/xhtml+xml',
+          'User-Agent': 'TrekkingLazioPortal/1.1 (+scheduled public-data refresh)'
+        }
+      });
+
+      if (typeof response.data !== 'string' || response.data.length < 500) {
+        throw new Error('CAI Roma returned an empty or invalid HTML document');
+      }
+
+      const excursions = parseCaiRomaHtml(response.data, { now });
+      if (excursions.length === 0) {
+        throw new Error('CAI Roma HTML contained no upcoming excursions');
+      }
+      return excursions;
+    } catch (error) {
+      lastError = error;
+      if (attempt === retries) break;
+      const delay = 500 * 2 ** attempt;
+      await new Promise((resolve) => setTimeout(resolve, delay));
+    }
+  }
+
+  throw new Error(`CAI Roma scrape failed after ${retries + 1} attempts: ${lastError.message}`);
 }
 
 function getApproximateCoords(title) {

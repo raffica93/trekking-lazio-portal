@@ -16,7 +16,7 @@ describe('App', () => {
   it('should create the app', () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
-    TestBed.inject(HttpTestingController).expectOne('/api/excursions').flush([]);
+    TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({ excursions: [] });
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
@@ -26,6 +26,6 @@ describe('App', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('header')?.textContent).toContain('TREKKING LAZIO');
-    TestBed.inject(HttpTestingController).expectOne('/api/excursions').flush([]);
+    TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({ excursions: [] });
   });
 });

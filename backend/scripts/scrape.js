@@ -13,10 +13,10 @@ async function readExisting() {
 }
 
 async function main() {
-  const excursions = await scrapeCaiRoma();
-  if (excursions.length === 0) {
-    throw new Error('Scraping returned no upcoming excursions; cache left unchanged');
-  }
+  const excursions = await scrapeCaiRoma({
+    retries: Number(process.env.SCRAPE_RETRIES || 3),
+    timeout: Number(process.env.SCRAPE_TIMEOUT_MS || 20_000)
+  });
 
   const existing = await readExisting();
   if (JSON.stringify(existing?.excursions) === JSON.stringify(excursions)) {
@@ -34,7 +34,7 @@ async function main() {
   const temporaryPath = `${outputPath}.tmp`;
   await fs.writeFile(temporaryPath, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
   await fs.rename(temporaryPath, outputPath);
-  console.log(`Updated cache with ${excursions.length} upcoming excursions`);
+  console.log(`Updated cache with ${excursions.length} upcoming excursions from ${CAI_ROMA_URL}`);
 }
 
 main().catch((error) => {

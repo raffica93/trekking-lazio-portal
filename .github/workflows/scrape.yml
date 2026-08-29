@@ -26,17 +26,26 @@ jobs:
           cache-dependency-path: backend/package-lock.json
       - run: npm ci
         working-directory: backend
+      - name: Validate scraper
+        run: npm test
+        working-directory: backend
       - run: npm run scrape
         working-directory: backend
+        env:
+          SCRAPE_RETRIES: 4
+          SCRAPE_TIMEOUT_MS: 30000
+      - name: Sync static site data
+        shell: bash
+        run: cp backend/data/excursions.json frontend/public/excursions.json
       - name: Commit changed data
         shell: bash
         run: |
-          if git diff --quiet -- backend/data/excursions.json; then
+          if git diff --quiet -- backend/data/excursions.json frontend/public/excursions.json; then
             echo "Excursion data is unchanged"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add backend/data/excursions.json
+          git add backend/data/excursions.json frontend/public/excursions.json
           git commit -m "chore(data): refresh excursions"
           git push origin HEAD:main
