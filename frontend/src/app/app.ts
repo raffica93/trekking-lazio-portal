@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, LOCALE_ID } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject, LOCALE_ID } from '@angular/core';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import localeIt from '@angular/common/locales/it';
 import { ExcursionService } from './excursion.service';
@@ -92,6 +92,7 @@ registerLocaleData(localeIt);
 })
 export class App implements OnInit {
   private excursionService = inject(ExcursionService);
+  private changeDetector = inject(ChangeDetectorRef);
   
   allExcursions: Excursion[] = [];
   excursions: Excursion[] = [];
@@ -108,10 +109,12 @@ export class App implements OnInit {
         this.allExcursions = data;
         this.excursions = data;
         this.loading = false;
+        this.changeDetector.markForCheck();
       },
       error: (err) => {
         console.error('Error fetching data', err);
         this.loading = false;
+        this.changeDetector.markForCheck();
       }
     });
   }
