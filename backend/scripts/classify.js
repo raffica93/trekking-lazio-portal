@@ -1,6 +1,6 @@
 const fs = require('node:fs/promises');
 const path = require('node:path');
-const { enrichExcursions } = require('../classifier');
+const { enrichExcursions, resolveApiKey } = require('../classifier');
 
 const outputPath = path.join(__dirname, '..', 'data', 'excursions.json');
 const publicPath = path.join(__dirname, '..', '..', 'frontend', 'public', 'excursions.json');
@@ -56,7 +56,8 @@ function usage() {
   return [
     'Usage: npm run classify -- [--dry-run] [--limit N] [--id roma-...]',
     '',
-    'Enriches backend/data/excursions.json with Grok (XAI_API_KEY required).',
+    'Enriches backend/data/excursions.json with Grok.',
+    'Uses XAI_API_KEY, or the logged-in Grok CLI session in ~/.grok/auth.json.',
     'Does not run as part of the scheduled scrape.'
   ].join('\n');
 }
@@ -67,6 +68,7 @@ async function runClassify({
   classify,
   dataPath = outputPath,
   sitePath = publicPath,
+  grokHome,
   log = console
 } = {}) {
   const args = parseArgs(argv);
@@ -75,9 +77,11 @@ async function runClassify({
     return { args, skipped: true };
   }
 
-  if (!env.XAI_API_KEY) {
-    throw new Error('XAI_API_KEY is required to run the classifier');
+  const apiKey = resolveApiKey({ env, grokHome });
+  if (!apiKey) {
+    throw new Error('XAI_API_KEY is required (or a Grok CLI login in ~/.grok/auth.json)');
   }
+  log.log(env.XAI_API_KEY ? 'Using XAI_API_KEY' : 'Using Grok CLI session');
 
   const payload = await readPayload(dataPath);
   const existing = Array.isArray(payload.excursions) ? payload.excursions : [];
@@ -90,7 +94,7 @@ async function runClassify({
   }
 
   const result = await enrichExcursions(existing, existing, {
-    apiKey: env.XAI_API_KEY,
+    apiKey,
     model: env.XAI_MODEL,
     classify,
     limit: args.limit,
@@ -115,6 +119,11 @@ async function runClassify({
     ));
     log.log(JSON.stringify(changed.slice(0, args.limit || changed.length), null, 2));
     return { args, result, wrote: false, payload: nextPayload };
+  }
+
+  if (result.classified === 0) {
+    log.log('No enrichment changes');
+    return { args, result, wrote: false, payload };
   }
 
   await writeJsonAtomic(dataPath, nextPayload);

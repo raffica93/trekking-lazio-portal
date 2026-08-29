@@ -4,7 +4,9 @@ import localeIt from '@angular/common/locales/it';
 import { ExcursionService } from './excursion.service';
 import { Excursion } from './excursion.model';
 import { ExcursionCardComponent } from './excursion-card.component';
+import { FilterBarComponent } from './filter-bar.component';
 import { MapComponent } from './map.component';
+import { DEFAULT_FILTERS, FilterState, applyFilters } from './excursion-filters';
 
 registerLocaleData(localeIt);
 
@@ -14,6 +16,7 @@ registerLocaleData(localeIt);
   imports: [
     CommonModule,
     ExcursionCardComponent,
+    FilterBarComponent,
     MapComponent
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'it-IT' }],
@@ -45,21 +48,13 @@ registerLocaleData(localeIt);
         </div>
       </header>
 
-      <!-- Filters sit under the header and push calendar/map down -->
-      <section
-        class="z-10 w-full shrink-0 border-b border-stone-200 bg-white"
-        aria-label="Filtri"
-      >
-        <div class="mx-auto flex w-full max-w-screen-2xl flex-col gap-2 px-3 py-3 md:flex-row md:items-center md:gap-4 md:px-6">
-          <div class="flex min-w-0 flex-wrap gap-1.5" role="group" aria-label="Filtra per difficoltà">
-            <button type="button" class="filter-chip" [class.filter-chip-active]="activeCategory === 'all'" (click)="resetFilters()">Tutte</button>
-            <button type="button" class="filter-chip" data-diff="T" aria-label="Turistico" [class.filter-chip-active]="activeCategory === 'T'" (click)="filterByCategory('T')">T</button>
-            <button type="button" class="filter-chip" data-diff="E" aria-label="Escursionistico" [class.filter-chip-active]="activeCategory === 'E'" (click)="filterByCategory('E')">E</button>
-            <button type="button" class="filter-chip" data-diff="EE" aria-label="Esperti" [class.filter-chip-active]="activeCategory === 'EE'" (click)="filterByCategory('EE')">EE</button>
-            <button type="button" class="filter-chip" data-diff="EEA" aria-label="Attrezzatura" [class.filter-chip-active]="activeCategory === 'EEA'" (click)="filterByCategory('EEA')">EEA</button>
-          </div>
-        </div>
-      </section>
+      <app-filter-bar
+        class="z-10 w-full shrink-0"
+        [filters]="filters"
+        [allExcursions]="allExcursions"
+        [resultCount]="excursions.length"
+        (filtersChange)="onFiltersChange($event)"
+      ></app-filter-bar>
 
       <!-- Main Content -->
       <main class="flex min-h-0 flex-1 overflow-hidden">
@@ -83,8 +78,13 @@ registerLocaleData(localeIt);
                 [excursion]="ex"
               ></app-excursion-card>
               
-              <div *ngIf="excursions.length === 0" class="text-center p-8 text-slate-400">
-                Nessuna escursione trovata.
+              <div *ngIf="excursions.length === 0" class="text-center p-8 text-slate-500">
+                <p>Nessuna escursione con questi filtri.</p>
+                <button
+                  type="button"
+                  class="mt-3 text-sm font-bold text-emerald-800 underline"
+                  (click)="resetFilters()"
+                >Azzera filtri</button>
               </div>
             </ng-container>
           </div>
@@ -105,57 +105,6 @@ registerLocaleData(localeIt);
       display: block;
       height: 100vh;
     }
-
-    .filter-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      border: 1px solid rgb(203 213 225);
-      border-radius: 9999px;
-      background: white;
-      min-height: 2rem;
-      padding: 0.4rem 0.85rem;
-      color: rgb(51 65 85);
-      font-size: 0.75rem;
-      font-weight: 700;
-      line-height: 1;
-      transition: 150ms ease;
-    }
-
-    .filter-chip[data-diff] {
-      font-family: 'IBM Plex Mono', ui-monospace, sans-serif;
-    }
-
-    .filter-chip[data-diff]::before {
-      content: '';
-      width: 0.55rem;
-      height: 0.55rem;
-      border-radius: 999px;
-      background: var(--diff);
-      box-shadow: 0 0 0 2px color-mix(in srgb, var(--diff) 18%, white);
-    }
-
-    .filter-chip[data-diff='T'] { --diff: #2F9E6B; }
-    .filter-chip[data-diff='E'] { --diff: #2F6FBD; }
-    .filter-chip[data-diff='EE'] { --diff: #D4532B; }
-    .filter-chip[data-diff='EEA'] { --diff: #1C1917; }
-
-    .filter-chip:hover,
-    .filter-chip:focus-visible {
-      border-color: var(--diff, rgb(5 150 105));
-      outline: none;
-    }
-
-    .filter-chip-active {
-      border-color: var(--diff, rgb(6 78 59));
-      background: var(--diff, rgb(6 78 59));
-      color: white;
-    }
-
-    .filter-chip-active[data-diff]::before {
-      background: white;
-      box-shadow: none;
-    }
   `]
 })
 export class App implements OnInit {
@@ -166,7 +115,7 @@ export class App implements OnInit {
   excursions: Excursion[] = [];
   loading = true;
   activeView: 'calendar' | 'map' = 'calendar';
-  activeCategory = 'all';
+  filters: FilterState = { ...DEFAULT_FILTERS };
 
   ngOnInit() {
     this.fetchExcursions();
@@ -177,7 +126,7 @@ export class App implements OnInit {
     this.excursionService.getExcursions().subscribe({
       next: (data) => {
         this.allExcursions = data;
-        this.excursions = data;
+        this.applyFilters();
         this.loading = false;
         this.changeDetector.markForCheck();
       },
@@ -193,15 +142,17 @@ export class App implements OnInit {
     this.activeView = view;
   }
 
-  filterByCategory(category: string) {
-    this.activeCategory = category;
-    this.excursions = this.allExcursions.filter(ex =>
-      ex.category.toUpperCase().split(/[^A-Z]+/).includes(category)
-    );
+  onFiltersChange(filters: FilterState) {
+    this.filters = filters;
+    this.applyFilters();
   }
 
   resetFilters() {
-    this.activeCategory = 'all';
-    this.excursions = [...this.allExcursions];
+    this.filters = { ...DEFAULT_FILTERS };
+    this.applyFilters();
+  }
+
+  private applyFilters() {
+    this.excursions = applyFilters(this.allExcursions, this.filters);
   }
 }

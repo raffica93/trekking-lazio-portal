@@ -37,7 +37,7 @@ npm test
 npm run classify -- --limit 2 --dry-run
 ```
 
-Serve `XAI_API_KEY`. Flag utili: `--dry-run` (non scrive), `--limit N`, `--id roma-...`.
+Serve `XAI_API_KEY`, oppure una sessione Grok CLI già loggata (`~/.grok/auth.json`). Flag utili: `--dry-run` (non scrive), `--limit N`, `--id roma-...`.
 
 Senza `--dry-run` lo script aggiorna `backend/data/excursions.json` e, se presente, `frontend/public/excursions.json`. Le uscite già classificate (stesso id, titolo, data e località) vengono riusate e non costano una nuova chiamata.
 

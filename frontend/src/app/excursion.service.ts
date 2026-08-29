@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Excursion } from './excursion.model';
+import { normalizeExcursion } from './excursion-filters';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ExcursionService {
   getExcursions(): Observable<Excursion[]> {
     return this.http
       .get<{ excursions: Excursion[] }>(this.dataUrl)
-      .pipe(map((payload) => payload.excursions.map((excursion) => ({
+      .pipe(map((payload) => payload.excursions.map((excursion) => normalizeExcursion({
         ...excursion,
         link: excursion.link.replace(/^http:\/\//i, 'https://')
       }))));

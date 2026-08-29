@@ -1,3 +1,6 @@
+const fs = require('node:fs');
+const os = require('node:os');
+const path = require('node:path');
 const { DEFAULT_COORDS } = require('./scraper');
 
 const XAI_URL = 'https://api.x.ai/v1/responses';
@@ -153,6 +156,26 @@ function mergeEnrichment(scraped, enrichment = {}) {
     merged.distanceKm = enrichment.distanceKm;
   }
 
+  if (scraped.durationHours != null) {
+    merged.durationHours = scraped.durationHours;
+  } else if (enrichment.durationHours != null) {
+    merged.durationHours = enrichment.durationHours;
+  }
+
+  if (scraped.region && scraped.region !== 'Altro') {
+    merged.region = scraped.region;
+  } else if (enrichment.region) {
+    merged.region = enrichment.region;
+  }
+
+  if (scraped.dateEnd) merged.dateEnd = scraped.dateEnd;
+  if (scraped.days != null) merged.days = scraped.days;
+  if (scraped.costAmount != null) merged.costAmount = scraped.costAmount;
+  if (scraped.transport) merged.transport = scraped.transport;
+  if (scraped.privateCar === true || scraped.privateCar === false || scraped.privateCar === null) {
+    merged.privateCar = scraped.privateCar;
+  }
+
   return merged;
 }
 
@@ -197,6 +220,25 @@ function parseEnrichmentJson(raw) {
   return parsed;
 }
 
+function resolveApiKey({
+  env = process.env,
+  grokHome,
+  readFileSync = fs.readFileSync,
+  now = Date.now()
+} = {}) {
+  if (env.XAI_API_KEY) return env.XAI_API_KEY;
+
+  const home = grokHome || env.GROK_HOME || path.join(os.homedir(), '.grok');
+  try {
+    const auth = JSON.parse(readFileSync(path.join(home, 'auth.json'), 'utf8'));
+    const records = Object.values(auth || {}).filter((record) => record && record.key);
+    const fresh = records.find((record) => !record.expires_at || Date.parse(record.expires_at) > now);
+    return (fresh || records[0] || {}).key || null;
+  } catch {
+    return null;
+  }
+}
+
 function defaultSleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -206,9 +248,9 @@ function isRetryableStatus(status) {
 }
 
 async function classifyOne(excursion, options = {}) {
-  const apiKey = options.apiKey || process.env.XAI_API_KEY;
+  const apiKey = options.apiKey || resolveApiKey({ env: process.env, grokHome: options.grokHome });
   if (!apiKey) {
-    throw new Error('XAI_API_KEY is required');
+    throw new Error('XAI_API_KEY is required (or a Grok CLI login in ~/.grok/auth.json)');
   }
 
   const model = options.model || process.env.XAI_MODEL || DEFAULT_MODEL;
@@ -359,5 +401,6 @@ module.exports = {
   mergeEnrichment,
   parseEnrichmentJson,
   pickEnrichment,
+  resolveApiKey,
   userPrompt
 };

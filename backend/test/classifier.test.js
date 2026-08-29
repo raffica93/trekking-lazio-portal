@@ -10,7 +10,8 @@ const {
   extractOutputText,
   isReusableEnrichment,
   mergeEnrichment,
-  parseEnrichmentJson
+  parseEnrichmentJson,
+  resolveApiKey
 } = require('../classifier');
 const { parseArgs, runClassify } = require('../scripts/classify');
 const { DEFAULT_COORDS } = require('../scraper');
@@ -86,15 +87,30 @@ test('extractOutputText accepts output_text and message content', () => {
 });
 
 test('mergeEnrichment never overwrites the CAI category and prefers scraped km', () => {
-  const scraped = sampleExcursion({ category: 'EE', distanceKm: 13, lat: 41.891, lng: 12.492 });
+  const scraped = sampleExcursion({
+    category: 'EE',
+    distanceKm: 13,
+    durationHours: 6,
+    region: 'Lazio',
+    dateEnd: '2026-09-06',
+    days: 2,
+    lat: 41.891,
+    lng: 12.492
+  });
   const merged = mergeEnrichment(scraped, sampleEnrichment({
     category: 'T',
     distanceKm: 99,
+    durationHours: 9,
+    region: 'Abruzzo',
     summary: 'ok'
   }));
 
   assert.equal(merged.category, 'EE');
   assert.equal(merged.distanceKm, 13);
+  assert.equal(merged.durationHours, 6);
+  assert.equal(merged.region, 'Lazio');
+  assert.equal(merged.dateEnd, '2026-09-06');
+  assert.equal(merged.days, 2);
   assert.equal(merged.summary, 'ok');
   assert.equal(merged.lat, 42.4694);
 });
@@ -244,9 +260,94 @@ test('--id classifies only the requested excursion', async () => {
   assert.equal(result.excursions[1].summary, 'roma-two');
 });
 
+test('runClassify writes enrichment to the cache file', async () => {
+  const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'classify-'));
+  const dataPath = path.join(tempDir, 'excursions.json');
+  const siteDir = path.join(tempDir, 'public');
+  const sitePath = path.join(siteDir, 'excursions.json');
+  await fs.mkdir(siteDir, { recursive: true });
+  const original = {
+    source: 'https://www.cairoma.it/?page_id=582',
+    generatedAt: '2026-08-29T00:00:00.000Z',
+    excursions: [sampleExcursion()]
+  };
+  await fs.writeFile(dataPath, `${JSON.stringify(original, null, 2)}\n`);
+
+  const run = await runClassify({
+    argv: ['--limit', '1'],
+    env: { XAI_API_KEY: 'test-key' },
+    dataPath,
+    sitePath,
+    log: { log: () => {} },
+    classify: async () => sampleEnrichment({ summary: 'Scritto su disco.' })
+  });
+
+  assert.equal(run.wrote, true);
+  const saved = JSON.parse(await fs.readFile(dataPath, 'utf8'));
+  const published = JSON.parse(await fs.readFile(sitePath, 'utf8'));
+  assert.equal(saved.excursions[0].summary, 'Scritto su disco.');
+  assert.equal(saved.excursions[0].category, 'EE');
+  assert.equal(published.excursions[0].lat, 42.4694);
+});
+
+test('runClassify does not rewrite the cache when enrichment is unchanged', async () => {
+  const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'classify-'));
+  const dataPath = path.join(tempDir, 'excursions.json');
+  const sitePath = path.join(tempDir, 'missing-site', 'excursions.json');
+  const excursion = mergeEnrichment(sampleExcursion(), sampleEnrichment());
+  const original = {
+    source: 'https://www.cairoma.it/?page_id=582',
+    generatedAt: '2026-08-29T00:00:00.000Z',
+    excursions: [excursion]
+  };
+  await fs.writeFile(dataPath, `${JSON.stringify(original, null, 2)}\n`);
+  const before = await fs.readFile(dataPath, 'utf8');
+
+  const run = await runClassify({
+    argv: [],
+    env: { XAI_API_KEY: 'test-key' },
+    dataPath,
+    sitePath,
+    log: { log: () => {} },
+    classify: async () => {
+      throw new Error('should not classify cached rows');
+    }
+  });
+
+  assert.equal(run.wrote, false);
+  assert.equal(await fs.readFile(dataPath, 'utf8'), before);
+});
+
+test('resolveApiKey prefers XAI_API_KEY then a Grok CLI session', () => {
+  assert.equal(resolveApiKey({ env: { XAI_API_KEY: 'from-env' }, grokHome: os.tmpdir() }), 'from-env');
+  assert.equal(resolveApiKey({
+    env: {},
+    grokHome: path.join(os.tmpdir(), 'missing-grok-home'),
+    readFileSync: () => {
+      throw new Error('missing');
+    }
+  }), null);
+  assert.equal(resolveApiKey({
+    env: {},
+    grokHome: '/tmp/grok',
+    now: Date.parse('2026-08-29T18:00:00Z'),
+    readFileSync: () => JSON.stringify({
+      session: {
+        key: 'cli-token',
+        expires_at: '2026-08-29T23:00:00Z'
+      }
+    })
+  }), 'cli-token');
+});
+
 test('runClassify refuses to start without XAI_API_KEY', async () => {
   await assert.rejects(
-    () => runClassify({ argv: [], env: {}, dataPath: __filename }),
+    () => runClassify({
+      argv: [],
+      env: {},
+      dataPath: __filename,
+      grokHome: path.join(os.tmpdir(), 'missing-grok-home')
+    }),
     /XAI_API_KEY/
   );
 });

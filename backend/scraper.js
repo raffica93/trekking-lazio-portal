@@ -23,18 +23,135 @@ function cellLines($, cell) {
     .filter(Boolean);
 }
 
-function parseDate(value, year) {
-  const match = value.match(
-    /(?:da\s+)?(?:lun|mar|mer|gio|ven|sab|dom)\s+(\d{1,2})\s+(gen|feb|mar|apr|mag|giu|lug|ago|set|ott|nov|dic)/i
-  );
-  if (!match) return null;
+const DATE_TOKEN = /(?:lun|mar|mer|gio|ven|sab|dom)\s+(\d{1,2})\s+(gen|feb|mar|apr|mag|giu|lug|ago|set|ott|nov|dic)/gi;
 
-  const date = DateTime.fromObject({
+const REGION_RULES = [
+  { region: 'Estero', tests: [/turchia/, /lussemburgo/, /mullerthal/, /moselsteig/] },
+  { region: 'Sicilia', tests: [/pantelleria/, /sicilia/] },
+  { region: 'Sardegna', tests: [/supramonte/, /sardegna/, /baunei/] },
+  { region: 'Trentino-Alto Adige', tests: [/trentino/, /dolomiti/, /fiemme/, /fassa/] },
+  { region: 'Piemonte', tests: [/cozie/, /maira/, /piemonte/] },
+  { region: 'Toscana', tests: [/toscana/, /apuane/, /orcia/] },
+  { region: 'Umbria', tests: [/umbria/, /amerini/, /subasio/, /narni/, /gemini/] },
+  {
+    region: 'Abruzzo',
+    tests: [
+      /gran sasso/, /maiella/, /majella/, /marsicani/, /velino/, /sirente/,
+      /pnalm/, /mainarde/, /\bmeta\b/, /aterno/, /barrea/, /trabocchi/,
+      /sulmona/, /abruzzo/
+    ]
+  },
+  {
+    region: 'Lazio',
+    tests: [
+      /lucretili/, /ernici/, /aurunci/, /ausoni/, /lepini/, /sabini/, /reatini/,
+      /cicolano/, /simbruini/, /albani/, /tuscia/, /sabatini/, /duchessa/,
+      /nazzano/, /farfa/, /\blazio\b/
+    ]
+  }
+];
+
+function parseDate(value, year) {
+  const range = parseDateRange(value, year);
+  return range ? range.date : null;
+}
+
+function parseDateRange(value, year) {
+  const matches = [...String(value).matchAll(new RegExp(DATE_TOKEN.source, 'gi'))];
+  if (matches.length === 0) return null;
+
+  const startMonth = MONTHS[matches[0][2].toUpperCase()];
+  const start = DateTime.fromObject({
     year,
-    month: MONTHS[match[2].toUpperCase()],
-    day: Number(match[1])
-  });
-  return date.isValid ? date.toISODate() : null;
+    month: startMonth,
+    day: Number(matches[0][1])
+  }, { zone: 'Europe/Rome' });
+  if (!start.isValid) return null;
+
+  let end = start;
+  if (matches[1]) {
+    const endMonth = MONTHS[matches[1][2].toUpperCase()];
+    const endYear = endMonth < startMonth ? year + 1 : year;
+    const parsedEnd = DateTime.fromObject({
+      year: endYear,
+      month: endMonth,
+      day: Number(matches[1][1])
+    }, { zone: 'Europe/Rome' });
+    if (parsedEnd.isValid) end = parsedEnd;
+  }
+
+  return { date: start.toISODate(), dateEnd: end.toISODate() };
+}
+
+function tripDays(date, dateEnd) {
+  const start = DateTime.fromISO(date, { zone: 'Europe/Rome' });
+  const end = DateTime.fromISO(dateEnd, { zone: 'Europe/Rome' });
+  if (!start.isValid || !end.isValid) return 1;
+  return Math.max(1, Math.round(end.diff(start, 'days').days) + 1);
+}
+
+function hoursFromToken(token) {
+  const value = String(token).trim();
+  const clock = value.match(/^(\d+)[.,](\d{2})$/);
+  if (clock) {
+    const minutes = Number(clock[2]);
+    if (minutes < 60) return Number(clock[1]) + minutes / 60;
+  }
+  const parsed = Number(value.replace(',', '.'));
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function parseDurationHours(values) {
+  const texts = Array.isArray(values) ? values : [values];
+  for (const raw of texts) {
+    const value = String(raw);
+    if (!/\bore\b|\d\s*h\b/i.test(value)) continue;
+
+    const withMinutes = value.match(/(\d+)\s*h\s*(\d+)/i);
+    if (withMinutes) {
+      return Number(withMinutes[1]) + Number(withMinutes[2]) / 60;
+    }
+
+    const range = value.match(/(\d+(?:[.,]\d+)?)\s*[/\u2013-]\s*(\d+(?:[.,]\d+)?)/);
+    if (range) {
+      const high = hoursFromToken(range[2]);
+      if (high != null && high > 0) return high;
+    }
+
+    const clock = value.match(/(\d+[.,]\d{2})/);
+    if (clock) {
+      const hours = hoursFromToken(clock[1]);
+      if (hours != null && hours > 0) return hours;
+    }
+
+    const simple = value.match(/(\d+(?:[.,]\d+)?)/);
+    if (simple) {
+      const hours = hoursFromToken(simple[1]);
+      if (hours != null && hours > 0) return hours;
+    }
+  }
+  return undefined;
+}
+
+function parseCostAmount(cost) {
+  if (!cost || /vedi sito/i.test(String(cost))) return undefined;
+  const match = String(cost).match(/(\d+(?:[.,]\d+)?)/);
+  if (!match) return undefined;
+  const amount = Number(match[1].replace(',', '.'));
+  return Number.isFinite(amount) ? amount : undefined;
+}
+
+function foldText(value) {
+  return String(value)
+    .normalize('NFD')
+    .replace(/\p{M}/gu, '')
+    .toLowerCase();
+}
+
+function resolveRegion(...parts) {
+  const haystack = foldText(parts.filter(Boolean).join(' '));
+  const found = REGION_RULES.find((rule) => rule.tests.some((test) => test.test(haystack)));
+  return found ? found.region : 'Altro';
 }
 
 function stableId(date, title) {
@@ -50,6 +167,33 @@ function parseDistanceKm(details) {
     if (Number.isFinite(km) && km > 0) return km;
   }
   return undefined;
+}
+
+const DATE_FRAGMENT = /(?:da\s+)?(?:lun|mar|mer|gio|ven|sab|dom)\s+\d{1,2}\s+(?:gen|feb|mar|apr|mag|giu|lug|ago|set|ott|nov|dic)/gi;
+
+function classifyPrivateCar(transport) {
+  if (!transport) return null;
+  const folded = foldText(transport);
+  const hasPrivateCar = /auto\s*privat|auto\s*propr|mezzi\s*propr|\bmacchina\b|\bautomobile\b|\bauto\b/.test(folded);
+  if (hasPrivateCar) return true;
+  if (/pullman|\bbus\b|autobus|pulmino|treno|\baereo\b|nave|traghetto|mezzi\s+pubblic/.test(folded)) {
+    return false;
+  }
+  return null;
+}
+
+function parseTransport(value) {
+  const transport = String(value || '')
+    .replace(new RegExp(DATE_FRAGMENT.source, 'gi'), ' ')
+    .replace(/\ba\s+/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (!transport) {
+    return { transport: undefined, privateCar: null };
+  }
+
+  return { transport, privateCar: classifyPrivateCar(transport) };
 }
 
 function parseCaiRomaHtml(html, { now = DateTime.now() } = {}) {
@@ -70,8 +214,9 @@ function parseCaiRomaHtml(html, { now = DateTime.now() } = {}) {
     }
     if (cells.length < 5 || /Data\s*\/\s*Mezzo/i.test(firstCell)) return;
 
-    const date = parseDate(firstCell, currentYear);
-    if (!date) return;
+    const range = parseDateRange(firstCell, currentYear);
+    if (!range) return;
+    const { date, dateEnd } = range;
 
     const routeLines = cellLines($, cells[1]);
     if (routeLines.length === 0) return;
@@ -83,20 +228,31 @@ function parseCaiRomaHtml(html, { now = DateTime.now() } = {}) {
     const link = linkValue ? new URL(linkValue, CAI_ROMA_URL).href : CAI_ROMA_URL;
     const coords = getApproximateCoords(`${location} ${title}`);
     const distanceKm = parseDistanceKm(details);
+    const durationHours = parseDurationHours(details);
+    const cost = 'Vedi sito';
+    const costAmount = parseCostAmount(cost);
+    const { transport, privateCar } = parseTransport(firstCell);
 
     excursions.push({
       id: stableId(date, title),
       title,
       date,
+      dateEnd,
+      days: tripDays(date, dateEnd),
       category: details[0] || 'Escursionismo',
       link,
       organizer: 'CAI Roma',
       location,
+      region: resolveRegion(location, title),
       lat: coords.lat,
       lng: coords.lng,
-      cost: 'Vedi sito',
+      cost,
       time: details.find((value) => /\bore\b/i.test(value)) || 'Vedi sito',
-      ...(distanceKm != null ? { distanceKm } : {})
+      ...(transport ? { transport } : {}),
+      privateCar,
+      ...(durationHours != null ? { durationHours } : {}),
+      ...(distanceKm != null ? { distanceKm } : {}),
+      ...(costAmount != null ? { costAmount } : {})
     });
   });
 
@@ -168,6 +324,13 @@ module.exports = {
   CAI_ROMA_URL,
   DEFAULT_COORDS,
   parseCaiRomaHtml,
+  parseCostAmount,
+  parseDate,
+  parseDateRange,
   parseDistanceKm,
+  parseDurationHours,
+  parseTransport,
+  classifyPrivateCar,
+  resolveRegion,
   scrapeCaiRoma
 };

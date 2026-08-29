@@ -107,6 +107,12 @@ export class ExcursionCardComponent {
 
   get meta(): string {
     const parts = [this.excursion.location];
+    if (this.excursion.days && this.excursion.days > 1) {
+      parts.push(`${this.excursion.days} giorni`);
+    }
+    if (this.excursion.transport && this.isUseful(this.excursion.transport)) {
+      parts.push(this.excursion.transport);
+    }
     if (this.excursion.distanceKm != null) {
       parts.push(`${this.excursion.distanceKm} km`);
     }
