@@ -1,0 +1,42 @@
+name: Refresh excursion data
+
+on:
+  schedule:
+    - cron: '17 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scheduled-scraping
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - run: npm ci
+        working-directory: backend
+      - run: npm run scrape
+        working-directory: backend
+      - name: Commit changed data
+        shell: bash
+        run: |
+          if git diff --quiet -- backend/data/excursions.json; then
+            echo "Excursion data is unchanged"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add backend/data/excursions.json
+          git commit -m "chore(data): refresh excursions"
+          git push origin HEAD:main

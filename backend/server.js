@@ -1,92 +1,53 @@
 const express = require('express');
 const cors = require('cors');
+const fs = require('node:fs');
+const path = require('node:path');
 const { scrapeCaiRoma } = require('./scraper');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const DATA_FILE = path.join(__dirname, 'data', 'excursions.json');
 
-app.use(cors());
+app.use(cors({ origin: process.env.CORS_ORIGIN || true }));
 app.use(express.json());
 
-// Enhanced mock data for CAI Roma as fallback
-function getRomaMocks() {
-  return [
-    {
-      id: 'roma-mock-1',
-      title: 'Tuscia: Anello da Oriolo sui Monti Sabatini',
-      date: '2026-03-14',
-      category: 'MTB',
-      link: 'https://www.cairoma.it/escursioni/programma-escursioni/',
-      organizer: 'CAI Roma',
-      location: 'Sabatini',
-      lat: 42.138,
-      lng: 12.235,
-      cost: 'Soci CAI',
-      time: '08:30'
-    },
-    {
-      id: 'roma-mock-2',
-      title: 'Monti Lucretili: Giro del Parco',
-      date: '2026-03-21',
-      category: 'MTB',
-      link: 'https://www.cairoma.it/escursioni/programma-escursioni/',
-      organizer: 'CAI Roma',
-      location: 'Monti Lucretili',
-      lat: 42.148,
-      lng: 12.894,
-      cost: 'Soci CAI',
-      time: '08:00'
-    }
-  ];
-}
-
-function generateMockExcursions() {
-  const sections = ['CAI Viterbo', 'CAI Latina', 'CAI Rieti', 'CAI Frosinone'];
-  const extra = [];
-  const locations = [
-    { name: 'Cimini', lat: 42.368, lng: 12.182 },
-    { name: 'Semprevisa', lat: 41.566, lng: 13.067 },
-    { name: 'Terminillo', lat: 42.483, lng: 12.984 },
-    { name: 'Ernici', lat: 41.802, lng: 13.486 }
-  ];
-
-  for (let i = 0; i < 8; i++) {
-    const section = sections[i % sections.length];
-    const loc = locations[i % locations.length];
-    const date = new Date();
-    date.setDate(date.getDate() + (i * 2) + 5);
-    
-    extra.push({
-      id: 100 + i,
-      title: `Escursione sui ${loc.name}`,
-      date: date.toISOString().split('T')[0],
-      category: 'Escursionismo',
-      link: '#',
-      organizer: section,
-      location: loc.name,
-      lat: loc.lat,
-      lng: loc.lng,
-      cost: '15€',
-      time: '07:30'
-    });
-  }
-  return extra;
-}
-
-app.get('/api/excursions', async (req, res) => {
+function readCachedExcursions() {
   try {
-    let caiRoma = await scrapeCaiRoma();
-    if (caiRoma.length === 0) {
-      caiRoma = getRomaMocks();
+    const payload = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+    return Array.isArray(payload.excursions) ? payload.excursions : [];
+  } catch {
+    return [];
+  }
+}
+
+app.get('/health', (_req, res) => {
+  res.json({ status: 'ok' });
+});
+
+app.get('/api/excursions', async (_req, res) => {
+  const cached = readCachedExcursions();
+  if (cached.length > 0) {
+    res.set('X-Data-Source', 'scheduled-cache');
+    return res.json(cached);
+  }
+
+  try {
+    const excursions = await scrapeCaiRoma();
+    if (excursions.length === 0) {
+      return res.status(503).json({ error: 'No excursion data available' });
     }
-    const mock = generateMockExcursions();
-    const all = [...caiRoma, ...mock].sort((a, b) => new Date(a.date) - new Date(b.date));
-    res.json(all);
+    res.set('X-Data-Source', 'live-scrape');
+    return res.json(excursions);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch excursions' });
+    console.error('Unable to load excursions:', error.message);
+    return res.status(503).json({ error: 'Excursion data temporarily unavailable' });
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
+}
+
+module.exports = { app, readCachedExcursions };

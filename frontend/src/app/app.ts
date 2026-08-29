@@ -5,7 +5,6 @@ import { ExcursionService } from './excursion.service';
 import { Excursion } from './excursion.model';
 import { ExcursionCardComponent } from './excursion-card.component';
 import { MapComponent } from './map.component';
-import { HlmScrollArea } from '@spartan-ng/helm/scroll-area';
 import { HlmButton } from '@spartan-ng/helm/button';
 
 registerLocaleData(localeIt);
@@ -17,7 +16,6 @@ registerLocaleData(localeIt);
     CommonModule,
     ExcursionCardComponent,
     MapComponent,
-    HlmScrollArea,
     HlmButton
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'it-IT' }],
@@ -46,7 +44,7 @@ registerLocaleData(localeIt);
             <p class="text-sm text-slate-500">Aggiornato da CAI Lazio</p>
           </div>
           
-          <hlm-scroll-area class="flex-1 p-4">
+          <div class="flex-1 p-4 overflow-y-auto">
             <div *ngIf="loading" class="flex justify-center p-8">
                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-700"></div>
             </div>
@@ -61,7 +59,7 @@ registerLocaleData(localeIt);
                 Nessuna escursione trovata.
               </div>
             </ng-container>
-          </hlm-scroll-area>
+          </div>
         </aside>
 
         <!-- Map -->

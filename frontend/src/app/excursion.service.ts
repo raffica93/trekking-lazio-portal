@@ -8,7 +8,7 @@ import { Excursion } from './excursion.model';
 })
 export class ExcursionService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000/api/excursions';
+  private apiUrl = '/api/excursions';
 
   getExcursions(): Observable<Excursion[]> {
     return this.http.get<Excursion[]>(this.apiUrl);

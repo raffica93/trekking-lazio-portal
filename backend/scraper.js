@@ -1,69 +1,105 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const crypto = require('node:crypto');
 const { DateTime } = require('luxon');
 
-async function scrapeCaiRoma() {
-  try {
-    const url = 'https://www.cairoma.it/escursioni/programma-escursioni/';
-    const { data } = await axios.get(url);
-    const $ = cheerio.load(data);
-    const excursions = [];
+const CAI_ROMA_URL = 'https://www.cairoma.it/?page_id=582';
 
-    // The data is usually in tables
-    $('table tr').each((i, el) => {
-      if (i === 0) return; // Skip header
+const MONTHS = {
+  GEN: 1, GENNAIO: 1, FEB: 2, FEBBRAIO: 2, MAR: 3, MARZO: 3,
+  APR: 4, APRILE: 4, MAG: 5, MAGGIO: 5, GIU: 6, GIUGNO: 6,
+  LUG: 7, LUGLIO: 7, AGO: 8, AGOSTO: 8, SET: 9, SETTEMBRE: 9,
+  OTT: 10, OTTOBRE: 10, NOV: 11, NOVEMBRE: 11, DIC: 12, DICEMBRE: 12
+};
 
-      const tds = $(el).find('td');
-      if (tds.length < 2) return;
-
-      const dateStr = $(tds[0]).text().trim(); // E.g. "15 MAR"
-      const title = $(tds[1]).text().trim();
-      const link = $(tds[1]).find('a').attr('href') || '#';
-      
-      if (!title || title.toLowerCase().includes('programma')) return;
-
-      // Parsing date (CAI Roma often uses "15 MAR" or similar)
-      let date = DateTime.now();
-      try {
-        const months = {
-          'GEN': 1, 'FEB': 2, 'MAR': 3, 'APR': 4, 'MAG': 5, 'GIU': 6,
-          'LUGLIO': 7, 'AGO': 8, 'SET': 9, 'OTT': 10, 'NOV': 11, 'DIC': 12,
-          'LUG': 7, 'DIC': 12 // common short versions
-        };
-        const parts = dateStr.split(/[\s-]+/);
-        if (parts.length >= 2) {
-          const day = parseInt(parts[0]);
-          const monthStr = parts[1].toUpperCase();
-          const month = months[monthStr] || 3; // Fallback to March for now
-          date = DateTime.fromObject({ year: 2026, month, day });
-        }
-      } catch (e) {}
-
-      const coords = getMockCoords(title);
-
-      excursions.push({
-        id: `roma-${i}`,
-        title,
-        date: date.isValid ? date.toISODate() : DateTime.now().toISODate(),
-        category: 'Escursionismo',
-        link: link.startsWith('http') ? link : `https://www.cairoma.it${link}`,
-        organizer: 'CAI Roma',
-        location: coords.name,
-        lat: coords.lat,
-        lng: coords.lng,
-        cost: 'Vedi sito',
-        time: '08:00'
-      });
-    });
-
-    return excursions;
-  } catch (error) {
-    console.error('Scraping failed:', error);
-    return [];
-  }
+function cellLines($, cell) {
+  const clone = $(cell).clone();
+  clone.find('br').replaceWith('\n');
+  return clone.text().split('\n')
+    .map((value) => value.replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
 }
 
-function getMockCoords(title) {
+function parseDate(value, year) {
+  const match = value.match(
+    /(?:da\s+)?(?:lun|mar|mer|gio|ven|sab|dom)\s+(\d{1,2})\s+(gen|feb|mar|apr|mag|giu|lug|ago|set|ott|nov|dic)/i
+  );
+  if (!match) return null;
+
+  const date = DateTime.fromObject({
+    year,
+    month: MONTHS[match[2].toUpperCase()],
+    day: Number(match[1])
+  });
+  return date.isValid ? date.toISODate() : null;
+}
+
+function stableId(date, title) {
+  const hash = crypto.createHash('sha256').update(`${date}|${title}`).digest('hex').slice(0, 12);
+  return `roma-${hash}`;
+}
+
+function parseCaiRomaHtml(html, { now = DateTime.now() } = {}) {
+  const $ = cheerio.load(html);
+  const excursions = [];
+  let currentYear = now.year;
+
+  $('table').slice(0, 2).find('tr').each((_index, row) => {
+    const cells = $(row).find('td, th');
+    const firstCell = $(cells[0]).text().replace(/\s+/g, ' ').trim();
+    const heading = firstCell.match(
+      /^(GENNAIO|FEBBRAIO|MARZO|APRILE|MAGGIO|GIUGNO|LUGLIO|AGOSTO|SETTEMBRE|OTTOBRE|NOVEMBRE|DICEMBRE)\s+(\d{4})$/i
+    );
+
+    if (heading) {
+      currentYear = Number(heading[2]);
+      return;
+    }
+    if (cells.length < 5 || /Data\s*\/\s*Mezzo/i.test(firstCell)) return;
+
+    const date = parseDate(firstCell, currentYear);
+    if (!date) return;
+
+    const routeLines = cellLines($, cells[1]);
+    if (routeLines.length === 0) return;
+
+    const location = routeLines[0];
+    const title = routeLines.slice(1).join(' — ') || location;
+    const details = cellLines($, cells[2]);
+    const linkValue = $(cells[1]).find('a').first().attr('href');
+    const link = linkValue ? new URL(linkValue, CAI_ROMA_URL).href : CAI_ROMA_URL;
+    const coords = getApproximateCoords(`${location} ${title}`);
+
+    excursions.push({
+      id: stableId(date, title),
+      title,
+      date,
+      category: details[0] || 'Escursionismo',
+      link,
+      organizer: 'CAI Roma',
+      location,
+      lat: coords.lat,
+      lng: coords.lng,
+      cost: 'Vedi sito',
+      time: details.find((value) => /\bore\b/i.test(value)) || 'Vedi sito'
+    });
+  });
+
+  const today = now.startOf('day').toISODate();
+  return excursions
+    .filter((excursion) => excursion.date >= today)
+    .sort((a, b) => a.date.localeCompare(b.date));
+}
+
+async function scrapeCaiRoma() {
+  const { data } = await axios.get(CAI_ROMA_URL, {
+    timeout: 15_000,
+    headers: { 'User-Agent': 'TrekkingLazioPortal/1.0 (+scheduled public-data refresh)' }
+  });
+  return parseCaiRomaHtml(data);
+}
+
+function getApproximateCoords(title) {
   const locations = [
     { name: 'Monti Lucretili', lat: 42.148, lng: 12.894 },
     { name: 'Sperlonga', lat: 41.258, lng: 13.433 },
@@ -74,13 +110,16 @@ function getMockCoords(title) {
     { name: 'Tuscia', lat: 42.417, lng: 12.101 },
     { name: 'Sabatini', lat: 42.138, lng: 12.235 },
     { name: 'Cicolano', lat: 42.235, lng: 13.254 },
-    { name: 'S. Severa', lat: 42.023, lng: 11.954 },
-    { name: 'Terni', lat: 42.563, lng: 12.641 },
+    { name: 'Reatini', lat: 42.483, lng: 12.984 },
+    { name: 'Ernici', lat: 41.802, lng: 13.486 },
+    { name: 'Lepini', lat: 41.566, lng: 13.067 },
     { name: 'Sora', lat: 41.716, lng: 13.612 }
   ];
 
-  const found = locations.find(l => title.toLowerCase().includes(l.name.toLowerCase()));
-  return found || { name: 'Lazio', lat: 41.891, lng: 12.492 };
+  const found = locations.find((location) =>
+    title.toLowerCase().includes(location.name.toLowerCase())
+  );
+  return found || { lat: 41.891, lng: 12.492 };
 }
 
-module.exports = { scrapeCaiRoma };
+module.exports = { CAI_ROMA_URL, parseCaiRomaHtml, scrapeCaiRoma };
