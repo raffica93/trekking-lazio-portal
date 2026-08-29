@@ -18,23 +18,23 @@ import { HlmButton } from '@spartan-ng/helm/button';
     HlmButton
   ],
   template: `
-    <div hlmCard class="mb-4">
+    <article hlmCard class="mb-3 overflow-hidden border-stone-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
       <div hlmCardHeader>
-        <h3 hlmCardTitle class="text-lg font-bold">{{ excursion.title }}</h3>
-        <p hlmCardDescription>{{ excursion.date | date:'fullDate':'':'it' }} - {{ excursion.organizer }}</p>
+        <p class="mb-2 text-[10px] font-black uppercase tracking-[0.16em] text-emerald-700">{{ excursion.category }} · {{ excursion.organizer }}</p>
+        <h3 hlmCardTitle class="text-lg font-black leading-snug tracking-tight text-slate-900">{{ excursion.title }}</h3>
+        <p hlmCardDescription class="mt-1 capitalize">{{ excursion.date | date:'fullDate':'':'it' }}</p>
       </div>
       <div hlmCardContent>
-        <div class="flex flex-col gap-1 text-sm">
+        <div class="flex flex-col gap-1.5 text-sm text-slate-600">
           <p><strong>Località:</strong> {{ excursion.location }}</p>
-          <p><strong>Categoria:</strong> {{ excursion.category }}</p>
           <p><strong>Costo:</strong> {{ excursion.cost }}</p>
           <p><strong>Orario:</strong> {{ excursion.time }}</p>
         </div>
       </div>
       <div hlmCardFooter class="flex justify-end">
-        <a [href]="excursion.link" target="_blank" hlmBtn variant="outline" size="sm">Dettagli</a>
+        <a [href]="excursion.link" target="_blank" rel="noopener noreferrer" hlmBtn variant="outline" size="sm">Apri dettagli</a>
       </div>
-    </div>
+    </article>
   `
 })
 export class ExcursionCardComponent {

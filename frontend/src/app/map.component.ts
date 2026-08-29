@@ -43,9 +43,17 @@ export class MapComponent implements OnChanges, AfterViewInit {
     this.markers.forEach(m => m.remove());
     this.markers = [];
 
-    this.excursions.forEach(ex => {
+    this.excursions.filter(ex => Number.isFinite(ex.lat) && Number.isFinite(ex.lng)).forEach(ex => {
+      const popup = document.createElement('div');
+      const title = document.createElement('strong');
+      const details = document.createElement('p');
+      title.textContent = ex.title;
+      details.textContent = `${ex.date} · ${ex.organizer}`;
+      details.style.margin = '0.25rem 0 0';
+      popup.append(title, details);
+
       const marker = L.marker([ex.lat, ex.lng])
-        .bindPopup(`<b>${ex.title}</b><br>${ex.date}<br>${ex.organizer}`)
+        .bindPopup(popup)
         .addTo(this.map);
       this.markers.push(marker);
     });

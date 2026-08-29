@@ -14,6 +14,9 @@ export class ExcursionService {
   getExcursions(): Observable<Excursion[]> {
     return this.http
       .get<{ excursions: Excursion[] }>(this.dataUrl)
-      .pipe(map((payload) => payload.excursions));
+      .pipe(map((payload) => payload.excursions.map((excursion) => ({
+        ...excursion,
+        link: excursion.link.replace(/^http:\/\//i, 'https://')
+      }))));
   }
 }
