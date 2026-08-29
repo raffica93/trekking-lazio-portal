@@ -9,6 +9,6 @@ import { classes } from '@spartan-ng/helm/utils';
 })
 export class HlmCardContent {
   constructor() {
-    classes(() => 'px-6 group-data-[size=sm]/card:px-4');
+    classes(() => 'px-3.5 pb-2 group-data-[size=sm]/card:px-3');
   }
 }

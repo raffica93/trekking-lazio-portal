@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "scrape": "node scripts/scrape.js",
+    "classify": "node scripts/classify.js",
     "test": "node --test"
   },
   "keywords": [],

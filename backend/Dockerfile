@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev
 
-COPY server.js scraper.js ./
+COPY server.js scraper.js classifier.js ./
 COPY scripts ./scripts
 COPY data ./data
 

@@ -34,7 +34,7 @@ describe('App', () => {
     fixture.detectChanges();
     TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({
       excursions: [
-        { id: '1', title: 'Sentiero facile', date: '2026-09-01', category: 'E', link: 'http://example.com/e', organizer: 'CAI Roma', location: 'Lazio', lat: 41.9, lng: 12.5, cost: 'Gratis', time: '3 ore' },
+        { id: '1', title: 'Sentiero facile', date: '2026-09-01', category: 'E', link: 'http://example.com/e', organizer: 'CAI Roma', location: 'Lazio', lat: 41.9, lng: 12.5, cost: 'Gratis', time: '3 ore', summary: 'Anello boschivo sui Colli Albani.', distanceKm: 8, elevationM: 948 },
         { id: '2', title: 'Ferrata', date: '2026-09-02', category: 'EEA', link: 'https://example.com/eea', organizer: 'CAI Roma', location: 'Lazio', lat: 42, lng: 13, cost: 'Gratis', time: '5 ore' }
       ]
     });
@@ -47,7 +47,15 @@ describe('App', () => {
     expect(app.allExcursions[0].link).toBe('https://example.com/e');
     expect(filters).toBeTruthy();
     expect(header?.nextElementSibling).toBe(filters);
+    expect(compiled.textContent).not.toContain('Prossime escursioni');
     expect(compiled.querySelector('app-map')?.querySelector('[aria-label="Filtri"]')).toBeNull();
+    expect(compiled.querySelector('[aria-label="Legenda difficoltà"]')).toBeTruthy();
+    expect(compiled.querySelector('[aria-label="Legenda difficoltà"]')?.textContent).toContain('Turistico');
+    fixture.detectChanges();
+    expect(compiled.textContent).not.toContain('Località:');
+    expect(compiled.querySelector('.difficulty-chip')?.textContent?.trim()).toBe('E');
+    expect(compiled.textContent).toContain('Anello boschivo sui Colli Albani.');
+    expect(compiled.textContent).toContain('8 km');
 
     const eea = Array.from(compiled.querySelectorAll('button')).find(button => button.textContent?.trim() === 'EEA') as HTMLButtonElement | undefined;
     eea?.click();

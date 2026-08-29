@@ -10,4 +10,15 @@ export interface Excursion {
   lng: number;
   cost: string;
   time: string;
+  distanceKm?: number | null;
+  elevationM?: number | null;
+  durationHours?: number | null;
+  mountainGroup?: string;
+  region?: string;
+  startPlace?: string;
+  coordinatesQuality?: string;
+  summary?: string;
+  activityType?: string;
+  terrain?: string;
+  difficultyNote?: string;
 }

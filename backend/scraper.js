@@ -6,6 +6,7 @@ const { DateTime } = require('luxon');
 const CAI_ROMA_URL = 'https://www.cairoma.it/?page_id=582';
 const DEFAULT_TIMEOUT_MS = 20_000;
 const DEFAULT_RETRIES = 3;
+const DEFAULT_COORDS = { lat: 41.891, lng: 12.492 };
 
 const MONTHS = {
   GEN: 1, GENNAIO: 1, FEB: 2, FEBBRAIO: 2, MAR: 3, MARZO: 3,
@@ -41,6 +42,16 @@ function stableId(date, title) {
   return `roma-${hash}`;
 }
 
+function parseDistanceKm(details) {
+  for (const value of details) {
+    const match = String(value).match(/(\d+(?:[.,]\d+)?)\s*km\b/i);
+    if (!match) continue;
+    const km = Number(match[1].replace(',', '.'));
+    if (Number.isFinite(km) && km > 0) return km;
+  }
+  return undefined;
+}
+
 function parseCaiRomaHtml(html, { now = DateTime.now() } = {}) {
   const $ = cheerio.load(html);
   const excursions = [];
@@ -71,6 +82,7 @@ function parseCaiRomaHtml(html, { now = DateTime.now() } = {}) {
     const linkValue = $(cells[1]).find('a').first().attr('href');
     const link = linkValue ? new URL(linkValue, CAI_ROMA_URL).href : CAI_ROMA_URL;
     const coords = getApproximateCoords(`${location} ${title}`);
+    const distanceKm = parseDistanceKm(details);
 
     excursions.push({
       id: stableId(date, title),
@@ -83,7 +95,8 @@ function parseCaiRomaHtml(html, { now = DateTime.now() } = {}) {
       lat: coords.lat,
       lng: coords.lng,
       cost: 'Vedi sito',
-      time: details.find((value) => /\bore\b/i.test(value)) || 'Vedi sito'
+      time: details.find((value) => /\bore\b/i.test(value)) || 'Vedi sito',
+      ...(distanceKm != null ? { distanceKm } : {})
     });
   });
 
@@ -148,7 +161,13 @@ function getApproximateCoords(title) {
   const found = locations.find((location) =>
     title.toLowerCase().includes(location.name.toLowerCase())
   );
-  return found || { lat: 41.891, lng: 12.492 };
+  return found || { ...DEFAULT_COORDS };
 }
 
-module.exports = { CAI_ROMA_URL, parseCaiRomaHtml, scrapeCaiRoma };
+module.exports = {
+  CAI_ROMA_URL,
+  DEFAULT_COORDS,
+  parseCaiRomaHtml,
+  parseDistanceKm,
+  scrapeCaiRoma
+};

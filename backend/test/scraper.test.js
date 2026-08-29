@@ -1,7 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const { DateTime } = require('luxon');
-const { parseCaiRomaHtml } = require('../scraper');
+const { parseCaiRomaHtml, parseDistanceKm } = require('../scraper');
 
 test('parses a CAI Roma excursion table', () => {
   const html = `
@@ -23,6 +23,8 @@ test('parses a CAI Roma excursion table', () => {
   assert.equal(result[0].date, '2026-09-20');
   assert.equal(result[0].location, 'Monti Reatini');
   assert.equal(result[0].category, 'EE');
+  assert.equal(result[0].distanceKm, 13);
+  assert.match(result[0].time, /6 ore/);
   assert.match(result[0].link, /\?p=123$/);
 });
 
@@ -39,4 +41,10 @@ test('ignores past excursions and keeps the year from the month heading', () => 
   });
 
   assert.equal(result[0].date, '2026-12-20');
+  assert.equal(result[0].distanceKm, undefined);
+});
+
+test('parseDistanceKm reads decimal values and ignores missing km', () => {
+  assert.equal(parseDistanceKm(['EE', '13,5 km']), 13.5);
+  assert.equal(parseDistanceKm(['E', '6 ore']), undefined);
 });
