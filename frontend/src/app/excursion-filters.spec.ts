@@ -1,4 +1,13 @@
-import { applyFilters, DEFAULT_FILTERS, normalizeExcursion, availableMonths, availableRegions } from './excursion-filters';
+import {
+  applyFilters,
+  DEFAULT_FILTERS,
+  extraFilterTags,
+  isNextWeekSelected,
+  nextWeekRange,
+  normalizeExcursion,
+  availableMonths,
+  availableRegions
+} from './excursion-filters';
 import { Excursion } from './excursion.model';
 
 function sample(overrides: Partial<Excursion> = {}): Excursion {
@@ -98,6 +107,15 @@ describe('excursion filters', () => {
     expect(applyFilters(list, { ...DEFAULT_FILTERS, privateCar: 'no' }).map((item) => item.id)).toEqual(['bus']);
     expect(applyFilters(list, { ...DEFAULT_FILTERS, privateCar: 'unknown' }).map((item) => item.id)).toEqual(['unknown']);
     expect(normalizeExcursion(sample({ transport: 'Mezzi Propri', privateCar: undefined })).privateCar).toBe(true);
+  });
+
+  it('treats next week as a date-range shortcut and lists extra tags', () => {
+    const now = new Date(2026, 7, 29);
+    const range = nextWeekRange(now);
+    expect(range).toEqual({ from: '2026-08-29', to: '2026-09-04' });
+    expect(isNextWeekSelected({ ...DEFAULT_FILTERS, dateFrom: range.from, dateTo: range.to }, now)).toBe(true);
+    expect(extraFilterTags({ ...DEFAULT_FILTERS, category: 'EEA', region: 'Lazio' }).map((tag) => tag.label))
+      .toEqual(['EEA', 'Lazio']);
   });
 
   it('lists months and regions from the dataset', () => {

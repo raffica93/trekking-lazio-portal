@@ -61,7 +61,7 @@ registerLocaleData(localeIt);
         <!-- Sidebar / List -->
         <aside
           class="h-full w-full flex-col border-r border-stone-200 bg-stone-50 md:w-[24rem] md:shrink-0 lg:w-[27rem]"
-          [ngClass]="activeView === 'calendar' ? 'flex' : 'hidden md:flex'"
+          [ngClass]="activeView === 'calendar' ? 'flex' : 'hidden'"
         >
           <div class="flex items-center justify-end border-b border-stone-200 bg-white px-4 py-2">
             <span class="rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-bold tabular-nums text-emerald-900">{{ excursions.length }}</span>
@@ -140,6 +140,7 @@ export class App implements OnInit {
 
   setView(view: 'calendar' | 'map') {
     this.activeView = view;
+    this.changeDetector.markForCheck();
   }
 
   onFiltersChange(filters: FilterState) {
@@ -154,5 +155,6 @@ export class App implements OnInit {
 
   private applyFilters() {
     this.excursions = applyFilters(this.allExcursions, this.filters);
+    this.changeDetector.markForCheck();
   }
 }

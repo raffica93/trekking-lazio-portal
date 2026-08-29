@@ -59,6 +59,9 @@ describe('App', () => {
     expect(compiled.textContent).toContain('Anello boschivo sui Colli Albani.');
     expect(compiled.textContent).toContain('8 km');
 
+    const more = Array.from(compiled.querySelectorAll('button')).find(button => button.textContent?.includes('Altri filtri')) as HTMLButtonElement;
+    more.click();
+    fixture.detectChanges();
     const eea = Array.from(compiled.querySelectorAll('button')).find(button => button.textContent?.trim() === 'EEA') as HTMLButtonElement | undefined;
     eea?.click();
     fixture.detectChanges();
@@ -67,6 +70,8 @@ describe('App', () => {
 
     app.setView('map');
     expect(app.activeView).toBe('map');
+    fixture.detectChanges();
+    expect(compiled.querySelector('aside')?.classList.contains('hidden')).toBe(true);
     expect(header?.nextElementSibling).toBe(filterBar);
   });
 
@@ -133,7 +138,15 @@ describe('App', () => {
       button.click();
       fixture.detectChanges();
     };
+    const openMega = () => {
+      const button = Array.from(compiled.querySelectorAll('button')).find(item => item.textContent?.includes('Altri filtri')) as HTMLButtonElement;
+      if (button.getAttribute('aria-expanded') !== 'true') {
+        button.click();
+        fixture.detectChanges();
+      }
+    };
 
+    openMega();
     clickInGroup('Filtra per regione', 'Lazio');
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['day']);
 
@@ -149,10 +162,12 @@ describe('App', () => {
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['day']);
 
     clickReset();
+    openMega();
     clickInGroup('Filtra per costo', 'Vedi sito');
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['week']);
 
     clickReset();
+    openMega();
     clickInGroup('Filtra per auto privata', 'No');
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['day']);
   });

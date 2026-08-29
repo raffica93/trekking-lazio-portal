@@ -1,13 +1,17 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Excursion } from './excursion.model';
 import {
   DEFAULT_FILTERS,
   FilterState,
+  FilterTag,
   availableMonths,
   availableRegions,
   dateBounds,
-  hasActiveFilters
+  extraFilterTags,
+  hasActiveFilters,
+  isNextWeekSelected,
+  nextWeekRange
 } from './excursion-filters';
 
 @Component({
@@ -16,8 +20,92 @@ import {
   imports: [CommonModule],
   template: `
     <section class="filter-bar" aria-label="Filtri">
-      <div class="filter-inner">
-        <div class="filter-groups">
+      <div class="filter-strip">
+        <button
+          type="button"
+          class="filter-chip"
+          [class.filter-chip-active]="nextWeekOn"
+          (click)="toggleNextWeek()"
+        >Prossima settimana</button>
+
+        <div class="filter-group" role="group" aria-label="Periodo da a">
+          <div class="filter-fields">
+            <label class="filter-field">
+              <span>Da</span>
+              <input
+                type="date"
+                aria-label="Data di inizio"
+                [value]="filters.dateFrom"
+                [attr.min]="bounds.min || null"
+                [attr.max]="filters.dateTo || bounds.max || null"
+                (input)="set('dateFrom', inputValue($event))"
+              >
+            </label>
+            <label class="filter-field">
+              <span>A</span>
+              <input
+                type="date"
+                aria-label="Data di fine"
+                [value]="filters.dateTo"
+                [attr.min]="filters.dateFrom || bounds.min || null"
+                [attr.max]="bounds.max || null"
+                (input)="set('dateTo', inputValue($event))"
+              >
+            </label>
+          </div>
+        </div>
+
+        <div class="filter-group" role="group" aria-label="Filtra per durata">
+          <div class="filter-chips">
+            <button type="button" class="filter-chip" [class.filter-chip-active]="filters.duration === 'le4'" (click)="toggle('duration', 'le4')">≤4h</button>
+            <button type="button" class="filter-chip" [class.filter-chip-active]="filters.duration === '4-6'" (click)="toggle('duration', '4-6')">4–6h</button>
+            <button type="button" class="filter-chip" [class.filter-chip-active]="filters.duration === '6-8'" (click)="toggle('duration', '6-8')">6–8h</button>
+            <button type="button" class="filter-chip" [class.filter-chip-active]="filters.duration === 'gt8'" (click)="toggle('duration', 'gt8')">>8h</button>
+          </div>
+        </div>
+
+        <div class="filter-group" role="group" aria-label="Filtra per distanza">
+          <div class="filter-chips">
+            <button type="button" class="filter-chip" [class.filter-chip-active]="filters.distance === 'le10'" (click)="toggle('distance', 'le10')">≤10 km</button>
+            <button type="button" class="filter-chip" [class.filter-chip-active]="filters.distance === '10-15'" (click)="toggle('distance', '10-15')">10–15</button>
+            <button type="button" class="filter-chip" [class.filter-chip-active]="filters.distance === '15-20'" (click)="toggle('distance', '15-20')">15–20</button>
+            <button type="button" class="filter-chip" [class.filter-chip-active]="filters.distance === 'gt20'" (click)="toggle('distance', 'gt20')">>20</button>
+          </div>
+        </div>
+
+        <div class="filter-actions">
+          <button
+            type="button"
+            class="filter-mega-toggle"
+            [class.is-open]="megaOpen"
+            [attr.aria-expanded]="megaOpen"
+            aria-controls="filter-mega"
+            (click)="toggleMega($event)"
+          >
+            Altri filtri
+            <span *ngIf="tags.length" class="filter-badge">{{ tags.length }}</span>
+          </button>
+          <span class="filter-count">{{ resultCount }}</span>
+          <button *ngIf="active" type="button" class="filter-reset" (click)="reset()">Azzera</button>
+        </div>
+      </div>
+
+      <div class="filter-tags" *ngIf="tags.length && !megaOpen">
+        <button
+          type="button"
+          class="filter-tag"
+          *ngFor="let tag of tags"
+          (click)="clearTag(tag)"
+        >{{ tag.label }} ×</button>
+      </div>
+
+      <div
+        id="filter-mega"
+        class="filter-mega"
+        [class.open]="megaOpen"
+        [attr.hidden]="megaOpen ? null : true"
+      >
+        <div class="filter-mega-grid">
           <div class="filter-group" role="group" aria-label="Filtra per difficoltà">
             <p class="filter-label">Difficoltà</p>
             <div class="filter-chips">
@@ -26,40 +114,6 @@ import {
               <button type="button" class="filter-chip" data-diff="E" aria-label="Escursionistico" [class.filter-chip-active]="filters.category === 'E'" (click)="set('category', 'E')">E</button>
               <button type="button" class="filter-chip" data-diff="EE" aria-label="Esperti" [class.filter-chip-active]="filters.category === 'EE'" (click)="set('category', 'EE')">EE</button>
               <button type="button" class="filter-chip" data-diff="EEA" aria-label="Attrezzatura" [class.filter-chip-active]="filters.category === 'EEA'" (click)="set('category', 'EEA')">EEA</button>
-            </div>
-          </div>
-
-          <div class="filter-group" role="group" aria-label="Filtra per durata">
-            <p class="filter-label">Durata</p>
-            <div class="filter-chips">
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.duration === 'all'" (click)="set('duration', 'all')">Tutte</button>
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.duration === 'le4'" (click)="set('duration', 'le4')">≤4h</button>
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.duration === '4-6'" (click)="set('duration', '4-6')">4–6h</button>
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.duration === '6-8'" (click)="set('duration', '6-8')">6–8h</button>
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.duration === 'gt8'" (click)="set('duration', 'gt8')">>8h</button>
-            </div>
-          </div>
-
-          <div class="filter-group" role="group" aria-label="Filtra per giorni della gita">
-            <p class="filter-label">Giorni</p>
-            <div class="filter-chips">
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.days === 'all'" (click)="set('days', 'all')">Tutti</button>
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.days === '1'" (click)="set('days', '1')">1</button>
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.days === '2'" (click)="set('days', '2')">2</button>
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.days === '3'" (click)="set('days', '3')">3</button>
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.days === '4-10'" (click)="set('days', '4-10')">4–10</button>
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.days === 'gt10'" (click)="set('days', 'gt10')">10+</button>
-            </div>
-          </div>
-
-          <div class="filter-group" role="group" aria-label="Filtra per distanza">
-            <p class="filter-label">Distanza</p>
-            <div class="filter-chips">
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.distance === 'all'" (click)="set('distance', 'all')">Tutte</button>
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.distance === 'le10'" (click)="set('distance', 'le10')">≤10 km</button>
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.distance === '10-15'" (click)="set('distance', '10-15')">10–15</button>
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.distance === '15-20'" (click)="set('distance', '15-20')">15–20</button>
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.distance === 'gt20'" (click)="set('distance', 'gt20')">>20</button>
             </div>
           </div>
 
@@ -77,16 +131,6 @@ import {
             </div>
           </div>
 
-          <div class="filter-group" role="group" aria-label="Filtra per auto privata">
-            <p class="filter-label">Auto privata</p>
-            <div class="filter-chips">
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.privateCar === 'all'" (click)="set('privateCar', 'all')">Tutti</button>
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.privateCar === 'yes'" (click)="set('privateCar', 'yes')">Sì</button>
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.privateCar === 'no'" (click)="set('privateCar', 'no')">No</button>
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.privateCar === 'unknown'" (click)="set('privateCar', 'unknown')">Non indicato</button>
-            </div>
-          </div>
-
           <div class="filter-group" role="group" aria-label="Filtra per regione">
             <p class="filter-label">Regione</p>
             <div class="filter-chips">
@@ -100,34 +144,26 @@ import {
               >{{ region }}</button>
             </div>
           </div>
-        </div>
 
-        <div class="filter-tools">
-          <div class="filter-group" role="group" aria-label="Periodo da a">
-            <p class="filter-label">Periodo</p>
-            <div class="filter-fields">
-              <label class="filter-field">
-                <span>Da</span>
-                <input
-                  type="date"
-                  aria-label="Data di inizio"
-                  [value]="filters.dateFrom"
-                  [attr.min]="bounds.min || null"
-                  [attr.max]="filters.dateTo || bounds.max || null"
-                  (input)="set('dateFrom', inputValue($event))"
-                >
-              </label>
-              <label class="filter-field">
-                <span>A</span>
-                <input
-                  type="date"
-                  aria-label="Data di fine"
-                  [value]="filters.dateTo"
-                  [attr.min]="filters.dateFrom || bounds.min || null"
-                  [attr.max]="bounds.max || null"
-                  (input)="set('dateTo', inputValue($event))"
-                >
-              </label>
+          <div class="filter-group" role="group" aria-label="Filtra per giorni della gita">
+            <p class="filter-label">Giorni</p>
+            <div class="filter-chips">
+              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.days === 'all'" (click)="set('days', 'all')">Tutti</button>
+              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.days === '1'" (click)="set('days', '1')">1</button>
+              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.days === '2'" (click)="set('days', '2')">2</button>
+              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.days === '3'" (click)="set('days', '3')">3</button>
+              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.days === '4-10'" (click)="set('days', '4-10')">4–10</button>
+              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.days === 'gt10'" (click)="set('days', 'gt10')">10+</button>
+            </div>
+          </div>
+
+          <div class="filter-group" role="group" aria-label="Filtra per auto privata">
+            <p class="filter-label">Auto privata</p>
+            <div class="filter-chips">
+              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.privateCar === 'all'" (click)="set('privateCar', 'all')">Tutti</button>
+              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.privateCar === 'yes'" (click)="set('privateCar', 'yes')">Sì</button>
+              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.privateCar === 'no'" (click)="set('privateCar', 'no')">No</button>
+              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.privateCar === 'unknown'" (click)="set('privateCar', 'unknown')">Non indicato</button>
             </div>
           </div>
 
@@ -166,16 +202,6 @@ import {
               </label>
             </div>
           </div>
-
-          <div class="filter-actions">
-            <span class="filter-count">{{ resultCount }}</span>
-            <button
-              *ngIf="active"
-              type="button"
-              class="filter-reset"
-              (click)="reset()"
-            >Azzera</button>
-          </div>
         </div>
       </div>
     </section>
@@ -183,46 +209,31 @@ import {
   styles: [`
     :host {
       display: block;
+      position: relative;
+      z-index: 20;
     }
 
     .filter-bar {
-      z-index: 10;
       width: 100%;
-      max-height: 42vh;
-      overflow-y: auto;
       border-bottom: 1px solid rgb(231 229 228);
       background: white;
     }
 
-    @media (min-width: 768px) {
-      .filter-bar {
-        max-height: none;
-        overflow: visible;
-      }
-    }
-
-    .filter-inner {
+    .filter-strip {
       display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.45rem 0.7rem;
       max-width: 96rem;
       margin: 0 auto;
-      padding: 0.7rem 0.75rem 0.8rem;
+      padding: 0.55rem 0.75rem;
     }
 
     @media (min-width: 768px) {
-      .filter-inner {
+      .filter-strip {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
       }
-    }
-
-    .filter-groups,
-    .filter-tools {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      gap: 0.65rem 1.15rem;
     }
 
     .filter-group {
@@ -240,14 +251,17 @@ import {
 
     .filter-chips,
     .filter-fields,
-    .filter-actions {
+    .filter-actions,
+    .filter-tags {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       gap: 0.35rem;
     }
 
-    .filter-chip {
+    .filter-chip,
+    .filter-mega-toggle,
+    .filter-tag {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
@@ -282,12 +296,17 @@ import {
     .filter-chip[data-diff='EEA'] { --diff: #1C1917; }
 
     .filter-chip:hover,
-    .filter-chip:focus-visible {
+    .filter-chip:focus-visible,
+    .filter-mega-toggle:hover,
+    .filter-mega-toggle:focus-visible,
+    .filter-tag:hover,
+    .filter-tag:focus-visible {
       border-color: var(--diff, rgb(5 150 105));
       outline: none;
     }
 
-    .filter-chip-active {
+    .filter-chip-active,
+    .filter-mega-toggle.is-open {
       border-color: var(--diff, rgb(6 78 59));
       background: var(--diff, rgb(6 78 59));
       color: white;
@@ -351,6 +370,20 @@ import {
       text-align: center;
     }
 
+    .filter-badge {
+      min-width: 1.1rem;
+      padding: 0.05rem 0.3rem;
+      border-radius: 999px;
+      background: rgb(190 242 100);
+      color: rgb(6 78 59);
+      font-size: 0.65rem;
+      font-weight: 800;
+    }
+
+    .filter-mega-toggle.is-open .filter-badge {
+      background: white;
+    }
+
     .filter-reset {
       min-height: 2rem;
       padding: 0.35rem 0.75rem;
@@ -366,13 +399,87 @@ import {
       outline: 2px solid rgb(6 78 59);
       outline-offset: 2px;
     }
+
+    .filter-tags {
+      max-width: 96rem;
+      margin: 0 auto;
+      padding: 0 0.75rem 0.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .filter-tags {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+
+    .filter-tag {
+      min-height: 1.6rem;
+      padding: 0.2rem 0.55rem;
+      background: rgb(236 253 245);
+      border-color: rgb(167 243 208);
+      color: rgb(6 78 59);
+      font-size: 0.68rem;
+    }
+
+    .filter-mega {
+      display: none;
+      position: absolute;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      padding: 0.85rem 0.75rem 1rem;
+      border-bottom: 1px solid rgb(231 229 228);
+      background: rgb(255 255 255 / 0.97);
+      box-shadow: 0 16px 32px rgb(18 38 28 / 0.12);
+    }
+
+    .filter-mega.open {
+      display: block;
+    }
+
+    @media (min-width: 768px) {
+      .filter-mega {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .filter-mega.open {
+        animation: filter-mega-in 140ms ease-out;
+      }
+    }
+
+    @keyframes filter-mega-in {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .filter-mega-grid {
+      display: grid;
+      gap: 0.85rem 1.4rem;
+      max-width: 96rem;
+      margin: 0 auto;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 768px) {
+      .filter-mega-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
   `]
 })
 export class FilterBarComponent {
+  private host = inject(ElementRef<HTMLElement>);
+
   @Input() filters: FilterState = { ...DEFAULT_FILTERS };
   @Input() allExcursions: Excursion[] = [];
   @Input() resultCount = 0;
   @Output() filtersChange = new EventEmitter<FilterState>();
+
+  megaOpen = false;
 
   get months() {
     return availableMonths(this.allExcursions);
@@ -390,15 +497,59 @@ export class FilterBarComponent {
     return hasActiveFilters(this.filters);
   }
 
+  get nextWeekOn() {
+    return isNextWeekSelected(this.filters);
+  }
+
+  get tags(): FilterTag[] {
+    return extraFilterTags(this.filters, this.months);
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    if (!this.megaOpen) return;
+    if (!this.host.nativeElement.contains(event.target as Node)) {
+      this.megaOpen = false;
+    }
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape() {
+    this.megaOpen = false;
+  }
+
+  toggleMega(event: Event) {
+    event.stopPropagation();
+    this.megaOpen = !this.megaOpen;
+  }
+
   set<K extends keyof FilterState>(key: K, value: FilterState[K]) {
     this.filtersChange.emit({ ...this.filters, [key]: value });
+  }
+
+  toggle<K extends 'duration' | 'distance'>(key: K, value: FilterState[K]) {
+    this.set(key, this.filters[key] === value ? 'all' as FilterState[K] : value);
+  }
+
+  toggleNextWeek() {
+    if (isNextWeekSelected(this.filters)) {
+      this.filtersChange.emit({ ...this.filters, dateFrom: '', dateTo: '' });
+      return;
+    }
+    const range = nextWeekRange();
+    this.filtersChange.emit({ ...this.filters, dateFrom: range.from, dateTo: range.to });
   }
 
   toggleVediSito() {
     this.set('vediSito', !this.filters.vediSito);
   }
 
+  clearTag(tag: FilterTag) {
+    this.filtersChange.emit({ ...this.filters, ...tag.patch });
+  }
+
   reset() {
+    this.megaOpen = false;
     this.filtersChange.emit({ ...DEFAULT_FILTERS });
   }
 

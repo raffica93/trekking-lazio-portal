@@ -222,6 +222,83 @@ export function dateBounds(excursions: Excursion[]): { min: string; max: string 
   return { min, max };
 }
 
+export function toIsoDate(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+export function shiftIsoDate(iso: string, days: number): string {
+  const [year, month, day] = iso.split('-').map(Number);
+  return toIsoDate(new Date(year, month - 1, day + days));
+}
+
+export function nextWeekRange(now = new Date()): { from: string; to: string } {
+  const from = toIsoDate(now);
+  return { from, to: shiftIsoDate(from, 6) };
+}
+
+export function isNextWeekSelected(filters: FilterState, now = new Date()): boolean {
+  const range = nextWeekRange(now);
+  return filters.dateFrom === range.from && filters.dateTo === range.to;
+}
+
+export interface FilterTag {
+  id: string;
+  label: string;
+  patch: Partial<FilterState>;
+}
+
+const DAY_LABELS: Record<string, string> = {
+  '1': '1 giorno',
+  '2': '2 giorni',
+  '3': '3 giorni',
+  '4-10': '4–10 giorni',
+  'gt10': '10+ giorni'
+};
+
+export function extraFilterTags(
+  filters: FilterState,
+  months: { id: string; label: string }[] = []
+): FilterTag[] {
+  const tags: FilterTag[] = [];
+  if (filters.category !== 'all') {
+    tags.push({ id: 'category', label: filters.category, patch: { category: 'all' } });
+  }
+  if (filters.month !== 'all') {
+    tags.push({
+      id: 'month',
+      label: months.find((month) => month.id === filters.month)?.label ?? filters.month,
+      patch: { month: 'all' }
+    });
+  }
+  if (filters.region !== 'all') {
+    tags.push({ id: 'region', label: filters.region, patch: { region: 'all' } });
+  }
+  if (filters.days !== 'all') {
+    tags.push({ id: 'days', label: DAY_LABELS[filters.days] ?? filters.days, patch: { days: 'all' } });
+  }
+  if (filters.privateCar === 'yes') {
+    tags.push({ id: 'privateCar', label: 'Auto sì', patch: { privateCar: 'all' } });
+  } else if (filters.privateCar === 'no') {
+    tags.push({ id: 'privateCar', label: 'Auto no', patch: { privateCar: 'all' } });
+  } else if (filters.privateCar === 'unknown') {
+    tags.push({ id: 'privateCar', label: 'Auto n/d', patch: { privateCar: 'all' } });
+  }
+  if (filters.vediSito) {
+    tags.push({ id: 'vediSito', label: 'Vedi sito', patch: { vediSito: false } });
+  }
+  if (filters.costMin !== '' || filters.costMax !== '') {
+    tags.push({
+      id: 'cost',
+      label: `€${filters.costMin || '0'}–${filters.costMax || '…'}`,
+      patch: { costMin: '', costMax: '' }
+    });
+  }
+  return tags;
+}
+
 export function hasActiveFilters(filters: FilterState): boolean {
   return filters.category !== 'all'
     || filters.duration !== 'all'
