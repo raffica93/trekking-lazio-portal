@@ -43,7 +43,7 @@ jobs:
           SCRAPE_TIMEOUT_MS: 30000
           GEMINI_KEY: ${{ secrets.GEMINI_KEY }}
           GEMINI_TIMEOUT_MS: 300000
-          GEMINI_PAUSE_MS: 4000
+          GEMINI_PAUSE_MS: 15000
           SOURCE: ${{ github.event.inputs.source }}
         run: |
           if [ -n "${SOURCE}" ]; then

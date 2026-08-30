@@ -2,6 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const { DateTime } = require('luxon');
 const { mergeEnrichment } = require('../classifier');
+const { resetGeminiQuotaExhausted } = require('../grok-extract');
 const {
   belongingTo,
   parseScrapeArgs,
@@ -184,7 +185,42 @@ test('--source keeps excursions from other sections', async () => {
   assert.equal(result.excursions.some((item) => item.id === 'tivoli-old'), false);
 });
 
+test('Gemini quota skips later LLM sources without calling extract', async () => {
+  resetGeminiQuotaExhausted();
+  const quota = new Error('Gemini API 429: You exceeded your current quota, please check your plan and billing details.');
+  quota.status = 429;
+  quota.kind = 'quota';
+  const extracted = [];
+
+  const result = await scrapeAll({
+    sources: SOURCES.filter((source) => ['roma', 'tivoli', 'sora'].includes(source.id)),
+    existingPayload: {
+      excursions: [
+        sample(),
+        sample({ id: 'tivoli-old', title: 'Tivoli', organizer: 'CAI Tivoli' }),
+        sample({ id: 'sora-old', title: 'Sora', organizer: 'CAI Sora' })
+      ]
+    },
+    now,
+    apiKey: 'test-key',
+    scrapeRoma: async () => [sample()],
+    extract: async (source) => {
+      extracted.push(source.id);
+      if (source.id === 'tivoli') throw quota;
+      return [sample({ id: `${source.id}-new` })];
+    },
+    fetchDoc: async (source) => ({ kind: 'pdf', hash: 'h', fileUrl: source.url }),
+    log: { log() {}, error() {} }
+  });
+
+  assert.deepEqual(extracted, ['tivoli']);
+  assert.equal(result.results.find((item) => item.source.id === 'sora')?.status, 'skipped');
+  assert.equal(result.excursions.some((item) => item.id === 'sora-old'), true);
+  resetGeminiQuotaExhausted();
+});
+
 test('hardFailures lists Gemini sources that died with an empty cache', async () => {
+  resetGeminiQuotaExhausted();
   const result = await scrapeAll({
     sources: SOURCES.filter((source) => source.id === 'roma' || source.id === 'sora'),
     existingPayload: { excursions: [sample()] },

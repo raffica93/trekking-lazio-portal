@@ -14,6 +14,34 @@ test('parseSedeArgv reads the sede id and forwards flags', () => {
   });
 });
 
+test('runSede all still walks remaining sedi after a Gemini quota miss', async () => {
+  const seen = [];
+  const logs = [];
+  const result = await runSede({
+    argv: ['all'],
+    sources: SOURCES.filter((source) => source.id === 'roma' || source.id === 'tivoli' || source.id === 'sora'),
+    sleep: async () => {},
+    runScrapeImpl: async ({ argv }) => {
+      seen.push(argv[1]);
+      if (argv.includes('tivoli')) {
+        return {
+          wrote: false,
+          hardFail: true,
+          result: {
+            failures: [{ error: new Error('You exceeded your current quota, please check your plan and billing') }]
+          }
+        };
+      }
+      return { wrote: false, hardFail: false, result: { failures: [] } };
+    },
+    log: { log: (message) => logs.push(String(message)), error() {} }
+  });
+
+  assert.deepEqual(seen, ['roma', 'tivoli', 'sora']);
+  assert.equal(logs.some((line) => /quota exhausted earlier/.test(line)), true);
+  assert.equal(result.hardFail, true);
+});
+
 test('runSede all walks enabled sources in order and keeps going after a failure', async () => {
   const seen = [];
   const result = await runSede({

@@ -3,10 +3,13 @@ const assert = require('node:assert/strict');
 const { DateTime } = require('luxon');
 const {
   buildRequestBody,
+  classifyGeminiError,
   extractFromSource,
   fetchDocument,
   htmlToText,
   isFacebookUrl,
+  isGeminiQuotaError,
+  resetGeminiQuotaExhausted,
   normalizeExtracted,
   userPrompt
 } = require('../grok-extract');
@@ -81,6 +84,48 @@ test('normalizeExtracted drops past dates and invalid rows', () => {
   }, TIVOLI, { now }), null);
 
   assert.equal(normalizeExtracted({ title: '', date: '2026-09-20' }, TIVOLI, { now }), null);
+});
+
+test('classifyGeminiError treats billing 429 as quota and other 429 as rate limits', () => {
+  const quota = classifyGeminiError(429, 'You exceeded your current quota, please check your plan and billing details.');
+  assert.equal(quota.kind, 'quota');
+  assert.equal(quota.retryAfterMs, null);
+  assert.equal(isGeminiQuotaError({ kind: 'quota' }), true);
+
+  const rate = classifyGeminiError(429, '{"error":{"status":"RESOURCE_EXHAUSTED","retryDelay":"12s"}}');
+  assert.equal(rate.kind, 'rate_limit');
+  assert.equal(rate.retryAfterMs, 12_000);
+
+  const busy = classifyGeminiError(503, 'high demand');
+  assert.equal(busy.kind, 'unavailable');
+});
+
+test('extractFromSource does not retry a quota 429', async () => {
+  resetGeminiQuotaExhausted();
+  let calls = 0;
+  await assert.rejects(
+    () => extractFromSource(VITERBO, { kind: 'html', text: 'calendario' }, {
+      apiKey: 'test-key',
+      now,
+      retries: 2,
+      sleep: async () => {
+        throw new Error('quota must not sleep-retry');
+      },
+      fetchImpl: async () => {
+        calls += 1;
+        return {
+          ok: false,
+          status: 429,
+          headers: { get: () => null },
+          text: async () => '{"error":{"message":"You exceeded your current quota, please check your plan and billing details."}}'
+        };
+      }
+    }),
+    /quota/
+  );
+  assert.equal(calls, 1);
+  assert.equal(process.env.GEMINI_QUOTA_EXHAUSTED, '1');
+  resetGeminiQuotaExhausted();
 });
 
 test('Facebook pages skip HTML fetch and ask Gemini to search the profile', async () => {

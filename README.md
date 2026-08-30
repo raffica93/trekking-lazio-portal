@@ -29,7 +29,7 @@ npm run scrape:all
 
 Ogni sede CAI ha uno script (`npm run scrape:sora`, `scrape:tivoli`, …). `scrape:all` le lancia una alla volta così un timeout Gemini non azzera le altre. Lo stato per sezione sta in `backend/data/scrape-status.json` e in admin `/#/admin/sedi`.
 
-Lo script aggiorna `backend/data/excursions.json` in modo atomico, lascia il file invariato quando i dati non cambiano e ritenta automaticamente gli errori di rete o le risposte HTML non valide. `SCRAPE_RETRIES` e `SCRAPE_TIMEOUT_MS` valgono per CAI Roma; `GEMINI_TIMEOUT_MS` (default 5 minuti) e `GEMINI_PAUSE_MS` per le altre.
+Lo script aggiorna `backend/data/excursions.json` in modo atomico, lascia il file invariato quando i dati non cambiano e ritenta automaticamente gli errori di rete o le risposte HTML non valide. `SCRAPE_RETRIES` e `SCRAPE_TIMEOUT_MS` valgono per CAI Roma; `GEMINI_TIMEOUT_MS` (default 5 minuti) e `GEMINI_PAUSE_MS` (default 10s in `scrape:all`, 15s in Actions) per le altre. Un 429 di quota non viene ritentato: le sedi Gemini successive restano sulla cache. Un 429 di rate-limit o un 503 aspetta e riprova.
 
 CAI Roma viene letto con il parser HTML. Le altre sezioni abilitate usano Gemini 3.5 Flash sul loro template (pagina programma, calendario o PDF). Serve `GEMINI_KEY` in `backend/.env` in locale, e lo stesso nome come secret nelle GitHub Actions. Senza chiave lo scrape di Roma continua e le altre sezioni restano sulla cache.
 

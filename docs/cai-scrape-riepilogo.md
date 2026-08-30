@@ -13,6 +13,8 @@ npm run scrape:all
 
 In admin: `/#/admin/sedi` (ogni riga è uno script; richiede backend locale o Docker). In GitHub Actions: workflow *Refresh excursion data*, input `source` oppure tutte, una alla volta.
 
+Gemini: `scrape:all` aspetta 10s tra una sede e l’altra (15s in Actions). Un 429 di **quota** non viene ritentato e le sedi Gemini successive vengono saltate (resta la cache). Un 429 di **rate-limit** o un 503 aspetta e riprova.
+
 Stato: `backend/data/scrape-status.json` (copia in `frontend/public/scrape-status.json`).
 
 ## Catalogo

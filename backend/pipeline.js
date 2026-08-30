@@ -1,7 +1,14 @@
 const { DateTime } = require('luxon');
 const { isReusableEnrichment, mergeEnrichment } = require('./classifier');
 const { scrapeCaiRoma } = require('./scraper');
-const { extractFromSource, fetchDocument, resolveGeminiKey } = require('./grok-extract');
+const {
+  extractFromSource,
+  fetchDocument,
+  geminiQuotaExhausted,
+  isGeminiQuotaError,
+  markGeminiQuotaExhausted,
+  resolveGeminiKey
+} = require('./grok-extract');
 const { SOURCES, enabledSources, isCheerioSource, sourceMeta } = require('./sources');
 
 function defaultSleep(ms) {
@@ -88,6 +95,15 @@ async function scrapeSource(source, {
   if (isCheerioSource(source)) {
     const excursions = preserveEnrichment(await scrapeRoma({ now }), existing);
     return { status: 'ok', source, excursions, hash: null };
+  }
+
+  if (geminiQuotaExhausted()) {
+    if (cached.length > 0) {
+      log.log(`Skipping ${source.id}: Gemini quota exhausted, keeping ${cached.length} cached excursions`);
+      return { status: 'skipped', source, excursions: cached, hash: hashes[source.id] || null };
+    }
+    log.log(`Skipping ${source.id}: Gemini quota exhausted`);
+    return { status: 'skipped', source, excursions: [], hash: hashes[source.id] || null };
   }
 
   if (!apiKey) {
@@ -182,6 +198,7 @@ async function scrapeAll({
         await sleep(pauseMs);
       }
     } catch (error) {
+      if (isGeminiQuotaError(error)) markGeminiQuotaExhausted();
       failures.push({ source, error });
       const cached = cachedOrEmpty(existing, source);
       if (cached.length > 0) {
@@ -191,7 +208,7 @@ async function scrapeAll({
       } else {
         log.error(`${source.id} failed with no cache: ${error.message}`);
       }
-      if (pauseMs > 0) await sleep(pauseMs);
+      if (pauseMs > 0 && !isGeminiQuotaError(error)) await sleep(pauseMs);
     }
   }
 

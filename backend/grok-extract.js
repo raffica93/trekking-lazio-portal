@@ -270,6 +270,64 @@ function isRetryableStatus(status) {
   return status === 429 || status >= 500;
 }
 
+function parseRetryAfterMs(headers, body) {
+  const header = typeof headers?.get === 'function'
+    ? headers.get('retry-after')
+    : headers?.['retry-after'] || headers?.['Retry-After'];
+  if (header && /^\d+(\.\d+)?$/.test(String(header).trim())) {
+    return Math.ceil(Number(header) * 1000);
+  }
+  const delay = String(body || '').match(/"retryDelay"\s*:\s*"([\d.]+)s"/i);
+  if (delay) return Math.ceil(Number(delay[1]) * 1000);
+  return null;
+}
+
+function classifyGeminiError(status, body = '', headers = null) {
+  const text = String(body || '');
+  if (status === 429) {
+    const quota = /exceeded your current quota|check your plan and billing|quota exceeded/i.test(text);
+    return {
+      kind: quota ? 'quota' : 'rate_limit',
+      retryAfterMs: quota ? null : (parseRetryAfterMs(headers, text) || 8_000)
+    };
+  }
+  if (status === 503 || (status >= 500 && status < 600)) {
+    return {
+      kind: 'unavailable',
+      retryAfterMs: parseRetryAfterMs(headers, text) || 4_000
+    };
+  }
+  return { kind: 'error', retryAfterMs: null };
+}
+
+function isGeminiQuotaError(error) {
+  if (!error) return false;
+  if (error.kind === 'quota') return true;
+  return /exceeded your current quota|check your plan and billing|quota exceeded/i.test(String(error.message || ''));
+}
+
+let quotaExhaustedFlag = false;
+
+function markGeminiQuotaExhausted(env = process.env) {
+  quotaExhaustedFlag = true;
+  env.GEMINI_QUOTA_EXHAUSTED = '1';
+}
+
+function geminiQuotaExhausted(env = process.env) {
+  return quotaExhaustedFlag
+    || env.GEMINI_QUOTA_EXHAUSTED === '1'
+    || env.GEMINI_QUOTA_EXHAUSTED === 'true';
+}
+
+function resetGeminiQuotaExhausted(env = process.env) {
+  quotaExhaustedFlag = false;
+  delete env.GEMINI_QUOTA_EXHAUSTED;
+}
+
+function capDelay(ms) {
+  return Math.min(Math.max(Number(ms) || 0, 0), 60_000);
+}
+
 async function extractFromSource(source, document, options = {}) {
   const apiKey = options.apiKey || resolveGeminiKey({ env: options.env || process.env });
   if (!apiKey) {
@@ -304,11 +362,18 @@ async function extractFromSource(source, document, options = {}) {
 
       if (!response.ok) {
         const detail = await response.text().catch(() => '');
+        const classified = classifyGeminiError(response.status, detail, response.headers);
         const error = new Error(`Gemini API ${response.status}${detail ? `: ${detail.slice(0, 200)}` : ''}`);
         error.status = response.status;
-        if (isRetryableStatus(response.status) && attempt < retries) {
+        error.kind = classified.kind;
+        error.retryAfterMs = classified.retryAfterMs;
+        if (classified.kind === 'quota') {
+          markGeminiQuotaExhausted(options.env || process.env);
+          throw error;
+        }
+        if (classified.kind !== 'error' && attempt < retries) {
           lastError = error;
-          await sleep(500 * 2 ** attempt);
+          await sleep(capDelay((classified.retryAfterMs || 1000) * 2 ** attempt));
           continue;
         }
         throw error;
@@ -328,9 +393,14 @@ async function extractFromSource(source, document, options = {}) {
       return excursions;
     } catch (error) {
       lastError = error;
-      const retryable = error.status ? isRetryableStatus(error.status) : error.name === 'TimeoutError';
+      if (isGeminiQuotaError(error)) {
+        markGeminiQuotaExhausted(options.env || process.env);
+        throw error;
+      }
+      const retryable = error.kind === 'rate_limit' || error.kind === 'unavailable'
+        || (error.status ? isRetryableStatus(error.status) : error.name === 'TimeoutError');
       if (attempt === retries || !retryable) throw error;
-      await sleep(500 * 2 ** attempt);
+      await sleep(capDelay((error.retryAfterMs || 1000) * 2 ** attempt));
     }
   }
 
@@ -391,8 +461,13 @@ module.exports = {
   extractGeminiText,
   fetchDocument,
   geminiEndpoint,
+  geminiQuotaExhausted,
+  classifyGeminiError,
   htmlToText,
   isFacebookUrl,
+  isGeminiQuotaError,
+  markGeminiQuotaExhausted,
+  resetGeminiQuotaExhausted,
   normalizeExtracted,
   resolveGeminiKey,
   sha256,

@@ -1,5 +1,15 @@
-const { enabledSources, findSource, SOURCES } = require('../sources');
+const { geminiQuotaExhausted, isGeminiQuotaError } = require('../grok-extract');
+const { enabledSources, findSource, isCheerioSource, SOURCES } = require('../sources');
 const { runScrape } = require('./scrape');
+
+function defaultSleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function runHitGeminiQuota(run) {
+  if (isGeminiQuotaError({ message: run?.error })) return true;
+  return (run?.result?.failures || []).some((item) => isGeminiQuotaError(item.error));
+}
 
 function parseSedeArgv(argv = process.argv.slice(2)) {
   const rest = [];
@@ -32,7 +42,8 @@ async function runSede({
   argv = process.argv.slice(2),
   runScrapeImpl = runScrape,
   sources = SOURCES,
-  log = console
+  log = console,
+  sleep = defaultSleep
 } = {}) {
   const { id, rest } = parseSedeArgv(argv);
   if (!id || id === '--help' || id === '-h') {
@@ -44,8 +55,17 @@ async function runSede({
     const selected = enabledSources(sources);
     const runs = [];
     let hardFail = false;
+    let quotaExhausted = geminiQuotaExhausted();
+    const pauseMs = Number(process.env.GEMINI_PAUSE_MS || 10_000);
+    let previousGemini = false;
     for (const source of selected) {
       log.log(`--- sede ${source.id} ---`);
+      if (quotaExhausted && !isCheerioSource(source)) {
+        log.log(`Skipping ${source.id}: Gemini quota exhausted earlier in this run`);
+      } else if (previousGemini && !isCheerioSource(source) && pauseMs > 0) {
+        log.log(`Waiting ${pauseMs}ms before the next Gemini sede`);
+        await sleep(pauseMs);
+      }
       try {
         const run = await runScrapeImpl({
           argv: ['--source', source.id, ...rest],
@@ -54,11 +74,14 @@ async function runSede({
         });
         runs.push({ id: source.id, run });
         if (run.hardFail) hardFail = true;
+        if (runHitGeminiQuota(run) || geminiQuotaExhausted()) quotaExhausted = true;
       } catch (error) {
         hardFail = true;
         log.error(`${source.id} failed: ${error.message}`);
         runs.push({ id: source.id, error: error.message });
+        if (isGeminiQuotaError(error)) quotaExhausted = true;
       }
+      previousGemini = !isCheerioSource(source);
     }
     log.log(`Finished ${runs.length} sedi`);
     return { id: 'all', runs, hardFail };
