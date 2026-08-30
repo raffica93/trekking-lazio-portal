@@ -55,10 +55,11 @@ function toPlaceRow(excursion, status) {
     throw new Error(`Excursion ${sourceId ?? '(unknown)'} is missing an id, title, date, link, or location`);
   }
 
+  const titleSlug = slugify(title).slice(0, 80).replace(/-+$/g, '') || 'itinerario';
   const suffix = slugify(sourceId);
   return {
     source_id: sourceId,
-    slug: `${slugify(title).slice(0, 80) || 'itinerario'}-${suffix}`,
+    slug: `${titleSlug}-${suffix}`,
     title,
     date,
     date_end: textOrNull(excursion.dateEnd),
@@ -109,7 +110,9 @@ async function main() {
 
   for (let index = 0; index < places.length; index += BATCH_SIZE) {
     const batch = places.slice(index, index + BATCH_SIZE);
-    const { error } = await supabase.from('places').upsert(batch, { onConflict: 'source_id' });
+    const { error } = await supabase
+      .from('places')
+      .upsert(batch, { onConflict: 'source_id', ignoreDuplicates: true });
     if (error) throw error;
   }
 

@@ -28,3 +28,18 @@ test('toPlaceRow preserves public excursion data and uses a stable unique slug',
 test('slugify normalizes Italian accents', () => {
   assert.equal(slugify('Cima dell’Àquila'), 'cima-dell-aquila');
 });
+
+test('toPlaceRow never leaves a doubled separator after truncating a title slug', () => {
+  const row = toPlaceRow({
+    id: 'roma-27d73203ebd1',
+    title: 'Costone (2271) - Monte Morrone (2141) — Da Piani di Pezza per il Costone fino a La Vena',
+    date: '2026-10-10',
+    category: 'EE',
+    link: 'https://example.com',
+    location: 'Velino-Sirente e Duchessa',
+    lat: 42.17,
+    lng: 13.38
+  }, 'draft');
+
+  assert.match(row.slug, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+});
