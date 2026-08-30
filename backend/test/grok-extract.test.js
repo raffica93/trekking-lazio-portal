@@ -80,52 +80,55 @@ test('normalizeExtracted drops past dates and invalid rows', () => {
   assert.equal(normalizeExtracted({ title: '', date: '2026-09-20' }, TIVOLI, { now }), null);
 });
 
-test('buildRequestBody attaches the PDF and restricts discover search', () => {
-  const pdfBody = buildRequestBody(TIVOLI, { kind: 'pdf', fileUrl: TIVOLI.url }, { now });
-  const user = pdfBody.input.find((item) => item.role === 'user');
-  assert.equal(user.content.some((part) => part.type === 'input_file'), true);
+test('buildRequestBody attaches the PDF and enables Gemini search for discover', () => {
+  const pdfBody = buildRequestBody(TIVOLI, { kind: 'pdf', bytes: Buffer.from('%PDF-1.4 test') }, { now });
+  const parts = pdfBody.contents[0].parts;
+  assert.equal(parts.some((part) => part.inline_data?.mime_type === 'application/pdf'), true);
   assert.equal(pdfBody.tools, undefined);
 
   const discoverBody = buildRequestBody({
     ...VITERBO,
     kind: 'discover'
   }, { kind: 'discover', text: 'programma' }, { now });
-  assert.deepEqual(discoverBody.tools, [{
-    type: 'web_search',
-    filters: { allowed_domains: ['www.caiviterbo.it'] }
-  }]);
+  assert.deepEqual(discoverBody.tools, [{ googleSearch: {} }]);
 });
 
-test('extractFromSource parses Grok JSON and ignores past rows', async () => {
+test('extractFromSource parses Gemini JSON and ignores past rows', async () => {
   const payload = {
-    output_text: JSON.stringify({
-      excursions: [
-        {
-          title: 'Selva di Malano',
-          date: '2026-09-28',
-          dateEnd: null,
-          category: 'E',
-          location: 'Tuscia',
-          link: null,
-          time: '5 ore',
-          transport: 'pullman',
-          distanceKm: 11,
-          durationHours: 5
-        },
-        {
-          title: 'Capodanno',
-          date: '2026-01-01',
-          dateEnd: null,
-          category: 'T',
-          location: 'Viterbo',
-          link: null,
-          time: null,
-          transport: null,
-          distanceKm: null,
-          durationHours: null
-        }
-      ]
-    })
+    candidates: [{
+      content: {
+        parts: [{
+          text: JSON.stringify({
+            excursions: [
+              {
+                title: 'Selva di Malano',
+                date: '2026-09-28',
+                dateEnd: null,
+                category: 'E',
+                location: 'Tuscia',
+                link: null,
+                time: '5 ore',
+                transport: 'pullman',
+                distanceKm: 11,
+                durationHours: 5
+              },
+              {
+                title: 'Capodanno',
+                date: '2026-01-01',
+                dateEnd: null,
+                category: 'T',
+                location: 'Viterbo',
+                link: null,
+                time: null,
+                transport: null,
+                distanceKm: null,
+                durationHours: null
+              }
+            ]
+          })
+        }]
+      }
+    }]
   };
 
   const excursions = await extractFromSource(VITERBO, { kind: 'html', text: 'calendario' }, {

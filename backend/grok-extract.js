@@ -2,13 +2,7 @@ const crypto = require('node:crypto');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const { DateTime } = require('luxon');
-const {
-  DEFAULT_MODEL,
-  XAI_URL,
-  extractOutputText,
-  parseEnrichmentJson,
-  resolveApiKey
-} = require('./classifier');
+const { parseEnrichmentJson } = require('./classifier');
 const {
   getApproximateCoords,
   parseTransport,
@@ -19,6 +13,7 @@ const {
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 const MAX_HTML_CHARS = 80_000;
+const DEFAULT_GEMINI_MODEL = 'gemini-3.5-flash';
 
 const EXTRACT_SCHEMA = {
   type: 'object',
@@ -89,14 +84,6 @@ function htmlToText(html) {
     .replace(/\n{3,}/g, '\n\n')
     .replace(/[ \t]{2,}/g, ' ')
     .trim();
-}
-
-function sourceHost(source) {
-  try {
-    return new URL(source.url).hostname;
-  } catch {
-    return null;
-  }
 }
 
 function isIsoDate(value) {
@@ -183,34 +170,81 @@ function userPrompt(source, document, { now = DateTime.now() } = {}) {
   return lines.join('\n');
 }
 
-function buildRequestBody(source, document, { model, now } = {}) {
-  const host = sourceHost(source);
-  const content = [{ type: 'input_text', text: userPrompt(source, document, { now }) }];
-  if (document?.kind === 'pdf' && (document.fileUrl || source.url)) {
-    content.push({ type: 'input_file', file_url: document.fileUrl || source.url });
+function geminiEndpoint(model) {
+  const name = model || process.env.GEMINI_MODEL || DEFAULT_GEMINI_MODEL;
+  return `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(name)}:generateContent`;
+}
+
+function resolveGeminiKey({ env = process.env } = {}) {
+  const value = env.GEMINI_KEY || env.GEMINI_API_KEY || env.GOOGLE_API_KEY;
+  if (typeof value !== 'string') return null;
+  const trimmed = value.trim();
+  return trimmed || null;
+}
+
+function geminiType(jsonType) {
+  const types = {
+    object: 'OBJECT',
+    array: 'ARRAY',
+    string: 'STRING',
+    number: 'NUMBER',
+    integer: 'INTEGER',
+    boolean: 'BOOLEAN'
+  };
+  return types[jsonType] || jsonType;
+}
+
+function geminiSchema(value) {
+  if (Array.isArray(value)) return value.map(geminiSchema);
+  if (!value || typeof value !== 'object') return value;
+
+  const copy = {};
+  let nullable = false;
+  for (const [key, child] of Object.entries(value)) {
+    if (key === 'additionalProperties') continue;
+    if (key === 'type') {
+      const types = Array.isArray(child) ? child : [child];
+      nullable = types.includes('null');
+      copy.type = geminiType(types.find((item) => item !== 'null') || 'string');
+      continue;
+    }
+    copy[key] = geminiSchema(child);
+  }
+  if (nullable) copy.nullable = true;
+  return copy;
+}
+
+function buildRequestBody(source, document, { now } = {}) {
+  const parts = [{ text: `${SYSTEM_PROMPT}\n\n${userPrompt(source, document, { now })}` }];
+  if (document?.kind === 'pdf' && document.bytes) {
+    parts.push({
+      inline_data: {
+        mime_type: 'application/pdf',
+        data: Buffer.from(document.bytes).toString('base64')
+      }
+    });
   }
 
   const body = {
-    model: model || process.env.XAI_MODEL || DEFAULT_MODEL,
-    input: [
-      { role: 'system', content: SYSTEM_PROMPT },
-      { role: 'user', content }
-    ],
-    text: {
-      format: {
-        type: 'json_schema',
-        name: 'cai_calendar_extract',
-        schema: EXTRACT_SCHEMA,
-        strict: true
-      }
+    contents: [{ role: 'user', parts }],
+    generationConfig: {
+      responseMimeType: 'application/json',
+      responseSchema: geminiSchema(EXTRACT_SCHEMA)
     }
   };
 
-  if (source.kind === 'discover' && host) {
-    body.tools = [{ type: 'web_search', filters: { allowed_domains: [host] } }];
+  if (source.kind === 'discover') {
+    body.tools = [{ googleSearch: {} }];
   }
 
   return body;
+}
+
+function extractGeminiText(payload) {
+  const parts = payload?.candidates?.[0]?.content?.parts || [];
+  const text = parts.map((part) => part.text).filter(Boolean).join('\n').trim();
+  if (text) return text;
+  throw new Error('Gemini response contained no output text');
 }
 
 function defaultSleep(ms) {
@@ -222,14 +256,14 @@ function isRetryableStatus(status) {
 }
 
 async function extractFromSource(source, document, options = {}) {
-  const apiKey = options.apiKey || resolveApiKey({ env: process.env, grokHome: options.grokHome });
+  const apiKey = options.apiKey || resolveGeminiKey({ env: options.env || process.env });
   if (!apiKey) {
-    throw new Error('XAI_API_KEY is required (or a Grok CLI login in ~/.grok/auth.json)');
+    throw new Error('GEMINI_KEY is required. Set the GitHub secret GEMINI_KEY or a local backend/.env value.');
   }
 
   const fetchImpl = options.fetchImpl || globalThis.fetch;
   const sleep = options.sleep || defaultSleep;
-  const timeoutMs = options.timeoutMs ?? Number(process.env.XAI_TIMEOUT_MS || 120_000);
+  const timeoutMs = options.timeoutMs ?? Number(process.env.GEMINI_TIMEOUT_MS || process.env.XAI_TIMEOUT_MS || 120_000);
   const retries = options.retries ?? 2;
   const now = options.now;
 
@@ -237,18 +271,16 @@ async function extractFromSource(source, document, options = {}) {
     throw new Error('fetch is not available');
   }
 
-  const requestBody = buildRequestBody(source, document, {
-    model: options.model,
-    now
-  });
+  const requestBody = buildRequestBody(source, document, { now });
+  const endpoint = geminiEndpoint(options.model);
 
   let lastError;
   for (let attempt = 0; attempt <= retries; attempt += 1) {
     try {
-      const response = await fetchImpl(XAI_URL, {
+      const response = await fetchImpl(endpoint, {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${apiKey}`,
+          'x-goog-api-key': apiKey,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(requestBody),
@@ -257,7 +289,7 @@ async function extractFromSource(source, document, options = {}) {
 
       if (!response.ok) {
         const detail = await response.text().catch(() => '');
-        const error = new Error(`Grok API ${response.status}${detail ? `: ${detail.slice(0, 200)}` : ''}`);
+        const error = new Error(`Gemini API ${response.status}${detail ? `: ${detail.slice(0, 200)}` : ''}`);
         error.status = response.status;
         if (isRetryableStatus(response.status) && attempt < retries) {
           lastError = error;
@@ -268,7 +300,7 @@ async function extractFromSource(source, document, options = {}) {
       }
 
       const payload = await response.json();
-      const parsed = parseEnrichmentJson(extractOutputText(payload));
+      const parsed = parseEnrichmentJson(extractGeminiText(payload));
       const rows = Array.isArray(parsed.excursions) ? parsed.excursions : [];
       const excursions = rows
         .map((row) => normalizeExtracted(row, source, { now }))
@@ -332,13 +364,17 @@ async function fetchDocument(source, {
 }
 
 module.exports = {
+  DEFAULT_GEMINI_MODEL,
   EXTRACT_SCHEMA,
   SYSTEM_PROMPT,
   buildRequestBody,
   extractFromSource,
+  extractGeminiText,
   fetchDocument,
+  geminiEndpoint,
   htmlToText,
   normalizeExtracted,
+  resolveGeminiKey,
   sha256,
   userPrompt
 };

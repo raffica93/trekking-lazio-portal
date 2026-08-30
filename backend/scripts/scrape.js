@@ -10,8 +10,8 @@ function usage() {
     'Usage: npm run scrape -- [--dry-run] [--source id]',
     '',
     'Scrapes enabled CAI Lazio sources into backend/data/excursions.json.',
-    'CAI Roma uses the HTML parser. Other sections use Grok (XAI_API_KEY).',
-    'Without an API key, Roma still runs and Grok sources keep their cache.',
+    'CAI Roma uses the HTML parser. Other sections use Gemini 3.5 Flash (GEMINI_KEY).',
+    'Without GEMINI_KEY, Roma still runs and other sections keep their cache.',
     'Repeat --source to limit the run, e.g. --source tivoli --source viterbo.'
   ].join('\n');
 }

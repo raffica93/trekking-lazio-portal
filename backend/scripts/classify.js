@@ -57,7 +57,7 @@ function usage() {
     'Usage: npm run classify -- [--dry-run] [--limit N] [--id roma-...]',
     '',
     'Enriches backend/data/excursions.json with Grok.',
-    'Uses XAI_API_KEY, or the logged-in Grok CLI session in ~/.grok/auth.json.',
+    'Uses XAI_API_KEY from https://console.x.ai (the key must start with xai-).',
     'Does not run as part of the scheduled scrape.'
   ].join('\n');
 }
@@ -79,9 +79,9 @@ async function runClassify({
 
   const apiKey = resolveApiKey({ env, grokHome });
   if (!apiKey) {
-    throw new Error('XAI_API_KEY is required (or a Grok CLI login in ~/.grok/auth.json)');
+    throw new Error('XAI_API_KEY is required. Create one at https://console.x.ai (it must start with xai-).');
   }
-  log.log(env.XAI_API_KEY ? 'Using XAI_API_KEY' : 'Using Grok CLI session');
+  log.log('Using XAI_API_KEY');
 
   const payload = await readPayload(dataPath);
   const existing = Array.isArray(payload.excursions) ? payload.excursions : [];

@@ -27,7 +27,7 @@ npm run scrape
 
 Lo script aggiorna `backend/data/excursions.json` in modo atomico, lascia il file invariato quando i dati non cambiano e ritenta automaticamente gli errori di rete o le risposte HTML non valide. È possibile personalizzare la chiamata con `SCRAPE_RETRIES` e `SCRAPE_TIMEOUT_MS`.
 
-CAI Roma viene letto con il parser HTML. Le altre sezioni abilitate (Tivoli, Viterbo, Rieti, Monterotondo, Frosinone, Leonessa) usano Grok per estrarre il calendario da HTML o PDF. Serve `XAI_API_KEY` (o una sessione Grok CLI). Senza chiave lo scrape di Roma continua e le altre sezioni restano sulla cache.
+CAI Roma viene letto con il parser HTML. Le altre sezioni abilitate (Tivoli, Viterbo, Rieti, Monterotondo, Frosinone, Leonessa) usano Gemini 3.5 Flash per estrarre il calendario da HTML o PDF. Serve `GEMINI_KEY` in `backend/.env` in locale, e lo stesso nome come secret nelle GitHub Actions. Senza chiave lo scrape di Roma continua e le altre sezioni restano sulla cache.
 
 ```bash
 npm run scrape -- --source tivoli
@@ -63,14 +63,14 @@ npm test
 npm run classify -- --limit 2 --dry-run
 ```
 
-Serve `XAI_API_KEY`, oppure una sessione Grok CLI già loggata (`~/.grok/auth.json`). Flag utili: `--dry-run` (non scrive), `--limit N`, `--id roma-...`.
+Serve `XAI_API_KEY` da [console.x.ai](https://console.x.ai/team/default/api-keys). Flag utili: `--dry-run` (non scrive), `--limit N`, `--id roma-...`.
 
 Senza `--dry-run` lo script aggiorna `backend/data/excursions.json` e, se presente, `frontend/public/excursions.json`. Le uscite già classificate (stesso id, titolo, data e località) vengono riusate e non costano una nuova chiamata.
 
 ## Automazione
 
 - `CI and release` esegue test e build. Su `main` e sui tag `v*` pubblica le immagini frontend e backend nel GitHub Container Registry.
-- `Refresh excursion data` viene eseguito ogni giorno alle 04:17 UTC e può essere lanciato anche manualmente. Se trova modifiche, aggiorna la cache su `main`, attivando un nuovo rilascio. Estrae i calendari delle altre sezioni con Grok se il secret `XAI_API_KEY` è configurato nel repository; senza secret aggiorna solo CAI Roma. Non esegue il classificatore Grok.
+- `Refresh excursion data` viene eseguito ogni giorno alle 04:17 UTC e può essere lanciato anche manualmente. Se trova modifiche, aggiorna la cache su `main`, attivando un nuovo rilascio. Estrae i calendari delle altre sezioni con Gemini 3.5 Flash se il secret `GEMINI_KEY` è configurato nel repository; senza secret aggiorna solo CAI Roma. Non esegue il classificatore Grok.
 - `Deploy GitHub Pages` verifica e pubblica il frontend statico a ogni aggiornamento di `main`.
 
 Il repository GitHub deve consentire a GitHub Actions la scrittura dei contenuti e dei package. Se `main` è protetto, autorizzare il bot oppure adattare il workflow affinché apra una pull request.

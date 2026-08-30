@@ -228,7 +228,7 @@ test('runClassify dry-run does not write the cache file', async () => {
   const logs = [];
   const run = await runClassify({
     argv: ['--dry-run', '--limit', '1'],
-    env: { XAI_API_KEY: 'test-key' },
+    env: { XAI_API_KEY: 'xai-test-key' },
     dataPath,
     sitePath,
     log: { log: (message) => logs.push(String(message)) },
@@ -275,7 +275,7 @@ test('runClassify writes enrichment to the cache file', async () => {
 
   const run = await runClassify({
     argv: ['--limit', '1'],
-    env: { XAI_API_KEY: 'test-key' },
+    env: { XAI_API_KEY: 'xai-test-key' },
     dataPath,
     sitePath,
     log: { log: () => {} },
@@ -305,7 +305,7 @@ test('runClassify does not rewrite the cache when enrichment is unchanged', asyn
 
   const run = await runClassify({
     argv: [],
-    env: { XAI_API_KEY: 'test-key' },
+    env: { XAI_API_KEY: 'xai-test-key' },
     dataPath,
     sitePath,
     log: { log: () => {} },
@@ -319,7 +319,7 @@ test('runClassify does not rewrite the cache when enrichment is unchanged', asyn
 });
 
 test('resolveApiKey prefers XAI_API_KEY then a Grok CLI session', () => {
-  assert.equal(resolveApiKey({ env: { XAI_API_KEY: 'from-env' }, grokHome: os.tmpdir() }), 'from-env');
+  assert.equal(resolveApiKey({ env: { XAI_API_KEY: 'xai-from-env' }, grokHome: os.tmpdir() }), 'xai-from-env');
   assert.equal(resolveApiKey({
     env: {},
     grokHome: path.join(os.tmpdir(), 'missing-grok-home'),
@@ -333,11 +333,15 @@ test('resolveApiKey prefers XAI_API_KEY then a Grok CLI session', () => {
     now: Date.parse('2026-08-29T18:00:00Z'),
     readFileSync: () => JSON.stringify({
       session: {
-        key: 'cli-token',
+        key: 'xai-cli-token',
         expires_at: '2026-08-29T23:00:00Z'
       }
     })
-  }), 'cli-token');
+  }), 'xai-cli-token');
+  assert.equal(resolveApiKey({
+    env: { XAI_API_KEY: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e30.sig' },
+    grokHome: path.join(os.tmpdir(), 'missing-grok-home')
+  }), null);
 });
 
 test('runClassify refuses to start without XAI_API_KEY', async () => {

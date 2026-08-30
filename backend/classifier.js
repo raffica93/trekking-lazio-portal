@@ -222,23 +222,31 @@ function parseEnrichmentJson(raw) {
   return parsed;
 }
 
+function isXaiApiKey(value) {
+  return typeof value === 'string' && /^xai-/.test(value.trim());
+}
+
 function resolveApiKey({
   env = process.env,
   grokHome,
   readFileSync = fs.readFileSync,
   now = Date.now()
 } = {}) {
-  if (env.XAI_API_KEY) return env.XAI_API_KEY;
+  const fromEnv = typeof env.XAI_API_KEY === 'string' ? env.XAI_API_KEY.trim() : '';
+  if (isXaiApiKey(fromEnv)) return fromEnv;
 
   const home = grokHome || env.GROK_HOME || path.join(os.homedir(), '.grok');
   try {
     const auth = JSON.parse(readFileSync(path.join(home, 'auth.json'), 'utf8'));
     const records = Object.values(auth || {}).filter((record) => record && record.key);
     const fresh = records.find((record) => !record.expires_at || Date.parse(record.expires_at) > now);
-    return (fresh || records[0] || {}).key || null;
+    const fromCli = (fresh || records[0] || {}).key || null;
+    if (isXaiApiKey(fromCli)) return fromCli.trim();
   } catch {
     return null;
   }
+
+  return null;
 }
 
 function defaultSleep(ms) {
@@ -252,7 +260,7 @@ function isRetryableStatus(status) {
 async function classifyOne(excursion, options = {}) {
   const apiKey = options.apiKey || resolveApiKey({ env: process.env, grokHome: options.grokHome });
   if (!apiKey) {
-    throw new Error('XAI_API_KEY is required (or a Grok CLI login in ~/.grok/auth.json)');
+    throw new Error('XAI_API_KEY is required. Create one at https://console.x.ai (it must start with xai-).');
   }
 
   const model = options.model || process.env.XAI_MODEL || DEFAULT_MODEL;
@@ -397,6 +405,7 @@ module.exports = {
   areCoordsUsable,
   cacheKey,
   classifyOne,
+  isXaiApiKey,
   enrichExcursions,
   extractOutputText,
   isReusableEnrichment,

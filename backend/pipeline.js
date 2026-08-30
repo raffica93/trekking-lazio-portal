@@ -1,7 +1,7 @@
 const { DateTime } = require('luxon');
-const { isReusableEnrichment, mergeEnrichment, resolveApiKey } = require('./classifier');
+const { isReusableEnrichment, mergeEnrichment } = require('./classifier');
 const { scrapeCaiRoma } = require('./scraper');
-const { extractFromSource, fetchDocument } = require('./grok-extract');
+const { extractFromSource, fetchDocument, resolveGeminiKey } = require('./grok-extract');
 const { SOURCES, enabledSources, sourceMeta } = require('./sources');
 
 function belongingTo(source, excursion) {
@@ -88,10 +88,10 @@ async function scrapeSource(source, {
 
   if (!apiKey) {
     if (cached.length > 0) {
-      log.log(`Skipping ${source.id}: no XAI_API_KEY, keeping ${cached.length} cached excursions`);
+      log.log(`Skipping ${source.id}: no GEMINI_KEY, keeping ${cached.length} cached excursions`);
       return { status: 'skipped', source, excursions: cached, hash: hashes[source.id] || null };
     }
-    throw new Error(`XAI_API_KEY is required to scrape ${source.organizer}`);
+    throw new Error(`GEMINI_KEY is required to scrape ${source.organizer}`);
   }
 
   let document;
@@ -99,7 +99,7 @@ async function scrapeSource(source, {
     document = await fetchDoc(source);
   } catch (error) {
     if (source.kind !== 'discover') throw error;
-    log.log(`${source.id}: homepage fetch failed, trying Grok search (${error.message})`);
+    log.log(`${source.id}: homepage fetch failed, trying Gemini search (${error.message})`);
     document = { kind: 'discover', text: '', hash: null };
   }
 
@@ -135,8 +135,19 @@ async function scrapeAll({
     : {};
 
   const resolvedKey = apiKey === undefined
-    ? resolveApiKey({ env: process.env })
+    ? resolveGeminiKey({ env: process.env })
     : apiKey;
+
+  if (selected.some((source) => source.extractor !== 'cheerio')) {
+    if (resolvedKey) {
+      log.log('Using GEMINI_KEY with gemini-3.5-flash');
+    } else {
+      log.log(
+        'No GEMINI_KEY: LLM sources will be skipped. '
+        + 'Set the GitHub Actions secret GEMINI_KEY, or put it in backend/.env.'
+      );
+    }
+  }
 
   const kept = sourceIds && sourceIds.length > 0
     ? existing.filter((item) => !selected.some((source) => belongingTo(source, item)))

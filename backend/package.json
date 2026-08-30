@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "scrape": "node scripts/scrape.js",
+    "scrape": "node --env-file-if-exists=.env scripts/scrape.js",
     "classify": "node scripts/classify.js",
     "import:supabase": "node --env-file-if-exists=.env scripts/import-supabase.js",
     "test": "node --test"
