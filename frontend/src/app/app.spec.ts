@@ -372,6 +372,12 @@ describe('App', () => {
     expect(compiled.querySelector('app-admin-shell')).toBeNull();
 
     const page = compiled.querySelector('app-info-page') as HTMLElement;
+    const shell = compiled.querySelector('.flex.h-dvh.flex-col') as HTMLElement;
+    expect(shell).toBeTruthy();
+    expect(shell.contains(header)).toBe(true);
+    expect(shell.contains(page)).toBe(true);
+    expect(compiled.querySelector('router-outlet')?.parentElement).toBe(shell);
+    expect(page.querySelector('#info-title')?.textContent?.trim()).toBe('Info');
     const text = page.textContent ?? '';
     expect(text).toContain(CAI_PHILOSOPHY.body);
     expect(text).toContain('alpinismo in ogni sua manifestazione');
@@ -407,5 +413,9 @@ describe('App', () => {
       }
     }
     expect(linksBody).toContain(AGENDA_NO_LABEL);
+    const esperia = CAI_SEZIONE_LINKS.find(sezione => sezione.id === 'esperia');
+    expect(esperia?.hasAgenda).toBe(true);
+    expect(esperia?.agendaUrl).toContain('calendario_2026.pdf');
+    expect(linksTable.querySelector(`a[href="${esperia?.agendaUrl}"]`)).toBeTruthy();
   });
 });

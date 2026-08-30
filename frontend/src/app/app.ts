@@ -160,8 +160,8 @@ registerLocaleData(localeIt);
           </article>
         </section>
       </main>
+      <router-outlet />
     </div>
-    <router-outlet />
   `,
   styles: [`
     :host {

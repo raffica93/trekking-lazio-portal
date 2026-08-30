@@ -113,7 +113,7 @@ Elenco ufficiale del Gruppo Regionale Lazio: [gr.cailazio.org/sezioni-del-lazio]
 | CAI Aprilia | [caiaprilia.com](http://www.caiaprilia.com) | no | — |
 | CAI Cassino | [caicassino.com](http://www.caicassino.com) | no | — |
 | CAI Colleferro | [caicolleferro.it](http://caicolleferro.it) | no | — |
-| CAI Esperia | [caiesperia.it](http://www.caiesperia.it) | no | — |
+| CAI Esperia | [caiesperia.it](http://www.caiesperia.it) | sì | [Calendario 2026 (PDF)](http://www.caiesperia.it/images/doc/calendario_2026.pdf) |
 | CAI Frascati | [caifrascati.it](http://www.caifrascati.it) | sì | [Calendario escursioni 2026](https://www.caifrascati.it/wp-content/uploads/2025/12/Brochure-2026-Pagina-2.jpg) e elenco eventi in home |
 | CAI Frosinone | [caifrosinone.it](http://www.caifrosinone.it) | no | Home senza pagina calendario/programma verificata |
 | CAI Gallinaro | [wordpress](https://caisezionedigallinaro.wordpress.com/) | no | Ultima locandina trovata: 2010 |

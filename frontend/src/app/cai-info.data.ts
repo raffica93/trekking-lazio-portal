@@ -214,7 +214,14 @@ export const CAI_SEZIONE_LINKS: SezioneLink[] = [
   { id: 'aprilia', name: 'CAI Aprilia', websiteUrl: 'http://www.caiaprilia.com', hasAgenda: false, agendaUrl: null, agendaLabel: null },
   { id: 'cassino', name: 'CAI Cassino', websiteUrl: 'http://www.caicassino.com', hasAgenda: false, agendaUrl: null, agendaLabel: null },
   { id: 'colleferro', name: 'CAI Colleferro', websiteUrl: 'http://caicolleferro.it', hasAgenda: false, agendaUrl: null, agendaLabel: null },
-  { id: 'esperia', name: 'CAI Esperia', websiteUrl: 'http://www.caiesperia.it', hasAgenda: false, agendaUrl: null, agendaLabel: null },
+  {
+    id: 'esperia',
+    name: 'CAI Esperia',
+    websiteUrl: 'http://www.caiesperia.it',
+    hasAgenda: true,
+    agendaUrl: 'http://www.caiesperia.it/images/doc/calendario_2026.pdf',
+    agendaLabel: 'Calendario 2026 (PDF)'
+  },
   {
     id: 'frascati',
     name: 'CAI Frascati',
