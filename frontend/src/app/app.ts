@@ -6,7 +6,7 @@ import { Excursion } from './excursion.model';
 import { ExcursionCardComponent } from './excursion-card.component';
 import { FilterBarComponent } from './filter-bar.component';
 import { MapComponent } from './map.component';
-import { FilterState, applyFilters, landingFilters } from './excursion-filters';
+import { FilterState, applyFilters, landingFilters, DEFAULT_FILTERS } from './excursion-filters';
 import { primaryDifficulty } from './difficulty';
 import { RouterOutlet } from '@angular/router';
 
@@ -321,7 +321,7 @@ export class App implements OnInit {
   }
 
   resetFilters() {
-    this.filters = landingFilters();
+    this.filters = { ...DEFAULT_FILTERS };
     this.applyFilters();
   }
 

@@ -61,9 +61,16 @@ describe('App', () => {
     expect(header?.nextElementSibling).toBe(filterBar);
     expect(filterBar?.querySelector('[aria-label="Filtri"]')).toBe(filters);
     const monthGroup = compiled.querySelector('[aria-label="Filtra per mese"]');
+    const whenBand = compiled.querySelector('[aria-label="Quando"]');
+    const trailBand = compiled.querySelector('[aria-label="Percorso"]');
     expect(monthGroup).toBeTruthy();
+    expect(whenBand).toBeTruthy();
+    expect(trailBand).toBeTruthy();
+    expect(whenBand?.contains(monthGroup)).toBe(true);
+    expect(trailBand?.textContent).toContain('Durata');
+    expect(trailBand?.textContent).toContain('Distanza');
     expect(compiled.querySelector('#filter-mega')?.contains(monthGroup)).toBe(false);
-    expect(filters?.firstElementChild).toBe(monthGroup);
+    expect(filters?.firstElementChild).toBe(whenBand);
     const landingMonth = nextYearMonth();
     const landingChip = Array.from(monthGroup?.querySelectorAll('button') ?? [])
       .find(button => button.textContent?.trim() === monthLabel(landingMonth));
@@ -86,6 +93,11 @@ describe('App', () => {
     const more = Array.from(compiled.querySelectorAll('button')).find(button => button.textContent?.includes('Altri filtri')) as HTMLButtonElement;
     more.click();
     fixture.detectChanges();
+    const mega = compiled.querySelector('#filter-mega') as HTMLElement;
+    expect(mega.parentElement).toBe(filters);
+    expect(mega.querySelector('.filter-mega-kicker')?.textContent).toContain('Caratteristiche');
+    expect(getComputedStyle(mega).width).not.toBe('0px');
+    expect(getComputedStyle(mega.querySelector('.filter-mega-grid') as HTMLElement).maxWidth).toBe('none');
     const eea = Array.from(compiled.querySelectorAll('button')).find(button => button.textContent?.trim() === 'EEA') as HTMLButtonElement | undefined;
     eea?.click();
     fixture.detectChanges();
@@ -224,6 +236,10 @@ describe('App', () => {
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['week']);
 
     clickReset();
+    expect(app.filters.month).toBe('all');
+    expect(Array.from(compiled.querySelectorAll('[aria-label="Filtra per mese"] button'))
+      .find(button => button.textContent?.trim() === 'Tutti')
+      ?.classList.contains('filter-chip-active')).toBe(true);
     clickInGroup('Filtra per distanza', '≤10 km');
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['day']);
 

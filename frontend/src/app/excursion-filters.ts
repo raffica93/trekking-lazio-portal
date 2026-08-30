@@ -314,20 +314,9 @@ export function extraFilterTags(filters: FilterState): FilterTag[] {
   return tags;
 }
 
-export function hasActiveFilters(filters: FilterState, now = new Date()): boolean {
-  return filters.category !== 'all'
-    || filters.duration !== 'all'
-    || filters.days !== 'all'
-    || filters.distance !== 'all'
-    || filters.month !== nextYearMonth(now)
-    || filters.region !== 'all'
-    || filters.organizer !== 'all'
-    || Boolean(filters.dateFrom)
-    || Boolean(filters.dateTo)
-    || filters.vediSito
-    || filters.costMin !== ''
-    || filters.costMax !== ''
-    || filters.privateCar !== 'all';
+export function hasActiveFilters(filters: FilterState, _now = new Date()): boolean {
+  return (Object.keys(DEFAULT_FILTERS) as (keyof FilterState)[])
+    .some((key) => filters[key] !== DEFAULT_FILTERS[key]);
 }
 
 function matchesDuration(hours: number | null | undefined, bucket: DurationBucket): boolean {

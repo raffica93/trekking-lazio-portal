@@ -123,15 +123,15 @@ describe('excursion filters', () => {
       .toEqual(['EEA', 'Lazio']);
   });
 
-  it('lands on the next month without treating it as an extra filter', () => {
+  it('lands on the next month and treats Azzera as all months', () => {
     const now = new Date(2026, 7, 30);
     expect(currentYearMonth(now)).toBe('2026-08');
     expect(nextYearMonth(now)).toBe('2026-09');
     expect(landingFilters(now).month).toBe('2026-09');
-    expect(hasActiveFilters(landingFilters(now), now)).toBe(false);
-    expect(hasActiveFilters({ ...landingFilters(now), month: 'all' }, now)).toBe(true);
-    expect(hasActiveFilters({ ...landingFilters(now), month: '2026-08' }, now)).toBe(true);
-    expect(hasActiveFilters({ ...landingFilters(now), month: '2026-10' }, now)).toBe(true);
+    expect(hasActiveFilters(DEFAULT_FILTERS, now)).toBe(false);
+    expect(hasActiveFilters(landingFilters(now), now)).toBe(true);
+    expect(hasActiveFilters({ ...DEFAULT_FILTERS, month: 'all' }, now)).toBe(false);
+    expect(hasActiveFilters({ ...DEFAULT_FILTERS, month: '2026-08' }, now)).toBe(true);
     expect(extraFilterTags(landingFilters(now)).map((tag) => tag.label)).toEqual([]);
   });
 

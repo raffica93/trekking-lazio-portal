@@ -2,6 +2,7 @@ import { Component, ElementRef, EventEmitter, HostListener, Input, Output, injec
 import { CommonModule } from '@angular/common';
 import { Excursion } from './excursion.model';
 import {
+  DEFAULT_FILTERS,
   FilterState,
   FilterTag,
   availableMonths,
@@ -24,101 +25,115 @@ import {
   imports: [CommonModule],
   template: `
     <section class="filter-bar" aria-label="Filtri">
-      <div class="filter-months" role="group" aria-label="Filtra per mese">
-        <button type="button" class="filter-chip" [class.filter-chip-active]="filters.month === 'all'" (click)="set('month', 'all')">Tutti</button>
-        <button
-          type="button"
-          class="filter-chip"
-          *ngFor="let month of months"
-          [class.filter-chip-active]="filters.month === month.id"
-          [attr.aria-current]="filters.month === month.id ? 'date' : null"
-          (click)="set('month', month.id)"
-        >{{ month.label }}</button>
+      <div class="filter-band filter-band-time" role="region" aria-label="Quando">
+        <p class="filter-band-title">Quando</p>
+        <div class="filter-band-body">
+          <div class="filter-group filter-group-months" role="group" aria-label="Filtra per mese">
+            <p class="filter-label">Mese</p>
+            <div class="filter-months">
+              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.month === 'all'" (click)="set('month', 'all')">Tutti</button>
+              <button
+                type="button"
+                class="filter-chip"
+                *ngFor="let month of months"
+                [class.filter-chip-active]="filters.month === month.id"
+                [attr.aria-current]="filters.month === month.id ? 'date' : null"
+                (click)="set('month', month.id)"
+              >{{ month.label }}</button>
+            </div>
+          </div>
+
+          <div class="filter-group" role="group" aria-label="Periodo da a">
+            <p class="filter-label">Periodo</p>
+            <div class="filter-chips">
+              <button
+                type="button"
+                class="filter-chip"
+                [class.filter-chip-active]="nextWeekOn"
+                (click)="toggleNextWeek()"
+              >Prossima settimana</button>
+              <label class="filter-field">
+                <span>Da</span>
+                <input
+                  type="date"
+                  aria-label="Data di inizio"
+                  [value]="filters.dateFrom"
+                  [attr.min]="bounds.min || null"
+                  [attr.max]="filters.dateTo || bounds.max || null"
+                  (input)="set('dateFrom', inputValue($event))"
+                >
+              </label>
+              <label class="filter-field">
+                <span>A</span>
+                <input
+                  type="date"
+                  aria-label="Data di fine"
+                  [value]="filters.dateTo"
+                  [attr.min]="filters.dateFrom || bounds.min || null"
+                  [attr.max]="bounds.max || null"
+                  (input)="set('dateTo', inputValue($event))"
+                >
+              </label>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="filter-strip">
-        <button
-          type="button"
-          class="filter-chip"
-          [class.filter-chip-active]="nextWeekOn"
-          (click)="toggleNextWeek()"
-        >Prossima settimana</button>
+      <div class="filter-band filter-band-trail" role="region" aria-label="Percorso">
+        <p class="filter-band-title">Percorso</p>
+        <div class="filter-band-body">
+          <div class="filter-group" role="group" aria-label="Filtra per durata">
+            <p class="filter-label">Durata</p>
+            <div class="filter-chips">
+              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.duration === 'le4'" (click)="toggle('duration', 'le4')">≤4h</button>
+              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.duration === '4-6'" (click)="toggle('duration', '4-6')">4–6h</button>
+              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.duration === '6-8'" (click)="toggle('duration', '6-8')">6–8h</button>
+              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.duration === 'gt8'" (click)="toggle('duration', 'gt8')">>8h</button>
+            </div>
+          </div>
 
-        <div class="filter-group" role="group" aria-label="Periodo da a">
-          <div class="filter-fields">
-            <label class="filter-field">
-              <span>Da</span>
-              <input
-                type="date"
-                aria-label="Data di inizio"
-                [value]="filters.dateFrom"
-                [attr.min]="bounds.min || null"
-                [attr.max]="filters.dateTo || bounds.max || null"
-                (input)="set('dateFrom', inputValue($event))"
+          <div class="filter-group" role="group" aria-label="Filtra per distanza">
+            <p class="filter-label">Distanza</p>
+            <div class="filter-chips">
+              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.distance === 'le10'" (click)="toggle('distance', 'le10')">≤10 km</button>
+              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.distance === '10-15'" (click)="toggle('distance', '10-15')">10–15</button>
+              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.distance === '15-20'" (click)="toggle('distance', '15-20')">15–20</button>
+              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.distance === 'gt20'" (click)="toggle('distance', 'gt20')">>20</button>
+            </div>
+          </div>
+
+          <div class="filter-group" *ngIf="organizers.length">
+            <p class="filter-label">Sezione</p>
+            <label
+              class="filter-field filter-select"
+              [class.filter-select-active]="filters.organizer !== 'all'"
+            >
+              <select
+                aria-label="Filtra per sezione"
+                [value]="filters.organizer"
+                (change)="set('organizer', inputValue($event))"
               >
-            </label>
-            <label class="filter-field">
-              <span>A</span>
-              <input
-                type="date"
-                aria-label="Data di fine"
-                [value]="filters.dateTo"
-                [attr.min]="filters.dateFrom || bounds.min || null"
-                [attr.max]="bounds.max || null"
-                (input)="set('dateTo', inputValue($event))"
-              >
+                <option value="all">Tutte</option>
+                <option *ngFor="let organizer of organizers" [value]="organizer">{{ organizer }}</option>
+              </select>
             </label>
           </div>
-        </div>
 
-        <div class="filter-group" role="group" aria-label="Filtra per durata">
-          <div class="filter-chips">
-            <button type="button" class="filter-chip" [class.filter-chip-active]="filters.duration === 'le4'" (click)="toggle('duration', 'le4')">≤4h</button>
-            <button type="button" class="filter-chip" [class.filter-chip-active]="filters.duration === '4-6'" (click)="toggle('duration', '4-6')">4–6h</button>
-            <button type="button" class="filter-chip" [class.filter-chip-active]="filters.duration === '6-8'" (click)="toggle('duration', '6-8')">6–8h</button>
-            <button type="button" class="filter-chip" [class.filter-chip-active]="filters.duration === 'gt8'" (click)="toggle('duration', 'gt8')">>8h</button>
+          <div class="filter-actions">
+            <button
+              type="button"
+              class="filter-mega-toggle"
+              [class.is-open]="megaOpen"
+              [attr.aria-expanded]="megaOpen"
+              aria-controls="filter-mega"
+              (click)="toggleMega($event)"
+            >
+              Altri filtri
+              <span *ngIf="tags.length" class="filter-badge">{{ tags.length }}</span>
+            </button>
+            <span class="filter-count">{{ resultCount }}</span>
+            <button *ngIf="active" type="button" class="filter-reset" (click)="reset()">Azzera</button>
           </div>
-        </div>
-
-        <div class="filter-group" role="group" aria-label="Filtra per distanza">
-          <div class="filter-chips">
-            <button type="button" class="filter-chip" [class.filter-chip-active]="filters.distance === 'le10'" (click)="toggle('distance', 'le10')">≤10 km</button>
-            <button type="button" class="filter-chip" [class.filter-chip-active]="filters.distance === '10-15'" (click)="toggle('distance', '10-15')">10–15</button>
-            <button type="button" class="filter-chip" [class.filter-chip-active]="filters.distance === '15-20'" (click)="toggle('distance', '15-20')">15–20</button>
-            <button type="button" class="filter-chip" [class.filter-chip-active]="filters.distance === 'gt20'" (click)="toggle('distance', 'gt20')">>20</button>
-          </div>
-        </div>
-
-        <label
-          class="filter-field filter-select"
-          *ngIf="organizers.length"
-          [class.filter-select-active]="filters.organizer !== 'all'"
-        >
-          <span>Sezione</span>
-          <select
-            aria-label="Filtra per sezione"
-            [value]="filters.organizer"
-            (change)="set('organizer', inputValue($event))"
-          >
-            <option value="all">Tutte</option>
-            <option *ngFor="let organizer of organizers" [value]="organizer">{{ organizer }}</option>
-          </select>
-        </label>
-
-        <div class="filter-actions">
-          <button
-            type="button"
-            class="filter-mega-toggle"
-            [class.is-open]="megaOpen"
-            [attr.aria-expanded]="megaOpen"
-            aria-controls="filter-mega"
-            (click)="toggleMega($event)"
-          >
-            Altri filtri
-            <span *ngIf="tags.length" class="filter-badge">{{ tags.length }}</span>
-          </button>
-          <span class="filter-count">{{ resultCount }}</span>
-          <button *ngIf="active" type="button" class="filter-reset" (click)="reset()">Azzera</button>
         </div>
       </div>
 
@@ -137,8 +152,9 @@ import {
         [class.open]="megaOpen"
         [attr.hidden]="megaOpen ? null : true"
       >
+        <p class="filter-mega-kicker">Caratteristiche</p>
         <div class="filter-mega-grid">
-          <div class="filter-group" role="group" aria-label="Filtra per difficoltà">
+          <div class="filter-stack" role="group" aria-label="Filtra per difficoltà">
             <p class="filter-label">Difficoltà</p>
             <div class="filter-chips">
               <button type="button" class="filter-chip" [class.filter-chip-active]="filters.category === 'all'" (click)="set('category', 'all')">Tutte</button>
@@ -149,7 +165,7 @@ import {
             </div>
           </div>
 
-          <div class="filter-group" role="group" aria-label="Filtra per regione">
+          <div class="filter-stack" role="group" aria-label="Filtra per regione">
             <p class="filter-label">Regione</p>
             <div class="filter-chips">
               <button type="button" class="filter-chip" [class.filter-chip-active]="filters.region === 'all'" (click)="set('region', 'all')">Tutte</button>
@@ -163,7 +179,7 @@ import {
             </div>
           </div>
 
-          <div class="filter-group" role="group" aria-label="Filtra per giorni della gita">
+          <div class="filter-stack" role="group" aria-label="Filtra per giorni della gita">
             <p class="filter-label">Giorni</p>
             <div class="filter-chips">
               <button type="button" class="filter-chip" [class.filter-chip-active]="filters.days === 'all'" (click)="set('days', 'all')">Tutti</button>
@@ -175,7 +191,7 @@ import {
             </div>
           </div>
 
-          <div class="filter-group" role="group" aria-label="Filtra per auto privata">
+          <div class="filter-stack" role="group" aria-label="Filtra per auto privata">
             <p class="filter-label">Auto privata</p>
             <div class="filter-chips">
               <button type="button" class="filter-chip" [class.filter-chip-active]="filters.privateCar === 'all'" (click)="set('privateCar', 'all')">Tutti</button>
@@ -185,9 +201,9 @@ import {
             </div>
           </div>
 
-          <div class="filter-group" role="group" aria-label="Filtra per costo">
+          <div class="filter-stack" role="group" aria-label="Filtra per costo">
             <p class="filter-label">Costo</p>
-            <div class="filter-fields">
+            <div class="filter-chips">
               <button
                 type="button"
                 class="filter-chip"
@@ -233,56 +249,74 @@ import {
 
     .filter-bar {
       width: 100%;
-      border-bottom: 1px solid rgb(231 229 228);
+      border-bottom: 1px solid rgb(214 211 209);
       background: white;
     }
 
-    .filter-months,
-    .filter-strip {
-      display: flex;
-      align-items: center;
-      gap: 0.45rem 0.7rem;
-      max-width: 96rem;
-      margin: 0 auto;
+    .filter-band {
+      display: grid;
+      gap: 0.4rem 0.9rem;
       padding: 0.55rem 0.75rem;
     }
 
-    .filter-months {
-      gap: 0.35rem;
-      padding-bottom: 0.2rem;
-      overflow-x: auto;
-      flex-wrap: nowrap;
-      scrollbar-width: thin;
+    .filter-band-time {
+      background: white;
     }
 
-    .filter-months .filter-chip {
-      flex-shrink: 0;
+    .filter-band-trail {
+      border-top: 1px solid rgb(231 229 228);
+      background: #f3f6f3;
     }
 
-    .filter-strip {
+    .filter-band-title {
+      margin: 0;
+      padding: 0.15rem 0 0.15rem 0.55rem;
+      border-left: 3px solid #047857;
+      color: #065f46;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .filter-band-body {
+      display: flex;
       flex-wrap: wrap;
-      padding-top: 0.35rem;
-    }
-
-    @media (min-width: 768px) {
-      .filter-months,
-      .filter-strip {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-      }
-
-      .filter-months {
-        flex-wrap: wrap;
-        overflow: visible;
-      }
-    }
-
-    .filter-group {
+      align-items: center;
+      gap: 0.45rem 0.95rem;
       min-width: 0;
     }
 
+    @media (min-width: 768px) {
+      .filter-band {
+        grid-template-columns: 6.8rem minmax(0, 1fr);
+        align-items: center;
+        padding: 0.55rem 1.5rem;
+      }
+    }
+
+    .filter-group,
+    .filter-stack {
+      display: flex;
+      min-width: 0;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .filter-stack {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+
+    .filter-group-months {
+      flex: 1 1 16rem;
+    }
+
     .filter-label {
-      margin: 0 0 0.3rem;
+      margin: 0;
+      flex-shrink: 0;
       color: rgb(120 113 108);
       font-size: 9px;
       font-weight: 800;
@@ -290,14 +324,37 @@ import {
       text-transform: uppercase;
     }
 
+    .filter-stack .filter-label {
+      margin: 0;
+    }
+
+    .filter-months,
     .filter-chips,
-    .filter-fields,
     .filter-actions,
     .filter-tags {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       gap: 0.35rem;
+    }
+
+    .filter-months {
+      flex: 1;
+      flex-wrap: nowrap;
+      min-width: 0;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    .filter-months .filter-chip {
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 768px) {
+      .filter-months {
+        flex-wrap: wrap;
+        overflow: visible;
+      }
     }
 
     .filter-chip,
@@ -465,9 +522,8 @@ import {
     }
 
     .filter-tags {
-      max-width: 96rem;
-      margin: 0 auto;
       padding: 0 0.75rem 0.5rem;
+      background: #f3f6f3;
     }
 
     @media (min-width: 768px) {
@@ -491,21 +547,32 @@ import {
       position: absolute;
       left: 0;
       right: 0;
+      width: 100%;
       z-index: 30;
-      padding: 0.85rem 0.75rem 1rem;
-      border-bottom: 1px solid rgb(231 229 228);
-      background: rgb(255 255 255 / 0.97);
-      box-shadow: 0 16px 32px rgb(18 38 28 / 0.12);
+      padding: 0.85rem 0.75rem 1.1rem;
+      border-bottom: 1px solid rgb(214 211 209);
+      background: #f3f6f3;
+      box-shadow: 0 18px 36px rgb(18 38 28 / 0.14);
     }
 
     .filter-mega.open {
       display: block;
     }
 
+    .filter-mega-kicker {
+      margin: 0 0 0.7rem;
+      padding-left: 0.55rem;
+      border-left: 3px solid #047857;
+      color: #065f46;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
     @media (min-width: 768px) {
       .filter-mega {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
+        padding: 0.95rem 1.5rem 1.2rem;
       }
     }
 
@@ -522,15 +589,22 @@ import {
 
     .filter-mega-grid {
       display: grid;
-      gap: 0.85rem 1.4rem;
-      max-width: 96rem;
-      margin: 0 auto;
+      gap: 1rem 1.5rem;
+      width: 100%;
+      max-width: none;
+      margin: 0;
       grid-template-columns: 1fr;
     }
 
     @media (min-width: 768px) {
       .filter-mega-grid {
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .filter-mega-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
       }
     }
   `]
@@ -610,7 +684,7 @@ export class FilterBarComponent {
 
   toggleNextWeek() {
     if (isNextWeekSelected(this.filters)) {
-      this.filtersChange.emit({ ...this.filters, dateFrom: '', dateTo: '', month: nextYearMonth() });
+      this.filtersChange.emit({ ...this.filters, dateFrom: '', dateTo: '', month: 'all' });
       return;
     }
     const range = nextWeekRange();
@@ -627,7 +701,7 @@ export class FilterBarComponent {
 
   reset() {
     this.megaOpen = false;
-    this.filtersChange.emit(landingFilters());
+    this.filtersChange.emit({ ...DEFAULT_FILTERS });
   }
 
   inputValue(event: Event): string {
