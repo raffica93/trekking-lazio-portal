@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T21:25:25.114Z",
+  "generatedAt": "2026-08-30T21:32:11.640Z",
   "sources": [
     {
       "id": "roma",
@@ -23,11 +23,11 @@
       "template": "html-programma",
       "extractor": "gemini",
       "enabled": true,
-      "status": "reused",
+      "status": "ok",
       "excursions": 8,
       "error": null,
-      "hash": "58bb3570c70c80e7cd152de393e6824e21d955436e79cf30d083ceabd04d7990",
-      "updatedAt": "2026-08-30T20:59:18.671Z"
+      "hash": "af270ad43e8ec971224ee92ad37425555c3e464f79f0a45fa810a941a24cf8ce",
+      "updatedAt": "2026-08-30T21:32:11.640Z"
     },
     {
       "id": "tivoli",

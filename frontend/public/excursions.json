@@ -14,7 +14,10 @@
       "id": "viterbo",
       "organizer": "CAI Viterbo",
       "url": "https://www.caiviterbo.it/index.php/programma",
-      "kind": "html"
+      "kind": "html",
+      "template": "html-programma",
+      "extractor": "gemini",
+      "enabled": true
     },
     {
       "id": "tivoli",
@@ -81,7 +84,7 @@
     }
   ],
   "sourceHashes": {
-    "viterbo": "58bb3570c70c80e7cd152de393e6824e21d955436e79cf30d083ceabd04d7990",
+    "viterbo": "af270ad43e8ec971224ee92ad37425555c3e464f79f0a45fa810a941a24cf8ce",
     "monterotondo": "8bed86d7091a154272ef131717fa3f1e203b7b8c675d27fc9b54598490b48d3c",
     "frosinone": "67e019c1a06ce71fd3900d209a0bbf89603d7dcaadbeee21333e5928751063ce",
     "esperia": "ec29fd624004d005295ff18cd02eb7ea0bc82bc2cfe387da186f692563000a89",
@@ -90,7 +93,7 @@
     "tivoli": "b629e95f47336ee2326499d63f345cf8ea0d3aabe2dddbe48057a682ec51cfb7",
     "rieti": "fc855d463c84cbba2c6d057ba1ba6100be9bc5cef200a3b2e413919b8cbf6b85"
   },
-  "generatedAt": "2026-08-30T20:59:17.130Z",
+  "generatedAt": "2026-08-30T21:32:11.639Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "excursions": [
     {
@@ -770,6 +773,7 @@
       "region": "Altro",
       "lat": 42.473,
       "lng": 12.987,
+      "coordinatesQuality": "massif",
       "cost": "Vedi sito",
       "time": "Vedi sito",
       "privateCar": null
@@ -867,6 +871,7 @@
       "region": "Abruzzo",
       "lat": 41.808,
       "lng": 13.789,
+      "coordinatesQuality": "massif",
       "cost": "Vedi sito",
       "time": "Vedi sito",
       "privateCar": null
@@ -971,6 +976,7 @@
       "region": "Altro",
       "lat": 42.408,
       "lng": 12.176,
+      "coordinatesQuality": "massif",
       "cost": "Vedi sito",
       "time": "Vedi sito",
       "privateCar": null
@@ -1158,10 +1164,11 @@
       "category": "Escursionismo",
       "link": "https://www.caiviterbo.it/index.php/programma",
       "organizer": "CAI Viterbo",
-      "location": "Aielli",
+      "location": "Gole di Celano",
       "region": "Altro",
       "lat": 42.148,
       "lng": 13.38,
+      "coordinatesQuality": "massif",
       "cost": "Vedi sito",
       "time": "Vedi sito",
       "privateCar": null
@@ -1179,6 +1186,7 @@
       "region": "Altro",
       "lat": 41.891,
       "lng": 12.492,
+      "coordinatesQuality": "massif",
       "cost": "Vedi sito",
       "time": "Vedi sito",
       "privateCar": null
@@ -1431,6 +1439,7 @@
       "region": "Altro",
       "lat": 42.585,
       "lng": 11.985,
+      "coordinatesQuality": "massif",
       "cost": "Vedi sito",
       "time": "Vedi sito",
       "privateCar": null
@@ -4129,8 +4138,9 @@
       "organizer": "CAI Viterbo",
       "location": "Civitella Alfedena",
       "region": "Abruzzo",
-      "lat": 41.792,
-      "lng": 13.869,
+      "lat": 41.808,
+      "lng": 13.789,
+      "coordinatesQuality": "massif",
       "cost": "Vedi sito",
       "time": "Vedi sito",
       "transport": "auto proprie",
@@ -4226,6 +4236,7 @@
       "region": "Altro",
       "lat": 45.876,
       "lng": 7.624,
+      "coordinatesQuality": "massif",
       "cost": "Vedi sito",
       "time": "Vedi sito",
       "privateCar": null
