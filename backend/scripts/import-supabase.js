@@ -76,15 +76,18 @@ async function existingPlaces(supabase, sourceIds) {
 function coordPatchForExisting(existing, excursion) {
   if (!existing) return null;
   if (PRECISE_COORD_QUALITY.has(existing.coordinates_quality)) return null;
-  if (!isRomeFallback(existing.latitude, existing.longitude)) return null;
+  const existingHasCoords = Number.isFinite(existing.latitude) && Number.isFinite(existing.longitude);
+  const existingIsRomeFallback = existingHasCoords
+    && isRomeFallback(existing.latitude, existing.longitude);
   if (!hasFiniteCoords(excursion)) {
-    return {
+    return existingIsRomeFallback ? {
       latitude: null,
       longitude: null,
       coordinates_quality: null
-    };
+    } : null;
   }
   if (isRomeFallback(excursion.lat, excursion.lng)) return null;
+  if (existingHasCoords && !existingIsRomeFallback) return null;
 
   return {
     latitude: excursion.lat,

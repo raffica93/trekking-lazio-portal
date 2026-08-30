@@ -297,3 +297,32 @@ test('importNewPlaces updates existing Rome fallback coordinates', async () => {
     coordinates_quality: 'massif'
   });
 });
+
+test('importNewPlaces fills coordinates that were previously missing', async () => {
+  const excursion = sampleExcursion({
+    id: 'rieti-nuria',
+    title: 'Monte Nuria',
+    location: 'Rascino',
+    lat: 42.291,
+    lng: 13.121,
+    coordinatesQuality: 'massif'
+  });
+  const supabase = createFakeSupabase({
+    existingRows: [{
+      source_id: excursion.id,
+      latitude: null,
+      longitude: null,
+      coordinates_quality: null,
+      status: 'published'
+    }]
+  });
+
+  const result = await importNewPlaces({ supabase, excursions: [excursion], status: 'published' });
+
+  assert.equal(result.updated, 1);
+  assert.deepEqual(supabase.updates[0].patch, {
+    latitude: 42.291,
+    longitude: 13.121,
+    coordinates_quality: 'massif'
+  });
+});

@@ -6,6 +6,8 @@ const { parseEnrichmentJson } = require('./classifier');
 const {
   getApproximateCoords,
   hasFiniteCoords,
+  isRomeFallback,
+  looksLikeRome,
   parseTransport,
   resolveRegion,
   stableId,
@@ -15,6 +17,8 @@ const {
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 const MAX_HTML_CHARS = 80_000;
 const DEFAULT_GEMINI_MODEL = 'gemini-3.5-flash';
+const EXTRACTION_VERSION = 'geo-zone-v1';
+const MIN_COORDINATE_CONFIDENCE = 0.7;
 
 const EXTRACT_SCHEMA = {
   type: 'object',
@@ -36,7 +40,11 @@ const EXTRACT_SCHEMA = {
           'time',
           'transport',
           'distanceKm',
-          'durationHours'
+          'durationHours',
+          'latitude',
+          'longitude',
+          'coordinatesQuality',
+          'coordinatesConfidence'
         ],
         properties: {
           title: { type: 'string', description: 'Outing title, without the mountain-group heading if separate' },
@@ -48,7 +56,18 @@ const EXTRACT_SCHEMA = {
           time: { type: ['string', 'null'], description: 'Duration as printed, e.g. 6 ore' },
           transport: { type: ['string', 'null'], description: 'Means of travel if printed' },
           distanceKm: { type: ['number', 'null'] },
-          durationHours: { type: ['number', 'null'] }
+          durationHours: { type: ['number', 'null'] },
+          latitude: { type: ['number', 'null'], description: 'Approximate latitude of the named hiking area, or null' },
+          longitude: { type: ['number', 'null'], description: 'Approximate longitude of the named hiking area, or null' },
+          coordinatesQuality: {
+            type: ['string', 'null'],
+            enum: ['massif', 'region'],
+            description: 'massif for a named mountain/local area, region only for a broad area, null if unknown'
+          },
+          coordinatesConfidence: {
+            type: ['number', 'null'],
+            description: 'Confidence from 0 to 1 that the coordinates represent the outing area'
+          }
         }
       }
     }
@@ -65,12 +84,24 @@ Regole:
 - date in YYYY-MM-DD, anno dal programma (non inventare l'anno).
 - category: grado CAI stampato (T, E, EE, EEA, EAI, BC, …). Se manca usa "Escursionismo".
 - location: gruppo montuoso o zona, non l'intera descrizione.
+- Se la zona dell'escursione è identificabile, restituisci latitude/longitude del centro approssimativo della zona reale.
+- Usa coordinatesQuality="massif" per gruppo montuoso, cima, sentiero, comune o area locale; "region" solo per una zona vasta.
+- coordinatesConfidence va da 0 a 1. Usa coordinate solo se supportate chiaramente da titolo, location o documento.
+- Non usare mai Roma, la città della sezione CAI o il capoluogo come fallback. Se la zona è ambigua usa null per coordinate, qualità e confidenza.
 - Non inventare km, ore, date o link. Se non c'è, null.
 - link: URL della locandina o della scheda se presente nel documento; altrimenti null.
 - Ignora uscite già concluse rispetto a oggi.`;
 
 function sha256(value) {
   return crypto.createHash('sha256').update(value).digest('hex');
+}
+
+function extractionHash(value) {
+  return crypto.createHash('sha256')
+    .update(EXTRACTION_VERSION)
+    .update('\0')
+    .update(value)
+    .digest('hex');
 }
 
 function htmlToText(html) {
@@ -89,6 +120,20 @@ function htmlToText(html) {
 
 function isIsoDate(value) {
   return ISO_DATE.test(String(value || '')) && DateTime.fromISO(String(value), { zone: 'Europe/Rome' }).isValid;
+}
+
+function geminiZoneCoords(raw, context = {}) {
+  const lat = raw?.latitude;
+  const lng = raw?.longitude;
+  const confidence = raw?.coordinatesConfidence;
+  const quality = raw?.coordinatesQuality;
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+  if (lat < -90 || lat > 90 || lng < -180 || lng > 180) return null;
+  if (lat === 0 && lng === 0) return null;
+  if (!Number.isFinite(confidence) || confidence < MIN_COORDINATE_CONFIDENCE || confidence > 1) return null;
+  if (quality !== 'massif' && quality !== 'region') return null;
+  if (isRomeFallback(lat, lng) && !looksLikeRome(context)) return null;
+  return { lat, lng, coordinatesQuality: quality };
 }
 
 function normalizeExtracted(raw, source, { now = DateTime.now() } = {}) {
@@ -116,7 +161,11 @@ function normalizeExtracted(raw, source, { now = DateTime.now() } = {}) {
     }
   }
 
-  const coords = getApproximateCoords(`${location} ${title}`);
+  const context = { location, title };
+  const knownCoords = getApproximateCoords(`${location} ${title}`);
+  const coords = hasFiniteCoords(knownCoords)
+    ? { ...knownCoords, coordinatesQuality: 'massif' }
+    : geminiZoneCoords(raw, context);
   const { transport, privateCar } = parseTransport(raw.transport || '');
   const distanceKm = Number.isFinite(raw.distanceKm) && raw.distanceKm > 0 ? raw.distanceKm : undefined;
   const durationHours = Number.isFinite(raw.durationHours) && raw.durationHours > 0
@@ -135,7 +184,11 @@ function normalizeExtracted(raw, source, { now = DateTime.now() } = {}) {
     organizer: source.organizer,
     location,
     region: resolveRegion(location, title),
-    ...(hasFiniteCoords(coords) ? { lat: coords.lat, lng: coords.lng } : {}),
+    ...(hasFiniteCoords(coords) ? {
+      lat: coords.lat,
+      lng: coords.lng,
+      coordinatesQuality: coords.coordinatesQuality
+    } : {}),
     cost: 'Vedi sito',
     time,
     ...(transport ? { transport } : {}),
@@ -434,7 +487,7 @@ async function fetchDocument(source, {
     return {
       kind: 'pdf',
       bytes,
-      hash: sha256(bytes),
+      hash: extractionHash(bytes),
       fileUrl: source.url
     };
   }
@@ -448,19 +501,22 @@ async function fetchDocument(source, {
     kind: source.kind === 'discover' ? 'discover' : 'html',
     html,
     text,
-    hash: sha256(text)
+    hash: extractionHash(text)
   };
 }
 
 module.exports = {
   DEFAULT_GEMINI_MODEL,
+  EXTRACTION_VERSION,
   EXTRACT_SCHEMA,
+  MIN_COORDINATE_CONFIDENCE,
   SYSTEM_PROMPT,
   buildRequestBody,
   extractFromSource,
   extractGeminiText,
   fetchDocument,
   geminiEndpoint,
+  geminiZoneCoords,
   geminiQuotaExhausted,
   classifyGeminiError,
   htmlToText,

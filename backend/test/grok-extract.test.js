@@ -6,6 +6,7 @@ const {
   classifyGeminiError,
   extractFromSource,
   fetchDocument,
+  geminiZoneCoords,
   htmlToText,
   isFacebookUrl,
   isGeminiQuotaError,
@@ -69,6 +70,7 @@ test('normalizeExtracted builds a stable id and fills CAI defaults', () => {
   assert.match(excursion.link, /uscita\/morra$/);
   assert.equal(excursion.lat, 42.148);
   assert.equal(excursion.lng, 12.894);
+  assert.equal(excursion.coordinatesQuality, 'massif');
 });
 
 test('normalizeExtracted does not pin unknown places to Rome', () => {
@@ -87,6 +89,45 @@ test('normalizeExtracted does not pin unknown places to Rome', () => {
 
   assert.equal(excursion.lat, undefined);
   assert.equal(excursion.lng, undefined);
+});
+
+test('normalizeExtracted accepts a confident Gemini hiking zone', () => {
+  const excursion = normalizeExtracted({
+    title: 'Anello Monte Nuria',
+    date: '2026-09-20',
+    dateEnd: null,
+    category: 'E',
+    location: 'Monte Nuria e Rascino',
+    link: null,
+    time: null,
+    transport: null,
+    distanceKm: null,
+    durationHours: null,
+    latitude: 42.291,
+    longitude: 13.121,
+    coordinatesQuality: 'massif',
+    coordinatesConfidence: 0.91
+  }, VITERBO, { now });
+
+  assert.equal(excursion.lat, 42.291);
+  assert.equal(excursion.lng, 13.121);
+  assert.equal(excursion.coordinatesQuality, 'massif');
+});
+
+test('Gemini zones reject low confidence and a non-Rome outing pinned to Rome', () => {
+  assert.equal(geminiZoneCoords({
+    latitude: 42.291,
+    longitude: 13.121,
+    coordinatesQuality: 'massif',
+    coordinatesConfidence: 0.4
+  }, { title: 'Monte Nuria', location: 'Rascino' }), null);
+
+  assert.equal(geminiZoneCoords({
+    latitude: 41.891,
+    longitude: 12.492,
+    coordinatesQuality: 'massif',
+    coordinatesConfidence: 0.99
+  }, { title: 'Monte Nuria', location: 'Rascino' }), null);
 });
 
 test('normalizeExtracted drops past dates and invalid rows', () => {
@@ -200,7 +241,11 @@ test('extractFromSource parses Gemini JSON and ignores past rows', async () => {
                 time: '5 ore',
                 transport: 'pullman',
                 distanceKm: 11,
-                durationHours: 5
+                durationHours: 5,
+                latitude: 42.42,
+                longitude: 12.1,
+                coordinatesQuality: 'massif',
+                coordinatesConfidence: 0.95
               },
               {
                 title: 'Capodanno',
@@ -212,7 +257,11 @@ test('extractFromSource parses Gemini JSON and ignores past rows', async () => {
                 time: null,
                 transport: null,
                 distanceKm: null,
-                durationHours: null
+                durationHours: null,
+                latitude: null,
+                longitude: null,
+                coordinatesQuality: null,
+                coordinatesConfidence: null
               }
             ]
           })
@@ -237,4 +286,6 @@ test('extractFromSource parses Gemini JSON and ignores past rows', async () => {
   assert.equal(excursions[0].id.startsWith('viterbo-'), true);
   assert.equal(excursions[0].privateCar, false);
   assert.equal(excursions[0].organizer, 'CAI Viterbo');
+  assert.equal(excursions[0].lat, 42.417);
+  assert.equal(excursions[0].coordinatesQuality, 'massif');
 });
