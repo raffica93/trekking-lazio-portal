@@ -5,6 +5,7 @@ const { DateTime } = require('luxon');
 const { parseEnrichmentJson } = require('./classifier');
 const {
   getApproximateCoords,
+  hasFiniteCoords,
   parseTransport,
   resolveRegion,
   stableId,
@@ -134,8 +135,7 @@ function normalizeExtracted(raw, source, { now = DateTime.now() } = {}) {
     organizer: source.organizer,
     location,
     region: resolveRegion(location, title),
-    lat: coords.lat,
-    lng: coords.lng,
+    ...(hasFiniteCoords(coords) ? { lat: coords.lat, lng: coords.lng } : {}),
     cost: 'Vedi sito',
     time,
     ...(transport ? { transport } : {}),

@@ -67,6 +67,26 @@ test('normalizeExtracted builds a stable id and fills CAI defaults', () => {
   assert.equal(excursion.privateCar, true);
   assert.equal(excursion.distanceKm, 13);
   assert.match(excursion.link, /uscita\/morra$/);
+  assert.equal(excursion.lat, 42.148);
+  assert.equal(excursion.lng, 12.894);
+});
+
+test('normalizeExtracted does not pin unknown places to Rome', () => {
+  const excursion = normalizeExtracted({
+    title: 'Open day arrampicata',
+    date: '2026-09-20',
+    dateEnd: null,
+    category: 'E',
+    location: 'Non specificato',
+    link: null,
+    time: null,
+    transport: null,
+    distanceKm: null,
+    durationHours: null
+  }, VITERBO, { now });
+
+  assert.equal(excursion.lat, undefined);
+  assert.equal(excursion.lng, undefined);
 });
 
 test('normalizeExtracted drops past dates and invalid rows', () => {

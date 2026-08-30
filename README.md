@@ -1,6 +1,6 @@
-# Trekking Lazio Portal
+# Trekking CAI
 
-Portale Angular ed Express per consultare sulla mappa le escursioni pubblicate dalle sezioni CAI del Lazio.
+Portale Angular ed Express per consultare sulla mappa le escursioni pubblicate dalle sezioni CAI del Lazio. Il dominio canonico è `https://trekking-cai.it`.
 
 ## Avvio locale
 
@@ -12,7 +12,7 @@ docker compose up --build
 
 Il portale è disponibile su `http://localhost:8080`.
 
-La versione pubblica è distribuita tramite GitHub Pages. Con Supabase configurato il frontend
+La versione pubblica è distribuita tramite GitHub Pages. Il file `frontend/public/CNAME` associa il dominio personalizzato; configura su DNS il record indicato da GitHub Pages e abilita HTTPS nelle impostazioni del repository. Con Supabase configurato il frontend
 legge i luoghi `published` da `places`. La cache statica `frontend/public/excursions.json`
 resta aggiornata dallo scrape come fallback.
 
@@ -55,7 +55,7 @@ cd backend
 npm run import:supabase
 ```
 
-L'import locale inserisce solo i `source_id` ancora assenti in `places` e, per sicurezza, li marca come bozze salvo `SUPABASE_IMPORT_STATUS=published`. Le righe già presenti non vengono aggiornate, così correzioni, stato e foto del pannello restano intatti.
+L'import locale inserisce i `source_id` ancora assenti in `places` e, per sicurezza, li marca come bozze salvo `SUPABASE_IMPORT_STATUS=published`. Titolo, stato e foto delle righe già presenti restano intatti. Se una scheda ha ancora le coordinate di fallback su Roma e non è classificata (`peak` / `trailhead` / `massif`), l'import aggiorna solo latitudine, longitudine e `coordinates_quality`.
 
 Lo scrape locale (`npm run scrape`) continua a scrivere soltanto il JSON. Lo scrape pianificato su GitHub Actions, dopo aver aggiornato la cache, importa in automatico i `source_id` nuovi come `published`. Serve configurare i secret `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` nel repository.
 
@@ -76,7 +76,7 @@ Senza `--dry-run` lo script aggiorna `backend/data/excursions.json` e, se presen
 ## Automazione
 
 - `CI and release` esegue test e build. Su `main` e sui tag `v*` pubblica le immagini frontend e backend nel GitHub Container Registry.
-- `Refresh excursion data` viene eseguito ogni giorno alle 04:17 UTC e può essere lanciato anche manualmente, anche per una sola sede (input `source`). Lancia gli script uno per sezione, aggiorna cache e `scrape-status.json` su `main`, poi inserisce in Supabase solo i `source_id` nuovi come `published`. Serve `GEMINI_KEY`; senza secret aggiorna solo CAI Roma. Se una sede fallisce senza cache il job resta rosso, ma i JSON delle sedi riuscite vengono comunque committati. Richiede i secret `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY`. Non esegue il classificatore Grok e non sovrascrive le schede già in database.
+- `Refresh excursion data` viene eseguito ogni giorno alle 04:17 UTC e può essere lanciato anche manualmente, anche per una sola sede (input `source`). Lancia gli script uno per sezione, aggiorna cache e `scrape-status.json` su `main`, poi inserisce in Supabase i `source_id` nuovi come `published` e riallinea le coordinate di fallback su Roma. Serve `GEMINI_KEY`; senza secret aggiorna solo CAI Roma. Se una sede fallisce senza cache il job resta rosso, ma i JSON delle sedi riuscite vengono comunque committati. Richiede i secret `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY`. Non esegue il classificatore Grok e non sovrascrive titolo, stato o foto delle schede già in database.
 - `Deploy GitHub Pages` verifica e pubblica il frontend statico a ogni aggiornamento di `main`.
 
 Il repository GitHub deve consentire a GitHub Actions la scrittura dei contenuti e dei package. Se `main` è protetto, autorizzare il bot oppure adattare il workflow affinché apra una pull request.

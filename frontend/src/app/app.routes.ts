@@ -6,9 +6,13 @@ import { AdminPlaceListComponent } from './admin-place-list.component';
 import { AdminSediComponent } from './admin-sedi.component';
 import { AdminShellComponent } from './admin-shell.component';
 import { InfoPageComponent } from './info-page.component';
+import { LegalPageComponent } from './legal-page.component';
 
 export const routes: Routes = [
   { path: 'info', component: InfoPageComponent },
+  { path: 'servizi', component: LegalPageComponent },
+  { path: 'termini', component: LegalPageComponent },
+  { path: 'privacy', component: LegalPageComponent },
   { path: 'admin/login', component: AdminLoginComponent },
   {
     path: 'admin',

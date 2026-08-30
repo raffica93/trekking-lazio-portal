@@ -1,11 +1,13 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const {
+  coordPatchForExisting,
   importNewPlaces,
   importStatus,
   slugify,
   toPlaceRow
 } = require('../scripts/import-supabase');
+const { DEFAULT_COORDS } = require('../scraper');
 
 function sampleExcursion(overrides = {}) {
   return {
@@ -25,11 +27,26 @@ function sampleExcursion(overrides = {}) {
   };
 }
 
-function createFakeSupabase({ existingSourceIds = [], selectError = null, insertError = null } = {}) {
+function createFakeSupabase({
+  existingSourceIds = [],
+  existingRows = null,
+  selectError = null,
+  insertError = null,
+  updateError = null
+} = {}) {
   const inserts = [];
+  const updates = [];
   const selects = [];
+  const rows = existingRows || existingSourceIds.map((source_id) => ({
+    source_id,
+    latitude: 42.473,
+    longitude: 12.987,
+    coordinates_quality: 'peak',
+    status: 'published'
+  }));
   return {
     inserts,
+    updates,
     selects,
     from(table) {
       assert.equal(table, 'places');
@@ -39,17 +56,24 @@ function createFakeSupabase({ existingSourceIds = [], selectError = null, insert
             async in(column, ids) {
               selects.push({ columns, column, ids: [...ids] });
               if (selectError) return { data: null, error: selectError };
-              const data = existingSourceIds
-                .filter((id) => ids.includes(id))
-                .map((source_id) => ({ source_id }));
+              const data = rows.filter((row) => ids.includes(row.source_id));
               return { data, error: null };
             }
           };
         },
-        async insert(rows) {
-          inserts.push(rows);
+        async insert(batch) {
+          inserts.push(batch);
           if (insertError) return { data: null, error: insertError };
-          return { data: rows, error: null };
+          return { data: batch, error: null };
+        },
+        update(patch) {
+          return {
+            async eq(column, value) {
+              updates.push({ patch, column, value });
+              if (updateError) return { data: null, error: updateError };
+              return { data: [patch], error: null };
+            }
+          };
         },
         upsert() {
           throw new Error('import must insert new rows, not upsert');
@@ -125,7 +149,7 @@ test('importNewPlaces inserts missing source_id rows as published', async () => 
     status: 'published'
   });
 
-  assert.deepEqual(result, { inserted: 1, skipped: 0, status: 'published' });
+  assert.deepEqual(result, { inserted: 1, updated: 0, skipped: 0, skippedUnlocated: 0, status: 'published' });
   assert.equal(supabase.inserts.length, 1);
   assert.equal(supabase.inserts[0][0].source_id, excursion.id);
   assert.equal(supabase.inserts[0][0].status, 'published');
@@ -141,7 +165,7 @@ test('importNewPlaces skips source_id values already in the database', async () 
     status: 'published'
   });
 
-  assert.deepEqual(result, { inserted: 0, skipped: 1, status: 'published' });
+  assert.deepEqual(result, { inserted: 0, updated: 0, skipped: 1, skippedUnlocated: 0, status: 'published' });
   assert.deepEqual(supabase.inserts, []);
 });
 
@@ -160,7 +184,7 @@ test('importNewPlaces inserts only the new rows in a mixed batch', async () => {
     status: 'published'
   });
 
-  assert.deepEqual(result, { inserted: 1, skipped: 1, status: 'published' });
+  assert.deepEqual(result, { inserted: 1, updated: 0, skipped: 1, skippedUnlocated: 0, status: 'published' });
   assert.equal(supabase.inserts.length, 1);
   assert.equal(supabase.inserts[0].length, 1);
   assert.equal(supabase.inserts[0][0].source_id, fresh.id);
@@ -178,6 +202,98 @@ test('importNewPlaces does not update existing rows when title or date changed',
   });
 
   assert.equal(result.inserted, 0);
+  assert.equal(result.updated, 0);
   assert.equal(result.skipped, 1);
+  assert.equal(result.skippedUnlocated, 0);
   assert.deepEqual(supabase.inserts, []);
+  assert.deepEqual(supabase.updates, []);
+});
+
+test('importNewPlaces skips excursions without coordinates', async () => {
+  const located = sampleExcursion();
+  const unlocated = sampleExcursion({
+    id: 'esperia-open-day',
+    title: 'Open day arrampicata',
+    location: 'Non specificato',
+    lat: null,
+    lng: null
+  });
+  const supabase = createFakeSupabase();
+  const result = await importNewPlaces({
+    supabase,
+    excursions: [located, unlocated],
+    status: 'published'
+  });
+
+  assert.deepEqual(result, { inserted: 1, updated: 0, skipped: 0, skippedUnlocated: 1, status: 'published' });
+  assert.equal(supabase.inserts.length, 1);
+  assert.equal(supabase.inserts[0].length, 1);
+  assert.equal(supabase.inserts[0][0].source_id, located.id);
+});
+
+test('coordPatchForExisting rewrites Rome fallback and leaves classified peaks', () => {
+  assert.deepEqual(coordPatchForExisting({
+    source_id: 'esperia-1',
+    latitude: DEFAULT_COORDS.lat,
+    longitude: DEFAULT_COORDS.lng,
+    coordinates_quality: null
+  }, sampleExcursion({
+    id: 'esperia-1',
+    location: 'M. Aurunci',
+    lat: 41.345,
+    lng: 13.67
+  })), {
+    latitude: 41.345,
+    longitude: 13.67,
+    coordinates_quality: 'massif'
+  });
+
+  assert.equal(coordPatchForExisting({
+    source_id: 'roma-peak',
+    latitude: DEFAULT_COORDS.lat,
+    longitude: DEFAULT_COORDS.lng,
+    coordinates_quality: 'peak'
+  }, sampleExcursion({ lat: 41.345, lng: 13.67 })), null);
+
+  assert.equal(coordPatchForExisting({
+    source_id: 'admin-fixed',
+    latitude: 41.566,
+    longitude: 13.067,
+    coordinates_quality: null
+  }, sampleExcursion({ lat: 41.345, lng: 13.67 })), null);
+});
+
+test('importNewPlaces updates existing Rome fallback coordinates', async () => {
+  const excursion = sampleExcursion({
+    id: 'esperia-petrella',
+    title: 'M. Petrella',
+    location: 'M. Aurunci',
+    lat: 41.345,
+    lng: 13.67
+  });
+  const supabase = createFakeSupabase({
+    existingRows: [{
+      source_id: excursion.id,
+      latitude: DEFAULT_COORDS.lat,
+      longitude: DEFAULT_COORDS.lng,
+      coordinates_quality: null,
+      status: 'published'
+    }]
+  });
+  const result = await importNewPlaces({
+    supabase,
+    excursions: [excursion],
+    status: 'published'
+  });
+
+  assert.deepEqual(result, { inserted: 0, updated: 1, skipped: 0, skippedUnlocated: 0, status: 'published' });
+  assert.deepEqual(supabase.inserts, []);
+  assert.equal(supabase.updates.length, 1);
+  assert.equal(supabase.updates[0].column, 'source_id');
+  assert.equal(supabase.updates[0].value, excursion.id);
+  assert.deepEqual(supabase.updates[0].patch, {
+    latitude: 41.345,
+    longitude: 13.67,
+    coordinates_quality: 'massif'
+  });
 });

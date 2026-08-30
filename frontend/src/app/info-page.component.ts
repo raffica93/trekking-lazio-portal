@@ -172,6 +172,7 @@ import { sectionColor } from './section-color';
       display: block;
       flex: 1;
       min-height: 0;
+      margin: 0;
       overflow: auto;
       background:
         radial-gradient(1200px 400px at 10% -10%, rgb(236 253 208 / 0.55), transparent 55%),
@@ -179,17 +180,18 @@ import { sectionColor } from './section-color';
     }
 
     .info-page {
+      margin: 0;
       color: #1c1917;
     }
 
     .info-inner {
       width: min(72rem, calc(100% - 1.5rem));
       margin: 0 auto;
-      padding: 1.5rem 0 3.5rem;
+      padding: 0.75rem 0 3.5rem;
     }
 
-    .kicker {
-      margin: 0 0 0.35rem;
+    p.kicker {
+      margin: 0 0 0.25rem;
       color: #3f6212;
       font-size: 0.72rem;
       font-weight: 700;

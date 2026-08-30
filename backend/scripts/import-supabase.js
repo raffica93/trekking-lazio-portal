@@ -1,6 +1,11 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { createClient } = require('@supabase/supabase-js');
+const {
+  PRECISE_COORD_QUALITY,
+  hasFiniteCoords,
+  isRomeFallback
+} = require('../scraper');
 
 const DATA_FILE = path.join(__dirname, '..', 'data', 'excursions.json');
 const BATCH_SIZE = 200;
@@ -53,37 +58,79 @@ function chunk(items, size = BATCH_SIZE) {
   return batches;
 }
 
-async function existingSourceIds(supabase, sourceIds) {
-  const found = new Set();
+async function existingPlaces(supabase, sourceIds) {
+  const found = new Map();
   for (const batch of chunk(sourceIds)) {
     const { data, error } = await supabase
       .from('places')
-      .select('source_id')
+      .select('source_id, latitude, longitude, coordinates_quality, status')
       .in('source_id', batch);
     if (error) throw error;
     for (const row of data || []) {
-      if (row.source_id) found.add(row.source_id);
+      if (row.source_id) found.set(row.source_id, row);
     }
   }
   return found;
 }
 
+function coordPatchForExisting(existing, excursion) {
+  if (!existing) return null;
+  if (PRECISE_COORD_QUALITY.has(existing.coordinates_quality)) return null;
+  if (!isRomeFallback(existing.latitude, existing.longitude)) return null;
+  if (!hasFiniteCoords(excursion)) return null;
+  if (isRomeFallback(excursion.lat, excursion.lng)) return null;
+
+  return {
+    latitude: excursion.lat,
+    longitude: excursion.lng,
+    coordinates_quality: textOrNull(excursion.coordinatesQuality) || 'massif'
+  };
+}
+
 async function importNewPlaces({ supabase, excursions, status }) {
-  const places = excursions.map((excursion) => toPlaceRow(excursion, status));
-  const existing = await existingSourceIds(
-    supabase,
-    places.map((place) => place.source_id)
-  );
-  const toInsert = places.filter((place) => !existing.has(place.source_id));
+  let skippedUnlocated = 0;
+  const sourceIds = excursions.map((excursion) => textOrNull(excursion.id)).filter(Boolean);
+  const existing = await existingPlaces(supabase, sourceIds);
+
+  const toInsert = [];
+  const toUpdate = [];
+
+  for (const excursion of excursions) {
+    const sourceId = textOrNull(excursion.id);
+    if (!sourceId) continue;
+
+    const row = existing.get(sourceId);
+    if (!row) {
+      if (!hasFiniteCoords(excursion)) {
+        skippedUnlocated += 1;
+        continue;
+      }
+      toInsert.push(toPlaceRow(excursion, status));
+      continue;
+    }
+
+    const patch = coordPatchForExisting(row, excursion);
+    if (patch) toUpdate.push({ sourceId, patch });
+  }
 
   for (const batch of chunk(toInsert)) {
     const { error } = await supabase.from('places').insert(batch);
     if (error) throw error;
   }
 
+  for (const item of toUpdate) {
+    const { error } = await supabase
+      .from('places')
+      .update(item.patch)
+      .eq('source_id', item.sourceId);
+    if (error) throw error;
+  }
+
   return {
     inserted: toInsert.length,
-    skipped: places.length - toInsert.length,
+    updated: toUpdate.length,
+    skipped: existing.size - toUpdate.length,
+    skippedUnlocated,
     status
   };
 }
@@ -153,7 +200,11 @@ async function main() {
     excursions: readExcursions(),
     status: importStatus()
   });
-  console.log(`inserted ${result.inserted}, skipped ${result.skipped} existing as ${result.status}`);
+  console.log(
+    `inserted ${result.inserted}, updated ${result.updated} coordinates, skipped ${result.skipped} existing`
+    + `${result.skippedUnlocated ? `, skipped ${result.skippedUnlocated} without coordinates` : ''}`
+    + ` as ${result.status}`
+  );
 }
 
 if (require.main === module) {
@@ -165,6 +216,7 @@ if (require.main === module) {
 
 module.exports = {
   BATCH_SIZE,
+  coordPatchForExisting,
   importNewPlaces,
   importStatus,
   readExcursions,

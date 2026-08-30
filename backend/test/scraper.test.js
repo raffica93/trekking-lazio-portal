@@ -2,6 +2,9 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const { DateTime } = require('luxon');
 const {
+  DEFAULT_COORDS,
+  applyApproximateCoords,
+  getApproximateCoords,
   parseCaiRomaHtml,
   parseCostAmount,
   parseDateRange,
@@ -40,6 +43,8 @@ test('parses a CAI Roma excursion table', () => {
   assert.equal(result[0].privateCar, true);
   assert.match(result[0].time, /6 ore/);
   assert.match(result[0].link, /\?p=123$/);
+  assert.equal(result[0].lat, 42.483);
+  assert.equal(result[0].lng, 12.984);
 });
 
 test('parses multi-day ranges, km, hours and region', () => {
@@ -140,4 +145,56 @@ test('resolveRegion maps mountain groups and parseCostAmount skips vedi sito', (
   assert.equal(resolveRegion('Turchia'), 'Estero');
   assert.equal(parseCostAmount('Vedi sito'), undefined);
   assert.equal(parseCostAmount('25 euro'), 25);
+});
+
+test('getApproximateCoords matches aliases instead of falling back to Rome', () => {
+  assert.deepEqual(getApproximateCoords('M. Aurunci M. Petrella'), { lat: 41.345, lng: 13.67 });
+  assert.deepEqual(getApproximateCoords('Monti Sabini Anello del Monte Tancia'), { lat: 42.33, lng: 12.75 });
+  assert.deepEqual(getApproximateCoords('Terminillo Sentiero Dei Lupari'), { lat: 42.473, lng: 12.987 });
+  assert.deepEqual(getApproximateCoords('PNALM Anello Val di Rose'), { lat: 41.808, lng: 13.789 });
+  assert.deepEqual(getApproximateCoords('Parco del Circeo Escursione solidale'), { lat: 41.234, lng: 13.054 });
+  assert.deepEqual(
+    getApproximateCoords('Roma Grande Anello Verde Di Roma 5 Tappa'),
+    { ...DEFAULT_COORDS }
+  );
+  assert.deepEqual(getApproximateCoords('Non specificato Open day arrampicata'), { lat: null, lng: null });
+});
+
+test('applyApproximateCoords refreshes Rome fallback and keeps classified peaks', () => {
+  const moved = applyApproximateCoords({
+    title: 'M. Petrella',
+    location: 'M. Aurunci',
+    lat: DEFAULT_COORDS.lat,
+    lng: DEFAULT_COORDS.lng
+  });
+  assert.equal(moved.lat, 41.345);
+  assert.equal(moved.lng, 13.67);
+
+  const dropped = applyApproximateCoords({
+    title: 'Open day arrampicata',
+    location: 'Non specificato',
+    lat: DEFAULT_COORDS.lat,
+    lng: DEFAULT_COORDS.lng
+  });
+  assert.equal(dropped.lat, undefined);
+  assert.equal(dropped.lng, undefined);
+
+  const classified = applyApproximateCoords({
+    title: 'Pizzo Confalonieri',
+    location: 'Gran Sasso',
+    lat: 42.4502,
+    lng: 13.5545,
+    coordinatesQuality: 'peak'
+  });
+  assert.equal(classified.lat, 42.4502);
+  assert.equal(classified.lng, 13.5545);
+
+  const inRome = applyApproximateCoords({
+    title: 'Grande Anello Verde Di Roma 5 Tappa',
+    location: 'Roma',
+    lat: DEFAULT_COORDS.lat,
+    lng: DEFAULT_COORDS.lng
+  });
+  assert.equal(inRome.lat, DEFAULT_COORDS.lat);
+  assert.equal(inRome.lng, DEFAULT_COORDS.lng);
 });

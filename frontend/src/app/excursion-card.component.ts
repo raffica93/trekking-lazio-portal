@@ -60,6 +60,7 @@ import { HlmButton } from '@spartan-ng/helm/button';
             <p class="min-w-0 truncate text-[13px] text-stone-600" *ngIf="meta">{{ meta }}</p>
           </div>
           <p *ngIf="excursion.summary" class="excursion-summary">{{ excursion.summary }}</p>
+          <p *ngIf="!located" class="mt-1 text-[12px] text-stone-500">Posizione da confermare</p>
         </div>
         <div hlmCardFooter class="justify-end border-t border-stone-100">
           <a
@@ -179,6 +180,10 @@ export class ExcursionCardComponent {
 
   get sectionTone(): string {
     return sectionColor(this.excursion.organizer);
+  }
+
+  get located(): boolean {
+    return Number.isFinite(this.excursion.lat) && Number.isFinite(this.excursion.lng);
   }
 
   get dateLabel(): string {

@@ -1,6 +1,6 @@
 const { DateTime } = require('luxon');
 const { isReusableEnrichment, mergeEnrichment } = require('./classifier');
-const { scrapeCaiRoma } = require('./scraper');
+const { applyApproximateCoords, scrapeCaiRoma } = require('./scraper');
 const {
   extractFromSource,
   fetchDocument,
@@ -215,7 +215,7 @@ async function scrapeAll({
   const collected = sortExcursions([
     ...kept,
     ...results.flatMap((result) => result.excursions)
-  ]);
+  ]).map(applyApproximateCoords);
 
   if (collected.length === 0) {
     const detail = failures.map((item) => `${item.source.id}: ${item.error.message}`).join('; ');

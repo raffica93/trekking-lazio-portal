@@ -110,7 +110,7 @@ export class AdminPlaceEditorComponent implements OnInit {
   readonly form = this.formBuilder.nonNullable.group({
     title: ['', Validators.required], slug: ['', Validators.required], status: ['draft' as PlaceStatus, Validators.required],
     date: ['', Validators.required], date_end: [''], category: ['', Validators.required],
-    external_url: ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/i)]], organizer: ['Trekking Lazio', Validators.required],
+    external_url: ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/i)]], organizer: ['Trekking CAI', Validators.required],
     location: ['', Validators.required], municipality: [''], province: [''], region: [''], latitude: ['', Validators.required], longitude: ['', Validators.required],
     cost: [''], distance_km: [''], elevation_m: [''], duration_hours: [''], time: [''], mountain_group: [''], transport: [''],
     start_place: [''], coordinates_quality: [''], summary: [''], activity_type: [''], terrain: [''], difficulty_note: [''], cover_image_path: ['']

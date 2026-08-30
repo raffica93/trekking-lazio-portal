@@ -11,6 +11,7 @@ import { formatDateRange, nights } from './excursion-dates';
 import { primaryDifficulty } from './difficulty';
 import { sectionColor } from './section-color';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Meta, Title } from '@angular/platform-browser';
 import { filter } from 'rxjs';
 
 registerLocaleData(localeIt);
@@ -35,7 +36,7 @@ registerLocaleData(localeIt);
           <a
             routerLink="/"
             class="flex min-w-0 items-center gap-2.5 text-inherit no-underline md:gap-3"
-            aria-label="Trekking Lazio, torna alla mappa"
+            aria-label="Trekking CAI, torna alla mappa"
           >
             <img
               src="logo.png"
@@ -45,7 +46,7 @@ registerLocaleData(localeIt);
               class="h-9 w-9 shrink-0 rounded-[0.7rem] object-cover shadow-sm md:h-10 md:w-10"
             >
             <div class="flex min-w-0 items-center gap-2">
-              <span class="truncate text-lg font-black tracking-[-0.04em] md:text-2xl">TREKKING LAZIO</span>
+              <span class="truncate text-lg font-black tracking-[-0.04em] md:text-2xl">TREKKING CAI</span>
               <span class="rounded-sm bg-lime-300 px-1.5 py-0.5 text-[9px] font-black tracking-widest text-emerald-950">PORTAL</span>
             </div>
           </a>
@@ -58,7 +59,7 @@ registerLocaleData(localeIt);
       </header>
 
       <app-filter-bar
-        *ngIf="!onInfoPage"
+        *ngIf="!onContentPage"
         class="relative z-30 w-full shrink-0"
         [filters]="filters"
         [allExcursions]="allExcursions"
@@ -67,7 +68,7 @@ registerLocaleData(localeIt);
       ></app-filter-bar>
 
       <!-- Main Content -->
-      <main *ngIf="!onInfoPage" class="relative z-0 flex min-h-0 flex-1 flex-col overflow-hidden md:flex-row">
+      <main *ngIf="!onContentPage" class="relative z-0 flex min-h-0 flex-1 flex-col overflow-hidden md:flex-row">
         <!-- Sidebar / List -->
         <aside
           class="flex h-[42%] w-full shrink-0 flex-col border-r border-stone-200 bg-stone-50 md:h-full md:w-[24rem] lg:w-[27rem]"
@@ -133,6 +134,7 @@ registerLocaleData(localeIt);
             </div>
             <h2>{{ selectedExcursion.title }}</h2>
             <p class="detail-place">{{ placeLine(selectedExcursion) }}</p>
+            <p *ngIf="!hasCoords(selectedExcursion)" class="detail-note">Posizione da confermare</p>
             <p *ngIf="selectedExcursion.summary" class="detail-summary">{{ selectedExcursion.summary }}</p>
             <dl class="detail-meta" *ngIf="metaItems(selectedExcursion).length">
               <div *ngFor="let item of metaItems(selectedExcursion)">
@@ -160,7 +162,16 @@ registerLocaleData(localeIt);
           </article>
         </section>
       </main>
-      <router-outlet />
+      <footer class="site-footer" aria-label="Informazioni del sito">
+        <span>© {{ currentYear }} Trekking CAI</span>
+        <span class="footer-note">Escursioni pubblicate dalle sezioni CAI del Lazio</span>
+        <nav aria-label="Link nel footer">
+          <a routerLink="/servizi">Servizi</a>
+          <a routerLink="/termini">Termini e condizioni</a>
+          <a routerLink="/privacy">Privacy</a>
+        </nav>
+      </footer>
+      <router-outlet class="hidden" />
     </div>
   `,
   styles: [`
@@ -185,6 +196,26 @@ registerLocaleData(localeIt);
       background: rgb(255 255 255 / 0.97);
       box-shadow: 0 16px 40px rgb(18 38 28 / 0.18);
     }
+
+    .site-footer {
+      display: flex;
+      min-height: 2.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.25rem 1rem;
+      padding: 0.45rem 1rem;
+      border-top: 1px solid rgb(6 78 59 / 0.22);
+      background: #123f34;
+      color: #d9e8dd;
+      font-size: 0.68rem;
+      line-height: 1.3;
+    }
+
+    .footer-note { color: #a8c6b7; }
+    .site-footer nav { display: flex; gap: 0.8rem; margin-left: auto; }
+    .site-footer a { color: #ecfccb; font-weight: 700; text-decoration: none; }
+    .site-footer a:hover, .site-footer a:focus-visible { text-decoration: underline; }
+    @media (max-width: 640px) { .site-footer nav { width: 100%; margin-left: 0; } .footer-note { display: none; } }
 
     .detail-sheet h2 {
       margin: 0;
@@ -331,6 +362,8 @@ export class App implements OnInit {
   private excursionService = inject(ExcursionService);
   private changeDetector = inject(ChangeDetectorRef);
   private router = inject(Router);
+  private title = inject(Title);
+  private meta = inject(Meta);
   @ViewChild('excursionList') private excursionList?: ElementRef<HTMLElement>;
   
   allExcursions: Excursion[] = [];
@@ -339,14 +372,15 @@ export class App implements OnInit {
   filters: FilterState = landingFilters();
   selectedId: string | null = null;
   detailOpen = false;
-  onInfoPage = false;
+  onContentPage = false;
+  readonly currentYear = new Date().getFullYear();
 
   ngOnInit() {
-    this.syncInfoRoute(this.router.url);
+    this.syncRoute(this.router.url);
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe(event => {
-        this.syncInfoRoute(event.urlAfterRedirects);
+        this.syncRoute(event.urlAfterRedirects);
         this.changeDetector.markForCheck();
       });
     this.fetchExcursions();
@@ -405,6 +439,10 @@ export class App implements OnInit {
     return primaryDifficulty(excursion.category);
   }
 
+  hasCoords(excursion: Excursion): boolean {
+    return Number.isFinite(excursion.lat) && Number.isFinite(excursion.lng);
+  }
+
   placeLine(excursion: Excursion): string {
     return [excursion.location, excursion.region, excursion.startPlace].filter(Boolean).join(' · ');
   }
@@ -457,9 +495,22 @@ export class App implements OnInit {
     }
   }
 
-  private syncInfoRoute(url: string) {
+  private syncRoute(url: string) {
     const path = url.split('?')[0].split('#')[0];
-    this.onInfoPage = /(^|\/)info\/?$/.test(path);
+    this.onContentPage = /(^|\/)(info|servizi|termini|privacy)\/?$/.test(path);
+    const seo = /servizi\/?$/.test(path)
+      ? ['Servizi | Trekking CAI', 'Come funziona il portale Trekking CAI e come usare le informazioni sulle escursioni.']
+      : /termini\/?$/.test(path)
+        ? ['Termini e condizioni | Trekking CAI', 'Termini e condizioni d’uso del portale Trekking CAI.']
+        : /privacy\/?$/.test(path)
+          ? ['Privacy | Trekking CAI', 'Informazioni sulla privacy di Trekking CAI.']
+          : /info\/?$/.test(path)
+            ? ['Info CAI Lazio | Trekking CAI', 'Informazioni sul CAI e sulle sezioni del Lazio.']
+            : ['Trekking CAI | Escursioni CAI nel Lazio', 'Scopri le prossime escursioni CAI nel Lazio: calendario aggiornato, mappa interattiva e informazioni dalle sezioni del territorio.'];
+    this.title.setTitle(seo[0]);
+    this.meta.updateTag({ name: 'description', content: seo[1] });
+    this.meta.updateTag({ property: 'og:title', content: seo[0] });
+    this.meta.updateTag({ property: 'og:description', content: seo[1] });
   }
 
   private applyFilters() {

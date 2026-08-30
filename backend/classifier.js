@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
-const { DEFAULT_COORDS } = require('./scraper');
+const { DEFAULT_COORDS, looksLikeRome } = require('./scraper');
 
 const XAI_URL = 'https://api.x.ai/v1/responses';
 const DEFAULT_MODEL = 'grok-4.6';
@@ -93,10 +93,6 @@ function isReusableEnrichment(scraped, existing) {
     && isEnriched(existing)
     && cacheKey(scraped) === cacheKey(existing)
   );
-}
-
-function looksLikeRome(excursion) {
-  return /\brom[ae]\b/i.test(`${excursion.location || ''} ${excursion.title || ''}`);
 }
 
 function nearlyEqual(a, b, epsilon = 0.0008) {

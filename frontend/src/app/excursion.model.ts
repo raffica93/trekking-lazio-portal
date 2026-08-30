@@ -8,8 +8,8 @@ export interface Excursion {
   link: string;
   organizer: string;
   location: string;
-  lat: number;
-  lng: number;
+  lat?: number | null;
+  lng?: number | null;
   cost: string;
   costAmount?: number | null;
   time: string;

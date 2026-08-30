@@ -155,7 +155,9 @@ export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
     this.markers.clear();
     this.map.closePopup();
 
-    const located = this.excursions.filter(ex => Number.isFinite(ex.lat) && Number.isFinite(ex.lng));
+    const located = this.excursions.filter((ex): ex is Excursion & { lat: number; lng: number } => (
+      Number.isFinite(ex.lat) && Number.isFinite(ex.lng)
+    ));
     const positions = spreadOverlapping(located);
 
     located.forEach((ex, index) => {

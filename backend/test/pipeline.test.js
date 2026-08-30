@@ -10,6 +10,7 @@ const {
   scrapeAll
 } = require('../pipeline');
 const { SOURCES } = require('../sources');
+const { DEFAULT_COORDS } = require('../scraper');
 
 const now = DateTime.fromISO('2026-08-30', { zone: 'Europe/Rome' });
 
@@ -112,6 +113,33 @@ test('a failed Grok source keeps its cache and does not drop Roma', async () => 
   assert.equal(result.excursions.some((item) => item.id === 'tivoli-old'), true);
   assert.equal(result.failures.length, 1);
   assert.equal(belongingTo({ id: 'tivoli' }, existing[1]), true);
+});
+
+test('scrapeAll remaps cached Rome fallback coords using the gazetteer', async () => {
+  const cached = [sample({
+    id: 'esperia-petrella',
+    title: 'M. Petrella',
+    organizer: 'CAI Esperia',
+    location: 'M. Aurunci',
+    lat: DEFAULT_COORDS.lat,
+    lng: DEFAULT_COORDS.lng
+  })];
+
+  const result = await scrapeAll({
+    sources: SOURCES.filter((source) => source.id === 'esperia'),
+    existingPayload: { excursions: cached, sourceHashes: { esperia: 'same-hash' } },
+    now,
+    apiKey: 'test-key',
+    extract: async () => {
+      throw new Error('should reuse hash');
+    },
+    fetchDoc: async () => ({ kind: 'pdf', hash: 'same-hash', fileUrl: 'https://example.com/a.pdf' }),
+    log: { log() {}, error() {} }
+  });
+
+  assert.equal(result.excursions[0].lat, 41.345);
+  assert.equal(result.excursions[0].lng, 13.67);
+  assert.equal(result.excursions[0].lat === DEFAULT_COORDS.lat, false);
 });
 
 test('unchanged document hash skips Grok', async () => {

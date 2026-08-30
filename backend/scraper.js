@@ -7,6 +7,56 @@ const CAI_ROMA_URL = 'https://www.cairoma.it/?page_id=582';
 const DEFAULT_TIMEOUT_MS = 20_000;
 const DEFAULT_RETRIES = 3;
 const DEFAULT_COORDS = { lat: 41.891, lng: 12.492 };
+const PRECISE_COORD_QUALITY = new Set(['peak', 'trailhead', 'massif']);
+
+const COORD_GROUPS = [
+  { lat: 41.234, lng: 13.054, tests: [/\bcirceo\b/] },
+  { lat: 40.822, lng: 14.429, tests: [/\bvesuvio\b/] },
+  { lat: 41.972, lng: 12.815, tests: [/\bcatillo\b/] },
+  { lat: 42.055, lng: 12.675, tests: [/\bgattaceca\b/, /\bnomentum\b/] },
+  { lat: 41.295, lng: 13.972, tests: [/\broccamonfina\b/] },
+  { lat: 41.258, lng: 13.433, tests: [/\bsperlonga\b/] },
+  { lat: 41.345, lng: 13.67, tests: [/\baurunci\b/, /\bpetrella\b/] },
+  { lat: 41.385, lng: 13.775, tests: [/\bdefensa\b/, /\bdifesa\b/] },
+  { lat: 41.542, lng: 13.763, tests: [/\bcairo\b/] },
+  { lat: 41.45, lng: 13.35, tests: [/\bausoni\b/] },
+  { lat: 42.175, lng: 13.348, tests: [/\bduchessa\b/, /\bmurolungo\b/] },
+  { lat: 42.086, lng: 14.087, tests: [/\bmaiella\b/, /\bmajella\b/] },
+  { lat: 42.148, lng: 13.38, tests: [/\bsirente\b/, /\bvelino\b/, /\bcelano\b/, /\baielli\b/] },
+  { lat: 41.808, lng: 13.789, tests: [/\bpnalm\b/, /\bpnlam\b/, /\bmarsican[io]\b/, /\bmainarde\b/, /\bbarrea\b/, /\bmeta\b/] },
+  { lat: 42.635, lng: 13.375, tests: [/\blaga\b/, /\bsevo\b/] },
+  { lat: 42.823, lng: 13.275, tests: [/\bsibillini\b/, /\bvettore\b/] },
+  { lat: 40.55, lng: 15.33, tests: [/\balburni\b/] },
+  { lat: 42.473, lng: 12.987, tests: [/\bterminillo\b/] },
+  { lat: 42.148, lng: 12.894, tests: [/\blucretili\b/] },
+  { lat: 41.934, lng: 13.235, tests: [/\bsimbruini\b/] },
+  { lat: 41.723, lng: 12.705, tests: [/\balbani\b/] },
+  { lat: 42.482, lng: 13.565, tests: [/\bgran sasso\b/] },
+  { lat: 42.417, lng: 12.101, tests: [/\btuscia\b/, /\betrusch/] },
+  { lat: 42.138, lng: 12.235, tests: [/\bsabatini\b/] },
+  { lat: 42.408, lng: 12.176, tests: [/\bcimini\b/, /\bcanepina\b/] },
+  { lat: 42.235, lng: 13.254, tests: [/\bcicolano\b/] },
+  { lat: 42.483, lng: 12.984, tests: [/\breatini\b/] },
+  { lat: 41.802, lng: 13.486, tests: [/\bernici\b/] },
+  { lat: 41.885, lng: 13.374, tests: [/\bcantari\b/, /\bviglio\b/] },
+  { lat: 42.14, lng: 13.08, tests: [/\bcarseolan/] },
+  { lat: 42.33, lng: 12.75, tests: [/\bsabin[aei]\b/, /\btancia\b/] },
+  { lat: 41.566, lng: 13.067, tests: [/\blepini\b/] },
+  { lat: 41.85, lng: 12.95, tests: [/\bprenestini\b/] },
+  { lat: 42.19, lng: 12.69, tests: [/\bfarfa\b/, /\bnazzano\b/] },
+  { lat: 41.904, lng: 13.879, tests: [/\bscanno\b/] },
+  { lat: 41.696, lng: 13.701, tests: [/\bfibreno\b/] },
+  { lat: 41.385, lng: 13.685, tests: [/\besperia\b/] },
+  { lat: 42.18, lng: 14.688, tests: [/\btrabocchi\b/, /\baderci\b/] },
+  { lat: 41.716, lng: 13.612, tests: [/\bsora\b/] },
+  { lat: 43.066, lng: 11.516, tests: [/\btoscana\b/, /\borcia\b/, /\bapuane\b/] },
+  { lat: 44.5, lng: 7.12, tests: [/\bmaira\b/, /\bcozie\b/] },
+  { lat: 46.16, lng: 10.75, tests: [/\brendena\b/] },
+  { lat: 46.313, lng: 11.666, tests: [/\btrentino\b/, /\bdolomiti\b/, /\bfiemme\b/, /\bfassa\b/] },
+  { lat: 45.876, lng: 7.624, tests: [/\btorgnon\b/, /\bvaltournanch/] },
+  { lat: 42.585, lng: 11.985, tests: [/\bvolsini\b/, /\bbolsena\b/] },
+  { lat: 41.792, lng: 13.869, tests: [/\babruzzo\b/] }
+];
 
 const MONTHS = {
   GEN: 1, GENNAIO: 1, FEB: 2, FEBBRAIO: 2, MAR: 3, MARZO: 3,
@@ -244,8 +294,7 @@ function parseCaiRomaHtml(html, { now = DateTime.now() } = {}) {
       organizer: 'CAI Roma',
       location,
       region: resolveRegion(location, title),
-      lat: coords.lat,
-      lng: coords.lng,
+      ...(hasFiniteCoords(coords) ? { lat: coords.lat, lng: coords.lng } : {}),
       cost,
       time: details.find((value) => /\bore\b/i.test(value)) || 'Vedi sito',
       ...(transport ? { transport } : {}),
@@ -308,33 +357,63 @@ async function scrapeCaiRoma({
   throw new Error(`CAI Roma scrape failed after ${retries + 1} attempts: ${lastError.message}`);
 }
 
-function getApproximateCoords(title) {
-  const locations = [
-    { name: 'Monti Lucretili', lat: 42.148, lng: 12.894 },
-    { name: 'Sperlonga', lat: 41.258, lng: 13.433 },
-    { name: 'Simbruini', lat: 41.934, lng: 13.235 },
-    { name: 'Albani', lat: 41.723, lng: 12.705 },
-    { name: 'Gran Sasso', lat: 42.482, lng: 13.565 },
-    { name: 'Abruzzo', lat: 41.792, lng: 13.869 },
-    { name: 'Tuscia', lat: 42.417, lng: 12.101 },
-    { name: 'Sabatini', lat: 42.138, lng: 12.235 },
-    { name: 'Cicolano', lat: 42.235, lng: 13.254 },
-    { name: 'Reatini', lat: 42.483, lng: 12.984 },
-    { name: 'Ernici', lat: 41.802, lng: 13.486 },
-    { name: 'Lepini', lat: 41.566, lng: 13.067 },
-    { name: 'Sora', lat: 41.716, lng: 13.612 }
-  ];
+function looksLikeRome(value) {
+  const text = typeof value === 'string'
+    ? value
+    : `${value?.location || ''} ${value?.title || ''}`;
+  return /\brom[ae]\b/i.test(text);
+}
 
-  const found = locations.find((location) =>
-    title.toLowerCase().includes(location.name.toLowerCase())
-  );
-  return found || { ...DEFAULT_COORDS };
+function hasFiniteCoords(coords) {
+  return Number.isFinite(coords?.lat) && Number.isFinite(coords?.lng);
+}
+
+function nearlyEqual(a, b, epsilon = 0.0008) {
+  return Math.abs(a - b) <= epsilon;
+}
+
+function isRomeFallback(lat, lng) {
+  return nearlyEqual(lat, DEFAULT_COORDS.lat) && nearlyEqual(lng, DEFAULT_COORDS.lng);
+}
+
+function getApproximateCoords(title) {
+  const haystack = String(title || '').toLowerCase();
+  const found = COORD_GROUPS.find((group) => group.tests.some((test) => test.test(haystack)));
+  if (found) return { lat: found.lat, lng: found.lng };
+  if (looksLikeRome(haystack)) return { ...DEFAULT_COORDS };
+  return { lat: null, lng: null };
+}
+
+function applyApproximateCoords(excursion) {
+  if (!excursion || typeof excursion !== 'object') return excursion;
+  if (PRECISE_COORD_QUALITY.has(excursion.coordinatesQuality)) return excursion;
+
+  const currentUsable = hasFiniteCoords(excursion);
+  const currentIsRome = currentUsable && isRomeFallback(excursion.lat, excursion.lng);
+  if (currentUsable && !currentIsRome) return excursion;
+  if (currentIsRome && looksLikeRome(excursion)) return excursion;
+
+  const guessed = getApproximateCoords(`${excursion.location || ''} ${excursion.title || ''}`);
+  const next = { ...excursion };
+  if (hasFiniteCoords(guessed)) {
+    next.lat = guessed.lat;
+    next.lng = guessed.lng;
+  } else {
+    delete next.lat;
+    delete next.lng;
+  }
+  return next;
 }
 
 module.exports = {
   CAI_ROMA_URL,
   DEFAULT_COORDS,
+  PRECISE_COORD_QUALITY,
+  applyApproximateCoords,
   getApproximateCoords,
+  hasFiniteCoords,
+  isRomeFallback,
+  looksLikeRome,
   parseCaiRomaHtml,
   parseCostAmount,
   parseDate,

@@ -48,7 +48,7 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('header')?.textContent).toContain('TREKKING LAZIO');
+    expect(compiled.querySelector('header')?.textContent).toContain('TREKKING CAI');
     TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({ excursions: [] });
   });
 
@@ -158,6 +158,34 @@ describe('App', () => {
     expect(getComputedStyle(close).position).not.toBe('absolute');
     expect(Boolean(close.compareDocumentPosition(chip) & Node.DOCUMENT_POSITION_FOLLOWING)).toBe(false);
     expect(compiled.querySelector('.leaflet-popup')).toBeNull();
+  });
+
+  it('keeps unlocated outings in the list and marks the position as unconfirmed', () => {
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({
+      excursions: [
+        {
+          id: 'no-pin',
+          title: 'Open day arrampicata',
+          date: dateInMonth(1, 1),
+          category: 'E',
+          link: 'https://example.com/open',
+          organizer: 'CAI Esperia',
+          location: 'Non specificato',
+          cost: 'Vedi sito',
+          time: 'Vedi sito'
+        }
+      ]
+    });
+    fixture.detectChanges();
+
+    const app = fixture.componentInstance;
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(app.excursions.map((excursion) => excursion.id)).toEqual(['no-pin']);
+    expect(app.hasCoords(app.excursions[0])).toBe(false);
+    expect(compiled.textContent).toContain('Open day arrampicata');
+    expect(compiled.textContent).toContain('Posizione da confermare');
   });
 
   it('shows a date range and nights for multi-day trips', () => {
@@ -350,7 +378,7 @@ describe('App', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const header = compiled.querySelector('header') as HTMLElement;
     const title = Array.from(header.querySelectorAll('span'))
-      .find(span => span.textContent?.trim() === 'TREKKING LAZIO') as HTMLElement;
+      .find(span => span.textContent?.trim() === 'TREKKING CAI') as HTMLElement;
     const info = Array.from(header.querySelectorAll('a'))
       .find(anchor => anchor.textContent?.trim() === 'Info') as HTMLAnchorElement;
 
@@ -377,7 +405,11 @@ describe('App', () => {
     expect(shell.contains(header)).toBe(true);
     expect(shell.contains(page)).toBe(true);
     expect(compiled.querySelector('router-outlet')?.parentElement).toBe(shell);
+    expect(compiled.querySelector('router-outlet')?.classList.contains('hidden')).toBe(true);
     expect(page.querySelector('#info-title')?.textContent?.trim()).toBe('Info');
+    const inner = page.querySelector('.info-inner') as HTMLElement;
+    expect(inner.firstElementChild?.classList.contains('kicker')).toBe(true);
+    expect(Number.parseFloat(getComputedStyle(inner).paddingTop)).toBeLessThanOrEqual(16);
     const text = page.textContent ?? '';
     expect(text).toContain(CAI_PHILOSOPHY.body);
     expect(text).toContain('alpinismo in ogni sua manifestazione');
