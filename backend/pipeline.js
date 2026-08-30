@@ -2,7 +2,11 @@ const { DateTime } = require('luxon');
 const { isReusableEnrichment, mergeEnrichment } = require('./classifier');
 const { scrapeCaiRoma } = require('./scraper');
 const { extractFromSource, fetchDocument, resolveGeminiKey } = require('./grok-extract');
-const { SOURCES, enabledSources, sourceMeta } = require('./sources');
+const { SOURCES, enabledSources, isCheerioSource, sourceMeta } = require('./sources');
+
+function defaultSleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 function belongingTo(source, excursion) {
   return Boolean(excursion?.id?.startsWith(`${source.id}-`));
@@ -81,7 +85,7 @@ async function scrapeSource(source, {
 } = {}) {
   const cached = existing.filter((item) => belongingTo(source, item));
 
-  if (source.extractor === 'cheerio') {
+  if (isCheerioSource(source)) {
     const excursions = preserveEnrichment(await scrapeRoma({ now }), existing);
     return { status: 'ok', source, excursions, hash: null };
   }
@@ -126,7 +130,8 @@ async function scrapeAll({
   scrapeRoma,
   extract,
   fetchDoc,
-  log = console
+  log = console,
+  sleep = defaultSleep
 } = {}) {
   const selected = selectSources(sources, sourceIds);
   const existing = Array.isArray(existingPayload.excursions) ? existingPayload.excursions : [];
@@ -138,7 +143,7 @@ async function scrapeAll({
     ? resolveGeminiKey({ env: process.env })
     : apiKey;
 
-  if (selected.some((source) => source.extractor !== 'cheerio')) {
+  if (selected.some((source) => !isCheerioSource(source))) {
     if (resolvedKey) {
       log.log('Using GEMINI_KEY with gemini-3.5-flash');
     } else {
@@ -156,6 +161,7 @@ async function scrapeAll({
   const results = [];
   const nextHashes = sourceIds && sourceIds.length > 0 ? { ...hashes } : {};
   const failures = [];
+  const pauseMs = Number(process.env.GEMINI_PAUSE_MS || 0);
 
   for (const source of selected) {
     try {
@@ -172,6 +178,9 @@ async function scrapeAll({
       results.push(result);
       if (result.hash) nextHashes[source.id] = result.hash;
       log.log(`${source.id}: ${result.status} (${result.excursions.length} excursions)`);
+      if (pauseMs > 0 && !isCheerioSource(source) && result.status === 'ok') {
+        await sleep(pauseMs);
+      }
     } catch (error) {
       failures.push({ source, error });
       const cached = cachedOrEmpty(existing, source);
@@ -182,6 +191,7 @@ async function scrapeAll({
       } else {
         log.error(`${source.id} failed with no cache: ${error.message}`);
       }
+      if (pauseMs > 0) await sleep(pauseMs);
     }
   }
 
@@ -195,6 +205,8 @@ async function scrapeAll({
     throw new Error(detail || 'No excursion data available');
   }
 
+  const hardFailures = failures.filter((item) => cachedOrEmpty(existing, item.source).length === 0);
+
   return {
     excursions: collected,
     sources: (sourceIds && sourceIds.length > 0
@@ -203,6 +215,7 @@ async function scrapeAll({
     ),
     sourceHashes: nextHashes,
     failures,
+    hardFailures,
     results
   };
 }

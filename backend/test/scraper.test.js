@@ -73,6 +73,27 @@ test('rolls the end date into the next year across December', () => {
   assert.equal(range.dateEnd, '2027-01-02');
 });
 
+test('keeps a multi-day trip that started before today if it still ends in the future', () => {
+  const html = `
+    <table>
+      <tr><td>AGOSTO 2026</td></tr>
+      <tr><td>Data/Mezzo</td><td>Percorso</td><td>Difficoltà</td><td>Accompagnatori</td><td>Note</td></tr>
+      <tr>
+        <td>da sab 29 ago a sab 5 set<br>auto private</td>
+        <td>Trentino<br>Settimana delle Ferrate</td>
+        <td>EEA</td><td></td><td></td>
+      </tr>
+    </table>`;
+
+  const result = parseCaiRomaHtml(html, {
+    now: DateTime.fromISO('2026-08-30', { zone: 'Europe/Rome' })
+  });
+
+  assert.equal(result.length, 1);
+  assert.equal(result[0].date, '2026-08-29');
+  assert.equal(result[0].dateEnd, '2026-09-05');
+});
+
 test('ignores past excursions and keeps the year from the month heading', () => {
   const html = `
     <table>

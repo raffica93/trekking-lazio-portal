@@ -23,19 +23,22 @@ Per lo sviluppo senza Docker, avviare `npm start` prima in `backend` e poi in `f
 ```bash
 cd backend
 npm ci
-npm run scrape
+npm run scrape:roma
+npm run scrape:all
 ```
 
-Lo script aggiorna `backend/data/excursions.json` in modo atomico, lascia il file invariato quando i dati non cambiano e ritenta automaticamente gli errori di rete o le risposte HTML non valide. È possibile personalizzare la chiamata con `SCRAPE_RETRIES` e `SCRAPE_TIMEOUT_MS`.
+Ogni sede CAI ha uno script (`npm run scrape:sora`, `scrape:tivoli`, …). `scrape:all` le lancia una alla volta così un timeout Gemini non azzera le altre. Lo stato per sezione sta in `backend/data/scrape-status.json` e in admin `/#/admin/sedi`.
 
-CAI Roma viene letto con il parser HTML. Le altre sezioni abilitate (Tivoli, Viterbo, Rieti, Monterotondo, Frosinone, Leonessa) usano Gemini 3.5 Flash per estrarre il calendario da HTML o PDF. Serve `GEMINI_KEY` in `backend/.env` in locale, e lo stesso nome come secret nelle GitHub Actions. Senza chiave lo scrape di Roma continua e le altre sezioni restano sulla cache.
+Lo script aggiorna `backend/data/excursions.json` in modo atomico, lascia il file invariato quando i dati non cambiano e ritenta automaticamente gli errori di rete o le risposte HTML non valide. `SCRAPE_RETRIES` e `SCRAPE_TIMEOUT_MS` valgono per CAI Roma; `GEMINI_TIMEOUT_MS` (default 5 minuti) e `GEMINI_PAUSE_MS` per le altre.
+
+CAI Roma viene letto con il parser HTML. Le altre sezioni abilitate usano Gemini 3.5 Flash sul loro template (pagina programma, calendario o PDF). Serve `GEMINI_KEY` in `backend/.env` in locale, e lo stesso nome come secret nelle GitHub Actions. Senza chiave lo scrape di Roma continua e le altre sezioni restano sulla cache.
 
 ```bash
-npm run scrape -- --source tivoli
-npm run scrape -- --dry-run
+npm run scrape:tivoli -- --dry-run
+npm run scrape -- --source alatri
 ```
 
-Le sezioni si accendono in `backend/sources.js` (`enabled: true`). Un fallimento di una fonte non cancella le altre. L’arricchimento già classificato (summary, coordinate) viene conservato se id, titolo, data e località non cambiano.
+Le sezioni si accendono in `backend/sources.js` (`enabled: true`). Un fallimento di una fonte non cancella le altre; se una sede muore senza cache lo script esce con codice 1. L’arricchimento già classificato (summary, coordinate) viene conservato se id, titolo, data e località non cambiano. Dettaglio sedi: `docs/cai-scrape-riepilogo.md`.
 
 ## Supabase e pannello amministratore
 
@@ -58,7 +61,7 @@ Lo scrape locale (`npm run scrape`) continua a scrivere soltanto il JSON. Lo scr
 
 ## Classificazione Grok (manuale)
 
-Lo scrape programmato estrae i calendari con Grok, ma **non** classifica le schede (coordinate precise, quota, riassunto). Per completare le escursioni:
+Lo scrape programmato estrae i calendari con Gemini 3.5 Flash (Roma resta sul parser HTML), ma **non** classifica le schede (coordinate precise, quota, riassunto). Per completare le escursioni:
 
 ```bash
 cd backend
@@ -73,7 +76,7 @@ Senza `--dry-run` lo script aggiorna `backend/data/excursions.json` e, se presen
 ## Automazione
 
 - `CI and release` esegue test e build. Su `main` e sui tag `v*` pubblica le immagini frontend e backend nel GitHub Container Registry.
-- `Refresh excursion data` viene eseguito ogni giorno alle 04:17 UTC e può essere lanciato anche manualmente. Se trova modifiche, aggiorna la cache JSON su `main`. Poi inserisce in Supabase solo le escursioni il cui `source_id` non è già in `places`, come `published`. Estrae i calendari delle altre sezioni con Gemini 3.5 Flash se il secret `GEMINI_KEY` è configurato; senza secret aggiorna solo CAI Roma. Richiede i secret `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY`. Non esegue il classificatore Grok e non sovrascrive le schede già in database.
+- `Refresh excursion data` viene eseguito ogni giorno alle 04:17 UTC e può essere lanciato anche manualmente, anche per una sola sede (input `source`). Lancia gli script uno per sezione, aggiorna cache e `scrape-status.json` su `main`, poi inserisce in Supabase solo i `source_id` nuovi come `published`. Serve `GEMINI_KEY`; senza secret aggiorna solo CAI Roma. Se una sede fallisce senza cache il job resta rosso, ma i JSON delle sedi riuscite vengono comunque committati. Richiede i secret `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY`. Non esegue il classificatore Grok e non sovrascrive le schede già in database.
 - `Deploy GitHub Pages` verifica e pubblica il frontend statico a ogni aggiornamento di `main`.
 
 Il repository GitHub deve consentire a GitHub Actions la scrittura dei contenuti e dei package. Se `main` è protetto, autorizzare il bot oppure adattare il workflow affinché apra una pull request.

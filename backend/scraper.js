@@ -258,11 +258,22 @@ function parseCaiRomaHtml(html, { now = DateTime.now() } = {}) {
 
   const today = now.startOf('day').toISODate();
   return excursions
-    .filter((excursion) => excursion.date >= today)
+    .filter((excursion) => (excursion.dateEnd || excursion.date) >= today)
     .sort((a, b) => a.date.localeCompare(b.date));
 }
 
-async function scrapeCaiRoma({ retries = DEFAULT_RETRIES, timeout = DEFAULT_TIMEOUT_MS, now } = {}) {
+function envInteger(name, fallback) {
+  const raw = process.env[name];
+  if (raw == null || String(raw).trim() === '') return fallback;
+  const parsed = Number(raw);
+  return Number.isFinite(parsed) && parsed >= 0 ? parsed : fallback;
+}
+
+async function scrapeCaiRoma({
+  retries = envInteger('SCRAPE_RETRIES', DEFAULT_RETRIES),
+  timeout = envInteger('SCRAPE_TIMEOUT_MS', DEFAULT_TIMEOUT_MS),
+  now
+} = {}) {
   let lastError;
 
   for (let attempt = 0; attempt <= retries; attempt += 1) {

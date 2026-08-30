@@ -183,3 +183,22 @@ test('--source keeps excursions from other sections', async () => {
   assert.equal(result.excursions.some((item) => item.id === 'tivoli-new'), true);
   assert.equal(result.excursions.some((item) => item.id === 'tivoli-old'), false);
 });
+
+test('hardFailures lists Gemini sources that died with an empty cache', async () => {
+  const result = await scrapeAll({
+    sources: SOURCES.filter((source) => source.id === 'roma' || source.id === 'sora'),
+    existingPayload: { excursions: [sample()] },
+    now,
+    apiKey: 'test-key',
+    scrapeRoma: async () => [sample()],
+    extract: async () => {
+      throw new Error('timeout');
+    },
+    fetchDoc: async () => ({ kind: 'pdf', hash: 'x', fileUrl: 'https://example.com/a.pdf' }),
+    log: { log() {}, error() {} }
+  });
+
+  assert.equal(result.hardFailures.length, 1);
+  assert.equal(result.hardFailures[0].source.id, 'sora');
+  assert.equal(result.excursions.some((item) => item.id === 'roma-aaa'), true);
+});

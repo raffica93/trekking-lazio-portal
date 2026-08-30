@@ -17,6 +17,8 @@ import { AdminAuthService } from './admin-auth.service';
           </span>
         </a>
         <nav aria-label="Navigazione amministratore">
+          <a routerLink="/admin" class="quiet-link">Luoghi</a>
+          <a routerLink="/admin/sedi" class="quiet-link">Sedi CAI</a>
           <a routerLink="/" class="quiet-link">Portale pubblico</a>
           <button type="button" class="sign-out" (click)="signOut()">Esci</button>
         </nav>

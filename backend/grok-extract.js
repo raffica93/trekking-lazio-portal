@@ -263,7 +263,7 @@ async function extractFromSource(source, document, options = {}) {
 
   const fetchImpl = options.fetchImpl || globalThis.fetch;
   const sleep = options.sleep || defaultSleep;
-  const timeoutMs = options.timeoutMs ?? Number(process.env.GEMINI_TIMEOUT_MS || process.env.XAI_TIMEOUT_MS || 120_000);
+  const timeoutMs = options.timeoutMs ?? Number(process.env.GEMINI_TIMEOUT_MS || process.env.XAI_TIMEOUT_MS || 300_000);
   const retries = options.retries ?? 2;
   const now = options.now;
 

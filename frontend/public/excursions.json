@@ -1,11 +1,14 @@
 {
-  "source": "https://www.cairoma.it/?page_id=582 https://www.caiviterbo.it/index.php/programma https://www.caitivoli.it/wp-content/uploads/2025/12/Programma_CAI_2026.pdf https://organizzazione.cai.it/sez-rieti/wp-content/uploads/sites/45/2026/01/CAI_RI_programma_attivita_2026_completo.pdf https://organizzazione.cai.it/sez-monterotondo/wp-content/uploads/sites/141/2026/01/Calendario-escursioni-2026-CAI-Monterotondo-estratto-PDF.pdf https://www.caifrosinone.it/ https://organizzazione.cai.it/sez-leonessa/wp-content/uploads/sites/26/2025/12/CAI-Pieghevole-2026.pdf",
+  "source": "https://www.cairoma.it/?page_id=582 https://www.caiviterbo.it/index.php/programma https://www.caitivoli.it/wp-content/uploads/2025/12/Programma_CAI_2026.pdf https://organizzazione.cai.it/sez-rieti/wp-content/uploads/sites/45/2026/01/CAI_RI_programma_attivita_2026_completo.pdf https://organizzazione.cai.it/sez-monterotondo/wp-content/uploads/sites/141/2026/01/Calendario-escursioni-2026-CAI-Monterotondo-estratto-PDF.pdf https://www.caifrosinone.it/ https://organizzazione.cai.it/sez-leonessa/wp-content/uploads/sites/26/2025/12/CAI-Pieghevole-2026.pdf http://www.caiesperia.it/images/doc/calendario_2026.pdf",
   "sources": [
     {
       "id": "roma",
       "organizer": "CAI Roma",
       "url": "https://www.cairoma.it/?page_id=582",
-      "kind": "html"
+      "kind": "html",
+      "template": "html-table",
+      "extractor": "cheerio",
+      "enabled": true
     },
     {
       "id": "viterbo",
@@ -42,16 +45,62 @@
       "organizer": "CAI Leonessa",
       "url": "https://organizzazione.cai.it/sez-leonessa/wp-content/uploads/sites/26/2025/12/CAI-Pieghevole-2026.pdf",
       "kind": "pdf"
+    },
+    {
+      "id": "esperia",
+      "organizer": "CAI Esperia",
+      "url": "http://www.caiesperia.it/images/doc/calendario_2026.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true
     }
   ],
   "sourceHashes": {
     "viterbo": "58bb3570c70c80e7cd152de393e6824e21d955436e79cf30d083ceabd04d7990",
     "monterotondo": "8bed86d7091a154272ef131717fa3f1e203b7b8c675d27fc9b54598490b48d3c",
-    "frosinone": "67e019c1a06ce71fd3900d209a0bbf89603d7dcaadbeee21333e5928751063ce"
+    "frosinone": "67e019c1a06ce71fd3900d209a0bbf89603d7dcaadbeee21333e5928751063ce",
+    "esperia": "ec29fd624004d005295ff18cd02eb7ea0bc82bc2cfe387da186f692563000a89"
   },
-  "generatedAt": "2026-08-30T04:28:39.137Z",
+  "generatedAt": "2026-08-30T19:49:08.202Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "excursions": [
+    {
+      "id": "roma-6ac6ae5b6e63",
+      "title": "Cime della Valle",
+      "date": "2026-08-23",
+      "dateEnd": "2026-08-30",
+      "days": 8,
+      "category": "E - EE",
+      "link": "http://www.cairoma.it/?p=31578",
+      "organizer": "CAI Roma",
+      "location": "Alpi - Val Maira",
+      "region": "Piemonte",
+      "lat": 41.891,
+      "lng": 12.492,
+      "cost": "Vedi sito",
+      "time": "max 7 ore (escluse soste))",
+      "transport": "auto private/pubblico",
+      "privateCar": true,
+      "durationHours": 7
+    },
+    {
+      "id": "esperia-8192bb99621d",
+      "title": "Anello Rocca Chiarano",
+      "date": "2026-08-30",
+      "dateEnd": "2026-08-30",
+      "days": 1,
+      "category": "EE",
+      "link": "http://www.caiesperia.it/images/doc/calendario_2026.pdf",
+      "organizer": "CAI Esperia",
+      "location": "Marsicani",
+      "region": "Abruzzo",
+      "lat": 41.891,
+      "lng": 12.492,
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
     {
       "id": "frosinone-2cbadc1d8cd3",
       "title": "IL SENTIERO DEI CIPPI",
@@ -380,6 +429,23 @@
       "privateCar": null
     },
     {
+      "id": "esperia-4d019fdb3835",
+      "title": "Morrone delle Rose",
+      "date": "2026-09-13",
+      "dateEnd": "2026-09-13",
+      "days": 1,
+      "category": "E",
+      "link": "http://www.caiesperia.it/images/doc/calendario_2026.pdf",
+      "organizer": "CAI Esperia",
+      "location": "Mainarde",
+      "region": "Abruzzo",
+      "lat": 41.891,
+      "lng": 12.492,
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
       "id": "monterotondo-091a9752b0f7",
       "title": "Oriolo - Cesano",
       "date": "2026-09-13",
@@ -471,6 +537,23 @@
       "region": "Abruzzo",
       "lat": 42.482,
       "lng": 13.565,
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
+      "id": "esperia-9e2c08798133",
+      "title": "Week End speleologico",
+      "date": "2026-09-19",
+      "dateEnd": "2026-09-20",
+      "days": 2,
+      "category": "E - EEA",
+      "link": "http://www.caiesperia.it/images/doc/calendario_2026.pdf",
+      "organizer": "CAI Esperia",
+      "location": "Aurunci",
+      "region": "Lazio",
+      "lat": 41.891,
+      "lng": 12.492,
       "cost": "Vedi sito",
       "time": "Vedi sito",
       "privateCar": null
@@ -769,6 +852,23 @@
       "privateCar": null
     },
     {
+      "id": "esperia-59a1bd23ced3",
+      "title": "M. Meta da Valle Fiorita Int CAI Rieti e Campobasso",
+      "date": "2026-09-27",
+      "dateEnd": "2026-09-27",
+      "days": 1,
+      "category": "E - EE",
+      "link": "http://www.caiesperia.it/images/doc/calendario_2026.pdf",
+      "organizer": "CAI Esperia",
+      "location": "Mainarde",
+      "region": "Abruzzo",
+      "lat": 41.891,
+      "lng": 12.492,
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
       "id": "viterbo-02bdee409ac5",
       "title": "Anello Dei Monti Volsini",
       "date": "2026-10-01",
@@ -930,6 +1030,23 @@
       "activityType": "ferrata",
       "terrain": "anello con ferrata e cresta",
       "difficultyNote": "EEA richiede escursionisti esperti con kit da ferrata: passaggi di arrampicata fino al II grado, tratti esposti e attrezzati."
+    },
+    {
+      "id": "esperia-4be0e2adbd40",
+      "title": "Week-End a Scanno (AQ)",
+      "date": "2026-10-03",
+      "dateEnd": "2026-10-04",
+      "days": 2,
+      "category": "E - EE",
+      "link": "http://www.caiesperia.it/images/doc/calendario_2026.pdf",
+      "organizer": "CAI Esperia",
+      "location": "Scanno (AQ)",
+      "region": "Altro",
+      "lat": 41.891,
+      "lng": 12.492,
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
     },
     {
       "id": "roma-2a0598317a44",
@@ -1106,6 +1223,23 @@
       "privateCar": null
     },
     {
+      "id": "esperia-0c6b462770d5",
+      "title": "Giornata del camminare",
+      "date": "2026-10-11",
+      "dateEnd": "2026-10-11",
+      "days": 1,
+      "category": "E",
+      "link": "http://www.caiesperia.it/images/doc/calendario_2026.pdf",
+      "organizer": "CAI Esperia",
+      "location": "Posta Fibreno",
+      "region": "Altro",
+      "lat": 41.891,
+      "lng": 12.492,
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
       "id": "roma-9943871b434f",
       "title": "Monte Corno (1.735 m) — Anello dai pressi di Leonessa",
       "date": "2026-10-11",
@@ -1205,6 +1339,23 @@
       "activityType": "escursione",
       "terrain": "anello su cresta",
       "difficultyNote": "La difficoltà E (Escursionistico) indica un itinerario su sentieri o tracce che richiede esperienza, orientamento e buon allenamento, senza difficoltà alpinistiche ma con possibili tratti poco evidenti."
+    },
+    {
+      "id": "esperia-4013d9dba3d0",
+      "title": "Anello M. Cairo da Terelle Int. CAI Cosenza",
+      "date": "2026-10-18",
+      "dateEnd": "2026-10-18",
+      "days": 1,
+      "category": "E - EE",
+      "link": "http://www.caiesperia.it/images/doc/calendario_2026.pdf",
+      "organizer": "CAI Esperia",
+      "location": "M. Cairo",
+      "region": "Altro",
+      "lat": 41.891,
+      "lng": 12.492,
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
     },
     {
       "id": "roma-3b8f8af98a46",
@@ -1392,6 +1543,23 @@
       "difficultyNote": "La difficoltà E indica un itinerario su sentieri evidenti con pendenze e tratti su terreno irregolare, adatto a escursionisti con esperienza di base, passo sicuro e buon allenamento; richiede abbigliamento e calzature adeguati."
     },
     {
+      "id": "esperia-7331eb907653",
+      "title": "Cresta M. La Defensa-Fortini Winterline sentiero degli Omini Morti Int. CAI Cassino",
+      "date": "2026-10-25",
+      "dateEnd": "2026-10-25",
+      "days": 1,
+      "category": "E - EE",
+      "link": "http://www.caiesperia.it/images/doc/calendario_2026.pdf",
+      "organizer": "CAI Esperia",
+      "location": "M. La Defensa",
+      "region": "Altro",
+      "lat": 41.891,
+      "lng": 12.492,
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
       "id": "roma-044be45ea408",
       "title": "Monte Argatone — Anello vette dell'Argatone",
       "date": "2026-10-25",
@@ -1519,6 +1687,23 @@
       "activityType": "escursione",
       "terrain": "cresta",
       "difficultyNote": "EE indica un itinerario per escursionisti esperti, con possibili tratti esposti, di orientamento o di facile arrampicata che richiedono esperienza e passo sicuro."
+    },
+    {
+      "id": "esperia-1462fe87a693",
+      "title": "M. Gemma da Fonte Santa Serena",
+      "date": "2026-11-01",
+      "dateEnd": "2026-11-01",
+      "days": 1,
+      "category": "E",
+      "link": "http://www.caiesperia.it/images/doc/calendario_2026.pdf",
+      "organizer": "CAI Esperia",
+      "location": "M. Lepini",
+      "region": "Lazio",
+      "lat": 41.566,
+      "lng": 13.067,
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
     },
     {
       "id": "roma-f435db1139af",
@@ -1665,6 +1850,23 @@
       "activityType": "escursione",
       "terrain": "anello",
       "difficultyNote": "EE (Escursionisti Esperti) implica un percorso per escursionisti con esperienza, su tracce non sempre segnalate, con tratti ripidi, ghiaiosi o esposti che richiedono orientamento e passo sicuro."
+    },
+    {
+      "id": "esperia-b0a9bad786e2",
+      "title": "da Cappelle a Roccamonfina",
+      "date": "2026-11-08",
+      "dateEnd": "2026-11-08",
+      "days": 1,
+      "category": "E",
+      "link": "http://www.caiesperia.it/images/doc/calendario_2026.pdf",
+      "organizer": "CAI Esperia",
+      "location": "Parco Reg. Roccamonfina",
+      "region": "Altro",
+      "lat": 41.891,
+      "lng": 12.492,
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
     },
     {
       "id": "roma-4123a09d90f5",
@@ -1824,6 +2026,23 @@
       "difficultyNote": "La difficoltà E indica un itinerario escursionistico che richiede esperienza di trekking, buon allenamento fisico e capacità di orientamento su sentieri boschivi, anche con tratti a volte impegnativi o poco evidenti."
     },
     {
+      "id": "esperia-e2614b6f3119",
+      "title": "M. Lupone",
+      "date": "2026-11-22",
+      "dateEnd": "2026-11-22",
+      "days": 1,
+      "category": "E",
+      "link": "http://www.caiesperia.it/images/doc/calendario_2026.pdf",
+      "organizer": "CAI Esperia",
+      "location": "Lepini",
+      "region": "Lazio",
+      "lat": 41.566,
+      "lng": 13.067,
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
       "id": "monterotondo-231a8afe8d96",
       "title": "Sentiero degli etruschi e delle cascate",
       "date": "2026-11-22",
@@ -1833,6 +2052,23 @@
       "link": "https://organizzazione.cai.it/sez-monterotondo/wp-content/uploads/sites/141/2026/01/Calendario-escursioni-2026-CAI-Monterotondo-estratto-PDF.pdf",
       "organizer": "CAI Monterotondo",
       "location": "Sentiero degli etruschi",
+      "region": "Altro",
+      "lat": 41.891,
+      "lng": 12.492,
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
+      "id": "esperia-45ef89f813ba",
+      "title": "Open day arrampicata",
+      "date": "2026-11-29",
+      "dateEnd": "2026-11-29",
+      "days": 1,
+      "category": "EEA-F",
+      "link": "http://www.caiesperia.it/images/doc/calendario_2026.pdf",
+      "organizer": "CAI Esperia",
+      "location": "Esperia",
       "region": "Altro",
       "lat": 41.891,
       "lng": 12.492,
@@ -1878,6 +2114,23 @@
       "link": "https://organizzazione.cai.it/sez-monterotondo/wp-content/uploads/sites/141/2026/01/Calendario-escursioni-2026-CAI-Monterotondo-estratto-PDF.pdf",
       "organizer": "CAI Monterotondo",
       "location": "Sabina",
+      "region": "Altro",
+      "lat": 41.891,
+      "lng": 12.492,
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
+      "id": "esperia-9ab753d95282",
+      "title": "Cresta M. La Defensa-Fortini Winterline",
+      "date": "2026-12-06",
+      "dateEnd": "2026-12-06",
+      "days": 1,
+      "category": "E",
+      "link": "http://www.caiesperia.it/images/doc/calendario_2026.pdf",
+      "organizer": "CAI Esperia",
+      "location": "M. La Defensa",
       "region": "Altro",
       "lat": 41.891,
       "lng": 12.492,
@@ -1987,6 +2240,23 @@
       "difficultyNote": "La difficoltà E indica un itinerario su sentieri evidenti e segnalati, senza tratti alpinistici o esposti, adatto a escursionisti con un minimo di allenamento per affrontare circa 5 ore di cammino e dislivelli di alcune centinaia di metri."
     },
     {
+      "id": "esperia-7f3fe0079681",
+      "title": "Pranzo Sociale con escursione verso Sella Strampaturo",
+      "date": "2026-12-13",
+      "dateEnd": "2026-12-13",
+      "days": 1,
+      "category": "E",
+      "link": "http://www.caiesperia.it/images/doc/calendario_2026.pdf",
+      "organizer": "CAI Esperia",
+      "location": "M. Aurunci",
+      "region": "Lazio",
+      "lat": 41.891,
+      "lng": 12.492,
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
       "id": "roma-d147ddc885f9",
       "title": "MONTE GIUSTO — Interessante anello sopra Terracina, sulla zona di confine tra Stato Pontificio e regno borbonico.",
       "date": "2026-12-19",
@@ -2043,6 +2313,23 @@
       "organizer": "CAI Monterotondo",
       "location": "Non specificato",
       "region": "Altro",
+      "lat": 41.891,
+      "lng": 12.492,
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
+      "id": "esperia-467ab945ec53",
+      "title": "M. Petrella - Sostituzione libro di vetta",
+      "date": "2026-12-30",
+      "dateEnd": "2026-12-30",
+      "days": 1,
+      "category": "EE",
+      "link": "http://www.caiesperia.it/images/doc/calendario_2026.pdf",
+      "organizer": "CAI Esperia",
+      "location": "M. Aurunci",
+      "region": "Lazio",
       "lat": 41.891,
       "lng": 12.492,
       "cost": "Vedi sito",
