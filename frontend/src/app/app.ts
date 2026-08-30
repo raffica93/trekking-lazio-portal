@@ -100,19 +100,21 @@ registerLocaleData(localeIt);
             tabindex="-1"
             aria-label="Dettaglio escursione"
           >
-            <button
-              type="button"
-              class="detail-close"
-              aria-label="Chiudi dettaglio"
-              (click)="clearSelection()"
-            >×</button>
-            <p class="detail-kicker">
-              {{ selectedExcursion.date | date:'EEEE d MMMM y':'':'it' }}
-              <span
-                class="difficulty-chip"
-                [style.background-color]="tone(selectedExcursion).color"
-              >{{ tone(selectedExcursion).code }}</span>
-            </p>
+            <div class="detail-header">
+              <p class="detail-kicker">
+                {{ selectedExcursion.date | date:'EEEE d MMMM y':'':'it' }}
+                <span
+                  class="difficulty-chip"
+                  [style.background-color]="tone(selectedExcursion).color"
+                >{{ tone(selectedExcursion).code }}</span>
+              </p>
+              <button
+                type="button"
+                class="detail-close"
+                aria-label="Chiudi dettaglio"
+                (click)="clearSelection()"
+              >×</button>
+            </div>
             <h2>{{ selectedExcursion.title }}</h2>
             <p class="detail-place">{{ placeLine(selectedExcursion) }}</p>
             <p *ngIf="selectedExcursion.summary" class="detail-summary">{{ selectedExcursion.summary }}</p>
@@ -165,11 +167,18 @@ registerLocaleData(localeIt);
       font-weight: 800;
       letter-spacing: -0.03em;
       line-height: 1.25;
-      padding-right: 1.6rem;
+    }
+
+    .detail-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .detail-kicker {
       display: flex;
+      min-width: 0;
+      flex: 1;
       align-items: center;
       justify-content: space-between;
       gap: 0.75rem;
@@ -233,14 +242,12 @@ registerLocaleData(localeIt);
     }
 
     .detail-close {
-      position: absolute;
-      top: 0.45rem;
-      right: 0.5rem;
+      flex-shrink: 0;
       width: 1.8rem;
       height: 1.8rem;
       border: 0;
       border-radius: 999px;
-      background: transparent;
+      background: rgb(245 245 244);
       color: #44403c;
       font-size: 1.35rem;
       line-height: 1;

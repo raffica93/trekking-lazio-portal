@@ -122,6 +122,14 @@ describe('App', () => {
     expect(detail.textContent).toContain('Sentiero facile');
     expect(detail.textContent).toContain('Anello boschivo sui Colli Albani.');
     expect(detail.querySelector('.detail-cta')?.getAttribute('href')).toBe('https://example.com/e');
+    const header = detail.querySelector('.detail-header') as HTMLElement;
+    const close = header?.querySelector('.detail-close') as HTMLElement;
+    const chip = header?.querySelector('.difficulty-chip') as HTMLElement;
+    expect(header).toBeTruthy();
+    expect(header.lastElementChild).toBe(close);
+    expect(chip?.textContent?.trim()).toBe('E');
+    expect(getComputedStyle(close).position).not.toBe('absolute');
+    expect(Boolean(close.compareDocumentPosition(chip) & Node.DOCUMENT_POSITION_FOLLOWING)).toBe(false);
     expect(compiled.querySelector('.leaflet-popup')).toBeNull();
   });
 
