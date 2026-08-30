@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T21:02:04.799Z",
+  "generatedAt": "2026-08-30T21:23:00.654Z",
   "sources": [
     {
       "id": "roma",
@@ -13,7 +13,7 @@
       "excursions": 51,
       "error": null,
       "hash": null,
-      "updatedAt": "2026-08-30T20:59:17.131Z"
+      "updatedAt": "2026-08-30T21:23:00.654Z"
     },
     {
       "id": "viterbo",
