@@ -111,6 +111,7 @@ export class AdminSediComponent implements OnInit {
       'html-programma': 'programma HTML',
       'html-calendario': 'calendario HTML',
       'pdf-programma': 'PDF programma',
+      facebook: 'Facebook',
       homepage: 'homepage'
     };
     return labels[sede.template || ''] || sede.kind;

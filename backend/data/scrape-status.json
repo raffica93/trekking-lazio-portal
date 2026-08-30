@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T19:49:17.076Z",
+  "generatedAt": "2026-08-30T20:04:20.190Z",
   "sources": [
     {
       "id": "roma",
@@ -228,44 +228,44 @@
     {
       "id": "latina",
       "organizer": "CAI Latina",
-      "url": "http://www.cailatina.com/",
-      "kind": "discover",
-      "template": "homepage",
+      "url": "https://www.cailatina.com/pagu_eventi.php?statoevento=pianificato",
+      "kind": "html",
+      "template": "html-calendario",
       "extractor": "gemini",
-      "enabled": false,
-      "status": "disabled",
-      "excursions": 0,
+      "enabled": true,
+      "status": "ok",
+      "excursions": 5,
       "error": null,
-      "hash": null,
-      "updatedAt": null
+      "hash": "1da3d3cff7498b9fb928d7c5a34d8699bc6c6492565d29ed39bce9b8cea6a15a",
+      "updatedAt": "2026-08-30T20:04:12.360Z"
     },
     {
       "id": "cassino",
       "organizer": "CAI Cassino",
-      "url": "http://www.caicassino.com/",
-      "kind": "discover",
-      "template": "homepage",
+      "url": "https://www.caicassino.it/index.php/eventi",
+      "kind": "html",
+      "template": "html-calendario",
       "extractor": "gemini",
-      "enabled": false,
-      "status": "disabled",
-      "excursions": 0,
+      "enabled": true,
+      "status": "ok",
+      "excursions": 1,
       "error": null,
-      "hash": null,
-      "updatedAt": null
+      "hash": "865cca97883fe50a506df9fe89a803881c973886f1bd065eef3f3f80fd960700",
+      "updatedAt": "2026-08-30T20:02:41.892Z"
     },
     {
       "id": "gallinaro",
       "organizer": "CAI Gallinaro",
-      "url": "https://caisezionedigallinaro.wordpress.com/",
+      "url": "https://www.facebook.com/p/CAI-Gallinaro-6157261685",
       "kind": "discover",
-      "template": "homepage",
+      "template": "facebook",
       "extractor": "gemini",
-      "enabled": false,
-      "status": "disabled",
+      "enabled": true,
+      "status": "failed",
       "excursions": 0,
-      "error": null,
+      "error": "Gemini API 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a",
       "hash": null,
-      "updatedAt": null
+      "updatedAt": "2026-08-30T20:04:20.190Z"
     }
   ]
 }

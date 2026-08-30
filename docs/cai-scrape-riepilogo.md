@@ -35,8 +35,8 @@ Stato: `backend/data/scrape-status.json` (copia in `frontend/public/scrape-statu
 | frascati | CAI Frascati | calendario HTML | sì | `scrape:frascati` |
 | palestrina | CAI Palestrina | calendario HTML | sì | `scrape:palestrina` |
 | antrodoco | CAI Antrodoco | calendario HTML | sì | `scrape:antrodoco` |
-| latina | CAI Latina | homepage vuota | no | — |
-| cassino | CAI Cassino | DNS assente | no | — |
-| gallinaro | CAI Gallinaro | homepage senza calendario | no | — |
+| latina | CAI Latina | eventi pianificati HTML | sì | `scrape:latina` |
+| cassino | CAI Cassino | eventi HTML | sì | `scrape:cassino` |
+| gallinaro | CAI Gallinaro | Facebook | sì | `scrape:gallinaro` |
 
 Roma usa Cheerio. Tutte le altre abilitate usano Gemini 3.5 Flash sul documento indicato in `backend/sources.js`.

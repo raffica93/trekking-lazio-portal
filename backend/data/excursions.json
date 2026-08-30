@@ -1,5 +1,5 @@
 {
-  "source": "https://www.cairoma.it/?page_id=582 https://www.caiviterbo.it/index.php/programma https://www.caitivoli.it/wp-content/uploads/2025/12/Programma_CAI_2026.pdf https://organizzazione.cai.it/sez-rieti/wp-content/uploads/sites/45/2026/01/CAI_RI_programma_attivita_2026_completo.pdf https://organizzazione.cai.it/sez-monterotondo/wp-content/uploads/sites/141/2026/01/Calendario-escursioni-2026-CAI-Monterotondo-estratto-PDF.pdf https://www.caifrosinone.it/ https://organizzazione.cai.it/sez-leonessa/wp-content/uploads/sites/26/2025/12/CAI-Pieghevole-2026.pdf http://www.caiesperia.it/images/doc/calendario_2026.pdf",
+  "source": "https://www.cairoma.it/?page_id=582 https://www.caiviterbo.it/index.php/programma https://www.caitivoli.it/wp-content/uploads/2025/12/Programma_CAI_2026.pdf https://organizzazione.cai.it/sez-rieti/wp-content/uploads/sites/45/2026/01/CAI_RI_programma_attivita_2026_completo.pdf https://organizzazione.cai.it/sez-monterotondo/wp-content/uploads/sites/141/2026/01/Calendario-escursioni-2026-CAI-Monterotondo-estratto-PDF.pdf https://www.caifrosinone.it/ https://organizzazione.cai.it/sez-leonessa/wp-content/uploads/sites/26/2025/12/CAI-Pieghevole-2026.pdf http://www.caiesperia.it/images/doc/calendario_2026.pdf https://www.caicassino.it/index.php/eventi https://www.cailatina.com/pagu_eventi.php?statoevento=pianificato",
   "sources": [
     {
       "id": "roma",
@@ -54,15 +54,35 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true
+    },
+    {
+      "id": "cassino",
+      "organizer": "CAI Cassino",
+      "url": "https://www.caicassino.it/index.php/eventi",
+      "kind": "html",
+      "template": "html-calendario",
+      "extractor": "gemini",
+      "enabled": true
+    },
+    {
+      "id": "latina",
+      "organizer": "CAI Latina",
+      "url": "https://www.cailatina.com/pagu_eventi.php?statoevento=pianificato",
+      "kind": "html",
+      "template": "html-calendario",
+      "extractor": "gemini",
+      "enabled": true
     }
   ],
   "sourceHashes": {
     "viterbo": "58bb3570c70c80e7cd152de393e6824e21d955436e79cf30d083ceabd04d7990",
     "monterotondo": "8bed86d7091a154272ef131717fa3f1e203b7b8c675d27fc9b54598490b48d3c",
     "frosinone": "67e019c1a06ce71fd3900d209a0bbf89603d7dcaadbeee21333e5928751063ce",
-    "esperia": "ec29fd624004d005295ff18cd02eb7ea0bc82bc2cfe387da186f692563000a89"
+    "esperia": "ec29fd624004d005295ff18cd02eb7ea0bc82bc2cfe387da186f692563000a89",
+    "cassino": "865cca97883fe50a506df9fe89a803881c973886f1bd065eef3f3f80fd960700",
+    "latina": "1da3d3cff7498b9fb928d7c5a34d8699bc6c6492565d29ed39bce9b8cea6a15a"
   },
-  "generatedAt": "2026-08-30T19:49:08.202Z",
+  "generatedAt": "2026-08-30T20:04:12.359Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "excursions": [
     {
@@ -112,6 +132,23 @@
       "organizer": "CAI Frosinone",
       "location": "M. Ausoni",
       "region": "Lazio",
+      "lat": 41.891,
+      "lng": 12.492,
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
+      "id": "cassino-75a4dee99da7",
+      "title": "RAM OFF - RIFUGI APERTI DEL MEDITERRANEO 2026",
+      "date": "2026-08-30",
+      "dateEnd": "2026-08-30",
+      "days": 1,
+      "category": "Escursionismo",
+      "link": "https://www.caicassino.it/index.php/eventi",
+      "organizer": "CAI Cassino",
+      "location": "Rifugi del Mediterraneo",
+      "region": "Altro",
       "lat": 41.891,
       "lng": 12.492,
       "cost": "Vedi sito",
@@ -190,6 +227,23 @@
       "activityType": "escursione",
       "terrain": "anello",
       "difficultyNote": "EE indica un itinerario per escursionisti esperti, con tratti ripidi e rocciosi a pendenza elevata che richiedono buon allenamento e abitudine al terreno accidentato."
+    },
+    {
+      "id": "latina-35499b5ea8cd",
+      "title": "Escursione al Vesuvio",
+      "date": "2026-09-06",
+      "dateEnd": "2026-09-06",
+      "days": 1,
+      "category": "Escursionismo",
+      "link": "https://www.cailatina.com/pagu_eventi.php?statoevento=pianificato",
+      "organizer": "CAI Latina",
+      "location": "Vesuvio",
+      "region": "Altro",
+      "lat": 41.891,
+      "lng": 12.492,
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
     },
     {
       "id": "frosinone-f5be650c8877",
@@ -576,6 +630,23 @@
       "privateCar": null
     },
     {
+      "id": "latina-4f4a6ca919d4",
+      "title": "Anello Monte Scindarella",
+      "date": "2026-09-20",
+      "dateEnd": "2026-09-20",
+      "days": 1,
+      "category": "Escursionismo",
+      "link": "https://www.cailatina.com/pagu_eventi.php?statoevento=pianificato",
+      "organizer": "CAI Latina",
+      "location": "Gruppo montuoso del Gran Sasso",
+      "region": "Abruzzo",
+      "lat": 42.482,
+      "lng": 13.565,
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
       "id": "viterbo-7bcd9026cdfe",
       "title": "Da Croce A Croce",
       "date": "2026-09-20",
@@ -869,6 +940,23 @@
       "privateCar": null
     },
     {
+      "id": "latina-b88a173c91be",
+      "title": "Mt Pizzone-Erdigheta da Pian Faggeta",
+      "date": "2026-09-27",
+      "dateEnd": "2026-09-27",
+      "days": 1,
+      "category": "Escursionismo",
+      "link": "https://www.cailatina.com/pagu_eventi.php?statoevento=pianificato",
+      "organizer": "CAI Latina",
+      "location": "Monti Lepini",
+      "region": "Lazio",
+      "lat": 41.566,
+      "lng": 13.067,
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
       "id": "viterbo-02bdee409ac5",
       "title": "Anello Dei Monti Volsini",
       "date": "2026-10-01",
@@ -1105,6 +1193,23 @@
       "difficultyNote": "EEA indica percorsi per escursionisti esperti che richiedono kit da ferrata omologato, casco e imbrago su tratti attrezzati ed esposti; non sostituisce il grado ufficiale."
     },
     {
+      "id": "latina-445e82392ed3",
+      "title": "Monti Alburni",
+      "date": "2026-10-09",
+      "dateEnd": "2026-10-09",
+      "days": 1,
+      "category": "Escursionismo",
+      "link": "https://www.cailatina.com/pagu_eventi.php?statoevento=pianificato",
+      "organizer": "CAI Latina",
+      "location": "Monti Alburni",
+      "region": "Altro",
+      "lat": 41.891,
+      "lng": 12.492,
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
       "id": "roma-27d73203ebd1",
       "title": "Costone (2271) - Monte Morrone (2141) — Da Piani di Pezza per il Costone fino a La Vena, di ritorno dal Morrone, per il rifugio forestale",
       "date": "2026-10-10",
@@ -1305,6 +1410,23 @@
       "link": "https://organizzazione.cai.it/sez-monterotondo/wp-content/uploads/sites/141/2026/01/Calendario-escursioni-2026-CAI-Monterotondo-estratto-PDF.pdf",
       "organizer": "CAI Monterotondo",
       "location": "Non specificato",
+      "region": "Altro",
+      "lat": 41.891,
+      "lng": 12.492,
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
+      "id": "latina-d7b361f9e526",
+      "title": "Escursione solidale al Parco del Circeo",
+      "date": "2026-10-17",
+      "dateEnd": "2026-10-17",
+      "days": 1,
+      "category": "Escursione con Joelette",
+      "link": "https://www.cailatina.com/pagu_eventi.php?statoevento=pianificato",
+      "organizer": "CAI Latina",
+      "location": "Parco del Circeo",
       "region": "Altro",
       "lat": 41.891,
       "lng": 12.492,

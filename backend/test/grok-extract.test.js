@@ -4,8 +4,11 @@ const { DateTime } = require('luxon');
 const {
   buildRequestBody,
   extractFromSource,
+  fetchDocument,
   htmlToText,
-  normalizeExtracted
+  isFacebookUrl,
+  normalizeExtracted,
+  userPrompt
 } = require('../grok-extract');
 
 const TIVOLI = {
@@ -78,6 +81,28 @@ test('normalizeExtracted drops past dates and invalid rows', () => {
   }, TIVOLI, { now }), null);
 
   assert.equal(normalizeExtracted({ title: '', date: '2026-09-20' }, TIVOLI, { now }), null);
+});
+
+test('Facebook pages skip HTML fetch and ask Gemini to search the profile', async () => {
+  const gallinaro = {
+    id: 'gallinaro',
+    organizer: 'CAI Gallinaro',
+    url: 'https://www.facebook.com/p/CAI-Gallinaro-6157261685',
+    kind: 'discover',
+    template: 'facebook',
+    extractor: 'gemini'
+  };
+
+  assert.equal(isFacebookUrl(gallinaro.url), true);
+  await assert.rejects(
+    () => fetchDocument(gallinaro, { axiosImpl: { get: async () => { throw new Error('should not fetch Facebook'); } } }),
+    /Facebook/
+  );
+
+  const prompt = userPrompt(gallinaro, { kind: 'discover', text: '' }, { now });
+  assert.match(prompt, /Facebook/);
+  const body = buildRequestBody(gallinaro, { kind: 'discover', text: '' }, { now });
+  assert.deepEqual(body.tools, [{ googleSearch: {} }]);
 });
 
 test('buildRequestBody attaches the PDF and enables Gemini search for discover', () => {

@@ -148,29 +148,29 @@ const SOURCES = [
   {
     id: 'latina',
     organizer: 'CAI Latina',
-    url: 'http://www.cailatina.com/',
-    kind: 'discover',
-    template: 'homepage',
+    url: 'https://www.cailatina.com/pagu_eventi.php?statoevento=pianificato',
+    kind: 'html',
+    template: 'html-calendario',
     extractor: 'gemini',
-    enabled: false
+    enabled: true
   },
   {
     id: 'cassino',
     organizer: 'CAI Cassino',
-    url: 'http://www.caicassino.com/',
-    kind: 'discover',
-    template: 'homepage',
+    url: 'https://www.caicassino.it/index.php/eventi',
+    kind: 'html',
+    template: 'html-calendario',
     extractor: 'gemini',
-    enabled: false
+    enabled: true
   },
   {
     id: 'gallinaro',
     organizer: 'CAI Gallinaro',
-    url: 'https://caisezionedigallinaro.wordpress.com/',
+    url: 'https://www.facebook.com/p/CAI-Gallinaro-6157261685',
     kind: 'discover',
-    template: 'homepage',
+    template: 'facebook',
     extractor: 'gemini',
-    enabled: false
+    enabled: true
   }
 ];
 

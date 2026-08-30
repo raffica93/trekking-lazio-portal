@@ -23,6 +23,9 @@
     "scrape:frascati": "node --env-file-if-exists=.env scripts/sede.js frascati",
     "scrape:palestrina": "node --env-file-if-exists=.env scripts/sede.js palestrina",
     "scrape:antrodoco": "node --env-file-if-exists=.env scripts/sede.js antrodoco",
+    "scrape:latina": "node --env-file-if-exists=.env scripts/sede.js latina",
+    "scrape:cassino": "node --env-file-if-exists=.env scripts/sede.js cassino",
+    "scrape:gallinaro": "node --env-file-if-exists=.env scripts/sede.js gallinaro",
     "classify": "node scripts/classify.js",
     "import:supabase": "node --env-file-if-exists=.env scripts/import-supabase.js",
     "test": "node --test"

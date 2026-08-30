@@ -11,10 +11,15 @@ test('enabled catalog includes the new PDF and HTML calendars', () => {
   assert.equal(ids.includes('esperia'), true);
   assert.equal(ids.includes('alatri'), true);
   assert.equal(ids.includes('frascati'), true);
-  assert.equal(ids.includes('latina'), false);
+  assert.equal(ids.includes('latina'), true);
+  assert.equal(ids.includes('cassino'), true);
+  assert.equal(ids.includes('gallinaro'), true);
   assert.equal(findSource('sora').kind, 'pdf');
   assert.equal(findSource('alatri').template, 'html-calendario');
-  assert.ok(enabledSources().length >= 16);
+  assert.match(findSource('latina').url, /statoevento=pianificato/);
+  assert.match(findSource('cassino').url, /caicassino\.it\/index\.php\/eventi/);
+  assert.equal(findSource('gallinaro').template, 'facebook');
+  assert.ok(enabledSources().length >= 19);
 });
 
 test('buildScrapeStatus merges a run onto the full catalog', () => {
@@ -33,12 +38,12 @@ test('buildScrapeStatus merges a run onto the full catalog', () => {
 
   const roma = status.sources.find((row) => row.id === 'roma');
   const sora = status.sources.find((row) => row.id === 'sora');
-  const latina = status.sources.find((row) => row.id === 'latina');
+  const gallinaro = status.sources.find((row) => row.id === 'gallinaro');
   assert.equal(roma.status, 'ok');
   assert.equal(roma.excursions, 1);
   assert.equal(sora.status, 'failed');
   assert.match(sora.error, /503/);
-  assert.equal(latina.status, 'disabled');
+  assert.equal(gallinaro.status, 'idle');
   assert.equal(status.sources.length, SOURCES.length);
 });
 

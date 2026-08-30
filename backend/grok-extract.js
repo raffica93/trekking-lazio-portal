@@ -163,11 +163,26 @@ function userPrompt(source, document, { now = DateTime.now() } = {}) {
     lines.push('', 'Testo della pagina:', text);
   }
 
-  if (source.kind === 'discover') {
+  if (source.template === 'facebook' || isFacebookUrl(source.url)) {
+    lines.push(
+      '',
+      `La sezione pubblica le uscite sulla pagina Facebook ${source.url}.`,
+      'Cerca i post e gli eventi futuri di escursionismo. Ignora login, cookie banner e uscite già concluse.'
+    );
+  } else if (source.kind === 'discover') {
     lines.push('', 'Se il testo non basta, cerca nel sito della sezione il calendario o il programma attività più recente.');
   }
 
   return lines.join('\n');
+}
+
+function isFacebookUrl(value) {
+  try {
+    const host = new URL(String(value || '')).hostname.replace(/^www\./i, '');
+    return host === 'facebook.com' || host === 'fb.com' || host.endsWith('.facebook.com');
+  } catch {
+    return false;
+  }
 }
 
 function geminiEndpoint(model) {
@@ -326,6 +341,10 @@ async function fetchDocument(source, {
   axiosImpl = axios,
   timeout = Number(process.env.SCRAPE_TIMEOUT_MS || 20_000)
 } = {}) {
+  if (source.template === 'facebook' || isFacebookUrl(source.url)) {
+    throw new Error(`${source.organizer} publishes on Facebook; skipping HTML fetch`);
+  }
+
   const responseType = source.kind === 'pdf' ? 'arraybuffer' : 'text';
   const response = await axiosImpl.get(source.url, {
     timeout,
@@ -373,6 +392,7 @@ module.exports = {
   fetchDocument,
   geminiEndpoint,
   htmlToText,
+  isFacebookUrl,
   normalizeExtracted,
   resolveGeminiKey,
   sha256,
