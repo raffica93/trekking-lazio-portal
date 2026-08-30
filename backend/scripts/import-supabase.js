@@ -37,12 +37,55 @@ function requiredNumber(value, field, excursionId) {
   return number;
 }
 
-function importStatus() {
-  const status = process.env.SUPABASE_IMPORT_STATUS ?? 'draft';
+function importStatus(env = process.env) {
+  const status = env.SUPABASE_IMPORT_STATUS ?? 'draft';
   if (status !== 'draft' && status !== 'published') {
     throw new Error('SUPABASE_IMPORT_STATUS must be either "draft" or "published"');
   }
   return status;
+}
+
+function chunk(items, size = BATCH_SIZE) {
+  const batches = [];
+  for (let index = 0; index < items.length; index += size) {
+    batches.push(items.slice(index, index + size));
+  }
+  return batches;
+}
+
+async function existingSourceIds(supabase, sourceIds) {
+  const found = new Set();
+  for (const batch of chunk(sourceIds)) {
+    const { data, error } = await supabase
+      .from('places')
+      .select('source_id')
+      .in('source_id', batch);
+    if (error) throw error;
+    for (const row of data || []) {
+      if (row.source_id) found.add(row.source_id);
+    }
+  }
+  return found;
+}
+
+async function importNewPlaces({ supabase, excursions, status }) {
+  const places = excursions.map((excursion) => toPlaceRow(excursion, status));
+  const existing = await existingSourceIds(
+    supabase,
+    places.map((place) => place.source_id)
+  );
+  const toInsert = places.filter((place) => !existing.has(place.source_id));
+
+  for (const batch of chunk(toInsert)) {
+    const { error } = await supabase.from('places').insert(batch);
+    if (error) throw error;
+  }
+
+  return {
+    inserted: toInsert.length,
+    skipped: places.length - toInsert.length,
+    status
+  };
 }
 
 function toPlaceRow(excursion, status) {
@@ -105,18 +148,12 @@ async function main() {
     requiredEnvironment('SUPABASE_SERVICE_ROLE_KEY'),
     { auth: { autoRefreshToken: false, persistSession: false, detectSessionInUrl: false } }
   );
-  const status = importStatus();
-  const places = readExcursions().map((excursion) => toPlaceRow(excursion, status));
-
-  for (let index = 0; index < places.length; index += BATCH_SIZE) {
-    const batch = places.slice(index, index + BATCH_SIZE);
-    const { error } = await supabase
-      .from('places')
-      .upsert(batch, { onConflict: 'source_id', ignoreDuplicates: true });
-    if (error) throw error;
-  }
-
-  console.log(`Imported ${places.length} places as ${status}.`);
+  const result = await importNewPlaces({
+    supabase,
+    excursions: readExcursions(),
+    status: importStatus()
+  });
+  console.log(`inserted ${result.inserted}, skipped ${result.skipped} existing as ${result.status}`);
 }
 
 if (require.main === module) {
@@ -126,4 +163,11 @@ if (require.main === module) {
   });
 }
 
-module.exports = { importStatus, readExcursions, slugify, toPlaceRow };
+module.exports = {
+  BATCH_SIZE,
+  importNewPlaces,
+  importStatus,
+  readExcursions,
+  slugify,
+  toPlaceRow
+};

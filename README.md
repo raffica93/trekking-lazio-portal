@@ -12,8 +12,9 @@ docker compose up --build
 
 Il portale è disponibile su `http://localhost:8080`.
 
-La versione pubblica è distribuita tramite GitHub Pages. Il frontend usa la cache statica
-`frontend/public/excursions.json`, aggiornata automaticamente dal workflow di scraping.
+La versione pubblica è distribuita tramite GitHub Pages. Con Supabase configurato il frontend
+legge i luoghi `published` da `places`. La cache statica `frontend/public/excursions.json`
+resta aggiornata dallo scrape come fallback.
 
 Per lo sviluppo senza Docker, avviare `npm start` prima in `backend` e poi in `frontend`.
 
@@ -51,7 +52,9 @@ cd backend
 npm run import:supabase
 ```
 
-L'import crea o aggiorna i luoghi usando l'ID originale come chiave; per sicurezza li importa come bozze, salvo `SUPABASE_IMPORT_STATUS=published`. Lo scraping pianificato continua ad aggiornare soltanto la cache JSON: l'import resta esplicito, così non sovrascrive stati di pubblicazione o correzioni fatte nel pannello.
+L'import locale inserisce solo i `source_id` ancora assenti in `places` e, per sicurezza, li marca come bozze salvo `SUPABASE_IMPORT_STATUS=published`. Le righe già presenti non vengono aggiornate, così correzioni, stato e foto del pannello restano intatti.
+
+Lo scrape locale (`npm run scrape`) continua a scrivere soltanto il JSON. Lo scrape pianificato su GitHub Actions, dopo aver aggiornato la cache, importa in automatico i `source_id` nuovi come `published`. Serve configurare i secret `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` nel repository.
 
 ## Classificazione Grok (manuale)
 
@@ -70,7 +73,7 @@ Senza `--dry-run` lo script aggiorna `backend/data/excursions.json` e, se presen
 ## Automazione
 
 - `CI and release` esegue test e build. Su `main` e sui tag `v*` pubblica le immagini frontend e backend nel GitHub Container Registry.
-- `Refresh excursion data` viene eseguito ogni giorno alle 04:17 UTC e può essere lanciato anche manualmente. Se trova modifiche, aggiorna la cache su `main`, attivando un nuovo rilascio. Estrae i calendari delle altre sezioni con Gemini 3.5 Flash se il secret `GEMINI_KEY` è configurato nel repository; senza secret aggiorna solo CAI Roma. Non esegue il classificatore Grok.
+- `Refresh excursion data` viene eseguito ogni giorno alle 04:17 UTC e può essere lanciato anche manualmente. Se trova modifiche, aggiorna la cache JSON su `main`. Poi inserisce in Supabase solo le escursioni il cui `source_id` non è già in `places`, come `published`. Estrae i calendari delle altre sezioni con Gemini 3.5 Flash se il secret `GEMINI_KEY` è configurato; senza secret aggiorna solo CAI Roma. Richiede i secret `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY`. Non esegue il classificatore Grok e non sovrascrive le schede già in database.
 - `Deploy GitHub Pages` verifica e pubblica il frontend statico a ogni aggiornamento di `main`.
 
 Il repository GitHub deve consentire a GitHub Actions la scrittura dei contenuti e dei package. Se `main` è protetto, autorizzare il bot oppure adattare il workflow affinché apra una pull request.
