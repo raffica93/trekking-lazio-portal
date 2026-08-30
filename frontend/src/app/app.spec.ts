@@ -75,6 +75,37 @@ describe('App', () => {
     expect(header?.nextElementSibling).toBe(filterBar);
   });
 
+  it('selects the card and opens the detail from a map marker', () => {
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({
+      excursions: [
+        { id: '1', title: 'Sentiero facile', date: '2026-09-01', category: 'E', link: 'http://example.com/e', organizer: 'CAI Roma', location: 'Lazio', lat: 41.9, lng: 12.5, cost: 'Gratis', time: '3 ore', summary: 'Anello boschivo sui Colli Albani.', distanceKm: 8, elevationM: 948 },
+        { id: '2', title: 'Ferrata', date: '2026-09-02', category: 'EEA', link: 'https://example.com/eea', organizer: 'CAI Roma', location: 'Lazio', lat: 42, lng: 13, cost: 'Gratis', time: '5 ore' }
+      ]
+    });
+    fixture.detectChanges();
+
+    const app = fixture.componentInstance;
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.excursion-popup')).toBeNull();
+    expect(compiled.querySelector('[aria-label="Dettaglio escursione"]')).toBeNull();
+
+    app.onMapSelect(app.excursions[0]);
+    fixture.detectChanges();
+
+    expect(app.selectedId).toBe('1');
+    expect(app.detailOpen).toBe(true);
+    expect(compiled.querySelector('app-excursion-card.is-selected')).toBeTruthy();
+    expect(compiled.querySelector('.excursion-card.is-selected')).toBeTruthy();
+    const detail = compiled.querySelector('[aria-label="Dettaglio escursione"]') as HTMLElement;
+    expect(detail).toBeTruthy();
+    expect(detail.textContent).toContain('Sentiero facile');
+    expect(detail.textContent).toContain('Anello boschivo sui Colli Albani.');
+    expect(detail.querySelector('.detail-cta')?.getAttribute('href')).toBe('https://example.com/e');
+    expect(compiled.querySelector('.leaflet-popup')).toBeNull();
+  });
+
   it('filters by month, region, days, distance and cost', () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();

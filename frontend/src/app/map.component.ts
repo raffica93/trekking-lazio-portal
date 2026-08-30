@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, SimpleChanges, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as L from 'leaflet';
 import { Excursion } from './excursion.model';
@@ -96,12 +96,14 @@ export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
   private host = inject(ElementRef<HTMLElement>);
   @ViewChild('mapContainer', { static: true }) private mapContainer!: ElementRef<HTMLDivElement>;
   @Input() excursions: Excursion[] = [];
+  @Input() selectedId: string | null = null;
+  @Output() selectExcursion = new EventEmitter<Excursion>();
 
   readonly difficultyOrder = DIFFICULTY_ORDER;
   readonly difficulties = DIFFICULTIES;
 
   private map!: L.Map;
-  private markers: L.Marker[] = [];
+  private markers = new Map<string, L.Marker>();
   private resizeObserver?: ResizeObserver;
 
   ngAfterViewInit() {
@@ -119,8 +121,15 @@ export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['excursions'] && this.map) {
+    if (!this.map) {
+      return;
+    }
+    if (changes['excursions']) {
       this.updateMarkers();
+      return;
+    }
+    if (changes['selectedId']) {
+      this.syncSelection(true);
     }
   }
 
@@ -141,55 +150,67 @@ export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   private updateMarkers(): void {
-    this.markers.forEach(m => m.remove());
-    this.markers = [];
+    this.markers.forEach(marker => marker.remove());
+    this.markers.clear();
+    this.map.closePopup();
 
     const located = this.excursions.filter(ex => Number.isFinite(ex.lat) && Number.isFinite(ex.lng));
     const positions = this.spreadOverlapping(located);
 
     located.forEach((ex, index) => {
       const tone = primaryDifficulty(ex.category);
-      const position = positions[index];
-      const popup = document.createElement('div');
-      popup.className = 'excursion-popup';
-
-      const title = document.createElement('strong');
-      title.textContent = ex.title;
-
-      const details = document.createElement('p');
-      details.textContent = `${ex.date} · ${ex.location}`;
-
-      popup.append(title, details);
-      if (ex.summary) {
-        const summary = document.createElement('p');
-        summary.textContent = ex.summary;
-        popup.append(summary);
-      }
-
-      const marker = L.marker(position, {
-        icon: this.markerIcon(tone.color),
+      const selected = ex.id === this.selectedId;
+      const marker = L.marker(positions[index], {
+        icon: this.markerIcon(tone.color, selected),
         title: `${ex.title} (${tone.code})`,
-        riseOnHover: true
-      })
-        .bindPopup(popup)
-        .addTo(this.map);
+        riseOnHover: true,
+        zIndexOffset: selected ? 1000 : 0
+      }).addTo(this.map);
 
-      this.markers.push(marker);
+      marker.on('click', (event: L.LeafletMouseEvent) => {
+        L.DomEvent.stopPropagation(event);
+        this.selectExcursion.emit(ex);
+      });
+
+      this.markers.set(ex.id, marker);
     });
 
-    if (this.markers.length > 0) {
-      const group = L.featureGroup(this.markers);
+    this.syncSelection(false);
+
+    if (this.markers.size > 0) {
+      const group = L.featureGroup([...this.markers.values()]);
       this.map.fitBounds(group.getBounds().pad(0.12));
     }
   }
 
-  private markerIcon(color: string): L.DivIcon {
+  private syncSelection(pan: boolean): void {
+    this.markers.forEach((marker, id) => {
+      const excursion = this.excursions.find(item => item.id === id);
+      if (!excursion) {
+        return;
+      }
+      const selected = id === this.selectedId;
+      const tone = primaryDifficulty(excursion.category);
+      marker.setIcon(this.markerIcon(tone.color, selected));
+      marker.setZIndexOffset(selected ? 1000 : 0);
+    });
+
+    if (!pan || !this.selectedId) {
+      return;
+    }
+    const selectedMarker = this.markers.get(this.selectedId);
+    if (selectedMarker) {
+      this.map.panTo(selectedMarker.getLatLng());
+    }
+  }
+
+  private markerIcon(color: string, selected = false): L.DivIcon {
+    const size = selected ? 22 : 18;
     return L.divIcon({
-      className: 'difficulty-marker-wrap',
-      html: `<span class="difficulty-marker" style="background:${color}"></span>`,
-      iconSize: [18, 18],
-      iconAnchor: [9, 9],
-      popupAnchor: [0, -12]
+      className: `difficulty-marker-wrap${selected ? ' is-selected' : ''}`,
+      html: `<span class="difficulty-marker${selected ? ' is-selected' : ''}" style="background:${color}"></span>`,
+      iconSize: [size, size],
+      iconAnchor: [size / 2, size / 2]
     });
   }
 

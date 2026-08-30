@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Excursion } from './excursion.model';
 import { primaryDifficulty } from './difficulty';
@@ -18,8 +18,18 @@ import { HlmButton } from '@spartan-ng/helm/button';
     HlmCardFooter,
     HlmButton
   ],
+  host: {
+    '[attr.data-excursion-id]': 'excursion?.id',
+    '[class.is-selected]': 'selected'
+  },
   template: `
-    <article hlmCard size="sm" class="excursion-card mb-2.5 flex-row">
+    <article
+      hlmCard
+      size="sm"
+      class="excursion-card mb-2.5 flex-row"
+      [class.is-selected]="selected"
+      (click)="selectExcursion.emit(excursion)"
+    >
       <span class="excursion-card-rail" [style.background-color]="tone.color" aria-hidden="true"></span>
       <div class="min-w-0 flex-1">
         <div hlmCardHeader>
@@ -58,11 +68,20 @@ import { HlmButton } from '@spartan-ng/helm/button';
       display: block;
     }
 
+    :host.is-selected {
+      display: block;
+    }
+
     .excursion-card {
       display: flex;
       flex-direction: row;
       align-items: stretch;
       gap: 0;
+      cursor: pointer;
+    }
+
+    .excursion-card.is-selected {
+      box-shadow: 0 0 0 2px #065f46, 0 8px 20px rgb(18 38 28 / 0.12);
     }
 
     .excursion-card-rail {
@@ -79,6 +98,11 @@ import { HlmButton } from '@spartan-ng/helm/button';
       line-height: 1.4;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
+    }
+
+    .excursion-card.is-selected .excursion-summary {
+      -webkit-line-clamp: unset;
+      overflow: visible;
     }
 
     .difficulty-chip {
@@ -100,6 +124,8 @@ import { HlmButton } from '@spartan-ng/helm/button';
 })
 export class ExcursionCardComponent {
   @Input() excursion!: Excursion;
+  @Input() selected = false;
+  @Output() selectExcursion = new EventEmitter<Excursion>();
 
   get tone() {
     return primaryDifficulty(this.excursion.category);
