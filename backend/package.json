@@ -7,12 +7,14 @@
     "start": "node server.js",
     "scrape": "node scripts/scrape.js",
     "classify": "node scripts/classify.js",
+    "import:supabase": "node --env-file-if-exists=.env scripts/import-supabase.js",
     "test": "node --test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@supabase/supabase-js": "2.112.4",
     "axios": "^1.13.6",
     "cheerio": "^1.2.0",
     "cors": "^2.8.6",

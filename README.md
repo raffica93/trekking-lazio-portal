@@ -27,6 +27,23 @@ npm run scrape
 
 Lo script aggiorna `backend/data/excursions.json` in modo atomico, lascia il file invariato quando i dati non cambiano e ritenta automaticamente gli errori di rete o le risposte HTML non valide. È possibile personalizzare la chiamata con `SCRAPE_RETRIES` e `SCRAPE_TIMEOUT_MS`.
 
+## Supabase e pannello amministratore
+
+Il pannello è disponibile su `/#/admin` (necessario per funzionare anche su GitHub Pages). La migrazione in `supabase/migrations/` crea la tabella `places`, il bucket immagini, i profili admin e tutte le policy RLS. Applica la migrazione al progetto Supabase, quindi crea un utente nella sezione Authentication e rendilo amministratore con la query commentata in fondo alla migrazione.
+
+Nei progetti Supabase recenti, verifica inoltre nelle impostazioni **Data API** che la tabella `public.places` sia esposta: le tabelle nuove possono non esserlo automaticamente. La migrazione concede già soltanto le operazioni necessarie a `anon` e `authenticated` e attiva RLS.
+
+Nel file `frontend/public/supabase-config.js` inserisci l'URL del progetto e la sua **publishable key**. La chiave è sicura da distribuire nel browser: i permessi sono controllati dalle policy RLS. Non inserire mai la service role key nel frontend.
+
+Per trasferire le escursioni esistenti, copia `backend/.env.example` in `backend/.env`, imposta le variabili nel tuo terminale e poi esegui:
+
+```bash
+cd backend
+npm run import:supabase
+```
+
+L'import crea o aggiorna i luoghi usando l'ID originale come chiave; per sicurezza li importa come bozze, salvo `SUPABASE_IMPORT_STATUS=published`. Lo scraping pianificato continua ad aggiornare soltanto la cache JSON: l'import resta esplicito, così non sovrascrive stati di pubblicazione o correzioni fatte nel pannello.
+
 ## Classificazione Grok (manuale)
 
 Lo scrape programmato **non** chiama Grok. Per completare le escursioni con coordinate più precise, quota, km e un riassunto:
