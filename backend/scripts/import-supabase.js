@@ -77,7 +77,13 @@ function coordPatchForExisting(existing, excursion) {
   if (!existing) return null;
   if (PRECISE_COORD_QUALITY.has(existing.coordinates_quality)) return null;
   if (!isRomeFallback(existing.latitude, existing.longitude)) return null;
-  if (!hasFiniteCoords(excursion)) return null;
+  if (!hasFiniteCoords(excursion)) {
+    return {
+      latitude: null,
+      longitude: null,
+      coordinates_quality: null
+    };
+  }
   if (isRomeFallback(excursion.lat, excursion.lng)) return null;
 
   return {
