@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T21:32:11.640Z",
+  "generatedAt": "2026-08-30T21:33:14.533Z",
   "sources": [
     {
       "id": "roma",
@@ -51,11 +51,11 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "status": "reused",
+      "status": "failed",
       "excursions": 61,
       "error": null,
       "hash": "fc855d463c84cbba2c6d057ba1ba6100be9bc5cef200a3b2e413919b8cbf6b85",
-      "updatedAt": "2026-08-30T20:59:54.273Z"
+      "updatedAt": "2026-08-30T21:33:14.533Z"
     },
     {
       "id": "monterotondo",
