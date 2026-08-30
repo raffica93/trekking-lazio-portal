@@ -12,6 +12,7 @@ import { AdminAuthService } from './admin-auth.service';
     <main class="login-page">
       <section class="login-card" aria-labelledby="login-title">
         <div class="contour" aria-hidden="true">41° 54′ N · 12° 30′ E</div>
+        <img src="logo.png" width="48" height="48" alt="" class="brand-mark">
         <p class="eyebrow">Trekking Lazio · amministrazione</p>
         <h1 id="login-title">Aggiorna la mappa.</h1>
         <p class="intro">Accedi per pubblicare luoghi, correggere coordinate e mantenere il portale aggiornato.</p>
@@ -38,6 +39,7 @@ import { AdminAuthService } from './admin-auth.service';
     .login-card { position: relative; overflow: hidden; padding: clamp(2rem, 8vw, 3.4rem); border: 1px solid rgb(212 232 201 / .42); background: #f6f9f1; box-shadow: 17px 17px 0 #9db98d; }
     .login-card::after { position: absolute; right: -5.5rem; bottom: -5.5rem; width: 15rem; height: 15rem; border: 1px solid #a8c39d; border-radius: 50%; content: ''; }
     .contour { position: absolute; top: 1rem; right: 1rem; color: #79967d; font: 700 .58rem/1 'IBM Plex Mono', monospace; letter-spacing: .06em; }
+    .brand-mark { position: relative; z-index: 1; display: block; width: 3rem; height: 3rem; margin-bottom: 1.1rem; border-radius: 0.85rem; }
     .eyebrow { margin: 0 0 .65rem; color: #49725b; font: 700 .68rem/1.2 'IBM Plex Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
     h1 { position: relative; z-index: 1; max-width: 11ch; margin: 0; color: #163d2e; font-size: clamp(2.1rem, 8vw, 3.25rem); line-height: .98; letter-spacing: -.075em; }
     .intro { position: relative; z-index: 1; max-width: 33ch; margin: 1rem 0 1.9rem; color: #526a5c; font-size: .93rem; line-height: 1.5; }

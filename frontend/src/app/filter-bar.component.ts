@@ -2,16 +2,19 @@ import { Component, ElementRef, EventEmitter, HostListener, Input, Output, injec
 import { CommonModule } from '@angular/common';
 import { Excursion } from './excursion.model';
 import {
-  DEFAULT_FILTERS,
   FilterState,
   FilterTag,
   availableMonths,
   availableOrganizers,
   availableRegions,
+  currentYearMonth,
+  nextYearMonth,
   dateBounds,
   extraFilterTags,
   hasActiveFilters,
   isNextWeekSelected,
+  landingFilters,
+  monthLabel,
   nextWeekRange
 } from './excursion-filters';
 
@@ -21,6 +24,18 @@ import {
   imports: [CommonModule],
   template: `
     <section class="filter-bar" aria-label="Filtri">
+      <div class="filter-months" role="group" aria-label="Filtra per mese">
+        <button type="button" class="filter-chip" [class.filter-chip-active]="filters.month === 'all'" (click)="set('month', 'all')">Tutti</button>
+        <button
+          type="button"
+          class="filter-chip"
+          *ngFor="let month of months"
+          [class.filter-chip-active]="filters.month === month.id"
+          [attr.aria-current]="filters.month === month.id ? 'date' : null"
+          (click)="set('month', month.id)"
+        >{{ month.label }}</button>
+      </div>
+
       <div class="filter-strip">
         <button
           type="button"
@@ -134,20 +149,6 @@ import {
             </div>
           </div>
 
-          <div class="filter-group" role="group" aria-label="Filtra per mese">
-            <p class="filter-label">Mese</p>
-            <div class="filter-chips">
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.month === 'all'" (click)="set('month', 'all')">Tutti</button>
-              <button
-                type="button"
-                class="filter-chip"
-                *ngFor="let month of months"
-                [class.filter-chip-active]="filters.month === month.id"
-                (click)="set('month', month.id)"
-              >{{ month.label }}</button>
-            </div>
-          </div>
-
           <div class="filter-group" role="group" aria-label="Filtra per regione">
             <p class="filter-label">Regione</p>
             <div class="filter-chips">
@@ -236,9 +237,9 @@ import {
       background: white;
     }
 
+    .filter-months,
     .filter-strip {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       gap: 0.45rem 0.7rem;
       max-width: 96rem;
@@ -246,10 +247,33 @@ import {
       padding: 0.55rem 0.75rem;
     }
 
+    .filter-months {
+      gap: 0.35rem;
+      padding-bottom: 0.2rem;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      scrollbar-width: thin;
+    }
+
+    .filter-months .filter-chip {
+      flex-shrink: 0;
+    }
+
+    .filter-strip {
+      flex-wrap: wrap;
+      padding-top: 0.35rem;
+    }
+
     @media (min-width: 768px) {
+      .filter-months,
       .filter-strip {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
+      }
+
+      .filter-months {
+        flex-wrap: wrap;
+        overflow: visible;
       }
     }
 
@@ -514,7 +538,7 @@ import {
 export class FilterBarComponent {
   private host = inject(ElementRef<HTMLElement>);
 
-  @Input() filters: FilterState = { ...DEFAULT_FILTERS };
+  @Input() filters: FilterState = landingFilters();
   @Input() allExcursions: Excursion[] = [];
   @Input() resultCount = 0;
   @Output() filtersChange = new EventEmitter<FilterState>();
@@ -522,7 +546,12 @@ export class FilterBarComponent {
   megaOpen = false;
 
   get months() {
-    return availableMonths(this.allExcursions);
+    const months = availableMonths(this.allExcursions);
+    const needed = new Set([currentYearMonth(), nextYearMonth()]);
+    const extra = [...needed]
+      .filter((id) => !months.some((month) => month.id === id))
+      .map((id) => ({ id, label: monthLabel(id) }));
+    return extra.length ? [...months, ...extra].sort((a, b) => a.id.localeCompare(b.id)) : months;
   }
 
   get regions() {
@@ -546,7 +575,7 @@ export class FilterBarComponent {
   }
 
   get tags(): FilterTag[] {
-    return extraFilterTags(this.filters, this.months);
+    return extraFilterTags(this.filters);
   }
 
   @HostListener('document:click', ['$event'])
@@ -568,6 +597,10 @@ export class FilterBarComponent {
   }
 
   set<K extends keyof FilterState>(key: K, value: FilterState[K]) {
+    if (key === 'month') {
+      this.filtersChange.emit({ ...this.filters, month: value as string, dateFrom: '', dateTo: '' });
+      return;
+    }
     this.filtersChange.emit({ ...this.filters, [key]: value });
   }
 
@@ -577,11 +610,11 @@ export class FilterBarComponent {
 
   toggleNextWeek() {
     if (isNextWeekSelected(this.filters)) {
-      this.filtersChange.emit({ ...this.filters, dateFrom: '', dateTo: '' });
+      this.filtersChange.emit({ ...this.filters, dateFrom: '', dateTo: '', month: nextYearMonth() });
       return;
     }
     const range = nextWeekRange();
-    this.filtersChange.emit({ ...this.filters, dateFrom: range.from, dateTo: range.to });
+    this.filtersChange.emit({ ...this.filters, dateFrom: range.from, dateTo: range.to, month: 'all' });
   }
 
   toggleVediSito() {
@@ -594,7 +627,7 @@ export class FilterBarComponent {
 
   reset() {
     this.megaOpen = false;
-    this.filtersChange.emit({ ...DEFAULT_FILTERS });
+    this.filtersChange.emit(landingFilters());
   }
 
   inputValue(event: Event): string {

@@ -38,6 +38,20 @@ export const DEFAULT_FILTERS: FilterState = {
   privateCar: 'all'
 };
 
+export function currentYearMonth(now = new Date()): string {
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  return `${year}-${month}`;
+}
+
+export function nextYearMonth(now = new Date()): string {
+  return currentYearMonth(new Date(now.getFullYear(), now.getMonth() + 1, 1));
+}
+
+export function landingFilters(now = new Date()): FilterState {
+  return { ...DEFAULT_FILTERS, month: nextYearMonth(now) };
+}
+
 const MONTH_SHORT = ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'];
 
 const REGION_ORDER = [
@@ -269,20 +283,10 @@ const DAY_LABELS: Record<string, string> = {
   'gt10': '10+ giorni'
 };
 
-export function extraFilterTags(
-  filters: FilterState,
-  months: { id: string; label: string }[] = []
-): FilterTag[] {
+export function extraFilterTags(filters: FilterState): FilterTag[] {
   const tags: FilterTag[] = [];
   if (filters.category !== 'all') {
     tags.push({ id: 'category', label: filters.category, patch: { category: 'all' } });
-  }
-  if (filters.month !== 'all') {
-    tags.push({
-      id: 'month',
-      label: months.find((month) => month.id === filters.month)?.label ?? filters.month,
-      patch: { month: 'all' }
-    });
   }
   if (filters.region !== 'all') {
     tags.push({ id: 'region', label: filters.region, patch: { region: 'all' } });
@@ -310,12 +314,12 @@ export function extraFilterTags(
   return tags;
 }
 
-export function hasActiveFilters(filters: FilterState): boolean {
+export function hasActiveFilters(filters: FilterState, now = new Date()): boolean {
   return filters.category !== 'all'
     || filters.duration !== 'all'
     || filters.days !== 'all'
     || filters.distance !== 'all'
-    || filters.month !== 'all'
+    || filters.month !== nextYearMonth(now)
     || filters.region !== 'all'
     || filters.organizer !== 'all'
     || Boolean(filters.dateFrom)

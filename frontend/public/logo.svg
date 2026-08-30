@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Trekking Lazio">
+  <rect width="512" height="512" rx="108" fill="#0f5c3d"/>
+  <path fill="#e7eeb8" d="M18 392 168 168l86 128-46 96z"/>
+  <path fill="#e7eeb8" d="M132 392 262 86l142 306z"/>
+  <path fill="#e7eeb8" d="M268 392 386 186l128 206z"/>
+  <path fill="none" stroke="#c5d63a" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" d="M4 428 78 404l62 22 58-78 48 38 86-96"/>
+  <rect x="392" y="236" width="44" height="16" rx="3" fill="#d61f26"/>
+  <rect x="392" y="256" width="44" height="16" rx="3" fill="#f4f1e6"/>
+  <rect x="392" y="276" width="44" height="16" rx="3" fill="#d61f26"/>
+</svg>

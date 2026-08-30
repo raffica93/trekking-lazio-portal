@@ -10,7 +10,7 @@ import { AdminAuthService } from './admin-auth.service';
     <section class="admin-shell">
       <header class="admin-header">
         <a routerLink="/admin" class="brand" aria-label="Torna all'archivio luoghi">
-          <span class="brand-mark">TL</span>
+          <img src="logo.png" width="40" height="40" alt="" class="brand-mark">
           <span>
             <strong>Trekking Lazio</strong>
             <small>Base cartografica</small>
@@ -31,7 +31,7 @@ import { AdminAuthService } from './admin-auth.service';
     .admin-shell { min-height: 100%; background-image: linear-gradient(90deg, rgb(24 50 41 / .05) 1px, transparent 1px), linear-gradient(rgb(24 50 41 / .05) 1px, transparent 1px); background-size: 26px 26px; }
     .admin-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem clamp(1rem, 4vw, 4rem); border-bottom: 1px solid #b4c9b6; background: rgb(250 252 248 / .94); backdrop-filter: blur(12px); }
     .brand { display: flex; align-items: center; gap: .75rem; color: inherit; text-decoration: none; }
-    .brand-mark { display: grid; width: 2.35rem; height: 2.35rem; place-items: center; border-radius: 50% 50% 46% 46%; background: #1d5c46; color: #e9f6c4; font: 800 .76rem/1 'IBM Plex Mono', monospace; letter-spacing: -.08em; }
+    .brand-mark { width: 2.35rem; height: 2.35rem; border-radius: 0.7rem; }
     .brand strong, .brand small { display: block; }
     .brand strong { font-size: 1rem; letter-spacing: -.025em; }
     .brand small { margin-top: .1rem; color: #577067; font: 600 .66rem/1.2 'IBM Plex Mono', monospace; letter-spacing: .04em; text-transform: uppercase; }
