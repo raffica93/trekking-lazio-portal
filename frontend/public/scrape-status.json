@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T20:17:12.866Z",
+  "generatedAt": "2026-08-30T20:48:07.178Z",
   "sources": [
     {
       "id": "roma",
@@ -13,7 +13,7 @@
       "excursions": 51,
       "error": null,
       "hash": null,
-      "updatedAt": "2026-08-30T20:13:37.882Z"
+      "updatedAt": "2026-08-30T20:46:55.728Z"
     },
     {
       "id": "viterbo",
@@ -27,7 +27,7 @@
       "excursions": 8,
       "error": null,
       "hash": "58bb3570c70c80e7cd152de393e6824e21d955436e79cf30d083ceabd04d7990",
-      "updatedAt": "2026-08-30T20:13:39.358Z"
+      "updatedAt": "2026-08-30T20:46:57.074Z"
     },
     {
       "id": "tivoli",
@@ -37,11 +37,11 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "status": "ok",
+      "status": "reused",
       "excursions": 45,
       "error": null,
       "hash": "b629e95f47336ee2326499d63f345cf8ea0d3aabe2dddbe48057a682ec51cfb7",
-      "updatedAt": "2026-08-30T20:15:06.498Z"
+      "updatedAt": "2026-08-30T20:47:14.221Z"
     },
     {
       "id": "rieti",
@@ -51,11 +51,11 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "status": "ok",
+      "status": "reused",
       "excursions": 61,
       "error": null,
       "hash": "fc855d463c84cbba2c6d057ba1ba6100be9bc5cef200a3b2e413919b8cbf6b85",
-      "updatedAt": "2026-08-30T20:16:37.140Z"
+      "updatedAt": "2026-08-30T20:47:31.386Z"
     },
     {
       "id": "monterotondo",
@@ -69,7 +69,7 @@
       "excursions": 24,
       "error": null,
       "hash": "8bed86d7091a154272ef131717fa3f1e203b7b8c675d27fc9b54598490b48d3c",
-      "updatedAt": "2026-08-30T20:16:55.097Z"
+      "updatedAt": "2026-08-30T20:47:48.876Z"
     },
     {
       "id": "frosinone",
@@ -83,7 +83,7 @@
       "excursions": 4,
       "error": null,
       "hash": "67e019c1a06ce71fd3900d209a0bbf89603d7dcaadbeee21333e5928751063ce",
-      "updatedAt": "2026-08-30T20:17:12.798Z"
+      "updatedAt": "2026-08-30T20:48:07.093Z"
     },
     {
       "id": "leonessa",
@@ -97,7 +97,7 @@
       "excursions": 0,
       "error": null,
       "hash": null,
-      "updatedAt": "2026-08-30T20:17:12.804Z"
+      "updatedAt": "2026-08-30T20:48:07.100Z"
     },
     {
       "id": "sora",
@@ -111,7 +111,7 @@
       "excursions": 0,
       "error": null,
       "hash": null,
-      "updatedAt": "2026-08-30T20:17:12.810Z"
+      "updatedAt": "2026-08-30T20:48:07.106Z"
     },
     {
       "id": "amatrice",
@@ -125,7 +125,7 @@
       "excursions": 0,
       "error": null,
       "hash": null,
-      "updatedAt": "2026-08-30T20:17:12.816Z"
+      "updatedAt": "2026-08-30T20:48:07.113Z"
     },
     {
       "id": "esperia",
@@ -139,7 +139,7 @@
       "excursions": 15,
       "error": null,
       "hash": "ec29fd624004d005295ff18cd02eb7ea0bc82bc2cfe387da186f692563000a89",
-      "updatedAt": "2026-08-30T20:17:12.821Z"
+      "updatedAt": "2026-08-30T20:48:07.117Z"
     },
     {
       "id": "alatri",
@@ -153,7 +153,7 @@
       "excursions": 0,
       "error": null,
       "hash": null,
-      "updatedAt": "2026-08-30T20:17:12.826Z"
+      "updatedAt": "2026-08-30T20:48:07.123Z"
     },
     {
       "id": "aprilia",
@@ -167,7 +167,7 @@
       "excursions": 0,
       "error": null,
       "hash": null,
-      "updatedAt": "2026-08-30T20:17:12.831Z"
+      "updatedAt": "2026-08-30T20:48:07.129Z"
     },
     {
       "id": "colleferro",
@@ -181,7 +181,7 @@
       "excursions": 0,
       "error": null,
       "hash": null,
-      "updatedAt": "2026-08-30T20:17:12.834Z"
+      "updatedAt": "2026-08-30T20:48:07.135Z"
     },
     {
       "id": "frascati",
@@ -195,7 +195,7 @@
       "excursions": 0,
       "error": null,
       "hash": null,
-      "updatedAt": "2026-08-30T20:17:12.839Z"
+      "updatedAt": "2026-08-30T20:48:07.141Z"
     },
     {
       "id": "palestrina",
@@ -209,7 +209,7 @@
       "excursions": 0,
       "error": null,
       "hash": null,
-      "updatedAt": "2026-08-30T20:17:12.843Z"
+      "updatedAt": "2026-08-30T20:48:07.145Z"
     },
     {
       "id": "antrodoco",
@@ -223,7 +223,7 @@
       "excursions": 0,
       "error": null,
       "hash": null,
-      "updatedAt": "2026-08-30T20:17:12.846Z"
+      "updatedAt": "2026-08-30T20:48:07.162Z"
     },
     {
       "id": "latina",
@@ -237,7 +237,7 @@
       "excursions": 5,
       "error": null,
       "hash": "1da3d3cff7498b9fb928d7c5a34d8699bc6c6492565d29ed39bce9b8cea6a15a",
-      "updatedAt": "2026-08-30T20:17:12.852Z"
+      "updatedAt": "2026-08-30T20:48:07.168Z"
     },
     {
       "id": "cassino",
@@ -251,7 +251,7 @@
       "excursions": 1,
       "error": null,
       "hash": "865cca97883fe50a506df9fe89a803881c973886f1bd065eef3f3f80fd960700",
-      "updatedAt": "2026-08-30T20:17:12.855Z"
+      "updatedAt": "2026-08-30T20:48:07.174Z"
     },
     {
       "id": "gallinaro",
@@ -265,7 +265,7 @@
       "excursions": 0,
       "error": null,
       "hash": null,
-      "updatedAt": "2026-08-30T20:17:12.866Z"
+      "updatedAt": "2026-08-30T20:48:07.178Z"
     }
   ]
 }
