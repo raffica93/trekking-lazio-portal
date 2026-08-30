@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import * as L from 'leaflet';
 import { Excursion } from './excursion.model';
 import { DIFFICULTIES, DIFFICULTY_ORDER, primaryDifficulty } from './difficulty';
+import { spreadOverlapping } from './map-overlap';
 
 @Component({
   selector: 'app-map',
@@ -155,7 +156,7 @@ export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
     this.map.closePopup();
 
     const located = this.excursions.filter(ex => Number.isFinite(ex.lat) && Number.isFinite(ex.lng));
-    const positions = this.spreadOverlapping(located);
+    const positions = spreadOverlapping(located);
 
     located.forEach((ex, index) => {
       const tone = primaryDifficulty(ex.category);
@@ -214,23 +215,4 @@ export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
     });
   }
 
-  private spreadOverlapping(excursions: Excursion[]): L.LatLngExpression[] {
-    const seen = new Map<string, number>();
-
-    return excursions.map((ex) => {
-      const key = `${ex.lat.toFixed(4)},${ex.lng.toFixed(4)}`;
-      const count = seen.get(key) ?? 0;
-      seen.set(key, count + 1);
-      if (count === 0) {
-        return [ex.lat, ex.lng];
-      }
-
-      const angle = (count * 137.508) * Math.PI / 180;
-      const distance = 0.014 * Math.ceil(count / 5);
-      return [
-        ex.lat + Math.sin(angle) * distance,
-        ex.lng + Math.cos(angle) * distance
-      ];
-    });
-  }
 }

@@ -96,6 +96,7 @@ describe('excursion filters', () => {
       sample({ id: 'week', days: 8, distanceKm: 22, durationHours: 9 })
     ];
 
+    expect(applyFilters(list, { ...DEFAULT_FILTERS, days: '2' }).map((item) => item.id)).toEqual(['weekend']);
     expect(applyFilters(list, { ...DEFAULT_FILTERS, days: '4-10' }).map((item) => item.id)).toEqual(['week']);
     expect(applyFilters(list, { ...DEFAULT_FILTERS, distance: '10-15' }).map((item) => item.id)).toEqual(['weekend']);
     expect(applyFilters(list, { ...DEFAULT_FILTERS, duration: '6-8' }).map((item) => item.id)).toEqual(['weekend']);

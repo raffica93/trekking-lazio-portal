@@ -7,8 +7,11 @@ import { ExcursionCardComponent } from './excursion-card.component';
 import { FilterBarComponent } from './filter-bar.component';
 import { MapComponent } from './map.component';
 import { FilterState, applyFilters, landingFilters, DEFAULT_FILTERS } from './excursion-filters';
+import { formatDateRange, nights } from './excursion-dates';
 import { primaryDifficulty } from './difficulty';
-import { RouterOutlet } from '@angular/router';
+import { sectionColor } from './section-color';
+import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs';
 
 registerLocaleData(localeIt);
 
@@ -20,6 +23,7 @@ registerLocaleData(localeIt);
     ExcursionCardComponent,
     FilterBarComponent,
     MapComponent,
+    RouterLink,
     RouterOutlet
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'it-IT' }],
@@ -28,22 +32,34 @@ registerLocaleData(localeIt);
       <!-- Header -->
       <header class="z-20 border-b border-emerald-950/20 bg-emerald-900 px-3 py-3 text-white shadow-lg md:px-6">
         <div class="mx-auto flex max-w-screen-2xl items-center gap-2.5 md:gap-3">
-          <img
-            src="logo.png"
-            width="40"
-            height="40"
-            alt=""
-            class="h-9 w-9 shrink-0 rounded-[0.7rem] object-cover shadow-sm md:h-10 md:w-10"
+          <a
+            routerLink="/"
+            class="flex min-w-0 items-center gap-2.5 text-inherit no-underline md:gap-3"
+            aria-label="Trekking Lazio, torna alla mappa"
           >
-          <div class="flex min-w-0 items-center gap-2">
-            <span class="truncate text-lg font-black tracking-[-0.04em] md:text-2xl">TREKKING LAZIO</span>
-            <span class="rounded-sm bg-lime-300 px-1.5 py-0.5 text-[9px] font-black tracking-widest text-emerald-950">PORTAL</span>
-          </div>
+            <img
+              src="logo.png"
+              width="40"
+              height="40"
+              alt=""
+              class="h-9 w-9 shrink-0 rounded-[0.7rem] object-cover shadow-sm md:h-10 md:w-10"
+            >
+            <div class="flex min-w-0 items-center gap-2">
+              <span class="truncate text-lg font-black tracking-[-0.04em] md:text-2xl">TREKKING LAZIO</span>
+              <span class="rounded-sm bg-lime-300 px-1.5 py-0.5 text-[9px] font-black tracking-widest text-emerald-950">PORTAL</span>
+            </div>
+          </a>
+          <a
+            routerLink="/info"
+            class="ml-auto shrink-0 rounded-md border border-lime-300/40 bg-lime-300 px-2.5 py-1 text-xs font-black tracking-wide text-emerald-950 no-underline md:px-3 md:text-sm"
+            aria-label="Info"
+          >Info</a>
         </div>
       </header>
 
       <app-filter-bar
-        class="z-10 w-full shrink-0"
+        *ngIf="!onInfoPage"
+        class="relative z-30 w-full shrink-0"
         [filters]="filters"
         [allExcursions]="allExcursions"
         [resultCount]="excursions.length"
@@ -51,7 +67,7 @@ registerLocaleData(localeIt);
       ></app-filter-bar>
 
       <!-- Main Content -->
-      <main class="flex min-h-0 flex-1 flex-col overflow-hidden md:flex-row">
+      <main *ngIf="!onInfoPage" class="relative z-0 flex min-h-0 flex-1 flex-col overflow-hidden md:flex-row">
         <!-- Sidebar / List -->
         <aside
           class="flex h-[42%] w-full shrink-0 flex-col border-r border-stone-200 bg-stone-50 md:h-full md:w-[24rem] lg:w-[27rem]"
@@ -102,7 +118,7 @@ registerLocaleData(localeIt);
           >
             <div class="detail-header">
               <p class="detail-kicker">
-                {{ selectedExcursion.date | date:'EEEE d MMMM y':'':'it' }}
+                {{ dateLabel(selectedExcursion) }}
                 <span
                   class="difficulty-chip"
                   [style.background-color]="tone(selectedExcursion).color"
@@ -121,7 +137,17 @@ registerLocaleData(localeIt);
             <dl class="detail-meta" *ngIf="metaItems(selectedExcursion).length">
               <div *ngFor="let item of metaItems(selectedExcursion)">
                 <dt>{{ item.label }}</dt>
-                <dd>{{ item.value }}</dd>
+                <dd>
+                  <span class="section-tag" *ngIf="item.color; else plainMeta">
+                    <span
+                      class="section-dot"
+                      [style.background-color]="item.color"
+                      aria-hidden="true"
+                    ></span>
+                    {{ item.value }}
+                  </span>
+                  <ng-template #plainMeta>{{ item.value }}</ng-template>
+                </dd>
               </div>
             </dl>
             <p *ngIf="selectedExcursion.difficultyNote" class="detail-note">{{ selectedExcursion.difficultyNote }}</p>
@@ -229,6 +255,29 @@ registerLocaleData(localeIt);
       font-size: 13px;
     }
 
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      min-height: 1.4rem;
+      padding: 0.12rem 0.5rem 0.12rem 0.35rem;
+      border: 1px solid rgb(28 25 23 / 0.08);
+      border-radius: 999px;
+      background: #f6f8f6;
+      color: #1c1917;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .section-dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      flex-shrink: 0;
+      border-radius: 999px;
+      box-shadow: 0 0 0 1.5px rgb(255 255 255 / 0.9);
+    }
+
     .detail-cta {
       justify-self: start;
       margin-top: 0.2rem;
@@ -281,6 +330,7 @@ registerLocaleData(localeIt);
 export class App implements OnInit {
   private excursionService = inject(ExcursionService);
   private changeDetector = inject(ChangeDetectorRef);
+  private router = inject(Router);
   @ViewChild('excursionList') private excursionList?: ElementRef<HTMLElement>;
   
   allExcursions: Excursion[] = [];
@@ -289,8 +339,16 @@ export class App implements OnInit {
   filters: FilterState = landingFilters();
   selectedId: string | null = null;
   detailOpen = false;
+  onInfoPage = false;
 
   ngOnInit() {
+    this.syncInfoRoute(this.router.url);
+    this.router.events
+      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+      .subscribe(event => {
+        this.syncInfoRoute(event.urlAfterRedirects);
+        this.changeDetector.markForCheck();
+      });
     this.fetchExcursions();
   }
 
@@ -351,10 +409,18 @@ export class App implements OnInit {
     return [excursion.location, excursion.region, excursion.startPlace].filter(Boolean).join(' · ');
   }
 
-  metaItems(excursion: Excursion): { label: string; value: string }[] {
-    const items: { label: string; value: string }[] = [];
+  dateLabel(excursion: Excursion): string {
+    return formatDateRange(excursion.date, excursion.dateEnd, 'long');
+  }
+
+  metaItems(excursion: Excursion): { label: string; value: string; color?: string }[] {
+    const items: { label: string; value: string; color?: string }[] = [];
     if (excursion.days && excursion.days > 1) {
       items.push({ label: 'Durata', value: `${excursion.days} giorni` });
+    }
+    const nightCount = nights(excursion.days);
+    if (nightCount >= 1) {
+      items.push({ label: 'Notti', value: `${nightCount} ${nightCount === 1 ? 'notte' : 'notti'}` });
     }
     if (excursion.distanceKm != null) {
       items.push({ label: 'Distanza', value: `${excursion.distanceKm} km` });
@@ -372,7 +438,11 @@ export class App implements OnInit {
       items.push({ label: 'Trasporto', value: excursion.transport! });
     }
     if (this.isUseful(excursion.organizer)) {
-      items.push({ label: 'Organizzatore', value: excursion.organizer });
+      items.push({
+        label: 'Organizzatore',
+        value: excursion.organizer,
+        color: sectionColor(excursion.organizer)
+      });
     }
     if (this.isUseful(excursion.terrain)) {
       items.push({ label: 'Terreno', value: excursion.terrain! });
@@ -385,6 +455,11 @@ export class App implements OnInit {
     if (this.detailOpen) {
       this.clearSelection();
     }
+  }
+
+  private syncInfoRoute(url: string) {
+    const path = url.split('?')[0].split('#')[0];
+    this.onInfoPage = /(^|\/)info\/?$/.test(path);
   }
 
   private applyFilters() {

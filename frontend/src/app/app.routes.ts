@@ -5,8 +5,10 @@ import { AdminPlaceEditorComponent } from './admin-place-editor.component';
 import { AdminPlaceListComponent } from './admin-place-list.component';
 import { AdminSediComponent } from './admin-sedi.component';
 import { AdminShellComponent } from './admin-shell.component';
+import { InfoPageComponent } from './info-page.component';
 
 export const routes: Routes = [
+  { path: 'info', component: InfoPageComponent },
   { path: 'admin/login', component: AdminLoginComponent },
   {
     path: 'admin',

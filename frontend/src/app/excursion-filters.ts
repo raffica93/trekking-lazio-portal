@@ -1,4 +1,5 @@
 import { parseDifficultyCodes, type DifficultyCode } from './difficulty';
+import { tripDays } from './excursion-dates';
 import { Excursion } from './excursion.model';
 
 export type DurationBucket = 'all' | 'le4' | '4-6' | '6-8' | 'gt8';
@@ -173,13 +174,6 @@ function monthsInRange(start: string, end: string): string[] {
   return months;
 }
 
-function daySpan(date: string, dateEnd: string): number {
-  const start = Date.parse(`${date}T00:00:00Z`);
-  const end = Date.parse(`${dateEnd}T00:00:00Z`);
-  if (!Number.isFinite(start) || !Number.isFinite(end)) return 1;
-  return Math.max(1, Math.round((end - start) / 86_400_000) + 1);
-}
-
 export function normalizeExcursion(excursion: Excursion): Excursion {
   const dateEnd = excursion.dateEnd || excursion.date;
   const durationHours = excursion.durationHours ?? parseDurationHours(excursion.time);
@@ -190,7 +184,7 @@ export function normalizeExcursion(excursion: Excursion): Excursion {
   return {
     ...excursion,
     dateEnd,
-    days: excursion.days ?? daySpan(excursion.date, dateEnd),
+    days: excursion.days ?? tripDays(excursion.date, dateEnd),
     durationHours: durationHours ?? null,
     costAmount: costAmount ?? null,
     region: excursion.region || resolveRegion(excursion.location, excursion.title),

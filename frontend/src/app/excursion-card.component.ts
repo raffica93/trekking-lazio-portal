@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Excursion } from './excursion.model';
+import { durationLabel, formatDateRange } from './excursion-dates';
 import { primaryDifficulty } from './difficulty';
+import { sectionColor } from './section-color';
 import { HlmCard, HlmCardHeader, HlmCardTitle, HlmCardDescription, HlmCardContent, HlmCardFooter } from '@spartan-ng/helm/card';
 import { HlmButton } from '@spartan-ng/helm/button';
 
@@ -35,7 +37,7 @@ import { HlmButton } from '@spartan-ng/helm/button';
         <div hlmCardHeader>
           <div class="flex items-start justify-between gap-3">
             <p hlmCardDescription class="m-0 text-[11px] font-medium capitalize tracking-wide text-stone-500">
-              {{ excursion.date | date:'EEE d MMM':'':'it' }}
+              {{ dateLabel }}
             </p>
             <span
               class="difficulty-chip"
@@ -45,8 +47,18 @@ import { HlmButton } from '@spartan-ng/helm/button';
           </div>
           <h3 hlmCardTitle>{{ excursion.title }}</h3>
         </div>
-        <div hlmCardContent *ngIf="meta || excursion.summary">
-          <p class="truncate text-[13px] text-stone-600">{{ meta }}</p>
+        <div hlmCardContent *ngIf="meta || excursion.summary || excursion.organizer">
+          <div class="flex min-w-0 items-center gap-2">
+            <span class="section-tag" *ngIf="excursion.organizer">
+              <span
+                class="section-dot"
+                [style.background-color]="sectionTone"
+                aria-hidden="true"
+              ></span>
+              <span class="section-tag-label">{{ excursion.organizer }}</span>
+            </span>
+            <p class="min-w-0 truncate text-[13px] text-stone-600" *ngIf="meta">{{ meta }}</p>
+          </div>
           <p *ngIf="excursion.summary" class="excursion-summary">{{ excursion.summary }}</p>
         </div>
         <div hlmCardFooter class="justify-end border-t border-stone-100">
@@ -105,6 +117,40 @@ import { HlmButton } from '@spartan-ng/helm/button';
       overflow: visible;
     }
 
+    .section-tag {
+      display: inline-flex;
+      min-width: 0;
+      flex-shrink: 0;
+      align-items: center;
+      gap: 0.35rem;
+      max-width: 9.5rem;
+      min-height: 1.35rem;
+      overflow: hidden;
+      padding: 0.12rem 0.5rem 0.12rem 0.35rem;
+      border: 1px solid rgb(28 25 23 / 0.08);
+      border-radius: 999px;
+      background: #f6f8f6;
+      color: #1c1917;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .section-tag-label {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .section-dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      flex-shrink: 0;
+      border-radius: 999px;
+      box-shadow: 0 0 0 1.5px rgb(255 255 255 / 0.9);
+    }
+
     .difficulty-chip {
       display: inline-flex;
       min-width: 1.75rem;
@@ -131,10 +177,19 @@ export class ExcursionCardComponent {
     return primaryDifficulty(this.excursion.category);
   }
 
+  get sectionTone(): string {
+    return sectionColor(this.excursion.organizer);
+  }
+
+  get dateLabel(): string {
+    return formatDateRange(this.excursion.date, this.excursion.dateEnd);
+  }
+
   get meta(): string {
-    const parts = [this.excursion.organizer, this.excursion.location];
-    if (this.excursion.days && this.excursion.days > 1) {
-      parts.push(`${this.excursion.days} giorni`);
+    const parts = [this.excursion.location];
+    const stay = durationLabel(this.excursion.days);
+    if (stay) {
+      parts.push(stay);
     }
     if (this.excursion.transport && this.isUseful(this.excursion.transport)) {
       parts.push(this.excursion.transport);

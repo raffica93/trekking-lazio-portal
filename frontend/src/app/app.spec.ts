@@ -1,8 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideRouter, Router } from '@angular/router';
 import { App } from './app';
+import { routes } from './app.routes';
+import {
+  AGENDA_NO_LABEL,
+  AGENDA_YES_LABEL,
+  CAI_PHILOSOPHY,
+  CAI_QUOTE_ROWS,
+  CAI_SEZIONE_LINKS,
+  quoteDisplay,
+  UNPUBLISHED_LABEL
+} from './cai-info.data';
 import { monthLabel, nextYearMonth } from './excursion-filters';
+import { formatDateRange } from './excursion-dates';
 
 function pad(value: number): string {
   return String(value).padStart(2, '0');
@@ -18,7 +30,7 @@ describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [provideHttpClient(), provideHttpClientTesting()],
+      providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter(routes)],
     }).compileComponents();
   });
 
@@ -94,7 +106,10 @@ describe('App', () => {
     more.click();
     fixture.detectChanges();
     const mega = compiled.querySelector('#filter-mega') as HTMLElement;
+    const main = compiled.querySelector('main') as HTMLElement;
     expect(mega.parentElement).toBe(filters);
+    expect(Number(getComputedStyle(filterBar as HTMLElement).zIndex))
+      .toBeGreaterThan(Number(getComputedStyle(main).zIndex || '0'));
     expect(mega.querySelector('.filter-mega-kicker')?.textContent).toContain('Caratteristiche');
     expect(getComputedStyle(mega).width).not.toBe('0px');
     expect(getComputedStyle(mega.querySelector('.filter-mega-grid') as HTMLElement).maxWidth).toBe('none');
@@ -143,6 +158,64 @@ describe('App', () => {
     expect(getComputedStyle(close).position).not.toBe('absolute');
     expect(Boolean(close.compareDocumentPosition(chip) & Node.DOCUMENT_POSITION_FOLLOWING)).toBe(false);
     expect(compiled.querySelector('.leaflet-popup')).toBeNull();
+  });
+
+  it('shows a date range and nights for multi-day trips', () => {
+    const start = dateInMonth(1, 12);
+    const end = dateInMonth(1, 13);
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({
+      excursions: [
+        {
+          id: 'weekend',
+          title: 'Gran Sasso',
+          date: start,
+          dateEnd: end,
+          days: 2,
+          category: 'EE',
+          link: 'https://example.com/gs',
+          organizer: 'CAI Roma',
+          location: 'Gran Sasso',
+          lat: 42.47,
+          lng: 13.56,
+          cost: 'Gratis',
+          time: '7 ore'
+        },
+        {
+          id: 'day',
+          title: 'Anello Ernici',
+          date: dateInMonth(1, 20),
+          dateEnd: dateInMonth(1, 20),
+          days: 1,
+          category: 'E',
+          link: 'https://example.com/e',
+          organizer: 'CAI Roma',
+          location: 'Monti Ernici',
+          lat: 41.8,
+          lng: 13.4,
+          cost: 'Gratis',
+          time: '5 ore'
+        }
+      ]
+    });
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    const weekendCard = compiled.querySelector('[data-excursion-id="weekend"]') as HTMLElement;
+    const dayCard = compiled.querySelector('[data-excursion-id="day"]') as HTMLElement;
+    expect(weekendCard.textContent).toContain(formatDateRange(start, end));
+    expect(weekendCard.textContent).toContain('2 giorni · 1 notte');
+    expect(dayCard.textContent).not.toContain('notte');
+
+    const app = fixture.componentInstance;
+    app.onMapSelect(app.excursions.find(item => item.id === 'weekend')!);
+    fixture.detectChanges();
+    const detail = compiled.querySelector('[aria-label="Dettaglio escursione"]') as HTMLElement;
+    expect(detail.textContent).toContain(formatDateRange(start, end, 'long'));
+    expect(detail.textContent).toContain('2 giorni');
+    expect(detail.textContent).toContain('Notti');
+    expect(detail.textContent).toContain('1 notte');
   });
 
   it('filters by month, region, days, distance and cost', () => {
@@ -254,11 +327,85 @@ describe('App', () => {
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['day']);
 
     clickReset();
-    const section = compiled.querySelector('[aria-label="Filtra per sezione"]') as HTMLSelectElement;
+    const section = compiled.querySelector('[aria-label="Filtra per sezione"]') as HTMLButtonElement;
     expect(section).toBeTruthy();
-    section.value = 'CAI Tivoli';
-    section.dispatchEvent(new Event('change'));
+    expect(compiled.querySelector('select[aria-label="Filtra per sezione"]')).toBeNull();
+    section.click();
+    fixture.detectChanges();
+    const option = Array.from(compiled.querySelectorAll('[role="option"]'))
+      .find((item) => item.textContent?.trim() === 'CAI Tivoli') as HTMLButtonElement;
+    expect(option.querySelector('.section-dot')).toBeTruthy();
+    option.click();
     fixture.detectChanges();
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['week']);
+    expect(compiled.querySelector('app-excursion-card .section-tag')?.textContent).toContain('CAI Tivoli');
+  });
+
+  it('opens the Info page from the header control and renders sourced CAI content', async () => {
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({ excursions: [] });
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    const header = compiled.querySelector('header') as HTMLElement;
+    const title = Array.from(header.querySelectorAll('span'))
+      .find(span => span.textContent?.trim() === 'TREKKING LAZIO') as HTMLElement;
+    const info = Array.from(header.querySelectorAll('a'))
+      .find(anchor => anchor.textContent?.trim() === 'Info') as HTMLAnchorElement;
+
+    expect(header).toBeTruthy();
+    expect(title).toBeTruthy();
+    expect(info).toBeTruthy();
+    expect(info.getAttribute('aria-label')).toBe('Info');
+    expect(Boolean(title.compareDocumentPosition(info) & Node.DOCUMENT_POSITION_FOLLOWING)).toBe(true);
+
+    info.click();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const router = TestBed.inject(Router);
+    expect(router.url).toMatch(/\/info$/);
+    expect(compiled.querySelector('app-info-page')).toBeTruthy();
+    expect(compiled.querySelector('app-filter-bar')).toBeNull();
+    expect(compiled.querySelector('app-map')).toBeNull();
+    expect(compiled.querySelector('app-admin-shell')).toBeNull();
+
+    const page = compiled.querySelector('app-info-page') as HTMLElement;
+    const text = page.textContent ?? '';
+    expect(text).toContain(CAI_PHILOSOPHY.body);
+    expect(text).toContain('alpinismo in ogni sua manifestazione');
+    expect(text).toContain('studio delle montagne');
+    expect(text).toContain('difesa del loro ambiente naturale');
+    expect(text).toContain('partecipare alle uscite');
+    expect(text).toContain('sezione di appartenenza');
+    expect(text).toContain('iscrizione');
+
+    const costTable = page.querySelector('[aria-label="Costi di iscrizione alle sezioni CAI del Lazio"]') as HTMLTableElement;
+    expect(costTable).toBeTruthy();
+    const costBody = costTable.querySelector('tbody')?.textContent ?? '';
+    for (const row of CAI_QUOTE_ROWS) {
+      expect(costBody).toContain(row.name);
+      expect(costBody).toContain(quoteDisplay(row.ordinario));
+      const source = costTable.querySelector(`a[href="${row.sourceUrl}"]`);
+      expect(source).toBeTruthy();
+    }
+    expect(costBody).toContain(UNPUBLISHED_LABEL);
+    expect(costBody).toContain('CAI Viterbo');
+    expect(costBody).toContain('CAI Roma');
+
+    const linksTable = page.querySelector('[aria-label="Siti e agende delle sezioni CAI del Lazio"]') as HTMLTableElement;
+    expect(linksTable).toBeTruthy();
+    const linksBody = linksTable.querySelector('tbody')?.textContent ?? '';
+    for (const sezione of CAI_SEZIONE_LINKS) {
+      expect(linksBody).toContain(sezione.name);
+      const site = linksTable.querySelector(`a[href="${sezione.websiteUrl}"]`);
+      expect(site).toBeTruthy();
+      if (sezione.hasAgenda) {
+        expect(linksBody).toContain(AGENDA_YES_LABEL);
+        expect(linksTable.querySelector(`a[href="${sezione.agendaUrl}"]`)).toBeTruthy();
+      }
+    }
+    expect(linksBody).toContain(AGENDA_NO_LABEL);
   });
 });

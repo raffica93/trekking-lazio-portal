@@ -18,6 +18,7 @@ import {
   monthLabel,
   nextWeekRange
 } from './excursion-filters';
+import { sectionColor } from './section-color';
 
 @Component({
   selector: 'app-filter-bar',
@@ -104,19 +105,66 @@ import {
 
           <div class="filter-group" *ngIf="organizers.length">
             <p class="filter-label">Sezione</p>
-            <label
-              class="filter-field filter-select"
+            <div
+              class="filter-select"
+              [class.filter-select-open]="sectionOpen"
               [class.filter-select-active]="filters.organizer !== 'all'"
+              [style.--section]="filters.organizer === 'all' ? null : colorFor(filters.organizer)"
             >
-              <select
+              <button
+                type="button"
+                class="filter-select-trigger"
                 aria-label="Filtra per sezione"
-                [value]="filters.organizer"
-                (change)="set('organizer', inputValue($event))"
+                aria-haspopup="listbox"
+                [attr.aria-expanded]="sectionOpen"
+                aria-controls="filter-section-listbox"
+                (click)="toggleSection($event)"
+                (keydown)="onSectionTriggerKey($event)"
               >
-                <option value="all">Tutte</option>
-                <option *ngFor="let organizer of organizers" [value]="organizer">{{ organizer }}</option>
-              </select>
-            </label>
+                <span
+                  class="section-dot"
+                  *ngIf="filters.organizer !== 'all'"
+                  [style.background-color]="colorFor(filters.organizer)"
+                  aria-hidden="true"
+                ></span>
+                <span class="filter-select-value">{{ sectionLabel }}</span>
+                <span class="filter-select-chevron" aria-hidden="true"></span>
+              </button>
+              <ul
+                *ngIf="sectionOpen"
+                id="filter-section-listbox"
+                class="filter-select-menu"
+                role="listbox"
+                aria-label="Sezioni CAI"
+              >
+                <li role="presentation">
+                  <button
+                    type="button"
+                    role="option"
+                    [attr.aria-selected]="filters.organizer === 'all'"
+                    [class.is-selected]="filters.organizer === 'all'"
+                    (click)="chooseSection('all', $event)"
+                  >Tutte</button>
+                </li>
+                <li *ngFor="let organizer of organizers" role="presentation">
+                  <button
+                    type="button"
+                    role="option"
+                    [attr.aria-selected]="filters.organizer === organizer"
+                    [class.is-selected]="filters.organizer === organizer"
+                    [style.--section]="colorFor(organizer)"
+                    (click)="chooseSection(organizer, $event)"
+                  >
+                    <span
+                      class="section-dot"
+                      [style.background-color]="colorFor(organizer)"
+                      aria-hidden="true"
+                    ></span>
+                    <span class="filter-select-option-label">{{ organizer }}</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
 
           <div class="filter-actions">
@@ -244,11 +292,12 @@ import {
     :host {
       display: block;
       position: relative;
-      z-index: 20;
+      z-index: 30;
     }
 
     .filter-bar {
       width: 100%;
+      overflow: visible;
       border-bottom: 1px solid rgb(214 211 209);
       background: white;
     }
@@ -447,31 +496,135 @@ import {
       width: 3.6rem;
     }
 
-    .filter-field input:focus,
-    .filter-select select:focus {
+    .filter-field input:focus {
       outline: none;
     }
 
-    .filter-select select {
-      min-width: 7.5rem;
-      max-width: 11.5rem;
-      border: 0;
-      background: transparent;
+    .filter-select-trigger:focus-visible {
+      outline: 2px solid rgb(6 78 59);
+      outline-offset: 2px;
+    }
+
+    .filter-select {
+      position: relative;
+    }
+
+    .filter-select-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      min-width: 8.5rem;
+      max-width: 13rem;
+      min-height: 2rem;
+      padding: 0.2rem 0.55rem 0.2rem 0.65rem;
+      border: 1px solid rgb(203 213 225);
+      border-radius: 9999px;
+      background: white;
       color: rgb(28 25 23);
       font-size: 0.75rem;
       font-weight: 700;
-      letter-spacing: 0;
-      text-transform: none;
+      line-height: 1;
+      cursor: pointer;
+      transition: 150ms ease;
     }
 
-    .filter-select-active {
-      border-color: rgb(6 78 59);
-      background: rgb(6 78 59);
-      color: white;
+    .filter-select-trigger:hover,
+    .filter-select-open .filter-select-trigger {
+      border-color: var(--section, rgb(5 150 105));
     }
 
-    .filter-select-active select {
-      color: white;
+    .filter-select-active .filter-select-trigger {
+      border-color: color-mix(in srgb, var(--section, rgb(6 78 59)) 70%, rgb(203 213 225));
+      background: color-mix(in srgb, var(--section, rgb(6 78 59)) 12%, white);
+    }
+
+    .filter-select-value {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .filter-select-chevron {
+      flex-shrink: 0;
+      width: 0.38rem;
+      height: 0.38rem;
+      margin-left: 0.15rem;
+      border-right: 1.6px solid rgb(120 113 108);
+      border-bottom: 1.6px solid rgb(120 113 108);
+      transform: translateY(-1px) rotate(45deg);
+    }
+
+    .filter-select-open .filter-select-chevron {
+      transform: translateY(1px) rotate(-135deg);
+    }
+
+    .filter-select-menu {
+      position: absolute;
+      top: calc(100% + 0.35rem);
+      left: 0;
+      z-index: 40;
+      display: grid;
+      gap: 0.1rem;
+      min-width: 14.5rem;
+      max-height: 18rem;
+      margin: 0;
+      padding: 0.35rem;
+      overflow: auto;
+      scrollbar-width: thin;
+      list-style: none;
+      border: 1px solid rgb(214 211 209);
+      border-radius: 0.85rem;
+      background: white;
+      box-shadow: 0 16px 36px rgb(18 38 28 / 0.16);
+    }
+
+    .filter-select-menu li {
+      margin: 0;
+      padding: 0;
+    }
+
+    .filter-select-menu button {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 2rem;
+      padding: 0.35rem 0.6rem;
+      border: 0;
+      border-radius: 0.55rem;
+      background: transparent;
+      color: rgb(28 25 23);
+      font-size: 0.78rem;
+      font-weight: 600;
+      line-height: 1.2;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .filter-select-option-label {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .filter-select-menu button:hover,
+    .filter-select-menu button:focus-visible {
+      background: color-mix(in srgb, var(--section, rgb(5 150 105)) 12%, white);
+      outline: none;
+    }
+
+    .filter-select-menu button.is-selected {
+      background: color-mix(in srgb, var(--section, rgb(6 78 59)) 16%, white);
+      color: rgb(28 25 23);
+      font-weight: 800;
+    }
+
+    .filter-select .section-dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      flex-shrink: 0;
+      border-radius: 999px;
+      box-shadow: 0 0 0 1.5px rgb(255 255 255 / 0.9);
     }
 
     .filter-actions {
@@ -618,6 +771,7 @@ export class FilterBarComponent {
   @Output() filtersChange = new EventEmitter<FilterState>();
 
   megaOpen = false;
+  sectionOpen = false;
 
   get months() {
     const months = availableMonths(this.allExcursions);
@@ -652,22 +806,59 @@ export class FilterBarComponent {
     return extraFilterTags(this.filters);
   }
 
+  get sectionLabel(): string {
+    return this.filters.organizer === 'all' ? 'Tutte' : this.filters.organizer;
+  }
+
+  colorFor(organizer: string): string {
+    return sectionColor(organizer);
+  }
+
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
-    if (!this.megaOpen) return;
-    if (!this.host.nativeElement.contains(event.target as Node)) {
+    const target = event.target as HTMLElement | null;
+    if (!this.host.nativeElement.contains(target)) {
       this.megaOpen = false;
+      this.sectionOpen = false;
+      return;
+    }
+    if (this.sectionOpen && !target?.closest('.filter-select')) {
+      this.sectionOpen = false;
     }
   }
 
   @HostListener('document:keydown.escape')
   onEscape() {
     this.megaOpen = false;
+    this.sectionOpen = false;
   }
 
   toggleMega(event: Event) {
     event.stopPropagation();
     this.megaOpen = !this.megaOpen;
+    if (this.megaOpen) this.sectionOpen = false;
+  }
+
+  toggleSection(event: Event) {
+    event.stopPropagation();
+    this.sectionOpen = !this.sectionOpen;
+    if (this.sectionOpen) this.megaOpen = false;
+  }
+
+  chooseSection(value: string, event: Event) {
+    event.stopPropagation();
+    this.sectionOpen = false;
+    this.set('organizer', value);
+  }
+
+  onSectionTriggerKey(event: KeyboardEvent) {
+    if (event.key === 'ArrowDown' || event.key === 'Enter' || event.key === ' ') {
+      if (!this.sectionOpen && event.key === 'ArrowDown') {
+        event.preventDefault();
+        this.sectionOpen = true;
+        this.megaOpen = false;
+      }
+    }
   }
 
   set<K extends keyof FilterState>(key: K, value: FilterState[K]) {
@@ -701,6 +892,7 @@ export class FilterBarComponent {
 
   reset() {
     this.megaOpen = false;
+    this.sectionOpen = false;
     this.filtersChange.emit({ ...DEFAULT_FILTERS });
   }
 

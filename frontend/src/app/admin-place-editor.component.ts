@@ -2,6 +2,7 @@ import { NgIf } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { durationLabel, tripDays } from './excursion-dates';
 import { AdminPlacesService } from './admin-places.service';
 import type { PlaceRow, PlaceStatus, PlaceWrite } from './place.model';
 
@@ -49,8 +50,10 @@ import type { PlaceRow, PlaceStatus, PlaceWrite } from './place.model';
       <fieldset>
         <legend>Dettagli utili</legend>
         <div class="grid two">
-          <label>Data finale<input type="date" formControlName="date_end"></label>
-          <label>Giorni<input type="number" min="1" step="1" formControlName="days"></label>
+          <label>Data finale
+            <input type="date" formControlName="date_end" [attr.min]="form.controls.date.value || null">
+            <span class="hint">{{ staySummary }}</span>
+          </label>
           <label>Distanza (km)<input type="number" min="0" step="0.1" formControlName="distance_km"></label>
           <label>Dislivello (m)<input type="number" min="0" step="1" formControlName="elevation_m"></label>
           <label>Durata (ore)<input type="number" min="0" step="0.25" formControlName="duration_hours"></label>
@@ -90,6 +93,7 @@ import type { PlaceRow, PlaceStatus, PlaceWrite } from './place.model';
     legend { padding: 0 .38rem; color: #2e6049; font: 800 .68rem/1 'IBM Plex Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
     .grid { display: grid; gap: .9rem; } .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     label { display: grid; gap: .4rem; min-width: 0; color: #466253; font-size: .74rem; font-weight: 800; } .wide { grid-column: 1 / -1; }
+    .hint { color: #5d7466; font-size: .72rem; font-weight: 600; }
     input, select, textarea { width: 100%; box-sizing: border-box; padding: .7rem .75rem; border: 1px solid #b7c9b8; border-radius: .22rem; background: white; color: #183229; font: 500 .88rem/1.3 Inter, sans-serif; }
     textarea { resize: vertical; } input:focus, select:focus, textarea:focus { outline: 3px solid rgb(166 202 109 / .55); outline-offset: 1px; }
     .cover-row { display: flex; align-items: center; gap: 1rem; color: #62776a; font-size: .77rem; } .cover-row img { width: 9rem; height: 6rem; object-fit: cover; border: 1px solid #b4c9b6; }
@@ -105,7 +109,7 @@ export class AdminPlaceEditorComponent implements OnInit {
   private readonly formBuilder = inject(FormBuilder);
   readonly form = this.formBuilder.nonNullable.group({
     title: ['', Validators.required], slug: ['', Validators.required], status: ['draft' as PlaceStatus, Validators.required],
-    date: ['', Validators.required], date_end: [''], days: [''], category: ['', Validators.required],
+    date: ['', Validators.required], date_end: [''], category: ['', Validators.required],
     external_url: ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/i)]], organizer: ['Trekking Lazio', Validators.required],
     location: ['', Validators.required], municipality: [''], province: [''], region: [''], latitude: ['', Validators.required], longitude: ['', Validators.required],
     cost: [''], distance_km: [''], elevation_m: [''], duration_hours: [''], time: [''], mountain_group: [''], transport: [''],
@@ -148,6 +152,14 @@ export class AdminPlaceEditorComponent implements OnInit {
 
   lockSlug(): void {
     this.slugLocked = true;
+  }
+
+  get staySummary(): string {
+    const start = this.form.controls.date.value;
+    if (!start) return 'Giorni e notti si calcolano dalle date.';
+    const end = this.form.controls.date_end.value.trim() || start;
+    if (end < start) return 'La data finale precede l’inizio.';
+    return durationLabel(tripDays(start, end)) ?? '1 giorno';
   }
 
   async onFileChange(event: Event): Promise<void> {
@@ -220,7 +232,7 @@ export class AdminPlaceEditorComponent implements OnInit {
 
   private fill(place: PlaceRow): void {
     this.form.patchValue({
-      title: place.title, slug: place.slug, status: place.status, date: place.date, date_end: place.date_end ?? '', days: this.stringValue(place.days),
+      title: place.title, slug: place.slug, status: place.status, date: place.date, date_end: place.date_end ?? '',
       category: place.category, external_url: place.external_url, organizer: place.organizer, location: place.location, municipality: place.municipality ?? '',
       province: place.province ?? '', region: place.region ?? '', latitude: this.stringValue(place.latitude), longitude: this.stringValue(place.longitude),
       cost: place.cost ?? '', distance_km: this.stringValue(place.distance_km), elevation_m: this.stringValue(place.elevation_m), duration_hours: this.stringValue(place.duration_hours),
@@ -236,7 +248,7 @@ export class AdminPlaceEditorComponent implements OnInit {
   private payload(): PlaceWrite {
     const value = this.form.getRawValue();
     return {
-      slug: this.slugify(value.slug), title: value.title.trim(), date: value.date, date_end: this.textOrNull(value.date_end), days: this.numberOrNull(value.days),
+      slug: this.slugify(value.slug), title: value.title.trim(), date: value.date, date_end: this.textOrNull(value.date_end), days: this.computedDays(),
       category: value.category.trim(), external_url: value.external_url.trim(), organizer: value.organizer.trim(), location: value.location.trim(),
       municipality: this.textOrNull(value.municipality), province: this.textOrNull(value.province), region: this.textOrNull(value.region),
       latitude: this.numberOrZero(value.latitude), longitude: this.numberOrZero(value.longitude), cost: this.textOrNull(value.cost), cost_amount: null,
@@ -246,6 +258,12 @@ export class AdminPlaceEditorComponent implements OnInit {
       activity_type: this.textOrNull(value.activity_type), terrain: this.textOrNull(value.terrain), difficulty_note: this.textOrNull(value.difficulty_note),
       cover_image_path: this.textOrNull(value.cover_image_path), status: value.status
     };
+  }
+
+  private computedDays(): number {
+    const start = this.form.controls.date.value;
+    const end = this.form.controls.date_end.value.trim() || start;
+    return tripDays(start, end);
   }
 
   private slugify(value: string): string {

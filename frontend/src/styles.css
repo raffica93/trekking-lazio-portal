@@ -12,6 +12,7 @@ body {
 .leaflet-container {
   height: 100%;
   width: 100%;
+  z-index: 0;
   background: #e7efe6;
 }
 
@@ -37,6 +38,15 @@ body {
   box-shadow:
     0 0 0 3px rgb(6 95 70 / 0.35),
     0 2px 8px rgb(18 38 28 / 0.4);
+}
+
+.section-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  flex-shrink: 0;
+  border-radius: 999px;
+  box-shadow: 0 0 0 1.5px rgb(255 255 255 / 0.9);
 }
 
 
