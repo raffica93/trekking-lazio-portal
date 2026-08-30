@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T20:04:20.190Z",
+  "generatedAt": "2026-08-30T20:17:12.866Z",
   "sources": [
     {
       "id": "roma",
@@ -13,7 +13,7 @@
       "excursions": 51,
       "error": null,
       "hash": null,
-      "updatedAt": "2026-08-30T19:48:32.516Z"
+      "updatedAt": "2026-08-30T20:13:37.882Z"
     },
     {
       "id": "viterbo",
@@ -23,11 +23,11 @@
       "template": "html-programma",
       "extractor": "gemini",
       "enabled": true,
-      "status": "ok",
+      "status": "reused",
       "excursions": 8,
       "error": null,
       "hash": "58bb3570c70c80e7cd152de393e6824e21d955436e79cf30d083ceabd04d7990",
-      "updatedAt": "2026-08-30T04:28:39.137Z"
+      "updatedAt": "2026-08-30T20:13:39.358Z"
     },
     {
       "id": "tivoli",
@@ -37,11 +37,11 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "status": "idle",
-      "excursions": 0,
+      "status": "ok",
+      "excursions": 45,
       "error": null,
-      "hash": null,
-      "updatedAt": null
+      "hash": "b629e95f47336ee2326499d63f345cf8ea0d3aabe2dddbe48057a682ec51cfb7",
+      "updatedAt": "2026-08-30T20:15:06.498Z"
     },
     {
       "id": "rieti",
@@ -51,11 +51,11 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "status": "idle",
-      "excursions": 0,
+      "status": "ok",
+      "excursions": 61,
       "error": null,
-      "hash": null,
-      "updatedAt": null
+      "hash": "fc855d463c84cbba2c6d057ba1ba6100be9bc5cef200a3b2e413919b8cbf6b85",
+      "updatedAt": "2026-08-30T20:16:37.140Z"
     },
     {
       "id": "monterotondo",
@@ -65,11 +65,11 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "status": "ok",
+      "status": "reused",
       "excursions": 24,
       "error": null,
       "hash": "8bed86d7091a154272ef131717fa3f1e203b7b8c675d27fc9b54598490b48d3c",
-      "updatedAt": "2026-08-30T04:28:39.137Z"
+      "updatedAt": "2026-08-30T20:16:55.097Z"
     },
     {
       "id": "frosinone",
@@ -79,11 +79,11 @@
       "template": "html-programma",
       "extractor": "gemini",
       "enabled": true,
-      "status": "ok",
+      "status": "failed",
       "excursions": 4,
       "error": null,
       "hash": "67e019c1a06ce71fd3900d209a0bbf89603d7dcaadbeee21333e5928751063ce",
-      "updatedAt": "2026-08-30T04:28:39.137Z"
+      "updatedAt": "2026-08-30T20:17:12.798Z"
     },
     {
       "id": "leonessa",
@@ -93,11 +93,11 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "status": "idle",
+      "status": "skipped",
       "excursions": 0,
       "error": null,
       "hash": null,
-      "updatedAt": null
+      "updatedAt": "2026-08-30T20:17:12.804Z"
     },
     {
       "id": "sora",
@@ -107,11 +107,11 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "status": "idle",
+      "status": "skipped",
       "excursions": 0,
       "error": null,
       "hash": null,
-      "updatedAt": null
+      "updatedAt": "2026-08-30T20:17:12.810Z"
     },
     {
       "id": "amatrice",
@@ -121,11 +121,11 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "status": "idle",
+      "status": "skipped",
       "excursions": 0,
       "error": null,
       "hash": null,
-      "updatedAt": null
+      "updatedAt": "2026-08-30T20:17:12.816Z"
     },
     {
       "id": "esperia",
@@ -135,11 +135,11 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "status": "ok",
+      "status": "skipped",
       "excursions": 15,
       "error": null,
       "hash": "ec29fd624004d005295ff18cd02eb7ea0bc82bc2cfe387da186f692563000a89",
-      "updatedAt": "2026-08-30T19:49:08.203Z"
+      "updatedAt": "2026-08-30T20:17:12.821Z"
     },
     {
       "id": "alatri",
@@ -149,11 +149,11 @@
       "template": "html-calendario",
       "extractor": "gemini",
       "enabled": true,
-      "status": "idle",
+      "status": "skipped",
       "excursions": 0,
       "error": null,
       "hash": null,
-      "updatedAt": null
+      "updatedAt": "2026-08-30T20:17:12.826Z"
     },
     {
       "id": "aprilia",
@@ -163,11 +163,11 @@
       "template": "html-programma",
       "extractor": "gemini",
       "enabled": true,
-      "status": "idle",
+      "status": "skipped",
       "excursions": 0,
       "error": null,
       "hash": null,
-      "updatedAt": null
+      "updatedAt": "2026-08-30T20:17:12.831Z"
     },
     {
       "id": "colleferro",
@@ -177,11 +177,11 @@
       "template": "html-calendario",
       "extractor": "gemini",
       "enabled": true,
-      "status": "idle",
+      "status": "skipped",
       "excursions": 0,
       "error": null,
       "hash": null,
-      "updatedAt": null
+      "updatedAt": "2026-08-30T20:17:12.834Z"
     },
     {
       "id": "frascati",
@@ -191,11 +191,11 @@
       "template": "html-calendario",
       "extractor": "gemini",
       "enabled": true,
-      "status": "idle",
+      "status": "skipped",
       "excursions": 0,
       "error": null,
       "hash": null,
-      "updatedAt": null
+      "updatedAt": "2026-08-30T20:17:12.839Z"
     },
     {
       "id": "palestrina",
@@ -205,11 +205,11 @@
       "template": "html-calendario",
       "extractor": "gemini",
       "enabled": true,
-      "status": "failed",
+      "status": "skipped",
       "excursions": 0,
-      "error": "CAI Palestrina extract contained no upcoming excursions",
+      "error": null,
       "hash": null,
-      "updatedAt": "2026-08-30T19:49:17.076Z"
+      "updatedAt": "2026-08-30T20:17:12.843Z"
     },
     {
       "id": "antrodoco",
@@ -219,11 +219,11 @@
       "template": "html-calendario",
       "extractor": "gemini",
       "enabled": true,
-      "status": "idle",
+      "status": "skipped",
       "excursions": 0,
       "error": null,
       "hash": null,
-      "updatedAt": null
+      "updatedAt": "2026-08-30T20:17:12.846Z"
     },
     {
       "id": "latina",
@@ -233,11 +233,11 @@
       "template": "html-calendario",
       "extractor": "gemini",
       "enabled": true,
-      "status": "ok",
+      "status": "skipped",
       "excursions": 5,
       "error": null,
       "hash": "1da3d3cff7498b9fb928d7c5a34d8699bc6c6492565d29ed39bce9b8cea6a15a",
-      "updatedAt": "2026-08-30T20:04:12.360Z"
+      "updatedAt": "2026-08-30T20:17:12.852Z"
     },
     {
       "id": "cassino",
@@ -247,11 +247,11 @@
       "template": "html-calendario",
       "extractor": "gemini",
       "enabled": true,
-      "status": "ok",
+      "status": "skipped",
       "excursions": 1,
       "error": null,
       "hash": "865cca97883fe50a506df9fe89a803881c973886f1bd065eef3f3f80fd960700",
-      "updatedAt": "2026-08-30T20:02:41.892Z"
+      "updatedAt": "2026-08-30T20:17:12.855Z"
     },
     {
       "id": "gallinaro",
@@ -261,11 +261,11 @@
       "template": "facebook",
       "extractor": "gemini",
       "enabled": true,
-      "status": "failed",
+      "status": "skipped",
       "excursions": 0,
-      "error": "Gemini API 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a",
+      "error": null,
       "hash": null,
-      "updatedAt": "2026-08-30T20:04:20.190Z"
+      "updatedAt": "2026-08-30T20:17:12.866Z"
     }
   ]
 }
