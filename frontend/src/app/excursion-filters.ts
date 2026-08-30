@@ -13,6 +13,7 @@ export interface FilterState {
   distance: DistanceBucket;
   month: string;
   region: string;
+  organizer: string;
   dateFrom: string;
   dateTo: string;
   vediSito: boolean;
@@ -28,6 +29,7 @@ export const DEFAULT_FILTERS: FilterState = {
   distance: 'all',
   month: 'all',
   region: 'all',
+  organizer: 'all',
   dateFrom: '',
   dateTo: '',
   vediSito: false,
@@ -208,6 +210,15 @@ export function availableRegions(excursions: Excursion[]): string[] {
   });
 }
 
+export function availableOrganizers(excursions: Excursion[]): string[] {
+  const ids = [...new Set(
+    excursions
+      .map((excursion) => excursion.organizer)
+      .filter((organizer): organizer is string => Boolean(organizer))
+  )];
+  return ids.sort((a, b) => a.localeCompare(b, 'it'));
+}
+
 export function dateBounds(excursions: Excursion[]): { min: string; max: string } {
   if (excursions.length === 0) {
     return { min: '', max: '' };
@@ -306,6 +317,7 @@ export function hasActiveFilters(filters: FilterState): boolean {
     || filters.distance !== 'all'
     || filters.month !== 'all'
     || filters.region !== 'all'
+    || filters.organizer !== 'all'
     || Boolean(filters.dateFrom)
     || Boolean(filters.dateTo)
     || filters.vediSito
@@ -388,6 +400,7 @@ export function applyFilters(excursions: Excursion[], filters: FilterState): Exc
     if (!matchesDistance(excursion.distanceKm, filters.distance)) return false;
     if (!matchesMonth(excursion, filters.month)) return false;
     if (filters.region !== 'all' && excursion.region !== filters.region) return false;
+    if (filters.organizer !== 'all' && excursion.organizer !== filters.organizer) return false;
     if (!matchesPrivateCar(excursion.privateCar, filters.privateCar)) return false;
     if (!matchesPeriod(excursion, filters.dateFrom, filters.dateTo)) return false;
     return matchesCost(excursion, filters);

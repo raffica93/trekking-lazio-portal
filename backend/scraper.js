@@ -154,9 +154,9 @@ function resolveRegion(...parts) {
   return found ? found.region : 'Altro';
 }
 
-function stableId(date, title) {
+function stableId(date, title, prefix = 'roma') {
   const hash = crypto.createHash('sha256').update(`${date}|${title}`).digest('hex').slice(0, 12);
-  return `roma-${hash}`;
+  return `${prefix}-${hash}`;
 }
 
 function parseDistanceKm(details) {
@@ -323,6 +323,7 @@ function getApproximateCoords(title) {
 module.exports = {
   CAI_ROMA_URL,
   DEFAULT_COORDS,
+  getApproximateCoords,
   parseCaiRomaHtml,
   parseCostAmount,
   parseDate,
@@ -332,5 +333,7 @@ module.exports = {
   parseTransport,
   classifyPrivateCar,
   resolveRegion,
-  scrapeCaiRoma
+  scrapeCaiRoma,
+  stableId,
+  tripDays
 };

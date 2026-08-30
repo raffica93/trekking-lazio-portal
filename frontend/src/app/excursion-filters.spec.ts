@@ -6,6 +6,7 @@ import {
   nextWeekRange,
   normalizeExcursion,
   availableMonths,
+  availableOrganizers,
   availableRegions
 } from './excursion-filters';
 import { Excursion } from './excursion.model';
@@ -126,5 +127,16 @@ describe('excursion filters', () => {
 
     expect(availableMonths(list).map((month) => month.label)).toEqual(['Set', 'Ott']);
     expect(availableRegions(list)).toEqual(['Lazio', 'Abruzzo']);
+  });
+
+  it('filters and lists CAI sections', () => {
+    const list = [
+      sample({ id: 'roma', organizer: 'CAI Roma' }),
+      sample({ id: 'tivoli', organizer: 'CAI Tivoli', title: 'Monte Morra' })
+    ];
+
+    expect(availableOrganizers(list)).toEqual(['CAI Roma', 'CAI Tivoli']);
+    expect(applyFilters(list, { ...DEFAULT_FILTERS, organizer: 'CAI Tivoli' }).map((item) => item.id))
+      .toEqual(['tivoli']);
   });
 });

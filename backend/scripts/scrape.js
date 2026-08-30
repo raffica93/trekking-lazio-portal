@@ -1,43 +1,85 @@
 const fs = require('node:fs/promises');
 const path = require('node:path');
-const { scrapeCaiRoma, CAI_ROMA_URL } = require('../scraper');
+const { buildPayload, parseScrapeArgs, scrapeAll } = require('../pipeline');
+const { SOURCES } = require('../sources');
 
 const outputPath = path.join(__dirname, '..', 'data', 'excursions.json');
 
-async function readExisting() {
+function usage() {
+  return [
+    'Usage: npm run scrape -- [--dry-run] [--source id]',
+    '',
+    'Scrapes enabled CAI Lazio sources into backend/data/excursions.json.',
+    'CAI Roma uses the HTML parser. Other sections use Grok (XAI_API_KEY).',
+    'Without an API key, Roma still runs and Grok sources keep their cache.',
+    'Repeat --source to limit the run, e.g. --source tivoli --source viterbo.'
+  ].join('\n');
+}
+
+async function writeJsonAtomic(filePath, payload) {
+  await fs.mkdir(path.dirname(filePath), { recursive: true });
+  const temporaryPath = `${filePath}.tmp`;
+  await fs.writeFile(temporaryPath, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+  await fs.rename(temporaryPath, filePath);
+}
+
+async function readExistingPayload(filePath) {
   try {
-    return JSON.parse(await fs.readFile(outputPath, 'utf8'));
+    return JSON.parse(await fs.readFile(filePath, 'utf8'));
   } catch {
     return null;
   }
 }
 
-async function main() {
-  const excursions = await scrapeCaiRoma({
-    retries: Number(process.env.SCRAPE_RETRIES || 3),
-    timeout: Number(process.env.SCRAPE_TIMEOUT_MS || 20_000)
-  });
-
-  const existing = await readExisting();
-  if (JSON.stringify(existing?.excursions) === JSON.stringify(excursions)) {
-    console.log(`No changes: ${excursions.length} upcoming excursions`);
-    return;
+async function runScrape({
+  argv = process.argv.slice(2),
+  dataPath = outputPath,
+  sources = SOURCES,
+  scrapeAllImpl = scrapeAll,
+  log = console
+} = {}) {
+  const args = parseScrapeArgs(argv);
+  if (args.help) {
+    log.log(usage());
+    return { args, skipped: true };
   }
 
-  const payload = {
-    source: CAI_ROMA_URL,
-    generatedAt: new Date().toISOString(),
-    excursions
-  };
+  const existing = await readExistingPayload(dataPath);
+  const result = await scrapeAllImpl({
+    sources,
+    existingPayload: existing || {},
+    sourceIds: args.sources.length > 0 ? args.sources : undefined,
+    log
+  });
 
-  await fs.mkdir(path.dirname(outputPath), { recursive: true });
-  const temporaryPath = `${outputPath}.tmp`;
-  await fs.writeFile(temporaryPath, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
-  await fs.rename(temporaryPath, outputPath);
-  console.log(`Updated cache with ${excursions.length} upcoming excursions from ${CAI_ROMA_URL}`);
+  const payload = buildPayload(result, existing || {});
+  const unchanged = JSON.stringify(existing?.excursions) === JSON.stringify(payload.excursions)
+    && JSON.stringify(existing?.sourceHashes || {}) === JSON.stringify(payload.sourceHashes || {});
+
+  if (unchanged) {
+    log.log(`No changes: ${payload.excursions.length} upcoming excursions`);
+    return { args, result, wrote: false, payload };
+  }
+
+  if (args.dryRun) {
+    log.log(`Dry-run: ${payload.excursions.length} upcoming excursions (not written)`);
+    return { args, result, wrote: false, payload };
+  }
+
+  await writeJsonAtomic(dataPath, payload);
+  log.log(`Updated cache with ${payload.excursions.length} upcoming excursions`);
+  return { args, result, wrote: true, payload };
 }
 
-main().catch((error) => {
-  console.error(error.message);
-  process.exitCode = 1;
-});
+async function main() {
+  await runScrape();
+}
+
+if (require.main === module) {
+  main().catch((error) => {
+    console.error(error.message);
+    process.exitCode = 1;
+  });
+}
+
+module.exports = { parseScrapeArgs, runScrape, usage };

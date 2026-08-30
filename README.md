@@ -1,6 +1,6 @@
 # Trekking Lazio Portal
 
-Portale Angular ed Express per consultare sulla mappa le escursioni pubblicate dal CAI Roma.
+Portale Angular ed Express per consultare sulla mappa le escursioni pubblicate dalle sezioni CAI del Lazio.
 
 ## Avvio locale
 
@@ -27,6 +27,15 @@ npm run scrape
 
 Lo script aggiorna `backend/data/excursions.json` in modo atomico, lascia il file invariato quando i dati non cambiano e ritenta automaticamente gli errori di rete o le risposte HTML non valide. È possibile personalizzare la chiamata con `SCRAPE_RETRIES` e `SCRAPE_TIMEOUT_MS`.
 
+CAI Roma viene letto con il parser HTML. Le altre sezioni abilitate (Tivoli, Viterbo, Rieti, Monterotondo, Frosinone, Leonessa) usano Grok per estrarre il calendario da HTML o PDF. Serve `XAI_API_KEY` (o una sessione Grok CLI). Senza chiave lo scrape di Roma continua e le altre sezioni restano sulla cache.
+
+```bash
+npm run scrape -- --source tivoli
+npm run scrape -- --dry-run
+```
+
+Le sezioni si accendono in `backend/sources.js` (`enabled: true`). Un fallimento di una fonte non cancella le altre. L’arricchimento già classificato (summary, coordinate) viene conservato se id, titolo, data e località non cambiano.
+
 ## Supabase e pannello amministratore
 
 Il pannello è disponibile su `/#/admin` (necessario per funzionare anche su GitHub Pages). La migrazione in `supabase/migrations/` crea la tabella `places`, il bucket immagini, i profili admin e tutte le policy RLS. Applica la migrazione al progetto Supabase, quindi crea un utente nella sezione Authentication e rendilo amministratore con la query commentata in fondo alla migrazione.
@@ -46,7 +55,7 @@ L'import crea o aggiorna i luoghi usando l'ID originale come chiave; per sicurez
 
 ## Classificazione Grok (manuale)
 
-Lo scrape programmato **non** chiama Grok. Per completare le escursioni con coordinate più precise, quota, km e un riassunto:
+Lo scrape programmato estrae i calendari con Grok, ma **non** classifica le schede (coordinate precise, quota, riassunto). Per completare le escursioni:
 
 ```bash
 cd backend
@@ -61,7 +70,7 @@ Senza `--dry-run` lo script aggiorna `backend/data/excursions.json` e, se presen
 ## Automazione
 
 - `CI and release` esegue test e build. Su `main` e sui tag `v*` pubblica le immagini frontend e backend nel GitHub Container Registry.
-- `Refresh excursion data` viene eseguito ogni giorno alle 04:17 UTC e può essere lanciato anche manualmente. Se trova modifiche, aggiorna la cache su `main`, attivando un nuovo rilascio. Non esegue il classificatore Grok.
+- `Refresh excursion data` viene eseguito ogni giorno alle 04:17 UTC e può essere lanciato anche manualmente. Se trova modifiche, aggiorna la cache su `main`, attivando un nuovo rilascio. Estrae i calendari delle altre sezioni con Grok se il secret `XAI_API_KEY` è configurato nel repository; senza secret aggiorna solo CAI Roma. Non esegue il classificatore Grok.
 - `Deploy GitHub Pages` verifica e pubblica il frontend statico a ogni aggiornamento di `main`.
 
 Il repository GitHub deve consentire a GitHub Actions la scrittura dei contenuti e dei package. Se `main` è protetto, autorizzare il bot oppure adattare il workflow affinché apra una pull request.

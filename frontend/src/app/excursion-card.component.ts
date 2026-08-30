@@ -132,7 +132,7 @@ export class ExcursionCardComponent {
   }
 
   get meta(): string {
-    const parts = [this.excursion.location];
+    const parts = [this.excursion.organizer, this.excursion.location];
     if (this.excursion.days && this.excursion.days > 1) {
       parts.push(`${this.excursion.days} giorni`);
     }

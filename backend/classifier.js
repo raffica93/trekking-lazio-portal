@@ -65,7 +65,7 @@ const ENRICHMENT_SCHEMA = {
 };
 
 const SYSTEM_PROMPT = `Sei un classificatore di escursioni CAI.
-Ti viene data una riga del calendario CAI Roma. Completala con dati fattuali e una breve interpretazione.
+Ti viene data una riga del calendario di una sezione CAI del Lazio. Completala con dati fattuali e una breve interpretazione.
 
 Usa web_search per verificare il toponimo reale (cima, rifugio o punto di partenza) e le coordinate.
 Non usare il centroide di un gruppo montuoso se puoi geolocalizzare la cima o la partenza.
@@ -180,14 +180,16 @@ function mergeEnrichment(scraped, enrichment = {}) {
 }
 
 function userPrompt(excursion) {
+  const organizer = excursion.organizer || 'CAI';
   return [
-    'Classifica e completa questa escursione CAI Roma.',
+    `Classifica e completa questa escursione ${organizer}.`,
     'Restituisci solo i campi dello schema.',
     JSON.stringify({
       id: excursion.id,
       title: excursion.title,
       date: excursion.date,
       category: excursion.category,
+      organizer,
       location: excursion.location,
       link: excursion.link,
       time: excursion.time,

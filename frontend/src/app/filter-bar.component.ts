@@ -6,6 +6,7 @@ import {
   FilterState,
   FilterTag,
   availableMonths,
+  availableOrganizers,
   availableRegions,
   dateBounds,
   extraFilterTags,
@@ -72,6 +73,22 @@ import {
             <button type="button" class="filter-chip" [class.filter-chip-active]="filters.distance === 'gt20'" (click)="toggle('distance', 'gt20')">>20</button>
           </div>
         </div>
+
+        <label
+          class="filter-field filter-select"
+          *ngIf="organizers.length"
+          [class.filter-select-active]="filters.organizer !== 'all'"
+        >
+          <span>Sezione</span>
+          <select
+            aria-label="Filtra per sezione"
+            [value]="filters.organizer"
+            (change)="set('organizer', inputValue($event))"
+          >
+            <option value="all">Tutte</option>
+            <option *ngFor="let organizer of organizers" [value]="organizer">{{ organizer }}</option>
+          </select>
+        </label>
 
         <div class="filter-actions">
           <button
@@ -349,8 +366,31 @@ import {
       width: 3.6rem;
     }
 
-    .filter-field input:focus {
+    .filter-field input:focus,
+    .filter-select select:focus {
       outline: none;
+    }
+
+    .filter-select select {
+      min-width: 7.5rem;
+      max-width: 11.5rem;
+      border: 0;
+      background: transparent;
+      color: rgb(28 25 23);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .filter-select-active {
+      border-color: rgb(6 78 59);
+      background: rgb(6 78 59);
+      color: white;
+    }
+
+    .filter-select-active select {
+      color: white;
     }
 
     .filter-actions {
@@ -487,6 +527,10 @@ export class FilterBarComponent {
 
   get regions() {
     return availableRegions(this.allExcursions);
+  }
+
+  get organizers() {
+    return availableOrganizers(this.allExcursions);
   }
 
   get bounds() {

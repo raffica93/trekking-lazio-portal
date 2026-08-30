@@ -119,7 +119,7 @@ describe('App', () => {
           days: 8,
           category: 'EEA',
           link: 'https://example.com/w',
-          organizer: 'CAI Roma',
+          organizer: 'CAI Tivoli',
           location: 'Trentino',
           region: 'Trentino-Alto Adige',
           lat: 46.3,
@@ -201,5 +201,13 @@ describe('App', () => {
     openMega();
     clickInGroup('Filtra per auto privata', 'No');
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['day']);
+
+    clickReset();
+    const section = compiled.querySelector('[aria-label="Filtra per sezione"]') as HTMLSelectElement;
+    expect(section).toBeTruthy();
+    section.value = 'CAI Tivoli';
+    section.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+    expect(app.excursions.map(excursion => excursion.id)).toEqual(['week']);
   });
 });
