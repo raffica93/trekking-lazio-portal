@@ -188,7 +188,7 @@ describe('App', () => {
     const trackCaiLink = vi.spyOn(TestBed.inject(AnalyticsService), 'trackCaiLink');
     detailCta.addEventListener('click', event => event.preventDefault(), { once: true });
     detailCta.click();
-    expect(trackCaiLink).toHaveBeenCalledWith('https://example.com/e', 'CAI Roma', 'escursione');
+    expect(trackCaiLink).toHaveBeenCalledWith(expect.any(Event), 'https://example.com/e', 'CAI Roma', 'escursione');
     const header = detail.querySelector('.detail-header') as HTMLElement;
     const close = header?.querySelector('.detail-close') as HTMLElement;
     const chip = header?.querySelector('.difficulty-chip') as HTMLElement;

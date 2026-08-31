@@ -179,7 +179,7 @@ export class ExcursionCardComponent {
 
   trackDetailsClick(event: Event): void {
     event.stopPropagation();
-    this.analytics.trackCaiLink(this.excursion.link, this.excursion.organizer, 'escursione');
+    this.analytics.trackCaiLink(event, this.excursion.link, this.excursion.organizer, 'escursione');
   }
 
   get tone() {

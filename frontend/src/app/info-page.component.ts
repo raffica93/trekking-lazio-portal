@@ -153,7 +153,7 @@ import { AnalyticsService } from './analytics.service';
                         [href]="sezione.websiteUrl"
                         target="_blank"
                         rel="noopener noreferrer"
-                        (click)="trackSectionLink(sezione, 'sito')"
+                        (click)="trackSectionLink($event, sezione, 'sito')"
                       >{{ hostOf(sezione.websiteUrl) }}</a>
                     </td>
                     <td>{{ sezione.hasAgenda ? agendaYes : agendaNo }}</td>
@@ -163,7 +163,7 @@ import { AnalyticsService } from './analytics.service';
                           [href]="sezione.agendaUrl"
                           target="_blank"
                           rel="noopener noreferrer"
-                          (click)="trackSectionLink(sezione, 'agenda')"
+                          (click)="trackSectionLink($event, sezione, 'agenda')"
                         >{{ sezione.agendaLabel }}</a>
                       } @else {
                         —
@@ -381,10 +381,10 @@ import { AnalyticsService } from './analytics.service';
 export class InfoPageComponent {
   private analytics = inject(AnalyticsService);
 
-  trackSectionLink(sezione: SezioneLink, linkType: 'sito' | 'agenda'): void {
+  trackSectionLink(event: Event, sezione: SezioneLink, linkType: 'sito' | 'agenda'): void {
     const url = linkType === 'sito' ? sezione.websiteUrl : sezione.agendaUrl;
     if (url) {
-      this.analytics.trackCaiLink(url, sezione.name, linkType);
+      this.analytics.trackCaiLink(event, url, sezione.name, linkType);
     }
   }
   readonly philosophy = CAI_PHILOSOPHY;
