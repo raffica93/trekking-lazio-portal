@@ -170,7 +170,9 @@ registerLocaleData(localeIt);
               [href]="selectedExcursion.link"
               target="_blank"
               rel="noopener noreferrer"
-              (click)="analytics.trackCaiLink(selectedExcursion.link, selectedExcursion.organizer, 'escursione')"
+              data-cai-track
+              [attr.data-cai-section]="selectedExcursion.organizer"
+              data-cai-link-type="escursione"
             >Dettagli</a>
           </article>
         </section>

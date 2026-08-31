@@ -68,7 +68,9 @@ import { AnalyticsService } from './analytics.service';
             [href]="excursion.link"
             target="_blank"
             rel="noopener noreferrer"
-            (click)="trackDetailsClick($event)"
+            data-cai-track
+            [attr.data-cai-section]="excursion.organizer"
+            data-cai-link-type="escursione"
             hlmBtn
             variant="link"
             size="sm"
@@ -177,10 +179,6 @@ export class ExcursionCardComponent {
   @Output() selectExcursion = new EventEmitter<Excursion>();
   private analytics = inject(AnalyticsService);
 
-  trackDetailsClick(event: Event): void {
-    event.stopPropagation();
-    this.analytics.trackCaiLink(this.excursion.link, this.excursion.organizer, 'escursione');
-  }
 
   get tone() {
     return primaryDifficulty(this.excursion.category);

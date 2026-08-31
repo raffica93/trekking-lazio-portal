@@ -153,7 +153,9 @@ import { AnalyticsService } from './analytics.service';
                         [href]="sezione.websiteUrl"
                         target="_blank"
                         rel="noopener noreferrer"
-                        (click)="trackSectionLink(sezione, 'sito')"
+                        data-cai-track
+                        [attr.data-cai-section]="sezione.name"
+                        data-cai-link-type="sito"
                       >{{ hostOf(sezione.websiteUrl) }}</a>
                     </td>
                     <td>{{ sezione.hasAgenda ? agendaYes : agendaNo }}</td>
@@ -163,7 +165,9 @@ import { AnalyticsService } from './analytics.service';
                           [href]="sezione.agendaUrl"
                           target="_blank"
                           rel="noopener noreferrer"
-                          (click)="trackSectionLink(sezione, 'agenda')"
+                          data-cai-track
+                          [attr.data-cai-section]="sezione.name"
+                          data-cai-link-type="agenda"
                         >{{ sezione.agendaLabel }}</a>
                       } @else {
                         —

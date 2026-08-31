@@ -10,6 +10,12 @@ declare global {
 @Injectable({ providedIn: 'root' })
 export class AnalyticsService {
   private enabled = false;
+  private readonly onDocumentClick = (event: Event): void => {
+    const target = event.target;
+    const anchor = target instanceof Element ? target.closest<HTMLAnchorElement>('a[data-cai-track]') : null;
+    if (!anchor) return;
+    this.trackCaiLink(anchor.href, anchor.dataset['caiSection'] || 'Sezione CAI', anchor.dataset['caiLinkType'] as 'sito' | 'agenda' | 'escursione' || 'sito');
+  };
 
   enable(): void {
     if (this.enabled || typeof document === 'undefined') return;
@@ -22,6 +28,7 @@ export class AnalyticsService {
     window.gtag = (...args: unknown[]) => window.dataLayer?.push(args);
     window.gtag('js', new Date());
     window.gtag('config', 'G-2ZZKHQPCYC');
+    document.addEventListener('click', this.onDocumentClick, true);
   }
 
   trackCaiLink(url: string, section: string, linkType: 'sito' | 'agenda' | 'escursione'): void {
