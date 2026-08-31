@@ -33,11 +33,7 @@ export class AnalyticsService {
       page_path: window.location.pathname
     };
 
-    if (window.gtag) {
-      window.gtag('event', 'click_sito_cai', params);
-      return;
-    }
-
-    window.dataLayer?.push(['event', 'click_sito_cai', params]);
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(['event', 'click_sito_cai', params]);
   }
 }
