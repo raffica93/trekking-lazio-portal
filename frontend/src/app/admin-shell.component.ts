@@ -10,7 +10,7 @@ import { AdminAuthService } from './admin-auth.service';
     <section class="admin-shell">
       <header class="admin-header">
         <a routerLink="/admin" class="brand" aria-label="Torna all'archivio luoghi">
-          <img src="logo.png" width="40" height="40" alt="" class="brand-mark">
+          <img src="logo.svg" width="40" height="40" alt="" class="brand-mark">
           <span>
             <strong>Trekking CAI</strong>
             <small>Base cartografica</small>

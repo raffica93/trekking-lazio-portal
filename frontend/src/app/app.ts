@@ -39,7 +39,7 @@ registerLocaleData(localeIt);
             aria-label="Trekking CAI, torna alla mappa"
           >
             <img
-              src="logo.png"
+              src="logo.svg"
               width="40"
               height="40"
               alt=""
@@ -68,11 +68,12 @@ registerLocaleData(localeIt);
       ></app-filter-bar>
 
       <!-- Main Content -->
-      <main *ngIf="!onContentPage" class="relative z-0 flex min-h-0 flex-1 flex-col overflow-hidden md:flex-row">
+      <main *ngIf="!onContentPage" class="portal-main relative z-0 flex min-h-0 flex-1 overflow-hidden md:flex-row">
         <h1 class="sr-only">Escursioni CAI nel Lazio</h1>
         <!-- Sidebar / List -->
         <aside
-          class="flex h-[42%] w-full shrink-0 flex-col border-r border-stone-200 bg-stone-50 md:h-full md:w-[24rem] lg:w-[27rem]"
+          class="calendar-pane flex h-full w-full shrink-0 flex-col border-r border-stone-200 bg-stone-50 md:w-[24rem] lg:w-[27rem]"
+          [class.mobile-pane-active]="mobileView === 'calendar'"
         >
           <div class="flex items-center justify-end border-b border-stone-200 bg-white px-4 py-2">
             <span class="rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-bold tabular-nums text-emerald-900">{{ excursions.length }}</span>
@@ -104,7 +105,10 @@ registerLocaleData(localeIt);
         </aside>
 
         <!-- Map -->
-        <section class="relative flex min-h-0 min-w-0 flex-1 overflow-hidden">
+        <section
+          class="map-pane relative min-h-0 min-w-0 flex-1 overflow-hidden md:flex"
+          [class.mobile-pane-active]="mobileView === 'map'"
+        >
           @defer (on viewport; prefetch on idle) {
             <app-map
               [excursions]="excursions"
@@ -169,6 +173,26 @@ registerLocaleData(localeIt);
           </article>
         </section>
       </main>
+      <nav *ngIf="!onContentPage" class="mobile-view-tabs" aria-label="Scegli visualizzazione">
+        <button
+          type="button"
+          [class.is-active]="mobileView === 'calendar'"
+          [attr.aria-pressed]="mobileView === 'calendar'"
+          (click)="setMobileView('calendar')"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v3M18 3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/><path d="M8 13h3v3H8z"/></svg>
+          <span>Calendario</span>
+        </button>
+        <button
+          type="button"
+          [class.is-active]="mobileView === 'map'"
+          [attr.aria-pressed]="mobileView === 'map'"
+          (click)="setMobileView('map')"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18-5 2V6l5-2 6 2 5-2v14l-5 2-6-2Z"/><path d="M9 4v14M15 6v14"/></svg>
+          <span>Mappa</span>
+        </button>
+      </nav>
       <footer class="site-footer" aria-label="Informazioni del sito">
         <span>© {{ currentYear }} Trekking CAI</span>
         <span class="footer-note">Escursioni pubblicate dalle sezioni CAI del Lazio</span>
@@ -215,6 +239,80 @@ registerLocaleData(localeIt);
       color: #3f6212;
       font-size: 0.875rem;
       font-weight: 700;
+    }
+
+    .mobile-view-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.3rem;
+      flex-shrink: 0;
+      padding: 0.4rem 0.6rem calc(0.4rem + env(safe-area-inset-bottom));
+      border-top: 1px solid rgb(6 78 59 / 0.16);
+      background: rgb(255 255 255 / 0.96);
+      box-shadow: 0 -8px 24px rgb(18 38 28 / 0.08);
+      backdrop-filter: blur(12px);
+    }
+
+    .mobile-view-tabs button {
+      display: flex;
+      min-height: 2.8rem;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border: 0;
+      border-radius: 0.7rem;
+      background: transparent;
+      color: #64748b;
+      font: inherit;
+      font-size: 0.76rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .mobile-view-tabs button.is-active {
+      background: #064e3b;
+      color: #ecfccb;
+      box-shadow: 0 4px 12px rgb(6 78 59 / 0.18);
+    }
+
+    .mobile-view-tabs button:focus-visible {
+      outline: 2px solid #65a30d;
+      outline-offset: 2px;
+    }
+
+    .mobile-view-tabs svg {
+      width: 1.15rem;
+      height: 1.15rem;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.8;
+    }
+
+    @media (max-width: 767px) {
+      .calendar-pane,
+      .map-pane {
+        display: none;
+      }
+
+      .calendar-pane.mobile-pane-active {
+        display: flex;
+      }
+
+      .map-pane.mobile-pane-active {
+        display: flex;
+      }
+
+      .detail-sheet {
+        bottom: 0.55rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .mobile-view-tabs {
+        display: none;
+      }
     }
 
     .site-footer {
@@ -393,6 +491,7 @@ export class App implements OnInit {
   filters: FilterState = landingFilters();
   selectedId: string | null = null;
   detailOpen = false;
+  mobileView: 'calendar' | 'map' = 'calendar';
   onContentPage = false;
   readonly currentYear = new Date().getFullYear();
 
@@ -448,6 +547,11 @@ export class App implements OnInit {
     this.detailOpen = true;
     this.changeDetector.detectChanges();
     this.scrollSelectedIntoView();
+  }
+
+  setMobileView(view: 'calendar' | 'map') {
+    this.mobileView = view;
+    this.changeDetector.markForCheck();
   }
 
   clearSelection() {

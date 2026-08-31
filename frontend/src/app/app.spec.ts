@@ -118,7 +118,7 @@ describe('App', () => {
     expect(compiled.querySelector('.difficulty-chip')?.textContent?.trim()).toBe('E');
     expect(compiled.textContent).toContain('Anello boschivo sui Colli Albani.');
     expect(compiled.textContent).toContain('8 km');
-    expect(compiled.querySelector('header img')?.getAttribute('src')).toBe('logo.png');
+    expect(compiled.querySelector('header img')?.getAttribute('src')).toBe('logo.svg');
     expect(Array.from(compiled.querySelectorAll('button')).some(button => button.textContent?.trim() === 'Mappa')).toBe(false);
     expect(compiled.querySelector('aside')).toBeTruthy();
     expect(compiled.querySelector('.map-placeholder')).toBeTruthy();

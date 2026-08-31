@@ -12,7 +12,7 @@ import { AdminAuthService } from './admin-auth.service';
     <main class="login-page">
       <section class="login-card" aria-labelledby="login-title">
         <div class="contour" aria-hidden="true">41° 54′ N · 12° 30′ E</div>
-        <img src="logo.png" width="48" height="48" alt="" class="brand-mark">
+        <img src="logo.svg" width="48" height="48" alt="" class="brand-mark">
         <p class="eyebrow">Trekking CAI · amministrazione</p>
         <h1 id="login-title">Aggiorna la mappa.</h1>
         <p class="intro">Accedi per pubblicare luoghi, correggere coordinate e mantenere il portale aggiornato.</p>
