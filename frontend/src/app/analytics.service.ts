@@ -19,7 +19,9 @@ export class AnalyticsService {
     script.async = true;
     script.src = 'https://www.googletagmanager.com/gtag/js?id=G-2ZZKHQPCYC';
     document.head.appendChild(script);
-    window.gtag = (...args: unknown[]) => window.dataLayer?.push(args);
+    window.gtag = function (..._args: unknown[]): void {
+      window.dataLayer?.push(arguments);
+    };
     window.gtag('js', new Date());
     window.gtag('config', 'G-2ZZKHQPCYC');
   }

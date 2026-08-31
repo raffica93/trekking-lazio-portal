@@ -21,7 +21,7 @@ describe('AnalyticsService', () => {
 
     service.trackCaiLink('https://www.cairoma.it/', 'CAI Roma', 'sito');
 
-    expect(window.dataLayer?.at(-1)).toEqual([
+    expect(Array.from(window.dataLayer?.at(-1) as IArguments)).toEqual([
       'event',
       'click_sito_cai',
       {
