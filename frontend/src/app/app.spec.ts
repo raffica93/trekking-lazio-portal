@@ -97,13 +97,14 @@ describe('App', () => {
     const monthGroup = compiled.querySelector('[aria-label="Filtra per mese"]');
     const whenBand = compiled.querySelector('[aria-label="Quando"]');
     const trailBand = compiled.querySelector('[aria-label="Percorso"]');
+    const megaFilters = compiled.querySelector('#filter-mega');
     expect(monthGroup).toBeTruthy();
     expect(whenBand).toBeTruthy();
-    expect(trailBand).toBeTruthy();
+    expect(trailBand).toBeNull();
     expect(whenBand?.contains(monthGroup)).toBe(true);
-    expect(trailBand?.textContent).toContain('Durata');
-    expect(trailBand?.textContent).toContain('Distanza');
-    expect(compiled.querySelector('#filter-mega')?.contains(monthGroup)).toBe(false);
+    expect(megaFilters?.textContent).toContain('Durata');
+    expect(megaFilters?.textContent).toContain('Distanza');
+    expect(megaFilters?.contains(monthGroup)).toBe(false);
     expect(filters?.firstElementChild).toBe(whenBand);
     const landingMonth = nextYearMonth();
     const landingChip = Array.from(monthGroup?.querySelectorAll('button') ?? [])
@@ -119,7 +120,19 @@ describe('App', () => {
     expect(compiled.textContent).toContain('Anello boschivo sui Colli Albani.');
     expect(compiled.textContent).toContain('8 km');
     expect(compiled.querySelector('header img')?.getAttribute('src')).toBe('logo.svg');
-    expect(Array.from(compiled.querySelectorAll('button')).some(button => button.textContent?.trim() === 'Mappa')).toBe(true);
+    const viewTabs = compiled.querySelector('[aria-label="Scegli visualizzazione"]') as HTMLElement;
+    const calendarTab = Array.from(viewTabs.querySelectorAll('button'))
+      .find(button => button.textContent?.trim() === 'Calendario') as HTMLButtonElement;
+    const mapTab = Array.from(viewTabs.querySelectorAll('button'))
+      .find(button => button.textContent?.trim() === 'Mappa') as HTMLButtonElement;
+    expect(viewTabs).toBeTruthy();
+    expect(calendarTab.getAttribute('aria-pressed')).toBe('true');
+    expect(mapTab.getAttribute('aria-pressed')).toBe('false');
+    mapTab.click();
+    fixture.detectChanges();
+    expect(app.mobileView).toBe('map');
+    expect(mapTab.getAttribute('aria-pressed')).toBe('true');
+    expect(compiled.querySelector('.map-pane')?.classList.contains('mobile-pane-active')).toBe(true);
     expect(compiled.querySelector('aside')).toBeTruthy();
     expect(compiled.querySelector('.map-placeholder')).toBeTruthy();
 
@@ -326,7 +339,7 @@ describe('App', () => {
       fixture.detectChanges();
     };
     const clickReset = () => {
-      const button = Array.from(compiled.querySelectorAll('button')).find(item => item.textContent?.trim() === 'Azzera') as HTMLButtonElement;
+      const button = Array.from(compiled.querySelectorAll('button')).find(item => item.textContent?.includes('Azzera')) as HTMLButtonElement;
       button.click();
       fixture.detectChanges();
     };
@@ -362,6 +375,7 @@ describe('App', () => {
     expect(Array.from(compiled.querySelectorAll('[aria-label="Filtra per mese"] button'))
       .find(button => button.textContent?.trim() === 'Tutti')
       ?.classList.contains('filter-chip-active')).toBe(true);
+    openMega();
     clickInGroup('Filtra per distanza', '≤10 km');
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['day']);
 
@@ -376,15 +390,11 @@ describe('App', () => {
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['day']);
 
     clickReset();
-    const section = compiled.querySelector('[aria-label="Filtra per sezione"]') as HTMLButtonElement;
+    openMega();
+    const section = compiled.querySelector('[aria-label="Filtra per sezione negli altri filtri"]') as HTMLSelectElement;
     expect(section).toBeTruthy();
-    expect(compiled.querySelector('select[aria-label="Filtra per sezione"]')).toBeNull();
-    section.click();
-    fixture.detectChanges();
-    const option = Array.from(compiled.querySelectorAll('[role="option"]'))
-      .find((item) => item.textContent?.trim() === 'CAI Tivoli') as HTMLButtonElement;
-    expect(option.querySelector('.section-dot')).toBeTruthy();
-    option.click();
+    section.value = 'CAI Tivoli';
+    section.dispatchEvent(new Event('change'));
     fixture.detectChanges();
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['week']);
     expect(compiled.querySelector('app-excursion-card .section-tag')?.textContent).toContain('CAI Tivoli');

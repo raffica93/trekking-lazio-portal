@@ -61,6 +61,67 @@ body {
   box-shadow: 0 0 0 1.5px rgb(255 255 255 / 0.9);
 }
 
+@media (max-width: 767px) {
+  app-filter-bar .filter-band {
+    gap: 0.45rem !important;
+    padding: 0.45rem 0.65rem 0.55rem !important;
+  }
+
+  app-filter-bar .filter-band-title,
+  app-filter-bar .filter-group-period > .filter-label,
+  app-filter-bar .filter-date-field,
+  app-filter-bar .filter-tags {
+    display: none !important;
+  }
+
+  app-filter-bar .filter-band-body {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    gap: 0.45rem 0.55rem !important;
+  }
+
+  app-filter-bar .filter-group-months {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+  }
+
+  app-filter-bar .filter-group-months .filter-label {
+    align-self: center !important;
+  }
+
+  app-filter-bar .filter-group-period {
+    min-width: 0 !important;
+  }
+
+  app-filter-bar .filter-group-period .filter-chips {
+    flex-wrap: nowrap !important;
+  }
+
+  app-filter-bar .filter-mega {
+    max-height: calc(100dvh - 10.5rem) !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom)) !important;
+  }
+
+  app-filter-bar .route-extra-filter,
+  app-filter-bar .mobile-date-extra {
+    display: flex !important;
+    padding-bottom: 0.8rem !important;
+    border-bottom: 1px solid rgb(214 211 209) !important;
+  }
+
+  app-filter-bar .filter-native-select {
+    width: 100% !important;
+  }
+
+  app-filter-bar .filter-native-select select {
+    min-width: 0 !important;
+    max-width: none !important;
+    width: 100% !important;
+  }
+}
+
 
 :root {
   color-scheme: light;

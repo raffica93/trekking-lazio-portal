@@ -277,8 +277,38 @@ const DAY_LABELS: Record<string, string> = {
   'gt10': '10+ giorni'
 };
 
+const DURATION_LABELS: Record<string, string> = {
+  le4: 'Durata ≤4h',
+  '4-6': 'Durata 4–6h',
+  '6-8': 'Durata 6–8h',
+  gt8: 'Durata >8h'
+};
+
+const DISTANCE_LABELS: Record<string, string> = {
+  le10: 'Distanza ≤10 km',
+  '10-15': 'Distanza 10–15 km',
+  '15-20': 'Distanza 15–20 km',
+  gt20: 'Distanza >20 km'
+};
+
 export function extraFilterTags(filters: FilterState): FilterTag[] {
   const tags: FilterTag[] = [];
+  if (filters.duration !== 'all') {
+    tags.push({ id: 'duration', label: DURATION_LABELS[filters.duration], patch: { duration: 'all' } });
+  }
+  if (filters.distance !== 'all') {
+    tags.push({ id: 'distance', label: DISTANCE_LABELS[filters.distance], patch: { distance: 'all' } });
+  }
+  if (filters.organizer !== 'all') {
+    tags.push({ id: 'organizer', label: filters.organizer, patch: { organizer: 'all' } });
+  }
+  if ((filters.dateFrom || filters.dateTo) && !isNextWeekSelected(filters)) {
+    tags.push({
+      id: 'period',
+      label: `${filters.dateFrom || '…'} – ${filters.dateTo || '…'}`,
+      patch: { dateFrom: '', dateTo: '' }
+    });
+  }
   if (filters.category !== 'all') {
     tags.push({ id: 'category', label: filters.category, patch: { category: 'all' } });
   }

@@ -1,28 +1,21 @@
 import { Routes } from '@angular/router';
 import { adminGuard } from './admin.route.guard';
-import { AdminLoginComponent } from './admin-login.component';
-import { AdminPlaceEditorComponent } from './admin-place-editor.component';
-import { AdminPlaceListComponent } from './admin-place-list.component';
-import { AdminSediComponent } from './admin-sedi.component';
-import { AdminShellComponent } from './admin-shell.component';
-import { InfoPageComponent } from './info-page.component';
-import { LegalPageComponent } from './legal-page.component';
 
 export const routes: Routes = [
-  { path: 'info', component: InfoPageComponent },
-  { path: 'servizi', component: LegalPageComponent },
-  { path: 'termini', component: LegalPageComponent },
-  { path: 'privacy', component: LegalPageComponent },
-  { path: 'admin/login', component: AdminLoginComponent },
+  { path: 'info', loadComponent: () => import('./info-page.component').then((module) => module.InfoPageComponent) },
+  { path: 'servizi', loadComponent: () => import('./legal-page.component').then((module) => module.LegalPageComponent) },
+  { path: 'termini', loadComponent: () => import('./legal-page.component').then((module) => module.LegalPageComponent) },
+  { path: 'privacy', loadComponent: () => import('./legal-page.component').then((module) => module.LegalPageComponent) },
+  { path: 'admin/login', loadComponent: () => import('./admin-login.component').then((module) => module.AdminLoginComponent) },
   {
     path: 'admin',
-    component: AdminShellComponent,
+    loadComponent: () => import('./admin-shell.component').then((module) => module.AdminShellComponent),
     canActivate: [adminGuard],
     children: [
-      { path: '', component: AdminPlaceListComponent },
-      { path: 'sedi', component: AdminSediComponent },
-      { path: 'places/new', component: AdminPlaceEditorComponent },
-      { path: 'places/:id', component: AdminPlaceEditorComponent }
+      { path: '', loadComponent: () => import('./admin-place-list.component').then((module) => module.AdminPlaceListComponent) },
+      { path: 'sedi', loadComponent: () => import('./admin-sedi.component').then((module) => module.AdminSediComponent) },
+      { path: 'places/new', loadComponent: () => import('./admin-place-editor.component').then((module) => module.AdminPlaceEditorComponent) },
+      { path: 'places/:id', loadComponent: () => import('./admin-place-editor.component').then((module) => module.AdminPlaceEditorComponent) }
     ]
   }
 ];

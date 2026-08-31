@@ -1,10 +1,11 @@
-import { inject } from '@angular/core';
+import { EnvironmentInjector, inject } from '@angular/core';
 import { type CanActivateFn, Router } from '@angular/router';
-import { AdminAuthService } from './admin-auth.service';
 
 export const adminGuard: CanActivateFn = async (_route, state) => {
-  const auth = inject(AdminAuthService);
+  const environmentInjector = inject(EnvironmentInjector);
   const router = inject(Router);
+  const { AdminAuthService } = await import('./admin-auth.service');
+  const auth = environmentInjector.get(AdminAuthService);
 
   if (await auth.currentAdmin()) return true;
 
