@@ -16,6 +16,7 @@ import {
 } from './cai-info.data';
 import { monthLabel, nextYearMonth } from './excursion-filters';
 import { formatDateRange } from './excursion-dates';
+import { AnalyticsService } from './analytics.service';
 
 function pad(value: number): string {
   return String(value).padStart(2, '0');
@@ -182,7 +183,12 @@ describe('App', () => {
     expect(detail).toBeTruthy();
     expect(detail.textContent).toContain('Sentiero facile');
     expect(detail.textContent).toContain('Anello boschivo sui Colli Albani.');
-    expect(detail.querySelector('.detail-cta')?.getAttribute('href')).toBe('https://example.com/e');
+    const detailCta = detail.querySelector('.detail-cta') as HTMLAnchorElement;
+    expect(detailCta?.getAttribute('href')).toBe('https://example.com/e');
+    const trackCaiLink = vi.spyOn(TestBed.inject(AnalyticsService), 'trackCaiLink');
+    detailCta.addEventListener('click', event => event.preventDefault(), { once: true });
+    detailCta.click();
+    expect(trackCaiLink).toHaveBeenCalledWith('https://example.com/e', 'CAI Roma', 'escursione');
     const header = detail.querySelector('.detail-header') as HTMLElement;
     const close = header?.querySelector('.detail-close') as HTMLElement;
     const chip = header?.querySelector('.difficulty-chip') as HTMLElement;
