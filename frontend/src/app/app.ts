@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, ViewChild, inject, LOCALE_ID } from '@angular/core';
-import { CommonModule, registerLocaleData } from '@angular/common';
+import { CommonModule, DOCUMENT, registerLocaleData } from '@angular/common';
 import localeIt from '@angular/common/locales/it';
 import { ExcursionService } from './excursion.service';
 import { Excursion } from './excursion.model';
@@ -69,6 +69,7 @@ registerLocaleData(localeIt);
 
       <!-- Main Content -->
       <main *ngIf="!onContentPage" class="relative z-0 flex min-h-0 flex-1 flex-col overflow-hidden md:flex-row">
+        <h1 class="sr-only">Escursioni CAI nel Lazio</h1>
         <!-- Sidebar / List -->
         <aside
           class="flex h-[42%] w-full shrink-0 flex-col border-r border-stone-200 bg-stone-50 md:h-full md:w-[24rem] lg:w-[27rem]"
@@ -104,12 +105,18 @@ registerLocaleData(localeIt);
 
         <!-- Map -->
         <section class="relative flex min-h-0 min-w-0 flex-1 overflow-hidden">
-          <app-map
-            [excursions]="excursions"
-            [selectedId]="selectedId"
-            class="h-full w-full"
-            (selectExcursion)="onMapSelect($event)"
-          ></app-map>
+          @defer (on viewport; prefetch on idle) {
+            <app-map
+              [excursions]="excursions"
+              [selectedId]="selectedId"
+              class="h-full w-full"
+              (selectExcursion)="onMapSelect($event)"
+            ></app-map>
+          } @placeholder {
+            <div class="map-placeholder" aria-label="Caricamento della mappa">
+              <span>Caricamento mappa…</span>
+            </div>
+          }
 
           <article
             *ngIf="selectedExcursion && detailOpen"
@@ -195,6 +202,19 @@ registerLocaleData(localeIt);
       border-radius: 0.75rem;
       background: rgb(255 255 255 / 0.97);
       box-shadow: 0 16px 40px rgb(18 38 28 / 0.18);
+    }
+
+    .map-placeholder {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      place-items: center;
+      background:
+        radial-gradient(circle at 20% 20%, rgb(236 253 208 / 0.8), transparent 35%),
+        #e7efe6;
+      color: #3f6212;
+      font-size: 0.875rem;
+      font-weight: 700;
     }
 
     .site-footer {
@@ -364,6 +384,7 @@ export class App implements OnInit {
   private router = inject(Router);
   private title = inject(Title);
   private meta = inject(Meta);
+  private document = inject(DOCUMENT);
   @ViewChild('excursionList') private excursionList?: ElementRef<HTMLElement>;
   
   allExcursions: Excursion[] = [];
@@ -499,18 +520,23 @@ export class App implements OnInit {
     const path = url.split('?')[0].split('#')[0];
     this.onContentPage = /(^|\/)(info|servizi|termini|privacy)\/?$/.test(path);
     const seo = /servizi\/?$/.test(path)
-      ? ['Servizi | Trekking CAI', 'Come funziona il portale Trekking CAI e come usare le informazioni sulle escursioni.']
+      ? ['Servizi | Trekking CAI', 'Come funziona il portale Trekking CAI e come usare le informazioni sulle escursioni.', '/servizi']
       : /termini\/?$/.test(path)
-        ? ['Termini e condizioni | Trekking CAI', 'Termini e condizioni d’uso del portale Trekking CAI.']
+        ? ['Termini e condizioni | Trekking CAI', 'Termini e condizioni d’uso del portale Trekking CAI.', '/termini']
         : /privacy\/?$/.test(path)
-          ? ['Privacy | Trekking CAI', 'Informazioni sulla privacy di Trekking CAI.']
+          ? ['Privacy | Trekking CAI', 'Informazioni sulla privacy di Trekking CAI.', '/privacy']
           : /info\/?$/.test(path)
-            ? ['Info CAI Lazio | Trekking CAI', 'Informazioni sul CAI e sulle sezioni del Lazio.']
-            : ['Trekking CAI | Escursioni CAI nel Lazio', 'Scopri le prossime escursioni CAI nel Lazio: calendario aggiornato, mappa interattiva e informazioni dalle sezioni del territorio.'];
+            ? ['Info CAI Lazio | Trekking CAI', 'Informazioni sul CAI e sulle sezioni del Lazio.', '/info']
+            : ['Trekking CAI | Escursioni CAI nel Lazio', 'Scopri le prossime escursioni CAI nel Lazio: calendario aggiornato, mappa interattiva e informazioni dalle sezioni del territorio.', '/'];
+    const canonicalUrl = `https://trekking-cai.it${seo[2]}`;
     this.title.setTitle(seo[0]);
     this.meta.updateTag({ name: 'description', content: seo[1] });
     this.meta.updateTag({ property: 'og:title', content: seo[0] });
     this.meta.updateTag({ property: 'og:description', content: seo[1] });
+    this.meta.updateTag({ property: 'og:url', content: canonicalUrl });
+    this.meta.updateTag({ name: 'twitter:title', content: seo[0] });
+    this.meta.updateTag({ name: 'twitter:description', content: seo[1] });
+    this.document.querySelector('link[rel="canonical"]')?.setAttribute('href', canonicalUrl);
   }
 
   private applyFilters() {
