@@ -48,6 +48,26 @@ Nei progetti Supabase recenti, verifica inoltre nelle impostazioni **Data API** 
 
 Nel file `frontend/public/supabase-config.js` inserisci l'URL del progetto e la sua **publishable key**. La chiave è sicura da distribuire nel browser: i permessi sono controllati dalle policy RLS. Non inserire mai la service role key nel frontend.
 
+### Tracking dei link CAI
+
+Dopo il consenso Analytics, i link CAI passano attraverso la Edge Function
+`track-cai-click`. La funzione invia l'evento fisso `click_sito_cai` a GA4 con
+Measurement Protocol, attende la risposta di raccolta e poi reindirizza al sito
+CAI. Il segreto GA4 resta esclusivamente nell'ambiente Supabase.
+
+```bash
+npx supabase secrets set GA4_API_SECRET=<secret-measurement-protocol> --project-ref <project-ref>
+npx supabase functions deploy track-cai-click --project-ref <project-ref> --no-verify-jwt --use-api
+```
+
+La funzione è pubblica perché i visitatori non sono autenticati, ma accetta un
+solo evento e permette redirect esclusivamente verso la allow-list dei domini
+CAI. Per verificare soltanto la configurazione, senza generare un evento:
+
+```text
+https://<project-ref>.supabase.co/functions/v1/track-cai-click?health=1
+```
+
 Per trasferire le escursioni esistenti, copia `backend/.env.example` in `backend/.env`, imposta le variabili nel tuo terminale e poi esegui:
 
 ```bash
