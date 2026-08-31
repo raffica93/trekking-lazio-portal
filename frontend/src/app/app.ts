@@ -549,7 +549,9 @@ export class App implements OnInit {
   readonly currentYear = new Date().getFullYear();
 
   ngOnInit() {
-    this.showCookieBanner = this.readCookieConsent() === null;
+    const cookieConsent = this.readCookieConsent();
+    this.showCookieBanner = cookieConsent === null;
+    if (cookieConsent === true) this.analytics.enable();
     this.syncRoute(this.router.url);
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
