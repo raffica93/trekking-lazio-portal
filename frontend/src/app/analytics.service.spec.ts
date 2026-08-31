@@ -15,11 +15,12 @@ describe('AnalyticsService', () => {
     expect(window.dataLayer).toBeUndefined();
   });
 
-  it('queues click_sito_cai through gtag after analytics is enabled', () => {
-    const service = new AnalyticsService();
-    service.enable();
+  it('queues click_sito_cai through gtag even from another service instance', () => {
+    const initializer = new AnalyticsService();
+    const lazyRouteService = new AnalyticsService();
+    initializer.enable();
 
-    service.trackCaiLink('https://www.cairoma.it/', 'CAI Roma', 'sito');
+    lazyRouteService.trackCaiLink('https://www.cairoma.it/', 'CAI Roma', 'sito');
 
     expect(Array.from(window.dataLayer?.at(-1) as IArguments)).toEqual([
       'event',
@@ -28,7 +29,8 @@ describe('AnalyticsService', () => {
         section: 'CAI Roma',
         link_url: 'https://www.cairoma.it/',
         link_type: 'sito',
-        page_path: window.location.pathname
+        page_path: window.location.pathname,
+        send_to: 'G-2ZZKHQPCYC'
       }
     ]);
   });
