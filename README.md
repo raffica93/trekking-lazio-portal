@@ -4,6 +4,9 @@ Portale Angular ed Express per consultare sulla mappa le escursioni pubblicate d
 
 ## Avvio locale
 
+Prerequisiti: Node.js 22+ per i servizi locali e Docker Desktop per l'avvio
+integrato.
+
 Con Docker:
 
 ```bash
@@ -17,6 +20,21 @@ legge i luoghi `published` da `places`. La cache statica `frontend/public/excurs
 resta aggiornata dallo scrape come fallback.
 
 Per lo sviluppo senza Docker, avviare `npm start` prima in `backend` e poi in `frontend`.
+
+I test si eseguono separatamente nei due servizi:
+
+```bash
+cd backend && npm ci && npm test
+cd ../frontend && npm ci && npm test -- --watch=false
+```
+
+Il frontend usa Angular e Leaflet; il backend espone l'API Express e mantiene
+la cache JSON delle escursioni. La struttura principale è:
+
+- `frontend/`: applicazione web e asset pubblicati su GitHub Pages;
+- `backend/`: API, scraper, classificatore e import Supabase;
+- `supabase/`: migrazioni e Edge Function per il tracking dei click CAI;
+- `docs/`: documentazione delle fonti e della pipeline di scraping.
 
 ## Aggiornamento dati
 

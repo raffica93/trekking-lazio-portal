@@ -1,59 +1,36 @@
-# Frontend
+# Frontend Trekking CAI
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.2.
+Frontend Angular del portale [trekking-cai.it](https://trekking-cai.it). Mostra
+le escursioni delle sezioni CAI del Lazio su una mappa Leaflet e include il
+pannello amministratore collegato a Supabase.
 
-## Development server
+## Sviluppo locale
 
-To start a local development server, run:
+Dal repository principale, installa le dipendenze e avvia il server di sviluppo:
 
 ```bash
+cd frontend
+npm ci
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Apri `http://localhost:4200/`. Per usare l'API locale insieme al frontend,
+avvia anche il backend con `cd ../backend && npm start`; la configurazione proxy
+è in `proxy.conf.json`.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Build e test
 
 ```bash
-ng generate --help
+npm test -- --watch=false
+npm run build
 ```
 
-## Building
+La build di produzione viene scritta in `dist/frontend/browser/`. Il workflow
+GitHub Pages la pubblica con base `/` e conserva il dominio personalizzato
+definito in `public/CNAME`.
 
-To build the project run:
+## Configurazione
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Per collegare Supabase in locale, configura URL e publishable key in
+`public/supabase-config.js`. Non inserire mai la service role key nel frontend:
+le autorizzazioni sono applicate dalle policy RLS di Supabase.
