@@ -202,8 +202,21 @@ registerLocaleData(localeIt);
           <a routerLink="/servizi">Servizi</a>
           <a routerLink="/termini">Termini e condizioni</a>
           <a routerLink="/privacy">Privacy</a>
+          <button type="button" class="cookie-settings" (click)="openCookieSettings()">Cookie</button>
         </nav>
       </footer>
+      <aside *ngIf="showCookieBanner" class="cookie-banner" aria-labelledby="cookie-title" role="dialog">
+        <div class="cookie-copy">
+          <p class="cookie-label">La tua privacy</p>
+          <h2 id="cookie-title">Cookie essenziali e analisi opzionale</h2>
+          <p>Usiamo solo ciò che serve al funzionamento del portale. Con il tuo consenso possiamo usare Google Analytics per capire quali contenuti sono più utili. Puoi cambiare scelta in qualsiasi momento.</p>
+          <a routerLink="/privacy">Leggi la privacy</a>
+        </div>
+        <div class="cookie-actions">
+          <button type="button" class="cookie-button cookie-button-secondary" (click)="setCookieConsent(false)">Solo necessari</button>
+          <button type="button" class="cookie-button cookie-button-primary" (click)="setCookieConsent(true)">Accetta analisi</button>
+        </div>
+      </aside>
       <router-outlet class="hidden" />
     </div>
   `,
@@ -228,6 +241,42 @@ registerLocaleData(localeIt);
       border-radius: 0.75rem;
       background: rgb(255 255 255 / 0.97);
       box-shadow: 0 16px 40px rgb(18 38 28 / 0.18);
+    }
+
+    .cookie-banner {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      left: 1rem;
+      z-index: 2000;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1.25rem;
+      max-width: 54rem;
+      margin: 0 auto;
+      padding: 1rem 1.1rem;
+      border: 1px solid rgb(28 25 23 / .14);
+      border-radius: .8rem;
+      background: rgb(255 255 255 / .98);
+      box-shadow: 0 18px 45px rgb(18 38 28 / .2);
+    }
+
+    .cookie-copy { min-width: 0; }
+    .cookie-label { margin: 0 0 .25rem; color: #3f6212; font: 700 .68rem/1.2 'IBM Plex Mono', monospace; letter-spacing: .1em; text-transform: uppercase; }
+    .cookie-copy h2 { margin: 0 0 .35rem; font-size: 1rem; letter-spacing: -.02em; }
+    .cookie-copy > p:not(.cookie-label) { margin: 0; color: #57534e; font-size: .82rem; line-height: 1.45; }
+    .cookie-copy a { display: inline-block; margin-top: .35rem; color: #14532d; font-size: .8rem; font-weight: 800; }
+    .cookie-actions { display: flex; flex-shrink: 0; gap: .5rem; }
+    .cookie-button { border-radius: .45rem; padding: .65rem .8rem; font-size: .78rem; font-weight: 800; cursor: pointer; }
+    .cookie-button-secondary { border: 1px solid #d6d3d1; background: #fff; color: #14532d; }
+    .cookie-button-primary { border: 1px solid #14532d; background: #14532d; color: #fff; }
+    .cookie-button:focus-visible, .cookie-settings:focus-visible { outline: 3px solid #bef264; outline-offset: 2px; }
+    .cookie-settings { border: 0; padding: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+    @media (max-width: 640px) {
+      .cookie-banner { align-items: stretch; flex-direction: column; gap: .8rem; }
+      .cookie-actions { justify-content: stretch; }
+      .cookie-button { flex: 1; }
     }
 
     .map-placeholder {
@@ -496,9 +545,11 @@ export class App implements OnInit {
   detailOpen = false;
   mobileView: 'calendar' | 'map' = 'calendar';
   onContentPage = false;
+  showCookieBanner = false;
   readonly currentYear = new Date().getFullYear();
 
   ngOnInit() {
+    this.showCookieBanner = this.readCookieConsent() === null;
     this.syncRoute(this.router.url);
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
@@ -507,6 +558,25 @@ export class App implements OnInit {
         this.changeDetector.markForCheck();
       });
     this.fetchExcursions();
+  }
+
+  setCookieConsent(analyticsAllowed: boolean): void {
+    try { localStorage.setItem('trekking-cai-cookie-consent', analyticsAllowed ? 'accepted' : 'rejected'); } catch { /* storage non disponibile: la scelta resta valida per la sessione */ }
+    this.showCookieBanner = false;
+    if (analyticsAllowed) this.analytics.enable();
+    this.changeDetector.markForCheck();
+  }
+
+  openCookieSettings(): void {
+    this.showCookieBanner = true;
+    this.changeDetector.markForCheck();
+  }
+
+  private readCookieConsent(): boolean | null {
+    try {
+      const value = localStorage.getItem('trekking-cai-cookie-consent');
+      return value === 'accepted' ? true : value === 'rejected' ? false : null;
+    } catch { return null; }
   }
 
   fetchExcursions() {
