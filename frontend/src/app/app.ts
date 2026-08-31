@@ -13,6 +13,7 @@ import { sectionColor } from './section-color';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 import { filter } from 'rxjs';
+import { AnalyticsService } from './analytics.service';
 
 registerLocaleData(localeIt);
 
@@ -169,6 +170,7 @@ registerLocaleData(localeIt);
               [href]="selectedExcursion.link"
               target="_blank"
               rel="noopener noreferrer"
+              (click)="analytics.trackCaiLink(selectedExcursion.link, selectedExcursion.organizer, 'escursione')"
             >Dettagli</a>
           </article>
         </section>
@@ -483,6 +485,7 @@ export class App implements OnInit {
   private title = inject(Title);
   private meta = inject(Meta);
   private document = inject(DOCUMENT);
+  protected analytics = inject(AnalyticsService);
   @ViewChild('excursionList') private excursionList?: ElementRef<HTMLElement>;
   
   allExcursions: Excursion[] = [];

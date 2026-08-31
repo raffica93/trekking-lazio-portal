@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   AGENDA_NO_LABEL,
@@ -14,6 +14,7 @@ import {
   type SezioneLink
 } from './cai-info.data';
 import { sectionColor } from './section-color';
+import { AnalyticsService } from './analytics.service';
 
 @Component({
   selector: 'app-info-page',
@@ -148,12 +149,22 @@ import { sectionColor } from './section-color';
                       </span>
                     </th>
                     <td>
-                      <a [href]="sezione.websiteUrl" target="_blank" rel="noopener noreferrer">{{ hostOf(sezione.websiteUrl) }}</a>
+                      <a
+                        [href]="sezione.websiteUrl"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        (click)="trackSectionLink(sezione, 'sito')"
+                      >{{ hostOf(sezione.websiteUrl) }}</a>
                     </td>
                     <td>{{ sezione.hasAgenda ? agendaYes : agendaNo }}</td>
                     <td>
                       @if (sezione.agendaUrl) {
-                        <a [href]="sezione.agendaUrl" target="_blank" rel="noopener noreferrer">{{ sezione.agendaLabel }}</a>
+                        <a
+                          [href]="sezione.agendaUrl"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          (click)="trackSectionLink(sezione, 'agenda')"
+                        >{{ sezione.agendaLabel }}</a>
                       } @else {
                         —
                       }
@@ -368,6 +379,14 @@ import { sectionColor } from './section-color';
   `]
 })
 export class InfoPageComponent {
+  private analytics = inject(AnalyticsService);
+
+  trackSectionLink(sezione: SezioneLink, linkType: 'sito' | 'agenda'): void {
+    const url = linkType === 'sito' ? sezione.websiteUrl : sezione.agendaUrl;
+    if (url) {
+      this.analytics.trackCaiLink(url, sezione.name, linkType);
+    }
+  }
   readonly philosophy = CAI_PHILOSOPHY;
   readonly participation = CAI_PARTICIPATION;
   readonly participationPoints = CAI_PARTICIPATION_POINTS;

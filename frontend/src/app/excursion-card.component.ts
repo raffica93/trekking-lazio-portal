@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Excursion } from './excursion.model';
 import { durationLabel, formatDateRange } from './excursion-dates';
@@ -6,6 +6,7 @@ import { primaryDifficulty } from './difficulty';
 import { sectionColor } from './section-color';
 import { HlmCard, HlmCardHeader, HlmCardTitle, HlmCardDescription, HlmCardContent, HlmCardFooter } from '@spartan-ng/helm/card';
 import { HlmButton } from '@spartan-ng/helm/button';
+import { AnalyticsService } from './analytics.service';
 
 @Component({
   selector: 'app-excursion-card',
@@ -67,6 +68,7 @@ import { HlmButton } from '@spartan-ng/helm/button';
             [href]="excursion.link"
             target="_blank"
             rel="noopener noreferrer"
+            (click)="trackDetailsClick($event)"
             hlmBtn
             variant="link"
             size="sm"
@@ -173,6 +175,12 @@ export class ExcursionCardComponent {
   @Input() excursion!: Excursion;
   @Input() selected = false;
   @Output() selectExcursion = new EventEmitter<Excursion>();
+  private analytics = inject(AnalyticsService);
+
+  trackDetailsClick(event: Event): void {
+    event.stopPropagation();
+    this.analytics.trackCaiLink(this.excursion.link, this.excursion.organizer, 'escursione');
+  }
 
   get tone() {
     return primaryDifficulty(this.excursion.category);
