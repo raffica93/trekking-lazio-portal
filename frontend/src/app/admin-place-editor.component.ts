@@ -4,6 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { durationLabel, tripDays } from './excursion-dates';
 import { AdminPlacesService } from './admin-places.service';
+import { formatItalianDate, parseItalianDate } from './italian-date-input';
 import type { PlaceRow, PlaceStatus, PlaceWrite } from './place.model';
 
 @Component({
@@ -27,7 +28,9 @@ import type { PlaceRow, PlaceStatus, PlaceWrite } from './place.model';
           <label class="wide">Titolo<input formControlName="title" (input)="suggestSlug()" placeholder="es. Monte Terminillo · Cresta Sassetelli"></label>
           <label>Slug<input formControlName="slug" (input)="lockSlug()" placeholder="monte-terminillo-cresta"></label>
           <label>Stato<select formControlName="status"><option value="draft">Bozza</option><option value="published">Pubblicato</option></select></label>
-          <label>Data<input type="date" formControlName="date"></label>
+          <label>Data
+            <input type="text" inputmode="numeric" autocomplete="off" placeholder="gg/mm/aaaa" [value]="dateDisplay" (input)="setDate('date', $event)" aria-describedby="date-format-hint">
+          </label>
           <label>Categoria<input formControlName="category" placeholder="E, EE, EEA…"></label>
           <label>Organizzatore<input formControlName="organizer" placeholder="CAI Roma"></label>
           <label class="wide">Link di riferimento<input type="url" formControlName="external_url" placeholder="https://…"></label>
@@ -51,9 +54,10 @@ import type { PlaceRow, PlaceStatus, PlaceWrite } from './place.model';
         <legend>Dettagli utili</legend>
         <div class="grid two">
           <label>Data finale
-            <input type="date" formControlName="date_end" [attr.min]="form.controls.date.value || null">
+            <input type="text" inputmode="numeric" autocomplete="off" placeholder="gg/mm/aaaa" [value]="dateEndDisplay" (input)="setDate('date_end', $event)" aria-describedby="date-format-hint">
             <span class="hint">{{ staySummary }}</span>
           </label>
+          <span id="date-format-hint" class="date-format-hint">Formato: gg/mm/aaaa</span>
           <label>Distanza (km)<input type="number" min="0" step="0.1" formControlName="distance_km"></label>
           <label>Dislivello (m)<input type="number" min="0" step="1" formControlName="elevation_m"></label>
           <label>Durata (ore)<input type="number" min="0" step="0.25" formControlName="duration_hours"></label>
@@ -93,6 +97,7 @@ import type { PlaceRow, PlaceStatus, PlaceWrite } from './place.model';
     legend { padding: 0 .38rem; color: #2e6049; font: 800 .68rem/1 'IBM Plex Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
     .grid { display: grid; gap: .9rem; } .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     label { display: grid; gap: .4rem; min-width: 0; color: #466253; font-size: .74rem; font-weight: 800; } .wide { grid-column: 1 / -1; }
+    .date-format-hint { color: #5d7466; font-size: .68rem; font-weight: 600; grid-column: 1 / -1; }
     .hint { color: #5d7466; font-size: .72rem; font-weight: 600; }
     input, select, textarea { width: 100%; box-sizing: border-box; padding: .7rem .75rem; border: 1px solid #b7c9b8; border-radius: .22rem; background: white; color: #183229; font: 500 .88rem/1.3 Inter, sans-serif; }
     textarea { resize: vertical; } input:focus, select:focus, textarea:focus { outline: 3px solid rgb(166 202 109 / .55); outline-offset: 1px; }
@@ -120,6 +125,8 @@ export class AdminPlaceEditorComponent implements OnInit {
   saving = false;
   uploading = false;
   error = '';
+  dateDisplay = '';
+  dateEndDisplay = '';
   imageUrl: string | null = null;
   private id: string | null = null;
   private slugLocked = false;
@@ -160,6 +167,16 @@ export class AdminPlaceEditorComponent implements OnInit {
     const end = this.form.controls.date_end.value.trim() || start;
     if (end < start) return 'La data finale precede l’inizio.';
     return durationLabel(tripDays(start, end)) ?? '1 giorno';
+  }
+
+  setDate(control: 'date' | 'date_end', event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const iso = parseItalianDate(input.value);
+    this.form.controls[control].setValue(iso);
+    const display = iso ? formatItalianDate(iso) : input.value;
+    if (control === 'date') this.dateDisplay = display;
+    else this.dateEndDisplay = display;
+    input.setCustomValidity(input.value && !iso ? 'Inserisci una data nel formato gg/mm/aaaa.' : '');
   }
 
   async onFileChange(event: Event): Promise<void> {
@@ -240,6 +257,8 @@ export class AdminPlaceEditorComponent implements OnInit {
       coordinates_quality: place.coordinates_quality ?? '', summary: place.summary ?? '', activity_type: place.activity_type ?? '', terrain: place.terrain ?? '',
       difficulty_note: place.difficulty_note ?? '', cover_image_path: place.cover_image_path ?? ''
     });
+    this.dateDisplay = formatItalianDate(place.date);
+    this.dateEndDisplay = formatItalianDate(place.date_end ?? '');
     this.slugLocked = true;
     this.originalCoverPath = place.cover_image_path;
     this.imageUrl = this.places.imageUrl(place.cover_image_path);
