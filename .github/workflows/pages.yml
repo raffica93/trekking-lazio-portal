@@ -31,6 +31,14 @@ jobs:
       - run: npm test -- --watch=false
       # The custom domain is served from the root, not from the repository path.
       - run: npm run build -- --base-href "/"
+      # Keep the custom-domain marker in the Pages artifact. Without it, a
+      # deployment can fall back to the github.io hostname and HTTPS may be
+      # served with the wrong certificate for trekking-cai.it.
+      - name: Preserve custom domain
+        shell: bash
+        run: |
+          test "$(cat public/CNAME)" = "trekking-cai.it"
+          printf 'trekking-cai.it\n' > dist/frontend/browser/CNAME
       - uses: actions/upload-pages-artifact@v3
         with:
           path: frontend/dist/frontend/browser
