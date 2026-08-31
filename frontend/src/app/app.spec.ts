@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideRouter, Router } from '@angular/router';
+import { vi } from 'vitest';
 import { App } from './app';
 import { routes } from './app.routes';
 import {
@@ -28,13 +29,31 @@ function dateInMonth(monthOffset: number, day: number): string {
 
 describe('App', () => {
   beforeEach(async () => {
+    vi.stubGlobal('IntersectionObserver', class {
+      readonly root = null;
+      readonly rootMargin = '';
+      readonly thresholds: number[] = [];
+
+      constructor(private readonly callback: IntersectionObserverCallback) {}
+
+      observe(target: Element) {
+        this.callback([{ isIntersecting: true, target } as IntersectionObserverEntry], this as unknown as IntersectionObserver);
+      }
+
+      unobserve() {}
+      disconnect() {}
+      takeRecords(): IntersectionObserverEntry[] { return []; }
+    });
     await TestBed.configureTestingModule({
       imports: [App],
       providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter(routes)],
     }).compileComponents();
   });
 
-  afterEach(() => TestBed.inject(HttpTestingController).verify());
+  afterEach(() => {
+    TestBed.inject(HttpTestingController).verify();
+    vi.unstubAllGlobals();
+  });
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(App);
@@ -52,7 +71,7 @@ describe('App', () => {
     TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({ excursions: [] });
   });
 
-  it('should switch views, filter by difficulty and secure detail links', () => {
+  it('should switch views, filter by difficulty and secure detail links', async () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
     TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({
@@ -61,6 +80,9 @@ describe('App', () => {
         { id: '2', title: 'Ferrata', date: dateInMonth(1, 2), category: 'EEA', link: 'https://example.com/eea', organizer: 'CAI Roma', location: 'Lazio', lat: 42, lng: 13, cost: 'Gratis', time: '5 ore' }
       ]
     });
+    await fixture.whenStable();
+    await new Promise(resolve => setTimeout(resolve));
+    fixture.detectChanges();
 
     const app = fixture.componentInstance;
     const compiled = fixture.nativeElement as HTMLElement;
@@ -89,9 +111,8 @@ describe('App', () => {
     expect(landingChip?.classList.contains('filter-chip-active')).toBe(true);
     expect(app.filters.month).toBe(landingMonth);
     expect(compiled.textContent).not.toContain('Prossime escursioni');
-    expect(compiled.querySelector('app-map')?.querySelector('[aria-label="Filtri"]')).toBeNull();
-    expect(compiled.querySelector('[aria-label="Legenda difficoltà"]')).toBeTruthy();
-    expect(compiled.querySelector('[aria-label="Legenda difficoltà"]')?.textContent).toContain('Turistico');
+    expect(compiled.querySelector('app-map')).toBeNull();
+    expect(compiled.querySelector('.map-placeholder')?.getAttribute('aria-label')).toBe('Caricamento della mappa');
     fixture.detectChanges();
     expect(compiled.textContent).not.toContain('Località:');
     expect(compiled.querySelector('.difficulty-chip')?.textContent?.trim()).toBe('E');
@@ -100,7 +121,7 @@ describe('App', () => {
     expect(compiled.querySelector('header img')?.getAttribute('src')).toBe('logo.png');
     expect(Array.from(compiled.querySelectorAll('button')).some(button => button.textContent?.trim() === 'Mappa')).toBe(false);
     expect(compiled.querySelector('aside')).toBeTruthy();
-    expect(compiled.querySelector('app-map')).toBeTruthy();
+    expect(compiled.querySelector('.map-placeholder')).toBeTruthy();
 
     const more = Array.from(compiled.querySelectorAll('button')).find(button => button.textContent?.includes('Altri filtri')) as HTMLButtonElement;
     more.click();
