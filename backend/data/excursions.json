@@ -1,5 +1,5 @@
 {
-  "source": "https://www.cairoma.it/?page_id=582 https://www.caiviterbo.it/index.php/programma https://www.caitivoli.it/wp-content/uploads/2025/12/Programma_CAI_2026.pdf https://organizzazione.cai.it/sez-rieti/wp-content/uploads/sites/45/2026/01/CAI_RI_programma_attivita_2026_completo.pdf https://organizzazione.cai.it/sez-monterotondo/wp-content/uploads/sites/141/2026/01/Calendario-escursioni-2026-CAI-Monterotondo-estratto-PDF.pdf https://www.caifrosinone.it/ https://organizzazione.cai.it/sez-leonessa/wp-content/uploads/sites/26/2025/12/CAI-Pieghevole-2026.pdf http://www.caiesperia.it/images/doc/calendario_2026.pdf https://www.caicassino.it/index.php/eventi https://www.cailatina.com/pagu_eventi.php?statoevento=pianificato https://www.caisora.it/sito/wp-content/uploads/2026/02/2026.pdf https://www.caiamatrice.it/wp-content/uploads/2026/05/CAI-Programma2026.pdf https://www.caialatri.it/calendario-escursioni/ https://caicolleferro.it/?p=2522",
+  "source": "https://www.cairoma.it/?page_id=582 https://www.caiviterbo.it/index.php/programma https://www.caitivoli.it/wp-content/uploads/2025/12/Programma_CAI_2026.pdf https://organizzazione.cai.it/sez-rieti/wp-content/uploads/sites/45/2026/01/CAI_RI_programma_attivita_2026_completo.pdf https://organizzazione.cai.it/sez-monterotondo/wp-content/uploads/sites/141/2026/01/Calendario-escursioni-2026-CAI-Monterotondo-estratto-PDF.pdf https://www.caifrosinone.it/ https://organizzazione.cai.it/sez-leonessa/wp-content/uploads/sites/26/2025/12/CAI-Pieghevole-2026.pdf http://www.caiesperia.it/images/doc/calendario_2026.pdf https://www.caicassino.it/index.php/eventi https://www.cailatina.com/pagu_eventi.php?statoevento=pianificato https://www.caisora.it/sito/wp-content/uploads/2026/02/2026.pdf https://www.caiamatrice.it/wp-content/uploads/2026/05/CAI-Programma2026.pdf https://www.caialatri.it/calendario-escursioni/ https://caicolleferro.it/?p=2522 https://www.caiantrodoco.it/eventi/",
   "sources": [
     {
       "id": "roma",
@@ -123,6 +123,15 @@
       "template": "html-calendario",
       "extractor": "gemini",
       "enabled": true
+    },
+    {
+      "id": "antrodoco",
+      "organizer": "CAI Antrodoco",
+      "url": "https://www.caiantrodoco.it/eventi/",
+      "kind": "html",
+      "template": "html-calendario",
+      "extractor": "gemini",
+      "enabled": true
     }
   ],
   "sourceHashes": {
@@ -130,7 +139,7 @@
     "monterotondo": "df24d29f376b5357f4d1a4736c8041e6496aa6c8237d3198cb2a103610aabc03",
     "frosinone": "67e019c1a06ce71fd3900d209a0bbf89603d7dcaadbeee21333e5928751063ce",
     "esperia": "29d6a0332e26ab13f68fcf7bbfc3607746963a356b6238a879714ef74e23ac18",
-    "cassino": "bb94dcfa75e890fdeda0c75f7e019198031e31973198d83650f6741b1deae425",
+    "cassino": "2084d9d702c5cc0cbf2458abe1a58a9299fd3defed0242d1b6f100a6d009a155",
     "latina": "8c3a2c429cafcb2dfe594919db7475a7180c66a32d400616156ee45b9271556c",
     "tivoli": "0138fa1ab16fc2082243056f825b0adc8b9b72114e9c450c9d62972c78864180",
     "rieti": "f4120972f867f8b28161073d7e51fbb1e8f8141b65d652829d4403ba797d32de",
@@ -138,9 +147,10 @@
     "sora": "fcab67ceb9ec0ba2c7daa00d3904e9c673e7959c502210af833e7dec18bdb56d",
     "amatrice": "a48efcfbd230ad46bc98c2552a35af3a515c6b012a2d010d804a3cd3502fb720",
     "alatri": "e32a0c78772fd3495d7b0d7b20440a7bf6699316ec0654f3363105c908ee8ea2",
-    "colleferro": "60b5775da12f5da92eab38e3c242f031d464b1bd96d192a6394f8fb48a48a1cb"
+    "colleferro": "b8f98ca509bc3a54ab854de2a4201eddb002fad2845310329929ceb663af04dc",
+    "antrodoco": "aefed3fb44be0b3fe78860df5380d5b7ec35cde37541342e17e81ee80c90cbad"
   },
-  "generatedAt": "2026-09-02T08:56:39.067Z",
+  "generatedAt": "2026-09-03T09:07:31.023Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "excursions": [
     {
@@ -318,6 +328,25 @@
       "distanceKm": 13
     },
     {
+      "id": "antrodoco-c5ac444f30a8",
+      "title": "Traversata Pian de Valli – Canetra di Castel Sant’Angelo",
+      "date": "2026-09-05",
+      "dateEnd": "2026-09-05",
+      "days": 1,
+      "category": "Escursionismo",
+      "link": "https://www.caiantrodoco.it/eventi/",
+      "organizer": "CAI Antrodoco",
+      "location": "Terminillo",
+      "region": "Altro",
+      "lat": 42.473,
+      "lng": 12.987,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "08:00 - 17:00",
+      "privateCar": null,
+      "durationHours": 9
+    },
+    {
       "id": "sora-f2e704c7e687",
       "title": "Cima ed Anfiteatro delle Murelle",
       "date": "2026-09-06",
@@ -484,10 +513,10 @@
       "category": "Escursionismo",
       "link": "https://www.caicassino.it/index.php/eventi",
       "organizer": "CAI Cassino",
-      "location": "Monti Aurunci",
-      "region": "Lazio",
-      "lat": 41.345,
-      "lng": 13.67,
+      "location": "Scannole - Sett'Are - La Forcella",
+      "region": "Altro",
+      "lat": 41.543,
+      "lng": 13.802,
       "coordinatesQuality": "massif",
       "cost": "Vedi sito",
       "time": "Vedi sito",
@@ -639,6 +668,24 @@
       "difficultyNote": "E indica sentiero escursionistico su mulattiere e tracce, anche ripide, con possibili facili passaggi su roccia non esposti. EEA richiede attrezzatura da ferrata (imbrago, kit, casco) per tratti attrezzati, oltre a roccette di II grado e passaggi esposti."
     },
     {
+      "id": "colleferro-45f50642c2e3",
+      "title": "Lago della Duchessa e Murolungo",
+      "date": "2026-09-12",
+      "dateEnd": "2026-09-12",
+      "days": 1,
+      "category": "Escursionismo",
+      "link": "https://caicolleferro.it/?p=2522",
+      "organizer": "CAI Colleferro",
+      "location": "Montagne della Duchessa",
+      "region": "Lazio",
+      "lat": 42.175,
+      "lng": 13.348,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
       "id": "leonessa-bd654f7b8d0e",
       "title": "Monte di Cambio da Albaneto (Anello)",
       "date": "2026-09-12",
@@ -753,7 +800,7 @@
       "dateEnd": "2026-09-13",
       "days": 1,
       "category": "EE (alcuni passi di I grado)",
-      "link": "https://www.cairoma.it/?page_id=582",
+      "link": "http://www.cairoma.it/?p=33651",
       "organizer": "CAI Roma",
       "location": "Gran Sasso",
       "region": "Abruzzo",
@@ -966,6 +1013,24 @@
       "activityType": "escursione",
       "terrain": "cresta e valli",
       "difficultyNote": "EE richiede escursionisti esperti con piede sicuro, ottimo allenamento e orientamento su itinerari lunghi con dislivelli elevati, pietraie e tratti di cresta."
+    },
+    {
+      "id": "antrodoco-f679240e3f0e",
+      "title": "Maiella tra creste panoramiche, valli e cascate",
+      "date": "2026-09-19",
+      "dateEnd": "2026-09-20",
+      "days": 2,
+      "category": "Escursionismo",
+      "link": "https://www.caiantrodoco.it/eventi/",
+      "organizer": "CAI Antrodoco",
+      "location": "Maiella",
+      "region": "Abruzzo",
+      "lat": 42.086,
+      "lng": 14.087,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
     },
     {
       "id": "rieti-d9b79990c1c3",
