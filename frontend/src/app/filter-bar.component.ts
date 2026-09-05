@@ -23,25 +23,24 @@ import {
   imports: [CommonModule],
   template: `
     <section class="filter-bar" aria-label="Filtri">
-      <div class="discovery-band" aria-label="Cerca eventi CAI in Italia">
-        <label class="discovery-field search-field">
-          <span>Cerca un’escursione</span>
-          <input type="search" aria-label="Cerca per titolo, località o CAI" placeholder="Monte, località o sezione…" [value]="filters.query" (input)="set('query', inputValue($event))">
-        </label>
-        <label class="discovery-field">
-          <span>Regione del CAI</span>
-          <select aria-label="Filtra per regione del CAI" [value]="filters.organizerRegion" (change)="set('organizerRegion', inputValue($event))">
-            <option value="all">Tutta Italia</option>
-            <option *ngFor="let region of organizerRegions" [value]="region">{{ region }}</option>
-          </select>
-        </label>
-        <label class="discovery-field">
-          <span>Sezione CAI</span>
-          <select aria-label="Filtra per sezione CAI" [value]="filters.organizer" (change)="set('organizer', inputValue($event))">
-            <option value="all">Tutte le sezioni</option>
-            <option *ngFor="let organizer of organizers" [value]="organizer">{{ organizer }}</option>
-          </select>
-        </label>
+      <div class="section-select-band" aria-label="Filtra per sede regionale e sezione CAI">
+        <span class="section-select-caption">CAI</span>
+        <div class="section-select-group">
+          <label class="section-select-field">
+            <span>Regione</span>
+            <select aria-label="Filtra per regione del CAI" [value]="filters.organizerRegion" (change)="set('organizerRegion', inputValue($event))">
+              <option value="all">Tutta Italia</option>
+              <option *ngFor="let region of organizerRegions" [value]="region">{{ region }}</option>
+            </select>
+          </label>
+          <label class="section-select-field section-select-field-section">
+            <span>Sezione</span>
+            <select aria-label="Filtra per sezione CAI" [value]="filters.organizer" (change)="set('organizer', inputValue($event))">
+              <option value="all">Tutte le sezioni</option>
+              <option *ngFor="let organizer of organizers" [value]="organizer">{{ organizer }}</option>
+            </select>
+          </label>
+        </div>
       </div>
       <div class="filter-band filter-band-time" role="region" aria-label="Quando">
         <p class="filter-band-title">Quando</p>
@@ -49,7 +48,6 @@ import {
           <div class="filter-group filter-group-months" role="group" aria-label="Filtra per mese">
             <p class="filter-label">Mese</p>
             <div class="filter-months">
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.month === 'all'" (click)="set('month', 'all')">Tutto il calendario</button>
               <button
                 type="button"
                 class="filter-chip"
@@ -268,17 +266,88 @@ import {
       background: white;
     }
 
-    .discovery-band { display: grid; grid-template-columns: minmax(14rem, 1.5fr) 1fr 1fr; gap: .65rem; padding: .7rem 1.5rem; border-bottom: 1px solid #e7e5e4; background: #f3f6f3; }
-    .discovery-field { display: grid; min-width: 0; gap: .25rem; }
-    .discovery-field > span { color: #065f46; font: 700 .62rem/1.3 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: .06em; }
-    .discovery-field input, .discovery-field select { width: 100%; min-width: 0; min-height: 2.5rem; border: 1px solid #bccdc3; border-radius: .4rem; padding: .45rem .65rem; background: #fff; color: #1c1917; font-size: .82rem; }
-    .discovery-field :is(input, select):focus-visible, .filter-field:focus-within { outline: 2px solid #047857; outline-offset: 2px; }
+    .section-select-band {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      padding: .4rem .75rem;
+      border-bottom: 1px solid #e7e5e4;
+      background: #f3f6f3;
+    }
+
+    .section-select-caption {
+      flex: 0 0 auto;
+      padding-left: .55rem;
+      border-left: 3px solid #047857;
+      color: #065f46;
+      font: 800 .62rem/1.2 'IBM Plex Mono', monospace;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .section-select-group {
+      display: flex;
+      flex: 1 1 auto;
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid #bccdc3;
+      border-radius: .45rem;
+      background: #fff;
+    }
+
+    .section-select-field {
+      display: flex;
+      flex: 0 1 auto;
+      min-width: 0;
+      align-items: center;
+      gap: .45rem;
+      padding: .05rem .65rem .05rem .7rem;
+    }
+
+    .section-select-field + .section-select-field {
+      border-left: 1px solid #dce6e1;
+    }
+
+    .section-select-field-section {
+      flex: 1 1 auto;
+    }
+
+    .section-select-field > span {
+      flex: 0 0 auto;
+      color: #065f46;
+      font: 800 .59rem/1.2 'IBM Plex Mono', monospace;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .section-select-field select {
+      min-width: 8.5rem;
+      max-width: 15rem;
+      min-height: 2.05rem;
+      border: 0;
+      background: transparent;
+      color: #1c1917;
+      font-size: .78rem;
+      font-weight: 700;
+      outline: none;
+    }
+
+    .section-select-field-section select {
+      width: 100%;
+      max-width: none;
+    }
+
+    .section-select-field :is(select):focus-visible { outline: 2px solid #047857; outline-offset: -2px; }
+    .filter-field:focus-within { outline: 2px solid #047857; outline-offset: 2px; }
     .filter-mega-apply { position: sticky; bottom: -.5rem; display: flex; justify-content: flex-end; margin-top: .75rem; padding: .5rem 0; background: #f3f6f3; }
     .filter-mega-apply button { padding: .5rem .8rem; border: 1px solid #064e3b; border-radius: .4rem; background: #064e3b; color: white; font-size: .78rem; font-weight: 700; }
     @media (max-width: 767px) {
-      .discovery-band { grid-template-columns: 1fr 1fr; gap: .45rem; padding: .5rem .65rem; }
-      .search-field { grid-column: 1 / -1; }
-      .discovery-field input, .discovery-field select { min-height: 2.4rem; font-size: .8rem; }
+      .section-select-band { flex-wrap: wrap; gap: .35rem .5rem; padding: .35rem .65rem; }
+      .section-select-caption { width: 100%; }
+      .section-select-group { width: 100%; }
+      .section-select-field { flex: 1 1 0; padding-right: .45rem; padding-left: .5rem; gap: .3rem; }
+      .section-select-field > span { font-size: .55rem; }
+      .section-select-field select { min-width: 0; width: 100%; max-width: none; font-size: .72rem; }
     }
 
     .filter-band {
@@ -492,6 +561,15 @@ import {
     .filter-actions {
       margin-left: auto;
       min-height: 2rem;
+    }
+
+    .primary-filter-actions {
+      flex: 1 0 100%;
+      justify-content: flex-end;
+      width: 100%;
+      margin-left: 0;
+      padding-top: .25rem;
+      border-top: 1px solid #edf1ef;
     }
 
     .filter-count {

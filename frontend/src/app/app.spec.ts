@@ -106,11 +106,9 @@ describe('App', () => {
     expect(megaFilters?.textContent).toContain('Durata');
     expect(megaFilters?.textContent).toContain('Distanza');
     expect(megaFilters?.contains(monthGroup)).toBe(false);
-    expect(filters?.firstElementChild?.getAttribute('aria-label')).toBe('Cerca eventi CAI in Italia');
-    const landingMonth = nextYearMonth();
-    const landingChip = Array.from(monthGroup?.querySelectorAll('button') ?? [])
-      .find(button => button.textContent?.trim() === 'Tutto il calendario');
-    expect(landingChip?.classList.contains('filter-chip-active')).toBe(true);
+    expect(filters?.firstElementChild?.getAttribute('aria-label')).toBe('Filtra per sede regionale e sezione CAI');
+    expect(Array.from(monthGroup?.querySelectorAll('button') ?? [])
+      .some(button => button.textContent?.trim() === 'Tutto il calendario')).toBe(false);
     expect(app.filters.month).toBe('all');
     expect(compiled.textContent).not.toContain('Prossime escursioni');
     expect(compiled.querySelector('app-map')).toBeNull();
@@ -368,7 +366,7 @@ describe('App', () => {
     clickInGroup('Filtra per mese', monthLabel(dateInMonth(2, 3).slice(0, 7)));
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['week']);
 
-    clickInGroup('Filtra per mese', 'Tutto il calendario');
+    clickReset();
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['day', 'week']);
     clickInGroup('Filtra per mese', monthLabel(nextYearMonth()));
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['day', 'week']);
@@ -379,8 +377,7 @@ describe('App', () => {
     clickReset();
     expect(app.filters.month).toBe('all');
     expect(Array.from(compiled.querySelectorAll('[aria-label="Filtra per mese"] button'))
-      .find(button => button.textContent?.trim() === 'Tutto il calendario')
-      ?.classList.contains('filter-chip-active')).toBe(true);
+      .some(button => button.textContent?.trim() === 'Tutto il calendario')).toBe(false);
     openMega();
     clickInGroup('Filtra per distanza', '≤10 km');
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['day']);
