@@ -324,9 +324,6 @@ export function extraFilterTags(filters: FilterState): FilterTag[] {
   if (filters.organizerRegion !== 'all') {
     tags.push({ id: 'organizerRegion', label: `CAI ${filters.organizerRegion}`, patch: { organizerRegion: 'all', organizer: 'all' } });
   }
-  if (filters.query) {
-    tags.push({ id: 'query', label: filters.query, patch: { query: '' } });
-  }
   if (filters.duration !== 'all') {
     tags.push({ id: 'duration', label: DURATION_LABELS[filters.duration], patch: { duration: 'all' } });
   }
