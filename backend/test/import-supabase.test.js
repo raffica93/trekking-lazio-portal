@@ -133,6 +133,15 @@ test('toPlaceRow can import places as published', () => {
   assert.equal(row.source_id, 'roma-2026-09-monte-terminillo');
 });
 
+test('toPlaceRow drops durations that overflow numeric(5,2)', () => {
+  const ok = toPlaceRow(sampleExcursion({ durationHours: 5.5 }), 'published');
+  assert.equal(ok.duration_hours, 5.5);
+  const overflow = toPlaceRow(sampleExcursion({ durationHours: 9669875 }), 'published');
+  assert.equal(overflow.duration_hours, null);
+  const elevationAsHours = toPlaceRow(sampleExcursion({ durationHours: 2230 }), 'published');
+  assert.equal(elevationAsHours.duration_hours, null);
+});
+
 test('importStatus defaults to draft and accepts published', () => {
   assert.equal(importStatus({}), 'draft');
   assert.equal(importStatus({ SUPABASE_IMPORT_STATUS: 'published' }), 'published');

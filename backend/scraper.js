@@ -140,6 +140,8 @@ function tripDays(date, dateEnd) {
   return Math.max(1, Math.round(end.diff(start, 'days').days) + 1);
 }
 
+const MAX_HIKING_DURATION_HOURS = 36;
+
 function hoursFromToken(token) {
   const value = String(token).trim();
   const clock = value.match(/^(\d+)[.,](\d{2})$/);
@@ -151,33 +153,41 @@ function hoursFromToken(token) {
   return Number.isFinite(parsed) ? parsed : null;
 }
 
+function plausibleDurationHours(value) {
+  return typeof value === 'number' && Number.isFinite(value) && value > 0 && value <= MAX_HIKING_DURATION_HOURS
+    ? value
+    : undefined;
+}
+
 function parseDurationHours(values) {
   const texts = Array.isArray(values) ? values : [values];
   for (const raw of texts) {
     const value = String(raw);
     if (!/\bore\b|\d\s*h\b/i.test(value)) continue;
 
-    const withMinutes = value.match(/(\d+)\s*h\s*(\d+)/i);
+    // Bind matches to "ore" / "h" so phone numbers and elevations are not durations.
+    const withMinutes = value.match(/(\d{1,2})\s*h\s*(\d{1,2})\b/i);
     if (withMinutes) {
-      return Number(withMinutes[1]) + Number(withMinutes[2]) / 60;
+      const hours = plausibleDurationHours(Number(withMinutes[1]) + Number(withMinutes[2]) / 60);
+      if (hours != null) return hours;
     }
 
-    const range = value.match(/(\d+(?:[.,]\d+)?)\s*[/\u2013-]\s*(\d+(?:[.,]\d+)?)/);
+    const range = value.match(/(\d{1,2}(?:[.,]\d+)?)\s*[/\u2013-]\s*(\d{1,2}(?:[.,]\d+)?)\s*(?:ore\b|h\b)/i);
     if (range) {
-      const high = hoursFromToken(range[2]);
-      if (high != null && high > 0) return high;
+      const hours = plausibleDurationHours(hoursFromToken(range[2]));
+      if (hours != null) return hours;
     }
 
-    const clock = value.match(/(\d+[.,]\d{2})/);
+    const clock = value.match(/(\d{1,2}[.,]\d{2})\s*(?:ore\b|h\b)/i);
     if (clock) {
-      const hours = hoursFromToken(clock[1]);
-      if (hours != null && hours > 0) return hours;
+      const hours = plausibleDurationHours(hoursFromToken(clock[1]));
+      if (hours != null) return hours;
     }
 
-    const simple = value.match(/(\d+(?:[.,]\d+)?)/);
+    const simple = value.match(/(\d{1,2}(?:[.,]\d+)?)\s*(?:ore\b|h\b)/i);
     if (simple) {
-      const hours = hoursFromToken(simple[1]);
-      if (hours != null && hours > 0) return hours;
+      const hours = plausibleDurationHours(hoursFromToken(simple[1]));
+      if (hours != null) return hours;
     }
   }
   return undefined;
@@ -421,6 +431,8 @@ module.exports = {
   parseDateRange,
   parseDistanceKm,
   parseDurationHours,
+  plausibleDurationHours,
+  MAX_HIKING_DURATION_HOURS,
   parseTransport,
   classifyPrivateCar,
   resolveRegion,

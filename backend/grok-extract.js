@@ -9,6 +9,7 @@ const {
   isRomeFallback,
   looksLikeRome,
   parseTransport,
+  plausibleDurationHours,
   resolveRegion,
   stableId,
   tripDays
@@ -168,9 +169,7 @@ function normalizeExtracted(raw, source, { now = DateTime.now() } = {}) {
     : geminiZoneCoords(raw, context);
   const { transport, privateCar } = parseTransport(raw.transport || '');
   const distanceKm = Number.isFinite(raw.distanceKm) && raw.distanceKm > 0 ? raw.distanceKm : undefined;
-  const durationHours = Number.isFinite(raw.durationHours) && raw.durationHours > 0
-    ? raw.durationHours
-    : undefined;
+  const durationHours = plausibleDurationHours(raw.durationHours);
   const time = String(raw.time || '').replace(/\s+/g, ' ').trim() || 'Vedi sito';
 
   return {

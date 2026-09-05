@@ -4,8 +4,14 @@ const { createClient } = require('@supabase/supabase-js');
 const {
   PRECISE_COORD_QUALITY,
   hasFiniteCoords,
-  isRomeFallback
+  isRomeFallback,
+  plausibleDurationHours
 } = require('../scraper');
+
+const DISTANCE_KM_MAX = 99999.99;
+const COST_AMOUNT_MAX = 99999999.99;
+const ELEVATION_M_MAX = 2147483647;
+const DAYS_MAX = 32767;
 
 const DATA_FILE = path.join(__dirname, '..', 'data', 'excursions.json');
 const REGISTRY_FILE = path.join(__dirname, '..', 'data', 'cai-sections.json');
@@ -36,6 +42,12 @@ function textOrNull(value) {
 
 function numberOrNull(value) {
   return typeof value === 'number' && Number.isFinite(value) ? value : null;
+}
+
+function boundedNumber(value, max) {
+  const number = numberOrNull(value);
+  if (number == null || number < 0 || number > max) return null;
+  return number;
 }
 
 function importStatus(env = process.env) {
@@ -166,7 +178,9 @@ function toPlaceRow(excursion, status) {
     title,
     date,
     date_end: textOrNull(excursion.dateEnd),
-    days: Number.isInteger(excursion.days) && excursion.days > 0 ? excursion.days : null,
+    days: Number.isInteger(excursion.days) && excursion.days > 0 && excursion.days <= DAYS_MAX
+      ? excursion.days
+      : null,
     category: textOrNull(excursion.category) ?? 'ND',
     external_url: externalUrl,
     organizer: textOrNull(excursion.organizer) ?? 'Sezione CAI',
@@ -179,11 +193,11 @@ function toPlaceRow(excursion, status) {
     latitude: hasFiniteCoords(excursion) ? numberOrNull(excursion.lat) : null,
     longitude: hasFiniteCoords(excursion) ? numberOrNull(excursion.lng) : null,
     cost: textOrNull(excursion.cost),
-    cost_amount: numberOrNull(excursion.costAmount),
+    cost_amount: boundedNumber(excursion.costAmount, COST_AMOUNT_MAX),
     time: textOrNull(excursion.time),
-    distance_km: numberOrNull(excursion.distanceKm),
-    elevation_m: numberOrNull(excursion.elevationM),
-    duration_hours: numberOrNull(excursion.durationHours),
+    distance_km: boundedNumber(excursion.distanceKm, DISTANCE_KM_MAX),
+    elevation_m: boundedNumber(excursion.elevationM, ELEVATION_M_MAX),
+    duration_hours: numberOrNull(plausibleDurationHours(excursion.durationHours)),
     mountain_group: textOrNull(excursion.mountainGroup),
     transport: textOrNull(excursion.transport),
     private_car: typeof excursion.privateCar === 'boolean' ? excursion.privateCar : null,

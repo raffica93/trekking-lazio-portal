@@ -128,6 +128,17 @@ test('parseDurationHours reads CAI hour formats', () => {
   assert.equal(parseDurationHours(['Vedi sito']), undefined);
 });
 
+test('parseDurationHours ignores phone numbers and elevations in the same text', () => {
+  assert.equal(
+    parseDurationHours([
+      'Durata: 5.30 ore (soste escluse) Coordinatori: Marino Fabbris (346-9669875)'
+    ]),
+    5.5
+  );
+  assert.equal(parseDurationHours(['Monte Cava (2000 m) 6 ore']), 6);
+  assert.equal(parseDurationHours(['quota 2230 m, coordinatore 347-1122334']), undefined);
+});
+
 test('parseTransport classifies private car, organized travel and unknown', () => {
   assert.deepEqual(parseTransport('dom 20 set auto private'), { transport: 'auto private', privateCar: true });
   assert.deepEqual(parseTransport('da sab 12 set a dom 13 set Mezzi Propri'), { transport: 'Mezzi Propri', privateCar: true });

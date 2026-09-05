@@ -121,28 +121,38 @@ function hoursFromToken(token: string): number | null {
   return Number.isFinite(parsed) ? parsed : null;
 }
 
+const MAX_HIKING_DURATION_HOURS = 36;
+
+function plausibleDurationHours(value: number | null): number | null {
+  return value != null && Number.isFinite(value) && value > 0 && value <= MAX_HIKING_DURATION_HOURS
+    ? value
+    : null;
+}
+
 export function parseDurationHours(value: string | undefined): number | null {
   if (!value || !/\bore\b|\d\s*h\b/i.test(value)) return null;
 
-  const withMinutes = value.match(/(\d+)\s*h\s*(\d+)/i);
-  if (withMinutes) return Number(withMinutes[1]) + Number(withMinutes[2]) / 60;
+  const withMinutes = value.match(/(\d{1,2})\s*h\s*(\d{1,2})\b/i);
+  if (withMinutes) {
+    const hours = plausibleDurationHours(Number(withMinutes[1]) + Number(withMinutes[2]) / 60);
+    if (hours != null) return hours;
+  }
 
-  const range = value.match(/(\d+(?:[.,]\d+)?)\s*[/\u2013-]\s*(\d+(?:[.,]\d+)?)/);
+  const range = value.match(/(\d{1,2}(?:[.,]\d+)?)\s*[/\u2013-]\s*(\d{1,2}(?:[.,]\d+)?)\s*(?:ore\b|h\b)/i);
   if (range) {
-    const high = hoursFromToken(range[2]);
-    if (high != null && high > 0) return high;
+    const hours = plausibleDurationHours(hoursFromToken(range[2]));
+    if (hours != null) return hours;
   }
 
-  const clock = value.match(/(\d+[.,]\d{2})/);
+  const clock = value.match(/(\d{1,2}[.,]\d{2})\s*(?:ore\b|h\b)/i);
   if (clock) {
-    const hours = hoursFromToken(clock[1]);
-    if (hours != null && hours > 0) return hours;
+    const hours = plausibleDurationHours(hoursFromToken(clock[1]));
+    if (hours != null) return hours;
   }
 
-  const simple = value.match(/(\d+(?:[.,]\d+)?)/);
+  const simple = value.match(/(\d{1,2}(?:[.,]\d+)?)\s*(?:ore\b|h\b)/i);
   if (!simple) return null;
-  const hours = hoursFromToken(simple[1]);
-  return hours != null && hours > 0 ? hours : null;
+  return plausibleDurationHours(hoursFromToken(simple[1]));
 }
 
 export function classifyPrivateCar(transport: string | undefined | null): boolean | null {

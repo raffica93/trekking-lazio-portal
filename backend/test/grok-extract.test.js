@@ -73,6 +73,24 @@ test('normalizeExtracted builds a stable id and fills CAI defaults', () => {
   assert.equal(excursion.coordinatesQuality, 'massif');
 });
 
+test('normalizeExtracted drops implausible Gemini durations', () => {
+  const now = DateTime.fromISO('2026-09-06T08:00:00', { zone: 'Europe/Rome' });
+  const excursion = normalizeExtracted({
+    title: 'Monte Boral',
+    date: '2026-10-07',
+    dateEnd: null,
+    category: 'E',
+    location: 'Prealpi',
+    link: 'https://www.caiconegliano.it/evento/monte-boral-2/',
+    time: '5.30 ore',
+    transport: null,
+    distanceKm: null,
+    durationHours: 9669875
+  }, TIVOLI, { now });
+
+  assert.equal(excursion.durationHours, undefined);
+});
+
 test('normalizeExtracted does not pin unknown places to Rome', () => {
   const excursion = normalizeExtracted({
     title: 'Open day arrampicata',
