@@ -429,7 +429,7 @@ describe('App', () => {
     expect(page.querySelector('.directory-row')?.textContent).toContain('CAI Milano');
   });
 
-  it('paginates long calendars and reveals the selected map event on its correct page', () => {
+  it('renders every filtered calendar event and reveals the selected map event', () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
     TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({ excursions: Array.from({ length: 65 }, (_, index) => ({ id: String(index).padStart(3, '0'), title: `Escursione ${index}`, date: dateInMonth(1, 1), category: 'E', link: 'https://cai.it', organizer: index % 2 ? 'CAI Milano' : 'CAI Roma', organizerRegion: index % 2 ? 'Lombardia' : 'Lazio', location: 'Monte', cost: 'Vedi sito', time: '' })) });
@@ -437,15 +437,14 @@ describe('App', () => {
     const app = fixture.componentInstance;
     const compiled = fixture.nativeElement as HTMLElement;
     expect(app.excursions.length).toBe(65);
-    expect(compiled.querySelectorAll('app-excursion-card').length).toBe(30);
+    expect(compiled.querySelectorAll('app-excursion-card').length).toBe(65);
     app.onMapSelect(app.excursions[64]); fixture.detectChanges();
-    expect(app.page).toBe(3);
     expect(compiled.querySelector('[data-excursion-id="064"]')).toBeTruthy();
+    expect(compiled.querySelector('[aria-label="Pagine del calendario"]')).toBeNull();
     const region = compiled.querySelector('[aria-label="Filtra per regione del CAI"]') as HTMLSelectElement;
     const section = compiled.querySelector('[aria-label="Filtra per sezione CAI"]') as HTMLSelectElement;
     section.value = 'CAI Roma'; section.dispatchEvent(new Event('change')); fixture.detectChanges();
     region.value = 'Lombardia'; region.dispatchEvent(new Event('change')); fixture.detectChanges();
-    expect(app.page).toBe(1);
     expect(app.filters.organizer).toBe('all');
     expect(app.excursions.every(item => item.organizer === 'CAI Milano')).toBe(true);
     expect(Array.from(section.options).map(option => option.value)).toEqual(['all', 'CAI Milano']);

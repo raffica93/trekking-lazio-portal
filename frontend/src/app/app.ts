@@ -109,11 +109,6 @@ registerLocaleData(localeIt);
               </div>
             </ng-container>
           </div>
-          <nav *ngIf="!loading && excursions.length > pageSize" class="calendar-pagination" aria-label="Pagine del calendario">
-            <button type="button" [disabled]="page === 1" (click)="changePage(page - 1)" aria-label="Pagina precedente">←</button>
-            <span>{{ pageStart }}–{{ pageEnd }} di {{ excursions.length }}</span>
-            <button type="button" [disabled]="page === pageCount" (click)="changePage(page + 1)" aria-label="Pagina successiva">→</button>
-          </nav>
         </aside>
 
         <!-- Map -->
@@ -237,10 +232,7 @@ registerLocaleData(localeIt);
     .calendar-heading h2 { margin: 0; color: #064e3b; font-size: .85rem; font-weight: 800; }
     .calendar-heading p { margin: .2rem 0 0; color: #57534e; font-size: .65rem; }
     .calendar-heading > span { white-space: nowrap; }
-    .calendar-pagination { display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding: .45rem .8rem; border-top: 1px solid #e7e5e4; background: #fff; font: 600 .75rem/1.2 'IBM Plex Mono', monospace; }
-    .calendar-pagination button, .retry-button { min-width: 2.75rem; min-height: 2.5rem; border: 1px solid #bccdc3; border-radius: .4rem; background: #f3f6f3; color: #064e3b; font-weight: 800; cursor: pointer; }
-    .calendar-pagination button:disabled { opacity: .35; cursor: default; }
-    .calendar-pagination button:focus-visible { outline: 2px solid #047857; outline-offset: 2px; }
+    .retry-button { min-width: 2.75rem; min-height: 2.5rem; border: 1px solid #bccdc3; border-radius: .4rem; background: #f3f6f3; color: #064e3b; font-weight: 800; cursor: pointer; }
     .snapshot-note { margin: 0 0 .6rem; color: #57534e; font-size: .7rem; }
     :host {
       display: block;
@@ -563,8 +555,6 @@ export class App implements OnInit {
   loading = true;
   loadError = false;
   usingSnapshot = false;
-  readonly pageSize = 30;
-  page = 1;
   private calendarMonth = currentYearMonth();
   filters: FilterState = landingFilters();
   selectedId: string | null = null;
@@ -632,17 +622,8 @@ export class App implements OnInit {
   }
 
   get coveredSections(): number { return new Set(this.allExcursions.map(item => item.organizer)).size; }
-  get visibleExcursions(): Excursion[] { return this.excursions.slice((this.page - 1) * this.pageSize, this.page * this.pageSize); }
-  get pageCount(): number { return Math.max(1, Math.ceil(this.excursions.length / this.pageSize)); }
-  get pageStart(): number { return (this.page - 1) * this.pageSize + 1; }
-  get pageEnd(): number { return Math.min(this.page * this.pageSize, this.excursions.length); }
+  get visibleExcursions(): Excursion[] { return this.excursions; }
   trackExcursion(_index: number, excursion: Excursion): string { return excursion.id; }
-
-  changePage(page: number): void {
-    this.page = Math.max(1, Math.min(page, this.pageCount));
-    this.excursionList?.nativeElement.scrollTo?.({ top: 0 });
-    this.changeDetector.markForCheck();
-  }
 
   @HostListener('document:visibilitychange')
   @HostListener('window:focus')
@@ -676,8 +657,6 @@ export class App implements OnInit {
   onMapSelect(excursion: Excursion) {
     this.selectedId = excursion.id;
     this.detailOpen = true;
-    const index = this.excursions.findIndex(item => item.id === excursion.id);
-    this.page = Math.floor(Math.max(0, index) / this.pageSize) + 1;
     this.changeDetector.detectChanges();
     this.scrollSelectedIntoView();
   }
@@ -785,7 +764,6 @@ export class App implements OnInit {
 
   private applyFilters() {
     this.excursions = applyFilters(this.allExcursions, this.filters);
-    this.page = 1;
     this.excursionList?.nativeElement.scrollTo?.({ top: 0 });
     if (this.selectedId && !this.excursions.some(excursion => excursion.id === this.selectedId)) {
       this.selectedId = null;
