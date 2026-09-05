@@ -1,4 +1,4 @@
-import { CAI_SEZIONE_LINKS } from './cai-info.data';
+import { CAI_SEZIONE_LINKS } from '../info/cai-info.data';
 
 /**
  * High-chroma categorical swatches (Kelly contrast + primary crayon hues).

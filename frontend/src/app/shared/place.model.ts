@@ -75,8 +75,8 @@ export function placeToExcursion(place: PlaceRow): Excursion {
     organizer: place.organizer,
     organizerRegion: place.organizer_region ?? undefined,
     location: place.location,
-    lat: place.latitude,
-    lng: place.longitude,
+    lat: asCoord(place.latitude),
+    lng: asCoord(place.longitude),
     cost: place.cost ?? 'Vedi sito',
     costAmount: place.cost_amount,
     time: place.time ?? '',
@@ -94,4 +94,10 @@ export function placeToExcursion(place: PlaceRow): Excursion {
     terrain: place.terrain ?? undefined,
     difficultyNote: place.difficulty_note ?? undefined
   };
+}
+
+function asCoord(value: number | string | null | undefined): number | null {
+  if (value == null || value === '') return null;
+  const n = typeof value === 'number' ? value : Number(value);
+  return Number.isFinite(n) ? n : null;
 }

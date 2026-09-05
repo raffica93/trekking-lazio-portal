@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, defer, map, of, shareReplay, tap } from 'rxjs';
-import { isSupabaseConfigured } from './supabase.config';
-import { SupabaseService } from './supabase.service';
+import { isSupabaseConfigured } from '../core/supabase.config';
+import { SupabaseService } from '../core/supabase.service';
 
 export interface CaiDirectoryEntry {
   id: string;

@@ -2,10 +2,10 @@ import { NgIf } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { durationLabel, tripDays } from './excursion-dates';
+import { durationLabel, tripDays } from '../shared/excursion-dates';
 import { AdminPlacesService } from './admin-places.service';
-import { formatItalianDate, parseItalianDate } from './italian-date-input';
-import type { PlaceRow, PlaceStatus, PlaceWrite } from './place.model';
+import { formatItalianDate, parseItalianDate } from '../shared/italian-date-input';
+import type { PlaceRow, PlaceStatus, PlaceWrite } from '../shared/place.model';
 
 @Component({
   selector: 'app-admin-place-editor',

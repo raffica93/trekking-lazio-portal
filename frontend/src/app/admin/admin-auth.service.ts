@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import type { User } from '@supabase/supabase-js';
-import { SupabaseService } from './supabase.service';
+import { SupabaseService } from '../core/supabase.service';
 
 @Injectable({ providedIn: 'root' })
 export class AdminAuthService {

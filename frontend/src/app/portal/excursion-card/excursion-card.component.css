@@ -1,0 +1,93 @@
+.excursion-destination { margin: .15rem 0 0; color: #57534e; font-size: .72rem; line-height: 1.4; }
+.card-map-button { margin-right: auto; border: 0; background: transparent; color: #065f46; font-size: .72rem; font-weight: 700; padding: .4rem 0; cursor: pointer; }
+.card-map-button:focus-visible { outline: 2px solid #047857; outline-offset: 3px; }
+:host {
+  display: block;
+}
+
+:host.is-selected {
+  display: block;
+}
+
+.excursion-card {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0;
+  cursor: pointer;
+}
+
+.excursion-card.is-selected {
+  box-shadow: 0 0 0 2px #065f46, 0 8px 20px rgb(18 38 28 / 0.12);
+}
+
+.excursion-card-rail {
+  width: 6px;
+  flex-shrink: 0;
+}
+
+.excursion-summary {
+  display: -webkit-box;
+  margin: 0.35rem 0 0;
+  overflow: hidden;
+  color: #78716c;
+  font-size: 12px;
+  line-height: 1.4;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.excursion-card.is-selected .excursion-summary {
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
+.section-tag {
+  display: inline-flex;
+  min-width: 0;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.35rem;
+  max-width: 9.5rem;
+  min-height: 1.35rem;
+  overflow: hidden;
+  padding: 0.12rem 0.5rem 0.12rem 0.35rem;
+  border: 1px solid rgb(28 25 23 / 0.08);
+  border-radius: 999px;
+  background: #f6f8f6;
+  color: #1c1917;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.section-tag-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.section-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  flex-shrink: 0;
+  border-radius: 999px;
+  box-shadow: 0 0 0 1.5px rgb(255 255 255 / 0.9);
+}
+
+.difficulty-chip {
+  display: inline-flex;
+  min-width: 1.75rem;
+  height: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  padding: 0 0.4rem;
+  color: #fff;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}

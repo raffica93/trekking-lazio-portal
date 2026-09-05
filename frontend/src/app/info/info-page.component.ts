@@ -2,8 +2,8 @@ import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 import { CAI_PARTICIPATION, CAI_PARTICIPATION_POINTS, CAI_PHILOSOPHY } from './cai-info.data';
-import { sectionColor } from './section-color';
-import { AnalyticsService } from './analytics.service';
+import { sectionColor } from '../shared/section-color';
+import { AnalyticsService } from '../core/analytics.service';
 
 interface DirectorySection {
   id: string;

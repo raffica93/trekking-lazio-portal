@@ -2,8 +2,8 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, O
 import { CommonModule } from '@angular/common';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
-import { Excursion } from './excursion.model';
-import { DIFFICULTIES, DIFFICULTY_ORDER, primaryDifficulty } from './difficulty';
+import { Excursion } from '../../shared/excursion.model';
+import { DIFFICULTIES, DIFFICULTY_ORDER, primaryDifficulty } from '../../shared/difficulty';
 
 @Component({
   selector: 'app-map',
@@ -33,8 +33,11 @@ import { DIFFICULTIES, DIFFICULTY_ORDER, primaryDifficulty } from './difficulty'
     .map-legend p { max-width: 14rem; margin: .75rem 0 0; color: #57534e; font-size: .68rem; line-height: 1.4; }
     :host {
       display: block;
-      height: 100%;
+      flex: 1 1 0;
+      min-height: 0;
+      min-width: 0;
       width: 100%;
+      height: 100%;
     }
 
     .map-shell {
@@ -112,20 +115,25 @@ export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   private map!: L.Map;
   private markers = new Map<string, L.Marker>();
-  private clusters!: L.MarkerClusterGroup;
+  private clusters!: L.MarkerClusterGroup | L.LayerGroup;
   private excursionById = new Map<string, Excursion>();
   private highlightedId: string | null = null;
   private resizeObserver?: ResizeObserver;
+  private sizeWasInvalid = true;
 
-  get locatedCount(): number { return this.excursions.filter(ex => Number.isFinite(ex.lat) && Number.isFinite(ex.lng)).length; }
+  get locatedCount(): number {
+    return this.excursions.filter(ex => coordsOf(ex)).length;
+  }
 
   ngAfterViewInit() {
     this.initMap();
     if (typeof ResizeObserver === 'undefined') {
+      this.scheduleReflow();
       return;
     }
-    this.resizeObserver = new ResizeObserver(() => this.map.invalidateSize());
+    this.resizeObserver = new ResizeObserver(() => this.onMapResize());
     this.resizeObserver.observe(this.host.nativeElement);
+    this.scheduleReflow();
   }
 
   ngOnDestroy() {
@@ -159,18 +167,25 @@ export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>'
     }).addTo(this.map);
 
-    this.clusters = L.markerClusterGroup({
+    this.clusters = this.createOverlays().addTo(this.map);
+    this.updateMarkers();
+  }
+
+  private createOverlays(): L.MarkerClusterGroup | L.LayerGroup {
+    if (typeof L.markerClusterGroup !== 'function') {
+      return L.layerGroup();
+    }
+    return L.markerClusterGroup({
       maxClusterRadius: 55,
       showCoverageOnHover: false,
-      animate: !window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+      animate: typeof window.matchMedia !== 'function'
+        || !window.matchMedia('(prefers-reduced-motion: reduce)').matches,
       iconCreateFunction: cluster => L.divIcon({
         className: 'event-cluster',
         html: `<span aria-label="${cluster.getChildCount()} eventi vicini">${cluster.getChildCount()}</span>`,
         iconSize: [42, 42]
       })
-    }).addTo(this.map);
-
-    this.updateMarkers();
+    });
   }
 
   private updateMarkers(): void {
@@ -180,13 +195,12 @@ export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
     this.highlightedId = null;
     this.map.closePopup();
 
-    const located = this.excursions.filter((ex): ex is Excursion & { lat: number; lng: number } => (
-      Number.isFinite(ex.lat) && Number.isFinite(ex.lng)
-    ));
-    located.forEach((ex) => {
-      const tone = primaryDifficulty(ex.category);
+    this.excursions.forEach((ex) => {
+      const coords = coordsOf(ex);
+      if (!coords) return;
+      const tone = primaryDifficulty(ex.category || 'E');
       const selected = ex.id === this.selectedId;
-      const marker = L.marker([ex.lat, ex.lng], {
+      const marker = L.marker([coords.lat, coords.lng], {
         icon: this.markerIcon(tone.color, selected),
         title: `${ex.title} (${tone.code})`,
         riseOnHover: true,
@@ -202,15 +216,43 @@ export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
       this.excursionById.set(ex.id, ex);
     });
 
-    this.clusters.addLayers([...this.markers.values()]);
+    if ('addLayers' in this.clusters) {
+      (this.clusters as L.MarkerClusterGroup).addLayers([...this.markers.values()]);
+    } else {
+      this.markers.forEach(marker => this.clusters.addLayer(marker));
+    }
     this.syncSelection(false);
+    this.fitToMarkers();
+  }
 
+  private fitToMarkers(): void {
+    if (!this.map) return;
     if (this.markers.size > 0) {
       const group = L.featureGroup([...this.markers.values()]);
-      this.map.fitBounds(group.getBounds().pad(0.12), { maxZoom: 12 });
+      this.map.fitBounds(group.getBounds().pad(0.12), { maxZoom: 12, animate: false });
     } else {
       this.map.setView([42.5, 12.5], 6);
     }
+  }
+
+  private hasValidSize(): boolean {
+    const size = this.map?.getSize();
+    return !!size && size.x > 2 && size.y > 2;
+  }
+
+  private onMapResize(): void {
+    if (!this.map) return;
+    this.map.invalidateSize();
+    const valid = this.hasValidSize();
+    if (this.sizeWasInvalid && valid) {
+      this.fitToMarkers();
+    }
+    this.sizeWasInvalid = !valid;
+  }
+
+  private scheduleReflow(): void {
+    const run = () => this.onMapResize();
+    requestAnimationFrame(() => requestAnimationFrame(run));
   }
 
   private syncSelection(pan: boolean): void {
@@ -221,7 +263,7 @@ export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
       const marker = this.markers.get(id);
       if (!excursion || !marker) return;
       const selected = id === this.selectedId;
-      const tone = primaryDifficulty(excursion.category);
+      const tone = primaryDifficulty(excursion.category || 'E');
       marker.setIcon(this.markerIcon(tone.color, selected));
       marker.setZIndexOffset(selected ? 1000 : 0);
     });
@@ -231,9 +273,13 @@ export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
       return;
     }
     const selectedMarker = this.markers.get(this.selectedId);
-    if (selectedMarker) {
-      this.clusters.zoomToShowLayer(selectedMarker, () => this.map.panTo(selectedMarker.getLatLng()));
+    if (!selectedMarker) return;
+    const clusters = this.clusters as L.MarkerClusterGroup;
+    if (typeof clusters.zoomToShowLayer === 'function') {
+      clusters.zoomToShowLayer(selectedMarker, () => this.map.panTo(selectedMarker.getLatLng()));
+      return;
     }
+    this.map.panTo(selectedMarker.getLatLng());
   }
 
   private markerIcon(color: string, selected = false): L.DivIcon {
@@ -246,4 +292,11 @@ export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
     });
   }
 
+}
+
+function coordsOf(excursion: Excursion): { lat: number; lng: number } | null {
+  if (excursion.lat == null || excursion.lng == null) return null;
+  const lat = Number(excursion.lat);
+  const lng = Number(excursion.lng);
+  return Number.isFinite(lat) && Number.isFinite(lng) ? { lat, lng } : null;
 }

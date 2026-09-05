@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AdminPlacesService } from './admin-places.service';
-import type { PlaceSummary } from './place.model';
+import type { PlaceSummary } from '../shared/place.model';
 
 @Component({
   selector: 'app-admin-place-list',

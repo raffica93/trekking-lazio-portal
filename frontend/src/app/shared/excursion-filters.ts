@@ -53,8 +53,8 @@ export function nextYearMonth(now = new Date()): string {
   return currentYearMonth(new Date(now.getFullYear(), now.getMonth() + 1, 1));
 }
 
-export function landingFilters(_now = new Date()): FilterState {
-  return { ...DEFAULT_FILTERS };
+export function landingFilters(now = new Date()): FilterState {
+  return { ...DEFAULT_FILTERS, month: currentYearMonth(now) };
 }
 
 export function currentMonthStart(now = new Date()): string {
@@ -218,6 +218,7 @@ export function monthLabel(yearMonth: string): string {
 export function availableMonths(excursions: Excursion[], now = new Date()): { id: string; label: string }[] {
   const ids = new Set<string>();
   const currentMonth = currentYearMonth(now);
+  ids.add(currentMonth);
   for (const excursion of excursions) {
     for (const month of monthsInRange(excursion.date, excursion.dateEnd || excursion.date)) {
       if (month >= currentMonth) ids.add(month);
@@ -318,9 +319,6 @@ const DISTANCE_LABELS: Record<string, string> = {
 
 export function extraFilterTags(filters: FilterState): FilterTag[] {
   const tags: FilterTag[] = [];
-  if (filters.month !== 'all') {
-    tags.push({ id: 'month', label: monthLabel(filters.month), patch: { month: 'all' } });
-  }
   if (filters.organizerRegion !== 'all') {
     tags.push({ id: 'organizerRegion', label: `CAI ${filters.organizerRegion}`, patch: { organizerRegion: 'all', organizer: 'all' } });
   }
@@ -337,7 +335,7 @@ export function extraFilterTags(filters: FilterState): FilterTag[] {
     tags.push({
       id: 'period',
       label: `${filters.dateFrom || '…'} – ${filters.dateTo || '…'}`,
-      patch: { dateFrom: '', dateTo: '' }
+      patch: { dateFrom: '', dateTo: '', month: currentYearMonth() }
     });
   }
   if (filters.category !== 'all') {
@@ -369,9 +367,13 @@ export function extraFilterTags(filters: FilterState): FilterTag[] {
   return tags;
 }
 
-export function hasActiveFilters(filters: FilterState, _now = new Date()): boolean {
-  return (Object.keys(DEFAULT_FILTERS) as (keyof FilterState)[])
-    .some((key) => filters[key] !== DEFAULT_FILTERS[key]);
+export function hasActiveFilters(filters: FilterState, now = new Date()): boolean {
+  const baseline = landingFilters(now);
+  return (Object.keys(baseline) as (keyof FilterState)[])
+    .some((key) => {
+      if (key === 'month') return filters.month !== 'all' && filters.month !== baseline.month;
+      return filters[key] !== baseline[key];
+    });
 }
 
 function matchesDuration(hours: number | null | undefined, bucket: DurationBucket): boolean {

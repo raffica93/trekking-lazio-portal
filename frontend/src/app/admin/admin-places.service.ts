@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { type PlaceRow, type PlaceSummary, type PlaceWrite } from './place.model';
-import { SupabaseService } from './supabase.service';
+import { type PlaceRow, type PlaceSummary, type PlaceWrite } from '../shared/place.model';
+import { SupabaseService } from '../core/supabase.service';
 
 @Injectable({ providedIn: 'root' })
 export class AdminPlacesService {

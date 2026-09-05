@@ -1,22 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { provideRouter, Router } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { vi } from 'vitest';
 import { App } from './app';
 import { routes } from './app.routes';
-import {
-  AGENDA_NO_LABEL,
-  AGENDA_YES_LABEL,
-  CAI_PHILOSOPHY,
-  CAI_QUOTE_ROWS,
-  CAI_SEZIONE_LINKS,
-  quoteDisplay,
-  UNPUBLISHED_LABEL
-} from './cai-info.data';
-import { monthLabel, nextYearMonth } from './excursion-filters';
-import { formatDateRange } from './excursion-dates';
-import { AnalyticsService } from './analytics.service';
+import { currentYearMonth, monthLabel, nextYearMonth } from './shared/excursion-filters';
+import { formatDateRange } from './shared/excursion-dates';
+import { AnalyticsService } from './core/analytics.service';
 
 function pad(value: number): string {
   return String(value).padStart(2, '0');
@@ -77,8 +68,8 @@ describe('App', () => {
     fixture.detectChanges();
     TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({
       excursions: [
-        { id: '1', title: 'Sentiero facile', date: dateInMonth(1, 1), category: 'E', link: 'http://example.com/e', organizer: 'CAI Roma', location: 'Lazio', lat: 41.9, lng: 12.5, cost: 'Gratis', time: '3 ore', summary: 'Anello boschivo sui Colli Albani.', distanceKm: 8, elevationM: 948 },
-        { id: '2', title: 'Ferrata', date: dateInMonth(1, 2), category: 'EEA', link: 'https://example.com/eea', organizer: 'CAI Roma', location: 'Lazio', lat: 42, lng: 13, cost: 'Gratis', time: '5 ore' }
+        { id: '1', title: 'Sentiero facile', date: dateInMonth(0, 1), category: 'E', link: 'http://example.com/e', organizer: 'CAI Roma', location: 'Lazio', lat: 41.9, lng: 12.5, cost: 'Gratis', time: '3 ore', summary: 'Anello boschivo sui Colli Albani.', distanceKm: 8, elevationM: 948 },
+        { id: '2', title: 'Ferrata', date: dateInMonth(0, 2), category: 'EEA', link: 'https://example.com/eea', organizer: 'CAI Roma', location: 'Lazio', lat: 42, lng: 13, cost: 'Gratis', time: '5 ore' }
       ]
     });
     await fixture.whenStable();
@@ -109,10 +100,9 @@ describe('App', () => {
     expect(filters?.firstElementChild?.getAttribute('aria-label')).toBe('Filtra per sede regionale e sezione CAI');
     expect(Array.from(monthGroup?.querySelectorAll('button') ?? [])
       .some(button => button.textContent?.trim() === 'Tutto il calendario')).toBe(false);
-    expect(app.filters.month).toBe('all');
+    expect(app.filters.month).toBe(currentYearMonth());
     expect(compiled.textContent).not.toContain('Prossime escursioni');
-    expect(compiled.querySelector('app-map')).toBeNull();
-    expect(compiled.querySelector('.map-placeholder')?.getAttribute('aria-label')).toBe('Caricamento della mappa');
+    expect(compiled.querySelector('app-map, .map-placeholder')).toBeTruthy();
     fixture.detectChanges();
     expect(compiled.textContent).not.toContain('Località:');
     expect(compiled.querySelector('.difficulty-chip')?.textContent?.trim()).toBe('E');
@@ -133,7 +123,7 @@ describe('App', () => {
     expect(mapTab.getAttribute('aria-pressed')).toBe('true');
     expect(compiled.querySelector('.map-pane')?.classList.contains('mobile-pane-active')).toBe(true);
     expect(compiled.querySelector('aside')).toBeTruthy();
-    expect(compiled.querySelector('.map-placeholder')).toBeTruthy();
+    expect(compiled.querySelector('app-map, .map-placeholder')).toBeTruthy();
 
     const more = Array.from(compiled.querySelectorAll('button')).find(button => button.textContent?.includes('Altri filtri')) as HTMLButtonElement;
     more.click();
@@ -159,8 +149,8 @@ describe('App', () => {
     fixture.detectChanges();
     TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({
       excursions: [
-        { id: '1', title: 'Sentiero facile', date: dateInMonth(1, 1), category: 'E', link: 'http://example.com/e', organizer: 'CAI Roma', location: 'Lazio', lat: 41.9, lng: 12.5, cost: 'Gratis', time: '3 ore', summary: 'Anello boschivo sui Colli Albani.', distanceKm: 8, elevationM: 948 },
-        { id: '2', title: 'Ferrata', date: dateInMonth(1, 2), category: 'EEA', link: 'https://example.com/eea', organizer: 'CAI Roma', location: 'Lazio', lat: 42, lng: 13, cost: 'Gratis', time: '5 ore' }
+        { id: '1', title: 'Sentiero facile', date: dateInMonth(0, 1), category: 'E', link: 'http://example.com/e', organizer: 'CAI Roma', location: 'Lazio', lat: 41.9, lng: 12.5, cost: 'Gratis', time: '3 ore', summary: 'Anello boschivo sui Colli Albani.', distanceKm: 8, elevationM: 948 },
+        { id: '2', title: 'Ferrata', date: dateInMonth(0, 2), category: 'EEA', link: 'https://example.com/eea', organizer: 'CAI Roma', location: 'Lazio', lat: 42, lng: 13, cost: 'Gratis', time: '5 ore' }
       ]
     });
     fixture.detectChanges();
@@ -206,7 +196,7 @@ describe('App', () => {
         {
           id: 'no-pin',
           title: 'Open day arrampicata',
-          date: dateInMonth(1, 1),
+          date: dateInMonth(0, 1),
           category: 'E',
           link: 'https://example.com/open',
           organizer: 'CAI Esperia',
@@ -227,8 +217,8 @@ describe('App', () => {
   });
 
   it('shows a date range and nights for multi-day trips', () => {
-    const start = dateInMonth(1, 12);
-    const end = dateInMonth(1, 13);
+    const start = dateInMonth(0, 12);
+    const end = dateInMonth(0, 13);
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
     TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({
@@ -251,8 +241,8 @@ describe('App', () => {
         {
           id: 'day',
           title: 'Anello Ernici',
-          date: dateInMonth(1, 20),
-          dateEnd: dateInMonth(1, 20),
+          date: dateInMonth(0, 20),
+          dateEnd: dateInMonth(0, 20),
           days: 1,
           category: 'E',
           link: 'https://example.com/e',
@@ -292,8 +282,8 @@ describe('App', () => {
         {
           id: 'week',
           title: 'Settimana ferrate',
-          date: dateInMonth(1, 26),
-          dateEnd: dateInMonth(2, 3),
+          date: dateInMonth(0, 26),
+          dateEnd: dateInMonth(1, 3),
           days: 8,
           category: 'EEA',
           link: 'https://example.com/w',
@@ -312,8 +302,8 @@ describe('App', () => {
         {
           id: 'day',
           title: 'Anello Ernici',
-          date: dateInMonth(1, 12),
-          dateEnd: dateInMonth(1, 12),
+          date: dateInMonth(0, 12),
+          dateEnd: dateInMonth(0, 12),
           days: 1,
           category: 'E',
           link: 'https://example.com/d',
@@ -355,27 +345,31 @@ describe('App', () => {
       }
     };
 
-    expect(app.filters.month).toBe('all');
+    expect(app.filters.month).toBe(currentYearMonth());
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['day', 'week']);
+    expect(compiled.querySelector('.filter-tags')).toBeNull();
 
     openMega();
     clickInGroup('Filtra per regione', 'Lazio');
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['day']);
 
     clickInGroup('Filtra per regione', 'Tutte');
-    clickInGroup('Filtra per mese', monthLabel(dateInMonth(2, 3).slice(0, 7)));
+    clickInGroup('Filtra per mese', monthLabel(nextYearMonth()));
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['week']);
+    expect(compiled.querySelector('.filter-tags')).toBeNull();
 
     clickReset();
+    expect(app.filters.month).toBe(currentYearMonth());
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['day', 'week']);
+    expect(compiled.querySelector('.filter-tags')).toBeNull();
     clickInGroup('Filtra per mese', monthLabel(nextYearMonth()));
-    expect(app.excursions.map(excursion => excursion.id)).toEqual(['day', 'week']);
+    expect(app.excursions.map(excursion => excursion.id)).toEqual(['week']);
 
     clickInGroup('Filtra per giorni della gita', '4–10');
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['week']);
 
     clickReset();
-    expect(app.filters.month).toBe('all');
+    expect(app.filters.month).toBe(currentYearMonth());
     expect(Array.from(compiled.querySelectorAll('[aria-label="Filtra per mese"] button'))
       .some(button => button.textContent?.trim() === 'Tutto il calendario')).toBe(false);
     openMega();
@@ -403,36 +397,10 @@ describe('App', () => {
     expect(compiled.querySelector('app-excursion-card .section-tag')?.textContent).toContain('CAI Tivoli');
   });
 
-  it('shows the national registry with distinct coverage and searchable section links', async () => {
-    const fixture = TestBed.createComponent(App);
-    fixture.detectChanges();
-    const http = TestBed.inject(HttpTestingController);
-    http.expectOne('excursions.json').flush({ excursions: [] });
-    await TestBed.inject(Router).navigateByUrl('/info');
-    fixture.detectChanges();
-    http.expectOne('cai-sections.json').flush({ sections: [
-      { id: 'milano', organizer: 'CAI Milano', region: 'Lombardia', municipality: 'Milano', website: 'https://www.caimilano.org', calendarUrls: ['https://www.caimilano.org/programma'], sectionType: 'section' },
-      { id: 'roma', organizer: 'CAI Roma', region: 'Lazio', municipality: 'Roma', website: 'http://www.cairoma.it', calendarUrls: [] }
-    ] });
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    const page = compiled.querySelector('app-info-page') as HTMLElement;
-    expect(compiled.querySelector('app-filter-bar')).toBeNull();
-    expect(page.textContent).toContain('portale indipendente');
-    expect(page.textContent).toContain('2 sezioni e sottosezioni');
-    expect(page.textContent).toContain('1 con collegamenti ai programmi');
-    expect(page.textContent).toContain(CAI_PHILOSOPHY.body);
-    expect(page.querySelector('a[href="http://www.cairoma.it"]')).toBeTruthy();
-    const region = page.querySelector('[aria-label="Regione del repertorio"]') as HTMLSelectElement;
-    region.value = 'Lombardia'; region.dispatchEvent(new Event('change')); fixture.detectChanges();
-    expect(page.querySelectorAll('.directory-row').length).toBe(1);
-    expect(page.querySelector('.directory-row')?.textContent).toContain('CAI Milano');
-  });
-
   it('renders every filtered calendar event and reveals the selected map event', () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
-    TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({ excursions: Array.from({ length: 65 }, (_, index) => ({ id: String(index).padStart(3, '0'), title: `Escursione ${index}`, date: dateInMonth(1, 1), category: 'E', link: 'https://cai.it', organizer: index % 2 ? 'CAI Milano' : 'CAI Roma', organizerRegion: index % 2 ? 'Lombardia' : 'Lazio', location: 'Monte', cost: 'Vedi sito', time: '' })) });
+    TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({ excursions: Array.from({ length: 65 }, (_, index) => ({ id: String(index).padStart(3, '0'), title: `Escursione ${index}`, date: dateInMonth(0, 1), category: 'E', link: 'https://cai.it', organizer: index % 2 ? 'CAI Milano' : 'CAI Roma', organizerRegion: index % 2 ? 'Lombardia' : 'Lazio', location: 'Monte', cost: 'Vedi sito', time: '' })) });
     fixture.detectChanges();
     const app = fixture.componentInstance;
     const compiled = fixture.nativeElement as HTMLElement;

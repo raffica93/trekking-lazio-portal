@@ -1,6 +1,6 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { SupabaseService } from './supabase.service';
+import { SupabaseService } from '../core/supabase.service';
 
 type SedeRow = {
   id: string;

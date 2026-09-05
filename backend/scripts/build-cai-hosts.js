@@ -25,7 +25,7 @@ function main() {
   const content = '// Generated from the official CAI registry by backend/scripts/build-cai-hosts.js.\n'
     + `export const CAI_DESTINATION_HOSTS: readonly string[] = ${JSON.stringify(destinationHosts(SOURCES), null, 2)};\n`;
   for (const output of [
-    '../../frontend/src/app/cai-destination-hosts.ts',
+    '../../frontend/src/app/core/cai-destination-hosts.ts',
     '../../supabase/functions/track-cai-click/cai-destination-hosts.ts'
   ]) fs.writeFileSync(path.join(__dirname, output), content);
   console.log(`Generated ${destinationHosts(SOURCES).length} verified CAI destination hosts`);

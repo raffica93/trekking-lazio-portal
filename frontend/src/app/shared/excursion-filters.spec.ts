@@ -129,16 +129,18 @@ describe('excursion filters', () => {
       .toEqual(['EEA', 'Lazio']);
   });
 
-  it('lands on all current and future months and resets without a month cap', () => {
+  it('lands on the current month without tagging it', () => {
     const now = new Date(2026, 7, 30);
     expect(currentYearMonth(now)).toBe('2026-08');
     expect(nextYearMonth(now)).toBe('2026-09');
-    expect(landingFilters(now).month).toBe('all');
+    expect(landingFilters(now).month).toBe('2026-08');
     expect(hasActiveFilters(DEFAULT_FILTERS, now)).toBe(false);
     expect(hasActiveFilters(landingFilters(now), now)).toBe(false);
     expect(hasActiveFilters({ ...DEFAULT_FILTERS, month: 'all' }, now)).toBe(false);
-    expect(hasActiveFilters({ ...DEFAULT_FILTERS, month: '2026-08' }, now)).toBe(true);
-    expect(extraFilterTags({ ...DEFAULT_FILTERS, month: '2026-08' }).map((tag) => tag.label)).toEqual(['Ago 2026']);
+    expect(hasActiveFilters({ ...DEFAULT_FILTERS, month: '2026-08' }, now)).toBe(false);
+    expect(hasActiveFilters({ ...DEFAULT_FILTERS, month: '2026-09' }, now)).toBe(true);
+    expect(extraFilterTags({ ...DEFAULT_FILTERS, month: '2026-08' }).map((tag) => tag.label)).toEqual([]);
+    expect(extraFilterTags({ ...DEFAULT_FILTERS, month: '2026-09' }).map((tag) => tag.label)).toEqual([]);
     expect(extraFilterTags(landingFilters(now)).map((tag) => tag.label)).toEqual([]);
   });
 

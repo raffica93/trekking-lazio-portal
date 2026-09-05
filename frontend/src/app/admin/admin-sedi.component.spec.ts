@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { AdminSediComponent } from './admin-sedi.component';
-import { SupabaseService } from './supabase.service';
+import { SupabaseService } from '../core/supabase.service';
 
 describe('AdminSediComponent', () => {
   const payload = {

@@ -1,10 +1,10 @@
 import { Injectable, Injector, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, defer, map } from 'rxjs';
-import { Excursion } from './excursion.model';
-import { currentAndFutureExcursions, currentMonthStart, normalizeExcursion } from './excursion-filters';
-import { isSupabaseConfigured } from './supabase.config';
-import { PlaceRow, placeToExcursion } from './place.model';
+import { Excursion } from '../shared/excursion.model';
+import { currentAndFutureExcursions, currentMonthStart, normalizeExcursion } from '../shared/excursion-filters';
+import { isSupabaseConfigured } from '../core/supabase.config';
+import { PlaceRow, placeToExcursion } from '../shared/place.model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +35,7 @@ export class ExcursionService {
   }
 
   private async loadPublished(): Promise<Excursion[]> {
-    const { SupabaseService } = await import('./supabase.service');
+    const { SupabaseService } = await import('../core/supabase.service');
     const supabase = this.injector.get(SupabaseService);
     const rows: PlaceRow[] = [];
     const pageSize = 500;

@@ -1,4 +1,4 @@
-import { CAI_SEZIONE_LINKS } from './cai-info.data';
+import { CAI_SEZIONE_LINKS } from '../info/cai-info.data';
 import { sectionColor } from './section-color';
 
 describe('sectionColor', () => {

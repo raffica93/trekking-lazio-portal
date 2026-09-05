@@ -4,9 +4,9 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { firstValueFrom } from 'rxjs';
 import { vi } from 'vitest';
 import { ExcursionService } from './excursion.service';
-import { SupabaseService } from './supabase.service';
-import { supabaseRuntimeConfig } from './supabase.config';
-import { currentMonthStart } from './excursion-filters';
+import { SupabaseService } from '../core/supabase.service';
+import { supabaseRuntimeConfig } from '../core/supabase.config';
+import { currentMonthStart } from '../shared/excursion-filters';
 
 describe('ExcursionService nationwide database loading', () => {
   const row = (id: number) => ({ id: String(id), title: `Evento ${id}`, date: currentMonthStart(), date_end: null, category: 'E', external_url: 'http://cai.it/evento', organizer: 'CAI Milano', organizer_region: 'Lombardia', region: 'Piemonte', location: 'Monte', latitude: null, longitude: null });
