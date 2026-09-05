@@ -138,6 +138,7 @@ describe('excursion filters', () => {
     expect(hasActiveFilters(landingFilters(now), now)).toBe(false);
     expect(hasActiveFilters({ ...DEFAULT_FILTERS, month: 'all' }, now)).toBe(false);
     expect(hasActiveFilters({ ...DEFAULT_FILTERS, month: '2026-08' }, now)).toBe(true);
+    expect(extraFilterTags({ ...DEFAULT_FILTERS, month: '2026-08' }).map((tag) => tag.label)).toEqual(['Ago 2026']);
     expect(extraFilterTags(landingFilters(now)).map((tag) => tag.label)).toEqual([]);
   });
 

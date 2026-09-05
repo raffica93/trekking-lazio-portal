@@ -308,6 +308,9 @@ const DISTANCE_LABELS: Record<string, string> = {
 
 export function extraFilterTags(filters: FilterState): FilterTag[] {
   const tags: FilterTag[] = [];
+  if (filters.month !== 'all') {
+    tags.push({ id: 'month', label: monthLabel(filters.month), patch: { month: 'all' } });
+  }
   if (filters.organizerRegion !== 'all') {
     tags.push({ id: 'organizerRegion', label: `CAI ${filters.organizerRegion}`, patch: { organizerRegion: 'all', organizer: 'all' } });
   }
