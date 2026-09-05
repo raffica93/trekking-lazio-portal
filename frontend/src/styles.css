@@ -1,5 +1,9 @@
 @import "tailwindcss";
 @import '@spartan-ng/brain/hlm-tailwind-preset.css';
+@import 'leaflet.markercluster/dist/MarkerCluster.css';
+
+.event-cluster { display: grid; place-items: center; border: 4px solid #ecfccbc9; border-radius: 50%; background: #064e3b; color: #fff; font: 700 12px/1 'IBM Plex Mono', monospace; box-shadow: 0 2px 8px #123f3455; }
+.leaflet-marker-icon:focus-visible { outline: 3px solid #65a30d; outline-offset: 3px; }
 
 html,
 body {
@@ -98,7 +102,7 @@ body {
   }
 
   app-filter-bar .filter-mega {
-    max-height: calc(100dvh - 10.5rem) !important;
+    max-height: calc(100dvh - 20rem) !important;
     overflow-y: auto !important;
     overscroll-behavior: contain;
     padding-bottom: calc(1rem + env(safe-area-inset-bottom)) !important;

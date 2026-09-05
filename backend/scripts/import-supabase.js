@@ -8,6 +8,8 @@ const {
 } = require('../scraper');
 
 const DATA_FILE = path.join(__dirname, '..', 'data', 'excursions.json');
+const REGISTRY_FILE = path.join(__dirname, '..', 'data', 'cai-sections.json');
+const STATUS_FILE = path.join(__dirname, '..', 'data', 'scrape-status.json');
 const BATCH_SIZE = 200;
 
 function requiredEnvironment(name) {
@@ -36,12 +38,6 @@ function numberOrNull(value) {
   return typeof value === 'number' && Number.isFinite(value) ? value : null;
 }
 
-function requiredNumber(value, field, excursionId) {
-  const number = numberOrNull(value);
-  if (number == null) throw new Error(`Excursion ${excursionId} has no valid ${field}`);
-  return number;
-}
-
 function importStatus(env = process.env) {
   const status = env.SUPABASE_IMPORT_STATUS ?? 'draft';
   if (status !== 'draft' && status !== 'published') {
@@ -63,7 +59,7 @@ async function existingPlaces(supabase, sourceIds) {
   for (const batch of chunk(sourceIds)) {
     const { data, error } = await supabase
       .from('places')
-      .select('source_id, latitude, longitude, coordinates_quality, status')
+      .select('source_id, latitude, longitude, coordinates_quality, status, organizer_region, cai_section_id')
       .in('source_id', batch);
     if (error) throw error;
     for (const row of data || []) {
@@ -110,16 +106,19 @@ async function importNewPlaces({ supabase, excursions, status }) {
 
     const row = existing.get(sourceId);
     if (!row) {
-      if (!hasFiniteCoords(excursion)) {
-        skippedUnlocated += 1;
-        continue;
-      }
       toInsert.push(toPlaceRow(excursion, status));
       continue;
     }
 
-    const patch = coordPatchForExisting(row, excursion);
-    if (patch) toUpdate.push({ sourceId, patch });
+    const patch = coordPatchForExisting(row, excursion) || {};
+    // Enrich organizer metadata without overwriting editorial title/status/photos.
+    if (!row.organizer_region && textOrNull(excursion.organizerRegion)) {
+      patch.organizer_region = excursion.organizerRegion.trim();
+    }
+    if (!row.cai_section_id && textOrNull(excursion.caiSectionId || excursion.sourceId)) {
+      patch.cai_section_id = (excursion.caiSectionId || excursion.sourceId).trim();
+    }
+    if (Object.keys(patch).length) toUpdate.push({ sourceId, patch });
   }
 
   for (const batch of chunk(toInsert)) {
@@ -148,10 +147,15 @@ function toPlaceRow(excursion, status) {
   const sourceId = textOrNull(excursion.id);
   const title = textOrNull(excursion.title);
   const date = textOrNull(excursion.date);
-  const externalUrl = textOrNull(excursion.link)?.replace(/^http:\/\//i, 'https://');
-  const location = textOrNull(excursion.location);
+  const externalUrl = textOrNull(excursion.link);
+  const location = textOrNull(excursion.location) || 'Località da verificare sul programma CAI';
   if (!sourceId || !title || !date || !externalUrl || !location) {
     throw new Error(`Excursion ${sourceId ?? '(unknown)'} is missing an id, title, date, link, or location`);
+  }
+  let parsedUrl;
+  try { parsedUrl = new URL(externalUrl); } catch { throw new Error(`Excursion ${sourceId} has an invalid link`); }
+  if (!['https:', 'http:'].includes(parsedUrl.protocol) || parsedUrl.username || parsedUrl.password) {
+    throw new Error(`Excursion ${sourceId} has an invalid link`);
   }
 
   const titleSlug = slugify(title).slice(0, 80).replace(/-+$/g, '') || 'itinerario';
@@ -163,15 +167,17 @@ function toPlaceRow(excursion, status) {
     date,
     date_end: textOrNull(excursion.dateEnd),
     days: Number.isInteger(excursion.days) && excursion.days > 0 ? excursion.days : null,
-    category: textOrNull(excursion.category) ?? 'E',
+    category: textOrNull(excursion.category) ?? 'ND',
     external_url: externalUrl,
-    organizer: textOrNull(excursion.organizer) ?? 'CAI Roma',
+    organizer: textOrNull(excursion.organizer) ?? 'Sezione CAI',
+    organizer_region: textOrNull(excursion.organizerRegion),
+    cai_section_id: textOrNull(excursion.caiSectionId || excursion.sourceId),
     location,
-    municipality: null,
-    province: null,
+    municipality: textOrNull(excursion.municipality),
+    province: textOrNull(excursion.province),
     region: textOrNull(excursion.region),
-    latitude: requiredNumber(excursion.lat, 'lat', sourceId),
-    longitude: requiredNumber(excursion.lng, 'lng', sourceId),
+    latitude: hasFiniteCoords(excursion) ? numberOrNull(excursion.lat) : null,
+    longitude: hasFiniteCoords(excursion) ? numberOrNull(excursion.lng) : null,
     cost: textOrNull(excursion.cost),
     cost_amount: numberOrNull(excursion.costAmount),
     time: textOrNull(excursion.time),
@@ -192,6 +198,44 @@ function toPlaceRow(excursion, status) {
   };
 }
 
+function sectionToRow(section, sourceStatus = {}, generatedAt = null) {
+  return {
+    id: section.id,
+    name: section.organizer || section.name,
+    organizer_region: textOrNull(section.region),
+    directory_id: section.directoryId == null ? null : String(section.directoryId),
+    section_type: textOrNull(section.sectionType),
+    parent_section_id: textOrNull(section.parentSectionId),
+    website_url: textOrNull(section.website),
+    directory_url: textOrNull(section.directoryUrl),
+    calendar_urls: Array.isArray(section.calendarUrls) ? section.calendarUrls : [],
+    adapter: textOrNull(section.template || section.extractor),
+    discovery_status: section.status || (section.enabled ? 'verified' : 'pending'),
+    scrape_status: textOrNull(sourceStatus.status),
+    event_count: Number.isInteger(sourceStatus.excursions) ? sourceStatus.excursions : (sourceStatus.eventCount || 0),
+    checked_at: section.checkedAt || generatedAt,
+    updated_at: new Date().toISOString()
+  };
+}
+
+async function importSections({ supabase, registry, scrapeStatus = {} }) {
+  const statuses = new Map((scrapeStatus.sources || []).map((row) => [row.id, row]));
+  const rows = (registry.sections || []).map((section) => sectionToRow(section, statuses.get(section.id), registry.generatedAt));
+  for (const batch of chunk(rows)) {
+    const { error } = await supabase.from('cai_sections').upsert(batch, { onConflict: 'id' });
+    if (error) throw error;
+  }
+  return rows.length;
+}
+
+function attachSectionMetadata(excursions, sources) {
+  const byOrganizer = new Map(sources.map((source) => [source.organizer, source]));
+  return excursions.map((excursion) => {
+    const source = byOrganizer.get(excursion.organizer);
+    return source ? { ...excursion, caiSectionId: source.id, organizerRegion: source.region || excursion.organizerRegion } : excursion;
+  });
+}
+
 function readExcursions(file = DATA_FILE) {
   const payload = JSON.parse(fs.readFileSync(file, 'utf8'));
   if (!Array.isArray(payload.excursions)) throw new Error('Expected an "excursions" array in the source JSON');
@@ -204,13 +248,22 @@ async function main() {
     requiredEnvironment('SUPABASE_SERVICE_ROLE_KEY'),
     { auth: { autoRefreshToken: false, persistSession: false, detectSessionInUrl: false } }
   );
+  const { SOURCES } = require('../sources');
+  if (fs.existsSync(REGISTRY_FILE)) {
+    const sections = await importSections({
+      supabase,
+      registry: JSON.parse(fs.readFileSync(REGISTRY_FILE, 'utf8')),
+      scrapeStatus: fs.existsSync(STATUS_FILE) ? JSON.parse(fs.readFileSync(STATUS_FILE, 'utf8')) : {}
+    });
+    console.log(`Imported ${sections} CAI registry entries`);
+  }
   const result = await importNewPlaces({
     supabase,
-    excursions: readExcursions(),
+    excursions: attachSectionMetadata(readExcursions(), SOURCES),
     status: importStatus()
   });
   console.log(
-    `inserted ${result.inserted}, updated ${result.updated} coordinates, skipped ${result.skipped} existing`
+    `inserted ${result.inserted}, updated ${result.updated} coordinates/organizer metadata, skipped ${result.skipped} existing`
     + `${result.skippedUnlocated ? `, skipped ${result.skippedUnlocated} without coordinates` : ''}`
     + ` as ${result.status}`
   );
@@ -228,6 +281,9 @@ module.exports = {
   coordPatchForExisting,
   importNewPlaces,
   importStatus,
+  importSections,
+  sectionToRow,
+  attachSectionMetadata,
   readExcursions,
   slugify,
   toPlaceRow

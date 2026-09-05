@@ -8,6 +8,8 @@ export type DistanceBucket = 'all' | 'le10' | '10-15' | '15-20' | 'gt20';
 export type PrivateCarBucket = 'all' | 'yes' | 'no' | 'unknown';
 
 export interface FilterState {
+  query: string;
+  organizerRegion: string;
   category: 'all' | DifficultyCode;
   duration: DurationBucket;
   days: DaysBucket;
@@ -24,6 +26,8 @@ export interface FilterState {
 }
 
 export const DEFAULT_FILTERS: FilterState = {
+  query: '',
+  organizerRegion: 'all',
   category: 'all',
   duration: 'all',
   days: 'all',
@@ -49,23 +53,27 @@ export function nextYearMonth(now = new Date()): string {
   return currentYearMonth(new Date(now.getFullYear(), now.getMonth() + 1, 1));
 }
 
-export function landingFilters(now = new Date()): FilterState {
-  return { ...DEFAULT_FILTERS, month: nextYearMonth(now) };
+export function landingFilters(_now = new Date()): FilterState {
+  return { ...DEFAULT_FILTERS };
+}
+
+export function currentMonthStart(now = new Date()): string {
+  return `${currentYearMonth(now)}-01`;
+}
+
+/** Keep multi-day outings which overlap the current month, including year rollover. */
+export function currentAndFutureExcursions(excursions: Excursion[], now = new Date()): Excursion[] {
+  const start = currentMonthStart(now);
+  return excursions.filter((excursion) => (excursion.dateEnd || excursion.date) >= start);
 }
 
 const MONTH_SHORT = ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'];
 
 const REGION_ORDER = [
-  'Lazio',
-  'Abruzzo',
-  'Umbria',
-  'Toscana',
-  'Piemonte',
-  'Trentino-Alto Adige',
-  'Sicilia',
-  'Sardegna',
-  'Estero',
-  'Altro'
+  'Abruzzo', 'Basilicata', 'Calabria', 'Campania', 'Emilia-Romagna',
+  'Friuli-Venezia Giulia', 'Lazio', 'Liguria', 'Lombardia', 'Marche',
+  'Molise', 'Piemonte', 'Puglia', 'Sardegna', 'Sicilia', 'Toscana',
+  'Trentino-Alto Adige', 'Umbria', "Valle d’Aosta", 'Veneto', 'Estero', 'Altro'
 ];
 
 const REGION_RULES: { region: string; tests: RegExp[] }[] = [
@@ -193,15 +201,16 @@ export function normalizeExcursion(excursion: Excursion): Excursion {
 }
 
 export function monthLabel(yearMonth: string): string {
-  const [, month] = yearMonth.split('-');
-  return MONTH_SHORT[Number(month) - 1] ?? yearMonth;
+  const [year, month] = yearMonth.split('-');
+  return `${MONTH_SHORT[Number(month) - 1] ?? month} ${year}`;
 }
 
-export function availableMonths(excursions: Excursion[]): { id: string; label: string }[] {
+export function availableMonths(excursions: Excursion[], now = new Date()): { id: string; label: string }[] {
   const ids = new Set<string>();
+  const currentMonth = currentYearMonth(now);
   for (const excursion of excursions) {
     for (const month of monthsInRange(excursion.date, excursion.dateEnd || excursion.date)) {
-      ids.add(month);
+      if (month >= currentMonth) ids.add(month);
     }
   }
   return [...ids].sort().map((id) => ({ id, label: monthLabel(id) }));
@@ -218,18 +227,24 @@ export function availableRegions(excursions: Excursion[]): string[] {
   });
 }
 
-export function availableOrganizers(excursions: Excursion[]): string[] {
+export function availableOrganizerRegions(excursions: Excursion[]): string[] {
+  return [...new Set(excursions.map(item => item.organizerRegion).filter((region): region is string => Boolean(region)))]
+    .sort((a, b) => a.localeCompare(b, 'it'));
+}
+
+export function availableOrganizers(excursions: Excursion[], organizerRegion = 'all'): string[] {
   const ids = [...new Set(
     excursions
+      .filter((excursion) => organizerRegion === 'all' || excursion.organizerRegion === organizerRegion)
       .map((excursion) => excursion.organizer)
       .filter((organizer): organizer is string => Boolean(organizer))
   )];
   return ids.sort((a, b) => a.localeCompare(b, 'it'));
 }
 
-export function dateBounds(excursions: Excursion[]): { min: string; max: string } {
+export function dateBounds(excursions: Excursion[], now = new Date()): { min: string; max: string } {
   if (excursions.length === 0) {
-    return { min: '', max: '' };
+    return { min: currentMonthStart(now), max: '' };
   }
   let min = excursions[0].date;
   let max = excursions[0].dateEnd || excursions[0].date;
@@ -238,7 +253,7 @@ export function dateBounds(excursions: Excursion[]): { min: string; max: string 
     const end = excursion.dateEnd || excursion.date;
     if (end > max) max = end;
   }
-  return { min, max };
+  return { min: min < currentMonthStart(now) ? currentMonthStart(now) : min, max };
 }
 
 export function toIsoDate(date: Date): string {
@@ -293,6 +308,12 @@ const DISTANCE_LABELS: Record<string, string> = {
 
 export function extraFilterTags(filters: FilterState): FilterTag[] {
   const tags: FilterTag[] = [];
+  if (filters.organizerRegion !== 'all') {
+    tags.push({ id: 'organizerRegion', label: `CAI ${filters.organizerRegion}`, patch: { organizerRegion: 'all', organizer: 'all' } });
+  }
+  if (filters.query) {
+    tags.push({ id: 'query', label: filters.query, patch: { query: '' } });
+  }
   if (filters.duration !== 'all') {
     tags.push({ id: 'duration', label: DURATION_LABELS[filters.duration], patch: { duration: 'all' } });
   }
@@ -407,8 +428,14 @@ function matchesCost(excursion: Excursion, filters: FilterState): boolean {
   return inRange;
 }
 
-export function applyFilters(excursions: Excursion[], filters: FilterState): Excursion[] {
-  return excursions.filter((excursion) => {
+export function applyFilters(excursions: Excursion[], filters: FilterState, now = new Date()): Excursion[] {
+  const words = foldText(filters.query || '').trim().split(/\s+/).filter(Boolean);
+  return currentAndFutureExcursions(excursions, now).filter((excursion) => {
+    if (filters.organizerRegion !== 'all' && excursion.organizerRegion !== filters.organizerRegion) return false;
+    if (words.length) {
+      const text = foldText([excursion.title, excursion.location, excursion.organizer, excursion.organizerRegion, excursion.region, excursion.mountainGroup].filter(Boolean).join(' '));
+      if (!words.every(word => text.includes(word))) return false;
+    }
     if (filters.category !== 'all' && !parseDifficultyCodes(excursion.category).includes(filters.category)) {
       return false;
     }

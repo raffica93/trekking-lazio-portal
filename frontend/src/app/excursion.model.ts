@@ -7,6 +7,7 @@ export interface Excursion {
   category: string;
   link: string;
   organizer: string;
+  organizerRegion?: string;
   location: string;
   lat?: number | null;
   lng?: number | null;

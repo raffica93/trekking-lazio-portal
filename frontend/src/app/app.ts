@@ -6,7 +6,7 @@ import { Excursion } from './excursion.model';
 import { ExcursionCardComponent } from './excursion-card.component';
 import { FilterBarComponent } from './filter-bar.component';
 import { MapComponent } from './map.component';
-import { FilterState, applyFilters, landingFilters, DEFAULT_FILTERS } from './excursion-filters';
+import { FilterState, applyFilters, landingFilters, DEFAULT_FILTERS, currentYearMonth, currentMonthStart, currentAndFutureExcursions } from './excursion-filters';
 import { formatDateRange, nights } from './excursion-dates';
 import { primaryDifficulty } from './difficulty';
 import { sectionColor } from './section-color';
@@ -48,7 +48,7 @@ registerLocaleData(localeIt);
             >
             <div class="flex min-w-0 items-center gap-2">
               <span class="truncate text-lg font-black tracking-[-0.04em] md:text-2xl">TREKKING CAI</span>
-              <span class="rounded-sm bg-lime-300 px-1.5 py-0.5 text-[9px] font-black tracking-widest text-emerald-950">PORTAL</span>
+              <span class="rounded-sm bg-lime-300 px-1.5 py-0.5 text-[9px] font-black tracking-widest text-emerald-950">ITALIA</span>
             </div>
           </a>
           <a
@@ -70,29 +70,35 @@ registerLocaleData(localeIt);
 
       <!-- Main Content -->
       <main *ngIf="!onContentPage" class="portal-main relative z-0 flex min-h-0 flex-1 overflow-hidden md:flex-row">
-        <h1 class="sr-only">Escursioni CAI nel Lazio</h1>
+        <h1 class="sr-only">Calendario delle escursioni CAI in Italia</h1>
         <!-- Sidebar / List -->
         <aside
           class="calendar-pane flex h-full w-full shrink-0 flex-col border-r border-stone-200 bg-stone-50 md:w-[24rem] lg:w-[27rem]"
           [class.mobile-pane-active]="mobileView === 'calendar'"
         >
-          <div class="flex items-center justify-end border-b border-stone-200 bg-white px-4 py-2">
-            <span class="rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-bold tabular-nums text-emerald-900">{{ excursions.length }}</span>
+          <div class="calendar-heading">
+            <div><h2>Calendario CAI</h2><p>Dal mese corrente · {{ coveredSections }} sezioni con eventi</p></div>
+            <span class="rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-bold tabular-nums text-emerald-900" aria-live="polite">{{ excursions.length }} eventi</span>
           </div>
           
           <div #excursionList class="flex-1 overflow-y-auto p-3 md:p-4">
-            <div *ngIf="loading" class="flex justify-center p-8">
+            <div *ngIf="loading" class="flex justify-center p-8" role="status" aria-label="Caricamento degli eventi">
                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-700"></div>
             </div>
             
-            <ng-container *ngIf="!loading">
-              <app-excursion-card 
-                *ngFor="let ex of excursions" 
+            <div *ngIf="loadError" class="text-center p-6 text-slate-600" role="alert">
+              <p>Il calendario non è disponibile. Riprova a caricare gli eventi.</p>
+              <button type="button" class="retry-button" (click)="fetchExcursions()">Riprova</button>
+            </div>
+            <ng-container *ngIf="!loading && !loadError">
+              <p *ngIf="usingSnapshot" class="snapshot-note">Stai consultando l’ultima copia pubblicata del calendario.</p>
+              <app-excursion-card
+                *ngFor="let ex of visibleExcursions; trackBy: trackExcursion"
                 [excursion]="ex"
                 [selected]="ex.id === selectedId"
                 (selectExcursion)="onCardSelect($event)"
               ></app-excursion-card>
-              
+
               <div *ngIf="excursions.length === 0" class="text-center p-8 text-slate-500">
                 <p>Nessuna escursione con questi filtri.</p>
                 <button
@@ -103,6 +109,11 @@ registerLocaleData(localeIt);
               </div>
             </ng-container>
           </div>
+          <nav *ngIf="!loading && excursions.length > pageSize" class="calendar-pagination" aria-label="Pagine del calendario">
+            <button type="button" [disabled]="page === 1" (click)="changePage(page - 1)" aria-label="Pagina precedente">←</button>
+            <span>{{ pageStart }}–{{ pageEnd }} di {{ excursions.length }}</span>
+            <button type="button" [disabled]="page === pageCount" (click)="changePage(page + 1)" aria-label="Pagina successiva">→</button>
+          </nav>
         </aside>
 
         <!-- Map -->
@@ -147,6 +158,7 @@ registerLocaleData(localeIt);
             <h2>{{ selectedExcursion.title }}</h2>
             <p class="detail-place">{{ placeLine(selectedExcursion) }}</p>
             <p *ngIf="!hasCoords(selectedExcursion)" class="detail-note">Posizione da confermare</p>
+            <p *ngIf="hasCoords(selectedExcursion)" class="detail-note">{{ positionNote(selectedExcursion) }}</p>
             <p *ngIf="selectedExcursion.summary" class="detail-summary">{{ selectedExcursion.summary }}</p>
             <dl class="detail-meta" *ngIf="metaItems(selectedExcursion).length">
               <div *ngFor="let item of metaItems(selectedExcursion)">
@@ -171,7 +183,7 @@ registerLocaleData(localeIt);
               target="_blank"
               rel="noopener noreferrer"
               (click)="analytics.trackCaiLink($event, selectedExcursion.link, selectedExcursion.organizer, 'escursione')"
-            >Dettagli</a>
+            >Programma e iscrizioni sul sito CAI ↗</a>
           </article>
         </section>
       </main>
@@ -197,7 +209,7 @@ registerLocaleData(localeIt);
       </nav>
       <footer class="site-footer" aria-label="Informazioni del sito">
         <span>© {{ currentYear }} Trekking CAI</span>
-        <span class="footer-note">Escursioni pubblicate dalle sezioni CAI del Lazio</span>
+        <span class="footer-note">Portale indipendente · Eventi pubblicati dai CAI d’Italia</span>
         <nav aria-label="Link nel footer">
           <a routerLink="/servizi">Servizi</a>
           <a routerLink="/termini">Termini e condizioni</a>
@@ -221,6 +233,15 @@ registerLocaleData(localeIt);
     </div>
   `,
   styles: [`
+    .calendar-heading { display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding: .7rem 1rem; border-bottom: 1px solid #e7e5e4; background: #fff; }
+    .calendar-heading h2 { margin: 0; color: #064e3b; font-size: .85rem; font-weight: 800; }
+    .calendar-heading p { margin: .2rem 0 0; color: #57534e; font-size: .65rem; }
+    .calendar-heading > span { white-space: nowrap; }
+    .calendar-pagination { display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding: .45rem .8rem; border-top: 1px solid #e7e5e4; background: #fff; font: 600 .75rem/1.2 'IBM Plex Mono', monospace; }
+    .calendar-pagination button, .retry-button { min-width: 2.75rem; min-height: 2.5rem; border: 1px solid #bccdc3; border-radius: .4rem; background: #f3f6f3; color: #064e3b; font-weight: 800; cursor: pointer; }
+    .calendar-pagination button:disabled { opacity: .35; cursor: default; }
+    .calendar-pagination button:focus-visible { outline: 2px solid #047857; outline-offset: 2px; }
+    .snapshot-note { margin: 0 0 .6rem; color: #57534e; font-size: .7rem; }
     :host {
       display: block;
       height: 100vh;
@@ -540,6 +561,11 @@ export class App implements OnInit {
   allExcursions: Excursion[] = [];
   excursions: Excursion[] = [];
   loading = true;
+  loadError = false;
+  usingSnapshot = false;
+  readonly pageSize = 30;
+  page = 1;
+  private calendarMonth = currentYearMonth();
   filters: FilterState = landingFilters();
   selectedId: string | null = null;
   detailOpen = false;
@@ -583,9 +609,11 @@ export class App implements OnInit {
 
   fetchExcursions() {
     this.loading = true;
+    this.loadError = false;
     this.excursionService.getExcursions().subscribe({
       next: (data) => {
         this.allExcursions = data;
+        this.usingSnapshot = this.excursionService.source === 'snapshot';
         this.applyFilters();
         this.loading = false;
         this.changeDetector.markForCheck();
@@ -593,6 +621,7 @@ export class App implements OnInit {
       error: (err) => {
         console.error('Error fetching data', err);
         this.loading = false;
+        this.loadError = true;
         this.changeDetector.markForCheck();
       }
     });
@@ -600,6 +629,31 @@ export class App implements OnInit {
 
   get selectedExcursion(): Excursion | null {
     return this.excursions.find(excursion => excursion.id === this.selectedId) ?? null;
+  }
+
+  get coveredSections(): number { return new Set(this.allExcursions.map(item => item.organizer)).size; }
+  get visibleExcursions(): Excursion[] { return this.excursions.slice((this.page - 1) * this.pageSize, this.page * this.pageSize); }
+  get pageCount(): number { return Math.max(1, Math.ceil(this.excursions.length / this.pageSize)); }
+  get pageStart(): number { return (this.page - 1) * this.pageSize + 1; }
+  get pageEnd(): number { return Math.min(this.page * this.pageSize, this.excursions.length); }
+  trackExcursion(_index: number, excursion: Excursion): string { return excursion.id; }
+
+  changePage(page: number): void {
+    this.page = Math.max(1, Math.min(page, this.pageCount));
+    this.excursionList?.nativeElement.scrollTo?.({ top: 0 });
+    this.changeDetector.markForCheck();
+  }
+
+  @HostListener('document:visibilitychange')
+  @HostListener('window:focus')
+  refreshCalendarMonth(): void {
+    if (this.calendarMonth === currentYearMonth()) return;
+    this.calendarMonth = currentYearMonth();
+    this.allExcursions = currentAndFutureExcursions(this.allExcursions);
+    if (this.filters.month !== 'all' && this.filters.month < this.calendarMonth) this.filters = { ...this.filters, month: 'all' };
+    if (this.filters.dateTo && this.filters.dateTo < currentMonthStart()) this.filters = { ...this.filters, dateFrom: '', dateTo: '' };
+    else if (this.filters.dateFrom && this.filters.dateFrom < currentMonthStart()) this.filters = { ...this.filters, dateFrom: currentMonthStart() };
+    this.applyFilters();
   }
 
   onFiltersChange(filters: FilterState) {
@@ -614,12 +668,16 @@ export class App implements OnInit {
 
   onCardSelect(excursion: Excursion) {
     this.selectedId = excursion.id;
+    this.detailOpen = true;
+    this.mobileView = 'map';
     this.changeDetector.markForCheck();
   }
 
   onMapSelect(excursion: Excursion) {
     this.selectedId = excursion.id;
     this.detailOpen = true;
+    const index = this.excursions.findIndex(item => item.id === excursion.id);
+    this.page = Math.floor(Math.max(0, index) / this.pageSize) + 1;
     this.changeDetector.detectChanges();
     this.scrollSelectedIntoView();
   }
@@ -641,6 +699,12 @@ export class App implements OnInit {
 
   hasCoords(excursion: Excursion): boolean {
     return Number.isFinite(excursion.lat) && Number.isFinite(excursion.lng);
+  }
+
+  positionNote(excursion: Excursion): string {
+    return ['source', 'exact', 'trailhead'].includes(excursion.coordinatesQuality || '')
+      ? 'Coordinate della fonte. Verifica il punto di ritrovo nel programma CAI.'
+      : 'Posizione indicativa della zona: non identifica il punto di ritrovo.';
   }
 
   placeLine(excursion: Excursion): string {
@@ -682,6 +746,7 @@ export class App implements OnInit {
         color: sectionColor(excursion.organizer)
       });
     }
+    if (excursion.organizerRegion) items.push({ label: 'Regione del CAI', value: excursion.organizerRegion });
     if (this.isUseful(excursion.terrain)) {
       items.push({ label: 'Terreno', value: excursion.terrain! });
     }
@@ -705,8 +770,8 @@ export class App implements OnInit {
         : /privacy\/?$/.test(path)
           ? ['Privacy | Trekking CAI', 'Informazioni sulla privacy di Trekking CAI.', '/privacy']
           : /info\/?$/.test(path)
-            ? ['Info CAI Lazio | Trekking CAI', 'Informazioni sul CAI e sulle sezioni del Lazio.', '/info']
-            : ['Trekking CAI | Escursioni CAI nel Lazio', 'Scopri le prossime escursioni CAI nel Lazio: calendario aggiornato, mappa interattiva e informazioni dalle sezioni del territorio.', '/'];
+            ? ['Info CAI Italia | Trekking CAI', 'Informazioni sul CAI e sulle sezioni d’Italia.', '/info']
+            : ['Trekking CAI | Escursioni CAI in Italia', 'Scopri le prossime escursioni CAI in Italia: calendario aggiornato, mappa interattiva e informazioni dalle sezioni italiane.', '/'];
     const canonicalUrl = `https://trekking-cai.it${seo[2]}`;
     this.title.setTitle(seo[0]);
     this.meta.updateTag({ name: 'description', content: seo[1] });
@@ -720,6 +785,8 @@ export class App implements OnInit {
 
   private applyFilters() {
     this.excursions = applyFilters(this.allExcursions, this.filters);
+    this.page = 1;
+    this.excursionList?.nativeElement.scrollTo?.({ top: 0 });
     if (this.selectedId && !this.excursions.some(excursion => excursion.id === this.selectedId)) {
       this.selectedId = null;
       this.detailOpen = false;

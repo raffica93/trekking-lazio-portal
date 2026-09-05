@@ -251,7 +251,7 @@ function parseCaiRomaHtml(html, { now = DateTime.now() } = {}) {
   const excursions = [];
   let currentYear = now.year;
 
-  $('table').slice(0, 2).find('tr').each((_index, row) => {
+  $('table').find('tr').each((_index, row) => {
     const cells = $(row).find('td, th');
     const firstCell = $(cells[0]).text().replace(/\s+/g, ' ').trim();
     const heading = firstCell.match(
@@ -305,7 +305,7 @@ function parseCaiRomaHtml(html, { now = DateTime.now() } = {}) {
     });
   });
 
-  const today = now.startOf('day').toISODate();
+  const today = now.setZone('Europe/Rome').startOf('month').toISODate();
   return excursions
     .filter((excursion) => (excursion.dateEnd || excursion.date) >= today)
     .sort((a, b) => a.date.localeCompare(b.date));
@@ -386,6 +386,7 @@ function getApproximateCoords(title) {
 
 function applyApproximateCoords(excursion) {
   if (!excursion || typeof excursion !== 'object') return excursion;
+  if (excursion.sourceId || excursion.locationSource || excursion.coordinatesQuality === 'source') return excursion;
   if (PRECISE_COORD_QUALITY.has(excursion.coordinatesQuality)) return excursion;
 
   const currentUsable = hasFiniteCoords(excursion);

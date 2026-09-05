@@ -91,7 +91,7 @@ describe('App', () => {
     const filterBar = compiled.querySelector('app-filter-bar');
     const filters = compiled.querySelector('[aria-label="Filtri"]');
 
-    expect(app.allExcursions[0].link).toBe('https://example.com/e');
+    expect(app.allExcursions[0].link).toBe('http://example.com/e');
     expect(filters).toBeTruthy();
     expect(header?.nextElementSibling).toBe(filterBar);
     expect(filterBar?.querySelector('[aria-label="Filtri"]')).toBe(filters);
@@ -106,12 +106,12 @@ describe('App', () => {
     expect(megaFilters?.textContent).toContain('Durata');
     expect(megaFilters?.textContent).toContain('Distanza');
     expect(megaFilters?.contains(monthGroup)).toBe(false);
-    expect(filters?.firstElementChild).toBe(whenBand);
+    expect(filters?.firstElementChild?.getAttribute('aria-label')).toBe('Cerca eventi CAI in Italia');
     const landingMonth = nextYearMonth();
     const landingChip = Array.from(monthGroup?.querySelectorAll('button') ?? [])
-      .find(button => button.textContent?.trim() === monthLabel(landingMonth));
+      .find(button => button.textContent?.trim() === 'Tutto il calendario');
     expect(landingChip?.classList.contains('filter-chip-active')).toBe(true);
-    expect(app.filters.month).toBe(landingMonth);
+    expect(app.filters.month).toBe('all');
     expect(compiled.textContent).not.toContain('Prossime escursioni');
     expect(compiled.querySelector('app-map')).toBeNull();
     expect(compiled.querySelector('.map-placeholder')?.getAttribute('aria-label')).toBe('Caricamento della mappa');
@@ -184,11 +184,11 @@ describe('App', () => {
     expect(detail.textContent).toContain('Sentiero facile');
     expect(detail.textContent).toContain('Anello boschivo sui Colli Albani.');
     const detailCta = detail.querySelector('.detail-cta') as HTMLAnchorElement;
-    expect(detailCta?.getAttribute('href')).toBe('https://example.com/e');
+    expect(detailCta?.getAttribute('href')).toBe('http://example.com/e');
     const trackCaiLink = vi.spyOn(TestBed.inject(AnalyticsService), 'trackCaiLink');
     detailCta.addEventListener('click', event => event.preventDefault(), { once: true });
     detailCta.click();
-    expect(trackCaiLink).toHaveBeenCalledWith(expect.any(Event), 'https://example.com/e', 'CAI Roma', 'escursione');
+    expect(trackCaiLink).toHaveBeenCalledWith(expect.any(Event), 'http://example.com/e', 'CAI Roma', 'escursione');
     const header = detail.querySelector('.detail-header') as HTMLElement;
     const close = header?.querySelector('.detail-close') as HTMLElement;
     const chip = header?.querySelector('.difficulty-chip') as HTMLElement;
@@ -357,8 +357,8 @@ describe('App', () => {
       }
     };
 
-    expect(app.filters.month).toBe(nextYearMonth());
-    expect(app.excursions.map(excursion => excursion.id)).toEqual(['week', 'day']);
+    expect(app.filters.month).toBe('all');
+    expect(app.excursions.map(excursion => excursion.id)).toEqual(['day', 'week']);
 
     openMega();
     clickInGroup('Filtra per regione', 'Lazio');
@@ -368,10 +368,10 @@ describe('App', () => {
     clickInGroup('Filtra per mese', monthLabel(dateInMonth(2, 3).slice(0, 7)));
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['week']);
 
-    clickInGroup('Filtra per mese', 'Tutti');
-    expect(app.excursions.map(excursion => excursion.id)).toEqual(['week', 'day']);
+    clickInGroup('Filtra per mese', 'Tutto il calendario');
+    expect(app.excursions.map(excursion => excursion.id)).toEqual(['day', 'week']);
     clickInGroup('Filtra per mese', monthLabel(nextYearMonth()));
-    expect(app.excursions.map(excursion => excursion.id)).toEqual(['week', 'day']);
+    expect(app.excursions.map(excursion => excursion.id)).toEqual(['day', 'week']);
 
     clickInGroup('Filtra per giorni della gita', '4–10');
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['week']);
@@ -379,7 +379,7 @@ describe('App', () => {
     clickReset();
     expect(app.filters.month).toBe('all');
     expect(Array.from(compiled.querySelectorAll('[aria-label="Filtra per mese"] button'))
-      .find(button => button.textContent?.trim() === 'Tutti')
+      .find(button => button.textContent?.trim() === 'Tutto il calendario')
       ?.classList.contains('filter-chip-active')).toBe(true);
     openMega();
     clickInGroup('Filtra per distanza', '≤10 km');
@@ -397,7 +397,7 @@ describe('App', () => {
 
     clickReset();
     openMega();
-    const section = compiled.querySelector('[aria-label="Filtra per sezione negli altri filtri"]') as HTMLSelectElement;
+    const section = compiled.querySelector('[aria-label="Filtra per sezione CAI"]') as HTMLSelectElement;
     expect(section).toBeTruthy();
     section.value = 'CAI Tivoli';
     section.dispatchEvent(new Event('change'));
@@ -406,85 +406,51 @@ describe('App', () => {
     expect(compiled.querySelector('app-excursion-card .section-tag')?.textContent).toContain('CAI Tivoli');
   });
 
-  it('opens the Info page from the header control and renders sourced CAI content', async () => {
+  it('shows the national registry with distinct coverage and searchable section links', async () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
-    TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({ excursions: [] });
+    const http = TestBed.inject(HttpTestingController);
+    http.expectOne('excursions.json').flush({ excursions: [] });
+    await TestBed.inject(Router).navigateByUrl('/info');
     fixture.detectChanges();
-
+    http.expectOne('cai-sections.json').flush({ sections: [
+      { id: 'milano', organizer: 'CAI Milano', region: 'Lombardia', municipality: 'Milano', website: 'https://www.caimilano.org', calendarUrls: ['https://www.caimilano.org/programma'], sectionType: 'section' },
+      { id: 'roma', organizer: 'CAI Roma', region: 'Lazio', municipality: 'Roma', website: 'http://www.cairoma.it', calendarUrls: [] }
+    ] });
+    fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    const header = compiled.querySelector('header') as HTMLElement;
-    const title = Array.from(header.querySelectorAll('span'))
-      .find(span => span.textContent?.trim() === 'TREKKING CAI') as HTMLElement;
-    const info = Array.from(header.querySelectorAll('a'))
-      .find(anchor => anchor.textContent?.trim() === 'Info') as HTMLAnchorElement;
-
-    expect(header).toBeTruthy();
-    expect(title).toBeTruthy();
-    expect(info).toBeTruthy();
-    expect(info.getAttribute('aria-label')).toBe('Info');
-    expect(Boolean(title.compareDocumentPosition(info) & Node.DOCUMENT_POSITION_FOLLOWING)).toBe(true);
-
-    info.click();
-    await fixture.whenStable();
-    fixture.detectChanges();
-
-    const router = TestBed.inject(Router);
-    expect(router.url).toMatch(/\/info$/);
-    expect(compiled.querySelector('app-info-page')).toBeTruthy();
-    expect(compiled.querySelector('app-filter-bar')).toBeNull();
-    expect(compiled.querySelector('app-map')).toBeNull();
-    expect(compiled.querySelector('app-admin-shell')).toBeNull();
-
     const page = compiled.querySelector('app-info-page') as HTMLElement;
-    const shell = compiled.querySelector('.flex.h-dvh.flex-col') as HTMLElement;
-    expect(shell).toBeTruthy();
-    expect(shell.contains(header)).toBe(true);
-    expect(shell.contains(page)).toBe(true);
-    expect(compiled.querySelector('router-outlet')?.parentElement).toBe(shell);
-    expect(compiled.querySelector('router-outlet')?.classList.contains('hidden')).toBe(true);
-    expect(page.querySelector('#info-title')?.textContent?.trim()).toBe('Info');
-    const inner = page.querySelector('.info-inner') as HTMLElement;
-    expect(inner.firstElementChild?.classList.contains('kicker')).toBe(true);
-    expect(Number.parseFloat(getComputedStyle(inner).paddingTop)).toBeLessThanOrEqual(16);
-    const text = page.textContent ?? '';
-    expect(text).toContain(CAI_PHILOSOPHY.body);
-    expect(text).toContain('alpinismo in ogni sua manifestazione');
-    expect(text).toContain('studio delle montagne');
-    expect(text).toContain('difesa del loro ambiente naturale');
-    expect(text).toContain('partecipare alle uscite');
-    expect(text).toContain('sezione di appartenenza');
-    expect(text).toContain('iscrizione');
+    expect(compiled.querySelector('app-filter-bar')).toBeNull();
+    expect(page.textContent).toContain('portale indipendente');
+    expect(page.textContent).toContain('2 sezioni e sottosezioni');
+    expect(page.textContent).toContain('1 con collegamenti ai programmi');
+    expect(page.textContent).toContain(CAI_PHILOSOPHY.body);
+    expect(page.querySelector('a[href="http://www.cairoma.it"]')).toBeTruthy();
+    const region = page.querySelector('[aria-label="Regione del repertorio"]') as HTMLSelectElement;
+    region.value = 'Lombardia'; region.dispatchEvent(new Event('change')); fixture.detectChanges();
+    expect(page.querySelectorAll('.directory-row').length).toBe(1);
+    expect(page.querySelector('.directory-row')?.textContent).toContain('CAI Milano');
+  });
 
-    const costTable = page.querySelector('[aria-label="Costi di iscrizione alle sezioni CAI del Lazio"]') as HTMLTableElement;
-    expect(costTable).toBeTruthy();
-    const costBody = costTable.querySelector('tbody')?.textContent ?? '';
-    for (const row of CAI_QUOTE_ROWS) {
-      expect(costBody).toContain(row.name);
-      expect(costBody).toContain(quoteDisplay(row.ordinario));
-      const source = costTable.querySelector(`a[href="${row.sourceUrl}"]`);
-      expect(source).toBeTruthy();
-    }
-    expect(costBody).toContain(UNPUBLISHED_LABEL);
-    expect(costBody).toContain('CAI Viterbo');
-    expect(costBody).toContain('CAI Roma');
-
-    const linksTable = page.querySelector('[aria-label="Siti e agende delle sezioni CAI del Lazio"]') as HTMLTableElement;
-    expect(linksTable).toBeTruthy();
-    const linksBody = linksTable.querySelector('tbody')?.textContent ?? '';
-    for (const sezione of CAI_SEZIONE_LINKS) {
-      expect(linksBody).toContain(sezione.name);
-      const site = linksTable.querySelector(`a[href="${sezione.websiteUrl}"]`);
-      expect(site).toBeTruthy();
-      if (sezione.hasAgenda) {
-        expect(linksBody).toContain(AGENDA_YES_LABEL);
-        expect(linksTable.querySelector(`a[href="${sezione.agendaUrl}"]`)).toBeTruthy();
-      }
-    }
-    expect(linksBody).toContain(AGENDA_NO_LABEL);
-    const esperia = CAI_SEZIONE_LINKS.find(sezione => sezione.id === 'esperia');
-    expect(esperia?.hasAgenda).toBe(true);
-    expect(esperia?.agendaUrl).toContain('calendario_2026.pdf');
-    expect(linksTable.querySelector(`a[href="${esperia?.agendaUrl}"]`)).toBeTruthy();
+  it('paginates long calendars and reveals the selected map event on its correct page', () => {
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({ excursions: Array.from({ length: 65 }, (_, index) => ({ id: String(index).padStart(3, '0'), title: `Escursione ${index}`, date: dateInMonth(1, 1), category: 'E', link: 'https://cai.it', organizer: index % 2 ? 'CAI Milano' : 'CAI Roma', organizerRegion: index % 2 ? 'Lombardia' : 'Lazio', location: 'Monte', cost: 'Vedi sito', time: '' })) });
+    fixture.detectChanges();
+    const app = fixture.componentInstance;
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(app.excursions.length).toBe(65);
+    expect(compiled.querySelectorAll('app-excursion-card').length).toBe(30);
+    app.onMapSelect(app.excursions[64]); fixture.detectChanges();
+    expect(app.page).toBe(3);
+    expect(compiled.querySelector('[data-excursion-id="064"]')).toBeTruthy();
+    const region = compiled.querySelector('[aria-label="Filtra per regione del CAI"]') as HTMLSelectElement;
+    const section = compiled.querySelector('[aria-label="Filtra per sezione CAI"]') as HTMLSelectElement;
+    section.value = 'CAI Roma'; section.dispatchEvent(new Event('change')); fixture.detectChanges();
+    region.value = 'Lombardia'; region.dispatchEvent(new Event('change')); fixture.detectChanges();
+    expect(app.page).toBe(1);
+    expect(app.filters.organizer).toBe('all');
+    expect(app.excursions.every(item => item.organizer === 'CAI Milano')).toBe(true);
+    expect(Array.from(section.options).map(option => option.value)).toEqual(['all', 'CAI Milano']);
   });
 });

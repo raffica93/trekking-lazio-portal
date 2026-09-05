@@ -10,13 +10,15 @@ const frontendPublic = path.join(__dirname, '..', '..', 'frontend', 'public');
 
 function usage() {
   return [
-    'Usage: npm run scrape -- [--dry-run] [--source id]',
+    'Usage: npm run scrape -- [--all | --source id] [--region "Lazio"] [--concurrency 8] [--dry-run] [--strict]',
     '       npm run scrape:roma',
     '       node scripts/sede.js <id|all> [--dry-run]',
     '',
-    'One script per CAI section. Roma uses the HTML parser;',
-    'other enabled sections use Gemini 3.5 Flash (GEMINI_KEY).',
-    'Without GEMINI_KEY, Roma still runs and other sections keep their cache.'
+    'One orchestrator, one isolated adapter process per CAI section.',
+    'Public JSON-LD, ICS, WordPress calendars, HTML and annual PDFs; no AI key required.',
+    'Previous-month events are excluded dynamically in Europe/Rome; future months have no upper limit.',
+    'Incomplete sources keep their valid cache and are reported in scrape-status.json.',
+    '--strict exits with an error when a source fails with no cache.'
   ].join('\n');
 }
 
@@ -91,6 +93,8 @@ async function runScrape({
     sources,
     existingPayload: existing || {},
     sourceIds: args.sources.length > 0 ? args.sources : undefined,
+    region: args.region,
+    concurrency: args.concurrency,
     log
   });
 
@@ -108,7 +112,7 @@ async function runScrape({
     copyFrontend: statusFile === statusPath
   });
 
-  const hardFail = (result.hardFailures || []).length > 0;
+  const hardFail = Boolean(args.strict && (result.hardFailures || []).length > 0);
 
   if (unchanged) {
     log.log(`No changes: ${payload.excursions.length} upcoming excursions`);

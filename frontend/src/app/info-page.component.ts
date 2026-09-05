@@ -1,20 +1,21 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
-import {
-  AGENDA_NO_LABEL,
-  AGENDA_YES_LABEL,
-  CAI_PARTICIPATION,
-  CAI_PARTICIPATION_POINTS,
-  CAI_PHILOSOPHY,
-  CAI_QUOTE_ROWS,
-  CAI_SEZIONE_LINKS,
-  quoteDisplay,
-  UNPUBLISHED_LABEL,
-  type QuoteRow,
-  type SezioneLink
-} from './cai-info.data';
+import { CAI_PARTICIPATION, CAI_PARTICIPATION_POINTS, CAI_PHILOSOPHY } from './cai-info.data';
 import { sectionColor } from './section-color';
 import { AnalyticsService } from './analytics.service';
+
+interface DirectorySection {
+  id: string;
+  organizer: string;
+  region: string;
+  municipality?: string;
+  website?: string;
+  directoryUrl?: string;
+  calendarUrls: string[];
+  sectionType?: string;
+}
+
 
 @Component({
   selector: 'app-info-page',
@@ -23,11 +24,11 @@ import { AnalyticsService } from './analytics.service';
   template: `
     <article class="info-page" aria-labelledby="info-title">
       <div class="info-inner">
-        <p class="kicker">Club Alpino Italiano · Lazio</p>
-        <h1 id="info-title">Info</h1>
+        <p class="kicker">Eventi CAI · Tutta Italia</p>
+        <h1 id="info-title">Il CAI, le sezioni, il calendario</h1>
         <p class="lead">
-          Perché esiste il CAI, come una sola iscrizione apre tutte le uscite, quanto costa davvero tesserarsi
-          nelle sezioni del Lazio — con le fonti, senza cifre inventate.
+          Trekking CAI raccoglie e organizza la consultazione degli eventi pubblicati dalle sezioni CAI in Italia.
+          È un portale indipendente: le escursioni sono organizzate dalle singole sezioni, che gestiscono iscrizioni e aggiornamenti.
         </p>
         <p class="back-row">
           <a routerLink="/" class="back">← Torna alla mappa</a>
@@ -65,120 +66,57 @@ import { AnalyticsService } from './analytics.service';
           </ul>
         </section>
 
-        <section aria-labelledby="costi-title">
-          <h2 id="costi-title">Costi di iscrizione alle sezioni CAI del Lazio</h2>
-          <p>
-            Prima riga: <strong>quote minime nazionali 2026</strong> (pavimento fissato dall’Assemblea dei Delegati).
-            Sotto: i tariffari <strong>pubblicati</strong> dalle sezioni. Dove il sito non mostra gli importi,
-            la cella resta «{{ unpublished }}» — non stimiamo dal minimo nazionale.
-          </p>
-          <div class="table-wrap">
-            <table aria-label="Costi di iscrizione alle sezioni CAI del Lazio">
-              <thead>
-                <tr>
-                  <th>Sezione</th>
-                  <th>Anno</th>
-                  <th>Ordinario</th>
-                  <th>Familiare</th>
-                  <th>Juniores 18–25</th>
-                  <th>Giovane</th>
-                  <th>Tessera / prima iscrizione</th>
-                  <th>Fonte</th>
-                </tr>
-              </thead>
-              <tbody>
-                @for (row of quotes; track row.id) {
-                  <tr [class.floor]="row.isNationalFloor">
-                    <th scope="row">
-                      @if (row.isNationalFloor) {
-                        {{ row.name }}
-                      } @else {
-                        <span class="section-tag">
-                          <span
-                            class="section-dot"
-                            [style.background-color]="colorFor(row.name)"
-                            aria-hidden="true"
-                          ></span>
-                          {{ row.name }}
-                        </span>
-                      }
-                    </th>
-                    <td>{{ row.year ?? '—' }}</td>
-                    <td>{{ display(row.ordinario) }}</td>
-                    <td>{{ display(row.familiare) }}</td>
-                    <td>{{ display(row.juniores) }}</td>
-                    <td>{{ display(row.giovane) }}</td>
-                    <td>{{ display(row.tesseraNuova) }}</td>
-                    <td>
-                      <a [href]="row.sourceUrl" target="_blank" rel="noopener noreferrer">{{ row.sourceLabel }}</a>
-                    </td>
-                  </tr>
-                }
-              </tbody>
-            </table>
-          </div>
-        </section>
-
         <section aria-labelledby="sezioni-title">
-          <h2 id="sezioni-title">Sezioni del Lazio: sito e agenda</h2>
-          <p>
-            Le 19 sezioni del Gruppo Regionale Lazio. «{{ agendaYes }}» se pubblicano un programma, calendario
-            o pieghevole di uscite; «{{ agendaNo }}» se al momento della ricerca non risulta un’agenda pubblica.
-          </p>
-          <div class="table-wrap">
-            <table aria-label="Siti e agende delle sezioni CAI del Lazio">
-              <thead>
-                <tr>
-                  <th>Sezione</th>
-                  <th>Sito</th>
-                  <th>Agenda</th>
-                  <th>Calendario / programma</th>
-                </tr>
-              </thead>
-              <tbody>
-                @for (sezione of sezioni; track sezione.id) {
-                  <tr>
-                    <th scope="row">
-                      <span class="section-tag">
-                        <span
-                          class="section-dot"
-                          [style.background-color]="colorFor(sezione.name)"
-                          aria-hidden="true"
-                        ></span>
-                        {{ sezione.name }}
-                      </span>
-                    </th>
-                    <td>
-                      <a
-                        [href]="sezione.websiteUrl"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        (click)="trackSectionLink($event, sezione, 'sito')"
-                      >{{ hostOf(sezione.websiteUrl) }}</a>
-                    </td>
-                    <td>{{ sezione.hasAgenda ? agendaYes : agendaNo }}</td>
-                    <td>
-                      @if (sezione.agendaUrl) {
-                        <a
-                          [href]="sezione.agendaUrl"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          (click)="trackSectionLink($event, sezione, 'agenda')"
-                        >{{ sezione.agendaLabel }}</a>
-                      } @else {
-                        —
-                      }
-                    </td>
-                  </tr>
-                }
-              </tbody>
-            </table>
+          <h2 id="sezioni-title">Le sezioni CAI d’Italia</h2>
+          <p>Consulta il repertorio delle sezioni e sottosezioni, con i collegamenti ai siti e ai programmi individuati. La presenza nel repertorio non garantisce che tutti gli eventi siano già nel calendario.</p>
+          <p class="source"><a href="https://www.cai.it/organizzazione/sezioni/" target="_blank" rel="noopener noreferrer">Repertorio ufficiale CAI</a></p>
+          <div class="directory-controls">
+            <label>Cerca sezione o città<input type="search" [value]="query" (input)="search($event)" placeholder="Es. Milano, Aosta, Roma" aria-label="Cerca sezione nel repertorio"></label>
+            <label>Regione<select [value]="region" (change)="chooseRegion($event)" aria-label="Regione del repertorio"><option value="all">Tutta Italia</option>@for (item of regions; track item) {<option [value]="item">{{ item }}</option>}</select></label>
           </div>
+          @if (loading) { <p role="status">Caricamento delle sezioni…</p> }
+          @if (loadError) { <p role="alert">Il repertorio non è disponibile. Puoi consultare l’elenco ufficiale CAI dal collegamento qui sopra.</p> }
+          @if (!loading && !loadError) {
+            <p class="directory-count" aria-live="polite">{{ filteredSections.length }} sezioni e sottosezioni · {{ calendarCount }} con collegamenti ai programmi</p>
+            <div class="directory-list">
+              @for (section of visibleSections; track section.id) {
+                <article class="directory-row">
+                  <div><h3><span class="section-dot" [style.background-color]="colorFor(section.organizer)"></span>{{ section.organizer }}</h3><p>{{ section.region }} · {{ section.municipality || 'Comune non indicato' }}@if (section.sectionType === 'subsection') { · Sottosezione }</p></div>
+                  <nav [attr.aria-label]="'Collegamenti ' + section.organizer">
+                    @if (section.website) { <a [href]="section.website" target="_blank" rel="noopener noreferrer" (click)="trackLink($event, section.website, section.organizer, 'sito')">Sito ↗</a> }
+                    @if (section.calendarUrls.length) { <a [href]="section.calendarUrls[0]" target="_blank" rel="noopener noreferrer" (click)="trackLink($event, section.calendarUrls[0], section.organizer, 'agenda')">Programma ↗</a> }
+                    @else { <span>Programma da verificare</span> }
+                    @if (section.directoryUrl) { <a [href]="section.directoryUrl" target="_blank" rel="noopener noreferrer">Scheda CAI ↗</a> }
+                  </nav>
+                </article>
+              } @empty { <p>Nessuna sezione con questi filtri. Prova un altro nome o scegli tutta Italia.</p> }
+            </div>
+            @if (filteredSections.length > pageSize) {
+              <nav class="directory-pagination" aria-label="Pagine del repertorio"><button type="button" [disabled]="page === 1" (click)="page = page - 1">← Precedenti</button><span>{{ page }} / {{ pageCount }}</span><button type="button" [disabled]="page === pageCount" (click)="page = page + 1">Successive →</button></nav>
+            }
+          }
         </section>
       </div>
     </article>
   `,
   styles: [`
+    .directory-controls { display: grid; grid-template-columns: 2fr 1fr; gap: .8rem; margin: 1rem 0; }
+    .directory-controls label { display: grid; gap: .3rem; color: #065f46; font-size: .75rem; font-weight: 700; }
+    .directory-controls input, .directory-controls select { width: 100%; min-width: 0; min-height: 2.7rem; border: 1px solid #bccdc3; border-radius: .4rem; padding: .5rem; background: #fff; color: #1c1917; }
+    .directory-count { font-size: .78rem; }
+    .directory-list { border-top: 1px solid #cdd7ce; }
+    .directory-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .9rem 0; border-bottom: 1px solid #cdd7ce; }
+    .directory-row h3 { display: flex; align-items: center; gap: .4rem; margin: 0; font-size: .88rem; }
+    .directory-row p { margin: .3rem 0 0; font-size: .75rem; }
+    .directory-row nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .6rem; font-size: .75rem; }
+    .directory-row nav a { color: #065f46; font-weight: 700; }
+    .directory-row nav span { color: #57534e; }
+    .directory-pagination { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; font-size: .8rem; }
+    .directory-pagination button { min-height: 2.5rem; border: 1px solid #bccdc3; border-radius: .4rem; background: #fff; padding: .5rem .8rem; color: #065f46; font-weight: 700; cursor: pointer; }
+    .directory-pagination button:disabled { opacity: .4; }
+    :is(button, input, select, a):focus-visible { outline: 2px solid #047857; outline-offset: 3px; }
+    @media (max-width: 640px) { .directory-controls { grid-template-columns: 1fr; } .directory-row { align-items: flex-start; flex-direction: column; gap: .5rem; } .directory-row nav { justify-content: flex-start; } }
+
     :host {
       display: block;
       flex: 1;
@@ -310,54 +248,6 @@ import { AnalyticsService } from './analytics.service';
 
     .points strong { color: #1c1917; }
 
-    .table-wrap {
-      overflow: auto;
-      border: 1px solid rgb(28 25 23 / 0.12);
-      border-radius: 0.55rem;
-      background: #fff;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.82rem;
-    }
-
-    th, td {
-      padding: 0.55rem 0.7rem;
-      border-bottom: 1px solid rgb(28 25 23 / 0.08);
-      text-align: left;
-      vertical-align: top;
-    }
-
-    thead th {
-      position: sticky;
-      top: 0;
-      background: #14532d;
-      color: #ecfccb;
-      font-size: 0.68rem;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    tbody th { font-weight: 700; color: #1c1917; white-space: nowrap; }
-
-    .section-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      min-height: 1.45rem;
-      padding: 0.12rem 0.55rem 0.12rem 0.35rem;
-      border: 1px solid rgb(28 25 23 / 0.08);
-      border-radius: 999px;
-      background: #f6f8f6;
-      color: #1c1917;
-      font-size: 0.78rem;
-      font-weight: 700;
-      line-height: 1;
-    }
-
     .section-dot {
       width: 0.5rem;
       height: 0.5rem;
@@ -366,46 +256,45 @@ import { AnalyticsService } from './analytics.service';
       box-shadow: 0 0 0 1.5px rgb(255 255 255 / 0.9);
     }
 
-    tbody tr.floor { background: #ecfccb; }
-
-    tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
-
-    td a { color: #3f6212; font-weight: 600; }
-
     @media (max-width: 640px) {
       .info-inner { width: min(72rem, calc(100% - 1.1rem)); }
       .pillars li { font-size: 0.85rem; }
     }
   `]
 })
-export class InfoPageComponent {
+export class InfoPageComponent implements OnInit {
   private analytics = inject(AnalyticsService);
-
-  trackSectionLink(event: Event, sezione: SezioneLink, linkType: 'sito' | 'agenda'): void {
-    const url = linkType === 'sito' ? sezione.websiteUrl : sezione.agendaUrl;
-    if (url) {
-      this.analytics.trackCaiLink(event, url, sezione.name, linkType);
-    }
-  }
+  private http = inject(HttpClient);
+  private changeDetector = inject(ChangeDetectorRef);
   readonly philosophy = CAI_PHILOSOPHY;
   readonly participation = CAI_PARTICIPATION;
   readonly participationPoints = CAI_PARTICIPATION_POINTS;
-  readonly quotes: QuoteRow[] = CAI_QUOTE_ROWS;
-  readonly sezioni: SezioneLink[] = CAI_SEZIONE_LINKS;
-  readonly unpublished = UNPUBLISHED_LABEL;
-  readonly agendaYes = AGENDA_YES_LABEL;
-  readonly agendaNo = AGENDA_NO_LABEL;
-  readonly display = quoteDisplay;
+  sections: DirectorySection[] = [];
+  loading = true;
+  loadError = false;
+  query = '';
+  region = 'all';
+  page = 1;
+  readonly pageSize = 30;
 
-  colorFor(name: string): string {
-    return sectionColor(name);
+  ngOnInit(): void {
+    this.http.get<{ sections: DirectorySection[] }>('cai-sections.json').subscribe({
+      next: data => { this.sections = data.sections; this.loading = false; this.changeDetector.markForCheck(); },
+      error: () => { this.loading = false; this.loadError = true; this.changeDetector.markForCheck(); }
+    });
   }
 
-  hostOf(url: string): string {
-    try {
-      return new URL(url).host.replace(/^www\./, '');
-    } catch {
-      return url;
-    }
+  get regions(): string[] { return [...new Set(this.sections.map(section => section.region).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'it')); }
+  get filteredSections(): DirectorySection[] {
+    const query = this.query.normalize('NFD').replace(/\p{M}/gu, '').toLocaleLowerCase('it').trim();
+    return this.sections.filter(section => (this.region === 'all' || section.region === this.region) &&
+      [section.organizer, section.municipality].join(' ').normalize('NFD').replace(/\p{M}/gu, '').toLocaleLowerCase('it').includes(query));
   }
+  get visibleSections(): DirectorySection[] { return this.filteredSections.slice((this.page - 1) * this.pageSize, this.page * this.pageSize); }
+  get pageCount(): number { return Math.max(1, Math.ceil(this.filteredSections.length / this.pageSize)); }
+  get calendarCount(): number { return this.filteredSections.filter(section => section.calendarUrls.length).length; }
+  search(event: Event): void { this.query = (event.target as HTMLInputElement).value; this.page = 1; }
+  chooseRegion(event: Event): void { this.region = (event.target as HTMLSelectElement).value; this.page = 1; }
+  colorFor(name: string): string { return sectionColor(name); }
+  trackLink(event: Event, url: string, organizer: string, type: 'sito' | 'agenda'): void { this.analytics.trackCaiLink(event, url, organizer, type); }
 }

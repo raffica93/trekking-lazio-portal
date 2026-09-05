@@ -52,6 +52,11 @@ async function runSede({
   }
 
   if (id === 'all') {
+    // The production entry point executes the single national orchestrator once,
+    // so source processes cannot race while writing the shared cache.
+    if (runScrapeImpl === runScrape) {
+      return runScrapeImpl({ argv: ['--all', ...rest], sources, log });
+    }
     const selected = enabledSources(sources);
     const runs = [];
     let hardFail = false;

@@ -7,18 +7,15 @@ import {
   FilterTag,
   availableMonths,
   availableOrganizers,
+  availableOrganizerRegions,
   availableRegions,
-  currentYearMonth,
-  nextYearMonth,
   dateBounds,
   extraFilterTags,
   hasActiveFilters,
   isNextWeekSelected,
   landingFilters,
-  monthLabel,
   nextWeekRange
 } from './excursion-filters';
-import { sectionColor } from './section-color';
 
 @Component({
   selector: 'app-filter-bar',
@@ -26,13 +23,33 @@ import { sectionColor } from './section-color';
   imports: [CommonModule],
   template: `
     <section class="filter-bar" aria-label="Filtri">
+      <div class="discovery-band" aria-label="Cerca eventi CAI in Italia">
+        <label class="discovery-field search-field">
+          <span>Cerca un’escursione</span>
+          <input type="search" aria-label="Cerca per titolo, località o CAI" placeholder="Monte, località o sezione…" [value]="filters.query" (input)="set('query', inputValue($event))">
+        </label>
+        <label class="discovery-field">
+          <span>Regione del CAI</span>
+          <select aria-label="Filtra per regione del CAI" [value]="filters.organizerRegion" (change)="set('organizerRegion', inputValue($event))">
+            <option value="all">Tutta Italia</option>
+            <option *ngFor="let region of organizerRegions" [value]="region">{{ region }}</option>
+          </select>
+        </label>
+        <label class="discovery-field">
+          <span>Sezione CAI</span>
+          <select aria-label="Filtra per sezione CAI" [value]="filters.organizer" (change)="set('organizer', inputValue($event))">
+            <option value="all">Tutte le sezioni</option>
+            <option *ngFor="let organizer of organizers" [value]="organizer">{{ organizer }}</option>
+          </select>
+        </label>
+      </div>
       <div class="filter-band filter-band-time" role="region" aria-label="Quando">
         <p class="filter-band-title">Quando</p>
         <div class="filter-band-body">
           <div class="filter-group filter-group-months" role="group" aria-label="Filtra per mese">
             <p class="filter-label">Mese</p>
             <div class="filter-months">
-              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.month === 'all'" (click)="set('month', 'all')">Tutti</button>
+              <button type="button" class="filter-chip" [class.filter-chip-active]="filters.month === 'all'" (click)="set('month', 'all')">Tutto il calendario</button>
               <button
                 type="button"
                 class="filter-chip"
@@ -52,7 +69,7 @@ import { sectionColor } from './section-color';
                 class="filter-chip"
                 [class.filter-chip-active]="nextWeekOn"
                 (click)="toggleNextWeek()"
-              >Prossima settimana</button>
+              >Prossimi 7 giorni</button>
               <label class="filter-field filter-date-field">
                 <span>Da</span>
                 <input
@@ -134,19 +151,6 @@ import { sectionColor } from './section-color';
             </div>
           </div>
 
-          <div class="filter-stack route-extra-filter">
-            <p class="filter-label">Sezione</p>
-            <div class="filter-chips">
-              <label class="filter-field filter-native-select" *ngIf="organizers.length">
-                <span>Sezione</span>
-                <select aria-label="Filtra per sezione negli altri filtri" [value]="filters.organizer" (change)="set('organizer', inputValue($event))">
-                  <option value="all">Tutte</option>
-                  <option *ngFor="let organizer of organizers" [value]="organizer">{{ organizer }}</option>
-                </select>
-              </label>
-            </div>
-          </div>
-
           <div class="filter-stack mobile-date-extra">
             <p class="filter-label">Periodo</p>
             <div class="filter-chips">
@@ -173,7 +177,7 @@ import { sectionColor } from './section-color';
           </div>
 
           <div class="filter-stack" role="group" aria-label="Filtra per regione">
-            <p class="filter-label">Regione</p>
+            <p class="filter-label">Regione della destinazione</p>
             <div class="filter-chips">
               <button type="button" class="filter-chip" [class.filter-chip-active]="filters.region === 'all'" (click)="set('region', 'all')">Tutte</button>
               <button
@@ -244,6 +248,9 @@ import { sectionColor } from './section-color';
             </div>
           </div>
         </div>
+        <div class="filter-mega-apply">
+          <button type="button" (click)="megaOpen = false">Mostra {{ resultCount }} eventi</button>
+        </div>
       </div>
     </section>
   `,
@@ -259,6 +266,19 @@ import { sectionColor } from './section-color';
       overflow: visible;
       border-bottom: 1px solid rgb(214 211 209);
       background: white;
+    }
+
+    .discovery-band { display: grid; grid-template-columns: minmax(14rem, 1.5fr) 1fr 1fr; gap: .65rem; padding: .7rem 1.5rem; border-bottom: 1px solid #e7e5e4; background: #f3f6f3; }
+    .discovery-field { display: grid; min-width: 0; gap: .25rem; }
+    .discovery-field > span { color: #065f46; font: 700 .62rem/1.3 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: .06em; }
+    .discovery-field input, .discovery-field select { width: 100%; min-width: 0; min-height: 2.5rem; border: 1px solid #bccdc3; border-radius: .4rem; padding: .45rem .65rem; background: #fff; color: #1c1917; font-size: .82rem; }
+    .discovery-field :is(input, select):focus-visible, .filter-field:focus-within { outline: 2px solid #047857; outline-offset: 2px; }
+    .filter-mega-apply { position: sticky; bottom: -.5rem; display: flex; justify-content: flex-end; margin-top: .75rem; padding: .5rem 0; background: #f3f6f3; }
+    .filter-mega-apply button { padding: .5rem .8rem; border: 1px solid #064e3b; border-radius: .4rem; background: #064e3b; color: white; font-size: .78rem; font-weight: 700; }
+    @media (max-width: 767px) {
+      .discovery-band { grid-template-columns: 1fr 1fr; gap: .45rem; padding: .5rem .65rem; }
+      .search-field { grid-column: 1 / -1; }
+      .discovery-field input, .discovery-field select { min-height: 2.4rem; font-size: .8rem; }
     }
 
     .filter-band {
@@ -469,133 +489,6 @@ import { sectionColor } from './section-color';
       outline: none;
     }
 
-    .filter-select-trigger:focus-visible {
-      outline: 2px solid rgb(6 78 59);
-      outline-offset: 2px;
-    }
-
-    .filter-select {
-      position: relative;
-    }
-
-    .filter-select-trigger {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      min-width: 8.5rem;
-      max-width: 13rem;
-      min-height: 2rem;
-      padding: 0.2rem 0.55rem 0.2rem 0.65rem;
-      border: 1px solid rgb(203 213 225);
-      border-radius: 9999px;
-      background: white;
-      color: rgb(28 25 23);
-      font-size: 0.75rem;
-      font-weight: 700;
-      line-height: 1;
-      cursor: pointer;
-      transition: 150ms ease;
-    }
-
-    .filter-select-trigger:hover,
-    .filter-select-open .filter-select-trigger {
-      border-color: var(--section, rgb(5 150 105));
-    }
-
-    .filter-select-active .filter-select-trigger {
-      border-color: color-mix(in srgb, var(--section, rgb(6 78 59)) 70%, rgb(203 213 225));
-      background: color-mix(in srgb, var(--section, rgb(6 78 59)) 12%, white);
-    }
-
-    .filter-select-value {
-      min-width: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .filter-select-chevron {
-      flex-shrink: 0;
-      width: 0.38rem;
-      height: 0.38rem;
-      margin-left: 0.15rem;
-      border-right: 1.6px solid rgb(120 113 108);
-      border-bottom: 1.6px solid rgb(120 113 108);
-      transform: translateY(-1px) rotate(45deg);
-    }
-
-    .filter-select-open .filter-select-chevron {
-      transform: translateY(1px) rotate(-135deg);
-    }
-
-    .filter-select-menu {
-      position: absolute;
-      top: calc(100% + 0.35rem);
-      left: 0;
-      z-index: 40;
-      display: grid;
-      gap: 0.1rem;
-      min-width: 14.5rem;
-      max-height: 18rem;
-      margin: 0;
-      padding: 0.35rem;
-      overflow: auto;
-      scrollbar-width: thin;
-      list-style: none;
-      border: 1px solid rgb(214 211 209);
-      border-radius: 0.85rem;
-      background: white;
-      box-shadow: 0 16px 36px rgb(18 38 28 / 0.16);
-    }
-
-    .filter-select-menu li {
-      margin: 0;
-      padding: 0;
-    }
-
-    .filter-select-menu button {
-      display: flex;
-      width: 100%;
-      align-items: center;
-      gap: 0.5rem;
-      min-height: 2rem;
-      padding: 0.35rem 0.6rem;
-      border: 0;
-      border-radius: 0.55rem;
-      background: transparent;
-      color: rgb(28 25 23);
-      font-size: 0.78rem;
-      font-weight: 600;
-      line-height: 1.2;
-      text-align: left;
-      cursor: pointer;
-    }
-
-    .filter-select-option-label {
-      min-width: 0;
-      flex: 1;
-    }
-
-    .filter-select-menu button:hover,
-    .filter-select-menu button:focus-visible {
-      background: color-mix(in srgb, var(--section, rgb(5 150 105)) 12%, white);
-      outline: none;
-    }
-
-    .filter-select-menu button.is-selected {
-      background: color-mix(in srgb, var(--section, rgb(6 78 59)) 16%, white);
-      color: rgb(28 25 23);
-      font-weight: 800;
-    }
-
-    .filter-select .section-dot {
-      width: 0.5rem;
-      height: 0.5rem;
-      flex-shrink: 0;
-      border-radius: 999px;
-      box-shadow: 0 0 0 1.5px rgb(255 255 255 / 0.9);
-    }
-
     .filter-actions {
       margin-left: auto;
       min-height: 2rem;
@@ -751,12 +644,7 @@ export class FilterBarComponent {
   sectionOpen = false;
 
   get months() {
-    const months = availableMonths(this.allExcursions);
-    const needed = new Set([currentYearMonth(), nextYearMonth()]);
-    const extra = [...needed]
-      .filter((id) => !months.some((month) => month.id === id))
-      .map((id) => ({ id, label: monthLabel(id) }));
-    return extra.length ? [...months, ...extra].sort((a, b) => a.id.localeCompare(b.id)) : months;
+    return availableMonths(this.allExcursions);
   }
 
   get regions() {
@@ -764,7 +652,11 @@ export class FilterBarComponent {
   }
 
   get organizers() {
-    return availableOrganizers(this.allExcursions);
+    return availableOrganizers(this.allExcursions, this.filters.organizerRegion);
+  }
+
+  get organizerRegions() {
+    return availableOrganizerRegions(this.allExcursions);
   }
 
   get bounds() {
@@ -781,14 +673,6 @@ export class FilterBarComponent {
 
   get tags(): FilterTag[] {
     return extraFilterTags(this.filters);
-  }
-
-  get sectionLabel(): string {
-    return this.filters.organizer === 'all' ? 'Tutte' : this.filters.organizer;
-  }
-
-  colorFor(organizer: string): string {
-    return sectionColor(organizer);
   }
 
   @HostListener('document:click', ['$event'])
@@ -816,31 +700,17 @@ export class FilterBarComponent {
     if (this.megaOpen) this.sectionOpen = false;
   }
 
-  toggleSection(event: Event) {
-    event.stopPropagation();
-    this.sectionOpen = !this.sectionOpen;
-    if (this.sectionOpen) this.megaOpen = false;
-  }
-
-  chooseSection(value: string, event: Event) {
-    event.stopPropagation();
-    this.sectionOpen = false;
-    this.set('organizer', value);
-  }
-
-  onSectionTriggerKey(event: KeyboardEvent) {
-    if (event.key === 'ArrowDown' || event.key === 'Enter' || event.key === ' ') {
-      if (!this.sectionOpen && event.key === 'ArrowDown') {
-        event.preventDefault();
-        this.sectionOpen = true;
-        this.megaOpen = false;
-      }
-    }
-  }
-
   set<K extends keyof FilterState>(key: K, value: FilterState[K]) {
+    if (key === 'organizerRegion') {
+      this.filtersChange.emit({ ...this.filters, organizerRegion: value as string, organizer: 'all' });
+      return;
+    }
     if (key === 'month') {
       this.filtersChange.emit({ ...this.filters, month: value as string, dateFrom: '', dateTo: '' });
+      return;
+    }
+    if (key === 'dateFrom' || key === 'dateTo') {
+      this.filtersChange.emit({ ...this.filters, [key]: value, month: 'all' });
       return;
     }
     this.filtersChange.emit({ ...this.filters, [key]: value });

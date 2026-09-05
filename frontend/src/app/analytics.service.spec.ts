@@ -59,4 +59,15 @@ describe('AnalyticsService', () => {
     const queuedCommands = (window.dataLayer ?? []).map(command => Array.from(command as IArguments));
     expect(queuedCommands.some(command => command[0] === 'event' && command[1] === 'click_sito_cai')).toBe(false);
   });
+
+  it('leaves unsupported external destinations direct even with analytics consent', () => {
+    const service = new AnalyticsService();
+    service.enable();
+    for (const url of ['https://example.org/program', 'https://facebook.com/cai', 'https://cai.it.evil.example/']) {
+      const anchor = document.createElement('a');
+      anchor.href = url;
+      service.trackCaiLink({ currentTarget: anchor } as unknown as Event, url, 'CAI sezione', 'agenda');
+      expect(anchor.href).toBe(url);
+    }
+  });
 });

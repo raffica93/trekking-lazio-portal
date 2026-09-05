@@ -13,9 +13,9 @@ const PAGES: Record<string, LegalPage> = {
   servizi: {
     eyebrow: 'Trekking CAI',
     title: 'Servizi del portale',
-    intro: 'Uno strumento indipendente per orientarsi tra le escursioni pubblicate dalle sezioni CAI del Lazio.',
+    intro: 'Uno strumento indipendente per orientarsi tra le escursioni pubblicate dalle sezioni CAI d’Italia.',
     sections: [
-      { title: 'Cosa trovi qui', body: ['La mappa e il calendario raccolgono le escursioni rese pubbliche dalle sezioni CAI del Lazio e, quando disponibile, mostrano luogo, data, difficoltà, durata e collegamento alla fonte.', 'Il servizio è informativo e gratuito: la pagina dell’organizzatore resta sempre il riferimento per programma, iscrizioni, costi, requisiti e modifiche.'] },
+      { title: 'Cosa trovi qui', body: ['La mappa e il calendario raccolgono le escursioni rese pubbliche dalle sezioni CAI d’Italia e, quando disponibile, mostrano luogo, data, difficoltà, durata e collegamento alla fonte.', 'Il servizio è informativo e gratuito: la pagina dell’organizzatore resta sempre il riferimento per programma, iscrizioni, costi, requisiti e modifiche.'] },
       { title: 'Fonti e aggiornamenti', body: ['I dati provengono da siti, calendari e programmi pubblicati dalle sezioni. Possono cambiare o contenere ritardi: prima di partire consulta sempre la pagina dell’uscita e contatta la sezione organizzatrice.'] },
       { title: 'Nessuna affiliazione', body: ['Trekking CAI non è il sito istituzionale del Club Alpino Italiano né di una sua sezione. I nomi e i collegamenti alle sezioni sono usati per rendere riconoscibile la fonte delle informazioni.'] }
     ]

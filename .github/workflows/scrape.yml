@@ -1,12 +1,14 @@
 name: Refresh excursion data
 
 on:
-  schedule:
-    - cron: '17 4 * * *'
   workflow_dispatch:
     inputs:
       source:
-        description: 'Sede CAI (roma, tivoli, sora, …). Vuoto = tutte le abilitate, una alla volta.'
+        description: 'ID sezione CAI. Vuoto = tutte le fonti nazionali abilitate.'
+        required: false
+        default: ''
+      region:
+        description: 'Regione della sezione CAI (facoltativa).'
         required: false
         default: ''
 
@@ -14,12 +16,13 @@ permissions:
   contents: write
 
 concurrency:
-  group: scheduled-scraping
+  group: manual-national-scraping
   cancel-in-progress: false
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,23 +37,27 @@ jobs:
       - name: Validate scraper
         run: npm test
         working-directory: backend
-      - name: Scrape sedi
+      - name: Collect national CAI calendars
         id: scrape
         continue-on-error: true
         working-directory: backend
         env:
-          SCRAPE_RETRIES: 4
-          SCRAPE_TIMEOUT_MS: 30000
+          SCRAPE_RETRIES: 2
+          SCRAPE_TIMEOUT_MS: 20000
           GEMINI_KEY: ${{ secrets.GEMINI_KEY }}
           GEMINI_TIMEOUT_MS: 300000
           GEMINI_PAUSE_MS: 15000
           SOURCE: ${{ github.event.inputs.source }}
+          REGION: ${{ github.event.inputs.region }}
         run: |
+          args=(--concurrency 8)
           if [ -n "${SOURCE}" ]; then
-            node --env-file-if-exists=.env scripts/sede.js "$SOURCE"
+            args+=(--source "$SOURCE")
           else
-            node --env-file-if-exists=.env scripts/sede.js all
+            args+=(--all)
           fi
+          if [ -n "${REGION}" ]; then args+=(--region "$REGION"); fi
+          node --env-file-if-exists=.env scripts/scrape.js "${args[@]}"
       - name: Sync static site data
         shell: bash
         run: |
@@ -77,6 +84,14 @@ jobs:
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           SUPABASE_IMPORT_STATUS: published
         run: npm run import:supabase
-      - name: Fail if a sede had no cache
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cai-italia-coverage
+          path: |
+            backend/data/scrape-status.json
+            backend/data/cai-sections.json
+      - name: Report collection failure
         if: steps.scrape.outcome == 'failure'
         run: exit 1

@@ -4,7 +4,7 @@ import { isSupabaseConfigured, supabaseRuntimeConfig } from './supabase.config';
 
 @Injectable({ providedIn: 'root' })
 export class SupabaseService {
-  readonly configured = isSupabaseConfigured;
+  readonly configured = isSupabaseConfigured();
   readonly client: SupabaseClient | null = this.configured
     ? createClient(
       supabaseRuntimeConfig.supabaseUrl,

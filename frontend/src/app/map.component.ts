@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as L from 'leaflet';
+import 'leaflet.markercluster';
 import { Excursion } from './excursion.model';
 import { DIFFICULTIES, DIFFICULTY_ORDER, primaryDifficulty } from './difficulty';
-import { spreadOverlapping } from './map-overlap';
 
 @Component({
   selector: 'app-map',
@@ -12,7 +12,9 @@ import { spreadOverlapping } from './map-overlap';
   template: `
     <div class="map-shell">
       <div #mapContainer class="map-canvas"></div>
-      <aside class="map-legend" aria-label="Legenda difficoltà">
+      <div class="map-caption">{{ locatedCount }} eventi in mappa · I numeri raggruppano eventi vicini</div>
+      <details class="map-legend" aria-label="Legenda difficoltà">
+        <summary>Difficoltà e posizioni</summary>
         <ul>
           <li *ngFor="let code of difficultyOrder">
             <span class="legend-dot" [style.background-color]="difficulties[code].color"></span>
@@ -20,10 +22,15 @@ import { spreadOverlapping } from './map-overlap';
             <span class="legend-label">{{ difficulties[code].label }}</span>
           </li>
         </ul>
-      </aside>
+        <p>Le posizioni indicative identificano la zona, non il punto di ritrovo. Verifica sempre la fonte CAI.</p>
+      </details>
     </div>
   `,
   styles: [`
+    .map-caption { position: absolute; left: 3.4rem; top: .7rem; right: .7rem; z-index: 800; width: fit-content; max-width: calc(100% - 4rem); padding: .4rem .6rem; border-radius: .4rem; background: rgb(255 255 255 / .95); color: #064e3b; font-size: .68rem; box-shadow: 0 1px 8px #123f3420; pointer-events: none; }
+    .map-legend summary { cursor: pointer; color: #064e3b; font-size: .75rem; font-weight: 700; }
+    .map-legend[open] summary { margin-bottom: .7rem; }
+    .map-legend p { max-width: 14rem; margin: .75rem 0 0; color: #57534e; font-size: .68rem; line-height: 1.4; }
     :host {
       display: block;
       height: 100%;
@@ -105,7 +112,12 @@ export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   private map!: L.Map;
   private markers = new Map<string, L.Marker>();
+  private clusters!: L.MarkerClusterGroup;
+  private excursionById = new Map<string, Excursion>();
+  private highlightedId: string | null = null;
   private resizeObserver?: ResizeObserver;
+
+  get locatedCount(): number { return this.excursions.filter(ex => Number.isFinite(ex.lat) && Number.isFinite(ex.lng)).length; }
 
   ngAfterViewInit() {
     this.initMap();
@@ -136,8 +148,8 @@ export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   private initMap(): void {
     this.map = L.map(this.mapContainer.nativeElement, {
-      center: [41.891, 12.492],
-      zoom: 8,
+      center: [42.5, 12.5],
+      zoom: 6,
       zoomControl: true
     });
 
@@ -147,28 +159,39 @@ export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>'
     }).addTo(this.map);
 
+    this.clusters = L.markerClusterGroup({
+      maxClusterRadius: 55,
+      showCoverageOnHover: false,
+      animate: !window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+      iconCreateFunction: cluster => L.divIcon({
+        className: 'event-cluster',
+        html: `<span aria-label="${cluster.getChildCount()} eventi vicini">${cluster.getChildCount()}</span>`,
+        iconSize: [42, 42]
+      })
+    }).addTo(this.map);
+
     this.updateMarkers();
   }
 
   private updateMarkers(): void {
-    this.markers.forEach(marker => marker.remove());
+    this.clusters.clearLayers();
     this.markers.clear();
+    this.excursionById.clear();
+    this.highlightedId = null;
     this.map.closePopup();
 
     const located = this.excursions.filter((ex): ex is Excursion & { lat: number; lng: number } => (
       Number.isFinite(ex.lat) && Number.isFinite(ex.lng)
     ));
-    const positions = spreadOverlapping(located);
-
-    located.forEach((ex, index) => {
+    located.forEach((ex) => {
       const tone = primaryDifficulty(ex.category);
       const selected = ex.id === this.selectedId;
-      const marker = L.marker(positions[index], {
+      const marker = L.marker([ex.lat, ex.lng], {
         icon: this.markerIcon(tone.color, selected),
         title: `${ex.title} (${tone.code})`,
         riseOnHover: true,
         zIndexOffset: selected ? 1000 : 0
-      }).addTo(this.map);
+      });
 
       marker.on('click', (event: L.LeafletMouseEvent) => {
         L.DomEvent.stopPropagation(event);
@@ -176,34 +199,40 @@ export class MapComponent implements OnChanges, AfterViewInit, OnDestroy {
       });
 
       this.markers.set(ex.id, marker);
+      this.excursionById.set(ex.id, ex);
     });
 
+    this.clusters.addLayers([...this.markers.values()]);
     this.syncSelection(false);
 
     if (this.markers.size > 0) {
       const group = L.featureGroup([...this.markers.values()]);
-      this.map.fitBounds(group.getBounds().pad(0.12));
+      this.map.fitBounds(group.getBounds().pad(0.12), { maxZoom: 12 });
+    } else {
+      this.map.setView([42.5, 12.5], 6);
     }
   }
 
   private syncSelection(pan: boolean): void {
-    this.markers.forEach((marker, id) => {
-      const excursion = this.excursions.find(item => item.id === id);
-      if (!excursion) {
-        return;
-      }
+    const changedIds = new Set([this.highlightedId, this.selectedId]);
+    changedIds.forEach((id) => {
+      if (!id) return;
+      const excursion = this.excursionById.get(id);
+      const marker = this.markers.get(id);
+      if (!excursion || !marker) return;
       const selected = id === this.selectedId;
       const tone = primaryDifficulty(excursion.category);
       marker.setIcon(this.markerIcon(tone.color, selected));
       marker.setZIndexOffset(selected ? 1000 : 0);
     });
+    this.highlightedId = this.selectedId;
 
     if (!pan || !this.selectedId) {
       return;
     }
     const selectedMarker = this.markers.get(this.selectedId);
     if (selectedMarker) {
-      this.map.panTo(selectedMarker.getLatLng());
+      this.clusters.zoomToShowLayer(selectedMarker, () => this.map.panTo(selectedMarker.getLatLng()));
     }
   }
 

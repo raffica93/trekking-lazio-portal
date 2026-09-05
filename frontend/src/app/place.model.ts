@@ -13,12 +13,13 @@ export interface PlaceRow {
   category: string;
   external_url: string;
   organizer: string;
+  organizer_region?: string | null;
   location: string;
   municipality: string | null;
   province: string | null;
   region: string | null;
-  latitude: number;
-  longitude: number;
+  latitude: number | null;
+  longitude: number | null;
   cost: string | null;
   cost_amount: number | null;
   time: string | null;
@@ -72,6 +73,7 @@ export function placeToExcursion(place: PlaceRow): Excursion {
     category: place.category,
     link: place.external_url,
     organizer: place.organizer,
+    organizerRegion: place.organizer_region ?? undefined,
     location: place.location,
     lat: place.latitude,
     lng: place.longitude,

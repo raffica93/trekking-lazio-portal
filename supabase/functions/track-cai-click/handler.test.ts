@@ -69,6 +69,13 @@ test('cannot be used as an open redirect', async () => {
   assert.deepEqual(await response.json(), { error: 'invalid_destination' });
 });
 
+test('rejects disguised hosts, user credentials and unexpected ports', async () => {
+  const handler = createTrackingHandler({ measurementId: '', apiSecret: '' });
+  for (const url of ['https://cairoma.it.attacker.example/', 'https://name:pass@cairoma.it/', 'https://cairoma.it:444/']) {
+    assert.equal((await handler(request(url))).status, 400);
+  }
+});
+
 test('does not block the destination when GA4 is temporarily unavailable', async () => {
   const handler = createTrackingHandler({
     measurementId: 'G-2ZZKHQPCYC',

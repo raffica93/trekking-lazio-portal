@@ -10,13 +10,15 @@ const {
   resolveGeminiKey
 } = require('./grok-extract');
 const { SOURCES, enabledSources, isCheerioSource, sourceMeta } = require('./sources');
+const { monthFloor } = require('./adapters/deterministic');
+const { runSourceProcess } = require('./adapters/process-runner');
 
 function defaultSleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function belongingTo(source, excursion) {
-  return Boolean(excursion?.id?.startsWith(`${source.id}-`));
+  return excursion?.sourceId ? excursion.sourceId === source.id : Boolean(excursion?.id?.startsWith(`${source.id}-`));
 }
 
 function cachedOrEmpty(existing, source) {
@@ -46,6 +48,18 @@ function parseScrapeArgs(argv) {
     const token = argv[index];
     if (token === '--dry-run') {
       args.dryRun = true;
+    } else if (token === '--all') {
+      args.all = true;
+    } else if (token === '--strict') {
+      args.strict = true;
+    } else if (token === '--region' || token === '--concurrency') {
+      const value = String(argv[++index] || '').trim();
+      if (!value) throw new Error(`Missing value for ${token}`);
+      args[token.slice(2)] = token === '--concurrency' ? Number(value) : value;
+    } else if (token.startsWith('--region=')) {
+      args.region = token.slice('--region='.length);
+    } else if (token.startsWith('--concurrency=')) {
+      args.concurrency = Number(token.slice('--concurrency='.length));
     } else if (token === '--source') {
       args.sources.push(String(argv[index + 1] || '').trim());
       index += 1;
@@ -58,10 +72,17 @@ function parseScrapeArgs(argv) {
     }
   }
   args.sources = args.sources.filter(Boolean);
+  if (args.concurrency !== undefined && (!Number.isInteger(args.concurrency) || args.concurrency < 1 || args.concurrency > 24)) throw new Error('Concurrency must be an integer from 1 to 24');
+  if (args.all && args.sources.length) throw new Error('Use --all or --source, not both');
   return args;
 }
 
-function selectSources(allSources, ids) {
+function selectSources(allSources, ids, region) {
+  if (region) {
+    const selected = selectSources(allSources, ids).filter((source) => source.region?.localeCompare(region, 'it', { sensitivity: 'base' }) === 0);
+    if (!selected.length) throw new Error(`No enabled sources in region: ${region}`);
+    return selected;
+  }
   if (!ids || ids.length === 0) {
     return enabledSources(allSources);
   }
@@ -88,11 +109,26 @@ async function scrapeSource(source, {
   scrapeRoma = scrapeCaiRoma,
   extract = extractFromSource,
   fetchDoc = fetchDocument,
+  deterministic = false,
+  adapter = runSourceProcess,
   log = console
 } = {}) {
   const cached = existing.filter((item) => belongingTo(source, item));
 
-  if (isCheerioSource(source)) {
+  if (deterministic) {
+    const result = await adapter(source, {
+      now,
+      budgetMs: Number(process.env.SCRAPE_SOURCE_BUDGET_MS || 60_000),
+      maxDocuments: Number(process.env.SCRAPE_MAX_DOCUMENTS || 12)
+    });
+    const extracted = preserveEnrichment(result.excursions, existing);
+    // Homepages and paginated calendars are partial views. Missing rows are never proof of cancellation.
+    const merged = new Map(cached.map((event) => [event.id, event]));
+    for (const event of extracted) merged.set(event.id, event);
+    return { ...result, source, excursions: [...merged.values()].filter((event) => (event.dateEnd || event.date) >= monthFloor(now)) };
+  }
+
+  if (isCheerioSource(source) || source.id === 'roma') {
     const excursions = preserveEnrichment(await scrapeRoma({ now }), existing);
     return { status: 'ok', source, excursions, hash: null };
   }
@@ -141,6 +177,9 @@ async function scrapeAll({
   sources = SOURCES,
   existingPayload = {},
   sourceIds,
+  region,
+  concurrency = Number(process.env.SCRAPE_CONCURRENCY || 8),
+  adapter,
   now = DateTime.now(),
   apiKey,
   scrapeRoma,
@@ -149,17 +188,18 @@ async function scrapeAll({
   log = console,
   sleep = defaultSleep
 } = {}) {
-  const selected = selectSources(sources, sourceIds);
+  const selected = selectSources(sources, sourceIds, region);
+  const deterministic = Boolean(adapter) || (!scrapeRoma && !extract && !fetchDoc);
   const existing = Array.isArray(existingPayload.excursions) ? existingPayload.excursions : [];
   const hashes = existingPayload.sourceHashes && typeof existingPayload.sourceHashes === 'object'
     ? { ...existingPayload.sourceHashes }
     : {};
 
-  const resolvedKey = apiKey === undefined
+  const resolvedKey = deterministic ? null : apiKey === undefined
     ? resolveGeminiKey({ env: process.env })
     : apiKey;
 
-  if (selected.some((source) => !isCheerioSource(source))) {
+  if (!deterministic && selected.some((source) => !isCheerioSource(source))) {
     if (resolvedKey) {
       log.log('Using GEMINI_KEY with gemini-3.5-flash');
     } else {
@@ -170,16 +210,14 @@ async function scrapeAll({
     }
   }
 
-  const kept = sourceIds && sourceIds.length > 0
-    ? existing.filter((item) => !selected.some((source) => belongingTo(source, item)))
-    : [];
+  const kept = existing.filter((item) => !selected.some((source) => belongingTo(source, item)));
 
   const results = [];
-  const nextHashes = sourceIds && sourceIds.length > 0 ? { ...hashes } : {};
+  const nextHashes = { ...hashes };
   const failures = [];
   const pauseMs = Number(process.env.GEMINI_PAUSE_MS || 0);
 
-  for (const source of selected) {
+  async function processSource(source) {
     try {
       const result = await scrapeSource(source, {
         existing,
@@ -189,12 +227,14 @@ async function scrapeAll({
         scrapeRoma,
         extract,
         fetchDoc,
+        deterministic,
+        adapter,
         log
       });
       results.push(result);
       if (result.hash) nextHashes[source.id] = result.hash;
       log.log(`${source.id}: ${result.status} (${result.excursions.length} excursions)`);
-      if (pauseMs > 0 && !isCheerioSource(source) && result.status === 'ok') {
+      if (!deterministic && pauseMs > 0 && !isCheerioSource(source) && result.status === 'ok') {
         await sleep(pauseMs);
       }
     } catch (error) {
@@ -208,16 +248,36 @@ async function scrapeAll({
       } else {
         log.error(`${source.id} failed with no cache: ${error.message}`);
       }
-      if (pauseMs > 0 && !isGeminiQuotaError(error)) await sleep(pauseMs);
+      if (!deterministic && pauseMs > 0 && !isGeminiQuotaError(error)) await sleep(pauseMs);
     }
+  }
+
+  // Distinct section processes are bounded globally and to two workers per host.
+  // This matters for the hundreds of section sites hosted together by cai.it.
+  const pending = [...selected];
+  const running = new Set();
+  const hosts = new Map();
+  const hostOf = (source) => { try { return new URL(source.url || source.website).hostname; } catch { return source.id; } };
+  const limit = deterministic ? Math.max(1, Math.min(24, concurrency)) : 1;
+  while (pending.length || running.size) {
+    while (running.size < limit && pending.length) {
+      const index = pending.findIndex((source) => (hosts.get(hostOf(source)) || 0) < 2);
+      if (index < 0) break;
+      const [source] = pending.splice(index, 1);
+      const host = hostOf(source); hosts.set(host, (hosts.get(host) || 0) + 1);
+      const promise = processSource(source).finally(() => { running.delete(promise); hosts.set(host, hosts.get(host) - 1); });
+      running.add(promise);
+    }
+    if (running.size) await Promise.race(running);
   }
 
   const collected = sortExcursions([
     ...kept,
     ...results.flatMap((result) => result.excursions)
-  ]).map(applyApproximateCoords);
+  ]).filter((event) => (event.dateEnd || event.date) >= monthFloor(now))
+    .map((event) => event.sourceId || event.coordinatesQuality === 'source' || event.locationSource ? event : applyApproximateCoords(event));
 
-  if (collected.length === 0) {
+  if (collected.length === 0 && results.length === 0) {
     const detail = failures.map((item) => `${item.source.id}: ${item.error.message}`).join('; ');
     throw new Error(detail || 'No excursion data available');
   }
@@ -226,14 +286,22 @@ async function scrapeAll({
 
   return {
     excursions: collected,
-    sources: (sourceIds && sourceIds.length > 0
+    sources: ((sourceIds && sourceIds.length > 0) || region
       ? mergeSourceMeta(existingPayload.sources, selected)
       : selected.map(sourceMeta)
     ),
     sourceHashes: nextHashes,
     failures,
     hardFailures,
-    results
+    results,
+    coverage: {
+      total: sources.length, selected: selected.length,
+      withEvents: results.filter((result) => result.excursions.length > 0).length,
+      parsed: results.filter((result) => ['ok', 'partial', 'no-upcoming', 'reused'].includes(result.status)).length,
+      unsupported: results.filter((result) => result.status === 'unsupported').length,
+      failed: failures.length,
+      located: collected.filter((event) => Number.isFinite(event.lat) && Number.isFinite(event.lng) && event.coordinatesQuality !== 'unknown').length
+    }
   };
 }
 
@@ -245,6 +313,7 @@ function buildPayload(result, existingPayload = {}) {
     sourceHashes: result.sourceHashes,
     generatedAt: new Date().toISOString(),
     classifiedAt: existingPayload.classifiedAt,
+    coverage: result.coverage,
     excursions: result.excursions
   };
 }

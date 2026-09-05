@@ -1,3 +1,5 @@
+import { CAI_DESTINATION_HOSTS } from './cai-destination-hosts.ts';
+
 export type TrackingFetch = (
   input: string | URL | Request,
   init?: RequestInit
@@ -15,6 +17,7 @@ const allowedLinkTypes = new Set(['sito', 'agenda', 'escursione']);
 // Keep this narrow: the function is intentionally public and must never become
 // a general-purpose open redirect. www. is stripped before matching.
 const allowedDestinationHosts = new Set([
+  ...CAI_DESTINATION_HOSTS,
   'cai.it',
   'cailazio.org',
   'caialatri.it',
@@ -54,6 +57,7 @@ function safeDestination(raw: string | null): URL | null {
   try {
     const destination = new URL(raw);
     if (!['http:', 'https:'].includes(destination.protocol)) return null;
+    if (destination.username || destination.password || (destination.port && !['80', '443'].includes(destination.port))) return null;
     const hostname = destination.hostname.toLowerCase().replace(/^www\./, '');
     const isAllowed = allowedDestinationHosts.has(hostname) || hostname.endsWith('.cai.it');
     return isAllowed ? destination : null;

@@ -150,26 +150,9 @@
     "colleferro": "b8f98ca509bc3a54ab854de2a4201eddb002fad2845310329929ceb663af04dc",
     "antrodoco": "a8b4df6add258bfdf524eeabb939d61e096d83f245df51837542c6393323034f"
   },
-  "generatedAt": "2026-09-05T08:31:39.785Z",
+  "generatedAt": "2026-09-05T21:30:10.488Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "excursions": [
-    {
-      "id": "frosinone-2cbadc1d8cd3",
-      "title": "IL SENTIERO DEI CIPPI",
-      "date": "2026-08-30",
-      "dateEnd": "2026-08-30",
-      "days": 1,
-      "category": "Escursionismo",
-      "link": "https://www.caifrosinone.it/",
-      "organizer": "CAI Frosinone",
-      "location": "M. Ausoni",
-      "region": "Lazio",
-      "lat": 41.45,
-      "lng": 13.35,
-      "cost": "Vedi sito",
-      "time": "Vedi sito",
-      "privateCar": null
-    },
     {
       "id": "rieti-4783fa190de9",
       "title": "Gran Sasso: Monte Bolza",

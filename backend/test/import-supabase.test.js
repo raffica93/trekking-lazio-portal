@@ -4,6 +4,8 @@ const {
   coordPatchForExisting,
   importNewPlaces,
   importStatus,
+  sectionToRow,
+  attachSectionMetadata,
   slugify,
   toPlaceRow
 } = require('../scripts/import-supabase');
@@ -100,7 +102,7 @@ test('toPlaceRow preserves public excursion data and uses a stable unique slug',
   }, 'draft');
 
   assert.equal(row.slug, 'monte-terminillo-cresta-roma-2026-09-monte-terminillo');
-  assert.equal(row.external_url, 'https://example.com/terminillo');
+  assert.equal(row.external_url, 'http://example.com/terminillo');
   assert.equal(row.status, 'draft');
   assert.equal(row.distance_km, 14.5);
   assert.equal(row.private_car, true);
@@ -209,7 +211,7 @@ test('importNewPlaces does not update existing rows when title or date changed',
   assert.deepEqual(supabase.updates, []);
 });
 
-test('importNewPlaces skips excursions without coordinates', async () => {
+test('importNewPlaces includes excursions without coordinates in the list', async () => {
   const located = sampleExcursion();
   const unlocated = sampleExcursion({
     id: 'esperia-open-day',
@@ -225,10 +227,45 @@ test('importNewPlaces skips excursions without coordinates', async () => {
     status: 'published'
   });
 
-  assert.deepEqual(result, { inserted: 1, updated: 0, skipped: 0, skippedUnlocated: 1, status: 'published' });
+  assert.deepEqual(result, { inserted: 2, updated: 0, skipped: 0, skippedUnlocated: 0, status: 'published' });
   assert.equal(supabase.inserts.length, 1);
-  assert.equal(supabase.inserts[0].length, 1);
+  assert.equal(supabase.inserts[0].length, 2);
   assert.equal(supabase.inserts[0][0].source_id, located.id);
+  assert.equal(supabase.inserts[0][1].latitude, null);
+  assert.equal(supabase.inserts[0][1].longitude, null);
+});
+
+test('organizer region is independent of the destination and supplements existing metadata', async () => {
+  const excursion = sampleExcursion({ organizerRegion: 'Lombardia', caiSectionId: 'milano' });
+  const row = toPlaceRow(excursion, 'published');
+  assert.equal(row.region, 'Lazio');
+  assert.equal(row.organizer_region, 'Lombardia');
+  const supabase = createFakeSupabase({ existingSourceIds: [excursion.id] });
+  await importNewPlaces({ supabase, excursions: [excursion], status: 'published' });
+  assert.deepEqual(supabase.updates[0].patch, { organizer_region: 'Lombardia', cai_section_id: 'milano' });
+});
+
+test('registry transformation preserves evidence and separates discovery from extraction', () => {
+  const row = sectionToRow({ id: 'milano', organizer: 'CAI Milano', region: 'Lombardia', directoryId: 42, status: 'calendar-found', calendarUrls: ['https://example.com/calendario'] }, { status: 'failed', eventCount: 0 }, '2026-09-05T12:00:00Z');
+  assert.equal(row.directory_id, '42');
+  assert.equal(row.discovery_status, 'calendar-found');
+  assert.equal(row.scrape_status, 'failed');
+  assert.equal(row.event_count, 0);
+  assert.equal(row.organizer_region, 'Lombardia');
+});
+
+test('section metadata does not overwrite destination region', () => {
+  const [excursion] = attachSectionMetadata([sampleExcursion()], [{ id: 'roma', organizer: 'CAI Roma', region: 'Lazio' }]);
+  assert.equal(excursion.caiSectionId, 'roma');
+  assert.equal(excursion.organizerRegion, 'Lazio');
+  assert.equal(excursion.region, 'Lazio');
+});
+
+test('import rejects executable URLs and does not invent a missing coordinate pair', () => {
+  assert.throws(() => toPlaceRow(sampleExcursion({ link: 'javascript:alert(1)' }), 'draft'), /invalid link/);
+  const row = toPlaceRow(sampleExcursion({ lat: 42, lng: null }), 'draft');
+  assert.equal(row.latitude, null);
+  assert.equal(row.longitude, null);
 });
 
 test('coordPatchForExisting rewrites Rome fallback and leaves classified peaks', () => {

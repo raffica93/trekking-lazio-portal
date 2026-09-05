@@ -1,6 +1,8 @@
 # Trekking CAI
 
-Portale Angular ed Express per consultare sulla mappa le escursioni pubblicate dalle sezioni CAI del Lazio. Il dominio canonico è `https://trekking-cai.it`.
+Portale Angular ed Express per consultare calendario e mappa degli eventi pubblicati dalle sezioni CAI di tutta Italia. Il dominio canonico è `https://trekking-cai.it`. È un aggregatore indipendente: le attività sono organizzate dalle singole sezioni CAI, cui rimandano i collegamenti originali.
+
+Il calendario mostra tutti gli eventi dal mese corrente, senza limite superiore; i mesi precedenti scompaiono dinamicamente nel fuso Europe/Rome. Ricerca, regione della sezione CAI, sezione, mese e filtri escursionistici aiutano a consultare il catalogo. L'elenco è paginato e la mappa raggruppa i punti vicini. Le uscite senza posizione verificata restano nell'elenco.
 
 ## Avvio locale
 
@@ -45,18 +47,20 @@ npm run scrape:roma
 npm run scrape:all
 ```
 
-Ogni sede CAI ha uno script (`npm run scrape:sora`, `scrape:tivoli`, …). `scrape:all` le lancia una alla volta così un timeout Gemini non azzera le altre. Lo stato per sezione sta in `backend/data/scrape-status.json` e in admin `/admin/sedi`.
+L'entry point è `npm run scrape -- --all --concurrency 8`. L'orchestratore avvia un processo isolato per ciascuna sezione, con URL e configurazione specifici nel registro nazionale. Gli alias storici `scrape:roma`, `scrape:tivoli`, ecc. restano compatibili. Sono disponibili `--source ID`, `--region Lazio`, `--dry-run` e `--strict`. Lo stato e le evidenze per sezione si trovano in `backend/data/scrape-status.json`.
 
-Lo script aggiorna `backend/data/excursions.json` in modo atomico, lascia il file invariato quando i dati non cambiano e ritenta automaticamente gli errori di rete o le risposte HTML non valide. `SCRAPE_RETRIES` e `SCRAPE_TIMEOUT_MS` valgono per CAI Roma; `GEMINI_TIMEOUT_MS` (default 5 minuti) e `GEMINI_PAUSE_MS` (default 10s in `scrape:all`, 15s in Actions) per le altre. Un 429 di quota non viene ritentato: le sedi Gemini successive restano sulla cache. Un 429 di rate-limit o un 503 aspetta e riprova.
+Lo script aggiorna `backend/data/excursions.json` atomicamente. I parser condividono pattern per JSON-LD Event, ICS, calendari WordPress, tabelle HTML e programmi PDF testuali. Hash dei documenti e cache HTTP evitano estrazioni ripetute; timeout e limiti di concorrenza isolano gli errori delle fonti. Lo stato distingue raccolta riuscita, parziale, nessun evento futuro, formato non supportato e fonte irraggiungibile.
 
-CAI Roma viene letto con il parser HTML. Le altre sezioni abilitate usano Gemini 3.5 Flash sul loro template (pagina programma, calendario o PDF). Serve `GEMINI_KEY` in `backend/.env` in locale, e lo stesso nome come secret nelle GitHub Actions. Senza chiave lo scrape di Roma continua e le altre sezioni restano sulla cache.
+La raccolta nazionale usa parser deterministici e non richiede chiavi AI. Il parser dedicato Roma è conservato. I moduli Gemini/Grok storici restano disponibili nel codice, ma non vengono invocati dalla raccolta nazionale predefinita.
 
 ```bash
 npm run scrape:tivoli -- --dry-run
 npm run scrape -- --source alatri
 ```
 
-Le sezioni si accendono in `backend/sources.js` (`enabled: true`). Un fallimento di una fonte non cancella le altre; se una sede muore senza cache lo script esce con codice 1. L’arricchimento già classificato (summary, coordinate) viene conservato se id, titolo, data e località non cambiano. Dettaglio sedi: `docs/cai-scrape-riepilogo.md`.
+Il censimento riproducibile parte dalla directory ufficiale CAI: `node scripts/discover-cai-sections.js`. Produce `backend/data/cai-sections.json` e la copia pubblica. `--directory-only` aggiorna il censimento; `--websites-only` verifica i siti già censiti. Il registro distingue sezioni censite da calendari trovati e da eventi effettivamente estratti: la presenza nel registro non implica copertura completa del programma. PDF scansionati, siti irraggiungibili e calendari non leggibili sono segnalati, senza inventare eventi. Dettagli in `docs/cai-italia.md`.
+
+Un fallimento di una fonte conserva la sua cache e non cancella i risultati delle altre. `--strict` restituisce errore anche per fonti fallite senza cache. Le coordinate delle sedi CAI non vengono usate come mete delle escursioni. `organizerRegion` è la regione della sezione; `region` è quella della destinazione, quando riconoscibile.
 
 ## Supabase e pannello amministratore
 
@@ -93,13 +97,13 @@ cd backend
 npm run import:supabase
 ```
 
-L'import locale inserisce i `source_id` ancora assenti in `places` e, per sicurezza, li marca come bozze salvo `SUPABASE_IMPORT_STATUS=published`. Titolo, stato e foto delle righe già presenti restano intatti. Se una scheda ha ancora le coordinate di fallback su Roma e non è classificata (`peak` / `trailhead` / `massif`), l'import aggiorna solo latitudine, longitudine e `coordinates_quality`.
+L'import locale inserisce i `source_id` assenti in `places`, inclusi gli eventi senza coordinate, come bozze salvo `SUPABASE_IMPORT_STATUS=published`. Titolo, stato e foto delle righe esistenti restano intatti. L'import arricchisce i metadati della sezione mancanti e sostituisce coordinate di fallback quando possibile. Il registro nazionale e lo stato delle fonti vengono sincronizzati in `cai_sections`, pubblicamente leggibile e scrivibile solo dal backend.
 
-Lo scrape locale (`npm run scrape`) continua a scrivere soltanto il JSON. Lo scrape pianificato su GitHub Actions, dopo aver aggiornato la cache, importa in automatico i `source_id` nuovi come `published`. Serve configurare i secret `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` nel repository.
+Lo scrape locale scrive il JSON. Il workflow manuale su GitHub Actions aggiorna la cache e importa i dati in Supabase come `published`. Usa i secret esistenti `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY`. Il frontend legge le righe pubblicate con paginazione, superando il limite predefinito di 1.000 record; la copia statica resta il fallback.
 
 ## Classificazione Grok (manuale)
 
-Lo scrape programmato estrae i calendari con Gemini 3.5 Flash (Roma resta sul parser HTML), ma **non** classifica le schede (coordinate precise, quota, riassunto). Per completare le escursioni:
+La raccolta nazionale non esegue la classificazione AI. Per l'arricchimento manuale opzionale delle escursioni:
 
 ```bash
 cd backend
@@ -114,7 +118,7 @@ Senza `--dry-run` lo script aggiorna `backend/data/excursions.json` e, se presen
 ## Automazione
 
 - `CI and release` esegue test e build. Su `main` e sui tag `v*` pubblica le immagini frontend e backend nel GitHub Container Registry.
-- `Refresh excursion data` viene eseguito ogni giorno alle 04:17 UTC e può essere lanciato anche manualmente, anche per una sola sede (input `source`). Lancia gli script uno per sezione, aggiorna cache e `scrape-status.json` su `main`, poi inserisce in Supabase i `source_id` nuovi come `published` e riallinea le coordinate di fallback su Roma. Serve `GEMINI_KEY`; senza secret aggiorna solo CAI Roma. Se una sede fallisce senza cache il job resta rosso, ma i JSON delle sedi riuscite vengono comunque committati. Richiede i secret `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY`. Non esegue il classificatore Grok e non sovrascrive titolo, stato o foto delle schede già in database.
+- `Refresh excursion data` è esclusivamente manuale: il cron giornaliero è stato rimosso. Gli input `source` e `region` consentono aggiornamenti mirati, oppure si raccolgono tutte le fonti abilitate. Il workflow salva cache e rapporto di copertura, importa sezioni ed eventi in Supabase e attiva la pubblicazione del sito.
 - `Deploy GitHub Pages` verifica e pubblica il frontend statico a ogni aggiornamento di `main`.
 
 Il repository GitHub deve consentire a GitHub Actions la scrittura dei contenuti e dei package. Se `main` è protetto, autorizzare il bot oppure adattare il workflow affinché apra una pull request.

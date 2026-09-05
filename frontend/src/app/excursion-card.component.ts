@@ -47,10 +47,11 @@ import { AnalyticsService } from './analytics.service';
             >{{ tone.code }}</span>
           </div>
           <h3 hlmCardTitle>{{ excursion.title }}</h3>
+          <p class="excursion-destination" *ngIf="excursion.location && excursion.location !== 'Non specificato'">{{ excursion.location }}<span *ngIf="excursion.region && excursion.region !== 'Altro'"> · {{ excursion.region }}</span></p>
         </div>
         <div hlmCardContent *ngIf="meta || excursion.summary || excursion.organizer">
           <div class="flex min-w-0 items-center gap-2">
-            <span class="section-tag" *ngIf="excursion.organizer">
+            <span class="section-tag" *ngIf="excursion.organizer" [title]="excursion.organizer + (excursion.organizerRegion ? ' · ' + excursion.organizerRegion : '')">
               <span
                 class="section-dot"
                 [style.background-color]="sectionTone"
@@ -64,6 +65,7 @@ import { AnalyticsService } from './analytics.service';
           <p *ngIf="!located" class="mt-1 text-[12px] text-stone-500">Posizione da confermare</p>
         </div>
         <div hlmCardFooter class="justify-end border-t border-stone-100">
+          <button type="button" class="card-map-button" (click)="$event.stopPropagation(); selectExcursion.emit(excursion)">Apri scheda</button>
           <a
             [href]="excursion.link"
             target="_blank"
@@ -73,12 +75,15 @@ import { AnalyticsService } from './analytics.service';
             variant="link"
             size="sm"
             class="h-auto px-0 text-emerald-800"
-          >Dettagli</a>
+          >Fonte CAI ↗</a>
         </div>
       </div>
     </article>
   `,
   styles: [`
+    .excursion-destination { margin: .15rem 0 0; color: #57534e; font-size: .72rem; line-height: 1.4; }
+    .card-map-button { margin-right: auto; border: 0; background: transparent; color: #065f46; font-size: .72rem; font-weight: 700; padding: .4rem 0; cursor: pointer; }
+    .card-map-button:focus-visible { outline: 2px solid #047857; outline-offset: 3px; }
     :host {
       display: block;
     }

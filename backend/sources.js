@@ -1,6 +1,6 @@
 const { CAI_ROMA_URL } = require('./scraper');
 
-const SOURCES = [
+const LAZIO_SOURCES = [
   {
     id: 'roma',
     organizer: 'CAI Roma',
@@ -174,6 +174,18 @@ const SOURCES = [
   }
 ];
 
+// The generated directory is the complete list, including sections without a
+// usable public calendar. Each enabled row is its own configurable adapter.
+let NATIONAL_REGISTRY = { sections: [] };
+try { NATIONAL_REGISTRY = require('./data/cai-sections.json'); }
+catch (error) { if (error.code !== 'MODULE_NOT_FOUND') throw error; }
+const registryByLegacyId = new Map(NATIONAL_REGISTRY.sections.filter(s => s.legacyId).map(s => [s.legacyId, s]));
+const legacyIds = new Set(LAZIO_SOURCES.map(s => s.id));
+const SOURCES = [
+  ...LAZIO_SOURCES.map(source => ({ ...source, region: 'Lazio', ...registryByLegacyId.get(source.id), id: source.id })),
+  ...NATIONAL_REGISTRY.sections.filter(source => !legacyIds.has(source.id))
+];
+
 function enabledSources(list = SOURCES) {
   return list.filter((source) => source.enabled);
 }
@@ -186,6 +198,14 @@ function sourceMeta(source) {
   return {
     id: source.id,
     organizer: source.organizer,
+    region: source.region || 'Lazio',
+    website: source.website || null,
+    directoryUrl: source.directoryUrl || null,
+    calendarUrls: source.calendarUrls || [source.url],
+    directoryId: source.directoryId || null,
+    sectionType: source.sectionType || 'section',
+    parentSectionId: source.parentSectionId || null,
+    status: source.status || 'calendar-found',
     url: source.url,
     kind: source.kind,
     template: source.template || source.kind,
@@ -200,6 +220,8 @@ function isCheerioSource(source) {
 
 module.exports = {
   SOURCES,
+  LAZIO_SOURCES,
+  NATIONAL_REGISTRY,
   enabledSources,
   findSource,
   isCheerioSource,

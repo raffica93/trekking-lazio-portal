@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { supabaseRuntimeConfig } from './supabase.config';
+import { CAI_DESTINATION_HOSTS } from './cai-destination-hosts';
 
 declare global {
   interface Window {
@@ -53,6 +54,12 @@ export class AnalyticsService {
     linkType: 'sito' | 'agenda' | 'escursione'
   ): void {
     if (typeof window === 'undefined' || typeof window.gtag !== 'function' || !supabaseRuntimeConfig.supabaseUrl) return;
+    try {
+      const destination = new URL(url);
+      const hostname = destination.hostname.toLowerCase().replace(/^www\./, '');
+      if (!['http:', 'https:'].includes(destination.protocol) || destination.username || destination.password) return;
+      if (!CAI_DESTINATION_HOSTS.includes(hostname) && !hostname.endsWith('.cai.it')) return;
+    } catch { return; }
     const anchor = event.currentTarget;
     if (!(anchor instanceof HTMLAnchorElement)) return;
 

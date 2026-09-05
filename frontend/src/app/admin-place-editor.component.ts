@@ -116,7 +116,7 @@ export class AdminPlaceEditorComponent implements OnInit {
     title: ['', Validators.required], slug: ['', Validators.required], status: ['draft' as PlaceStatus, Validators.required],
     date: ['', Validators.required], date_end: [''], category: ['', Validators.required],
     external_url: ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/i)]], organizer: ['Trekking CAI', Validators.required],
-    location: ['', Validators.required], municipality: [''], province: [''], region: [''], latitude: ['', Validators.required], longitude: ['', Validators.required],
+    location: ['', Validators.required], municipality: [''], province: [''], region: [''], latitude: [''], longitude: [''],
     cost: [''], distance_km: [''], elevation_m: [''], duration_hours: [''], time: [''], mountain_group: [''], transport: [''],
     start_place: [''], coordinates_quality: [''], summary: [''], activity_type: [''], terrain: [''], difficulty_note: [''], cover_image_path: ['']
   });
@@ -270,7 +270,7 @@ export class AdminPlaceEditorComponent implements OnInit {
       slug: this.slugify(value.slug), title: value.title.trim(), date: value.date, date_end: this.textOrNull(value.date_end), days: this.computedDays(),
       category: value.category.trim(), external_url: value.external_url.trim(), organizer: value.organizer.trim(), location: value.location.trim(),
       municipality: this.textOrNull(value.municipality), province: this.textOrNull(value.province), region: this.textOrNull(value.region),
-      latitude: this.numberOrZero(value.latitude), longitude: this.numberOrZero(value.longitude), cost: this.textOrNull(value.cost), cost_amount: null,
+      latitude: this.numberOrNull(value.latitude), longitude: this.numberOrNull(value.longitude), cost: this.textOrNull(value.cost), cost_amount: null,
       time: this.textOrNull(value.time), distance_km: this.numberOrNull(value.distance_km), elevation_m: this.numberOrNull(value.elevation_m),
       duration_hours: this.numberOrNull(value.duration_hours), mountain_group: this.textOrNull(value.mountain_group), transport: this.textOrNull(value.transport),
       private_car: null, start_place: this.textOrNull(value.start_place), coordinates_quality: this.textOrNull(value.coordinates_quality), summary: this.textOrNull(value.summary),

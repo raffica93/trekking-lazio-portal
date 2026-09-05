@@ -1,13 +1,15 @@
 const { SOURCES, sourceMeta } = require('./sources');
 
 function belongingTo(source, excursion) {
-  return Boolean(excursion?.id?.startsWith(`${source.id}-`));
+  return excursion?.sourceId ? excursion.sourceId === source.id : Boolean(excursion?.id?.startsWith(`${source.id}-`));
 }
 
 function countBySource(excursions = [], sources = SOURCES) {
-  const counts = {};
-  for (const source of sources) {
-    counts[source.id] = (excursions || []).filter((item) => belongingTo(source, item)).length;
+  const counts = Object.fromEntries(sources.map((source) => [source.id, 0]));
+  const ordered = [...sources].sort((a, b) => b.id.length - a.id.length);
+  for (const event of excursions || []) {
+    const id = event.sourceId || ordered.find((source) => belongingTo(source, event))?.id;
+    if (id && id in counts) counts[id] += 1;
   }
   return counts;
 }
@@ -19,7 +21,11 @@ function catalogRow(source, extras = {}) {
     excursions: extras.excursions ?? 0,
     error: extras.error || null,
     hash: extras.hash || null,
-    updatedAt: extras.updatedAt || null
+    updatedAt: extras.updatedAt || null,
+    documents: extras.documents || [],
+    methods: extras.methods || [],
+    issues: extras.issues || [],
+    extractedEvents: extras.extractedEvents ?? null
   };
 }
 
@@ -50,9 +56,13 @@ function buildScrapeStatus({
       return catalogRow(source, {
         status: run.status,
         excursions: run.excursions.length,
-        error: null,
+        error: failuresById.get(source.id) || null,
         hash: run.hash || null,
-        updatedAt: generatedAt
+        updatedAt: generatedAt,
+        documents: run.documents,
+        methods: run.methods,
+        issues: run.issues,
+        extractedEvents: run.extractedEvents
       });
     }
     if (failuresById.has(source.id)) {
@@ -69,12 +79,17 @@ function buildScrapeStatus({
       excursions: counts[source.id] ?? prior.excursions ?? 0,
       error: prior.error || null,
       hash: prior.hash || null,
-      updatedAt: prior.updatedAt || null
+      updatedAt: prior.updatedAt || null,
+      documents: prior.documents,
+      methods: prior.methods,
+      issues: prior.issues,
+      extractedEvents: prior.extractedEvents
     });
   });
 
   return {
     generatedAt,
+    coverage: result?.coverage || existingStatus.coverage || null,
     sources: rows
   };
 }

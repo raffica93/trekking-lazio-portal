@@ -4,6 +4,12 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Pushes made with GITHUB_TOKEN do not trigger other push workflows.
+  # Publish the cache after the manually requested collection completes.
+  workflow_run:
+    workflows: ['Refresh excursion data']
+    types: [completed]
+    branches: [main]
 
 permissions:
   contents: read
@@ -16,12 +22,15 @@ concurrency:
 
 jobs:
   build:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: frontend
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -52,7 +61,7 @@ jobs:
           # GitHub Pages serves nested index files with HTTP 200. Keep clean
           # admin URLs working on first load and on browser refresh, instead
           # of relying only on the HTTP 404 fallback.
-          for route in admin admin/login admin/sedi admin/places/new; do
+          for route in info servizi termini privacy admin admin/login admin/sedi admin/places/new; do
             mkdir -p "dist/frontend/browser/${route}"
             cp dist/frontend/browser/index.html "dist/frontend/browser/${route}/index.html"
           done

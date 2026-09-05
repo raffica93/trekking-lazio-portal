@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import {
   applyFilters,
   DEFAULT_FILTERS,
@@ -11,6 +12,8 @@ import {
   normalizeExcursion,
   availableMonths,
   availableOrganizers,
+  availableOrganizerRegions,
+  currentAndFutureExcursions,
   availableRegions
 } from './excursion-filters';
 import { Excursion } from './excursion.model';
@@ -33,6 +36,8 @@ function sample(overrides: Partial<Excursion> = {}): Excursion {
 }
 
 describe('excursion filters', () => {
+  beforeEach(() => { vi.useFakeTimers(); vi.setSystemTime(new Date(2026, 8, 5)); });
+  afterEach(() => vi.useRealTimers());
   it('normalizes missing dateEnd, hours, days and region', () => {
     const excursion = normalizeExcursion(sample({
       dateEnd: undefined,
@@ -124,13 +129,13 @@ describe('excursion filters', () => {
       .toEqual(['EEA', 'Lazio']);
   });
 
-  it('lands on the next month and treats Azzera as all months', () => {
+  it('lands on all current and future months and resets without a month cap', () => {
     const now = new Date(2026, 7, 30);
     expect(currentYearMonth(now)).toBe('2026-08');
     expect(nextYearMonth(now)).toBe('2026-09');
-    expect(landingFilters(now).month).toBe('2026-09');
+    expect(landingFilters(now).month).toBe('all');
     expect(hasActiveFilters(DEFAULT_FILTERS, now)).toBe(false);
-    expect(hasActiveFilters(landingFilters(now), now)).toBe(true);
+    expect(hasActiveFilters(landingFilters(now), now)).toBe(false);
     expect(hasActiveFilters({ ...DEFAULT_FILTERS, month: 'all' }, now)).toBe(false);
     expect(hasActiveFilters({ ...DEFAULT_FILTERS, month: '2026-08' }, now)).toBe(true);
     expect(extraFilterTags(landingFilters(now)).map((tag) => tag.label)).toEqual([]);
@@ -142,8 +147,8 @@ describe('excursion filters', () => {
       sample({ date: '2026-10-03', region: 'Abruzzo' })
     ].map((item) => normalizeExcursion(item));
 
-    expect(availableMonths(list).map((month) => month.label)).toEqual(['Set', 'Ott']);
-    expect(availableRegions(list)).toEqual(['Lazio', 'Abruzzo']);
+    expect(availableMonths(list).map((month) => month.label)).toEqual(['Set 2026', 'Ott 2026']);
+    expect(availableRegions(list)).toEqual(['Abruzzo', 'Lazio']);
   });
 
   it('filters and lists CAI sections', () => {
@@ -156,4 +161,25 @@ describe('excursion filters', () => {
     expect(applyFilters(list, { ...DEFAULT_FILTERS, organizer: 'CAI Tivoli' }).map((item) => item.id))
       .toEqual(['tivoli']);
   });
+  it('removes previous months dynamically while preserving overlapping trips', () => {
+    const list = [sample({ id: 'past', date: '2026-08-30', dateEnd: '2026-08-31' }), sample({ id: 'overlap', date: '2026-08-30', dateEnd: '2026-09-02' }), sample({ id: 'later', date: '2026-12-20' })];
+    expect(currentAndFutureExcursions(list, new Date(2026, 8, 1)).map(item => item.id)).toEqual(['overlap', 'later']);
+    expect(availableMonths(list, new Date(2026, 8, 1)).map(item => item.id)).toEqual(['2026-09', '2026-12']);
+    expect(applyFilters(list, DEFAULT_FILTERS, new Date(2026, 9, 1)).map(item => item.id)).toEqual(['later']);
+  });
+
+  it('handles December to January without showing last year’s months', () => {
+    const list = [sample({ id: 'old', date: '2026-12-20', dateEnd: '2026-12-20' }), sample({ id: 'trip', date: '2026-12-30', dateEnd: '2027-01-02' })];
+    expect(currentAndFutureExcursions(list, new Date(2027, 0, 1)).map(item => item.id)).toEqual(['trip']);
+    expect(availableMonths(list, new Date(2027, 0, 1))).toEqual([{ id: '2027-01', label: 'Gen 2027' }]);
+  });
+
+  it('distinguishes the CAI region from the destination and searches without accents', () => {
+    const list = [sample({ id: 'milano', organizer: 'CAI Milano', organizerRegion: 'Lombardia', region: 'Piemonte', title: 'Valle d’Aosta – Colle' }), sample({ id: 'roma', organizer: 'CAI Roma', organizerRegion: 'Lazio' })];
+    expect(availableOrganizerRegions(list)).toEqual(['Lazio', 'Lombardia']);
+    expect(availableOrganizers(list, 'Lombardia')).toEqual(['CAI Milano']);
+    expect(applyFilters(list, { ...DEFAULT_FILTERS, organizerRegion: 'Lombardia', query: 'aosta colle' }).map(item => item.id)).toEqual(['milano']);
+    expect(applyFilters(list, { ...DEFAULT_FILTERS, organizerRegion: 'Piemonte' })).toEqual([]);
+  });
+
 });

@@ -16,6 +16,6 @@ export const supabaseRuntimeConfig: SupabaseRuntimeConfig = {
   supabasePublishableKey: runtimeConfig?.supabasePublishableKey?.trim() ?? ''
 };
 
-export const isSupabaseConfigured = Boolean(
-  supabaseRuntimeConfig.supabaseUrl && supabaseRuntimeConfig.supabasePublishableKey
-);
+export function isSupabaseConfigured(): boolean {
+  return Boolean(supabaseRuntimeConfig.supabaseUrl && supabaseRuntimeConfig.supabasePublishableKey);
+}
