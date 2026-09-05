@@ -1,6 +1,7 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, Output, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Excursion } from './excursion.model';
+import { CaiDirectoryEntry, CaiDirectoryService } from './cai-directory.service';
 import {
   DEFAULT_FILTERS,
   FilterState,
@@ -24,7 +25,6 @@ import {
   template: `
     <section class="filter-bar" aria-label="Filtri">
       <div class="section-select-band" aria-label="Filtra per sede regionale e sezione CAI">
-        <span class="section-select-caption">CAI</span>
         <div class="section-select-group">
           <label class="section-select-field">
             <span>Regione</span>
@@ -35,10 +35,18 @@ import {
           </label>
           <label class="section-select-field section-select-field-section">
             <span>Sezione</span>
-            <select aria-label="Filtra per sezione CAI" [value]="filters.organizer" (change)="set('organizer', inputValue($event))">
-              <option value="all">Tutte le sezioni</option>
-              <option *ngFor="let organizer of organizers" [value]="organizer">{{ organizer }}</option>
-            </select>
+            <input
+              type="search"
+              list="cai-section-options"
+              aria-label="Cerca sezione CAI"
+              autocomplete="off"
+              placeholder="Tutte le sezioni"
+              [value]="sectionSearch || (filters.organizer === 'all' ? '' : filters.organizer)"
+              (input)="setSectionSearch($event)"
+            >
+            <datalist id="cai-section-options">
+              <option *ngFor="let organizer of sectionSuggestions" [value]="organizer"></option>
+            </datalist>
           </label>
         </div>
       </div>
@@ -269,25 +277,16 @@ import {
     .section-select-band {
       display: flex;
       align-items: center;
-      gap: .55rem;
-      padding: .4rem .75rem;
+      gap: .4rem;
+      padding: .22rem .75rem;
       border-bottom: 1px solid #e7e5e4;
       background: #f3f6f3;
     }
 
-    .section-select-caption {
-      flex: 0 0 auto;
-      padding-left: .55rem;
-      border-left: 3px solid #047857;
-      color: #065f46;
-      font: 800 .62rem/1.2 'IBM Plex Mono', monospace;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
     .section-select-group {
       display: flex;
-      flex: 1 1 auto;
+      flex: 0 1 48rem;
+      width: min(100%, 48rem);
       min-width: 0;
       overflow: hidden;
       border: 1px solid #bccdc3;
@@ -322,14 +321,34 @@ import {
 
     .section-select-field select {
       min-width: 8.5rem;
-      max-width: 15rem;
-      min-height: 2.05rem;
+      max-width: 14rem;
+      min-height: 1.8rem;
       border: 0;
       background: transparent;
       color: #1c1917;
-      font-size: .78rem;
-      font-weight: 700;
+      font: 700 .74rem/1.2 'IBM Plex Mono', monospace;
       outline: none;
+    }
+
+    .section-select-field-section input {
+      width: 100%;
+      min-width: 0;
+      min-height: 1.8rem;
+      border: 0;
+      background: transparent;
+      color: #1c1917;
+      font: 700 .74rem/1.2 'IBM Plex Mono', monospace;
+      outline: none;
+    }
+
+    .section-select-field-section input::placeholder {
+      color: #78716c;
+      opacity: 1;
+    }
+
+    .section-select-field-section input:focus-visible {
+      outline: 2px solid #047857;
+      outline-offset: -2px;
     }
 
     .section-select-field-section select {
@@ -342,12 +361,12 @@ import {
     .filter-mega-apply { position: sticky; bottom: -.5rem; display: flex; justify-content: flex-end; margin-top: .75rem; padding: .5rem 0; background: #f3f6f3; }
     .filter-mega-apply button { padding: .5rem .8rem; border: 1px solid #064e3b; border-radius: .4rem; background: #064e3b; color: white; font-size: .78rem; font-weight: 700; }
     @media (max-width: 767px) {
-      .section-select-band { flex-wrap: wrap; gap: .35rem .5rem; padding: .35rem .65rem; }
-      .section-select-caption { width: 100%; }
-      .section-select-group { width: 100%; }
+      .section-select-band { padding: .2rem .65rem; }
+      .section-select-group { width: 100%; flex-basis: 100%; }
       .section-select-field { flex: 1 1 0; padding-right: .45rem; padding-left: .5rem; gap: .3rem; }
       .section-select-field > span { font-size: .55rem; }
-      .section-select-field select { min-width: 0; width: 100%; max-width: none; font-size: .72rem; }
+      .section-select-field select,
+      .section-select-field-section input { min-width: 0; width: 100%; max-width: none; font-size: .69rem; }
     }
 
     .filter-band {
@@ -564,12 +583,22 @@ import {
     }
 
     .primary-filter-actions {
-      flex: 1 0 100%;
+      flex: 0 0 auto;
       justify-content: flex-end;
-      width: 100%;
-      margin-left: 0;
-      padding-top: .25rem;
-      border-top: 1px solid #edf1ef;
+      width: auto;
+      margin-left: auto;
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    @media (max-width: 767px) {
+      .primary-filter-actions {
+        flex-basis: 100%;
+        width: 100%;
+        margin-left: 0;
+        padding-top: .2rem;
+        border-top: 1px solid #edf1ef;
+      }
     }
 
     .filter-count {
@@ -710,8 +739,10 @@ import {
     }
   `]
 })
-export class FilterBarComponent {
+export class FilterBarComponent implements OnInit {
   private host = inject(ElementRef<HTMLElement>);
+  private readonly directoryService = inject(CaiDirectoryService);
+  private readonly changeDetector = inject(ChangeDetectorRef);
 
   @Input() filters: FilterState = landingFilters();
   @Input() allExcursions: Excursion[] = [];
@@ -720,6 +751,15 @@ export class FilterBarComponent {
 
   megaOpen = false;
   sectionOpen = false;
+  sectionSearch = '';
+  directoryEntries: CaiDirectoryEntry[] = [];
+
+  ngOnInit() {
+    this.directoryService.getDirectory().subscribe(entries => {
+      this.directoryEntries = entries;
+      this.changeDetector.markForCheck();
+    });
+  }
 
   get months() {
     return availableMonths(this.allExcursions);
@@ -730,11 +770,29 @@ export class FilterBarComponent {
   }
 
   get organizers() {
+    if (this.directoryEntries.length > 0) {
+      return Array.from(new Set(this.directoryEntries
+        .filter(entry => this.filters.organizerRegion === 'all' || entry.region === this.filters.organizerRegion)
+        .map(entry => entry.organizer)
+        .filter(Boolean)))
+        .sort((a, b) => a.localeCompare(b, 'it'));
+    }
     return availableOrganizers(this.allExcursions, this.filters.organizerRegion);
   }
 
   get organizerRegions() {
+    if (this.directoryEntries.length > 0) {
+      return Array.from(new Set(this.directoryEntries.map(entry => entry.region).filter(Boolean)))
+        .sort((a, b) => a.localeCompare(b, 'it'));
+    }
     return availableOrganizerRegions(this.allExcursions);
+  }
+
+  get sectionSuggestions() {
+    const term = this.sectionSearch.trim().toLocaleLowerCase('it');
+    return this.organizers
+      .filter(organizer => !term || organizer.toLocaleLowerCase('it').includes(term))
+      .slice(0, 80);
   }
 
   get bounds() {
@@ -780,6 +838,7 @@ export class FilterBarComponent {
 
   set<K extends keyof FilterState>(key: K, value: FilterState[K]) {
     if (key === 'organizerRegion') {
+      this.sectionSearch = '';
       this.filtersChange.emit({ ...this.filters, organizerRegion: value as string, organizer: 'all' });
       return;
     }
@@ -812,13 +871,26 @@ export class FilterBarComponent {
   }
 
   clearTag(tag: FilterTag) {
+    if (tag.id === 'organizer') this.sectionSearch = '';
     this.filtersChange.emit({ ...this.filters, ...tag.patch });
   }
 
   reset() {
     this.megaOpen = false;
     this.sectionOpen = false;
+    this.sectionSearch = '';
     this.filtersChange.emit({ ...DEFAULT_FILTERS });
+  }
+
+  setSectionSearch(event: Event) {
+    const value = this.inputValue(event).trim();
+    this.sectionSearch = value;
+    if (!value) {
+      this.set('organizer', 'all');
+      return;
+    }
+    const match = this.organizers.find(organizer => organizer.localeCompare(value, 'it', { sensitivity: 'base' }) === 0);
+    this.set('organizer', match ?? 'all');
   }
 
   inputValue(event: Event): string {

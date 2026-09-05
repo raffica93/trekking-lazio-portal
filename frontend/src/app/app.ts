@@ -32,7 +32,7 @@ registerLocaleData(localeIt);
   template: `
     <div class="flex h-dvh flex-col overflow-hidden bg-stone-100 text-slate-900">
       <!-- Header -->
-      <header class="z-20 border-b border-emerald-950/20 bg-emerald-900 px-3 py-3 text-white shadow-lg md:px-6">
+      <header class="z-20 border-b border-emerald-950/20 bg-emerald-900 px-3 py-2 text-white shadow-lg md:px-6">
         <div class="mx-auto flex max-w-screen-2xl items-center gap-2.5 md:gap-3">
           <a
             routerLink="/"
@@ -44,7 +44,7 @@ registerLocaleData(localeIt);
               width="40"
               height="40"
               alt=""
-              class="h-9 w-9 shrink-0 rounded-[0.7rem] object-cover shadow-sm md:h-10 md:w-10"
+              class="h-8 w-8 shrink-0 rounded-[0.7rem] object-cover shadow-sm md:h-9 md:w-9"
             >
             <div class="flex min-w-0 items-center gap-2">
               <span class="truncate text-lg font-black tracking-[-0.04em] md:text-2xl">TREKKING CAI</span>

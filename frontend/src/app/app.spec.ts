@@ -394,10 +394,10 @@ describe('App', () => {
 
     clickReset();
     openMega();
-    const section = compiled.querySelector('[aria-label="Filtra per sezione CAI"]') as HTMLSelectElement;
+    const section = compiled.querySelector('[aria-label="Cerca sezione CAI"]') as HTMLInputElement;
     expect(section).toBeTruthy();
     section.value = 'CAI Tivoli';
-    section.dispatchEvent(new Event('change'));
+    section.dispatchEvent(new Event('input'));
     fixture.detectChanges();
     expect(app.excursions.map(excursion => excursion.id)).toEqual(['week']);
     expect(compiled.querySelector('app-excursion-card .section-tag')?.textContent).toContain('CAI Tivoli');
@@ -442,11 +442,11 @@ describe('App', () => {
     expect(compiled.querySelector('[data-excursion-id="064"]')).toBeTruthy();
     expect(compiled.querySelector('[aria-label="Pagine del calendario"]')).toBeNull();
     const region = compiled.querySelector('[aria-label="Filtra per regione del CAI"]') as HTMLSelectElement;
-    const section = compiled.querySelector('[aria-label="Filtra per sezione CAI"]') as HTMLSelectElement;
-    section.value = 'CAI Roma'; section.dispatchEvent(new Event('change')); fixture.detectChanges();
+    const section = compiled.querySelector('[aria-label="Cerca sezione CAI"]') as HTMLInputElement;
+    section.value = 'CAI Roma'; section.dispatchEvent(new Event('input')); fixture.detectChanges();
     region.value = 'Lombardia'; region.dispatchEvent(new Event('change')); fixture.detectChanges();
     expect(app.filters.organizer).toBe('all');
     expect(app.excursions.every(item => item.organizer === 'CAI Milano')).toBe(true);
-    expect(Array.from(section.options).map(option => option.value)).toEqual(['all', 'CAI Milano']);
+    expect(section.getAttribute('list')).toBe('cai-section-options');
   });
 });
