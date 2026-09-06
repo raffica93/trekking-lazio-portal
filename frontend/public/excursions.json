@@ -7158,7 +7158,7 @@
     "sora": "f9b1ef4d4c6fc96132f558eb490b2d492a351345808853ff18982ef9365d2b8c",
     "amatrice": "a48efcfbd230ad46bc98c2552a35af3a515c6b012a2d010d804a3cd3502fb720",
     "alatri": "28eba1ccb513fbf0898e2e85d109e7a3c357cb3d48d08185193fc8f0ae15427b",
-    "colleferro": "63ba5ba1fcf86ad9f4638d8a17991bec11999c17d9f62eb98763dad29dd34a4b",
+    "colleferro": "9223187dd2227b2ce8b374f6629d770e92958d16be9ab20945cf727b727c6930",
     "antrodoco": "b602e37c214a45eff44ecf2047993d365513cdab0f7e1d2d0af98f6726cfb6f2",
     "roma": "7279b7afd59336182b997a707a47c8d700555208c07fc4fcc5d2b8d9da0bae65",
     "frascati": "d197c66fafceaa3a875fb1caaf039d8ae3fa9f7bf1f344d50986793356b0ec5b",
@@ -7436,16 +7436,16 @@
     "cai-savona-9210003": "97bdcc6ebbaa6e3916b62c629827b3bdce1762d3fde59772de5cd5a3389b8548",
     "cai-legnano-9216022": "c58fda988d4ee558ee3f826057a7ee2516c12ed439fbd2c61b6033bad6d4b149"
   },
-  "generatedAt": "2026-09-06T11:18:59.276Z",
+  "generatedAt": "2026-09-06T11:25:07.842Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
-    "selected": 292,
-    "withEvents": 165,
-    "parsed": 171,
-    "unsupported": 103,
-    "failed": 7,
-    "located": 233
+    "selected": 1,
+    "withEvents": 1,
+    "parsed": 1,
+    "unsupported": 0,
+    "failed": 0,
+    "located": 246
   },
   "excursions": [
     {
@@ -11456,6 +11456,24 @@
       "difficultyNote": "EE richiede escursionisti esperti con passo sicuro su terreni ripidi, detritici e rocciosi, inclusi brevi passaggi di I grado e tratti esposti sulla cresta e in discesa."
     },
     {
+      "id": "colleferro-fe47aef4ced0",
+      "title": "Monte Brancastello (Gran Sasso)",
+      "date": "2026-09-06",
+      "dateEnd": "2026-09-06",
+      "days": 1,
+      "category": "Escursionismo",
+      "link": "https://caicolleferro.it/wp-content/uploads/2025/12/CAI-Colleferro-2026.pdf",
+      "organizer": "CAI Colleferro",
+      "location": "Gran Sasso",
+      "region": "Abruzzo",
+      "lat": 42.482,
+      "lng": 13.565,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
       "id": "cai-livorno-9226004-59fc91f4b1d9",
       "sourceId": "cai-livorno-9226004",
       "title": "Monte Folgorito e Monte Carchio",
@@ -13427,9 +13445,9 @@
       "dateEnd": "2026-09-12",
       "days": 1,
       "category": "Escursionismo",
-      "link": "https://caicolleferro.it/?p=2522",
+      "link": "https://caicolleferro.it/wp-content/uploads/2025/12/CAI-Colleferro-2026.pdf",
       "organizer": "CAI Colleferro",
-      "location": "Montagne della Duchessa",
+      "location": "Lago della Duchessa",
       "region": "Lazio",
       "lat": 42.175,
       "lng": 13.348,
@@ -14756,24 +14774,6 @@
       "privateCar": null
     },
     {
-      "id": "colleferro-f57702165839",
-      "title": "Gole di Celano",
-      "date": "2026-09-13",
-      "dateEnd": "2026-09-13",
-      "days": 1,
-      "category": "Escursionismo",
-      "link": "https://caicolleferro.it/?p=2522",
-      "organizer": "CAI Colleferro",
-      "location": "Gole di Celano",
-      "region": "Altro",
-      "lat": 42.148,
-      "lng": 13.38,
-      "coordinatesQuality": "massif",
-      "cost": "Vedi sito",
-      "time": "Vedi sito",
-      "privateCar": null
-    },
-    {
       "id": "cai-portogruaro-9220030-33f34b74b31b",
       "sourceId": "cai-portogruaro-9220030",
       "title": "Gruppo Giovani - Jôf di Montasio",
@@ -15750,6 +15750,24 @@
       "locationSource": "ics",
       "sourceDocument": "https://organizzazione.cai.it/sez-cedegolo/eventi/?ical=1",
       "description": "Festa al rifugio Laeng 1740m (E) Posto su un dosso nella conca di Varicla, è incorniciato dalle pareti rocciose calcaree del gruppo del Pizzo Camino e cima Moren E’ inserito in un ambiente simile a un giardino dove ogni albero, cespuglio fiore e pietra sembrano disposti con impareggiabile sensibilità paesaggistica."
+    },
+    {
+      "id": "colleferro-cc7882227ffc",
+      "title": "Santuario della Santissima Trinità da Monna dell’Orso",
+      "date": "2026-09-13",
+      "dateEnd": "2026-09-13",
+      "days": 1,
+      "category": "Escursionismo",
+      "link": "https://caicolleferro.it/wp-content/uploads/2025/12/CAI-Colleferro-2026.pdf",
+      "organizer": "CAI Colleferro",
+      "location": "Santuario della Santissima Trinità",
+      "region": "Altro",
+      "lat": 41.9687,
+      "lng": 13.3666,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
     },
     {
       "id": "cai-reggio-calabria-9244001-bdcdb608955c",
@@ -17553,6 +17571,24 @@
       "description": "19 sabato SENTIERO GLACIOLOGICO VAL MARTELLO"
     },
     {
+      "id": "colleferro-2d1600b35ebb",
+      "title": "Sentiero Italia (S.I.) Campocatino-Filettino",
+      "date": "2026-09-19",
+      "dateEnd": "2026-09-19",
+      "days": 1,
+      "category": "EE",
+      "link": "https://caicolleferro.it/wp-content/uploads/2025/12/CAI-Colleferro-2026.pdf",
+      "organizer": "CAI Colleferro",
+      "location": "Campocatino-Filettino",
+      "region": "Altro",
+      "lat": 41.8333,
+      "lng": 13.3333,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
       "id": "cai-lendinara-9220038-751fc7d6dae0",
       "sourceId": "cai-lendinara-9220038",
       "title": "siete invitati alla cena di fine estate a base di pesce. Ci incontriamo alle 20.00 presso la sala Puglisi a Runzi. Prenotatevi in sezione.",
@@ -17733,6 +17769,24 @@
       "locationSource": "pdf-text",
       "sourceDocument": "https://www.caibrugherio.com/data/sites/1/documenti/programma2026.pdf",
       "description": "Domenica 20.09 “AL COSPETTO DEL MONTE ROSA: RIFUGIO PASTORE E RIFUGIO BARBA"
+    },
+    {
+      "id": "colleferro-f405e3eaa282",
+      "title": "“Selenamente” Campo di Segni",
+      "date": "2026-09-20",
+      "dateEnd": "2026-09-20",
+      "days": 1,
+      "category": "Escursionismo",
+      "link": "https://caicolleferro.it/wp-content/uploads/2025/12/CAI-Colleferro-2026.pdf",
+      "organizer": "CAI Colleferro",
+      "location": "Campo di Segni",
+      "region": "Altro",
+      "lat": 41.6917,
+      "lng": 13.0232,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
     },
     {
       "id": "cai-salerno-9238003-4cf7d8ddd1f2",
@@ -22504,6 +22558,24 @@
       "description": "27 dom Family CAI Monte Penna del Trasimeno (Stefanelli)"
     },
     {
+      "id": "colleferro-9b3cf818cae3",
+      "title": "Ferrata Ricci (Gran Sasso) – Moderatamente Difficile",
+      "date": "2026-09-27",
+      "dateEnd": "2026-09-27",
+      "days": 1,
+      "category": "EEA",
+      "link": "https://caicolleferro.it/wp-content/uploads/2025/12/CAI-Colleferro-2026.pdf",
+      "organizer": "CAI Colleferro",
+      "location": "Gran Sasso",
+      "region": "Abruzzo",
+      "lat": 42.482,
+      "lng": 13.565,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
       "id": "cai-sacile-9222024-bfcfe24d055c",
       "sourceId": "cai-sacile-9222024",
       "title": "Festa della Montagna - Intersezionale",
@@ -24346,6 +24418,24 @@
       "description": "Descrizione itinerario: In fase di preparazione Difficoltà: EE Dislivello in salita: 1750 m Dislivello in discesa: 1750 m Durata Prevista (ore di marcia): 9 Equipaggiamento: Appuntamento: Con l’iscrizione all’escursione il partecipante dichiara di conoscere e accettare le Regole di comportamento per le escursioni sociali della Sezione di Frascati che trova esposte in sede o visionabili sul sito www.caifrascati.it – Per tutti i dettagli sulle assicurazioni http://www.cai.it/assicurazione"
     },
     {
+      "id": "colleferro-7790e0da18f8",
+      "title": "Monte Crepacuore da Campocatino",
+      "date": "2026-10-03",
+      "dateEnd": "2026-10-03",
+      "days": 1,
+      "category": "E",
+      "link": "https://caicolleferro.it/wp-content/uploads/2025/12/CAI-Colleferro-2026.pdf",
+      "organizer": "CAI Colleferro",
+      "location": "Campocatino",
+      "region": "Altro",
+      "lat": 41.8347,
+      "lng": 13.3411,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
       "id": "cai-varese-9216009-59ff50948052",
       "sourceId": "cai-varese-9216009",
       "title": "Monte Pisello di Talamona, 2272 mt. da Albaredo, 1470 mt. - SO",
@@ -24502,6 +24592,24 @@
       "sourceDocument": "https://www.caivesuvio.it/eventi/?ical=1",
       "description": "Difficoltà: E – Dislivello: +500 – Durata: 5 ore – Distanza: Km",
       "durationHours": 5
+    },
+    {
+      "id": "colleferro-594e288379ec",
+      "title": "TAM: Pian della Faggeta e Perrone del Corvo",
+      "date": "2026-10-03",
+      "dateEnd": "2026-10-03",
+      "days": 1,
+      "category": "Escursionismo",
+      "link": "https://caicolleferro.it/wp-content/uploads/2025/12/CAI-Colleferro-2026.pdf",
+      "organizer": "CAI Colleferro",
+      "location": "Monti Lepini",
+      "region": "Lazio",
+      "lat": 41.566,
+      "lng": 13.067,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
     },
     {
       "id": "roma-7934068c1dd7",
@@ -28717,6 +28825,24 @@
       "description": "11 ottobre - Esercitazione estiva-manovre di soccorso in parete"
     },
     {
+      "id": "colleferro-052316c3ae06",
+      "title": "Ferrata Bertona – Moderatamente Difficile",
+      "date": "2026-10-11",
+      "dateEnd": "2026-10-11",
+      "days": 1,
+      "category": "EEA",
+      "link": "https://caicolleferro.it/wp-content/uploads/2025/12/CAI-Colleferro-2026.pdf",
+      "organizer": "CAI Colleferro",
+      "location": "Monte Bertona",
+      "region": "Altro",
+      "lat": 42.4497,
+      "lng": 13.8828,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
       "id": "cai-brescia-9216005-df263d881ad8",
       "sourceId": "cai-brescia-9216005",
       "title": "Ferrata Campalani e Cima Carega (2259) Ferrata breve ma impegnativa ed esposta, che consente di raggiungere la Cima Carega e poi ridiscendere dalla via normale lungo un percorso ad anello EEA (D) 950 mt 6 h Luca Bonfà – Nicola Farella",
@@ -31101,6 +31227,24 @@
       "locationSource": "pdf-text",
       "sourceDocument": "https://www.caipistoia.org/wp-content/uploads/2024/12/CALENDARIO_ESCURSIONISMO_2026.pdf",
       "description": "domenica 18 ottobre Anello Fossato-Chiapporato E Ciuti, Torelli A., Falcone"
+    },
+    {
+      "id": "colleferro-ac8e79a067a7",
+      "title": "Anello Lago di Giulianello",
+      "date": "2026-10-18",
+      "dateEnd": "2026-10-18",
+      "days": 1,
+      "category": "Escursionismo",
+      "link": "https://caicolleferro.it/wp-content/uploads/2025/12/CAI-Colleferro-2026.pdf",
+      "organizer": "CAI Colleferro",
+      "location": "Lago di Giulianello",
+      "region": "Altro",
+      "lat": 41.6781,
+      "lng": 12.8711,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
     },
     {
       "id": "esperia-ffb52fa2c654",
@@ -34901,6 +35045,24 @@
       "durationHours": 5
     },
     {
+      "id": "colleferro-d696404f73e2",
+      "title": "Monte Amaro di Opi",
+      "date": "2026-10-25",
+      "dateEnd": "2026-10-25",
+      "days": 1,
+      "category": "Escursionismo",
+      "link": "https://caicolleferro.it/wp-content/uploads/2025/12/CAI-Colleferro-2026.pdf",
+      "organizer": "CAI Colleferro",
+      "location": "Opi",
+      "region": "Altro",
+      "lat": 41.7761,
+      "lng": 13.8291,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
       "id": "alatri-b34a0c3cefa7",
       "title": "MONTE AMARO DI OPI",
       "date": "2026-10-25",
@@ -35183,6 +35345,24 @@
       "locationSource": "html-calendar",
       "sourceDocument": "https://caicampobasso.it/calendario-delle-attivita/",
       "description": "25 Ottobre – P.N. DEL MATESE: Anello M.ti Monaco ed Erbano"
+    },
+    {
+      "id": "colleferro-a536611baafd",
+      "title": "Parco Nazionale Abruzzo Lazio Molise",
+      "date": "2026-10-25",
+      "dateEnd": "2026-10-25",
+      "days": 1,
+      "category": "Escursionismo",
+      "link": "https://caicolleferro.it/wp-content/uploads/2025/12/CAI-Colleferro-2026.pdf",
+      "organizer": "CAI Colleferro",
+      "location": "Parco Nazionale Abruzzo Lazio Molise",
+      "region": "Abruzzo",
+      "lat": 41.792,
+      "lng": 13.869,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
     },
     {
       "id": "cai-piedimonte-matese-9238005-c3a26834d60b",
@@ -35944,6 +36124,24 @@
       "coordinatesQuality": "unknown",
       "locationSource": "ics",
       "sourceDocument": "https://www.caichieti.it/wp-content/uploads/2026/03/Calendario_Sezionale_CAI_Chieti_2026.ics"
+    },
+    {
+      "id": "colleferro-6e64212ef3d0",
+      "title": "Castagneti dei Monti Lepini II^ Edizione – Montelanico",
+      "date": "2026-11-01",
+      "dateEnd": "2026-11-01",
+      "days": 1,
+      "category": "Escursionismo",
+      "link": "https://caicolleferro.it/wp-content/uploads/2025/12/CAI-Colleferro-2026.pdf",
+      "organizer": "CAI Colleferro",
+      "location": "Monti Lepini",
+      "region": "Lazio",
+      "lat": 41.566,
+      "lng": 13.067,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
     },
     {
       "id": "cai-codogno-9216071-be59dba710f5",
@@ -36934,6 +37132,24 @@
       "locationSource": "ics",
       "sourceDocument": "https://organizzazione.cai.it/sez-livorno/eventi/?ical=1",
       "description": "MTB – Diff.: TC/TC – Scavo M."
+    },
+    {
+      "id": "colleferro-56a6e56dad3e",
+      "title": "Sprone Maraoni",
+      "date": "2026-11-07",
+      "dateEnd": "2026-11-07",
+      "days": 1,
+      "category": "E",
+      "link": "https://caicolleferro.it/wp-content/uploads/2025/12/CAI-Colleferro-2026.pdf",
+      "organizer": "CAI Colleferro",
+      "location": "Sprone Maraoni",
+      "region": "Altro",
+      "lat": 41.7951,
+      "lng": 13.4357,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
     },
     {
       "id": "cai-livorno-9226004-720fd7ef28c2",
@@ -42583,6 +42799,24 @@
       "description": "domenica 29 novembre"
     },
     {
+      "id": "colleferro-8392b55dd1a0",
+      "title": "Riserva Naturale Monte Mario",
+      "date": "2026-11-29",
+      "dateEnd": "2026-11-29",
+      "days": 1,
+      "category": "Escursionismo",
+      "link": "https://caicolleferro.it/wp-content/uploads/2025/12/CAI-Colleferro-2026.pdf",
+      "organizer": "CAI Colleferro",
+      "location": "Monte Mario",
+      "region": "Altro",
+      "lat": 41.9238,
+      "lng": 12.4527,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
       "id": "cai-u-l-e-genova-9210005-e1ed72175ba8",
       "sourceId": "cai-u-l-e-genova-9210005",
       "title": "SENTIERO DEL DAINO SANTO STEFANO BRUZZONE LATINO E 6",
@@ -46614,6 +46848,21 @@
       "lat": 42.51,
       "lng": 12.92,
       "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
+      "id": "colleferro-2311f5bc26a1",
+      "title": "Brindisi in Vetta di Fine Anno",
+      "date": "2026-12-31",
+      "dateEnd": "2026-12-31",
+      "days": 1,
+      "category": "Escursionismo",
+      "link": "https://caicolleferro.it/wp-content/uploads/2025/12/CAI-Colleferro-2026.pdf",
+      "organizer": "CAI Colleferro",
+      "location": "Vetta",
+      "region": "Altro",
       "cost": "Vedi sito",
       "time": "Vedi sito",
       "privateCar": null

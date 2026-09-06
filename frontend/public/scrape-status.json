@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-06T11:18:59.287Z",
+  "generatedAt": "2026-09-06T11:25:07.850Z",
   "coverage": {
     "total": 838,
-    "selected": 292,
-    "withEvents": 165,
-    "parsed": 171,
-    "unsupported": 103,
-    "failed": 7,
-    "located": 233
+    "selected": 1,
+    "withEvents": 1,
+    "parsed": 1,
+    "unsupported": 0,
+    "failed": 0,
+    "located": 246
   },
   "sources": [
     {
@@ -510,16 +510,16 @@
       "directoryId": "9232018",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "skipped",
+      "status": "ok",
       "url": "https://caicolleferro.it/wp-content/uploads/2025/12/CAI-Colleferro-2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 2,
+      "excursions": 16,
       "error": null,
-      "hash": "63ba5ba1fcf86ad9f4638d8a17991bec11999c17d9f62eb98763dad29dd34a4b",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "9223187dd2227b2ce8b374f6629d770e92958d16be9ab20945cf727b727c6930",
+      "updatedAt": "2026-09-06T11:25:07.850Z",
       "documents": [],
       "methods": [],
       "issues": [],
