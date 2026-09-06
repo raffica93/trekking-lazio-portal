@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T11:33:41.299Z",
+  "generatedAt": "2026-09-06T11:44:44.342Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 249
+    "located": 250
   },
   "sources": [
     {
@@ -344,16 +344,16 @@
       "directoryId": "9232002",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "failed",
+      "status": "ok",
       "url": "https://www.caisora.it/sito/wp-content/uploads/2026/02/2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 12,
-      "error": "Gemini API 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a",
-      "hash": "f9b1ef4d4c6fc96132f558eb490b2d492a351345808853ff18982ef9365d2b8c",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "excursions": 13,
+      "error": null,
+      "hash": "fcab67ceb9ec0ba2c7daa00d3904e9c673e7959c502210af833e7dec18bdb56d",
+      "updatedAt": "2026-09-06T11:44:44.342Z",
       "documents": [],
       "methods": [],
       "issues": [],
