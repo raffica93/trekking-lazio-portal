@@ -174,8 +174,9 @@ const LAZIO_SOURCES = [
   }
 ];
 
-// Abruzzo batch 1: gemini pdf-programma calendars (override registry discover stubs).
-// Torre De' Passeri shares the Popoli PDF (same events; organizer is the subsection).
+// Abruzzo overrides win over registry discover stubs (same precedence as LAZIO).
+// Batch 1: gemini pdf-programma. Torre De' Passeri shares the Popoli PDF.
+// Batch 2: more pdf-programma + Chieti ICS/deterministic (avoids Gemini quota).
 const ABRUZZO_SOURCES = [
   {
     id: 'cai-pescara-9234005',
@@ -231,6 +232,56 @@ const ABRUZZO_SOURCES = [
     id: 'cai-torre-de-passeri-9134014',
     organizer: "CAI Torre De' Passeri",
     url: 'https://www.sezionecaipopoli.it/wp-content/uploads/2026/01/Programma-CAI-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-carsoli-9234024',
+    organizer: 'CAI Carsoli',
+    url: 'https://www.caicarsoli.it/allegati/upload/calendario-sociale-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-arsita-9234026',
+    organizer: 'CAI Arsita',
+    url: 'https://www.caiabruzzo.it/wp-content/uploads/2026/01/PROGRAMMA-CAI-Arsita-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-val-vibrata-monti-gemelli-9234027',
+    organizer: 'CAI Val Vibrata (monti Gemelli)',
+    url: 'https://www.caiabruzzo.it/wp-content/uploads/2026/01/VAL-VIBRATA-PIeghevole-calendario-26SITO.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-chieti-9234001',
+    organizer: 'CAI Chieti',
+    url: 'https://www.caichieti.it/wp-content/uploads/2026/03/Calendario_Sezionale_CAI_Chieti_2026.ics',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-atessa-9234011',
+    organizer: 'CAI Atessa',
+    url: 'https://organizzazione.cai.it/sez-atessa/wp-content/uploads/sites/4/2026/01/CALENDARIO-CAI-2026.pdf',
     kind: 'pdf',
     template: 'pdf-programma',
     extractor: 'gemini',
