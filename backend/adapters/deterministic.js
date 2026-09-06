@@ -1,1 +1,0 @@
-@file:///workspace/diag-colleferro/det_content.txt
