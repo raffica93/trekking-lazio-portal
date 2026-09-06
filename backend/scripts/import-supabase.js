@@ -213,9 +213,6 @@ function toPlaceRow(excursion, status) {
 }
 
 function sectionToRow(section, sourceStatus = {}, generatedAt = null) {
-  // Registry sync must not reset discovery_status / primary_url: those are enriched by
-  // scrape + discovery jobs (Scraper Url / Lazio coverage). Omit them from upsert payloads
-  // so existing rows keep admin/discovery values; new rows still get DB defaults ('pending').
   return {
     id: section.id,
     name: section.organizer || section.name,
@@ -227,6 +224,7 @@ function sectionToRow(section, sourceStatus = {}, generatedAt = null) {
     directory_url: textOrNull(section.directoryUrl),
     calendar_urls: Array.isArray(section.calendarUrls) ? section.calendarUrls : [],
     adapter: textOrNull(section.template || section.extractor),
+    discovery_status: section.status || (section.enabled ? 'verified' : 'pending'),
     scrape_status: textOrNull(sourceStatus.status),
     event_count: Number.isInteger(sourceStatus.excursions) ? sourceStatus.excursions : (sourceStatus.eventCount || 0),
     checked_at: section.checkedAt || generatedAt,
@@ -234,9 +232,19 @@ function sectionToRow(section, sourceStatus = {}, generatedAt = null) {
   };
 }
 
+function sectionUpsertRow(section, sourceStatus = {}, generatedAt = null) {
+  // Registry sync must not reset discovery_status / primary_url: those are enriched by
+  // scrape + discovery jobs (Scraper Url / Lazio coverage). Strip them from upsert payloads
+  // so existing rows keep admin/discovery values; new rows still get DB defaults ('pending').
+  const row = sectionToRow(section, sourceStatus, generatedAt);
+  delete row.discovery_status;
+  delete row.primary_url;
+  return row;
+}
+
 async function importSections({ supabase, registry, scrapeStatus = {} }) {
   const statuses = new Map((scrapeStatus.sources || []).map((row) => [row.id, row]));
-  const rows = (registry.sections || []).map((section) => sectionToRow(section, statuses.get(section.id), registry.generatedAt));
+  const rows = (registry.sections || []).map((section) => sectionUpsertRow(section, statuses.get(section.id), registry.generatedAt));
   for (const batch of chunk(rows)) {
     const { error } = await supabase.from('cai_sections').upsert(batch, { onConflict: 'id' });
     if (error) throw error;
@@ -299,6 +307,7 @@ module.exports = {
   importStatus,
   importSections,
   sectionToRow,
+  sectionUpsertRow,
   attachSectionMetadata,
   readExcursions,
   slugify,
