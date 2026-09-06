@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-06T12:06:39.800Z",
+  "generatedAt": "2026-09-06T12:17:30.136Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
-    "parsed": 0,
+    "withEvents": 1,
+    "parsed": 1,
     "unsupported": 0,
-    "failed": 1,
+    "failed": 0,
     "located": 324
   },
   "sources": [
@@ -872,46 +872,23 @@
       "extractedEvents": null
     },
     {
-      "id": "cai-alta-valle-dell-aterno-9134015",
-      "organizer": "CAI Alta Valle Dell'aterno",
+      "id": "cai-carsoli-9234024",
+      "organizer": "CAI Carsoli",
       "region": "Abruzzo",
       "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9234002",
-      "calendarUrls": [],
-      "directoryId": "9134015",
-      "sectionType": "subsection",
-      "parentSectionId": "cai-l-aquila-9234002",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9234024",
+      "calendarUrls": [
+        "https://www.caicarsoli.it/allegati/upload/calendario-sociale-2026.pdf"
+      ],
+      "directoryId": "9234024",
+      "sectionType": "section",
+      "parentSectionId": null,
       "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9134015",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
-      "id": "cai-altopiano-delle-rocche-9134016",
-      "organizer": "CAI Altopiano Delle Rocche",
-      "region": "Abruzzo",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9234002",
-      "calendarUrls": [],
-      "directoryId": "9134016",
-      "sectionType": "subsection",
-      "parentSectionId": "cai-l-aquila-9234002",
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9134016",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
+      "url": "https://www.caicarsoli.it/allegati/upload/calendario-sociale-2026.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
       "excursions": 0,
       "error": null,
       "hash": null,
@@ -927,16 +904,18 @@
       "region": "Abruzzo",
       "website": null,
       "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9234026",
-      "calendarUrls": [],
+      "calendarUrls": [
+        "https://www.caiabruzzo.it/wp-content/uploads/2026/01/PROGRAMMA-CAI-Arsita-2026.pdf"
+      ],
       "directoryId": "9234026",
       "sectionType": "section",
       "parentSectionId": null,
       "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9234026",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
+      "url": "https://www.caiabruzzo.it/wp-content/uploads/2026/01/PROGRAMMA-CAI-Arsita-2026.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
       "excursions": 0,
       "error": null,
       "hash": null,
@@ -947,14 +926,138 @@
       "extractedEvents": null
     },
     {
+      "id": "cai-val-vibrata-monti-gemelli-9234027",
+      "organizer": "CAI Val Vibrata (monti Gemelli)",
+      "region": "Abruzzo",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9234027",
+      "calendarUrls": [
+        "https://www.caiabruzzo.it/wp-content/uploads/2026/01/VAL-VIBRATA-PIeghevole-calendario-26SITO.pdf"
+      ],
+      "directoryId": "9234027",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "disabled",
+      "url": "https://www.caiabruzzo.it/wp-content/uploads/2026/01/VAL-VIBRATA-PIeghevole-calendario-26SITO.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-chieti-9234001",
+      "organizer": "CAI Chieti",
+      "region": "Abruzzo",
+      "website": "https://www.caichieti.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9234001",
+      "calendarUrls": [
+        "https://www.caichieti.it/wp-content/uploads/2026/03/Calendario_Sezionale_CAI_Chieti_2026.ics",
+        "https://www.caichieti.it/wp-content/uploads/2026/03/Calendario_2026_CAI_Giovani_Chieti.ics",
+        "https://www.caichieti.it/wp-content/uploads/2026/03/CAI-Chieti-Majella-Programma-2026-digitale.pdf",
+        "https://www.caichieti.it/programma/",
+        "https://www.caichieti.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caichieti.it%2Fprogramma%2F",
+        "https://www.caichieti.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caichieti.it%2Fprogramma%2F&format=xml",
+        "https://www.caichieti.it/programma/info@caichieti.it",
+        "https://www.caichieti.it/escursionismo/"
+      ],
+      "directoryId": "9234001",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "partial",
+      "url": "https://www.caichieti.it/wp-content/uploads/2026/03/Calendario_Sezionale_CAI_Chieti_2026.ics",
+      "kind": "ics",
+      "template": "icalendar",
+      "extractor": "deterministic",
+      "enabled": true,
+      "excursions": 31,
+      "error": null,
+      "hash": "84bfee5bd5a33a227765a99b67bd64bc2e4a457d843a74408adc30383d6ce5cf",
+      "updatedAt": "2026-09-06T12:17:30.136Z",
+      "documents": [
+        {
+          "url": "https://www.caichieti.it/wp-content/uploads/2026/03/Calendario_Sezionale_CAI_Chieti_2026.ics",
+          "hash": "3f79ea02c1af7ad7d6e943b0447f16b4f6eda04ee9e2f9f185cbefbee8928c5e",
+          "events": 47,
+          "method": "ics"
+        },
+        {
+          "url": "https://www.caichieti.it/wp-content/uploads/2026/03/Calendario_2026_CAI_Giovani_Chieti.ics",
+          "hash": "8d3ab01ca60a3ad5af0a73599ff53a437e68acf380aeebb4f87e56f2ae92685f",
+          "events": 11,
+          "method": "ics"
+        },
+        {
+          "url": "https://www.caichieti.it/wp-content/uploads/2026/03/CAI-Chieti-Majella-Programma-2026-digitale.pdf",
+          "hash": "c013c7a53800d68576682781c877203744bc182dcb13cc31290f5edc9b2e9bc5",
+          "events": 28,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caichieti.it/programma/",
+          "hash": "f3e6c4fd981998d06e0014df8e4048985990d673c711c9d1554cabae35bc4b0d",
+          "events": 28,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://www.caichieti.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caichieti.it%2Fprogramma%2F",
+          "hash": "a2c16dca152591496444d4ece00f40b88f46ec957db5195147446f3f3ae1a2f6",
+          "events": 0,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://www.caichieti.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caichieti.it%2Fprogramma%2F&format=xml",
+          "hash": "975aa30eabe5b82e2ef2ab79230657ff3036da30ef17c08977b7f3b980f160e6",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caichieti.it/escursionismo/",
+          "hash": "6caf859043c2e5bde40952c7175d80e00426d30bec4b4cc8d3b83d4977291072",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caichieti.it/",
+          "hash": "d3022feacbc071599308559f212eaa8b4976bc3bfeaa722bb54fadd431d8f245",
+          "events": 0,
+          "method": null
+        }
+      ],
+      "methods": [
+        "ics",
+        "pdf-text",
+        "html-calendar",
+        "wordpress-events"
+      ],
+      "issues": [
+        {
+          "url": "https://www.caichieti.it/programma/info@caichieti.it",
+          "message": "Request failed with status code 404"
+        },
+        {
+          "url": "https://www.caichieti.it/attivita/",
+          "message": "Request failed with status code 404"
+        }
+      ],
+      "extractedEvents": 114
+    },
+    {
       "id": "cai-atessa-9234011",
       "organizer": "CAI Atessa",
       "region": "Abruzzo",
       "website": "https://organizzazione.cai.it/sez-atessa/",
       "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9234011",
       "calendarUrls": [
-        "https://organizzazione.cai.it/sez-atessa/eventi/?ical=1",
         "https://organizzazione.cai.it/sez-atessa/wp-content/uploads/sites/4/2026/01/CALENDARIO-CAI-2026.pdf",
+        "https://organizzazione.cai.it/sez-atessa/eventi/?ical=1",
         "https://organizzazione.cai.it/sez-atessa/2026/01/calendario-escursionistico-2025/",
         "https://organizzazione.cai.it/sez-atessa/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-atessa%2F2026%2F01%2Fcalendario-escursionistico-2025%2F",
         "https://organizzazione.cai.it/sez-atessa/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-atessa%2F2026%2F01%2Fcalendario-escursionistico-2025%2F&format=xml"
@@ -963,10 +1066,10 @@
       "sectionType": "section",
       "parentSectionId": null,
       "status": "ok",
-      "url": "https://organizzazione.cai.it/sez-atessa/eventi/?ical=1",
-      "kind": "ics",
-      "template": "icalendar",
-      "extractor": "deterministic",
+      "url": "https://organizzazione.cai.it/sez-atessa/wp-content/uploads/sites/4/2026/01/CALENDARIO-CAI-2026.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
       "enabled": true,
       "excursions": 6,
       "error": null,
@@ -1022,6 +1125,56 @@
       ],
       "issues": [],
       "extractedEvents": 15
+    },
+    {
+      "id": "cai-alta-valle-dell-aterno-9134015",
+      "organizer": "CAI Alta Valle Dell'aterno",
+      "region": "Abruzzo",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9234002",
+      "calendarUrls": [],
+      "directoryId": "9134015",
+      "sectionType": "subsection",
+      "parentSectionId": "cai-l-aquila-9234002",
+      "status": "disabled",
+      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9134015",
+      "kind": "discover",
+      "template": "calendar-discovery",
+      "extractor": "deterministic",
+      "enabled": false,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-altopiano-delle-rocche-9134016",
+      "organizer": "CAI Altopiano Delle Rocche",
+      "region": "Abruzzo",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9234002",
+      "calendarUrls": [],
+      "directoryId": "9134016",
+      "sectionType": "subsection",
+      "parentSectionId": "cai-l-aquila-9234002",
+      "status": "disabled",
+      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9134016",
+      "kind": "discover",
+      "template": "calendar-discovery",
+      "extractor": "deterministic",
+      "enabled": false,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
     },
     {
       "id": "cai-avezzano-9234013",
@@ -1088,31 +1241,6 @@
         }
       ],
       "extractedEvents": 0
-    },
-    {
-      "id": "cai-carsoli-9234024",
-      "organizer": "CAI Carsoli",
-      "region": "Abruzzo",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9234024",
-      "calendarUrls": [],
-      "directoryId": "9234024",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9234024",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
     },
     {
       "id": "cai-castel-di-sangro-9234015",
@@ -1324,103 +1452,6 @@
       "methods": [],
       "issues": [],
       "extractedEvents": null
-    },
-    {
-      "id": "cai-chieti-9234001",
-      "organizer": "CAI Chieti",
-      "region": "Abruzzo",
-      "website": "https://www.caichieti.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9234001",
-      "calendarUrls": [
-        "https://www.caichieti.it/wp-content/uploads/2026/03/Calendario_Sezionale_CAI_Chieti_2026.ics",
-        "https://www.caichieti.it/wp-content/uploads/2026/03/Calendario_2026_CAI_Giovani_Chieti.ics",
-        "https://www.caichieti.it/wp-content/uploads/2026/03/CAI-Chieti-Majella-Programma-2026-digitale.pdf",
-        "https://www.caichieti.it/programma/",
-        "https://www.caichieti.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caichieti.it%2Fprogramma%2F",
-        "https://www.caichieti.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caichieti.it%2Fprogramma%2F&format=xml",
-        "https://www.caichieti.it/programma/info@caichieti.it",
-        "https://www.caichieti.it/escursionismo/"
-      ],
-      "directoryId": "9234001",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "partial",
-      "url": "https://www.caichieti.it/wp-content/uploads/2026/03/Calendario_Sezionale_CAI_Chieti_2026.ics",
-      "kind": "ics",
-      "template": "icalendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 31,
-      "error": null,
-      "hash": "54bcee55b23ad857a42526e9fcb89259aa04197031d209e6f4b9a651485afd06",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
-      "documents": [
-        {
-          "url": "https://www.caichieti.it/wp-content/uploads/2026/03/Calendario_Sezionale_CAI_Chieti_2026.ics",
-          "hash": "3f79ea02c1af7ad7d6e943b0447f16b4f6eda04ee9e2f9f185cbefbee8928c5e",
-          "events": 47,
-          "method": "ics"
-        },
-        {
-          "url": "https://www.caichieti.it/wp-content/uploads/2026/03/Calendario_2026_CAI_Giovani_Chieti.ics",
-          "hash": "8d3ab01ca60a3ad5af0a73599ff53a437e68acf380aeebb4f87e56f2ae92685f",
-          "events": 11,
-          "method": "ics"
-        },
-        {
-          "url": "https://www.caichieti.it/wp-content/uploads/2026/03/CAI-Chieti-Majella-Programma-2026-digitale.pdf",
-          "hash": "c013c7a53800d68576682781c877203744bc182dcb13cc31290f5edc9b2e9bc5",
-          "events": 28,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caichieti.it/programma/",
-          "hash": "f3e6c4fd981998d06e0014df8e4048985990d673c711c9d1554cabae35bc4b0d",
-          "events": 28,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://www.caichieti.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caichieti.it%2Fprogramma%2F",
-          "hash": "3b2425e6a4375554ca61056b2eaa1854dc0291abcfb1541f2194570177fb50d7",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://www.caichieti.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caichieti.it%2Fprogramma%2F&format=xml",
-          "hash": "a74b336c66971d4f6116669debd2cf8acab41bc1fbd83c6166530b6d6b242e1e",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caichieti.it/escursionismo/",
-          "hash": "6caf859043c2e5bde40952c7175d80e00426d30bec4b4cc8d3b83d4977291072",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caichieti.it/",
-          "hash": "d3022feacbc071599308559f212eaa8b4976bc3bfeaa722bb54fadd431d8f245",
-          "events": 0,
-          "method": null
-        }
-      ],
-      "methods": [
-        "ics",
-        "pdf-text",
-        "html-calendar",
-        "wordpress-events"
-      ],
-      "issues": [
-        {
-          "url": "https://www.caichieti.it/programma/info@caichieti.it",
-          "message": "Request failed with status code 404"
-        },
-        {
-          "url": "https://www.caichieti.it/attivita/",
-          "message": "Request failed with status code 404"
-        }
-      ],
-      "extractedEvents": 114
     },
     {
       "id": "cai-fara-s-martino-9234012",
@@ -2286,31 +2317,6 @@
         }
       ],
       "extractedEvents": 4
-    },
-    {
-      "id": "cai-val-vibrata-monti-gemelli-9234027",
-      "organizer": "CAI Val Vibrata (monti Gemelli)",
-      "region": "Abruzzo",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9234027",
-      "calendarUrls": [],
-      "directoryId": "9234027",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9234027",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
     },
     {
       "id": "cai-valle-roveto-9234019",

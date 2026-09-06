@@ -7263,7 +7263,7 @@
     "palestrina": "e27dbd0266827445575860cf5aa24d66dd492aa43f335cbab1ed11036e54ca68",
     "cai-avezzano-9234013": "5fb88caafa59ca9e2afc86763be4929e0d87b28f15b45e5235743179c096ba57",
     "cai-farindola-9234008": "48c5f5e34ef4380d3495d6c87ec492e4ac019a98371321cde87e8b76ef9a1a2d",
-    "cai-chieti-9234001": "54bcee55b23ad857a42526e9fcb89259aa04197031d209e6f4b9a651485afd06",
+    "cai-chieti-9234001": "84bfee5bd5a33a227765a99b67bd64bc2e4a457d843a74408adc30383d6ce5cf",
     "cai-atessa-9234011": "f0b4272b3aadfabb700e4f9f74613e364c33f053dc878fbac7ae572c3b7132fa",
     "cai-isola-del-gran-sasso-9234018": "25dc8df64bc4caa52a3e8ebd9baac1ef7839b1b4a1968991cfe844af110a4ce4",
     "cai-teramo-9234003": "28dae123522150692f4fabff97745507875e72c0233accf518c9d5f604450ff5",
@@ -7537,7 +7537,7 @@
     "cai-vasto-9234022": "404b2b33fc009f5c031fdc1ff3acd25cc834de00b17164ff65f849eef1653438",
     "cai-guardiagrele-9234007": "5421cbb478bdd3972a7ccb2db18e218e335fd2c7b05f528aa097c4c85ae0e351"
   },
-  "generatedAt": "2026-09-06T12:04:37.461Z",
+  "generatedAt": "2026-09-06T12:17:30.120Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
