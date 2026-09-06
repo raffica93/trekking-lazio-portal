@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T11:58:52.373Z",
+  "generatedAt": "2026-09-06T12:00:51.701Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 292
+    "located": 310
   },
   "sources": [
     {
@@ -802,16 +802,16 @@
       "directoryId": "9234022",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "https://www.caivasto.it/wp-content/uploads/2026/02/Calendario-2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 19,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
+      "hash": "404b2b33fc009f5c031fdc1ff3acd25cc834de00b17164ff65f849eef1653438",
+      "updatedAt": "2026-09-06T12:00:51.701Z",
       "documents": [],
       "methods": [],
       "issues": [],
