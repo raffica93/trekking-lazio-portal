@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T11:52:51.205Z",
+  "generatedAt": "2026-09-06T11:55:59.812Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 270
+    "located": 281
   },
   "sources": [
     {
@@ -748,16 +748,16 @@
       "directoryId": "9234004",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "https://caisulmona.it/wp-content/uploads/2026/01/Programma-2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 13,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
+      "hash": "7cbf021ba0133e6ab8db2b7a62c739086d3a4c7a4ceefd36f7e01c4475d458ac",
+      "updatedAt": "2026-09-06T11:55:59.812Z",
       "documents": [],
       "methods": [],
       "issues": [],
