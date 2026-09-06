@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 const { DateTime } = require('luxon');
 const {
   LARGE_PDF_BYTES,
+  MIN_PDF_TEXT_CHARS,
   buildRequestBody,
   classifyGeminiError,
   driveConfirmDownloadUrl,
@@ -408,3 +409,73 @@ test('fetchDocument follows a Google Drive virus-scan confirm page when needed',
   assert.equal(calls, 2);
   assert.equal(isPdfBuffer(doc.bytes), true);
 });
+
+
+test('large scanned PDFs fall back to OCR text when pdfjs yields nothing', async () => {
+  const largePdf = Buffer.concat([
+    Buffer.from('%PDF-1.4 '),
+    Buffer.alloc(LARGE_PDF_BYTES + 1024, 0x41)
+  ]);
+  const largeDoc = await fetchDocument(
+    {
+      id: 'sora',
+      organizer: 'CAI Sora',
+      url: 'https://www.caisora.it/sito/wp-content/uploads/2026/02/2026.pdf',
+      kind: 'pdf',
+      template: 'pdf-programma',
+      extractor: 'gemini'
+    },
+    {
+      axiosImpl: {
+        get: async () => ({ data: largePdf, status: 200 })
+      },
+      pdfLinesImpl: async () => [],
+      ocrPdfImpl: async () => [
+        'PROGRAMMA ESCURSIONISTICO 2026',
+        'Domenica 11 Gennaio',
+        'Ciaspolata Santuario Monte Tranquillo',
+        'Diff. EAI — Disl. 400 m — Percorso 15 km',
+        'x'.repeat(220)
+      ].join('\n')
+    }
+  );
+  assert.equal(largeDoc.bytes, undefined);
+  assert.equal(largeDoc.pdfAsText, true);
+  assert.equal(largeDoc.pdfTextSource, 'ocr');
+  assert.match(largeDoc.text, /Ciaspolata Santuario Monte Tranquillo/);
+  assert.equal(largeDoc.text.length >= MIN_PDF_TEXT_CHARS, true);
+
+  const body = buildRequestBody(
+    { id: 'sora', organizer: 'CAI Sora', url: 'https://www.caisora.it/sito/wp-content/uploads/2026/02/2026.pdf', kind: 'pdf' },
+    largeDoc,
+    { now }
+  );
+  assert.equal(body.contents[0].parts.some((part) => part.inline_data), false);
+  assert.match(body.contents[0].parts[0].text, /Testo OCR dal PDF scansionato/);
+  assert.match(body.contents[0].parts[0].text, /Ciaspolata Santuario Monte Tranquillo/);
+});
+
+test('large PDF OCR failure surfaces a clear error when pdfjs is also empty', async () => {
+  const largePdf = Buffer.concat([
+    Buffer.from('%PDF-1.4 '),
+    Buffer.alloc(LARGE_PDF_BYTES + 512, 0x42)
+  ]);
+  await assert.rejects(
+    () => fetchDocument(
+      {
+        id: 'sora',
+        organizer: 'CAI Sora',
+        url: 'https://www.caisora.it/sito/wp-content/uploads/2026/02/2026.pdf',
+        kind: 'pdf',
+        extractor: 'gemini'
+      },
+      {
+        axiosImpl: { get: async () => ({ data: largePdf, status: 200 }) },
+        pdfLinesImpl: async () => ['a', 'b'],
+        ocrPdfImpl: async () => 'too short'
+      }
+    ),
+    /OCR produced too little text/
+  );
+});
+

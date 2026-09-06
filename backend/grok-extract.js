@@ -1,4 +1,8 @@
 const crypto = require('node:crypto');
+const fs = require('node:fs');
+const os = require('node:os');
+const path = require('node:path');
+const { execFileSync } = require('node:child_process');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const { DateTime } = require('luxon');
@@ -22,6 +26,10 @@ const MAX_HTML_CHARS = 80_000;
 // Larger ones (e.g. Frosinone ~81MB) exceed axios/Gemini inline limits — send extracted text.
 const LARGE_PDF_BYTES = 6 * 1024 * 1024;
 const MAX_PDF_DOWNLOAD_BYTES = 100 * 1024 * 1024;
+const MIN_PDF_TEXT_CHARS = 200;
+const OCR_DPI = Number(process.env.OCR_DPI || 180);
+const OCR_MAX_PAGES = Number(process.env.OCR_MAX_PAGES || 40);
+const OCR_LANG = process.env.OCR_LANG || 'ita';
 const DEFAULT_GEMINI_MODEL = 'gemini-3.5-flash';
 const EXTRACTION_VERSION = 'geo-zone-v1';
 const MIN_COORDINATE_CONFIDENCE = 0.7;
@@ -218,7 +226,9 @@ function userPrompt(source, document, { now = DateTime.now() } = {}) {
       ? `${document.text.slice(0, MAX_HTML_CHARS)}\n[troncato]`
       : document.text;
     const label = document?.kind === 'pdf'
-      ? 'Testo estratto dal PDF del programma:'
+      ? (document.pdfTextSource === 'ocr'
+        ? 'Testo OCR dal PDF scansionato del programma:'
+        : 'Testo estratto dal PDF del programma:')
       : 'Testo della pagina:';
     lines.push('', label, text);
   }
@@ -467,6 +477,78 @@ async function extractFromSource(source, document, options = {}) {
   throw lastError;
 }
 
+
+function normalizePdfText(linesOrText) {
+  const raw = Array.isArray(linesOrText) ? linesOrText.join('\n') : String(linesOrText || '');
+  return raw.replace(/\n{3,}/g, '\n\n').trim();
+}
+
+/**
+ * OCR a scanned PDF via pdftoppm + tesseract (Italian by default).
+ * Used when pdfjs text extraction is empty for large pdf-programma files
+ * (e.g. CAI Sora ~9.5MB print-to-PDF scans that exceed Gemini inline limits).
+ */
+function ocrPdfText(pdfBytes, {
+  pdftoppmCmd = process.env.PDFTOPPM_CMD || 'pdftoppm',
+  tesseractCmd = process.env.TESSERACT_CMD || 'tesseract',
+  lang = OCR_LANG,
+  dpi = OCR_DPI,
+  maxPages = OCR_MAX_PAGES
+} = {}) {
+  if (!Buffer.isBuffer(pdfBytes) || pdfBytes.length < 100) {
+    throw new Error('OCR requires a PDF buffer');
+  }
+
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'cai-pdf-ocr-'));
+  try {
+    const pdfPath = path.join(tmp, 'doc.pdf');
+    fs.writeFileSync(pdfPath, pdfBytes);
+    const prefix = path.join(tmp, 'page');
+    try {
+      execFileSync(
+        pdftoppmCmd,
+        ['-png', '-r', String(dpi), '-f', '1', '-l', String(maxPages), pdfPath, prefix],
+        { timeout: 180_000, maxBuffer: 32 * 1024 * 1024 }
+      );
+    } catch (error) {
+      const detail = error?.stderr?.toString?.() || error.message;
+      throw new Error(`pdftoppm failed (is poppler-utils installed?): ${detail}`);
+    }
+
+    const pages = fs.readdirSync(tmp)
+      .filter((name) => /^page-\d+\.png$/i.test(name) || /^page\d+\.png$/i.test(name))
+      .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+    if (!pages.length) {
+      throw new Error('pdftoppm produced no page images for OCR');
+    }
+
+    const chunks = [];
+    for (const page of pages) {
+      const imgPath = path.join(tmp, page);
+      const outBase = path.join(tmp, page.replace(/\.png$/i, ''));
+      try {
+        execFileSync(
+          tesseractCmd,
+          [imgPath, outBase, '-l', lang, '--psm', '6'],
+          { timeout: 120_000, maxBuffer: 16 * 1024 * 1024 }
+        );
+      } catch (error) {
+        const detail = error?.stderr?.toString?.() || error.message;
+        throw new Error(`tesseract failed (is tesseract-ocr / tesseract-ocr-ita installed?): ${detail}`);
+      }
+      const txtPath = `${outBase}.txt`;
+      if (fs.existsSync(txtPath)) {
+        const pageText = fs.readFileSync(txtPath, 'utf8').trim();
+        if (pageText) chunks.push(pageText);
+      }
+    }
+
+    return normalizePdfText(chunks.join('\n\n'));
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+}
+
 function isPdfBuffer(bytes) {
   return Buffer.isBuffer(bytes) && bytes.length >= 5 && bytes.subarray(0, 5).toString('latin1') === '%PDF-';
 }
@@ -519,7 +601,8 @@ async function axiosGetBinary(axiosImpl, url, { timeout, headers }) {
 async function fetchDocument(source, {
   axiosImpl = axios,
   timeout = Number(process.env.SCRAPE_TIMEOUT_MS || 20_000),
-  pdfLinesImpl = pdfLines
+  pdfLinesImpl = pdfLines,
+  ocrPdfImpl = ocrPdfText
 } = {}) {
   if (source.template === 'facebook' || isFacebookUrl(source.url)) {
     throw new Error(`${source.organizer} publishes on Facebook; skipping HTML fetch`);
@@ -553,10 +636,25 @@ async function fetchDocument(source, {
     const fileUrl = source.url;
 
     if (bytes.length > LARGE_PDF_BYTES) {
-      const lines = await pdfLinesImpl(bytes);
-      const text = lines.join('\n').replace(/\n{3,}/g, '\n\n').trim();
-      if (text.length < 200) {
-        throw new Error(`${source.organizer} PDF text extraction produced too little text for Gemini`);
+      let text = '';
+      let pdfTextSource = 'pdfjs';
+      try {
+        const lines = await pdfLinesImpl(bytes);
+        text = normalizePdfText(lines);
+      } catch (error) {
+        text = '';
+      }
+
+      if (text.length < MIN_PDF_TEXT_CHARS) {
+        // Scanned / print-to-PDF programs (e.g. CAI Sora) have no pdfjs text.
+        text = normalizePdfText(await ocrPdfImpl(bytes));
+        pdfTextSource = 'ocr';
+      }
+
+      if (text.length < MIN_PDF_TEXT_CHARS) {
+        throw new Error(
+          `${source.organizer} PDF has no extractable text for Gemini (pdfjs empty; OCR produced too little text)`
+        );
       }
       return {
         kind: 'pdf',
@@ -564,6 +662,7 @@ async function fetchDocument(source, {
         hash,
         fileUrl,
         pdfAsText: true,
+        pdfTextSource,
         pdfByteLength: bytes.length
       };
     }
@@ -606,6 +705,7 @@ module.exports = {
   EXTRACT_SCHEMA,
   LARGE_PDF_BYTES,
   MAX_PDF_DOWNLOAD_BYTES,
+  MIN_PDF_TEXT_CHARS,
   MIN_COORDINATE_CONFIDENCE,
   SYSTEM_PROMPT,
   buildRequestBody,
@@ -622,6 +722,8 @@ module.exports = {
   isGeminiQuotaError,
   isGoogleDriveUrl,
   isPdfBuffer,
+  normalizePdfText,
+  ocrPdfText,
   markGeminiQuotaExhausted,
   resetGeminiQuotaExhausted,
   normalizeExtracted,
