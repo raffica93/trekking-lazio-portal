@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T11:55:59.812Z",
+  "generatedAt": "2026-09-06T11:58:52.373Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 281
+    "located": 292
   },
   "sources": [
     {
@@ -775,16 +775,16 @@
       "directoryId": "9234016",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "https://www.sezionecaipopoli.it/wp-content/uploads/2026/01/Programma-CAI-2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 12,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
+      "hash": "0fe93023dcb0168bee8b7cb531bda5bec5db7b7c7d074a3c06d6669c2852d243",
+      "updatedAt": "2026-09-06T11:58:52.373Z",
       "documents": [],
       "methods": [],
       "issues": [],
