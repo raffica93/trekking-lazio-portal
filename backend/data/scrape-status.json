@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T11:25:07.850Z",
+  "generatedAt": "2026-09-06T11:33:41.299Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 246
+    "located": 249
   },
   "sources": [
     {
@@ -262,6 +262,7 @@
       "website": "https://www.caifrosinone.it/",
       "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9232003",
       "calendarUrls": [
+        "https://drive.google.com/uc?export=download&id=1qh5YNLgJqtqOZoYIJMZe7HLapWuI3rNv",
         "https://www.caifrosinone.it/news/programma-attivit%C3%A0",
         "https://www.caifrosinone.it/D7/news/programma-attivit%C3%A0",
         "https://www.caifrosinone.it/D7/programmi",
@@ -274,16 +275,16 @@
       "directoryId": "9232003",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "failed",
-      "url": "https://www.caifrosinone.it/news/programma-attivit%C3%A0",
-      "kind": "html",
-      "template": "html-programma",
+      "status": "ok",
+      "url": "https://drive.google.com/uc?export=download&id=1qh5YNLgJqtqOZoYIJMZe7HLapWuI3rNv",
+      "kind": "pdf",
+      "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 3,
-      "error": "CAI Frosinone extract contained no upcoming excursions",
-      "hash": "b1d77b9f297f7af9645f20ded8c55c3aa2215ba2f2ad8bff9f4ee192d8cde80e",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "excursions": 7,
+      "error": null,
+      "hash": "15efe3bf6c8eab354e1ffa1496c74ac53c38bd08810822a5a76eaa8bc062b90d",
+      "updatedAt": "2026-09-06T11:33:41.299Z",
       "documents": [],
       "methods": [],
       "issues": [],
