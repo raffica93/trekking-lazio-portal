@@ -174,28 +174,109 @@ const LAZIO_SOURCES = [
   }
 ];
 
+// Abruzzo batch 1: gemini pdf-programma calendars (override registry discover stubs).
+// Torre De' Passeri shares the Popoli PDF (same events; organizer is the subsection).
+const ABRUZZO_SOURCES = [
+  {
+    id: 'cai-pescara-9234005',
+    organizer: 'CAI Pescara',
+    url: 'https://www.caipescara.it/wp-content/uploads/2026/02/programma_2026_cai_pescara_compressione_forte.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-sulmona-9234004',
+    organizer: 'CAI Sulmona',
+    url: 'https://caisulmona.it/wp-content/uploads/2026/01/Programma-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-popoli-9234016',
+    organizer: 'CAI Popoli',
+    url: 'https://www.sezionecaipopoli.it/wp-content/uploads/2026/01/Programma-CAI-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-vasto-9234022',
+    organizer: 'CAI Vasto',
+    url: 'https://www.caivasto.it/wp-content/uploads/2026/02/Calendario-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-guardiagrele-9234007',
+    organizer: 'CAI Guardiagrele',
+    url: 'https://www.caiguardiagrele.it/pag/programma/programma2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-torre-de-passeri-9134014',
+    organizer: "CAI Torre De' Passeri",
+    url: 'https://www.sezionecaipopoli.it/wp-content/uploads/2026/01/Programma-CAI-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  }
+];
+
 // The generated directory is the complete list, including sections without a
 // usable public calendar. Each enabled row is its own configurable adapter.
 let NATIONAL_REGISTRY = { sections: [] };
 try { NATIONAL_REGISTRY = require('./data/cai-sections.json'); }
 catch (error) { if (error.code !== 'MODULE_NOT_FOUND') throw error; }
 const registryByLegacyId = new Map(NATIONAL_REGISTRY.sections.filter(s => s.legacyId).map(s => [s.legacyId, s]));
-const legacyIds = new Set(LAZIO_SOURCES.map(s => s.id));
-// LAZIO_SOURCES scrape fields (url/kind/template/extractor/enabled) must win over
+const registryById = new Map(NATIONAL_REGISTRY.sections.map(s => [s.id, s]));
+
+function mergeOverrideSource(source, { defaultRegion, lookup }) {
+  const registry = lookup(source.id) || {};
+  const calendarUrls = [source.url, ...(registry.calendarUrls || []).filter((u) => u !== source.url)];
+  return {
+    ...registry,
+    ...source,
+    region: registry.region || defaultRegion,
+    id: source.id,
+    calendarUrls
+  };
+}
+
+const lazioOverrideIds = new Set(LAZIO_SOURCES.map(s => s.id));
+const abruzzoOverrideIds = new Set(ABRUZZO_SOURCES.map(s => s.id));
+const overrideIds = new Set([...lazioOverrideIds, ...abruzzoOverrideIds]);
+
+// Override scrape fields (url/kind/template/extractor/enabled) must win over
 // registry discovery metadata. Registry still contributes website/directoryUrl/etc.
 const SOURCES = [
-  ...LAZIO_SOURCES.map(source => {
-    const registry = registryByLegacyId.get(source.id) || {};
-    const calendarUrls = [source.url, ...(registry.calendarUrls || []).filter((u) => u !== source.url)];
-    return {
-      ...registry,
-      ...source,
-      region: 'Lazio',
-      id: source.id,
-      calendarUrls
-    };
-  }),
-  ...NATIONAL_REGISTRY.sections.filter(source => !legacyIds.has(source.id))
+  ...LAZIO_SOURCES.map(source => mergeOverrideSource(source, {
+    defaultRegion: 'Lazio',
+    lookup: (id) => registryByLegacyId.get(id)
+  })),
+  ...ABRUZZO_SOURCES.map(source => mergeOverrideSource(source, {
+    defaultRegion: 'Abruzzo',
+    lookup: (id) => registryById.get(id)
+  })),
+  ...NATIONAL_REGISTRY.sections.filter(source =>
+    !overrideIds.has(source.id) && !(source.legacyId && overrideIds.has(source.legacyId))
+  )
 ];
 
 function enabledSources(list = SOURCES) {
@@ -233,6 +314,7 @@ function isCheerioSource(source) {
 module.exports = {
   SOURCES,
   LAZIO_SOURCES,
+  ABRUZZO_SOURCES,
   NATIONAL_REGISTRY,
   enabledSources,
   findSource,
