@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T12:00:51.701Z",
+  "generatedAt": "2026-09-06T12:04:37.469Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 310
+    "located": 324
   },
   "sources": [
     {
@@ -829,16 +829,16 @@
       "directoryId": "9234007",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "https://www.caiguardiagrele.it/pag/programma/programma2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 14,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
+      "hash": "5421cbb478bdd3972a7ccb2db18e218e335fd2c7b05f528aa097c4c85ae0e351",
+      "updatedAt": "2026-09-06T12:04:37.469Z",
       "documents": [],
       "methods": [],
       "issues": [],
