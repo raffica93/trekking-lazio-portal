@@ -14,9 +14,14 @@ const {
   stableId,
   tripDays
 } = require('./scraper');
+const { pdfLines } = require('./adapters/deterministic');
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 const MAX_HTML_CHARS = 80_000;
+// Small PDFs (e.g. Colleferro ~1.7MB) stay as inline Gemini PDF bytes.
+// Larger ones (e.g. Frosinone ~81MB) exceed axios/Gemini inline limits — send extracted text.
+const LARGE_PDF_BYTES = 6 * 1024 * 1024;
+const MAX_PDF_DOWNLOAD_BYTES = 100 * 1024 * 1024;
 const DEFAULT_GEMINI_MODEL = 'gemini-3.5-flash';
 const EXTRACTION_VERSION = 'geo-zone-v1';
 const MIN_COORDINATE_CONFIDENCE = 0.7;
@@ -206,13 +211,16 @@ function userPrompt(source, document, { now = DateTime.now() } = {}) {
     'Restituisci solo lo schema JSON.'
   ];
 
-  if (document?.kind === 'pdf') {
+  if (document?.kind === 'pdf' && document.bytes) {
     lines.push('', 'Il programma è nel PDF allegato. Leggi tutto il calendario.');
   } else if (document?.text) {
     const text = document.text.length > MAX_HTML_CHARS
       ? `${document.text.slice(0, MAX_HTML_CHARS)}\n[troncato]`
       : document.text;
-    lines.push('', 'Testo della pagina:', text);
+    const label = document?.kind === 'pdf'
+      ? 'Testo estratto dal PDF del programma:'
+      : 'Testo della pagina:';
+    lines.push('', label, text);
   }
 
   if (source.template === 'facebook' || isFacebookUrl(source.url)) {
@@ -459,37 +467,125 @@ async function extractFromSource(source, document, options = {}) {
   throw lastError;
 }
 
+function isPdfBuffer(bytes) {
+  return Buffer.isBuffer(bytes) && bytes.length >= 5 && bytes.subarray(0, 5).toString('latin1') === '%PDF-';
+}
+
+function looksLikeHtmlBuffer(bytes) {
+  const head = bytes.subarray(0, Math.min(bytes.length, 2048)).toString('utf8').trimStart();
+  return /^<!DOCTYPE html/i.test(head) || /^<html[\s>]/i.test(head);
+}
+
+function driveConfirmDownloadUrl(html, originalUrl) {
+  const confirm = String(html || '').match(/confirm=([0-9A-Za-z_-]+)/);
+  if (!confirm) return null;
+  let fileId = null;
+  try {
+    fileId = new URL(String(originalUrl || '')).searchParams.get('id');
+  } catch {
+    fileId = null;
+  }
+  if (!fileId) {
+    fileId = String(html || '').match(/[?&]id=([0-9A-Za-z_-]+)/)?.[1] || null;
+  }
+  if (!fileId) return null;
+  const uuid = String(html || '').match(/[?&]uuid=([0-9A-Za-z_-]+)/)?.[1];
+  const params = new URLSearchParams({ export: 'download', id: fileId, confirm: confirm[1] });
+  if (uuid) params.set('uuid', uuid);
+  return `https://drive.google.com/uc?${params}`;
+}
+
+function isGoogleDriveUrl(value) {
+  try {
+    const host = new URL(String(value || '')).hostname.replace(/^www\./i, '');
+    return host === 'drive.google.com' || host === 'drive.usercontent.google.com';
+  } catch {
+    return false;
+  }
+}
+
+async function axiosGetBinary(axiosImpl, url, { timeout, headers }) {
+  return axiosImpl.get(url, {
+    timeout,
+    responseType: 'arraybuffer',
+    maxRedirects: 5,
+    maxContentLength: MAX_PDF_DOWNLOAD_BYTES,
+    maxBodyLength: MAX_PDF_DOWNLOAD_BYTES,
+    validateStatus: (status) => status >= 200 && status < 300,
+    headers
+  });
+}
+
 async function fetchDocument(source, {
   axiosImpl = axios,
-  timeout = Number(process.env.SCRAPE_TIMEOUT_MS || 20_000)
+  timeout = Number(process.env.SCRAPE_TIMEOUT_MS || 20_000),
+  pdfLinesImpl = pdfLines
 } = {}) {
   if (source.template === 'facebook' || isFacebookUrl(source.url)) {
     throw new Error(`${source.organizer} publishes on Facebook; skipping HTML fetch`);
   }
 
-  const responseType = source.kind === 'pdf' ? 'arraybuffer' : 'text';
-  const response = await axiosImpl.get(source.url, {
-    timeout,
-    responseType,
-    validateStatus: (status) => status >= 200 && status < 300,
-    headers: {
-      Accept: source.kind === 'pdf' ? 'application/pdf,application/octet-stream' : 'text/html,application/xhtml+xml',
-      'User-Agent': 'TrekkingLazioPortal/1.1 (+scheduled public-data refresh)'
-    }
-  });
+  const pdfHeaders = {
+    Accept: 'application/pdf,application/octet-stream,*/*',
+    'User-Agent': 'TrekkingLazioPortal/1.1 (+scheduled public-data refresh)'
+  };
 
   if (source.kind === 'pdf') {
-    const bytes = Buffer.from(response.data);
-    if (bytes.length < 100) {
-      throw new Error(`${source.organizer} returned an empty PDF`);
+    const pdfTimeout = Math.max(timeout, 120_000);
+    let response = await axiosGetBinary(axiosImpl, source.url, { timeout: pdfTimeout, headers: pdfHeaders });
+    let bytes = Buffer.from(response.data);
+
+    // Large Google Drive files sometimes return an HTML virus-scan confirm page.
+    if (!isPdfBuffer(bytes) && looksLikeHtmlBuffer(bytes) && isGoogleDriveUrl(source.url)) {
+      const confirmUrl = driveConfirmDownloadUrl(bytes.toString('utf8'), source.url);
+      if (!confirmUrl) {
+        throw new Error(`${source.organizer} Google Drive download returned HTML instead of a PDF`);
+      }
+      response = await axiosGetBinary(axiosImpl, confirmUrl, { timeout: pdfTimeout, headers: pdfHeaders });
+      bytes = Buffer.from(response.data);
     }
+
+    if (!isPdfBuffer(bytes) || bytes.length < 100) {
+      throw new Error(`${source.organizer} returned an empty or invalid PDF`);
+    }
+
+    const hash = extractionHash(bytes);
+    const fileUrl = source.url;
+
+    if (bytes.length > LARGE_PDF_BYTES) {
+      const lines = await pdfLinesImpl(bytes);
+      const text = lines.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+      if (text.length < 200) {
+        throw new Error(`${source.organizer} PDF text extraction produced too little text for Gemini`);
+      }
+      return {
+        kind: 'pdf',
+        text,
+        hash,
+        fileUrl,
+        pdfAsText: true,
+        pdfByteLength: bytes.length
+      };
+    }
+
     return {
       kind: 'pdf',
       bytes,
-      hash: extractionHash(bytes),
-      fileUrl: source.url
+      hash,
+      fileUrl
     };
   }
+
+  const response = await axiosImpl.get(source.url, {
+    timeout,
+    responseType: 'text',
+    maxRedirects: 5,
+    validateStatus: (status) => status >= 200 && status < 300,
+    headers: {
+      Accept: 'text/html,application/xhtml+xml',
+      'User-Agent': 'TrekkingLazioPortal/1.1 (+scheduled public-data refresh)'
+    }
+  });
 
   const html = String(response.data || '');
   if (html.length < 200) {
@@ -508,9 +604,12 @@ module.exports = {
   DEFAULT_GEMINI_MODEL,
   EXTRACTION_VERSION,
   EXTRACT_SCHEMA,
+  LARGE_PDF_BYTES,
+  MAX_PDF_DOWNLOAD_BYTES,
   MIN_COORDINATE_CONFIDENCE,
   SYSTEM_PROMPT,
   buildRequestBody,
+  driveConfirmDownloadUrl,
   extractFromSource,
   extractGeminiText,
   fetchDocument,
@@ -521,6 +620,8 @@ module.exports = {
   htmlToText,
   isFacebookUrl,
   isGeminiQuotaError,
+  isGoogleDriveUrl,
+  isPdfBuffer,
   markGeminiQuotaExhausted,
   resetGeminiQuotaExhausted,
   normalizeExtracted,
