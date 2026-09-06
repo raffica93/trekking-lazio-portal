@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-05T23:05:32.818Z",
+  "generatedAt": "2026-09-06T10:31:01.594Z",
   "coverage": {
     "total": 838,
-    "selected": 292,
-    "withEvents": 165,
-    "parsed": 178,
-    "unsupported": 110,
-    "failed": 4,
+    "selected": 1,
+    "withEvents": 1,
+    "parsed": 0,
+    "unsupported": 1,
+    "failed": 0,
     "located": 224
   },
   "sources": [
@@ -1355,18 +1355,12 @@
       "enabled": true,
       "excursions": 2,
       "error": null,
-      "hash": "1135235af2528dc48ef458492556970ac1b4a312b55567eef1f60876b1d8064d",
-      "updatedAt": "2026-09-05T23:05:32.818Z",
+      "hash": "b25ca99dd1c061ca9cf86c39f79d327ef082fdd2cc434ce5a44c11ce4cd52c00",
+      "updatedAt": "2026-09-06T10:31:01.594Z",
       "documents": [
         {
-          "url": "https://caicolleferro.it/?p=2522",
-          "hash": "e6b761067061e88a0cb649cb22fc6e7bb572fc094a23cef1069c87a40cddda21",
-          "events": 0,
-          "method": null
-        },
-        {
           "url": "https://www.facebook.com/login/?next=https%3A%2F%2Fwww.facebook.com%2Fshare_channel%2F%3Ftype%3Dreshare%26link%3Dhttps%253A%252F%252Fcaicolleferro.it%252F%253Fp%253D2522%26app_id%3D966242223397117%26source_surface%3Dexternal_reshare%26display%26hashtag",
-          "hash": "4a9dfd0cf815adf7544d3060fc2624a17b0f822c95c6e5a3dcf846b9b6fbd8ab",
+          "hash": "fceff7e710650f110c9a03b13b3fde1986d824fc2de74641fca6bf93badf2356",
           "events": 0,
           "method": null
         },
@@ -1375,31 +1369,29 @@
           "hash": "03a17dae074c962c226284e119abd4a1e9752e13ac53eba4ef1235b753e53aaa",
           "events": 0,
           "method": null
-        },
-        {
-          "url": "https://caicolleferro.it/?page_id=193",
-          "hash": "32212b4c93390fd58f8c3467f02259561a116036a682f6f81a0e548fbaf443d1",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://caicolleferro.it/?page_id=239",
-          "hash": "715b8019498028b9323c734639142eb0f5ab7c6b77984f1dbead54af647ca8cf",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://caicolleferro.it/",
-          "hash": "2246314bf7a7c0a735581b6dcd8b43bc90b8cd664ca2a600ba6e47a07467c290",
-          "events": 0,
-          "method": null
         }
       ],
       "methods": [],
       "issues": [
         {
+          "url": "https://caicolleferro.it/?p=2522",
+          "message": "Hostname/IP does not match certificate's altnames: Host: caicolleferro.it. is not in the cert's altnames: DNS:ssd1.iltuohosting.it"
+        },
+        {
           "url": "https://www.addtoany.com/add_to/email?linkurl=https%3A%2F%2Fcaicolleferro.it%2F%3Fp%3D2522&linkname=Calendario%20Attivit%C3%A0%202026",
           "message": "Redirected request failed: Unsupported protocol mailto:"
+        },
+        {
+          "url": "https://caicolleferro.it/?page_id=193",
+          "message": "Hostname/IP does not match certificate's altnames: Host: caicolleferro.it. is not in the cert's altnames: DNS:ssd1.iltuohosting.it"
+        },
+        {
+          "url": "https://caicolleferro.it/?page_id=239",
+          "message": "Hostname/IP does not match certificate's altnames: Host: caicolleferro.it. is not in the cert's altnames: DNS:ssd1.iltuohosting.it"
+        },
+        {
+          "url": "https://caicolleferro.it/",
+          "message": "Hostname/IP does not match certificate's altnames: Host: caicolleferro.it. is not in the cert's altnames: DNS:ssd1.iltuohosting.it"
         }
       ],
       "extractedEvents": 0

@@ -7154,7 +7154,7 @@
     "sora": "10abec662c82f5d3b862e5b09f9785e16d4cd2c64bce8040781479d3eede2802",
     "amatrice": "68a2618f8640962f1e190cba94edbc49cdfe212677ef8459b94e9a256d4fd4c0",
     "alatri": "088e045dc8a603f66c50433efab0a7a83318a9a6ff5014d4fae936507975fdda",
-    "colleferro": "1135235af2528dc48ef458492556970ac1b4a312b55567eef1f60876b1d8064d",
+    "colleferro": "b25ca99dd1c061ca9cf86c39f79d327ef082fdd2cc434ce5a44c11ce4cd52c00",
     "antrodoco": "e62fd5b236678ca7c25324be57a1020a5974af8b5921818f54a392606f75922b",
     "roma": "396e2247ec2e422485cd6486e919d8feac9e21cf85976ba38be6a7566fcd5476",
     "frascati": "80cd8c43162e98c02f6db5e8a0ec24ebcf92d6790906cd41fc8da526ef6098c6",
@@ -7432,15 +7432,15 @@
     "cai-savona-9210003": "97bdcc6ebbaa6e3916b62c629827b3bdce1762d3fde59772de5cd5a3389b8548",
     "cai-legnano-9216022": "05fa71c82ec2dbb54cc18c52c61745d1eaadd73310d5d433f65eb340d55ef8a1"
   },
-  "generatedAt": "2026-09-05T23:05:32.806Z",
+  "generatedAt": "2026-09-06T10:31:01.582Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
-    "selected": 292,
-    "withEvents": 165,
-    "parsed": 178,
-    "unsupported": 110,
-    "failed": 4,
+    "selected": 1,
+    "withEvents": 1,
+    "parsed": 0,
+    "unsupported": 1,
+    "failed": 0,
     "located": 224
   },
   "excursions": [
