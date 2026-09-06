@@ -21,6 +21,10 @@ function belongingTo(source, excursion) {
   return excursion?.sourceId ? excursion.sourceId === source.id : Boolean(excursion?.id?.startsWith(`${source.id}-`));
 }
 
+function usesGeminiExtractor(source) {
+  return source?.extractor === 'gemini';
+}
+
 function cachedOrEmpty(existing, source) {
   return existing.filter((item) => belongingTo(source, item));
 }
@@ -115,7 +119,10 @@ async function scrapeSource(source, {
 } = {}) {
   const cached = existing.filter((item) => belongingTo(source, item));
 
-  if (deterministic) {
+  // National collector sets deterministic=true, but pdf-programma / gemini sources
+  // must still go through fetchDocument + extractFromSource when a key is present.
+  const useDeterministicAdapter = deterministic && !(usesGeminiExtractor(source) && apiKey);
+  if (useDeterministicAdapter) {
     const result = await adapter(source, {
       now,
       budgetMs: Number(process.env.SCRAPE_SOURCE_BUDGET_MS || 60_000),
@@ -195,11 +202,14 @@ async function scrapeAll({
     ? { ...existingPayload.sourceHashes }
     : {};
 
-  const resolvedKey = deterministic ? null : apiKey === undefined
+  const geminiSelected = selected.some((source) => usesGeminiExtractor(source) && !isCheerioSource(source));
+  // Resolve Gemini even when the national collector runs in deterministic mode,
+  // otherwise extractor:'gemini' sources are forced through pdf-text and yield 0 events.
+  const resolvedKey = (deterministic && !geminiSelected) ? null : apiKey === undefined
     ? resolveGeminiKey({ env: process.env })
     : apiKey;
 
-  if (!deterministic && selected.some((source) => !isCheerioSource(source))) {
+  if (geminiSelected || (!deterministic && selected.some((source) => !isCheerioSource(source)))) {
     if (resolvedKey) {
       log.log('Using GEMINI_KEY with gemini-3.5-flash');
     } else {
@@ -234,7 +244,7 @@ async function scrapeAll({
       results.push(result);
       if (result.hash) nextHashes[source.id] = result.hash;
       log.log(`${source.id}: ${result.status} (${result.excursions.length} excursions)`);
-      if (!deterministic && pauseMs > 0 && !isCheerioSource(source) && result.status === 'ok') {
+      if (pauseMs > 0 && (usesGeminiExtractor(source) || (!deterministic && !isCheerioSource(source))) && result.status === 'ok') {
         await sleep(pauseMs);
       }
     } catch (error) {
@@ -248,7 +258,7 @@ async function scrapeAll({
       } else {
         log.error(`${source.id} failed with no cache: ${error.message}`);
       }
-      if (!deterministic && pauseMs > 0 && !isGeminiQuotaError(error)) await sleep(pauseMs);
+      if (pauseMs > 0 && (usesGeminiExtractor(source) || !deterministic) && !isGeminiQuotaError(error)) await sleep(pauseMs);
     }
   }
 
@@ -326,5 +336,6 @@ module.exports = {
   scrapeAll,
   scrapeSource,
   selectSources,
-  sortExcursions
+  sortExcursions,
+  usesGeminiExtractor
 };
