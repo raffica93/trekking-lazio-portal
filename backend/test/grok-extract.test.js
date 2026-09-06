@@ -2,14 +2,17 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const { DateTime } = require('luxon');
 const {
+  LARGE_PDF_BYTES,
   buildRequestBody,
   classifyGeminiError,
+  driveConfirmDownloadUrl,
   extractFromSource,
   fetchDocument,
   geminiZoneCoords,
   htmlToText,
   isFacebookUrl,
   isGeminiQuotaError,
+  isPdfBuffer,
   resetGeminiQuotaExhausted,
   normalizeExtracted,
   userPrompt
@@ -306,4 +309,102 @@ test('extractFromSource parses Gemini JSON and ignores past rows', async () => {
   assert.equal(excursions[0].organizer, 'CAI Viterbo');
   assert.equal(excursions[0].lat, 42.417);
   assert.equal(excursions[0].coordinatesQuality, 'massif');
+});
+
+
+test('large PDFs are sent to Gemini as extracted text, small PDFs stay inline', async () => {
+  const smallPdf = Buffer.from('%PDF-1.4 small-content-' + 'x'.repeat(200));
+  const smallDoc = await fetchDocument(
+    { ...TIVOLI, organizer: 'CAI Tivoli' },
+    {
+      axiosImpl: {
+        get: async () => ({ data: smallPdf, status: 200 })
+      }
+    }
+  );
+  assert.equal(Buffer.isBuffer(smallDoc.bytes), true);
+  assert.equal(smallDoc.text, undefined);
+  assert.equal(isPdfBuffer(smallDoc.bytes), true);
+
+  const largePdf = Buffer.concat([
+    Buffer.from('%PDF-1.4 '),
+    Buffer.alloc(LARGE_PDF_BYTES + 1024, 0x41)
+  ]);
+  const largeDoc = await fetchDocument(
+    {
+      id: 'frosinone',
+      organizer: 'CAI Frosinone',
+      url: 'https://drive.google.com/uc?export=download&id=1qh5YNLgJqtqOZoYIJMZe7HLapWuI3rNv',
+      kind: 'pdf',
+      extractor: 'gemini'
+    },
+    {
+      axiosImpl: {
+        get: async (url, opts) => {
+          assert.equal(opts.maxContentLength >= LARGE_PDF_BYTES, true);
+          assert.equal(opts.responseType, 'arraybuffer');
+          return { data: largePdf, status: 200 };
+        }
+      },
+      pdfLinesImpl: async () => [
+        'CAI SEZIONE DI FROSINONE',
+        '6 APRILE 2026',
+        'PUNTA LA LENZA',
+        'Categoria: Escursionismo',
+        'Difficoltà: E',
+        'x'.repeat(250)
+      ]
+    }
+  );
+  assert.equal(largeDoc.bytes, undefined);
+  assert.equal(largeDoc.pdfAsText, true);
+  assert.match(largeDoc.text, /PUNTA LA LENZA/);
+  assert.equal(typeof largeDoc.hash, 'string');
+
+  const textBody = buildRequestBody(
+    { id: 'frosinone', organizer: 'CAI Frosinone', url: 'https://drive.google.com/uc?export=download&id=abc', kind: 'pdf' },
+    largeDoc,
+    { now }
+  );
+  const textParts = textBody.contents[0].parts;
+  assert.equal(textParts.some((part) => part.inline_data), false);
+  assert.match(textParts[0].text, /Testo estratto dal PDF del programma/);
+  assert.match(textParts[0].text, /PUNTA LA LENZA/);
+
+  const inlineBody = buildRequestBody(TIVOLI, smallDoc, { now });
+  assert.equal(inlineBody.contents[0].parts.some((part) => part.inline_data?.mime_type === 'application/pdf'), true);
+});
+
+test('driveConfirmDownloadUrl builds a confirm link from the interstitial HTML', () => {
+  const html = '<form action="https://drive.google.com/uc?export=download&confirm=t&id=1qh5YNLgJqtqOZoYIJMZe7HLapWuI3rNv&uuid=abc-123">';
+  const url = driveConfirmDownloadUrl(html, 'https://drive.google.com/uc?export=download&id=1qh5YNLgJqtqOZoYIJMZe7HLapWuI3rNv');
+  assert.match(url, /confirm=t/);
+  assert.match(url, /id=1qh5YNLgJqtqOZoYIJMZe7HLapWuI3rNv/);
+  assert.match(url, /uuid=abc-123/);
+});
+
+test('fetchDocument follows a Google Drive virus-scan confirm page when needed', async () => {
+  const html = Buffer.from('<!DOCTYPE html><html><body>confirm=t&id=file123&uuid=u1 virus scan</body></html>');
+  const pdf = Buffer.from('%PDF-1.4 drive-confirmed-' + 'y'.repeat(200));
+  let calls = 0;
+  const doc = await fetchDocument(
+    {
+      id: 'frosinone',
+      organizer: 'CAI Frosinone',
+      url: 'https://drive.google.com/uc?export=download&id=file123',
+      kind: 'pdf'
+    },
+    {
+      axiosImpl: {
+        get: async (url) => {
+          calls += 1;
+          if (calls === 1) return { data: html, status: 200 };
+          assert.match(String(url), /confirm=t/);
+          return { data: pdf, status: 200 };
+        }
+      }
+    }
+  );
+  assert.equal(calls, 2);
+  assert.equal(isPdfBuffer(doc.bytes), true);
 });

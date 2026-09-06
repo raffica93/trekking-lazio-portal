@@ -49,9 +49,9 @@ const LAZIO_SOURCES = [
   {
     id: 'frosinone',
     organizer: 'CAI Frosinone',
-    url: 'https://www.caifrosinone.it/news/programma-attivit%C3%A0',
-    kind: 'html',
-    template: 'html-programma',
+    url: 'https://drive.google.com/uc?export=download&id=1qh5YNLgJqtqOZoYIJMZe7HLapWuI3rNv',
+    kind: 'pdf',
+    template: 'pdf-programma',
     extractor: 'gemini',
     enabled: true
   },
