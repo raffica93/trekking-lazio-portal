@@ -112,9 +112,9 @@ const LAZIO_SOURCES = [
   {
     id: 'colleferro',
     organizer: 'CAI Colleferro',
-    url: 'https://caicolleferro.it/?p=2522',
-    kind: 'html',
-    template: 'html-calendario',
+    url: 'https://caicolleferro.it/wp-content/uploads/2025/12/CAI-Colleferro-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
     extractor: 'gemini',
     enabled: true
   },
