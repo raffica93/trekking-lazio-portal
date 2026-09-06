@@ -181,8 +181,20 @@ try { NATIONAL_REGISTRY = require('./data/cai-sections.json'); }
 catch (error) { if (error.code !== 'MODULE_NOT_FOUND') throw error; }
 const registryByLegacyId = new Map(NATIONAL_REGISTRY.sections.filter(s => s.legacyId).map(s => [s.legacyId, s]));
 const legacyIds = new Set(LAZIO_SOURCES.map(s => s.id));
+// LAZIO_SOURCES scrape fields (url/kind/template/extractor/enabled) must win over
+// registry discovery metadata. Registry still contributes website/directoryUrl/etc.
 const SOURCES = [
-  ...LAZIO_SOURCES.map(source => ({ ...source, region: 'Lazio', ...registryByLegacyId.get(source.id), id: source.id })),
+  ...LAZIO_SOURCES.map(source => {
+    const registry = registryByLegacyId.get(source.id) || {};
+    const calendarUrls = [source.url, ...(registry.calendarUrls || []).filter((u) => u !== source.url)];
+    return {
+      ...registry,
+      ...source,
+      region: 'Lazio',
+      id: source.id,
+      calendarUrls
+    };
+  }),
   ...NATIONAL_REGISTRY.sections.filter(source => !legacyIds.has(source.id))
 ];
 
