@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T11:38:03.244Z",
+  "generatedAt": "2026-09-08T11:39:40.450Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 433
+    "located": 445
   },
   "sources": [
     {
@@ -1295,102 +1295,20 @@
       "directoryId": "9248001",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "partial",
+      "status": "ok",
       "url": "https://www.caicagliari.it/escursionismo/wp-content/uploads/sites/2/2026/08/PAE2026s.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 10,
+      "excursions": 13,
       "error": null,
-      "hash": "4f5bc9068a9e3f6ee86bac761018d8d88586de425c61ea811338d67c33dc60b0",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
-      "documents": [
-        {
-          "url": "https://www.caicagliari.it/escursionismo/wp-content/uploads/sites/2/2026/08/PAE2026s.pdf",
-          "hash": "2f021c35087cde28eeff5adfc010177c2aa1161e14648a78e4952e493bd95194",
-          "events": 24,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicagliari.it/escursionismo/calendario-escursioni/",
-          "hash": "925230a5b123cdae7c44225cda13961a366e4c208607379b7467fcc3ca31869b",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicagliari.it/escursionismo/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caicagliari.it%2Fescursionismo%2Fcalendario-escursioni%2F",
-          "hash": "438ef4c710c07e0659fc0c279d7c0912aff033b138f8d6de87401aac12c709a5",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://www.caicagliari.it/escursionismo/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caicagliari.it%2Fescursionismo%2Fcalendario-escursioni%2F&format=xml",
-          "hash": "d8782af3c6f00d2e8dbfc628c9fa7a971a5ef6f2d0b915eb34e7eaabd2726cd4",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicagliari.it/escursionismo/2026/09/01/sab-dom-03-04-ottobre-2026-pevero-caprera/",
-          "hash": "904389db199818957d369790e6e46c71e4a7d4b5bc9896a1e668b7a74dea0fdd",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicagliari.it/escursionismo/2026/08/13/giovedi-27-agosto-2026-luna-dello-storione/",
-          "hash": "9645a175d6d0c8185a0c321dd3a41bf41d391b5bc19e75ffe28862e3543fbc4d",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicagliari.it/escursionismo/2026/07/19/mercoledi-29-luglio-2026-luna-che-sorge-sole-che-tramonta/",
-          "hash": "b426f1a366ee61ecf93e31a744e6097811a8a3bd652a67f2a2335ec1c67261ae",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicagliari.it/escursionismo/2026/07/09/domenica-19-luglio-2026-castello-di-quirra/",
-          "hash": "fcb4a8f584e8f215a730bcf6292109d0dea3be987dfbb365380739070060bd7e",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicagliari.it/",
-          "hash": "a5349a29c50b83dcbc981038ba343a2adaebdf34805917adc2e3dd9cd229e5fd",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicagliari.it/escursionismo/wp-content/uploads/sites/2/2026/09/2026_10_03-04-Pevero-Caprera.pdf",
-          "hash": "38e7ae6138ce293ffab5efb0490a7f2fcc05e3f83cf0b6586a5bb18031bd1afe",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicagliari.it/escursionismo/wp-content/uploads/sites/2/2026/08/2026_08_27-LOCANDINA-SORGE-LUNA.pdf",
-          "hash": "d3e7d08864927087f2c12231bb56f47caccfc7a88893153f88b36f7a94cce4e4",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicagliari.it/escursionismo/wp-content/uploads/sites/2/2026/07/2026_07_29-LOCANDINA-SORGE-SOLE.pdf",
-          "hash": "c7c18d9927b526d0d0b3ed3b13c68ea1cedec945218af992963ff913de50299d",
-          "events": 0,
-          "method": "pdf-text"
-        }
-      ],
-      "methods": [
-        "pdf-text",
-        "wordpress-events"
-      ],
-      "issues": [
-        {
-          "url": "https://www.caicagliari.it/escursionismo/wp-content/uploads/sites/2/2026/08/PAE2026s.pdf",
-          "message": "Discovery budget reached; 59 candidate documents remain.",
-          "code": "discovery-limit"
-        }
-      ],
-      "extractedEvents": 24
+      "hash": "9ae2d63a7b843a045b52a60af7f67f3587e57fd4a8ff746a91b54abecfd782b3",
+      "updatedAt": "2026-09-08T11:39:40.450Z",
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
     },
     {
       "id": "cai-nuoro-9248002",
