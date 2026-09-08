@@ -2687,6 +2687,42 @@ const TRENTINO_SOURCES = [
 ];
 
 
+// Nazionale AGAI collegio overrides win over registry discover stubs (same precedence as TRENTINO/LOMBARDIA).
+// PDF Gemini pdf-programma for Collegi Guide Alpine (Lombardia, Piemonte, Campania FPC/calendari 2026).
+// Out of scope: Marche HTML, CAAI/CNSAS HTML hubs, unreachable AGAI nazionale, scrapes.
+const NAZIONALE_SOURCES = [
+  {
+    id: 'cai-agai-coll-lombardia-9102003',
+    organizer: 'CAI Agai Coll. Lombardia',
+    url: 'https://guidealpine.lombardia.it/wp-content/uploads/2025/10/All.B3_Calendario-GA-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-agai-coll-piemonte-9102001',
+    organizer: 'CAI Agai Coll. Piemonte',
+    url: 'https://www.guidealpinepiemonte.it/res/download/pdf/988_it.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-agai-coll-campania-9102013',
+    organizer: 'CAI Agai Coll. Campania',
+    url: 'https://www.guidealpinevulcanologichecampania.it/wp-content/uploads/2025/11/Locandina-corso-FPC-02-25_crgavc.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  }
+];
+
 let NATIONAL_REGISTRY = { sections: [] };
 try { NATIONAL_REGISTRY = require('./data/cai-sections.json'); }
 catch (error) { if (error.code !== 'MODULE_NOT_FOUND') throw error; }
@@ -2716,6 +2752,7 @@ const friuliOverrideIds = new Set(FRIULI_SOURCES.map(s => s.id));
 const piemonteOverrideIds = new Set(PIEMONTE_SOURCES.map(s => s.id));
 const lombardiaOverrideIds = new Set(LOMBARDIA_SOURCES.map(s => s.id));
 const trentinoOverrideIds = new Set(TRENTINO_SOURCES.map(s => s.id));
+const nazionaleOverrideIds = new Set(NAZIONALE_SOURCES.map(s => s.id));
 const overrideIds = new Set([
   ...lazioOverrideIds,
   ...abruzzoOverrideIds,
@@ -2727,7 +2764,8 @@ const overrideIds = new Set([
   ...friuliOverrideIds,
   ...piemonteOverrideIds,
   ...lombardiaOverrideIds,
-  ...trentinoOverrideIds
+  ...trentinoOverrideIds,
+  ...nazionaleOverrideIds
 ]);
 
 // Override scrape fields (url/kind/template/extractor/enabled) must win over
@@ -2775,6 +2813,10 @@ const SOURCES = [
   })),
   ...TRENTINO_SOURCES.map(source => mergeOverrideSource(source, {
     defaultRegion: 'Trentino-Alto Adige',
+    lookup: (id) => registryById.get(id)
+  })),
+  ...NAZIONALE_SOURCES.map(source => mergeOverrideSource(source, {
+    defaultRegion: 'Nazionale',
     lookup: (id) => registryById.get(id)
   })),
   ...NATIONAL_REGISTRY.sections.filter(source =>
@@ -2827,6 +2869,7 @@ module.exports = {
   PIEMONTE_SOURCES,
   LOMBARDIA_SOURCES,
   TRENTINO_SOURCES,
+  NAZIONALE_SOURCES,
   NATIONAL_REGISTRY,
   enabledSources,
   findSource,
