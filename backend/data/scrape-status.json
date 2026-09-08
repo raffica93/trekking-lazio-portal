@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T13:10:04.874Z",
+  "generatedAt": "2026-09-08T13:11:05.238Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7507,20 +7507,29 @@
       "directoryId": "9212066",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "https://caipianezza.it/eventi/?ical=1",
       "kind": "ics",
       "template": "icalendar",
       "extractor": "deterministic",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 11,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
+      "hash": "40936dfd29922598e3e712921b98cb77495321a669c69fcc5b654b4b41e41cff",
+      "updatedAt": "2026-09-08T13:11:05.238Z",
+      "documents": [
+        {
+          "url": "https://caipianezza.it/eventi/?ical=1",
+          "hash": "ba284ccafae0e48b0157394e77a3cb4fac6ea6a071d05e22d2afcd6762ee8b9e",
+          "events": 11,
+          "method": "ics"
+        }
+      ],
+      "methods": [
+        "ics"
+      ],
       "issues": [],
-      "extractedEvents": null
+      "extractedEvents": 11
     },
     {
       "id": "cai-pino-torinese-9212078",
