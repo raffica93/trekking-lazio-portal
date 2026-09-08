@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T13:52:01.152Z",
+  "generatedAt": "2026-09-08T13:53:03.770Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -12002,78 +12002,78 @@
       "enabled": true,
       "excursions": 2,
       "error": null,
-      "hash": "9fcb2c02134d08af48c62cc534219f6d52bed10cf8f52c8732a905d06308d861",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "308b206bdfbb02a5fa763d9a0cfc895d5d6f678cb970a500a55edc9865d04a51",
+      "updatedAt": "2026-09-08T13:53:03.770Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-livigno/eventi/?ical=1",
-          "hash": "161ac253dc11edbadb981012b075362a3c369dc709a7ed050ce23b3433705546",
+          "hash": "6c2154768fcbac7b1eefe70fe44a4344ca84613234275bc787c52a6b496583e8",
           "events": 1,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-livigno/2026/04/programma-estivo-2026/",
-          "hash": "48d8cfef1199c7cb39c131520b3a9af7ed165060942b6000ffb152a1052721f9",
+          "hash": "328ff2914a114a02ed971404cf2c3a7758f0f4c1c3fd1529e9d7d94e67ff6e02",
           "events": 3,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-livigno/2026/03/programma-primaverile-2026/",
-          "hash": "c81619acc41470c9f21acda6b3c466b7e050d670ec527671eec4f2b3e86549b1",
+          "hash": "72a54fbf70d72fdc313a2cc13e501a6f80c585b7a0f2344cbd31b716a77b479a",
           "events": 3,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-livigno/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-livigno%2F2026%2F04%2Fprogramma-estivo-2026%2F",
-          "hash": "62929874be168bddd43ebc91d99a9c91734433ed341d4e43401c2ba96b279128",
+          "hash": "03a36ffa0f3c99be137b6a48c18abdcb6186f15265bb6729ebbc61cffc22c9b2",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-livigno/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-livigno%2F2026%2F04%2Fprogramma-estivo-2026%2F&format=xml",
-          "hash": "f9500a5215f7e4c25119f2eb0b5bbe3c8dd6003dab86cee5fd79ac170f943e15",
+          "hash": "9319a501bac2703643e6c264279bdecfbbee16cdbfbf0f0169ba4270909ad0be",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-livigno/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-livigno%2F2026%2F03%2Fprogramma-primaverile-2026%2F",
-          "hash": "bcc5165ca512d5be8be2dfd8317d516df66da9a8991b8d148a8957cbc8bb8899",
+          "hash": "d6a24f9e6d698625bff3cc8786d2c2e96e6a00c88de95860bc4dca4b77a8b91f",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-livigno/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-livigno%2F2026%2F03%2Fprogramma-primaverile-2026%2F&format=xml",
-          "hash": "59f2d4d017f22b7189b228f04b6efed9c822907463198524c4c285ce7e68a32e",
+          "hash": "469a361c68e48e52f6b0d567572b5241fa01cae19a797de64ff9755abdf80693",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-livigno/eventi/",
-          "hash": "0a55774a28449fad33fd67799ad3b664b845bbc169692fe26d8fe2da4eb79a08",
+          "hash": "953dc54fa4a07b5a161c41295be45adbd1c4d483a71cb495b139d80db433ea4d",
           "events": 1,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-livigno/",
-          "hash": "dba1b9aa25ece49520298f1d2228a5f08855148e3d5a1cceaf998e46506fbc2c",
+          "hash": "1e6a851e78156aa0acde8b749e7b82e9eaac034c571686d94a158e4bc6c6e43c",
           "events": 1,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "hash": "919751f77dcf50bad37cb8f5776f7cffef4022b3f1e5a684aaa01492a3536e8e",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-livigno/eventi/elenco/?ical=1",
-          "hash": "40913aebe7e9fa21abd07671a7528f41559c865965e95f3861829cda8c78787c",
+          "hash": "c5b4dc107d0a921d62ba80900554a13239ffda3ea12e38d98468058deea65809",
           "events": 1,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-livigno/eventi/elenco/?outlook-ical=1",
-          "hash": "4e8fa87fcb31a7ecbbeb752d764ed231c8f46118f9e09bfed2b3d130e0deeb02",
+          "hash": "c2de2288776292018e6119d1b23fa45a4558d99ee3c5a1786427f83d05edc879",
           "events": 1,
           "method": "ics"
         }
