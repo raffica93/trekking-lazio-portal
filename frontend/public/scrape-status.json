@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-08T13:47:07.257Z",
+  "generatedAt": "2026-09-08T13:48:53.202Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 1,
+    "withEvents": 0,
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
@@ -11354,8 +11354,8 @@
       "enabled": true,
       "excursions": 0,
       "error": null,
-      "hash": "aef7b4a16b892af4519460113cae896947664983a40148586139925d4c2fb242",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "19687998ec3b772e4a5c5edce4d72bd2e3b2a9358e25fb1862fbe11cd39f4240",
+      "updatedAt": "2026-09-08T13:48:53.202Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-desenzano/eventi/?ical=1",
@@ -11365,13 +11365,13 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-desenzano/",
-          "hash": "43cc22b837a4ccdafeac754212e4e5f38e312166da4755e67c8397dfa1f88d4a",
+          "hash": "9b54071ccdd26551732e2f07cd351cf49378774fcf20380ba43c7cbf64647d13",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "hash": "919751f77dcf50bad37cb8f5776f7cffef4022b3f1e5a684aaa01492a3536e8e",
           "events": 0,
           "method": "wordpress-events"
         }
