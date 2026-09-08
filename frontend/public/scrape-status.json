@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T13:38:20.905Z",
+  "generatedAt": "2026-09-08T13:39:56.518Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -10432,8 +10432,8 @@
       "enabled": true,
       "excursions": 4,
       "error": null,
-      "hash": "66d279eee072b911740a475637049e3b123ce1622ec59b0fbd706b3faebf2f19",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "36922e5a8a0f921a4f1919818949ef2228fdf4776d0ecd0d3aba52e1a0300ccc",
+      "updatedAt": "2026-09-08T13:39:56.518Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-caslino-derba/eventi/?ical=1",
@@ -10443,61 +10443,61 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-caslino-derba/attivita-e-programma-2026/",
-          "hash": "83f39aa3e59c061be574005455ebcfd656351912b8e18829b7b89338e1a73491",
+          "hash": "d5b47b47bc3b0794eee40185746342f53c09ae22585589b8fe7086a6f039d868",
           "events": 10,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-caslino-derba/ag2026-programma-attivita/",
-          "hash": "b623318ee05658fa1c6a7a9c7086e3222feb23a0d949f969185886b96a517986",
+          "hash": "e87804b628bb08c6493a7734035f7b3a5a8e7f93aeef0fe4d1b16883a2836c8e",
           "events": 4,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-caslino-derba/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-caslino-derba%2Fattivita-e-programma-2026%2F",
-          "hash": "9b8a2b0d67fc5842b216746afdacf0a8be4afeb61b1799e6fef95f0985fb4404",
+          "hash": "722f2de6137d7b94dfc563eff08778c8d0033b910f002c91e57ae3bd56f96d89",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-caslino-derba/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-caslino-derba%2Fattivita-e-programma-2026%2F&format=xml",
-          "hash": "640e5225b4359d4317c6d2ca1bbf9cdd086e82e70d72661156449be113ea2b42",
+          "hash": "c7281ceb30f7921290318971a906bcded96161bef1dc7a319855afec32be436b",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-caslino-derba/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-caslino-derba%2Fag2026-programma-attivita%2F",
-          "hash": "f85f4b8d12503b6978bac7a1c12b74f8238cc75ca585d9a08150180c33b8fd63",
+          "hash": "f828ce2aecf92d7586a87e2b35327f8066acca3163089ecbf7f243aa570f9793",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-caslino-derba/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-caslino-derba%2Fag2026-programma-attivita%2F&format=xml",
-          "hash": "7540a756ee4e700c271ac4dd4d577d3765c68cfb9071fd756b5d8f6594a9cbfe",
+          "hash": "b731c137be12c5372e4d9b86e68e32d2d0762169e9e750c0ab50242b167096ca",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-caslino-derba/",
-          "hash": "30b7432b6e5757d1d258ae09c63c6ea0a5fdc4b9bfa8e02cbcf3ee1fc18bfda6",
+          "hash": "f590fff0735df2b33ddea90085a4d79d826811aa2b8257d6cab462aa968763e4",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "hash": "919751f77dcf50bad37cb8f5776f7cffef4022b3f1e5a684aaa01492a3536e8e",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-caslino-derba/sample-page/chi-siamo/regolamento-escursioni/",
-          "hash": "5c8574a937d32a3d6922de8f9f5112193a947169cb6717502751f6f0d9b37082",
+          "hash": "8efc2a2349ef1f9f3d55453d2ec7e825fdb1f88966b0d5eb2d527c865d94e0b4",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-caslino-derba/sample-page/chi-siamo/regolamento-escursioni/",
-          "hash": "13ecf5264d2a5c257e6a20dea7b29ab84bafc746331e8478db90d1b24c48984c",
+          "hash": "11e63f058df9d7274525dd851bcda8920f7a12b595e9da4d528eb1920baef24a",
           "events": 0,
           "method": null
         }
