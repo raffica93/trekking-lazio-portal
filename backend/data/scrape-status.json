@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T14:05:58.134Z",
+  "generatedAt": "2026-09-08T14:07:08.522Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -13503,62 +13503,62 @@
       "template": "icalendar",
       "extractor": "deterministic",
       "enabled": true,
-      "excursions": 23,
+      "excursions": 25,
       "error": null,
-      "hash": "29083ab78f3ed579d355c908c74535a26072444b00d562b9cf4c95d2c7c46761",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "e942f9981d4cf7ef43a40e046ef5e53dedf3e51909cac81a7a4726f32f5a6208",
+      "updatedAt": "2026-09-08T14:07:08.522Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-veduggio/eventi/?ical=1",
-          "hash": "3bad6a0c4e1fd86b415336e4d056f108ecd676fe3323d88f2ff34fba5a00b822",
-          "events": 10,
+          "hash": "68e06841e11e5bfedec135dae018c107f15fc19e85bac7acc153ffafdcd266f5",
+          "events": 9,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-veduggio/?post_type=tribe_events&ical=1&eventDisplay=list",
-          "hash": "647b61a82db6bfe8fefbb1f5ce9213a93160f70bd0530d2f5eeb1a5d2ecc77d0",
-          "events": 10,
+          "hash": "12077d9e89750c08f12cf891889484988f7e5173296621d9cce2fdef17559965",
+          "events": 9,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-veduggio/eventi/elenco/?ical=1",
-          "hash": "2f895dae54bcfaed2a4c4c11f87485c8fc6e5dc80a775eec0e0ffefdfb2a8f0e",
-          "events": 10,
+          "hash": "bd2d98808b09b8833c28acd3dc77fb66afa825209987995b9b899a6005f87ca2",
+          "events": 9,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-veduggio/eventi/",
-          "hash": "9d89ee66aa1856447d793fd59456b8c47d0bad70e69c0407614f1f28c13861d2",
-          "events": 10,
+          "hash": "87370953ce4177eef2024de83cd0a1ba6ab82147d5a8f2da35cfe706f0a8b617",
+          "events": 9,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-veduggio/attivita/",
-          "hash": "c68e7ef4485d40c6359dc807bebda48d18ff0e8ecdcc60808c10cb6612849af4",
+          "hash": "c6ea32268d9c1aede8496c204e438e77c36d23bbe64b58246df56b39513d7f5c",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-veduggio/attivita/attivita-giovanili/",
-          "hash": "f5eca2fed028ae385737db9880ac8e4056cb3846a14df7f97e126b71639f2e5d",
+          "hash": "71cb0bab05241691c313c5aed9e8ec0b99cab66ae0d52dfc14350a13daa0fb38",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-veduggio/attivita/attivita-giovani/",
-          "hash": "22840cdb93926e394183c0de80198b7b5823b40a5fa1e0f5337afe95d4fd2b81",
+          "hash": "0a147b889c8a85931a0d58de8f0deff0a66f0971a3912f56cac5525d664c053f",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-veduggio/attivita/attivita-adulti/",
-          "hash": "fc9c62686ca32f2df0d1269fb06d72b1eb89e32a5672bdbfefe007067172779f",
+          "hash": "be21546b09a10200224342a55e9193a9e906b4710610dce63c1e26efbc489bea",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-veduggio/",
-          "hash": "30ad2d8cd6280f274f16dc0b4a4a60eb38c5a386e4ed449beeba254980b4cb86",
+          "hash": "c8f2e8d606f75d988a3802c9851fd27a0ceee0ca92c5d31bf7c946fc7c1738af",
           "events": 6,
           "method": "html-calendar"
         },
@@ -13593,7 +13593,7 @@
           "code": "discovery-limit"
         }
       ],
-      "extractedEvents": 61
+      "extractedEvents": 57
     },
     {
       "id": "cai-vigevano-9216013",
