@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T11:59:35.579Z",
+  "generatedAt": "2026-09-08T12:00:14.345Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -2349,20 +2349,29 @@
       "directoryId": "9220045",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "https://www.cairecoaroterme.it/events/?ical=1",
       "kind": "ics",
       "template": "icalendar",
       "extractor": "deterministic",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 3,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
+      "hash": "83c228c5b0798c75450ed27a2c803aca406be93f8f4e7eb86139412def63b1c0",
+      "updatedAt": "2026-09-08T12:00:14.345Z",
+      "documents": [
+        {
+          "url": "https://www.cairecoaroterme.it/events/?ical=1",
+          "hash": "453b60b2df26e480f5cf32f902b42aa98e29ba6decf83cbd1a91104648d7e32e",
+          "events": 3,
+          "method": "ics"
+        }
+      ],
+      "methods": [
+        "ics"
+      ],
       "issues": [],
-      "extractedEvents": null
+      "extractedEvents": 3
     },
     {
       "id": "cai-alta-valle-dell-aterno-9134015",
