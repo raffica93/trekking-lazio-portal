@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T13:58:41.445Z",
+  "generatedAt": "2026-09-08T13:59:32.088Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -9194,7 +9194,7 @@
       "directoryId": "9116059",
       "sectionType": "subsection",
       "parentSectionId": "cai-mantova-9216025",
-      "status": "disabled",
+      "status": "unsupported",
       "url": "https://organizzazione.cai.it/sez-mantova/eventi/?ical=1",
       "kind": "ics",
       "template": "icalendar",
@@ -9202,12 +9202,19 @@
       "enabled": true,
       "excursions": 0,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
+      "hash": "531580c60b60d01edae2e5e9202864fca7a91d9a296344d6b375ecc100744bf4",
+      "updatedAt": "2026-09-08T13:59:32.088Z",
+      "documents": [
+        {
+          "url": "https://organizzazione.cai.it/sez-mantova/eventi/?ical=1",
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "events": 0,
+          "method": null
+        }
+      ],
       "methods": [],
       "issues": [],
-      "extractedEvents": null
+      "extractedEvents": 0
     },
     {
       "id": "cai-suzzara-9116097",
