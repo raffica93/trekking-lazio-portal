@@ -747,6 +747,80 @@ const VENETO_SOURCES = [
     enabled: true,
     status: 'calendar-found'
   }
+,
+
+  // --- HARD1 missing dig (PDF/HTML) ---
+  {
+    id: 'cai-lozzo-di-cadore-9220043',
+    organizer: 'CAI Lozzo Di Cadore',
+    url: 'https://caicalalzo.it/wp-content/uploads/2026/03/Escursioni-estate-2026-opuscolo.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-aziendale-lanerossi-9120005',
+    organizer: 'CAI Aziendale Lanerossi',
+    url: 'https://www.gamschio.it/app/download/39574898/pgm+gite+2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-zevio-9120024',
+    organizer: 'CAI Zevio',
+    url: 'https://www.geaz.org/wp-content/uploads/2025/12/Programma-geaz-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-sandrigo-9120021',
+    organizer: 'CAI Sandrigo',
+    url: 'https://caimarostica.it/calendario-uscite/',
+    kind: 'html',
+    template: 'html-calendario',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-s-polo-di-piave-9120019',
+    organizer: 'CAI S. Polo Di Piave',
+    url: 'https://www.caisanpolo.com/attivit%C3%A0/escursioni',
+    kind: 'html',
+    template: 'html-calendario',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-g-alp-giov-mont-9120010',
+    organizer: 'CAI G. Alp. Giov. Montagna',
+    url: 'https://www.giovanemontagna.org/calendario.asp?s=12',
+    kind: 'html',
+    template: 'html-calendario',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-g-alp-scaligero-9120011',
+    organizer: 'CAI G. Alp. Scaligero',
+    url: 'https://www.gruppoalpinoscaligeroverona.it/programma-2024/',
+    kind: 'html',
+    template: 'html-calendario',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  }
+
 ];
 
 
