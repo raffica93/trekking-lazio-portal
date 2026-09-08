@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T14:03:31.550Z",
+  "generatedAt": "2026-09-08T14:04:39.326Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -13127,8 +13127,8 @@
       "enabled": true,
       "excursions": 0,
       "error": null,
-      "hash": "b837e2b195ca6258306c8431806218c88d07f8c2b38e93e421e17981b4ab25e0",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "199eaade7f085b70a49285ad6b8fb932ec95ba2b76e79327915bb1ceddad6184",
+      "updatedAt": "2026-09-08T14:04:39.326Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-valle-intelvi/eventi/?ical=1",
@@ -13150,25 +13150,25 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-valle-intelvi/escursionismo-2/",
-          "hash": "db16c5c577841af452e923171b0d356982a91808cfd92f6205a632da20efbdce",
+          "hash": "0f168a7542fc44e4490c971607e5d208126f6405b4ad1bd80f6e6db0c94ba0d2",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-valle-intelvi/eventi/",
-          "hash": "82c7fa85961c916c7141fdb4974be08877e53c51018d3702f85310c69dca8dbe",
+          "hash": "fa9c681a6ca89680084ffb6f7bc49442136e692a34864d4190baaa677553dce2",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-valle-intelvi/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-valle-intelvi%2Fescursionismo-2%2F",
-          "hash": "54dc0adbdeeb62186e0d8793a7f3314ba38b5327b9170f93ef0c79b9ffd6cfb5",
+          "hash": "4eede5cbaeff9284609601189ca473dc5771023a1d8897c868b77b79ec43b004",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-valle-intelvi/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-valle-intelvi%2Fescursionismo-2%2F&format=xml",
-          "hash": "e863a54779852efc996e60059d74485353cfbe1daae7a0c06ecbc82761c83a84",
+          "hash": "c8f862a509f394db949a27894539b817613b5baca2645fbcf515657270d0e45d",
           "events": 0,
           "method": null
         },
@@ -13180,13 +13180,13 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-valle-intelvi/",
-          "hash": "2ef798b46630d9ead5fd0df35f1f8d26e8fe88c39b8f158aaecf43a42bb30a02",
+          "hash": "ac619012581a25a921ba4dd609601a4a369d1b81df9b754cb0d5d43652d2cca6",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "hash": "919751f77dcf50bad37cb8f5776f7cffef4022b3f1e5a684aaa01492a3536e8e",
           "events": 0,
           "method": "wordpress-events"
         },
@@ -13198,7 +13198,7 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-valle-intelvi/eventi/elenco/",
-          "hash": "c944d89277a8e92fefe9205976af3f11bedefdc2336ee7d90997497433672160",
+          "hash": "c68c13f22d502c0f97ea643ca4cdf2003dd5d689b7686abd31d99d615012e6ca",
           "events": 0,
           "method": null
         }
