@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T11:31:39.947Z",
+  "generatedAt": "2026-09-08T11:32:48.083Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 377
+    "located": 382
   },
   "sources": [
     {
@@ -1172,16 +1172,16 @@
       "directoryId": "9144003",
       "sectionType": "subsection",
       "parentSectionId": "cai-castrovillari-9244005",
-      "status": "disabled",
+      "status": "ok",
       "url": "https://www.caicastrovillari.it/images/programmacerchiara26.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 5,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
+      "hash": "5473eaab7cb8a3f9f03c55889685311ce36be6c8107478b9e5bacb1a91f2c28a",
+      "updatedAt": "2026-09-08T11:32:48.083Z",
       "documents": [],
       "methods": [],
       "issues": [],
