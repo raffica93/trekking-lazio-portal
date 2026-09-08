@@ -7821,7 +7821,7 @@
     "cai-s-e-m-9216028": "b480b1dd9ce27ff9e3e19fa54de3e83fa3ee42920293b311d053b2229245b1d4",
     "cai-seregno-9216016": "493456388c84f6a008517fbbe53648271e804709c1c5c5a2eb99d43d15c95de0",
     "cai-sesto-calende-9216044": "1c2401cd2afcbe400f063f0500242799912ec595a4b88da4576d9ef6ac530747",
-    "cai-sesto-s-giovanni-9216020": "500aa00a3461b82a44cc62cc2e96e1d007343fb738e23cb83f8845b483bd74c6",
+    "cai-sesto-s-giovanni-9216020": "7daa4e234d1f7c4391781b028c27c3ba1fc47ee309c5f8dbe21c25b468442ae5",
     "cai-trezzo-sull-adda-9216156": "4c74505e37343cd25da5d8d69f6516d8964090062a5f28ffb0f9ebf63c242644",
     "cai-brescia-9216005": "d692215f030adb12901df27f8a465e8dfa5401e4b75da06cba0d45b26c1ad8a7",
     "cai-varano-borghi-9116118": "260ab822a8f666a44a582aff663953ab586e49f68c01cb382f4344c54286322d",
@@ -8019,12 +8019,12 @@
     "cai-paderno-dugnano-9216057": "068b47ea6ab67d9d40fc787029b28bf6f858f3a6428a25e5d5a17fd950b9dbf5",
     "cai-quistello-9116059": "531580c60b60d01edae2e5e9202864fca7a91d9a296344d6b375ecc100744bf4"
   },
-  "generatedAt": "2026-09-08T14:01:35.133Z",
+  "generatedAt": "2026-09-08T14:02:37.972Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
+    "withEvents": 1,
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,

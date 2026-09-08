@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-08T14:01:35.147Z",
+  "generatedAt": "2026-09-08T14:02:37.985Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
+    "withEvents": 1,
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
@@ -12897,78 +12897,77 @@
       "enabled": true,
       "excursions": 2,
       "error": null,
-      "hash": "500aa00a3461b82a44cc62cc2e96e1d007343fb738e23cb83f8845b483bd74c6",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "7daa4e234d1f7c4391781b028c27c3ba1fc47ee309c5f8dbe21c25b468442ae5",
+      "updatedAt": "2026-09-08T14:02:37.985Z",
       "documents": [
         {
           "url": "https://www.caisestosg.it/eventi/?ical=1",
-          "hash": "532ff0e293130a953da9948848e6505fb1b60cec566a5028d81b21317f5cd3e8",
-          "events": 1,
-          "method": "ics"
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "events": 0,
+          "method": null
         },
         {
           "url": "https://www.caisestosg.it/attivita/alpinismo-giovanile/calendario-gite-2026/",
-          "hash": "0bb8f18c10992dae4d0e3cc58cd5b76052e1c3139e9c2248334ea7dbea328159",
+          "hash": "d514eaa2bf2d7e7048d1be5318d7efb097e8136a2154ba96b1b0bf81883f198d",
           "events": 0,
           "method": null
         },
         {
           "url": "https://www.caisestosg.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caisestosg.it%2Fattivita%2Falpinismo-giovanile%2Fcalendario-gite-2026%2F",
-          "hash": "a9674bc73347e447a61e36d646bbe85a6a5acce161efe2248a2d22fd8fa83afb",
+          "hash": "506faf507ae07ffe2bb5bef25c171925c10e16a20abe31509c178900f04a4aaa",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://www.caisestosg.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caisestosg.it%2Fattivita%2Falpinismo-giovanile%2Fcalendario-gite-2026%2F&format=xml",
-          "hash": "9c0557d8410c2c339e6b5f634dc5df693a00531f0a89221c1e77c6a60be5ba4e",
+          "hash": "2db792d81d27f1f4e4654a531ee55a3f712a0666b302e7e3766ab62488e967f2",
           "events": 0,
           "method": null
         },
         {
           "url": "https://www.caisestosg.it/attivita/alpinismo-giovanile/calendario-gite-2026/?s=",
-          "hash": "acc4db017406bda910c9f029427faa66363fe37b03e484613f16316c27b52208",
+          "hash": "8b819037d10996c3104f1d556bc419a93a160209644b35352f9dcdbe7c24f0a8",
           "events": 0,
           "method": null
         },
         {
           "url": "https://x.com/intent/tweet?text=Calendario%20Gite%202026&url=https%3A%2F%2Fwww.caisestosg.it%2Fattivita%2Falpinismo-giovanile%2Fcalendario-gite-2026%2F",
-          "hash": "2cfe936483daf1ef54433907ab6f1f0f49cb2c1939acbf27b754723bc77bfdb3",
+          "hash": "7574d6c766d5e1d45b17ffdbc11d94224af65bc4dcdeb245cf7eb06f989ed427",
           "events": 0,
           "method": null
         },
         {
           "url": "https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2FshareArticle%2F%3Furl%3Dhttps%253A%252F%252Fwww.caisestosg.it%252Fattivita%252Falpinismo-giovanile%252Fcalendario-gite-2026%252F",
-          "hash": "90a97718cd867c1f0b671722cdd6cbaf1b6e44f84784b11899a7e808a91598ab",
+          "hash": "419f913e9f1048a9359bc80e6f31770763e19d6ccf6178bda415d9edaa045043",
           "events": 0,
           "method": null
         },
         {
           "url": "https://www.caisestosg.it/",
-          "hash": "bcf5425137454fa1683fa5dc1728ea417f371e5e3ea7ee47fb38d11daa1bb4fe",
+          "hash": "b4ffb312d5e82fed205898cbd04ec0b872bf9b7f3687b86177e504fa591fed7e",
           "events": 0,
           "method": null
         },
         {
           "url": "https://www.caisestosg.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "f7530101f7a740d49655db19ababc7e9796fc247d4947954bb15d18f25fadf31",
+          "hash": "f264477904d1e15d3f255878c0aaeb627e1b1bef453156ac8a2291962b3283bd",
           "events": 1,
           "method": "wordpress-events"
         },
         {
           "url": "https://www.caisestosg.it/attivita/agendina-2024/",
-          "hash": "b14bf8184899804391500050f18c34154588c8f33ff70b8bb4e32c926f2aa34a",
+          "hash": "d723bc64645e6de17f5951c980e926a93b4243879707dbc4f3867c02a627069f",
           "events": 0,
           "method": null
         },
         {
           "url": "https://www.caisestosg.it/escursionismo-sezionale/8-corso-di-escursionismo-avanzato-2026/",
-          "hash": "14bbca6e126ed9d744fb17b52dbced2a01f2dd27e80005f4a9df3f5febd7f402",
+          "hash": "776a12f9ab575c119d04723783a0e05a935c80084660254c426301b346a6dc06",
           "events": 1,
           "method": "html-calendar"
         }
       ],
       "methods": [
-        "ics",
         "wordpress-events",
         "html-calendar"
       ],
@@ -12983,7 +12982,7 @@
           "code": "discovery-limit"
         }
       ],
-      "extractedEvents": 3
+      "extractedEvents": 2
     },
     {
       "id": "cai-somma-lombardo-9216065",
