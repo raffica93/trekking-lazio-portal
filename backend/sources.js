@@ -446,6 +446,52 @@ const CAMPANIA_SOURCES = [
   }
 ];
 
+
+// Valle d'Aosta overrides win over registry discover stubs (same precedence as ABRUZZO).
+// Gressoney deferred (no calendar PDF in this batch). Barthelemy is subsection of Aosta.
+const VALLE_DAOSTA_SOURCES = [
+  {
+    id: 'cai-aosta-9214001',
+    organizer: 'CAI Aosta',
+    url: 'https://www.caivda.it/wp-content/uploads/2025/12/annuario-2026-cai-aosta.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-barthelemy-9114002',
+    organizer: 'CAI Barthelemy',
+    url: 'https://www.caivda.it/wp-content/uploads/2026/01/CAI-StB-Annuario-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-chatillon-9214004',
+    organizer: 'CAI Chatillon',
+    url: 'https://www.caivda.it/wp-content/uploads/2026/01/Pieghevole-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-verres-9214003',
+    organizer: 'CAI Verres',
+    url: 'https://www.caiverres.it/attachments/article/9/CAI%20Verres%20-%20Opuscolo%202026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  }
+];
+
 // The generated directory is the complete list, including sections without a
 // usable public calendar. Each enabled row is its own configurable adapter.
 let NATIONAL_REGISTRY = { sections: [] };
@@ -471,12 +517,14 @@ const abruzzoOverrideIds = new Set(ABRUZZO_SOURCES.map(s => s.id));
 const calabriaOverrideIds = new Set(CALABRIA_SOURCES.map(s => s.id));
 const sardegnaOverrideIds = new Set(SARDEGNA_SOURCES.map(s => s.id));
 const campaniaOverrideIds = new Set(CAMPANIA_SOURCES.map(s => s.id));
+const valleDaostaOverrideIds = new Set(VALLE_DAOSTA_SOURCES.map(s => s.id));
 const overrideIds = new Set([
   ...lazioOverrideIds,
   ...abruzzoOverrideIds,
   ...calabriaOverrideIds,
   ...sardegnaOverrideIds,
-  ...campaniaOverrideIds
+  ...campaniaOverrideIds,
+  ...valleDaostaOverrideIds
 ]);
 
 // Override scrape fields (url/kind/template/extractor/enabled) must win over
@@ -500,6 +548,10 @@ const SOURCES = [
   })),
   ...CAMPANIA_SOURCES.map(source => mergeOverrideSource(source, {
     defaultRegion: 'Campania',
+    lookup: (id) => registryById.get(id)
+  })),
+  ...VALLE_DAOSTA_SOURCES.map(source => mergeOverrideSource(source, {
+    defaultRegion: "Valle d'Aosta",
     lookup: (id) => registryById.get(id)
   })),
   ...NATIONAL_REGISTRY.sections.filter(source =>
@@ -546,6 +598,7 @@ module.exports = {
   CALABRIA_SOURCES,
   SARDEGNA_SOURCES,
   CAMPANIA_SOURCES,
+  VALLE_DAOSTA_SOURCES,
   NATIONAL_REGISTRY,
   enabledSources,
   findSource,
