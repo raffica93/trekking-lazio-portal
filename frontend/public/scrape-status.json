@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T12:00:14.345Z",
+  "generatedAt": "2026-09-08T12:02:24.807Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 603
+    "located": 607
   },
   "sources": [
     {
@@ -1598,16 +1598,16 @@
       "directoryId": "9114002",
       "sectionType": "subsection",
       "parentSectionId": "cai-aosta-9214001",
-      "status": "disabled",
+      "status": "ok",
       "url": "https://www.caivda.it/wp-content/uploads/2026/01/CAI-StB-Annuario-2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 4,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
+      "hash": "4d40c7157ae71471714a9f90b7bcd8bba9718a2b5199209581413e9a1f5ad0d6",
+      "updatedAt": "2026-09-08T12:02:24.807Z",
       "documents": [],
       "methods": [],
       "issues": [],
