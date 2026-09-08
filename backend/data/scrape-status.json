@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T11:25:33.023Z",
+  "generatedAt": "2026-09-08T11:27:13.896Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 347
+    "located": 362
   },
   "sources": [
     {
@@ -937,16 +937,16 @@
       "directoryId": "9234027",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "https://www.caiabruzzo.it/wp-content/uploads/2026/01/VAL-VIBRATA-PIeghevole-calendario-26SITO.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 15,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
+      "hash": "553fe204311569f914a336cf3a1abee01581c1d7dfdaa8ecc8b4e4efafd8470a",
+      "updatedAt": "2026-09-08T11:27:13.896Z",
       "documents": [],
       "methods": [],
       "issues": [],
