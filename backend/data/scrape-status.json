@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T11:30:57.269Z",
+  "generatedAt": "2026-09-08T11:31:39.947Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -1145,7 +1145,7 @@
       "directoryId": "9244005",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "ok",
+      "status": "reused",
       "url": "https://www.caicastrovillari.it/images/programma2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
@@ -1154,7 +1154,7 @@
       "excursions": 16,
       "error": null,
       "hash": "8cfd9707acda4c004bb6fe3a583112f8520941d1a82cdf03dd0ca0babe9d98a1",
-      "updatedAt": "2026-09-08T11:30:57.269Z",
+      "updatedAt": "2026-09-08T11:31:39.947Z",
       "documents": [],
       "methods": [],
       "issues": [],
