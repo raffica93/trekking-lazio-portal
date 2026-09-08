@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T13:03:04.709Z",
+  "generatedAt": "2026-09-08T13:04:07.803Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -5075,72 +5075,72 @@
       "enabled": true,
       "excursions": 7,
       "error": null,
-      "hash": "af2a1d1b202202d4eb000b20b774191bd7a6613ed9735c6affec97175da961e4",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "b1ff2471c469774528918485eb41ebea86452a156ccf6f56ed9c74e03a50a77f",
+      "updatedAt": "2026-09-08T13:04:07.803Z",
       "documents": [
         {
           "url": "https://www.caivarallo.com/eventi-attivita-cai/?ical=1",
-          "hash": "49f80e8ee8878bfba3c53f69a98c8b731247635d1134712b89b0834a7c982a4a",
-          "events": 4,
+          "hash": "94897eac2575ab6b2b5b833be12ebd1fd15c827b4391c833871bd260512c5fea",
+          "events": 3,
           "method": "ics"
         },
         {
           "url": "https://www.caivarallo.com/attivita-cai-varallo/",
-          "hash": "5f216220f7461ff4f84308b40b89055e12b2cfe72d58b59baa489cd4b25ff39a",
+          "hash": "c60c93c43b9cc335b80b714828bcd49f672fc97e378a7c887fe255102863a7ba",
           "events": 3,
           "method": "html-calendar"
         },
         {
           "url": "https://www.caivarallo.com/attivita-cai-varallo/gite/",
-          "hash": "1e44f3e5b6e4ccf1bf529c77a919597e95ba264523649c902eeb318244d0d6f5",
-          "events": 7,
+          "hash": "82f2b222d0e43d3e0705ff419a1612990e37d54b1f8498de199c5214d17c3d69",
+          "events": 6,
           "method": "html-calendar"
         },
         {
           "url": "https://www.caivarallo.com/escursioni-estive-sui-sentieri-dellarte-2026/",
-          "hash": "9a20529db6ebc879836bba8b5d2b5a28e6a07f39fe351030452bb6a92b4c35b4",
+          "hash": "852e55d31adf96a2aadd5b9f10cc9c485e92c0d621a870f813dc14dde230a812",
           "events": 3,
           "method": "html-calendar"
         },
         {
           "url": "https://www.caivarallo.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caivarallo.com%2Fescursioni-estive-sui-sentieri-dellarte-2026%2F",
-          "hash": "28231c09087fdd7d8a330b2b6d582c4c4853b53b4b5e106440dec8b4f143a8f1",
+          "hash": "f70cd70073a899dc8c74536fcfefcb8b0aea543c68fc4b1cc42115d28af0d212",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://www.caivarallo.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caivarallo.com%2Fescursioni-estive-sui-sentieri-dellarte-2026%2F&format=xml",
-          "hash": "b4ea4e1f86cc97148194c20ccc05626c2a0237087c5c53055c50af18bcd7b711",
+          "hash": "4e9b212e42c1012fa2764b3d4d144bc67ccc53ea22b8b779226d08b5100fef06",
           "events": 0,
           "method": null
         },
         {
           "url": "https://www.caivarallo.com/attivita-cai-varallo/notizie/",
-          "hash": "7c0537a11e02bb5373c5eee34da7e60769b9120bce76081eeceeeb394f47d338",
+          "hash": "88ca4cdfd772424b232a775408e52fb2d3e787739ad3a889c498a00175395e67",
           "events": 3,
           "method": "html-calendar"
         },
         {
           "url": "https://www.caivarallo.com/",
-          "hash": "ace84a8b4f515458fd4138f6469a739b752feafe6f48222c66a9bde95bcec142",
-          "events": 7,
+          "hash": "47d4ff3cd3dbc80eb8b4bded4ceeaed9a117677bafb9383534eef6b9916bc55e",
+          "events": 6,
           "method": "html-calendar"
         },
         {
           "url": "https://www.caivarallo.com/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "34dd09579d176bcd8b642c1ea7649d127ad0aacde05c90e56c1c52844061cbde",
+          "hash": "d1a1baa87d0d0002b4e541be382ab7e0a089c3755414b865f4f597e724f43bda",
           "events": 5,
           "method": "wordpress-events"
         },
         {
           "url": "https://www.caivarallo.com/calendario-gite-e-manifestazioni-2026/",
-          "hash": "6e23ae47ba1a96971d298348de6786fdae1b81c391db9ff909fc592d27e2f750",
+          "hash": "b1654d55c76c08c22943f8e17f0123ee6f923b135f2ef92aee96b113379af610",
           "events": 3,
           "method": "html-calendar"
         },
         {
           "url": "https://www.caivarallo.com/attivita-cai-varallo/corsi-cai/",
-          "hash": "4628a54fa54bc49c5fe5106ce5b4634ba0ba63c4d1210531dae88162f2e82961",
+          "hash": "87fec0615656dd2eeda50ad850860cdfc62ae0a410bf9bfd337dbfe9afe74467",
           "events": 3,
           "method": "html-calendar"
         }
@@ -5161,7 +5161,7 @@
           "code": "discovery-limit"
         }
       ],
-      "extractedEvents": 38
+      "extractedEvents": 35
     },
     {
       "id": "cai-varallo-sesia-9212002",
