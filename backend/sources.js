@@ -492,6 +492,244 @@ const VALLE_DAOSTA_SOURCES = [
   }
 ];
 
+// Veneto overrides win over registry discover stubs (same precedence as ABRUZZO).
+// Asiago/Spresiano keep HTTP URLs (HTTPS SSL broken / 999). Pieve shares Calalzo PDF.
+// Pedemontana Grappa uses Feltre parent Annuario PDF (Feltre itself not enabled here).
+// Out of scope: ICS Pieve di Soligo/Recoaro; scrapes.
+const VENETO_SOURCES = [
+  {
+    id: 'cai-asiago-9220040',
+    organizer: 'CAI Asiago',
+    url: 'http://www.caiasiago.it/documenti/Libretto%20CAI%20Asiago%202026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-cittadella-9220020',
+    organizer: 'CAI Cittadella',
+    url: 'https://www.caicittadella.it/wp-content/uploads/2026/02/Programma2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-este-9220032',
+    organizer: 'CAI Este',
+    url: 'https://www.caieste.org/wp-content/uploads/2025/12/Libretto-rev-FUTURAMA-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-legnago-9220063',
+    organizer: 'CAI Legnago',
+    url: 'https://cailegnago.it/wp-content/uploads/2025/12/CAI-Legnago-Programma-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-treviso-9220009',
+    organizer: 'CAI Treviso',
+    url: 'https://www.caitreviso.it/wp-content/uploads/2026/01/calendario-CAI-Treviso-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-arzignano-9220024',
+    organizer: 'CAI Arzignano',
+    url: 'https://www.caiarzignano.info/attivita/programma/download/145_b1828245b46e81eef4f75fa63b08a761',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-calalzo-di-cadore-9220035',
+    organizer: 'CAI Calalzo Di Cadore',
+    url: 'https://caicalalzo.it/wp-content/uploads/2026/03/Escursioni-estate-2026-opuscolo.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-pieve-di-cadore-9220022',
+    organizer: 'CAI Pieve Di Cadore',
+    url: 'https://caicalalzo.it/wp-content/uploads/2026/03/Escursioni-estate-2026-opuscolo.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-canal-di-brenta-9120022',
+    organizer: 'CAI Canal Di Brenta',
+    url: 'https://organizzazione.cai.it/sez-bassano-del-grappa/wp-content/uploads/sites/113/2026/03/Sottosezione-Canal-di-Brenta-Escursioni-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-famiglia-alpinistica-9120013',
+    organizer: 'CAI Famiglia Alpinistica',
+    url: 'https://www.famigliaalpinistica.it/media/attachments/2025/11/28/calendario-f.a.-2026-senza-capo-gita.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-lonigo-9220015',
+    organizer: 'CAI Lonigo',
+    url: 'https://cailonigo.it/wp-content/uploads/2026/01/Cai-Lonigo-libretto-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-malo-9220046',
+    organizer: 'CAI Malo',
+    url: 'https://www.caimalo.it/wp-content/uploads/2025/12/2026_libretto-CAI.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-motta-di-livenza-9220051',
+    organizer: 'CAI Motta Di Livenza',
+    url: 'https://www.caimotta.it/wp-content/uploads/2026/01/escursioni-2026-calendario-e-relazioni.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-oderzo-9220052',
+    organizer: 'CAI Oderzo',
+    url: 'https://www.caioderzo.it/public/pdf/Librettocai2026_web.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-pedemontana-grappa-9120023',
+    organizer: 'CAI Pedemontana Grappa',
+    url: 'https://www.caifeltre.it/wp-content/uploads/2025/11/Annuario-CAI-Feltre-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-ponte-piave-salgareda-9220058',
+    organizer: 'CAI Ponte Piave Salgareda',
+    url: 'https://caipontesalgareda.it/wp-content/uploads/2025/12/Libretto_2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-s-bonifacio-9220060',
+    organizer: 'CAI S.bonifacio',
+    url: 'https://01baa50c-7b76-4f2f-86bb-e894771d9808.filesusr.com/ugd/fe6011_4ae5310122014e7586c720684b6ffbe7.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-s-pietro-in-cariano-9220059',
+    organizer: 'CAI S.pietro In Cariano',
+    url: 'https://www.caivalpolicella.it/wp-content/uploads/2025/11/CAI-San-Pietro-programma-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-spresiano-9220056',
+    organizer: 'CAI Spresiano',
+    url: 'http://www.cai-spresiano.it/escursioni26/prgm_short2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-tregnago-9220061',
+    organizer: 'CAI Tregnago',
+    url: 'https://www.caitregnago.it/wp-content/uploads/2026/01/2026-Programma-SOCIAL-.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-valdagno-9220012',
+    organizer: 'CAI Valdagno',
+    url: 'https://www.caivaldagno.it/images/DOC-CAI/CAI%20VALDAGNO%20calendario%202026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-verona-9220003',
+    organizer: 'CAI Verona',
+    url: 'https://www.caiverona.it/wp-content/uploads/2025/12/libretto-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-vigo-di-cadore-9220047',
+    organizer: 'CAI Vigo Di Cadore',
+    url: 'https://www.caivigodicadore.it/wp-content/uploads/2026/03/Escursioni-CAI-Estate-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  }
+];
+
+
 // The generated directory is the complete list, including sections without a
 // usable public calendar. Each enabled row is its own configurable adapter.
 let NATIONAL_REGISTRY = { sections: [] };
@@ -518,13 +756,15 @@ const calabriaOverrideIds = new Set(CALABRIA_SOURCES.map(s => s.id));
 const sardegnaOverrideIds = new Set(SARDEGNA_SOURCES.map(s => s.id));
 const campaniaOverrideIds = new Set(CAMPANIA_SOURCES.map(s => s.id));
 const valleDaostaOverrideIds = new Set(VALLE_DAOSTA_SOURCES.map(s => s.id));
+const venetoOverrideIds = new Set(VENETO_SOURCES.map(s => s.id));
 const overrideIds = new Set([
   ...lazioOverrideIds,
   ...abruzzoOverrideIds,
   ...calabriaOverrideIds,
   ...sardegnaOverrideIds,
   ...campaniaOverrideIds,
-  ...valleDaostaOverrideIds
+  ...valleDaostaOverrideIds,
+  ...venetoOverrideIds
 ]);
 
 // Override scrape fields (url/kind/template/extractor/enabled) must win over
@@ -552,6 +792,10 @@ const SOURCES = [
   })),
   ...VALLE_DAOSTA_SOURCES.map(source => mergeOverrideSource(source, {
     defaultRegion: "Valle d'Aosta",
+    lookup: (id) => registryById.get(id)
+  })),
+  ...VENETO_SOURCES.map(source => mergeOverrideSource(source, {
+    defaultRegion: 'Veneto',
     lookup: (id) => registryById.get(id)
   })),
   ...NATIONAL_REGISTRY.sections.filter(source =>
@@ -599,6 +843,7 @@ module.exports = {
   SARDEGNA_SOURCES,
   CAMPANIA_SOURCES,
   VALLE_DAOSTA_SOURCES,
+  VENETO_SOURCES,
   NATIONAL_REGISTRY,
   enabledSources,
   findSource,
