@@ -7858,7 +7858,7 @@
     "cai-salo-9216076": "0b6344ef80730f35b3d373aa41ebc60cf61d456d38ab0722428f047b530e6076",
     "cai-vimercate-9216048": "48629f3907696597ce5a82692cd015002d90d39f08f2712a00277278d624b045",
     "cai-vimodrone-9216151": "4fd0b26df2279dc89bc8c9738947b707dbb13e2413f6bd2352b76879fa2f091d",
-    "cai-varese-9216009": "985f6a35f352a7cb1792fb187244cf82167e98e916d920475da1ed14dee7f8ba",
+    "cai-varese-9216009": "b16b61cab4fd79b19363e0648587fbf59b98d0dfb239843df2b0f343ee09efd7",
     "cai-pesaro-9228006": "e504aa0df4d756fa9025774832c1cfa61f83a13bd94285913df6972215bf76db",
     "cai-cornaredo-9216149": "00148a71cc8056b298d8c2c9cc25609c2a755a653736ac40c709e8f6dc9ab64f",
     "cai-jesi-9228003": "30ffa05706c84cf9a4e900aecb91575b8752f021a0d5f22cdc96aa7788e628e6",
@@ -8039,14 +8039,14 @@
     "cai-quistello-9116059": "531580c60b60d01edae2e5e9202864fca7a91d9a296344d6b375ecc100744bf4",
     "cai-suzzara-9116097": "531580c60b60d01edae2e5e9202864fca7a91d9a296344d6b375ecc100744bf4"
   },
-  "generatedAt": "2026-09-08T14:04:39.314Z",
+  "generatedAt": "2026-09-08T14:05:58.124Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
-    "parsed": 0,
-    "unsupported": 1,
+    "withEvents": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 611
   },
@@ -9227,7 +9227,7 @@
       "date": "2026-09-05",
       "dateEnd": "2026-09-06",
       "days": 2,
-      "category": "Alpinismo Giovanile,Escursione",
+      "category": "Alpinismo Giovanile, Escursione",
       "link": "https://www.caivarese.it/evento/due-giorni-in-rifugio/",
       "organizer": "CAI Varese",
       "organizerRegion": "Lombardia",
@@ -9237,8 +9237,8 @@
       "time": "Vedi sito",
       "privateCar": null,
       "coordinatesQuality": "unknown",
-      "locationSource": "ics",
-      "sourceDocument": "https://www.caivarese.it/eventi/?ical=1",
+      "locationSource": "wordpress-events",
+      "sourceDocument": "https://www.caivarese.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
       "description": "Rifugio Frassati"
     },
     {
@@ -11227,7 +11227,7 @@
       "date": "2026-09-06",
       "dateEnd": "2026-09-06",
       "days": 1,
-      "category": "Attività CAI",
+      "category": "Escursione, Escursionismo",
       "link": "https://www.caivarese.it/evento/escursione-intersezionale-al-rifugio-citta-di-somma-da-riale/",
       "organizer": "CAI Varese",
       "organizerRegion": "Lombardia",
@@ -11237,9 +11237,9 @@
       "time": "Vedi sito",
       "privateCar": null,
       "coordinatesQuality": "unknown",
-      "locationSource": "json-ld",
-      "sourceDocument": "https://www.caivarese.it/gruppi-sezionali/escursionismo/",
-      "description": "<p>Descrizione itinerario Lasciata l’automobile al parcheggio sotto alla diga del Lago Morasco si segue a piedi la strada (percorso G00) che sale a destra del lungo muraglione della diga fino a giungere alla […]</p>\\n"
+      "locationSource": "wordpress-events",
+      "sourceDocument": "https://www.caivarese.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
+      "description": "Descrizione itinerario Lasciata l’automobile al parcheggio sotto alla diga del Lago Morasco si segue a piedi la strada (percorso G00) che sale a destra del lungo muraglione della diga fino a giungere alla casa dei guardiani della diga e quindi alla carrabile che costeggia il lago. Lasciandosi alle spalle la diga, si prosegue in piano lungo la sponda del bacino, fino alla fine del lago dove in una ventina di minuti si raggiungono due edifici in muratura: il primo, ad un livello inferiore al piano della strada, è la stazione di partenza della teleferica utilizzata per la costruzione della diga dei Sabbioni e non più in uso, il secondo, poco più avanti, è, invece, la stazione di partenza della funivia di servizio ENEL. La cartellonistica invita a scendere, oltrepassando la stazione di partenza della vecchia teleferica, attraversare il ponticello in cemento sul Rio del Gries e percorrere il largo sentiero che conduce all’alpeggio in fondo alla vallata. Un cartello sconsiglia l’accesso al vecchio tracciato del sentiero G09 che piega a sinistra, e che sale ripido sul costone di roccia che si affaccia al canalone dove corre il torrente Rio. In pochi minuti di salita si raggiunge un bivio segnalato con un cartello: Il sentiero più veloce consigliato per raggiungere il rifugio Somma e il Lago Sabbioni è il G39. Il sentiero è ben segnalato con tracce BIANCO/ROSSE e cartellonistica del CAI. In pochi minuti di salita si raggiunge un bivio ove si seguono le indicazioni (a sinistra) per il"
     },
     {
       "id": "cai-valcomelico-9220042-25fbdfab903d",
@@ -14761,7 +14761,8 @@
       "coordinatesQuality": "unknown",
       "locationSource": "ics",
       "sourceDocument": "https://www.caivarese.it/eventi/?ical=1",
-      "description": "Salita su mulattiera, a tratti asfaltata. Discesa su single track, a tratti ripida. Panorama splendido su tutta la valle. PROSSIMAMENTE MAGGIORI INFORMAZIONI."
+      "description": "Partenza da Caillod (1.200 m) sopra Sarre, seguendo per 4,4 km la panoramica SR41 dei Salassi. La traccia devia poi verso Metz, dove inizia la salita su poderale sterrata, regolare e mai impegnativa, fino all’Alpe Metz (1.738 m) e successivamente all’Alpe di Vignon (1.820 m). Da qui si scende leggermente per collegarsi alla sterrata proveniente da Thouraz e si affronta la lunga salita che attraversa gli alpeggi di Moron, Combroz, La Combaz, Frumiere e Le Morgnoz, fino a raggiungere l’Alpe Tsa della Comba (2.267 m), termine della strada. Un sentiero scollina verso la Becca France: ignorando le deviazioni e seguendo la traccia GPS, si raggiunge una balconata panoramica con vista su fondovalle, Grivola e Rutor. Qui inizia la lunga discesa sul versante occidentale della Becca: prima tecnica e pietrosa, poi più scorrevole nel bosco, con qualche passaggio che richiede di scendere dalla bici. Dopo circa 4 km si arriva a Combellin, da cui una sterrata riporta sulla SR41. Si segue l’asfalto fino a Bellun, dove si imbocca il sentiero 9A per Ville-sur-Sarre. Il tracciato scende tra prati e bosco, supera una breve scalinata e riporta ai margini di Caillod. Ultimi 500 m su asfalto per chiudere l’anello.",
+      "distanceKm": 4.4
     },
     {
       "id": "cai-varese-9216009-b20b5449d8be",
@@ -24340,6 +24341,28 @@
       "locationSource": "json-ld",
       "sourceDocument": "https://www.caifrascati.it/",
       "description": "<p>Descrizione itinerario: In fase di preparazione<br />\\nSottosezione di Caste Gandolfo<br />\\nDifficoltà: E </p>\\n"
+    },
+    {
+      "id": "cai-varese-9216009-574f5212d264",
+      "sourceId": "cai-varese-9216009",
+      "title": "Cervinia: Cime Bianche",
+      "date": "2026-09-27",
+      "dateEnd": "2026-09-27",
+      "days": 1,
+      "category": "Cicloescursionismo MTB,Escursione",
+      "link": "https://www.caivarese.it/evento/cervini-cime-bianche/",
+      "organizer": "CAI Varese",
+      "organizerRegion": "Lombardia",
+      "location": "Cervinia",
+      "region": "Altro",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null,
+      "coordinatesQuality": "unknown",
+      "locationSource": "ics",
+      "sourceDocument": "https://www.caivarese.it/eventi/?ical=1",
+      "description": "Cicloescursione IMPEGNATIVA sia per i sentieri che andremo a percorrere (pendenze oltre il 20%, tratti tecnici ed esposti e discese impegnative) che per la quota che andremo a raggiungere (c.a. 3.100 metri) per cui si raccomanda un’ottima preparazione fisica che un’adeguata attrezzatura (giacca, pile, scarpe adatte a camminare su rocce e PROTEZIONI OBBLIGATORIE. Solo per MTB ed eMTB bi-ammortizzate. Prima dell’iscrizione è necessario contattare direttamente il capogita. L’iscrizione alla cicloescursione è riservata ai SOCI CAI che hanno già partecipato più volte alle gite sociali organizzate dal CAI Varese. Altimetria Cervinia – Cime Bianche Partendo dal parcheggio di Breuil-Cervinia (circa 2.000 m) si inizia a salire lungo la circonvallazione e poi su sterrata segnalata (sentiero n.13 – Foto 01) fino al Rifugio Oriondè Duca degli Abruzzi (quota 2.808 m). Da qui si gode di una prospettiva insolita sul Cervino e panorami sui ghiacciai della Gobba di Rollin, Piccolo Cervino e Breithorn. Si prosegue con un traverso ciclabile (Foto 02), un sentiero a mezzacosta con tratti esposti (Foto 03) e altri da percorrere a piedi per attraversare ruscelli su pietraie a volte instabili. Segue una discesa tecnica, sulla cresta della morena (Foto 04), in cui bisogna fare molta attenzione sia per la pendenza del percorso, sia per il fondo sdrucciolevole e con la presenza di sassi smossi (Foto 05), che porta a incrociare le piste da sci. Finalmente giungiamo Plan Maison (2.560 m), da qui inizia ",
+      "distanceKm": 2.5
     },
     {
       "id": "cai-almese-9212061-38c214061d5a",
@@ -35669,7 +35692,7 @@
       "privateCar": null,
       "coordinatesQuality": "unknown",
       "locationSource": "ics",
-      "sourceDocument": "https://www.caivarese.it/eventi/categoria/escursionismo/?post_type=tribe_events&ical=1&eventDisplay=list",
+      "sourceDocument": "https://www.caivarese.it/eventi/?ical=1",
       "description": "Torniamo in Engadina, al passo Maloja, per una immersione nei colori autunnali dei larici che coronano i laghi nei dintorni di Salacina e ne approfittiamo per salire l’omonimo pizzo che permette di avere una panoramica vista su tutta la val Bregaglia ma soprattutto sulla valle dell’Inn con i suoi laghi di Sils, di Silvaplana e i più piccoli Chamfer e San Murezzan (St. Moritz). Lasciata l’auto in un parcheggio defilato che si raggiunge attraverso una stradina che abbandona la cantonale svoltando a destra proprio al termine dei tornanti del passo. Si inizia un giro ad anello puntando dapprima verso il piccolo ma incantevole laghetto di Bitabergh con un sentiero dall’andamento quasi pianeggiante dopo aver attraversato il torrente Orlegna. Salendo tra i larici si raggiunge un leggero altipiano denominato Mota Salacina a quota 2150mt, massima elevazione della giornata. Raggiunto il Passo del Cavall si ignora la traccia che scende verso il lago e si prosegue con moderata salita fino a quota 2200 dove la pendenza si fa più accentuata e si imbocca la deviazione per il che risale il pendio fino al colle posto a quota 2495 mt. Da lì, gli ultimi 100 mt di dislivello per filo di cresta fino alla vetta. Discesa per lo stesso itinerario di salita fino al bivio per scendere al lago Cavloc, dove ancora si potranno ammirare i colori dei larici che si specchiano nelle sue acque e che, una volta raggiunto, si costeggia quasi interamente per poi rientrare seguendo l’ampio sentiero che collega il"
     },
     {
@@ -35700,7 +35723,7 @@
       "date": "2026-10-18",
       "dateEnd": "2026-10-18",
       "days": 1,
-      "category": "Alpinismo Giovanile, Escursione",
+      "category": "Alpinismo Giovanile,Escursione",
       "link": "https://www.caivarese.it/evento/monte-barro/",
       "organizer": "CAI Varese",
       "organizerRegion": "Lombardia",
@@ -35710,8 +35733,8 @@
       "time": "Vedi sito",
       "privateCar": null,
       "coordinatesQuality": "unknown",
-      "locationSource": "wordpress-events",
-      "sourceDocument": "https://www.caivarese.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100"
+      "locationSource": "ics",
+      "sourceDocument": "https://www.caivarese.it/eventi/?ical=1"
     },
     {
       "id": "cai-val-vibrata-monti-gemelli-9234027-0cdcf36d7de7",
@@ -45603,7 +45626,7 @@
       "privateCar": null,
       "coordinatesQuality": "unknown",
       "locationSource": "wordpress-events",
-      "sourceDocument": "https://www.caivarese.it/wp-json/tribe/events/v1/events/?per_page=50&start_date=2026-09-01+00%3A00%3A00&end_date=2028-09-06+23%3A59%3A59&status=publish&page=2",
+      "sourceDocument": "https://www.caivarese.it/wp-json/tribe/events/v1/events/?per_page=50&start_date=2026-09-01+00%3A00%3A00&end_date=2028-09-08+23%3A59%3A59&status=publish&page=2",
       "description": "Miniera Valvassera – M.Martica 19/11/2026 Percorso Stradale: Varese, Brinzio, Valganna Piccolo parcheggio dopo la sbarra del sentiero per la miniera Descrizione itinerario escursione Il percorso si sviluppa ad anello, lungo il versante nord del monte Martica, in ambiente particolare, selvaggio, isolato e caratterizzato da una vegetazione composta da brugo, erbe e roverelle; dalla presenza di una miniera di galena argentifera e dagli incendi boschivi che lo hanno attraversato. Il primo tratto del sentiero sarà quello usato dai minatori per raggiungere gli accessi alle miniere, quindi passeremo vicino ai ruderi di edifici utilizzati come alloggi, all’opificio necessario alla lavorazione del minerale estratto, alle opere di presa dell’acqua ed agli ingressi alla miniera. Successivamente si raggiungerà la strada militare che porta fino alla vetta del monte Martica. Lungo questo tratto saliremo ad un punto panoramico, poco conosciuto e stretto, dal quale si potrà vedere un ampio panorama, a 360 gradi, sl Varesotto e sulle Alpi. In vetta, dove è presente una piazzola per cannoni realizzata per la “Frontiera nord, linea Cadorna”, sosta pranzo. Poi scenderemo lungo un sentiero in cresta tra rocce di porfido, (sassi rossi) che ci riporterà verso il luogo di partenza."
     },
     {
@@ -47217,7 +47240,7 @@
       "privateCar": null,
       "coordinatesQuality": "unknown",
       "locationSource": "wordpress-events",
-      "sourceDocument": "https://www.caivarese.it/wp-json/tribe/events/v1/events/?per_page=50&start_date=2026-09-01+00%3A00%3A00&end_date=2028-09-06+23%3A59%3A59&status=publish&page=2",
+      "sourceDocument": "https://www.caivarese.it/wp-json/tribe/events/v1/events/?per_page=50&start_date=2026-09-01+00%3A00%3A00&end_date=2028-09-08+23%3A59%3A59&status=publish&page=2",
       "description": "Programma da definire"
     },
     {
@@ -49225,7 +49248,7 @@
       "privateCar": null,
       "coordinatesQuality": "unknown",
       "locationSource": "wordpress-events",
-      "sourceDocument": "https://www.caivarese.it/wp-json/tribe/events/v1/events/?per_page=50&start_date=2026-09-01+00%3A00%3A00&end_date=2028-09-06+23%3A59%3A59&status=publish&page=2",
+      "sourceDocument": "https://www.caivarese.it/wp-json/tribe/events/v1/events/?per_page=50&start_date=2026-09-01+00%3A00%3A00&end_date=2028-09-08+23%3A59%3A59&status=publish&page=2",
       "description": "Programma da definire"
     },
     {

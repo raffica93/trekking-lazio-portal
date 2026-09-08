@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-08T14:04:39.326Z",
+  "generatedAt": "2026-09-08T14:05:58.134Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
-    "parsed": 0,
-    "unsupported": 1,
+    "withEvents": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 611
   },
@@ -13385,33 +13385,33 @@
       "template": "icalendar",
       "extractor": "deterministic",
       "enabled": true,
-      "excursions": 72,
+      "excursions": 73,
       "error": null,
-      "hash": "985f6a35f352a7cb1792fb187244cf82167e98e916d920475da1ed14dee7f8ba",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "b16b61cab4fd79b19363e0648587fbf59b98d0dfb239843df2b0f343ee09efd7",
+      "updatedAt": "2026-09-08T14:05:58.134Z",
       "documents": [
         {
           "url": "https://www.caivarese.it/eventi/?ical=1",
-          "hash": "75645e17f77e29acdee297804cad33ad89ab838f31979b705600ff082a16ba34",
+          "hash": "4de930345214e2856e02a387603a3544f76ac2a2e785f8736090adad916a81e3",
           "events": 30,
           "method": "ics"
         },
         {
           "url": "https://www.caivarese.it/eventi/categoria/escursionismo/?post_type=tribe_events&ical=1&eventDisplay=list",
-          "hash": "3f3c5459314ef6c242a0bab25bf12c10ceec1d3cc7d7768432ae778b0a819080",
-          "events": 12,
+          "hash": "f611485db03d2fa04d9a31a4d7f01922bd4d2e61d05f73dfe36833e265de8f28",
+          "events": 11,
           "method": "ics"
         },
         {
           "url": "https://www.caivarese.it/eventi/elenco/?shortcode=c6f8d3bd&ical=1",
-          "hash": "75645e17f77e29acdee297804cad33ad89ab838f31979b705600ff082a16ba34",
+          "hash": "4de930345214e2856e02a387603a3544f76ac2a2e785f8736090adad916a81e3",
           "events": 30,
           "method": "ics"
         },
         {
           "url": "https://www.caivarese.it/gruppi-sezionali/escursionismo/",
-          "hash": "60cd9fc830b2d1eff79251a077b49318a6a1942a5d0a50dac590e4dadca88f82",
-          "events": 12,
+          "hash": "4d4555f15f2c1daca80eaababe67ed47f9e1c55cee3bad08b9d324aa064579f9",
+          "events": 11,
           "method": "html-calendar"
         },
         {
@@ -13422,19 +13422,19 @@
         },
         {
           "url": "https://www.caivarese.it/gruppi-sezionali/cicloescursionismo-mtb/",
-          "hash": "acf064ad0d8dac9838699cdc4e6df7bf3a66d115732029cedf3892366e1f68a8",
+          "hash": "2041487516f729fdff5502e9e15f12242cd9a862e904a6a299d47867303f4539",
           "events": 7,
           "method": "html-calendar"
         },
         {
           "url": "https://www.caivarese.it/",
-          "hash": "97ed1ae9c9fc625a098f7343c833333c2d684c77c02a1d725ff028de1f2475b0",
+          "hash": "be10e41617cfae741e396a9838830eb55b2e195053125e99779390b2d91ea831",
           "events": 0,
           "method": null
         },
         {
           "url": "https://www.caivarese.it/escursioni/",
-          "hash": "567dc8701bae6127d4c78ccf2bcd1eac69cc1fca39328c76b09e0e34eabad12e",
+          "hash": "34bdbae804681063d74b2aff89e51b87b6e4484462f445672ac088a4dfcc1e8b",
           "events": 12,
           "method": "html-calendar"
         },
@@ -13446,19 +13446,19 @@
         },
         {
           "url": "https://www.caivarese.it/eventi/elenco/?shortcode=c6f8d3bd&outlook-ical=1",
-          "hash": "79149a423835978ed660661797ab7e39de78cb5462dda08979a4c00b1de58f1b",
+          "hash": "e04f9e7dda5bb843212e1e6cd606ad2934450a39924cd9f632f63f1c56ee8cfc",
           "events": 30,
           "method": "ics"
         },
         {
           "url": "https://www.caivarese.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "2307617ca63280dec0257b057acac3e4afda2e89505f915e836638808fabaceb",
+          "hash": "52ae441b0e1707f85874430c9cd12a16dc42e3173deb529dbd5f593584198b99",
           "events": 50,
           "method": "wordpress-events"
         },
         {
-          "url": "https://www.caivarese.it/wp-json/tribe/events/v1/events/?per_page=50&start_date=2026-09-01+00%3A00%3A00&end_date=2028-09-06+23%3A59%3A59&status=publish&page=2",
-          "hash": "32a06c297d337cccd159fbaa6293c284fca1aa619cbb8c3658a2319e3f1c2e5e",
+          "url": "https://www.caivarese.it/wp-json/tribe/events/v1/events/?per_page=50&start_date=2026-09-01+00%3A00%3A00&end_date=2028-09-08+23%3A59%3A59&status=publish&page=2",
+          "hash": "693a710f5eec6a16ff7e343986b5882d8469897582a2b1f9c4205234ae8c5be6",
           "events": 7,
           "method": "wordpress-events"
         }
@@ -13476,7 +13476,7 @@
           "code": "discovery-limit"
         }
       ],
-      "extractedEvents": 238
+      "extractedEvents": 236
     },
     {
       "id": "cai-veduggio-9216147",
