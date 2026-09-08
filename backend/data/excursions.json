@@ -7833,7 +7833,7 @@
     "cai-chivasso-9212013": "c13d393c8ec74ebd20bbf7182aac0d4d4104150176c64392269cdfcb367d54cd",
     "cai-cameri-9212083": "f58135bfc823581a7ff6ab7e13d8258690b14d7b196bf7e2b952fe1f7c5b6e48",
     "cai-menaggio-9216060": "2d39ee26828952839538ac3f911df7e754495dd4ed3efaf47bfadf0be740b013",
-    "cai-mantova-9216025": "44735bd64ce398d104cd48f3ac40275fc010fa2525828ad4904dc8812ccc3d74",
+    "cai-mantova-9216025": "a33fed375de410fa46597913be5e6a3f0503e2b46f8f7cff9d37c676482424c2",
     "cai-cervasca-9212081": "bfeed55a9fe0cad04c446c24fb2ad24883aa30f6e724e548dddd4ac6df7e2901",
     "cai-cuneo-9212006": "284a9a9e5a65c154ae0513cd7d0fefc9beacf8bf2b60ef1d6df727f786e087c2",
     "cai-rho-9216021": "4a8ac26eb598e5c66a630babc597bde37f48c9c242759585cd99d0abc8442fae",
@@ -7979,12 +7979,12 @@
     "cai-corsico-9216115": "ee5308cfff58a6d9e79896b668e7933f9736d427aad1c316773b6089a66eb38e",
     "cai-esino-lario-9116099": "9b88a06d8d0ba76d42edb1cd420964c7175c2c84052010f2f2d1e79580b361b1"
   },
-  "generatedAt": "2026-09-08T13:53:03.756Z",
+  "generatedAt": "2026-09-08T13:54:08.188Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 1,
+    "withEvents": 0,
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,

@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-08T13:53:03.770Z",
+  "generatedAt": "2026-09-08T13:54:08.199Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 1,
+    "withEvents": 0,
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
@@ -9100,8 +9100,8 @@
       "enabled": true,
       "excursions": 0,
       "error": null,
-      "hash": "44735bd64ce398d104cd48f3ac40275fc010fa2525828ad4904dc8812ccc3d74",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "a33fed375de410fa46597913be5e6a3f0503e2b46f8f7cff9d37c676482424c2",
+      "updatedAt": "2026-09-08T13:54:08.199Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-mantova/eventi/?ical=1",
@@ -9111,67 +9111,67 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-mantova/chi-siamo/avvertenze-importanti-per-le-escursioni/",
-          "hash": "e6be3cf0de311afc57c7e086ffd9c1b4a01e00e326043bd7d14a4917fb71838a",
+          "hash": "1f88ca7781f0a7b93fd83ecc9ae1c8379400da6e8e317f65c28a2eddd246eb3e",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-mantova/attivita/",
-          "hash": "ceed6cabba23b83c4c14de4c130b7b10a24b303a491ca8c655a93368b1c7994e",
+          "hash": "90da378c734515e96621d9cf10cab43d53b262862a44ea2293f9c98cbc521a6d",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-mantova/attivita/scuole/",
-          "hash": "d2d562f019f2f7d27564ead9aa15b25a4e5b4f0e580de2c1e188363f553d0896",
+          "hash": "247ed6e64d940fa523e604fd67473d6b958fadadda1ddb0c562dde918edfad50",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-mantova/attivita/escursioni/",
-          "hash": "286002523b8c03915689bb68b982c737eebfd477e56fba5420209eb048229c14",
+          "hash": "44cb77d82d45597eba868fa7611e3e3c7eb4f67a17b47f309a112a9a0a0b78b0",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-mantova/attivita/juniores/",
-          "hash": "cf38725ca08dba41044e0b47081f8283c8a05b56dab5fdbcfc2a64fd4361c27c",
+          "hash": "7a9edb77e8496456ae177ddafe6d7cde83f976109b334630e5e8e0f9c8b230e4",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-mantova/attivita/seniores/",
-          "hash": "377ed6997fd20564e14ef46742bec264ba76013ceef3cfc0b561e6e7ae2996bf",
+          "hash": "4e3ec95f36d044bfd9d55511b1d631567c4a2b909a8730f540041b6f13dd2399",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-mantova/attivita/cultura/",
-          "hash": "7323db3bcb02ddf08e073a363d3177cd50b7ef3edecddd772e7fb4c6e693bd92",
+          "hash": "3f1f6548d48357c24ec77a5425d654eb0192d53eb34fdbc8e3dbdecac94aa8aa",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-mantova/",
-          "hash": "a06d725063883e51cd8df0a49c966e1c0da1bac625075884080176cf8b6af85c",
+          "hash": "593fe2dec05696d7f2145ddf6e975bae17af6f8d4652dc0e0a6869813d56e188",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "hash": "919751f77dcf50bad37cb8f5776f7cffef4022b3f1e5a684aaa01492a3536e8e",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-mantova/attivita/family-cai/",
-          "hash": "d8f9debe4769689ac49867993846177161bca38740cb27f90c7ae09228a3b83a",
+          "hash": "6296cfd2561f472c1e10efff425c8cac8c9c8e4cd77a57a141415045372d88bb",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-mantova/chi-siamo/regolamento-gite-sezionali/",
-          "hash": "f0d27bf7d6a8090ebbf70ced3e656dbd5ad54b3dae17a43a5a9ef31f39971baf",
+          "hash": "61e5d22692f4fa9c39acf5489f238d9073f66792e8e44d4c0192fa0b73e18f51",
           "events": 0,
           "method": null
         }
