@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T14:07:08.522Z",
+  "generatedAt": "2026-09-08T14:08:43.757Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -13699,6 +13699,582 @@
       ],
       "issues": [],
       "extractedEvents": 59
+    },
+    {
+      "id": "cai-appiano-c-a-i-a-a-9219001",
+      "organizer": "CAI Appiano C.a.i. A.a.",
+      "region": "Trentino-Alto Adige",
+      "website": "https://organizzazione.cai.it/sez-appiano-caiaa/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9219001",
+      "calendarUrls": [
+        "https://organizzazione.cai.it/sez-appiano-caiaa/wp-content/uploads/sites/152/2025/12/PROGRAMMA-ATTIVITA-CAI-APPIANO-2026.pdf",
+        "https://organizzazione.cai.it/sez-appiano-caiaa/eventi/?ical=1",
+        "https://organizzazione.cai.it/sez-appiano-caiaa/calendario-gite/",
+        "https://organizzazione.cai.it/sez-appiano-caiaa/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-appiano-caiaa%2Fcalendario-gite%2F",
+        "https://organizzazione.cai.it/sez-appiano-caiaa/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-appiano-caiaa%2Fcalendario-gite%2F&format=xml",
+        "https://organizzazione.cai.it/sez-appiano-caiaa/escursionismo/",
+        "https://organizzazione.cai.it/sez-appiano-caiaa/eventi-convegni/",
+        "https://organizzazione.cai.it/sez-appiano-caiaa/attivita/"
+      ],
+      "directoryId": "9219001",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "partial",
+      "url": "https://organizzazione.cai.it/sez-appiano-caiaa/wp-content/uploads/sites/152/2025/12/PROGRAMMA-ATTIVITA-CAI-APPIANO-2026.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 5,
+      "error": null,
+      "hash": "616325a2ede7c4b52a0a4770e1833f0fb6030c9393da8ce88f7fcb90e63646fe",
+      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "documents": [
+        {
+          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/eventi/?ical=1",
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/wp-content/uploads/sites/152/2025/12/PROGRAMMA-ATTIVITA-CAI-APPIANO-2026.pdf",
+          "hash": "f8a92806dbca16ea8b34c7c46605ebad1d882afd45a12c9564895d68509e9cba",
+          "events": 23,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/calendario-gite/",
+          "hash": "6ae6779b301650a2162e756a44b53de29674d0ec7f2bf977a1771a661bae77f0",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-appiano-caiaa%2Fcalendario-gite%2F",
+          "hash": "1bd37cda075d7a7d583bf8a2c19d04a24d38f79a5976eba685d8a82edc55fe61",
+          "events": 0,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-appiano-caiaa%2Fcalendario-gite%2F&format=xml",
+          "hash": "d33ac4edc1c8d442da0ec6d3ee2cb6460d552f4b468a7617ea12e08f0521a94c",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/escursionismo/",
+          "hash": "e97f04c626381633f18a2f2b0540b114f403d7a8a180088f3a0dc9908daa2996",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/eventi-convegni/",
+          "hash": "af07da71df0eac919310dc10a1a9c8597cdc9511059aa81c854e57e818eac460",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/attivita/",
+          "hash": "f8aec000a4f0dd3fbec51c517117e4af73f7832169f32c8d3a454cbba77d1e3a",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/",
+          "hash": "f582b19842ad4e5bc7eb5e51da36f0edc32ec380f01411c4ea50deb08a5fedc9",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
+          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "events": 0,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/2026/08/escursione-alla-croda-della-calva-22-08-2026/",
+          "hash": "a239144ccbc28dbf3ef7ecbe1546bd9db283bd4c15d806ad9fcf8b789d8c4c3a",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/2026/08/escursione-ai-tre-laghi-in-val-rendena-01-08-2026/",
+          "hash": "92ded2bc9814aaa267babfc5d3713f3d368d2a929fa76880f085b5bb1f7e0be3",
+          "events": 0,
+          "method": null
+        }
+      ],
+      "methods": [
+        "pdf-text",
+        "wordpress-events"
+      ],
+      "issues": [
+        {
+          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/eventi/?ical=1",
+          "message": "Discovery budget reached; 50 candidate documents remain.",
+          "code": "discovery-limit"
+        }
+      ],
+      "extractedEvents": 23
+    },
+    {
+      "id": "cai-bolzano-9219002",
+      "organizer": "CAI Bolzano",
+      "region": "Trentino-Alto Adige",
+      "website": "https://organizzazione.cai.it/sez-bolzano-caiaa/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9219002",
+      "calendarUrls": [
+        "https://organizzazione.cai.it/sez-bolzano-caiaa/wp-content/uploads/sites/6/2025/12/Attivita-Cai-2026_compressed.pdf",
+        "https://organizzazione.cai.it/sez-bolzano-caiaa/eventi/?ical=1",
+        "https://organizzazione.cai.it/sez-bolzano-caiaa/wp-content/uploads/sites/6/2026/03/2026_attivita-culturale_sito.pdf",
+        "https://organizzazione.cai.it/sez-bolzano-caiaa/libretto-attivita-2026/",
+        "https://organizzazione.cai.it/sez-bolzano-caiaa/libretto-attivita-2024/",
+        "https://organizzazione.cai.it/sez-bolzano-caiaa/2026/05/serata-informativa-martedi-26-maggio-trekking-in-abruzzo-21-27-settembre/",
+        "https://organizzazione.cai.it/sez-bolzano-caiaa/2025/12/prossima-attivita/",
+        "https://organizzazione.cai.it/sez-bolzano-caiaa/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-bolzano-caiaa%2Flibretto-attivita-2026%2F"
+      ],
+      "directoryId": "9219002",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "partial",
+      "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/wp-content/uploads/sites/6/2025/12/Attivita-Cai-2026_compressed.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 14,
+      "error": null,
+      "hash": "01940dd8f1a0a2f19a921c8622dc86044eafd8e83d53965e75912d6448f807d3",
+      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "documents": [
+        {
+          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/eventi/?ical=1",
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/wp-content/uploads/sites/6/2026/03/2026_attivita-culturale_sito.pdf",
+          "hash": "aa851512f772347eff6f69b1f09c2b8dd909d2687f2975f8936298a9907cc41f",
+          "events": 0,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/wp-content/uploads/sites/6/2025/12/Attivita-Cai-2026_compressed.pdf",
+          "hash": "9d6a65cabf5a02ec8b19af0b99783529f01cb405ae2a7cae1fbe0b212a4b8256",
+          "events": 6,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/libretto-attivita-2026/",
+          "hash": "2754ee3c2e541874ab8ad76cdecd2b50dece59a32b5bbb7e08a378898486f73d",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/libretto-attivita-2024/",
+          "hash": "738599cab6c9146abedbccc84f8c8f60ff731c273ed5be53262ecd5bf1e2aa0a",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/2026/05/serata-informativa-martedi-26-maggio-trekking-in-abruzzo-21-27-settembre/",
+          "hash": "3e47ce8da5cc628194d5abe8359bc78093a3d0db207684facf8fa46228043cab",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/2025/12/prossima-attivita/",
+          "hash": "832de5597bed384ee933292a53df8ba2f84cf3063d9ed2de789a9ab923353f86",
+          "events": 17,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-bolzano-caiaa%2Flibretto-attivita-2026%2F",
+          "hash": "f8630595d289cafe1cf2f0b7798ade3a609846b87d88a0e010a700782e41629a",
+          "events": 0,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/",
+          "hash": "1f56e423978cf045b3ca71cc1a3eb50b946db20386d2adf7e0b16ca45e196596",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/wp-content/uploads/sites/6/2026/05/PRESENTAZIONE-PROGRAMMA-ESCURSIONISTICO-SNE-2026.pdf",
+          "hash": "34356a31d47d7fa77765cc6e754f708ca39ff09c3f6316df181d4fd6f2d1550e",
+          "events": 3,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
+          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "events": 0,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/wp-content/uploads/sites/6/2026/05/Tabella-escursioni-completa.pdf",
+          "hash": "9620a069b7af3a9ab4bb8bfd126b608f478828d007cc05e2268796a3fa667049",
+          "events": 10,
+          "method": "pdf-text"
+        }
+      ],
+      "methods": [
+        "pdf-text",
+        "html-calendar",
+        "wordpress-events"
+      ],
+      "issues": [
+        {
+          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/eventi/?ical=1",
+          "message": "Discovery budget reached; 42 candidate documents remain.",
+          "code": "discovery-limit"
+        }
+      ],
+      "extractedEvents": 36
+    },
+    {
+      "id": "cai-bronzolo-c-a-i-a-a-9219004",
+      "organizer": "CAI Bronzolo C.a.i. A.a.",
+      "region": "Trentino-Alto Adige",
+      "website": "https://organizzazione.cai.it/sez-bronzolo/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9219004",
+      "calendarUrls": [
+        "https://organizzazione.cai.it/sez-bronzolo/wp-content/uploads/sites/163/2026/01/Calendario-2026-Cai-Bronzolo_Optimized-1.pdf",
+        "https://organizzazione.cai.it/sez-bronzolo/evento/auguri-natalizi-e-presentazione-programma-2027/?ical=1",
+        "https://organizzazione.cai.it/sez-bronzolo/eventi/?ical=1",
+        "https://organizzazione.cai.it/sez-bronzolo/2026/01/calendario-attivita-2026/",
+        "https://organizzazione.cai.it/sez-bronzolo/2026/01/calendario-attivita-2026/feed/",
+        "https://organizzazione.cai.it/sez-bronzolo/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-bronzolo%2F2026%2F01%2Fcalendario-attivita-2026%2F",
+        "https://organizzazione.cai.it/sez-bronzolo/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-bronzolo%2F2026%2F01%2Fcalendario-attivita-2026%2F&format=xml",
+        "https://organizzazione.cai.it/sez-bronzolo/?attachment_id=240"
+      ],
+      "directoryId": "9219004",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "partial",
+      "url": "https://organizzazione.cai.it/sez-bronzolo/wp-content/uploads/sites/163/2026/01/Calendario-2026-Cai-Bronzolo_Optimized-1.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 6,
+      "error": null,
+      "hash": "47bd56b9bafdcdcf1e0a98a051128e56b3af0cd700bf5170cd76c4d524eb769f",
+      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "documents": [
+        {
+          "url": "https://organizzazione.cai.it/sez-bronzolo/evento/auguri-natalizi-e-presentazione-programma-2027/?ical=1",
+          "hash": "1253a21e1f534d49b39c0980e1274f5444c3a5c1733dd909475000fd11fd5532",
+          "events": 1,
+          "method": "ics"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-bronzolo/eventi/?ical=1",
+          "hash": "9c14c0ca484a92012068390f3561c388da919b2a5ceb013927feb648747962f8",
+          "events": 5,
+          "method": "ics"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-bronzolo/wp-content/uploads/sites/163/2026/01/Calendario-2026-Cai-Bronzolo_Optimized-1.pdf",
+          "hash": "7a9c11f5e25d914dcf25dbbdaa3d302746d085b43d929f398fba8e6bacb2984a",
+          "events": 5,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-bronzolo/2026/01/calendario-attivita-2026/",
+          "hash": "6caa60c8073aaefe9acfe55de57161012fb85cdbbcca029025e8726aff55ae34",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-bronzolo/2026/01/calendario-attivita-2026/feed/",
+          "hash": "6b588f78810cf64b4c2648da496ae2178d225c2afa25c7ed787359d6106a23d7",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-bronzolo/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-bronzolo%2F2026%2F01%2Fcalendario-attivita-2026%2F",
+          "hash": "cb04004e807d250915333ca160067524691a7ce804fabb6c2674bdc50abca286",
+          "events": 0,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-bronzolo/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-bronzolo%2F2026%2F01%2Fcalendario-attivita-2026%2F&format=xml",
+          "hash": "6379911743466cdd2c0af44b09c257a5b363d21762fec21477ef07934829788a",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-bronzolo/2026/01/calendario-attivita-2026/",
+          "hash": "d86900768f30a547baa5b2f1a587ca10b8d07f48078a46ed9ff76010e3b597e5",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-bronzolo/",
+          "hash": "7030af33d5d05a420ec46816513122daffb4160a3ea3383e02c09b6a16528d40",
+          "events": 5,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
+          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "events": 0,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-bronzolo/eventi/",
+          "hash": "d77f519a0dc26af3959ba39f61036b17a39bdbbd8d60153668c485cef490d693",
+          "events": 5,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-bronzolo/eventi/elenco/?ical=1",
+          "hash": "a7c0d2cc64efadc7c4e1054dfcaed9bf88419b83b9e042dde114d07f79d3f271",
+          "events": 5,
+          "method": "ics"
+        }
+      ],
+      "methods": [
+        "ics",
+        "pdf-text",
+        "wordpress-events",
+        "html-calendar"
+      ],
+      "issues": [
+        {
+          "url": "https://organizzazione.cai.it/sez-bronzolo/evento/auguri-natalizi-e-presentazione-programma-2027/?ical=1",
+          "message": "Discovery budget reached; 24 candidate documents remain.",
+          "code": "discovery-limit"
+        }
+      ],
+      "extractedEvents": 26
+    },
+    {
+      "id": "cai-egna-c-a-i-a-a-9219007",
+      "organizer": "CAI Egna C.a.i. A.a.",
+      "region": "Trentino-Alto Adige",
+      "website": "https://www.caiegna.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9219007",
+      "calendarUrls": [
+        "http://www.caiegna.it/wp-content/uploads/Programma-2026_2_compressed.pdf"
+      ],
+      "directoryId": "9219007",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "disabled",
+      "url": "http://www.caiegna.it/wp-content/uploads/Programma-2026_2_compressed.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-s-a-t-ledrense-9118033",
+      "organizer": "S.a.t. Ledrense",
+      "region": "Trentino-Alto Adige",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9218001",
+      "calendarUrls": [
+        "https://www.satledrense.it/wp-content/uploads/2026/02/Attivita-SAT-2026.pdf"
+      ],
+      "directoryId": "9118033",
+      "sectionType": "subsection",
+      "parentSectionId": "cai-s-a-t-9218001",
+      "status": "disabled",
+      "url": "https://www.satledrense.it/wp-content/uploads/2026/02/Attivita-SAT-2026.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-s-a-t-male-9118036",
+      "organizer": "S.a.t. Male'",
+      "region": "Trentino-Alto Adige",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9218001",
+      "calendarUrls": [
+        "http://www.satmale.it/wp-content/uploads/2026/02/Sat-di-Male-programma-attivita-2026.pdf"
+      ],
+      "directoryId": "9118036",
+      "sectionType": "subsection",
+      "parentSectionId": "cai-s-a-t-9218001",
+      "status": "disabled",
+      "url": "http://www.satmale.it/wp-content/uploads/2026/02/Sat-di-Male-programma-attivita-2026.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-s-a-t-mori-9118041",
+      "organizer": "S.a.t. Mori",
+      "region": "Trentino-Alto Adige",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9218001",
+      "calendarUrls": [
+        "https://www.sat-mori.it/app/download/15433973123/Sat+Mori+2026_Libretto_v3_Optimized3.pdf?t=1785509041"
+      ],
+      "directoryId": "9118041",
+      "sectionType": "subsection",
+      "parentSectionId": "cai-s-a-t-9218001",
+      "status": "disabled",
+      "url": "https://www.sat-mori.it/app/download/15433973123/Sat+Mori+2026_Libretto_v3_Optimized3.pdf?t=1785509041",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-s-a-t-pergine-9118043",
+      "organizer": "S.a.t. Pergine",
+      "region": "Trentino-Alto Adige",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9218001",
+      "calendarUrls": [
+        "https://www.satpergine.it/wp-content/uploads/2026/02/SAT_Programma-2026-WEB.pdf"
+      ],
+      "directoryId": "9118043",
+      "sectionType": "subsection",
+      "parentSectionId": "cai-s-a-t-9218001",
+      "status": "disabled",
+      "url": "https://www.satpergine.it/wp-content/uploads/2026/02/SAT_Programma-2026-WEB.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-s-a-t-s-o-s-a-t-9118061",
+      "organizer": "S.a.t. S.o.s.a.t.",
+      "region": "Trentino-Alto Adige",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9218001",
+      "calendarUrls": [
+        "https://www.sosat.it/wp-content/uploads/2026/01/SOSAT_Programma-guide-2026_WEB.pdf"
+      ],
+      "directoryId": "9118061",
+      "sectionType": "subsection",
+      "parentSectionId": "cai-s-a-t-9218001",
+      "status": "disabled",
+      "url": "https://www.sosat.it/wp-content/uploads/2026/01/SOSAT_Programma-guide-2026_WEB.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-s-a-t-trento-9118068",
+      "organizer": "S.a.t. Trento",
+      "region": "Trentino-Alto Adige",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9218001",
+      "calendarUrls": [
+        "http://www.sattrento.it/PROGRAMMA%20ATTIVITA'%20SAT%20TRENTO%202026_def.pdf"
+      ],
+      "directoryId": "9118068",
+      "sectionType": "subsection",
+      "parentSectionId": "cai-s-a-t-9218001",
+      "status": "disabled",
+      "url": "http://www.sattrento.it/PROGRAMMA%20ATTIVITA'%20SAT%20TRENTO%202026_def.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-s-a-t-cavalese-9118022",
+      "organizer": "S.a.t. Cavalese",
+      "region": "Trentino-Alto Adige",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9218001",
+      "calendarUrls": [
+        "https://www.satcavalese.it/events/?ical=1"
+      ],
+      "directoryId": "9118022",
+      "sectionType": "subsection",
+      "parentSectionId": "cai-s-a-t-9218001",
+      "status": "ok",
+      "url": "https://www.satcavalese.it/events/?ical=1",
+      "kind": "ics",
+      "template": "icalendar",
+      "extractor": "deterministic",
+      "enabled": true,
+      "excursions": 4,
+      "error": null,
+      "hash": "8d63f0f70c1d742ead11f9b897897c602561c39dc992034fb54687b07b4371b7",
+      "updatedAt": "2026-09-08T14:08:43.757Z",
+      "documents": [
+        {
+          "url": "https://www.satcavalese.it/events/?ical=1",
+          "hash": "9aae17c0c4be44935e6cfa0119181c87a42eb512e51adc82a1fb0082d93c9e05",
+          "events": 4,
+          "method": "ics"
+        }
+      ],
+      "methods": [
+        "ics"
+      ],
+      "issues": [],
+      "extractedEvents": 4
     },
     {
       "id": "cai-alta-valle-dell-aterno-9134015",
@@ -32935,239 +33511,6 @@
       "extractedEvents": 86
     },
     {
-      "id": "cai-appiano-c-a-i-a-a-9219001",
-      "organizer": "CAI Appiano C.a.i. A.a.",
-      "region": "Trentino-Alto Adige",
-      "website": "https://organizzazione.cai.it/sez-appiano-caiaa/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9219001",
-      "calendarUrls": [
-        "https://organizzazione.cai.it/sez-appiano-caiaa/eventi/?ical=1",
-        "https://organizzazione.cai.it/sez-appiano-caiaa/wp-content/uploads/sites/152/2025/12/PROGRAMMA-ATTIVITA-CAI-APPIANO-2026.pdf",
-        "https://organizzazione.cai.it/sez-appiano-caiaa/calendario-gite/",
-        "https://organizzazione.cai.it/sez-appiano-caiaa/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-appiano-caiaa%2Fcalendario-gite%2F",
-        "https://organizzazione.cai.it/sez-appiano-caiaa/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-appiano-caiaa%2Fcalendario-gite%2F&format=xml",
-        "https://organizzazione.cai.it/sez-appiano-caiaa/escursionismo/",
-        "https://organizzazione.cai.it/sez-appiano-caiaa/eventi-convegni/",
-        "https://organizzazione.cai.it/sez-appiano-caiaa/attivita/"
-      ],
-      "directoryId": "9219001",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "partial",
-      "url": "https://organizzazione.cai.it/sez-appiano-caiaa/eventi/?ical=1",
-      "kind": "ics",
-      "template": "icalendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 5,
-      "error": null,
-      "hash": "616325a2ede7c4b52a0a4770e1833f0fb6030c9393da8ce88f7fcb90e63646fe",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
-      "documents": [
-        {
-          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/eventi/?ical=1",
-          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/wp-content/uploads/sites/152/2025/12/PROGRAMMA-ATTIVITA-CAI-APPIANO-2026.pdf",
-          "hash": "f8a92806dbca16ea8b34c7c46605ebad1d882afd45a12c9564895d68509e9cba",
-          "events": 23,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/calendario-gite/",
-          "hash": "6ae6779b301650a2162e756a44b53de29674d0ec7f2bf977a1771a661bae77f0",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-appiano-caiaa%2Fcalendario-gite%2F",
-          "hash": "1bd37cda075d7a7d583bf8a2c19d04a24d38f79a5976eba685d8a82edc55fe61",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-appiano-caiaa%2Fcalendario-gite%2F&format=xml",
-          "hash": "d33ac4edc1c8d442da0ec6d3ee2cb6460d552f4b468a7617ea12e08f0521a94c",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/escursionismo/",
-          "hash": "e97f04c626381633f18a2f2b0540b114f403d7a8a180088f3a0dc9908daa2996",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/eventi-convegni/",
-          "hash": "af07da71df0eac919310dc10a1a9c8597cdc9511059aa81c854e57e818eac460",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/attivita/",
-          "hash": "f8aec000a4f0dd3fbec51c517117e4af73f7832169f32c8d3a454cbba77d1e3a",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/",
-          "hash": "f582b19842ad4e5bc7eb5e51da36f0edc32ec380f01411c4ea50deb08a5fedc9",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/2026/08/escursione-alla-croda-della-calva-22-08-2026/",
-          "hash": "a239144ccbc28dbf3ef7ecbe1546bd9db283bd4c15d806ad9fcf8b789d8c4c3a",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/2026/08/escursione-ai-tre-laghi-in-val-rendena-01-08-2026/",
-          "hash": "92ded2bc9814aaa267babfc5d3713f3d368d2a929fa76880f085b5bb1f7e0be3",
-          "events": 0,
-          "method": null
-        }
-      ],
-      "methods": [
-        "pdf-text",
-        "wordpress-events"
-      ],
-      "issues": [
-        {
-          "url": "https://organizzazione.cai.it/sez-appiano-caiaa/eventi/?ical=1",
-          "message": "Discovery budget reached; 50 candidate documents remain.",
-          "code": "discovery-limit"
-        }
-      ],
-      "extractedEvents": 23
-    },
-    {
-      "id": "cai-bolzano-9219002",
-      "organizer": "CAI Bolzano",
-      "region": "Trentino-Alto Adige",
-      "website": "https://organizzazione.cai.it/sez-bolzano-caiaa/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9219002",
-      "calendarUrls": [
-        "https://organizzazione.cai.it/sez-bolzano-caiaa/eventi/?ical=1",
-        "https://organizzazione.cai.it/sez-bolzano-caiaa/wp-content/uploads/sites/6/2026/03/2026_attivita-culturale_sito.pdf",
-        "https://organizzazione.cai.it/sez-bolzano-caiaa/wp-content/uploads/sites/6/2025/12/Attivita-Cai-2026_compressed.pdf",
-        "https://organizzazione.cai.it/sez-bolzano-caiaa/libretto-attivita-2026/",
-        "https://organizzazione.cai.it/sez-bolzano-caiaa/libretto-attivita-2024/",
-        "https://organizzazione.cai.it/sez-bolzano-caiaa/2026/05/serata-informativa-martedi-26-maggio-trekking-in-abruzzo-21-27-settembre/",
-        "https://organizzazione.cai.it/sez-bolzano-caiaa/2025/12/prossima-attivita/",
-        "https://organizzazione.cai.it/sez-bolzano-caiaa/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-bolzano-caiaa%2Flibretto-attivita-2026%2F"
-      ],
-      "directoryId": "9219002",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "partial",
-      "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/eventi/?ical=1",
-      "kind": "ics",
-      "template": "icalendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 14,
-      "error": null,
-      "hash": "01940dd8f1a0a2f19a921c8622dc86044eafd8e83d53965e75912d6448f807d3",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
-      "documents": [
-        {
-          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/eventi/?ical=1",
-          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/wp-content/uploads/sites/6/2026/03/2026_attivita-culturale_sito.pdf",
-          "hash": "aa851512f772347eff6f69b1f09c2b8dd909d2687f2975f8936298a9907cc41f",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/wp-content/uploads/sites/6/2025/12/Attivita-Cai-2026_compressed.pdf",
-          "hash": "9d6a65cabf5a02ec8b19af0b99783529f01cb405ae2a7cae1fbe0b212a4b8256",
-          "events": 6,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/libretto-attivita-2026/",
-          "hash": "2754ee3c2e541874ab8ad76cdecd2b50dece59a32b5bbb7e08a378898486f73d",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/libretto-attivita-2024/",
-          "hash": "738599cab6c9146abedbccc84f8c8f60ff731c273ed5be53262ecd5bf1e2aa0a",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/2026/05/serata-informativa-martedi-26-maggio-trekking-in-abruzzo-21-27-settembre/",
-          "hash": "3e47ce8da5cc628194d5abe8359bc78093a3d0db207684facf8fa46228043cab",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/2025/12/prossima-attivita/",
-          "hash": "832de5597bed384ee933292a53df8ba2f84cf3063d9ed2de789a9ab923353f86",
-          "events": 17,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-bolzano-caiaa%2Flibretto-attivita-2026%2F",
-          "hash": "f8630595d289cafe1cf2f0b7798ade3a609846b87d88a0e010a700782e41629a",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/",
-          "hash": "1f56e423978cf045b3ca71cc1a3eb50b946db20386d2adf7e0b16ca45e196596",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/wp-content/uploads/sites/6/2026/05/PRESENTAZIONE-PROGRAMMA-ESCURSIONISTICO-SNE-2026.pdf",
-          "hash": "34356a31d47d7fa77765cc6e754f708ca39ff09c3f6316df181d4fd6f2d1550e",
-          "events": 3,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/wp-content/uploads/sites/6/2026/05/Tabella-escursioni-completa.pdf",
-          "hash": "9620a069b7af3a9ab4bb8bfd126b608f478828d007cc05e2268796a3fa667049",
-          "events": 10,
-          "method": "pdf-text"
-        }
-      ],
-      "methods": [
-        "pdf-text",
-        "html-calendar",
-        "wordpress-events"
-      ],
-      "issues": [
-        {
-          "url": "https://organizzazione.cai.it/sez-bolzano-caiaa/eventi/?ical=1",
-          "message": "Discovery budget reached; 42 candidate documents remain.",
-          "code": "discovery-limit"
-        }
-      ],
-      "extractedEvents": 36
-    },
-    {
       "id": "cai-brennero-c-a-i-a-a-9219013",
       "organizer": "CAI Brennero C.a.i. A.a.",
       "region": "Trentino-Alto Adige",
@@ -33287,124 +33630,6 @@
       ],
       "issues": [],
       "extractedEvents": 1
-    },
-    {
-      "id": "cai-bronzolo-c-a-i-a-a-9219004",
-      "organizer": "CAI Bronzolo C.a.i. A.a.",
-      "region": "Trentino-Alto Adige",
-      "website": "https://organizzazione.cai.it/sez-bronzolo/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9219004",
-      "calendarUrls": [
-        "https://organizzazione.cai.it/sez-bronzolo/evento/auguri-natalizi-e-presentazione-programma-2027/?ical=1",
-        "https://organizzazione.cai.it/sez-bronzolo/eventi/?ical=1",
-        "https://organizzazione.cai.it/sez-bronzolo/wp-content/uploads/sites/163/2026/01/Calendario-2026-Cai-Bronzolo_Optimized-1.pdf",
-        "https://organizzazione.cai.it/sez-bronzolo/2026/01/calendario-attivita-2026/",
-        "https://organizzazione.cai.it/sez-bronzolo/2026/01/calendario-attivita-2026/feed/",
-        "https://organizzazione.cai.it/sez-bronzolo/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-bronzolo%2F2026%2F01%2Fcalendario-attivita-2026%2F",
-        "https://organizzazione.cai.it/sez-bronzolo/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-bronzolo%2F2026%2F01%2Fcalendario-attivita-2026%2F&format=xml",
-        "https://organizzazione.cai.it/sez-bronzolo/?attachment_id=240"
-      ],
-      "directoryId": "9219004",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "partial",
-      "url": "https://organizzazione.cai.it/sez-bronzolo/evento/auguri-natalizi-e-presentazione-programma-2027/?ical=1",
-      "kind": "ics",
-      "template": "icalendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 6,
-      "error": null,
-      "hash": "47bd56b9bafdcdcf1e0a98a051128e56b3af0cd700bf5170cd76c4d524eb769f",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
-      "documents": [
-        {
-          "url": "https://organizzazione.cai.it/sez-bronzolo/evento/auguri-natalizi-e-presentazione-programma-2027/?ical=1",
-          "hash": "1253a21e1f534d49b39c0980e1274f5444c3a5c1733dd909475000fd11fd5532",
-          "events": 1,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-bronzolo/eventi/?ical=1",
-          "hash": "9c14c0ca484a92012068390f3561c388da919b2a5ceb013927feb648747962f8",
-          "events": 5,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-bronzolo/wp-content/uploads/sites/163/2026/01/Calendario-2026-Cai-Bronzolo_Optimized-1.pdf",
-          "hash": "7a9c11f5e25d914dcf25dbbdaa3d302746d085b43d929f398fba8e6bacb2984a",
-          "events": 5,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-bronzolo/2026/01/calendario-attivita-2026/",
-          "hash": "6caa60c8073aaefe9acfe55de57161012fb85cdbbcca029025e8726aff55ae34",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-bronzolo/2026/01/calendario-attivita-2026/feed/",
-          "hash": "6b588f78810cf64b4c2648da496ae2178d225c2afa25c7ed787359d6106a23d7",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-bronzolo/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-bronzolo%2F2026%2F01%2Fcalendario-attivita-2026%2F",
-          "hash": "cb04004e807d250915333ca160067524691a7ce804fabb6c2674bdc50abca286",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-bronzolo/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-bronzolo%2F2026%2F01%2Fcalendario-attivita-2026%2F&format=xml",
-          "hash": "6379911743466cdd2c0af44b09c257a5b363d21762fec21477ef07934829788a",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-bronzolo/2026/01/calendario-attivita-2026/",
-          "hash": "d86900768f30a547baa5b2f1a587ca10b8d07f48078a46ed9ff76010e3b597e5",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-bronzolo/",
-          "hash": "7030af33d5d05a420ec46816513122daffb4160a3ea3383e02c09b6a16528d40",
-          "events": 5,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-bronzolo/eventi/",
-          "hash": "d77f519a0dc26af3959ba39f61036b17a39bdbbd8d60153668c485cef490d693",
-          "events": 5,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-bronzolo/eventi/elenco/?ical=1",
-          "hash": "a7c0d2cc64efadc7c4e1054dfcaed9bf88419b83b9e042dde114d07f79d3f271",
-          "events": 5,
-          "method": "ics"
-        }
-      ],
-      "methods": [
-        "ics",
-        "pdf-text",
-        "wordpress-events",
-        "html-calendar"
-      ],
-      "issues": [
-        {
-          "url": "https://organizzazione.cai.it/sez-bronzolo/evento/auguri-natalizi-e-presentazione-programma-2027/?ical=1",
-          "message": "Discovery budget reached; 24 candidate documents remain.",
-          "code": "discovery-limit"
-        }
-      ],
-      "extractedEvents": 26
     },
     {
       "id": "cai-brunico-c-a-i-a-a-9219005",
@@ -33535,31 +33760,6 @@
       "parentSectionId": null,
       "status": "disabled",
       "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9219006",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
-      "id": "cai-egna-c-a-i-a-a-9219007",
-      "organizer": "CAI Egna C.a.i. A.a.",
-      "region": "Trentino-Alto Adige",
-      "website": "https://www.caiegna.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9219007",
-      "calendarUrls": [],
-      "directoryId": "9219007",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "disabled",
-      "url": "https://www.caiegna.it/",
       "kind": "discover",
       "template": "calendar-discovery",
       "extractor": "deterministic",
@@ -34343,31 +34543,6 @@
       "extractedEvents": null
     },
     {
-      "id": "cai-s-a-t-cavalese-9118022",
-      "organizer": "S.a.t. Cavalese",
-      "region": "Trentino-Alto Adige",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9218001",
-      "calendarUrls": [],
-      "directoryId": "9118022",
-      "sectionType": "subsection",
-      "parentSectionId": "cai-s-a-t-9218001",
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9118022",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
       "id": "cai-s-a-t-cembra-9118023",
       "organizer": "S.a.t. Cembra",
       "region": "Trentino-Alto Adige",
@@ -34718,31 +34893,6 @@
       "extractedEvents": null
     },
     {
-      "id": "cai-s-a-t-ledrense-9118033",
-      "organizer": "S.a.t. Ledrense",
-      "region": "Trentino-Alto Adige",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9218001",
-      "calendarUrls": [],
-      "directoryId": "9118033",
-      "sectionType": "subsection",
-      "parentSectionId": "cai-s-a-t-9218001",
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9118033",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
       "id": "cai-s-a-t-levico-terme-9118034",
       "organizer": "S.a.t. Levico Terme",
       "region": "Trentino-Alto Adige",
@@ -34854,31 +35004,6 @@
       "parentSectionId": "cai-s-a-t-9218001",
       "status": "disabled",
       "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9118091",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
-      "id": "cai-s-a-t-male-9118036",
-      "organizer": "S.a.t. Male'",
-      "region": "Trentino-Alto Adige",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9218001",
-      "calendarUrls": [],
-      "directoryId": "9118036",
-      "sectionType": "subsection",
-      "parentSectionId": "cai-s-a-t-9218001",
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9118036",
       "kind": "discover",
       "template": "calendar-discovery",
       "extractor": "deterministic",
@@ -35018,31 +35143,6 @@
       "extractedEvents": null
     },
     {
-      "id": "cai-s-a-t-mori-9118041",
-      "organizer": "S.a.t. Mori",
-      "region": "Trentino-Alto Adige",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9218001",
-      "calendarUrls": [],
-      "directoryId": "9118041",
-      "sectionType": "subsection",
-      "parentSectionId": "cai-s-a-t-9218001",
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9118041",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
       "id": "cai-s-a-t-pejo-9118042",
       "organizer": "S.a.t. Pejo",
       "region": "Trentino-Alto Adige",
@@ -35054,31 +35154,6 @@
       "parentSectionId": "cai-s-a-t-9218001",
       "status": "disabled",
       "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9118042",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
-      "id": "cai-s-a-t-pergine-9118043",
-      "organizer": "S.a.t. Pergine",
-      "region": "Trentino-Alto Adige",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9218001",
-      "calendarUrls": [],
-      "directoryId": "9118043",
-      "sectionType": "subsection",
-      "parentSectionId": "cai-s-a-t-9218001",
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9118043",
       "kind": "discover",
       "template": "calendar-discovery",
       "extractor": "deterministic",
@@ -35518,31 +35593,6 @@
       "extractedEvents": null
     },
     {
-      "id": "cai-s-a-t-s-o-s-a-t-9118061",
-      "organizer": "S.a.t. S.o.s.a.t.",
-      "region": "Trentino-Alto Adige",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9218001",
-      "calendarUrls": [],
-      "directoryId": "9118061",
-      "sectionType": "subsection",
-      "parentSectionId": "cai-s-a-t-9218001",
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9118061",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
       "id": "cai-s-a-t-s-u-s-a-t-9118063",
       "organizer": "S.a.t. S.u.s.a.t.",
       "region": "Trentino-Alto Adige",
@@ -35829,31 +35879,6 @@
       "parentSectionId": "cai-s-a-t-9218001",
       "status": "disabled",
       "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9118078",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
-      "id": "cai-s-a-t-trento-9118068",
-      "organizer": "S.a.t. Trento",
-      "region": "Trentino-Alto Adige",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9218001",
-      "calendarUrls": [],
-      "directoryId": "9118068",
-      "sectionType": "subsection",
-      "parentSectionId": "cai-s-a-t-9218001",
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9118068",
       "kind": "discover",
       "template": "calendar-discovery",
       "extractor": "deterministic",
