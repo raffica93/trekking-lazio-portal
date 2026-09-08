@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T12:02:24.807Z",
+  "generatedAt": "2026-09-08T12:03:52.747Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 607
+    "located": 611
   },
   "sources": [
     {
@@ -1626,41 +1626,20 @@
       "directoryId": "9214004",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "unsupported",
+      "status": "ok",
       "url": "https://www.caivda.it/wp-content/uploads/2026/01/Pieghevole-2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 4,
       "error": null,
-      "hash": "dc50d14197716671ca52f2c96e7748d27b402f26fdf0edee739ed91722debff8",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
-      "documents": [
-        {
-          "url": "https://www.caichatillon.it/public/pdfnotizie/Classificazione_difficolta.pdf",
-          "hash": "8a02533ee34ea49ff498e93dd97cbf228eacdc2d71fc77b46b044c22905a80b8",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caichatillon.it/sito/homepage.asp",
-          "hash": "2944cb836eef27ee1e09deea5896fdef58f8b058219595f42f8eb10d066983ae",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caichatillon.it/sito/VediNotizia.asp?chiave=317",
-          "hash": "b181b870dd8253077fc8ac3c3d2966f3e3c50209606c082dd726082b22da7031",
-          "events": 0,
-          "method": null
-        }
-      ],
-      "methods": [
-        "pdf-text"
-      ],
+      "hash": "ccd2e069199de4dd48bed0bd8bcfb9c075dd95f9f134aea465ae7b51cf465f54",
+      "updatedAt": "2026-09-08T12:03:52.747Z",
+      "documents": [],
+      "methods": [],
       "issues": [],
-      "extractedEvents": 0
+      "extractedEvents": null
     },
     {
       "id": "cai-verres-9214003",
