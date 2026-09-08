@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T13:33:39.136Z",
+  "generatedAt": "2026-09-08T13:36:24.171Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -9819,8 +9819,8 @@
       "enabled": true,
       "excursions": 3,
       "error": null,
-      "hash": "b2ef1223f7c8218e0b172ba3f212f2415c070a4d649179a6565773d5425b117d",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "8f67b3168a9ca54360d7aafc63f0d6b5d48a571277648a2f338ede0564b13709",
+      "updatedAt": "2026-09-08T13:36:24.171Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-besozzo-superiore/eventi/?ical=1",
@@ -9830,67 +9830,67 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-besozzo-superiore/2026/03/programma-attivita-2026/",
-          "hash": "74c615139101b792d8301837cfcfec048906222e18abaa719399712c9b922c13",
+          "hash": "d0c2ec3776bf67d7d9137692cdac819b973f7b00d22826e9ac49d9de833d6084",
           "events": 4,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-besozzo-superiore/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-besozzo-superiore%2F2026%2F03%2Fprogramma-attivita-2026%2F",
-          "hash": "2d3fd32e25701770190cfbd39eb7c63d60e4c80eaaf17de7febec261cda98186",
+          "hash": "12b8218db5cb7ef82d3806df4735fbcaa42a06bc657285523cd841f8a5926656",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-besozzo-superiore/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-besozzo-superiore%2F2026%2F03%2Fprogramma-attivita-2026%2F&format=xml",
-          "hash": "965f8fe83180c11db4b4d5a21ae11e4a310447249bcfcbc9551abd6f9c890697",
+          "hash": "797cc1e21d863ff5b3fce0dab97d7c57da1faa31f0e678fa888045565493d13e",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-besozzo-superiore/attivita/escursioni-2026/",
-          "hash": "a9c3d0e9c1bfb751d24683b65c3607100bdb8701458cb6df7c42a47bcfd85d6c",
+          "hash": "4c03efa836578689ec34f9d9a9c324c3e96c05a4cadbd18a84a2bc7fdd1f5fbd",
           "events": 4,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-besozzo-superiore/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-besozzo-superiore%2Fattivita%2Fescursioni-2026%2F",
-          "hash": "95c902252a706201320c461f92ba9fb3fa638eb3dfe8d8a003433bd368f97c82",
+          "hash": "67c855134b24f46b33e4de04c53100dc45c97846508f5cae3c513f5223f2ca14",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-besozzo-superiore/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-besozzo-superiore%2Fattivita%2Fescursioni-2026%2F&format=xml",
-          "hash": "19b858d8142a566612cdb9446f58476aa9fe01a1b6179cf1568b4e407dd07d2e",
+          "hash": "87d2007f2c019321e38539f7fd50f78cee9caaf03b25daf2eb78714c557a35e1",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-besozzo-superiore/attivita/",
-          "hash": "8dd2178d7e48463b5bed3c7476d49e909f75c85f94b0f7fd1b9f26fe1c65df4c",
+          "hash": "5ff79ff431287b473bcca5e2ed24c68d8c7347eef727814178116ff5dcbe5ed8",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-besozzo-superiore/",
-          "hash": "751d678a3a17b471834dd8b374b8a5007c81468e57d8a5418f9bf8eef85f2151",
+          "hash": "a1c25446651b38d960d6d9d330b387a5a1de05f6b326f01dc5282147cea0ac7a",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "hash": "919751f77dcf50bad37cb8f5776f7cffef4022b3f1e5a684aaa01492a3536e8e",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-besozzo-superiore/attivita/colonia-estiva-al-cuvignone/",
-          "hash": "8076e4bade7cf845c3985ac5ca5ea669663c35f9be6c1cf14ef9b3f27df78c9d",
+          "hash": "d7ea705eeec1783cf823baecee8927f704a3945d970d271ad0cdee6fbbdb40f2",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-besozzo-superiore/attivita/gruppo-juniores/",
-          "hash": "fc856a4bd5eaac00e4f6c0757d0b6ac05c61b2400f961d8a7413c2073b2ffdb3",
+          "hash": "65b0e0853aa761469deea8700d5008202a7e20156b66d44c0245fdc9d663c3c5",
           "events": 0,
           "method": null
         }
