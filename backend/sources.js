@@ -380,6 +380,72 @@ const SARDEGNA_SOURCES = [
   }
 ];
 
+
+// Campania overrides win over registry discover stubs (same precedence as ABRUZZO).
+// Avella shares the Avellino PDF (subsection of Avellino). Hub Napoli multi-section later.
+const CAMPANIA_SOURCES = [
+  {
+    id: 'cai-avellino-9238004',
+    organizer: 'CAI Avellino',
+    url: 'http://www.caiavellino.it/images/programma/Programma_Attivita_CAI_Avellino_2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-avella-9138007',
+    organizer: 'CAI Avella',
+    url: 'http://www.caiavellino.it/images/programma/Programma_Attivita_CAI_Avellino_2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-benevento-9238008',
+    organizer: 'CAI Benevento',
+    url: 'https://www.caibenevento.it/wp-content/uploads/2026/01/Programma_CAI_BN_2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-caserta-9238006',
+    organizer: 'CAI Caserta',
+    url: 'https://www.caicaserta.it/documenti/Calendario%20escursionistico%202026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-piedimonte-matese-9238005',
+    organizer: 'CAI Piedimonte Matese',
+    url: 'https://www.caipiedimontematese.it/wp-content/uploads/2026/programma_sezionale_2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-monte-bulgheria-9238010',
+    organizer: 'CAI Monte Bulgheria',
+    url: 'https://www.caimontebulgheria.it/Programmi/Programma_Sez_MB_2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  }
+];
+
 // The generated directory is the complete list, including sections without a
 // usable public calendar. Each enabled row is its own configurable adapter.
 let NATIONAL_REGISTRY = { sections: [] };
@@ -404,11 +470,13 @@ const lazioOverrideIds = new Set(LAZIO_SOURCES.map(s => s.id));
 const abruzzoOverrideIds = new Set(ABRUZZO_SOURCES.map(s => s.id));
 const calabriaOverrideIds = new Set(CALABRIA_SOURCES.map(s => s.id));
 const sardegnaOverrideIds = new Set(SARDEGNA_SOURCES.map(s => s.id));
+const campaniaOverrideIds = new Set(CAMPANIA_SOURCES.map(s => s.id));
 const overrideIds = new Set([
   ...lazioOverrideIds,
   ...abruzzoOverrideIds,
   ...calabriaOverrideIds,
-  ...sardegnaOverrideIds
+  ...sardegnaOverrideIds,
+  ...campaniaOverrideIds
 ]);
 
 // Override scrape fields (url/kind/template/extractor/enabled) must win over
@@ -428,6 +496,10 @@ const SOURCES = [
   })),
   ...SARDEGNA_SOURCES.map(source => mergeOverrideSource(source, {
     defaultRegion: 'Sardegna',
+    lookup: (id) => registryById.get(id)
+  })),
+  ...CAMPANIA_SOURCES.map(source => mergeOverrideSource(source, {
+    defaultRegion: 'Campania',
     lookup: (id) => registryById.get(id)
   })),
   ...NATIONAL_REGISTRY.sections.filter(source =>
@@ -473,6 +545,7 @@ module.exports = {
   ABRUZZO_SOURCES,
   CALABRIA_SOURCES,
   SARDEGNA_SOURCES,
+  CAMPANIA_SOURCES,
   NATIONAL_REGISTRY,
   enabledSources,
   findSource,
