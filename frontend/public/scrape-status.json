@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T11:47:20.191Z",
+  "generatedAt": "2026-09-08T11:49:24.769Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 531
+    "located": 556
   },
   "sources": [
     {
@@ -1444,16 +1444,16 @@
       "directoryId": "9238008",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "https://www.caibenevento.it/wp-content/uploads/2026/01/Programma_CAI_BN_2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 25,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
+      "hash": "a92eb48671fbccc11d601f8bf8a1c40a5bce4e5835443bcb0993aee43917dfa0",
+      "updatedAt": "2026-09-08T11:49:24.769Z",
       "documents": [],
       "methods": [],
       "issues": [],
