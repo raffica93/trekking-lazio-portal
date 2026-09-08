@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-08T13:45:58.389Z",
+  "generatedAt": "2026-09-08T13:47:07.257Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
+    "withEvents": 1,
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
@@ -11283,20 +11283,29 @@
       "directoryId": "9216115",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "https://caicorsico.it/eventi/?ical=1",
       "kind": "ics",
       "template": "icalendar",
       "extractor": "deterministic",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 4,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
+      "hash": "ee5308cfff58a6d9e79896b668e7933f9736d427aad1c316773b6089a66eb38e",
+      "updatedAt": "2026-09-08T13:47:07.257Z",
+      "documents": [
+        {
+          "url": "https://caicorsico.it/eventi/?ical=1",
+          "hash": "87cee2e1cfd260867270a0089b53ff8b3d0e88f073dac01fbf1912ae5ffddc94",
+          "events": 4,
+          "method": "ics"
+        }
+      ],
+      "methods": [
+        "ics"
+      ],
       "issues": [],
-      "extractedEvents": null
+      "extractedEvents": 4
     },
     {
       "id": "cai-crema-9216027",
