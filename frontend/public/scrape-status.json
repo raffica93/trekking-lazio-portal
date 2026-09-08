@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T14:00:21.978Z",
+  "generatedAt": "2026-09-08T14:01:35.147Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -12490,8 +12490,8 @@
       "enabled": true,
       "excursions": 0,
       "error": null,
-      "hash": "dbe7bd926b40dc580cf9abe524f487916c8f9288350ae91abbbf4ed4d12c414d",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "c69084e9a90a41365f57e8cf2a0a31ed842bf69cab1313c0ebb7cbd873425b7c",
+      "updatedAt": "2026-09-08T14:01:35.147Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-romano-di-lombardia/eventi/?ical=1",
@@ -12501,25 +12501,25 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-romano-di-lombardia/incontri/",
-          "hash": "9a8daeff091b6077d7d2bfb3c7ab9b4c2caf54003cd664e5d06172c268bcf0f5",
+          "hash": "11102ffa172ffba00fd42c2b906139547b4dd519d636c6fa105be7e59a5ad36c",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-romano-di-lombardia/",
-          "hash": "bb0e0383db829ab867b2ce9a59546e6cf2240f9dd9c3acd22c63c29912d7a661",
+          "hash": "c3640daa91891509a8e3ad47b55226acf538eae4ec9424a795e534c6b1124089",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "hash": "919751f77dcf50bad37cb8f5776f7cffef4022b3f1e5a684aaa01492a3536e8e",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-romano-di-lombardia/escursioni/",
-          "hash": "41c54a71eca7b2464430a7f52935546430aad3ea94fde240d6a824d09450b4ee",
+          "hash": "9296298fc11b1cac8727329232fa824879aeca209f6d17d7c8d78b7355dd1e7c",
           "events": 0,
           "method": null
         }
