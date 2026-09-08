@@ -290,6 +290,96 @@ const ABRUZZO_SOURCES = [
   }
 ];
 
+
+// Calabria overrides win over registry discover stubs (same precedence as ABRUZZO).
+// Mendicino shares the Cosenza PDF (subsection of Cosenza).
+const CALABRIA_SOURCES = [
+  {
+    id: 'cai-castrovillari-9244005',
+    organizer: 'CAI Castrovillari',
+    url: 'https://www.caicastrovillari.it/images/programma2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-cerchiara-di-calabria-9144003',
+    organizer: 'CAI Cerchiara Di Calabria',
+    url: 'https://www.caicastrovillari.it/images/programmacerchiara26.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-cosenza-9244002',
+    organizer: 'CAI Cosenza',
+    url: 'https://brunopino.it/wp-content/uploads/2026/01/programma-cai-cosenza-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-mendicino-9144004',
+    organizer: 'CAI Mendicino',
+    url: 'https://brunopino.it/wp-content/uploads/2026/01/programma-cai-cosenza-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-reggio-calabria-9244001',
+    organizer: 'CAI Reggio Calabria',
+    url: 'https://drive.google.com/uc?export=download&id=10kXORYlyXLWHHRmG7ZB11iCXdeeEPoUh',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  }
+];
+
+// Sardegna overrides win over registry discover stubs (same precedence as ABRUZZO).
+const SARDEGNA_SOURCES = [
+  {
+    id: 'cai-cagliari-9248001',
+    organizer: 'CAI Cagliari',
+    url: 'https://www.caicagliari.it/escursionismo/wp-content/uploads/sites/2/2026/08/PAE2026s.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-nuoro-9248002',
+    organizer: 'CAI Nuoro',
+    url: 'https://organizzazione.cai.it/sez-nuoro/wp-content/uploads/sites/40/2026/02/Calendario-Escursionistico-Cai-Nuoro-2026-3.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-oristano-9248004',
+    organizer: 'CAI Oristano',
+    url: 'https://organizzazione.cai.it/sez-oristano/wp-content/uploads/sites/41/2025/10/2026-calendario-completo.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  }
+];
+
 // The generated directory is the complete list, including sections without a
 // usable public calendar. Each enabled row is its own configurable adapter.
 let NATIONAL_REGISTRY = { sections: [] };
@@ -312,7 +402,14 @@ function mergeOverrideSource(source, { defaultRegion, lookup }) {
 
 const lazioOverrideIds = new Set(LAZIO_SOURCES.map(s => s.id));
 const abruzzoOverrideIds = new Set(ABRUZZO_SOURCES.map(s => s.id));
-const overrideIds = new Set([...lazioOverrideIds, ...abruzzoOverrideIds]);
+const calabriaOverrideIds = new Set(CALABRIA_SOURCES.map(s => s.id));
+const sardegnaOverrideIds = new Set(SARDEGNA_SOURCES.map(s => s.id));
+const overrideIds = new Set([
+  ...lazioOverrideIds,
+  ...abruzzoOverrideIds,
+  ...calabriaOverrideIds,
+  ...sardegnaOverrideIds
+]);
 
 // Override scrape fields (url/kind/template/extractor/enabled) must win over
 // registry discovery metadata. Registry still contributes website/directoryUrl/etc.
@@ -323,6 +420,14 @@ const SOURCES = [
   })),
   ...ABRUZZO_SOURCES.map(source => mergeOverrideSource(source, {
     defaultRegion: 'Abruzzo',
+    lookup: (id) => registryById.get(id)
+  })),
+  ...CALABRIA_SOURCES.map(source => mergeOverrideSource(source, {
+    defaultRegion: 'Calabria',
+    lookup: (id) => registryById.get(id)
+  })),
+  ...SARDEGNA_SOURCES.map(source => mergeOverrideSource(source, {
+    defaultRegion: 'Sardegna',
     lookup: (id) => registryById.get(id)
   })),
   ...NATIONAL_REGISTRY.sections.filter(source =>
@@ -366,6 +471,8 @@ module.exports = {
   SOURCES,
   LAZIO_SOURCES,
   ABRUZZO_SOURCES,
+  CALABRIA_SOURCES,
+  SARDEGNA_SOURCES,
   NATIONAL_REGISTRY,
   enabledSources,
   findSource,
