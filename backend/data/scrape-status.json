@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T11:32:48.083Z",
+  "generatedAt": "2026-09-08T11:34:42.521Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 382
+    "located": 397
   },
   "sources": [
     {
@@ -1199,16 +1199,16 @@
       "directoryId": "9244002",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "https://brunopino.it/wp-content/uploads/2026/01/programma-cai-cosenza-2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 16,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
+      "hash": "c8db534f09b26b0d167d457bf4726a0ce220da80b40448a44c432eeffd528fc5",
+      "updatedAt": "2026-09-08T11:34:42.521Z",
       "documents": [],
       "methods": [],
       "issues": [],
