@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T11:34:42.521Z",
+  "generatedAt": "2026-09-08T11:36:15.437Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 397
+    "located": 412
   },
   "sources": [
     {
@@ -1226,16 +1226,16 @@
       "directoryId": "9144004",
       "sectionType": "subsection",
       "parentSectionId": "cai-cosenza-9244002",
-      "status": "disabled",
+      "status": "ok",
       "url": "https://brunopino.it/wp-content/uploads/2026/01/programma-cai-cosenza-2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 16,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
+      "hash": "c8db534f09b26b0d167d457bf4726a0ce220da80b40448a44c432eeffd528fc5",
+      "updatedAt": "2026-09-08T11:36:15.437Z",
       "documents": [],
       "methods": [],
       "issues": [],
@@ -1710,6 +1710,370 @@
         }
       ],
       "extractedEvents": 6
+    },
+    {
+      "id": "cai-avellino-9238004",
+      "organizer": "CAI Avellino",
+      "region": "Campania",
+      "website": "https://www.caiavellino.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9238004",
+      "calendarUrls": [
+        "http://www.caiavellino.it/images/programma/Programma_Attivita_CAI_Avellino_2026.pdf"
+      ],
+      "directoryId": "9238004",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "disabled",
+      "url": "http://www.caiavellino.it/images/programma/Programma_Attivita_CAI_Avellino_2026.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-avella-9138007",
+      "organizer": "CAI Avella",
+      "region": "Campania",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9238004",
+      "calendarUrls": [
+        "http://www.caiavellino.it/images/programma/Programma_Attivita_CAI_Avellino_2026.pdf"
+      ],
+      "directoryId": "9138007",
+      "sectionType": "subsection",
+      "parentSectionId": "cai-avellino-9238004",
+      "status": "disabled",
+      "url": "http://www.caiavellino.it/images/programma/Programma_Attivita_CAI_Avellino_2026.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-benevento-9238008",
+      "organizer": "CAI Benevento",
+      "region": "Campania",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9238008",
+      "calendarUrls": [
+        "https://www.caibenevento.it/wp-content/uploads/2026/01/Programma_CAI_BN_2026.pdf"
+      ],
+      "directoryId": "9238008",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "disabled",
+      "url": "https://www.caibenevento.it/wp-content/uploads/2026/01/Programma_CAI_BN_2026.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-caserta-9238006",
+      "organizer": "CAI Caserta",
+      "region": "Campania",
+      "website": "https://www.caicaserta.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9238006",
+      "calendarUrls": [
+        "https://www.caicaserta.it/documenti/Calendario%20escursionistico%202026.pdf",
+        "https://www.caicaserta.it/documenti/Programma_CAI_2026.pdf",
+        "https://www.caicaserta.it/escursioni/etna.pdf",
+        "https://www.caicaserta.it/escursioni/Via_Francigena_Castelli_Romani.pdf",
+        "https://www.caicaserta.it/escursioni/Lifestyle.pdf",
+        "https://www.caicaserta.it/escursioni/La%20Laghetta.pdf",
+        "https://www.caicaserta.it/escursioni/badia%20di%20cava.pdf",
+        "https://www.caicaserta.it/escursioni.html"
+      ],
+      "directoryId": "9238006",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "partial",
+      "url": "https://www.caicaserta.it/documenti/Calendario%20escursionistico%202026.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 45,
+      "error": null,
+      "hash": "d73a1835055113dc8c8639204692fc81c6a755f4d363379b2eb95505a9e5fd36",
+      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "documents": [
+        {
+          "url": "https://www.caicaserta.it/documenti/Calendario%20escursionistico%202026.pdf",
+          "hash": "c1e72219e3d259e4ec0a8e886f841cb49206d21bbbf6942766ebc7d28dee1eaa",
+          "events": 0,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caicaserta.it/documenti/Programma_CAI_2026.pdf",
+          "hash": "e18ecb9485eb4b307a72c6968234f7819035d8366e1d0396d53ee5f8aead5abe",
+          "events": 125,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caicaserta.it/escursioni/etna.pdf",
+          "hash": "370699273b45ead4b66fd959ae7c1f9418b1dfb7677cb40713bb193d19f4fef7",
+          "events": 1,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caicaserta.it/escursioni/Via_Francigena_Castelli_Romani.pdf",
+          "hash": "6ea9d8b5d9e1ab0675efa0b4ae109f5b0979e9c535ff11d0bae2e6085152a3e5",
+          "events": 0,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caicaserta.it/escursioni/Lifestyle.pdf",
+          "hash": "b35ad400a323db75017cd6c95807a8607bf44d8b62175a693507494701b4ca91",
+          "events": 0,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caicaserta.it/escursioni/La%20Laghetta.pdf",
+          "hash": "0d2456fa7383a722b63b28060c60aa4b7a2af114726710cfec3eab63ad533c64",
+          "events": 0,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caicaserta.it/escursioni/badia%20di%20cava.pdf",
+          "hash": "5c9b55c6c81f72edb81381411fbaca7a7f87bca558190b7dcc6a3380889adf7c",
+          "events": 0,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caicaserta.it/escursioni.html",
+          "hash": "9b4265437357f21539d4e56c1440d0c2553c9ef1a693176f4ce43340b7f069e0",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caicaserta.it/",
+          "hash": "34b6f34acab1887c97f13f54b947da397a2c7ea147ab998a25578687bf78b72f",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caicaserta.it/documenti/programma%20giovani%202025.pdf",
+          "hash": "e334bf198bbd0facfe789c4c6012b6463939d06719c392f4e4ee8ed16dfcbc15",
+          "events": 0,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caicaserta.it/escursioni/Regolamento_Escursioni_Sociali-v2.pdf",
+          "hash": "5df8f4aa0bfe7a67a87c8ddb7c019ce8ba096334a741039de5cd7398d1705a0a",
+          "events": 0,
+          "method": "pdf-text"
+        }
+      ],
+      "methods": [
+        "pdf-text"
+      ],
+      "issues": [
+        {
+          "url": "https://www.caicaserta.it/escursioni/Via_Francigena_Castelli_Romani.pdf",
+          "message": "PDF contains no extractable text; OCR/manual verification required."
+        },
+        {
+          "url": "https://www.caicaserta.it/escursioni/badia%20di%20cava.pdf",
+          "message": "PDF contains no extractable text; OCR/manual verification required."
+        }
+      ],
+      "extractedEvents": 126
+    },
+    {
+      "id": "cai-piedimonte-matese-9238005",
+      "organizer": "CAI Piedimonte Matese",
+      "region": "Campania",
+      "website": "https://www.caipiedimontematese.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9238005",
+      "calendarUrls": [
+        "https://www.caipiedimontematese.it/wp-content/uploads/2026/programma_sezionale_2026.pdf",
+        "https://www.caipiedimontematese.it/wp-content/uploads/2026/programma_regionale_2026.pdf",
+        "https://www.caipiedimontematese.it/programma/",
+        "https://www.caipiedimontematese.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caipiedimontematese.it%2Fprogramma%2F",
+        "https://www.caipiedimontematese.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caipiedimontematese.it%2Fprogramma%2F&format=xml",
+        "https://www.caipiedimontematese.it/",
+        "https://www.caipiedimontematese.it/escursionismo/",
+        "https://www.caipiedimontematese.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caipiedimontematese.it%2Fescursionismo%2F"
+      ],
+      "directoryId": "9238005",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "ok",
+      "url": "https://www.caipiedimontematese.it/wp-content/uploads/2026/programma_sezionale_2026.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 71,
+      "error": null,
+      "hash": "bf1266dfece7cf7e85df5dd28b1c664fa2d0e24df23de4be53dfdcf83eb39dcc",
+      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "documents": [
+        {
+          "url": "https://www.caipiedimontematese.it/wp-content/uploads/2026/programma_sezionale_2026.pdf",
+          "hash": "9e960041a9c9c9a574e469d042ee12ea1586712ad57070fcf712f91aff458ee2",
+          "events": 46,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caipiedimontematese.it/wp-content/uploads/2026/programma_regionale_2026.pdf",
+          "hash": "e18ecb9485eb4b307a72c6968234f7819035d8366e1d0396d53ee5f8aead5abe",
+          "events": 125,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caipiedimontematese.it/programma/",
+          "hash": "a5bf3cd6d3fd56708cd262d20f02477ddbac95ae12f7d345e134907a620f453d",
+          "events": 38,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://www.caipiedimontematese.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caipiedimontematese.it%2Fprogramma%2F",
+          "hash": "80e9c86b02d9e3310125eceecd0a222a9d971ed29c17c7c559b2bc9d4f7428fc",
+          "events": 0,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://www.caipiedimontematese.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caipiedimontematese.it%2Fprogramma%2F&format=xml",
+          "hash": "4783f1f74c1858cc3d64ad449032291e08feac20b97c1f07b29c0180f8559e87",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caipiedimontematese.it/",
+          "hash": "e6e293eb6889e583549e44e2b9d52bd7578fa668e608cb7f82d1e1144a1a4cec",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caipiedimontematese.it/escursionismo/",
+          "hash": "8953e3dbad828a49d1964683eef6297cf4cde5f428f599ea73799605cd0173e3",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caipiedimontematese.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caipiedimontematese.it%2Fescursionismo%2F",
+          "hash": "cb7acece3b3218f0b0102911ac00e83c280299721bbbe479e7c1400a7b53ebdd",
+          "events": 0,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://www.caipiedimontematese.it/category/escursioni/",
+          "hash": "2a2807bdd08246ab2807d19be7ca9cfd264776a846b273ad45c3d21896ea6c79",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caipiedimontematese.it/category/escursioni/page/2/",
+          "hash": "a11c413ff3f1bc0ea386b83b82ecf39cdad81d64672d345522b48beb7a0352ac",
+          "events": 0,
+          "method": null
+        }
+      ],
+      "methods": [
+        "pdf-text",
+        "html-calendar",
+        "wordpress-events"
+      ],
+      "issues": [],
+      "extractedEvents": 209
+    },
+    {
+      "id": "cai-monte-bulgheria-9238010",
+      "organizer": "CAI Monte Bulgheria",
+      "region": "Campania",
+      "website": "https://www.caimontebulgheria.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9238010",
+      "calendarUrls": [
+        "https://www.caimontebulgheria.it/Programmi/Programma_Sez_MB_2026.pdf",
+        "https://www.caimontebulgheria.it/Programmi/Programma_CAI_2026.pdf",
+        "https://www.caimontebulgheria.it/",
+        "https://www.caimontebulgheria.it/escursionismo/",
+        "https://www.caimontebulgheria.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caimontebulgheria.it%2Fescursionismo%2F",
+        "https://www.caimontebulgheria.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caimontebulgheria.it%2Fescursionismo%2F&format=xml"
+      ],
+      "directoryId": "9238010",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "ok",
+      "url": "https://www.caimontebulgheria.it/Programmi/Programma_Sez_MB_2026.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 45,
+      "error": null,
+      "hash": "114502ae854f44461013f7972c649a51ec87ba4e9b3b65ca7ab46f5453404245",
+      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "documents": [
+        {
+          "url": "https://www.caimontebulgheria.it/Programmi/Programma_Sez_MB_2026.pdf",
+          "hash": "e50b4cb2f234c20ce018966ee2a3a84b51ca46b2d51346768c846cdcf43eb45a",
+          "events": 0,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caimontebulgheria.it/Programmi/Programma_CAI_2026.pdf",
+          "hash": "e18ecb9485eb4b307a72c6968234f7819035d8366e1d0396d53ee5f8aead5abe",
+          "events": 125,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caimontebulgheria.it/",
+          "hash": "aa3bafaebcb8dc114e62a96bd7bf6b4f348a9d346c30adf4ae156e846e07cd46",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caimontebulgheria.it/escursionismo/",
+          "hash": "d284b08a809dadcd9b97927e42463f340864a695ed9e8777321903d08e44e5b7",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caimontebulgheria.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caimontebulgheria.it%2Fescursionismo%2F",
+          "hash": "dc4d0fe76fc5f342136aea587f928f5ab8b4ca005d74554d721104977bcb43e1",
+          "events": 0,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://www.caimontebulgheria.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caimontebulgheria.it%2Fescursionismo%2F&format=xml",
+          "hash": "521488962e447f07a133635d4c0a358488e61b440edc92e52524846b136a5854",
+          "events": 0,
+          "method": null
+        }
+      ],
+      "methods": [
+        "pdf-text",
+        "wordpress-events"
+      ],
+      "issues": [],
+      "extractedEvents": 125
     },
     {
       "id": "cai-alta-valle-dell-aterno-9134015",
@@ -3672,193 +4036,6 @@
       "extractedEvents": null
     },
     {
-      "id": "cai-avella-9138007",
-      "organizer": "CAI Avella",
-      "region": "Campania",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9238004",
-      "calendarUrls": [],
-      "directoryId": "9138007",
-      "sectionType": "subsection",
-      "parentSectionId": "cai-avellino-9238004",
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9138007",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
-      "id": "cai-avellino-9238004",
-      "organizer": "CAI Avellino",
-      "region": "Campania",
-      "website": "https://www.caiavellino.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9238004",
-      "calendarUrls": [],
-      "directoryId": "9238004",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "disabled",
-      "url": "https://www.caiavellino.it/",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
-      "id": "cai-benevento-9238008",
-      "organizer": "CAI Benevento",
-      "region": "Campania",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9238008",
-      "calendarUrls": [],
-      "directoryId": "9238008",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9238008",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
-      "id": "cai-caserta-9238006",
-      "organizer": "CAI Caserta",
-      "region": "Campania",
-      "website": "https://www.caicaserta.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9238006",
-      "calendarUrls": [
-        "https://www.caicaserta.it/documenti/Calendario%20escursionistico%202026.pdf",
-        "https://www.caicaserta.it/documenti/Programma_CAI_2026.pdf",
-        "https://www.caicaserta.it/escursioni/etna.pdf",
-        "https://www.caicaserta.it/escursioni/Via_Francigena_Castelli_Romani.pdf",
-        "https://www.caicaserta.it/escursioni/Lifestyle.pdf",
-        "https://www.caicaserta.it/escursioni/La%20Laghetta.pdf",
-        "https://www.caicaserta.it/escursioni/badia%20di%20cava.pdf",
-        "https://www.caicaserta.it/escursioni.html"
-      ],
-      "directoryId": "9238006",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "partial",
-      "url": "https://www.caicaserta.it/documenti/Calendario%20escursionistico%202026.pdf",
-      "kind": "pdf",
-      "template": "pdf-programma",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 45,
-      "error": null,
-      "hash": "d73a1835055113dc8c8639204692fc81c6a755f4d363379b2eb95505a9e5fd36",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
-      "documents": [
-        {
-          "url": "https://www.caicaserta.it/documenti/Calendario%20escursionistico%202026.pdf",
-          "hash": "c1e72219e3d259e4ec0a8e886f841cb49206d21bbbf6942766ebc7d28dee1eaa",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicaserta.it/documenti/Programma_CAI_2026.pdf",
-          "hash": "e18ecb9485eb4b307a72c6968234f7819035d8366e1d0396d53ee5f8aead5abe",
-          "events": 125,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicaserta.it/escursioni/etna.pdf",
-          "hash": "370699273b45ead4b66fd959ae7c1f9418b1dfb7677cb40713bb193d19f4fef7",
-          "events": 1,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicaserta.it/escursioni/Via_Francigena_Castelli_Romani.pdf",
-          "hash": "6ea9d8b5d9e1ab0675efa0b4ae109f5b0979e9c535ff11d0bae2e6085152a3e5",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicaserta.it/escursioni/Lifestyle.pdf",
-          "hash": "b35ad400a323db75017cd6c95807a8607bf44d8b62175a693507494701b4ca91",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicaserta.it/escursioni/La%20Laghetta.pdf",
-          "hash": "0d2456fa7383a722b63b28060c60aa4b7a2af114726710cfec3eab63ad533c64",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicaserta.it/escursioni/badia%20di%20cava.pdf",
-          "hash": "5c9b55c6c81f72edb81381411fbaca7a7f87bca558190b7dcc6a3380889adf7c",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicaserta.it/escursioni.html",
-          "hash": "9b4265437357f21539d4e56c1440d0c2553c9ef1a693176f4ce43340b7f069e0",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicaserta.it/",
-          "hash": "34b6f34acab1887c97f13f54b947da397a2c7ea147ab998a25578687bf78b72f",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicaserta.it/documenti/programma%20giovani%202025.pdf",
-          "hash": "e334bf198bbd0facfe789c4c6012b6463939d06719c392f4e4ee8ed16dfcbc15",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicaserta.it/escursioni/Regolamento_Escursioni_Sociali-v2.pdf",
-          "hash": "5df8f4aa0bfe7a67a87c8ddb7c019ce8ba096334a741039de5cd7398d1705a0a",
-          "events": 0,
-          "method": "pdf-text"
-        }
-      ],
-      "methods": [
-        "pdf-text"
-      ],
-      "issues": [
-        {
-          "url": "https://www.caicaserta.it/escursioni/Via_Francigena_Castelli_Romani.pdf",
-          "message": "PDF contains no extractable text; OCR/manual verification required."
-        },
-        {
-          "url": "https://www.caicaserta.it/escursioni/badia%20di%20cava.pdf",
-          "message": "PDF contains no extractable text; OCR/manual verification required."
-        }
-      ],
-      "extractedEvents": 126
-    },
-    {
       "id": "cai-castellammare-di-stabia-9238009",
       "organizer": "CAI Castellammare Di Stabia",
       "region": "Campania",
@@ -3984,78 +4161,6 @@
       "extractedEvents": null
     },
     {
-      "id": "cai-monte-bulgheria-9238010",
-      "organizer": "CAI Monte Bulgheria",
-      "region": "Campania",
-      "website": "https://www.caimontebulgheria.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9238010",
-      "calendarUrls": [
-        "https://www.caimontebulgheria.it/Programmi/Programma_Sez_MB_2026.pdf",
-        "https://www.caimontebulgheria.it/Programmi/Programma_CAI_2026.pdf",
-        "https://www.caimontebulgheria.it/",
-        "https://www.caimontebulgheria.it/escursionismo/",
-        "https://www.caimontebulgheria.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caimontebulgheria.it%2Fescursionismo%2F",
-        "https://www.caimontebulgheria.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caimontebulgheria.it%2Fescursionismo%2F&format=xml"
-      ],
-      "directoryId": "9238010",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "ok",
-      "url": "https://www.caimontebulgheria.it/Programmi/Programma_Sez_MB_2026.pdf",
-      "kind": "pdf",
-      "template": "pdf-programma",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 45,
-      "error": null,
-      "hash": "114502ae854f44461013f7972c649a51ec87ba4e9b3b65ca7ab46f5453404245",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
-      "documents": [
-        {
-          "url": "https://www.caimontebulgheria.it/Programmi/Programma_Sez_MB_2026.pdf",
-          "hash": "e50b4cb2f234c20ce018966ee2a3a84b51ca46b2d51346768c846cdcf43eb45a",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caimontebulgheria.it/Programmi/Programma_CAI_2026.pdf",
-          "hash": "e18ecb9485eb4b307a72c6968234f7819035d8366e1d0396d53ee5f8aead5abe",
-          "events": 125,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caimontebulgheria.it/",
-          "hash": "aa3bafaebcb8dc114e62a96bd7bf6b4f348a9d346c30adf4ae156e846e07cd46",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caimontebulgheria.it/escursionismo/",
-          "hash": "d284b08a809dadcd9b97927e42463f340864a695ed9e8777321903d08e44e5b7",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caimontebulgheria.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caimontebulgheria.it%2Fescursionismo%2F",
-          "hash": "dc4d0fe76fc5f342136aea587f928f5ab8b4ca005d74554d721104977bcb43e1",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://www.caimontebulgheria.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caimontebulgheria.it%2Fescursionismo%2F&format=xml",
-          "hash": "521488962e447f07a133635d4c0a358488e61b440edc92e52524846b136a5854",
-          "events": 0,
-          "method": null
-        }
-      ],
-      "methods": [
-        "pdf-text",
-        "wordpress-events"
-      ],
-      "issues": [],
-      "extractedEvents": 125
-    },
-    {
       "id": "cai-monte-bulgheria-diventata-sezione-9138006",
       "organizer": "CAI Monte Bulgheria (diventata Sezione)",
       "region": "Campania",
@@ -4138,105 +4243,6 @@
       "methods": [],
       "issues": [],
       "extractedEvents": null
-    },
-    {
-      "id": "cai-piedimonte-matese-9238005",
-      "organizer": "CAI Piedimonte Matese",
-      "region": "Campania",
-      "website": "https://www.caipiedimontematese.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9238005",
-      "calendarUrls": [
-        "https://www.caipiedimontematese.it/wp-content/uploads/2026/programma_sezionale_2026.pdf",
-        "https://www.caipiedimontematese.it/wp-content/uploads/2026/programma_regionale_2026.pdf",
-        "https://www.caipiedimontematese.it/programma/",
-        "https://www.caipiedimontematese.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caipiedimontematese.it%2Fprogramma%2F",
-        "https://www.caipiedimontematese.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caipiedimontematese.it%2Fprogramma%2F&format=xml",
-        "https://www.caipiedimontematese.it/",
-        "https://www.caipiedimontematese.it/escursionismo/",
-        "https://www.caipiedimontematese.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caipiedimontematese.it%2Fescursionismo%2F"
-      ],
-      "directoryId": "9238005",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "ok",
-      "url": "https://www.caipiedimontematese.it/wp-content/uploads/2026/programma_sezionale_2026.pdf",
-      "kind": "pdf",
-      "template": "pdf-programma",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 71,
-      "error": null,
-      "hash": "bf1266dfece7cf7e85df5dd28b1c664fa2d0e24df23de4be53dfdcf83eb39dcc",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
-      "documents": [
-        {
-          "url": "https://www.caipiedimontematese.it/wp-content/uploads/2026/programma_sezionale_2026.pdf",
-          "hash": "9e960041a9c9c9a574e469d042ee12ea1586712ad57070fcf712f91aff458ee2",
-          "events": 46,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caipiedimontematese.it/wp-content/uploads/2026/programma_regionale_2026.pdf",
-          "hash": "e18ecb9485eb4b307a72c6968234f7819035d8366e1d0396d53ee5f8aead5abe",
-          "events": 125,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caipiedimontematese.it/programma/",
-          "hash": "a5bf3cd6d3fd56708cd262d20f02477ddbac95ae12f7d345e134907a620f453d",
-          "events": 38,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://www.caipiedimontematese.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caipiedimontematese.it%2Fprogramma%2F",
-          "hash": "80e9c86b02d9e3310125eceecd0a222a9d971ed29c17c7c559b2bc9d4f7428fc",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://www.caipiedimontematese.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caipiedimontematese.it%2Fprogramma%2F&format=xml",
-          "hash": "4783f1f74c1858cc3d64ad449032291e08feac20b97c1f07b29c0180f8559e87",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caipiedimontematese.it/",
-          "hash": "e6e293eb6889e583549e44e2b9d52bd7578fa668e608cb7f82d1e1144a1a4cec",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caipiedimontematese.it/escursionismo/",
-          "hash": "8953e3dbad828a49d1964683eef6297cf4cde5f428f599ea73799605cd0173e3",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caipiedimontematese.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caipiedimontematese.it%2Fescursionismo%2F",
-          "hash": "cb7acece3b3218f0b0102911ac00e83c280299721bbbe479e7c1400a7b53ebdd",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://www.caipiedimontematese.it/category/escursioni/",
-          "hash": "2a2807bdd08246ab2807d19be7ca9cfd264776a846b273ad45c3d21896ea6c79",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caipiedimontematese.it/category/escursioni/page/2/",
-          "hash": "a11c413ff3f1bc0ea386b83b82ecf39cdad81d64672d345522b48beb7a0352ac",
-          "events": 0,
-          "method": null
-        }
-      ],
-      "methods": [
-        "pdf-text",
-        "html-calendar",
-        "wordpress-events"
-      ],
-      "issues": [],
-      "extractedEvents": 209
     },
     {
       "id": "cai-roccarainola-9138004",
