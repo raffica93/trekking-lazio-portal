@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-08T13:54:08.199Z",
+  "generatedAt": "2026-09-08T13:55:10.737Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 0,
-    "parsed": 1,
-    "unsupported": 0,
+    "parsed": 0,
+    "unsupported": 1,
     "failed": 0,
     "located": 611
   },
@@ -12146,8 +12146,8 @@
       "enabled": true,
       "excursions": 0,
       "error": null,
-      "hash": "2d39ee26828952839538ac3f911df7e754495dd4ed3efaf47bfadf0be740b013",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "0cd95a9ef5bdc947fbd868acbf85a089b3ace99906ee56017ca529c928d8f4dd",
+      "updatedAt": "2026-09-08T13:55:10.737Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-menaggio/eventi/?ical=1",
@@ -12157,7 +12157,7 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-menaggio/calendario/",
-          "hash": "9b86456f1fc20df78509da2c85ab55ed62eb3dbb555c3b024bc81306dcf1517a",
+          "hash": "2f787b40dcb298d286dd91f4dd01433f517e4a1576e89b2b15e85170874e9e66",
           "events": 0,
           "method": null
         },
@@ -12169,55 +12169,55 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-menaggio/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-menaggio%2Fcalendario%2F",
-          "hash": "3fc56f872f29478ef1c2d040dd0033bce70b3ca65e81d9f2225cca5c85bd001a",
+          "hash": "e38319cc48d3d8d1c9084c2e46e12b646c14c182202fac2790022676231a469f",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-menaggio/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-menaggio%2Fcalendario%2F&format=xml",
-          "hash": "9e3966c7875945a65bb3d9561154fdcfaed3e0a46962ecec7148eea87e81be94",
+          "hash": "7638d26feb4fd64f74b03a4c5da677217c738dff18cc6e90e74a84975852d707",
           "events": 0,
           "method": null
         },
         {
           "url": "https://calendar.google.com/calendar/embed?src=menaggio%40cai.it&ctz=Europe%2FRome",
-          "hash": "5f287184f5c092ddeac1cc433d9a9b4b64d0fc95fe53d0427fd0c982b890530b",
+          "hash": "9f9726d1d9100f8cb043133a6bdd9598295463646d2d18c79ea1ec1583d8da85",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-menaggio/attivita/",
-          "hash": "8cc2c0b522a7c0fae1ef4465be4b185c197ebf0951ecf8aebc391d0bb5acfa67",
+          "hash": "7bb59d8ab8093c7001415091b7b08d79ae1bf65db495bd484bf62b169fdac38c",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-menaggio/attivita/scuole/",
-          "hash": "5638d909618876d650da7b66656efab2debfc5a8534b767d03558aa6063b88e2",
+          "hash": "5b18432c30114f5b441d6c6aad595d84c7d5912d859ddd9a643e1b07bc826dd6",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-menaggio/",
-          "hash": "bfd06b0cf5841e583d911d9bed8f734f2a7b352ce611a93488682b37c18f33e5",
+          "hash": "beb601ccd6e83c795c9dd5c4f324cfccab68f521d8067f53c4d81a263fdd0478",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "hash": "919751f77dcf50bad37cb8f5776f7cffef4022b3f1e5a684aaa01492a3536e8e",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-menaggio/attivita/escursionismo/",
-          "hash": "bf15a96a243e3c2d9f87b21c1866e3f53a09be0591fc784a660ccaa7a02746e8",
+          "hash": "4ef5a862c774d543a3487495b12cfca6b6d91751d887d8b8c1a854b476b06d44",
           "events": 1,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-menaggio/attivita/ciaspole/",
-          "hash": "c70ce3d6e38aacba9ab65a402912c30e4ffb0510859108e6e7a1234202314d64",
+          "hash": "032536c755dba6c7ff12ebc1a9ad5dac6db1320b0eeea68e1410a2ed7822cbc9",
           "events": 0,
           "method": null
         }
