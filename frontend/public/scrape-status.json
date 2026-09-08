@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T13:06:09.904Z",
+  "generatedAt": "2026-09-08T13:07:18.859Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7684,79 +7684,79 @@
       "enabled": true,
       "excursions": 5,
       "error": null,
-      "hash": "ccd4d3cdc8968e4256a559f3afd127c23292e318e1d7f3d11cd7bc2fe9b25fc7",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "e3bfa54b71b31a72abb6f56311f78359f1e87b24b1391d58c04e0386925e1a3a",
+      "updatedAt": "2026-09-08T13:07:18.859Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-val-della-torre/eventi/?ical=1",
-          "hash": "26db9892ec0ac6d4269f7a23e3b482bc0e5ac5342f8cec6b240e7c9b4dec824a",
-          "events": 4,
+          "hash": "e5ea2416f7eb231570624184a53cda21897d3b3ca81354ad22b3dbd5476dd9a0",
+          "events": 3,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-val-della-torre/?post_type=tribe_events&ical=1&eventDisplay=list",
-          "hash": "1f71f272b42564bb3e516b96c63b23ea90296e2ac26aa3d99b9282166be7aa24",
-          "events": 4,
+          "hash": "015d268a65e1e9a2fabefdbb4f3030a9b192cbbe9a4977b79cae516f62b02c7d",
+          "events": 3,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-val-della-torre/eventi/elenco/?ical=1",
-          "hash": "e0148ec97fdee496ff31978063efc6b238ee589d0b849f154c1512cdf9ac9395",
-          "events": 4,
+          "hash": "bd979d5b9083c21b6b9f7f53bb79ce38c7077a91c47bb6fc32cdbd5c59079808",
+          "events": 3,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-val-della-torre/2026/01/calendario-manutenzione-sentieri-2025/",
-          "hash": "66779fe0a0ee41f95b415678f4443978820ed48bec5c8372d7909e13dd504e81",
+          "hash": "14ab4dfdf8062ac74668af6d2dbf73fc0fd67bcddd3093960e40b2e3ae69bc9c",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-val-della-torre/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-val-della-torre%2F2026%2F01%2Fcalendario-manutenzione-sentieri-2025%2F",
-          "hash": "b5e3a63a7f851fdbe891b70f72d54f8304e2ae1ee1ce8dccb720bf15513fba8e",
+          "hash": "6af63ef632ac6443f76cf4f90452d66bb1be4bd30d529207db24875f57d03174",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-val-della-torre/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-val-della-torre%2F2026%2F01%2Fcalendario-manutenzione-sentieri-2025%2F&format=xml",
-          "hash": "68d583a6bc899ae2dcae4fac372fb61cf16a756dc77f1b198bde8bbc5c1373f6",
+          "hash": "8260a60b594b541c87fc6f0dea5f19eb342bd0ddf5c11307d9aaf73e9ddd4efc",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-val-della-torre/eventi/",
-          "hash": "759d95f7bb6a8b903bbd02057285ad71bf802041a7f7558131392060360d7971",
-          "events": 4,
+          "hash": "f588692a21197b68d01dedca46121951ffe0631af0421537006461e155fe9cb3",
+          "events": 3,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-val-della-torre/archivio-calendario/",
-          "hash": "45b4cb56aa7ed55d356e713bb7f4cf50c64fc8b57bca8e3947c6227d76053090",
+          "hash": "b587bf545086bc2a1f5cda5f222ffd1974ef00bd2dc8a5426270f98bba33e3cf",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-val-della-torre/",
-          "hash": "2ae4e63eaacf681aa6ebad2e806c492e30d153881eb641368d13e5075ad149dd",
-          "events": 4,
+          "hash": "4c5c52ffa2c9a4b4674aff5e554aa29e71e10ced3d5383ba8470dd650c55dbb5",
+          "events": 3,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "hash": "919751f77dcf50bad37cb8f5776f7cffef4022b3f1e5a684aaa01492a3536e8e",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-val-della-torre/eventi/elenco/?outlook-ical=1",
-          "hash": "886090e8940fcf5dbc4ef2d294112c4cf5a1e4721df384b98925347c7116687f",
-          "events": 4,
+          "hash": "586edc64fffea2a8dcedc67b8c00361fd220f6d70f61a2db1d0b64d5e6e923e8",
+          "events": 3,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-val-della-torre/eventi/",
-          "hash": "c5a845e74c181b50a404397e85b414c2f7157bd93ca96878631fea174faa1f11",
-          "events": 4,
+          "hash": "637e214fdceb6fe742b136136d7e98cad9b1cca2479cf6e67165b88123d9d37c",
+          "events": 3,
           "method": "html-calendar"
         }
       ],
@@ -7768,11 +7768,11 @@
       "issues": [
         {
           "url": "https://organizzazione.cai.it/sez-val-della-torre/eventi/?ical=1",
-          "message": "Discovery budget reached; 43 candidate documents remain.",
+          "message": "Discovery budget reached; 42 candidate documents remain.",
           "code": "discovery-limit"
         }
       ],
-      "extractedEvents": 28
+      "extractedEvents": 21
     },
     {
       "id": "cai-valenza-9212057",

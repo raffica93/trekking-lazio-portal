@@ -7742,7 +7742,7 @@
     "cai-grosseto-9226020": "c0514d7cfc079dbc3cd736c83cb78361f8d75cee9c7374e7d4261cfd097f0c7c",
     "cai-pisa-9226003": "a628f18e0dd006ceae5bcfa8dbf865cdaf865210ff2df5ac39f942be2b1268c5",
     "cai-gioia-del-colle-9240001": "252c5bcfe55fc54c4f8d3008dea2a926a23ca19f5be3510b12e2fd1c436785c4",
-    "cai-val-della-torre-9212065": "ccd4d3cdc8968e4256a559f3afd127c23292e318e1d7f3d11cd7bc2fe9b25fc7",
+    "cai-val-della-torre-9212065": "e3bfa54b71b31a72abb6f56311f78359f1e87b24b1391d58c04e0386925e1a3a",
     "cai-fivizzano-9226019": "9438fb320d6564ec255bf40722ea3e6ec49a4b95aa9646850f934ddd04cc2514",
     "cai-cefalu-9246016": "2a344357dd9785a45647589f8069df75974604d173d8f9af281e580c9264b199",
     "cai-pistoia-9226007": "8cf0ad14b002453eed3a23d9f12ca1853628a6ddf89bf77ec6c6b96f05eaa2d4",
@@ -7839,7 +7839,7 @@
     "cai-pieve-di-soligo-9220054": "49622492f7578db3b38ba5333bca92df7ee38cfba0fb5f3bc416d37d042fc8e6",
     "cai-varallo-sesia-9212002": "9f9cb7746b57ec270dde2b94d44609d41ecf1e075c7bc825453c4dcc37897280"
   },
-  "generatedAt": "2026-09-08T13:06:09.892Z",
+  "generatedAt": "2026-09-08T13:07:18.850Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
