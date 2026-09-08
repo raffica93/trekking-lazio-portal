@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T11:36:15.437Z",
+  "generatedAt": "2026-09-08T11:38:03.244Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 412
+    "located": 433
   },
   "sources": [
     {
@@ -1261,103 +1261,20 @@
       "directoryId": "9244001",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "partial",
+      "status": "ok",
       "url": "https://drive.google.com/uc?export=download&id=10kXORYlyXLWHHRmG7ZB11iCXdeeEPoUh",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 32,
+      "excursions": 24,
       "error": null,
-      "hash": "01ac8bd476f44a6e085cb632fb4bc4f49259ad497b53534e18c5400007d77563",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
-      "documents": [
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/eventi/?ical=1",
-          "hash": "80b8aa7b37170c8d726359796d116b59c8c08ff890bd55a9053bbaf3b245a64c",
-          "events": 27,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/?post_type=tribe_events&ical=1&eventDisplay=list",
-          "hash": "e27ff7a8bf1a226c3949bd068e9a23b348efbd6488d2d5d4ce23741f1cb34f98",
-          "events": 27,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/eventi/elenco/?ical=1",
-          "hash": "1d441030f0d1d75881f9571d0d2cc63bb518d12afc0ac0e31d2c6312e735886e",
-          "events": 27,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/attivita/programma2026/",
-          "hash": "1022c2622d25bcb7c911f424fc0e7777d56546d16433a1344c38e330b4e07062",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-reggio-calabria%2Fattivita%2Fprogramma2026%2F",
-          "hash": "f71b6a775b65ba8b2a49f0edbd4ed29e43a01b4d377ba420973c9eba551fef2b",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-reggio-calabria%2Fattivita%2Fprogramma2026%2F&format=xml",
-          "hash": "144213ac79d233605f7e67d5123927406c4d923bc8fa49e8da7a28558e9acba2",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://drive.google.com/file/d/10kXORYlyXLWHHRmG7ZB11iCXdeeEPoUh/view?usp=sharing",
-          "hash": "6ec9df24700a88b2da546534fc2cac0e86c9fa2af45a10da42b0a8971b873cda",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/eventi/",
-          "hash": "8132065cfcd0c9f874775149c3232e45a92da27e1813afaacd0f380360fa2047",
-          "events": 12,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/",
-          "hash": "cb9e194d6f2500426689405ae00e797cd647fea1a1c7433b42098c753503f613",
-          "events": 6,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/eventi/elenco/?outlook-ical=1",
-          "hash": "e881e7faab8c9e8cae1564e5b43fa379cb83ec0a059ec4b1bcbd81269d5d6ba6",
-          "events": 27,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/eventi/categoria/uscite-in-ambiente/",
-          "hash": "fe2db55891418b5f70293da7c34fd9b22da3aa9962057729875548ab76423c3a",
-          "events": 0,
-          "method": null
-        }
-      ],
-      "methods": [
-        "ics",
-        "wordpress-events",
-        "html-calendar"
-      ],
-      "issues": [
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/eventi/?ical=1",
-          "message": "Discovery budget reached; 41 candidate documents remain.",
-          "code": "discovery-limit"
-        }
-      ],
-      "extractedEvents": 126
+      "hash": "acef30671456d309dda9f6b5c402f30c7e776b89c43a91c1a53266aae42d2c57",
+      "updatedAt": "2026-09-08T11:38:03.244Z",
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
     },
     {
       "id": "cai-cagliari-9248001",
