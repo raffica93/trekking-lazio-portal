@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-06T12:19:27.406Z",
+  "generatedAt": "2026-09-08T11:19:06.818Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
-    "parsed": 0,
+    "withEvents": 1,
+    "parsed": 1,
     "unsupported": 0,
-    "failed": 1,
-    "located": 324
+    "failed": 0,
+    "located": 335
   },
   "sources": [
     {
@@ -856,16 +856,16 @@
       "directoryId": "9134014",
       "sectionType": "subsection",
       "parentSectionId": "cai-popoli-9234016",
-      "status": "failed",
+      "status": "ok",
       "url": "https://www.sezionecaipopoli.it/wp-content/uploads/2026/01/Programma-CAI-2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
-      "error": "Gemini API 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a",
-      "hash": null,
-      "updatedAt": "2026-09-06T12:06:39.800Z",
+      "excursions": 11,
+      "error": null,
+      "hash": "0fe93023dcb0168bee8b7cb531bda5bec5db7b7c7d074a3c06d6669c2852d243",
+      "updatedAt": "2026-09-08T11:19:06.818Z",
       "documents": [],
       "methods": [],
       "issues": [],
