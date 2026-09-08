@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-08T13:48:53.202Z",
+  "generatedAt": "2026-09-08T13:49:52.097Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 0,
-    "parsed": 1,
-    "unsupported": 0,
+    "parsed": 0,
+    "unsupported": 1,
     "failed": 0,
     "located": 611
   },
@@ -9330,7 +9330,7 @@
       "directoryId": "9116099",
       "sectionType": "subsection",
       "parentSectionId": "cai-premana-9216089",
-      "status": "disabled",
+      "status": "unsupported",
       "url": "https://organizzazione.cai.it/sez-premana/eventi/?ical=1",
       "kind": "ics",
       "template": "icalendar",
@@ -9338,12 +9338,19 @@
       "enabled": true,
       "excursions": 0,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
+      "hash": "9b88a06d8d0ba76d42edb1cd420964c7175c2c84052010f2f2d1e79580b361b1",
+      "updatedAt": "2026-09-08T13:49:52.097Z",
+      "documents": [
+        {
+          "url": "https://organizzazione.cai.it/sez-premana/eventi/?ical=1",
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "events": 0,
+          "method": null
+        }
+      ],
       "methods": [],
       "issues": [],
-      "extractedEvents": null
+      "extractedEvents": 0
     },
     {
       "id": "cai-premana-9216089",
