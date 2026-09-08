@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T11:23:03.480Z",
+  "generatedAt": "2026-09-08T11:25:33.023Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 342
+    "located": 347
   },
   "sources": [
     {
@@ -910,16 +910,16 @@
       "directoryId": "9234026",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "https://www.caiabruzzo.it/wp-content/uploads/2026/01/PROGRAMMA-CAI-Arsita-2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 6,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
+      "hash": "457e8ffa386dc92ac4598f5ca8e2fca82d75b5eef7cc0b22acc9737ae90b049a",
+      "updatedAt": "2026-09-08T11:25:33.023Z",
       "documents": [],
       "methods": [],
       "issues": [],
