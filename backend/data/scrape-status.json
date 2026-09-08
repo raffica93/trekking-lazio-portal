@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-08T13:39:56.518Z",
+  "generatedAt": "2026-09-08T13:41:28.650Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 1,
-    "parsed": 1,
-    "unsupported": 0,
+    "withEvents": 0,
+    "parsed": 0,
+    "unsupported": 1,
     "failed": 0,
     "located": 611
   },
@@ -9248,7 +9248,7 @@
       "directoryId": "9116045",
       "sectionType": "subsection",
       "parentSectionId": "cai-gallarate-9216015",
-      "status": "disabled",
+      "status": "unsupported",
       "url": "https://organizzazione.cai.it/sez-gallarate/eventi/?ical=1",
       "kind": "ics",
       "template": "icalendar",
@@ -9256,12 +9256,19 @@
       "enabled": true,
       "excursions": 0,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
+      "hash": "92d339bb17b1d0eb6870daf2163d3434895e73f6a06807b49a310e3151edf0bf",
+      "updatedAt": "2026-09-08T13:41:28.650Z",
+      "documents": [
+        {
+          "url": "https://organizzazione.cai.it/sez-gallarate/eventi/?ical=1",
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "events": 0,
+          "method": null
+        }
+      ],
       "methods": [],
       "issues": [],
-      "extractedEvents": null
+      "extractedEvents": 0
     },
     {
       "id": "cai-gallarate-9216015",
