@@ -7862,7 +7862,7 @@
     "cai-fossano-9212034": "0164f0a7524dd9f2e2166f5178f566d35d1a615f69b47f459e4dd1bc858a109c",
     "cai-mondovi-9212010": "54be02a6bb67b9dc04d2694c50c85a23a8c90e81335db72bf0886d46f5c46aa3",
     "cai-romano-di-lombardia-9216087": "dbe7bd926b40dc580cf9abe524f487916c8f9288350ae91abbbf4ed4d12c414d",
-    "cai-premana-9216089": "afc74ba5b5eb21d04beb2499c920bd58078229388bbfa76fb7caff9d4f7a3287",
+    "cai-premana-9216089": "304d8759c6e559396a6a6853f2f3066d4e68a8890d472ea0add5d9e624c1c830",
     "cai-ghemme-9112027": "3e9e30406f181ac677f0c975e3cb9d00e6c617827ae29260cdf890d794f6dcbe",
     "cai-gozzano-9212037": "4aecf72b615a4346758271f335f3098468fc5a62a1cff06ff31b72760d1aee42",
     "cai-grignasco-9112028": "43d0962ced46371c66b7118538bbd4089094d8cd928ebe97bf53af6fbc7a6089",
@@ -7999,14 +7999,14 @@
     "cai-esino-lario-9116099": "9b88a06d8d0ba76d42edb1cd420964c7175c2c84052010f2f2d1e79580b361b1",
     "cai-paderno-dugnano-9216057": "068b47ea6ab67d9d40fc787029b28bf6f858f3a6428a25e5d5a17fd950b9dbf5"
   },
-  "generatedAt": "2026-09-08T13:57:40.232Z",
+  "generatedAt": "2026-09-08T13:58:41.433Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 1,
-    "parsed": 1,
-    "unsupported": 0,
+    "withEvents": 0,
+    "parsed": 0,
+    "unsupported": 1,
     "failed": 0,
     "located": 611
   },
