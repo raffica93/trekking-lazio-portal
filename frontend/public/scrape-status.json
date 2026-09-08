@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-08T13:59:32.088Z",
+  "generatedAt": "2026-09-08T14:00:21.978Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 0,
-    "parsed": 0,
-    "unsupported": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 611
   },
@@ -12441,8 +12441,8 @@
       "enabled": true,
       "excursions": 0,
       "error": null,
-      "hash": "4a8ac26eb598e5c66a630babc597bde37f48c9c242759585cd99d0abc8442fae",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "0911d0ebbbf0a82195d972ecba0a9962a8b77da4b968d9b8d5a58b051b72caa0",
+      "updatedAt": "2026-09-08T14:00:21.978Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-rho/eventi/?ical=1",
@@ -12452,13 +12452,13 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-rho/",
-          "hash": "33625492eaab1382a63729b3090a8584c70918d4884c4a76b1b0e1b2f5616b76",
+          "hash": "17e43b1e1514e6f8f381bd07ddde2dcae632e50383af9e10918b25646231eb30",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "hash": "919751f77dcf50bad37cb8f5776f7cffef4022b3f1e5a684aaa01492a3536e8e",
           "events": 0,
           "method": "wordpress-events"
         }

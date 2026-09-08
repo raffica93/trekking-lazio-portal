@@ -7874,7 +7874,7 @@
     "cai-mantova-9216025": "a33fed375de410fa46597913be5e6a3f0503e2b46f8f7cff9d37c676482424c2",
     "cai-cervasca-9212081": "bfeed55a9fe0cad04c446c24fb2ad24883aa30f6e724e548dddd4ac6df7e2901",
     "cai-cuneo-9212006": "284a9a9e5a65c154ae0513cd7d0fefc9beacf8bf2b60ef1d6df727f786e087c2",
-    "cai-rho-9216021": "4a8ac26eb598e5c66a630babc597bde37f48c9c242759585cd99d0abc8442fae",
+    "cai-rho-9216021": "0911d0ebbbf0a82195d972ecba0a9962a8b77da4b968d9b8d5a58b051b72caa0",
     "cai-chieri-9212084": "fc02e050192b62120d16b96ee54c17abad17f93601409c341f67adcab1151ebc",
     "cai-cumiana-9212060": "0db53329cae28b3b9aaada1fcb5bfe52efa839f363c13b1a31796dc96eade1a4",
     "cai-leini-9212039": "0cfb872d8eb5ec6b9ea7b8ba266beb05c83848db0d515cb0ff7409b8ab56ba13",
@@ -8019,14 +8019,14 @@
     "cai-paderno-dugnano-9216057": "068b47ea6ab67d9d40fc787029b28bf6f858f3a6428a25e5d5a17fd950b9dbf5",
     "cai-quistello-9116059": "531580c60b60d01edae2e5e9202864fca7a91d9a296344d6b375ecc100744bf4"
   },
-  "generatedAt": "2026-09-08T13:59:32.076Z",
+  "generatedAt": "2026-09-08T14:00:21.966Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 0,
-    "parsed": 0,
-    "unsupported": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 611
   },
