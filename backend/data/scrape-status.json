@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-08T13:05:10.096Z",
+  "generatedAt": "2026-09-08T13:06:09.904Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
+    "withEvents": 1,
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
@@ -7540,30 +7540,30 @@
       "enabled": true,
       "excursions": 5,
       "error": null,
-      "hash": "a7fbdcd6c0f31e7de78079ec6de55628c3b9bb6334c4f7a3836253728af0a466",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "4db560c603605b291427b56452f8160af585023c9ca8acc8583c097780959db1",
+      "updatedAt": "2026-09-08T13:06:09.904Z",
       "documents": [
         {
-          "url": "https://www.caipinotorinese.it/?post_type=tribe_events&tribe-bar-date=2026-09-05&ical=1&eventDisplay=list",
-          "hash": "60ccbf127cdafeded4751285e49b32554e022f84961a8237ab778c67bf31ad30",
-          "events": 4,
+          "url": "https://www.caipinotorinese.it/eventi/?ical=1",
+          "hash": "ddc9aeb97ef9ebcfcbe1fcd9a3e25c4f9e8f20c99a031b57edb1297c3a019521",
+          "events": 3,
           "method": "ics"
         },
         {
-          "url": "https://www.caipinotorinese.it/eventi/?ical=1",
-          "hash": "638ab76c8070cfd9f88fb19f235ba7e93f11e70425d58f2c44f57d235e198f97",
+          "url": "https://www.caipinotorinese.it/?post_type=tribe_events&tribe-bar-date=2026-09-05&ical=1&eventDisplay=list",
+          "hash": "270c87c3141348d44787deead8e6d08555974f4ccdae22da53740355125a7b55",
           "events": 4,
           "method": "ics"
         },
         {
           "url": "https://www.caipinotorinese.it/eventi/elenco/?ical=1",
-          "hash": "4e387e3064d283ad8f216caff20e7ce35f9596d3f16b35d2f38b888764a7853e",
-          "events": 4,
+          "hash": "c8a9d0b4d73d106d514d0064a249b8d40752ac1a1dbdb8783544ebebf6799acc",
+          "events": 3,
           "method": "ics"
         },
         {
           "url": "https://www.caipinotorinese.it/2025/12/19/il-programma-attivita-del-2026-del-cai-di-pino/",
-          "hash": "0b8958e48628578e02516587e3a708a341964a3f5602913ce3f2c6d89c807369",
+          "hash": "5d95d338898c87769fceaf80fe6645762e7207983be61827d3d4f8b3ec6c0285",
           "events": 0,
           "method": null
         },
@@ -7575,43 +7575,43 @@
         },
         {
           "url": "https://www.caipinotorinese.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caipinotorinese.it%2F2025%2F12%2F19%2Fil-programma-attivita-del-2026-del-cai-di-pino%2F",
-          "hash": "683a1a360f6c0b5982b6d364815b3a2af42acd4dd744053ea644a9b1e8c26ef3",
+          "hash": "3586f749c88db294ad92c920ca701b5a585f19a9314271563a3f98c38a846b5c",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://www.caipinotorinese.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caipinotorinese.it%2F2025%2F12%2F19%2Fil-programma-attivita-del-2026-del-cai-di-pino%2F&format=xml",
-          "hash": "c12eaf11ea1ccfc06a6e9f47d8e1b1b1de80f403abb769b2be4e002c42a23da5",
+          "hash": "626d797afa4b556e4a65f6ff76a0bd7bd961ef76f8bb1134c8033767fc8ab835",
           "events": 0,
           "method": null
         },
         {
           "url": "https://www.caipinotorinese.it/en/2025/12/19/il-programma-attivita-del-2026-del-cai-di-pino/",
-          "hash": "b36aa12927b2169c35a3681b459eb35ea2ed33d597ff92a820888a0493aa9be8",
+          "hash": "faa424023873ffe7e291db6cbf9306b103ab43451853748cb242f66179469074",
           "events": 0,
           "method": null
         },
         {
           "url": "https://www.caipinotorinese.it/",
-          "hash": "9254c209195617c42dd1f287323192789f8fda7af878ed6c3c0adcd441ffc612",
+          "hash": "42ee87beb76d32f70664a06ee2054a89f0cdb4fa22b79343fa127afcb75113f3",
           "events": 3,
           "method": "html-calendar"
         },
         {
           "url": "https://www.caipinotorinese.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "9d6751247f81e42fc5c1d89ff1b647b1d6edafe5d96814fd036f20d7c22d53a3",
+          "hash": "b9da8cc01feab9943843a03ee02abd3fbde9d6bc36e83f9bef09a288d7c5e6b5",
           "events": 4,
           "method": "wordpress-events"
         },
         {
           "url": "https://www.caipinotorinese.it/en/eventi/?ical=1",
-          "hash": "82513c3b6adcfffb47d2d07732cab1e0e164009d72e703507284f1a0ca5ae110",
-          "events": 4,
+          "hash": "2884f1a9a900b1b1e232e40b650881e88f3697833a69fd59779a16e8a36afb6f",
+          "events": 3,
           "method": "ics"
         },
         {
           "url": "https://x.com/intent/tweet?text=Il%20programma%20attivit%C3%A0%20del%202026%20del%20CAI%20di%20Pino&url=https%3A%2F%2Fwww.caipinotorinese.it%2F2025%2F12%2F19%2Fil-programma-attivita-del-2026-del-cai-di-pino%2F",
-          "hash": "ded2985a4d79792f056d000269636bcb9562bd0ea5e8c1128d3830307d29f9ea",
+          "hash": "3a7c259292fe9b3746b8f134730d8fe8f0b9c45ad182535df168790080fde2c2",
           "events": 0,
           "method": null
         }
@@ -7623,12 +7623,12 @@
       ],
       "issues": [
         {
-          "url": "https://www.caipinotorinese.it/?post_type=tribe_events&tribe-bar-date=2026-09-05&ical=1&eventDisplay=list",
+          "url": "https://www.caipinotorinese.it/eventi/?ical=1",
           "message": "Discovery budget reached; 30 candidate documents remain.",
           "code": "discovery-limit"
         }
       ],
-      "extractedEvents": 23
+      "extractedEvents": 20
     },
     {
       "id": "cai-tortona-9212040",
