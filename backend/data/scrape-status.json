@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T13:42:29.738Z",
+  "generatedAt": "2026-09-08T13:43:33.367Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -10686,72 +10686,72 @@
       "enabled": true,
       "excursions": 10,
       "error": null,
-      "hash": "73226269abf7ed586ab0de3e783c167eaf3ad3484a7994ba65ea9f6385eda37b",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "66fb87952fdb6001db4ebe2bed1048b5d4b5d3da3c13255798be3b622c5c8860",
+      "updatedAt": "2026-09-08T13:43:33.367Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-cedegolo/eventi/?ical=1",
-          "hash": "ce064fe6194cc9090ad8a3bf20718ff2063bc33c670550eb42aa84a653b9a3c0",
-          "events": 7,
+          "hash": "2030fcd2a67571a7e11b9d31e908b40f09bb4c55535876e40815315dfb4cb1f4",
+          "events": 6,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-cedegolo/?post_type=tribe_events&ical=1&eventDisplay=list",
-          "hash": "f81e4c6f330945c922f58cfd9d4d7d78b1391243b5d73594d2a7ea661ad76000",
-          "events": 7,
+          "hash": "014df2a4a653f3457a09f1771c0f79347192a489ad668502654a051886df8ab6",
+          "events": 6,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-cedegolo/eventi/elenco/?ical=1",
-          "hash": "ac34b7bbeae2697565267ccfc5c84698be2b21114d5dd25a1316d8a0e5a02705",
-          "events": 7,
+          "hash": "b2f301bd522750ddcb98d74b9703c8a0a7697637b0e424cc90bfdc5a512eff16",
+          "events": 6,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-cedegolo/eventi/",
-          "hash": "d321c55e1b3b7902144e06ccf4ec183e35bedafef9bcbf1ae112e67acd2d92a3",
-          "events": 7,
+          "hash": "00216b49887467ef449a2c3856fdb0f46c2d67bceaa24ff53e18c5665f9af640",
+          "events": 6,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-cedegolo/attivita-sociali/",
-          "hash": "4f29741c2b8876f4b9d5393f3761d792e6cd6d540f34d5ab0dd1210c3d650577",
+          "hash": "f06195d4fe78101dc2b5cad2ffbff51d4ca4a5024370f70d4f37b176d1966928",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-cedegolo/eventi/page/2/",
-          "hash": "521efa5e944c911118a374c503cf239f97a94f385e66a957a03f369eb4d73bbc",
+          "hash": "2bbd2c1892824a573459cb20426692976cb19871819859cfa76df46f60b78a34",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-cedegolo/eventi/feed/",
-          "hash": "b899f585026f57c5faccb3ee076c5709472f62157122b1df66d7edd86f1024df",
+          "hash": "a4a741a0b88dfbd7d17ee5354cb3ccd22facdd50e2ce77d9203669b18922443e",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-cedegolo/eventi/elenco/",
-          "hash": "ede72537ad748366a787dc806be96c1260ebcdf7c508811fc699d683882a93ff",
-          "events": 7,
+          "hash": "48a4d60341fdc9e6247526e12b96a9e38ff363fc34b49c2570d0d14222d7c3c1",
+          "events": 6,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-cedegolo/",
-          "hash": "48a75d39fb323ceb77d173bb4c4dee9c490f21988f2904f52cdfae2ba76a7a77",
+          "hash": "96432806952fe0cc93a3ad9eaa14ff34b27febbf0b9690dd298666a57f9bc7cd",
           "events": 6,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-cedegolo/eventi/elenco/?outlook-ical=1",
-          "hash": "8dadc053c1aeb176344a5e18c0b1b769d0e1d8da70c00b5dce12a029653a2b6f",
-          "events": 7,
+          "hash": "1021e016058248c5d9b969ee13a2f44ebd9cf2a52f6ceb513831f68b6ed5c4f9",
+          "events": 6,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "hash": "919751f77dcf50bad37cb8f5776f7cffef4022b3f1e5a684aaa01492a3536e8e",
           "events": 0,
           "method": "wordpress-events"
         },
@@ -10774,7 +10774,7 @@
           "code": "discovery-limit"
         }
       ],
-      "extractedEvents": 48
+      "extractedEvents": 42
     },
     {
       "id": "cai-cermenate-9216116",
