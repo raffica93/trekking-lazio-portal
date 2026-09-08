@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-08T13:50:55.538Z",
+  "generatedAt": "2026-09-08T13:52:01.152Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
+    "withEvents": 1,
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
@@ -11885,72 +11885,72 @@
       "enabled": true,
       "excursions": 11,
       "error": null,
-      "hash": "aefe3db4294c2485035a0456db1b608a4755a224433ee7a5cd25308e59d0e90b",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "9a37f264ac40172d0a93f09dd89788eae611eeca6b8898c5cceeeb752cdf637c",
+      "updatedAt": "2026-09-08T13:52:01.152Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-iseo/eventi/?ical=1",
-          "hash": "bf1f9070e4d6d42dadec8136d87043ac4a6c85447af8ed7dcc55be11527d8863",
+          "hash": "195516c5bf7f2a21e6cd9beb1b7a7dd33e5ca485b745e354e8d12b5407d74810",
           "events": 5,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-iseo/?post_type=tribe_events&ical=1&eventDisplay=list",
-          "hash": "21626c0fda8a8ab0c2b9ae8310cc1925d05ee49b218055d822d7bcef0a0b9c19",
+          "hash": "5b41e218f8639c1663adcc847b03f7a7f6d5581133132d713ce4c0feba40a7d9",
           "events": 5,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-iseo/eventi/elenco/?ical=1",
-          "hash": "35823d4120c45432d1784e789aabff319f9bc9cbbe745a1b1731b8d76112948d",
+          "hash": "1d4f57b1cf9f742ab46d735cca0119ea6a6781f37a2b998698e68986644815ce",
           "events": 5,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-iseo/eventi/",
-          "hash": "94983a101b78428a59e00e636eda4cb2073f85338154c6bbd67d8da40d397c2b",
+          "hash": "ba8cb9deacce54d360140601ab75fbf8f05f4953a53e697f5bafb993d54e30a0",
           "events": 5,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-iseo/categorie/escursioni/",
-          "hash": "e9239623b2b98424b9783ca45638ae12756ae98a034905f58dfffa92a4431e46",
+          "hash": "c04d4e7add50e6c8fb528172c5b07d4f678bf7c71414535f827b400fb5752257",
           "events": 3,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-iseo/categorie/trekking/",
-          "hash": "baa10c8f9467441eefa6a53ce42ac16f882d157a2c74a625d1a959201e7587bd",
+          "hash": "12f3882d02ac6206861541e2e4f38c0ce3f8ee08d04f4efd4f309403ecf75deb",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-iseo/categorie/eventi/",
-          "hash": "e48c869957de26b56b24085ced6f1f1435b1961a9e4cb2a9b54371735c9ee9f3",
+          "hash": "7e0698a94d651346beb88046dd791427d0a46b9473c36633ac6dcabf4805a98b",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-iseo/eventi/page/2/",
-          "hash": "37b4489053227edd1be640e97e80bc9bbc03b87712951be674377aac452b0008",
+          "hash": "b7e3974da7aed8f67beeb100524522d014e2e4358d780842f99634eb6ef0a600",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-iseo/",
-          "hash": "e0c2f3a1e1c4b2a76429a632d9841f7b59efab7c5d0335bb633bc03665abbb48",
+          "hash": "daf7400e48318fba8aa4cfdc5d3fbfa613f662acda4399c0b2a9685b28a7ecc3",
           "events": 5,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-iseo/eventi/elenco/?outlook-ical=1",
-          "hash": "4a0c5137d0e939646f8f7d59a3e577f2e485e15e3efd85e1c709eb818614db7c",
+          "hash": "120003b0b7a0861403cd75911126e5d6dbdf460adf687576066243fedde1fd7a",
           "events": 5,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "hash": "919751f77dcf50bad37cb8f5776f7cffef4022b3f1e5a684aaa01492a3536e8e",
           "events": 0,
           "method": "wordpress-events"
         },

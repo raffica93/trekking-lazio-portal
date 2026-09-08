@@ -7820,7 +7820,7 @@
     "cai-acqui-terme-9212036": "cf790d9c1dc06bbf20b9b19c999113146f75553a77f1f6e777a08071ac0ba14d",
     "cai-almese-9212061": "f6480cc03645bac70bb2a4d199b4a259ae520f9aa32d07c8a1c6ddc956175611",
     "cai-arona-9212018": "0508e6e51749ce024083d5c355b4ecb1cb1d4057c6e6ae8029aa3f2a09260da4",
-    "cai-iseo-9216157": "aefe3db4294c2485035a0456db1b608a4755a224433ee7a5cd25308e59d0e90b",
+    "cai-iseo-9216157": "9a37f264ac40172d0a93f09dd89788eae611eeca6b8898c5cceeeb752cdf637c",
     "cai-livigno-9216120": "9fcb2c02134d08af48c62cc534219f6d52bed10cf8f52c8732a905d06308d861",
     "cai-bra-9212048": "99448f3129e282c892a9ae1eff7ca5f3dc67a99e4f58b78b90e9a1d560e30686",
     "cai-bardonecchia-9212052": "201ca500b6a80aaf04e5b75eb8622e88069929450baeb3fa41a1163107a5e886",
@@ -7979,12 +7979,12 @@
     "cai-corsico-9216115": "ee5308cfff58a6d9e79896b668e7933f9736d427aad1c316773b6089a66eb38e",
     "cai-esino-lario-9116099": "9b88a06d8d0ba76d42edb1cd420964c7175c2c84052010f2f2d1e79580b361b1"
   },
-  "generatedAt": "2026-09-08T13:50:55.525Z",
+  "generatedAt": "2026-09-08T13:52:01.139Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
+    "withEvents": 1,
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
