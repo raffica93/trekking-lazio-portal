@@ -7806,7 +7806,7 @@
     "cai-cornaredo-9216149": "00148a71cc8056b298d8c2c9cc25609c2a755a653736ac40c709e8f6dc9ab64f",
     "cai-jesi-9228003": "30ffa05706c84cf9a4e900aecb91575b8752f021a0d5f22cdc96aa7788e628e6",
     "cai-desenzano-9216136": "19687998ec3b772e4a5c5edce4d72bd2e3b2a9358e25fb1862fbe11cd39f4240",
-    "cai-gallarate-9216015": "09e269fa1c24eb487d33c90ab1e6760a247d7a9a6775bd1584e879b7303c1d8e",
+    "cai-gallarate-9216015": "b5f49bc0c1b2290b03f22d7cab61b7e3827948ca786be2d53db68d19afe8935d",
     "cai-fermo-9228004": "03b4ba612a6d22f8dcd39382a9ff76d1a864495c71e3509fce3971a831124e6a",
     "cai-cernusco-sul-naviglio-9216051": "abaf373d35eb590377cadd8c40425acc6836ffab5a522d72afe121d7927d254f",
     "cai-ancona-9228001": "d041b8b831dd7e9b72f7ea4bd6f111b77dfa543a431330b45da9290a0d6b7d47",
@@ -7979,14 +7979,14 @@
     "cai-corsico-9216115": "ee5308cfff58a6d9e79896b668e7933f9736d427aad1c316773b6089a66eb38e",
     "cai-esino-lario-9116099": "9b88a06d8d0ba76d42edb1cd420964c7175c2c84052010f2f2d1e79580b361b1"
   },
-  "generatedAt": "2026-09-08T13:49:52.085Z",
+  "generatedAt": "2026-09-08T13:50:55.525Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 0,
-    "parsed": 0,
-    "unsupported": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 611
   },

@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-08T13:49:52.097Z",
+  "generatedAt": "2026-09-08T13:50:55.538Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 0,
-    "parsed": 0,
-    "unsupported": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 611
   },
@@ -9290,8 +9290,8 @@
       "enabled": true,
       "excursions": 0,
       "error": null,
-      "hash": "09e269fa1c24eb487d33c90ab1e6760a247d7a9a6775bd1584e879b7303c1d8e",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "b5f49bc0c1b2290b03f22d7cab61b7e3827948ca786be2d53db68d19afe8935d",
+      "updatedAt": "2026-09-08T13:50:55.538Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-gallarate/eventi/?ical=1",
@@ -9301,13 +9301,13 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-gallarate/",
-          "hash": "5d77556a2015038031f4242249cd482ee0d02fbdbdd9e5f6966fe9b4257e130a",
+          "hash": "31ead758868a673f799edef254a687d0eaf5b82ff2e14fc03c1e80fc61b22d80",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "hash": "919751f77dcf50bad37cb8f5776f7cffef4022b3f1e5a684aaa01492a3536e8e",
           "events": 0,
           "method": "wordpress-events"
         }
