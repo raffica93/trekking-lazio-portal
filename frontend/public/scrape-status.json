@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T11:39:40.450Z",
+  "generatedAt": "2026-09-08T11:41:13.887Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 445
+    "located": 453
   },
   "sources": [
     {
@@ -1329,104 +1329,20 @@
       "directoryId": "9248002",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "partial",
+      "status": "ok",
       "url": "https://organizzazione.cai.it/sez-nuoro/wp-content/uploads/sites/40/2026/02/Calendario-Escursionistico-Cai-Nuoro-2026-3.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 2,
+      "excursions": 8,
       "error": null,
-      "hash": "4a3036def9b928ea34bb80ad9573238cae3021ac75c7e61a481a6a2b81885d6f",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
-      "documents": [
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/evento/calendario-escursionistico-2026/?ical=1",
-          "hash": "b6d29bf2dda5ef47d6ccbdef407d93671ad0ceca6a505c8dfd1053f0a3561dcb",
-          "events": 1,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/eventi/?ical=1",
-          "hash": "fe7d02965fab7e3be9e003f336b6ddc1e4652943a67ee886ced41ed5c2fdbdc9",
-          "events": 2,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/?post_type=tribe_events&ical=1&eventDisplay=list",
-          "hash": "089919453ad1a258a7cb26cf6e69770267f08c7fc0fa664dc72b6656ef2e047b",
-          "events": 2,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/eventi/elenco/?ical=1",
-          "hash": "00c127f4a007bcc19fc113132c127b69e807eb0635d74229735ea8fa1bfaad2f",
-          "events": 2,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/wp-content/uploads/sites/40/2026/02/Calendario-Escursionistico-Cai-Nuoro-2026-3.pdf",
-          "hash": "6912b0b554a37f9fbb57be6a8069784cbcf0c07b8eb3c4b5b588edaf288133f0",
-          "events": 2,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/evento/calendario-escursionistico-2026/",
-          "hash": "3033873b43d844b6ab250b9c2be1a811890dd4af23f26127d55c6fd55c5a1baf",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-nuoro%2Fevento%2Fcalendario-escursionistico-2026%2F",
-          "hash": "cbf0f940db008ac7f2a265f6b9a2a533f382d0d1649ea5a49a6af2d24897d344",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-nuoro%2Fevento%2Fcalendario-escursionistico-2026%2F&format=xml",
-          "hash": "63f83e9130b96222d6ae4c4b017fe15758dc27c0788337048e578ccbe8a1c743",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/",
-          "hash": "1d84410589b91ae6c3ca74453b61536950234a6a639dfde9063c01ce8720f934",
-          "events": 2,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/eventi/categoria/calendario-escursionistico/",
-          "hash": "0c7cb158e2c44a145ff08114440dac355f7d5ea5eb6f0faf5586f96fae2f1857",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/eventi/categoria/calendario-escursionistico/?post_type=tribe_events&ical=1&eventDisplay=list",
-          "hash": "061a1cd5369ca648da9e1e890d06705f107e276650c4aec2bf102366ef8701f0",
-          "events": 1,
-          "method": "ics"
-        }
-      ],
-      "methods": [
-        "ics",
-        "pdf-text",
-        "html-calendar",
-        "wordpress-events"
-      ],
-      "issues": [
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/evento/calendario-escursionistico-2026/?ical=1",
-          "message": "Discovery budget reached; 32 candidate documents remain.",
-          "code": "discovery-limit"
-        }
-      ],
-      "extractedEvents": 14
+      "hash": "f73413611503abcab66703d569fbbe2099d339ea43f5b534bc715f4a668112ee",
+      "updatedAt": "2026-09-08T11:41:13.887Z",
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
     },
     {
       "id": "cai-oristano-9248004",
@@ -1909,6 +1825,136 @@
       ],
       "issues": [],
       "extractedEvents": 125
+    },
+    {
+      "id": "cai-aosta-9214001",
+      "organizer": "CAI Aosta",
+      "region": "Valle d'Aosta",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9214001",
+      "calendarUrls": [
+        "https://www.caivda.it/wp-content/uploads/2025/12/annuario-2026-cai-aosta.pdf"
+      ],
+      "directoryId": "9214001",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "disabled",
+      "url": "https://www.caivda.it/wp-content/uploads/2025/12/annuario-2026-cai-aosta.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-barthelemy-9114002",
+      "organizer": "CAI Barthelemy",
+      "region": "Valle d'Aosta",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9214001",
+      "calendarUrls": [
+        "https://www.caivda.it/wp-content/uploads/2026/01/CAI-StB-Annuario-2026.pdf"
+      ],
+      "directoryId": "9114002",
+      "sectionType": "subsection",
+      "parentSectionId": "cai-aosta-9214001",
+      "status": "disabled",
+      "url": "https://www.caivda.it/wp-content/uploads/2026/01/CAI-StB-Annuario-2026.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-chatillon-9214004",
+      "organizer": "CAI Chatillon",
+      "region": "Valle d'Aosta",
+      "website": "https://www.caichatillon.it/sito/homepage.asp",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9214004",
+      "calendarUrls": [
+        "https://www.caivda.it/wp-content/uploads/2026/01/Pieghevole-2026.pdf",
+        "https://www.caichatillon.it/public/pdfnotizie/Classificazione_difficolta.pdf"
+      ],
+      "directoryId": "9214004",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "unsupported",
+      "url": "https://www.caivda.it/wp-content/uploads/2026/01/Pieghevole-2026.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": "dc50d14197716671ca52f2c96e7748d27b402f26fdf0edee739ed91722debff8",
+      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "documents": [
+        {
+          "url": "https://www.caichatillon.it/public/pdfnotizie/Classificazione_difficolta.pdf",
+          "hash": "8a02533ee34ea49ff498e93dd97cbf228eacdc2d71fc77b46b044c22905a80b8",
+          "events": 0,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caichatillon.it/sito/homepage.asp",
+          "hash": "2944cb836eef27ee1e09deea5896fdef58f8b058219595f42f8eb10d066983ae",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caichatillon.it/sito/VediNotizia.asp?chiave=317",
+          "hash": "b181b870dd8253077fc8ac3c3d2966f3e3c50209606c082dd726082b22da7031",
+          "events": 0,
+          "method": null
+        }
+      ],
+      "methods": [
+        "pdf-text"
+      ],
+      "issues": [],
+      "extractedEvents": 0
+    },
+    {
+      "id": "cai-verres-9214003",
+      "organizer": "CAI Verres",
+      "region": "Valle d'Aosta",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9214003",
+      "calendarUrls": [
+        "https://www.caiverres.it/attachments/article/9/CAI%20Verres%20-%20Opuscolo%202026.pdf"
+      ],
+      "directoryId": "9214003",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "disabled",
+      "url": "https://www.caiverres.it/attachments/article/9/CAI%20Verres%20-%20Opuscolo%202026.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
     },
     {
       "id": "cai-alta-valle-dell-aterno-9134015",
@@ -36061,104 +36107,6 @@
       "extractedEvents": 43
     },
     {
-      "id": "cai-aosta-9214001",
-      "organizer": "CAI Aosta",
-      "region": "Valle d'Aosta",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9214001",
-      "calendarUrls": [],
-      "directoryId": "9214001",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9214001",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
-      "id": "cai-barthelemy-9114002",
-      "organizer": "CAI Barthelemy",
-      "region": "Valle d'Aosta",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9214001",
-      "calendarUrls": [],
-      "directoryId": "9114002",
-      "sectionType": "subsection",
-      "parentSectionId": "cai-aosta-9214001",
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9114002",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
-      "id": "cai-chatillon-9214004",
-      "organizer": "CAI Chatillon",
-      "region": "Valle d'Aosta",
-      "website": "https://www.caichatillon.it/sito/homepage.asp",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9214004",
-      "calendarUrls": [
-        "https://www.caichatillon.it/public/pdfnotizie/Classificazione_difficolta.pdf"
-      ],
-      "directoryId": "9214004",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "unsupported",
-      "url": "https://www.caichatillon.it/public/pdfnotizie/Classificazione_difficolta.pdf",
-      "kind": "pdf",
-      "template": "pdf-programma",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 0,
-      "error": null,
-      "hash": "dc50d14197716671ca52f2c96e7748d27b402f26fdf0edee739ed91722debff8",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
-      "documents": [
-        {
-          "url": "https://www.caichatillon.it/public/pdfnotizie/Classificazione_difficolta.pdf",
-          "hash": "8a02533ee34ea49ff498e93dd97cbf228eacdc2d71fc77b46b044c22905a80b8",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caichatillon.it/sito/homepage.asp",
-          "hash": "2944cb836eef27ee1e09deea5896fdef58f8b058219595f42f8eb10d066983ae",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caichatillon.it/sito/VediNotizia.asp?chiave=317",
-          "hash": "b181b870dd8253077fc8ac3c3d2966f3e3c50209606c082dd726082b22da7031",
-          "events": 0,
-          "method": null
-        }
-      ],
-      "methods": [
-        "pdf-text"
-      ],
-      "issues": [],
-      "extractedEvents": 0
-    },
-    {
       "id": "cai-gressoney-9214002",
       "organizer": "CAI Gressoney",
       "region": "Valle d'Aosta",
@@ -36170,31 +36118,6 @@
       "parentSectionId": null,
       "status": "disabled",
       "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9214002",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
-      "id": "cai-verres-9214003",
-      "organizer": "CAI Verres",
-      "region": "Valle d'Aosta",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9214003",
-      "calendarUrls": [],
-      "directoryId": "9214003",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9214003",
       "kind": "discover",
       "template": "calendar-discovery",
       "extractor": "deterministic",
