@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-08T13:55:10.737Z",
+  "generatedAt": "2026-09-08T13:57:40.244Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
-    "parsed": 0,
-    "unsupported": 1,
+    "withEvents": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 611
   },
@@ -12336,20 +12336,29 @@
       "directoryId": "9216057",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "https://www.caipadernodugnano.it/events/?ical=1",
       "kind": "ics",
       "template": "icalendar",
       "extractor": "deterministic",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 2,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
+      "hash": "068b47ea6ab67d9d40fc787029b28bf6f858f3a6428a25e5d5a17fd950b9dbf5",
+      "updatedAt": "2026-09-08T13:57:40.244Z",
+      "documents": [
+        {
+          "url": "https://www.caipadernodugnano.it/events/?ical=1",
+          "hash": "ba5b3854ce4c74c27c0e060e5aed40182041dcf3b9d9aa52fcf54eaef56130c5",
+          "events": 2,
+          "method": "ics"
+        }
+      ],
+      "methods": [
+        "ics"
+      ],
       "issues": [],
-      "extractedEvents": null
+      "extractedEvents": 2
     },
     {
       "id": "cai-parabiago-9216138",
