@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-08T13:08:18.372Z",
+  "generatedAt": "2026-09-08T13:09:20.686Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 0,
-    "parsed": 1,
-    "unsupported": 0,
+    "parsed": 0,
+    "unsupported": 1,
     "failed": 0,
     "located": 611
   },
@@ -7909,8 +7909,8 @@
       "enabled": true,
       "excursions": 0,
       "error": null,
-      "hash": "1e3882ee24a09cbf445d0c2a1e6dfcfbb8cf6194864adac5b8d28c6381b91c23",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "750f63d8a7c513b5b495e63c5b5ad166c5e3cd8653eb521ba598f7f69ac97f87",
+      "updatedAt": "2026-09-08T13:09:20.686Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-villadossola/eventi/?ical=1",
@@ -7920,67 +7920,67 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-villadossola/attivita/",
-          "hash": "8d4732aa49910917f295dbd2c840fc48755342a000f075ea5fe89b9b78242b2b",
+          "hash": "20833e8068772c1b00f80bd95f5f3d0f86ef6a37849c8d2adaa22af34a772331",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-villadossola/attivita/scuole/",
-          "hash": "228efb48a74fe5ff574ed24d29e140e01ab92625825c56e3f3bf24b1f64a992a",
+          "hash": "136be0e3647bdf8c0f8682ee26b154ff0f7d72ff722163b0945d9184f5928f0f",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-villadossola/attivita/escursioni/",
-          "hash": "edbd89da3f67d87b5c68d97f435366179e3621ca1b2e05c6482aa42e58ce5f57",
+          "hash": "87cf52043d4304aa4d98ceadbc2f6e3472613b6ef8dcba3b01f2f0eef658664f",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-villadossola/attivita/alpinismo-giovanile/",
-          "hash": "b10b59821cf2a31819e80cfb10c1cae68baef6ab9bc19761f3b4a36e070d8dd4",
+          "hash": "27f265bec1055c5cb27f2ead3383f04f768a4686508c7676c3a6e39703f5279d",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-villadossola/attivita/eventi/",
-          "hash": "9358c8f8a4545fa0f9affe0c6a944b6e37ac63c019a452225aa2825a48a62bda",
+          "hash": "d5fdf17f75336c909937d6618beb5cabd836cf07a666c4a2ffe716a38cc44414",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-villadossola/attivita/progetti/",
-          "hash": "d378866985bcb5ab7f52594502967976defd20aa092b816a85be4e9a0a0ef1d7",
+          "hash": "3af264ca11973901b742c7dc8603ed5ef9f77801b6df69c9434c59a75370f36f",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-villadossola/attivita/progetti/progetto-vetta/",
-          "hash": "2957f241723319e69aa36668bd1e3e770b7fca54fcb39fbd594bc4e2b08ebee3",
+          "hash": "2e997341c971c5c4bdce4a7daaa8dcd9c4ced05c9380f5b094780f0276eef12a",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-villadossola/",
-          "hash": "d82f8f43f28cf86a7b31e6e18a75b5cc9060e504e2b08da611561cb5231bee71",
+          "hash": "af8387c5a27e07e806d876529fa41ad90c8e7d80cff8cc54d662beb48eb5a514",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "hash": "919751f77dcf50bad37cb8f5776f7cffef4022b3f1e5a684aaa01492a3536e8e",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-villadossola/attivita/progetti/cammino-tra-natura-e-spiritualita-2/",
-          "hash": "697630c13ac2d6a41b1c2bb66cffd28e34b10c6aec72d7bae9ca5f429d40b814",
+          "hash": "6c0b3a51923d6f05efad6059a94c6a97c33e4342f1411162dcea44878c5e3e73",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-villadossola/attivita/progetti/carta-etica-della-montagna-cets/",
-          "hash": "34bff129074d3127d48c91db9b3d93ad2bfab1b4eb11dac365a866a5e273a4b6",
+          "hash": "0d34c3d6f2d666a5cc99c11e596a8ad856f0f6dea4a92c5c74b6871a030fa228",
           "events": 0,
           "method": null
         }

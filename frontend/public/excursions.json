@@ -7754,7 +7754,7 @@
     "cai-stia-9226028": "d6bb28a2da57d1ff09e3afc85369d49cb238873672ef02b5e9187114085caebc",
     "cai-viareggio-9226010": "fc43ab7dc274a9c21717bb3a923be06d0465c194e0d28a915e089b4bb5335746",
     "cai-sesto-fiorentino-9226011": "1902f09f387af022d710e2d9a073345e4b91f6f1aa96c955b7fef3cda07ce0c9",
-    "cai-villadossola-9212022": "1e3882ee24a09cbf445d0c2a1e6dfcfbb8cf6194864adac5b8d28c6381b91c23",
+    "cai-villadossola-9212022": "750f63d8a7c513b5b495e63c5b5ad166c5e3cd8653eb521ba598f7f69ac97f87",
     "cai-gubbio-9230006": "eed470b7af1978756e53da5ebf38f8f02b556bd50bbd9f79cab24917e7e4aaaf",
     "cai-grottaglie-9240004": "98fd3ea6f38db022c6ed4030dd4984a4dc42d23fddf6958026c41f422d8a7101",
     "cai-citta-di-castello-9230005": "293b92518df259b1b1d5846891e6c25d90996ee539b2465d9e9d30759f0d6e46",
@@ -7839,14 +7839,14 @@
     "cai-pieve-di-soligo-9220054": "49622492f7578db3b38ba5333bca92df7ee38cfba0fb5f3bc416d37d042fc8e6",
     "cai-varallo-sesia-9212002": "9f9cb7746b57ec270dde2b94d44609d41ecf1e075c7bc825453c4dcc37897280"
   },
-  "generatedAt": "2026-09-08T13:08:18.359Z",
+  "generatedAt": "2026-09-08T13:09:20.675Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 0,
-    "parsed": 1,
-    "unsupported": 0,
+    "parsed": 0,
+    "unsupported": 1,
     "failed": 0,
     "located": 611
   },
