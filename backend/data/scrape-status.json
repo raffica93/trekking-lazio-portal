@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-08T14:02:37.985Z",
+  "generatedAt": "2026-09-08T14:03:31.550Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 1,
-    "parsed": 1,
-    "unsupported": 0,
+    "withEvents": 0,
+    "parsed": 0,
+    "unsupported": 1,
     "failed": 0,
     "located": 611
   },
@@ -9228,7 +9228,7 @@
       "directoryId": "9116097",
       "sectionType": "subsection",
       "parentSectionId": "cai-mantova-9216025",
-      "status": "disabled",
+      "status": "unsupported",
       "url": "https://organizzazione.cai.it/sez-mantova/eventi/?ical=1",
       "kind": "ics",
       "template": "icalendar",
@@ -9236,12 +9236,19 @@
       "enabled": true,
       "excursions": 0,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
+      "hash": "531580c60b60d01edae2e5e9202864fca7a91d9a296344d6b375ecc100744bf4",
+      "updatedAt": "2026-09-08T14:03:31.550Z",
+      "documents": [
+        {
+          "url": "https://organizzazione.cai.it/sez-mantova/eventi/?ical=1",
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "events": 0,
+          "method": null
+        }
+      ],
       "methods": [],
       "issues": [],
-      "extractedEvents": null
+      "extractedEvents": 0
     },
     {
       "id": "cai-casorate-sempione-9116045",
