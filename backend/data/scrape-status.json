@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T13:36:24.171Z",
+  "generatedAt": "2026-09-08T13:37:28.385Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -9935,78 +9935,78 @@
       "enabled": true,
       "excursions": 3,
       "error": null,
-      "hash": "74535feda828643f0ec7aaf09685de042d9bb9a198a5949b8844cb66d0e647c2",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "2e1d5b893aaf07cdf876a8ce13f003411476e82ca0c4af51333ee1bc414b6e93",
+      "updatedAt": "2026-09-08T13:37:28.385Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-boffalora-sopra-ticino/eventi/?ical=1",
-          "hash": "ea8068a72dec07d7c8e3240b0f02d26d047dd51f34d4a185ef5c51f3087b12c9",
+          "hash": "d9242e39615ff79b1ce69ffc3c03a3711b5ad6440e96e4602a4984fca9ce6230",
           "events": 2,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-boffalora-sopra-ticino/?post_type=tribe_events&ical=1&eventDisplay=list",
-          "hash": "bb29cf32e9f66f7c73cbc863f36f2d1a7b10e313a386841c07ab77bed68c78bc",
+          "hash": "82b74b3e3df921e0c9cb14dd1fde4f8ffd3e754263637c9596ef5a9b945b641f",
           "events": 2,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-boffalora-sopra-ticino/eventi/elenco/?ical=1",
-          "hash": "bb29cf32e9f66f7c73cbc863f36f2d1a7b10e313a386841c07ab77bed68c78bc",
+          "hash": "b4bb1278fd668764bb208d2c5fbbc26a629f7af02ecb072c69f632cc48267c94",
           "events": 2,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-boffalora-sopra-ticino/2026/02/programma-alpinismo-giovanile-2026/",
-          "hash": "1e011377b0d2ec879ceee77a8f6db03a355e73c474a5d658ddbf32dcfa18203c",
+          "hash": "6e5ae6d55cef32a3fdbe161bc0877efc5827d47fd61761e42f504a9fd1130cf5",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-boffalora-sopra-ticino/eventi/",
-          "hash": "2ac69b5d790d14f21034f34607644d0ade1f0c4f7fa4cce00a5dd77c00382e54",
+          "hash": "90df09c38c0f15c08be40fa42493924efcee6675171231f3022993501e4ecc1e",
           "events": 2,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-boffalora-sopra-ticino/2026/07/corso-introduzione-alle-ferrate-scuola-di-escursionismo-ticinum/",
-          "hash": "a8b3c364ba7b7196ad448558a2ae552af59dbd9e0fa3841ffe9601b8389c4208",
+          "hash": "31b1db2f09d68bfce4a0f4cd7c35af75910082d43748a84637ccb4a1d37537c6",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-boffalora-sopra-ticino/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-boffalora-sopra-ticino%2F2026%2F07%2Fcorso-introduzione-alle-ferrate-scuola-di-escursionismo-ticinum%2F",
-          "hash": "1efd6e977f37bfeb693499d865931f6eb3a45b459ef5d3505a55f30c93b83685",
+          "hash": "b715408f31d23f721a7e0b8a302c7fd9273aedd5a981c02c22fa8302ac2f379c",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-boffalora-sopra-ticino/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-boffalora-sopra-ticino%2F2026%2F07%2Fcorso-introduzione-alle-ferrate-scuola-di-escursionismo-ticinum%2F&format=xml",
-          "hash": "e32b9c494b1087fa15da1f7b815b2b5c44beb0035ee47a21220146c3de8bcdcb",
+          "hash": "6e7d4e9168e2676e7e5a7aa66761f578481e898c9caa367216a848122b3c5997",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-boffalora-sopra-ticino/",
-          "hash": "44a8519d8da77fcf70488939395728a92144a65c9f9b8a44e646e365e2758350",
+          "hash": "e280f06459975d40b882e39abded450d9dc26e5f9121efa724f7249bcb87eff0",
           "events": 2,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "hash": "919751f77dcf50bad37cb8f5776f7cffef4022b3f1e5a684aaa01492a3536e8e",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-boffalora-sopra-ticino/eventi/elenco/?outlook-ical=1",
-          "hash": "23cc3d3d38408601dedf6ac2f2a2730d28f3b5596c7b685c9664f6b105c48c7a",
+          "hash": "da4617aa2c958d89cf18f027f50064483ed0e4706e50688dd772733f9c80ac28",
           "events": 2,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-boffalora-sopra-ticino/2025/12/programma-seniores-2026/",
-          "hash": "3752358a4b874385cd7bef5612d29813a13e0106105d1fb94f5738b1170c8f99",
+          "hash": "ff04e161687a634157532676c7e2ab1f648bceafb1fabc81204aefb74a16a688",
           "events": 0,
           "method": null
         }
