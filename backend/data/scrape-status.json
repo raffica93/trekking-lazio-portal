@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-08T13:09:20.686Z",
+  "generatedAt": "2026-09-08T13:10:04.874Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
-    "parsed": 0,
-    "unsupported": 1,
+    "withEvents": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 611
   },
@@ -7471,20 +7471,29 @@
       "directoryId": "9212008",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "https://www.caiivrea.it/events/?ical=1",
       "kind": "ics",
       "template": "icalendar",
       "extractor": "deterministic",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 30,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
+      "hash": "192b27bac64cbd9c04f20a9a5875bec08bafe2bb6305251c12d7d71e13ef175c",
+      "updatedAt": "2026-09-08T13:10:04.874Z",
+      "documents": [
+        {
+          "url": "https://www.caiivrea.it/events/?ical=1",
+          "hash": "bd401106848bc7bb1df55365c46f79a5a9bc6adf2ea2191bc0f5ad9402d2b663",
+          "events": 30,
+          "method": "ics"
+        }
+      ],
+      "methods": [
+        "ics"
+      ],
       "issues": [],
-      "extractedEvents": null
+      "extractedEvents": 30
     },
     {
       "id": "cai-pianezza-9212066",
