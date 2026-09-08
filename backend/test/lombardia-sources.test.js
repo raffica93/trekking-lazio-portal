@@ -13,6 +13,13 @@ const MANTOVA_ICS = 'https://organizzazione.cai.it/sez-mantova/eventi/?ical=1';
 const GALLARATE_ICS = 'https://organizzazione.cai.it/sez-gallarate/eventi/?ical=1';
 const PREMANA_ICS = 'https://organizzazione.cai.it/sez-premana/eventi/?ical=1';
 
+const CASORATE_HTML = 'https://www.caigallarate.it/escursionismo/base/calendario-attivita.html';
+const SUZZARA_PDF = 'https://www.caisuzzara.it/download/Giornalino_CAI_2026.pdf';
+const QUISTELLO_HTML = 'https://www.caiquistello.it/programma-estivo/';
+const MENAGGIO_HTML = 'https://organizzazione.cai.it/sez-menaggio/attivita/escursionismo/';
+const MADESIMO_HTML = 'https://www.caivallespluga.it/calendario';
+const MORBEGNO_HTML = 'https://www.caimorbegno.org/?portfolio=programma-2026';
+
 const BRESCIA_PDF_IDS = [
   'cai-bagolino-9116018',
   'cai-brescia-9216005',
@@ -63,29 +70,76 @@ const MEDA_PDF_IDS = [
   'cai-meda-9216042',
 ];
 
+// HARD1: Quistello + Suzzara left Mantova hub for own calendars.
 const MANTOVA_ICS_IDS = [
   'cai-mantova-9216025',
-  'cai-quistello-9116059',
-  'cai-suzzara-9116097',
 ];
 
+// HARD1: Casorate left Gallarate hub for Gallarate HTML calendario.
 const GALLARATE_ICS_IDS = [
-  'cai-casorate-sempione-9116045',
   'cai-gallarate-9216015',
 ];
 
+// Stuck HARD1 — keep Premana hub ICS (do not invent URLs).
 const PREMANA_ICS_IDS = [
   'cai-esino-lario-9116099',
   'cai-premana-9216089',
 ];
 
+const HARD1_OVERRIDES = [
+  {
+    id: 'cai-casorate-sempione-9116045',
+    url: CASORATE_HTML,
+    kind: 'html',
+    template: 'html-calendario',
+    extractor: 'gemini',
+  },
+  {
+    id: 'cai-suzzara-9116097',
+    url: SUZZARA_PDF,
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+  },
+  {
+    id: 'cai-quistello-9116059',
+    url: QUISTELLO_HTML,
+    kind: 'html',
+    template: 'html-calendario',
+    extractor: 'gemini',
+  },
+  {
+    id: 'cai-menaggio-9216060',
+    url: MENAGGIO_HTML,
+    kind: 'html',
+    template: 'html-calendario',
+    extractor: 'gemini',
+  },
+  {
+    id: 'cai-madesimo-9216104',
+    url: MADESIMO_HTML,
+    kind: 'html',
+    template: 'html-calendario',
+    extractor: 'gemini',
+  },
+  {
+    id: 'cai-morbegno-9216029',
+    url: MORBEGNO_HTML,
+    kind: 'html',
+    template: 'html-calendario',
+    extractor: 'gemini',
+  },
+];
+
 test("Lombardia overrides win over registry discover stubs", () => {
-  assert.equal(LOMBARDIA_SOURCES.length, 87);
+  assert.equal(LOMBARDIA_SOURCES.length, 89);
 
   const pdfCount = LOMBARDIA_SOURCES.filter((s) => s.kind === "pdf").length;
   const icsCount = LOMBARDIA_SOURCES.filter((s) => s.kind === "ics").length;
-  assert.equal(pdfCount, 59);
-  assert.equal(icsCount, 28);
+  const htmlCount = LOMBARDIA_SOURCES.filter((s) => s.kind === "html").length;
+  assert.equal(pdfCount, 60);
+  assert.equal(icsCount, 24);
+  assert.equal(htmlCount, 5);
 
   for (const raw of LOMBARDIA_SOURCES) {
     const source = findSource(raw.id);
@@ -100,12 +154,46 @@ test("Lombardia overrides win over registry discover stubs", () => {
       assert.equal(source.kind, "ics", raw.id);
       assert.equal(source.template, "icalendar", raw.id);
       assert.equal(source.extractor, "deterministic", raw.id);
+    } else if (raw.kind === "html") {
+      assert.equal(source.kind, "html", raw.id);
+      assert.equal(source.template, "html-calendario", raw.id);
+      assert.equal(source.extractor, "gemini", raw.id);
     } else {
       assert.equal(source.kind, "pdf", raw.id);
       assert.equal(source.template, "pdf-programma", raw.id);
       assert.equal(source.extractor, "gemini", raw.id);
     }
   }
+});
+
+test("Lombardia HARD1 replacements (html/pdf overrides)", () => {
+  for (const expected of HARD1_OVERRIDES) {
+    const source = findSource(expected.id);
+    assert.ok(source, expected.id);
+    assert.equal(source.url, expected.url, expected.id);
+    assert.equal(source.kind, expected.kind, expected.id);
+    assert.equal(source.template, expected.template, expected.id);
+    assert.equal(source.extractor, expected.extractor, expected.id);
+    assert.equal(source.enabled, true, expected.id);
+    assert.equal(source.region, "Lombardia", expected.id);
+    assert.equal(source.status, "calendar-found", expected.id);
+    assert.equal(source.calendarUrls[0], expected.url, expected.id);
+  }
+
+  // Stuck: Premana / Esino Lario stay on Premana ICS; Valle Intelvi stays own ICS.
+  for (const id of PREMANA_ICS_IDS) {
+    const source = findSource(id);
+    assert.ok(source, id);
+    assert.equal(source.url, PREMANA_ICS, id);
+    assert.equal(source.kind, "ics", id);
+  }
+  const valleIntelvi = findSource("cai-valle-intelvi-9216130");
+  assert.ok(valleIntelvi);
+  assert.equal(valleIntelvi.kind, "ics");
+  assert.equal(
+    valleIntelvi.url,
+    "https://organizzazione.cai.it/sez-valle-intelvi/eventi/?ical=1"
+  );
 });
 
 test("Lombardia shared hub PDF + ICS urls", () => {
@@ -173,7 +261,7 @@ test("Lombardia shared hub PDF + ICS urls", () => {
     assert.equal(source.template, "icalendar", id);
     assert.equal(source.extractor, "deterministic", id);
   }
-  assert.equal(MANTOVA_ICS_IDS.length, 3);
+  assert.equal(MANTOVA_ICS_IDS.length, 1);
 
   for (const id of GALLARATE_ICS_IDS) {
     const source = findSource(id);
@@ -183,7 +271,7 @@ test("Lombardia shared hub PDF + ICS urls", () => {
     assert.equal(source.template, "icalendar", id);
     assert.equal(source.extractor, "deterministic", id);
   }
-  assert.equal(GALLARATE_ICS_IDS.length, 2);
+  assert.equal(GALLARATE_ICS_IDS.length, 1);
 
   for (const id of PREMANA_ICS_IDS) {
     const source = findSource(id);
@@ -208,9 +296,9 @@ test("Lombardia shared hub PDF + ICS urls", () => {
     ...GALLARATE_ICS_IDS,
     ...PREMANA_ICS_IDS
   ]);
-  assert.equal(hubIds.size, 36);
+  assert.equal(hubIds.size, 33);
   const sezionali = LOMBARDIA_SOURCES.filter((s) => !hubIds.has(s.id));
-  assert.equal(sezionali.length, 51);
+  assert.equal(sezionali.length, 56);
   for (const s of sezionali) {
     assert.notEqual(s.url, BRESCIA_PDF, s.id);
     assert.notEqual(s.url, VALTELLINESE_PDF, s.id);
@@ -224,7 +312,7 @@ test("Lombardia shared hub PDF + ICS urls", () => {
     assert.notEqual(s.url, PREMANA_ICS, s.id);
   }
 
-  // Registry parent links retained for Mantova hub sottosezioni.
+  // Registry parent links retained for Mantova hub sottosezioni (even after HARD1 URL swap).
   const quistello = findSource("cai-quistello-9116059");
   assert.equal(quistello.sectionType, "subsection");
   assert.equal(quistello.parentSectionId, "cai-mantova-9216025");

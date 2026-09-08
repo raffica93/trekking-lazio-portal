@@ -1671,8 +1671,9 @@ const PIEMONTE_SOURCES = [
 
 // Lombardia overrides win over registry discover stubs (same precedence as PIEMONTE/FRIULI).
 // Hubs: Brescia PDF, Valtellinese-Sondrio PDF (+ Teglio sibling), Vimercate, Merate, Mariano Comense,
-// Meda/Lentate, Mantova ICS, Gallarate ICS, Premana ICS.
-// Out of scope: html/facebook/missing, scrapes.
+// Meda/Lentate, Mantova ICS (parent only), Gallarate ICS (parent only), Premana ICS (stuck).
+// HARD1: Casorate/Quistello/Menaggio HTML, Suzzara PDF, Madesimo/Morbegno NEW HTML.
+// Leave stuck as ICS: Premana, Esino Lario, Valle Intelvi. No scrapes.
 const LOMBARDIA_SOURCES = [
   // --- Hub Brescia (shared pdf: Programma-Escursionismo-2026.pdf) ---
   {
@@ -1978,7 +1979,7 @@ const LOMBARDIA_SOURCES = [
     status: 'calendar-found'
   },
 
-  // --- Hub Mantova (shared ics: sez-mantova/eventi/?ical=1) ---
+  // --- Hub Mantova (shared ics: sez-mantova/eventi/?ical=1; Quistello/Suzzara HARD1 overrides below) ---
   {
     id: 'cai-mantova-9216025',
     organizer: 'CAI Mantova',
@@ -1989,38 +1990,8 @@ const LOMBARDIA_SOURCES = [
     enabled: true,
     status: 'calendar-found'
   },
-  {
-    id: 'cai-quistello-9116059',
-    organizer: 'CAI Quistello',
-    url: 'https://organizzazione.cai.it/sez-mantova/eventi/?ical=1',
-    kind: 'ics',
-    template: 'icalendar',
-    extractor: 'deterministic',
-    enabled: true,
-    status: 'calendar-found'
-  },
-  {
-    id: 'cai-suzzara-9116097',
-    organizer: 'CAI Suzzara',
-    url: 'https://organizzazione.cai.it/sez-mantova/eventi/?ical=1',
-    kind: 'ics',
-    template: 'icalendar',
-    extractor: 'deterministic',
-    enabled: true,
-    status: 'calendar-found'
-  },
 
-  // --- Hub Gallarate (shared ics: sez-gallarate/eventi/?ical=1) ---
-  {
-    id: 'cai-casorate-sempione-9116045',
-    organizer: 'CAI Casorate Sempione',
-    url: 'https://organizzazione.cai.it/sez-gallarate/eventi/?ical=1',
-    kind: 'ics',
-    template: 'icalendar',
-    extractor: 'deterministic',
-    enabled: true,
-    status: 'calendar-found'
-  },
+  // --- Hub Gallarate (shared ics: sez-gallarate/eventi/?ical=1; Casorate HARD1 override below) ---
   {
     id: 'cai-gallarate-9216015',
     organizer: 'CAI Gallarate',
@@ -2054,7 +2025,39 @@ const LOMBARDIA_SOURCES = [
     status: 'calendar-found'
   },
 
-  // --- Sezionali (pdf/ics) ---
+  // --- HARD1 replacements (unsupported ICS / missing dig) ---
+  {
+    id: 'cai-casorate-sempione-9116045',
+    organizer: 'CAI Casorate Sempione',
+    url: 'https://www.caigallarate.it/escursionismo/base/calendario-attivita.html',
+    kind: 'html',
+    template: 'html-calendario',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-quistello-9116059',
+    organizer: 'CAI Quistello',
+    url: 'https://www.caiquistello.it/programma-estivo/',
+    kind: 'html',
+    template: 'html-calendario',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-suzzara-9116097',
+    organizer: 'CAI Suzzara',
+    url: 'https://www.caisuzzara.it/download/Giornalino_CAI_2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+
+  // --- Sezionali (pdf/ics/html) ---
   {
     id: 'cai-albiate-9216107',
     organizer: 'CAI Albiate',
@@ -2356,6 +2359,16 @@ const LOMBARDIA_SOURCES = [
     status: 'calendar-found'
   },
   {
+    id: 'cai-madesimo-9216104',
+    organizer: 'CAI Madesimo',
+    url: 'https://www.caivallespluga.it/calendario',
+    kind: 'html',
+    template: 'html-calendario',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
     id: 'cai-malnate-9216067',
     organizer: 'CAI Malnate',
     url: 'https://caimalnate.it/wp-content/uploads/2026/03/calendario-gite-2026-CAI-Malnate-approvato-V2.pdf',
@@ -2368,10 +2381,20 @@ const LOMBARDIA_SOURCES = [
   {
     id: 'cai-menaggio-9216060',
     organizer: 'CAI Menaggio',
-    url: 'https://organizzazione.cai.it/sez-menaggio/eventi/?ical=1',
-    kind: 'ics',
-    template: 'icalendar',
-    extractor: 'deterministic',
+    url: 'https://organizzazione.cai.it/sez-menaggio/attivita/escursionismo/',
+    kind: 'html',
+    template: 'html-calendario',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-morbegno-9216029',
+    organizer: 'CAI Morbegno',
+    url: 'https://www.caimorbegno.org/?portfolio=programma-2026',
+    kind: 'html',
+    template: 'html-calendario',
+    extractor: 'gemini',
     enabled: true,
     status: 'calendar-found'
   },
