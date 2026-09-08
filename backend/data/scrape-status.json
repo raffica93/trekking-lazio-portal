@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T11:49:24.769Z",
+  "generatedAt": "2026-09-08T11:51:39.001Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 556
+    "located": 572
   },
   "sources": [
     {
@@ -1478,98 +1478,20 @@
       "directoryId": "9238006",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "partial",
+      "status": "ok",
       "url": "https://www.caicaserta.it/documenti/Calendario%20escursionistico%202026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 45,
+      "excursions": 16,
       "error": null,
-      "hash": "d73a1835055113dc8c8639204692fc81c6a755f4d363379b2eb95505a9e5fd36",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
-      "documents": [
-        {
-          "url": "https://www.caicaserta.it/documenti/Calendario%20escursionistico%202026.pdf",
-          "hash": "c1e72219e3d259e4ec0a8e886f841cb49206d21bbbf6942766ebc7d28dee1eaa",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicaserta.it/documenti/Programma_CAI_2026.pdf",
-          "hash": "e18ecb9485eb4b307a72c6968234f7819035d8366e1d0396d53ee5f8aead5abe",
-          "events": 125,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicaserta.it/escursioni/etna.pdf",
-          "hash": "370699273b45ead4b66fd959ae7c1f9418b1dfb7677cb40713bb193d19f4fef7",
-          "events": 1,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicaserta.it/escursioni/Via_Francigena_Castelli_Romani.pdf",
-          "hash": "6ea9d8b5d9e1ab0675efa0b4ae109f5b0979e9c535ff11d0bae2e6085152a3e5",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicaserta.it/escursioni/Lifestyle.pdf",
-          "hash": "b35ad400a323db75017cd6c95807a8607bf44d8b62175a693507494701b4ca91",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicaserta.it/escursioni/La%20Laghetta.pdf",
-          "hash": "0d2456fa7383a722b63b28060c60aa4b7a2af114726710cfec3eab63ad533c64",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicaserta.it/escursioni/badia%20di%20cava.pdf",
-          "hash": "5c9b55c6c81f72edb81381411fbaca7a7f87bca558190b7dcc6a3380889adf7c",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicaserta.it/escursioni.html",
-          "hash": "9b4265437357f21539d4e56c1440d0c2553c9ef1a693176f4ce43340b7f069e0",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicaserta.it/",
-          "hash": "34b6f34acab1887c97f13f54b947da397a2c7ea147ab998a25578687bf78b72f",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicaserta.it/documenti/programma%20giovani%202025.pdf",
-          "hash": "e334bf198bbd0facfe789c4c6012b6463939d06719c392f4e4ee8ed16dfcbc15",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicaserta.it/escursioni/Regolamento_Escursioni_Sociali-v2.pdf",
-          "hash": "5df8f4aa0bfe7a67a87c8ddb7c019ce8ba096334a741039de5cd7398d1705a0a",
-          "events": 0,
-          "method": "pdf-text"
-        }
-      ],
-      "methods": [
-        "pdf-text"
-      ],
-      "issues": [
-        {
-          "url": "https://www.caicaserta.it/escursioni/Via_Francigena_Castelli_Romani.pdf",
-          "message": "PDF contains no extractable text; OCR/manual verification required."
-        },
-        {
-          "url": "https://www.caicaserta.it/escursioni/badia%20di%20cava.pdf",
-          "message": "PDF contains no extractable text; OCR/manual verification required."
-        }
-      ],
-      "extractedEvents": 126
+      "hash": "c5a27fab7cd9e89c34cca12dee899f5e55d71b0b24bd59681a6c1756b68d11ef",
+      "updatedAt": "2026-09-08T11:51:39.001Z",
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
     },
     {
       "id": "cai-piedimonte-matese-9238005",
