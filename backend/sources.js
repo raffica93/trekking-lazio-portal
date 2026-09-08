@@ -1668,6 +1668,905 @@ const PIEMONTE_SOURCES = [
   }
 ];
 
+
+// Lombardia overrides win over registry discover stubs (same precedence as PIEMONTE/FRIULI).
+// Hubs: Brescia PDF, Valtellinese-Sondrio PDF (+ Teglio sibling), Vimercate, Merate, Mariano Comense,
+// Meda/Lentate, Mantova ICS, Gallarate ICS, Premana ICS.
+// Out of scope: html/facebook/missing, scrapes.
+const LOMBARDIA_SOURCES = [
+  // --- Hub Brescia (shared pdf: Programma-Escursionismo-2026.pdf) ---
+  {
+    id: 'cai-bagolino-9116018',
+    organizer: 'CAI Bagolino',
+    url: 'https://organizzazione.cai.it/sez-brescia/wp-content/uploads/sites/7/2026/02/Programma-Escursionismo-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-brescia-9216005',
+    organizer: 'CAI Brescia',
+    url: 'https://organizzazione.cai.it/sez-brescia/wp-content/uploads/sites/7/2026/02/Programma-Escursionismo-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-cidneo-o-m-9116019',
+    organizer: 'CAI Cidneo O.m.',
+    url: 'https://organizzazione.cai.it/sez-brescia/wp-content/uploads/sites/7/2026/02/Programma-Escursionismo-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-collebeato-9116110',
+    organizer: 'CAI Collebeato',
+    url: 'https://organizzazione.cai.it/sez-brescia/wp-content/uploads/sites/7/2026/02/Programma-Escursionismo-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-iseo-diventata-sezione-9116023',
+    organizer: 'CAI Iseo (diventata Sezione)',
+    url: 'https://organizzazione.cai.it/sez-brescia/wp-content/uploads/sites/7/2026/02/Programma-Escursionismo-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-manerbio-9116106',
+    organizer: 'CAI Manerbio',
+    url: 'https://organizzazione.cai.it/sez-brescia/wp-content/uploads/sites/7/2026/02/Programma-Escursionismo-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-marone-9116024',
+    organizer: 'CAI Marone',
+    url: 'https://organizzazione.cai.it/sez-brescia/wp-content/uploads/sites/7/2026/02/Programma-Escursionismo-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-nave-9116093',
+    organizer: 'CAI Nave',
+    url: 'https://organizzazione.cai.it/sez-brescia/wp-content/uploads/sites/7/2026/02/Programma-Escursionismo-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-odolo-9116025',
+    organizer: 'CAI Odolo',
+    url: 'https://organizzazione.cai.it/sez-brescia/wp-content/uploads/sites/7/2026/02/Programma-Escursionismo-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-provaglio-d-iseo-9116123',
+    organizer: 'CAI Provaglio D\'iseo',
+    url: 'https://organizzazione.cai.it/sez-brescia/wp-content/uploads/sites/7/2026/02/Programma-Escursionismo-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-santicolo-9116029',
+    organizer: 'CAI Santicolo',
+    url: 'https://organizzazione.cai.it/sez-brescia/wp-content/uploads/sites/7/2026/02/Programma-Escursionismo-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+
+  // --- Hub Valtellinese-Sondrio (shared pdf: 2026_Programma_gite.pdf) ---
+  {
+    id: 'cai-berbenno-9116142',
+    organizer: 'CAI Berbenno',
+    url: 'https://www.caivaltellinese.it/wp/wp-content/uploads/2026/01/2026_Programma_gite.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-ponte-in-valtellina-9116109',
+    organizer: 'CAI Ponte In Valtellina',
+    url: 'https://www.caivaltellinese.it/wp/wp-content/uploads/2026/01/2026_Programma_gite.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-tirano-9116089',
+    organizer: 'CAI Tirano',
+    url: 'https://www.caivaltellinese.it/wp/wp-content/uploads/2026/01/2026_Programma_gite.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-valdidentro-9116140',
+    organizer: 'CAI Valdidentro',
+    url: 'https://www.caivaltellinese.it/wp/wp-content/uploads/2026/01/2026_Programma_gite.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-valtellinese-sondrio-9216001',
+    organizer: 'CAI Valtellinese-Sondrio',
+    url: 'https://www.caivaltellinese.it/wp/wp-content/uploads/2026/01/2026_Programma_gite.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+
+  // --- Hub Teglio sibling PDF (2026_Programma_gite_CAI_TEGLIO.pdf) ---
+  {
+    id: 'cai-teglio-9216158',
+    organizer: 'CAI Teglio',
+    url: 'https://www.caivaltellinese.it/wp/wp-content/uploads/2026/01/2026_Programma_gite_CAI_TEGLIO.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-teglio-diventata-sezione-9116143',
+    organizer: 'CAI Teglio (diventata Sezione)',
+    url: 'https://www.caivaltellinese.it/wp/wp-content/uploads/2026/01/2026_Programma_gite_CAI_TEGLIO.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+
+  // --- Hub Vimercate (shared pdf: Programma-Escursionismo-2026-x-stampa-D-.pdf) ---
+  {
+    id: 'cai-arcore-9116092',
+    organizer: 'CAI Arcore',
+    url: 'https://www.caivimercate.it/wp-content/uploads/2026/03/Programma-Escursionismo-2026-x-stampa-D-.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-burago-molgora-9116134',
+    organizer: 'CAI Burago Molgora',
+    url: 'https://www.caivimercate.it/wp-content/uploads/2026/03/Programma-Escursionismo-2026-x-stampa-D-.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-cavenago-brianza-9116136',
+    organizer: 'CAI Cavenago Brianza',
+    url: 'https://www.caivimercate.it/wp-content/uploads/2026/03/Programma-Escursionismo-2026-x-stampa-D-.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-sulbiate-9116121',
+    organizer: 'CAI Sulbiate',
+    url: 'https://www.caivimercate.it/wp-content/uploads/2026/03/Programma-Escursionismo-2026-x-stampa-D-.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-vimercate-9216048',
+    organizer: 'CAI Vimercate',
+    url: 'https://www.caivimercate.it/wp-content/uploads/2026/03/Programma-Escursionismo-2026-x-stampa-D-.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+
+  // --- Hub Merate (shared pdf: programma-attivita-2026.pdf) ---
+  {
+    id: 'cai-merate-9216023',
+    organizer: 'CAI Merate',
+    url: 'https://www.caimerate.it/wp/wp-content/uploads/programma-attivita-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-usmate-9116064',
+    organizer: 'CAI Usmate',
+    url: 'https://www.caimerate.it/wp/wp-content/uploads/programma-attivita-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+
+  // --- Hub Mariano Comense (shared pdf: LibretttoCAI-2026.pdf) ---
+  {
+    id: 'cai-arosio-9116060',
+    organizer: 'CAI Arosio',
+    url: 'http://www.caimariano.it/wp-content/uploads/2025/12/LibretttoCAI-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-mariano-comense-9216077',
+    organizer: 'CAI Mariano Comense',
+    url: 'http://www.caimariano.it/wp-content/uploads/2025/12/LibretttoCAI-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+
+  // --- Hub Meda / Lentate (shared pdf: IDS26_Meda_LOCANDINA_.pdf) ---
+  {
+    id: 'cai-lentate-sul-seveso-9116061',
+    organizer: 'CAI Lentate Sul Seveso',
+    url: 'https://www.comune.meda.mb.it/export/sites/default/.galleries/documenti/eventi-news/IDS26_Meda_LOCANDINA_.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-meda-9216042',
+    organizer: 'CAI Meda',
+    url: 'https://www.comune.meda.mb.it/export/sites/default/.galleries/documenti/eventi-news/IDS26_Meda_LOCANDINA_.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+
+  // --- Hub Mantova (shared ics: sez-mantova/eventi/?ical=1) ---
+  {
+    id: 'cai-mantova-9216025',
+    organizer: 'CAI Mantova',
+    url: 'https://organizzazione.cai.it/sez-mantova/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-quistello-9116059',
+    organizer: 'CAI Quistello',
+    url: 'https://organizzazione.cai.it/sez-mantova/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-suzzara-9116097',
+    organizer: 'CAI Suzzara',
+    url: 'https://organizzazione.cai.it/sez-mantova/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+
+  // --- Hub Gallarate (shared ics: sez-gallarate/eventi/?ical=1) ---
+  {
+    id: 'cai-casorate-sempione-9116045',
+    organizer: 'CAI Casorate Sempione',
+    url: 'https://organizzazione.cai.it/sez-gallarate/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-gallarate-9216015',
+    organizer: 'CAI Gallarate',
+    url: 'https://organizzazione.cai.it/sez-gallarate/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+
+  // --- Hub Premana (shared ics: sez-premana/eventi/?ical=1) ---
+  {
+    id: 'cai-esino-lario-9116099',
+    organizer: 'CAI Esino Lario',
+    url: 'https://organizzazione.cai.it/sez-premana/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-premana-9216089',
+    organizer: 'CAI Premana',
+    url: 'https://organizzazione.cai.it/sez-premana/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+
+  // --- Sezionali (pdf/ics) ---
+  {
+    id: 'cai-albiate-9216107',
+    organizer: 'CAI Albiate',
+    url: 'https://organizzazione.cai.it/sez-albiate/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-arsago-seprio-9216153',
+    organizer: 'CAI Arsago Seprio',
+    url: 'https://www.caiarsago.it/uploads/ckeditor/attachments/92/Programma_2026_Arsago_Completo_v3.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-barlassina-9216090',
+    organizer: 'CAI Barlassina',
+    url: 'https://www.caibarlassina.org/uploads/9/5/4/2/95425450/locandina_gite_sociali_2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-besozzo-superiore-9216026',
+    organizer: 'CAI Besozzo Superiore',
+    url: 'https://organizzazione.cai.it/sez-besozzo-superiore/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-boffalora-sopra-ticino-9216114',
+    organizer: 'CAI Boffalora Sopra Ticino',
+    url: 'https://organizzazione.cai.it/sez-boffalora-sopra-ticino/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-borno-9216113',
+    organizer: 'CAI Borno',
+    url: 'https://www.caiborno.it/_files/ugd/cf96c6_184faae3a5c04a3687bb070840761b9c.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-bozzolo-9216140',
+    organizer: 'CAI Bozzolo',
+    url: 'https://organizzazione.cai.it/sez-bozzolo/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-brugherio-9216072',
+    organizer: 'CAI Brugherio',
+    url: 'https://www.caibrugherio.com/data/sites/1/documenti/programma2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-carate-brianza-9216030',
+    organizer: 'CAI Carate Brianza',
+    url: 'https://www.caicaratebrianza.it/phocadownload/Programmi_Tascabili/Programma%20CAI%202026%20WEB.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-caslino-d-erba-9216063',
+    organizer: 'CAI Caslino D\'erba',
+    url: 'https://organizzazione.cai.it/sez-caslino-derba/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-castellanza-9216036',
+    organizer: 'CAI Castellanza',
+    url: 'https://www.caicastellanza.it/wp-content/uploads/2026/01/cai-_programma-2026-def.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-castiglione-stiviere-9216096',
+    organizer: 'CAI Castiglione Stiviere',
+    url: 'https://www.caicastiglione.it/events/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-cedegolo-9216062',
+    organizer: 'CAI Cedegolo',
+    url: 'https://organizzazione.cai.it/sez-cedegolo/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-cermenate-9216116',
+    organizer: 'CAI Cermenate',
+    url: 'https://organizzazione.cai.it/sez-cermenate/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-cernusco-sul-naviglio-9216051',
+    organizer: 'CAI Cernusco Sul Naviglio',
+    url: 'https://organizzazione.cai.it/sez-cernusco-sul-naviglio/wp-content/uploads/sites/19/2025/12/Locandina-programma-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-chiari-9216052',
+    organizer: 'CAI Chiari',
+    url: 'https://www.caichiari.it/images/documenti/2026/2026_libretto.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-chiavenna-9216018',
+    organizer: 'CAI Chiavenna',
+    url: 'https://www.caichiavenna.it/wp-content/uploads/2026/04/programma_estivo_2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-coccaglio-9216139',
+    organizer: 'CAI Coccaglio',
+    url: 'http://www.cai-coccaglio.it/files/Programma-2026-completo.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-codogno-9216071',
+    organizer: 'CAI Codogno',
+    url: 'https://www.caicodogno.it/media/137807/a4-programma-2026-one-page.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-colico-9216123',
+    organizer: 'CAI Colico',
+    url: 'https://www.caicolico.it/_files/ugd/f57be4_a702a4a3971c4b099eefeec536ce4a42.pdf?index=true',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-cornaredo-9216149',
+    organizer: 'CAI Cornaredo',
+    url: 'https://organizzazione.cai.it/sez-cornaredo/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-corsico-9216115',
+    organizer: 'CAI Corsico',
+    url: 'https://caicorsico.it/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-crema-9216027',
+    organizer: 'CAI Crema',
+    url: 'https://caicrema.it/wp-content/uploads/2026/03/Pieghevole-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-desenzano-9216136',
+    organizer: 'CAI Desenzano',
+    url: 'https://organizzazione.cai.it/sez-desenzano/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-dongo-9216131',
+    organizer: 'CAI Dongo',
+    url: 'http://www.caidongo.it/wp-content/uploads/2026/02/Calendario-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-gazzada-schianno-9216148',
+    organizer: 'CAI Gazzada Schianno',
+    url: 'https://www.caigazzadaschianno.it/images/dettaglio-escursioni/2026escursioni/Calendario-escursioni26.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-germignaga-9216031',
+    organizer: 'CAI Germignaga',
+    url: 'https://www.caigermignaga.it/wp-content/uploads/2026/07/PROGRAMMA-SENIOR-AGOSTO-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-inveruno-9216128',
+    organizer: 'CAI Inveruno',
+    url: 'https://www.caiinveruno.it/doc/2026/Locandina%20programma%20CAI%20INVERUNO%202026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-iseo-9216157',
+    organizer: 'CAI Iseo',
+    url: 'https://organizzazione.cai.it/sez-iseo/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-livigno-9216120',
+    organizer: 'CAI Livigno',
+    url: 'https://organizzazione.cai.it/sez-livigno/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-malnate-9216067',
+    organizer: 'CAI Malnate',
+    url: 'https://caimalnate.it/wp-content/uploads/2026/03/calendario-gite-2026-CAI-Malnate-approvato-V2.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-menaggio-9216060',
+    organizer: 'CAI Menaggio',
+    url: 'https://organizzazione.cai.it/sez-menaggio/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-nerviano-9216100',
+    organizer: 'CAI Nerviano',
+    url: 'https://www.cainerviano.it/images/CAI/Documents/2026/2026_Varie/2025_11_21_Programma_CAI_2026_Stampa_013.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-paderno-dugnano-9216057',
+    organizer: 'CAI Paderno Dugnano',
+    url: 'https://www.caipadernodugnano.it/events/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-parabiago-9216138',
+    organizer: 'CAI Parabiago',
+    url: 'https://www.caiparabiago.it/wp-content/uploads/2025/12/Programma-CAI-2026-Web-2.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-pavia-9216012',
+    organizer: 'CAI Pavia',
+    url: 'https://www.caipavia.it/doc/2026/CaiPV2026-Riferimenti.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-rho-9216021',
+    organizer: 'CAI Rho',
+    url: 'https://organizzazione.cai.it/sez-rho/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-romano-di-lombardia-9216087',
+    organizer: 'CAI Romano Di Lombardia',
+    url: 'https://organizzazione.cai.it/sez-romano-di-lombardia/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-rovagnate-9216068',
+    organizer: 'CAI Rovagnate',
+    url: 'https://www.cairovagnate.it/wp-content/uploads/2026/02/Calendario-26-A3-pdf_compressed-1.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-s-e-m-9216028',
+    organizer: 'CAI S.e.m.',
+    url: 'https://www.caisem.org/sezione/gitesociali/pdf/GiteSEM2026.pdf?ed1601',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-salo-9216076',
+    organizer: 'CAI Salo\'',
+    url: 'https://www.caisalo.it/wp-content/uploads/Libretto_CAI_2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-sesto-calende-9216044',
+    organizer: 'CAI Sesto Calende',
+    url: 'https://caisestocalende.it/wp-content/uploads/2026/01/Libretto-Programma-2026-CAI-SESTO-CALENDE.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-sesto-s-giovanni-9216020',
+    organizer: 'CAI Sesto S.giovanni',
+    url: 'https://www.caisestosg.it/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-somma-lombardo-9216065',
+    organizer: 'CAI Somma Lombardo',
+    url: 'https://caisomma.it/wp-content/uploads/pdf/Escursioni/2026/SIEL_Programma%20Escursionistico%202026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-valle-intelvi-9216130',
+    organizer: 'CAI Valle Intelvi',
+    url: 'https://organizzazione.cai.it/sez-valle-intelvi/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-valmadrera-9216081',
+    organizer: 'CAI Valmadrera',
+    url: 'https://organizzazione.cai.it/sez-valmadrera/wp-content/uploads/sites/56/2026/03/Calendario-attivita-2026_rev.04_16-03-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-valmalenco-9216112',
+    organizer: 'CAI Valmalenco',
+    url: 'https://www.caivalmalenco.it/Sites/407/WebExplorer/CAI/Attivita/Programmi/programmaValmalenco2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-varese-9216009',
+    organizer: 'CAI Varese',
+    url: 'https://www.caivarese.it/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-veduggio-9216147',
+    organizer: 'CAI Veduggio',
+    url: 'https://organizzazione.cai.it/sez-veduggio/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-vigevano-9216013',
+    organizer: 'CAI Vigevano',
+    url: 'https://www.caivigevano.it/wp-content/uploads/2025/12/Libretto_26-1.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-vimodrone-9216151',
+    organizer: 'CAI Vimodrone',
+    url: 'https://www.caivimodrone.it/deposito/File/2026/CaiVimo2026.pdf.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+];
+
 let NATIONAL_REGISTRY = { sections: [] };
 try { NATIONAL_REGISTRY = require('./data/cai-sections.json'); }
 catch (error) { if (error.code !== 'MODULE_NOT_FOUND') throw error; }
@@ -1695,6 +2594,7 @@ const valleDaostaOverrideIds = new Set(VALLE_DAOSTA_SOURCES.map(s => s.id));
 const venetoOverrideIds = new Set(VENETO_SOURCES.map(s => s.id));
 const friuliOverrideIds = new Set(FRIULI_SOURCES.map(s => s.id));
 const piemonteOverrideIds = new Set(PIEMONTE_SOURCES.map(s => s.id));
+const lombardiaOverrideIds = new Set(LOMBARDIA_SOURCES.map(s => s.id));
 const overrideIds = new Set([
   ...lazioOverrideIds,
   ...abruzzoOverrideIds,
@@ -1704,7 +2604,8 @@ const overrideIds = new Set([
   ...valleDaostaOverrideIds,
   ...venetoOverrideIds,
   ...friuliOverrideIds,
-  ...piemonteOverrideIds
+  ...piemonteOverrideIds,
+  ...lombardiaOverrideIds
 ]);
 
 // Override scrape fields (url/kind/template/extractor/enabled) must win over
@@ -1744,6 +2645,10 @@ const SOURCES = [
   })),
   ...PIEMONTE_SOURCES.map(source => mergeOverrideSource(source, {
     defaultRegion: 'Piemonte',
+    lookup: (id) => registryById.get(id)
+  })),
+  ...LOMBARDIA_SOURCES.map(source => mergeOverrideSource(source, {
+    defaultRegion: 'Lombardia',
     lookup: (id) => registryById.get(id)
   })),
   ...NATIONAL_REGISTRY.sections.filter(source =>
@@ -1794,6 +2699,7 @@ module.exports = {
   VENETO_SOURCES,
   FRIULI_SOURCES,
   PIEMONTE_SOURCES,
+  LOMBARDIA_SOURCES,
   NATIONAL_REGISTRY,
   enabledSources,
   findSource,
