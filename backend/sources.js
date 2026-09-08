@@ -2567,6 +2567,126 @@ const LOMBARDIA_SOURCES = [
   },
 ];
 
+// Trentino-Alto Adige overrides win over registry discover stubs (same precedence as LOMBARDIA/PIEMONTE).
+// PDF Gemini pdf-programma for Alto Adige sezioni + SAT Trentino; ICS deterministic for SAT Cavalese.
+// Keep HTTP URLs as discovered (caiegna.it, satmale.it, sattrento.it). Out of scope: html/website-only, scrapes.
+const TRENTINO_SOURCES = [
+  // --- Alto Adige sezioni (organizzazione.cai.it / caiegna.it PDFs) ---
+  {
+    id: 'cai-appiano-c-a-i-a-a-9219001',
+    organizer: 'CAI Appiano C.a.i. A.a.',
+    url: 'https://organizzazione.cai.it/sez-appiano-caiaa/wp-content/uploads/sites/152/2025/12/PROGRAMMA-ATTIVITA-CAI-APPIANO-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-bolzano-9219002',
+    organizer: 'CAI Bolzano',
+    url: 'https://organizzazione.cai.it/sez-bolzano-caiaa/wp-content/uploads/sites/6/2025/12/Attivita-Cai-2026_compressed.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-bronzolo-c-a-i-a-a-9219004',
+    organizer: 'CAI Bronzolo C.a.i. A.a.',
+    url: 'https://organizzazione.cai.it/sez-bronzolo/wp-content/uploads/sites/163/2026/01/Calendario-2026-Cai-Bronzolo_Optimized-1.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-egna-c-a-i-a-a-9219007',
+    organizer: 'CAI Egna C.a.i. A.a.',
+    url: 'http://www.caiegna.it/wp-content/uploads/Programma-2026_2_compressed.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  // --- SAT Trentino PDF sezionali ---
+  {
+    id: 'cai-s-a-t-ledrense-9118033',
+    organizer: 'S.a.t. Ledrense',
+    url: 'https://www.satledrense.it/wp-content/uploads/2026/02/Attivita-SAT-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-s-a-t-male-9118036',
+    organizer: "S.a.t. Male'",
+    url: 'http://www.satmale.it/wp-content/uploads/2026/02/Sat-di-Male-programma-attivita-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-s-a-t-mori-9118041',
+    organizer: 'S.a.t. Mori',
+    url: 'https://www.sat-mori.it/app/download/15433973123/Sat+Mori+2026_Libretto_v3_Optimized3.pdf?t=1785509041',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-s-a-t-pergine-9118043',
+    organizer: 'S.a.t. Pergine',
+    url: 'https://www.satpergine.it/wp-content/uploads/2026/02/SAT_Programma-2026-WEB.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-s-a-t-s-o-s-a-t-9118061',
+    organizer: 'S.a.t. S.o.s.a.t.',
+    url: 'https://www.sosat.it/wp-content/uploads/2026/01/SOSAT_Programma-guide-2026_WEB.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-s-a-t-trento-9118068',
+    organizer: 'S.a.t. Trento',
+    url: "http://www.sattrento.it/PROGRAMMA%20ATTIVITA'%20SAT%20TRENTO%202026_def.pdf",
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  // --- SAT Cavalese ICS ---
+  {
+    id: 'cai-s-a-t-cavalese-9118022',
+    organizer: 'S.a.t. Cavalese',
+    url: 'https://www.satcavalese.it/events/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  }
+];
+
+
 let NATIONAL_REGISTRY = { sections: [] };
 try { NATIONAL_REGISTRY = require('./data/cai-sections.json'); }
 catch (error) { if (error.code !== 'MODULE_NOT_FOUND') throw error; }
@@ -2595,6 +2715,7 @@ const venetoOverrideIds = new Set(VENETO_SOURCES.map(s => s.id));
 const friuliOverrideIds = new Set(FRIULI_SOURCES.map(s => s.id));
 const piemonteOverrideIds = new Set(PIEMONTE_SOURCES.map(s => s.id));
 const lombardiaOverrideIds = new Set(LOMBARDIA_SOURCES.map(s => s.id));
+const trentinoOverrideIds = new Set(TRENTINO_SOURCES.map(s => s.id));
 const overrideIds = new Set([
   ...lazioOverrideIds,
   ...abruzzoOverrideIds,
@@ -2605,7 +2726,8 @@ const overrideIds = new Set([
   ...venetoOverrideIds,
   ...friuliOverrideIds,
   ...piemonteOverrideIds,
-  ...lombardiaOverrideIds
+  ...lombardiaOverrideIds,
+  ...trentinoOverrideIds
 ]);
 
 // Override scrape fields (url/kind/template/extractor/enabled) must win over
@@ -2649,6 +2771,10 @@ const SOURCES = [
   })),
   ...LOMBARDIA_SOURCES.map(source => mergeOverrideSource(source, {
     defaultRegion: 'Lombardia',
+    lookup: (id) => registryById.get(id)
+  })),
+  ...TRENTINO_SOURCES.map(source => mergeOverrideSource(source, {
+    defaultRegion: 'Trentino-Alto Adige',
     lookup: (id) => registryById.get(id)
   })),
   ...NATIONAL_REGISTRY.sections.filter(source =>
@@ -2700,6 +2826,7 @@ module.exports = {
   FRIULI_SOURCES,
   PIEMONTE_SOURCES,
   LOMBARDIA_SOURCES,
+  TRENTINO_SOURCES,
   NATIONAL_REGISTRY,
   enabledSources,
   findSource,
