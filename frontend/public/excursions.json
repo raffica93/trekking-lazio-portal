@@ -7747,7 +7747,7 @@
     "cai-cefalu-9246016": "2a344357dd9785a45647589f8069df75974604d173d8f9af281e580c9264b199",
     "cai-pistoia-9226007": "8cf0ad14b002453eed3a23d9f12ca1853628a6ddf89bf77ec6c6b96f05eaa2d4",
     "cai-sansepolcro-9226022": "e0ca6e7e4c9f3a9a56d70b67856527e837387b877b4bb0c2a554a074870ec9af",
-    "cai-valenza-9212057": "472e15acd84c8b5501c70e3b537982349e5fdddaeef28e6c291e9c8fe4254f99",
+    "cai-valenza-9212057": "2a4aa4166625f56addcf57c3df6e486eb25f002393224b82b401379e481f200d",
     "cai-montagna-pistoiese-maresca-9226015": "ad4a11b72dbaa7c5fb308ededa31bf703e6ed5081df60b76dad4f7d3b5556adb",
     "cai-scandicci-9226027": "2882946e87db86d7f5ac29c9566d6c1009f2c824b5e5c406e8d67914c4480a1d",
     "cai-pontedera-9226025": "95e501c962082f8dcba4c9bacd2895356dc666af2f69611e60a87debace3b4a1",
@@ -7839,12 +7839,12 @@
     "cai-pieve-di-soligo-9220054": "49622492f7578db3b38ba5333bca92df7ee38cfba0fb5f3bc416d37d042fc8e6",
     "cai-varallo-sesia-9212002": "9f9cb7746b57ec270dde2b94d44609d41ecf1e075c7bc825453c4dcc37897280"
   },
-  "generatedAt": "2026-09-08T13:07:18.850Z",
+  "generatedAt": "2026-09-08T13:08:18.359Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 1,
+    "withEvents": 0,
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,

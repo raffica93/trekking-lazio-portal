@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-08T13:07:18.859Z",
+  "generatedAt": "2026-09-08T13:08:18.372Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 1,
+    "withEvents": 0,
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
@@ -7799,8 +7799,8 @@
       "enabled": true,
       "excursions": 0,
       "error": null,
-      "hash": "472e15acd84c8b5501c70e3b537982349e5fdddaeef28e6c291e9c8fe4254f99",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "2a4aa4166625f56addcf57c3df6e486eb25f002393224b82b401379e481f200d",
+      "updatedAt": "2026-09-08T13:08:18.372Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-valenza/eventi/?ical=1",
@@ -7810,67 +7810,67 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-valenza/attivita/",
-          "hash": "bb235ddb5aeb82ecea9ffddf78f3e5325ea7c7140f8c8664a1aa341b446b0a2a",
+          "hash": "75517ba0ebce27861f763e67bd74f6784b1129459a9d1be03527d1e13c7a14c2",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-valenza/2026/04/gita-domenica-3-maggio-2026-pella-lago-dorta-viaggio-in-pullman/",
-          "hash": "3753f6926210916cf3e8bf5206bedcfb199c50cd84ea12992612c8291fee1927",
+          "hash": "9d4549a3068eeec3f3734890618699703fac83acfb1821e12ea7737623b44bd6",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-valenza/2025/09/trekking-ottobre-2026-pantelleria/",
-          "hash": "34b07616ecdfef01bc0641ac584aaf47fbe8cb55bf64c1a1c265aeb3c8461e87",
+          "hash": "73accd934bc629a9234cf8335579da5d8466af9e1c06a73db9b165b04b7ee3c6",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-valenza/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-valenza%2Fattivita%2F",
-          "hash": "bbcc24fc1332a7325c4de6c1bed9e2636508beb210e0744885601e35a4a179b3",
+          "hash": "b5f436bfe9ccaf10909dcb483ba9530795a9e8dc8e52b9bb59682e9bec94c595",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-valenza/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-valenza%2Fattivita%2F&format=xml",
-          "hash": "4af4c899536896b45bf0ac316e40d772265863f07ffa240c8b58131272405ec0",
+          "hash": "5f65b0e1421e61d54137f4fb05545ba4cffad5642bb57b6017571bd76d7ccbc3",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-valenza/",
-          "hash": "f06fc6206152df1465f5383c189fd1f6517157eb0ab721ffbf84516b0610364d",
+          "hash": "27ac214e70d566f730c1560f0b9b8fc5357737dc5f7b5294dcbc65e1cb0539b4",
           "events": 5,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "hash": "919751f77dcf50bad37cb8f5776f7cffef4022b3f1e5a684aaa01492a3536e8e",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-valenza/2026/05/escursione-domenica-17-maggio-2026-con-il-cai-di-acqui-terme/",
-          "hash": "18d65d132948b08864e6f886ed2fd25f529fa721f85b7fdd1db0345fa72a40a7",
+          "hash": "37d22605354d5a63954b70c6a6c089df7678c3b448bd72601ef0a3ed592b91f2",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-valenza/2026/03/domenica-19-aprile-2026-escursione-biella-oropa-e-visita-turistica-viaggio-in-pullman/",
-          "hash": "35f445325ee125726247857a659f86ff2ecd849ef2e16810cba0dd26a0a9e804",
+          "hash": "8fd6af77722e88850598d4bec75672d70046e52762c4036cfa164643faa2ce8c",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-valenza/2026/03/escursione-domenica-22-marzo-2026-genova-casella/",
-          "hash": "0feca87cfee11b01a4c66f59a104b31b22a352af998296ad9138e12aa9b52745",
+          "hash": "139a18f3aaace6bc386b8d7f705ed8926da5be3d42aa310b08e8330bf9176285",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-valenza/2026/01/gita-domenica-22-febbraio-2026-in-pullman-genova-voltri-e-per-i-turisti-parco-villa-duchessa-di-galliera-a-genova/",
-          "hash": "1ad235c0453c595f817799f094d2ab32fa20fd9443de6852d35b8f72882d25f5",
+          "hash": "e20901ca2c1e54a2ff311398e1426632ccf1f50f1ddbbe7b26c1681673d86a53",
           "events": 0,
           "method": null
         }
