@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-08T12:06:05.893Z",
+  "generatedAt": "2026-09-08T12:08:02.223Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
-    "parsed": 0,
+    "withEvents": 1,
+    "parsed": 1,
     "unsupported": 0,
-    "failed": 1,
+    "failed": 0,
     "located": 611
   },
   "sources": [
@@ -2301,20 +2301,29 @@
       "directoryId": "9220054",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "https://www.caipievedisoligo.it/index.php/eventi/?ical=1",
       "kind": "ics",
       "template": "icalendar",
       "extractor": "deterministic",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 8,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
+      "hash": "49622492f7578db3b38ba5333bca92df7ee38cfba0fb5f3bc416d37d042fc8e6",
+      "updatedAt": "2026-09-08T12:08:02.223Z",
+      "documents": [
+        {
+          "url": "https://www.caipievedisoligo.it/index.php/eventi/?ical=1",
+          "hash": "c3d468d9d2026ac72325ea138c76785d76c5e36f4e8f467d8b171b1dea7516a6",
+          "events": 8,
+          "method": "ics"
+        }
+      ],
+      "methods": [
+        "ics"
+      ],
       "issues": [],
-      "extractedEvents": null
+      "extractedEvents": 8
     },
     {
       "id": "cai-recoaro-terme-9220045",
