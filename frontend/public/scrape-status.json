@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T11:42:52.983Z",
+  "generatedAt": "2026-09-08T11:45:14.571Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 475
+    "located": 503
   },
   "sources": [
     {
@@ -1390,16 +1390,16 @@
       "directoryId": "9238004",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "http://www.caiavellino.it/images/programma/Programma_Attivita_CAI_Avellino_2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 28,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
+      "hash": "25a74b275f63a9681ff4c1214ca4c1b98163c6ac7dbd7ad9d47deb55e2d5fed2",
+      "updatedAt": "2026-09-08T11:45:14.571Z",
       "documents": [],
       "methods": [],
       "issues": [],
