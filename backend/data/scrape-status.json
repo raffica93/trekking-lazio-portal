@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T11:19:06.818Z",
+  "generatedAt": "2026-09-08T11:23:03.480Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 335
+    "located": 342
   },
   "sources": [
     {
@@ -883,16 +883,16 @@
       "directoryId": "9234024",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "failed",
+      "status": "ok",
       "url": "https://www.caicarsoli.it/allegati/upload/calendario-sociale-2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
-      "error": "Gemini API 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a",
-      "hash": null,
-      "updatedAt": "2026-09-06T12:19:27.406Z",
+      "excursions": 8,
+      "error": null,
+      "hash": "e68f91cccf92a8422afb7b43e95117070e543691af51b34c94fb5ecfa98cccbd",
+      "updatedAt": "2026-09-08T11:23:03.480Z",
       "documents": [],
       "methods": [],
       "issues": [],
