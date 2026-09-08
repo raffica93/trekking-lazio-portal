@@ -7731,7 +7731,7 @@
     "cai-scopello-9112030": "b1ff2471c469774528918485eb41ebea86452a156ccf6f56ed9c74e03a50a77f",
     "cai-susa-9212004": "973a769d1be2961254ff72177ff988a7ecb5835d20100ab4faee4caa885b7d97",
     "cai-foggia-9240003": "75fd1513c7e21e81d34c2e43a6c842b85481f0ab5cc056df0fb888592e280957",
-    "cai-ceva-9212058": "a99b8ece3f17b1c800af2e9a8ad619614f97568b3f30e6e403c395defd8ad397",
+    "cai-ceva-9212058": "14bd39bd4f0b727b178c2993b3898557e8a11b0721f6da08818b18103091c58c",
     "cai-bari-9240002": "c69471cf9a8f1b55885ecc041497bca06087bccfe2a7f3c2d2ba4e6e06c95dad",
     "cai-lecce-9240005": "c153e0930b79b3296af6786134d8b92d2878e7b7eeb34d41db8ecd819a79898f",
     "cai-barga-9226024": "a33ac9b6e5ed81dbcd9add60fa3f301212d1033e01523eee89913f8d43fb21fe",
@@ -7839,12 +7839,12 @@
     "cai-pieve-di-soligo-9220054": "49622492f7578db3b38ba5333bca92df7ee38cfba0fb5f3bc416d37d042fc8e6",
     "cai-varallo-sesia-9212002": "9f9cb7746b57ec270dde2b94d44609d41ecf1e075c7bc825453c4dcc37897280"
   },
-  "generatedAt": "2026-09-08T13:04:07.792Z",
+  "generatedAt": "2026-09-08T13:05:10.086Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 1,
+    "withEvents": 0,
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,

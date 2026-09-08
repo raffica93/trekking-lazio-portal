@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-08T13:04:07.803Z",
+  "generatedAt": "2026-09-08T13:05:10.096Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 1,
+    "withEvents": 0,
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
@@ -7419,8 +7419,8 @@
       "enabled": true,
       "excursions": 0,
       "error": null,
-      "hash": "a99b8ece3f17b1c800af2e9a8ad619614f97568b3f30e6e403c395defd8ad397",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "14bd39bd4f0b727b178c2993b3898557e8a11b0721f6da08818b18103091c58c",
+      "updatedAt": "2026-09-08T13:05:10.096Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-ceva/eventi/?ical=1",
@@ -7430,25 +7430,25 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-ceva/",
-          "hash": "69021fd638f0ed417249cade83ba60e8c0d36407a3b974450cd7ec91d53d44a9",
+          "hash": "59643c8f9b72d07aa818a1e4d9c5bc467d2ce3e930285c0ed79db263e94ac27b",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "hash": "919751f77dcf50bad37cb8f5776f7cffef4022b3f1e5a684aaa01492a3536e8e",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-ceva/2026/08/domenica-23-agosto-escursione-in-valle-stura/",
-          "hash": "03e6b30a41e820958902d274ce3c0e5f6b121a8021b5cded4bb45510adb51efe",
+          "hash": "d832e8e47af2008b0c948f298d772e36b31b4169b84e01bdda60eb23adb3552a",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-ceva/2026/07/valle-susa-escursione-lago-moncenisio-monte-e-forte-malamot/",
-          "hash": "3d290ac6898234af782db2ecbe5237938fcab56368c9e3b5ed09df92db3d8600",
+          "hash": "8f03d3754e169bdbc2e7f81805a2687d803f5911c89767028a0b10799ef44f8a",
           "events": 0,
           "method": null
         }
