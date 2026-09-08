@@ -7754,7 +7754,7 @@
     "cai-somma-lombardo-9216065": "ca32923cab7b6df9a7ce652ef9ab31ea7261ce497deb24824bb47726d63cc27b",
     "cai-vestone-9216155": "52d67c82f26112aa2ca56705e1c22de25322b8f1a49b8f7474638b5f8c4e21fb",
     "cai-strada-storta-9116052": "ff088d8c8d782fa8dcd379025cd15094a9c15962508bd0ebb8ae3e517a1ca396",
-    "cai-cermenate-9216116": "a8fc14a52e45e25f2afada4435e4ec608caf4c2a8ad4d1ebc8dc2f121344d963",
+    "cai-cermenate-9216116": "9afb01d548040c5db6fbe01348ced34028e4848a64b14ab95ae5e159fe7324a0",
     "cai-villasanta-9216126": "0812fbced622cd35f2599fea0356a862a779fbe4a338a1444cc9cf0011e8306d",
     "cai-voghera-9216024": "ea90988fac4d20672f40d1ee1aed1b88a85004990104aa28d8b8ce61d606e90b",
     "cai-villa-carcina-9216146": "e00ffc5446bf290239ff4f1bbb25fda842d438c4168b095fa96e1f12165d9c83",
@@ -7939,12 +7939,12 @@
     "cai-bozzolo-9216140": "d35f6b6476896f82fcc2c4a5235f1df2a2413f7985b329b452038f0fbc871e8b",
     "cai-casorate-sempione-9116045": "92d339bb17b1d0eb6870daf2163d3434895e73f6a06807b49a310e3151edf0bf"
   },
-  "generatedAt": "2026-09-08T13:43:33.355Z",
+  "generatedAt": "2026-09-08T13:45:02.508Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 1,
+    "withEvents": 0,
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,

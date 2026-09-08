@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-08T13:43:33.367Z",
+  "generatedAt": "2026-09-08T13:45:02.522Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 1,
+    "withEvents": 0,
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
@@ -10803,8 +10803,8 @@
       "enabled": true,
       "excursions": 0,
       "error": null,
-      "hash": "a8fc14a52e45e25f2afada4435e4ec608caf4c2a8ad4d1ebc8dc2f121344d963",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "9afb01d548040c5db6fbe01348ced34028e4848a64b14ab95ae5e159fe7324a0",
+      "updatedAt": "2026-09-08T13:45:02.522Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-cermenate/eventi/?ical=1",
@@ -10814,25 +10814,25 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-cermenate/attivita/",
-          "hash": "4f53f422f5b5dec84250bffd16a28109b2c80941e770be1bc52806e896b8f50b",
+          "hash": "4958826b33576879b5273c159cbe10509e454166365296a2641326a211491647",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-cermenate/attivita/scuole/",
-          "hash": "6e97f3f456f4b10c05e82d9835ce48fdb8ce5fa7888c00d53c0dd25067341e4c",
+          "hash": "6c9dd0967bd3c075424ae3e9943f9a9a8343e6d94cc9ef0aff09f0cbf20c25f7",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-cermenate/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-cermenate%2Fattivita%2F",
-          "hash": "c0d55f9cc5bcd1688c45722f3a5690833dc5faa0b0939bf0c789f5b4da51d84e",
+          "hash": "4e6cafdd27aa08808f3f5ef405a4d16e6db7452148633c0ad8c108b79bb6de1d",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-cermenate/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-cermenate%2Fattivita%2F&format=xml",
-          "hash": "c2d9e530da87de3310a19369c4f8efebf57008c8b09625730fe6e8b8322f68cf",
+          "hash": "ac81b369c16b5045419ad26d45c15af84248402b43b1eec6ad249f426c2b8d35",
           "events": 0,
           "method": null
         },
@@ -10844,25 +10844,25 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-cermenate/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-cermenate%2Fattivita%2Fscuole%2F",
-          "hash": "d2ded39c8ea85f4e4ecc156dcec0a5fa6ddd46bcc052778ddcf7d53e2883f2e7",
+          "hash": "8ff7d1eb4fd985f06392731c97a2a7c0386a548a8753ced1642fe503143c391c",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-cermenate/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-cermenate%2Fattivita%2Fscuole%2F&format=xml",
-          "hash": "6e9f49257a87094e483cdb3c188b43d666a1a0f9b46621cf09e040a02acf9732",
+          "hash": "2233db6b3c04e23258faa0c964d9d0e2c6f5cb956a9acaa48c5cdaa5321847fc",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-cermenate/",
-          "hash": "1286f6192f7397502747b43de42c2d3109a23c1c4f2bcfda409b5bdd5e28fd17",
+          "hash": "1acd62ccdb16b12dc691881c3972ad3b742986eb9fd91460a3dffa30d686be7c",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "hash": "919751f77dcf50bad37cb8f5776f7cffef4022b3f1e5a684aaa01492a3536e8e",
           "events": 0,
           "method": "wordpress-events"
         }
