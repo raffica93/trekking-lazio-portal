@@ -2,8 +2,11 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { VENETO_SOURCES, findSource } = require('../sources');
 
+const CADORINE_OPUSCOLO =
+  'https://caicalalzo.it/wp-content/uploads/2026/03/Escursioni-estate-2026-opuscolo.pdf';
+
 test('Veneto overrides win over registry discover stubs', () => {
-  assert.equal(VENETO_SOURCES.length, 25);
+  assert.equal(VENETO_SOURCES.length, 32);
 
   for (const raw of VENETO_SOURCES) {
     const source = findSource(raw.id);
@@ -18,6 +21,10 @@ test('Veneto overrides win over registry discover stubs', () => {
       assert.equal(source.kind, 'ics', raw.id);
       assert.equal(source.template, 'icalendar', raw.id);
       assert.equal(source.extractor, 'deterministic', raw.id);
+    } else if (raw.kind === 'html') {
+      assert.equal(source.kind, 'html', raw.id);
+      assert.equal(source.template, 'html-calendario', raw.id);
+      assert.equal(source.extractor, 'gemini', raw.id);
     } else {
       assert.equal(source.kind, 'pdf', raw.id);
       assert.equal(source.template, 'pdf-programma', raw.id);
@@ -40,11 +47,13 @@ test('Veneto overrides win over registry discover stubs', () => {
     'http://www.cai-spresiano.it/escursioni26/prgm_short2026.pdf'
   );
 
-  // Pieve shares Calalzo estate opuscolo PDF.
+  // Pieve + Lozzo share Calalzo estate opuscolo PDF.
   const calalzo = findSource('cai-calalzo-di-cadore-9220035');
   const pieve = findSource('cai-pieve-di-cadore-9220022');
+  const lozzo = findSource('cai-lozzo-di-cadore-9220043');
   assert.equal(pieve.url, calalzo.url);
-  assert.match(calalzo.url, /Escursioni-estate-2026-opuscolo\.pdf$/);
+  assert.equal(lozzo.url, calalzo.url);
+  assert.equal(calalzo.url, CADORINE_OPUSCOLO);
 
   // Pedemontana Grappa uses Feltre parent Annuario PDF.
   // Feltre itself stays registry-only (already html-calendar; not in VENETO_SOURCES).
@@ -103,4 +112,52 @@ test('Veneto ICS lock-in: Pieve di Soligo + Recoaro Terme deterministic', () => 
     'cai-pieve-di-soligo-9220054',
     'cai-recoaro-terme-9220045'
   ].sort());
+});
+
+test('Veneto hard1: 3 PDF + 4 HTML extract-ready', () => {
+  const lanerossi = findSource('cai-aziendale-lanerossi-9120005');
+  assert.equal(lanerossi.kind, 'pdf');
+  assert.equal(
+    lanerossi.url,
+    'https://www.gamschio.it/app/download/39574898/pgm+gite+2026.pdf'
+  );
+
+  const zevio = findSource('cai-zevio-9120024');
+  assert.equal(zevio.kind, 'pdf');
+  assert.equal(
+    zevio.url,
+    'https://www.geaz.org/wp-content/uploads/2025/12/Programma-geaz-2026.pdf'
+  );
+
+  const sandrigo = findSource('cai-sandrigo-9120021');
+  assert.equal(sandrigo.kind, 'html');
+  assert.equal(sandrigo.url, 'https://caimarostica.it/calendario-uscite/');
+
+  const spolo = findSource('cai-s-polo-di-piave-9120019');
+  assert.equal(spolo.kind, 'html');
+  assert.equal(spolo.url, 'https://www.caisanpolo.com/attivit%C3%A0/escursioni');
+
+  const giov = findSource('cai-g-alp-giov-mont-9120010');
+  assert.equal(giov.kind, 'html');
+  assert.equal(giov.url, 'https://www.giovanemontagna.org/calendario.asp?s=12');
+
+  const scaligero = findSource('cai-g-alp-scaligero-9120011');
+  assert.equal(scaligero.kind, 'html');
+  assert.equal(
+    scaligero.url,
+    'https://www.gruppoalpinoscaligeroverona.it/programma-2024/'
+  );
+
+  const hard1Ids = [
+    'cai-lozzo-di-cadore-9220043',
+    'cai-aziendale-lanerossi-9120005',
+    'cai-zevio-9120024',
+    'cai-sandrigo-9120021',
+    'cai-s-polo-di-piave-9120019',
+    'cai-g-alp-giov-mont-9120010',
+    'cai-g-alp-scaligero-9120011'
+  ];
+  for (const id of hard1Ids) {
+    assert.ok(VENETO_SOURCES.some((s) => s.id === id), id);
+  }
 });
