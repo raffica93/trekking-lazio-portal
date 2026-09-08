@@ -750,6 +750,287 @@ const VENETO_SOURCES = [
 ];
 
 
+// Friuli-Venezia Giulia overrides win over registry discover stubs (same precedence as ABRUZZO).
+// Hub ASCA shares Tolmezzo PDF; hub SAF Udine shares Programma 2026; hub SAG-AXXXO shares joint calendar.
+// Buja keeps HTTP URL (caigemona.it). Out of scope: HTML-only, website-only, scrapes.
+const FRIULI_SOURCES = [
+  // --- Hub ASCA (shared PDF: caitolmezzo.it/escursioni.pdf) ---
+  {
+    id: 'cai-tolmezzo-9222002',
+    organizer: 'CAI Tolmezzo',
+    url: 'https://caitolmezzo.it/escursioni.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-forni-di-sopra-9222021',
+    organizer: 'CAI Forni Di Sopra',
+    url: 'https://caitolmezzo.it/escursioni.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-ravascletto-9222020',
+    organizer: 'CAI Ravascletto',
+    url: 'https://caitolmezzo.it/escursioni.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-sappada-9220033',
+    organizer: 'CAI Sappada',
+    url: 'https://caitolmezzo.it/escursioni.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-forni-avoltri-9222022',
+    organizer: 'CAI Forni Avoltri',
+    url: 'https://caitolmezzo.it/escursioni.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-moggio-udinese-9222013',
+    organizer: 'CAI Moggio Udinese',
+    url: 'https://caitolmezzo.it/escursioni.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-tarvisio-9222010',
+    organizer: 'CAI Tarvisio',
+    url: 'https://caitolmezzo.it/escursioni.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  // --- Hub SAF Udine (shared PDF: CAI-sez-UDINE-Programma-2026.pdf) ---
+  {
+    id: 'cai-s-a-f-udine-9222003',
+    organizer: 'CAI S.a.f.- Udine',
+    url: 'https://www.alpinafriulana.it/wp-content/uploads/2025/12/CAI-sez-UDINE-Programma-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-artegna-9122009',
+    organizer: 'CAI Artegna',
+    url: 'https://www.alpinafriulana.it/wp-content/uploads/2025/12/CAI-sez-UDINE-Programma-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-palmanova-9122020',
+    organizer: 'CAI Palmanova',
+    url: 'https://www.alpinafriulana.it/wp-content/uploads/2025/12/CAI-sez-UDINE-Programma-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-pasian-di-prato-9122012',
+    organizer: 'CAI Pasian Di Prato',
+    url: 'https://www.alpinafriulana.it/wp-content/uploads/2025/12/CAI-sez-UDINE-Programma-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-s-daniele-del-friuli-9122014',
+    organizer: 'CAI S.daniele Del Friuli',
+    url: 'https://www.alpinafriulana.it/wp-content/uploads/2025/12/CAI-sez-UDINE-Programma-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-tarcento-cai-udine-9122015',
+    organizer: 'CAI Tarcento Cai Udine',
+    url: 'https://www.alpinafriulana.it/wp-content/uploads/2025/12/CAI-sez-UDINE-Programma-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  // --- Hub SAG-AXXXO (shared PDF: SAG-AXXXO-CALENDARIO-2026-giu.pdf) ---
+  {
+    id: 'cai-s-a-g-trieste-9222001',
+    organizer: 'CAI S.a.g.- Trieste',
+    url: 'https://caisag.ts.it/wp-content/uploads/2026/06/SAG-AXXXO-CALENDARIO-2026-giu.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-xxx-ottobre-9222011',
+    organizer: 'CAI Xxx Ottobre',
+    url: 'https://caisag.ts.it/wp-content/uploads/2026/06/SAG-AXXXO-CALENDARIO-2026-giu.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  // --- Sezionali (own PDF) ---
+  {
+    id: 'cai-cervignano-del-friuli-9222026',
+    organizer: 'CAI Cervignano Del Friuli',
+    url: 'https://www.caicervignano.it/wp-content/uploads/2026/01/Programma_C_2026_rev_3_rid.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-codroipo-9222027',
+    organizer: 'CAI Codroipo',
+    url: 'https://www.caicodroipo.it/res/download/pdf/346_it.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-maniago-9222008',
+    organizer: 'CAI Maniago',
+    url: 'https://organizzazione.cai.it/sez-maniago/wp-content/uploads/sites/28/2026/01/Guida-CAI-2026-compresso.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-monfalcone-9222012',
+    organizer: 'CAI Monfalcone',
+    url: 'https://www.caimonfalcone.org/uploads/Main/2026_pieghevole_v7.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-pordenone-9222006',
+    organizer: 'CAI Pordenone',
+    url: 'https://www.cai.pordenone.it/documenti/escursionismo/_2026/programma-escursioni-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-s-vito-al-tagliamento-9222019',
+    organizer: 'CAI S.vito Al Tagliamento',
+    url: 'https://www.caisanvito.it/wp-content/uploads/2025/12/CALENDARIO-GITE-CAI-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-sacile-9222024',
+    organizer: 'CAI Sacile',
+    url: 'https://organizzazione.cai.it/sez-sacile/wp-content/uploads/sites/145/2026/01/Libretto-escursioni-sociali-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-tricesimo-9222029',
+    organizer: 'CAI Tricesimo',
+    url: 'https://organizzazione.cai.it/sez-tricesimo/wp-content/uploads/sites/144/2025/12/Calendario-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-gorizia-9222005',
+    organizer: 'CAI Gorizia',
+    url: 'https://www.caigorizia.it/wp-content/themes/cai/programmi_cai/programma_2026_web.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-pontebba-9222023',
+    organizer: 'CAI Pontebba',
+    url: 'https://www.caipontebba.it/gite/asca_2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-cividale-del-friuli-9222014',
+    organizer: 'CAI Cividale Del Friuli',
+    url: 'https://www.caicividale.org/s/CAI-Cividale-programma-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-buja-9122003',
+    organizer: 'CAI Buja',
+    url: 'http://www.caigemona.it/dati/images/pdf/gjoldi_de_mont/GjoldileMontdeVierte_2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  }
+];
+
+
 // The generated directory is the complete list, including sections without a
 // usable public calendar. Each enabled row is its own configurable adapter.
 let NATIONAL_REGISTRY = { sections: [] };
@@ -777,6 +1058,7 @@ const sardegnaOverrideIds = new Set(SARDEGNA_SOURCES.map(s => s.id));
 const campaniaOverrideIds = new Set(CAMPANIA_SOURCES.map(s => s.id));
 const valleDaostaOverrideIds = new Set(VALLE_DAOSTA_SOURCES.map(s => s.id));
 const venetoOverrideIds = new Set(VENETO_SOURCES.map(s => s.id));
+const friuliOverrideIds = new Set(FRIULI_SOURCES.map(s => s.id));
 const overrideIds = new Set([
   ...lazioOverrideIds,
   ...abruzzoOverrideIds,
@@ -784,7 +1066,8 @@ const overrideIds = new Set([
   ...sardegnaOverrideIds,
   ...campaniaOverrideIds,
   ...valleDaostaOverrideIds,
-  ...venetoOverrideIds
+  ...venetoOverrideIds,
+  ...friuliOverrideIds
 ]);
 
 // Override scrape fields (url/kind/template/extractor/enabled) must win over
@@ -816,6 +1099,10 @@ const SOURCES = [
   })),
   ...VENETO_SOURCES.map(source => mergeOverrideSource(source, {
     defaultRegion: 'Veneto',
+    lookup: (id) => registryById.get(id)
+  })),
+  ...FRIULI_SOURCES.map(source => mergeOverrideSource(source, {
+    defaultRegion: 'Friuli-Venezia Giulia',
     lookup: (id) => registryById.get(id)
   })),
   ...NATIONAL_REGISTRY.sections.filter(source =>
@@ -864,6 +1151,7 @@ module.exports = {
   CAMPANIA_SOURCES,
   VALLE_DAOSTA_SOURCES,
   VENETO_SOURCES,
+  FRIULI_SOURCES,
   NATIONAL_REGISTRY,
   enabledSources,
   findSource,
