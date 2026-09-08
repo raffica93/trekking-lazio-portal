@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T11:53:40.169Z",
+  "generatedAt": "2026-09-08T11:55:40.385Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 586
+    "located": 596
   },
   "sources": [
     {
@@ -1550,54 +1550,14 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 45,
+      "excursions": 10,
       "error": null,
-      "hash": "114502ae854f44461013f7972c649a51ec87ba4e9b3b65ca7ab46f5453404245",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
-      "documents": [
-        {
-          "url": "https://www.caimontebulgheria.it/Programmi/Programma_Sez_MB_2026.pdf",
-          "hash": "e50b4cb2f234c20ce018966ee2a3a84b51ca46b2d51346768c846cdcf43eb45a",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caimontebulgheria.it/Programmi/Programma_CAI_2026.pdf",
-          "hash": "e18ecb9485eb4b307a72c6968234f7819035d8366e1d0396d53ee5f8aead5abe",
-          "events": 125,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caimontebulgheria.it/",
-          "hash": "aa3bafaebcb8dc114e62a96bd7bf6b4f348a9d346c30adf4ae156e846e07cd46",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caimontebulgheria.it/escursionismo/",
-          "hash": "d284b08a809dadcd9b97927e42463f340864a695ed9e8777321903d08e44e5b7",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caimontebulgheria.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caimontebulgheria.it%2Fescursionismo%2F",
-          "hash": "dc4d0fe76fc5f342136aea587f928f5ab8b4ca005d74554d721104977bcb43e1",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://www.caimontebulgheria.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caimontebulgheria.it%2Fescursionismo%2F&format=xml",
-          "hash": "521488962e447f07a133635d4c0a358488e61b440edc92e52524846b136a5854",
-          "events": 0,
-          "method": null
-        }
-      ],
-      "methods": [
-        "pdf-text",
-        "wordpress-events"
-      ],
+      "hash": "8f239b2c0613d0cef2563cefdcee9e7aea3abddb26741de5beb048dfb1ba75d5",
+      "updatedAt": "2026-09-08T11:55:40.385Z",
+      "documents": [],
+      "methods": [],
       "issues": [],
-      "extractedEvents": 125
+      "extractedEvents": null
     },
     {
       "id": "cai-aosta-9214001",
