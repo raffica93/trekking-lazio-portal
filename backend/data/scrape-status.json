@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-08T13:41:28.650Z",
+  "generatedAt": "2026-09-08T13:42:29.738Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
-    "parsed": 0,
-    "unsupported": 1,
+    "withEvents": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 611
   },
@@ -10570,8 +10570,8 @@
       "enabled": true,
       "excursions": 2,
       "error": null,
-      "hash": "a933bcfa6f4835d0189ee97c85588f6e14a84c27e37cb1b46dd34424a4abc87f",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "hash": "f731b132048a05121fb7863e94cfe61b6bfd3ab89439e123352b993b754cec2a",
+      "updatedAt": "2026-09-08T13:42:29.738Z",
       "documents": [
         {
           "url": "https://www.caicastiglione.it/events/?ical=1",
@@ -10581,67 +10581,67 @@
         },
         {
           "url": "https://www.caicastiglione.it/programma-sociale/",
-          "hash": "0e277f255c89b8c960616a8a8b8832f361e36c1e83284e1efd1a9a049b8ba834",
+          "hash": "ad9160807c5deaaef958fb2e815de7aa3a480e7567ddcf5db6663771aa784a03",
           "events": 2,
           "method": "html-calendar"
         },
         {
           "url": "https://www.caicastiglione.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caicastiglione.it%2Fprogramma-sociale%2F",
-          "hash": "425a94f5e4baeb2c3a112790f8525d1abbf6cd14eed157fedcb47165d3782798",
+          "hash": "5a0892dfae40910572c2b3fcdb418286abcff3a8d8385994da09e02a0ece049e",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://www.caicastiglione.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caicastiglione.it%2Fprogramma-sociale%2F&format=xml",
-          "hash": "bfba239173af0200af583bdfdb92d91fa57f37ae956a8426e36c2ff90b4774fc",
+          "hash": "01d7cd22565627e0abcfd15fc7e3bb586add296eb57333c217a00a0deceaee3c",
           "events": 0,
           "method": null
         },
         {
           "url": "https://www.caicastiglione.it/corso-di-escursionismo-eea-2026-ferrate/",
-          "hash": "f985bc601bbbc0b925f4e5b0ec8c737f5fdc01adfe6c1609f7164d31fe1c2aa7",
+          "hash": "dfc3897df45c2b1ac0ffced499095557d51da2cbfe0e455353d05bd0caa33d6a",
           "events": 7,
           "method": "html-calendar"
         },
         {
           "url": "https://www.caicastiglione.it/uscite-cai/2026-09-06-pizzo-arera-2512m/",
-          "hash": "4affc0f28a7bb910446f666b5b6d27f15770a8279e9f9a3a427f34d184984c70",
+          "hash": "6220b57666dc9bb7386bdf2960ba238c7b6c93ef46494f1f384bbb58d8cfcc42",
           "events": 0,
           "method": null
         },
         {
           "url": "https://www.caicastiglione.it/uscite-cai/2026-09-09-monte-lobbia-1672m/",
-          "hash": "b26c0f5a985597841d94ef3aac1c470fd486049d415c010423644f676d49a7f4",
+          "hash": "d43a8e99d19ce60a161b33a612b8dab1a088e2276a37d699ceca07c7cc6a3187",
           "events": 0,
           "method": null
         },
         {
           "url": "https://www.caicastiglione.it/uscite-cai/2026-09-20-rifugio-e-monte-torsoleto-2708m/",
-          "hash": "7618ebb10b0e75518587f075feb016cbcbf632c01d0b34412dc526c1f27bf597",
+          "hash": "ace2775b90a6e159ca1c8ec7121159a7e4b6fbd2757e371f86a020c61b2908c3",
           "events": 0,
           "method": null
         },
         {
           "url": "https://www.caicastiglione.it/",
-          "hash": "638ce27db8c7889444f6e7e30bbf9b29dce560ccd54c01513cc88d012b7ed024",
+          "hash": "348099cf517edc8615a262b13a96e2153575b8bc7b15e6bd607f311b926781c3",
           "events": 0,
           "method": null
         },
         {
           "url": "https://www.caicastiglione.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "5282f34e17e36ee049690cfee71b9f20979121821de455fd7caf175413cb4c42",
+          "hash": "190a270970da2b1df5477b939b37212669d84098fabc66384119a2869fc5bf70",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://www.caicastiglione.it/privacy-policy/",
-          "hash": "a0261027309ea1ebcd629ca2ae470817f006b8427d3249cc1b885461ce4d3f61",
+          "hash": "be57f23dacee2e053bd1ec8afcbe491a66674f1cd3f5232223049cbcaa5b6185",
           "events": 0,
           "method": null
         },
         {
           "url": "https://www.caicastiglione.it/privacy-policy/",
-          "hash": "a0261027309ea1ebcd629ca2ae470817f006b8427d3249cc1b885461ce4d3f61",
+          "hash": "be57f23dacee2e053bd1ec8afcbe491a66674f1cd3f5232223049cbcaa5b6185",
           "events": 0,
           "method": null
         }

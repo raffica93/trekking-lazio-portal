@@ -7707,7 +7707,7 @@
     "cai-bovisio-masciago-9216082": "2119971d979ab897d59fcdbebd92ccaf2187d53aca56f721dd8da41556b6e4e1",
     "cai-busto-arsizio-9216014": "57839f238bdb432e4f7026a155f1963b49c8ae6aff5e6196d9e8b893061534f6",
     "cai-cantu-9216050": "d418d3ef5fe5fdefaf86d700ee79b55faba7acd914a200db8f3ff6a10a9d095d",
-    "cai-castiglione-stiviere-9216096": "a933bcfa6f4835d0189ee97c85588f6e14a84c27e37cb1b46dd34424a4abc87f",
+    "cai-castiglione-stiviere-9216096": "f731b132048a05121fb7863e94cfe61b6bfd3ab89439e123352b993b754cec2a",
     "cai-sappada-9220033": "75112db4fff118f08b31228e2b1377534a5f54f94b5648121c711aad14731dd7",
     "cai-desio-9216011": "fde3dc3696898f592d399a84971a62a5e20bf6a5aa70385e6fbe18d35e8094a1",
     "cai-como-9216006": "22053fb0ecc38fe6b8da05bab547c6680ce9d18b0a124455b3bf7344cf94dd0c",
@@ -7939,14 +7939,14 @@
     "cai-bozzolo-9216140": "d35f6b6476896f82fcc2c4a5235f1df2a2413f7985b329b452038f0fbc871e8b",
     "cai-casorate-sempione-9116045": "92d339bb17b1d0eb6870daf2163d3434895e73f6a06807b49a310e3151edf0bf"
   },
-  "generatedAt": "2026-09-08T13:41:28.637Z",
+  "generatedAt": "2026-09-08T13:42:29.726Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
-    "parsed": 0,
-    "unsupported": 1,
+    "withEvents": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 611
   },
