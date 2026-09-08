@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T13:37:28.385Z",
+  "generatedAt": "2026-09-08T13:38:20.905Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -10152,20 +10152,29 @@
       "directoryId": "9216140",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "https://organizzazione.cai.it/sez-bozzolo/eventi/?ical=1",
       "kind": "ics",
       "template": "icalendar",
       "extractor": "deterministic",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 21,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
+      "hash": "d35f6b6476896f82fcc2c4a5235f1df2a2413f7985b329b452038f0fbc871e8b",
+      "updatedAt": "2026-09-08T13:38:20.905Z",
+      "documents": [
+        {
+          "url": "https://organizzazione.cai.it/sez-bozzolo/eventi/?ical=1",
+          "hash": "8531f174e5583178696cbaf9000cb7b65457168bcf992be8f66d866de823c053",
+          "events": 21,
+          "method": "ics"
+        }
+      ],
+      "methods": [
+        "ics"
+      ],
       "issues": [],
-      "extractedEvents": null
+      "extractedEvents": 21
     },
     {
       "id": "cai-brugherio-9216072",
