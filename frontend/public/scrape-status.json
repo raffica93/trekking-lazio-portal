@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T11:27:13.896Z",
+  "generatedAt": "2026-09-08T11:30:57.269Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 362
+    "located": 377
   },
   "sources": [
     {
@@ -1125,6 +1125,591 @@
       ],
       "issues": [],
       "extractedEvents": 15
+    },
+    {
+      "id": "cai-castrovillari-9244005",
+      "organizer": "CAI Castrovillari",
+      "region": "Calabria",
+      "website": "https://www.caicastrovillari.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9244005",
+      "calendarUrls": [
+        "https://www.caicastrovillari.it/images/programma2026.pdf",
+        "https://www.caicastrovillari.it/images/programmacoro26.pdf",
+        "https://www.caicastrovillari.it/images/programmacerchiara26.pdf",
+        "https://www.caicastrovillari.it/images/familycaimorano.pdf",
+        "https://www.caicastrovillari.it/images/proposta25.pdf",
+        "https://www.caicastrovillari.it/prog.php",
+        "https://www.caicastrovillari.it/racc26.php",
+        "https://www.caicastrovillari.it/racc.php"
+      ],
+      "directoryId": "9244005",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "ok",
+      "url": "https://www.caicastrovillari.it/images/programma2026.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 16,
+      "error": null,
+      "hash": "8cfd9707acda4c004bb6fe3a583112f8520941d1a82cdf03dd0ca0babe9d98a1",
+      "updatedAt": "2026-09-08T11:30:57.269Z",
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-cerchiara-di-calabria-9144003",
+      "organizer": "CAI Cerchiara Di Calabria",
+      "region": "Calabria",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9244005",
+      "calendarUrls": [
+        "https://www.caicastrovillari.it/images/programmacerchiara26.pdf"
+      ],
+      "directoryId": "9144003",
+      "sectionType": "subsection",
+      "parentSectionId": "cai-castrovillari-9244005",
+      "status": "disabled",
+      "url": "https://www.caicastrovillari.it/images/programmacerchiara26.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-cosenza-9244002",
+      "organizer": "CAI Cosenza",
+      "region": "Calabria",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9244002",
+      "calendarUrls": [
+        "https://brunopino.it/wp-content/uploads/2026/01/programma-cai-cosenza-2026.pdf"
+      ],
+      "directoryId": "9244002",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "disabled",
+      "url": "https://brunopino.it/wp-content/uploads/2026/01/programma-cai-cosenza-2026.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-mendicino-9144004",
+      "organizer": "CAI Mendicino",
+      "region": "Calabria",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9244002",
+      "calendarUrls": [
+        "https://brunopino.it/wp-content/uploads/2026/01/programma-cai-cosenza-2026.pdf"
+      ],
+      "directoryId": "9144004",
+      "sectionType": "subsection",
+      "parentSectionId": "cai-cosenza-9244002",
+      "status": "disabled",
+      "url": "https://brunopino.it/wp-content/uploads/2026/01/programma-cai-cosenza-2026.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-reggio-calabria-9244001",
+      "organizer": "CAI Reggio Calabria",
+      "region": "Calabria",
+      "website": "https://organizzazione.cai.it/sez-reggio-calabria/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9244001",
+      "calendarUrls": [
+        "https://drive.google.com/uc?export=download&id=10kXORYlyXLWHHRmG7ZB11iCXdeeEPoUh",
+        "https://organizzazione.cai.it/sez-reggio-calabria/eventi/?ical=1",
+        "https://organizzazione.cai.it/sez-reggio-calabria/?post_type=tribe_events&ical=1&eventDisplay=list",
+        "https://organizzazione.cai.it/sez-reggio-calabria/eventi/elenco/?ical=1",
+        "https://organizzazione.cai.it/sez-reggio-calabria/attivita/programma2026/",
+        "https://organizzazione.cai.it/sez-reggio-calabria/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-reggio-calabria%2Fattivita%2Fprogramma2026%2F",
+        "https://organizzazione.cai.it/sez-reggio-calabria/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-reggio-calabria%2Fattivita%2Fprogramma2026%2F&format=xml",
+        "https://caireggio.short.gy/Programma2026",
+        "https://organizzazione.cai.it/sez-reggio-calabria/eventi/"
+      ],
+      "directoryId": "9244001",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "partial",
+      "url": "https://drive.google.com/uc?export=download&id=10kXORYlyXLWHHRmG7ZB11iCXdeeEPoUh",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 32,
+      "error": null,
+      "hash": "01ac8bd476f44a6e085cb632fb4bc4f49259ad497b53534e18c5400007d77563",
+      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "documents": [
+        {
+          "url": "https://organizzazione.cai.it/sez-reggio-calabria/eventi/?ical=1",
+          "hash": "80b8aa7b37170c8d726359796d116b59c8c08ff890bd55a9053bbaf3b245a64c",
+          "events": 27,
+          "method": "ics"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-reggio-calabria/?post_type=tribe_events&ical=1&eventDisplay=list",
+          "hash": "e27ff7a8bf1a226c3949bd068e9a23b348efbd6488d2d5d4ce23741f1cb34f98",
+          "events": 27,
+          "method": "ics"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-reggio-calabria/eventi/elenco/?ical=1",
+          "hash": "1d441030f0d1d75881f9571d0d2cc63bb518d12afc0ac0e31d2c6312e735886e",
+          "events": 27,
+          "method": "ics"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-reggio-calabria/attivita/programma2026/",
+          "hash": "1022c2622d25bcb7c911f424fc0e7777d56546d16433a1344c38e330b4e07062",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-reggio-calabria/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-reggio-calabria%2Fattivita%2Fprogramma2026%2F",
+          "hash": "f71b6a775b65ba8b2a49f0edbd4ed29e43a01b4d377ba420973c9eba551fef2b",
+          "events": 0,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-reggio-calabria/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-reggio-calabria%2Fattivita%2Fprogramma2026%2F&format=xml",
+          "hash": "144213ac79d233605f7e67d5123927406c4d923bc8fa49e8da7a28558e9acba2",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://drive.google.com/file/d/10kXORYlyXLWHHRmG7ZB11iCXdeeEPoUh/view?usp=sharing",
+          "hash": "6ec9df24700a88b2da546534fc2cac0e86c9fa2af45a10da42b0a8971b873cda",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-reggio-calabria/eventi/",
+          "hash": "8132065cfcd0c9f874775149c3232e45a92da27e1813afaacd0f380360fa2047",
+          "events": 12,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-reggio-calabria/",
+          "hash": "cb9e194d6f2500426689405ae00e797cd647fea1a1c7433b42098c753503f613",
+          "events": 6,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
+          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "events": 0,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-reggio-calabria/eventi/elenco/?outlook-ical=1",
+          "hash": "e881e7faab8c9e8cae1564e5b43fa379cb83ec0a059ec4b1bcbd81269d5d6ba6",
+          "events": 27,
+          "method": "ics"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-reggio-calabria/eventi/categoria/uscite-in-ambiente/",
+          "hash": "fe2db55891418b5f70293da7c34fd9b22da3aa9962057729875548ab76423c3a",
+          "events": 0,
+          "method": null
+        }
+      ],
+      "methods": [
+        "ics",
+        "wordpress-events",
+        "html-calendar"
+      ],
+      "issues": [
+        {
+          "url": "https://organizzazione.cai.it/sez-reggio-calabria/eventi/?ical=1",
+          "message": "Discovery budget reached; 41 candidate documents remain.",
+          "code": "discovery-limit"
+        }
+      ],
+      "extractedEvents": 126
+    },
+    {
+      "id": "cai-cagliari-9248001",
+      "organizer": "CAI Cagliari",
+      "region": "Sardegna",
+      "website": "https://www.caicagliari.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9248001",
+      "calendarUrls": [
+        "https://www.caicagliari.it/escursionismo/wp-content/uploads/sites/2/2026/08/PAE2026s.pdf",
+        "https://www.caicagliari.it/escursionismo/calendario-escursioni/",
+        "https://www.caicagliari.it/escursionismo/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caicagliari.it%2Fescursionismo%2Fcalendario-escursioni%2F",
+        "https://www.caicagliari.it/escursionismo/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caicagliari.it%2Fescursionismo%2Fcalendario-escursioni%2F&format=xml",
+        "https://www.caicagliari.it/escursionismo/2026/09/01/sab-dom-03-04-ottobre-2026-pevero-caprera/",
+        "https://www.caicagliari.it/escursionismo/2026/08/13/giovedi-27-agosto-2026-luna-dello-storione/",
+        "https://www.caicagliari.it/escursionismo/2026/07/19/mercoledi-29-luglio-2026-luna-che-sorge-sole-che-tramonta/",
+        "https://www.caicagliari.it/escursionismo/2026/07/09/domenica-19-luglio-2026-castello-di-quirra/"
+      ],
+      "directoryId": "9248001",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "partial",
+      "url": "https://www.caicagliari.it/escursionismo/wp-content/uploads/sites/2/2026/08/PAE2026s.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 10,
+      "error": null,
+      "hash": "4f5bc9068a9e3f6ee86bac761018d8d88586de425c61ea811338d67c33dc60b0",
+      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "documents": [
+        {
+          "url": "https://www.caicagliari.it/escursionismo/wp-content/uploads/sites/2/2026/08/PAE2026s.pdf",
+          "hash": "2f021c35087cde28eeff5adfc010177c2aa1161e14648a78e4952e493bd95194",
+          "events": 24,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caicagliari.it/escursionismo/calendario-escursioni/",
+          "hash": "925230a5b123cdae7c44225cda13961a366e4c208607379b7467fcc3ca31869b",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caicagliari.it/escursionismo/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caicagliari.it%2Fescursionismo%2Fcalendario-escursioni%2F",
+          "hash": "438ef4c710c07e0659fc0c279d7c0912aff033b138f8d6de87401aac12c709a5",
+          "events": 0,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://www.caicagliari.it/escursionismo/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caicagliari.it%2Fescursionismo%2Fcalendario-escursioni%2F&format=xml",
+          "hash": "d8782af3c6f00d2e8dbfc628c9fa7a971a5ef6f2d0b915eb34e7eaabd2726cd4",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caicagliari.it/escursionismo/2026/09/01/sab-dom-03-04-ottobre-2026-pevero-caprera/",
+          "hash": "904389db199818957d369790e6e46c71e4a7d4b5bc9896a1e668b7a74dea0fdd",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caicagliari.it/escursionismo/2026/08/13/giovedi-27-agosto-2026-luna-dello-storione/",
+          "hash": "9645a175d6d0c8185a0c321dd3a41bf41d391b5bc19e75ffe28862e3543fbc4d",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caicagliari.it/escursionismo/2026/07/19/mercoledi-29-luglio-2026-luna-che-sorge-sole-che-tramonta/",
+          "hash": "b426f1a366ee61ecf93e31a744e6097811a8a3bd652a67f2a2335ec1c67261ae",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caicagliari.it/escursionismo/2026/07/09/domenica-19-luglio-2026-castello-di-quirra/",
+          "hash": "fcb4a8f584e8f215a730bcf6292109d0dea3be987dfbb365380739070060bd7e",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caicagliari.it/",
+          "hash": "a5349a29c50b83dcbc981038ba343a2adaebdf34805917adc2e3dd9cd229e5fd",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caicagliari.it/escursionismo/wp-content/uploads/sites/2/2026/09/2026_10_03-04-Pevero-Caprera.pdf",
+          "hash": "38e7ae6138ce293ffab5efb0490a7f2fcc05e3f83cf0b6586a5bb18031bd1afe",
+          "events": 0,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caicagliari.it/escursionismo/wp-content/uploads/sites/2/2026/08/2026_08_27-LOCANDINA-SORGE-LUNA.pdf",
+          "hash": "d3e7d08864927087f2c12231bb56f47caccfc7a88893153f88b36f7a94cce4e4",
+          "events": 0,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caicagliari.it/escursionismo/wp-content/uploads/sites/2/2026/07/2026_07_29-LOCANDINA-SORGE-SOLE.pdf",
+          "hash": "c7c18d9927b526d0d0b3ed3b13c68ea1cedec945218af992963ff913de50299d",
+          "events": 0,
+          "method": "pdf-text"
+        }
+      ],
+      "methods": [
+        "pdf-text",
+        "wordpress-events"
+      ],
+      "issues": [
+        {
+          "url": "https://www.caicagliari.it/escursionismo/wp-content/uploads/sites/2/2026/08/PAE2026s.pdf",
+          "message": "Discovery budget reached; 59 candidate documents remain.",
+          "code": "discovery-limit"
+        }
+      ],
+      "extractedEvents": 24
+    },
+    {
+      "id": "cai-nuoro-9248002",
+      "organizer": "CAI Nuoro",
+      "region": "Sardegna",
+      "website": "https://organizzazione.cai.it/sez-nuoro/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9248002",
+      "calendarUrls": [
+        "https://organizzazione.cai.it/sez-nuoro/wp-content/uploads/sites/40/2026/02/Calendario-Escursionistico-Cai-Nuoro-2026-3.pdf",
+        "https://organizzazione.cai.it/sez-nuoro/evento/calendario-escursionistico-2026/?ical=1",
+        "https://organizzazione.cai.it/sez-nuoro/eventi/?ical=1",
+        "https://organizzazione.cai.it/sez-nuoro/?post_type=tribe_events&ical=1&eventDisplay=list",
+        "https://organizzazione.cai.it/sez-nuoro/eventi/elenco/?ical=1",
+        "https://organizzazione.cai.it/sez-nuoro/evento/calendario-escursionistico-2026/",
+        "https://organizzazione.cai.it/sez-nuoro/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-nuoro%2Fevento%2Fcalendario-escursionistico-2026%2F",
+        "https://organizzazione.cai.it/sez-nuoro/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-nuoro%2Fevento%2Fcalendario-escursionistico-2026%2F&format=xml"
+      ],
+      "directoryId": "9248002",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "partial",
+      "url": "https://organizzazione.cai.it/sez-nuoro/wp-content/uploads/sites/40/2026/02/Calendario-Escursionistico-Cai-Nuoro-2026-3.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 2,
+      "error": null,
+      "hash": "4a3036def9b928ea34bb80ad9573238cae3021ac75c7e61a481a6a2b81885d6f",
+      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "documents": [
+        {
+          "url": "https://organizzazione.cai.it/sez-nuoro/evento/calendario-escursionistico-2026/?ical=1",
+          "hash": "b6d29bf2dda5ef47d6ccbdef407d93671ad0ceca6a505c8dfd1053f0a3561dcb",
+          "events": 1,
+          "method": "ics"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-nuoro/eventi/?ical=1",
+          "hash": "fe7d02965fab7e3be9e003f336b6ddc1e4652943a67ee886ced41ed5c2fdbdc9",
+          "events": 2,
+          "method": "ics"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-nuoro/?post_type=tribe_events&ical=1&eventDisplay=list",
+          "hash": "089919453ad1a258a7cb26cf6e69770267f08c7fc0fa664dc72b6656ef2e047b",
+          "events": 2,
+          "method": "ics"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-nuoro/eventi/elenco/?ical=1",
+          "hash": "00c127f4a007bcc19fc113132c127b69e807eb0635d74229735ea8fa1bfaad2f",
+          "events": 2,
+          "method": "ics"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-nuoro/wp-content/uploads/sites/40/2026/02/Calendario-Escursionistico-Cai-Nuoro-2026-3.pdf",
+          "hash": "6912b0b554a37f9fbb57be6a8069784cbcf0c07b8eb3c4b5b588edaf288133f0",
+          "events": 2,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-nuoro/evento/calendario-escursionistico-2026/",
+          "hash": "3033873b43d844b6ab250b9c2be1a811890dd4af23f26127d55c6fd55c5a1baf",
+          "events": 1,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-nuoro/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-nuoro%2Fevento%2Fcalendario-escursionistico-2026%2F",
+          "hash": "cbf0f940db008ac7f2a265f6b9a2a533f382d0d1649ea5a49a6af2d24897d344",
+          "events": 0,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-nuoro/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-nuoro%2Fevento%2Fcalendario-escursionistico-2026%2F&format=xml",
+          "hash": "63f83e9130b96222d6ae4c4b017fe15758dc27c0788337048e578ccbe8a1c743",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-nuoro/",
+          "hash": "1d84410589b91ae6c3ca74453b61536950234a6a639dfde9063c01ce8720f934",
+          "events": 2,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
+          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "events": 0,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-nuoro/eventi/categoria/calendario-escursionistico/",
+          "hash": "0c7cb158e2c44a145ff08114440dac355f7d5ea5eb6f0faf5586f96fae2f1857",
+          "events": 1,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-nuoro/eventi/categoria/calendario-escursionistico/?post_type=tribe_events&ical=1&eventDisplay=list",
+          "hash": "061a1cd5369ca648da9e1e890d06705f107e276650c4aec2bf102366ef8701f0",
+          "events": 1,
+          "method": "ics"
+        }
+      ],
+      "methods": [
+        "ics",
+        "pdf-text",
+        "html-calendar",
+        "wordpress-events"
+      ],
+      "issues": [
+        {
+          "url": "https://organizzazione.cai.it/sez-nuoro/evento/calendario-escursionistico-2026/?ical=1",
+          "message": "Discovery budget reached; 32 candidate documents remain.",
+          "code": "discovery-limit"
+        }
+      ],
+      "extractedEvents": 14
+    },
+    {
+      "id": "cai-oristano-9248004",
+      "organizer": "CAI Oristano",
+      "region": "Sardegna",
+      "website": "https://organizzazione.cai.it/sez-oristano/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9248004",
+      "calendarUrls": [
+        "https://organizzazione.cai.it/sez-oristano/wp-content/uploads/sites/41/2025/10/2026-calendario-completo.pdf",
+        "https://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/?ical=1",
+        "https://organizzazione.cai.it/sez-oristano/eventi/?ical=1",
+        "https://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/",
+        "https://organizzazione.cai.it/sez-oristano/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F",
+        "https://organizzazione.cai.it/sez-oristano/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F&format=xml",
+        "https://www.google.com/calendar/event?action=TEMPLATE&dates=20260101T080000/20261231T230000&text=Calendario%20delle%20attivit%C3%A0%20escursionistiche%20e%20ciclo-escursionistiche%202026&details=Qui+trovate+il+calendario+con+tutte+le+attivit%C3%A0+escursionistiche+della+Sezione+di+Oristano+del+CAI+calendarizzate+dal+Direttivo+Sezionale.Verificateli+di+frequente+dove%3A+%3Cstrong%3ETRK%3C%2Fstrong%3E+%28escursionistica+e+Senior%29%2C+%3Cstrong%3EMTB%3C%2Fstrong%3E+%28ciclo-escursionismo%29%2C+MOT+%28montagna-terapia+con+%3Cstrong%3EMTG%3C%2Fstrong%3E+Ghilarza+e+%3Cstrong%3EMTO%3C%2Fstrong%3E+Oristano%29%2C+%3Cstrong%3EFAM%3C%2Fstrong%3E+%28Family+CAI%29%2C+%3Cstrong%3EGiG+%3C%2Fstrong%3Eo+%3Cstrong%3ETRG+%3C%2Fstrong%3E%28Gruppo+intersezionale+Giovani%29.Si+ricorda+che+le+attivit%C3%A0+possono+subire+delle+variazioni+di+data+o+cancellazioni%2C+di+cui+sarete+informati+sui+canali+social+e+con+l%27aggiornamento+del+calendario%2C+o+avere+delle+limitazioni+%28numero%2C+tipologia+di+partecipanti%2C+capacit%C3%A0+tecniche%2C+altro%29+che+troverete+indicate+all%27interno+della+scheda+di+escursione+postata+almeno+5+giorni+prima+dell%27evento+in+home+page%2C+%3Cstrong%3Eda+leggere+obbligatoriamente%3C%2Fstrong%3E.+Poich%C3%A8+le+attivit%C3%A0+possono+anche+essere+incrementate+durante+l%27anno%2C+si+consiglia+di+verificare+freque+%28View+Full+evento+Description+Here%3A+https%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F%29&trp=false&ctz=UTC+0&sprop=website:https://organizzazione.cai.it/sez-oristano",
+        "https://outlook.office.com/owa/?path=/calendar/action/compose&rrv=addevent&startdt=2026-01-01T08%3A00%3A00%2B00%3A00&enddt=2026-12-31T23%3A00%3A00%2B00%3A00&location&subject=Calendario%20delle%20attivit%C3%A0%20escursionistiche%20e%20ciclo-escursionistiche%202026&body=Qui%20trovate%20il%20calendario%20con%20tutte%20le%20attivit%C3%A0%20escursionistiche%20della%20Sezione%20di%20Oristano%20del%20CAI%20calendarizzate%20dal%20Direttivo%20Sezionale.Verificateli%20di%20frequente%20dove%3A%20TRK%20%28escursionistica%20e%20Senior%29%2C%20MTB%20%28ciclo-escursionismo%29%2C%20MOT%20%28montagna-terapia%20con%20MTG%20Ghilarza%20e%20MTO%20Oristano%29%2C%20FAM%20%28Family%20CAI%29%2C%20GiG%20o%20TRG%20%28Gruppo%20intersezionale%20Giovani%29.Si%20ricorda%20che%20le%20attivit%C3%A0%20possono%20subire%20delle%20variazioni%20di%20data%20o%20cancellazioni%2C%20di%20cui%20sarete%20informati%20sui%20canali%20social%20e%20con%20l%27aggiornamento%20del%20calendario%2C%20o%20avere%20delle%20limitazioni%20%28numero%2C%20tipologia%20di%20partecipanti%2C%20capacit%C3%A0%20tecniche%2C%20altro%29%20che%20troverete%20indicate%20all%27interno%20della%20scheda%20di%20escursione%20postata%20almeno%205%20giorni%20prima%20dell%27evento%20in%20home%20page%2C%20da%20leggere%20obbligatoriamente.%20Poich%C3%A8%20le%20attivit%C3%A0%20possono%20anche%20essere%20incrementate%20durante%20l%27anno%2C%20si%20consiglia%20di%20verificare%20frequentemente%20il%20sito%20per%20rimanere%20aggiornati%20%28View%20Full%20Evento%20Description%20Here%3A%20https%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F%29"
+      ],
+      "directoryId": "9248004",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "partial",
+      "url": "https://organizzazione.cai.it/sez-oristano/wp-content/uploads/sites/41/2025/10/2026-calendario-completo.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "gemini",
+      "enabled": true,
+      "excursions": 3,
+      "error": null,
+      "hash": "6d09a45da3f5c49e7a4cc3fc5f8f5e237442d6ebcc19c2f1c6b81f748b857136",
+      "updatedAt": "2026-09-06T11:18:59.287Z",
+      "documents": [
+        {
+          "url": "https://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/?ical=1",
+          "hash": "d20fd9415d43c26ffa68a091ee0fabdb25141bf7299ae4bbedfe911c09c10be9",
+          "events": 1,
+          "method": "ics"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-oristano/eventi/?ical=1",
+          "hash": "08cd1a9e956473b2d7f2308b8e08eb20d1f397ab33ccf83c7a94c237ec09af18",
+          "events": 2,
+          "method": "ics"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-oristano/wp-content/uploads/sites/41/2025/10/2026-calendario-completo.pdf",
+          "hash": "4b54372096a12b51c677cc11dd4e7e41d32d7a585820329fd385f211b07aca52",
+          "events": 0,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/",
+          "hash": "bddb9ff6587bc138d7a07aef4d353765d8505164eecdcf1f36a725b715bfc4b2",
+          "events": 1,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-oristano/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F",
+          "hash": "2513f69dbd6cae24032a4617ae4413882a88115a78ce83455e5d0b41cf1b8006",
+          "events": 0,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-oristano/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F&format=xml",
+          "hash": "1b2369bf4dfbf9b2b1ea21a502248a69d6aec5b2c957737668ef1d74ace8402e",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://accounts.google.com/v3/signin/identifier?continue=https://calendar.google.com/calendar/event?action%3DTEMPLATE%26dates%3D20260101T080000/20261231T230000%26text%3DCalendario%2Bdelle%2Battivit%25C3%25A0%2Bescursionistiche%2Be%2Bciclo-escursionistiche%2B2026%26details%3DQui%2Btrovate%2Bil%2Bcalendario%2Bcon%2Btutte%2Ble%2Battivit%25C3%25A0%2Bescursionistiche%2Bdella%2BSezione%2Bdi%2BOristano%2Bdel%2BCAI%2Bcalendarizzate%2Bdal%2BDirettivo%2BSezionale.Verificateli%2Bdi%2Bfrequente%2Bdove:%2B%253Cstrong%253ETRK%253C/strong%253E%2B(escursionistica%2Be%2BSenior),%2B%253Cstrong%253EMTB%253C/strong%253E%2B(ciclo-escursionismo),%2BMOT%2B(montagna-terapia%2Bcon%2B%253Cstrong%253EMTG%253C/strong%253E%2BGhilarza%2Be%2B%253Cstrong%253EMTO%253C/strong%253E%2BOristano),%2B%253Cstrong%253EFAM%253C/strong%253E%2B(Family%2BCAI),%2B%253Cstrong%253EGiG%2B%253C/strong%253Eo%2B%253Cstrong%253ETRG%2B%253C/strong%253E(Gruppo%2Bintersezionale%2BGiovani).Si%2Bricorda%2Bche%2Ble%2Battivit%25C3%25A0%2Bpossono%2Bsubire%2Bdelle%2Bvariazioni%2Bdi%2Bdata%2Bo%2Bcancellazioni,%2Bdi%2Bcui%2Bsarete%2Binformati%2Bsui%2Bcanali%2Bsocial%2Be%2Bcon%2Bl%27aggiornamento%2Bdel%2Bcalendario,%2Bo%2Bavere%2Bdelle%2Blimitazioni%2B(numero,%2Btipologia%2Bdi%2Bpartecipanti,%2Bcapacit%25C3%25A0%2Btecniche,%2Baltro)%2Bche%2Btroverete%2Bindicate%2Ball%27interno%2Bdella%2Bscheda%2Bdi%2Bescursione%2Bpostata%2Balmeno%2B5%2Bgiorni%2Bprima%2Bdell%27evento%2Bin%2Bhome%2Bpage,%2B%253Cstrong%253Eda%2Bleggere%2Bobbligatoriamente%253C/strong%253E.%2BPoich%25C3%25A8%2Ble%2Battivit%25C3%25A0%2Bpossono%2Banche%2Bessere%2Bincrementate%2Bdurante%2Bl%27anno,%2Bsi%2Bconsiglia%2Bdi%2Bverificare%2Bfreque%2B(View%2BFull%2Bevento%2BDescription%2BHere:%2Bhttps://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/)%26trp%3Dfalse%26ctz%3DUTC%2B0%26sprop%3Dwebsite:https://organizzazione.cai.it/sez-oristano&emr=1&followup=https://calendar.google.com/calendar/event?action%3DTEMPLATE%26dates%3D20260101T080000/20261231T230000%26text%3DCalendario%2Bdelle%2Battivit%25C3%25A0%2Bescursionistiche%2Be%2Bciclo-escursionistiche%2B2026%26details%3DQui%2Btrovate%2Bil%2Bcalendario%2Bcon%2Btutte%2Ble%2Battivit%25C3%25A0%2Bescursionistiche%2Bdella%2BSezione%2Bdi%2BOristano%2Bdel%2BCAI%2Bcalendarizzate%2Bdal%2BDirettivo%2BSezionale.Verificateli%2Bdi%2Bfrequente%2Bdove:%2B%253Cstrong%253ETRK%253C/strong%253E%2B(escursionistica%2Be%2BSenior),%2B%253Cstrong%253EMTB%253C/strong%253E%2B(ciclo-escursionismo),%2BMOT%2B(montagna-terapia%2Bcon%2B%253Cstrong%253EMTG%253C/strong%253E%2BGhilarza%2Be%2B%253Cstrong%253EMTO%253C/strong%253E%2BOristano),%2B%253Cstrong%253EFAM%253C/strong%253E%2B(Family%2BCAI),%2B%253Cstrong%253EGiG%2B%253C/strong%253Eo%2B%253Cstrong%253ETRG%2B%253C/strong%253E(Gruppo%2Bintersezionale%2BGiovani).Si%2Bricorda%2Bche%2Ble%2Battivit%25C3%25A0%2Bpossono%2Bsubire%2Bdelle%2Bvariazioni%2Bdi%2Bdata%2Bo%2Bcancellazioni,%2Bdi%2Bcui%2Bsarete%2Binformati%2Bsui%2Bcanali%2Bsocial%2Be%2Bcon%2Bl%27aggiornamento%2Bdel%2Bcalendario,%2Bo%2Bavere%2Bdelle%2Blimitazioni%2B(numero,%2Btipologia%2Bdi%2Bpartecipanti,%2Bcapacit%25C3%25A0%2Btecniche,%2Baltro)%2Bche%2Btroverete%2Bindicate%2Ball%27interno%2Bdella%2Bscheda%2Bdi%2Bescursione%2Bpostata%2Balmeno%2B5%2Bgiorni%2Bprima%2Bdell%27evento%2Bin%2Bhome%2Bpage,%2B%253Cstrong%253Eda%2Bleggere%2Bobbligatoriamente%253C/strong%253E.%2BPoich%25C3%25A8%2Ble%2Battivit%25C3%25A0%2Bpossono%2Banche%2Bessere%2Bincrementate%2Bdurante%2Bl%27anno,%2Bsi%2Bconsiglia%2Bdi%2Bverificare%2Bfreque%2B(View%2BFull%2Bevento%2BDescription%2BHere:%2Bhttps://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/)%26trp%3Dfalse%26ctz%3DUTC%2B0%26sprop%3Dwebsite:https://organizzazione.cai.it/sez-oristano&osid=1&passive=1209600&service=cl&flowName=WebLiteSignIn&flowEntry=ServiceLogin&dsh=S-2093993167:1788693404611142",
+          "hash": "5907df5664d1f34381824b8a08f3ab20a25a84058239709d15ce5fd17861f840",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://outlook.office.com/calendar/action/compose?rrv=addevent&startdt=2026-01-01T08%3A00%3A00%2B00%3A00&enddt=2026-12-31T23%3A00%3A00%2B00%3A00&location&subject=Calendario%20delle%20attivit%C3%A0%20escursionistiche%20e%20ciclo-escursionistiche%202026&body=Qui%20trovate%20il%20calendario%20con%20tutte%20le%20attivit%C3%A0%20escursionistiche%20della%20Sezione%20di%20Oristano%20del%20CAI%20calendarizzate%20dal%20Direttivo%20Sezionale.Verificateli%20di%20frequente%20dove%3A%20TRK%20(escursionistica%20e%20Senior),%20MTB%20(ciclo-escursionismo),%20MOT%20(montagna-terapia%20con%20MTG%20Ghilarza%20e%20MTO%20Oristano),%20FAM%20(Family%20CAI),%20GiG%20o%20TRG%20(Gruppo%20intersezionale%20Giovani).Si%20ricorda%20che%20le%20attivit%C3%A0%20possono%20subire%20delle%20variazioni%20di%20data%20o%20cancellazioni,%20di%20cui%20sarete%20informati%20sui%20canali%20social%20e%20con%20l%27aggiornamento%20del%20calendario,%20o%20avere%20delle%20limitazioni%20(numero,%20tipologia%20di%20partecipanti,%20capacit%C3%A0%20tecniche,%20altro)%20che%20troverete%20indicate%20all%27interno%20della%20scheda%20di%20escursione%20postata%20almeno%205%20giorni%20prima%20dell%27evento%20in%20home%20page,%20da%20leggere%20obbligatoriamente.%20Poich%C3%A8%20le%20attivit%C3%A0%20possono%20anche%20essere%20incrementate%20durante%20l%27anno,%20si%20consiglia%20di%20verificare%20frequentemente%20il%20sito%20per%20rimanere%20aggiornati%20(View%20Full%20Evento%20Description%20Here%3A%20https%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F)",
+          "hash": "d0e723dc6e80c2a6b2e3a800230cda4caab0f7e52c3c78cb3bb0385e6c38f69e",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-oristano/",
+          "hash": "84176ccdac4712669a5f9dc152175392ce29c57d4c067f99cbd500e8dea52e26",
+          "events": 2,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
+          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
+          "events": 0,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://accounts.google.com/signin/v2/usernamerecovery?continue=https%3A%2F%2Fcalendar.google.com%2Fcalendar%2Fevent%3Faction%3DTEMPLATE%26dates%3D20260101T080000%2F20261231T230000%26text%3DCalendario%2Bdelle%2Battivit%25C3%25A0%2Bescursionistiche%2Be%2Bciclo-escursionistiche%2B2026%26details%3DQui%2Btrovate%2Bil%2Bcalendario%2Bcon%2Btutte%2Ble%2Battivit%25C3%25A0%2Bescursionistiche%2Bdella%2BSezione%2Bdi%2BOristano%2Bdel%2BCAI%2Bcalendarizzate%2Bdal%2BDirettivo%2BSezionale.Verificateli%2Bdi%2Bfrequente%2Bdove%3A%2B%253Cstrong%253ETRK%253C%2Fstrong%253E%2B%28escursionistica%2Be%2BSenior%29%2C%2B%253Cstrong%253EMTB%253C%2Fstrong%253E%2B%28ciclo-escursionismo%29%2C%2BMOT%2B%28montagna-terapia%2Bcon%2B%253Cstrong%253EMTG%253C%2Fstrong%253E%2BGhilarza%2Be%2B%253Cstrong%253EMTO%253C%2Fstrong%253E%2BOristano%29%2C%2B%253Cstrong%253EFAM%253C%2Fstrong%253E%2B%28Family%2BCAI%29%2C%2B%253Cstrong%253EGiG%2B%253C%2Fstrong%253Eo%2B%253Cstrong%253ETRG%2B%253C%2Fstrong%253E%28Gruppo%2Bintersezionale%2BGiovani%29.Si%2Bricorda%2Bche%2Ble%2Battivit%25C3%25A0%2Bpossono%2Bsubire%2Bdelle%2Bvariazioni%2Bdi%2Bdata%2Bo%2Bcancellazioni%2C%2Bdi%2Bcui%2Bsarete%2Binformati%2Bsui%2Bcanali%2Bsocial%2Be%2Bcon%2Bl%27aggiornamento%2Bdel%2Bcalendario%2C%2Bo%2Bavere%2Bdelle%2Blimitazioni%2B%28numero%2C%2Btipologia%2Bdi%2Bpartecipanti%2C%2Bcapacit%25C3%25A0%2Btecniche%2C%2Baltro%29%2Bche%2Btroverete%2Bindicate%2Ball%27interno%2Bdella%2Bscheda%2Bdi%2Bescursione%2Bpostata%2Balmeno%2B5%2Bgiorni%2Bprima%2Bdell%27evento%2Bin%2Bhome%2Bpage%2C%2B%253Cstrong%253Eda%2Bleggere%2Bobbligatoriamente%253C%2Fstrong%253E.%2BPoich%25C3%25A8%2Ble%2Battivit%25C3%25A0%2Bpossono%2Banche%2Bessere%2Bincrementate%2Bdurante%2Bl%27anno%2C%2Bsi%2Bconsiglia%2Bdi%2Bverificare%2Bfreque%2B%28View%2BFull%2Bevento%2BDescription%2BHere%3A%2Bhttps%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F%29%26trp%3Dfalse%26ctz%3DUTC%2B0%26sprop%3Dwebsite%3Ahttps%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano&dsh=S-2093993167%3A1788693404611142&emr=1&flowEntry=ServiceLogin&flowName=GlifWebSignIn&followup=https%3A%2F%2Fcalendar.google.com%2Fcalendar%2Fevent%3Faction%3DTEMPLATE%26dates%3D20260101T080000%2F20261231T230000%26text%3DCalendario%2Bdelle%2Battivit%25C3%25A0%2Bescursionistiche%2Be%2Bciclo-escursionistiche%2B2026%26details%3DQui%2Btrovate%2Bil%2Bcalendario%2Bcon%2Btutte%2Ble%2Battivit%25C3%25A0%2Bescursionistiche%2Bdella%2BSezione%2Bdi%2BOristano%2Bdel%2BCAI%2Bcalendarizzate%2Bdal%2BDirettivo%2BSezionale.Verificateli%2Bdi%2Bfrequente%2Bdove%3A%2B%253Cstrong%253ETRK%253C%2Fstrong%253E%2B%28escursionistica%2Be%2BSenior%29%2C%2B%253Cstrong%253EMTB%253C%2Fstrong%253E%2B%28ciclo-escursionismo%29%2C%2BMOT%2B%28montagna-terapia%2Bcon%2B%253Cstrong%253EMTG%253C%2Fstrong%253E%2BGhilarza%2Be%2B%253Cstrong%253EMTO%253C%2Fstrong%253E%2BOristano%29%2C%2B%253Cstrong%253EFAM%253C%2Fstrong%253E%2B%28Family%2BCAI%29%2C%2B%253Cstrong%253EGiG%2B%253C%2Fstrong%253Eo%2B%253Cstrong%253ETRG%2B%253C%2Fstrong%253E%28Gruppo%2Bintersezionale%2BGiovani%29.Si%2Bricorda%2Bche%2Ble%2Battivit%25C3%25A0%2Bpossono%2Bsubire%2Bdelle%2Bvariazioni%2Bdi%2Bdata%2Bo%2Bcancellazioni%2C%2Bdi%2Bcui%2Bsarete%2Binformati%2Bsui%2Bcanali%2Bsocial%2Be%2Bcon%2Bl%27aggiornamento%2Bdel%2Bcalendario%2C%2Bo%2Bavere%2Bdelle%2Blimitazioni%2B%28numero%2C%2Btipologia%2Bdi%2Bpartecipanti%2C%2Bcapacit%25C3%25A0%2Btecniche%2C%2Baltro%29%2Bche%2Btroverete%2Bindicate%2Ball%27interno%2Bdella%2Bscheda%2Bdi%2Bescursione%2Bpostata%2Balmeno%2B5%2Bgiorni%2Bprima%2Bdell%27evento%2Bin%2Bhome%2Bpage%2C%2B%253Cstrong%253Eda%2Bleggere%2Bobbligatoriamente%253C%2Fstrong%253E.%2BPoich%25C3%25A8%2Ble%2Battivit%25C3%25A0%2Bpossono%2Banche%2Bessere%2Bincrementate%2Bdurante%2Bl%27anno%2C%2Bsi%2Bconsiglia%2Bdi%2Bverificare%2Bfreque%2B%28View%2BFull%2Bevento%2BDescription%2BHere%3A%2Bhttps%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F%29%26trp%3Dfalse%26ctz%3DUTC%2B0%26sprop%3Dwebsite%3Ahttps%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano&osid=1&service=cl",
+          "hash": "5f997285934de6558332929b4702f5648337fa61924c9ca2987ae1d6275a8ac9",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://accounts.google.com/lifecycle/steps/signup/unknownerror?continue=https://calendar.google.com/calendar/event?action%3DTEMPLATE%26dates%3D20260101T080000/20261231T230000%26text%3DCalendario%2Bdelle%2Battivit%25C3%25A0%2Bescursionistiche%2Be%2Bciclo-escursionistiche%2B2026%26details%3DQui%2Btrovate%2Bil%2Bcalendario%2Bcon%2Btutte%2Ble%2Battivit%25C3%25A0%2Bescursionistiche%2Bdella%2BSezione%2Bdi%2BOristano%2Bdel%2BCAI%2Bcalendarizzate%2Bdal%2BDirettivo%2BSezionale.Verificateli%2Bdi%2Bfrequente%2Bdove:%2B%253Cstrong%253ETRK%253C/strong%253E%2B(escursionistica%2Be%2BSenior),%2B%253Cstrong%253EMTB%253C/strong%253E%2B(ciclo-escursionismo),%2BMOT%2B(montagna-terapia%2Bcon%2B%253Cstrong%253EMTG%253C/strong%253E%2BGhilarza%2Be%2B%253Cstrong%253EMTO%253C/strong%253E%2BOristano),%2B%253Cstrong%253EFAM%253C/strong%253E%2B(Family%2BCAI),%2B%253Cstrong%253EGiG%2B%253C/strong%253Eo%2B%253Cstrong%253ETRG%2B%253C/strong%253E(Gruppo%2Bintersezionale%2BGiovani).Si%2Bricorda%2Bche%2Ble%2Battivit%25C3%25A0%2Bpossono%2Bsubire%2Bdelle%2Bvariazioni%2Bdi%2Bdata%2Bo%2Bcancellazioni,%2Bdi%2Bcui%2Bsarete%2Binformati%2Bsui%2Bcanali%2Bsocial%2Be%2Bcon%2Bl%27aggiornamento%2Bdel%2Bcalendario,%2Bo%2Bavere%2Bdelle%2Blimitazioni%2B(numero,%2Btipologia%2Bdi%2Bpartecipanti,%2Bcapacit%25C3%25A0%2Btecniche,%2Baltro)%2Bche%2Btroverete%2Bindicate%2Ball%27interno%2Bdella%2Bscheda%2Bdi%2Bescursione%2Bpostata%2Balmeno%2B5%2Bgiorni%2Bprima%2Bdell%27evento%2Bin%2Bhome%2Bpage,%2B%253Cstrong%253Eda%2Bleggere%2Bobbligatoriamente%253C/strong%253E.%2BPoich%25C3%25A8%2Ble%2Battivit%25C3%25A0%2Bpossono%2Banche%2Bessere%2Bincrementate%2Bdurante%2Bl%27anno,%2Bsi%2Bconsiglia%2Bdi%2Bverificare%2Bfreque%2B(View%2BFull%2Bevento%2BDescription%2BHere:%2Bhttps://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/)%26trp%3Dfalse%26ctz%3DUTC%2B0%26sprop%3Dwebsite:https://organizzazione.cai.it/sez-oristano&dsh=S-2093993167:1788693404611142&emr=1&flowEntry=SignUp&flowName=GlifWebSignIn&followup=https://calendar.google.com/calendar/event?action%3DTEMPLATE%26dates%3D20260101T080000/20261231T230000%26text%3DCalendario%2Bdelle%2Battivit%25C3%25A0%2Bescursionistiche%2Be%2Bciclo-escursionistiche%2B2026%26details%3DQui%2Btrovate%2Bil%2Bcalendario%2Bcon%2Btutte%2Ble%2Battivit%25C3%25A0%2Bescursionistiche%2Bdella%2BSezione%2Bdi%2BOristano%2Bdel%2BCAI%2Bcalendarizzate%2Bdal%2BDirettivo%2BSezionale.Verificateli%2Bdi%2Bfrequente%2Bdove:%2B%253Cstrong%253ETRK%253C/strong%253E%2B(escursionistica%2Be%2BSenior),%2B%253Cstrong%253EMTB%253C/strong%253E%2B(ciclo-escursionismo),%2BMOT%2B(montagna-terapia%2Bcon%2B%253Cstrong%253EMTG%253C/strong%253E%2BGhilarza%2Be%2B%253Cstrong%253EMTO%253C/strong%253E%2BOristano),%2B%253Cstrong%253EFAM%253C/strong%253E%2B(Family%2BCAI),%2B%253Cstrong%253EGiG%2B%253C/strong%253Eo%2B%253Cstrong%253ETRG%2B%253C/strong%253E(Gruppo%2Bintersezionale%2BGiovani).Si%2Bricorda%2Bche%2Ble%2Battivit%25C3%25A0%2Bpossono%2Bsubire%2Bdelle%2Bvariazioni%2Bdi%2Bdata%2Bo%2Bcancellazioni,%2Bdi%2Bcui%2Bsarete%2Binformati%2Bsui%2Bcanali%2Bsocial%2Be%2Bcon%2Bl%27aggiornamento%2Bdel%2Bcalendario,%2Bo%2Bavere%2Bdelle%2Blimitazioni%2B(numero,%2Btipologia%2Bdi%2Bpartecipanti,%2Bcapacit%25C3%25A0%2Btecniche,%2Baltro)%2Bche%2Btroverete%2Bindicate%2Ball%27interno%2Bdella%2Bscheda%2Bdi%2Bescursione%2Bpostata%2Balmeno%2B5%2Bgiorni%2Bprima%2Bdell%27evento%2Bin%2Bhome%2Bpage,%2B%253Cstrong%253Eda%2Bleggere%2Bobbligatoriamente%253C/strong%253E.%2BPoich%25C3%25A8%2Ble%2Battivit%25C3%25A0%2Bpossono%2Banche%2Bessere%2Bincrementate%2Bdurante%2Bl%27anno,%2Bsi%2Bconsiglia%2Bdi%2Bverificare%2Bfreque%2B(View%2BFull%2Bevento%2BDescription%2BHere:%2Bhttps://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/)%26trp%3Dfalse%26ctz%3DUTC%2B0%26sprop%3Dwebsite:https://organizzazione.cai.it/sez-oristano&osid=1&service=cl&TL=ACv9tzETtDyEYQFVyOu5uUMUoPBojSn1rDzs3HwiTjCyHII5oTjanbpdTNQrFO2e",
+          "hash": "5a53ce8991f2c007b922aa3b692bc1ef30bee8bec79a85a024828762370e4fa2",
+          "events": 0,
+          "method": null
+        }
+      ],
+      "methods": [
+        "ics",
+        "pdf-text",
+        "html-calendar",
+        "wordpress-events"
+      ],
+      "issues": [
+        {
+          "url": "https://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/?ical=1",
+          "message": "Discovery budget reached; 22 candidate documents remain.",
+          "code": "discovery-limit"
+        }
+      ],
+      "extractedEvents": 6
     },
     {
       "id": "cai-alta-valle-dell-aterno-9134015",
@@ -2896,123 +3481,6 @@
       "extractedEvents": 38
     },
     {
-      "id": "cai-castrovillari-9244005",
-      "organizer": "CAI Castrovillari",
-      "region": "Calabria",
-      "website": "https://www.caicastrovillari.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9244005",
-      "calendarUrls": [
-        "https://www.caicastrovillari.it/images/programma2026.pdf",
-        "https://www.caicastrovillari.it/images/programmacoro26.pdf",
-        "https://www.caicastrovillari.it/images/programmacerchiara26.pdf",
-        "https://www.caicastrovillari.it/images/familycaimorano.pdf",
-        "https://www.caicastrovillari.it/images/proposta25.pdf",
-        "https://www.caicastrovillari.it/prog.php",
-        "https://www.caicastrovillari.it/racc26.php",
-        "https://www.caicastrovillari.it/racc.php"
-      ],
-      "directoryId": "9244005",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "unsupported",
-      "url": "https://www.caicastrovillari.it/images/programma2026.pdf",
-      "kind": "pdf",
-      "template": "pdf-programma",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 0,
-      "error": null,
-      "hash": "09a508ed85ace73630fa59a0cb0f2824ea56d301bdd4f189930e8884dc30fe5d",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
-      "documents": [
-        {
-          "url": "https://www.caicastrovillari.it/images/programma2026.pdf",
-          "hash": "61b6964088d7ad876ebc08e455c4f32478abb3369f3b5328e791c6604af82709",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicastrovillari.it/images/programmacoro26.pdf",
-          "hash": "fcd4be54149751165d4ab168166b2a99ec6faef295d283551e84ec697aa91085",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicastrovillari.it/images/programmacerchiara26.pdf",
-          "hash": "1e0bee3fc09bdfd8db7b6c29289c755b6e435a481c81ab3f1fec2002786f0084",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicastrovillari.it/images/familycaimorano.pdf",
-          "hash": "aaac7df890096d6ddc0621f1a5796e293c31640e899c4a5cc6d17e50a4b3fa6c",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicastrovillari.it/images/proposta25.pdf",
-          "hash": "e745dc8bcbae79d465c18e9567bdc67e67a2e8992c9ffd081e4ea36f302cf51f",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicastrovillari.it/prog.php",
-          "hash": "4cf633e1d05adefd69e52b79ab517cc842a5f7d72b545281b54b2f3169e70c3b",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicastrovillari.it/racc26.php",
-          "hash": "5d99bde8639d142b42648aa6270b7f1d3a754dcbfb5c9007619d7987168ed34e",
-          "events": 8,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://www.caicastrovillari.it/racc.php",
-          "hash": "a9476deadb4a70c2a8ea18e1a6281353439fa49528656a0d6d99f43b77e3604e",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicastrovillari.it/",
-          "hash": "a9d22c1619eac2dad9f7511200db9c0b7e350fbfc26743abc5ac4aade01961b4",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicastrovillari.it/regesc.php",
-          "hash": "b3019b292f8e2811dccd1160adc96812e1598f8444b5c6b4e58a5e5f2bbf1283",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicastrovillari.it/download/raccontatrekking2002_2007.doc",
-          "hash": "bc87602d140b043ca92883a759739fc913096edd27fc00e47383a26edfe34a3e",
-          "events": 58,
-          "method": "html-calendar"
-        }
-      ],
-      "methods": [
-        "pdf-text",
-        "html-calendar"
-      ],
-      "issues": [
-        {
-          "url": "https://www.caicastrovillari.it/images/programma2026.pdf",
-          "message": "PDF contains no extractable text; OCR/manual verification required."
-        },
-        {
-          "url": "https://www.caicastrovillari.it/images/programmacoro26.pdf",
-          "message": "PDF contains no extractable text; OCR/manual verification required."
-        },
-        {
-          "url": "https://www.caicastrovillari.it/images/programmacerchiara26.pdf",
-          "message": "PDF contains no extractable text; OCR/manual verification required."
-        }
-      ],
-      "extractedEvents": 66
-    },
-    {
       "id": "cai-catanzaro-9244004",
       "organizer": "CAI Catanzaro",
       "region": "Calabria",
@@ -3127,198 +3595,6 @@
         }
       ],
       "extractedEvents": 9
-    },
-    {
-      "id": "cai-cerchiara-di-calabria-9144003",
-      "organizer": "CAI Cerchiara Di Calabria",
-      "region": "Calabria",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9244005",
-      "calendarUrls": [],
-      "directoryId": "9144003",
-      "sectionType": "subsection",
-      "parentSectionId": "cai-castrovillari-9244005",
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9144003",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
-      "id": "cai-cosenza-9244002",
-      "organizer": "CAI Cosenza",
-      "region": "Calabria",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9244002",
-      "calendarUrls": [],
-      "directoryId": "9244002",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9244002",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
-      "id": "cai-mendicino-9144004",
-      "organizer": "CAI Mendicino",
-      "region": "Calabria",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9244002",
-      "calendarUrls": [],
-      "directoryId": "9144004",
-      "sectionType": "subsection",
-      "parentSectionId": "cai-cosenza-9244002",
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9144004",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
-      "id": "cai-reggio-calabria-9244001",
-      "organizer": "CAI Reggio Calabria",
-      "region": "Calabria",
-      "website": "https://organizzazione.cai.it/sez-reggio-calabria/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9244001",
-      "calendarUrls": [
-        "https://organizzazione.cai.it/sez-reggio-calabria/eventi/?ical=1",
-        "https://organizzazione.cai.it/sez-reggio-calabria/?post_type=tribe_events&ical=1&eventDisplay=list",
-        "https://organizzazione.cai.it/sez-reggio-calabria/eventi/elenco/?ical=1",
-        "https://organizzazione.cai.it/sez-reggio-calabria/attivita/programma2026/",
-        "https://organizzazione.cai.it/sez-reggio-calabria/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-reggio-calabria%2Fattivita%2Fprogramma2026%2F",
-        "https://organizzazione.cai.it/sez-reggio-calabria/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-reggio-calabria%2Fattivita%2Fprogramma2026%2F&format=xml",
-        "https://caireggio.short.gy/Programma2026",
-        "https://organizzazione.cai.it/sez-reggio-calabria/eventi/"
-      ],
-      "directoryId": "9244001",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "partial",
-      "url": "https://organizzazione.cai.it/sez-reggio-calabria/eventi/?ical=1",
-      "kind": "ics",
-      "template": "icalendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 32,
-      "error": null,
-      "hash": "01ac8bd476f44a6e085cb632fb4bc4f49259ad497b53534e18c5400007d77563",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
-      "documents": [
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/eventi/?ical=1",
-          "hash": "80b8aa7b37170c8d726359796d116b59c8c08ff890bd55a9053bbaf3b245a64c",
-          "events": 27,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/?post_type=tribe_events&ical=1&eventDisplay=list",
-          "hash": "e27ff7a8bf1a226c3949bd068e9a23b348efbd6488d2d5d4ce23741f1cb34f98",
-          "events": 27,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/eventi/elenco/?ical=1",
-          "hash": "1d441030f0d1d75881f9571d0d2cc63bb518d12afc0ac0e31d2c6312e735886e",
-          "events": 27,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/attivita/programma2026/",
-          "hash": "1022c2622d25bcb7c911f424fc0e7777d56546d16433a1344c38e330b4e07062",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-reggio-calabria%2Fattivita%2Fprogramma2026%2F",
-          "hash": "f71b6a775b65ba8b2a49f0edbd4ed29e43a01b4d377ba420973c9eba551fef2b",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-reggio-calabria%2Fattivita%2Fprogramma2026%2F&format=xml",
-          "hash": "144213ac79d233605f7e67d5123927406c4d923bc8fa49e8da7a28558e9acba2",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://drive.google.com/file/d/10kXORYlyXLWHHRmG7ZB11iCXdeeEPoUh/view?usp=sharing",
-          "hash": "6ec9df24700a88b2da546534fc2cac0e86c9fa2af45a10da42b0a8971b873cda",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/eventi/",
-          "hash": "8132065cfcd0c9f874775149c3232e45a92da27e1813afaacd0f380360fa2047",
-          "events": 12,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/",
-          "hash": "cb9e194d6f2500426689405ae00e797cd647fea1a1c7433b42098c753503f613",
-          "events": 6,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/eventi/elenco/?outlook-ical=1",
-          "hash": "e881e7faab8c9e8cae1564e5b43fa379cb83ec0a059ec4b1bcbd81269d5d6ba6",
-          "events": 27,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/eventi/categoria/uscite-in-ambiente/",
-          "hash": "fe2db55891418b5f70293da7c34fd9b22da3aa9962057729875548ab76423c3a",
-          "events": 0,
-          "method": null
-        }
-      ],
-      "methods": [
-        "ics",
-        "wordpress-events",
-        "html-calendar"
-      ],
-      "issues": [
-        {
-          "url": "https://organizzazione.cai.it/sez-reggio-calabria/eventi/?ical=1",
-          "message": "Discovery budget reached; 41 candidate documents remain.",
-          "code": "discovery-limit"
-        }
-      ],
-      "extractedEvents": 126
     },
     {
       "id": "cai-serra-pedace-9144002",
@@ -28745,122 +29021,6 @@
       "extractedEvents": 30
     },
     {
-      "id": "cai-cagliari-9248001",
-      "organizer": "CAI Cagliari",
-      "region": "Sardegna",
-      "website": "https://www.caicagliari.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9248001",
-      "calendarUrls": [
-        "https://www.caicagliari.it/escursionismo/wp-content/uploads/sites/2/2026/08/PAE2026s.pdf",
-        "https://www.caicagliari.it/escursionismo/calendario-escursioni/",
-        "https://www.caicagliari.it/escursionismo/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caicagliari.it%2Fescursionismo%2Fcalendario-escursioni%2F",
-        "https://www.caicagliari.it/escursionismo/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caicagliari.it%2Fescursionismo%2Fcalendario-escursioni%2F&format=xml",
-        "https://www.caicagliari.it/escursionismo/2026/09/01/sab-dom-03-04-ottobre-2026-pevero-caprera/",
-        "https://www.caicagliari.it/escursionismo/2026/08/13/giovedi-27-agosto-2026-luna-dello-storione/",
-        "https://www.caicagliari.it/escursionismo/2026/07/19/mercoledi-29-luglio-2026-luna-che-sorge-sole-che-tramonta/",
-        "https://www.caicagliari.it/escursionismo/2026/07/09/domenica-19-luglio-2026-castello-di-quirra/"
-      ],
-      "directoryId": "9248001",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "partial",
-      "url": "https://www.caicagliari.it/escursionismo/wp-content/uploads/sites/2/2026/08/PAE2026s.pdf",
-      "kind": "pdf",
-      "template": "pdf-programma",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 10,
-      "error": null,
-      "hash": "4f5bc9068a9e3f6ee86bac761018d8d88586de425c61ea811338d67c33dc60b0",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
-      "documents": [
-        {
-          "url": "https://www.caicagliari.it/escursionismo/wp-content/uploads/sites/2/2026/08/PAE2026s.pdf",
-          "hash": "2f021c35087cde28eeff5adfc010177c2aa1161e14648a78e4952e493bd95194",
-          "events": 24,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicagliari.it/escursionismo/calendario-escursioni/",
-          "hash": "925230a5b123cdae7c44225cda13961a366e4c208607379b7467fcc3ca31869b",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicagliari.it/escursionismo/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caicagliari.it%2Fescursionismo%2Fcalendario-escursioni%2F",
-          "hash": "438ef4c710c07e0659fc0c279d7c0912aff033b138f8d6de87401aac12c709a5",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://www.caicagliari.it/escursionismo/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caicagliari.it%2Fescursionismo%2Fcalendario-escursioni%2F&format=xml",
-          "hash": "d8782af3c6f00d2e8dbfc628c9fa7a971a5ef6f2d0b915eb34e7eaabd2726cd4",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicagliari.it/escursionismo/2026/09/01/sab-dom-03-04-ottobre-2026-pevero-caprera/",
-          "hash": "904389db199818957d369790e6e46c71e4a7d4b5bc9896a1e668b7a74dea0fdd",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicagliari.it/escursionismo/2026/08/13/giovedi-27-agosto-2026-luna-dello-storione/",
-          "hash": "9645a175d6d0c8185a0c321dd3a41bf41d391b5bc19e75ffe28862e3543fbc4d",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicagliari.it/escursionismo/2026/07/19/mercoledi-29-luglio-2026-luna-che-sorge-sole-che-tramonta/",
-          "hash": "b426f1a366ee61ecf93e31a744e6097811a8a3bd652a67f2a2335ec1c67261ae",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicagliari.it/escursionismo/2026/07/09/domenica-19-luglio-2026-castello-di-quirra/",
-          "hash": "fcb4a8f584e8f215a730bcf6292109d0dea3be987dfbb365380739070060bd7e",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicagliari.it/",
-          "hash": "a5349a29c50b83dcbc981038ba343a2adaebdf34805917adc2e3dd9cd229e5fd",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caicagliari.it/escursionismo/wp-content/uploads/sites/2/2026/09/2026_10_03-04-Pevero-Caprera.pdf",
-          "hash": "38e7ae6138ce293ffab5efb0490a7f2fcc05e3f83cf0b6586a5bb18031bd1afe",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicagliari.it/escursionismo/wp-content/uploads/sites/2/2026/08/2026_08_27-LOCANDINA-SORGE-LUNA.pdf",
-          "hash": "d3e7d08864927087f2c12231bb56f47caccfc7a88893153f88b36f7a94cce4e4",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caicagliari.it/escursionismo/wp-content/uploads/sites/2/2026/07/2026_07_29-LOCANDINA-SORGE-SOLE.pdf",
-          "hash": "c7c18d9927b526d0d0b3ed3b13c68ea1cedec945218af992963ff913de50299d",
-          "events": 0,
-          "method": "pdf-text"
-        }
-      ],
-      "methods": [
-        "pdf-text",
-        "wordpress-events"
-      ],
-      "issues": [
-        {
-          "url": "https://www.caicagliari.it/escursionismo/wp-content/uploads/sites/2/2026/08/PAE2026s.pdf",
-          "message": "Discovery budget reached; 59 candidate documents remain.",
-          "code": "discovery-limit"
-        }
-      ],
-      "extractedEvents": 24
-    },
-    {
       "id": "cai-gallura-9148002",
       "organizer": "CAI Gallura",
       "region": "Sardegna",
@@ -28886,124 +29046,6 @@
       "extractedEvents": null
     },
     {
-      "id": "cai-nuoro-9248002",
-      "organizer": "CAI Nuoro",
-      "region": "Sardegna",
-      "website": "https://organizzazione.cai.it/sez-nuoro/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9248002",
-      "calendarUrls": [
-        "https://organizzazione.cai.it/sez-nuoro/evento/calendario-escursionistico-2026/?ical=1",
-        "https://organizzazione.cai.it/sez-nuoro/eventi/?ical=1",
-        "https://organizzazione.cai.it/sez-nuoro/?post_type=tribe_events&ical=1&eventDisplay=list",
-        "https://organizzazione.cai.it/sez-nuoro/eventi/elenco/?ical=1",
-        "https://organizzazione.cai.it/sez-nuoro/wp-content/uploads/sites/40/2026/02/Calendario-Escursionistico-Cai-Nuoro-2026-3.pdf",
-        "https://organizzazione.cai.it/sez-nuoro/evento/calendario-escursionistico-2026/",
-        "https://organizzazione.cai.it/sez-nuoro/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-nuoro%2Fevento%2Fcalendario-escursionistico-2026%2F",
-        "https://organizzazione.cai.it/sez-nuoro/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-nuoro%2Fevento%2Fcalendario-escursionistico-2026%2F&format=xml"
-      ],
-      "directoryId": "9248002",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "partial",
-      "url": "https://organizzazione.cai.it/sez-nuoro/evento/calendario-escursionistico-2026/?ical=1",
-      "kind": "ics",
-      "template": "icalendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 2,
-      "error": null,
-      "hash": "4a3036def9b928ea34bb80ad9573238cae3021ac75c7e61a481a6a2b81885d6f",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
-      "documents": [
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/evento/calendario-escursionistico-2026/?ical=1",
-          "hash": "b6d29bf2dda5ef47d6ccbdef407d93671ad0ceca6a505c8dfd1053f0a3561dcb",
-          "events": 1,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/eventi/?ical=1",
-          "hash": "fe7d02965fab7e3be9e003f336b6ddc1e4652943a67ee886ced41ed5c2fdbdc9",
-          "events": 2,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/?post_type=tribe_events&ical=1&eventDisplay=list",
-          "hash": "089919453ad1a258a7cb26cf6e69770267f08c7fc0fa664dc72b6656ef2e047b",
-          "events": 2,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/eventi/elenco/?ical=1",
-          "hash": "00c127f4a007bcc19fc113132c127b69e807eb0635d74229735ea8fa1bfaad2f",
-          "events": 2,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/wp-content/uploads/sites/40/2026/02/Calendario-Escursionistico-Cai-Nuoro-2026-3.pdf",
-          "hash": "6912b0b554a37f9fbb57be6a8069784cbcf0c07b8eb3c4b5b588edaf288133f0",
-          "events": 2,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/evento/calendario-escursionistico-2026/",
-          "hash": "3033873b43d844b6ab250b9c2be1a811890dd4af23f26127d55c6fd55c5a1baf",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-nuoro%2Fevento%2Fcalendario-escursionistico-2026%2F",
-          "hash": "cbf0f940db008ac7f2a265f6b9a2a533f382d0d1649ea5a49a6af2d24897d344",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-nuoro%2Fevento%2Fcalendario-escursionistico-2026%2F&format=xml",
-          "hash": "63f83e9130b96222d6ae4c4b017fe15758dc27c0788337048e578ccbe8a1c743",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/",
-          "hash": "1d84410589b91ae6c3ca74453b61536950234a6a639dfde9063c01ce8720f934",
-          "events": 2,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/eventi/categoria/calendario-escursionistico/",
-          "hash": "0c7cb158e2c44a145ff08114440dac355f7d5ea5eb6f0faf5586f96fae2f1857",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/eventi/categoria/calendario-escursionistico/?post_type=tribe_events&ical=1&eventDisplay=list",
-          "hash": "061a1cd5369ca648da9e1e890d06705f107e276650c4aec2bf102366ef8701f0",
-          "events": 1,
-          "method": "ics"
-        }
-      ],
-      "methods": [
-        "ics",
-        "pdf-text",
-        "html-calendar",
-        "wordpress-events"
-      ],
-      "issues": [
-        {
-          "url": "https://organizzazione.cai.it/sez-nuoro/evento/calendario-escursionistico-2026/?ical=1",
-          "message": "Discovery budget reached; 32 candidate documents remain.",
-          "code": "discovery-limit"
-        }
-      ],
-      "extractedEvents": 14
-    },
-    {
       "id": "cai-ogliastra-diventata-sezione-9148001",
       "organizer": "CAI Ogliastra (diventata Sezione)",
       "region": "Sardegna",
@@ -29027,124 +29069,6 @@
       "methods": [],
       "issues": [],
       "extractedEvents": null
-    },
-    {
-      "id": "cai-oristano-9248004",
-      "organizer": "CAI Oristano",
-      "region": "Sardegna",
-      "website": "https://organizzazione.cai.it/sez-oristano/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9248004",
-      "calendarUrls": [
-        "https://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/?ical=1",
-        "https://organizzazione.cai.it/sez-oristano/eventi/?ical=1",
-        "https://organizzazione.cai.it/sez-oristano/wp-content/uploads/sites/41/2025/10/2026-calendario-completo.pdf",
-        "https://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/",
-        "https://organizzazione.cai.it/sez-oristano/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F",
-        "https://organizzazione.cai.it/sez-oristano/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F&format=xml",
-        "https://www.google.com/calendar/event?action=TEMPLATE&dates=20260101T080000/20261231T230000&text=Calendario%20delle%20attivit%C3%A0%20escursionistiche%20e%20ciclo-escursionistiche%202026&details=Qui+trovate+il+calendario+con+tutte+le+attivit%C3%A0+escursionistiche+della+Sezione+di+Oristano+del+CAI+calendarizzate+dal+Direttivo+Sezionale.Verificateli+di+frequente+dove%3A+%3Cstrong%3ETRK%3C%2Fstrong%3E+%28escursionistica+e+Senior%29%2C+%3Cstrong%3EMTB%3C%2Fstrong%3E+%28ciclo-escursionismo%29%2C+MOT+%28montagna-terapia+con+%3Cstrong%3EMTG%3C%2Fstrong%3E+Ghilarza+e+%3Cstrong%3EMTO%3C%2Fstrong%3E+Oristano%29%2C+%3Cstrong%3EFAM%3C%2Fstrong%3E+%28Family+CAI%29%2C+%3Cstrong%3EGiG+%3C%2Fstrong%3Eo+%3Cstrong%3ETRG+%3C%2Fstrong%3E%28Gruppo+intersezionale+Giovani%29.Si+ricorda+che+le+attivit%C3%A0+possono+subire+delle+variazioni+di+data+o+cancellazioni%2C+di+cui+sarete+informati+sui+canali+social+e+con+l%27aggiornamento+del+calendario%2C+o+avere+delle+limitazioni+%28numero%2C+tipologia+di+partecipanti%2C+capacit%C3%A0+tecniche%2C+altro%29+che+troverete+indicate+all%27interno+della+scheda+di+escursione+postata+almeno+5+giorni+prima+dell%27evento+in+home+page%2C+%3Cstrong%3Eda+leggere+obbligatoriamente%3C%2Fstrong%3E.+Poich%C3%A8+le+attivit%C3%A0+possono+anche+essere+incrementate+durante+l%27anno%2C+si+consiglia+di+verificare+freque+%28View+Full+evento+Description+Here%3A+https%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F%29&trp=false&ctz=UTC+0&sprop=website:https://organizzazione.cai.it/sez-oristano",
-        "https://outlook.office.com/owa/?path=/calendar/action/compose&rrv=addevent&startdt=2026-01-01T08%3A00%3A00%2B00%3A00&enddt=2026-12-31T23%3A00%3A00%2B00%3A00&location&subject=Calendario%20delle%20attivit%C3%A0%20escursionistiche%20e%20ciclo-escursionistiche%202026&body=Qui%20trovate%20il%20calendario%20con%20tutte%20le%20attivit%C3%A0%20escursionistiche%20della%20Sezione%20di%20Oristano%20del%20CAI%20calendarizzate%20dal%20Direttivo%20Sezionale.Verificateli%20di%20frequente%20dove%3A%20TRK%20%28escursionistica%20e%20Senior%29%2C%20MTB%20%28ciclo-escursionismo%29%2C%20MOT%20%28montagna-terapia%20con%20MTG%20Ghilarza%20e%20MTO%20Oristano%29%2C%20FAM%20%28Family%20CAI%29%2C%20GiG%20o%20TRG%20%28Gruppo%20intersezionale%20Giovani%29.Si%20ricorda%20che%20le%20attivit%C3%A0%20possono%20subire%20delle%20variazioni%20di%20data%20o%20cancellazioni%2C%20di%20cui%20sarete%20informati%20sui%20canali%20social%20e%20con%20l%27aggiornamento%20del%20calendario%2C%20o%20avere%20delle%20limitazioni%20%28numero%2C%20tipologia%20di%20partecipanti%2C%20capacit%C3%A0%20tecniche%2C%20altro%29%20che%20troverete%20indicate%20all%27interno%20della%20scheda%20di%20escursione%20postata%20almeno%205%20giorni%20prima%20dell%27evento%20in%20home%20page%2C%20da%20leggere%20obbligatoriamente.%20Poich%C3%A8%20le%20attivit%C3%A0%20possono%20anche%20essere%20incrementate%20durante%20l%27anno%2C%20si%20consiglia%20di%20verificare%20frequentemente%20il%20sito%20per%20rimanere%20aggiornati%20%28View%20Full%20Evento%20Description%20Here%3A%20https%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F%29"
-      ],
-      "directoryId": "9248004",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "partial",
-      "url": "https://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/?ical=1",
-      "kind": "ics",
-      "template": "icalendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 3,
-      "error": null,
-      "hash": "6d09a45da3f5c49e7a4cc3fc5f8f5e237442d6ebcc19c2f1c6b81f748b857136",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
-      "documents": [
-        {
-          "url": "https://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/?ical=1",
-          "hash": "d20fd9415d43c26ffa68a091ee0fabdb25141bf7299ae4bbedfe911c09c10be9",
-          "events": 1,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-oristano/eventi/?ical=1",
-          "hash": "08cd1a9e956473b2d7f2308b8e08eb20d1f397ab33ccf83c7a94c237ec09af18",
-          "events": 2,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-oristano/wp-content/uploads/sites/41/2025/10/2026-calendario-completo.pdf",
-          "hash": "4b54372096a12b51c677cc11dd4e7e41d32d7a585820329fd385f211b07aca52",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/",
-          "hash": "bddb9ff6587bc138d7a07aef4d353765d8505164eecdcf1f36a725b715bfc4b2",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-oristano/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F",
-          "hash": "2513f69dbd6cae24032a4617ae4413882a88115a78ce83455e5d0b41cf1b8006",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-oristano/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F&format=xml",
-          "hash": "1b2369bf4dfbf9b2b1ea21a502248a69d6aec5b2c957737668ef1d74ace8402e",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://accounts.google.com/v3/signin/identifier?continue=https://calendar.google.com/calendar/event?action%3DTEMPLATE%26dates%3D20260101T080000/20261231T230000%26text%3DCalendario%2Bdelle%2Battivit%25C3%25A0%2Bescursionistiche%2Be%2Bciclo-escursionistiche%2B2026%26details%3DQui%2Btrovate%2Bil%2Bcalendario%2Bcon%2Btutte%2Ble%2Battivit%25C3%25A0%2Bescursionistiche%2Bdella%2BSezione%2Bdi%2BOristano%2Bdel%2BCAI%2Bcalendarizzate%2Bdal%2BDirettivo%2BSezionale.Verificateli%2Bdi%2Bfrequente%2Bdove:%2B%253Cstrong%253ETRK%253C/strong%253E%2B(escursionistica%2Be%2BSenior),%2B%253Cstrong%253EMTB%253C/strong%253E%2B(ciclo-escursionismo),%2BMOT%2B(montagna-terapia%2Bcon%2B%253Cstrong%253EMTG%253C/strong%253E%2BGhilarza%2Be%2B%253Cstrong%253EMTO%253C/strong%253E%2BOristano),%2B%253Cstrong%253EFAM%253C/strong%253E%2B(Family%2BCAI),%2B%253Cstrong%253EGiG%2B%253C/strong%253Eo%2B%253Cstrong%253ETRG%2B%253C/strong%253E(Gruppo%2Bintersezionale%2BGiovani).Si%2Bricorda%2Bche%2Ble%2Battivit%25C3%25A0%2Bpossono%2Bsubire%2Bdelle%2Bvariazioni%2Bdi%2Bdata%2Bo%2Bcancellazioni,%2Bdi%2Bcui%2Bsarete%2Binformati%2Bsui%2Bcanali%2Bsocial%2Be%2Bcon%2Bl%27aggiornamento%2Bdel%2Bcalendario,%2Bo%2Bavere%2Bdelle%2Blimitazioni%2B(numero,%2Btipologia%2Bdi%2Bpartecipanti,%2Bcapacit%25C3%25A0%2Btecniche,%2Baltro)%2Bche%2Btroverete%2Bindicate%2Ball%27interno%2Bdella%2Bscheda%2Bdi%2Bescursione%2Bpostata%2Balmeno%2B5%2Bgiorni%2Bprima%2Bdell%27evento%2Bin%2Bhome%2Bpage,%2B%253Cstrong%253Eda%2Bleggere%2Bobbligatoriamente%253C/strong%253E.%2BPoich%25C3%25A8%2Ble%2Battivit%25C3%25A0%2Bpossono%2Banche%2Bessere%2Bincrementate%2Bdurante%2Bl%27anno,%2Bsi%2Bconsiglia%2Bdi%2Bverificare%2Bfreque%2B(View%2BFull%2Bevento%2BDescription%2BHere:%2Bhttps://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/)%26trp%3Dfalse%26ctz%3DUTC%2B0%26sprop%3Dwebsite:https://organizzazione.cai.it/sez-oristano&emr=1&followup=https://calendar.google.com/calendar/event?action%3DTEMPLATE%26dates%3D20260101T080000/20261231T230000%26text%3DCalendario%2Bdelle%2Battivit%25C3%25A0%2Bescursionistiche%2Be%2Bciclo-escursionistiche%2B2026%26details%3DQui%2Btrovate%2Bil%2Bcalendario%2Bcon%2Btutte%2Ble%2Battivit%25C3%25A0%2Bescursionistiche%2Bdella%2BSezione%2Bdi%2BOristano%2Bdel%2BCAI%2Bcalendarizzate%2Bdal%2BDirettivo%2BSezionale.Verificateli%2Bdi%2Bfrequente%2Bdove:%2B%253Cstrong%253ETRK%253C/strong%253E%2B(escursionistica%2Be%2BSenior),%2B%253Cstrong%253EMTB%253C/strong%253E%2B(ciclo-escursionismo),%2BMOT%2B(montagna-terapia%2Bcon%2B%253Cstrong%253EMTG%253C/strong%253E%2BGhilarza%2Be%2B%253Cstrong%253EMTO%253C/strong%253E%2BOristano),%2B%253Cstrong%253EFAM%253C/strong%253E%2B(Family%2BCAI),%2B%253Cstrong%253EGiG%2B%253C/strong%253Eo%2B%253Cstrong%253ETRG%2B%253C/strong%253E(Gruppo%2Bintersezionale%2BGiovani).Si%2Bricorda%2Bche%2Ble%2Battivit%25C3%25A0%2Bpossono%2Bsubire%2Bdelle%2Bvariazioni%2Bdi%2Bdata%2Bo%2Bcancellazioni,%2Bdi%2Bcui%2Bsarete%2Binformati%2Bsui%2Bcanali%2Bsocial%2Be%2Bcon%2Bl%27aggiornamento%2Bdel%2Bcalendario,%2Bo%2Bavere%2Bdelle%2Blimitazioni%2B(numero,%2Btipologia%2Bdi%2Bpartecipanti,%2Bcapacit%25C3%25A0%2Btecniche,%2Baltro)%2Bche%2Btroverete%2Bindicate%2Ball%27interno%2Bdella%2Bscheda%2Bdi%2Bescursione%2Bpostata%2Balmeno%2B5%2Bgiorni%2Bprima%2Bdell%27evento%2Bin%2Bhome%2Bpage,%2B%253Cstrong%253Eda%2Bleggere%2Bobbligatoriamente%253C/strong%253E.%2BPoich%25C3%25A8%2Ble%2Battivit%25C3%25A0%2Bpossono%2Banche%2Bessere%2Bincrementate%2Bdurante%2Bl%27anno,%2Bsi%2Bconsiglia%2Bdi%2Bverificare%2Bfreque%2B(View%2BFull%2Bevento%2BDescription%2BHere:%2Bhttps://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/)%26trp%3Dfalse%26ctz%3DUTC%2B0%26sprop%3Dwebsite:https://organizzazione.cai.it/sez-oristano&osid=1&passive=1209600&service=cl&flowName=WebLiteSignIn&flowEntry=ServiceLogin&dsh=S-2093993167:1788693404611142",
-          "hash": "5907df5664d1f34381824b8a08f3ab20a25a84058239709d15ce5fd17861f840",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://outlook.office.com/calendar/action/compose?rrv=addevent&startdt=2026-01-01T08%3A00%3A00%2B00%3A00&enddt=2026-12-31T23%3A00%3A00%2B00%3A00&location&subject=Calendario%20delle%20attivit%C3%A0%20escursionistiche%20e%20ciclo-escursionistiche%202026&body=Qui%20trovate%20il%20calendario%20con%20tutte%20le%20attivit%C3%A0%20escursionistiche%20della%20Sezione%20di%20Oristano%20del%20CAI%20calendarizzate%20dal%20Direttivo%20Sezionale.Verificateli%20di%20frequente%20dove%3A%20TRK%20(escursionistica%20e%20Senior),%20MTB%20(ciclo-escursionismo),%20MOT%20(montagna-terapia%20con%20MTG%20Ghilarza%20e%20MTO%20Oristano),%20FAM%20(Family%20CAI),%20GiG%20o%20TRG%20(Gruppo%20intersezionale%20Giovani).Si%20ricorda%20che%20le%20attivit%C3%A0%20possono%20subire%20delle%20variazioni%20di%20data%20o%20cancellazioni,%20di%20cui%20sarete%20informati%20sui%20canali%20social%20e%20con%20l%27aggiornamento%20del%20calendario,%20o%20avere%20delle%20limitazioni%20(numero,%20tipologia%20di%20partecipanti,%20capacit%C3%A0%20tecniche,%20altro)%20che%20troverete%20indicate%20all%27interno%20della%20scheda%20di%20escursione%20postata%20almeno%205%20giorni%20prima%20dell%27evento%20in%20home%20page,%20da%20leggere%20obbligatoriamente.%20Poich%C3%A8%20le%20attivit%C3%A0%20possono%20anche%20essere%20incrementate%20durante%20l%27anno,%20si%20consiglia%20di%20verificare%20frequentemente%20il%20sito%20per%20rimanere%20aggiornati%20(View%20Full%20Evento%20Description%20Here%3A%20https%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F)",
-          "hash": "d0e723dc6e80c2a6b2e3a800230cda4caab0f7e52c3c78cb3bb0385e6c38f69e",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-oristano/",
-          "hash": "84176ccdac4712669a5f9dc152175392ce29c57d4c067f99cbd500e8dea52e26",
-          "events": 2,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://accounts.google.com/signin/v2/usernamerecovery?continue=https%3A%2F%2Fcalendar.google.com%2Fcalendar%2Fevent%3Faction%3DTEMPLATE%26dates%3D20260101T080000%2F20261231T230000%26text%3DCalendario%2Bdelle%2Battivit%25C3%25A0%2Bescursionistiche%2Be%2Bciclo-escursionistiche%2B2026%26details%3DQui%2Btrovate%2Bil%2Bcalendario%2Bcon%2Btutte%2Ble%2Battivit%25C3%25A0%2Bescursionistiche%2Bdella%2BSezione%2Bdi%2BOristano%2Bdel%2BCAI%2Bcalendarizzate%2Bdal%2BDirettivo%2BSezionale.Verificateli%2Bdi%2Bfrequente%2Bdove%3A%2B%253Cstrong%253ETRK%253C%2Fstrong%253E%2B%28escursionistica%2Be%2BSenior%29%2C%2B%253Cstrong%253EMTB%253C%2Fstrong%253E%2B%28ciclo-escursionismo%29%2C%2BMOT%2B%28montagna-terapia%2Bcon%2B%253Cstrong%253EMTG%253C%2Fstrong%253E%2BGhilarza%2Be%2B%253Cstrong%253EMTO%253C%2Fstrong%253E%2BOristano%29%2C%2B%253Cstrong%253EFAM%253C%2Fstrong%253E%2B%28Family%2BCAI%29%2C%2B%253Cstrong%253EGiG%2B%253C%2Fstrong%253Eo%2B%253Cstrong%253ETRG%2B%253C%2Fstrong%253E%28Gruppo%2Bintersezionale%2BGiovani%29.Si%2Bricorda%2Bche%2Ble%2Battivit%25C3%25A0%2Bpossono%2Bsubire%2Bdelle%2Bvariazioni%2Bdi%2Bdata%2Bo%2Bcancellazioni%2C%2Bdi%2Bcui%2Bsarete%2Binformati%2Bsui%2Bcanali%2Bsocial%2Be%2Bcon%2Bl%27aggiornamento%2Bdel%2Bcalendario%2C%2Bo%2Bavere%2Bdelle%2Blimitazioni%2B%28numero%2C%2Btipologia%2Bdi%2Bpartecipanti%2C%2Bcapacit%25C3%25A0%2Btecniche%2C%2Baltro%29%2Bche%2Btroverete%2Bindicate%2Ball%27interno%2Bdella%2Bscheda%2Bdi%2Bescursione%2Bpostata%2Balmeno%2B5%2Bgiorni%2Bprima%2Bdell%27evento%2Bin%2Bhome%2Bpage%2C%2B%253Cstrong%253Eda%2Bleggere%2Bobbligatoriamente%253C%2Fstrong%253E.%2BPoich%25C3%25A8%2Ble%2Battivit%25C3%25A0%2Bpossono%2Banche%2Bessere%2Bincrementate%2Bdurante%2Bl%27anno%2C%2Bsi%2Bconsiglia%2Bdi%2Bverificare%2Bfreque%2B%28View%2BFull%2Bevento%2BDescription%2BHere%3A%2Bhttps%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F%29%26trp%3Dfalse%26ctz%3DUTC%2B0%26sprop%3Dwebsite%3Ahttps%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano&dsh=S-2093993167%3A1788693404611142&emr=1&flowEntry=ServiceLogin&flowName=GlifWebSignIn&followup=https%3A%2F%2Fcalendar.google.com%2Fcalendar%2Fevent%3Faction%3DTEMPLATE%26dates%3D20260101T080000%2F20261231T230000%26text%3DCalendario%2Bdelle%2Battivit%25C3%25A0%2Bescursionistiche%2Be%2Bciclo-escursionistiche%2B2026%26details%3DQui%2Btrovate%2Bil%2Bcalendario%2Bcon%2Btutte%2Ble%2Battivit%25C3%25A0%2Bescursionistiche%2Bdella%2BSezione%2Bdi%2BOristano%2Bdel%2BCAI%2Bcalendarizzate%2Bdal%2BDirettivo%2BSezionale.Verificateli%2Bdi%2Bfrequente%2Bdove%3A%2B%253Cstrong%253ETRK%253C%2Fstrong%253E%2B%28escursionistica%2Be%2BSenior%29%2C%2B%253Cstrong%253EMTB%253C%2Fstrong%253E%2B%28ciclo-escursionismo%29%2C%2BMOT%2B%28montagna-terapia%2Bcon%2B%253Cstrong%253EMTG%253C%2Fstrong%253E%2BGhilarza%2Be%2B%253Cstrong%253EMTO%253C%2Fstrong%253E%2BOristano%29%2C%2B%253Cstrong%253EFAM%253C%2Fstrong%253E%2B%28Family%2BCAI%29%2C%2B%253Cstrong%253EGiG%2B%253C%2Fstrong%253Eo%2B%253Cstrong%253ETRG%2B%253C%2Fstrong%253E%28Gruppo%2Bintersezionale%2BGiovani%29.Si%2Bricorda%2Bche%2Ble%2Battivit%25C3%25A0%2Bpossono%2Bsubire%2Bdelle%2Bvariazioni%2Bdi%2Bdata%2Bo%2Bcancellazioni%2C%2Bdi%2Bcui%2Bsarete%2Binformati%2Bsui%2Bcanali%2Bsocial%2Be%2Bcon%2Bl%27aggiornamento%2Bdel%2Bcalendario%2C%2Bo%2Bavere%2Bdelle%2Blimitazioni%2B%28numero%2C%2Btipologia%2Bdi%2Bpartecipanti%2C%2Bcapacit%25C3%25A0%2Btecniche%2C%2Baltro%29%2Bche%2Btroverete%2Bindicate%2Ball%27interno%2Bdella%2Bscheda%2Bdi%2Bescursione%2Bpostata%2Balmeno%2B5%2Bgiorni%2Bprima%2Bdell%27evento%2Bin%2Bhome%2Bpage%2C%2B%253Cstrong%253Eda%2Bleggere%2Bobbligatoriamente%253C%2Fstrong%253E.%2BPoich%25C3%25A8%2Ble%2Battivit%25C3%25A0%2Bpossono%2Banche%2Bessere%2Bincrementate%2Bdurante%2Bl%27anno%2C%2Bsi%2Bconsiglia%2Bdi%2Bverificare%2Bfreque%2B%28View%2BFull%2Bevento%2BDescription%2BHere%3A%2Bhttps%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F%29%26trp%3Dfalse%26ctz%3DUTC%2B0%26sprop%3Dwebsite%3Ahttps%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano&osid=1&service=cl",
-          "hash": "5f997285934de6558332929b4702f5648337fa61924c9ca2987ae1d6275a8ac9",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://accounts.google.com/lifecycle/steps/signup/unknownerror?continue=https://calendar.google.com/calendar/event?action%3DTEMPLATE%26dates%3D20260101T080000/20261231T230000%26text%3DCalendario%2Bdelle%2Battivit%25C3%25A0%2Bescursionistiche%2Be%2Bciclo-escursionistiche%2B2026%26details%3DQui%2Btrovate%2Bil%2Bcalendario%2Bcon%2Btutte%2Ble%2Battivit%25C3%25A0%2Bescursionistiche%2Bdella%2BSezione%2Bdi%2BOristano%2Bdel%2BCAI%2Bcalendarizzate%2Bdal%2BDirettivo%2BSezionale.Verificateli%2Bdi%2Bfrequente%2Bdove:%2B%253Cstrong%253ETRK%253C/strong%253E%2B(escursionistica%2Be%2BSenior),%2B%253Cstrong%253EMTB%253C/strong%253E%2B(ciclo-escursionismo),%2BMOT%2B(montagna-terapia%2Bcon%2B%253Cstrong%253EMTG%253C/strong%253E%2BGhilarza%2Be%2B%253Cstrong%253EMTO%253C/strong%253E%2BOristano),%2B%253Cstrong%253EFAM%253C/strong%253E%2B(Family%2BCAI),%2B%253Cstrong%253EGiG%2B%253C/strong%253Eo%2B%253Cstrong%253ETRG%2B%253C/strong%253E(Gruppo%2Bintersezionale%2BGiovani).Si%2Bricorda%2Bche%2Ble%2Battivit%25C3%25A0%2Bpossono%2Bsubire%2Bdelle%2Bvariazioni%2Bdi%2Bdata%2Bo%2Bcancellazioni,%2Bdi%2Bcui%2Bsarete%2Binformati%2Bsui%2Bcanali%2Bsocial%2Be%2Bcon%2Bl%27aggiornamento%2Bdel%2Bcalendario,%2Bo%2Bavere%2Bdelle%2Blimitazioni%2B(numero,%2Btipologia%2Bdi%2Bpartecipanti,%2Bcapacit%25C3%25A0%2Btecniche,%2Baltro)%2Bche%2Btroverete%2Bindicate%2Ball%27interno%2Bdella%2Bscheda%2Bdi%2Bescursione%2Bpostata%2Balmeno%2B5%2Bgiorni%2Bprima%2Bdell%27evento%2Bin%2Bhome%2Bpage,%2B%253Cstrong%253Eda%2Bleggere%2Bobbligatoriamente%253C/strong%253E.%2BPoich%25C3%25A8%2Ble%2Battivit%25C3%25A0%2Bpossono%2Banche%2Bessere%2Bincrementate%2Bdurante%2Bl%27anno,%2Bsi%2Bconsiglia%2Bdi%2Bverificare%2Bfreque%2B(View%2BFull%2Bevento%2BDescription%2BHere:%2Bhttps://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/)%26trp%3Dfalse%26ctz%3DUTC%2B0%26sprop%3Dwebsite:https://organizzazione.cai.it/sez-oristano&dsh=S-2093993167:1788693404611142&emr=1&flowEntry=SignUp&flowName=GlifWebSignIn&followup=https://calendar.google.com/calendar/event?action%3DTEMPLATE%26dates%3D20260101T080000/20261231T230000%26text%3DCalendario%2Bdelle%2Battivit%25C3%25A0%2Bescursionistiche%2Be%2Bciclo-escursionistiche%2B2026%26details%3DQui%2Btrovate%2Bil%2Bcalendario%2Bcon%2Btutte%2Ble%2Battivit%25C3%25A0%2Bescursionistiche%2Bdella%2BSezione%2Bdi%2BOristano%2Bdel%2BCAI%2Bcalendarizzate%2Bdal%2BDirettivo%2BSezionale.Verificateli%2Bdi%2Bfrequente%2Bdove:%2B%253Cstrong%253ETRK%253C/strong%253E%2B(escursionistica%2Be%2BSenior),%2B%253Cstrong%253EMTB%253C/strong%253E%2B(ciclo-escursionismo),%2BMOT%2B(montagna-terapia%2Bcon%2B%253Cstrong%253EMTG%253C/strong%253E%2BGhilarza%2Be%2B%253Cstrong%253EMTO%253C/strong%253E%2BOristano),%2B%253Cstrong%253EFAM%253C/strong%253E%2B(Family%2BCAI),%2B%253Cstrong%253EGiG%2B%253C/strong%253Eo%2B%253Cstrong%253ETRG%2B%253C/strong%253E(Gruppo%2Bintersezionale%2BGiovani).Si%2Bricorda%2Bche%2Ble%2Battivit%25C3%25A0%2Bpossono%2Bsubire%2Bdelle%2Bvariazioni%2Bdi%2Bdata%2Bo%2Bcancellazioni,%2Bdi%2Bcui%2Bsarete%2Binformati%2Bsui%2Bcanali%2Bsocial%2Be%2Bcon%2Bl%27aggiornamento%2Bdel%2Bcalendario,%2Bo%2Bavere%2Bdelle%2Blimitazioni%2B(numero,%2Btipologia%2Bdi%2Bpartecipanti,%2Bcapacit%25C3%25A0%2Btecniche,%2Baltro)%2Bche%2Btroverete%2Bindicate%2Ball%27interno%2Bdella%2Bscheda%2Bdi%2Bescursione%2Bpostata%2Balmeno%2B5%2Bgiorni%2Bprima%2Bdell%27evento%2Bin%2Bhome%2Bpage,%2B%253Cstrong%253Eda%2Bleggere%2Bobbligatoriamente%253C/strong%253E.%2BPoich%25C3%25A8%2Ble%2Battivit%25C3%25A0%2Bpossono%2Banche%2Bessere%2Bincrementate%2Bdurante%2Bl%27anno,%2Bsi%2Bconsiglia%2Bdi%2Bverificare%2Bfreque%2B(View%2BFull%2Bevento%2BDescription%2BHere:%2Bhttps://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/)%26trp%3Dfalse%26ctz%3DUTC%2B0%26sprop%3Dwebsite:https://organizzazione.cai.it/sez-oristano&osid=1&service=cl&TL=ACv9tzETtDyEYQFVyOu5uUMUoPBojSn1rDzs3HwiTjCyHII5oTjanbpdTNQrFO2e",
-          "hash": "5a53ce8991f2c007b922aa3b692bc1ef30bee8bec79a85a024828762370e4fa2",
-          "events": 0,
-          "method": null
-        }
-      ],
-      "methods": [
-        "ics",
-        "pdf-text",
-        "html-calendar",
-        "wordpress-events"
-      ],
-      "issues": [
-        {
-          "url": "https://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/?ical=1",
-          "message": "Discovery budget reached; 22 candidate documents remain.",
-          "code": "discovery-limit"
-        }
-      ],
-      "extractedEvents": 6
     },
     {
       "id": "cai-sassari-9248003",

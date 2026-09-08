@@ -932,7 +932,7 @@
       "url": "https://www.caicastrovillari.it/images/programma2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
-      "extractor": "deterministic",
+      "extractor": "gemini",
       "enabled": true
     },
     {
@@ -7348,7 +7348,7 @@
     "cai-penne-9234006": "62bb510a2636fabb138021a32abb8543dfbd24d78276bb6f6e2e397dc132af8c",
     "cai-lagonegro-9242002": "b494b08465896b63be478216bf13a9cba1c8788eba254a0ab2e7ba977c5ed92a",
     "cai-castel-di-sangro-9234015": "b7fcf0e5120027d2169af7fa575035f6d8b99855490953d160de6b9f29b2c3b0",
-    "cai-castrovillari-9244005": "09a508ed85ace73630fa59a0cb0f2824ea56d301bdd4f189930e8884dc30fe5d",
+    "cai-castrovillari-9244005": "8cfd9707acda4c004bb6fe3a583112f8520941d1a82cdf03dd0ca0babe9d98a1",
     "cai-vallelonga-coppo-dell-orso-9234025": "24d882ea7c6d1f73443ee949c8ad6d1c6c4784ee3e1280bd4f5521900f09a880",
     "cai-monte-bulgheria-9238010": "114502ae854f44461013f7972c649a51ec87ba4e9b3b65ca7ab46f5453404245",
     "cai-matera-9242004": "e4ef80bbb162d66185cb767d78d807ea2e7a889609c17e6a45aecc32399c82ae",
@@ -7617,7 +7617,7 @@
     "cai-arsita-9234026": "457e8ffa386dc92ac4598f5ca8e2fca82d75b5eef7cc0b22acc9737ae90b049a",
     "cai-val-vibrata-monti-gemelli-9234027": "553fe204311569f914a336cf3a1abee01581c1d7dfdaa8ecc8b4e4efafd8470a"
   },
-  "generatedAt": "2026-09-08T11:27:13.886Z",
+  "generatedAt": "2026-09-08T11:30:57.258Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
@@ -7626,7 +7626,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 362
+    "located": 377
   },
   "excursions": [
     {
@@ -16231,6 +16231,25 @@
       "description": "Festa al rifugio Laeng 1740m (E) Posto su un dosso nella conca di Varicla, è incorniciato dalle pareti rocciose calcaree del gruppo del Pizzo Camino e cima Moren E’ inserito in un ambiente simile a un giardino dove ogni albero, cespuglio fiore e pietra sembrano disposti con impareggiabile sensibilità paesaggistica."
     },
     {
+      "id": "cai-castrovillari-9244005-68979d6e5b7e",
+      "title": "San Lorenzo Bellizzi. Colle di Conca (1350m) - Timpa di San Lorenzo (1632m)",
+      "date": "2026-09-13",
+      "dateEnd": "2026-09-13",
+      "days": 1,
+      "category": "E",
+      "link": "https://www.caicastrovillari.it/images/programma2026.pdf",
+      "organizer": "CAI Castrovillari",
+      "location": "Timpa di San Lorenzo",
+      "region": "Altro",
+      "lat": 39.889,
+      "lng": 16.319,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "5 ore",
+      "privateCar": null,
+      "durationHours": 5
+    },
+    {
       "id": "colleferro-cc7882227ffc",
       "title": "Santuario della Santissima Trinità da Monna dell’Orso",
       "date": "2026-09-13",
@@ -18718,6 +18737,25 @@
       "description": "20 dom Azimut Terminillo da Pian delle Valli con la Cima dell’Innamorata (De Angelis, Piga, Baioletti)"
     },
     {
+      "id": "cai-castrovillari-9244005-e990d91173da",
+      "title": "Belvedere. Trifari (720m) - Monte la Caccia (1774m)",
+      "date": "2026-09-20",
+      "dateEnd": "2026-09-20",
+      "days": 1,
+      "category": "EE",
+      "link": "https://www.caicastrovillari.it/images/programma2026.pdf",
+      "organizer": "CAI Castrovillari",
+      "location": "Monte la Caccia",
+      "region": "Altro",
+      "lat": 39.839,
+      "lng": 15.986,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "8 ore",
+      "privateCar": null,
+      "durationHours": 8
+    },
+    {
       "id": "cai-chieti-9234001-1ce852bb357c",
       "sourceId": "cai-chieti-9234001",
       "title": "CAI 60° anniversario Via \"Quelli del '66\" alle Murelle",
@@ -20845,6 +20883,24 @@
       "description": "Evento da confermare nei giorni precedenti l’uscita. Ulteriori dettagli saranno dati in prossimità dell’evento stesso aggiornando questa descrizione sul sito. Consuetamente le uscite giornaliere del weekend vengono confermate o annullate il martedì precedente l’uscita tramite i nostri canali. Segui tutti gli aggiornamenti del CAI Reggio Calabria su Whatsapp https://chat.whatsapp.com/BhUezT56qj213l2MtwEbtf o sui social come CAI Reggo Calabria su Facebook https://www.facebook.com/caireggiocalabria e CAI Giovani Reggio Calabria su Instagram https://www.instagram.com/caigiovanireggiocalabria/"
     },
     {
+      "id": "cai-castrovillari-9244005-d5c423e72803",
+      "title": "Sulmona. PNGML. Settimana nazionale dell'escursionismo",
+      "date": "2026-09-22",
+      "dateEnd": "2026-09-26",
+      "days": 5,
+      "category": "Escursionismo",
+      "link": "https://www.caicastrovillari.it/images/programma2026.pdf",
+      "organizer": "CAI Castrovillari",
+      "location": "Sulmona, Parco Nazionale della Maiella",
+      "region": "Abruzzo",
+      "lat": 42.086,
+      "lng": 14.087,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
       "id": "cai-perugia-9230001-b0769d67467a",
       "sourceId": "cai-perugia-9230001",
       "title": "Trekking Settimana Nazionale dell’Escursionismo a Sulmona (Furin, Biancucci)",
@@ -21723,6 +21779,24 @@
       "locationSource": "pdf-text",
       "sourceDocument": "https://organizzazione.cai.it/sez-bolzano-caiaa/wp-content/uploads/sites/6/2026/05/Tabella-escursioni-completa.pdf",
       "description": "26/09/2026 Sabato Campo Imperatore, Pizzo Cefalone, Cima Giovanni Paolo II EE 500 500 6 Passaggi esposti"
+    },
+    {
+      "id": "cai-castrovillari-9244005-6aa7c5b44a46",
+      "title": "Cerchiara di Calabria. MontagnAttiva. Trekking, Arrampicata, Speleologia",
+      "date": "2026-09-26",
+      "dateEnd": "2026-09-27",
+      "days": 2,
+      "category": "Escursionismo",
+      "link": "https://www.caicastrovillari.it/images/programma2026.pdf",
+      "organizer": "CAI Castrovillari",
+      "location": "Cerchiara di Calabria",
+      "region": "Altro",
+      "lat": 39.864,
+      "lng": 16.37,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
     },
     {
       "id": "cai-brunico-c-a-i-a-a-9219005-8d703c739b32",
@@ -26185,6 +26259,25 @@
       "description": "DOMENICA 4 OTTOBRE"
     },
     {
+      "id": "cai-castrovillari-9244005-7bb4f544593c",
+      "title": "Castelsaraceno. Bosco Favino (1344m) - Monte Alpi (1900m)",
+      "date": "2026-10-04",
+      "dateEnd": "2026-10-04",
+      "days": 1,
+      "category": "E",
+      "link": "https://www.caicastrovillari.it/images/programma2026.pdf",
+      "organizer": "CAI Castrovillari",
+      "location": "Monte Alpi",
+      "region": "Altro",
+      "lat": 40.134,
+      "lng": 15.983,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "7 ore",
+      "privateCar": null,
+      "durationHours": 7
+    },
+    {
       "id": "cai-sacile-9222024-e0a61aa8f72f",
       "sourceId": "cai-sacile-9222024",
       "title": "CHIESE E BORGHI DELLA VAL TAGLIAMENTO",
@@ -29268,6 +29361,24 @@
       "coordinatesQuality": "unknown",
       "locationSource": "ics",
       "sourceDocument": "https://caigualdotadino.it/?post_type=tribe_events&ical=1&eventDisplay=list"
+    },
+    {
+      "id": "cai-castrovillari-9244005-f3fa7f4c5c94",
+      "title": "Trekking in Salento",
+      "date": "2026-10-10",
+      "dateEnd": "2026-10-11",
+      "days": 2,
+      "category": "T/E",
+      "link": "https://www.caicastrovillari.it/images/programma2026.pdf",
+      "organizer": "CAI Castrovillari",
+      "location": "Salento",
+      "region": "Altro",
+      "lat": 40.15,
+      "lng": 18.15,
+      "coordinatesQuality": "region",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
     },
     {
       "id": "tivoli-6120e2cb7aa8",
@@ -33047,6 +33158,24 @@
       "description": "domenica 18 ottobre"
     },
     {
+      "id": "cai-castrovillari-9244005-57d111fa457d",
+      "title": "Civita. Alpinismo. Serra delle Ciavole. Via Ferranti/Caldarola",
+      "date": "2026-10-18",
+      "dateEnd": "2026-10-18",
+      "days": 1,
+      "category": "EEA",
+      "link": "https://www.caicastrovillari.it/images/programma2026.pdf",
+      "organizer": "CAI Castrovillari",
+      "location": "Serra delle Ciavole",
+      "region": "Altro",
+      "lat": 39.897,
+      "lng": 16.197,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
+    },
+    {
       "id": "cai-varese-9216009-00a7931f94d1",
       "sourceId": "cai-varese-9216009",
       "title": "Corso di Introduzione alla Speleologia - Uscita pratica",
@@ -34523,6 +34652,25 @@
       "coordinatesQuality": "unknown",
       "locationSource": "json-ld",
       "sourceDocument": "https://caigualdotadino.it/?post_type=tribe_events&eventDisplay=list"
+    },
+    {
+      "id": "cai-castrovillari-9244005-ec1b4b96aa80",
+      "title": "Viggianello. Colle Impiso (1550m) - Monte Pollino (2248m)",
+      "date": "2026-10-18",
+      "dateEnd": "2026-10-18",
+      "days": 1,
+      "category": "EE",
+      "link": "https://www.caicastrovillari.it/images/programma2026.pdf",
+      "organizer": "CAI Castrovillari",
+      "location": "Monte Pollino",
+      "region": "Altro",
+      "lat": 39.901,
+      "lng": 16.182,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "7 ore",
+      "privateCar": null,
+      "durationHours": 7
     },
     {
       "id": "cai-varese-9216009-ebcacc6679d5",
@@ -37311,6 +37459,25 @@
       "privateCar": null
     },
     {
+      "id": "cai-castrovillari-9244005-692a18d67065",
+      "title": "Viggianello. Colle Impiso (m1550) - Madonna di Pollino (1537m). Sentiero dei Pellegrini e della Transumanza",
+      "date": "2026-10-25",
+      "dateEnd": "2026-10-25",
+      "days": 1,
+      "category": "EE",
+      "link": "https://www.caicastrovillari.it/images/programma2026.pdf",
+      "organizer": "CAI Castrovillari",
+      "location": "Madonna di Pollino",
+      "region": "Altro",
+      "lat": 39.927,
+      "lng": 16.177,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "7 ore",
+      "privateCar": null,
+      "durationHours": 7
+    },
+    {
       "id": "cai-perugia-9230001-3fb726dbfe30",
       "sourceId": "cai-perugia-9230001",
       "title": "Escursionismo Foliage da Armenzano - Che meraviglia! (Bambini, Rosignoli, Montecchiani)",
@@ -37981,6 +38148,25 @@
       "locationSource": "pdf-text",
       "sourceDocument": "https://www.caiaprilia.com/wp-content/uploads/2026/01/CAI_Programma-2026.pdf",
       "description": "1 Novembre Frascati - Monte Tuscolo e ritorno"
+    },
+    {
+      "id": "cai-castrovillari-9244005-dc054306ea05",
+      "title": "Frascineto. Masseria Quercia Marina (722m) - Timpone Pallone (1526m)",
+      "date": "2026-11-01",
+      "dateEnd": "2026-11-01",
+      "days": 1,
+      "category": "EE",
+      "link": "https://www.caicastrovillari.it/images/programma2026.pdf",
+      "organizer": "CAI Castrovillari",
+      "location": "Timpone Pallone",
+      "region": "Altro",
+      "lat": 39.851,
+      "lng": 16.241,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "8 ore",
+      "privateCar": null,
+      "durationHours": 8
     },
     {
       "id": "cai-pavullo-nel-frignano-9224020-7019f5d4292d",
@@ -38832,6 +39018,25 @@
       "privateCar": null,
       "durationHours": 5,
       "distanceKm": 7.3
+    },
+    {
+      "id": "cai-castrovillari-9244005-990268639ddc",
+      "title": "P.N.C.V.D. Monte Motola (1743m) e Cocuzzo delle Puglie (1411m)",
+      "date": "2026-11-07",
+      "dateEnd": "2026-11-08",
+      "days": 2,
+      "category": "EE",
+      "link": "https://www.caicastrovillari.it/images/programma2026.pdf",
+      "organizer": "CAI Castrovillari",
+      "location": "Monte Motola",
+      "region": "Altro",
+      "lat": 40.323,
+      "lng": 15.426,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "7 ore",
+      "privateCar": null,
+      "durationHours": 7
     },
     {
       "id": "roma-1d63e9d3a3a7",
@@ -42285,6 +42490,25 @@
       "description": "domenica 15 novembre"
     },
     {
+      "id": "cai-castrovillari-9244005-664e0900f4a7",
+      "title": "San Lorenzo Bellizzi. Colle di Conca (1350m) - Timpa la Falconara (1696m)",
+      "date": "2026-11-15",
+      "dateEnd": "2026-11-15",
+      "days": 1,
+      "category": "E",
+      "link": "https://www.caicastrovillari.it/images/programma2026.pdf",
+      "organizer": "CAI Castrovillari",
+      "location": "Timpa la Falconara",
+      "region": "Altro",
+      "lat": 39.896,
+      "lng": 16.311,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "6 ore",
+      "privateCar": null,
+      "durationHours": 6
+    },
+    {
       "id": "cai-pavullo-nel-frignano-9224020-68b113405f83",
       "sourceId": "cai-pavullo-nel-frignano-9224020",
       "title": "Sui sentieri di Serramazzoni (Appennino Modenese)",
@@ -43314,6 +43538,25 @@
       "locationSource": "wordpress-events",
       "sourceDocument": "https://www.caifrascati.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
       "description": "Descrizione itinerario: In fase di preparazione Difficoltà: E Dislivello in salita: Dislivello in discesa: Durata Prevista (ore di marcia): Equipaggiamento: Appuntamento: Con l’iscrizione all’escursione il partecipante dichiara di conoscere e accettare le Regole di comportamento per le escursioni sociali della Sezione di Frascati che trova esposte in sede o visionabili sul sito www.caifrascati.it – Per tutti i dettagli sulle assicurazioni http://www.cai.it/assicurazione"
+    },
+    {
+      "id": "cai-castrovillari-9244005-89f6412f967a",
+      "title": "Castrovillari. Orto Botanico (650m). Anello del Timpone Campanaro (m1490)",
+      "date": "2026-11-22",
+      "dateEnd": "2026-11-22",
+      "days": 1,
+      "category": "E",
+      "link": "https://www.caicastrovillari.it/images/programma2026.pdf",
+      "organizer": "CAI Castrovillari",
+      "location": "Timpone Campanaro",
+      "region": "Altro",
+      "lat": 39.846,
+      "lng": 16.143,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "6 ore",
+      "privateCar": null,
+      "durationHours": 6
     },
     {
       "id": "cai-monte-bulgheria-9238010-35899d014092",
@@ -44981,6 +45224,25 @@
       "privateCar": null
     },
     {
+      "id": "cai-castrovillari-9244005-c0e30737b49d",
+      "title": "Rotonda. Cascata del Demonio",
+      "date": "2026-11-29",
+      "dateEnd": "2026-11-29",
+      "days": 1,
+      "category": "T/C",
+      "link": "https://www.caicastrovillari.it/images/programma2026.pdf",
+      "organizer": "CAI Castrovillari",
+      "location": "Cascata del Demonio",
+      "region": "Altro",
+      "lat": 39.967,
+      "lng": 16.059,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "2 ore",
+      "privateCar": null,
+      "durationHours": 2
+    },
+    {
       "id": "cai-u-l-e-genova-9210005-e1ed72175ba8",
       "sourceId": "cai-u-l-e-genova-9210005",
       "title": "SENTIERO DEL DAINO SANTO STEFANO BRUZZONE LATINO E 6",
@@ -45924,6 +46186,25 @@
       "locationSource": "html-calendar",
       "sourceDocument": "https://caigrosseto.it/",
       "description": "6 Regole per l’Escursionista"
+    },
+    {
+      "id": "cai-castrovillari-9244005-2b7ba16013ed",
+      "title": "S. Donato Ninea. Piano di Lanzo (1345m) - Cozzo dell'Orso (1571m)",
+      "date": "2026-12-06",
+      "dateEnd": "2026-12-06",
+      "days": 1,
+      "category": "EE",
+      "link": "https://www.caicastrovillari.it/images/programma2026.pdf",
+      "organizer": "CAI Castrovillari",
+      "location": "Cozzo dell'Orso",
+      "region": "Altro",
+      "lat": 39.721,
+      "lng": 16.035,
+      "coordinatesQuality": "massif",
+      "cost": "Vedi sito",
+      "time": "8 ore",
+      "privateCar": null,
+      "durationHours": 8
     },
     {
       "id": "cai-reggio-calabria-9244001-9781db2eab9b",
@@ -49046,6 +49327,21 @@
       "locationSource": "html-calendar",
       "sourceDocument": "https://caigrosseto.it/",
       "description": "27 DOM Escursione di fine anno E Frassinetti"
+    },
+    {
+      "id": "cai-castrovillari-9244005-5e83cb04f8dc",
+      "title": "Escursione di fine anno. Itinerario da stabilire",
+      "date": "2026-12-27",
+      "dateEnd": "2026-12-27",
+      "days": 1,
+      "category": "Escursionismo",
+      "link": "https://www.caicastrovillari.it/images/programma2026.pdf",
+      "organizer": "CAI Castrovillari",
+      "location": "Da stabilire",
+      "region": "Altro",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null
     },
     {
       "id": "cai-lecce-9240005-80a1996803e7",
