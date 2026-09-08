@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T11:41:13.887Z",
+  "generatedAt": "2026-09-08T11:42:52.983Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 453
+    "located": 475
   },
   "sources": [
     {
@@ -1363,104 +1363,20 @@
       "directoryId": "9248004",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "partial",
+      "status": "ok",
       "url": "https://organizzazione.cai.it/sez-oristano/wp-content/uploads/sites/41/2025/10/2026-calendario-completo.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 3,
+      "excursions": 23,
       "error": null,
-      "hash": "6d09a45da3f5c49e7a4cc3fc5f8f5e237442d6ebcc19c2f1c6b81f748b857136",
-      "updatedAt": "2026-09-06T11:18:59.287Z",
-      "documents": [
-        {
-          "url": "https://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/?ical=1",
-          "hash": "d20fd9415d43c26ffa68a091ee0fabdb25141bf7299ae4bbedfe911c09c10be9",
-          "events": 1,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-oristano/eventi/?ical=1",
-          "hash": "08cd1a9e956473b2d7f2308b8e08eb20d1f397ab33ccf83c7a94c237ec09af18",
-          "events": 2,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-oristano/wp-content/uploads/sites/41/2025/10/2026-calendario-completo.pdf",
-          "hash": "4b54372096a12b51c677cc11dd4e7e41d32d7a585820329fd385f211b07aca52",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/",
-          "hash": "bddb9ff6587bc138d7a07aef4d353765d8505164eecdcf1f36a725b715bfc4b2",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-oristano/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F",
-          "hash": "2513f69dbd6cae24032a4617ae4413882a88115a78ce83455e5d0b41cf1b8006",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-oristano/wp-json/oembed/1.0/embed?url=https%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F&format=xml",
-          "hash": "1b2369bf4dfbf9b2b1ea21a502248a69d6aec5b2c957737668ef1d74ace8402e",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://accounts.google.com/v3/signin/identifier?continue=https://calendar.google.com/calendar/event?action%3DTEMPLATE%26dates%3D20260101T080000/20261231T230000%26text%3DCalendario%2Bdelle%2Battivit%25C3%25A0%2Bescursionistiche%2Be%2Bciclo-escursionistiche%2B2026%26details%3DQui%2Btrovate%2Bil%2Bcalendario%2Bcon%2Btutte%2Ble%2Battivit%25C3%25A0%2Bescursionistiche%2Bdella%2BSezione%2Bdi%2BOristano%2Bdel%2BCAI%2Bcalendarizzate%2Bdal%2BDirettivo%2BSezionale.Verificateli%2Bdi%2Bfrequente%2Bdove:%2B%253Cstrong%253ETRK%253C/strong%253E%2B(escursionistica%2Be%2BSenior),%2B%253Cstrong%253EMTB%253C/strong%253E%2B(ciclo-escursionismo),%2BMOT%2B(montagna-terapia%2Bcon%2B%253Cstrong%253EMTG%253C/strong%253E%2BGhilarza%2Be%2B%253Cstrong%253EMTO%253C/strong%253E%2BOristano),%2B%253Cstrong%253EFAM%253C/strong%253E%2B(Family%2BCAI),%2B%253Cstrong%253EGiG%2B%253C/strong%253Eo%2B%253Cstrong%253ETRG%2B%253C/strong%253E(Gruppo%2Bintersezionale%2BGiovani).Si%2Bricorda%2Bche%2Ble%2Battivit%25C3%25A0%2Bpossono%2Bsubire%2Bdelle%2Bvariazioni%2Bdi%2Bdata%2Bo%2Bcancellazioni,%2Bdi%2Bcui%2Bsarete%2Binformati%2Bsui%2Bcanali%2Bsocial%2Be%2Bcon%2Bl%27aggiornamento%2Bdel%2Bcalendario,%2Bo%2Bavere%2Bdelle%2Blimitazioni%2B(numero,%2Btipologia%2Bdi%2Bpartecipanti,%2Bcapacit%25C3%25A0%2Btecniche,%2Baltro)%2Bche%2Btroverete%2Bindicate%2Ball%27interno%2Bdella%2Bscheda%2Bdi%2Bescursione%2Bpostata%2Balmeno%2B5%2Bgiorni%2Bprima%2Bdell%27evento%2Bin%2Bhome%2Bpage,%2B%253Cstrong%253Eda%2Bleggere%2Bobbligatoriamente%253C/strong%253E.%2BPoich%25C3%25A8%2Ble%2Battivit%25C3%25A0%2Bpossono%2Banche%2Bessere%2Bincrementate%2Bdurante%2Bl%27anno,%2Bsi%2Bconsiglia%2Bdi%2Bverificare%2Bfreque%2B(View%2BFull%2Bevento%2BDescription%2BHere:%2Bhttps://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/)%26trp%3Dfalse%26ctz%3DUTC%2B0%26sprop%3Dwebsite:https://organizzazione.cai.it/sez-oristano&emr=1&followup=https://calendar.google.com/calendar/event?action%3DTEMPLATE%26dates%3D20260101T080000/20261231T230000%26text%3DCalendario%2Bdelle%2Battivit%25C3%25A0%2Bescursionistiche%2Be%2Bciclo-escursionistiche%2B2026%26details%3DQui%2Btrovate%2Bil%2Bcalendario%2Bcon%2Btutte%2Ble%2Battivit%25C3%25A0%2Bescursionistiche%2Bdella%2BSezione%2Bdi%2BOristano%2Bdel%2BCAI%2Bcalendarizzate%2Bdal%2BDirettivo%2BSezionale.Verificateli%2Bdi%2Bfrequente%2Bdove:%2B%253Cstrong%253ETRK%253C/strong%253E%2B(escursionistica%2Be%2BSenior),%2B%253Cstrong%253EMTB%253C/strong%253E%2B(ciclo-escursionismo),%2BMOT%2B(montagna-terapia%2Bcon%2B%253Cstrong%253EMTG%253C/strong%253E%2BGhilarza%2Be%2B%253Cstrong%253EMTO%253C/strong%253E%2BOristano),%2B%253Cstrong%253EFAM%253C/strong%253E%2B(Family%2BCAI),%2B%253Cstrong%253EGiG%2B%253C/strong%253Eo%2B%253Cstrong%253ETRG%2B%253C/strong%253E(Gruppo%2Bintersezionale%2BGiovani).Si%2Bricorda%2Bche%2Ble%2Battivit%25C3%25A0%2Bpossono%2Bsubire%2Bdelle%2Bvariazioni%2Bdi%2Bdata%2Bo%2Bcancellazioni,%2Bdi%2Bcui%2Bsarete%2Binformati%2Bsui%2Bcanali%2Bsocial%2Be%2Bcon%2Bl%27aggiornamento%2Bdel%2Bcalendario,%2Bo%2Bavere%2Bdelle%2Blimitazioni%2B(numero,%2Btipologia%2Bdi%2Bpartecipanti,%2Bcapacit%25C3%25A0%2Btecniche,%2Baltro)%2Bche%2Btroverete%2Bindicate%2Ball%27interno%2Bdella%2Bscheda%2Bdi%2Bescursione%2Bpostata%2Balmeno%2B5%2Bgiorni%2Bprima%2Bdell%27evento%2Bin%2Bhome%2Bpage,%2B%253Cstrong%253Eda%2Bleggere%2Bobbligatoriamente%253C/strong%253E.%2BPoich%25C3%25A8%2Ble%2Battivit%25C3%25A0%2Bpossono%2Banche%2Bessere%2Bincrementate%2Bdurante%2Bl%27anno,%2Bsi%2Bconsiglia%2Bdi%2Bverificare%2Bfreque%2B(View%2BFull%2Bevento%2BDescription%2BHere:%2Bhttps://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/)%26trp%3Dfalse%26ctz%3DUTC%2B0%26sprop%3Dwebsite:https://organizzazione.cai.it/sez-oristano&osid=1&passive=1209600&service=cl&flowName=WebLiteSignIn&flowEntry=ServiceLogin&dsh=S-2093993167:1788693404611142",
-          "hash": "5907df5664d1f34381824b8a08f3ab20a25a84058239709d15ce5fd17861f840",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://outlook.office.com/calendar/action/compose?rrv=addevent&startdt=2026-01-01T08%3A00%3A00%2B00%3A00&enddt=2026-12-31T23%3A00%3A00%2B00%3A00&location&subject=Calendario%20delle%20attivit%C3%A0%20escursionistiche%20e%20ciclo-escursionistiche%202026&body=Qui%20trovate%20il%20calendario%20con%20tutte%20le%20attivit%C3%A0%20escursionistiche%20della%20Sezione%20di%20Oristano%20del%20CAI%20calendarizzate%20dal%20Direttivo%20Sezionale.Verificateli%20di%20frequente%20dove%3A%20TRK%20(escursionistica%20e%20Senior),%20MTB%20(ciclo-escursionismo),%20MOT%20(montagna-terapia%20con%20MTG%20Ghilarza%20e%20MTO%20Oristano),%20FAM%20(Family%20CAI),%20GiG%20o%20TRG%20(Gruppo%20intersezionale%20Giovani).Si%20ricorda%20che%20le%20attivit%C3%A0%20possono%20subire%20delle%20variazioni%20di%20data%20o%20cancellazioni,%20di%20cui%20sarete%20informati%20sui%20canali%20social%20e%20con%20l%27aggiornamento%20del%20calendario,%20o%20avere%20delle%20limitazioni%20(numero,%20tipologia%20di%20partecipanti,%20capacit%C3%A0%20tecniche,%20altro)%20che%20troverete%20indicate%20all%27interno%20della%20scheda%20di%20escursione%20postata%20almeno%205%20giorni%20prima%20dell%27evento%20in%20home%20page,%20da%20leggere%20obbligatoriamente.%20Poich%C3%A8%20le%20attivit%C3%A0%20possono%20anche%20essere%20incrementate%20durante%20l%27anno,%20si%20consiglia%20di%20verificare%20frequentemente%20il%20sito%20per%20rimanere%20aggiornati%20(View%20Full%20Evento%20Description%20Here%3A%20https%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F)",
-          "hash": "d0e723dc6e80c2a6b2e3a800230cda4caab0f7e52c3c78cb3bb0385e6c38f69e",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-oristano/",
-          "hash": "84176ccdac4712669a5f9dc152175392ce29c57d4c067f99cbd500e8dea52e26",
-          "events": 2,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-09-01&per_page=100",
-          "hash": "8a205c9c6b28db3c0366ede6d53c2b7b26acf0d0e060d938bf826ae4780103ba",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://accounts.google.com/signin/v2/usernamerecovery?continue=https%3A%2F%2Fcalendar.google.com%2Fcalendar%2Fevent%3Faction%3DTEMPLATE%26dates%3D20260101T080000%2F20261231T230000%26text%3DCalendario%2Bdelle%2Battivit%25C3%25A0%2Bescursionistiche%2Be%2Bciclo-escursionistiche%2B2026%26details%3DQui%2Btrovate%2Bil%2Bcalendario%2Bcon%2Btutte%2Ble%2Battivit%25C3%25A0%2Bescursionistiche%2Bdella%2BSezione%2Bdi%2BOristano%2Bdel%2BCAI%2Bcalendarizzate%2Bdal%2BDirettivo%2BSezionale.Verificateli%2Bdi%2Bfrequente%2Bdove%3A%2B%253Cstrong%253ETRK%253C%2Fstrong%253E%2B%28escursionistica%2Be%2BSenior%29%2C%2B%253Cstrong%253EMTB%253C%2Fstrong%253E%2B%28ciclo-escursionismo%29%2C%2BMOT%2B%28montagna-terapia%2Bcon%2B%253Cstrong%253EMTG%253C%2Fstrong%253E%2BGhilarza%2Be%2B%253Cstrong%253EMTO%253C%2Fstrong%253E%2BOristano%29%2C%2B%253Cstrong%253EFAM%253C%2Fstrong%253E%2B%28Family%2BCAI%29%2C%2B%253Cstrong%253EGiG%2B%253C%2Fstrong%253Eo%2B%253Cstrong%253ETRG%2B%253C%2Fstrong%253E%28Gruppo%2Bintersezionale%2BGiovani%29.Si%2Bricorda%2Bche%2Ble%2Battivit%25C3%25A0%2Bpossono%2Bsubire%2Bdelle%2Bvariazioni%2Bdi%2Bdata%2Bo%2Bcancellazioni%2C%2Bdi%2Bcui%2Bsarete%2Binformati%2Bsui%2Bcanali%2Bsocial%2Be%2Bcon%2Bl%27aggiornamento%2Bdel%2Bcalendario%2C%2Bo%2Bavere%2Bdelle%2Blimitazioni%2B%28numero%2C%2Btipologia%2Bdi%2Bpartecipanti%2C%2Bcapacit%25C3%25A0%2Btecniche%2C%2Baltro%29%2Bche%2Btroverete%2Bindicate%2Ball%27interno%2Bdella%2Bscheda%2Bdi%2Bescursione%2Bpostata%2Balmeno%2B5%2Bgiorni%2Bprima%2Bdell%27evento%2Bin%2Bhome%2Bpage%2C%2B%253Cstrong%253Eda%2Bleggere%2Bobbligatoriamente%253C%2Fstrong%253E.%2BPoich%25C3%25A8%2Ble%2Battivit%25C3%25A0%2Bpossono%2Banche%2Bessere%2Bincrementate%2Bdurante%2Bl%27anno%2C%2Bsi%2Bconsiglia%2Bdi%2Bverificare%2Bfreque%2B%28View%2BFull%2Bevento%2BDescription%2BHere%3A%2Bhttps%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F%29%26trp%3Dfalse%26ctz%3DUTC%2B0%26sprop%3Dwebsite%3Ahttps%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano&dsh=S-2093993167%3A1788693404611142&emr=1&flowEntry=ServiceLogin&flowName=GlifWebSignIn&followup=https%3A%2F%2Fcalendar.google.com%2Fcalendar%2Fevent%3Faction%3DTEMPLATE%26dates%3D20260101T080000%2F20261231T230000%26text%3DCalendario%2Bdelle%2Battivit%25C3%25A0%2Bescursionistiche%2Be%2Bciclo-escursionistiche%2B2026%26details%3DQui%2Btrovate%2Bil%2Bcalendario%2Bcon%2Btutte%2Ble%2Battivit%25C3%25A0%2Bescursionistiche%2Bdella%2BSezione%2Bdi%2BOristano%2Bdel%2BCAI%2Bcalendarizzate%2Bdal%2BDirettivo%2BSezionale.Verificateli%2Bdi%2Bfrequente%2Bdove%3A%2B%253Cstrong%253ETRK%253C%2Fstrong%253E%2B%28escursionistica%2Be%2BSenior%29%2C%2B%253Cstrong%253EMTB%253C%2Fstrong%253E%2B%28ciclo-escursionismo%29%2C%2BMOT%2B%28montagna-terapia%2Bcon%2B%253Cstrong%253EMTG%253C%2Fstrong%253E%2BGhilarza%2Be%2B%253Cstrong%253EMTO%253C%2Fstrong%253E%2BOristano%29%2C%2B%253Cstrong%253EFAM%253C%2Fstrong%253E%2B%28Family%2BCAI%29%2C%2B%253Cstrong%253EGiG%2B%253C%2Fstrong%253Eo%2B%253Cstrong%253ETRG%2B%253C%2Fstrong%253E%28Gruppo%2Bintersezionale%2BGiovani%29.Si%2Bricorda%2Bche%2Ble%2Battivit%25C3%25A0%2Bpossono%2Bsubire%2Bdelle%2Bvariazioni%2Bdi%2Bdata%2Bo%2Bcancellazioni%2C%2Bdi%2Bcui%2Bsarete%2Binformati%2Bsui%2Bcanali%2Bsocial%2Be%2Bcon%2Bl%27aggiornamento%2Bdel%2Bcalendario%2C%2Bo%2Bavere%2Bdelle%2Blimitazioni%2B%28numero%2C%2Btipologia%2Bdi%2Bpartecipanti%2C%2Bcapacit%25C3%25A0%2Btecniche%2C%2Baltro%29%2Bche%2Btroverete%2Bindicate%2Ball%27interno%2Bdella%2Bscheda%2Bdi%2Bescursione%2Bpostata%2Balmeno%2B5%2Bgiorni%2Bprima%2Bdell%27evento%2Bin%2Bhome%2Bpage%2C%2B%253Cstrong%253Eda%2Bleggere%2Bobbligatoriamente%253C%2Fstrong%253E.%2BPoich%25C3%25A8%2Ble%2Battivit%25C3%25A0%2Bpossono%2Banche%2Bessere%2Bincrementate%2Bdurante%2Bl%27anno%2C%2Bsi%2Bconsiglia%2Bdi%2Bverificare%2Bfreque%2B%28View%2BFull%2Bevento%2BDescription%2BHere%3A%2Bhttps%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano%2Fevento%2Fcalendario-completo-attivita-escursionistiche-2026%2F%29%26trp%3Dfalse%26ctz%3DUTC%2B0%26sprop%3Dwebsite%3Ahttps%3A%2F%2Forganizzazione.cai.it%2Fsez-oristano&osid=1&service=cl",
-          "hash": "5f997285934de6558332929b4702f5648337fa61924c9ca2987ae1d6275a8ac9",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://accounts.google.com/lifecycle/steps/signup/unknownerror?continue=https://calendar.google.com/calendar/event?action%3DTEMPLATE%26dates%3D20260101T080000/20261231T230000%26text%3DCalendario%2Bdelle%2Battivit%25C3%25A0%2Bescursionistiche%2Be%2Bciclo-escursionistiche%2B2026%26details%3DQui%2Btrovate%2Bil%2Bcalendario%2Bcon%2Btutte%2Ble%2Battivit%25C3%25A0%2Bescursionistiche%2Bdella%2BSezione%2Bdi%2BOristano%2Bdel%2BCAI%2Bcalendarizzate%2Bdal%2BDirettivo%2BSezionale.Verificateli%2Bdi%2Bfrequente%2Bdove:%2B%253Cstrong%253ETRK%253C/strong%253E%2B(escursionistica%2Be%2BSenior),%2B%253Cstrong%253EMTB%253C/strong%253E%2B(ciclo-escursionismo),%2BMOT%2B(montagna-terapia%2Bcon%2B%253Cstrong%253EMTG%253C/strong%253E%2BGhilarza%2Be%2B%253Cstrong%253EMTO%253C/strong%253E%2BOristano),%2B%253Cstrong%253EFAM%253C/strong%253E%2B(Family%2BCAI),%2B%253Cstrong%253EGiG%2B%253C/strong%253Eo%2B%253Cstrong%253ETRG%2B%253C/strong%253E(Gruppo%2Bintersezionale%2BGiovani).Si%2Bricorda%2Bche%2Ble%2Battivit%25C3%25A0%2Bpossono%2Bsubire%2Bdelle%2Bvariazioni%2Bdi%2Bdata%2Bo%2Bcancellazioni,%2Bdi%2Bcui%2Bsarete%2Binformati%2Bsui%2Bcanali%2Bsocial%2Be%2Bcon%2Bl%27aggiornamento%2Bdel%2Bcalendario,%2Bo%2Bavere%2Bdelle%2Blimitazioni%2B(numero,%2Btipologia%2Bdi%2Bpartecipanti,%2Bcapacit%25C3%25A0%2Btecniche,%2Baltro)%2Bche%2Btroverete%2Bindicate%2Ball%27interno%2Bdella%2Bscheda%2Bdi%2Bescursione%2Bpostata%2Balmeno%2B5%2Bgiorni%2Bprima%2Bdell%27evento%2Bin%2Bhome%2Bpage,%2B%253Cstrong%253Eda%2Bleggere%2Bobbligatoriamente%253C/strong%253E.%2BPoich%25C3%25A8%2Ble%2Battivit%25C3%25A0%2Bpossono%2Banche%2Bessere%2Bincrementate%2Bdurante%2Bl%27anno,%2Bsi%2Bconsiglia%2Bdi%2Bverificare%2Bfreque%2B(View%2BFull%2Bevento%2BDescription%2BHere:%2Bhttps://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/)%26trp%3Dfalse%26ctz%3DUTC%2B0%26sprop%3Dwebsite:https://organizzazione.cai.it/sez-oristano&dsh=S-2093993167:1788693404611142&emr=1&flowEntry=SignUp&flowName=GlifWebSignIn&followup=https://calendar.google.com/calendar/event?action%3DTEMPLATE%26dates%3D20260101T080000/20261231T230000%26text%3DCalendario%2Bdelle%2Battivit%25C3%25A0%2Bescursionistiche%2Be%2Bciclo-escursionistiche%2B2026%26details%3DQui%2Btrovate%2Bil%2Bcalendario%2Bcon%2Btutte%2Ble%2Battivit%25C3%25A0%2Bescursionistiche%2Bdella%2BSezione%2Bdi%2BOristano%2Bdel%2BCAI%2Bcalendarizzate%2Bdal%2BDirettivo%2BSezionale.Verificateli%2Bdi%2Bfrequente%2Bdove:%2B%253Cstrong%253ETRK%253C/strong%253E%2B(escursionistica%2Be%2BSenior),%2B%253Cstrong%253EMTB%253C/strong%253E%2B(ciclo-escursionismo),%2BMOT%2B(montagna-terapia%2Bcon%2B%253Cstrong%253EMTG%253C/strong%253E%2BGhilarza%2Be%2B%253Cstrong%253EMTO%253C/strong%253E%2BOristano),%2B%253Cstrong%253EFAM%253C/strong%253E%2B(Family%2BCAI),%2B%253Cstrong%253EGiG%2B%253C/strong%253Eo%2B%253Cstrong%253ETRG%2B%253C/strong%253E(Gruppo%2Bintersezionale%2BGiovani).Si%2Bricorda%2Bche%2Ble%2Battivit%25C3%25A0%2Bpossono%2Bsubire%2Bdelle%2Bvariazioni%2Bdi%2Bdata%2Bo%2Bcancellazioni,%2Bdi%2Bcui%2Bsarete%2Binformati%2Bsui%2Bcanali%2Bsocial%2Be%2Bcon%2Bl%27aggiornamento%2Bdel%2Bcalendario,%2Bo%2Bavere%2Bdelle%2Blimitazioni%2B(numero,%2Btipologia%2Bdi%2Bpartecipanti,%2Bcapacit%25C3%25A0%2Btecniche,%2Baltro)%2Bche%2Btroverete%2Bindicate%2Ball%27interno%2Bdella%2Bscheda%2Bdi%2Bescursione%2Bpostata%2Balmeno%2B5%2Bgiorni%2Bprima%2Bdell%27evento%2Bin%2Bhome%2Bpage,%2B%253Cstrong%253Eda%2Bleggere%2Bobbligatoriamente%253C/strong%253E.%2BPoich%25C3%25A8%2Ble%2Battivit%25C3%25A0%2Bpossono%2Banche%2Bessere%2Bincrementate%2Bdurante%2Bl%27anno,%2Bsi%2Bconsiglia%2Bdi%2Bverificare%2Bfreque%2B(View%2BFull%2Bevento%2BDescription%2BHere:%2Bhttps://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/)%26trp%3Dfalse%26ctz%3DUTC%2B0%26sprop%3Dwebsite:https://organizzazione.cai.it/sez-oristano&osid=1&service=cl&TL=ACv9tzETtDyEYQFVyOu5uUMUoPBojSn1rDzs3HwiTjCyHII5oTjanbpdTNQrFO2e",
-          "hash": "5a53ce8991f2c007b922aa3b692bc1ef30bee8bec79a85a024828762370e4fa2",
-          "events": 0,
-          "method": null
-        }
-      ],
-      "methods": [
-        "ics",
-        "pdf-text",
-        "html-calendar",
-        "wordpress-events"
-      ],
-      "issues": [
-        {
-          "url": "https://organizzazione.cai.it/sez-oristano/evento/calendario-completo-attivita-escursionistiche-2026/?ical=1",
-          "message": "Discovery budget reached; 22 candidate documents remain.",
-          "code": "discovery-limit"
-        }
-      ],
-      "extractedEvents": 6
+      "hash": "a17d717acc6ac262d557b83d34e4cfd60eb1529953b35de0ab0a4e2462942f81",
+      "updatedAt": "2026-09-08T11:42:52.983Z",
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
     },
     {
       "id": "cai-avellino-9238004",
