@@ -3,20 +3,26 @@ const assert = require('node:assert/strict');
 const { VENETO_SOURCES, findSource } = require('../sources');
 
 test('Veneto overrides win over registry discover stubs', () => {
-  assert.equal(VENETO_SOURCES.length, 23);
+  assert.equal(VENETO_SOURCES.length, 25);
 
   for (const raw of VENETO_SOURCES) {
     const source = findSource(raw.id);
     assert.ok(source, raw.id);
     assert.equal(source.enabled, true, raw.id);
-    assert.equal(source.kind, 'pdf', raw.id);
-    assert.equal(source.template, 'pdf-programma', raw.id);
-    assert.equal(source.extractor, 'gemini', raw.id);
     assert.equal(source.region, 'Veneto', raw.id);
     assert.equal(source.status, 'calendar-found', raw.id);
     // Override wins as calendarUrls[0] over registry discover stubs.
     assert.equal(source.calendarUrls[0], source.url, raw.id);
     assert.equal(source.url, raw.url, raw.id);
+    if (raw.kind === 'ics') {
+      assert.equal(source.kind, 'ics', raw.id);
+      assert.equal(source.template, 'icalendar', raw.id);
+      assert.equal(source.extractor, 'deterministic', raw.id);
+    } else {
+      assert.equal(source.kind, 'pdf', raw.id);
+      assert.equal(source.template, 'pdf-programma', raw.id);
+      assert.equal(source.extractor, 'gemini', raw.id);
+    }
   }
 
   // Asiago/Spresiano keep HTTP URLs (HTTPS SSL broken / 999).
@@ -64,4 +70,37 @@ test('Veneto overrides win over registry discover stubs', () => {
   const verona = findSource('cai-verona-9220003');
   assert.equal(verona.directoryId, '9220003');
   assert.match(verona.url, /libretto-2026\.pdf$/);
+});
+
+test('Veneto ICS lock-in: Pieve di Soligo + Recoaro Terme deterministic', () => {
+  const pieveSoligo = findSource('cai-pieve-di-soligo-9220054');
+  assert.ok(pieveSoligo);
+  assert.equal(pieveSoligo.enabled, true);
+  assert.equal(pieveSoligo.kind, 'ics');
+  assert.equal(pieveSoligo.template, 'icalendar');
+  assert.equal(pieveSoligo.extractor, 'deterministic');
+  assert.equal(pieveSoligo.region, 'Veneto');
+  assert.equal(pieveSoligo.url, 'https://www.caipievedisoligo.it/index.php/eventi/?ical=1');
+  assert.equal(pieveSoligo.calendarUrls[0], pieveSoligo.url);
+  assert.equal(pieveSoligo.directoryId, '9220054');
+  assert.equal(pieveSoligo.status, 'calendar-found');
+
+  const recoaro = findSource('cai-recoaro-terme-9220045');
+  assert.ok(recoaro);
+  assert.equal(recoaro.enabled, true);
+  assert.equal(recoaro.kind, 'ics');
+  assert.equal(recoaro.template, 'icalendar');
+  assert.equal(recoaro.extractor, 'deterministic');
+  assert.equal(recoaro.region, 'Veneto');
+  assert.equal(recoaro.url, 'https://www.cairecoaroterme.it/events/?ical=1');
+  assert.equal(recoaro.calendarUrls[0], recoaro.url);
+  assert.equal(recoaro.directoryId, '9220045');
+  assert.equal(recoaro.status, 'calendar-found');
+
+  // Both stay in VENETO_SOURCES as ICS overrides (not PDF gemini).
+  const icsIds = VENETO_SOURCES.filter((s) => s.kind === 'ics').map((s) => s.id).sort();
+  assert.deepEqual(icsIds, [
+    'cai-pieve-di-soligo-9220054',
+    'cai-recoaro-terme-9220045'
+  ].sort());
 });

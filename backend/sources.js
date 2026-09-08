@@ -726,6 +726,26 @@ const VENETO_SOURCES = [
     extractor: 'gemini',
     enabled: true,
     status: 'calendar-found'
+  },
+  {
+    id: 'cai-pieve-di-soligo-9220054',
+    organizer: 'CAI Pieve Di Soligo',
+    url: 'https://www.caipievedisoligo.it/index.php/eventi/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-recoaro-terme-9220045',
+    organizer: 'CAI Recoaro Terme',
+    url: 'https://www.cairecoaroterme.it/events/?ical=1',
+    kind: 'ics',
+    template: 'icalendar',
+    extractor: 'deterministic',
+    enabled: true,
+    status: 'calendar-found'
   }
 ];
 
