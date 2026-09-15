@@ -64,12 +64,14 @@ const CHIVASSO_IDS = [
 ];
 
 test('Piemonte overrides win over registry discover stubs', () => {
-  assert.equal(PIEMONTE_SOURCES.length, 62);
+  assert.equal(PIEMONTE_SOURCES.length, 74);
 
   const pdfCount = PIEMONTE_SOURCES.filter((s) => s.kind === 'pdf').length;
   const icsCount = PIEMONTE_SOURCES.filter((s) => s.kind === 'ics').length;
-  assert.equal(pdfCount, 47);
+  const htmlCount = PIEMONTE_SOURCES.filter((s) => s.kind === 'html').length;
+  assert.equal(pdfCount, 58);
   assert.equal(icsCount, 15);
+  assert.equal(htmlCount, 1);
 
   for (const raw of PIEMONTE_SOURCES) {
     const source = findSource(raw.id);
@@ -84,6 +86,10 @@ test('Piemonte overrides win over registry discover stubs', () => {
       assert.equal(source.kind, 'ics', raw.id);
       assert.equal(source.template, 'icalendar', raw.id);
       assert.equal(source.extractor, 'deterministic', raw.id);
+    } else if (raw.kind === 'html') {
+      assert.equal(source.kind, 'html', raw.id);
+      assert.equal(source.template, 'html-calendario', raw.id);
+      assert.equal(source.extractor, 'gemini', raw.id);
     } else {
       assert.equal(source.kind, 'pdf', raw.id);
       assert.equal(source.template, 'pdf-programma', raw.id);
@@ -142,7 +148,7 @@ test('Piemonte shared hub PDF + Varallo shared ICS', () => {
   ]);
   assert.equal(hubIds.size, 31);
   const sezionali = PIEMONTE_SOURCES.filter((s) => !hubIds.has(s.id));
-  assert.equal(sezionali.length, 31);
+  assert.equal(sezionali.length, 43);
   for (const s of sezionali) {
     assert.notEqual(s.url, EST_MONTEROSA_PDF, s.id);
     assert.notEqual(s.url, ALTO_CANAVESE_PDF, s.id);
@@ -160,4 +166,39 @@ test('Piemonte shared hub PDF + Varallo shared ICS', () => {
   const varallo = findSource('cai-varallo-sesia-9212002');
   assert.equal(varallo.directoryId, '9212002');
   assert.equal(varallo.sectionType, 'section');
+});
+
+test('Piemonte hard1: 11 PDF + 1 HTML extract-ready', () => {
+  const ADS = 'https://www.alpidoc.it/wp-content/uploads/2026/03/ADS2026-x-sezioni.pdf';
+  const VIGONE_CANDIOLO =
+    'https://3c454990-b65b-412b-bb51-704f98b6454a.filesusr.com/ugd/354d8e_d0cdfdad7f7744129763ea58d91444e2.pdf';
+
+  assert.equal(findSource('cai-savigliano-9212033').url, 'https://www.caisavigliano.it/files/depliant-CAI-2026.pdf');
+  assert.equal(
+    findSource('cai-settimo-torinese-9112022').url,
+    'https://www.caisettimotorinese.it/wp-content/uploads/2026/07/Pieghevole-CAI-interno_2026-2.pdf'
+  );
+  assert.equal(
+    findSource('cai-g-e-a-t-9112020').url,
+    'https://www.geatcaitorino.it/wp-content/uploads/2024/12/Calendario-GEAT-2026.pdf'
+  );
+  assert.equal(findSource('cai-vigone-9212074').url, VIGONE_CANDIOLO);
+  assert.equal(findSource('cai-candiolo-9112053').url, VIGONE_CANDIOLO);
+  assert.equal(
+    findSource('cai-borgo-san-dalmazzo-9112040').url,
+    'https://www.caicuneo.it/wp-content/uploads/2017/06/Download-Programma-2026.pdf'
+  );
+  for (const id of [
+    'cai-barge-9212031',
+    'cai-garessio-9212038',
+    'cai-racconigi-9212046',
+    'cai-busca-9112010',
+    'cai-dronero-9112012'
+  ]) {
+    assert.equal(findSource(id).url, ADS, id);
+    assert.equal(findSource(id).kind, 'pdf', id);
+  }
+  const gsp = findSource('cai-gruppo-speleologico-9112011');
+  assert.equal(gsp.kind, 'html');
+  assert.equal(gsp.url, 'https://www.gsptorino.it/index.php/gite-e-corsi/');
 });
