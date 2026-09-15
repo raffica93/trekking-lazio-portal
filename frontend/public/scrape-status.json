@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T22:07:14.991Z",
+  "generatedAt": "2026-09-15T22:10:19.886Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 624
+    "located": 633
   },
   "sources": [
     {
@@ -1707,16 +1707,16 @@
       "directoryId": "9220020",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "https://www.caicittadella.it/wp-content/uploads/2026/02/Programma2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 9,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
+      "hash": "4ac336bb39975d7292680f3e1dd5253b50f372692996fa635f1055f5cc56c5b1",
+      "updatedAt": "2026-09-15T22:10:19.886Z",
       "documents": [],
       "methods": [],
       "issues": [],
