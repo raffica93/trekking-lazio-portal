@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-08T15:18:00.074Z",
+  "generatedAt": "2026-09-15T22:07:14.991Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
-    "parsed": 0,
+    "withEvents": 1,
+    "parsed": 1,
     "unsupported": 0,
-    "failed": 1,
-    "located": 617
+    "failed": 0,
+    "located": 624
   },
   "sources": [
     {
@@ -1680,16 +1680,16 @@
       "directoryId": "9220040",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "failed",
+      "status": "ok",
       "url": "http://www.caiasiago.it/documenti/Libretto%20CAI%20Asiago%202026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
-      "error": "Gemini API 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a",
-      "hash": null,
-      "updatedAt": "2026-09-08T15:18:00.074Z",
+      "excursions": 7,
+      "error": null,
+      "hash": "1008c6187916e49eac545cee55192c8b516f60fb5e1c0c8efbe4c659d9d4163b",
+      "updatedAt": "2026-09-15T22:07:14.991Z",
       "documents": [],
       "methods": [],
       "issues": [],
