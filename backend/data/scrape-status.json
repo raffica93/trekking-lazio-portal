@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T22:40:29.420Z",
+  "generatedAt": "2026-09-15T22:42:08.107Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 686
+    "located": 690
   },
   "sources": [
     {
@@ -2031,16 +2031,16 @@
       "directoryId": "9220052",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "https://www.caioderzo.it/public/pdf/Librettocai2026_web.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 4,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
+      "hash": "2f049c52defa0bf1d6ad8bdf46f3610817b14115dc36dd6ee0ebc64ac6dc387a",
+      "updatedAt": "2026-09-15T22:42:08.107Z",
       "documents": [],
       "methods": [],
       "issues": [],
