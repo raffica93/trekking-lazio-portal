@@ -1740,6 +1740,130 @@ const PIEMONTE_SOURCES = [
     enabled: true,
     status: 'calendar-found'
   }
+,
+
+  // --- HARD1 missing dig (PDF/HTML) ---
+  {
+    id: 'cai-savigliano-9212033',
+    organizer: 'CAI Savigliano',
+    url: 'https://www.caisavigliano.it/files/depliant-CAI-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-settimo-torinese-9112022',
+    organizer: 'CAI Settimo Torinese',
+    url: 'https://www.caisettimotorinese.it/wp-content/uploads/2026/07/Pieghevole-CAI-interno_2026-2.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-g-e-a-t-9112020',
+    organizer: 'CAI G.e.a.t.',
+    url: 'https://www.geatcaitorino.it/wp-content/uploads/2024/12/Calendario-GEAT-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-vigone-9212074',
+    organizer: 'CAI Vigone',
+    url: 'https://3c454990-b65b-412b-bb51-704f98b6454a.filesusr.com/ugd/354d8e_d0cdfdad7f7744129763ea58d91444e2.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-candiolo-9112053',
+    organizer: 'CAI Candiolo',
+    url: 'https://3c454990-b65b-412b-bb51-704f98b6454a.filesusr.com/ugd/354d8e_d0cdfdad7f7744129763ea58d91444e2.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-borgo-san-dalmazzo-9112040',
+    organizer: 'CAI Borgo San Dalmazzo',
+    url: 'https://www.caicuneo.it/wp-content/uploads/2017/06/Download-Programma-2026.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-barge-9212031',
+    organizer: 'CAI Barge',
+    url: 'https://www.alpidoc.it/wp-content/uploads/2026/03/ADS2026-x-sezioni.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-garessio-9212038',
+    organizer: 'CAI Garessio',
+    url: 'https://www.alpidoc.it/wp-content/uploads/2026/03/ADS2026-x-sezioni.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-racconigi-9212046',
+    organizer: 'CAI Racconigi',
+    url: 'https://www.alpidoc.it/wp-content/uploads/2026/03/ADS2026-x-sezioni.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-busca-9112010',
+    organizer: 'CAI Busca',
+    url: 'https://www.alpidoc.it/wp-content/uploads/2026/03/ADS2026-x-sezioni.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-dronero-9112012',
+    organizer: 'CAI Dronero',
+    url: 'https://www.alpidoc.it/wp-content/uploads/2026/03/ADS2026-x-sezioni.pdf',
+    kind: 'pdf',
+    template: 'pdf-programma',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  },
+  {
+    id: 'cai-gruppo-speleologico-9112011',
+    organizer: 'CAI Gruppo Speleologico',
+    url: 'https://www.gsptorino.it/index.php/gite-e-corsi/',
+    kind: 'html',
+    template: 'html-calendario',
+    extractor: 'gemini',
+    enabled: true,
+    status: 'calendar-found'
+  }
+
 ];
 
 
