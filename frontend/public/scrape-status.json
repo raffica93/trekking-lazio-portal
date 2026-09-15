@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-15T22:15:21.916Z",
+  "generatedAt": "2026-09-15T22:22:04.150Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
-    "parsed": 0,
+    "withEvents": 1,
+    "parsed": 1,
     "unsupported": 0,
-    "failed": 1,
-    "located": 633
+    "failed": 0,
+    "located": 637
   },
   "sources": [
     {
@@ -1761,16 +1761,16 @@
       "directoryId": "9220063",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "https://cailegnago.it/wp-content/uploads/2025/12/CAI-Legnago-Programma-2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 5,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
+      "hash": "9fbc041aa4a6826442f737fbca25cf1ed79337b9235acb1d4d56f09870dbc023",
+      "updatedAt": "2026-09-15T22:22:04.150Z",
       "documents": [],
       "methods": [],
       "issues": [],
