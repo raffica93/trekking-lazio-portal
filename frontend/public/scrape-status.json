@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-15T22:23:14.058Z",
+  "generatedAt": "2026-09-15T22:25:00.157Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
-    "parsed": 0,
+    "withEvents": 1,
+    "parsed": 1,
     "unsupported": 0,
-    "failed": 1,
-    "located": 637
+    "failed": 0,
+    "located": 641
   },
   "sources": [
     {
@@ -1815,16 +1815,16 @@
       "directoryId": "9220024",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "https://www.caiarzignano.info/attivita/programma/download/145_b1828245b46e81eef4f75fa63b08a761",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 4,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
+      "hash": "31674f88acb13fdd7fa5ce0e65f204f5c0b5c17a5be9713620cc1814fa8c9910",
+      "updatedAt": "2026-09-15T22:25:00.157Z",
       "documents": [],
       "methods": [],
       "issues": [],
