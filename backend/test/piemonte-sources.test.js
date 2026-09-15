@@ -148,7 +148,7 @@ test('Piemonte shared hub PDF + Varallo shared ICS', () => {
   ]);
   assert.equal(hubIds.size, 31);
   const sezionali = PIEMONTE_SOURCES.filter((s) => !hubIds.has(s.id));
-  assert.equal(sezionali.length, 31);
+  assert.equal(sezionali.length, 43);
   for (const s of sezionali) {
     assert.notEqual(s.url, EST_MONTEROSA_PDF, s.id);
     assert.notEqual(s.url, ALTO_CANAVESE_PDF, s.id);
