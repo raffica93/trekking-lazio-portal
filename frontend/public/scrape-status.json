@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T22:33:22.010Z",
+  "generatedAt": "2026-09-15T22:35:28.998Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 666
+    "located": 684
   },
   "sources": [
     {
@@ -1977,16 +1977,16 @@
       "directoryId": "9220046",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "https://www.caimalo.it/wp-content/uploads/2025/12/2026_libretto-CAI.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 18,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
+      "hash": "9009d8950569592f29644f1258a530bb2160c9572e16e0a5d1c96465e60e335a",
+      "updatedAt": "2026-09-15T22:35:28.998Z",
       "documents": [],
       "methods": [],
       "issues": [],
