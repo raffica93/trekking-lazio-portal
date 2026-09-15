@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T22:30:16.985Z",
+  "generatedAt": "2026-09-15T22:31:41.613Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 653
+    "located": 659
   },
   "sources": [
     {
@@ -1923,16 +1923,16 @@
       "directoryId": "9120013",
       "sectionType": "subsection",
       "parentSectionId": "cai-verona-9220003",
-      "status": "disabled",
+      "status": "ok",
       "url": "https://www.famigliaalpinistica.it/media/attachments/2025/11/28/calendario-f.a.-2026-senza-capo-gita.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 7,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
+      "hash": "88958bb0a924992a2c9509d73ba4f5c06e277b16af280de98f45b95c377b469e",
+      "updatedAt": "2026-09-15T22:31:41.613Z",
       "documents": [],
       "methods": [],
       "issues": [],
