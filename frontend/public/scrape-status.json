@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T22:35:28.998Z",
+  "generatedAt": "2026-09-15T22:40:29.420Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 684
+    "located": 686
   },
   "sources": [
     {
@@ -2004,16 +2004,16 @@
       "directoryId": "9220051",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "disabled",
+      "status": "ok",
       "url": "https://www.caimotta.it/wp-content/uploads/2026/01/escursioni-2026-calendario-e-relazioni.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 2,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
+      "hash": "ce962e037775a28a82b063fef9fb2969453b9ba420c9bd37132c35f7a72920c8",
+      "updatedAt": "2026-09-15T22:40:29.420Z",
       "documents": [],
       "methods": [],
       "issues": [],
