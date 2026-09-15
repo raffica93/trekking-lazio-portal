@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T22:29:02.091Z",
+  "generatedAt": "2026-09-15T22:30:16.985Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 649
+    "located": 653
   },
   "sources": [
     {
@@ -1896,16 +1896,16 @@
       "directoryId": "9120022",
       "sectionType": "subsection",
       "parentSectionId": "cai-bassano-del-grappa-9220010",
-      "status": "disabled",
+      "status": "ok",
       "url": "https://organizzazione.cai.it/sez-bassano-del-grappa/wp-content/uploads/sites/113/2026/03/Sottosezione-Canal-di-Brenta-Escursioni-2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 4,
       "error": null,
-      "hash": null,
-      "updatedAt": null,
+      "hash": "c26a70dbd3a6bcbb2b27cd73283b89a41deaca85b940101ec4b99ccbd4a03b2c",
+      "updatedAt": "2026-09-15T22:30:16.985Z",
       "documents": [],
       "methods": [],
       "issues": [],
