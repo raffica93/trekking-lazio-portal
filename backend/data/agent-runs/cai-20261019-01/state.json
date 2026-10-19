@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "runId": "cai-20261019-01",
+  "model": "gpt-6-luna",
+  "createdAt": "2026-10-19T17:44:20.643Z",
+  "scrapeArgs": [
+    "--all",
+    "--concurrency",
+    "8"
+  ],
+  "collection": "pending",
+  "files": "pending",
+  "database": "pending",
+  "sources": [],
+  "history": [
+    {
+      "at": "2026-10-19T17:44:20.644Z",
+      "event": "run-created"
+    }
+  ],
+  "updatedAt": "2026-10-19T17:44:20.644Z"
+}

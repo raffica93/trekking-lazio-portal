@@ -4,9 +4,10 @@ const crypto = require('node:crypto');
 const fs = require('node:fs/promises');
 const path = require('node:path');
 const { DateTime } = require('luxon');
+const { ocrPdfLines } = require('./pdf-ocr');
 const { parseCaiRomaHtml, stableId, tripDays, parseDistanceKm, parseDurationHours } = require('../scraper');
 
-const VERSION = 3;
+const VERSION = 4;
 const MONTHS = { gennaio: 1, febbraio: 2, marzo: 3, aprile: 4, maggio: 5, giugno: 6, luglio: 7, agosto: 8, settembre: 9, ottobre: 10, novembre: 11, dicembre: 12 };
 const MONTH_PATTERN = Object.keys(MONTHS).join('|');
 const REGIONS = ['Abruzzo', 'Basilicata', 'Calabria', 'Campania', 'Emilia-Romagna', 'Friuli-Venezia Giulia', 'Lazio', 'Liguria', 'Lombardia', 'Marche', 'Molise', 'Piemonte', 'Puglia', 'Sardegna', 'Sicilia', 'Toscana', 'Trentino-Alto Adige', 'Umbria', "Valle d'Aosta", 'Veneto'];
@@ -271,7 +272,7 @@ function parseHtmlCalendar(html, source, url, now) {
   return { events, recognized: recognized || events.length > 0, method: events.length ? 'html-calendar' : null };
 }
 
-async function pdfLines(buffer) {
+async function pdfText(buffer) {
   const { getDocument } = await import('pdfjs-dist/legacy/build/pdf.mjs');
   const task = getDocument({ data: new Uint8Array(buffer), useSystemFonts: true, isEvalSupported: false, verbosity: 0 });
   const doc = await task.promise;
@@ -293,7 +294,11 @@ async function pdfLines(buffer) {
       page.cleanup();
     }
   } finally { await task.destroy(); }
-  return lines;
+  return { lines, pageCount: doc.numPages };
+}
+
+async function pdfLines(buffer) {
+  return (await pdfText(buffer)).lines;
 }
 
 function discoverLinks(html, url, now) {
@@ -348,7 +353,7 @@ async function fetchDocument(url, { timeoutMs = 8000, cacheDir = CACHE_DIR } = {
   return { ...meta, buffer };
 }
 
-async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fetchDocument, maxDocuments = 12, budgetMs = 60_000, cacheDir = CACHE_DIR } = {}) {
+async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fetchDocument, maxDocuments = 12, budgetMs = 60_000, cacheDir = CACHE_DIR, recognizePdf = ocrPdfLines } = {}) {
   if (typeof now === 'string') now = DateTime.fromISO(now, { zone: 'Europe/Rome' });
   const started = Date.now();
   const initialUrls = [...new Set([...(source.calendarUrls || []), source.url, source.website].filter(Boolean))];
@@ -376,11 +381,39 @@ async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fe
       // Cache annual document extraction by its content, preserving every month in that document.
       if (isPdf) {
         try { parsed = JSON.parse(await fs.readFile(extractedPath, 'utf8')); } catch {
-          const lines = await pdfLines(document.buffer);
+          const { lines: extractedText, pageCount } = await pdfText(document.buffer);
+          let lines = extractedText;
+          let method = 'pdf-text';
+          let cacheable = true;
+          const textLength = lines.join(' ').replace(/\s/g, '').length;
+          const ocrIssues = [];
+          if (textLength < 80) {
+            const remainingBudgetMs = budgetMs - (Date.now() - started);
+            if (remainingBudgetMs <= 0) {
+              cacheable = false;
+              ocrIssues.push('PDF OCR skipped because the scrape time budget is exhausted.');
+            } else {
+              try {
+                const timeoutMs = Math.min(120_000, remainingBudgetMs);
+                const ocrLines = await recognizePdf(document.buffer, { pageCount, timeoutMs });
+                if (ocrLines.join(' ').replace(/\s/g, '').length > textLength) {
+                  lines = ocrLines;
+                  method = 'pdf-ocr';
+                }
+                if (lines.join(' ').replace(/\s/g, '').length < 80) ocrIssues.push('PDF has little or no extractable text after OCR; manual verification required.');
+              } catch (error) {
+                cacheable = false;
+                ocrIssues.push(`PDF OCR unavailable or failed: ${error.message}`);
+              }
+            }
+          }
           const year = documentYear(lines.join('\n'), url);
-          const extracted = source.id === 'tivoli' ? parseTivoliPdf(lines, source, document.url || url, year) : parseCalendarLines(lines, source, document.url || url, year, 'pdf-text');
-          parsed = { events: extracted, recognized: extracted.length > 0, method: 'pdf-text', issues: lines.length < 5 ? ['PDF contains no extractable text; OCR/manual verification required.'] : [] };
-          await fs.mkdir(cacheDir, { recursive: true }); await fs.writeFile(extractedPath, JSON.stringify(parsed));
+          const extracted = source.id === 'tivoli' ? parseTivoliPdf(lines, source, document.url || url, year) : parseCalendarLines(lines, source, document.url || url, year, method);
+          parsed = { events: extracted, recognized: extracted.length > 0, method, issues: ocrIssues };
+          if (cacheable) {
+            await fs.mkdir(cacheDir, { recursive: true });
+            await fs.writeFile(extractedPath, JSON.stringify(parsed));
+          }
         }
       } else if (/BEGIN:VCALENDAR/.test(text)) parsed = parseIcs(text, source, document.url || url);
       else if (/^\s*\{/.test(text)) {
@@ -419,4 +452,4 @@ async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fe
   };
 }
 
-module.exports = { VERSION, monthFloor, parseDates, normalizeEvent, parseJsonLd, parseIcs, parseWordPress, parseCalendarLines, parseTivoliPdf, parseHtmlCalendar, discoverLinks, pdfLines, fetchDocument, scrapeDeterministic };
+module.exports = { VERSION, monthFloor, parseDates, normalizeEvent, parseJsonLd, parseIcs, parseWordPress, parseCalendarLines, parseTivoliPdf, parseHtmlCalendar, discoverLinks, pdfLines, pdfText, fetchDocument, scrapeDeterministic };

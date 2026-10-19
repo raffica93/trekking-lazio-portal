@@ -1,5 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
+const crypto = require('node:crypto');
 const { createClient } = require('@supabase/supabase-js');
 const {
   PRECISE_COORD_QUALITY,
@@ -16,10 +17,11 @@ const DAYS_MAX = 32767;
 const DATA_FILE = path.join(__dirname, '..', 'data', 'excursions.json');
 const REGISTRY_FILE = path.join(__dirname, '..', 'data', 'cai-sections.json');
 const STATUS_FILE = path.join(__dirname, '..', 'data', 'scrape-status.json');
+const REPO_ROOT = path.resolve(__dirname, '..', '..');
 const BATCH_SIZE = 200;
 
-function requiredEnvironment(name) {
-  const value = process.env[name]?.trim();
+function requiredEnvironment(name, env = process.env) {
+  const value = env[name]?.trim();
   if (!value) throw new Error(`Missing required environment variable: ${name}`);
   return value;
 }
@@ -262,35 +264,120 @@ function attachSectionMetadata(excursions, sources) {
 
 function readExcursions(file = DATA_FILE) {
   const payload = JSON.parse(fs.readFileSync(file, 'utf8'));
+  return excursionsFromPayload(payload);
+}
+
+function excursionsFromPayload(payload) {
   if (!Array.isArray(payload.excursions)) throw new Error('Expected an "excursions" array in the source JSON');
   return payload.excursions;
 }
 
-async function main() {
+function verifyImportManifest(manifestFile, requiredFiles = [DATA_FILE], repoRoot = REPO_ROOT) {
+  if (!manifestFile) throw new Error('An import manifest path is required');
+  const manifestPath = path.resolve(manifestFile);
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  if (manifest.version !== 1) throw new Error('Import manifest version must be 1');
+  if (typeof manifest.runId !== 'string' || !manifest.runId.trim()
+    || typeof manifest.createdAt !== 'string' || !Number.isFinite(Date.parse(manifest.createdAt))) {
+    throw new Error('Import manifest must include a runId and valid createdAt timestamp');
+  }
+  if (!Array.isArray(manifest.files) || manifest.files.length === 0) {
+    throw new Error('Import manifest must contain a non-empty "files" array');
+  }
+
+  const verified = new Map();
+  for (const entry of manifest.files) {
+    if (!entry || typeof entry.path !== 'string' || !/^[a-f0-9]{64}$/i.test(entry.sha256 || '')) {
+      throw new Error('Each import manifest file needs a path and a 64-character SHA-256 checksum');
+    }
+    // Handoff paths are repo-root-relative so the orchestrator and importer share
+    // one stable manifest format regardless of the manifest's own directory.
+    const file = path.resolve(repoRoot, entry.path);
+    const relativePath = path.relative(repoRoot, file);
+    if (relativePath === '..' || relativePath.startsWith(`..${path.sep}`) || path.isAbsolute(relativePath)) {
+      throw new Error(`Manifest path must stay inside the repository: ${entry.path}`);
+    }
+    if (!fs.statSync(file).isFile()) throw new Error(`Manifest file is not a regular file: ${entry.path}`);
+    const bytes = fs.readFileSync(file);
+    const actual = crypto.createHash('sha256').update(bytes).digest('hex');
+    if (actual.toLowerCase() !== entry.sha256.toLowerCase()) {
+      throw new Error(`Import manifest checksum mismatch: ${entry.path}`);
+    }
+    verified.set(file, bytes);
+  }
+
+  for (const requiredFile of requiredFiles) {
+    if (!verified.has(path.resolve(requiredFile))) {
+      throw new Error(`Import manifest does not cover required file: ${path.resolve(requiredFile)}`);
+    }
+  }
+  return { files: verified.size, manifestPath, snapshots: verified };
+}
+
+function manifestArgument(argv = process.argv.slice(2), env = process.env) {
+  const index = argv.indexOf('--manifest');
+  if (index !== -1) {
+    if (!argv[index + 1] || argv[index + 1].startsWith('--')) throw new Error('--manifest requires a file path');
+    return argv[index + 1];
+  }
+  return env.SUPABASE_IMPORT_MANIFEST || null;
+}
+
+async function main({ argv = process.argv.slice(2), env = process.env } = {}) {
+  const manifestPath = manifestArgument(argv, env);
+  let snapshots = null;
+  if (manifestPath) {
+    const requiredFiles = [DATA_FILE, REGISTRY_FILE, STATUS_FILE];
+    const result = verifyImportManifest(manifestPath, requiredFiles);
+    snapshots = result.snapshots;
+    console.log(`Verified ${result.files} source file checksums from ${result.manifestPath}`);
+  }
+
+  // Parse and validate the exact verified bytes before any network client is created.
+  const excursionsPayload = snapshots
+    ? JSON.parse(snapshots.get(path.resolve(DATA_FILE)).toString('utf8'))
+    : JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+  const excursions = excursionsFromPayload(excursionsPayload);
+  const registry = snapshots
+    ? JSON.parse(snapshots.get(path.resolve(REGISTRY_FILE)).toString('utf8'))
+    : fs.existsSync(REGISTRY_FILE) ? JSON.parse(fs.readFileSync(REGISTRY_FILE, 'utf8')) : null;
+  const scrapeStatus = snapshots
+    ? JSON.parse(snapshots.get(path.resolve(STATUS_FILE)).toString('utf8'))
+    : fs.existsSync(STATUS_FILE) ? JSON.parse(fs.readFileSync(STATUS_FILE, 'utf8')) : { sources: [] };
+  if (registry && !Array.isArray(registry.sections)) {
+    throw new Error('Expected a "sections" array in the CAI registry JSON');
+  }
+  if (!Array.isArray(scrapeStatus.sources)) {
+    throw new Error('Expected a "sources" array in the scrape status JSON');
+  }
+  const status = importStatus(env);
+
   const supabase = createClient(
-    requiredEnvironment('SUPABASE_URL'),
-    requiredEnvironment('SUPABASE_SERVICE_ROLE_KEY'),
+    requiredEnvironment('SUPABASE_URL', env),
+    requiredEnvironment('SUPABASE_SERVICE_ROLE_KEY', env),
     { auth: { autoRefreshToken: false, persistSession: false, detectSessionInUrl: false } }
   );
   const { SOURCES } = require('../sources');
-  if (fs.existsSync(REGISTRY_FILE)) {
-    const sections = await importSections({
+  let importedSections = 0;
+  if (registry) {
+    importedSections = await importSections({
       supabase,
-      registry: JSON.parse(fs.readFileSync(REGISTRY_FILE, 'utf8')),
-      scrapeStatus: fs.existsSync(STATUS_FILE) ? JSON.parse(fs.readFileSync(STATUS_FILE, 'utf8')) : {}
+      registry,
+      scrapeStatus
     });
-    console.log(`Imported ${sections} CAI registry entries`);
+    console.log(`Imported ${importedSections} CAI registry entries`);
   }
   const result = await importNewPlaces({
     supabase,
-    excursions: attachSectionMetadata(readExcursions(), SOURCES),
-    status: importStatus()
+    excursions: attachSectionMetadata(excursions, SOURCES),
+    status
   });
   console.log(
     `inserted ${result.inserted}, updated ${result.updated} coordinates/organizer metadata, skipped ${result.skipped} existing`
     + `${result.skippedUnlocated ? `, skipped ${result.skippedUnlocated} without coordinates` : ''}`
     + ` as ${result.status}`
   );
+  return { sections: importedSections, ...result };
 }
 
 if (require.main === module) {
@@ -302,6 +389,7 @@ if (require.main === module) {
 
 module.exports = {
   BATCH_SIZE,
+  main,
   coordPatchForExisting,
   importNewPlaces,
   importStatus,
@@ -310,6 +398,8 @@ module.exports = {
   sectionUpsertRow,
   attachSectionMetadata,
   readExcursions,
+  verifyImportManifest,
+  manifestArgument,
   slugify,
   toPlaceRow
 };

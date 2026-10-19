@@ -23,6 +23,8 @@ jobs:
   scrape:
     runs-on: ubuntu-latest
     timeout-minutes: 120
+    env:
+      CAI_RUN_ID: cai-gh-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -42,16 +44,9 @@ jobs:
       - name: Validate scraper
         run: npm test
         working-directory: backend
-      - name: Collect national CAI calendars
-        id: scrape
-        continue-on-error: true
+      - name: Create collection run
         working-directory: backend
         env:
-          SCRAPE_RETRIES: 2
-          SCRAPE_TIMEOUT_MS: 20000
-          GEMINI_KEY: ${{ secrets.GEMINI_KEY }}
-          GEMINI_TIMEOUT_MS: 300000
-          GEMINI_PAUSE_MS: 15000
           SOURCE: ${{ github.event.inputs.source }}
           REGION: ${{ github.event.inputs.region }}
         run: |
@@ -62,7 +57,14 @@ jobs:
             args+=(--all)
           fi
           if [ -n "${REGION}" ]; then args+=(--region "$REGION"); fi
-          node --env-file-if-exists=.env scripts/scrape.js "${args[@]}"
+          npm run orchestrate -- init --run "$CAI_RUN_ID" "${args[@]}"
+      - name: Collect calendars and verify files
+        id: scrape
+        working-directory: backend
+        env:
+          SCRAPE_RETRIES: 2
+          SCRAPE_TIMEOUT_MS: 20000
+        run: npm run orchestrate -- collect --run "$CAI_RUN_ID"
       - name: Sync static site data
         shell: bash
         run: |
@@ -71,24 +73,19 @@ jobs:
             cp backend/data/scrape-status.json frontend/public/scrape-status.json
           fi
       - name: Import new places into Supabase
-        if: steps.scrape.outcome == 'success' || steps.scrape.outcome == 'failure'
         working-directory: backend
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           SUPABASE_IMPORT_STATUS: published
-        run: npm run import:supabase
+        run: npm run orchestrate -- import --run "$CAI_RUN_ID"
       - name: Commit changed data
-        if: steps.scrape.outcome == 'success' || steps.scrape.outcome == 'failure'
         shell: bash
         run: |
-          if git diff --quiet -- backend/data/excursions.json backend/data/scrape-status.json frontend/public/excursions.json frontend/public/scrape-status.json; then
-            echo "Excursion data is unchanged"
-            exit 0
-          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add backend/data/excursions.json backend/data/scrape-status.json frontend/public/excursions.json frontend/public/scrape-status.json
+          git add "backend/data/agent-runs/$CAI_RUN_ID/state.json" "backend/data/agent-runs/$CAI_RUN_ID/manifest.json"
           git commit -m "chore(data): refresh excursions"
           for attempt in 1 2 3 4 5; do
             git fetch origin main
@@ -108,6 +105,7 @@ jobs:
           path: |
             backend/data/scrape-status.json
             backend/data/cai-sections.json
+            backend/data/agent-runs/${{ env.CAI_RUN_ID }}/
       - name: Report collection failure
         if: steps.scrape.outcome == 'failure'
         run: exit 1

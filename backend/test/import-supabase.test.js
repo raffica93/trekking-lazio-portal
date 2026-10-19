@@ -1,5 +1,9 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const os = require('node:os');
+const path = require('node:path');
+const crypto = require('node:crypto');
 const {
   coordPatchForExisting,
   importNewPlaces,
@@ -7,9 +11,49 @@ const {
   sectionToRow,
   attachSectionMetadata,
   slugify,
-  toPlaceRow
+  toPlaceRow,
+  verifyImportManifest,
+  manifestArgument,
+  main
 } = require('../scripts/import-supabase');
 const { DEFAULT_COORDS } = require('../scraper');
+
+test('import manifest verifies every listed file and required source coverage', (t) => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'cai-import-'));
+  t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
+  const source = path.join(dir, 'excursions.json');
+  const bytes = Buffer.from('{"excursions":[]}');
+  fs.writeFileSync(source, bytes);
+  const manifest = path.join(dir, 'manifest.json');
+  fs.writeFileSync(manifest, JSON.stringify({ version: 1, runId: 'test-run', createdAt: '2026-10-19T00:00:00Z', files: [{
+    path: 'excursions.json',
+    sha256: crypto.createHash('sha256').update(bytes).digest('hex')
+  }] }));
+
+  const verified = verifyImportManifest(manifest, [source], dir);
+  assert.equal(verified.files, 1);
+  fs.writeFileSync(source, '{"excursions":["changed"]}');
+  assert.deepEqual(verified.snapshots.get(source), bytes);
+  assert.throws(() => verifyImportManifest(manifest, [source], dir), /checksum mismatch/);
+  fs.writeFileSync(source, bytes);
+  assert.throws(() => verifyImportManifest(manifest, [path.join(dir, 'other.json')], dir), /does not cover required file/);
+  assert.throws(() => verifyImportManifest(manifest, [path.join(dir, 'required.json')], dir), /does not cover required file/);
+  fs.writeFileSync(manifest, JSON.stringify({ version: 2, runId: 'test-run', createdAt: '2026-10-19T00:00:00Z', files: [] }));
+  assert.throws(() => verifyImportManifest(manifest, [source], dir), /version must be 1/);
+});
+
+test('manifestArgument accepts CLI and environment handoff paths', () => {
+  assert.equal(manifestArgument(['--manifest', 'manifest.json'], {}), 'manifest.json');
+  assert.equal(manifestArgument([], { SUPABASE_IMPORT_MANIFEST: 'manifest.json' }), 'manifest.json');
+  assert.throws(() => manifestArgument(['--manifest'], {}), /requires a file path/);
+});
+
+test('main rejects an invalid import status before requiring database credentials', async () => {
+  await assert.rejects(
+    main({ argv: [], env: { SUPABASE_IMPORT_STATUS: 'archived' } }),
+    /SUPABASE_IMPORT_STATUS must be either "draft" or "published"/
+  );
+});
 
 function sampleExcursion(overrides = {}) {
   return {
