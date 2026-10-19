@@ -18,6 +18,14 @@ Aggiornamento: 19 ottobre 2026 (Europe/Rome).
   snapshot verificati in memoria. Righe esistenti deduplicate e contenuti
   amministrati preservati.
 - Preparati setup Linux e prompt per l'orchestratore remoto.
+- Accesso ChatGPT completato e ambiente cloud privato `trekking-lazio-portal`
+  creato e pubblicato. Chat di configurazione: `01a15548-ef47-77d2-9d06-100fe20a9056`.
+- Configurazione cloud: Node.js 24, dipendenze dai lockfile, setup Poppler e
+  Tesseract italiano, istruzioni dei due ruoli Luna e destinazioni delle fonti
+  censite consentite. Non sono stati aggiunti segreti DB.
+- Verifica iniziale remota sul codice `main`: 169 test e build development
+  superati; frontend e API rispondono. La build production ha incontrato un 403
+  sui Google Fonts prima dell'applicazione della configurazione di rete.
 - Verifica finale: 141 test backend superati; sintassi TOML e Bash valida;
   workflow YAML valido con solo trigger manuale.
 - Preparato il lotto `cai-20261019-01`, ancora con raccolta/file/DB in `pending`.
@@ -31,10 +39,8 @@ Aggiornamento: 19 ottobre 2026 (Europe/Rome).
 
 ## Da completare prima della raccolta remota
 
-- **Accesso utente:** il browser del pannello mostra il login ChatGPT, quindi
-  l'ambiente cloud non è stato ancora creato da questa sessione.
-- Creare l'ambiente del repository, eseguire `.codex/setup-cloud.sh`, verificare
-  rete, disponibilità effettiva di Luna e supporto ai due sottoagenti.
+- Verificare nella chat operativa rete, OCR e supporto ai due sottoagenti Luna
+  sul branch preparato. Luna è disponibile nel selettore del modello cloud.
 - Configurare l'accesso DB nell'ambiente di esecuzione: i secret presenti in
   GitHub Actions non sono automaticamente disponibili in Codex Cloud.
 - Avviare il collector cloud, completare i file e controllare le evidenze.
