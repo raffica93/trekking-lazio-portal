@@ -15051,7 +15051,9 @@
       "website": "https://caipezzopontedilegno.it/",
       "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9216124",
       "url": "https://caipezzopontedilegno.it/",
-      "calendarUrls": [],
+      "calendarUrls": [
+        "https://caipezzopontedilegno.it/wp-content/uploads/2026/05/PROGRAMMA-ESTATE-2026.jpeg"
+      ],
       "kind": "html",
       "template": "html-calendar",
       "extractor": "deterministic",
@@ -15060,7 +15062,13 @@
       "evidenceUrls": [
         "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
       ],
-      "calendarEvidence": [],
+      "calendarEvidence": [
+        {
+          "url": "https://caipezzopontedilegno.it/wp-content/uploads/2026/05/PROGRAMMA-ESTATE-2026.jpeg",
+          "label": "PROGRAMMA ESTATE 2026 (JPEG)",
+          "foundOn": "https://caipezzopontedilegno.it/"
+        }
+      ],
       "verifiedAt": "2026-09-05T20:27:14.966Z"
     },
     {

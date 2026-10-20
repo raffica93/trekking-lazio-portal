@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "runId": "cai-20261020-lombardia-deep-06",
+  "createdAt": "2026-10-20T02:12:33.922Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "ea2456b75ee7450488a0f1b9d43fa91a75d7279fd6b7ae683e028b3dfd6adcdc"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "2709dd5fba759054ba1434877d554a6a71876894d5c5548bc98878729d34dd50"
+    },
+    {
+      "path": "frontend/public/excursions.json",
+      "sha256": "ea2456b75ee7450488a0f1b9d43fa91a75d7279fd6b7ae683e028b3dfd6adcdc"
+    },
+    {
+      "path": "frontend/public/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "frontend/public/scrape-status.json",
+      "sha256": "2709dd5fba759054ba1434877d554a6a71876894d5c5548bc98878729d34dd50"
+    }
+  ]
+}

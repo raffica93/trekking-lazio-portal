@@ -125,8 +125,8 @@ async function scrapeSource(source, {
   if (useDeterministicAdapter) {
     const result = await adapter(source, {
       now,
-      budgetMs: Number(process.env.SCRAPE_SOURCE_BUDGET_MS || 60_000),
-      maxDocuments: Number(process.env.SCRAPE_MAX_DOCUMENTS || 12)
+      budgetMs: Math.max(1_000, Math.min(240_000, Number(process.env.SCRAPE_SOURCE_BUDGET_MS) || 60_000)),
+      maxDocuments: Math.max(1, Math.min(40, Number(process.env.SCRAPE_MAX_DOCUMENTS) || 12))
     });
     const extracted = preserveEnrichment(result.excursions, existing);
     // Homepages and paginated calendars are partial views. Missing rows are never proof of cancellation.

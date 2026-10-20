@@ -28,7 +28,7 @@
     "scrape:gallinaro": "node --env-file-if-exists=.env scripts/sede.js gallinaro",
     "classify": "node scripts/classify.js",
     "import:supabase": "node --env-file-if-exists=.env scripts/import-supabase.js",
-    "orchestrate": "node --env-file-if-exists=.env scripts/orchestrate-cai.js",
+    "orchestrate": "NODE_USE_ENV_PROXY=1 node --env-file-if-exists=.env scripts/orchestrate-cai.js",
     "test": "node --test"
   },
   "keywords": [],

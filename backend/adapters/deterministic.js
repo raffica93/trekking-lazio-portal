@@ -1,21 +1,50 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const crypto = require('node:crypto');
+const fsSync = require('node:fs');
 const fs = require('node:fs/promises');
 const path = require('node:path');
+const { Transform } = require('node:stream');
+const { pipeline: streamPipeline } = require('node:stream/promises');
+const { execFile } = require('node:child_process');
+const { promisify } = require('node:util');
 const { DateTime } = require('luxon');
-const { ocrPdfLines } = require('./pdf-ocr');
+const { ocrPdfLines, ocrPdfPageLines, ocrPdfFilePages, ocrImageLines } = require('./pdf-ocr');
 const { parseCaiRomaHtml, stableId, tripDays, parseDistanceKm, parseDurationHours } = require('../scraper');
 
-const VERSION = 4;
+const VERSION = 10;
 const MONTHS = { gennaio: 1, febbraio: 2, marzo: 3, aprile: 4, maggio: 5, giugno: 6, luglio: 7, agosto: 8, settembre: 9, ottobre: 10, novembre: 11, dicembre: 12 };
 const MONTH_PATTERN = Object.keys(MONTHS).join('|');
 const REGIONS = ['Abruzzo', 'Basilicata', 'Calabria', 'Campania', 'Emilia-Romagna', 'Friuli-Venezia Giulia', 'Lazio', 'Liguria', 'Lombardia', 'Marche', 'Molise', 'Piemonte', 'Puglia', 'Sardegna', 'Sicilia', 'Toscana', 'Trentino-Alto Adige', 'Umbria', "Valle d'Aosta", 'Veneto'];
 const CACHE_DIR = path.join(__dirname, '..', 'node_modules', '.cache', 'cai');
-const EVENT_WORDS = /escursion|trekking|sentiero|rifugio|monte\b|monti\b|cima\b|anello\b|traversata|ferrata|alpinis|ciaspol|sci\b|cicloescursion|passeggiata|cammino|gita\b|uscita\b|assemblea|convegno|serata|incontro|corso\b|arrampic|torrent|speleolog|raduno|castagnata|pranzo|cena/i;
+const MAX_PDF_DOWNLOAD_BYTES = 180 * 1024 * 1024;
+const MAX_DOCUMENT_BYTES = 32 * 1024 * 1024;
+const MAX_PDF_PAGES = 400;
+const execFileAsync = promisify(execFile);
+const EVENT_WORDS = /escursion|trekking|sentiero|rifugio|\balpe\b|monte\b|monti\b|cima\b|anello\b|traversata|ferrata|alpinis|ciaspol|sci\b|cicloescursion|passeggiata|camminat|cammino|gita\b|uscita\b|assemblea|convegno|serata|incontro|corso\b|arrampic|torrent|speleolog|raduno|castagn|casatagn|pranzo|cena|befan|campeggi|discesa|festa|lag(?:o|hi)/i;
 const CALENDAR_WORDS = /calendari|programm[ai]|escursion|attivit|eventi|gite|agenda|trekking/i;
 const digest = (value) => crypto.createHash('sha256').update(value).digest('hex');
 const clean = (value) => cheerio.load(String(value || '')).text().replace(/\s+/g, ' ').trim();
+
+function normalizeMonthAbbreviations(value) {
+  const aliases = { gen: 'gennaio', feb: 'febbraio', mar: 'marzo', apr: 'aprile', mag: 'maggio', giu: 'giugno', lug: 'luglio', ago: 'agosto', set: 'settembre', sett: 'settembre', ott: 'ottobre', nov: 'novembre', dic: 'dicembre' };
+  return String(value || '').replace(/\b(gen|feb|mar|apr|mag|giu|lug|ago|sett?|ott|nov|dic)\.(?=\s|$)/gi, (match) => aliases[match.slice(0, -1).toLowerCase()]);
+}
+
+function isNonCalendarUrl(value) {
+  try {
+    const url = new URL(value);
+    const host = url.hostname.toLowerCase();
+    const shareHost = /(?:^|\.)(?:facebook\.com|instagram\.com|youtube\.com|youtu\.be|linkedin\.com|twitter\.com|x\.com|reddit\.com|pinterest\.com|tiktok\.com|wa\.me|whatsapp\.com|addtoany\.com)$/.test(host)
+      || /^(?:accounts\.google\.com|outlook\.office\.com|outlook\.live\.com)$/.test(host);
+    const shareAction = /calendar\.google\.com\/calendar\/event/i.test(url.href) && url.searchParams.get('action') === 'TEMPLATE'
+      || /\/deeplink\/compose/i.test(url.pathname);
+    const feedOrMetadata = /\/(?:wp-json\/oembed|feed)(?:\/|$)/i.test(url.pathname);
+    const unrelatedPolicy = /\/(?:assicurazioni|insurance)(?:\/|$)/i.test(url.pathname) || /polizza/i.test(url.pathname);
+    const rasterImage = /\.(?:png|jpe?g|gif|webp)(?:[?#]|$)/i.test(url.href);
+    return shareHost || shareAction || feedOrMetadata || unrelatedPolicy || (rasterImage && !CALENDAR_WORDS.test(url.href));
+  } catch { return true; }
+}
 
 function monthFloor(now = DateTime.now()) {
   const date = typeof now === 'string' ? DateTime.fromISO(now) : now;
@@ -35,18 +64,20 @@ function parseDates(input, year, month) {
     const firstYear = Number(range[3] || year);
     return { date: validDate(firstYear, MONTHS[range[2]], range[1]), dateEnd: validDate(range[6] || firstYear + (MONTHS[range[5]] < MONTHS[range[2]] ? 1 : 0), MONTHS[range[5]], range[4]), matched: range[0] };
   }
+  // An explicit month name takes precedence over an adjacent numeric range: "8/10 Maggio"
+  // means 8–10 May, not October 8.
+  range = value.match(new RegExp(`\\b(\\d{1,2})(?:\\s*[-–/e]\\s*(\\d{1,2}))?\\s+(${MONTH_PATTERN})(?:\\s+(20\\d{2}))?\\b`, 'i'));
+  if (range) return {
+    date: validDate(range[4] || year, MONTHS[range[3]], range[1]),
+    dateEnd: range[2] ? validDate(range[4] || year, MONTHS[range[3]], range[2]) : undefined,
+    matched: range[0]
+  };
   let match = value.match(/\b(20\d{2})-(\d{2})-(\d{2})\b/);
   if (match) return { date: validDate(match[1], match[2], match[3]), matched: match[0] };
   match = value.match(/\b(\d{1,2})[/.](\d{1,2})[/.](20\d{2}|\d{2})\b/);
   if (match) return { date: validDate(match[3].length === 2 ? `20${match[3]}` : match[3], match[2], match[1]), matched: match[0] };
   match = value.match(/\b(\d{1,2})[/.](\d{1,2})(?![/.\d])\b/);
   if (match && year) return { date: validDate(year, match[2], match[1]), matched: match[0] };
-  match = value.match(new RegExp(`\\b(\\d{1,2})(?:\\s*[-–/e]\\s*(\\d{1,2}))?\\s+(${MONTH_PATTERN})(?:\\s+(20\\d{2}))?\\b`, 'i'));
-  if (match) return {
-    date: validDate(match[4] || year, MONTHS[match[3]], match[1]),
-    dateEnd: match[2] ? validDate(match[4] || year, MONTHS[match[3]], match[2]) : undefined,
-    matched: match[0]
-  };
   match = value.match(/^\s*(?:lun(?:ed[iì])?|mar(?:ted[iì])?|mer(?:coled[iì])?|gio(?:ved[iì])?|ven(?:erd[iì])?|sab(?:ato)?|dom(?:enica)?)?\s*(\d{1,2})(?:\s*[-–/]\s*(\d{1,2}))?(?=\s|$)/i);
   if (match && month) return {
     date: validDate(year, month, match[1]),
@@ -184,19 +215,41 @@ function parseCalendarLines(lines, source, url, year, method) {
   const events = [];
   let month;
   for (let index = 0; index < lines.length; index += 1) {
-    const line = clean(lines[index]);
+    const line = normalizeMonthAbbreviations(clean(lines[index]));
     if (!line) continue;
     const monthHeading = line.toLowerCase().match(new RegExp(`^(${MONTH_PATTERN})(?:\\s+(20\\d{2}))?$`));
     if (monthHeading) { month = MONTHS[monthHeading[1]]; year = Number(monthHeading[2] || year); continue; }
     const range = parseDates(line, year, month);
     if (!range?.date) continue;
-    const beforeDate = line.slice(0, line.toLowerCase().indexOf(range.matched.trim().toLowerCase())).trim();
-    if (beforeDate && !/^(?:(?:lun(?:ed[iì])?|mar(?:ted[iì])?|mer(?:coled[iì])?|gio(?:ved[iì])?|ven(?:erd[iì])?|sab(?:ato)?|dom(?:enica)?|dal|da|data|e|[-–:])+\s*)+$/i.test(beforeDate)) continue;
-    let title = line.replace(new RegExp(range.matched.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), '').replace(/^\s*(?:lun(?:ed[iì])?|mar(?:ted[iì])?|mer(?:coled[iì])?|gio(?:ved[iì])?|ven(?:erd[iì])?|sab(?:ato)?|dom(?:enica)?)\b\s*/i, '').replace(/^[\s:;|–—-]+/, '').trim();
-    if (title.length < 8 && index + 1 < lines.length && !parseDates(lines[index + 1], year, month)?.date) title += ` ${clean(lines[index + 1])}`;
+    const dateStart = line.toLowerCase().indexOf(range.matched.trim().toLowerCase());
+    const beforeDate = line.slice(0, dateStart).trim();
+    const afterDate = line.slice(dateStart + range.matched.length).replace(/^[\s:;|–—-]+/, '').trim();
+    const genericHeading = /^(?:escursionismo|escursion(?:i)?\s+(?:alpinistiche|per ragazzi|senior(?:\s+.*)?|cicloescursionismo)|alpinismo|cicloescursionismo|programma|attivit[aà]|riflessi d['’]autunno|serate|in allegria|lavoriamo insieme|in evidenza)$/i.test(beforeDate);
+    const beforeIsEventTitle = EVENT_WORDS.test(beforeDate) && !genericHeading;
+    if (beforeDate && !beforeIsEventTitle && !genericHeading && !/^(?:(?:lun(?:ed[iì])?|mar(?:ted[iì])?|mer(?:coled[iì])?|gio(?:ved[iì])?|ven(?:erd[iì])?|sab(?:ato)?|dom(?:enica)?|dal|da|data|e|[-–:])+\s*)+$/i.test(beforeDate)) continue;
+    let title = beforeIsEventTitle ? beforeDate : afterDate.replace(/^\s*(?:lun(?:ed[iì])?|mar(?:ted[iì])?|mer(?:coled[iì])?|gio(?:ved[iì])?|ven(?:erd[iì])?|sab(?:ato)?|dom(?:enica)?)\b\s*/i, '').replace(/^[\s:;|–—-]+/, '').trim();
+    const weekdayInHeader = /(?:^|\s)(?:lun(?:ed[iì])?|mar(?:ted[iì])?|mer(?:coled[iì])?|gio(?:ved[iì])?|ven(?:erd[iì])?|sab(?:ato)?|dom(?:enica)?)(?:$|\s)/i.test(`${beforeDate} ${line.slice(line.toLowerCase().indexOf(range.matched.trim().toLowerCase()) + range.matched.length)}`);
+    let eventLine = line;
+    if (!EVENT_WORDS.test(title) && weekdayInHeader) {
+      for (let lookahead = index + 1; lookahead < Math.min(index + 13, lines.length); lookahead += 1) {
+        const candidate = normalizeMonthAbbreviations(clean(lines[lookahead]));
+        if (!candidate) continue;
+        if (/^(?:(?:data\s+)?(?:lun(?:ed[iì])?|mar(?:ted[iì])?|mer(?:coled[iì])?|gio(?:ved[iì])?|ven(?:erd[iì])?|sab(?:ato)?|dom(?:enica)?)\s+)?\d{1,2}(?:[-–/]\d{1,2})?\b/i.test(candidate)
+          && parseDates(candidate, year, month)?.date) break;
+        if (EVENT_WORDS.test(candidate) && !/^\s*\d+\)/.test(candidate)
+          && !/^(?:le escursioni sono|il programma potr[aà]|per una corretta pratica|modalit[aà] di partecipazione)/i.test(candidate)
+          && !/pubblicat|aggiornat|regolamento|iscrizion[ei]|quote obbligatorie|partecipazione alle escursioni/i.test(candidate)) {
+          title = candidate;
+          eventLine = `${line} ${candidate}`;
+          break;
+        }
+      }
+    }
     // Generic pages include publication dates and footer dates. Import only actual activity descriptions.
-    if (!EVENT_WORDS.test(title) || /^(?:escursionismo|alpinismo|cicloescursionismo|programma|attivit[aà])$/i.test(title) || /pubblicat|aggiornat|copyright|cookie|privacy|tesseramento|contattaci|leggi tutto|orario di apertura/i.test(title)) continue;
-    const event = normalizeEvent({ title, ...range, description: line }, source, url, method);
+    if (!EVENT_WORDS.test(title) || /^(?:escursionismo|escursion(?:i)?\s+(?:alpinistiche|per ragazzi|senior(?:\s+.*)?|cicloescursionismo)|alpinismo|cicloescursionismo|programma|attivit[aà]|riflessi d['’]autunno|serate|in allegria|lavoriamo insieme|in evidenza)$/i.test(title)
+      || /^\s*\d+\)/.test(title) || /^(?:le escursioni sono|il programma potr[aà]|\(cai [^)]+\) in relazione|per una corretta pratica|modalit[aà] di partecipazione)/i.test(title)
+      || /pubblicat|aggiornat|copyright|cookie|privacy|tesseramento|contattaci|leggi tutto|orario di apertura|regolamento|iscrizion[ei]|quote obbligatorie|partecipazione alle escursioni/i.test(title)) continue;
+    const event = normalizeEvent({ title, ...range, description: eventLine }, source, url, method);
     if (event) events.push(event);
   }
   return events;
@@ -277,12 +330,14 @@ async function pdfText(buffer) {
   const task = getDocument({ data: new Uint8Array(buffer), useSystemFonts: true, isEvalSupported: false, verbosity: 0 });
   const doc = await task.promise;
   const lines = [];
+  const columnLines = [];
   try {
     // Annual section programs are bounded documents; record oversize documents as unsupported instead of silently truncating.
     if (doc.numPages > 160) throw new Error(`PDF too long for automatic calendar extraction: ${doc.numPages} pages`);
     for (let pageNo = 1; pageNo <= doc.numPages; pageNo += 1) {
       const page = await doc.getPage(pageNo);
       const content = await page.getTextContent();
+      const width = page.getViewport({ scale: 1 }).width;
       const groups = new Map();
       for (const item of content.items) {
         if (!item.str?.trim()) continue;
@@ -290,11 +345,66 @@ async function pdfText(buffer) {
         if (!groups.has(y)) groups.set(y, []);
         groups.get(y).push({ x: item.transform[4], text: item.str });
       }
-      for (const [, items] of [...groups].sort((a, b) => b[0] - a[0])) lines.push(items.sort((a, b) => a.x - b.x).map((item) => item.text).join(' '));
+      const orderedGroups = [...groups].sort((a, b) => b[0] - a[0]);
+      for (const [, items] of orderedGroups) lines.push(items.sort((a, b) => a.x - b.x).map((item) => item.text).join(' '));
+      const items = content.items.filter((item) => item.str?.trim());
+      const split = findPdfColumnSplit(items, width);
+      if (split) {
+        for (const side of ['left', 'right']) {
+          for (const [, rowItems] of orderedGroups) {
+            const column = rowItems.filter((item) => side === 'left' ? item.x < split : item.x >= split);
+            if (column.length) columnLines.push(column.sort((a, b) => a.x - b.x).map((item) => item.text).join(' '));
+          }
+        }
+      } else {
+        for (const [, rowItems] of orderedGroups) columnLines.push(rowItems.sort((a, b) => a.x - b.x).map((item) => item.text).join(' '));
+      }
       page.cleanup();
     }
   } finally { await task.destroy(); }
-  return { lines, pageCount: doc.numPages };
+  return { lines, columnLines, pageCount: doc.numPages };
+}
+
+async function pdfTextFile(filePath, { timeoutMs = 45_000, pages } = {}) {
+  const { stdout: info } = await execFileAsync('pdfinfo', [filePath], {
+    timeout: Math.min(timeoutMs, 15_000), maxBuffer: 1024 * 1024, windowsHide: true
+  });
+  const pageCount = Number(info.match(/^Pages:\s+(\d+)/m)?.[1]);
+  if (!Number.isInteger(pageCount) || pageCount < 1 || pageCount > MAX_PDF_PAGES) {
+    throw new Error(`PDF page count must be between 1 and ${MAX_PDF_PAGES}; got ${pageCount || 'unknown'}`);
+  }
+  const firstPage = pages?.[0] ?? 1;
+  const lastPage = pages?.[1] ?? pageCount;
+  if (!Number.isInteger(firstPage) || !Number.isInteger(lastPage) || firstPage < 1 || lastPage < firstPage || lastPage > pageCount) {
+    throw new Error(`Invalid PDF page range ${firstPage}-${lastPage} for ${pageCount} pages`);
+  }
+  const { stdout } = await execFileAsync('pdftotext', [
+    '-layout', '-enc', 'UTF-8', '-f', String(firstPage), '-l', String(lastPage), filePath, '-'
+  ], { timeout: timeoutMs, maxBuffer: 16 * 1024 * 1024, windowsHide: true });
+  const lines = String(stdout || '').split(/\r?\n/);
+  return { lines, columnLines: lines, pageCount, extractedPages: [firstPage, lastPage] };
+}
+
+function findPdfColumnSplit(items, width) {
+  const xValues = [...new Set(items.map((item) => Math.round(item.transform[4])))].sort((a, b) => a - b);
+  const candidates = [];
+  for (let index = 1; index < xValues.length; index += 1) {
+    const gap = xValues[index] - xValues[index - 1];
+    const split = (xValues[index] + xValues[index - 1]) / 2;
+    if (gap < 28 || split < width * 0.22 || split > width * 0.58) continue;
+    const leftRows = new Set();
+    const rightRows = new Set();
+    for (const item of items) {
+      const y = Math.round(item.transform[5] / 3) * 3;
+      (item.transform[4] < split ? leftRows : rightRows).add(y);
+    }
+    const overlap = [...leftRows].filter((y) => rightRows.has(y)).length;
+    if (leftRows.size < 12 || rightRows.size < 12 || overlap < 5) continue;
+    const balance = Math.min(leftRows.size, rightRows.size) / Math.max(leftRows.size, rightRows.size);
+    candidates.push({ split, score: gap * overlap * balance });
+  }
+  candidates.sort((a, b) => b.score - a.score);
+  return candidates[0]?.split ?? null;
 }
 
 async function pdfLines(buffer) {
@@ -309,7 +419,8 @@ function discoverLinks(html, url, now) {
     if (!href) return;
     const label = clean($(element).text());
     const signal = `${href} ${label}`;
-    if (/facebook|instagram|youtube|linkedin|twitter\.com|x\.com|wa\.me|mailto:|\/feed\/?$|\/oembed\/|\.(?:png|jpe?g|gif|webp)(?:[?#]|$)/i.test(href)) return;
+    if (isNonCalendarUrl(href) && !/\.(?:png|jpe?g|gif|webp)(?:[?#]|$)/i.test(href)) return;
+    if (/\.(?:png|jpe?g|gif|webp)(?:[?#]|$)/i.test(href) && !CALENDAR_WORDS.test(signal)) return;
     if (new URL(href).hostname !== new URL(url).hostname && !/\.pdf(?:[?#]|$)|\.ics(?:[?#]|$)|calendar\.google/i.test(href)) return;
     if (!CALENDAR_WORDS.test(signal) && !/\.ics(?:[?#]|$)|ical=1|icalendar/i.test(signal)) return;
     const years = [...signal.matchAll(/\b(20\d{2})\b/g)].map((match) => Number(match[1]));
@@ -337,31 +448,101 @@ async function fetchDocument(url, { timeoutMs = 8000, cacheDir = CACHE_DIR } = {
   let prior;
   try { prior = JSON.parse(await fs.readFile(metaPath, 'utf8')); } catch { /* First fetch. */ }
   const response = await axios.get(url, {
-    timeout: timeoutMs, responseType: 'arraybuffer', maxContentLength: 18 * 1024 * 1024, maxRedirects: 4,
+    // Node's environment proxy support handles the configured cloud proxy;
+    // Axios' own env-proxy parsing is incompatible with this runtime proxy URL.
+    ...(process.env.NODE_USE_ENV_PROXY === '1' ? { proxy: false } : {}),
+    timeout: timeoutMs, responseType: 'stream', maxContentLength: MAX_PDF_DOWNLOAD_BYTES, maxRedirects: 4,
     headers: { 'User-Agent': 'CAI-Italia-Calendar/1.0 (public event directory; contact through repository)', Accept: 'text/html,application/pdf,text/calendar,application/json;q=0.9,*/*;q=0.5', ...(prior?.etag ? { 'If-None-Match': prior.etag } : {}), ...(prior?.lastModified ? { 'If-Modified-Since': prior.lastModified } : {}) },
     validateStatus: (status) => status === 304 || (status >= 200 && status < 300)
   });
   if (response.status === 304 && prior) {
-    try { return { ...prior, buffer: await fs.readFile(bodyPath), reusedHttp: true }; } catch { return fetchDocument(url, { timeoutMs, cacheDir: `${cacheDir}-recovery` }); }
+    try {
+      const bytes = prior.bytes || (await fs.stat(bodyPath)).size;
+      const buffer = bytes <= MAX_DOCUMENT_BYTES ? await fs.readFile(bodyPath) : null;
+      return { ...prior, bytes, buffer, filePath: bodyPath, reusedHttp: true };
+    } catch { return fetchDocument(url, { timeoutMs, cacheDir: `${cacheDir}-recovery` }); }
   }
-  const buffer = Buffer.from(response.data);
-  const finalUrl = response.request?.res?.responseUrl || url;
-  const meta = { url: finalUrl, hash: digest(buffer), contentType: response.headers['content-type'] || '', etag: response.headers.etag, lastModified: response.headers['last-modified'] };
+  const contentType = response.headers['content-type'] || '';
+  const requestedPdf = /\.pdf(?:[?#]|$)/i.test(url);
+  const isPdfResponse = /application\/pdf/i.test(contentType) || requestedPdf;
+  const maxBytes = isPdfResponse ? MAX_PDF_DOWNLOAD_BYTES : MAX_DOCUMENT_BYTES;
+  const declaredBytes = Number(response.headers['content-length']);
+  if (Number.isFinite(declaredBytes) && declaredBytes > maxBytes) {
+    response.data.destroy();
+    throw new Error(`${isPdfResponse ? 'PDF' : 'Document'} exceeds bounded download size of ${maxBytes} bytes (${declaredBytes} declared)`);
+  }
   await fs.mkdir(cacheDir, { recursive: true });
-  await fs.writeFile(bodyPath, buffer);
+  const tempBodyPath = `${bodyPath}.${process.pid}.${Date.now()}.tmp`;
+  const hash = crypto.createHash('sha256');
+  let bytes = 0;
+  const limiter = new Transform({
+    transform(chunk, _encoding, callback) {
+      bytes += chunk.length;
+      if (bytes > maxBytes) return callback(new Error(`${isPdfResponse ? 'PDF' : 'Document'} exceeded bounded download size of ${maxBytes} bytes`));
+      hash.update(chunk);
+      callback(null, chunk);
+    }
+  });
+  try {
+    await streamPipeline(response.data, limiter, fsSync.createWriteStream(tempBodyPath, { flags: 'wx' }));
+    await fs.rename(tempBodyPath, bodyPath);
+  } catch (error) {
+    response.data.destroy();
+    await fs.rm(tempBodyPath, { force: true });
+    throw error;
+  }
+  const finalUrl = response.request?.res?.responseUrl || url;
+  const meta = { url: finalUrl, hash: hash.digest('hex'), contentType, etag: response.headers.etag, lastModified: response.headers['last-modified'], bytes };
   await fs.writeFile(metaPath, JSON.stringify(meta));
-  return { ...meta, buffer };
+  return { ...meta, buffer: bytes <= MAX_DOCUMENT_BYTES ? await fs.readFile(bodyPath) : null, filePath: bodyPath };
 }
 
-async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fetchDocument, maxDocuments = 12, budgetMs = 60_000, cacheDir = CACHE_DIR, recognizePdf = ocrPdfLines } = {}) {
+async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fetchDocument, maxDocuments = 12, budgetMs = 60_000, cacheDir = CACHE_DIR, recognizePdf = ocrPdfLines, recognizePdfPage = ocrPdfPageLines, recognizePdfFile = ocrPdfFilePages } = {}) {
   if (typeof now === 'string') now = DateTime.fromISO(now, { zone: 'Europe/Rome' });
   const started = Date.now();
-  const initialUrls = [...new Set([...(source.calendarUrls || []), source.url, source.website].filter(Boolean))];
+  const pdfOnly = process.env.SCRAPE_PDF_ONLY === '1';
+  const explicitPdfUrls = String(process.env.SCRAPE_PDF_URLS || '').split(',').map((value) => value.trim()).filter(Boolean);
+  const longTimeoutPdfUrls = new Set(String(process.env.SCRAPE_PDF_LONG_TIMEOUT_URLS || '').split(',').map((value) => value.trim()).filter(Boolean));
+  let pdfPageRanges = {};
+  try { pdfPageRanges = JSON.parse(process.env.SCRAPE_PDF_PAGE_RANGES || '{}'); } catch { throw new Error('SCRAPE_PDF_PAGE_RANGES must be valid JSON'); }
+  let pdfOcrPages = {};
+  try { pdfOcrPages = JSON.parse(process.env.SCRAPE_PDF_OCR_PAGES || '{}'); } catch { throw new Error('SCRAPE_PDF_OCR_PAGES must be valid JSON'); }
+  let candidates = [...new Set([...(source.calendarUrls || []), source.url, source.website].filter(Boolean))];
+  if (pdfOnly && explicitPdfUrls.length) {
+    const sourceHost = new URL(source.website || source.url).hostname.replace(/^www\./i, '').toLowerCase();
+    candidates = explicitPdfUrls.filter((url) => {
+      try { return new URL(url).hostname.replace(/^www\./i, '').toLowerCase() === sourceHost; } catch { return false; }
+    });
+  }
+  if (pdfOnly) candidates = candidates.filter((url) => /\.pdf(?:[?#]|$)/i.test(url));
+  const registryPath = path.join(__dirname, '..', 'data', 'scrape-status.json');
+  let prior404 = [];
+  try {
+    const previous = JSON.parse(await fs.readFile(registryPath, 'utf8'));
+    prior404 = (previous.sources || []).find((entry) => entry.id === source.id)?.issues || [];
+  } catch { /* A missing previous status file must not stop source collection. */ }
+  const confirmedUnavailable = new Map(prior404.filter((issue) => /status code (?:403|404|410|500|502|503|504)|HTTP\/1\.1 (?:403|404|410|500|502|503|504)/i.test(issue.message || '') && issue.url)
+    .map((issue) => [issue.url, issue.message]));
+  const sourceScopedSkip = (url) => {
+    if (source.id === 'cai-varano-borghi-9116118' && /caigavirate\.it/i.test(url)
+      && !/sottosezione(?:-di)?-varano-borghi/i.test(url)) return 'Shared CAI Gavirate calendar omitted; this source is the dedicated Varano Borghi subsection.';
+    if (source.id === 'cai-meda-9216042' && /comune\.meda\.mb\.it/i.test(url)) return 'Shared Meda municipal event leaflet omitted; CAI Meda official calendars remain in scope.';
+    return null;
+  };
+  const omitted = new Map(candidates.map((url) => [url, sourceScopedSkip(url)]).filter(([, reason]) => reason));
+  const skipped = candidates.filter((url) => omitted.has(url) || isNonCalendarUrl(url) || confirmedUnavailable.has(url));
+  const initialUrls = candidates.filter((url) => !omitted.has(url) && !isNonCalendarUrl(url) && !confirmedUnavailable.has(url));
   const queue = initialUrls.map((url, index) => ({ url, depth: 0, score: 1000 - index }));
   const visited = new Set();
   const events = [];
   const documents = [];
-  const issues = [];
+  const issues = skipped.map((url) => ({
+    url,
+    code: confirmedUnavailable.has(url) ? 'previous-unavailable-skipped' : omitted.has(url) ? 'shared-attribution-skipped' : 'non-calendar-link-skipped',
+    message: confirmedUnavailable.has(url)
+      ? `Skipped URL previously confirmed unavailable: ${confirmedUnavailable.get(url)}`
+      : omitted.get(url) || 'Skipped social, feed, metadata, sharing, or unrelated image URL.'
+  }));
   const methods = new Set();
   let recognized = false;
   let eventCount = 0;
@@ -372,16 +553,20 @@ async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fe
     if (!url || visited.has(url)) continue;
     visited.add(url);
     try {
-      const document = await fetchDoc(url, { timeoutMs: Math.max(1000, Math.min(8000, budgetMs - (Date.now() - started))), cacheDir });
+      const documentTimeout = /\.pdf(?:[?#]|$)/i.test(url) ? (longTimeoutPdfUrls.has(url) ? 180_000 : 90_000) : 8000;
+      const document = await fetchDoc(url, { timeoutMs: Math.max(1000, Math.min(documentTimeout, budgetMs - (Date.now() - started))), cacheDir });
       const text = document.buffer?.toString('utf8') ?? document.text ?? '';
-      const isPdf = /application\/pdf/i.test(document.contentType) || text.startsWith('%PDF');
-      const extractionKey = digest(`${VERSION}|${source.id}|${document.hash}|${now.year}`);
+      const isPdf = /application\/pdf/i.test(document.contentType) || text.startsWith('%PDF') || Boolean(document.filePath && /\.pdf(?:[?#]|$)/i.test(url));
+      const extractionKey = digest(`${VERSION}|${source.id}|${document.hash}|${now.year}|${JSON.stringify(pdfPageRanges[source.id] || null)}|${JSON.stringify(pdfOcrPages[source.id] || null)}`);
       const extractedPath = path.join(cacheDir, `events-${extractionKey}.json`);
       let parsed;
       // Cache annual document extraction by its content, preserving every month in that document.
       if (isPdf) {
         try { parsed = JSON.parse(await fs.readFile(extractedPath, 'utf8')); } catch {
-          const { lines: extractedText, pageCount } = await pdfText(document.buffer);
+          const pdfResult = document.buffer
+            ? await pdfText(document.buffer)
+            : await pdfTextFile(document.filePath, { timeoutMs: Math.min(45_000, Math.max(1000, budgetMs - (Date.now() - started))), pages: pdfPageRanges[source.id] });
+          const { lines: extractedText, columnLines, pageCount } = pdfResult;
           let lines = extractedText;
           let method = 'pdf-text';
           let cacheable = true;
@@ -394,8 +579,16 @@ async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fe
               ocrIssues.push('PDF OCR skipped because the scrape time budget is exhausted.');
             } else {
               try {
-                const timeoutMs = Math.min(120_000, remainingBudgetMs);
-                const ocrLines = await recognizePdf(document.buffer, { pageCount, timeoutMs });
+                const timeoutMs = Math.min(90_000, remainingBudgetMs);
+                const targetedPages = ({
+                  'cai-colico-9216123': [12],
+                  'cai-missaglia-9216150': [21]
+                })[source.id] || pdfOcrPages[source.id];
+                const ocrLines = document.buffer
+                  ? (targetedPages
+                    ? await recognizePdfPage(document.buffer, { pageCount, pages: targetedPages, timeoutMs })
+                    : await recognizePdf(document.buffer, { pageCount, timeoutMs }))
+                  : await recognizePdfFile(document.filePath, { pageCount, pages: targetedPages, timeoutMs });
                 if (ocrLines.join(' ').replace(/\s/g, '').length > textLength) {
                   lines = ocrLines;
                   method = 'pdf-ocr';
@@ -408,13 +601,31 @@ async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fe
             }
           }
           const year = documentYear(lines.join('\n'), url);
-          const extracted = source.id === 'tivoli' ? parseTivoliPdf(lines, source, document.url || url, year) : parseCalendarLines(lines, source, document.url || url, year, method);
+          const parsePdfLines = (candidateLines) => source.id === 'tivoli'
+            ? parseTivoliPdf(candidateLines, source, document.url || url, year)
+            : parseCalendarLines(candidateLines, source, document.url || url, year, method);
+          let extracted = parsePdfLines(lines);
+          // Multi-column CAI booklets interleave rows from separate columns in PDF text order.
+          // Prefer the coordinate-separated reading only when it produces more grounded events.
+          if (columnLines?.length && columnLines !== lines) {
+            const columnEvents = parsePdfLines(columnLines);
+            if (columnEvents.length > extracted.length) extracted = columnEvents;
+          }
           parsed = { events: extracted, recognized: extracted.length > 0, method, issues: ocrIssues };
           if (cacheable) {
             await fs.mkdir(cacheDir, { recursive: true });
             await fs.writeFile(extractedPath, JSON.stringify(parsed));
           }
         }
+      } else if (/^image\/(?:jpeg|png|webp|tiff|gif|bmp)(?:;|$)/i.test(document.contentType || '') && document.buffer?.length <= 12 * 1024 * 1024) {
+        const remainingBudgetMs = budgetMs - (Date.now() - started);
+        if (remainingBudgetMs <= 0) throw new Error('Image OCR skipped because the scrape time budget is exhausted.');
+        const lines = await ocrImageLines(document.buffer, { timeoutMs: Math.min(30_000, remainingBudgetMs) });
+        const textLength = lines.join(' ').replace(/\s/g, '').length;
+        const year = documentYear(lines.join('\n'), url, now.year);
+        const extracted = textLength >= 40 ? parseCalendarLines(lines, source, document.url || url, year, 'image-ocr') : [];
+        const imageIssues = textLength < 40 ? ['Image OCR yielded insufficient text; manual verification required.'] : [];
+        parsed = { events: extracted, recognized: extracted.length > 0, method: 'image-ocr', issues: imageIssues };
       } else if (/BEGIN:VCALENDAR/.test(text)) parsed = parseIcs(text, source, document.url || url);
       else if (/^\s*\{/.test(text)) {
         parsed = parseWordPress(JSON.parse(text), source, document.url || url);
@@ -422,7 +633,13 @@ async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fe
       } else {
         parsed = parseHtmlCalendar(text, source, document.url || url, now);
         if (candidate.depth < 2) {
-          const links = discoverLinks(text, document.url || url, now).filter((link) => !visited.has(link.url));
+          const discoveredLinks = discoverLinks(text, document.url || url, now);
+          for (const link of discoveredLinks) {
+            if (confirmedUnavailable.has(link.url) && !issues.some((issue) => issue.url === link.url && issue.code === 'previous-unavailable-skipped')) {
+              issues.push({ url: link.url, code: 'previous-unavailable-skipped', message: `Skipped URL previously confirmed unavailable: ${confirmedUnavailable.get(link.url)}` });
+            }
+          }
+          const links = discoveredLinks.filter((link) => (!pdfOnly || /\.pdf(?:[?#]|$)/i.test(link.url)) && !visited.has(link.url) && !isNonCalendarUrl(link.url) && !omitted.has(link.url) && !confirmedUnavailable.has(link.url));
           // Document links outrank detail pages; read linked annual programs even when the homepage only shows this month.
           queue.push(...links.slice(0, maxDocuments).map((link) => ({ ...link, score: link.score - candidate.depth * 10, depth: candidate.depth + 1 })));
         }
@@ -452,4 +669,4 @@ async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fe
   };
 }
 
-module.exports = { VERSION, monthFloor, parseDates, normalizeEvent, parseJsonLd, parseIcs, parseWordPress, parseCalendarLines, parseTivoliPdf, parseHtmlCalendar, discoverLinks, pdfLines, pdfText, fetchDocument, scrapeDeterministic };
+module.exports = { VERSION, monthFloor, parseDates, normalizeEvent, parseJsonLd, parseIcs, parseWordPress, parseCalendarLines, parseTivoliPdf, parseHtmlCalendar, discoverLinks, pdfLines, pdfText, pdfTextFile, fetchDocument, scrapeDeterministic, MAX_PDF_DOWNLOAD_BYTES, MAX_PDF_PAGES };

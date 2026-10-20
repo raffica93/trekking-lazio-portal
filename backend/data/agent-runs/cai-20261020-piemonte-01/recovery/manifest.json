@@ -1,0 +1,26 @@
+{
+  "generatedAt": "2026-10-20T11:39:23.391Z",
+  "projectRef": "snwzxegtqnnuvlawnpgl",
+  "currentExcursionsSha256": "41678e2494ff32d9a05ba717e97030f5e18dbcc9893bc60eb7d9d052128e340c",
+  "filter": "public.places status=published and coalesce(date_end,date)>=2026-10-01; compare source_id against current excursions[].id",
+  "counts": {
+    "dbActivePublished": 3296,
+    "currentFileIds": 2567,
+    "dbActivePublishedMatched": 2463,
+    "dbActivePublishedAbsentFromCurrent": 833,
+    "currentFileRecordsAbsentFromDb": 103
+  },
+  "reconciliation": "833 exact DB rows by requested date cutoff. This is one more than the earlier 832 estimate because current local source roma-50c69cb07e8d has dateEnd 2026-10-03 but its DB date_end is 2026-09-26, so it is not DB-active under coalesce(date_end,date).",
+  "files": {
+    "published-active-missing-from-current.json": {
+      "sha256": "91669c158c40354f6fbf69482bd6055fb6f4ffbe32cbad2e387fd6d0bdaa349e",
+      "bytes": 1153002,
+      "records": 833
+    },
+    "current-events-absent-from-db.json": {
+      "sha256": "eab2ec2a403785559dd8d4cfb3b697dfc020396dac730fff2711585ad7f2401b",
+      "bytes": 98571,
+      "records": 103
+    }
+  }
+}

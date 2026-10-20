@@ -23,13 +23,14 @@ function parseArgs(argv) {
   const runId = argv[runIndex + 1];
   if (runIndex < 1 || !/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,79}$/.test(runId || '')) throw new Error('Specify --run with a safe run ID (1-80 letters, numbers, underscores or hyphens)');
   const rest = argv.slice(1).filter((_, index) => index !== runIndex - 1 && index !== runIndex);
-  if (command !== 'init' && rest.length) throw new Error('Scrape options belong to init only');
+  const retryFailed = command === 'collect' && rest.length === 1 && rest[0] === '--retry-failed';
+  if (command !== 'init' && rest.length && !retryFailed) throw new Error('Scrape options belong to init only; collect accepts only --retry-failed');
   const { parseScrapeArgs } = require('../pipeline');
   if (command === 'init') {
     const parsed = parseScrapeArgs(rest);
     if (parsed.dryRun || parsed.help) throw new Error('Orchestration requires persisted files; use scrape directly for --dry-run/--help');
   }
-  return { command, runId, scrapeArgs: rest.length ? rest : ['--all'] };
+  return { command, runId, retryFailed, scrapeArgs: command === 'init' && rest.length ? rest : ['--all'] };
 }
 
 function coverageTasks(status) {
@@ -106,12 +107,28 @@ async function run({ argv = process.argv.slice(2), root = ROOT, runs = RUNS, col
     } else {
       state = JSON.parse(await fs.readFile(stateFile, 'utf8'));
       if (args.command === 'collect') {
-        if (state.files === 'ready' || state.database === 'completed') return state;
+        if (state.database === 'completed') return state;
+        if (state.files === 'ready' && !args.retryFailed) return state;
+        const retryableState = (state.collection === 'partial' && state.files === 'ready')
+          || (state.collection === 'failed' && state.files === 'pending' && Boolean(state.manifest));
+        if (args.retryFailed && !retryableState) {
+          throw new Error('Failed-source retry requires partial/ready state or a failed retry with a prior manifest');
+        }
+        let collectionArgs = state.scrapeArgs;
+        if (args.retryFailed) {
+          const sourceIds = state.sources.filter((source) => source.task === 'todo').map((source) => source.id);
+          if (!sourceIds.length) throw new Error('Failed-source retry found no enabled incomplete sources');
+          collectionArgs = [`--source=${sourceIds.join(',')}`];
+          const concurrencyIndex = state.scrapeArgs.indexOf('--concurrency');
+          if (concurrencyIndex >= 0 && state.scrapeArgs[concurrencyIndex + 1]) {
+            collectionArgs.push('--concurrency', state.scrapeArgs[concurrencyIndex + 1]);
+          }
+        }
         state.collection = 'running';
         state.files = 'pending';
         delete state.error;
-        await save('collection-started');
-        const result = await collect({ argv: state.scrapeArgs });
+        await save(args.retryFailed ? 'failed-source-retry-started' : 'collection-started');
+        const result = await collect({ argv: collectionArgs });
         if (!result.status) throw new Error('Collection did not produce a source report');
         state.sources = coverageTasks(result.status);
         if (result.hardFail) throw new Error('Collection has hard failures; resolve them before database import');

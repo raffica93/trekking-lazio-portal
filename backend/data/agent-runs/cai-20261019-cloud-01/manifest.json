@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261019-cloud-01",
+  "createdAt": "2026-10-19T18:24:36.011Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "1563ebbb8055bc98b1c3f603a52919e098d4223f37c1297d0f1a335fba5e2942"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "853a327b90fdb8fc3bec729711e084a4fcda6c0a9d8bd7fda458d1503c512e43"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "7f9aed86dc41ff85972c812164b4af9d9f211f89ec1192818bc4fbc45ddead57"
+    }
+  ]
+}
