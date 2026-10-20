@@ -2,7 +2,8 @@
 @import '@spartan-ng/brain/hlm-tailwind-preset.css';
 @import 'leaflet.markercluster/dist/MarkerCluster.css';
 
-.event-cluster { display: grid; place-items: center; box-sizing: border-box; border: 3px solid #fff; border-radius: 50%; background: #065f46; color: #fff; font: 700 14px/1 'IBM Plex Mono', monospace; box-shadow: 0 2px 8px #123f3455; cursor: pointer; }
+/* More specific than Leaflet's later .leaflet-marker-icon display:block rule. */
+.leaflet-marker-icon.event-cluster { display: grid; place-items: center; box-sizing: border-box; border: 3px solid #fff; border-radius: 50%; background: #065f46; color: #fff; font: 700 14px/1 'IBM Plex Mono', monospace; box-shadow: 0 2px 8px #123f3455; cursor: pointer; }
 .event-cluster:hover { background: #064e3b; }
 .event-cluster span { pointer-events: none; }
 .leaflet-marker-icon:focus-visible { outline: 3px solid #65a30d; outline-offset: 3px; }
