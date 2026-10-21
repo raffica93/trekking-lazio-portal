@@ -14,6 +14,11 @@ credenziali, `.env`, cookie e conversazioni personali restano fuori da Git.
 3. [Stato](STATE.json): fase attuale e riferimenti alla baseline verificata.
 4. [Passaggio di consegne](HANDOFF.md): istruzioni per la prossima sessione cloud.
 5. [Decisioni](DECISIONS.md): regole condivise da non riscoprire ogni volta.
+6. [Registro errori](FAILURES.json): fonti/fasi osservate, tentativi effettivi
+   quando noti, cooldown candidati e verifiche risolutive.
+7. [Avanzamento regionale](REGIONS.md): stato aggregato dell'ultimo snapshot,
+   con limiti e prossima regione da lavorare.
+8. [Soluzioni verificate](LEARNINGS.md): solo correzioni con test e commit.
 
 Completano il contesto `AGENTS.md`, `docs/orchestratore-cai.md`,
 `docs/cai-italia.md` e `docs/procedura-pdf-cai.md`.
@@ -36,15 +41,9 @@ non dimostra che una chat nuova possa recuperare il lavoro.
 
 ## Stato di questo passaggio
 
-Il piano e lo spazio operativo sono predisposti. La qualifica **full cloud** è
-ancora da eseguire: non sono stati corretti in questa revisione bootstrap,
-isolamento degli output o percorso d'importazione. Non avviare una raccolta
-nazionale come prova iniziale; usare il piccolo lotto previsto dal piano.
+Il checkpoint codice per errori, classificatore Mercury e filtro mappa è stato verificato offline e pubblicato al commit `3469923fe6c21e28f2182753b7b5c4aa528baa91`. La nuova chat cloud destinataria è `01a1604c-7018-7460-8316-df3c57dfd077`; i suoi dati di test live sintetici sono riferiti dall’utente e non sostituiscono il campione reale. Nessun batch o aggiornamento DB è stato eseguito in questo checkpoint. La mappa legge la popolazione Supabase pubblicata e corrente/futura, quindi non classificare soltanto il JSON statico. Procedere per regione e chiudere prima la coda Lombardia documentata in `REGIONS.md`.
 
-Baseline dati: commit `9919927`, run `cai-20261020-piemonte-01`, 3.337 ID unici.
-I sei hash del manifest coincidono con i blob Git del commit. Nel checkout Windows
-controllato, `core.autocrlf=true` cambia i byte: la verifica locale dei raw hash
-fallisce. Prima di importare serve una verifica positiva nel checkout effettivo.
+Baseline dati storica: commit `9919927`, run `cai-20261020-piemonte-01`, 3.337 ID unici; import storico +40 Piemonte. Non è copertura nazionale completa. Il catalogo in checkout è invariato rispetto al suo hash `1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877`.
 
 ## Responsabilità
 
@@ -52,6 +51,8 @@ fallisce. Prima di importare serve una verifica positiva nel checkout effettivo.
   registra il prossimo passo. È l'unico autore di `STATE.json` e `HANDOFF.md`.
 - `cai-collector`, `gpt-6-luna`: fonti, parser, raccolta, file ed evidenze del lotto.
 - `cai-importer`, `gpt-6-luna`: verifica del passaggio file/DB, import e ricevuta.
+- La classificazione Mercury usa solo `inception/mercury-decide` e l'endpoint
+  Decisions documentato. La sessione aggiornata separata ha riferito una smoke sintetica live riuscita; questo checkout non ha effettuato chiamate live e il relativo artefatto di 12 fixture non è qui.
 
 Non duplicare qui il catalogo o l'intero stato di tutte le fonti: usare riferimenti
 ai lotti. I modelli per sessioni e ricevute sono in [templates](templates/).
