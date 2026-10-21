@@ -12,6 +12,9 @@ const {
   attachSectionMetadata,
   slugify,
   toPlaceRow,
+  classificationToRow,
+  prepareClassifications,
+  upsertClassifications,
   verifyImportManifest,
   manifestArgument,
   main
@@ -83,6 +86,7 @@ function createFakeSupabase({
   const inserts = [];
   const updates = [];
   const selects = [];
+  const classificationUpserts = [];
   const rows = existingRows || existingSourceIds.map((source_id) => ({
     source_id,
     latitude: 42.473,
@@ -94,15 +98,16 @@ function createFakeSupabase({
     inserts,
     updates,
     selects,
+    classificationUpserts,
     from(table) {
-      assert.equal(table, 'places');
+      assert.ok(['places', 'place_classifications'].includes(table));
       return {
         select(columns) {
           return {
             async in(column, ids) {
               selects.push({ columns, column, ids: [...ids] });
               if (selectError) return { data: null, error: selectError };
-              const data = rows.filter((row) => ids.includes(row.source_id));
+              const data = table === 'places' ? rows.filter((row) => ids.includes(row.source_id)) : [];
               return { data, error: null };
             }
           };
@@ -110,6 +115,7 @@ function createFakeSupabase({
         async insert(batch) {
           inserts.push(batch);
           if (insertError) return { data: null, error: insertError };
+          rows.push(...batch.map((row) => ({ ...row, id: `fake-${row.source_id}` })));
           return { data: batch, error: null };
         },
         update(patch) {
@@ -117,12 +123,15 @@ function createFakeSupabase({
             async eq(column, value) {
               updates.push({ patch, column, value });
               if (updateError) return { data: null, error: updateError };
+              for (const row of rows) if (row[column] === value) Object.assign(row, patch);
               return { data: [patch], error: null };
             }
           };
         },
         upsert() {
-          throw new Error('import must insert new rows, not upsert');
+          if (table === 'places') throw new Error('places import must insert new rows, not upsert');
+          classificationUpserts.push(arguments[0]);
+          return Promise.resolve({ data: arguments[0], error: null });
         }
       };
     }
@@ -177,6 +186,58 @@ test('toPlaceRow can import places as published', () => {
   assert.equal(row.source_id, 'roma-2026-09-monte-terminillo');
 });
 
+test('classification contract is persisted separately and is keyed to the same source_id', async () => {
+  const event = sampleExcursion({
+    classification: {
+      decision: 'trekking', category: 'a piedi', confidence: 0.9, probability: 0.95,
+      rationale: 'Percorso escursionistico', evidenceOriginal: 'Escursione al rifugio',
+      source_id: 'roma-2026-09-monte-terminillo', fingerprint: 'sha256:fixture',
+      modelRequested: null, responseModel: null, modelAttested: false,
+      method: 'rules-v1', policyVersion: 'cai-trekking-v1', modelVersion: null
+    }
+  });
+  const row = classificationToRow(event.id, event.classification);
+  assert.deepEqual(Object.keys(row).sort(), [
+    'category', 'confidence', 'decision', 'evidence_original', 'fingerprint', 'method',
+    'model_attested', 'model_requested', 'model_version', 'policy_version', 'probability',
+    'rationale', 'response_model', 'source_id'
+  ]);
+  assert.equal(row.decision, 'trekking');
+  const unverifiedMercury = classificationToRow(event.id, {
+    ...event.classification,
+    decision: 'da_verificare', category: 'altro', method: 'mercury-decide',
+    modelRequested: 'inception/mercury-decide', responseModel: null,
+    modelAttested: false, modelVersion: null
+  });
+  assert.equal(unverifiedMercury.model_requested, 'inception/mercury-decide');
+  assert.equal(unverifiedMercury.response_model, null);
+  assert.equal(unverifiedMercury.model_attested, false);
+  assert.throws(() => classificationToRow(event.id, {
+    ...event.classification,
+    method: 'mercury-decide', modelRequested: 'inception/mercury-decide',
+    responseModel: 'other/model', modelAttested: true, modelVersion: 'other/model'
+  }), /inconsistent Mercury model attestation/);
+  const supabase = createFakeSupabase();
+  assert.equal(await upsertClassifications({ supabase, excursions: [event] }), 1);
+  assert.equal(supabase.classificationUpserts[0][0].source_id, event.id);
+  assert.throws(() => classificationToRow(event.id, {
+    ...event.classification, source_id: 'different-source'
+  }), /invalid classification/);
+  assert.throws(() => classificationToRow(event.id, {
+    ...event.classification, decision: 'include'
+  }), /invalid classification/);
+  assert.throws(() => classificationToRow(event.id, {
+    ...event.classification, error: 'provider unavailable'
+  }), /error or invalid classification response/);
+  assert.deepEqual(prepareClassifications([{
+    ...event,
+    classification: { error: 'provider unavailable', decision: 'da_verificare' }
+  }]), {
+    rows: [],
+    skipped: [{ source_id: event.id, reason: `Excursion ${event.id} has an error or invalid classification response` }]
+  });
+});
+
 test('toPlaceRow drops durations that overflow numeric(5,2)', () => {
   const ok = toPlaceRow(sampleExcursion({ durationHours: 5.5 }), 'published');
   assert.equal(ok.duration_hours, 5.5);
@@ -204,7 +265,10 @@ test('importNewPlaces inserts missing source_id rows as published', async () => 
     status: 'published'
   });
 
-  assert.deepEqual(result, { inserted: 1, updated: 0, skipped: 0, skippedUnlocated: 0, status: 'published' });
+  assert.equal(result.inserted, 1);
+  assert.equal(result.updated, 0);
+  assert.equal(result.skipped, 0);
+  assert.equal(result.status, 'published');
   assert.equal(supabase.inserts.length, 1);
   assert.equal(supabase.inserts[0][0].source_id, excursion.id);
   assert.equal(supabase.inserts[0][0].status, 'published');
@@ -220,7 +284,9 @@ test('importNewPlaces skips source_id values already in the database', async () 
     status: 'published'
   });
 
-  assert.deepEqual(result, { inserted: 0, updated: 0, skipped: 1, skippedUnlocated: 0, status: 'published' });
+  assert.equal(result.inserted, 0);
+  assert.equal(result.updated, 0);
+  assert.equal(result.skipped, 1);
   assert.deepEqual(supabase.inserts, []);
 });
 
@@ -239,7 +305,9 @@ test('importNewPlaces inserts only the new rows in a mixed batch', async () => {
     status: 'published'
   });
 
-  assert.deepEqual(result, { inserted: 1, updated: 0, skipped: 1, skippedUnlocated: 0, status: 'published' });
+  assert.equal(result.inserted, 1);
+  assert.equal(result.updated, 0);
+  assert.equal(result.skipped, 1);
   assert.equal(supabase.inserts.length, 1);
   assert.equal(supabase.inserts[0].length, 1);
   assert.equal(supabase.inserts[0][0].source_id, fresh.id);
@@ -280,7 +348,9 @@ test('importNewPlaces includes excursions without coordinates in the list', asyn
     status: 'published'
   });
 
-  assert.deepEqual(result, { inserted: 2, updated: 0, skipped: 0, skippedUnlocated: 0, status: 'published' });
+  assert.equal(result.inserted, 2);
+  assert.equal(result.updated, 0);
+  assert.equal(result.skipped, 0);
   assert.equal(supabase.inserts.length, 1);
   assert.equal(supabase.inserts[0].length, 2);
   assert.equal(supabase.inserts[0][0].source_id, located.id);
@@ -376,7 +446,9 @@ test('importNewPlaces updates existing Rome fallback coordinates', async () => {
     status: 'published'
   });
 
-  assert.deepEqual(result, { inserted: 0, updated: 1, skipped: 0, skippedUnlocated: 0, status: 'published' });
+  assert.equal(result.inserted, 0);
+  assert.equal(result.updated, 1);
+  assert.equal(result.skipped, 0);
   assert.deepEqual(supabase.inserts, []);
   assert.equal(supabase.updates.length, 1);
   assert.equal(supabase.updates[0].column, 'source_id');
@@ -415,4 +487,117 @@ test('importNewPlaces fills coordinates that were previously missing', async () 
     longitude: 13.121,
     coordinates_quality: 'massif'
   });
+});
+
+function readyRunFixture(t) {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'cai-import-ready-'));
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const runDir = path.join(root, 'backend/data/agent-runs/test-run');
+  fs.mkdirSync(runDir, { recursive: true });
+  const files = {
+    data: path.join(root, 'backend/data/excursions.json'),
+    registry: path.join(root, 'backend/data/cai-sections.json'),
+    status: path.join(root, 'backend/data/scrape-status.json'),
+    repoRoot: root
+  };
+  fs.mkdirSync(path.dirname(files.data), { recursive: true });
+  fs.writeFileSync(files.data, JSON.stringify({ excursions: [sampleExcursion()] }));
+  fs.writeFileSync(files.registry, JSON.stringify({ sections: [] }));
+  fs.writeFileSync(files.status, JSON.stringify({ sources: [] }));
+  const manifestPath = path.join(runDir, 'manifest.json');
+  const manifest = {
+    version: 1,
+    runId: 'test-run',
+    createdAt: '2026-10-19T00:00:00Z',
+    files: Object.entries(files).filter(([key]) => key !== 'repoRoot').map(([, file]) => ({
+      path: path.relative(root, file).split(path.sep).join('/'),
+      sha256: crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex')
+    }))
+  };
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest));
+  fs.writeFileSync(path.join(runDir, 'state.json'), JSON.stringify({
+    runId: 'test-run', files: 'ready', manifest: 'backend/data/agent-runs/test-run/manifest.json'
+  }));
+  return { root, runDir, files, manifestPath };
+}
+
+function resealFixture(fixture) {
+  const manifest = JSON.parse(fs.readFileSync(fixture.manifestPath, 'utf8'));
+  for (const entry of manifest.files) {
+    const file = path.resolve(fixture.root, entry.path);
+    entry.sha256 = crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+  }
+  fs.writeFileSync(fixture.manifestPath, JSON.stringify(manifest));
+}
+
+test('main requires a ready state and verified manifest before creating a database client', async (t) => {
+  const fixture = readyRunFixture(t);
+  let factoryCalls = 0;
+  const factory = () => { factoryCalls += 1; return createFakeSupabase(); };
+  fs.writeFileSync(fixture.files.data, JSON.stringify({ excursions: [] }));
+  await assert.rejects(main({
+    argv: ['--manifest', fixture.manifestPath],
+    env: { SUPABASE_IMPORT_STATUS: 'published', SUPABASE_URL: 'https://project.supabase.co', SUPABASE_SERVICE_ROLE_KEY: 'test' },
+    supabaseFactory: factory,
+    files: fixture.files
+  }), /checksum mismatch/);
+  assert.equal(factoryCalls, 0);
+  assert.equal(fs.existsSync(path.join(fixture.runDir, 'import-receipt.json')), false);
+
+  const fresh = readyRunFixture(t);
+  fs.writeFileSync(path.join(fresh.runDir, 'state.json'), JSON.stringify({
+    runId: 'test-run', files: 'pending', manifest: 'backend/data/agent-runs/test-run/manifest.json'
+  }));
+  await assert.rejects(main({
+    argv: ['--manifest', fresh.manifestPath],
+    env: { SUPABASE_IMPORT_STATUS: 'published', SUPABASE_URL: 'https://project.supabase.co', SUPABASE_SERVICE_ROLE_KEY: 'test' },
+    supabaseFactory: factory,
+    files: fresh.files
+  }), /files=ready/);
+  assert.equal(factoryCalls, 0);
+});
+
+test('main imports a sealed fixture and writes a verifiable receipt after reconciliation', async (t) => {
+  const fixture = readyRunFixture(t);
+  const supabase = createFakeSupabase();
+  let factoryCalls = 0;
+  const factory = () => { factoryCalls += 1; return supabase; };
+  const result = await main({
+    argv: ['--manifest', fixture.manifestPath],
+    env: { SUPABASE_IMPORT_STATUS: 'published', SUPABASE_URL: 'https://project.supabase.co', SUPABASE_SERVICE_ROLE_KEY: 'test' },
+    supabaseFactory: factory,
+    files: fixture.files,
+    now: () => '2026-10-20T12:00:00.000Z'
+  });
+  assert.equal(factoryCalls, 1);
+  assert.deepEqual({ inserted: result.inserted, updated: result.updated, skipped: result.skipped, projectRef: result.projectRef }, { inserted: 1, updated: 0, skipped: 0, projectRef: 'project' });
+  assert.deepEqual({ expectedSourceIds: result.verification.expectedSourceIds, matchedSourceIds: result.verification.matchedSourceIds, publishedSourceIds: result.verification.publishedSourceIds, missingSourceIds: result.verification.missingSourceIds }, { expectedSourceIds: 1, matchedSourceIds: 1, publishedSourceIds: 1, missingSourceIds: [] });
+  const receipt = JSON.parse(fs.readFileSync(path.join(fixture.runDir, 'import-receipt.json'), 'utf8'));
+  const verification = JSON.parse(fs.readFileSync(path.join(fixture.runDir, 'db-verification.json'), 'utf8'));
+  assert.deepEqual({ status: receipt.status, runId: receipt.runId, inserted: receipt.inserted, projectRef: receipt.projectRef, registrySyncPerformed: receipt.registrySyncPerformed }, { status: 'completed', runId: 'test-run', inserted: 1, projectRef: 'project', registrySyncPerformed: true });
+  assert.equal(receipt.verification.protectedFieldsChanged, 0);
+  assert.deepEqual(verification.sourceIds, ['roma-2026-09-monte-terminillo']);
+});
+
+test('invalid classification responses are skipped without classification upserts', async (t) => {
+  const fixture = readyRunFixture(t);
+  const payload = JSON.parse(fs.readFileSync(fixture.files.data, 'utf8'));
+  payload.excursions[0].classification = { error: 'provider unavailable', decision: 'da_verificare' };
+  fs.writeFileSync(fixture.files.data, JSON.stringify(payload));
+  resealFixture(fixture);
+  let factoryCalls = 0;
+  const supabase = createFakeSupabase();
+  const result = await main({
+    argv: ['--manifest', fixture.manifestPath],
+    env: { SUPABASE_IMPORT_STATUS: 'published', SUPABASE_URL: 'https://project.supabase.co', SUPABASE_SERVICE_ROLE_KEY: 'test' },
+    supabaseFactory: () => { factoryCalls += 1; return supabase; },
+    files: fixture.files
+  });
+  assert.equal(factoryCalls, 1);
+  assert.equal(result.inserted, 1);
+  assert.equal(result.classifications, 0);
+  assert.equal(result.skippedClassifications, 1);
+  assert.deepEqual(supabase.classificationUpserts, []);
+  const receipt = JSON.parse(fs.readFileSync(path.join(fixture.runDir, 'import-receipt.json'), 'utf8'));
+  assert.equal(receipt.skippedClassifications, 1);
 });

@@ -77,6 +77,7 @@ async function runScrape({
   argv = process.argv.slice(2),
   dataPath = outputPath,
   statusFile = statusPath,
+  copyFrontend = dataPath === outputPath,
   sources = SOURCES,
   scrapeAllImpl = scrapeAll,
   log = console
@@ -109,7 +110,7 @@ async function runScrape({
     dryRun: args.dryRun,
     log,
     statusFile,
-    copyFrontend: statusFile === statusPath
+    copyFrontend: copyFrontend && statusFile === statusPath
   });
 
   const hardFail = Boolean(args.strict && (result.hardFailures || []).length > 0);
@@ -125,7 +126,7 @@ async function runScrape({
   }
 
   await writeJsonAtomic(dataPath, payload);
-  await copyToFrontend('excursions.json', payload);
+  if (copyFrontend) await copyToFrontend('excursions.json', payload);
   log.log(`Updated cache with ${payload.excursions.length} upcoming excursions`);
   return { args, result, wrote: true, payload, status, hardFail };
 }

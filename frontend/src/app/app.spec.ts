@@ -63,6 +63,25 @@ describe('App', () => {
     TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({ excursions: [] });
   });
 
+  it('keeps unclassified snapshot events in the calendar and excludes them from map pins', async () => {
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({ excursions: [
+      {
+        id: 'classified-trek', title: 'Sentiero confermato', date: dateInMonth(0, 1), category: 'E',
+        link: 'https://cai.it/trek', organizer: 'CAI Roma', location: 'Roma', cost: '', time: '',
+        classification: { decision: 'trekking', category: 'a piedi', confidence: 0.9, probability: 0.95, rationale: 'Sentiero', evidenceOriginal: 'Escursione', fingerprint: 'fp-1', method: 'rules-v1', modelRequested: null, responseModel: null, modelAttested: false, policyVersion: 'cai-v1', modelVersion: null }
+      },
+      { id: 'unclassified', title: 'Evento senza classificazione', date: dateInMonth(0, 2), category: 'E', link: 'https://cai.it/unknown', organizer: 'CAI Roma', location: 'Roma', cost: '', time: '' }
+    ] });
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const app = fixture.componentInstance;
+    expect(app.excursions.map((event) => event.id)).toEqual(['classified-trek', 'unclassified']);
+    expect(app.mapExcursions.map((event) => event.id)).toEqual(['classified-trek']);
+  });
+
   it('should switch views, filter by difficulty and secure detail links', async () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();

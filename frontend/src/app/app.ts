@@ -59,6 +59,7 @@ export class App implements OnInit {
   
   allExcursions: Excursion[] = [];
   excursions: Excursion[] = [];
+  mapExcursions: Excursion[] = [];
   loading = true;
   loadError = false;
   usingSnapshot = false;
@@ -264,6 +265,9 @@ export class App implements OnInit {
 
   private applyFilters() {
     this.excursions = applyFilters(this.allExcursions, this.filters);
+    // Only explicit, current trekking classifications are eligible for map pins.
+    // Calendar cards remain visible when the static snapshot has no classification.
+    this.mapExcursions = this.excursions.filter((excursion) => excursion.classification?.decision === 'trekking');
     this.excursionList?.nativeElement.scrollTo?.({ top: 0 });
     if (this.selectedId && !this.excursions.some(excursion => excursion.id === this.selectedId)) {
       this.selectedId = null;

@@ -1,6 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
+const { execFileSync } = require('node:child_process');
 const { createClient } = require('@supabase/supabase-js');
 const {
   PRECISE_COORD_QUALITY,
@@ -73,7 +74,7 @@ async function existingPlaces(supabase, sourceIds) {
   for (const batch of chunk(sourceIds)) {
     const { data, error } = await supabase
       .from('places')
-      .select('source_id, latitude, longitude, coordinates_quality, status, organizer_region, cai_section_id')
+      .select('source_id, latitude, longitude, coordinates_quality, status, organizer_region, cai_section_id, title, cover_image_path')
       .in('source_id', batch);
     if (error) throw error;
     for (const row of data || []) {
@@ -107,6 +108,7 @@ function coordPatchForExisting(existing, excursion) {
 }
 
 async function importNewPlaces({ supabase, excursions, status }) {
+  assertUniqueSourceIds(excursions);
   let skippedUnlocated = 0;
   const sourceIds = excursions.map((excursion) => textOrNull(excursion.id)).filter(Boolean);
   const existing = await existingPlaces(supabase, sourceIds);
@@ -150,11 +152,210 @@ async function importNewPlaces({ supabase, excursions, status }) {
 
   return {
     inserted: toInsert.length,
+    insertedSourceIds: toInsert.map((row) => row.source_id),
+    existingSourceIds: [...existing.keys()],
+    updatedSourceIds: toUpdate.map((item) => item.sourceId),
+    existingProtectedFields: Object.fromEntries([...existing].map(([sourceId, row]) => [sourceId, {
+      title: row.title ?? null,
+      status: row.status ?? null,
+      cover_image_path: row.cover_image_path ?? null
+    }])),
     updated: toUpdate.length,
     skipped: existing.size - toUpdate.length,
     skippedUnlocated,
     status
   };
+}
+
+function assertUniqueSourceIds(excursions) {
+  if (!Array.isArray(excursions)) throw new Error('Expected an excursions array');
+  const seen = new Set();
+  for (const excursion of excursions) {
+    const sourceId = textOrNull(excursion?.id);
+    if (!sourceId) throw new Error('Every excursion needs a non-empty source_id');
+    if (seen.has(sourceId)) throw new Error(`Duplicate source_id in import files: ${sourceId}`);
+    seen.add(sourceId);
+  }
+}
+
+function validDateOnly(value) {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const date = new Date(`${value}T00:00:00.000Z`);
+  return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === value;
+}
+
+function validateImportEvents(excursions, status) {
+  assertUniqueSourceIds(excursions);
+  return excursions.map((excursion) => {
+    if (!validDateOnly(excursion.date)
+      || (excursion.dateEnd != null
+        && (!validDateOnly(excursion.dateEnd) || excursion.dateEnd < excursion.date))) {
+      throw new Error(`Excursion ${excursion.id} has an invalid date range`);
+    }
+    return toPlaceRow(excursion, status);
+  });
+}
+
+const CLASSIFICATION_DECISIONS = new Set(['trekking', 'non_trekking', 'da_verificare']);
+const CLASSIFICATION_CATEGORIES = new Set([
+  'a piedi', 'ciaspole', 'alpinismo/ferrata', 'bici', 'sci',
+  'sociale/culturale', 'corso/riunione', 'altro'
+]);
+const CLASSIFICATION_METHODS = new Set(['rules-v1', 'mercury-decide']);
+
+function classificationToRow(sourceId, classification) {
+  if (!classification || typeof classification !== 'object') return null;
+  if (Object.hasOwn(classification, 'error') || classification.valid === false) {
+    throw new Error(`Excursion ${sourceId} has an error or invalid classification response`);
+  }
+  const {
+    decision, category, confidence, probability, method,
+    modelRequested,
+    responseModel = null,
+    modelAttested,
+    policyVersion, modelVersion, rationale, evidenceOriginal,
+    fingerprint
+  } = classification;
+  if (method === 'mercury-decide'
+    && typeof rationale === 'string'
+    && rationale.startsWith('Classificazione automatica non disponibile;')) {
+    throw new Error(`Excursion ${sourceId} has a Mercury provider failure, not a classification result`);
+  }
+  const validProbability = (value) => value === null
+    || (typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= 1);
+  if (!CLASSIFICATION_DECISIONS.has(decision)
+    || classification.source_id !== sourceId
+    || !CLASSIFICATION_CATEGORIES.has(category)
+    || !CLASSIFICATION_METHODS.has(method)
+    || typeof policyVersion !== 'string' || !policyVersion.trim()
+    || (modelVersion !== null && (typeof modelVersion !== 'string' || !modelVersion.trim()))
+    || (typeof rationale !== 'string' || !rationale.trim())
+    || (typeof evidenceOriginal !== 'string' || !evidenceOriginal.trim())
+    || typeof fingerprint !== 'string' || !fingerprint.trim()
+    || !validProbability(confidence) || !validProbability(probability)
+    || (modelRequested !== null && (typeof modelRequested !== 'string' || !modelRequested.trim()))
+    || (responseModel !== null && (typeof responseModel !== 'string' || !responseModel.trim()))
+    || typeof modelAttested !== 'boolean'
+    || (modelAttested && responseModel == null)
+    || (!modelAttested && responseModel !== null)) {
+    throw new Error(`Excursion ${sourceId} has an invalid classification`);
+  }
+  if (method === 'mercury-decide' && modelRequested !== 'inception/mercury-decide') {
+    throw new Error(`Excursion ${sourceId} has an unexpected requested Mercury model`);
+  }
+  if (method === 'mercury-decide'
+    && (responseModel !== null && responseModel !== 'inception/mercury-decide'
+      || modelAttested !== (responseModel === 'inception/mercury-decide')
+      || modelVersion !== (modelAttested ? 'inception/mercury-decide' : null))) {
+    throw new Error(`Excursion ${sourceId} has inconsistent Mercury model attestation`);
+  }
+  if (method === 'rules-v1' && (modelRequested !== null || responseModel !== null || modelAttested || modelVersion !== null)) {
+    throw new Error(`Excursion ${sourceId} has unexpected model metadata for rules-v1`);
+  }
+  return {
+    source_id: sourceId,
+    decision,
+    category: category.trim(),
+    confidence,
+    probability,
+    rationale: rationale.trim(),
+    evidence_original: evidenceOriginal.trim(),
+    fingerprint: fingerprint.trim(),
+    method,
+    model_requested: modelRequested,
+    response_model: responseModel,
+    model_attested: modelAttested,
+    policy_version: policyVersion.trim(),
+    model_version: modelVersion?.trim() ?? null
+  };
+}
+
+function prepareClassifications(excursions) {
+  const rows = [];
+  const skipped = [];
+  for (const excursion of excursions) {
+    if (!excursion.classification || typeof excursion.classification !== 'object') continue;
+    try {
+      const row = classificationToRow(textOrNull(excursion.id), excursion.classification);
+      if (row) rows.push(row);
+    } catch (error) {
+      skipped.push({ source_id: textOrNull(excursion.id), reason: error.message });
+    }
+  }
+  return { rows, skipped };
+}
+
+async function upsertClassifications({ supabase, excursions = [], rows = prepareClassifications(excursions).rows }) {
+  for (const batch of chunk(rows)) {
+    const { error } = await supabase.from('place_classifications').upsert(batch, { onConflict: 'source_id' });
+    if (error) throw error;
+  }
+  return rows.length;
+}
+
+async function reconcileClassifications({ supabase, excursions = [], rows = prepareClassifications(excursions).rows }) {
+  const expected = rows;
+  const fields = 'source_id, decision, category, confidence, probability, rationale, evidence_original, fingerprint, method, model_requested, response_model, model_attested, policy_version, model_version';
+  const found = new Map();
+  for (const batch of chunk(expected.map((row) => row.source_id))) {
+    const { data, error } = await supabase.from('place_classifications').select(fields).in('source_id', batch);
+    if (error) throw error;
+    for (const row of data || []) found.set(row.source_id, row);
+  }
+  const mismatchedSourceIds = [];
+  const fieldsToCompare = fields.split(', ');
+  for (const expectedRow of expected) {
+    const row = found.get(expectedRow.source_id);
+    if (!row || fieldsToCompare.some((field) => (row[field] ?? null) !== (expectedRow[field] ?? null))) {
+      mismatchedSourceIds.push(expectedRow.source_id);
+    }
+  }
+  return {
+    expected: expected.length,
+    matched: expected.length - mismatchedSourceIds.length,
+    mismatchedSourceIds
+  };
+}
+
+async function reconcileImportedPlaces({ supabase, excursions, imported, status }) {
+  const expected = validateImportEvents(excursions, status);
+  const expectedById = new Map(expected.map((row) => [row.source_id, row]));
+  const after = await existingPlaces(supabase, [...expectedById.keys()]);
+  const missingSourceIds = [...expectedById.keys()].filter((id) => !after.has(id));
+  const insertedIds = new Set(imported.insertedSourceIds);
+  const protectedFieldsChanged = [];
+  const insertedFieldMismatches = [];
+  for (const [sourceId, row] of after) {
+    const before = imported.existingProtectedFields[sourceId];
+    if (before && (before.title !== (row.title ?? null)
+      || before.status !== (row.status ?? null)
+      || before.cover_image_path !== (row.cover_image_path ?? null))) {
+      protectedFieldsChanged.push(sourceId);
+    }
+    if (insertedIds.has(sourceId)) {
+      const expectedRow = expectedById.get(sourceId);
+      if (row.title !== expectedRow.title || row.status !== status
+        || (row.cover_image_path ?? null) !== null) insertedFieldMismatches.push(sourceId);
+    }
+  }
+  const matchedRows = [...after.values()];
+  const result = {
+    expectedSourceIds: expectedById.size,
+    matchedSourceIds: matchedRows.length,
+    publishedSourceIds: matchedRows.filter((row) => row.status === 'published').length,
+    draftSourceIds: matchedRows.filter((row) => row.status === 'draft').length,
+    missingSourceIds,
+    protectedFieldsChanged,
+    insertedFieldMismatches
+  };
+  if (missingSourceIds.length || protectedFieldsChanged.length || insertedFieldMismatches.length) {
+    throw new Error(`Import reconciliation failed: ${JSON.stringify({
+      missing: missingSourceIds.length,
+      protectedFieldsChanged: protectedFieldsChanged.length,
+      insertedFieldMismatches: insertedFieldMismatches.length
+    })}`);
+  }
+  return result;
 }
 
 function toPlaceRow(excursion, status) {
@@ -275,7 +476,8 @@ function excursionsFromPayload(payload) {
 function verifyImportManifest(manifestFile, requiredFiles = [DATA_FILE], repoRoot = REPO_ROOT) {
   if (!manifestFile) throw new Error('An import manifest path is required');
   const manifestPath = path.resolve(manifestFile);
-  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  const manifestBytes = fs.readFileSync(manifestPath);
+  const manifest = JSON.parse(manifestBytes.toString('utf8'));
   if (manifest.version !== 1) throw new Error('Import manifest version must be 1');
   if (typeof manifest.runId !== 'string' || !manifest.runId.trim()
     || typeof manifest.createdAt !== 'string' || !Number.isFinite(Date.parse(manifest.createdAt))) {
@@ -297,6 +499,7 @@ function verifyImportManifest(manifestFile, requiredFiles = [DATA_FILE], repoRoo
     if (relativePath === '..' || relativePath.startsWith(`..${path.sep}`) || path.isAbsolute(relativePath)) {
       throw new Error(`Manifest path must stay inside the repository: ${entry.path}`);
     }
+    if (verified.has(file)) throw new Error(`Import manifest contains a duplicate file path: ${entry.path}`);
     if (!fs.statSync(file).isFile()) throw new Error(`Manifest file is not a regular file: ${entry.path}`);
     const bytes = fs.readFileSync(file);
     const actual = crypto.createHash('sha256').update(bytes).digest('hex');
@@ -311,7 +514,13 @@ function verifyImportManifest(manifestFile, requiredFiles = [DATA_FILE], repoRoo
       throw new Error(`Import manifest does not cover required file: ${path.resolve(requiredFile)}`);
     }
   }
-  return { files: verified.size, manifestPath, snapshots: verified };
+  return {
+    files: verified.size,
+    manifestPath,
+    manifest,
+    manifestSha256: crypto.createHash('sha256').update(manifestBytes).digest('hex'),
+    snapshots: verified
+  };
 }
 
 function manifestArgument(argv = process.argv.slice(2), env = process.env) {
@@ -323,41 +532,128 @@ function manifestArgument(argv = process.argv.slice(2), env = process.env) {
   return env.SUPABASE_IMPORT_MANIFEST || null;
 }
 
-async function main({ argv = process.argv.slice(2), env = process.env } = {}) {
-  const manifestPath = manifestArgument(argv, env);
-  let snapshots = null;
-  if (manifestPath) {
-    const requiredFiles = [DATA_FILE, REGISTRY_FILE, STATUS_FILE];
-    const result = verifyImportManifest(manifestPath, requiredFiles);
-    snapshots = result.snapshots;
-    console.log(`Verified ${result.files} source file checksums from ${result.manifestPath}`);
+function verifyReadyRunState({ manifest, manifestPath, repoRoot = REPO_ROOT }) {
+  const statePath = path.join(path.dirname(manifestPath), 'state.json');
+  const state = JSON.parse(fs.readFileSync(statePath, 'utf8'));
+  const expectedManifest = path.relative(repoRoot, manifestPath).split(path.sep).join('/');
+  const declaredManifest = typeof state.manifest === 'string'
+    ? path.resolve(repoRoot, state.manifest)
+    : null;
+  if (state.runId !== manifest.runId) {
+    throw new Error('Import manifest runId does not match adjacent state.json');
   }
+  if (state.files !== 'ready') {
+    throw new Error('Database import requires files=ready in adjacent state.json');
+  }
+  if (!declaredManifest || declaredManifest !== path.resolve(manifestPath)) {
+    throw new Error(`state.json does not reference the verified manifest: ${expectedManifest}`);
+  }
+  return state;
+}
+
+function projectRefFromUrl(value) {
+  try {
+    const host = new URL(value).hostname;
+    return host.endsWith('.supabase.co') ? host.slice(0, -'.supabase.co'.length) : null;
+  } catch {
+    return null;
+  }
+}
+
+function sourceCommit(repoRoot = REPO_ROOT) {
+  try {
+    return execFileSync('git', ['rev-parse', 'HEAD'], { cwd: repoRoot, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim() || null;
+  } catch {
+    return null;
+  }
+}
+
+function writeJsonAtomic(file, value) {
+  const temporary = `${file}.${process.pid}.${crypto.randomBytes(6).toString('hex')}.tmp`;
+  fs.writeFileSync(temporary, `${JSON.stringify(value, null, 2)}\n`, { flag: 'wx' });
+  fs.renameSync(temporary, file);
+}
+
+function buildImportReceipt({ manifest, manifestPath, manifestSha256, projectRef, imported, verification, classificationVerification, skippedClassifications = [], registrySyncPerformed, repoRoot = REPO_ROOT, verifiedAt = new Date().toISOString() }) {
+  return {
+    schemaVersion: 1,
+    status: 'completed',
+    runId: manifest.runId,
+    projectRef,
+    method: 'supabase-js',
+    sourceCommit: sourceCommit(repoRoot),
+    manifestPath: path.relative(repoRoot, manifestPath).split(path.sep).join('/'),
+    manifestSha256,
+    verifiedAt,
+    verificationEvidencePath: path.relative(repoRoot, path.join(path.dirname(manifestPath), 'db-verification.json')).split(path.sep).join('/'),
+    inserted: imported.inserted,
+    existingPreserved: imported.existingSourceIds.length,
+    updatedMetadata: imported.updated,
+    classifications: classificationVerification.expected,
+    skippedClassifications: skippedClassifications.length,
+    registrySyncPerformed,
+    verification: {
+      expectedSourceIds: verification.expectedSourceIds,
+      matchedSourceIds: verification.matchedSourceIds,
+      publishedSourceIds: verification.publishedSourceIds,
+      draftSourceIds: verification.draftSourceIds,
+      missingSourceIds: verification.missingSourceIds.length,
+      protectedFieldsChanged: verification.protectedFieldsChanged.length,
+      insertedFieldMismatches: verification.insertedFieldMismatches.length
+    },
+    classificationVerification: {
+      expected: classificationVerification.expected,
+      matched: classificationVerification.matched,
+      mismatched: classificationVerification.mismatchedSourceIds.length,
+      skipped: skippedClassifications
+    },
+    remoteReceiptCommit: null
+  };
+}
+
+async function main({
+  argv = process.argv.slice(2),
+  env = process.env,
+  supabaseFactory = createClient,
+  files = { data: DATA_FILE, registry: REGISTRY_FILE, status: STATUS_FILE, repoRoot: REPO_ROOT },
+  now = () => new Date().toISOString()
+} = {}) {
+  const status = importStatus(env);
+  const manifestPath = manifestArgument(argv, env);
+  if (!manifestPath) throw new Error('A verified import manifest is required; pass --manifest <path>');
+  const requiredFiles = [files.data, files.registry, files.status];
+  const verified = verifyImportManifest(manifestPath, requiredFiles, files.repoRoot);
+  const snapshots = verified.snapshots;
+  const runState = verifyReadyRunState({ manifest: verified.manifest, manifestPath: verified.manifestPath, repoRoot: files.repoRoot });
+  console.log(`Verified ${verified.files} source file checksums from ${verified.manifestPath}`);
 
   // Parse and validate the exact verified bytes before any network client is created.
   const excursionsPayload = snapshots
-    ? JSON.parse(snapshots.get(path.resolve(DATA_FILE)).toString('utf8'))
-    : JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+    ? JSON.parse(snapshots.get(path.resolve(files.data)).toString('utf8'))
+    : JSON.parse(fs.readFileSync(files.data, 'utf8'));
   const excursions = excursionsFromPayload(excursionsPayload);
   const registry = snapshots
-    ? JSON.parse(snapshots.get(path.resolve(REGISTRY_FILE)).toString('utf8'))
-    : fs.existsSync(REGISTRY_FILE) ? JSON.parse(fs.readFileSync(REGISTRY_FILE, 'utf8')) : null;
+    ? JSON.parse(snapshots.get(path.resolve(files.registry)).toString('utf8'))
+    : fs.existsSync(files.registry) ? JSON.parse(fs.readFileSync(files.registry, 'utf8')) : null;
   const scrapeStatus = snapshots
-    ? JSON.parse(snapshots.get(path.resolve(STATUS_FILE)).toString('utf8'))
-    : fs.existsSync(STATUS_FILE) ? JSON.parse(fs.readFileSync(STATUS_FILE, 'utf8')) : { sources: [] };
+    ? JSON.parse(snapshots.get(path.resolve(files.status)).toString('utf8'))
+    : fs.existsSync(files.status) ? JSON.parse(fs.readFileSync(files.status, 'utf8')) : { sources: [] };
   if (registry && !Array.isArray(registry.sections)) {
     throw new Error('Expected a "sections" array in the CAI registry JSON');
   }
   if (!Array.isArray(scrapeStatus.sources)) {
     throw new Error('Expected a "sources" array in the scrape status JSON');
   }
-  const status = importStatus(env);
+  const { SOURCES } = require('../sources');
+  const preparedExcursions = attachSectionMetadata(excursions, SOURCES);
+  validateImportEvents(preparedExcursions, status);
+  const preparedClassifications = prepareClassifications(preparedExcursions);
 
-  const supabase = createClient(
+  const supabase = supabaseFactory(
     requiredEnvironment('SUPABASE_URL', env),
     requiredEnvironment('SUPABASE_SERVICE_ROLE_KEY', env),
     { auth: { autoRefreshToken: false, persistSession: false, detectSessionInUrl: false } }
   );
-  const { SOURCES } = require('../sources');
   let importedSections = 0;
   if (registry) {
     importedSections = await importSections({
@@ -369,15 +665,72 @@ async function main({ argv = process.argv.slice(2), env = process.env } = {}) {
   }
   const result = await importNewPlaces({
     supabase,
-    excursions: attachSectionMetadata(excursions, SOURCES),
+    excursions: preparedExcursions,
     status
   });
+  const importedClassifications = await upsertClassifications({
+    supabase,
+    rows: preparedClassifications.rows
+  });
+  const classificationVerification = await reconcileClassifications({
+    supabase,
+    rows: preparedClassifications.rows
+  });
+  if (classificationVerification.mismatchedSourceIds.length) {
+    throw new Error(`Classification reconciliation failed for ${classificationVerification.mismatchedSourceIds.length} source_id values`);
+  }
+  const verification = await reconcileImportedPlaces({
+    supabase,
+    excursions: preparedExcursions,
+    imported: result,
+    status
+  });
+  const receipt = buildImportReceipt({
+    manifest: verified.manifest,
+    manifestPath: verified.manifestPath,
+    manifestSha256: verified.manifestSha256,
+    projectRef: projectRefFromUrl(requiredEnvironment('SUPABASE_URL', env)),
+    imported: result,
+    verification,
+    classificationVerification,
+    skippedClassifications: preparedClassifications.skipped,
+    registrySyncPerformed: Boolean(registry),
+    repoRoot: files.repoRoot,
+    verifiedAt: now()
+  });
+  const verificationEvidence = {
+    schemaVersion: 1,
+    runId: verified.manifest.runId,
+    projectRef: receipt.projectRef,
+    verifiedAt: receipt.verifiedAt,
+    sourceIds: preparedExcursions.map((excursion) => excursion.id),
+    classifications: { ...classificationVerification, skipped: preparedClassifications.skipped },
+    ...verification
+  };
+  writeJsonAtomic(path.join(path.dirname(verified.manifestPath), 'db-verification.json'), verificationEvidence);
+  writeJsonAtomic(path.join(path.dirname(verified.manifestPath), 'import-receipt.json'), receipt);
   console.log(
     `inserted ${result.inserted}, updated ${result.updated} coordinates/organizer metadata, skipped ${result.skipped} existing`
     + `${result.skippedUnlocated ? `, skipped ${result.skippedUnlocated} without coordinates` : ''}`
     + ` as ${result.status}`
   );
-  return { sections: importedSections, ...result };
+  return {
+    sections: importedSections,
+    classifications: importedClassifications,
+    skippedClassifications: preparedClassifications.skipped.length,
+    inserted: result.inserted,
+    updated: result.updated,
+    skipped: result.skipped,
+    skippedUnlocated: result.skippedUnlocated,
+    status: result.status,
+    verification,
+    receiptPath: path.relative(files.repoRoot, path.join(path.dirname(verified.manifestPath), 'import-receipt.json')).split(path.sep).join('/'),
+    receiptSha256: crypto.createHash('sha256').update(fs.readFileSync(path.join(path.dirname(verified.manifestPath), 'import-receipt.json'))).digest('hex'),
+    manifestSha256: verified.manifestSha256,
+    runId: verified.manifest.runId,
+    projectRef: receipt.projectRef,
+    filesReadyAtImport: runState.files
+  };
 }
 
 if (require.main === module) {
@@ -394,12 +747,20 @@ module.exports = {
   importNewPlaces,
   importStatus,
   importSections,
+  classificationToRow,
+  upsertClassifications,
+  prepareClassifications,
+  reconcileClassifications,
   sectionToRow,
   sectionUpsertRow,
   attachSectionMetadata,
   readExcursions,
   verifyImportManifest,
+  verifyReadyRunState,
   manifestArgument,
+  validateImportEvents,
+  reconcileImportedPlaces,
+  buildImportReceipt,
   slugify,
   toPlaceRow
 };

@@ -20,6 +20,10 @@ const CACHE_DIR = path.join(__dirname, '..', 'node_modules', '.cache', 'cai');
 const MAX_PDF_DOWNLOAD_BYTES = 180 * 1024 * 1024;
 const MAX_DOCUMENT_BYTES = 32 * 1024 * 1024;
 const MAX_PDF_PAGES = 400;
+const PRIOR_TRANSIENT_RETRY_AFTER_MS = 6 * 60 * 60 * 1000;
+const PRIOR_ACCESS_RETRY_AFTER_MS = 30 * 24 * 60 * 60 * 1000;
+const PRIOR_REMOVED_RECHECK_AFTER_MS = 90 * 24 * 60 * 60 * 1000;
+const MAX_PRIOR_FAILURE_RETRIES_PER_SOURCE = 2;
 const execFileAsync = promisify(execFile);
 const EVENT_WORDS = /escursion|trekking|sentiero|rifugio|\balpe\b|monte\b|monti\b|cima\b|anello\b|traversata|ferrata|alpinis|ciaspol|sci\b|cicloescursion|passeggiata|camminat|cammino|gita\b|uscita\b|assemblea|convegno|serata|incontro|corso\b|arrampic|torrent|speleolog|raduno|castagn|casatagn|pranzo|cena|befan|campeggi|discesa|festa|lag(?:o|hi)/i;
 const CALENDAR_WORDS = /calendari|programm[ai]|escursion|attivit|eventi|gite|agenda|trekking/i;
@@ -248,6 +252,7 @@ function parseCalendarLines(lines, source, url, year, method) {
     // Generic pages include publication dates and footer dates. Import only actual activity descriptions.
     if (!EVENT_WORDS.test(title) || /^(?:escursionismo|escursion(?:i)?\s+(?:alpinistiche|per ragazzi|senior(?:\s+.*)?|cicloescursionismo)|alpinismo|cicloescursionismo|programma|attivit[aà]|riflessi d['’]autunno|serate|in allegria|lavoriamo insieme|in evidenza)$/i.test(title)
       || /^\s*\d+\)/.test(title) || /^(?:le escursioni sono|il programma potr[aà]|\(cai [^)]+\) in relazione|per una corretta pratica|modalit[aà] di partecipazione)/i.test(title)
+      || /^(?:la prima|la prossima) escursione\b/i.test(title)
       || /pubblicat|aggiornat|copyright|cookie|privacy|tesseramento|contattaci|leggi tutto|orario di apertura|regolamento|iscrizion[ei]|quote obbligatorie|partecipazione alle escursioni/i.test(title)) continue;
     const event = normalizeEvent({ title, ...range, description: eventLine }, source, url, method);
     if (event) events.push(event);
@@ -497,7 +502,71 @@ async function fetchDocument(url, { timeoutMs = 8000, cacheDir = CACHE_DIR } = {
   return { ...meta, buffer: bytes <= MAX_DOCUMENT_BYTES ? await fs.readFile(bodyPath) : null, filePath: bodyPath };
 }
 
-async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fetchDocument, maxDocuments = 12, budgetMs = 60_000, cacheDir = CACHE_DIR, recognizePdf = ocrPdfLines, recognizePdfPage = ocrPdfPageLines, recognizePdfFile = ocrPdfFilePages } = {}) {
+function httpStatusFromMessage(value) {
+  const match = String(value || '').match(/(?:status code\s+|HTTP\/1\.1\s+)(\d{3})/i);
+  return match ? Number(match[1]) : null;
+}
+
+function priorFailureFromIssue(issue, sourceUpdatedAt) {
+  const status = Number(issue.httpStatus) || httpStatusFromMessage(issue.failureMessage || issue.message);
+  if (![401, 403, 404, 410, 429, 500, 502, 503, 504].includes(status)) return null;
+  const kind = [404, 410].includes(status) ? 'removed'
+    : [401, 403].includes(status) ? 'access-denied'
+      : 'transient';
+  const retryAfterMs = kind === 'removed' ? PRIOR_REMOVED_RECHECK_AFTER_MS
+    : kind === 'access-denied' ? PRIOR_ACCESS_RETRY_AFTER_MS
+      : PRIOR_TRANSIENT_RETRY_AFTER_MS;
+  const failureAt = issue.failureAt || sourceUpdatedAt || null;
+  const failureTime = failureAt ? Date.parse(failureAt) : Number.NaN;
+  const expired = !Number.isFinite(failureTime) || Date.now() - failureTime >= retryAfterMs;
+  return {
+    status,
+    kind,
+    retryAfterMs,
+    failureAt,
+    expired,
+    failureMessage: issue.failureMessage || issue.message || `HTTP ${status}`
+  };
+}
+
+function previousFailureSkipIssue(url, failure) {
+  const explanations = {
+    removed: `Official URL previously returned HTTP ${failure.status}; searching the section's official pages for a replacement.`,
+    'access-denied': `Official URL previously returned HTTP ${failure.status}; access will be rechecked after the cooldown.`,
+    transient: `URL previously returned transient HTTP ${failure.status}; retry is eligible after the cooldown.`
+  };
+  return {
+    url,
+    code: 'previous-unavailable-skipped',
+    httpStatus: failure.status,
+    failureAt: failure.failureAt,
+    failureMessage: failure.failureMessage,
+    message: explanations[failure.kind]
+  };
+}
+
+function retryBudgetSkipIssue(url, failure) {
+  return {
+    url,
+    code: 'previous-retry-budget-skipped',
+    httpStatus: failure.status,
+    failureAt: failure.failureAt,
+    failureMessage: failure.failureMessage,
+    message: `Per-source retry budget (${MAX_PRIOR_FAILURE_RETRIES_PER_SOURCE}) exhausted for previously failed URLs.`
+  };
+}
+
+function failureIssue(url, error) {
+  const status = Number(error?.response?.status) || httpStatusFromMessage(error?.message);
+  const httpFailure = [401, 403, 404, 410, 429, 500, 502, 503, 504].includes(status);
+  return {
+    url,
+    ...(httpFailure ? { code: [404, 410].includes(status) ? 'http-removed' : [500, 502, 503, 504, 429].includes(status) ? 'http-transient' : 'http-access-denied', httpStatus: status, failureAt: new Date().toISOString(), failureMessage: error.message } : {}),
+    message: error.message
+  };
+}
+
+async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fetchDocument, maxDocuments = 12, budgetMs = 60_000, cacheDir = CACHE_DIR, recognizePdf = ocrPdfLines, recognizePdfPage = ocrPdfPageLines, recognizePdfFile = ocrPdfFilePages, previousStatus } = {}) {
   if (typeof now === 'string') now = DateTime.fromISO(now, { zone: 'Europe/Rome' });
   const started = Date.now();
   const pdfOnly = process.env.SCRAPE_PDF_ONLY === '1';
@@ -516,13 +585,18 @@ async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fe
   }
   if (pdfOnly) candidates = candidates.filter((url) => /\.pdf(?:[?#]|$)/i.test(url));
   const registryPath = path.join(__dirname, '..', 'data', 'scrape-status.json');
-  let prior404 = [];
-  try {
-    const previous = JSON.parse(await fs.readFile(registryPath, 'utf8'));
-    prior404 = (previous.sources || []).find((entry) => entry.id === source.id)?.issues || [];
-  } catch { /* A missing previous status file must not stop source collection. */ }
-  const confirmedUnavailable = new Map(prior404.filter((issue) => /status code (?:403|404|410|500|502|503|504)|HTTP\/1\.1 (?:403|404|410|500|502|503|504)/i.test(issue.message || '') && issue.url)
-    .map((issue) => [issue.url, issue.message]));
+  let previous = previousStatus;
+  if (!previous) {
+    try { previous = JSON.parse(await fs.readFile(registryPath, 'utf8')); }
+    catch { previous = {}; /* A missing previous status file must not stop source collection. */ }
+  }
+  const previousSource = (previous.sources || []).find((entry) => entry.id === source.id) || {};
+  const priorFailures = new Map();
+  for (const issue of previousSource.issues || []) {
+    if (!issue.url) continue;
+    const failure = priorFailureFromIssue(issue, previousSource.updatedAt);
+    if (failure) priorFailures.set(issue.url, failure);
+  }
   const sourceScopedSkip = (url) => {
     if (source.id === 'cai-varano-borghi-9116118' && /caigavirate\.it/i.test(url)
       && !/sottosezione(?:-di)?-varano-borghi/i.test(url)) return 'Shared CAI Gavirate calendar omitted; this source is the dedicated Varano Borghi subsection.';
@@ -530,19 +604,35 @@ async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fe
     return null;
   };
   const omitted = new Map(candidates.map((url) => [url, sourceScopedSkip(url)]).filter(([, reason]) => reason));
-  const skipped = candidates.filter((url) => omitted.has(url) || isNonCalendarUrl(url) || confirmedUnavailable.has(url));
-  const initialUrls = candidates.filter((url) => !omitted.has(url) && !isNonCalendarUrl(url) && !confirmedUnavailable.has(url));
+  let priorRetriesUsed = 0;
+  const skipped = candidates.filter((url) => omitted.has(url) || isNonCalendarUrl(url));
+  const initialUrls = [];
+  const issues = skipped.map((url) => ({
+    url,
+    code: omitted.has(url) ? 'shared-attribution-skipped' : 'non-calendar-link-skipped',
+    message: omitted.get(url) || 'Skipped social, feed, metadata, sharing, or unrelated image URL.'
+  }));
+  const scheduleUrl = (url) => {
+    if (omitted.has(url) || isNonCalendarUrl(url)) return false;
+    const failure = priorFailures.get(url);
+    if (!failure) return true;
+    if (!failure.expired) {
+      issues.push(previousFailureSkipIssue(url, failure));
+      return false;
+    }
+    if (priorRetriesUsed >= MAX_PRIOR_FAILURE_RETRIES_PER_SOURCE) {
+      issues.push(retryBudgetSkipIssue(url, failure));
+      return false;
+    }
+    priorRetriesUsed += 1;
+    return true;
+  };
+  for (const url of candidates) if (scheduleUrl(url)) initialUrls.push(url);
   const queue = initialUrls.map((url, index) => ({ url, depth: 0, score: 1000 - index }));
+  const queued = new Set(initialUrls);
   const visited = new Set();
   const events = [];
   const documents = [];
-  const issues = skipped.map((url) => ({
-    url,
-    code: confirmedUnavailable.has(url) ? 'previous-unavailable-skipped' : omitted.has(url) ? 'shared-attribution-skipped' : 'non-calendar-link-skipped',
-    message: confirmedUnavailable.has(url)
-      ? `Skipped URL previously confirmed unavailable: ${confirmedUnavailable.get(url)}`
-      : omitted.get(url) || 'Skipped social, feed, metadata, sharing, or unrelated image URL.'
-  }));
   const methods = new Set();
   let recognized = false;
   let eventCount = 0;
@@ -634,12 +724,13 @@ async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fe
         parsed = parseHtmlCalendar(text, source, document.url || url, now);
         if (candidate.depth < 2) {
           const discoveredLinks = discoverLinks(text, document.url || url, now);
+          const links = [];
           for (const link of discoveredLinks) {
-            if (confirmedUnavailable.has(link.url) && !issues.some((issue) => issue.url === link.url && issue.code === 'previous-unavailable-skipped')) {
-              issues.push({ url: link.url, code: 'previous-unavailable-skipped', message: `Skipped URL previously confirmed unavailable: ${confirmedUnavailable.get(link.url)}` });
-            }
+            if ((pdfOnly && !/\.pdf(?:[?#]|$)/i.test(link.url)) || visited.has(link.url) || queued.has(link.url)) continue;
+            if (!scheduleUrl(link.url)) continue;
+            queued.add(link.url);
+            links.push(link);
           }
-          const links = discoveredLinks.filter((link) => (!pdfOnly || /\.pdf(?:[?#]|$)/i.test(link.url)) && !visited.has(link.url) && !isNonCalendarUrl(link.url) && !omitted.has(link.url) && !confirmedUnavailable.has(link.url));
           // Document links outrank detail pages; read linked annual programs even when the homepage only shows this month.
           queue.push(...links.slice(0, maxDocuments).map((link) => ({ ...link, score: link.score - candidate.depth * 10, depth: candidate.depth + 1 })));
         }
@@ -649,7 +740,7 @@ async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fe
       recognized ||= parsed.recognized;
       if (parsed.method) methods.add(parsed.method);
       issues.push(...(parsed.issues || []).map((message) => ({ url, message })));
-    } catch (error) { issues.push({ url, message: error.message }); }
+    } catch (error) { issues.push(failureIssue(url, error)); }
   }
   const remaining = queue.filter((candidate) => !visited.has(candidate.url)).length;
   if (remaining) issues.push({ url: source.url, message: `Discovery budget reached; ${remaining} candidate documents remain.`, code: 'discovery-limit' });

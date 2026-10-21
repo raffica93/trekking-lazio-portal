@@ -1,7 +1,12 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const fs = require('node:fs/promises');
+const os = require('node:os');
+const path = require('node:path');
+const http = require('node:http');
+const crypto = require('node:crypto');
 const { DateTime } = require('luxon');
-const { monthFloor, parseDates, normalizeEvent, parseIcs, parseJsonLd, parseWordPress, parseCalendarLines, parseTivoliPdf, parseHtmlCalendar, discoverLinks, scrapeDeterministic } = require('../adapters/deterministic');
+const { monthFloor, parseDates, normalizeEvent, parseIcs, parseJsonLd, parseWordPress, parseCalendarLines, parseTivoliPdf, parseHtmlCalendar, discoverLinks, fetchDocument, scrapeDeterministic } = require('../adapters/deterministic');
 const { parseScrapeArgs, scrapeAll } = require('../pipeline');
 const source = { id: 'test-section', organizer: 'CAI Prova', region: 'Lombardia', url: 'https://section.example/calendario-2026/', enabled: true, extractor: 'deterministic' };
 const now = DateTime.fromISO('2026-09-05T12:00:00', { zone: 'Europe/Rome' });
@@ -80,6 +85,101 @@ test('structured empty calendar is distinct from unreadable HTML', async () => {
   const run = async (text) => scrapeDeterministic(source, { now, fetchDoc: async (url) => ({ url, text, hash: 'a', contentType: 'text/html' }) });
   assert.equal((await run('BEGIN:VCALENDAR\nEND:VCALENDAR')).status, 'no-upcoming');
   assert.equal((await run('<h1>Sezione CAI</h1>')).status, 'unsupported');
+});
+
+test('recent transient failures are skipped with their original timestamp and bounded error detail', async () => {
+  const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'cai-prior-transient-fresh-'));
+  const unavailable = 'https://section.example/programma-2026.pdf';
+  const previousStatus = { sources: [{
+    id: source.id,
+    updatedAt: new Date(Date.now() - 60 * 60 * 1000).toISOString(),
+    issues: [{ url: unavailable, message: 'Request failed with status code 503' }]
+  }] };
+  let calls = 0;
+  try {
+    const result = await scrapeDeterministic({ ...source, url: 'https://section.example/index', calendarUrls: [unavailable] }, {
+      now, cacheDir: tmp, previousStatus,
+      fetchDoc: async (url) => { calls += 1; return { url, text: '<h1>Sezione CAI</h1>', hash: 'index', contentType: 'text/html' }; }
+    });
+    const skipped = result.issues.find((issue) => issue.url === unavailable);
+    assert.equal(calls, 1); // The official index is still consulted.
+    assert.equal(skipped.code, 'previous-unavailable-skipped');
+    assert.equal(skipped.httpStatus, 503);
+    assert.equal(skipped.failureMessage, 'Request failed with status code 503');
+    assert.equal(skipped.failureAt, previousStatus.sources[0].updatedAt);
+    assert.match(skipped.message, /transient/);
+  } finally { await fs.rm(tmp, { recursive: true, force: true }); }
+});
+
+test('expired removed URL is rechecked once while the official index can discover its replacement', async () => {
+  const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'cai-prior-removed-expired-'));
+  const removed = 'https://section.example/programma-2025.pdf';
+  const index = 'https://section.example/index';
+  const replacement = 'https://section.example/programma-2026';
+  const previousStatus = { sources: [{
+    id: source.id,
+    updatedAt: new Date(Date.now() - 91 * 24 * 60 * 60 * 1000).toISOString(),
+    issues: [{ url: removed, message: 'Request failed with status code 404' }]
+  }] };
+  const calls = [];
+  try {
+    const result = await scrapeDeterministic({ ...source, url: index, website: 'https://section.example/', calendarUrls: [removed] }, {
+      now, cacheDir: tmp, previousStatus,
+      fetchDoc: async (url) => {
+        calls.push(url);
+        if (url === removed) { const error = new Error('Request failed with status code 404'); error.response = { status: 404 }; throw error; }
+        if (url === index || url === 'https://section.example/') return { url, text: `<h1>Calendario CAI</h1><a href="${replacement}">Programma 2026</a>`, hash: `index-${url}`, contentType: 'text/html' };
+        return { url, text: '<h1>Programma 2026</h1><table><tr><th>Ottobre</th></tr><tr><td>25</td><td>Escursione Monte Rosa</td></tr></table>', hash: 'new-calendar', contentType: 'text/html' };
+      }
+    });
+    assert.equal(calls.filter((url) => url === removed).length, 1);
+    assert.equal(calls.includes(replacement), true);
+    assert.equal(result.excursions.some((event) => event.title === 'Escursione Monte Rosa' && event.date === '2026-10-25'), true);
+    assert.equal(result.issues.some((issue) => issue.url === removed && issue.code === 'http-removed'), true);
+  } finally { await fs.rm(tmp, { recursive: true, force: true }); }
+});
+
+test('expired previous failures have a per-source retry cap without blocking new official pages', async () => {
+  const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'cai-prior-retry-cap-'));
+  const urls = [1, 2, 3].map((n) => `https://section.example/old-calendar-${n}`);
+  const previousStatus = { sources: [{
+    id: source.id,
+    updatedAt: new Date(Date.now() - 7 * 60 * 60 * 1000).toISOString(),
+    issues: urls.map((url) => ({ url, message: 'Request failed with status code 503' }))
+  }] };
+  const calls = [];
+  try {
+    const result = await scrapeDeterministic({ ...source, url: urls[0], calendarUrls: urls }, {
+      now, cacheDir: tmp, previousStatus,
+      fetchDoc: async (url) => { calls.push(url); return { url, text: '<h1>Programma CAI</h1>', hash: url, contentType: 'text/html' }; }
+    });
+    assert.equal(calls.filter((url) => urls.includes(url)).length, 2);
+    assert.equal(result.issues.some((issue) => issue.url === urls[2] && issue.code === 'previous-retry-budget-skipped'), true);
+  } finally { await fs.rm(tmp, { recursive: true, force: true }); }
+});
+
+test('transient download failure leaves a valid isolated cache entry untouched', async () => {
+  const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'cai-download-cache-preserve-'));
+  const server = http.createServer((_request, response) => { response.writeHead(503); response.end('temporarily unavailable'); });
+  try {
+    await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
+    const { port } = server.address();
+    const url = `http://127.0.0.1:${port}/calendar.pdf`;
+    const key = crypto.createHash('sha256').update(url).digest('hex');
+    const metaPath = path.join(tmp, `${key}.json`);
+    const bodyPath = path.join(tmp, `${key}.bin`);
+    const originalMeta = JSON.stringify({ url, hash: 'previous-valid-pdf', contentType: 'application/pdf', bytes: 15, etag: 'prior-etag' });
+    const originalBody = Buffer.from('%PDF-valid-cache');
+    await fs.writeFile(metaPath, originalMeta);
+    await fs.writeFile(bodyPath, originalBody);
+    await assert.rejects(fetchDocument(url, { timeoutMs: 1000, cacheDir: tmp }), /503/);
+    assert.equal(await fs.readFile(metaPath, 'utf8'), originalMeta);
+    assert.deepEqual(await fs.readFile(bodyPath), originalBody);
+    assert.deepEqual((await fs.readdir(tmp)).sort(), [`${key}.bin`, `${key}.json`].sort());
+  } finally {
+    await new Promise((resolve) => server.close(resolve));
+    await fs.rm(tmp, { recursive: true, force: true });
+  }
 });
 
 test('deterministic pipeline retains current-month/cache data, skips past months and keeps future years', async () => {
