@@ -4,12 +4,6 @@ Stato al 21 ottobre 2026: revisione e spazio operativo predisposti; implementazi
 e qualifica dei punti seguenti ancora da eseguire. Il codice del portale, i dati
 e le procedure esistenti sono il punto di partenza.
 
-**Vincolo successivo dell'utente:** lo script esistente non va rieseguito.
-Sono consentite analisi del codice e delle evidenze gia disponibili. I passaggi
-che comportano nuovi scrape, retry, OCR o import, anche tramite test o workflow,
-restano sospesi fino a una nuova istruzione esplicita; la sequenza seguente non
-costituisce autorizzazione ad avviarli.
-
 ## Sequenza
 
 | Passo | Responsabile | Lavoro | Prova di completamento |
