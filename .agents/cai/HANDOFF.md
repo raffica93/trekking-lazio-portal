@@ -1,7 +1,9 @@
 # Passaggio alla prossima sessione cloud
 
-Prossima azione: **S1 del piano**, poi preparazione riproducibile del runtime S2.
-Non lanciare subito un'altra raccolta nazionale.
+Prossima azione: analisi statica della baseline S1 e dei fallimenti gia registrati.
+**Lo script esistente non va rieseguito**, come richiesto dall'utente il 21 ottobre.
+Nessun nuovo scrape, retry, OCR o import, anche tramite test o workflow. Le prove
+operative del piano restano sospese fino a una nuova istruzione esplicita.
 
 ## Contesto da recuperare
 
@@ -31,7 +33,10 @@ branch remoto preservando modifiche e commit locali; non usare reset --hard.
 Leggi AGENTS.md e .agents/cai/README.md, OBJECTIVES.md, PLAN.md, STATE.json,
 HANDOFF.md. Controlla che questi file siano effettivamente nel commit recuperato.
 
-Segui i passi S1–S6 del piano. Usa esattamente due agenti gpt-6-luna high:
+Rispetta il blocco di riesecuzione dello script: usa solo codice e artefatti
+esistenti per l'analisi; non riprodurre gli errori avviando scrape, retry, OCR,
+importazioni, test o workflow che li richiamano. I passi operativi S1–S6 restano
+un piano, non un'autorizzazione all'esecuzione. Usa esattamente due agenti gpt-6-luna high:
 cai-collector per bootstrap/raccolta/evidenze, cai-importer per validazione,
 checkpoint e contratto di import. Tu mantieni coordinamento e stato. Dai a
 ciascuno ownership esplicita e avvertilo delle modifiche degli altri.

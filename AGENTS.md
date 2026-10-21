@@ -1,5 +1,13 @@
 # Coordinamento eventi CAI
 
+Vincolo operativo dell'utente (21 ottobre 2026): lo script esistente non va
+rieseguito. Per analisi dei fallimenti e pianificazione usare codice, file,
+cache e rapporti gia disponibili. Non avviare raccolte, retry, OCR o importazioni,
+neppure tramite wrapper, test o workflow, per riprodurre un errore. I passi del
+piano che richiedono una nuova esecuzione restano sospesi finche l'utente non
+impartisce una nuova istruzione esplicita. Questo vincolo prevale sui comandi
+di avvio e verifica descritti sotto.
+
 Per la raccolta delegata usa un orchestratore e due soli sottoagenti:
 `cai-collector` e `cai-importer`, entrambi `gpt-6-luna`. L'orchestratore gestisce
 dipendenze, verifiche e registro, senza duplicare il lavoro degli agenti.

@@ -3,6 +3,11 @@
 Punto di ingresso per riprendere il progetto da una sessione cloud nuova,
 senza dipendere dal PC o dai file non pubblicati di una chat precedente.
 
+**Vincolo attivo:** lo script esistente non va rieseguito. Analizzare soltanto
+codice e artefatti disponibili; nessun nuovo scrape, retry, OCR o import, anche
+tramite test o workflow. Le prove operative del piano restano sospese fino a
+una nuova istruzione esplicita dell'utente.
+
 **Visibilità:** questo spazio eredita quella del repository, attualmente pubblico.
 Non è un archivio privato. Conserva solo contesto di progetto ed evidenze pubbliche;
 credenziali, `.env`, cookie e conversazioni personali restano fuori da Git.

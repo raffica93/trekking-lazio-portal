@@ -11,6 +11,12 @@
   },
   "coordinationSpace": ".agents/cai",
   "planningExecutionScope": "local-workspace",
+  "executionPolicy": {
+    "existingScriptRerunAllowed": false,
+    "source": "explicit-user-instruction-2026-10-21",
+    "allowedNow": "static-review-of-code-and-existing-artifacts",
+    "operationalPlanExecution": "suspended-until-new-explicit-user-instruction"
+  },
   "runtimeReadiness": {
     "status": "not_checked_in_a_new_cloud_session",
     "observationsCurrent": false
@@ -149,7 +155,7 @@
   ],
   "nextAction": {
     "step": "S1",
-    "instruction": "Establish reproducible LF baseline and verify manifest in a fresh checkout before implementing the non-root cloud bootstrap."
+    "instruction": "Review baseline and recorded failures using existing code and artifacts only. Do not rerun scripts, collection, retry, OCR or import, including through tests or workflows. Operational execution requires a new explicit user instruction."
   },
   "constraints": {
     "recurringSchedules": false,

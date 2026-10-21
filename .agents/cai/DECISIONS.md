@@ -2,6 +2,7 @@
 
 | Data | Decisione | Motivo |
 |---|---|---|
+| 2026-10-21 | Lo script esistente non va rieseguito, neppure tramite wrapper, test o workflow. | Istruzione esplicita dell'utente: analizzare i fallimenti usando codice e artefatti gia disponibili; nuove raccolte, retry, OCR e import restano sospesi fino a una nuova istruzione esplicita. |
 | 2026-10-21 | Spazio operativo nel repository attuale, in `.agents/cai/`. | Scelta dell'utente; recuperabile con il codice e i dati. |
 | 2026-10-21 | Lo spazio non viene descritto come privato: il repository è pubblico. | Una directory non ha una visibilità GitHub diversa dal repository. Nessun segreto o contenuto personale qui. |
 | 2026-10-21 | GitHub è il riferimento dei checkpoint condivisi; l'ambiente conserva strumenti/accessi. | La persistenza della stessa chat non trasferisce automaticamente file e modifiche a una chat nuova. |
