@@ -1,0 +1,562 @@
+diff --git a/backend/adapters/mercury-decide.js b/backend/adapters/mercury-decide.js
+index 4f829f3..cfd36a6 100644
+--- a/backend/adapters/mercury-decide.js
++++ b/backend/adapters/mercury-decide.js
+@@ -6,6 +6,9 @@ const path = require('node:path');
+ 
+ const ENDPOINT = 'https://openrouter.ai/api/alpha/decisions';
+ const MODEL = 'inception/mercury-decide';
++// Exact snapshot verified from OpenRouter's public models metadata on 2026-10-21.
++// Do not broaden this to arbitrary dated snapshots or provider model aliases.
++const VERIFIED_RESPONSE_MODELS = new Set([MODEL, 'inception/mercury-decide-20260930']);
+ const POLICY_VERSION = 'cai-trekking-v1';
+ const DECISIONS = new Set(['trekking', 'non_trekking', 'da_verificare']);
+ const CATEGORIES = new Set([
+@@ -156,6 +159,10 @@ function normalizeScore(value) {
+ function scoreFor(answer) {
+   const confidence = normalizeScore(answer?.confidence);
+   if (confidence !== null) return confidence;
++  return probabilityFor(answer);
++}
++
++function probabilityFor(answer) {
+   const choice = answer?.choice;
+   const probabilities = answer?.probabilities;
+   if (typeof probabilities === 'number') return normalizeScore(probabilities);
+@@ -163,6 +170,10 @@ function scoreFor(answer) {
+   return null;
+ }
+ 
++function isVerifiedResponseModel(value) {
++  return typeof value === 'string' && VERIFIED_RESPONSE_MODELS.has(value);
++}
++
+ function modelClassification(event, answerPayload) {
+   const answers = answerPayload?.answers;
+   const decision = answers?.decision?.choice;
+@@ -172,18 +183,20 @@ function modelClassification(event, answerPayload) {
+   const responseModel = typeof answerPayload?.model === 'string'
+     ? answerPayload.model
+     : typeof answerPayload?.model_id === 'string' ? answerPayload.model_id : null;
+-  const modelAttested = responseModel === MODEL;
++  const modelAttested = isVerifiedResponseModel(responseModel);
++  const decisionProbability = probabilityFor(answers?.decision);
+   const base = classifyRules({ ...event, description: event.description || event.summary });
++  const invalidModel = responseModel !== null && !modelAttested;
++  const invalidShape = !DECISIONS.has(decision) || !CATEGORIES.has(category) || decisionScore === null;
+   if (!DECISIONS.has(decision) || !CATEGORIES.has(category) || decisionScore === null
+-    || decisionScore < MIN_CONFIDENCE || (responseModel !== null && responseModel !== MODEL)) {
++    || decisionScore < MIN_CONFIDENCE || invalidModel) {
+     return {
+       ...base,
+-      ...(DECISIONS.has(decision) && CATEGORIES.has(category) && decisionScore !== null && decisionScore < MIN_CONFIDENCE
+-        ? {} : { valid: false, errorCode: 'invalid-model-response' }),
++      ...(invalidModel || invalidShape ? { valid: false, errorCode: 'invalid-model-response' } : {}),
+       decision: 'da_verificare',
+       category: CATEGORIES.has(category) && categoryScore !== null && categoryScore >= MIN_CONFIDENCE ? category : 'altro',
+       confidence: decisionScore,
+-      probability: decisionScore,
++      probability: decisionProbability,
+       rationale: 'La risposta del classificatore è incompleta o sotto la soglia di confidenza; serve verifica.',
+       model: responseModel,
+       modelRequested: MODEL,
+@@ -200,7 +213,7 @@ function modelClassification(event, answerPayload) {
+     decision,
+     category: chosenCategory,
+     confidence: decisionScore,
+-    probability: decisionScore,
++    probability: decisionProbability,
+     rationale: `Mercury Decide: ${decision}${chosenCategory === 'altro' ? '; categoria da verificare' : `; categoria ${chosenCategory}`}.`,
+     model: responseModel,
+     modelRequested: MODEL,
+@@ -242,8 +255,8 @@ async function readCache(cacheDir, fingerprint) {
+       && parsed?.valid !== false && DECISIONS.has(parsed.decision) && CATEGORIES.has(parsed.category)
+       && parsed.policyVersion === POLICY_VERSION && parsed.modelRequested === MODEL
+       && parsed.model === parsed.responseModel
+-      && parsed.modelAttested === (parsed.responseModel === MODEL)
+-      && parsed.modelVersion === (parsed.modelAttested ? MODEL : null)) return parsed;
++      && parsed.modelAttested === isVerifiedResponseModel(parsed.responseModel)
++      && parsed.modelVersion === (parsed.modelAttested ? parsed.responseModel : null)) return parsed;
+   } catch {}
+   return null;
+ }
+@@ -358,6 +371,7 @@ module.exports = {
+   DECISIONS,
+   ENDPOINT,
+   MODEL,
++  VERIFIED_RESPONSE_MODELS,
+   POLICY_VERSION,
+   QUESTIONS,
+   buildRequestState,
+@@ -366,6 +380,7 @@ module.exports = {
+   classifyRules,
+   eventEvidence,
+   fingerprintFor,
++  isVerifiedResponseModel,
+   modelClassification,
+   remoteConfig
+ };
+diff --git a/backend/scripts/classify-catalog.js b/backend/scripts/classify-catalog.js
+index fb55dcc..e7cbe75 100644
+--- a/backend/scripts/classify-catalog.js
++++ b/backend/scripts/classify-catalog.js
+@@ -8,6 +8,7 @@ const {
+   CATEGORIES,
+   DECISIONS,
+   MODEL,
++  isVerifiedResponseModel,
+   POLICY_VERSION,
+   classifyEvents,
+   fingerprintFor,
+@@ -33,7 +34,9 @@ function parseArgs(argv) {
+     }
+     const value = String(argv[index + 1] || '').trim();
+     if (!value || value.startsWith('--')) throw new Error(`Missing value for ${token}`);
+-    args[token.slice(2).replace(/-([a-z])/g, (_match, letter) => letter.toUpperCase())] = value;
++    const key = token === '--rate-ms' ? 'rateLimitMs'
++      : token.slice(2).replace(/-([a-z])/g, (_match, letter) => letter.toUpperCase());
++    args[key] = value;
+     index += 1;
+   }
+   for (const key of ['input', 'output', 'run']) if (!args[key]) throw new Error(`Required argument: --${key}`);
+@@ -74,8 +77,8 @@ function validClassification(event, classification) {
+       : classification.modelRequested === MODEL
+         && (classification.responseModel === null || typeof classification.responseModel === 'string')
+         && classification.model === classification.responseModel
+-        && classification.modelAttested === (classification.responseModel === MODEL)
+-        && classification.modelVersion === (classification.modelAttested ? MODEL : null))
++        && classification.modelAttested === isVerifiedResponseModel(classification.responseModel)
++        && classification.modelVersion === (classification.modelAttested ? classification.responseModel : null))
+     && typeof classification.rationale === 'string' && classification.rationale.trim()
+     && typeof classification.evidenceOriginal === 'string'
+     && validScore(classification.confidence)
+@@ -307,7 +310,7 @@ async function runCatalogClassification({
+   return state;
+ }
+ 
+-async function main(argv = process.argv.slice(2), { log = console } = {}) {
++async function main(argv = process.argv.slice(2), { log = console, env = process.env } = {}) {
+   if (argv.length === 1 && (argv[0] === '--help' || argv[0] === '-h')) {
+     log.log(USAGE);
+     return null;
+@@ -319,7 +322,8 @@ async function main(argv = process.argv.slice(2), { log = console } = {}) {
+     runId: args.run,
+     concurrency: args.concurrency,
+     rateLimitMs: args.rateLimitMs,
+-    cacheDir: args.cacheDir
++    cacheDir: args.cacheDir,
++    env
+   });
+   log.log(JSON.stringify({ runId: state.runId, status: state.status, counts: state.counts, output: path.resolve(args.output) }, null, 2));
+   return state;
+diff --git a/backend/scripts/import-supabase.js b/backend/scripts/import-supabase.js
+index a43946c..a58ff34 100644
+--- a/backend/scripts/import-supabase.js
++++ b/backend/scripts/import-supabase.js
+@@ -3,6 +3,7 @@ const path = require('node:path');
+ const crypto = require('node:crypto');
+ const { execFileSync } = require('node:child_process');
+ const { createClient } = require('@supabase/supabase-js');
++const { MODEL, isVerifiedResponseModel } = require('../adapters/mercury-decide');
+ const {
+   PRECISE_COORD_QUALITY,
+   hasFiniteCoords,
+@@ -240,13 +241,13 @@ function classificationToRow(sourceId, classification) {
+     || (!modelAttested && responseModel !== null)) {
+     throw new Error(`Excursion ${sourceId} has an invalid classification`);
+   }
+-  if (method === 'mercury-decide' && modelRequested !== 'inception/mercury-decide') {
++  if (method === 'mercury-decide' && modelRequested !== MODEL) {
+     throw new Error(`Excursion ${sourceId} has an unexpected requested Mercury model`);
+   }
+   if (method === 'mercury-decide'
+-    && (responseModel !== null && responseModel !== 'inception/mercury-decide'
+-      || modelAttested !== (responseModel === 'inception/mercury-decide')
+-      || modelVersion !== (modelAttested ? 'inception/mercury-decide' : null))) {
++    && (responseModel !== null && !isVerifiedResponseModel(responseModel)
++      || modelAttested !== isVerifiedResponseModel(responseModel)
++      || modelVersion !== (modelAttested ? responseModel : null))) {
+     throw new Error(`Excursion ${sourceId} has inconsistent Mercury model attestation`);
+   }
+   if (method === 'rules-v1' && (modelRequested !== null || responseModel !== null || modelAttested || modelVersion !== null)) {
+@@ -293,6 +294,33 @@ async function upsertClassifications({ supabase, excursions = [], rows = prepare
+   return rows.length;
+ }
+ 
++// Classification-only first loads must never update an existing decision. Read all
++// conflicts first, then insert missing source_ids with ON CONFLICT DO NOTHING semantics.
++async function insertMissingClassifications({ supabase, rows = [] }) {
++  const fields = 'source_id';
++  const existingIds = new Set();
++  for (const batch of chunk(rows.map((row) => row.source_id))) {
++    const { data, error } = await supabase.from('place_classifications').select(fields).in('source_id', batch);
++    if (error) throw error;
++    for (const row of data || []) existingIds.add(row.source_id);
++  }
++  const preservedSourceIds = [...existingIds];
++  const missing = rows.filter((row) => !existingIds.has(row.source_id));
++  for (const batch of chunk(missing)) {
++    const { error } = await supabase.from('place_classifications').upsert(batch, {
++      onConflict: 'source_id', ignoreDuplicates: true
++    });
++    if (error) throw error;
++  }
++  const verification = await reconcileClassifications({ supabase, rows: missing });
++  return {
++    attempted: missing.length,
++    matched: verification.matched,
++    preservedSourceIds,
++    mismatchedSourceIds: verification.mismatchedSourceIds
++  };
++}
++
+ async function reconcileClassifications({ supabase, excursions = [], rows = prepareClassifications(excursions).rows }) {
+   const expected = rows;
+   const fields = 'source_id, decision, category, confidence, probability, rationale, evidence_original, fingerprint, method, model_requested, response_model, model_attested, policy_version, model_version';
+@@ -654,6 +682,33 @@ async function main({
+     requiredEnvironment('SUPABASE_SERVICE_ROLE_KEY', env),
+     { auth: { autoRefreshToken: false, persistSession: false, detectSessionInUrl: false } }
+   );
++  if (argv.includes('--classifications-only')) {
++    const result = await insertMissingClassifications({ supabase, rows: preparedClassifications.rows });
++    const receipt = {
++      schemaVersion: 1,
++      status: result.mismatchedSourceIds.length ? 'partial' : 'completed',
++      mode: 'classification-only',
++      runId: verified.manifest.runId,
++      projectRef: projectRefFromUrl(requiredEnvironment('SUPABASE_URL', env)),
++      sourceCommit: sourceCommit(files.repoRoot),
++      manifestPath: path.relative(files.repoRoot, verified.manifestPath).split(path.sep).join('/'),
++      manifestSha256: verified.manifestSha256,
++      verifiedAt: now(),
++      classifications: {
++        input: preparedClassifications.rows.length,
++        attempted: result.attempted,
++        matched: result.matched,
++        preexistingPreserved: result.preservedSourceIds.length,
++        concurrentConflicts: result.mismatchedSourceIds,
++        skipped: preparedClassifications.skipped
++      },
++      placesTouched: false,
++      sectionsTouched: false
++    };
++    const receiptPath = path.join(path.dirname(verified.manifestPath), 'classification-import-receipt.json');
++    writeJsonAtomic(receiptPath, receipt);
++    return { ...receipt, receiptPath, receiptSha256: crypto.createHash('sha256').update(fs.readFileSync(receiptPath)).digest('hex') };
++  }
+   let importedSections = 0;
+   if (registry) {
+     importedSections = await importSections({
+@@ -749,6 +804,7 @@ module.exports = {
+   importSections,
+   classificationToRow,
+   upsertClassifications,
++  insertMissingClassifications,
+   prepareClassifications,
+   reconcileClassifications,
+   sectionToRow,
+diff --git a/backend/test/classify-catalog.test.js b/backend/test/classify-catalog.test.js
+index ae850a2..8935cef 100644
+--- a/backend/test/classify-catalog.test.js
++++ b/backend/test/classify-catalog.test.js
+@@ -11,6 +11,7 @@ const {
+   MANIFEST_NAME,
+   OUTPUT_NAME,
+   STATE_NAME,
++  main,
+   parseArgs,
+   runCatalogClassification
+ } = require('../scripts/classify-catalog');
+@@ -49,6 +50,26 @@ test('CLI parser requires explicit paths/run and bounds concurrency/rate', () =>
+   });
+   assert.throws(() => parseArgs(['--input', 'a', '--output', 'b', '--run', 'c', '--concurrency', '9']), /concurrency/);
+   assert.throws(() => parseArgs(['--input', 'a', '--output', 'b', '--run', '../unsafe']), /Run ID/);
++  assert.equal(parseArgs(['--input', 'a', '--output', 'b', '--run', 'rate-test', '--rate-ms', '4321']).rateLimitMs, 4321);
++});
++
++test('CLI --rate-ms non-default value is written into the run state', async () => {
++  const temp = await workspace();
++  const event = { id: 'rate-state-fixture', title: 'Escursione al rifugio' };
++  const { classifyRules } = require('../adapters/mercury-decide');
++  event.classification = classifyRules(event);
++  await fs.writeFile(temp.input, JSON.stringify([event]));
++  try {
++    const state = await main([
++      '--input', temp.input, '--output', temp.output, '--run', 'rate-state-01', '--rate-ms', '4321'
++    ], {
++      env: { OPENROUTER_API_KEY: 'test-only', MERCURY_DECIDE_ENABLED: '1', OPENROUTER_ALLOWED_HOSTS: 'openrouter.ai' },
++      log: { log() {} }
++    });
++    assert.equal(state.rateLimitMs, 4321);
++    const persisted = JSON.parse(await fs.readFile(path.join(temp.output, STATE_NAME), 'utf8'));
++    assert.equal(persisted.rateLimitMs, 4321);
++  } finally { await fs.rm(temp.root, { recursive: true, force: true }); }
+ });
+ 
+ test('run writes isolated catalog, state, decision/category counts and verifiable manifest; sealed resume is idempotent', async () => {
+diff --git a/backend/test/fixtures/mercury-decide-canonical-snapshot.json b/backend/test/fixtures/mercury-decide-canonical-snapshot.json
+new file mode 100644
+index 0000000..208fafb
+--- /dev/null
++++ b/backend/test/fixtures/mercury-decide-canonical-snapshot.json
+@@ -0,0 +1,20 @@
++{
++  "fixture_scope": "Minimized sanitized extract of the real diagnostic; only fields explicitly reported are included.",
++  "diagnostic_sha256": "eaf1aff4c20d9b5e67634c24423dcc26a69855a785bd9a7988ca72f3e564430f",
++  "source_id": "alatri-6535fc1bf5da",
++  "requested_model": "inception/mercury-decide",
++  "response": {
++    "provider": "Inception",
++    "model": "inception/mercury-decide-20260930",
++    "answers": {
++      "decision": {
++        "choice": "trekking",
++        "confidence": 0.9063821012510593
++      },
++      "category": {
++        "choice": "a piedi",
++        "confidence": 0.6743453648546985
++      }
++    }
++  }
++}
+diff --git a/backend/test/import-supabase.test.js b/backend/test/import-supabase.test.js
+index 2732677..b02047b 100644
+--- a/backend/test/import-supabase.test.js
++++ b/backend/test/import-supabase.test.js
+@@ -15,6 +15,7 @@ const {
+   classificationToRow,
+   prepareClassifications,
+   upsertClassifications,
++  insertMissingClassifications,
+   verifyImportManifest,
+   manifestArgument,
+   main
+@@ -79,6 +80,7 @@ function sampleExcursion(overrides = {}) {
+ function createFakeSupabase({
+   existingSourceIds = [],
+   existingRows = null,
++  existingClassificationRows = [],
+   selectError = null,
+   insertError = null,
+   updateError = null
+@@ -87,6 +89,7 @@ function createFakeSupabase({
+   const updates = [];
+   const selects = [];
+   const classificationUpserts = [];
++  const classificationRows = existingClassificationRows.map((row) => ({ ...row }));
+   const rows = existingRows || existingSourceIds.map((source_id) => ({
+     source_id,
+     latitude: 42.473,
+@@ -99,6 +102,7 @@ function createFakeSupabase({
+     updates,
+     selects,
+     classificationUpserts,
++    classificationRows,
+     from(table) {
+       assert.ok(['places', 'place_classifications'].includes(table));
+       return {
+@@ -107,7 +111,8 @@ function createFakeSupabase({
+             async in(column, ids) {
+               selects.push({ columns, column, ids: [...ids] });
+               if (selectError) return { data: null, error: selectError };
+-              const data = table === 'places' ? rows.filter((row) => ids.includes(row.source_id)) : [];
++              const source = table === 'places' ? rows : classificationRows;
++              const data = source.filter((row) => ids.includes(row.source_id));
+               return { data, error: null };
+             }
+           };
+@@ -128,10 +133,13 @@ function createFakeSupabase({
+             }
+           };
+         },
+-        upsert() {
++        upsert(batch, options) {
+           if (table === 'places') throw new Error('places import must insert new rows, not upsert');
+-          classificationUpserts.push(arguments[0]);
+-          return Promise.resolve({ data: arguments[0], error: null });
++          classificationUpserts.push(batch);
++          if (options?.ignoreDuplicates) {
++            for (const row of batch) if (!classificationRows.some((entry) => entry.source_id === row.source_id)) classificationRows.push({ ...row });
++          }
++          return Promise.resolve({ data: batch, error: null });
+         }
+       };
+     }
+@@ -212,11 +220,27 @@ test('classification contract is persisted separately and is keyed to the same s
+   assert.equal(unverifiedMercury.model_requested, 'inception/mercury-decide');
+   assert.equal(unverifiedMercury.response_model, null);
+   assert.equal(unverifiedMercury.model_attested, false);
++  const verifiedSnapshot = classificationToRow(event.id, {
++    ...event.classification,
++    method: 'mercury-decide', modelRequested: 'inception/mercury-decide',
++    responseModel: 'inception/mercury-decide-20260930', modelAttested: true,
++    modelVersion: 'inception/mercury-decide-20260930'
++  });
++  assert.equal(verifiedSnapshot.model_requested, 'inception/mercury-decide');
++  assert.equal(verifiedSnapshot.response_model, 'inception/mercury-decide-20260930');
++  assert.equal(verifiedSnapshot.model_attested, true);
++  assert.equal(verifiedSnapshot.model_version, 'inception/mercury-decide-20260930');
+   assert.throws(() => classificationToRow(event.id, {
+     ...event.classification,
+     method: 'mercury-decide', modelRequested: 'inception/mercury-decide',
+     responseModel: 'other/model', modelAttested: true, modelVersion: 'other/model'
+   }), /inconsistent Mercury model attestation/);
++  assert.throws(() => classificationToRow(event.id, {
++    ...event.classification,
++    method: 'mercury-decide', modelRequested: 'inception/mercury-decide',
++    responseModel: 'inception/mercury-decide-20990101', modelAttested: true,
++    modelVersion: 'inception/mercury-decide-20990101'
++  }), /inconsistent Mercury model attestation/);
+   const supabase = createFakeSupabase();
+   assert.equal(await upsertClassifications({ supabase, excursions: [event] }), 1);
+   assert.equal(supabase.classificationUpserts[0][0].source_id, event.id);
+@@ -238,6 +262,35 @@ test('classification contract is persisted separately and is keyed to the same s
+   });
+ });
+ 
++test('classification-only insertion preserves conflicts, reconciles new rows, and never writes places', async () => {
++  const first = {
++    source_id: 'preexisting-source', decision: 'non_trekking', category: 'corso/riunione',
++    confidence: 0.91, probability: null, rationale: 'Admin-reviewed', evidence_original: 'admin',
++    fingerprint: 'admin-fingerprint', method: 'rules-v1', model_requested: null,
++    response_model: null, model_attested: false, policy_version: 'admin-policy', model_version: null
++  };
++  const supabase = createFakeSupabase({ existingClassificationRows: [first] });
++  const newRow = { ...first, source_id: 'new-source', decision: 'trekking', fingerprint: 'new-fingerprint' };
++  const result = await insertMissingClassifications({ supabase, rows: [first, newRow] });
++  assert.equal(result.attempted, 1);
++  assert.equal(result.matched, 1);
++  assert.deepEqual(result.preservedSourceIds, ['preexisting-source']);
++  assert.deepEqual(result.mismatchedSourceIds, []);
++  assert.equal(supabase.classificationRows.length, 2);
++  assert.equal(supabase.classificationRows[0].rationale, 'Admin-reviewed');
++  assert.equal(supabase.classificationRows[1].source_id, 'new-source');
++  assert.equal(supabase.inserts.length, 0);
++  assert.equal(supabase.updates.length, 0);
++  assert.equal(supabase.classificationUpserts.length, 1);
++});
++
++test('classification migration protects place rows and accepts only verified Mercury snapshot identity', () => {
++  const migration = fs.readFileSync(path.join(__dirname, '../../supabase/migrations/20261021090000_place_classifications.sql'), 'utf8');
++  assert.match(migration, /references public\.places\(source_id\) on delete restrict/i);
++  assert.match(migration, /in \('inception\/mercury-decide', 'inception\/mercury-decide-20260930'\)/);
++  assert.doesNotMatch(migration, /on delete cascade/i);
++});
++
+ test('toPlaceRow drops durations that overflow numeric(5,2)', () => {
+   const ok = toPlaceRow(sampleExcursion({ durationHours: 5.5 }), 'published');
+   assert.equal(ok.duration_hours, 5.5);
+diff --git a/backend/test/mercury-decide.test.js b/backend/test/mercury-decide.test.js
+index a108b94..9fe116c 100644
+--- a/backend/test/mercury-decide.test.js
++++ b/backend/test/mercury-decide.test.js
+@@ -5,6 +5,7 @@ const assert = require('node:assert/strict');
+ const fs = require('node:fs/promises');
+ const os = require('node:os');
+ const path = require('node:path');
++const realCanonicalFixture = require('./fixtures/mercury-decide-canonical-snapshot.json');
+ const {
+   CATEGORIES,
+   DECISIONS,
+@@ -229,3 +230,76 @@ test('response model mismatch is rejected as an invalid model response', async (
+     assert.equal(result.modelAttested, false);
+   } finally { await fs.rm(tmp, { recursive: true, force: true }); }
+ });
++
++test('real diagnostic snapshot is attested separately from requested alias and preserves separate scores', async () => {
++  const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'cai-mercury-real-snapshot-'));
++  try {
++    const row = { ...event, id: realCanonicalFixture.source_id, title: 'Programma autunnale' };
++    const result = await classifyEvent(row, {
++      env: { OPENROUTER_API_KEY: 'test-only', MERCURY_DECIDE_ENABLED: '1', OPENROUTER_ALLOWED_HOSTS: 'openrouter.ai' },
++      cacheDir: tmp,
++      fetchImpl: async (_url, options) => {
++        assert.equal(JSON.parse(options.body).model, realCanonicalFixture.requested_model);
++        return { ok: true, json: async () => realCanonicalFixture.response };
++      }
++    });
++    assert.equal(result.decision, 'trekking');
++    assert.equal(result.category, 'altro'); // Reported category confidence is below MIN_CONFIDENCE.
++    assert.equal(result.confidence, 0.9063821012510593);
++    assert.equal(result.probability, null); // No selected-choice probability was reported.
++    assert.equal(result.modelRequested, 'inception/mercury-decide');
++    assert.equal(result.responseModel, 'inception/mercury-decide-20260930');
++    assert.equal(result.model, result.responseModel);
++    assert.equal(result.modelAttested, true);
++    assert.equal(result.modelVersion, result.responseModel);
++    assert.equal(result.valid, undefined);
++  } finally { await fs.rm(tmp, { recursive: true, force: true }); }
++});
++
++test('unknown returned model remains invalid even when decision confidence is below threshold', () => {
++  const { modelClassification } = require('../adapters/mercury-decide');
++  const result = modelClassification(event, {
++    model: 'inception/mercury-decide-20990101',
++    answers: {
++      decision: { choice: 'trekking', confidence: 0.2 },
++      category: { choice: 'a piedi', confidence: 0.2 }
++    }
++  });
++  assert.equal(result.valid, false);
++  assert.equal(result.errorCode, 'invalid-model-response');
++  assert.equal(result.modelRequested, 'inception/mercury-decide');
++  assert.equal(result.responseModel, 'inception/mercury-decide-20990101');
++  assert.equal(result.modelAttested, false);
++});
++
++test('cache accepts only the exact verified snapshot and scores confidence separately from probability', async () => {
++  const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'cai-mercury-snapshot-cache-'));
++  const row = { ...event, title: 'Programma cache fixture' };
++  const env = { OPENROUTER_API_KEY: 'test-only', MERCURY_DECIDE_ENABLED: '1', OPENROUTER_ALLOWED_HOSTS: 'openrouter.ai' };
++  let calls = 0;
++  try {
++    const answerPayload = {
++      model: 'inception/mercury-decide-20260930',
++      answers: {
++        decision: { choice: 'trekking', confidence: 0.91, probabilities: { trekking: 0.84 } },
++        category: { choice: 'a piedi', confidence: 0.89, probabilities: { 'a piedi': 0.81 } }
++      }
++    };
++    const fetchImpl = async () => { calls += 1; return { ok: true, json: async () => answerPayload }; };
++    const first = await classifyEvent(row, { env, cacheDir: tmp, fetchImpl });
++    assert.equal(first.confidence, 0.91);
++    assert.equal(first.probability, 0.84);
++    assert.equal(first.modelVersion, 'inception/mercury-decide-20260930');
++    assert.deepEqual(await classifyEvent(row, { env, cacheDir: tmp, fetchImpl }), first);
++    assert.equal(calls, 1);
++
++    const cachePath = path.join(tmp, `${fingerprintFor(row)}.json`);
++    const cached = JSON.parse(await fs.readFile(cachePath, 'utf8'));
++    cached.responseModel = 'inception/mercury-decide-20990101';
++    cached.model = cached.responseModel;
++    cached.modelVersion = cached.responseModel;
++    await fs.writeFile(cachePath, JSON.stringify(cached));
++    await classifyEvent(row, { env, cacheDir: tmp, fetchImpl });
++    assert.equal(calls, 2); // Unsupported snapshot cannot be accepted from cache.
++  } finally { await fs.rm(tmp, { recursive: true, force: true }); }
++});
+diff --git a/supabase/migrations/20261021090000_place_classifications.sql b/supabase/migrations/20261021090000_place_classifications.sql
+index 8ed0658..2887782 100644
+--- a/supabase/migrations/20261021090000_place_classifications.sql
++++ b/supabase/migrations/20261021090000_place_classifications.sql
+@@ -2,7 +2,7 @@
+ -- Reclassification can therefore never replace title, status, activity_type,
+ -- terrain, difficulty_note, cover_image_path, or other curated place values.
+ create table public.place_classifications (
+-  source_id text primary key references public.places(source_id) on delete cascade,
++  source_id text primary key references public.places(source_id) on delete restrict,
+   decision text not null check (decision in ('trekking', 'non_trekking', 'da_verificare')),
+   category text not null check (category in (
+     'a piedi', 'ciaspole', 'alpinismo/ferrata', 'bici', 'sci',
+@@ -25,7 +25,9 @@ create table public.place_classifications (
+       method = 'mercury-decide'
+       and model_requested = 'inception/mercury-decide'
+       and (
+-        (model_attested and response_model = model_requested and model_version = response_model)
++        (model_attested
++          and response_model in ('inception/mercury-decide', 'inception/mercury-decide-20260930')
++          and model_version = response_model)
+         or (not model_attested and response_model is null and model_version is null)
+       )
+     )
