@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-10-21",
+  "timezone": "Europe/Rome",
+  "phase": "cloud-transition-plan-defined",
+  "fullCloudQualified": false,
+  "repository": {
+    "name": "raffica93/trekking-lazio-portal",
+    "visibility": "public",
+    "branch": "codex/cai-orchestrator-luna"
+  },
+  "coordinationSpace": ".agents/cai",
+  "planningExecutionScope": "local-workspace",
+  "runtimeReadiness": {
+    "status": "not_checked_in_a_new_cloud_session",
+    "observationsCurrent": false
+  },
+  "roles": {
+    "orchestrator": "coordination-and-checkpoints",
+    "collector": {
+      "name": "cai-collector",
+      "model": "gpt-6-luna",
+      "reasoningEffort": "high"
+    },
+    "importer": {
+      "name": "cai-importer",
+      "model": "gpt-6-luna",
+      "reasoningEffort": "high"
+    }
+  },
+  "baseline": {
+    "commit": "9919927d4cbef6d154c4dae1441d64cd01c70ad4",
+    "runId": "cai-20261020-piemonte-01",
+    "runPath": "backend/data/agent-runs/cai-20261020-piemonte-01",
+    "catalogEvents": 3337,
+    "uniqueSourceIds": 3337,
+    "collection": "partial",
+    "files": "ready",
+    "database": "completed",
+    "verificationScope": "git-blobs-at-baseline-commit",
+    "manifestPath": "backend/data/agent-runs/cai-20261020-piemonte-01/manifest.json",
+    "manifestSha256": "3824c028aea07417f599e6317cc845bf891f355b677289ed10821ec291aed7c6",
+    "allManifestGitBlobsVerified": true,
+    "manifestFiles": [
+      {
+        "path": "backend/data/excursions.json",
+        "sha256": "1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877",
+        "gitBlobVerified": true,
+        "workingTreeVerified": false
+      },
+      {
+        "path": "backend/data/cai-sections.json",
+        "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+        "gitBlobVerified": true,
+        "workingTreeVerified": false
+      },
+      {
+        "path": "backend/data/scrape-status.json",
+        "sha256": "d97a57f0a73a6e56a268df0a7d499d16030b3a07d0456a28624a12513a71aed7",
+        "gitBlobVerified": true,
+        "workingTreeVerified": false
+      },
+      {
+        "path": "frontend/public/excursions.json",
+        "sha256": "1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877",
+        "gitBlobVerified": true,
+        "workingTreeVerified": false
+      },
+      {
+        "path": "frontend/public/cai-sections.json",
+        "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+        "gitBlobVerified": true,
+        "workingTreeVerified": false
+      },
+      {
+        "path": "frontend/public/scrape-status.json",
+        "sha256": "d97a57f0a73a6e56a268df0a7d499d16030b3a07d0456a28624a12513a71aed7",
+        "gitBlobVerified": true,
+        "workingTreeVerified": false
+      }
+    ],
+    "reportPath": "backend/data/agent-runs/cai-20261020-piemonte-01/collection-report.md",
+    "reportGitBlobVerified": true,
+    "recordedDatabaseVerification": {
+      "observedAt": "2026-10-20T11:52:28.269Z",
+      "method": "authorized-supabase-mcp",
+      "places": 4405,
+      "cai_sections": 837,
+      "matchedSourceIds": 3337,
+      "publishedRunSourceIds": 3337,
+      "draftRunSourceIds": 0,
+      "missingSourceIds": 0,
+      "deltaMatched": 40,
+      "deltaPublished": 40,
+      "deltaDraft": 0,
+      "deltaFieldMismatches": 0,
+      "projectRef": "snwzxegtqnnuvlawnpgl",
+      "inserted": 40
+    },
+    "databaseRequeriedDuringPlanning": false
+  },
+  "excludedAsBaseline": [
+    {
+      "runId": "cai-20261020-piemonte-ocr-01",
+      "reason": "files-and-database-pending"
+    }
+  ],
+  "steps": [
+    {
+      "id": "S0",
+      "status": "completed",
+      "result": "shared-context-plan-and-baseline-index"
+    },
+    {
+      "id": "S1",
+      "status": "todo",
+      "owner": "orchestrator-and-importer"
+    },
+    {
+      "id": "S2",
+      "status": "todo",
+      "owner": "collector"
+    },
+    {
+      "id": "S3",
+      "status": "todo",
+      "owner": "orchestrator-and-collector"
+    },
+    {
+      "id": "S4",
+      "status": "todo",
+      "owner": "collector-and-orchestrator"
+    },
+    {
+      "id": "S5",
+      "status": "todo",
+      "owner": "importer"
+    },
+    {
+      "id": "S6",
+      "status": "todo",
+      "owner": "orchestrator-and-two-agents"
+    },
+    {
+      "id": "S7",
+      "status": "todo",
+      "owner": "orchestrator"
+    }
+  ],
+  "nextAction": {
+    "step": "S1",
+    "instruction": "Establish reproducible LF baseline and verify manifest in a fresh checkout before implementing the non-root cloud bootstrap."
+  },
+  "constraints": {
+    "recurringSchedules": false,
+    "implicitMerge": false,
+    "implicitDeploy": false,
+    "secretsInGit": false,
+    "databaseDeletes": false
+  }
+}

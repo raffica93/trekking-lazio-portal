@@ -1,5 +1,9 @@
 # Orchestratore CAI con due agenti Luna
 
+Per la revisione del flusso full cloud e il contesto condiviso degli agenti,
+partire da [`.agents/cai/README.md`](../.agents/cai/README.md). Il piano distingue
+il lavoro già eseguito dalla qualifica di una ripartenza in sessioni cloud nuove.
+
 L'orchestratore coordina esattamente due ruoli Codex, entrambi `gpt-6-luna`:
 `cai-collector` raccoglie calendari e produce file; `cai-importer` importa i file
 verificati in Supabase. Le definizioni sono in `.codex/agents/`, con limite di due
