@@ -304,10 +304,10 @@
       "id": "S24",
       "status": "in_progress",
       "owner": "cai-collector + orchestrator",
-      "result": "Run stopped before initialization: planned source ID was not in registry; verified correct registered ID cai-caserta-9238006 in sections/status/FAILURES. No run or lock created. Correct ID in docs, republish checkpoint, then resume same bounded URL."
+      "result": "Corrected registered source ID cai-caserta-9238006 and verified correction remotely at 8ed9f73. The prior attempt created no run/lock. Proceed with the single bounded index run only."
     }
   ],
-  "nextAction": "Correct the Caserta source ID in the checkpoint to cai-caserta-9238006 (verified in sections/status/FAILURES), publish and remotely verify that correction; no run or lock was created. Then resume the same single URL https://www.caicaserta.it/escursioni.html with unique ID, max1 document/120s/concurrency1.",
+  "nextAction": "Remote checkpoint 8ed9f735f6ae5f36af2e5dd7f94517ab0472722e verified with correct source ID cai-caserta-9238006. Run exactly cai-20261022-campania-caserta-index01 on https://www.caicaserta.it/escursioni.html, max1 document/120s/concurrency1; do not retry annual PDF or expand discovery. Stop collection before tests/QA.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -316,7 +316,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "0f5992d9c451f34fdeecd685721de4420cc93652",
+    "branchHead": "8ed9f735f6ae5f36af2e5dd7f94517ab0472722e",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -479,7 +479,7 @@
     },
     "ocrItalian": false,
     "agentStatus": {
-      "caiCollector": "Preflight complete; one bounded Caserta index run authorized after remote checkpoint",
+      "caiCollector": "Correct source ID checkpoint verified; bounded Caserta index run authorized now",
       "caiImporter": "Independent read-only QA of current regional handoff files in progress",
       "agentRequestedModel": "gpt-6-luna",
       "agentRequestedEffort": "high",
@@ -1028,9 +1028,9 @@
         "checkpointCommit": "pending"
       }
     ],
-    "repositoryCheckpointCommit": "0f5992d9c451f34fdeecd685721de4420cc93652",
+    "repositoryCheckpointCommit": "8ed9f735f6ae5f36af2e5dd7f94517ab0472722e",
     "updatedAt": "2026-10-22T22:56:53Z",
-    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:59:10Z",
+    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:02:15Z",
     "continuationMechanism": {
       "flag": "--source-url URL (repeatable) with exactly one --source ID",
       "safety": "Exact official hostname, HTTP(S), no credentials/custom port; redirect guard in continuation mode permits only HTTPS same-host redirects on default/443 without auth. Existing cooldown/cache and bounded document/time limits retained.",
@@ -1271,14 +1271,14 @@
       "backendTests": "205/205 after run; six public JSON hashes stable",
       "dbWrites": 0
     },
-    "nextAction": "Correct the Caserta source ID in the checkpoint to cai-caserta-9238006 (verified in sections/status/FAILURES), publish and remotely verify that correction; no run or lock was created. Then resume the same single URL https://www.caicaserta.it/escursioni.html with unique ID, max1 document/120s/concurrency1."
+    "nextAction": "Remote checkpoint 8ed9f735f6ae5f36af2e5dd7f94517ab0472722e verified with correct source ID cai-caserta-9238006. Run exactly cai-20261022-campania-caserta-index01 on https://www.caicaserta.it/escursioni.html, max1 document/120s/concurrency1; do not retry annual PDF or expand discovery. Stop collection before tests/QA."
   },
   "repositoryCommit": {
     "branch": "codex/cai-orchestrator-luna",
-    "head": "0f5992d9c451f34fdeecd685721de4420cc93652",
+    "head": "8ed9f735f6ae5f36af2e5dd7f94517ab0472722e",
     "remoteVerified": true,
-    "fetchHead": "0f5992d9c451f34fdeecd685721de4420cc93652",
-    "checkpointKind": "Castrovillari link preflight + Campania Caserta bounded-index plan (STATE/HANDOFF/PLAN/REGIONS)"
+    "fetchHead": "8ed9f735f6ae5f36af2e5dd7f94517ab0472722e",
+    "checkpointKind": "Correct Caserta source ID in STATE/HANDOFF/PLAN/REGIONS; bounded index sample authorized"
   },
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
@@ -1302,8 +1302,8 @@
     }
   },
   "tests": "After the Castrovillari01 collection finished, backend npm test passed 205/205; SHA-256 for six public JSON files was identical before/after. No tests were run concurrently with collection.",
-  "updatedAt": "2026-10-22T23:01:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:59:10Z",
+  "updatedAt": "2026-10-22T23:02:15Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:02:15Z",
   "regionCurrent": "Calabria — Castrovillari01 partial; 12 existing event rows unchanged, 0 events extracted from index; PDF OCR page2/discovery8 and HTML discovery1 open. Four newly visible PDF links reviewed offline; none safe to collect under a currently registered source.",
   "regionNext": "After remote verification of source ID correction to cai-caserta-9238006, retry only the authorized bounded index sample; no other URL.",
   "preflight": {
