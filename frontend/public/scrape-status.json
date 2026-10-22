@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T23:18:05.384Z",
+  "generatedAt": "2026-10-22T23:25:05.804Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -25363,7 +25363,7 @@
       "excursions": 6,
       "error": null,
       "hash": "28d4cc1070b27109d9959c165cec9451bc5d1b2e72b85d2de8d97ec8a3cb4812",
-      "updatedAt": "2026-10-22T23:18:05.384Z",
+      "updatedAt": "2026-10-22T23:25:05.804Z",
       "documents": [
         {
           "url": "https://www.caicesena.com/images/download/2026/calendario_2026_apz_cai_cesena.pdf",
@@ -25382,11 +25382,18 @@
           "hash": "292708d5ddddb26a9e412d30777ac7bfb47efc22fc51af71ea27c5642b8bc9c9",
           "events": 0,
           "method": null
+        },
+        {
+          "url": "https://www.caicesena.com/images/download/2026/programma_2026_escursionismo_adattato_cai_cesena.jpg",
+          "hash": "6c11893a0b371c51650c39a8275a777d13bc06f29dc0f9204fd6aaf6bc72702c",
+          "events": 0,
+          "method": "image-ocr"
         }
       ],
       "methods": [
         "pdf-ocr",
-        "pdf-text"
+        "pdf-text",
+        "image-ocr"
       ],
       "issues": [
         {

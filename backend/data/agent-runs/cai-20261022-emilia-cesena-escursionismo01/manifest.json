@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-emilia-cesena-escursionismo01",
+  "createdAt": "2026-10-22T23:25:06.006Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "85d5482519433df06d2e15d2db3deb651309ac52945671607bb954170f40c2ad"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "90e1e6a62de6e059d02f7853681a8a1c6a4a1551966076cccfe378ef61c47dcc"
+    }
+  ]
+}

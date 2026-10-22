@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "emilia-romagna-cesena-index01-files-awaiting-checkpoint",
+  "phase": "emilia-romagna-cesena-escursionismo01-files-awaiting-checkpoint",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -71,14 +71,14 @@
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "official source QA, bounded provider circuit breaker, adapter/tests",
-      "status": "Cesena index01 raccolto: 1 pagina, method null, 0 estrazioni, 6 eventi esistenti preservati; offline preflight selezionato JPEG escursionismo 2026 distinto."
+      "status": "Cesena escursionismo01 raccolto con image-ocr; date nel poster senza titolo/destinazione, nessuna riga inferita; offline preflight selezionato CAI Pavullo."
     },
     "importer": {
       "name": "cai-importer",
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "classification manifest validator, candidate/effective QA schema, conflicts/reconciliation and DB safety",
-      "status": "Cesena index01 independent QA PASS; no event delta, backend tests pass, no DB query/import."
+      "status": "Cesena escursionismo01 independent QA PASS; nessun delta evento; backend tests 205/205; no DB."
     }
   },
   "baseline": {
@@ -353,11 +353,26 @@
     },
     {
       "id": "S34",
+      "status": "completed",
+      "result": "Checkpoint Cesena index01 remoto verificato cd98b54; una successiva preflight offline ha selezionato il JPEG ufficiale Escursionismo Adattato 2026, distinto dai PDF bloccati."
+    },
+    {
+      "id": "S35",
+      "status": "completed",
+      "result": "Cesena escursionismo01: un singolo JPEG ufficiale (685,319 B, SHA 6c11893a0b371c51650c39a8275a777d13bc06f29dc0f9204fd6aaf6bc72702c) elaborato image-ocr. Poster conferma programma 2026 e date future, ma non associa titoli/destinazioni; 0 record estratti/inferiti. Sei record Cesena invariati; 3.366 ID unici, 0 add/remove/change; fonte partial."
+    },
+    {
+      "id": "S36",
+      "status": "completed",
+      "result": "Importer QA PASS; npm test backend 205/205 dopo la raccolta; sei JSON pubblici invariati nei test. Nessuna query/scrittura DB o import, delta zero."
+    },
+    {
+      "id": "S37",
       "status": "in_progress",
-      "result": "Checkpoint remoto degli artefatti Cesena01 e stato regionale, poi bounded sample dell’unico JPEG ufficiale di escursionismo 2026 trovato offline nell’indice checkpointato."
+      "result": "Pubblicare e verificare il checkpoint del secondo campione Cesena e aggiornare la copertura; poi un campione limitato CAI Pavullo su URL ufficiale non visitato."
     }
   ],
-  "nextAction": "Pubblicare e verificare il checkpoint completo del sample Cesena01 (report, manifest, state, cataloghi/status e handoff); poi, dopo il checkpoint, campionare soltanto il JPEG ufficiale 2026 di escursionismo già linkato dall’indice, max1 documento/120s/concurrency1. Nessuna classificazione/import perché non c’è delta; non ripetere i PDF annuale o giovani.",
+  "nextAction": "Pubblicare e verificare il checkpoint completo di Cesena escursionismo01 e handoff; poi campionare l’URL ufficiale CAI Pavullo nel Frignano https://www.caipavullo.it/calendario-2026/ con run univoco, max1 documento/120s/concurrency1. Non ripetere code ICS/PDF culturale già bloccate né i PDF Cesena. Nessun import Cesena: zero righe evento complete.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -366,18 +381,24 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "0fdd1dc79a9027bbd765095460173cb39b8660b4",
+    "branchHead": "cd98b54dd29eebbdeb4f1bdbdc11ad315713f32a",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
-      "runId": "cai-20261022-emilia-cesena-index01",
+      "runId": "cai-20261022-emilia-cesena-escursionismo01",
       "collection": "partial",
       "files": "ready",
       "database": "pending",
       "sourceId": "cai-cesena-9224012",
-      "sourceUrl": "https://www.caicesena.com/index.php/programma-attivita",
-      "documentBytes": 33413,
-      "documentSha256": "292708d5ddddb26a9e412d30777ac7bfb47efc22fc51af71ea27c5642b8bc9c9",
-      "eventsExtracted": 0,
+      "sourceUrl": "https://www.caicesena.com/images/download/2026/programma_2026_escursionismo_adattato_cai_cesena.jpg",
+      "documentBytes": 685319,
+      "documentSha256": "6c11893a0b371c51650c39a8275a777d13bc06f29dc0f9204fd6aaf6bc72702c",
+      "method": "image-ocr",
+      "dateOccurrencesObserved": [
+        "2026-10-24",
+        "2026-11-07",
+        "2026-11-21"
+      ],
+      "completeEventsExtracted": 0,
       "existingSectionRows": 6,
       "catalogIdsBefore": 3366,
       "catalogIdsAfter": 3366,
@@ -385,20 +406,20 @@
       "removed": 0,
       "changed": 0,
       "duplicateIdsExcluded": 0,
-      "manifestSha256": "e373ca59a7c19fdbeda66cae44c0a7d7b4575fbaaa920b5a3ed9a91441f00041",
-      "reportSha256": "2d73af59a93adc8154ee6f59798ecad3b1c531fe9f8b5d464f82aa4f54f137de",
-      "stateSha256": "f23d9c5d5df718d256bf9febd153298b4bffbea027c10b8deddb79a398c842a8",
+      "manifestSha256": "8caa9bc863d6f8be297e6eff362ddcb43eecc2413700a577da048d7b447f6925",
+      "reportSha256": "174b8146e0ff7d306bd3cf4f52b72770c5eb18818ee644f0deff806a92522fcb",
+      "stateSha256": "87056fdf3c04fa24806d4ccba42c9bec4953074f54c8ba3970b1978c2e2e34d1",
       "importerQa": "PASS",
       "backendTests": "205/205; six public JSON SHA-256 unchanged"
     },
-    "nextAction": "Pubblicare e verificare il checkpoint completo del sample Cesena01 (report, manifest, state, cataloghi/status e handoff); poi, dopo il checkpoint, campionare soltanto il JPEG ufficiale 2026 di escursionismo già linkato dall’indice, max1 documento/120s/concurrency1. Nessuna classificazione/import perché non c’è delta; non ripetere i PDF annuale o giovani."
+    "nextAction": "Pubblicare e verificare il checkpoint completo di Cesena escursionismo01 e handoff; poi campionare l’URL ufficiale CAI Pavullo nel Frignano https://www.caipavullo.it/calendario-2026/ con run univoco, max1 documento/120s/concurrency1. Non ripetere code ICS/PDF culturale già bloccate né i PDF Cesena. Nessun import Cesena: zero righe evento complete."
   },
   "repositoryCommit": {
     "branch": "codex/cai-orchestrator-luna",
-    "head": "0fdd1dc79a9027bbd765095460173cb39b8660b4",
+    "head": "cd98b54dd29eebbdeb4f1bdbdc11ad315713f32a",
     "remoteVerified": true,
-    "fetchHead": "0fdd1dc79a9027bbd765095460173cb39b8660b4",
-    "checkpointKind": "verified handoff/preflight checkpoint before Cesena01 collection"
+    "fetchHead": "cd98b54dd29eebbdeb4f1bdbdc11ad315713f32a",
+    "checkpointKind": "Cesena index01 run/catalog/handoff; second sample awaiting checkpoint"
   },
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
@@ -422,17 +443,17 @@
     }
   },
   "tests": "After the Castrovillari01 collection finished, backend npm test passed 205/205; SHA-256 for six public JSON files was identical before/after. No tests were run concurrently with collection.",
-  "updatedAt": "2026-10-22T23:21:43Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:21:43Z",
-  "regionCurrent": "Emilia-Romagna — CAI Cesena index01: 1 URL controllata, fonte partial, 6 record storici invariati, 0 estratti e 0 delta catalogo; nessuna classificazione o scrittura DB.",
-  "regionNext": "Emilia-Romagna — bounded sample dell’immagine ufficiale https://www.caicesena.com/images/download/2026/programma_2026_escursionismo_adattato_cai_cesena.jpg (link diretto nell’indice già campionato), dopo checkpoint remoto; max1/120s/concurrency1.",
+  "updatedAt": "2026-10-22T23:28:13Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:28:13Z",
+  "regionCurrent": "Emilia-Romagna — Cesena escursionismo01: poster 2026 OCR, date senza titoli/destinazioni; 0 eventi completi, sei record esistenti invariati, nessuna scrittura DB.",
+  "regionNext": "Emilia-Romagna — CAI Pavullo nel Frignano, calendario ufficiale https://www.caipavullo.it/calendario-2026/, target distinto senza history/cache/failure/cooldown; dopo checkpoint, max1/120s/concurrency1.",
   "preflight": {
-    "at": "2026-10-22T23:21:43Z",
-    "sourceId": "cai-cesena-9224012",
-    "scope": "offline inspection of cached official index and source registry/history/cache/failures",
-    "result": "one distinct same-host 2026 hiking-program JPEG candidate; not visited/cached/failed; deterministic image-ocr supported",
-    "reason": "linked directly from the checkpointed CAI activity index; candidate filename identifies 2026 hiking programme; no network used",
-    "next": "publish Cesena01 files and handoff checkpoint, then one bounded fetch of the exact JPEG"
+    "at": "2026-10-22T23:28:13Z",
+    "sourceId": "cai-pavullo-nel-frignano-9224020",
+    "scope": "offline source registry, status/document history, run artifacts, cache, FAILURES/cooldown",
+    "result": "one exact same-host official calendar URL eligible for bounded sample",
+    "reason": "registered calendarEvidence label Calendario 2026; exact URL absent from status/documents/cache/run history/FAILURES. Other source issues are separate: ICS discovery 5; excursion PDF OCR yielded 7; cultural PDF timeout with no-automatic-retry policy.",
+    "next": "publish Cesena escursionismo01 checkpoint, then one explicit URL fetch at max1 document/120s/concurrency1"
   },
   "databasePreflight": {
     "observedAt": "2026-10-22T22:30:21.913236Z",

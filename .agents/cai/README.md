@@ -41,11 +41,11 @@ non dimostra che una chat nuova possa recuperare il lavoro.
 
 ## Stato di questo passaggio — 22 ottobre 2026
 
-Branch `codex/cai-orchestrator-luna`; checkpoint remoto corrente `0fdd1dc79a9027bbd765095460173cb39b8660b4`. La classificazione completa del catalogo e i delta precedenti (incluso Valmadrera) sono chiusi e riconciliati; non ripetere gli import storici. Campania non ha al momento un URL distinto sicuro senza replay delle code bloccate.
+Branch `codex/cai-orchestrator-luna`; ultimo checkpoint remoto verificato `cd98b54dd29eebbdeb4f1bdbdc11ad315713f32a`. Classificazione completa e delta precedenti sono chiusi; non ripetere i batch/import storici.
 
-Il run Cesena `cai-20261022-emilia-cesena-index01` ha letto una sola pagina ufficiale; la fonte resta `partial`, `method=null`, 0 estrazioni non equivale a calendario vuoto. 3.366 ID nazionali invariati, nessun delta o DB. QA importer PASS; backend `npm test` 205/205 e sei JSON pubblici invariati. Il checkpoint operativo dei file Cesena e del presente handoff deve essere pubblicato prima del prossimo fetch. Preflight offline ha selezionato un solo URL successivo, JPEG ufficiale 2026: `https://www.caicesena.com/images/download/2026/programma_2026_escursionismo_adattato_cai_cesena.jpg`, max1 documento/120s/concurrency1. I PDF annuale e giovani restano distinti e non vanno ripetuti.
+Cesena index01 e poster Escursionismo Adattato01 hanno verificato due fonti ufficiali; entrambe restano partial. Il poster elenca date 2026 senza abbinarle a titoli/destinazioni, quindi nessun evento completo o coordinata è stato inferito. 3.366 ID unici invariati, nessun DB. Importer QA PASS e backend test 205/205, sei JSON pubblici stabili. Il checkpoint del secondo run deve essere pubblicato prima del prossimo fetch. Preflight offline seleziona CAI Pavullo, `https://www.caipavullo.it/calendario-2026/`, max1 documento/120s/concurrency1; issues ICS/PDF già note sono su URL distinti e non vanno ripetute.
 
-Orchestratore e due ruoli `cai-collector`/`cai-importer` sono richiesti/configurati GPT-6 Luna high; l’identità/effort effettivi non sono attestati dalla telemetria runtime. Nessun merge, deploy, cron o cancellazione DB.
+Orchestratore e ruoli `cai-collector`/`cai-importer` sono richiesti/configurati GPT-6 Luna high; telemetria runtime non attesta identità/effort effettivi. Nessun merge, deploy, cron o cancellazione DB.
 
 ## Responsabilità
 
