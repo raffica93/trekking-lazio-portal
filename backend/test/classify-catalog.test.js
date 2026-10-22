@@ -152,6 +152,32 @@ test('run writes isolated catalog, state, decision/category counts and verifiabl
   } finally { await fs.rm(temp.root, { recursive: true, force: true }); }
 });
 
+test('new classification runs persist repository-relative input paths in state and manifest', async () => {
+  const repoRoot = path.resolve(__dirname, '../..');
+  const temp = path.join(repoRoot, 'backend', 'data', 'agent-runs', `portable-path-${process.pid}-${Date.now()}`);
+  const input = path.join(temp, 'input.json');
+  const output = path.join(temp, 'result');
+  const event = { id: 'portable-input-fixture', title: 'Escursione al rifugio' };
+  event.classification = classifyRules(event);
+  await fs.mkdir(temp, { recursive: true });
+  await fs.writeFile(input, JSON.stringify([event]));
+  try {
+    const state = await runCatalogClassification({
+      input, output, runId: 'portable-path-01',
+      env: { OPENROUTER_API_KEY: 'test-only', MERCURY_DECIDE_ENABLED: '1', OPENROUTER_ALLOWED_HOSTS: 'openrouter.ai' }
+    });
+    const relativeInput = path.relative(repoRoot, input).split(path.sep).join('/');
+    assert.equal(state.input, relativeInput);
+    const manifest = JSON.parse(await fs.readFile(path.join(output, MANIFEST_NAME), 'utf8'));
+    assert.equal(manifest.input.path, relativeInput);
+    assert.equal(manifest.input.sha256, state.inputSha256);
+    for (const entry of manifest.files) {
+      const bytes = await fs.readFile(path.join(output, entry.path));
+      assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), entry.sha256);
+    }
+  } finally { await fs.rm(temp, { recursive: true, force: true }); }
+});
+
 test('API failures stay invalid, are counted, and resume retries them without marking files ready', async () => {
   const temp = await workspace();
   await fs.writeFile(temp.input, JSON.stringify([{ id: 'cai-unclear-1', title: 'Programma speciale', date: '2026-11-01' }]));

@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "runId": "cai-map-20261022-valmadrera01",
+  "createdAt": "2026-10-22T20:19:25.944Z",
+  "input": {
+    "path": "backend/data/agent-runs/cai-map-20261022-valmadrera01/input.json",
+    "sha256": "287911693fde8f58a2d2f09b9ab4f645efff624682ff6dc1a72410dfbb59c363"
+  },
+  "files": [
+    {
+      "path": "classified-catalog.json",
+      "sha256": "e827a123629e43022e050bea22686ed4b4febf1dab98d0016fbe7b818a1c602e",
+      "bytes": 21868
+    },
+    {
+      "path": "state.json",
+      "sha256": "c883538f2d18c1d4cdf334c79b6b6104b23fe30c76adf4ee9edbc0d2953b5054",
+      "bytes": 886
+    }
+  ]
+}

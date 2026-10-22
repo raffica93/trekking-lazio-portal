@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "regional-files-verified-awaiting-classification",
+  "phase": "delta-file-checkpoint-ready-awaiting-db-import",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -203,11 +203,17 @@
       "status": "completed",
       "owner": "orchestrator + cai-collector + cai-importer",
       "result": "Run cai-20261022-lombardia-valmadrera07 reprocessed the single official 2026 PDF with deterministic parser VERSION 11: 65 document rows reconciled to 21 future catalog events (7 existing + 14 new), with 0 existing-row changes/removals. Parser failure resolved by the source run. One conditional GET succeeded through the inherited proxy; exact HTTP status is not persisted (304 inferred from unchanged cache mtimes). Independent importer QA PASS; backend tests 187/187. Files are ready, database pending classification of the 14 new IDs."
+    },
+    {
+      "id": "S8",
+      "status": "completed",
+      "owner": "collector + importer + orchestrator",
+      "result": "Run07 semantic duplicate review excluded 2 confirmed and held 2 probable duplicates; Mercury batch cai-map-20261022-valmadrera01 classified the remaining 10 (8 non_trekking supported by official PDF, 2 da_verificare, 0 trekking, 0 errors). Collector QA and importer schema/integrity QA PASS. Added insert-only bounded delta importer, resumable partial receipt state, and portable repo-relative input paths; backend npm test 193/193. No DB writes."
     }
   ],
   "nextAction": {
-    "step": "S8",
-    "instruction": "Checkpoint the verified run07 regional files/report on origin, then classify only the 14 newly added Valmadrera source IDs with the verified Mercury contract in an isolated run. Independent QA and a second remote file checkpoint must precede any classification-only DB upsert. Do not reimport existing rows or alter places."
+    "step": "S9",
+    "instruction": "Commit and push the verified importer/orchestrator changes plus the sealed 10-event classification delta and duplicate/source QA artifacts. Verify remote ref and blob hashes. Only then repeat the read-only target-ID and editorial-digest query, run the published insert-only delta through the importer, save the receipt, and verify the after-state. Do not scrape or reimport the 3,336 classified baseline rows."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -883,5 +889,37 @@
     "result": "blocked-before-request",
     "reason": "Expired 6h cooldown makes collector schedule historical 503 URL; no exact exclusion option. No network request, no collection, no files or DB changed.",
     "next": "Select a different official Lombardia source after read-only queue/cooldown review."
+  },
+  "databasePreflight": {
+    "observedAt": "2026-10-22T20:28:47.638735Z",
+    "method": "authorized-supabase-mcp-read-only",
+    "projectRef": "snwzxegtqnnuvlawnpgl",
+    "placesTotal": 4405,
+    "publishedTotal": 4346,
+    "currentMapCandidates": 3336,
+    "classificationsTotal": 3336,
+    "targetPlaceRows": 0,
+    "targetClassificationRows": 0,
+    "placesLastUpdated": "2026-10-20T11:51:23.239637Z",
+    "editorialDigest": "b52a6bcc1c0d4779ffeb112e5547c891",
+    "fk": "place_classifications.source_id -> places.source_id ON DELETE RESTRICT",
+    "writePerformed": false
+  },
+  "deltaDelivery": {
+    "regionalRunId": "cai-20261022-lombardia-valmadrera07",
+    "classificationRunId": "cai-map-20261022-valmadrera01",
+    "status": "files-ready-db-pending-checkpoint",
+    "candidateIds": 10,
+    "confirmedDuplicatesExcluded": 2,
+    "probableDuplicatesHeld": 2,
+    "classificationCounts": {
+      "trekking": 0,
+      "non_trekking": 8,
+      "da_verificare": 2,
+      "errors": 0
+    },
+    "coordinatesAdded": 0,
+    "writeContract": "insert-only places + missing classifications; conflict-ignore; no deletes/updates",
+    "next": "commit/push and verify the sealed input/output and importer code; then fresh read-only DB check, published insert-only delta, verify receipt and after-query"
   }
 }

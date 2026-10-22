@@ -1,6 +1,6 @@
 # Piano di passaggio al lavoro interamente cloud
 
-Stato aggiornato al 22 ottobre 2026: classificazione completa del catalogo importata e riconciliata. Il lavoro attivo è la ripresa regionale Lombardia a campioni limitati; le sezioni più sotto che indicano il batch come prossimo passo sono piano storico, superato dalla ricevuta DB e dagli aggiornamenti finali.
+Stato aggiornato al 22 ottobre 2026: classificazione completa del catalogo importata e riconciliata. La raccolta Valmadrera run07 e il delta classificato sono già pronti; il lavoro attivo è pubblicare il checkpoint delta, consegnare soltanto i 10 eventi non duplicati con importer insert-only e riconciliare la ricevuta DB. Nessun nuovo scrape mentre il delivery è in corso; le sezioni più sotto che indicano il batch come prossimo passo sono piano storico.
 
 ## Sequenza
 

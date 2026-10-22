@@ -25,8 +25,16 @@ function parseArgs(argv) {
   const runId = argv[runIndex + 1];
   if (runIndex < 1 || !/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,79}$/.test(runId || '')) throw new Error('Specify --run with a safe run ID (1-80 letters, numbers, underscores or hyphens)');
   const rest = argv.slice(1).filter((_, index) => index !== runIndex - 1 && index !== runIndex);
+  let deltaManifest = null;
+  if (command === 'import' && rest.length) {
+    if (rest.length !== 3 || rest[0] !== '--delta-only' || rest[1] !== '--manifest'
+      || !rest[2] || rest[2].startsWith('--')) {
+      throw new Error('Import accepts only --delta-only --manifest <sealed-classification-manifest>');
+    }
+    deltaManifest = rest[2];
+  }
   const retryFailed = command === 'collect' && rest.length === 1 && rest[0] === '--retry-failed';
-  if (command !== 'init' && rest.length && !retryFailed) throw new Error('Scrape options belong to init only; collect accepts only --retry-failed');
+  if (command !== 'init' && command !== 'import' && rest.length && !retryFailed) throw new Error('Scrape options belong to init only; collect accepts only --retry-failed');
   const { parseScrapeArgs } = require('../pipeline');
   let sourceUrlContinuation = null;
   if (command === 'init') {
@@ -39,7 +47,7 @@ function parseArgs(argv) {
       sourceUrlContinuation = { sourceId: parsed.sources[0], urls: [...parsed.sourceUrls] };
     }
   }
-  return { command, runId, retryFailed, sourceUrlContinuation, scrapeArgs: command === 'init' && rest.length ? rest : ['--all'] };
+  return { command, runId, retryFailed, deltaManifest, sourceUrlContinuation, scrapeArgs: command === 'init' && rest.length ? rest : ['--all'] };
 }
 
 function coverageTasks(status) {
@@ -155,13 +163,45 @@ async function run({ argv = process.argv.slice(2), root = ROOT, runs = RUNS, col
       } else {
         if (state.database === 'completed') return state;
         if (state.files !== 'ready') throw new Error('Database import is waiting for verified collection files');
+        const resumablePartial = ['partial', 'failed', 'running'].includes(state.database);
+        if (resumablePartial && state.databaseImport?.mode !== 'delta-only' && !args.deltaManifest) {
+          throw new Error('A partial catalog import cannot be resumed wholesale; provide --delta-only --manifest for the sealed missing delta');
+        }
+        const priorDeltaManifest = state.databaseImport?.mode === 'delta-only'
+          ? path.resolve(root, state.databaseImport.manifestPath) : null;
+        const requestedDeltaManifest = args.deltaManifest ? path.resolve(root, args.deltaManifest) : null;
+        if (resumablePartial && priorDeltaManifest && requestedDeltaManifest && requestedDeltaManifest !== priorDeltaManifest) {
+          throw new Error('Delta resume must reuse the original sealed classification manifest');
+        }
+        const deltaManifest = requestedDeltaManifest || (resumablePartial ? priorDeltaManifest : null);
+        if (deltaManifest) {
+          const relative = path.relative(root, deltaManifest);
+          if (relative === '..' || relative.startsWith(`..${path.sep}`) || path.isAbsolute(relative)) {
+            throw new Error('Delta classification manifest must stay inside the repository');
+          }
+        }
+        state.databaseImport = deltaManifest
+          ? { mode: 'delta-only', manifestPath: path.relative(root, deltaManifest).split(path.sep).join('/') }
+          : { mode: 'catalog', manifestPath: state.manifest };
         state.database = 'running';
         delete state.error;
-        await save('database-started');
+        await save(resumablePartial ? 'database-delta-resume-started' : 'database-started');
         const importer = importData || require('./import-supabase').main;
-        state.importResult = await importer({ argv: ['--manifest', manifestFile] });
-        state.database = 'completed';
-        await save('database-completed');
+        const importArgv = deltaManifest
+          ? ['--delta-only', '--manifest', deltaManifest]
+          : ['--manifest', manifestFile];
+        state.importResult = await importer({ argv: importArgv });
+        const result = state.importResult || {};
+        const partial = (result.status != null && result.status !== 'completed')
+          || Number(result.skippedUnclassifiedNew || 0) > 0
+          || Number(result.classifications?.errors || 0) > 0
+          || Number(result.classifications?.mismatched?.length || result.classifications?.mismatchedSourceIds?.length || 0) > 0
+          || Number(result.classifications?.skipped?.length || result.skippedClassifications || 0) > 0
+          || Number(result.places?.missing?.length || 0) > 0
+          || Number(result.places?.skipped?.length || 0) > 0
+          || Number(result.places?.protectedFieldMismatches?.length || 0) > 0;
+        state.database = partial ? 'partial' : 'completed';
+        await save(partial ? 'database-partial-resumable' : 'database-completed');
       }
     }
     log.log(JSON.stringify({ runId: state.runId, collection: state.collection, files: state.files, database: state.database }, null, 2));
@@ -169,7 +209,7 @@ async function run({ argv = process.argv.slice(2), root = ROOT, runs = RUNS, col
   } catch (error) {
     if (state && args.command !== 'init') {
       if (args.command === 'collect') state.collection = 'failed';
-      else state.database = 'failed';
+      else if (state.database === 'running') state.database = 'failed';
       state.error = error.message;
       await save(`${args.command}-failed`);
     }

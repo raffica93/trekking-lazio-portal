@@ -21,7 +21,7 @@ const {
   main
 } = require('../scripts/import-supabase');
 const { DEFAULT_COORDS } = require('../scraper');
-const { classifyRules } = require('../adapters/mercury-decide');
+const { classifyRules, fingerprintFor } = require('../adapters/mercury-decide');
 
 test('import manifest verifies every listed file and required source coverage', (t) => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'cai-import-'));
@@ -86,18 +86,73 @@ function verifiedGeo(sourceKind = 'official', sourceUrl = 'https://example.org/c
   return { status: 'verified', pointType: 'area', precision: 'high', sourceKind, sourceUrl };
 }
 
+function writeSealedClassificationRun(root, runId, events, { portableInputPath = true, stateStatus = 'ready' } = {}) {
+  const runDir = path.join(root, 'backend', 'data', 'agent-runs', runId);
+  const resultDir = path.join(runDir, 'result');
+  fs.mkdirSync(resultDir, { recursive: true });
+  const input = { source: 'fixture', baselineCommit: 'fixture-baseline', excursions: events.map(({ classification, ...event }) => event) };
+  const output = { ...input, excursions: events };
+  const inputBytes = Buffer.from(JSON.stringify(input));
+  const outputBytes = Buffer.from(JSON.stringify(output));
+  const inputPath = path.join(runDir, 'input.json');
+  fs.writeFileSync(inputPath, inputBytes);
+  const inputSha256 = crypto.createHash('sha256').update(inputBytes).digest('hex');
+  const state = {
+    runId, status: stateStatus,
+    input: portableInputPath ? path.relative(root, inputPath).split(path.sep).join('/') : inputPath,
+    inputSha256, total: events.length, completed: events.length, processed: events.length, errors: []
+  };
+  const stateBytes = Buffer.from(JSON.stringify(state));
+  fs.writeFileSync(path.join(resultDir, 'classified-catalog.json'), outputBytes);
+  fs.writeFileSync(path.join(resultDir, 'state.json'), stateBytes);
+  const manifest = {
+    version: 1, runId, createdAt: new Date().toISOString(),
+    input: {
+      path: portableInputPath ? path.relative(root, inputPath).split(path.sep).join('/') : inputPath,
+      sha256: inputSha256
+    },
+    files: [
+      { path: 'classified-catalog.json', sha256: crypto.createHash('sha256').update(outputBytes).digest('hex'), bytes: outputBytes.length },
+      { path: 'state.json', sha256: crypto.createHash('sha256').update(stateBytes).digest('hex'), bytes: stateBytes.length }
+    ]
+  };
+  const manifestPath = path.join(resultDir, 'manifest.json');
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest));
+  return { runDir, resultDir, manifestPath, inputPath, state, input, output };
+}
+
+function classifiedFixture(source, overrides = {}) {
+  const classification = {
+    decision: 'da_verificare', category: 'altro', confidence: 0.75, probability: 0.8,
+    rationale: 'Fixture deterministica per test del delta importer.',
+    evidenceOriginal: JSON.stringify({ title: source.title, sourceEvidence: source.sourceDocument }),
+    source_id: source.id, fingerprint: fingerprintFor(source), model: 'inception/mercury-decide-20260930',
+    modelRequested: 'inception/mercury-decide', responseModel: 'inception/mercury-decide-20260930',
+    modelAttested: true, method: 'mercury-decide', policyVersion: 'cai-trekking-v2',
+    modelVersion: 'inception/mercury-decide-20260930',
+    ...overrides
+  };
+  classification.mapEligible = classification.decision === 'trekking';
+  return {
+    ...source,
+    classification
+  };
+}
+
 function createFakeSupabase({
   existingSourceIds = [],
   existingRows = null,
   existingClassificationRows = [],
   selectError = null,
   insertError = null,
-  updateError = null
+  updateError = null,
+  concurrentPlaceRows = []
 } = {}) {
   const inserts = [];
   const updates = [];
   const selects = [];
   const classificationUpserts = [];
+  const placeUpserts = [];
   const classificationRows = existingClassificationRows.map((row) => ({ ...row }));
   const tables = [];
   const rows = existingRows || existingSourceIds.map((source_id) => ({
@@ -112,6 +167,7 @@ function createFakeSupabase({
     updates,
     selects,
     classificationUpserts,
+    placeUpserts,
     classificationRows,
     rows,
     tables,
@@ -147,7 +203,21 @@ function createFakeSupabase({
           };
         },
         upsert(batch, options) {
-          if (table === 'places') throw new Error('places import must insert new rows, not upsert');
+          if (table === 'places') {
+            assert.equal(options?.ignoreDuplicates, true);
+            placeUpserts.push(batch);
+            for (const row of concurrentPlaceRows) {
+              if (!rows.some((entry) => entry.source_id === row.source_id)) rows.push({ ...row });
+            }
+            const inserted = [];
+            for (const row of batch) if (!rows.some((entry) => entry.source_id === row.source_id)) {
+              rows.push({ ...row, id: `fake-${row.source_id}` });
+              inserted.push(row);
+            }
+            const result = Promise.resolve({ data: batch, error: null });
+            result.select = async () => ({ data: inserted.map(({ source_id }) => ({ source_id })), error: null });
+            return result;
+          }
           classificationUpserts.push(batch);
           const inserted = [];
           if (options?.ignoreDuplicates) {
@@ -461,6 +531,154 @@ test('classification-only CLI verifies a sealed classifier run and touches only 
     files: { repoRoot: root }
   }), /status=ready/);
   assert.equal(partialClientCreated, false);
+});
+
+test('delta-only CLI inserts the sealed delta places then classifications and resumes without reimport', async (t) => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'cai-delta-only-'));
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const source = {
+    id: 'cai-valmadrera-test-new', sourceId: 'cai-valmadrera-9216081',
+    title: 'Escursione fixture', date: '2026-11-04', dateEnd: '2026-11-04',
+    location: 'Località da verificare', sourceDocument: 'https://example.org/calendar.pdf',
+    link: 'https://example.org/calendar.pdf', lat: null, lng: null,
+    coordinatesQuality: 'unknown', organizer: 'CAI Valmadrera', organizerRegion: 'Lombardia'
+  };
+  const event = classifiedFixture(source);
+  const run = writeSealedClassificationRun(root, 'delta-first-load', [event]);
+  const supabase = createFakeSupabase();
+  let clientsCreated = 0;
+  const invoke = () => main({
+    argv: ['--delta-only', '--manifest', run.manifestPath],
+    env: { SUPABASE_URL: 'https://snwzxegtqnnuvlawnpgl.supabase.co', SUPABASE_SERVICE_ROLE_KEY: 'test-only' },
+    supabaseFactory: () => { clientsCreated += 1; return supabase; },
+    files: { repoRoot: root }, now: () => '2026-10-22T22:00:00.000Z'
+  });
+
+  const first = await invoke();
+  assert.equal(first.status, 'completed');
+  assert.equal(first.mode, 'delta-only');
+  assert.deepEqual(first.places.insertedSourceIds, [source.id]);
+  assert.equal(first.places.existingPreserved, 0);
+  assert.equal(first.places.updated, 0);
+  assert.equal(first.places.deleted, 0);
+  assert.equal(first.classifications.inserted, 1);
+  assert.equal(first.classifications.matched, 1);
+  assert.deepEqual([...new Set(supabase.tables)], ['places', 'place_classifications']);
+  assert.equal(supabase.placeUpserts.length, 1);
+  assert.equal(supabase.classificationUpserts.length, 1);
+  assert.equal(supabase.rows[0].source_id, source.id);
+  assert.equal(supabase.rows[0].status, 'draft');
+  assert.equal(supabase.classificationRows[0].source_id, source.id);
+  assert.deepEqual(supabase.updates, []);
+  assert.deepEqual(supabase.inserts, []);
+
+  const second = await invoke();
+  assert.equal(second.status, 'completed');
+  assert.equal(second.places.inserted, 0);
+  assert.deepEqual(second.places.existingPreservedSourceIds, [source.id]);
+  assert.equal(second.classifications.inserted, 0);
+  assert.deepEqual(second.classifications.preexistingSourceIds, [source.id]);
+  assert.equal(supabase.placeUpserts.length, 1);
+  assert.equal(supabase.classificationUpserts.length, 1);
+  assert.deepEqual(supabase.updates, []);
+  assert.deepEqual(supabase.inserts, []);
+  assert.equal(clientsCreated, 2);
+  assert.equal(first.manifestSha256, second.manifestSha256);
+  assert.equal(first.inputSha256, second.inputSha256);
+});
+
+test('delta-only preserves curated and concurrent conflicts and keeps mismatches partial', async (t) => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'cai-delta-conflicts-'));
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const make = (id, title) => classifiedFixture({
+    id, sourceId: 'cai-valmadrera-9216081', title, date: '2026-11-04',
+    location: 'Valmadrera', sourceDocument: 'https://example.org/calendar.pdf',
+    link: 'https://example.org/calendar.pdf', lat: null, lng: null,
+    coordinatesQuality: 'unknown'
+  });
+  const events = [make('new-delta-event', 'New event'), make('existing-curated-event', 'Candidate title'), make('race-conflict-event', 'Concurrent candidate')];
+  const run = writeSealedClassificationRun(root, 'delta-conflicts', events);
+  const curated = {
+    source_id: 'existing-curated-event', title: 'ADMIN TITLE', status: 'published', cover_image_path: 'curated/photo.jpg',
+    location: 'Admin location', latitude: 41.9, longitude: 12.5, coordinates_quality: 'admin',
+    geo_evidence: { status: 'verified', pointType: 'area', precision: 'high', sourceKind: 'official', sourceUrl: 'https://example.org/admin' },
+    organizer_region: 'Admin region', cai_section_id: 'admin-section'
+  };
+  const conflict = classificationToRow('existing-curated-event', events[1].classification);
+  conflict.decision = 'trekking';
+  conflict.candidate_decision = 'trekking';
+  conflict.category = 'a piedi';
+  conflict.candidate_category = 'a piedi';
+  conflict.rationale = 'Preexisting admin-reviewed decision';
+  conflict.fingerprint = 'admin-fingerprint';
+  const concurrent = {
+    source_id: 'race-conflict-event', title: 'CONCURRENT ADMIN TITLE', status: 'draft', cover_image_path: 'concurrent/photo.jpg',
+    location: 'Concurrent location', latitude: 42.1, longitude: 12.7, coordinates_quality: 'admin',
+    geo_evidence: null, organizer_region: 'Concurrent region', cai_section_id: 'concurrent-section'
+  };
+  const supabase = createFakeSupabase({
+    existingRows: [curated], existingClassificationRows: [conflict], concurrentPlaceRows: [concurrent]
+  });
+  const receipt = await main({
+    argv: ['--delta-only', '--manifest', run.manifestPath],
+    env: { SUPABASE_URL: 'https://snwzxegtqnnuvlawnpgl.supabase.co', SUPABASE_SERVICE_ROLE_KEY: 'test-only' },
+    supabaseFactory: () => supabase, files: { repoRoot: root },
+    now: () => '2026-10-22T22:01:00.000Z'
+  });
+  assert.equal(receipt.status, 'partial');
+  assert.deepEqual(receipt.places.insertedSourceIds, ['new-delta-event']);
+  assert.deepEqual(receipt.places.existingPreservedSourceIds, ['existing-curated-event']);
+  assert.deepEqual(receipt.places.concurrentConflictSourceIds, ['race-conflict-event']);
+  assert.deepEqual(receipt.places.protectedFieldMismatches, []);
+  assert.deepEqual(receipt.classifications.mismatched, ['existing-curated-event']);
+  assert.equal(receipt.classifications.inserted, 2);
+  assert.equal(receipt.places.updated, 0);
+  assert.equal(receipt.places.deleted, 0);
+  assert.deepEqual(supabase.rows.find((row) => row.source_id === curated.source_id), curated);
+  assert.deepEqual(supabase.rows.find((row) => row.source_id === concurrent.source_id), concurrent);
+  assert.equal(supabase.classificationRows.find((row) => row.source_id === conflict.source_id).rationale, 'Preexisting admin-reviewed decision');
+  assert.deepEqual(supabase.updates, []);
+  assert.deepEqual(supabase.inserts, []);
+  assert.equal(supabase.placeUpserts.length, 1);
+});
+
+test('delta-only accepts repo-relative and rebases legacy agent-runs input paths, but gates invalid runs pre-client', async (t) => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'cai-delta-gates-'));
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const source = { id: 'portable-event', title: 'Portable event', date: '2026-11-04', sourceDocument: 'https://example.org/calendar.pdf' };
+  const event = classifiedFixture(source);
+  const run = writeSealedClassificationRun(root, 'delta-portable', [event]);
+  const importer = require('../scripts/import-supabase');
+  assert.equal(importer.verifyReadyClassificationRun({ manifestPath: run.manifestPath, repoRoot: root }).rows.length, 1);
+  const legacyManifest = JSON.parse(fs.readFileSync(run.manifestPath, 'utf8'));
+  legacyManifest.input.path = `/old/cloud/checkout/backend/data/agent-runs/delta-portable/input.json`;
+  fs.writeFileSync(run.manifestPath, JSON.stringify(legacyManifest));
+  assert.equal(importer.verifyReadyClassificationRun({ manifestPath: run.manifestPath, repoRoot: root }).rows.length, 1);
+
+  let clientCreated = false;
+  const env = { SUPABASE_URL: 'https://snwzxegtqnnuvlawnpgl.supabase.co', SUPABASE_SERVICE_ROLE_KEY: 'test-only' };
+  await assert.rejects(main({
+    argv: ['--delta-only', '--manifest', run.manifestPath], env: { ...env, SUPABASE_IMPORT_STATUS: 'bad' },
+    supabaseFactory: () => { clientCreated = true; return createFakeSupabase(); }, files: { repoRoot: root }
+  }), /SUPABASE_IMPORT_STATUS/);
+  assert.equal(clientCreated, false);
+
+  const oversized = Array.from({ length: 501 }, (_, index) => classifiedFixture({ ...source, id: `portable-${index}` }));
+  const oversizedRun = writeSealedClassificationRun(root, 'delta-too-large', oversized);
+  await assert.rejects(main({
+    argv: ['--delta-only', '--manifest', oversizedRun.manifestPath], env,
+    supabaseFactory: () => { clientCreated = true; return createFakeSupabase(); }, files: { repoRoot: root }
+  }), /1–500 classified events/);
+  assert.equal(clientCreated, false);
+
+  const invalidEvent = classifiedFixture({ ...source, id: 'invalid-classification' });
+  invalidEvent.classification.valid = false;
+  const invalidRun = writeSealedClassificationRun(root, 'delta-invalid-classification', [invalidEvent]);
+  await assert.rejects(main({
+    argv: ['--delta-only', '--manifest', invalidRun.manifestPath], env,
+    supabaseFactory: () => { clientCreated = true; return createFakeSupabase(); }, files: { repoRoot: root }
+  }), /Invalid or misaligned classification/);
+  assert.equal(clientCreated, false);
 });
 
 test('classification migration protects place rows and accepts only verified Mercury snapshot identity', () => {

@@ -25,7 +25,7 @@ async function fixture(t) {
     importData: async ({ argv }) => {
       imports++;
       verifyImportManifest(argv[1], ['excursions.json', 'cai-sections.json', 'scrape-status.json'].map((name) => path.join(directory, name)), root);
-      return { inserted: 1, updated: 0, skipped: 0 };
+      return { status: 'completed', inserted: 1, updated: 0, skipped: 0 };
     }
   };
   const command = (...argv) => run({ ...options, argv: [argv[0], '--run', 'test', ...argv.slice(1)] });
@@ -47,6 +47,47 @@ test('database waits for files, then imports once and keeps partial sources as t
   await f.command('collect');
   assert.equal(f.imports(), 1);
   assert.equal(f.collections(), 1);
+});
+
+test('partial delta receipts remain resumable and repeat only the sealed delta manifest', async (t) => {
+  const f = await fixture(t);
+  await f.command('init');
+  await f.command('collect');
+  const calls = [];
+  let attempt = 0;
+  const runImport = async ({ argv }) => {
+    calls.push(argv);
+    return ++attempt === 1
+      ? { mode: 'delta-only', status: 'partial', places: { missing: [] }, classifications: { mismatched: ['cai-one'] } }
+      : { mode: 'delta-only', status: 'completed', places: { missing: [] }, classifications: { mismatched: [] } };
+  };
+  const manifest = 'backend/data/agent-runs/classification/delta/manifest.json';
+  const first = await run({ ...f.options, argv: ['import', '--run', 'test', '--delta-only', '--manifest', manifest], importData: runImport });
+  assert.equal(first.database, 'partial');
+  assert.equal(first.databaseImport.mode, 'delta-only');
+  const second = await run({ ...f.options, argv: ['import', '--run', 'test'], importData: runImport });
+  assert.equal(second.database, 'completed');
+  assert.deepEqual(calls, [
+    ['--delta-only', '--manifest', path.join(f.root, manifest)],
+    ['--delta-only', '--manifest', path.join(f.root, manifest)]
+  ]);
+});
+
+test('partial catalog receipt cannot be resumed by a wholesale import', async (t) => {
+  const f = await fixture(t);
+  await f.command('init');
+  await f.command('collect');
+  const statePath = path.join(f.options.runs, 'test', 'state.json');
+  const state = JSON.parse(await fs.readFile(statePath, 'utf8'));
+  state.database = 'partial';
+  state.databaseImport = { mode: 'catalog', manifestPath: state.manifest };
+  state.importResult = { status: 'partial', skippedUnclassifiedNew: 1 };
+  await fs.writeFile(statePath, JSON.stringify(state));
+  const importsBefore = f.imports();
+  await assert.rejects(f.command('import'), /cannot be resumed wholesale/);
+  assert.equal(f.imports(), importsBefore);
+  const after = await f.command('status');
+  assert.equal(after.database, 'partial');
 });
 
 test('changed files fail the import and keep resumable state', async (t) => {
@@ -82,8 +123,9 @@ test('global lock prevents overlapping collection and duplicate run cannot overw
 });
 
 test('invalid IDs, dry runs and unknown import flags are rejected', () => {
-  for (const argv of [['init', '--run', '../escape'], ['init', '--run', 'a', '--dry-run'], ['import', '--run', 'a', '--all']]) assert.throws(() => parseArgs(argv));
+  for (const argv of [['init', '--run', '../escape'], ['init', '--run', 'a', '--dry-run'], ['import', '--run', 'a', '--all'], ['import', '--run', 'a', '--delta-only']]) assert.throws(() => parseArgs(argv));
   assert.deepEqual(parseArgs(['init', '--run', 'valid', '--region', 'Lazio']).scrapeArgs, ['--region', 'Lazio']);
+  assert.equal(parseArgs(['import', '--run', 'valid', '--delta-only', '--manifest', 'sealed.json']).deltaManifest, 'sealed.json');
 });
 
 test('init persists explicit continuation URLs with their single source and rejects a cross-host URL', async (t) => {

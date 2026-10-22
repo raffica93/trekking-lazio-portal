@@ -25,6 +25,10 @@ function sha256(bytes) {
   return crypto.createHash('sha256').update(bytes).digest('hex');
 }
 
+function repoRelativePath(filePath) {
+  return path.relative(REPO_ROOT, filePath).split(path.sep).join('/');
+}
+
 function parseArgs(argv) {
   const args = { concurrency: 2, rateLimitMs: 1_000 };
   for (let index = 0; index < argv.length; index += 1) {
@@ -228,7 +232,7 @@ async function runCatalogClassification({
     version: 1,
     runId,
     status: 'running',
-    input: inputPath,
+    input: repoRelativePath(inputPath),
     inputSha256: inputHash,
     modelRequested: MODEL,
     policyVersion: POLICY_VERSION,
@@ -299,7 +303,7 @@ async function runCatalogClassification({
     version: 1,
     runId,
     createdAt: new Date().toISOString(),
-    input: { path: inputPath, sha256: inputHash },
+    input: { path: repoRelativePath(inputPath), sha256: inputHash },
     files: []
   };
   for (const name of [OUTPUT_NAME, STATE_NAME]) {

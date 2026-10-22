@@ -464,6 +464,33 @@ async function insertMissingClassifications({ supabase, rows = [] }) {
   };
 }
 
+async function insertMissingPlaces({ supabase, excursions = [], status = 'draft' }) {
+  assertUniqueSourceIds(excursions);
+  const sourceIds = excursions.map((event) => textOrNull(event.id)).filter(Boolean);
+  const before = await existingPlaces(supabase, sourceIds);
+  const missingEvents = excursions.filter((event) => !before.has(textOrNull(event.id)));
+  const missingRows = validateImportEvents(missingEvents, status);
+  const insertedIds = new Set();
+  for (const batch of chunk(missingRows)) {
+    const { data, error } = await supabase.from('places').upsert(batch, {
+      onConflict: 'source_id', ignoreDuplicates: true
+    }).select('source_id');
+    if (error) throw error;
+    for (const row of data || []) insertedIds.add(row.source_id);
+  }
+  const after = await existingPlaces(supabase, sourceIds);
+  const missingSourceIds = sourceIds.filter((sourceId) => !after.has(sourceId));
+  return {
+    input: sourceIds.length,
+    insertedSourceIds: [...insertedIds],
+    existingSourceIds: [...before.keys()],
+    concurrentConflictIds: missingEvents.map((event) => textOrNull(event.id)).filter((sourceId) => !insertedIds.has(sourceId) && after.has(sourceId)),
+    missingSourceIds,
+    before,
+    after
+  };
+}
+
 async function reconcileClassifications({ supabase, excursions = [], rows = prepareClassifications(excursions).rows }) {
   const expected = rows;
   const fields = 'source_id, decision, candidate_decision, category, candidate_category, review_metadata, confidence, probability, rationale, evidence_original, fingerprint, method, model_requested, response_model, model_attested, policy_version, model_version';
@@ -733,6 +760,33 @@ function classificationManifestArgument(argv = process.argv.slice(2), env = proc
   return env.SUPABASE_CLASSIFICATION_MANIFEST || null;
 }
 
+function resolveSealedInputPath(inputPath, { repoRoot, runDir }) {
+  if (typeof inputPath !== 'string' || !inputPath.trim()) throw new Error('Classification manifest input path is missing');
+  const repo = path.resolve(repoRoot);
+  const runsRoot = path.resolve(repo, 'backend/data/agent-runs');
+  const resolved = path.isAbsolute(inputPath) ? path.resolve(inputPath) : path.resolve(repo, inputPath);
+  const insideRepo = resolved === repo || resolved.startsWith(`${repo}${path.sep}`);
+  if (insideRepo) return resolved;
+
+  // Older run manifests stored the original absolute checkout path. Rebase only
+  // the known agent-runs suffix into this checkout; the sealed SHA-256 below
+  // still has to match before any client can be created.
+  const normalized = inputPath.replace(/\\/g, '/');
+  const marker = '/backend/data/agent-runs/';
+  const markerIndex = normalized.lastIndexOf(marker);
+  if (path.isAbsolute(inputPath) && markerIndex >= 0) {
+    const suffix = normalized.slice(markerIndex + marker.length);
+    const candidate = path.resolve(runsRoot, suffix);
+    const relative = path.relative(runsRoot, candidate);
+    const expectedRunDir = path.resolve(runDir, '..');
+    if (relative && !relative.startsWith('..') && !path.isAbsolute(relative)
+      && candidate === path.join(expectedRunDir, 'input.json')) {
+      return candidate;
+    }
+  }
+  throw new Error('Classification manifest input path must be repo-relative or a recognized agent-runs path');
+}
+
 function verifyReadyClassificationRun({ manifestPath, repoRoot = REPO_ROOT }) {
   if (!manifestPath) throw new Error('Classification-only import requires --classification-manifest <path>');
   const resolvedManifest = path.resolve(manifestPath);
@@ -771,8 +825,8 @@ function verifyReadyClassificationRun({ manifestPath, repoRoot = REPO_ROOT }) {
     || state.completed !== state.total || state.processed !== state.total) {
     throw new Error('Classification batch must have matching runId, status=ready, full completion, and zero errors');
   }
-  const inputPath = path.resolve(manifest.input.path);
-  if (state.input && path.resolve(state.input) !== inputPath) {
+  const inputPath = resolveSealedInputPath(manifest.input.path, { repoRoot, runDir });
+  if (state.input && resolveSealedInputPath(state.input, { repoRoot, runDir }) !== inputPath) {
     throw new Error('Classification state input path does not match the sealed manifest');
   }
   const inputBytes = fs.readFileSync(inputPath);
@@ -785,6 +839,8 @@ function verifyReadyClassificationRun({ manifestPath, repoRoot = REPO_ROOT }) {
   if (!inputEvents.length || inputEvents.length !== outputEvents.length || state.total !== inputEvents.length) {
     throw new Error('Sealed classification output does not cover the complete input catalog');
   }
+  assertUniqueSourceIds(inputEvents);
+  assertUniqueSourceIds(outputEvents);
   const rows = outputEvents.map((event, index) => {
     const sourceId = String(event.source_id || event.id || '').trim();
     const inputSourceId = String(inputEvents[index].source_id || inputEvents[index].id || '').trim();
@@ -799,7 +855,9 @@ function verifyReadyClassificationRun({ manifestPath, repoRoot = REPO_ROOT }) {
     manifestSha256: crypto.createHash('sha256').update(manifestBytes).digest('hex'),
     inputSha256,
     outputSha256: crypto.createHash('sha256').update(verifiedFiles.get('classified-catalog.json')).digest('hex'),
-    rows
+    rows,
+    inputEvents,
+    outputEvents
   };
 }
 
@@ -845,10 +903,126 @@ function writeJsonAtomic(file, value) {
   fs.renameSync(temporary, file);
 }
 
+function deltaPlaceSnapshot(row) {
+  return Object.fromEntries([
+    'source_id', 'title', 'status', 'cover_image_path', 'location', 'latitude', 'longitude',
+    'coordinates_quality', 'geo_evidence', 'organizer_region', 'cai_section_id'
+  ].map((field) => [field, row[field] ?? null]));
+}
+
+async function importDeltaOnly({ supabase, classificationRun, status, manifestPath, repoRoot = REPO_ROOT, verifiedAt }) {
+  const events = classificationRun.outputEvents;
+  if (!events.length || events.length > 500) {
+    throw new Error(`Delta import requires 1–500 classified events; received ${events.length}`);
+  }
+  const expectedRows = new Map(classificationRun.rows.map((row) => [row.source_id, row]));
+  if (expectedRows.size !== events.length) throw new Error('Delta manifest contains duplicate or misaligned source IDs');
+  const placeResult = await insertMissingPlaces({ supabase, excursions: events, status });
+  const availableRows = classificationRun.rows.filter((row) => placeResult.after.has(row.source_id));
+  const skippedWithoutPlace = classificationRun.rows
+    .filter((row) => !placeResult.after.has(row.source_id))
+    .map((row) => ({ source_id: row.source_id, reason: 'place_missing_after_insert' }));
+  const classificationResult = await insertMissingClassifications({ supabase, rows: availableRows });
+
+  const placeMismatches = [];
+  const eventById = new Map(events.map((event) => [textOrNull(event.id), event]));
+  for (const sourceId of placeResult.existingSourceIds) {
+    const before = placeResult.before.get(sourceId);
+    const after = placeResult.after.get(sourceId);
+    if (!after || stableJson(deltaPlaceSnapshot(before)) !== stableJson(deltaPlaceSnapshot(after))) {
+      placeMismatches.push(sourceId);
+    }
+  }
+  for (const sourceId of placeResult.insertedSourceIds) {
+    const actual = placeResult.after.get(sourceId);
+    const expected = toPlaceRow(eventById.get(sourceId), status);
+    if (!actual || ['source_id', 'title', 'status', 'cover_image_path', 'location', 'latitude', 'longitude', 'coordinates_quality', 'geo_evidence']
+      .some((field) => stableJson(actual[field] ?? null) !== stableJson(expected[field] ?? null))) {
+      placeMismatches.push(sourceId);
+    }
+  }
+  const uniquePlaceMismatches = [...new Set(placeMismatches)];
+  const classificationSkipped = [...skippedWithoutPlace, ...classificationResult.mismatchedSourceIds.map((source_id) => ({
+    source_id, reason: 'existing_classification_preserved_but_differs_from_candidate'
+  }))];
+  const isPartial = placeResult.missingSourceIds.length > 0
+    || uniquePlaceMismatches.length > 0
+    || classificationResult.mismatchedSourceIds.length > 0
+    || skippedWithoutPlace.length > 0;
+  const receipt = {
+    schemaVersion: 1,
+    mode: 'delta-only',
+    status: isPartial ? 'partial' : 'completed',
+    runId: classificationRun.manifest.runId,
+    projectRef: null,
+    sourceCommit: sourceCommit(repoRoot),
+    manifestPath: path.relative(repoRoot, manifestPath).split(path.sep).join('/'),
+    manifestSha256: classificationRun.manifestSha256,
+    inputSha256: classificationRun.inputSha256,
+    outputSha256: classificationRun.outputSha256,
+    verifiedAt,
+    places: {
+      input: events.length,
+      inserted: placeResult.insertedSourceIds.length,
+      insertedSourceIds: placeResult.insertedSourceIds,
+      existingPreserved: placeResult.existingSourceIds.length,
+      existingPreservedSourceIds: placeResult.existingSourceIds,
+      concurrentConflictsPreserved: placeResult.concurrentConflictIds.length,
+      concurrentConflictSourceIds: placeResult.concurrentConflictIds,
+      skipped: placeResult.missingSourceIds.length,
+      skippedSourceIds: placeResult.missingSourceIds,
+      missing: placeResult.missingSourceIds,
+      updated: 0,
+      deleted: 0,
+      protectedFieldMismatches: uniquePlaceMismatches,
+      invariants: events.map((event) => {
+        const sourceId = textOrNull(event.id);
+        const disposition = placeResult.insertedSourceIds.includes(sourceId) ? 'inserted'
+          : placeResult.existingSourceIds.includes(sourceId) ? 'existing_preserved'
+            : placeResult.concurrentConflictIds.includes(sourceId) ? 'concurrent_conflict_preserved' : 'missing';
+        const current = placeResult.after.get(sourceId);
+        return {
+          source_id: sourceId,
+          disposition,
+          before: placeResult.before.has(sourceId) ? deltaPlaceSnapshot(placeResult.before.get(sourceId)) : null,
+          after: current ? deltaPlaceSnapshot(current) : null
+        };
+      })
+    },
+    classifications: {
+      input: classificationRun.rows.length,
+      eligible: availableRows.length,
+      inserted: classificationResult.insertedSourceIds.length,
+      insertedSourceIds: classificationResult.insertedSourceIds,
+      preexistingPreserved: classificationResult.preservedSourceIds.length,
+      preexistingSourceIds: classificationResult.preservedSourceIds,
+      concurrentPreserved: classificationResult.concurrentConflictIds.length,
+      concurrentConflictSourceIds: classificationResult.concurrentConflictIds,
+      matched: classificationResult.matched,
+      mismatched: classificationResult.mismatchedSourceIds,
+      skipped: classificationSkipped,
+      updated: 0,
+      deleted: 0
+    },
+    placesTouched: true,
+    placeUpdates: 0,
+    placeDeletes: 0,
+    sectionsTouched: false
+  };
+  return receipt;
+}
+
 function buildImportReceipt({ manifest, manifestPath, manifestSha256, projectRef, imported, verification, classificationVerification, skippedClassifications = [], registrySyncPerformed, repoRoot = REPO_ROOT, verifiedAt = new Date().toISOString() }) {
+  const partial = imported.skippedUnclassified.length > 0
+    || skippedClassifications.length > 0
+    || verification.missingSourceIds.length > 0
+    || verification.protectedFieldsChanged.length > 0
+    || verification.insertedFieldMismatches.length > 0
+    || verification.geography.mismatchedSourceIds.length > 0
+    || classificationVerification.mismatchedSourceIds.length > 0;
   return {
     schemaVersion: 1,
-    status: imported.skippedUnclassified.length || skippedClassifications.length ? 'partial' : 'completed',
+    status: partial ? 'partial' : 'completed',
     runId: manifest.runId,
     projectRef,
     method: 'supabase-js',
@@ -896,6 +1070,34 @@ async function main({
   files = { data: DATA_FILE, registry: REGISTRY_FILE, status: STATUS_FILE, repoRoot: REPO_ROOT },
   now = () => new Date().toISOString()
 } = {}) {
+  if (argv.includes('--delta-only')) {
+    if (argv.includes('--classifications-only')) throw new Error('--delta-only cannot be combined with --classifications-only');
+    const manifestPath = manifestArgument(argv, env);
+    const classificationRun = verifyReadyClassificationRun({ manifestPath, repoRoot: files.repoRoot });
+    if (!classificationRun.outputEvents.length || classificationRun.outputEvents.length > 500) {
+      throw new Error(`Delta import requires 1–500 classified events; received ${classificationRun.outputEvents.length}`);
+    }
+    const status = importStatus(env);
+    // Validate the complete sealed event batch before creating a network client.
+    validateImportEvents(classificationRun.outputEvents, status);
+    const supabaseUrl = requiredEnvironment('SUPABASE_URL', env);
+    const serviceRoleKey = requiredEnvironment('SUPABASE_SERVICE_ROLE_KEY', env);
+    const supabase = supabaseFactory(supabaseUrl, serviceRoleKey, {
+      auth: { autoRefreshToken: false, persistSession: false, detectSessionInUrl: false }
+    });
+    const receipt = await importDeltaOnly({
+      supabase, classificationRun, status, manifestPath,
+      repoRoot: files.repoRoot, verifiedAt: now()
+    });
+    receipt.projectRef = projectRefFromUrl(supabaseUrl);
+    const receiptPath = path.join(path.dirname(manifestPath), 'delta-import-receipt.json');
+    writeJsonAtomic(receiptPath, receipt);
+    return {
+      ...receipt,
+      receiptPath,
+      receiptSha256: crypto.createHash('sha256').update(fs.readFileSync(receiptPath)).digest('hex')
+    };
+  }
   if (argv.includes('--classifications-only')) {
     const classificationRun = verifyReadyClassificationRun({
       manifestPath: classificationManifestArgument(argv, env),
@@ -1055,7 +1257,8 @@ async function main({
     skipped: result.skipped,
     skippedUnlocated: result.skippedUnlocated,
     skippedUnclassifiedNew: result.skippedUnclassified.length,
-    status: result.status,
+    status: receipt.status,
+    placeStatus: result.status,
     verification,
     receiptPath: path.relative(files.repoRoot, path.join(path.dirname(verified.manifestPath), 'import-receipt.json')).split(path.sep).join('/'),
     receiptSha256: crypto.createHash('sha256').update(fs.readFileSync(path.join(path.dirname(verified.manifestPath), 'import-receipt.json'))).digest('hex'),

@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "runId": "cai-map-20261022-valmadrera01",
+  "pdfSha256": "f3939cb69b55824e4db402d989acea993a58e7fa81671d8c7a3093d3b4103e9",
+  "extractedNewCandidates": 14,
+  "classificationInputCount": 10,
+  "confirmedDuplicatesExcluded": 2,
+  "probableDuplicatesHeldFromIndependentImport": 2,
+  "reviews": [
+    {
+      "candidateId": "cai-valmadrera-9216081-b371db7515b3",
+      "candidateTitle": "RACCONTAMI LA MONTAGNA",
+      "date": "2026-10-17",
+      "matchId": "cai-valmadrera-9216081-08f80e8dc9a5",
+      "matchTitle": "6° Appuntamento rassegna Raccontami la Montagna 2026",
+      "status": "confirmed_duplicate",
+      "action": "exclude_candidate_id_preserve_existing",
+      "evidence": "Same date; existing record description says sixth Raccontami event at Pianezzo with Andrea Cassini. Official PDF fixture lists Raccontami on 17 Oct."
+    },
+    {
+      "candidateId": "cai-valmadrera-9216081-ad57bfc6c54c",
+      "candidateTitle": "VIVI IL MOREGALLO",
+      "date": "2026-10-18",
+      "matchId": "cai-valmadrera-9216081-e2177dd44e1a",
+      "matchTitle": "Vivi Il Moregallo 2026",
+      "status": "confirmed_duplicate",
+      "action": "exclude_candidate_id_preserve_existing",
+      "evidence": "Same title/date; existing record has detailed Moregallo description and the official PDF notes the 17–18 Oct Vivi il Moregallo event."
+    },
+    {
+      "candidateId": "cai-valmadrera-9216081-6442e365d70b",
+      "candidateTitle": "GITA SOCIALE MEDIA MONTAGNA Presolana",
+      "date": "2026-10-11",
+      "matchId": "cai-valmadrera-9216081-93f8dd640820",
+      "matchTitle": "ESCURSIONE MEDIA MONTAGNA: RIFUGIO OLMO PRESOLANA",
+      "status": "probable_duplicate_hold",
+      "action": "exclude_from_independent_import_pending_review",
+      "evidence": "Same date, social medium-mountain outing and Presolana; existing detailed description identifies Rifugio Olmo Presolana and difficulty E. Do not merge or overwrite automatically."
+    },
+    {
+      "candidateId": "cai-valmadrera-9216081-ddb3aaccfc1a",
+      "candidateTitle": "GITA SOCIALE MEDIA MONTAGNA Valmalenco",
+      "date": "2026-11-01",
+      "matchId": "cai-valmadrera-9216081-07c7e327bb27",
+      "matchTitle": "GITA SOCIALE",
+      "status": "probable_duplicate_hold",
+      "action": "exclude_from_independent_import_pending_review",
+      "evidence": "Same date and PDF slot; existing same-source record is a sparse GITA SOCIALE with description 1. Candidate carries more specific PDF title. Preserve both records and avoid a duplicate DB insert pending review."
+    }
+  ]
+}
