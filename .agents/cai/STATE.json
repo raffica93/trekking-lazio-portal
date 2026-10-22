@@ -307,7 +307,7 @@
       "result": "Run bounded pianificato per CAI Caserta /escursioni.html, una URL/max1 documento/120s/concurrency1, dopo checkpoint remoto; senza discovery automatica del PDF già bloccato."
     }
   ],
-  "nextAction": "Campania preflight selected exactly one new official URL: https://www.caicaserta.it/escursioni.html (registered, not in documents/history/cache/FAILURES). First publish and remotely verify the updated regional handoff, then run only this URL with a unique run ID, max1 document/120s/concurrency1; do not retry the annual PDF with discovery-budget-exhausted.",
+  "nextAction": "Remote checkpoint 0f5992d9c451f34fdeecd685721de4420cc93652 verified. Run exactly cai-20261022-campania-caserta-index01 on https://www.caicaserta.it/escursioni.html, max1 document/120s/concurrency1; do not retry annual PDF or expand discovery. Stop collection before tests/QA.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -316,7 +316,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "c23a9979061573e23468e17fb2df48d85c2792bb",
+    "branchHead": "0f5992d9c451f34fdeecd685721de4420cc93652",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -479,7 +479,7 @@
     },
     "ocrItalian": false,
     "agentStatus": {
-      "caiCollector": "Campania preflight complete, selected official Caserta index; collection starts only after updated remote checkpoint",
+      "caiCollector": "Preflight complete; one bounded Caserta index run authorized after remote checkpoint",
       "caiImporter": "Independent read-only QA of current regional handoff files in progress",
       "agentRequestedModel": "gpt-6-luna",
       "agentRequestedEffort": "high",
@@ -1028,9 +1028,9 @@
         "checkpointCommit": "pending"
       }
     ],
-    "repositoryCheckpointCommit": "c23a9979061573e23468e17fb2df48d85c2792bb",
+    "repositoryCheckpointCommit": "0f5992d9c451f34fdeecd685721de4420cc93652",
     "updatedAt": "2026-10-22T22:56:53Z",
-    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:54:50.597Z",
+    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:59:10Z",
     "continuationMechanism": {
       "flag": "--source-url URL (repeatable) with exactly one --source ID",
       "safety": "Exact official hostname, HTTP(S), no credentials/custom port; redirect guard in continuation mode permits only HTTPS same-host redirects on default/443 without auth. Existing cooldown/cache and bounded document/time limits retained.",
@@ -1270,14 +1270,15 @@
       "importerQa": "PASS on corrected source-evidence/report/evidence-manifest and hashes",
       "backendTests": "205/205 after run; six public JSON hashes stable",
       "dbWrites": 0
-    }
+    },
+    "nextAction": "Remote checkpoint 0f5992d9c451f34fdeecd685721de4420cc93652 verified. Run exactly cai-20261022-campania-caserta-index01 on https://www.caicaserta.it/escursioni.html, max1 document/120s/concurrency1; do not retry annual PDF or expand discovery. Stop collection before tests/QA."
   },
   "repositoryCommit": {
     "branch": "codex/cai-orchestrator-luna",
-    "head": "c23a9979061573e23468e17fb2df48d85c2792bb",
+    "head": "0f5992d9c451f34fdeecd685721de4420cc93652",
     "remoteVerified": true,
-    "fetchHead": "c23a9979061573e23468e17fb2df48d85c2792bb",
-    "checkpointKind": "Castrovillari report/evidence/catalog and remote verification docs; Campania preflight pending"
+    "fetchHead": "0f5992d9c451f34fdeecd685721de4420cc93652",
+    "checkpointKind": "Castrovillari link preflight + Campania Caserta bounded-index plan (STATE/HANDOFF/PLAN/REGIONS)"
   },
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
@@ -1301,8 +1302,8 @@
     }
   },
   "tests": "After the Castrovillari01 collection finished, backend npm test passed 205/205; SHA-256 for six public JSON files was identical before/after. No tests were run concurrently with collection.",
-  "updatedAt": "2026-10-22T22:57:30Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:54:50.597Z",
+  "updatedAt": "2026-10-22T22:59:10Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:59:10Z",
   "regionCurrent": "Calabria — Castrovillari01 partial; 12 existing event rows unchanged, 0 events extracted from index; PDF OCR page2/discovery8 and HTML discovery1 open. Four newly visible PDF links reviewed offline; none safe to collect under a currently registered source.",
   "regionNext": "After a remote checkpoint of this preflight, one bounded run of official CAI Caserta /escursioni.html only; annual PDF remains blocked.",
   "preflight": {
