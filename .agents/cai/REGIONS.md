@@ -183,4 +183,9 @@ I totali regionali della tabella iniziale restano lo snapshot storico 2026-10-20
 
 | Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
 |---|---:|---:|---:|---:|---|---:|---|---|---|
-| `cai-20261022-lombardia-stradastorta01` — CAI Strada Storta (preflight) | 1 target URL selezionato, non ancora raccolto | 0 | 1 fonte | 0 | Non ancora verificati | — | Target ufficiale assente dai 19 documenti, senza issue/cooldown/cache | Calendario e parser da verificare nel run | Un solo documento, 120 s, concurrency 1; aggiornare la riga con il risultato verificato |
+| `cai-20261022-lombardia-stradastorta02` — CAI Strada Storta | 1 | 0 | 1 | 0 | 6 card parse; 1 nuovo candidato (Monte Pisello, 25-10-2026), 5 righe esistenti con soli campi sourceDocument/description | 0 duplicati ID | Parser v13 legge le card Event Manager dalla cache ufficiale; fixture e test PASS | 1 discovery-limit; destinazione aggiornata non identificata, luogo da verificare | Checkpoint remoto, query/import delta-only del solo ID nuovo, poi diversa fonte Lombardia |
+
+
+### Classificazione/delivery separato — Strada Storta
+
+Il lotto `cai-map-20261022-stradastorta02` classifica solo l’ID nuovo: 0 trekking, 0 non trekking, 1 da verificare, 0 errori. Mercury risposta attestata, nessun override. File QA PASS ma DB pending; la consegna attende checkpoint remoto. Conteggi di copertura regionali rimangono lo snapshot storico in testa a questo file.

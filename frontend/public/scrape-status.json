@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-22T21:40:32.521Z",
+  "generatedAt": "2026-10-22T21:51:08.589Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 1,
-    "parsed": 0,
-    "unsupported": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 548
   },
@@ -34479,16 +34479,16 @@
       "template": "html-calendar",
       "extractor": "deterministic",
       "enabled": true,
-      "excursions": 6,
+      "excursions": 7,
       "error": null,
       "hash": "52cb0beaee4a4157b26db556d5f96cd928dd6f4b10f2d6c2730cef517b137e1f",
-      "updatedAt": "2026-10-20T03:42:01.583Z",
+      "updatedAt": "2026-10-22T21:51:08.589Z",
       "documents": [
         {
           "url": "https://stradastorta.it/eventi/",
-          "hash": "f1ddd67cc5fc18197b091c338521f3796359c91c824d008b68a81a901c8bc1fa",
-          "events": 0,
-          "method": null
+          "hash": "2ef8ff6949919ba58b018f056f4e2250bd8cfc4ea4915a3328ca69ca7519c90d",
+          "events": 6,
+          "method": "html-calendar"
         },
         {
           "url": "https://stradastorta.it/eventi/60-strada-storta/",
@@ -34505,12 +34505,6 @@
         {
           "url": "https://stradastorta.it/eventi/gara-sociale-di-marcia-alpina-e-castagnata/",
           "hash": "668169919dfc8cea36a7de135cab56f61623b382b5e1f4f12204a8549ec5ead0",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://stradastorta.it/eventi/",
-          "hash": "f1ddd67cc5fc18197b091c338521f3796359c91c824d008b68a81a901c8bc1fa",
           "events": 0,
           "method": null
         },
@@ -34600,7 +34594,8 @@
         }
       ],
       "methods": [
-        "ics"
+        "ics",
+        "html-calendar"
       ],
       "issues": [
         {
@@ -34617,6 +34612,11 @@
           "url": "https://outlook.live.com/calendar/0/deeplink/compose?allday=false&body=CiaoIl+percorso+dei+festeggiamenti+per+i+60+anni+del+CAI+Strada+Storta+PROSEGUE+con+un+nuovo+appuntamento+da+condividere.+Segnatevi+sul+calendario+il+12+settembre%21Festeggeremo+all%26%238217%3Boratorio+di+Acquate%3A+l%C3%AC+trascorreremo+del+tempo+insieme+passando+per+merenda%2C+arrampicata%2C+Santa+Messa%2C+musica%2C+aperitivo+e+cena.Un+momento+pensato+per+ritrovarsi%2C+incontrare+vecchi+e+nuovi+amici+e+continuare+a+celebrare+una+storia+che+%C3%A8+fatta+da+60+anni+di+montagna%2C+persone+e+condivisione.%26nbsp%3BVi+aspettiamo+per+festeggiare+insieme%21%3Ca+href%3D%22https%3A%2F%2Fstradastorta.it%2Fwp-content%2Fuploads%2F2026%2F07%2F60esimo_StradaStorta.pdf%22%3ESCARICA+LA+LOCANDINA%3C%2Fa%3E&location=&path=/calendar/action/compose&rru=addevent&startdt=2026-09-12T16%3A00%3A00%2B02%3A00&enddt=2026-09-12T22%3A00%3A00%2B02%3A00&subject=60%C2%B0+Strada+Storta",
           "code": "non-calendar-link-skipped",
           "message": "Skipped social, feed, metadata, sharing, or unrelated image URL."
+        },
+        {
+          "url": "https://www.google.com/calendar/event?action=TEMPLATE&text=60%C2%B0+Strada+Storta&dates=20260912T160000/20260912T220000&details=CiaoIl+percorso+dei+festeggiamenti+per+i+60+anni+del+CAI+Strada+Storta+PROSEGUE+con+un+nuovo+appuntamento+da+condividere.+Segnatevi+sul+calendario+il+12+settembre%21Festeggeremo+all%26%238217%3Boratorio+di+Acquate%3A+l%C3%AC+trascorreremo+del+tempo+insieme+passando+per+merenda%2C+arrampicata%2C+Santa+Messa%2C+musica%2C+aperitivo+e+cena.Un+momento+pensato+per+ritrovarsi%2C+incontrare+vecchi+e+nuovi+amici+e+continuare+a+celebrare+una+storia+che+%C3%A8+fatta+da+60+anni+di+montagna%2C+persone+e+condivisione.%26nbsp%3BVi+aspettiamo+per+festeggiare+insieme%21%3Ca+href%3D%22https%3A%2F%2Fstradastorta.it%2Fwp-content%2Fuploads%2F2026%2F07%2F60esimo_StradaStorta.pdf%22%3ESCARICA+LA+LOCANDINA%3C%2Fa%3E&location=&trp=false&sprop=https%3A%2F%2Fstradastorta.it%2Feventi%2F60-strada-storta%2F&sprop=name:CAI+Strada+Storta&ctz=Europe%2FRome",
+          "message": "Discovery budget reached; 1 candidate documents remain.",
+          "code": "discovery-limit"
         }
       ],
       "extractedEvents": 8

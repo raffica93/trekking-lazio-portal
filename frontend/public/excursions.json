@@ -10449,7 +10449,7 @@
     "cai-laveno-mombello-9216032": "d809a539b8d97488e619b157cbfe8cbac3f5d041ed2f43dbd09e0a0b57bb665a",
     "cai-somma-lombardo-9216065": "5e7b6ca52dfab1a1e0f4fdf321b240d4baf6aaf6f3df53a86cf4936911f9ee9e",
     "cai-vestone-9216155": "3d3d51c6ea2552ad103a6744fe74302658114cba2d1e3c2720577cc1742c2ea2",
-    "cai-strada-storta-9116052": "52cb0beaee4a4157b26db556d5f96cd928dd6f4b10f2d6c2730cef517b137e1f",
+    "cai-strada-storta-9116052": "5540eecfc15f7134cfd5ca895aeeac5dcdb8655b26b181f45b9f10bc8cc7154a",
     "cai-cermenate-9216116": "027d1c6f58a1f4b1809d31be597110d89545782d977e61dc10abd26a2af36a09",
     "cai-villasanta-9216126": "bde10d03bc8663fb8d2c24f13f65ac1f2428d31f47863009d847829cb1c275de",
     "cai-voghera-9216024": "ea90988fac4d20672f40d1ee1aed1b88a85004990104aa28d8b8ce61d606e90b",
@@ -10773,14 +10773,14 @@
     "cai-busca-9112010": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967",
     "cai-dronero-9112012": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967"
   },
-  "generatedAt": "2026-10-22T21:40:32.497Z",
+  "generatedAt": "2026-10-22T21:51:08.562Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 1,
-    "parsed": 0,
-    "unsupported": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 548
   },
@@ -50158,6 +50158,27 @@
       "privateCar": null
     },
     {
+      "id": "cai-strada-storta-9116052-01a8ce10aa39",
+      "sourceId": "cai-strada-storta-9116052",
+      "title": "Monte Pisello – Rifugio Alpe Piazza",
+      "date": "2026-10-25",
+      "dateEnd": "2026-10-25",
+      "days": 1,
+      "category": "Attività CAI",
+      "link": "https://stradastorta.it/eventi/pizzo-arera-e-capanna-2000/",
+      "organizer": "CAI Strada Storta",
+      "organizerRegion": "Lombardia",
+      "location": "Località da verificare",
+      "region": "Altro",
+      "cost": "Vedi sito",
+      "time": "Vedi sito",
+      "privateCar": null,
+      "coordinatesQuality": "unknown",
+      "locationSource": "html-event",
+      "sourceDocument": "https://stradastorta.it/eventi/",
+      "description": "A causa della chiusura del rifugio Capanna 2000 (in ristrutturazione) è stato deciso un cambio di destinazione per l’uscita in programma per domenica 25 ottobre […]"
+    },
+    {
       "id": "cai-salerno-9238003-3a7a8a95fe78",
       "sourceId": "cai-salerno-9238003",
       "title": "Monte Porrara – Palena",
@@ -53329,8 +53350,8 @@
       "privateCar": null,
       "coordinatesQuality": "unknown",
       "locationSource": "ics",
-      "sourceDocument": "https://stradastorta.it/eventi/messa-in-ricordo-dei-nostri-defunti/ical/",
-      "description": "Vogliamo ricordarvi la santa messa in onore di tutti i defunti della nostra società. Sabato 31 Ottobre saluteremo i nostri amici passati a miglior vita. Per chi volesse partecipare, la messa si terrà alla parrocchia di Acquate alle 18.00."
+      "sourceDocument": "https://stradastorta.it/eventi/",
+      "description": "Vogliamo ricordarvi la santa messa in onore di tutti i defunti della nostra società. Sabato 31 Ottobre saluteremo i nostri amici passati a miglior vita. […]"
     },
     {
       "id": "cai-livorno-9226004-e09cbb3c01c0",
@@ -58935,8 +58956,8 @@
       "privateCar": null,
       "coordinatesQuality": "unknown",
       "locationSource": "ics",
-      "sourceDocument": "https://stradastorta.it/eventi/ferrata-medale/ical/",
-      "description": "La Ferrata del Gruppo degli Alpini al Corno di Medale è una ferrata molto appagante, ma richiede un buon allenamento per via dei tratti verticali ed esposti. La via è attrezzata con catene e cavo metallico per assicurarsi con il kit da ferrata. In alcuni punti si risale su placche, comunque la roccia offre numerosi appigli rendendo il percorso arrampicabile e molto divertente. E’ sconsigliata come prima esperienza di ferrata considerata la sua lunghezza e l’assenza di vie di fuga lungo il percorso."
+      "sourceDocument": "https://stradastorta.it/eventi/",
+      "description": "La Ferrata del Gruppo degli Alpini al Corno di Medale è una ferrata molto appagante, ma richiede un buon allenamento per via dei tratti verticali […]"
     },
     {
       "id": "cai-milano-9216003-74bde6c7dec0",
@@ -70163,7 +70184,7 @@
       "privateCar": null,
       "coordinatesQuality": "unknown",
       "locationSource": "ics",
-      "sourceDocument": "https://stradastorta.it/eventi/pranzo-sociale/ical/",
+      "sourceDocument": "https://stradastorta.it/eventi/",
       "description": "A breve maggiori info."
     },
     {
@@ -77863,7 +77884,7 @@
       "privateCar": null,
       "coordinatesQuality": "unknown",
       "locationSource": "ics",
-      "sourceDocument": "https://stradastorta.it/eventi/gita-culturale/ical/",
+      "sourceDocument": "https://stradastorta.it/eventi/",
       "description": "A breve maggiori info."
     },
     {
@@ -81645,7 +81666,7 @@
       "privateCar": null,
       "coordinatesQuality": "unknown",
       "locationSource": "ics",
-      "sourceDocument": "https://stradastorta.it/eventi/auguri-natalizi/ical/",
+      "sourceDocument": "https://stradastorta.it/eventi/",
       "description": "Classico scambio di auguri natalizi"
     },
     {
