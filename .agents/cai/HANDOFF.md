@@ -588,3 +588,5 @@ Issue aperte distinte: iCal MTB Varese HTTP 503 e coda iCal eventi con discovery
 ### Prossimo campione Lombardia — CAI Lissone
 
 Preflight offline del collector: una URL ufficiale candidata, `https://cai-lissone.it/escursionismo/`, fonte `cai-lissone-9216040`, label registro “Escursionismo” e link dalla pagina ufficiale delle attività. L’URL esatto è assente da status/documents, cache, FAILURES e run history. La fonte è partial con 40 documenti e discovery-limit 65 su un URL distinto `tipo=escursionismo&num=255`; gli host cai-lissone.it/www sono consentiti. Dopo il checkpoint remoto Varese, un solo run explicit continuation max1 documento/120s/concurrency1 su questo target; non seguire la coda discovery. La pagina non è stata letta: nessun evento o esito zero è ancora affermabile.
+
+Il report, manifest, stato run, cataloghi aggiornati e registro sono stati pubblicati e verificati nel commit `7b063750be774219c6c3406d780b45ca29a841e9` (tree `85f44bedaa770ec71275da8efe4f3b22bba97a22`). Prossimo passo: un solo run Lissone circoscritto; nessuna collection in corso al checkpoint.

@@ -428,8 +428,8 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "2c3a5d82304c63b1277a91e08df7bf2edd441951",
-    "recoverableRemoteCheckpoint": false,
+    "branchHead": "7b063750be774219c6c3406d780b45ca29a841e9",
+    "recoverableRemoteCheckpoint": true,
     "sampleRun": {
       "runId": "cai-20261022-lombardia-varese-calendar01",
       "region": "Lombardia",
@@ -472,11 +472,12 @@
       "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-varese-calendar01/collection-report.md",
       "coordinatesAdded": 0,
       "dbWrites": 0,
-      "reportSha256": "ae28e7dc12f8b086649987afdc7be91b32bf81e72692d5059f5cdb9bf5144012"
+      "reportSha256": "ae28e7dc12f8b086649987afdc7be91b32bf81e72692d5059f5cdb9bf5144012",
+      "filesCheckpointCommit": "7b063750be774219c6c3406d780b45ca29a841e9"
     },
     "nextAction": "Checkpoint remoto del report e dei file Varese; poi un solo run cai-20261022-lombardia-lissone-escursionismo01 sulla URL ufficiale https://cai-lissone.it/escursionismo/, max1 documento/120s/concurrency1. Non seguire la discovery-limit su num=255."
   },
-  "repositoryCommit": "2c3a5d82304c63b1277a91e08df7bf2edd441951",
+  "repositoryCommit": "7b063750be774219c6c3406d780b45ca29a841e9",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -499,8 +500,8 @@
     }
   },
   "tests": "After Varese collection: backend npm test 205/205; six public JSON SHA-256 values identical before/after (including frontend/public/excursions.json).",
-  "updatedAt": "2026-10-22T23:58:30Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:52:00Z",
+  "updatedAt": "2026-10-22T23:58:45Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:58:45Z",
   "regionCurrent": "Lombardia — Varese calendarannual: richiesta risolta a PDF 2025 già presente, 0 delta; freshness non attestata perché cache non registra HTTP status; fonte resta partial. 3.371 catalog IDs e 58 Varese rows invariati. Nessun DB.",
   "regionNext": "Lombardia — CAI Lissone (`cai-lissone-9216040`), URL Escursionismo preflightata offline e distinta; dopo checkpoint Varese, una pagina sola max1/120s/concurrency1.",
   "preflight": {
@@ -591,7 +592,8 @@
     "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-varese-calendar01/collection-report.md",
     "coordinatesAdded": 0,
     "dbWrites": 0,
-    "reportSha256": "ae28e7dc12f8b086649987afdc7be91b32bf81e72692d5059f5cdb9bf5144012"
+    "reportSha256": "ae28e7dc12f8b086649987afdc7be91b32bf81e72692d5059f5cdb9bf5144012",
+    "filesCheckpointCommit": "7b063750be774219c6c3406d780b45ca29a841e9"
   },
   "regionalCoverage": {
     "region": "Lombardia",
