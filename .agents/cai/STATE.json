@@ -224,8 +224,8 @@
     }
   ],
   "nextAction": {
-    "step": "PREMANA-RESIDUAL-QUEUE",
-    "instruction": "Checkpoint cai-20261022-lombardia-premana01 file outputs and report to origin first. Then use only existing local cache/status evidence to identify the exact two residual official URLs and resume them with a new bounded run if targeted without replay; otherwise record queue blocked and select another workable Lombardia source. No repeat of the same URL queue without evidence of progress."
+    "step": "LOMBARDIA-SELECT-NEXT-SOURCE",
+    "instruction": "Publish Premana02 file/status/report checkpoint and verify remote. Stop Premana for now because the queue expanded 2→4 and the next exact URLs are not persisted; do not replay the same discovery page. Have collector select another workable official Lombardia source by read-only preflight, then run one bounded sample."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -235,7 +235,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "dcbee9e305c0e0ad0a5dc950a8fd67b339134e3c",
+    "branchHead": "ba079704bac2524f87a22140d59b390ff30f8e5c",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -361,10 +361,10 @@
       }
     },
     "catalogHashes": {
-      "backendExcursions": "4b69669347c569058db1d776327b6253a3ac7d01decbe76bf275de3ce4c42827",
-      "frontendExcursions": "4b69669347c569058db1d776327b6253a3ac7d01decbe76bf275de3ce4c42827",
-      "backendScrapeStatus": "f8dbb427c647239a2e91f19f76d3938786c355e82dfcb407edaa65e83b1bb102",
-      "frontendScrapeStatus": "f8dbb427c647239a2e91f19f76d3938786c355e82dfcb407edaa65e83b1bb102",
+      "backendExcursions": "7b28f14459cda764b2d8dae3b8691c4048a8afb904fc604d62db607d57a7c0ae",
+      "frontendExcursions": "7b28f14459cda764b2d8dae3b8691c4048a8afb904fc604d62db607d57a7c0ae",
+      "backendScrapeStatus": "f9f5f280d77847f7bff5c53d5333a788b8adac397027fb9bd32f6e3fbaad3384",
+      "frontendScrapeStatus": "f9f5f280d77847f7bff5c53d5333a788b8adac397027fb9bd32f6e3fbaad3384",
       "copiesIdentical": true
     },
     "regionalCoverage": {
@@ -854,6 +854,41 @@
         "importerQa": "PASS: hashes and admin/geographic fields verified; no DB delivery warranted.",
         "fileCheckpointCommit": "dcbee9e305c0e0ad0a5dc950a8fd67b339134e3c",
         "remoteVerified": true
+      },
+      {
+        "runId": "cai-20261022-lombardia-premana01",
+        "sourceId": "cai-premana-9216089",
+        "sourceUrl": "https://organizzazione.cai.it/sez-premana/eventi/elenco/",
+        "collection": "partial",
+        "files": "ready",
+        "database": "pending",
+        "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-premana01/manifest.json",
+        "manifestSha256": "abf50e4b5e4cd5532755beb85c9446836c03b26b7bead244e42e5ce4e868f6d4",
+        "statePath": "backend/data/agent-runs/cai-20261022-lombardia-premana01/state.json",
+        "stateSha256": "383dab5910e8f7420b1df83bca9d864579f5de5c94f0cec674b620670257a652",
+        "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-premana01/collection-report.md",
+        "reportSha256": "77f32437389b7be23778640b826659e65160a21cca9d354d401d244a5d86f322",
+        "sourceStatus": "partial",
+        "sourceDocumentsRetained": 40,
+        "sourceIssuesRetained": 3,
+        "residualCandidatesBefore": 10,
+        "residualCandidatesAfter": 2,
+        "verifiedEvents": 1,
+        "catalogBefore": 3359,
+        "catalogAfter": 3359,
+        "newIds": 0,
+        "removedIds": 0,
+        "changedRows": 1,
+        "changedRow": "cai-premana-9216089-b4e7ad624a0a",
+        "changedFields": [
+          "sourceDocument"
+        ],
+        "duplicateIdsExcluded": 0,
+        "dbWrites": 0,
+        "collectorQa": "PASS: official HTML JSON-LD verifies existing CENA SOCIALE on 2026-10-24, Premana; no coordinates added.",
+        "importerQa": "PASS: no new ID or classification/DB delta; history and all other row fields preserved.",
+        "fileCheckpointCommit": "ba079704bac2524f87a22140d59b390ff30f8e5c",
+        "remoteVerified": true
       }
     ],
     "repositoryCheckpointCommit": "d45f27136177ce05181d69f87e00a8d7bb96a3cb",
@@ -939,40 +974,43 @@
       ]
     },
     "latestRegionalRun": {
-      "runId": "cai-20261022-lombardia-premana01",
+      "runId": "cai-20261022-lombardia-premana02",
       "sourceId": "cai-premana-9216089",
-      "sourceUrl": "https://organizzazione.cai.it/sez-premana/eventi/elenco/",
+      "sourceUrls": [
+        "https://organizzazione.cai.it/sez-premana/eventi/oggi/",
+        "https://organizzazione.cai.it/sez-premana/eventi/elenco/?eventDisplay=past"
+      ],
       "collection": "partial",
       "files": "ready",
       "database": "pending",
-      "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-premana01/manifest.json",
-      "manifestSha256": "abf50e4b5e4cd5532755beb85c9446836c03b26b7bead244e42e5ce4e868f6d4",
-      "statePath": "backend/data/agent-runs/cai-20261022-lombardia-premana01/state.json",
-      "stateSha256": "383dab5910e8f7420b1df83bca9d864579f5de5c94f0cec674b620670257a652",
-      "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-premana01/collection-report.md",
-      "reportSha256": "77f32437389b7be23778640b826659e65160a21cca9d354d401d244a5d86f322",
+      "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-premana02/manifest.json",
+      "manifestSha256": "4b00cb7e88e787e93cf47d08960c80ecf48dfc8e1e42d11cc29669070206990d",
+      "statePath": "backend/data/agent-runs/cai-20261022-lombardia-premana02/state.json",
+      "stateSha256": "4e6c2a3aa9b93dfb6413f6045458254105ce0bb346e73a815062a79b605b99e6",
+      "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-premana02/collection-report.md",
+      "reportSha256": "88e6e56c0da6a4d89da4212015886dba6fcef4cc1f05cbf25e7b78cdfa067551",
       "sourceStatus": "partial",
+      "cliSliceStatus": "unsupported",
       "sourceDocumentsRetained": 40,
-      "sourceIssuesRetained": 3,
-      "residualCandidatesBefore": 10,
-      "residualCandidatesAfter": 2,
-      "verifiedEvents": 1,
+      "sourceUrlsAdded": 0,
+      "sourceUrlsRemoved": 0,
+      "candidateQueueBefore": 2,
+      "candidateQueueAfter": 4,
+      "exactNextUrlsPersisted": false,
       "catalogBefore": 3359,
       "catalogAfter": 3359,
       "newIds": 0,
       "removedIds": 0,
-      "changedRows": 1,
-      "changedRow": "cai-premana-9216089-b4e7ad624a0a",
-      "changedFields": [
-        "sourceDocument"
-      ],
+      "changedRows": 0,
+      "verifiedPastEvents": 9,
+      "upcomingEvents": 0,
       "duplicateIdsExcluded": 0,
       "dbWrites": 0,
-      "collectorQa": "PASS: official HTML JSON-LD verifies existing CENA SOCIALE on 2026-10-24, Premana; no coordinates added.",
-      "importerQa": "PASS: no new ID or classification/DB delta; history and all other row fields preserved."
+      "collectorQa": "PASS: exact URLs fetched; today page yielded zero events and past listing yielded 9 historical rows; no catalog delta; stop to avoid queue replay.",
+      "importerQa": "PASS: manifest, status, copies verified; no DB delivery."
     }
   },
-  "repositoryCommit": "dcbee9e305c0e0ad0a5dc950a8fd67b339134e3c",
+  "repositoryCommit": "ba079704bac2524f87a22140d59b390ff30f8e5c",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -986,20 +1024,20 @@
     "writes": 0
   },
   "tests": {
-    "backend": "npm test: 197 passed, 0 failed after Premana01 collection; four public catalog/status hashes unchanged by tests.",
+    "backend": "npm test: 197 passed, 0 failed after Premana02 collection; four public catalog/status hashes unchanged by tests.",
     "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
     "catalogHashes": {
-      "backendExcursions": "4b69669347c569058db1d776327b6253a3ac7d01decbe76bf275de3ce4c42827",
-      "frontendExcursions": "4b69669347c569058db1d776327b6253a3ac7d01decbe76bf275de3ce4c42827",
-      "backendScrapeStatus": "f8dbb427c647239a2e91f19f76d3938786c355e82dfcb407edaa65e83b1bb102",
-      "frontendScrapeStatus": "f8dbb427c647239a2e91f19f76d3938786c355e82dfcb407edaa65e83b1bb102",
+      "backendExcursions": "7b28f14459cda764b2d8dae3b8691c4048a8afb904fc604d62db607d57a7c0ae",
+      "frontendExcursions": "7b28f14459cda764b2d8dae3b8691c4048a8afb904fc604d62db607d57a7c0ae",
+      "backendScrapeStatus": "f9f5f280d77847f7bff5c53d5333a788b8adac397027fb9bd32f6e3fbaad3384",
+      "frontendScrapeStatus": "f9f5f280d77847f7bff5c53d5333a788b8adac397027fb9bd32f6e3fbaad3384",
       "copiesIdentical": true
     }
   },
-  "updatedAt": "2026-10-22T21:19:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T21:17:54Z",
-  "regionCurrent": "Lombardia — Premana01 checked one official HTML listing; one existing event verified, 0 new IDs; discovery queue advanced 10→2; source remains partial.",
-  "regionNext": "Publish and verify Premana01 files. Then inspect exact residual candidate URLs from local cache/status and continue only if targeted; otherwise move to another workable source.",
+  "updatedAt": "2026-10-22T21:25:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T21:22:23Z",
+  "regionCurrent": "Lombardia — Premana residual run02 inspected exactly two official URLs; no upcoming/new IDs; queue grew 2→4 without persisted target URLs, so source paused to avoid no-progress loop.",
+  "regionNext": "Publish Premana02 checkpoint. Move to a different Lombardia source after bounded read-only collector preflight; Premana remains partial until exact residual URLs are recoverable.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
     "sourceId": "cai-varese-9216009",
@@ -1101,41 +1139,43 @@
     "independentImporterQa": "PASS"
   },
   "lastRegionalAttempt": {
-    "runId": "cai-20261022-lombardia-premana01",
+    "runId": "cai-20261022-lombardia-premana02",
     "status": "file-checkpoint-ready-no-db-delta",
     "sourceId": "cai-premana-9216089",
     "collection": "partial",
     "files": "ready; pending Git checkpoint",
     "database": "pending; no new source ID; no DB operation",
-    "catalog": "3359 before/after; zero IDs added/removed; one sourceDocument-only change",
-    "documents": "40 retained; 3 issues; residual candidates reduced 10→2",
-    "manifestSha256": "abf50e4b5e4cd5532755beb85c9446836c03b26b7bead244e42e5ce4e868f6d4",
-    "stateSha256": "383dab5910e8f7420b1df83bca9d864579f5de5c94f0cec674b620670257a652",
-    "reportSha256": "77f32437389b7be23778640b826659e65160a21cca9d354d401d244a5d86f322",
-    "test": "backend npm test 197/197; four public catalog/status hashes unchanged by tests.",
-    "next": "Checkpoint files, then inspect exact residual official URLs locally before deciding to continue Premana or move on."
+    "catalog": "3359 before/after; zero IDs added/removed/changed",
+    "sourceHistory": "40 URLs retained; two selected hashes refreshed; queue 2→4; next four URLs are not persisted",
+    "cliSliceStatus": "unsupported (0 upcoming from the selected pages); orchestrator run/source status remains partial due preserved unvisited history/issues",
+    "manifestSha256": "4b00cb7e88e787e93cf47d08960c80ecf48dfc8e1e42d11cc29669070206990d",
+    "stateSha256": "4e6c2a3aa9b93dfb6413f6045458254105ce0bb346e73a815062a79b605b99e6",
+    "reportSha256": "88e6e56c0da6a4d89da4212015886dba6fcef4cc1f05cbf25e7b78cdfa067551",
+    "test": "backend npm test 197/197; four public catalog/status hashes unchanged during tests.",
+    "next": "Publish checkpoint; stop Premana until exact residual URLs can be recovered; select another official Lombardia source."
   },
   "regionalCoverage": {
     "region": "Lombardia",
-    "status": "open; Cernusco OCR correction is checkpointed; Premana discovery queue advanced but remains partial; other regional sources are not recounted.",
+    "status": "open; Premana remains partial and is paused because the next discovery URLs are not persisted; other sources remain.",
     "currentRunCounts": {
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
-      "verifiedExistingEvents": 1,
+      "verifiedPastEvents": 9,
+      "upcomingEvents": 0,
       "newEvents": 0,
-      "residualCandidatesBefore": 10,
-      "residualCandidatesAfter": 2,
+      "residualCandidatesBefore": 2,
+      "residualCandidatesAfter": 4,
       "exactDuplicateIdsExcluded": 0,
       "failuresResolved": [
-        "Premana official HTML continuation confirms existing CENA SOCIALE record and advances discovery candidates 10→2."
+        "Two exact Premana residual URLs were fetched and parsed; page results were classified correctly as zero current events and nine historical events."
       ],
       "failuresOpen": [
-        "Premana has two discovery candidates remaining and stays partial; broader Lombardia coverage remains incomplete."
+        "Premana has four unresolved candidates not persisted as URLs; source paused to avoid a replay/no-progress loop. Broader Lombardia coverage remains incomplete."
       ]
     },
     "historicalSnapshot": {},
-    "historicalSnapshotNote": "Historical handoff only; current sample covers Premana alone; no Lombardia-wide recount."
+    "historicalSnapshotNote": "Historical handoff only; current sample covers Premana only; no Lombardia-wide recount."
   }
 }

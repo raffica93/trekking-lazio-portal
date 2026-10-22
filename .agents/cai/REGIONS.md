@@ -137,6 +137,15 @@ Catalogo: 3.359→3.359 ID, zero aggiunti/rimossi, una sola descrizione aggiunta
 
 | Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
 |---|---:|---:|---:|---:|---|---:|---|---|---|
-| `cai-20261022-lombardia-premana01` — CAI Premana | 1 pagina ufficiale | 0 | 1 | 0 | Un evento esistente CENA SOCIALE (24-10-2026), JSON-LD ufficiale; 0 nuovi ID | 0 | Coda discovery avanzata da 10 a 2 candidati | Due candidati non ancora letti; fonte parziale, 40 URL storici conservati | Dopo checkpoint, identificare localmente i due URL e proseguire solo se mirabili senza replay; altrimenti altra fonte Lombardia |
+| `cai-20261022-lombardia-premana01` — CAI Premana | 1 pagina ufficiale | 0 | 1 | 0 | Un evento esistente CENA SOCIALE (24-10-2026), JSON-LD ufficiale; 0 nuovi ID | 0 | Coda discovery avanzata da 10 a 2 candidati | Due candidati non ancora letti; fonte parziale, 40 URL storici conservati | Checkpoint ba07970 verificato; identificare localmente i due URL e proseguire solo se mirabili senza replay, altrimenti altra fonte Lombardia |
 
 Catalogo invariato a 3.359 ID quanto a cardinalità: zero aggiunti/rimossi e una sola variazione del campo `sourceDocument` per l’evento esistente. Nessuna coordinata o evento inventato; nessuna classificazione/import DB. Report SHA `77f32437389b7be23778640b826659e65160a21cca9d354d401d244a5d86f322`; manifest SHA `abf50e4b5e4cd5532755beb85c9446836c03b26b7bead244e42e5ce4e868f6d4`. Suite backend 197/197 dopo la raccolta; copie backend/frontend identiche e i quattro hash invariati dai test. La regione Lombardia complessiva non è stata ricalcolata.
+
+
+## CAI Premana residual continuation 02 — 22 ottobre 2026
+
+| Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| `cai-20261022-lombardia-premana02` — CAI Premana | 2 URL ufficiali mirati | 0 | 1 | 0 | 9 eventi storici controllati, 0 prossimi, 0 ID nuovi | 0 | `/oggi/` e listing archivio letti; nessun evento futuro dal campione | Discovery 2→4 residui; esatti quattro URL non salvati; fonte in pausa per prevenire replay | Checkpoint; poi altra fonte Lombardia con campione ufficiale delimitato |
+
+Il catalogo resta a 3.359 ID e non ha righe evento cambiate; sono cambiati i due hash dei documenti, la metadata di coverage e la issue con la nuova coda. La status history conserva 40 URL, zero aggiunti/rimossi. La CLI sul sottoinsieme ha segnalato `unsupported`, il run e la sezione restano `partial`; non è un calendario vuoto e non è complete coverage. Nessuna classification/import DB. Report SHA `88e6e56c0da6a4d89da4212015886dba6fcef4cc1f05cbf25e7b78cdfa067551`; manifest SHA `4b00cb7e88e787e93cf47d08960c80ecf48dfc8e1e42d11cc29669070206990d`; test backend 197/197, copie identiche. Non sono stati ricalcolati i totali regionali.

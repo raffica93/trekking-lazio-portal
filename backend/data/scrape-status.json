@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-22T21:19:38.856Z",
+  "generatedAt": "2026-10-22T21:23:01.641Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 1,
-    "parsed": 1,
-    "unsupported": 0,
+    "parsed": 0,
+    "unsupported": 1,
     "failed": 0,
     "located": 548
   },
@@ -13876,7 +13876,7 @@
       "excursions": 1,
       "error": null,
       "hash": "a0f8ac009ae71fa26bf3e5765ca9377f41b2ed738e5e064900a6ca1cd1cc2b3d",
-      "updatedAt": "2026-10-22T21:19:38.856Z",
+      "updatedAt": "2026-10-22T21:23:01.641Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-premana/eventi/?ical=1",
@@ -13904,13 +13904,13 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-premana/eventi/oggi/",
-          "hash": "5f49fb23a1f37658f73f10bba37b267ee784e3e66087f341e991489b91ccc27e",
+          "hash": "60828a153751dc22a7bf1a511b1f2b9cb61f95a1766177dfd8da091eb251305a",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-premana/eventi/elenco/?eventDisplay=past",
-          "hash": "31694e70d70ea632fc18c7680338e1785d574c5c3a6a802fa567789f2757f834",
+          "hash": "86f727b6394002a0f743e89285b2c434ac1257e8d2178100dcc78f182f4a2955",
           "events": 9,
           "method": "html-calendar"
         },
@@ -14138,6 +14138,11 @@
         {
           "url": "https://organizzazione.cai.it/sez-premana/eventi/?ical=1",
           "message": "Discovery budget reached; 2 candidate documents remain.",
+          "code": "discovery-limit"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-premana/eventi/?ical=1",
+          "message": "Discovery budget reached; 4 candidate documents remain.",
           "code": "discovery-limit"
         }
       ],
