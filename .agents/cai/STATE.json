@@ -324,10 +324,10 @@
     {
       "id": "S28",
       "status": "in_progress",
-      "result": "After remote checkpoint of this exact preflight, run one explicit-URL sample for the future Monte Scalambra detail PDF, max1 doc/120s/concurrency1; no discovery follow-up."
+      "result": "Exact offline preflight for the Monte Scalambra detail PDF was published and verified remotely at c110d172a012242c43c97a35283e63f164e7472c. Run only cai-20261022-campania-caserta-scalambra01, max1/120s/concurrency1; no discovery follow-up."
     }
   ],
-  "nextAction": "Remote parent checkpoint 764e463319ca4e0050e98ca0bba53542a89e6ff8 verified. Publish this offline preflight, then run exactly cai-20261022-campania-caserta-scalambra01 on https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf, source cai-caserta-9238006, max1 document/120s/concurrency1. Do not follow discovery links or retry the annual PDF.",
+  "nextAction": "Remote preflight checkpoint c110d172a012242c43c97a35283e63f164e7472c verified. Run exactly cai-20261022-campania-caserta-scalambra01 for cai-caserta-9238006 at https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf, max1 document/120s/concurrency1. Stop after this URL; do not follow discovery or retry annual PDF.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -336,7 +336,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "52deb84835e47a355d66da4662dc7e9a877f2ab4",
+    "branchHead": "c110d172a012242c43c97a35283e63f164e7472c",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -499,13 +499,13 @@
     },
     "ocrItalian": false,
     "agentStatus": {
-      "caiCollector": "Caserta index child-link preflight complete; one future event detail PDF selected, sample pending remote preflight checkpoint",
-      "caiImporter": "Independent read-only QA PASS for run artifacts/docs; no DB",
+      "caiCollector": "Monte Scalambra target preflight checkpoint remotely verified; one bounded explicit URL sample authorized now",
+      "caiImporter": "Caserta index01 file QA complete; available for next run independent QA",
       "agentRequestedModel": "gpt-6-luna",
       "agentRequestedEffort": "high",
       "effectiveModelTelemetry": "not exposed"
     },
-    "nextPhase": "campania-caserta-scalambra-checkpoint-pending",
+    "nextPhase": "campania-caserta-scalambra-sample",
     "databaseReadOnlyObservation": {
       "observedAt": "2026-10-22T18:12:15.676Z",
       "source": "authorized Supabase read-only SQL and map predicate",
@@ -520,7 +520,7 @@
     },
     "tests": "After run07 stopped, backend npm test passed 187/187. Backend/frontend excursions SHA256 6e46cec85daae67e6da0a98afb36d4fbf72b3790b2246dfcdf3837ea9a0ff99b and scrape-status SHA256 da7fa46626cfd3c7e29cc59e0eb66c85f2374a70d0d325a68caba38308dd8450 remained byte-identical after tests.",
     "regionCurrent": "Campania — CAI Caserta index01 partial; one official page read, method=null/0 events (calendar not proven empty), 50 existing event rows unchanged, annual PDF and index discovery issues remain.",
-    "regionNext": "Publish and verify the exact Monte Scalambra child-PDF preflight; then one bounded explicit-URL sample only, no discovery expansion.",
+    "regionNext": "One bounded explicit-URL sample of the future Monte Scalambra event detail PDF; after collection stop for importer QA and backend tests.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
     "remoteCheckpointVerifiedAt": "2026-10-22T19:25:20Z",
@@ -1020,9 +1020,9 @@
         "checkpointCommit": "pending"
       }
     ],
-    "repositoryCheckpointCommit": "52deb84835e47a355d66da4662dc7e9a877f2ab4",
+    "repositoryCheckpointCommit": "c110d172a012242c43c97a35283e63f164e7472c",
     "updatedAt": "2026-10-22T23:05:00Z",
-    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:10:00Z",
+    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:17:00Z",
     "continuationMechanism": {
       "flag": "--source-url URL (repeatable) with exactly one --source ID",
       "safety": "Exact official hostname, HTTP(S), no credentials/custom port; redirect guard in continuation mode permits only HTTPS same-host redirects on default/443 without auth. Existing cooldown/cache and bounded document/time limits retained.",
@@ -1195,7 +1195,7 @@
       "sourceId": "cai-caserta-9238006",
       "sourceName": "CAI Caserta",
       "url": "https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf",
-      "status": "offline preflight selected; single sample pending checkpoint",
+      "status": "offline preflight remotely checkpointed; one bounded sample authorized",
       "evidence": "official saved index source-page.html links PDF next to 25 October 2026 Serrone/Monte Scalambra text; target absent from status/history/cache/FAILURES",
       "scope": "one explicit URL, max1 document,120s,concurrency1; no discovery expansion",
       "networkFetchPerformed": false
@@ -1283,14 +1283,14 @@
       "checkpointCommit": "52deb84835e47a355d66da4662dc7e9a877f2ab4",
       "remoteVerifiedAt": "2026-10-22T23:10:00Z"
     },
-    "nextAction": "Remote parent checkpoint 764e463319ca4e0050e98ca0bba53542a89e6ff8 verified. Publish this offline preflight, then run exactly cai-20261022-campania-caserta-scalambra01 on https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf, source cai-caserta-9238006, max1 document/120s/concurrency1. Do not follow discovery links or retry the annual PDF."
+    "nextAction": "Remote preflight checkpoint c110d172a012242c43c97a35283e63f164e7472c verified. Run exactly cai-20261022-campania-caserta-scalambra01 for cai-caserta-9238006 at https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf, max1 document/120s/concurrency1. Stop after this URL; do not follow discovery or retry annual PDF."
   },
   "repositoryCommit": {
     "branch": "codex/cai-orchestrator-luna",
-    "head": "52deb84835e47a355d66da4662dc7e9a877f2ab4",
+    "head": "c110d172a012242c43c97a35283e63f164e7472c",
     "remoteVerified": true,
-    "fetchHead": "52deb84835e47a355d66da4662dc7e9a877f2ab4",
-    "checkpointKind": "Caserta index01 run, catalog/status and regional handoff"
+    "fetchHead": "c110d172a012242c43c97a35283e63f164e7472c",
+    "checkpointKind": "Caserta index child-link preflight; one future event detail URL selected"
   },
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
@@ -1314,10 +1314,10 @@
     }
   },
   "tests": "After the Castrovillari01 collection finished, backend npm test passed 205/205; SHA-256 for six public JSON files was identical before/after. No tests were run concurrently with collection.",
-  "updatedAt": "2026-10-22T23:14:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:10:00Z",
+  "updatedAt": "2026-10-22T23:17:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:17:00Z",
   "regionCurrent": "Campania — CAI Caserta index01 partial; one official page read, method=null/0 events (calendar not proven empty), 50 existing event rows unchanged, annual PDF and index discovery issues remain.",
-  "regionNext": "Publish and verify the exact Monte Scalambra child-PDF preflight; then one bounded explicit-URL sample only, no discovery expansion.",
+  "regionNext": "One bounded explicit-URL sample of the future Monte Scalambra event detail PDF; after collection stop for importer QA and backend tests.",
   "preflight": {
     "at": "2026-10-22T22:30:21.913236Z",
     "sourceId": "cai-campobasso-9236001",
@@ -1566,7 +1566,7 @@
     "sourceId": "cai-caserta-9238006",
     "sourceName": "CAI Caserta",
     "url": "https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf",
-    "status": "offline preflight selected; single sample pending checkpoint",
+    "status": "offline preflight remotely checkpointed; one bounded sample authorized",
     "evidence": "official saved index source-page.html links PDF next to 25 October 2026 Serrone/Monte Scalambra text; target absent from status/history/cache/FAILURES",
     "scope": "one explicit URL, max1 document,120s,concurrency1; no discovery expansion",
     "networkFetchPerformed": false
