@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "classification-full-run-ready",
-  "fullCloudQualified": false,
+  "phase": "classification-checkpoint-ready",
+  "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
     "visibility": "public",
@@ -176,21 +176,21 @@
     },
     {
       "id": "S3",
-      "status": "ready",
+      "status": "completed",
       "owner": "orchestrator",
-      "result": "full population input sealed from fresh Supabase REST export: 3336 rows/unique source_ids; run cai-map-20261022-full01; use sample cache; concurrency 4/rate-ms 200; fail fast on auth/quota/429/unverified model"
+      "result": "Full classification ready 3336/3336, one bounded resume recovered three transient failures; zero final errors."
     },
     {
       "id": "S4",
-      "status": "pending",
+      "status": "completed",
       "owner": "cai-collector + cai-importer",
-      "result": "review all non_trekking candidates and ambiguous/failed rows; apply evidence-backed QA overrides; produce final sealed report"
+      "result": "Final sealed run 3336/3336; independent QA checked 157/462 original non-trekking candidates from 11 source groups, with 8 evidence-backed exclusions, 5 trekking false negatives corrected, 27 mixed/mismatched and 117 unresolved retained for review; importer independently PASS-validated all rows and model attestation."
     },
     {
       "id": "S5",
-      "status": "pending",
+      "status": "in-progress",
       "owner": "cai-importer",
-      "result": "after ready files and remote checkpoint, apply classification-only migration/upsert; preserve conflict rows; no places writes"
+      "result": "Checkpoint files/tests/QA on remote first, then apply classification-only migration and insert missing classification rows; preserve conflicts and never update places."
     },
     {
       "id": "S6",
@@ -206,8 +206,8 @@
     }
   ],
   "nextAction": {
-    "step": "S3",
-    "instruction": "Run cai-map-20261022-full01 from the committed input.json using only inception/mercury-decide, concurrency 4, rate-ms 200, and the sample cache. Stop on auth/quota/429 or unverified response model; do not start regional collection. After file completion, QA excluded/uncertain candidates and publish verified manifest before any DB write."
+    "step": "S5",
+    "instruction": "Push and verify this sealed run checkpoint on codex/cai-orchestrator-luna. Then use authorized Supabase MCP to apply migration and classification-only insert, with ON CONFLICT DO NOTHING; fresh before/after reconciliation and map eligibility receipt. No places updates, deletes, merge or deploy."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -217,7 +217,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "25f1750d6446736b6176c85b028cbcb73ea78e9b",
+    "branchHead": "ee1eb5114703265f787fd7635677767bc3efa247",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -245,31 +245,60 @@
     },
     "fullClassificationRun": {
       "runId": "cai-map-20261022-full01",
-      "status": "ready-checkpoint-verified",
+      "status": "ready-qa-complete-checkpoint-pending",
       "inputPath": "backend/data/agent-runs/cai-map-20261022-full01/input.json",
       "inputSha256": "2963f287c4ccedb20a70068b2551dad3565b264d871194ec91324d0f98bb0687",
-      "inputBytes": 3956792,
       "rows": 3336,
       "uniqueSourceIds": 3336,
-      "exportObservedAt": "2026-10-22T17:25:59.485Z",
-      "dbQueryObservedAt": "2026-10-22T17:27:56.333893Z",
-      "publishedTotal": 4346,
-      "mapCandidates": 3336,
-      "dateGte": 3307,
-      "dateEndGte": 3300,
-      "classificationTableExists": false,
-      "sourceCommit": "3f93525f4f52dff9dd322278a6b3e4759455648b",
-      "plannedConcurrency": 4,
-      "plannedRateMs": 200,
-      "cachePath": "backend/data/agent-runs/cai-map-20261022-sample02/cache",
-      "outputPath": "backend/data/agent-runs/cai-map-20261022-full01/output"
+      "completed": 3336,
+      "errors": 0,
+      "sourceCommit": "ee1eb5114703265f787fd7635677767bc3efa247",
+      "modelRequested": "inception/mercury-decide",
+      "responseModel": "inception/mercury-decide-20260930",
+      "modelAttested": true,
+      "policyVersion": "cai-trekking-v2",
+      "concurrency": 4,
+      "rateLimitMs": 200,
+      "resumes": 1,
+      "cacheReused": true,
+      "candidateCounts": {
+        "trekking": 973,
+        "non_trekking": 478,
+        "da_verificare": 1885
+      },
+      "effectiveCounts": {
+        "trekking": 969,
+        "non_trekking": 9,
+        "da_verificare": 2358
+      },
+      "qa": {
+        "originalNonTrekkingCandidates": 462,
+        "officialSourceGroups": 11,
+        "rowsReviewed": 157,
+        "confirmedNonTrekking": 8,
+        "confirmedTrekkingFalseNegatives": 5,
+        "mixedOrAttributionMismatch": 27,
+        "reviewedInconclusive": 117,
+        "notPointReviewed": 305,
+        "sourceReviewOverlays": 43,
+        "reviewRecordsTotal": 496,
+        "evidenceBackedSampleOverrides": 6,
+        "uncertainExclusionsPrevented": 469
+      },
+      "manifestSha256": "5d7b2423edcad5f116c6e375bc8897139cba371e3bbae525ac24a0f74d83ce98",
+      "catalogSha256": "e3c5d5b09d268bdc43fdeff4a91b67054fd9e8d75e04eeb00042bfe75969aa5c",
+      "stateSha256": "180c28394488e942d7c31b5715b7103d2ce5f1105aef718b6a03d054586fbf10",
+      "qaReportSha256": "0f828750cda80138c2d32599be0154e80033a6938601692e40ffc22152cb310a",
+      "independentImporterQa": "PASS; manifest 5d7b2423...; 3336 aligned unique rows, model identity attested, review overlays verified",
+      "dbWrites": 0
     },
     "database": {
       "classificationTableExists": false,
-      "lastObservedAt": "2026-10-22T17:27:56.333893Z",
+      "lastObservedAt": "2026-10-22T18:12:15.676Z",
       "migrationApplied": false,
       "writes": 0,
-      "placesTouched": false
+      "placesTouched": false,
+      "writePath": "authorized Supabase MCP; local SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY absent"
     },
     "catalogHashes": {
       "backendData": "1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877",
@@ -293,28 +322,53 @@
       "caiCollector": "completed",
       "caiImporter": "completed"
     },
-    "nextPhase": "Commit and push the sample QA + full input checkpoint; verify remote head; then start cai-map-20261022-full01.",
+    "nextPhase": "Publish verified run checkpoint; then apply classification-only migration and inserts through Supabase MCP; reconcile before/after; only then resume Lombardia",
     "databaseReadOnlyObservation": {
-      "observedAt": "2026-10-22T17:27:56.333893Z",
-      "source": "authorized Supabase SQL + public REST export",
+      "observedAt": "2026-10-22T18:12:15.676Z",
+      "source": "authorized Supabase read-only SQL and map predicate",
       "projectRef": "snwzxegtqnnuvlawnpgl",
+      "placesTotal": 4405,
       "published": 4346,
       "mapCandidates": 3336,
-      "publishedDateGte2026_10_01": 3307,
-      "publishedDateEndGte2026_10_01": 3300,
+      "uniqueMapSourceIds": 3336,
+      "latestPlacesUpdatedAt": "2026-10-20T11:51:23.239637Z",
       "classificationTablesFound": false,
       "writes": 0
     },
     "tests": {
-      "backend": "npm test: 173 passed, 0 failed",
-      "frontend": "43 passed in 11 files on same code behavior; no frontend edits in latest commits",
+      "backend": "npm test: 174 passed, 0 failed (2026-10-22 full classification suite included)",
+      "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
       "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
     },
     "regionCurrent": "Lombardia remains open; historical snapshot only, no regional collection while classification active",
     "regionNext": "After batch/import receipt closes, resume Lombardia with bounded source samples, then one region at a time",
     "updatedChatRecipient": null,
-    "artifactCheckpointCommit": "25f1750d6446736b6176c85b028cbcb73ea78e9b",
-    "remoteCheckpointVerifiedAt": "2026-10-22T17:30:00Z"
+    "artifactCheckpointCommit": null,
+    "remoteCheckpointVerifiedAt": null,
+    "operationalRecovery": {
+      "incident": "An intermediate overlay command briefly reduced an uncommitted working output to a one-row transfer fixture. It was recovered from the sealed 3336-row input and existing classifier cache before QA, with no DB writes. The final full output was rebuilt and importer-validated.",
+      "status": "recovered-before-checkpoint",
+      "testRef": "backend/test/full-classification-source-qa.test.js"
+    },
+    "qaStatus": "independent source QA complete; importer independently PASS; no DB writes"
   },
-  "repositoryCommit": "25f1750d6446736b6176c85b028cbcb73ea78e9b"
+  "repositoryCommit": "25f1750d6446736b6176c85b028cbcb73ea78e9b",
+  "databaseReadOnlyObservation": {
+    "observedAt": "2026-10-22T18:12:15.676Z",
+    "source": "authorized Supabase read-only SQL and map predicate",
+    "projectRef": "snwzxegtqnnuvlawnpgl",
+    "placesTotal": 4405,
+    "published": 4346,
+    "mapCandidates": 3336,
+    "uniqueMapSourceIds": 3336,
+    "latestPlacesUpdatedAt": "2026-10-20T11:51:23.239637Z",
+    "classificationTablesFound": false,
+    "writes": 0
+  },
+  "tests": {
+    "backend": "npm test: 174 passed, 0 failed (2026-10-22 full classification suite included)",
+    "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
+    "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
+  },
+  "updatedAt": "2026-10-22T18:20:00Z"
 }

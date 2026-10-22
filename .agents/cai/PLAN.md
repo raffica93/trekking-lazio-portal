@@ -60,3 +60,12 @@ Qui vengono definiti obiettivi, ordine, spazio e criteri di riuscita. Non vengon
 eseguiti nuovi scrape/import, modifiche ai permessi o al database, ripubblicazioni
 dell'ambiente, merge, deploy o scheduler. Le prove già registrate non equivalgono
 a un collaudo del runtime cloud corrente.
+
+
+## Stato 2026-10-22 — classificazione catalogo mappa
+
+- S0–S4 completati: branch e runtime verificati, input mappa 3.336 ID sigillato, run Mercury pronto senza errori, QA fonti e verifica indipendente importer concluse.
+- QA fonti indipendente: 157/462 candidati originari esaminati in 11 gruppi; 8 esclusioni documentate, 5 falsi negativi portati a trekking, 27 misti/mismatch e 117 inconclusivi restano da verificare; 305 non esaminati singolarmente.
+- Conteggi candidati definitivi: trekking 973, non trekking 478, da verificare 1.885. Conteggi effettivi dopo QA: trekking 969, non trekking 9, da verificare 2.358. Nessun errore Mercury.
+- Test backend 174/174; cataloghi pubblici invariati. Importer PASS su manifest/output; database ancora senza tabella classificazioni e senza scritture.
+- Prossimo: commit/push di file e report e verifica del ref remoto. Poi migration classification-only + inserimenti mancanti con conflitti preservati via Supabase MCP. Query/ricevuta prima e dopo, mai aggiornare `places`. Nessun deploy. Lombardia resta ferma finché l’import non è riconciliato.

@@ -33,3 +33,24 @@ La migration non è applicata e la tabella classificazioni non esisteva nell’u
 ## Baseline distinta
 
 La baseline storica resta run `cai-20261020-piemonte-01`, commit `9919927`, 3.337 ID e 40 nuovi eventi Piemonte. `cai-20261020-piemonte-ocr-01` è un run OCR pending, non baseline da reimportare. Lombardia rimane la regione aperta; ultimo handoff storico: 229 sezioni, 125 controllate, 56 complete, 68 parziali, 1 irraggiungibile, 104 non verificate e 69 fonti parziali/irraggiungibili. Questi sono conteggi storici, non risultati query attuali.
+
+
+## Checkpoint classificazione completa — 22 ottobre 2026
+
+Il run `cai-map-20261022-full01` è completo e pronto per checkpoint/import: input da 3.336 candidati effettivi della mappa, 3.336 ID univoci e allineati, 0 errori. Query di sola lettura Supabase alle 18:12:15.676 UTC: 4.405 `places`, 4.346 pubblicati, 3.336 nella mappa con predicate `published AND (date >= 2026-10-01 OR date_end >= 2026-10-01)`, tabella classificazioni assente. Latest `places.updated_at` osservato: 2026-10-20 11:51:23.239637 UTC. Nessuna scrittura DB.
+
+Modello richiesto `inception/mercury-decide`, risposta attestata `inception/mercury-decide-20260930`, policy `cai-trekking-v2`. Run 4 concurrency / 200 ms, una ripresa idempotente; il final output rigenerato sullo stesso input ha 0 errori. Mercury è non deterministico: i valori da usare sono quelli nel manifest finale, non i conteggi della prima generazione.
+
+| Classificazione | Candidati Mercury | Valore effettivo dopo QA |
+|---|---:|---:|
+| Trekking | 973 | 969 |
+| Non trekking | 478 | 9 |
+| Da verificare | 1.885 | 2.358 |
+
+QA collector indipendente: 157 dei 462 candidati `non_trekking` originari revisionati in 11 gruppi fonte; 8 esclusioni con riscontro diretto, 5 falsi negativi corretti a trekking, 27 righe miste/mismatch e 117 inconclusive mantenute `da_verificare`; 305 non esaminate puntualmente. Gli altri candidati non trekking senza prova individuale sono conservati come `da_verificare`. 43 overlay di gruppo conservativi e 6 riscontri dal campione reale (conteggi review totali 496). Importer ha indipendentemente PASS-validato manifest, conteggi, unicità/allineamento, alias/snapshot e override.
+
+Artifact da pubblicare: input `2963f287c4ccedb20a70068b2551dad3565b264d871194ec91324d0f98bb0687`; catalogo effettivo `e3c5d5b09d268bdc43fdeff4a91b67054fd9e8d75e04eeb00042bfe75969aa5c`; stato run `180c28394488e942d7c31b5715b7103d2ce5f1105aef718b6a03d054586fbf10`; manifest `5d7b2423edcad5f116c6e375bc8897139cba371e3bbae525ac24a0f74d83ce98`; QA report `0f828750cda80138c2d32599be0154e80033a6938601692e40ffc22152cb310a`. Fixture QA: `backend/test/fixtures/cai-map-20261022-full01-source-qa.json`; test: `backend/test/full-classification-source-qa.test.js`. Backend `npm test`: 174/174; cataloghi backend/frontend invariati, SHA256 `1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877`.
+
+Un artefatto intermedio dell’overlay si è ridotto a un record per errore di preparazione input. È stato ripristinato dall’input completo e dalla cache prima del QA, rigenerato e poi verificato dall’importer; non è avvenuta alcuna scrittura DB. I due backup corrotti sono stati rimossi.
+
+**Gate:** nessuna migration o import prima che commit e push del checkpoint file siano riletti su `origin/codex/cai-orchestrator-luna`. Dopo il push, applicare solo la migration `place_classifications` e inserire record classificazione mancanti; conflitti preesistenti restano intatti, nessuna UPDATE/DELETE su `places`. Usare Supabase MCP perché `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` non sono presenti nel runtime backend. Fare query digest/invarianti immediatamente prima e dopo, salvare ricevuta recuperabile in un checkpoint successivo, poi soltanto riprendere Lombardia. Nessun deploy, merge o scheduler.

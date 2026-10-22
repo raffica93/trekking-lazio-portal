@@ -17,3 +17,11 @@
 - Soluzione: il batch si arresta su 401/402/403/429 o attestazione modello non allowlisted; il run parziale non è importabile. L’importer conserva decisione/categoria candidate Mercury e valore effettivo separato con metadata QA verificabili, senza sovrascrivere i conflitti esistenti.
 - Verifica: test circuito interruttore su status/model e persistenza run parziale; fixture per Sacile, Alatri e Omegna; `backend npm test` 173/173 e test importer 28/28.
 - Commit: `902a1802dade16bead38f3aa61f3026f84e3ec49`, `3f93525f4f52dff9dd322278a6b3e4759455648b`.
+
+
+## 2026-10-22 — classificazione catalogo completo
+
+- Fare parsing e verifica 3336 ID/input/output prima di applicare qualsiasi overlay. Un comando di preparazione errato aveva prodotto un output temporaneo a un record: ripristino da input sigillato + cache esistente, quindi rigenerazione e verifica importer prima del gate; nessuna scrittura DB.
+- Le risposte Mercury non sono deterministiche anche con stesso run/input. Alla ripresa verificare sempre output/manifest finali e non riutilizzare conteggi di un output precedente.
+- Non escludere in massa candidati `non_trekking` basandosi soltanto sul modello o su PDF condivisi tra sezioni. QA puntuale ha confermato solo 8 esclusioni; candidati ambigui/non revisionati restano `da_verificare`.
+- Controllare il ref remoto con `git ls-remote`: la cache del ref `origin/*` locale può essere indietro rispetto al branch effettivo.
