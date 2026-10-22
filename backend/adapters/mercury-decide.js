@@ -207,6 +207,9 @@ function modelClassification(event, answerPayload) {
       modelRequested: MODEL,
       responseModel,
       modelAttested,
+      // An unrecognized provider model means this deployment is no longer
+      // returning the response contract we verified; stop the current batch.
+      stopBatch: invalidModel,
       method: 'mercury-decide',
       modelVersion: modelAttested ? responseModel : null,
       mapEligible: false
@@ -304,9 +307,36 @@ async function classifyEvent(event, {
       }),
       signal: AbortSignal.timeout(Math.max(1_000, Math.min(30_000, timeoutMs)))
     });
-    if (!response?.ok) throw new Error(`Mercury Decide HTTP ${response?.status || 'error'}`);
+    if (!response?.ok) {
+      const status = Number.isInteger(response?.status) && response.status >= 100 && response.status <= 599
+        ? response.status
+        : null;
+      const stopBatch = [401, 402, 403, 429].includes(status);
+      return {
+        ...local,
+        valid: false,
+        errorCode: stopBatch ? `mercury-http-${status}` : 'mercury-unavailable',
+        httpStatus: status,
+        stopBatch,
+        decision: 'da_verificare',
+        category: local.category || 'altro',
+        confidence: null,
+        probability: null,
+        rationale: stopBatch
+          ? `Classificazione interrotta dopo risposta HTTP ${status}; run da riprendere dopo la risoluzione.`
+          : 'Classificazione automatica non disponibile; serve verifica manuale.',
+        model: null,
+        modelRequested: MODEL,
+        responseModel: null,
+        modelAttested: false,
+        method: 'mercury-decide',
+        modelVersion: null,
+        mapEligible: false
+      };
+    }
     const payload = await response.json();
     const result = modelClassification(event, payload);
+    if (result.stopBatch) result.httpStatus = Number.isInteger(response.status) ? response.status : null;
     if (result.decision !== 'da_verificare' && result.category !== 'altro') await writeCache(cacheDir, result);
     return result;
   } catch (error) {
@@ -347,16 +377,22 @@ async function classifyEvents(events, options = {}) {
   const results = new Array(events.length);
   let nextIndex = 0;
   let nextStartAt = Date.now();
+  let stopBatch = false;
   async function worker() {
     while (true) {
+      if (stopBatch) return;
       const index = nextIndex;
       nextIndex += 1;
       if (index >= events.length) return;
       const delayMs = Math.max(0, nextStartAt - Date.now());
       nextStartAt = Math.max(Date.now(), nextStartAt) + rateLimitMs;
       if (delayMs) await new Promise((resolve) => setTimeout(resolve, delayMs));
+      // A worker may have been waiting for its rate slot while another
+      // in-flight request tripped the circuit breaker.
+      if (stopBatch) return;
       const classification = await classifyEvent(events[index], { ...classifyOptions, forceRemote: true });
       results[index] = classification;
+      if (classification?.stopBatch === true) stopBatch = true;
       if (onResult) await onResult(index, classification);
     }
   }

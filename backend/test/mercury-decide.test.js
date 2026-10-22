@@ -209,6 +209,85 @@ test('catalog batch respects bounded concurrency and minimum inter-request rate'
   } finally { await fs.rm(tmp, { recursive: true, force: true }); }
 });
 
+test('catalog batch circuit breaker stops new requests on auth, quota, rate-limit, and model-attestation failures', async () => {
+  const scenarios = [
+    { name: '401', status: 401, code: 'mercury-http-401' },
+    { name: '402', status: 402, code: 'mercury-http-402' },
+    { name: '403', status: 403, code: 'mercury-http-403' },
+    { name: '429', status: 429, code: 'mercury-http-429' },
+    { name: 'unknown model', status: 200, code: 'invalid-model-response', unknownModel: true }
+  ];
+
+  for (const scenario of scenarios) {
+    const tmp = await fs.mkdtemp(path.join(os.tmpdir(), `cai-mercury-circuit-${scenario.name.replaceAll(' ', '-')}-`));
+    let calls = 0;
+    let active = 0;
+    let peak = 0;
+    let resolveSecondStarted;
+    let resolveSecond;
+    let resolveStopped;
+    const secondStarted = new Promise((resolve) => { resolveSecondStarted = resolve; });
+    const secondRelease = new Promise((resolve) => { resolveSecond = resolve; });
+    const stopped = new Promise((resolve) => { resolveStopped = resolve; });
+    try {
+      const rows = Array.from({ length: 6 }, (_, n) => ({ ...event, id: `cai-circuit-${scenario.name}-${n}` }));
+      const resultPromise = classifyEvents(rows, {
+        concurrency: 3,
+        rateLimitMs: 100,
+        cacheDir: tmp,
+        env: { OPENROUTER_API_KEY: 'test-only', MERCURY_DECIDE_ENABLED: '1', OPENROUTER_ALLOWED_HOSTS: 'openrouter.ai' },
+        fetchImpl: async () => {
+          calls += 1;
+          active += 1;
+          peak = Math.max(peak, active);
+          const call = calls;
+          try {
+            if (call === 1) {
+              await secondStarted;
+              if (scenario.unknownModel) {
+                return { ok: true, status: scenario.status, json: async () => ({ ...reply('trekking', 'a piedi'), model: 'unverified/model' }) };
+              }
+              return { ok: false, status: scenario.status };
+            }
+            if (call === 2) {
+              resolveSecondStarted();
+              await secondRelease;
+              return { ok: true, status: 200, json: async () => reply('trekking', 'a piedi') };
+            }
+            return { ok: true, status: 200, json: async () => reply('trekking', 'a piedi') };
+          } finally {
+            active -= 1;
+          }
+        },
+        onResult: (_index, classification) => {
+          if (classification.stopBatch) resolveStopped(classification);
+        }
+      });
+
+      const stopResult = await stopped;
+      assert.equal(stopResult.errorCode, scenario.code, scenario.name);
+      assert.equal(stopResult.httpStatus, scenario.status, scenario.name);
+      assert.equal(stopResult.valid, false, scenario.name);
+      assert.equal(peak <= 3, true, scenario.name);
+      assert.equal(calls, 2, scenario.name);
+
+      // Let any worker already waiting for its rate slot resume and observe
+      // the breaker while the second request remains in flight.
+      await new Promise((resolve) => setTimeout(resolve, 150));
+      assert.equal(calls, 2, scenario.name);
+      assert.equal(active, 1, scenario.name);
+
+      resolveSecond();
+      await resultPromise;
+      assert.equal(calls, 2, scenario.name);
+      assert.equal(active, 0, scenario.name);
+    } finally {
+      resolveSecond();
+      await fs.rm(tmp, { recursive: true, force: true });
+    }
+  }
+});
+
 test('model cache is keyed by evidence fingerprint and malformed/error answers fail open without caching', async () => {
   const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'cai-mercury-cache-'));
   const env = { OPENROUTER_API_KEY: 'test-only', MERCURY_DECIDE_ENABLED: '1', OPENROUTER_ALLOWED_HOSTS: 'openrouter.ai' };
