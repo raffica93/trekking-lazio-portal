@@ -43,7 +43,7 @@ non dimostra che una chat nuova possa recuperare il lavoro.
 
 Branch `codex/cai-orchestrator-luna`; ultimo checkpoint remoto verificato `cd98b54dd29eebbdeb4f1bdbdc11ad315713f32a`. Classificazione completa e delta precedenti sono chiusi; non ripetere i batch/import storici.
 
-Cesena index01 e poster Escursionismo Adattato01 hanno verificato due fonti ufficiali; entrambe restano partial. Il poster elenca date 2026 senza abbinarle a titoli/destinazioni, quindi nessun evento completo o coordinata è stato inferito. 3.366 ID unici invariati, nessun DB. Importer QA PASS e backend test 205/205, sei JSON pubblici stabili. Il checkpoint del secondo run deve essere pubblicato prima del prossimo fetch. Preflight offline seleziona CAI Pavullo, `https://www.caipavullo.it/calendario-2026/`, max1 documento/120s/concurrency1; issues ICS/PDF già note sono su URL distinti e non vanno ripetute.
+Cesena index01 e poster Escursionismo Adattato01 hanno verificato due fonti ufficiali; entrambe restano partial. Il poster elenca date 2026 senza abbinarle a titoli/destinazioni, quindi nessun evento completo o coordinata è stato inferito. 3.366 ID unici invariati, nessun DB. Importer QA PASS e backend test 205/205, sei JSON pubblici stabili. Il checkpoint del secondo run è pubblicato e verificato a `b23dea1`. Preflight offline seleziona CAI Pavullo, `https://www.caipavullo.it/calendario-2026/`, max1 documento/120s/concurrency1; issues ICS/PDF già note sono su URL distinti e non vanno ripetute.
 
 Orchestratore e ruoli `cai-collector`/`cai-importer` sono richiesti/configurati GPT-6 Luna high; telemetria runtime non attesta identità/effort effettivi. Nessun merge, deploy, cron o cancellazione DB.
 

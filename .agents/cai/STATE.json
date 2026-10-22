@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "emilia-romagna-cesena-escursionismo01-files-awaiting-checkpoint",
+  "phase": "emilia-romagna-pavullo-calendar01-preflight-ready",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -368,11 +368,16 @@
     },
     {
       "id": "S37",
+      "status": "completed",
+      "result": "Cesena escursionismo01 file/report/catalogo/manifest e copertura pubblicati e verificati al commit remoto b23dea1e53aee7a108da05b4cae3b1622497985f; tree locale/remoto identico."
+    },
+    {
+      "id": "S38",
       "status": "in_progress",
-      "result": "Pubblicare e verificare il checkpoint del secondo campione Cesena e aggiornare la copertura; poi un campione limitato CAI Pavullo su URL ufficiale non visitato."
+      "result": "Eseguire un campione distinto e bounded CAI Pavullo sul calendario ufficiale 2026; nessun retry di code su URL distinti."
     }
   ],
-  "nextAction": "Pubblicare e verificare il checkpoint completo di Cesena escursionismo01 e handoff; poi campionare l’URL ufficiale CAI Pavullo nel Frignano https://www.caipavullo.it/calendario-2026/ con run univoco, max1 documento/120s/concurrency1. Non ripetere code ICS/PDF culturale già bloccate né i PDF Cesena. Nessun import Cesena: zero righe evento complete.",
+  "nextAction": "Cesena escursionismo01 è checkpointato e verificato al commit remoto b23dea1e53aee7a108da05b4cae3b1622497985f. Avviare un solo sample su CAI Pavullo nel Frignano, run ID cai-20261022-emilia-pavullo-calendar01, URL https://www.caipavullo.it/calendario-2026/, max1 documento/120s/concurrency1; non ripetere ICS discovery5, PDF culturale timeout o PDF già consumati.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -381,7 +386,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "cd98b54dd29eebbdeb4f1bdbdc11ad315713f32a",
+    "branchHead": "b23dea1e53aee7a108da05b4cae3b1622497985f",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
       "runId": "cai-20261022-emilia-cesena-escursionismo01",
@@ -412,14 +417,14 @@
       "importerQa": "PASS",
       "backendTests": "205/205; six public JSON SHA-256 unchanged"
     },
-    "nextAction": "Pubblicare e verificare il checkpoint completo di Cesena escursionismo01 e handoff; poi campionare l’URL ufficiale CAI Pavullo nel Frignano https://www.caipavullo.it/calendario-2026/ con run univoco, max1 documento/120s/concurrency1. Non ripetere code ICS/PDF culturale già bloccate né i PDF Cesena. Nessun import Cesena: zero righe evento complete."
+    "nextAction": "Cesena escursionismo01 è checkpointato e verificato al commit remoto b23dea1e53aee7a108da05b4cae3b1622497985f. Avviare un solo sample su CAI Pavullo nel Frignano, run ID cai-20261022-emilia-pavullo-calendar01, URL https://www.caipavullo.it/calendario-2026/, max1 documento/120s/concurrency1; non ripetere ICS discovery5, PDF culturale timeout o PDF già consumati."
   },
   "repositoryCommit": {
     "branch": "codex/cai-orchestrator-luna",
-    "head": "cd98b54dd29eebbdeb4f1bdbdc11ad315713f32a",
+    "head": "b23dea1e53aee7a108da05b4cae3b1622497985f",
     "remoteVerified": true,
-    "fetchHead": "cd98b54dd29eebbdeb4f1bdbdc11ad315713f32a",
-    "checkpointKind": "Cesena index01 run/catalog/handoff; second sample awaiting checkpoint"
+    "fetchHead": "b23dea1e53aee7a108da05b4cae3b1622497985f",
+    "checkpointKind": "Cesena Escursionismo Adattato01 run/catalog/report/coverage; verified remote before Pavullo"
   },
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
@@ -443,8 +448,8 @@
     }
   },
   "tests": "After the Castrovillari01 collection finished, backend npm test passed 205/205; SHA-256 for six public JSON files was identical before/after. No tests were run concurrently with collection.",
-  "updatedAt": "2026-10-22T23:28:13Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:28:13Z",
+  "updatedAt": "2026-10-22T23:30:31Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:30:31Z",
   "regionCurrent": "Emilia-Romagna — Cesena escursionismo01: poster 2026 OCR, date senza titoli/destinazioni; 0 eventi completi, sei record esistenti invariati, nessuna scrittura DB.",
   "regionNext": "Emilia-Romagna — CAI Pavullo nel Frignano, calendario ufficiale https://www.caipavullo.it/calendario-2026/, target distinto senza history/cache/failure/cooldown; dopo checkpoint, max1/120s/concurrency1.",
   "preflight": {

@@ -1,6 +1,6 @@
 # Piano di passaggio al lavoro interamente cloud
 
-Stato aggiornato al 22 ottobre 2026: classificazione completa e delta già consegnati restano chiusi; non ripetere batch storici o import completati. Lavoro corrente: Cesena index01 e il successivo poster Escursionismo Adattato01 sono raccolti, QA importer PASS e backend test 205/205. Entrambi i campioni lasciano 3.366 ID invariati e nessun import DB; il poster fornisce date non abbinate a destinazioni/titoli. È pending il checkpoint remoto del secondo campione; dopo il push, un solo URL calendario ufficiale CAI Pavullo, max1 documento/120s/concurrency1. I piani sottostanti che descrivono lotti già consegnati sono storici.
+Stato aggiornato al 22 ottobre 2026: classificazione completa e delta già consegnati restano chiusi; non ripetere batch storici o import completati. Lavoro corrente: Cesena index01 e il successivo poster Escursionismo Adattato01 sono raccolti, QA importer PASS e backend test 205/205. Entrambi i campioni lasciano 3.366 ID invariati e nessun import DB; il poster fornisce date non abbinate a destinazioni/titoli. Il checkpoint remoto del secondo campione è verificato al commit `b23dea1`; ora un solo URL calendario ufficiale CAI Pavullo, max1 documento/120s/concurrency1. I piani sottostanti che descrivono lotti già consegnati sono storici.
 
 ## Sequenza
 
