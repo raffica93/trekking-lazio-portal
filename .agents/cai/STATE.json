@@ -225,7 +225,7 @@
   ],
   "nextAction": {
     "step": "LOMBARDIA-BUSTO-ARSIZIO-BOUNDED-01",
-    "instruction": "After publishing and verifying Missaglia01 checkpoint files, run one bounded sample on official CAI Busto Arsizio calendar https://www.caibustoarsizio.it/attivita-invernali/ (cai-busto-arsizio-9216014), max 1 document/120 s/concurrency 1. Leave partial/unsupported unless current calendar coverage is actually proved."
+    "instruction": "Missaglia01 file checkpoint is published and verified at 7968b4eb6221dfd2d6406c640e408ac7d291181d. Run one bounded sample on official CAI Busto Arsizio calendar https://www.caibustoarsizio.it/attivita-invernali/ (cai-busto-arsizio-9216014), max 1 document/120 s/concurrency 1. Leave partial/unsupported unless current calendar coverage is actually proved."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -235,7 +235,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "7204642efea0630bed21f6db1d7a576f1db71b15",
+    "branchHead": "7968b4eb6221dfd2d6406c640e408ac7d291181d",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -421,7 +421,7 @@
     },
     "tests": "After run07 stopped, backend npm test passed 187/187. Backend/frontend excursions SHA256 6e46cec85daae67e6da0a98afb36d4fbf72b3790b2246dfcdf3837ea9a0ff99b and scrape-status SHA256 da7fa46626cfd3c7e29cc59e0eb66c85f2374a70d0d325a68caba38308dd8450 remained byte-identical after tests.",
     "regionCurrent": "Lombardia — Missaglia run01 read one official page headed Edizione 2014; parser extracted a single 2024 past event, zero current events, one discovery candidate remaining; source partial.",
-    "regionNext": "After Missaglia checkpoint, run one bounded Busto Arsizio sample at its official winter activities calendar; keep the source partial/unsupported absent full-calendar proof.",
+    "regionNext": "Missaglia01 checkpoint 7968b4e is published/verified. Next is one bounded Busto Arsizio sample on the official winter-activities calendar; leave partial/unsupported absent full-calendar proof.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
     "remoteCheckpointVerifiedAt": "2026-10-22T19:25:20Z",
@@ -951,11 +951,11 @@
       "sourceId": "cai-missaglia-9216150",
       "sourceName": "CAI Missaglia",
       "collection": "partial",
-      "files": "ready; file checkpoint pending",
+      "files": "ready; checkpoint published and verified",
       "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-missaglia01/manifest.json",
       "manifestSha256": "9f73e0a51f0cec7a7794e14b943ec9e235d7b50ecac93acf274d09e4a4d92b04",
       "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-missaglia01/collection-report.md",
-      "reportSha256": "5a07fcf62a03965bffe7ef344558c9083707bead1de76e729223e03fbe4090c7",
+      "reportSha256": "701f74343c3a479de34dc9285f296129753241da53b42ddbdfe83ad693bcf56c",
       "stateSha256": "cfac59d0bae4ad27bc47aaec354b5b11848b20f51bb0c37f913f6293c5f5eb4b",
       "sectionsChecked": 1,
       "complete": 0,
@@ -974,8 +974,8 @@
       "importerQa": "PASS read-only; manifest matches; only Missaglia source status changed",
       "backendTest": "201/201 after collection; canonical files still match manifest",
       "sourceCommit": "7204642efea0630bed21f6db1d7a576f1db71b15",
-      "fileCheckpointCommit": "pending",
-      "remoteVerified": false
+      "fileCheckpointCommit": "7968b4eb6221dfd2d6406c640e408ac7d291181d",
+      "remoteVerified": true
     },
     "lastCodeCorrection": {
       "commit": "010af3796a99d01e8081d45ef625b2344ec134c7",
@@ -996,11 +996,11 @@
       "sourceId": "cai-missaglia-9216150",
       "sourceName": "CAI Missaglia",
       "collection": "partial",
-      "files": "ready; file checkpoint pending",
+      "files": "ready; checkpoint published and verified",
       "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-missaglia01/manifest.json",
       "manifestSha256": "9f73e0a51f0cec7a7794e14b943ec9e235d7b50ecac93acf274d09e4a4d92b04",
       "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-missaglia01/collection-report.md",
-      "reportSha256": "5a07fcf62a03965bffe7ef344558c9083707bead1de76e729223e03fbe4090c7",
+      "reportSha256": "701f74343c3a479de34dc9285f296129753241da53b42ddbdfe83ad693bcf56c",
       "stateSha256": "cfac59d0bae4ad27bc47aaec354b5b11848b20f51bb0c37f913f6293c5f5eb4b",
       "sectionsChecked": 1,
       "complete": 0,
@@ -1019,8 +1019,8 @@
       "importerQa": "PASS read-only; manifest matches; only Missaglia source status changed",
       "backendTest": "201/201 after collection; canonical files still match manifest",
       "sourceCommit": "7204642efea0630bed21f6db1d7a576f1db71b15",
-      "fileCheckpointCommit": "pending",
-      "remoteVerified": false
+      "fileCheckpointCommit": "7968b4eb6221dfd2d6406c640e408ac7d291181d",
+      "remoteVerified": true
     },
     "nextSourcePreflight": {
       "sourceId": "cai-busto-arsizio-9216014",
@@ -1031,7 +1031,7 @@
       "mode": "read-only"
     }
   },
-  "repositoryCommit": "7204642efea0630bed21f6db1d7a576f1db71b15",
+  "repositoryCommit": "7968b4eb6221dfd2d6406c640e408ac7d291181d",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -1055,10 +1055,10 @@
       "copiesIdentical": true
     }
   },
-  "updatedAt": "2026-10-22T21:36:16Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T21:36:16Z",
+  "updatedAt": "2026-10-22T21:40:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T21:40:00Z",
   "regionCurrent": "Lombardia — Missaglia run01 read one official page headed Edizione 2014; parser extracted a single 2024 past event, zero current events, one discovery candidate remaining; source partial.",
-  "regionNext": "After Missaglia checkpoint, run one bounded Busto Arsizio sample at its official winter activities calendar; keep the source partial/unsupported absent full-calendar proof.",
+  "regionNext": "Missaglia01 checkpoint 7968b4e is published/verified. Next is one bounded Busto Arsizio sample on the official winter-activities calendar; leave partial/unsupported absent full-calendar proof.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
     "sourceId": "cai-varese-9216009",
@@ -1164,11 +1164,11 @@
     "sourceId": "cai-missaglia-9216150",
     "sourceName": "CAI Missaglia",
     "collection": "partial",
-    "files": "ready; file checkpoint pending",
+    "files": "ready; checkpoint published and verified",
     "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-missaglia01/manifest.json",
     "manifestSha256": "9f73e0a51f0cec7a7794e14b943ec9e235d7b50ecac93acf274d09e4a4d92b04",
     "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-missaglia01/collection-report.md",
-    "reportSha256": "5a07fcf62a03965bffe7ef344558c9083707bead1de76e729223e03fbe4090c7",
+    "reportSha256": "701f74343c3a479de34dc9285f296129753241da53b42ddbdfe83ad693bcf56c",
     "stateSha256": "cfac59d0bae4ad27bc47aaec354b5b11848b20f51bb0c37f913f6293c5f5eb4b",
     "sectionsChecked": 1,
     "complete": 0,
@@ -1187,8 +1187,8 @@
     "importerQa": "PASS read-only; manifest matches; only Missaglia source status changed",
     "backendTest": "201/201 after collection; canonical files still match manifest",
     "sourceCommit": "7204642efea0630bed21f6db1d7a576f1db71b15",
-    "fileCheckpointCommit": "pending",
-    "remoteVerified": false
+    "fileCheckpointCommit": "7968b4eb6221dfd2d6406c640e408ac7d291181d",
+    "remoteVerified": true
   },
   "regionalCoverage": {
     "region": "Lombardia",

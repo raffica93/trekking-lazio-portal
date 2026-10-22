@@ -18,4 +18,4 @@ Importer performed read-only QA and approved this as a partial sample. The run s
 
 Manifest SHA-256: `9f73e0a51f0cec7a7794e14b943ec9e235d7b50ecac93acf274d09e4a4d92b04`
 
-The run is a file checkpoint candidate, not complete source coverage. After checkpoint, continue with another Lombardia source or recover the remaining exact candidate from cache; do not repeat this same page as evidence of completion.
+The file checkpoint is published and verified on `origin/codex/cai-orchestrator-luna` at commit `7968b4eb6221dfd2d6406c640e408ac7d291181d`; manifest, state, report, and the four canonical blobs were read back from the remote commit and all hashes match. This does not attest complete source coverage. Next: run a bounded sample from another Lombardia source without repeating this same page as evidence of completion.

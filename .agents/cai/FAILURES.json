@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T21:36:16.277Z",
-  "repositoryCommit": "7204642efea0630bed21f6db1d7a576f1db71b15",
+  "generatedAt": "2026-10-22T21:40:00Z",
+  "repositoryCommit": "7968b4eb6221dfd2d6406c640e408ac7d291181d",
   "baseline": {
     "commit": "9919927d4cbef6d154c4dae1441d64cd01c70ad4",
     "runId": "cai-20261020-piemonte-01"
@@ -37190,7 +37190,7 @@
         "runId": "cai-20261022-lombardia-missaglia01",
         "manifestSha256": "9f73e0a51f0cec7a7794e14b943ec9e235d7b50ecac93acf274d09e4a4d92b04",
         "remainingCandidates": 1,
-        "reportSha256": "5a07fcf62a03965bffe7ef344558c9083707bead1de76e729223e03fbe4090c7",
+        "reportSha256": "701f74343c3a479de34dc9285f296129753241da53b42ddbdfe83ad693bcf56c",
         "databaseWrites": 0
       },
       "policyStatus": "candidate_pending_test"
