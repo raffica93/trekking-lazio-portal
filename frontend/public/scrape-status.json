@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T19:36:26.348Z",
+  "generatedAt": "2026-10-22T19:42:44.573Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -20806,142 +20806,70 @@
       "enabled": true,
       "excursions": 7,
       "error": null,
-      "hash": "b10d54691387df4885b3d25c32cae5433c41f2427ac34bd3e42b11d237c2106f",
-      "updatedAt": "2026-10-22T19:36:26.348Z",
+      "hash": "29f77bb1866e69255e7cb951b3adbcd87b91f5f4c0bfa0dcb4236b015c0592ba",
+      "updatedAt": "2026-10-22T19:42:44.573Z",
       "documents": [
         {
-          "url": "https://organizzazione.cai.it/sez-valmadrera/eventi/2026-10-18/",
-          "hash": "96d7e4df79fcf9d6050988127c1c39c0f5443e0935c85006df840aab54f8e251",
-          "events": 2,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-valmadrera/eventi/2026-10-19/",
-          "hash": "b639fb69f015969d0bf5619ac023b1baf84218f0f5cc635181b7f53cc1d47a95",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-valmadrera/eventi/2026-10-20/",
-          "hash": "225a2fd83c188fb85bc4dbb575531e465ee1e3785db91a8525c85a72f4d5ed63",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-valmadrera/eventi/2026-10-21/",
-          "hash": "b01889c8a4048a5bbe0028ec0a5a408be9dd63f83a6d218cee6df8100cbda60f",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-valmadrera/eventi/2026-10-22/",
-          "hash": "0406ef96a22c5a31a1f9e924109dd511ea81685c2a72c607d242365e00eb91e3",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-valmadrera/eventi/2026-10-23/",
-          "hash": "217e9d9c8bb260321b7d36ad005afab4016e4646fa9c9056444aa6643ed7876a",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-valmadrera/eventi/oggi/",
-          "hash": "17f9564e5c2458119df56ef60acade1de6ee3ef8482b2cb4f898adcd9fadb888",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-valmadrera/eventi/elenco/?eventDisplay=past",
-          "hash": "bbe71fbbf89751fa58e0ffefdf0d29067f7521cd95b9b66f4182a72cccf16d8d",
-          "events": 12,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-valmadrera/evento/escursione-media-montagna-laghi-acquafraggia/",
-          "hash": "770d19d74caedc6aa11a880b754652390b8d94d6315d695a7c3304d9bb83b651",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-valmadrera/evento/escursione-media-montagna-capanna-sciora/",
-          "hash": "aa23ad2968473b6d2cf8611998e3a274bd5482851ebf69730e1cf06f1b5419fc",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-valmadrera/evento/escursione-media-montagna-sasso-canale/",
-          "hash": "94ce25d837721a096d4b9cfbf77235b28af42681e120dd6065c089aaa8ba711d",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-valmadrera/evento/escursione-media-montagna-rifugio-olmo-presolana/",
-          "hash": "029f64110a0f3fc4a5f212805ba958ff27919d7ebdeac2cb700000df49815474",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-valmadrera/eventi/2026-10-22/?ical=1/",
-          "hash": "32b1e6261d03a86e252a2b38c1a921c290f6e328d3b173e2881392951b52fe4e",
+          "url": "https://organizzazione.cai.it/sez-valmadrera/eventi/oggi/?ical=1",
+          "hash": "4a5c0789fd86b0b5f10816781fab878ea0fd54651e09f15a2f0e0cdee5dd749f",
           "events": 1,
           "method": "ics"
         },
         {
-          "url": "https://organizzazione.cai.it/sez-valmadrera/eventi/2026-10-18/?ical=1",
-          "hash": "8ea0387ab7706245db148c55e9352579d06edadd9a32dcc4733b95cc688c983b",
-          "events": 2,
-          "method": "ics"
+          "url": "https://organizzazione.cai.it/sez-valmadrera/eventi/elenco/?tribe-bar-date=2026-10-22",
+          "hash": "5ca1f84227b0f7bc8a70748196fc67cd5aec8e93b47285ef962a994a9f60abad",
+          "events": 1,
+          "method": "html-calendar"
         },
         {
-          "url": "https://organizzazione.cai.it/sez-valmadrera/eventi/2026-10-18/?outlook-ical=1",
-          "hash": "10b0fd09cebe4f44544519c1ece769d4f08815b7850a646baae270f921368e06",
-          "events": 2,
-          "method": "ics"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-valmadrera/eventi/2026-10-19/?ical=1",
-          "hash": "7b58a63444d37d8388234bb17f7bf9dba4b458936a93ebdc7f8f092f6d41bff8",
+          "url": "https://organizzazione.cai.it/sez-valmadrera/eventi/2026-10-23/?ical=1",
+          "hash": "55cd36f5cc5ee51a37ef01b2c874cef8a745042d528b22210c3cb456e98becf3",
           "events": 1,
           "method": "ics"
         },
         {
-          "url": "https://organizzazione.cai.it/sez-valmadrera/eventi/2026-10-19/?outlook-ical=1",
-          "hash": "f8bc655acadf425ec25516e9a25e3c858062251c30e733d5e7186827e0866270",
+          "url": "https://organizzazione.cai.it/sez-valmadrera/eventi/2026-10-23/?outlook-ical=1",
+          "hash": "2d7a26ca854c47789c20474c7023af127e983b915c490e21312d15063c5dd66f",
           "events": 1,
           "method": "ics"
         },
         {
-          "url": "https://organizzazione.cai.it/sez-valmadrera/eventi/2026-10-20/?ical=1",
-          "hash": "b814c5ff8e5fe57c937939639bac369c86eee27a81753f8ea72827ad2a19f6b4",
-          "events": 1,
-          "method": "ics"
+          "url": "https://organizzazione.cai.it/sez-valmadrera/eventi/mese/2026-10/",
+          "hash": "419c4f3b49084bf59e98397a04d4775f4557facc866e803aba34b453a6b1a536",
+          "events": 4,
+          "method": "html-calendar"
         },
         {
-          "url": "https://organizzazione.cai.it/sez-valmadrera/eventi/2026-10-20/?outlook-ical=1",
-          "hash": "72f2223676cf540d0465c70a3b060569393b72868a1e539dcae44928a9103e47",
-          "events": 1,
-          "method": "ics"
+          "url": "https://organizzazione.cai.it/sez-valmadrera/attivita/",
+          "hash": "b81e0bc8671b211551a95c786ce276a612d93d724fce05e575608568ca34ebcc",
+          "events": 0,
+          "method": null
         },
         {
-          "url": "https://organizzazione.cai.it/sez-valmadrera/eventi/2026-10-21/?ical=1",
-          "hash": "df71cd9c095e2dfcec1a9ac07cf52216bac9cd4ed8db6724cacb5d6287ecc3b2",
-          "events": 1,
-          "method": "ics"
+          "url": "https://organizzazione.cai.it/sez-valmadrera/attivita/escursioni/",
+          "hash": "cd2eb827c5040aad55f2b67409abdc6832a3a7f4ca9991b5db8f2be599bb7aee",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-valmadrera/attivita/gite-sociali-di-scialpinismo/",
+          "hash": "c59b7ff1e44e2852384fa6fc8acf54c00c846fe6f7edfe9bb1f5471bebe8433f",
+          "events": 0,
+          "method": null
         }
       ],
       "methods": [
-        "html-calendar",
-        "ics"
+        "ics",
+        "html-calendar"
       ],
       "issues": [
         {
           "url": "https://organizzazione.cai.it/sez-valmadrera/wp-content/uploads/sites/56/2026/03/Calendario-attivita-2026_rev.04_16-03-2026.pdf",
-          "message": "Discovery budget reached; 38 candidate documents remain.",
+          "message": "Discovery budget reached; 19 candidate documents remain.",
           "code": "discovery-limit"
         }
       ],
-      "extractedEvents": 34
+      "extractedEvents": 8
     },
     {
       "id": "cai-valmalenco-9216112",

@@ -99,3 +99,10 @@ Migration `create_place_classifications_20261021090000` registrata dal progetto 
 - Delta contro `c5036ff`: 3.345 ID unici, zero aggiunti/rimossi, cinque righe cambiate solo nei riferimenti sorgente ufficiali e due descrizioni abbreviate. Nessun nuovo evento/coordinate; DB non consultato né scritto e nessun reimport di classificazioni.
 - Importer QA PASS; `npm test` backend 186/186; copie backend/frontend invariate. Report e manifest SHA registrati in HANDOFF. Checkpoint run05 da pushare/verificare prima di procedere.
 - Discovery offline conferma 38 residui. Dopo checkpoint, un solo continuation run max8 documenti sui calendari correnti/futuri e sulle categorie escursioni/scialpinismo. Escludere dalla lista esplicita archivio passato, programma 2024, feed di eventi già passati, API root non attribuibile e pagina attività ancora incerta. Varese resta bloccata senza richiesta per il 503 in cooldown scaduto.
+
+## Stato 2026-10-22 — Valmadrera run06
+
+- Run `cai-20261022-lombardia-valmadrera06`, dopo checkpoint run05: gli 8 URL espliciti sono stati raggiunti, 8 estrazioni riconciliate a 7 record (1 duplicato estratto escluso); discovery-limit lascia 19 candidati sul calendario PDF ufficiale. Zero errori HTTP del run; fonte partial.
+- Catalogo 3.345 ID: 0 aggiunte/rimozioni, 5 record esistenti con cambi di provenienza/descrizione; nessun campo geografico/editoriale amministrato alterato e nessuna coordinata nuova. Nessun DB import/query.
+- Importer QA PASS, backend `npm test` 186/186, copie output pubblico/backend identiche. Report e manifest SHA in HANDOFF. Checkpoint run06 da pushare e verificare.
+- Poi valutare un solo run esplicito, max1 doc/180s, per il PDF calendario 2026 se è ancora candidato distinto; non estendere oltre e preservare cache su errore.

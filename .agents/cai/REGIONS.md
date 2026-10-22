@@ -94,3 +94,12 @@ Il catalogo resta a 3.345 ID unici, delta 0. Nessun nuovo punto geografico. Sezi
 | `cai-20261022-lombardia-valmadrera05` — CAI Valmadrera | 1 | 0 | 1 | 0 | 7 già presenti; 0 nuovi, 20 documenti, 34 estrazioni | 0 ID duplicati nel catalogo; overlap tra righe estratte non esposto | 12 URL espliciti e 8 ICS scoperti raggiunti senza errori HTTP | 38 candidati non verificati | Dopo checkpoint, max8 URL di calendari correnti/futuri e categorie escursioni/scialpinismo; lasciare fuori archive passati, API non attribuibile e attività incerta |
 
 Delta catalogo contro `c5036ff`: 0 aggiunti, 0 rimossi, 5 modifiche a `sourceDocument` ufficiali; 2 record hanno inoltre descrizioni abbreviate. 3.345 ID unici; nessun campo editoriale/geografico modificato, nessuna coordinata aggiunta. La fonte resta parziale: zero errori di rete non equivale a calendario completo. Nessun import DB, dato che non sono emersi ID nuovi; nessuna query DB. Importer QA PASS, suite backend 186/186, copie backend/frontend identiche dopo i test. Manifest SHA `f88571727bbbcda6dceec0c5205f3da7dfdc95c4c1a70897444daf33f092e2a2`; report SHA `cc50445c9c91cedef90a672e4f0809ac7074fe6275b787ab8154f74e142cfb25`. I totali complessivi Lombardia rimangono lo snapshot storico del 20 ottobre.
+
+
+## CAI Valmadrera bounded sample 06 — 22 ottobre 2026
+
+| Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| `cai-20261022-lombardia-valmadrera06` — CAI Valmadrera | 1 | 0 | 1 | 0 | 7 eventi unici esistenti; 8 estrazioni, 0 nuovi ID | 1 riga estratta duplicata esclusa; zero ID duplicati nel catalogo | 8/8 URL ufficiali raggiunti senza errori HTTP | discovery-limit: 19 candidati sul calendario PDF ufficiale | Dopo checkpoint, valutare solo quel PDF con run max1 doc/180 s, se non già visitato |
+
+Confronto con commit `f00a1e4`: 3.345 ID unici; 0 aggiunti/rimossi; 5 righe aggiornate (quattro `sourceDocument`, Moregallo anche description). Nessun campo geografico/editoriale amministrato alterato. Sezione ancora parziale, nessuna coordinata o attribuzione aggiunta e nessuna query/import DB. QA importer PASS; backend tests 186/186; copie backend/frontend byte-identiche dopo i test. Report SHA `42837b9104b440128911a879b2a0b9adcda54699eaf5983835f7b4f5dc0ff082`; manifest SHA `f673039b1a8b2286067637a9ddb524c04868656bc1a6e6505b2ac6252934d64d`. I totali regionali Lombardia restano lo snapshot storico del 20 ottobre.
