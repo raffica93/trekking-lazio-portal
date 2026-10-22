@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "marche-potenza-picena-preflight",
+  "phase": "marche-potenza-picena-page-unreadable",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -230,8 +230,8 @@
     }
   ],
   "nextAction": {
-    "step": "MARCHE-POTENZA-PICENA-BOUNDED-SAMPLE",
-    "instruction": "Pinasca receipt/report/checkpoint sono verificati dal remoto al commit 0d5f978. Delivery completato: 4 places + 4 classifications, 4/4 reconciled, 0 missing/mismatch, 0 update/delete. Avvia adesso run univoco `cai-20261022-marche-potenzapicena01` per CAI Potenza Picena `cai-potenza-picena-9228014`, URL ufficiale `https://www.caipotenzapicena.it/attivita2026`, solo 1 source-url, max 1 doc/120s/concurrency1. Baseline file corrente è già pubblicata; non ripetere l’HTML/PDF Pinasca senza nuovo target. Fonte Marche partial, target esatto non in cache/docs, discovery storico 11 senza cooldown o HTTP status."
+    "step": "PUBLISH-POTENZA-PICENA01-FILES-THEN-CONTINUE-REGIONAL-PREFLIGHT",
+    "instruction": "Run cai-20261022-marche-potenzapicena01 ha collection partial/files ready/database pending; importer QA PASS; npm test backend 204/204 post-run e sei hash pubblici identici prima/dopo. Delta eventi 0, dunque nessuna classificazione né query/scrittura DB. Checkpoint manifest/report/stato/cataloghi e registry; quindi prosegui con il prossimo URL ufficiale mirabile proposto dal collector, senza ripetere Potenza Picena `/attivita2026` (same-host Wix generico, method null) né fare cicli sulla discovery queue."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -1257,7 +1257,7 @@
       "receiptCheckpointSha256": "bef3ff50b4266d0486eb343f9c281fdb96ea3a14b2f6a07727be57e2d00acf32"
     }
   },
-  "repositoryCommit": "0d5f978",
+  "repositoryCommit": "f4d86ea67c1037820c62a5da9ead6d761e183152",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -1270,11 +1270,11 @@
     "classificationTablesFound": false,
     "writes": 0
   },
-  "tests": "After Pinasca02 collection, backend npm test 204/204. Six public catalog/status JSON SHA-256 values were unchanged before/after the test run.",
-  "updatedAt": "2026-10-22T22:17:08.252Z",
+  "tests": "After Potenza Picena01 collection, backend npm test passed 204/204. Six public catalog/status JSON SHA-256 values unchanged before and after tests.",
+  "updatedAt": "2026-10-22T22:19:49.601Z",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:17:08.252Z",
-  "regionCurrent": "Piemonte — CAI Pinasca run02: 4 ID, 4 place + 4 classification inseriti e riconciliati; file e ricevuta pubblicati. Sezione resta partial per OCR PDF/discovery-limit.",
-  "regionNext": "Marche — CAI Potenza Picena (`cai-potenza-picena-9228014`), `https://www.caipotenzapicena.it/attivita2026`; preflight read-only conferma URL ufficiale, target non presente in documenti/cache e nessun cooldown; fonte partial con 11 candidati discovery storici.",
+  "regionCurrent": "Marche — CAI Potenza Picena run01: 1 pagina ufficiale letta, ma Wix generico non interpretabile (method=null, 0 estrazioni); delta evento 0 e unica riga esistente preservata. La fonte resta partial, discovery-limit 11. Nessun DB.",
+  "regionNext": "Preflight read-only in corso per una diversa fonte ufficiale lavorabile, prima in Marche poi regione nazionale successiva. Non ripetere la pagina Wix senza evidenza di progresso.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
     "sourceId": "cai-varese-9216009",
@@ -1342,107 +1342,67 @@
     "independentImporterQa": "PASS"
   },
   "lastRegionalAttempt": {
-    "runId": "cai-20261022-piemonte-pinasca02",
-    "sourceId": "cai-pinasca-9212062",
-    "sourceName": "CAI Pinasca",
-    "region": "Piemonte",
-    "requestedUrl": "https://www.caipinasca.it/index.php/calendario-gite",
+    "runId": "cai-20261022-marche-potenzapicena01",
+    "sourceId": "cai-potenza-picena-9228014",
+    "sourceName": "CAI Potenza Picena",
+    "region": "Marche",
+    "requestedUrl": "https://www.caipotenzapicena.it/attivita2026",
+    "canonicalUrl": "https://www.caipotenzapicena.it/attivita-temp",
     "collection": "partial",
-    "files": "ready; checkpoint remoto 90f7f7a verificato; receipt pronto e localmente verificato",
-    "database": "completed; 4 places + 4 classifications, post-query 4/4 join, 0 mismatches, 0 updates/deletes",
-    "manifestPath": "backend/data/agent-runs/cai-20261022-piemonte-pinasca02/manifest.json",
-    "manifestSha256": "4bec0f0bf1067f7ef6b1075b7d9341892e8c7bc2b6df9d0b4f4857b5d9848182",
-    "collectionReportPath": "backend/data/agent-runs/cai-20261022-piemonte-pinasca02/collection-report.md",
-    "collectionReportSha256": "eadb956d7859be058db76842cc326822a2a9b35f9688966be3efd02292a27125",
-    "classificationRunId": "cai-map-20261022-pinasca02",
-    "classificationManifestSha256": "3dd59a810621ede84d09b4b3bb7bed0b0c766bc1c215f86ef2245defd881ffd5",
-    "candidateInputSha256": "85b20198a72956266751a9b13ca86fd9b6e59b3b3a1db4d342d108432f460edf",
-    "classifiedOutputSha256": "133d5a7b7aba43ebd27b51481a128fb6d80b2f591fdad525c2f8d8779883fdae",
+    "files": "ready; importer QA PASS; checkpoint pending",
+    "database": "pending; no query/write; zero catalog event delta",
+    "manifestPath": "backend/data/agent-runs/cai-20261022-marche-potenzapicena01/manifest.json",
+    "manifestSha256": "2d5dd8ebca32ea25fdf52a84679cf553f42475d4791845cf875b509dfed39fa1",
+    "stateSha256": "5ec1fc1d2d3b4667a7e2bc1d1231130c2efdb1c99afc045e976fbad57a663a84",
+    "reportPath": "backend/data/agent-runs/cai-20261022-marche-potenzapicena01/collection-report.md",
+    "reportSha256": "28df16309f4e8a296020f5d37b7153a276faa3ad8b1525ac35030ebf8ade7b3a",
     "sectionsChecked": 1,
     "complete": 0,
     "partial": 1,
     "unreachable": 0,
-    "extractedRows": 27,
-    "verifiedCandidates": 4,
-    "newIds": 4,
+    "sourceEvents": 1,
+    "sourceHistoryExtractedEvents": 2,
+    "targetHtmlBytes": 654389,
+    "targetHtmlSha256": "410c8d0f4dba157c141e7a56029ad32fd7ff9852dd217395895b637d14a4b96d",
+    "targetMethod": null,
+    "targetExtractedEvents": 0,
+    "newIds": 0,
     "removedIds": 0,
-    "changedExistingRows": 0,
+    "changedEventRows": 0,
     "duplicateIdsExcluded": 0,
-    "classificationCounts": {
-      "trekking": 2,
-      "non_trekking": 2,
-      "da_verificare": 0,
-      "errors": 0
-    },
-    "modelRequested": "inception/mercury-decide",
-    "responseModelAttested": "inception/mercury-decide-20260930",
-    "modelAttested": true,
-    "databaseInserted": null,
-    "openFailures": [
-      "Official calendar PDF OCR failed; one discovery candidate remains."
-    ],
-    "sourceCache": {
-      "bytes": 45803,
-      "sha256": "523217b200fbcd9dedff73699ef0416fa336c754b1f775c26d2a8e09312bda5a",
-      "httpStatus": "not persisted"
-    },
+    "discoveryLimitRemaining": 11,
+    "existingEventPreserved": "cai-potenza-picena-9228014-548230c7292d — Ferrata Bertona Gran Sasso, 2026-10-24",
     "coordinatesAdded": 0,
-    "backendTests": "204/204; six public JSON hashes unchanged",
-    "databaseReceiptPath": "backend/data/agent-runs/cai-20261022-piemonte-pinasca02/delta-import-receipt.json",
-    "databaseReceiptSha256": "7baeb4307d6d8ef91d2dfd42a05f84e936ff9126dee9c83ba379ae99c2d3d41a",
-    "databaseReportPath": "backend/data/agent-runs/cai-20261022-piemonte-pinasca02/delta-import-report.md",
-    "databaseReportSha256": "0d384f9cbe614b480d8b1d37708efcbaf49adc1287550dcdf7a54064a4ce4422",
-    "databaseBefore": {
-      "places": 0,
-      "classifications": 0
-    },
-    "databaseAfter": {
-      "places": 4,
-      "classifications": 4,
-      "joinedRows": 4
-    },
-    "databaseUpdates": 0,
-    "databaseDeletes": 0,
-    "preflightTimestamp": "not returned by MCP",
-    "writeTimestamp": "2026-10-22 22:14:25.13088+00",
-    "postQueryTimestamp": "2026-10-22 22:15:18.267267+00"
+    "collectorQa": "bounded single fetch; same-host Wix generic page unreadable; no retries",
+    "importerQa": "PASS read-only; mirrors, hashes, delta and existing event verified",
+    "backendTests": "204/204 after collection; six public JSON hashes unchanged",
+    "dbWrites": 0
   },
   "regionalCoverage": {
-    "region": "Piemonte",
-    "status": "Campione Pinasca02: 1 sezione controllata, partial; 4 eventi nuovi candidati con file e classificazione pronti ma DB non ancora interrogato. Nessun conteggio regionale complessivo ricalcolato; Lombardia resta aperta.",
+    "region": "Marche",
+    "status": "Potenza Picena01 è un campione parziale non interpretabile: page Wix generica, zero estrazioni non attesta calendario vuoto. Nessun delta; non ripetere senza nuova evidenza. Conteggi regionali aggregati non ricalcolati.",
     "currentRunCounts": {
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
-      "extractedRows": 27,
-      "verifiedNewEventCandidates": 4,
-      "catalogNewIds": 4,
+      "sourceEvents": 1,
+      "historyExtractedEvents": 2,
+      "targetRowsExtracted": 0,
+      "verifiedNewEventCandidates": 0,
+      "catalogNewIds": 0,
       "removedIds": 0,
       "changedEventRows": 0,
       "exactDuplicateIdsExcluded": 0,
-      "classificationCounts": {
-        "trekking": 2,
-        "non_trekking": 2,
-        "da_verificare": 0,
-        "errors": 0
-      },
-      "databaseInserted": 4,
-      "failuresResolved": [
-        "Scrape-status partial continuation recomputes extractedEvents across merged documents; fixture-backed correction at 4175eb9702021e9d6fda771db82bee5122bf8bd4, test included in 204/204."
-      ],
+      "databaseInserted": 0,
+      "classificationCounts": null,
+      "failuresResolved": [],
       "failuresOpen": [
-        "Official calendar PDF OCR failed; discovery-limit has 1 candidate remaining."
+        "Official 2026 URL resolves to a generic Wix page, extractor method null/events 0; discovery-limit 11 remains."
       ],
-      "nextStep": "Publish receipt checkpoint; then bounded sample CAI Potenza Picena (Marche) official activities2026 URL.",
-      "deliveredPlaces": 4,
-      "deliveredClassifications": 4,
-      "databaseTargetMissingAfter": 0,
-      "databaseMismatches": 0,
-      "databaseUpdates": 0,
-      "databaseDeletes": 0,
-      "receiptPath": "backend/data/agent-runs/cai-20261022-piemonte-pinasca02/delta-import-receipt.json",
-      "receiptSha256": "7baeb4307d6d8ef91d2dfd42a05f84e936ff9126dee9c83ba379ae99c2d3d41a"
+      "nextStep": "Checkpoint file/registry, then preflight a different official source; do not replay same Potenza URL.",
+      "deliveredPlaces": 0,
+      "deliveredClassifications": 0
     },
     "historicalSnapshot": {
       "sections": 229,

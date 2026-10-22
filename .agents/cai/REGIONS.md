@@ -209,3 +209,11 @@ Catalogo 3.360→3.364 ID unici; +4, 0 rimossi, 0 record preesistenti cambiati. 
 Delivery Pinasca02: prima del DML 0/4 place e 0/4 classificazioni presenti; inserite 4 + 4. La SELECT joined separata ha riconciliato 4/4 senza mismatch/missing. Updates/deletes 0; campi geografici restano null. Write timestamp `2026-10-22 22:14:25.13088+00`; post-query `2026-10-22 22:15:18.267267+00`; pre-query timestamp non restituito dal MCP. Ricevuta SHA `7baeb4307d6d8ef91d2dfd42a05f84e936ff9126dee9c83ba379ae99c2d3d41a`, report SHA `0d384f9cbe614b480d8b1d37708efcbaf49adc1287550dcdf7a54064a4ce4422`; entrambi da pubblicare nel checkpoint receipt dedicato. Prossimo target read-only preflight: CAI Potenza Picena (Marche), `https://www.caipotenzapicena.it/attivita2026`, bounded max1 doc/120s/concurrency1 dopo checkpoint.
 
 Ricevuta Pinasca02 pubblicata/verificata al commit `0d5f978`; delivery chiuso, 4/4 righe place e classification riconciliate (receipt SHA `7baeb4307d6d8ef91d2dfd42a05f84e936ff9126dee9c83ba379ae99c2d3d41a`). Prossimo run autorizzato e preflightato: CAI Potenza Picena, Marche, `https://www.caipotenzapicena.it/attivita2026`, bounded max1 doc/120s/concurrency1.
+
+## CAI Potenza Picena bounded sample 01 — Marche, 22 ottobre 2026
+
+| Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| `cai-20261022-marche-potenzapicena01` — CAI Potenza Picena | 1 URL ufficiale | 0 | 1 | 0 | 0 nuovi; la pagina Wix generica non attesta calendario vuoto; 1 evento catalogo esistente invariato | 0 | Nessuno | Extractor `method=null`; discovery-limit 11 aperto | Checkpoint file, quindi fonte ufficiale diversa senza replay della pagina Wix |
+
+Catalogo 3.364→3.364 ID unici, 0 aggiunti/rimossi/cambiati. Status source partial, `events=1`, history `extractedEvents=2`; la singola pagina letta ha 0 estrazioni e method null. L’unico evento esistente resta invariato, location non verificata e coordinate assenti. Importer QA PASS. Backend test 204/204 dopo la raccolta, sei hash pubblici invariati. Manifest SHA `2d5dd8ebca32ea25fdf52a84679cf553f42475d4791845cf875b509dfed39fa1`; report SHA `28df16309f4e8a296020f5d37b7153a276faa3ad8b1525ac35030ebf8ade7b3a`. Nessuna query o scrittura DB per delta zero.

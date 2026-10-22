@@ -10472,7 +10472,7 @@
     "cai-macerata-9228008": "7b62a2ffaecc2d3f0e1bbf9c288bbc3546de23bf1136ee75b85dbce9dfc268e3",
     "cai-s-benedetto-del-tronto-9228013": "ba0f71af0d71942f61545f0118eb04688122181061274a90fee74bb2f0d2ed73",
     "cai-c-n-s-a-s-9200003": "90b77c1a72a204be0d1382844cbd4ed1d3c436ca157528f2d719c7445185d58d",
-    "cai-potenza-picena-9228014": "53fb61d39684d531cfd2779ecba7609a3daa0cd45a2a0435b43d50dfc105f3c3",
+    "cai-potenza-picena-9228014": "033fa740c938e72f206dffca9385636be4f37cd6de8e3ce771bb701f510f70a5",
     "cai-campobasso-9236001": "3b44f98c44a9f0b8ca266325a9c01d26934802a590144aff362ededf9120c949",
     "cai-senigallia-9228012": "44c781df89842b09c02308f2f528bcfc45df1a845b5620681a3d15c5fb0ec039",
     "cai-acqui-terme-9212036": "18d3086113bc929a3552186555ad4938a999ed70a420d959b5cb3707decf6e9d",
@@ -10773,14 +10773,14 @@
     "cai-busca-9112010": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967",
     "cai-dronero-9112012": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967"
   },
-  "generatedAt": "2026-10-22T22:09:29.896Z",
+  "generatedAt": "2026-10-22T22:17:34.031Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 1,
-    "parsed": 1,
-    "unsupported": 0,
+    "parsed": 0,
+    "unsupported": 1,
     "failed": 0,
     "located": 548
   },

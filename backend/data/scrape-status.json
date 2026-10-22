@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-22T22:09:29.921Z",
+  "generatedAt": "2026-10-22T22:17:34.055Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 1,
-    "parsed": 1,
-    "unsupported": 0,
+    "parsed": 0,
+    "unsupported": 1,
     "failed": 0,
     "located": 548
   },
@@ -36673,23 +36673,17 @@
       "excursions": 1,
       "error": null,
       "hash": "53fb61d39684d531cfd2779ecba7609a3daa0cd45a2a0435b43d50dfc105f3c3",
-      "updatedAt": "2026-10-19T18:24:35.762Z",
+      "updatedAt": "2026-10-22T22:17:34.055Z",
       "documents": [
         {
           "url": "https://www.caipotenzapicena.it/attivita-temp",
-          "hash": "9849272630a172c150c66b072e78a6c817a3fa7909903f74534ac4ee8f4318d4",
+          "hash": "410c8d0f4dba157c141e7a56029ad32fd7ff9852dd217395895b637d14a4b96d",
           "events": 0,
           "method": null
         },
         {
           "url": "https://www.escursionicai.it/",
           "hash": "cf0c1015fee839cf43e1e4f7988a043889ac68947b57e371854dcff0a456b033",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caipotenzapicena.it/attivita-temp",
-          "hash": "9849272630a172c150c66b072e78a6c817a3fa7909903f74534ac4ee8f4318d4",
           "events": 0,
           "method": null
         },
