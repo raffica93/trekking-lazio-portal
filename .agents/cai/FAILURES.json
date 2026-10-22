@@ -22919,11 +22919,13 @@
           "cai-20261020-lombardia-deep-14",
           "cai-20261020-lombardia-deep-15",
           "cai-20261020-piemonte-01",
-          "cai-20261020-piemonte-ocr-01"
+          "cai-20261020-piemonte-ocr-01",
+          "cai-20261022-abruzzo-penne01"
         ],
         "snapshotCopies": 19,
         "issueCodes": [
-          "discovery-limit"
+          "discovery-limit",
+          "bounded-continuation-canonical-duplicate"
         ],
         "sourceStatuses": [
           "partial"
@@ -22931,8 +22933,18 @@
       },
       "attempts": {
         "actualHistoricalRequests": "unknown",
-        "currentCycleRequests": 0,
-        "recoveryAttempts": []
+        "currentCycleRequests": 1,
+        "recoveryAttempts": [
+          {
+            "runId": "cai-20261022-abruzzo-penne01",
+            "scope": "one explicit official continuation URL; max 1 document, 120 seconds, concurrency 1",
+            "requestedUrl": "https://caipenne.it/2026/03/09/programma-sezionale-2026/",
+            "canonicalUrl": "https://caipenne.it/2026/03/07/programma-sezionale-2026/",
+            "httpStatus": "not persisted",
+            "bodySha256": "d875735a03ff8004a547ae9aedacf414d0695b268e07abba0e60919e74ca5a70",
+            "outcome": "byte-identical to already-read March 7 page; method=null; zero extracted event rows; PDF discovery count remains 60; no cache/catalog data cleared"
+          }
+        ]
       },
       "cooldown": {
         "policy": "No automatic retry until a bounded strategy is assigned",
@@ -22940,20 +22952,21 @@
       },
       "evidence": {
         "representativeMessages": [
-          "Discovery budget reached; 60 candidate documents remain."
+          "Discovery budget reached; 60 candidate documents remain.",
+          "Penne bounded run cai-20261022-abruzzo-penne01 reached only the already-known canonical March 7 program page (body SHA d875735a…); no parsed events, so this does not clear the 60-candidate PDF discovery backlog."
         ],
         "sourceUpdatedAt": [
           "2026-10-19T18:24:35.762Z"
         ]
       },
       "strategy": "Classify evidence, preserve valid cache, then retry/re-discover with a bounded policy appropriate to the class.",
-      "status": "historical_classified_unverified",
+      "status": "recheck_open",
       "owner": "cai-collector",
-      "outcome": "No resolution check in the current cycle yet.",
+      "outcome": "PDF discovery backlog remains open at 60. A bounded continuation attempt resolved to the already-known March 7 page, byte-identical to history, with method=null and zero extracted rows; this is not evidence of an empty calendar. Do not replay this target; seek a distinct official source or stable residual URL.",
       "correctionRef": null,
       "testRefs": [],
       "resolutionCheck": null,
-      "policyStatus": "candidate_pending_test"
+      "policyStatus": "observed_open"
     },
     {
       "id": "CAI-F-8b165238965879a6",

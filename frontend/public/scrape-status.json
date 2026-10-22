@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-22T22:22:15.238Z",
+  "generatedAt": "2026-10-22T22:38:41.425Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 1,
-    "parsed": 1,
-    "unsupported": 0,
+    "parsed": 0,
+    "unsupported": 1,
     "failed": 0,
     "located": 548
   },
@@ -23234,7 +23234,7 @@
       "excursions": 8,
       "error": null,
       "hash": "565c6e5defe61349ce5b3a6dc358855fc8edaa723851a816f9c1531b3e25830e",
-      "updatedAt": "2026-10-19T18:24:35.762Z",
+      "updatedAt": "2026-10-22T22:38:41.425Z",
       "documents": [
         {
           "url": "https://caipenne.it/wp-content/uploads/2026/03/programma-CAI-2026-1.pdf",
@@ -23257,12 +23257,6 @@
         {
           "url": "https://caipenne.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcaipenne.it%2F2026%2F03%2F07%2Fprogramma-sezionale-2026%2F&format=xml",
           "hash": "ffc69529077e38e82e06fdc56b62781683b42cab629fc5a78c4dc794739b88a8",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://caipenne.it/2026/03/07/programma-sezionale-2026/",
-          "hash": "d875735a03ff8004a547ae9aedacf414d0695b268e07abba0e60919e74ca5a70",
           "events": 0,
           "method": null
         },
@@ -23318,6 +23312,11 @@
         {
           "url": "https://caipenne.it/wp-content/uploads/2026/03/programma-CAI-2026-1.pdf",
           "message": "Discovery budget reached; 60 candidate documents remain.",
+          "code": "discovery-limit"
+        },
+        {
+          "url": "https://caipenne.it/2026/03/07/programma-sezionale-2026/",
+          "message": "Discovery budget reached; 1 candidate documents remain.",
           "code": "discovery-limit"
         }
       ],

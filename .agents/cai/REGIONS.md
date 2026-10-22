@@ -241,3 +241,13 @@ Il delta `cai-map-20261022-campobasso01` è stato consegnato via insert-only: 2 
 | CAI Penne `cai-penne-9234006` | Abruzzo | `https://caipenne.it/2026/03/09/programma-sezionale-2026/` | Discovery-limit 60 sull’URL PDF annuale; nessun HTTP failure/cooldown; articolo 7 marzo e PDF già letti | Pagina 9 marzo elencata nelle evidenze calendar URL ufficiali, non nei 12 documenti visitati; può duplicare il programma già letto | Run nuovo `cai-20261022-abruzzo-penne01`, una sola URL, max1 documento/120s/concurrency1; no delta presunto |
 
 Molise resta parziale: PDF 37 residui senza URL persistite né body cache; continuation HTML 1 non persistita, unica URL ricostruibile già nella history. Nessuna nuova raccolta o rete nel preflight.
+
+## Campione corrente Abruzzo — CAI Penne, 22 ottobre 2026
+
+| Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Nuovi ID file | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | DB consegnati | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---:|---|---|---:|---|
+| `cai-20261022-abruzzo-penne01` — CAI Penne | 1 URL ufficiale | 0 | 1 | 0 | 8 righe catalogo esistenti riconfermate byte-identiche; pagina nuova richiesta canonizza su contenuto storico, `method=null`, zero righe estratte (nessuna conclusione di calendario vuoto) | 0 | 0 ID; nessuna decisione semantica possibile senza delta eventi | Nessuno | PDF annuale discovery 60; HTML continuation 1, URL richiesta ha ripetuto canonicalmente pagina già nota | 0; nessun candidato e nessuna query DB | Pubblicare checkpoint Penne; poi 1 URL distinta CAI L'Aquila in Abruzzo |
+
+Catalogo: 3366 ID prima/dopo, zero aggiunti/rimossi/modificati come righe evento. Otto righe della fonte Penne hanno SHA canonico ordinato `2e6e61eb7229ec3fa46580d0de75a7c83bba17c5ba95f6af6367266afa064960` in entrambi gli snapshot. Il file excursions ha solo metadati generati diversi: full SHA `243cdf4c…`→`dd756f6f…`, coverage `parsed 1/unsupported 0`→`parsed 0/unsupported 1`; report ed evidence-manifest aggiornati. Collection `partial`, files QA `ready`, database `not-applicable-no-delta`. Backend test 205/205 dopo la raccolta, con hash dei sei JSON pubblici stabili durante i test.
+
+Preflight offline collector: URL ufficiale CAI L'Aquila `https://cailaquila.it/le-attivita-del-cai/programma-2026/?commissioni=escursionismo`, abilitata e non letta/non in cache. Nessun cooldown/record failure specifico; esiste un 403 su URL sorella con filtro `commissioni=legale`, perciò solo un fetch max1 doc/120s/concurrency1 e stop immediato al 403. Nessuna raccolta prima della pubblicazione del checkpoint Penne. Questa è una misura del campione; le statistiche cumulative Abruzzo restano storico 20 ottobre, non ricalcolate.

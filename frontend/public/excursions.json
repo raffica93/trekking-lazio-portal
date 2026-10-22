@@ -10347,7 +10347,7 @@
     "cai-teramo-9234003": "9902608f516411b3e7aebd001c909b2ba2491b6744ba14f371f1602eca336dd7",
     "cai-loreto-aprutino-9234023": "73ee547584e4a4b4d3b4fa13e175c6cc3c288f173a67b24871c47ec54dab2a4c",
     "cai-castelli-9234010": "b636f83e027599ba92b46c2fbbfb4c15b97d897c0d133af57e0ced4beece14a3",
-    "cai-penne-9234006": "565c6e5defe61349ce5b3a6dc358855fc8edaa723851a816f9c1531b3e25830e",
+    "cai-penne-9234006": "8db43b30a20166697fecead336459a876b111c24a11d472cd201eb726b0c2369",
     "cai-lagonegro-9242002": "e7e196e314a591f5a05bf1250912082c924d9c05cbb0144471620741f83edaa0",
     "cai-castel-di-sangro-9234015": "8ce86e62d411e6510b2b37313d0cf06daa914e952dcfc0e380f69a76c1d73b53",
     "cai-castrovillari-9244005": "1a48f2c10d7ffce219250012e985fd478968f8b6ab7a685d7fc67f5408f34dba",
@@ -10773,14 +10773,14 @@
     "cai-busca-9112010": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967",
     "cai-dronero-9112012": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967"
   },
-  "generatedAt": "2026-10-22T22:22:15.215Z",
+  "generatedAt": "2026-10-22T22:38:41.397Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 1,
-    "parsed": 1,
-    "unsupported": 0,
+    "parsed": 0,
+    "unsupported": 1,
     "failed": 0,
     "located": 548
   },

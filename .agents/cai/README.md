@@ -39,15 +39,15 @@ Una modifica non committata non è un checkpoint condiviso. Un commit locale non
 è pubblicato finché il push non è confermato. La persistenza della stessa chat
 non dimostra che una chat nuova possa recuperare il lavoro.
 
-## Stato di questo passaggio
+## Stato di questo passaggio — 22 ottobre 2026
 
-Checkpoint al 22 ottobre 2026, branch `codex/cai-orchestrator-luna`. Il codice è stato pubblicato e verificato ai commit `902a180` e `3f93525`; il campione reale Mercury `cai-map-20261022-sample02` è completo, revisionato e sigillato. Il campione ha 20/20 richieste HTTP riuscite, senza errori provider. Dopo QA indipendente i valori effettivi sono 5 `trekking`, 3 `non_trekking`, 12 `da_verificare`; le decisioni Mercury candidate restano registrate separatamente dai sei override QA.
+Branch `codex/cai-orchestrator-luna`. Checkpoint remoto corrente all'apertura `805d90922c605a5893edb6a20629c1c00f18647c`; Penne01 e registro aggiornato sono in preparazione al checkpoint successivo. È completato il delta Campobasso: 2 places + 2 classificazioni riconciliati, ricevuta remota al commit `9bc54c5`. Il campione CAI Penne `cai-20261022-abruzzo-penne01` ha 0 nuovi ID, 8 righe identiche, 0 query/scritture DB; fonte partial (PDF discovery 60, HTML continuation 1). La pagina richiesta è la canonical già nota, con `method=null`: zero estrazioni non prova un calendario vuoto. Il run ha rigenerato metadata excursions, esplicitati nel report e nel relativo evidence manifest.
 
-L’export fresco per `cai-map-20261022-full01` contiene 3.336 righe e 3.336 `source_id` univoci, osservato il 22 ottobre alle 17:25:59 UTC, SHA-256 `2963f287c4ccedb20a70068b2551dad3565b264d871194ec91324d0f98bb0687`. La query DB alle 17:27:56 ha trovato 4.346 pubblicati, 3.336 nella mappa secondo `date >= 2026-10-01 OR date_end >= 2026-10-01`, e nessuna tabella classificazioni. Batch completo e scritture DB non sono ancora iniziati. Il file campione/cache, input completo, report, manifest, stato e registro errori vengono salvati nel repository prima del batch.
+Test backend 205/205 sono passati dopo la raccolta Penne e i sei hash dei JSON pubblici sono rimasti stabili durante il test. Importer ha passato QA di manifest, report, sidecar, mirror e righe evento. Nessun batch nazionale o lotto storico viene ripetuto.
 
-Il runtime attuale è connesso, rete enforced, osservazioni correnti; `OPENROUTER_API_KEY` risulta pronta solo per `openrouter.ai` ed è stata controllata soltanto come presenza booleana. Il modello richiesto è `inception/mercury-decide`; nel campione il provider ha attestato `inception/mercury-decide-20260930`. UI e configurazione chiedono GPT-6 Luna high per orchestratore e i due agenti; il runtime non espone telemetria del modello effettivo. Tesseract italiano manca (solo `eng`/`osd`).
+Orchestratore e due ruoli cai-collector/cai-importer sono richiesti/configurati GPT-6 Luna high; l'UI conferma la selezione dell'orchestratore, ma la telemetria runtime non attesta il modello effettivo. `OPENROUTER_API_KEY` è stata controllata solo come presenza booleana, senza lettura del valore, per il solo host `openrouter.ai`. Mercury non è stato chiamato nel campione Penne. Nessun merge, deploy, cron o cancellazione DB.
 
-La baseline storica resta `cai-20261020-piemonte-01` / `9919927`, 3.337 ID e 40 nuovi eventi Piemonte; il run OCR pending non la sostituisce. Lombardia resta aperta con i soli conteggi storici riportati nel handoff. Nessun merge, deploy, cron o cancellazione DB.
+Il preflight read-only propone come prossimo campione una pagina ufficiale CAI L'Aquila, Abruzzo, max 1 documento/120 secondi/concurrency 1; esiste rischio 403 su una pagina sorella e il campione deve arrestarsi al primo 403. Avviare soltanto dopo che Penne e il registro aggiornato sono checkpointati e verificati su origin.
 
 ## Responsabilità
 

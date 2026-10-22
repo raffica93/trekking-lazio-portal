@@ -1,0 +1,17 @@
+# Collection report — CAI Penne
+
+- Run: `cai-20261022-abruzzo-penne01` (started 2026-10-22T22:38:34.595Z); orchestrator result: collection `partial`, files `ready`, database `pending`.
+- Scope: one explicit source URL, source `cai-penne-9234006`, concurrency 1, maximum 1 document, 120 s source budget. No second URL or broader queue was started; no database write.
+- Requested URL: https://caipenne.it/2026/03/09/programma-sezionale-2026/
+- Cached response canonical URL: https://caipenne.it/2026/03/07/programma-sezionale-2026/ (same-host canonical/redirect recorded by cache metadata). The body is 70,625 bytes, SHA-256 `d875735a03ff8004a547ae9aedacf414d0695b268e07abba0e60919e74ca5a70`; it exactly matches the pre-existing source-history hash for the March 7 URL. HTTP status was not persisted, so no status code is asserted.
+- Page title: “Programma sezionale 2026 : CAI Sezione di Penne.” The body describes the 2026 program and links to the complete official PDF; the exact body is the already-known March 7 page. Extraction result: `method=null`, zero events for this document. This is not evidence that the calendar has no events.
+- Semantic comparison: the page-level text is a program introduction, not a newly parsed event list. The official PDF remains the existing 30-event document in source history. Because this response is byte-identical to the known March 7 page and yields no parsed event rows, it supplies no distinct event-level evidence. Possible duplicate relationship is recorded but not decided; no merge/exclusion or event inference was made.
+- Penne catalog: 8 source event rows before and after; zero added, removed, or changed rows. Event records are byte-identical to HEAD, including all existing editorial and geographic fields. No geodata was changed.
+- Coverage remains partial. Existing PDF discovery-limit remains 60 candidates; the targeted continuation records 1 remaining candidate on the March 7 page. Neither issue was cleared. No import/database operation occurred.
+- Public mirrors are identical: backend/frontend `excursions.json`, `scrape-status.json`, and `cai-sections.json` have matching SHA-256 values. The orchestrator `manifest.json` and `state.json` were not modified while these evidence artifacts were added.
+
+## Catalog row and metadata comparison
+
+Compared with baseline commit `805d90922c605a5893edb6a20629c1c00f18647c`, `backend/data/excursions.json` changed as a generated catalog file: full-file SHA-256 changed from `243cdf4c96379eb31e1cfc2285327fa3ba686d93113779e42a98be9ca021342d` to the run-manifest SHA-256 `dd756f6f775b3d9dd3de2165ef880910ffbcfdb82b6a8de981da02c6e035822e`. Its metadata was regenerated: `generatedAt` changed from `2026-10-22T22:22:15.215Z` to `2026-10-22T22:38:41.397Z`; coverage changed from parsed 1 / unsupported 0 to parsed 0 / unsupported 1; Penne's `sourceHashes` entry changed from `565c6e5defe61349ce5b3a6dc358855fc8edaa723851a816f9c1531b3e25830e` to `8db43b30a20166697fecead336459a876b111c24a11d472cd201eb726b0c2369`.
+
+Despite those file/metadata changes, the eight Penne event rows are exactly equal before and after. Canonical JSON of those rows sorted by ID has SHA-256 `2e6e61eb7229ec3fa46580d0de75a7c83bba17c5ba95f6af6367266afa064960` in both snapshots; no event-row or existing administrative/geographic field changed. The source hash/coverage changes describe the refreshed extraction run, not changed event data.

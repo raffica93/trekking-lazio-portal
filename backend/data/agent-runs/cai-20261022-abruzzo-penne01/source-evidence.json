@@ -1,0 +1,60 @@
+{
+  "runId": "cai-20261022-abruzzo-penne01",
+  "sourceId": "cai-penne-9234006",
+  "requestedUrl": "https://caipenne.it/2026/03/09/programma-sezionale-2026/",
+  "canonicalUrl": "https://caipenne.it/2026/03/07/programma-sezionale-2026/",
+  "contentType": "text/html; charset=UTF-8",
+  "httpStatus": "not persisted",
+  "bodyBytes": 70625,
+  "bodySha256": "d875735a03ff8004a547ae9aedacf414d0695b268e07abba0e60919e74ca5a70",
+  "rawBodyPath": "backend/data/agent-runs/cai-20261022-abruzzo-penne01/source-page.html",
+  "cache": {
+    "keySha256": "f15ce2679c7aca59322fc6f7bf19ca8cb3e8de5eaf0baa8eb416c5d7385fdad5",
+    "metadataLastModified": "Thu, 15 Oct 2026 21:03:53 GMT"
+  },
+  "historyMatch": {
+    "url": "https://caipenne.it/2026/03/07/programma-sezionale-2026/",
+    "hash": "d875735a03ff8004a547ae9aedacf414d0695b268e07abba0e60919e74ca5a70",
+    "events": 0,
+    "method": null,
+    "exactHashMatch": true
+  },
+  "extraction": {
+    "method": null,
+    "events": 0
+  },
+  "semanticNotes": {
+    "pageTitle": "Programma sezionale 2026 : CAI Sezione di Penne",
+    "pageDescribes2026Program": true,
+    "linksToOfficialPdf": "https://caipenne.it/wp-content/uploads/2026/03/programma-CAI-2026-1.pdf",
+    "eventLevelEvidence": "none established from this page",
+    "duplicateAssessment": "possible_duplicate_unresolved"
+  },
+  "catalogDelta": {
+    "sourceRowsBefore": 8,
+    "sourceRowsAfter": 8,
+    "added": 0,
+    "removed": 0,
+    "changed": 0,
+    "editorialOrGeographicFieldsChanged": 0
+  },
+  "coverage": {
+    "status": "partial",
+    "issues": [
+      {
+        "url": "https://caipenne.it/wp-content/uploads/2026/03/programma-CAI-2026-1.pdf",
+        "code": "discovery-limit",
+        "remainingCandidates": 60
+      },
+      {
+        "url": "https://caipenne.it/2026/03/07/programma-sezionale-2026/",
+        "code": "discovery-limit",
+        "remainingCandidates": 1
+      }
+    ]
+  },
+  "database": {
+    "status": "pending",
+    "writes": 0
+  }
+}
