@@ -10459,7 +10459,7 @@
     "cai-salo-9216076": "b15e3ba13fb5d9363b2c24917fb20c99296f8e73a94c5f480005603915195e52",
     "cai-vimercate-9216048": "8bbd95c04d1c099b68cf4e6cb8748c9e5422f48111c149ae8f1c220b28b75353",
     "cai-vimodrone-9216151": "e3e7aec58ff0f1b90a211f0007b45c6021448352053fa00f7e5a66267c67bd81",
-    "cai-varese-9216009": "3eb10dad01b00bd2d362755f965925f84161cd9e393c8e7066955c6bd50b6f62",
+    "cai-varese-9216009": "9492a0532da338414dca6cecef6ded790e3e73ffd8e52209a35dc9298c332637",
     "cai-pesaro-9228006": "e504aa0df4d756fa9025774832c1cfa61f83a13bd94285913df6972215bf76db",
     "cai-cornaredo-9216149": "477090b08a30c35062a78b7cac867696c96cdbea4123712399c27c02cba5b840",
     "cai-jesi-9228003": "50bc2046caadca764fc46f11abba2c00aa80b6870f7c99b002f059c8c8e9f81f",
@@ -10773,14 +10773,14 @@
     "cai-busca-9112010": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967",
     "cai-dronero-9112012": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967"
   },
-  "generatedAt": "2026-10-22T23:49:40.261Z",
+  "generatedAt": "2026-10-22T23:54:43.887Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 1,
-    "parsed": 0,
-    "unsupported": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 548
   },

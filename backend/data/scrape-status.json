@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-22T23:49:40.304Z",
+  "generatedAt": "2026-10-22T23:54:43.913Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 1,
-    "parsed": 0,
-    "unsupported": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 548
   },
@@ -20949,7 +20949,7 @@
       "excursions": 58,
       "error": null,
       "hash": "3eb10dad01b00bd2d362755f965925f84161cd9e393c8e7066955c6bd50b6f62",
-      "updatedAt": "2026-10-20T02:33:43.210Z",
+      "updatedAt": "2026-10-22T23:54:43.913Z",
       "documents": [
         {
           "url": "https://www.caivarese.it/eventi/?ical=1",

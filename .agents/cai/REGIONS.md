@@ -418,3 +418,13 @@ Il catalogo resta 3.371 ID; 14 righe Somma invariate. No coordinates, classifica
 | `cai-varese-9216009` | 1 URL selezionata offline | 0 | fonte partial, 39 documenti / 2 issue | 0 | 0 nel preflight | n/a | 503/cooldown trascorso su iCal distinto; iCal discovery-limit | Checkpoint e fetch solo della pagina annuale max1/120s/concurrency1 |
 
 `https://www.caivarese.it/calendarioannuale` è registrata come calendario annuale ufficiale e assente da cache/status/FAILURES/run precedenti. Il 503 non riguarda questa URL; l’iCal non verrà seguito. Nessuna richiesta di rete nel preflight.
+
+## Lombardia — CAI Varese calendarannual01, esito corrente (22 ottobre 2026)
+
+| Regione / run | Sezioni controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| `cai-20261022-lombardia-varese-calendar01`, CAI Varese | 1 URL esplicita | 0 | 1 | 0 | 0 nuovi; la richiesta calendarannual risolve nel cache mapping a un PDF CAI Calendar2025 già noto (58 record Varese restano invariati); non attestata freschezza del calendario 2026 | 0 | Nessuno | cache senza status HTTP 200/304; iCal MTB 503; iCal eventi discovery-limit 93 | Dopo checkpoint, preflight offline di una diversa fonte Lombardia; non ripetere calendarannual o code iCal senza nuova evidenza/strumentazione |
+
+Catalogo 3.371→3.371 ID unici; Varese 58→58, add/remove/change 0. Importer ha validato i manifest/cataloghi ma ha messo in HOLD l’accettazione della freschezza fonte; nessun evento da classificare, nessuna coordinata o scrittura DB. Il body in cache ha hash `ce93c4c3b0cfeff2da1f94641a43dc698920c7440ef959e4af5812ae285f09ce`, 3.208.298 byte, final URL il PDF 2025. Il relativo `collection-report.md` chiarisce che il cache non prova se il body sia stato trasferito con 200 o rivalidato con 304 e che “zero nuovi eventi” non equivale a calendario vuoto. Backend `npm test` 205/205 dopo collection; sei JSON pubblici byte-identici prima/dopo i test.
+
+Prossima fonte Lombardia preflightata offline: CAI Lissone `cai-lissone-9216040`, `https://cai-lissone.it/escursionismo/`, registry label “Escursionismo”, esatta URL non vista in cache/status/FAILURES/run history. La sezione è partial con 40 documenti e backlog 65 su altra pagina; dopo il checkpoint Varese, una pagina esplicita max1/120s/concurrency1 senza discovery-follow-up.

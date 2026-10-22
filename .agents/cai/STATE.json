@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "lombardia-varese-calendar-preflight-selected",
+  "phase": "lombardia-varese-review-checkpoint",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -13,7 +13,7 @@
   "planningExecutionScope": "remote-cloud-checkout",
   "runtimeReadiness": {
     "status": "current-runtime-observed-and-live-sample-verified",
-    "observedAt": "2026-10-22T18:33:00Z",
+    "observedAt": "2026-10-22T23:57:59Z",
     "connectivity": "connected",
     "desiredPhase": "running",
     "observationsCurrent": true,
@@ -44,12 +44,12 @@
       "caiCollector": {
         "configuredModel": "gpt-6-luna",
         "configuredEffort": "high",
-        "status": "completed sample source QA and breaker patch"
+        "status": "role available and used; effective model/effort telemetry not exposed"
       },
       "caiImporter": {
         "configuredModel": "gpt-6-luna",
         "configuredEffort": "high",
-        "status": "completed import contract QA and review overlay patch"
+        "status": "role available and used; effective model/effort telemetry not exposed"
       }
     },
     "effectiveAllowedHostCount": 822,
@@ -62,7 +62,8 @@
       "httpSuccess": 20,
       "providerErrors": 0,
       "classificationPolicyVersion": "cai-trekking-v2"
-    }
+    },
+    "effectiveModelTelemetry": "not exposed by runtime; requested GPT-6 Luna high only"
   },
   "roles": {
     "orchestrator": "coordination-and-checkpoints; sole writer for run logs and acceptance",
@@ -408,11 +409,17 @@
     },
     {
       "id": "S45",
-      "status": "in_progress",
-      "result": "After preflight checkpoint, fetch one Varese calendarannual page max1/120s/concurrency1, no iCal queue expansion."
+      "status": "completed",
+      "result": "Varese calendarannual01 concluso max1: richiesta mappata dalla cache al PDF annuale 2025 già noto (3,208,298 B, SHA ce93c4c3…); cache non conserva status 200/304. Nessun nuovo ID, fonte resta partial, nessun DB. Importer QA catalogo PASS/evidenza freschezza HOLD; backend 205/205 e sei JSON pubblici stabili."
+    },
+    {
+      "id": "S46",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline preflight dopo Varese seleziona CAI Lissone cai-lissone-9216040, https://cai-lissone.it/escursionismo/: URL esatta assente da status/cache/FAILURES/run history; host consentito; fonte partial con backlog discovery distinto num=255 (65 candidati), da non seguire."
     }
   ],
-  "nextAction": "Checkpoint remoto del preflight Varese. Poi un solo run cai-20261022-lombardia-varese-calendar01 sulla URL https://www.caivarese.it/calendarioannuale, max1 documento/120s/concurrency1. Non seguire la coda iCal discovery-limit né ripetere il distinto endpoint 503.",
+  "nextAction": "Checkpoint remoto del report e dei file Varese; poi un solo run cai-20261022-lombardia-lissone-escursionismo01 sulla URL ufficiale https://cai-lissone.it/escursionismo/, max1 documento/120s/concurrency1. Non seguire la discovery-limit su num=255.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -421,46 +428,55 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "46a7c853d363eb40bc7ae99547f44f6e7c478cd9",
-    "recoverableRemoteCheckpoint": true,
+    "branchHead": "2c3a5d82304c63b1277a91e08df7bf2edd441951",
+    "recoverableRemoteCheckpoint": false,
     "sampleRun": {
-      "runId": "cai-20261022-lombardia-somma-blinnenhorn01",
+      "runId": "cai-20261022-lombardia-varese-calendar01",
+      "region": "Lombardia",
+      "sourceId": "cai-varese-9216009",
+      "requestedUrl": "https://www.caivarese.it/calendarioannuale",
       "collection": "partial",
-      "files": "ready",
-      "database": "not-applicable-no-complete-event-candidate",
-      "sourceId": "cai-somma-lombardo-9216065",
-      "sourceUrl": "https://www.caisomma.it/wp-content/uploads/pdf/Escursioni/2026/Rifugio%20Somma%20-%20Blinnenhorn%20(EE).pdf",
-      "documentBytes": 760092,
-      "documentSha256": "c9f7cab19bc7993fb7e3db8e4dc39ebb8aa29039c98cc27dd3a1cc016af4e1af",
-      "method": "pdf-text",
-      "finalUrl": "not exposed by cache metadata; requested URL retained",
-      "eventsExtracted": 0,
-      "eventDateFound": false,
-      "registrationDeadline": "2026-07-25 (not an outing date)",
-      "sectionRowsBefore": 14,
-      "sectionRowsAfter": 14,
-      "catalogIdsBefore": 3371,
-      "catalogIdsAfter": 3371,
+      "files": "ready; importer catalog/manifest QA PASS, source freshness HOLD",
+      "database": "pending; no verified event delta; no query/write",
+      "baselineCommit": "2c3a5d82304c63b1277a91e08df7bf2edd441951",
+      "runFolder": "backend/data/agent-runs/cai-20261022-lombardia-varese-calendar01",
+      "requestedUrlCacheKeySha256": "d0686bc332e9b91ef146fbf163d684572b07c6ede0282ab7d9101eb52b0d3be4",
+      "finalUrl": "https://www.caivarese.it/wp-content/uploads/2025/02/A4-CAI_Calendar2025.pdf",
+      "contentType": "application/pdf",
+      "bodyBytes": 3208298,
+      "bodySha256": "ce93c4c3b0cfeff2da1f94641a43dc698920c7440ef959e4af5812ae285f09ce",
+      "httpStatus": "not recorded; cannot distinguish 200 from 304",
+      "catalogBefore": 3371,
+      "catalogAfter": 3371,
+      "sourceRowsBefore": 58,
+      "sourceRowsAfter": 58,
       "added": 0,
       "removed": 0,
       "changed": 0,
-      "manifestSha256": "7d1be91a308365001813f21ec6456613d2db20d444dc02e5df5c9851f60a34e7",
-      "stateSha256": "2a566c12e6b65783580ff469bd9b08cd2d60aa6bdc86f0eb37d756a0a3a50e4f",
-      "reportSha256": "6c12db4ad10596ca74db8b5c4a4f0a629b81d3e05fe7e1d89604e1b90ac54b11",
-      "evidenceSha256": "a737ab7c993163ea37d2e7316763799c04ccddd0f97b76801748fd6799f5a3d8",
-      "importerQa": "PASS; official flyer and route/difficulty verified, no outing date, zero event rows",
-      "backendTests": "205/205 after collection; six public JSON hashes unchanged",
+      "eventsVerified": 0,
+      "duplicateIdsExcluded": 0,
+      "sectionsChecked": 1,
+      "complete": 0,
+      "partial": 1,
+      "unreachable": 0,
+      "failuresResolved": [],
+      "failuresOpen": [
+        "Varese iCal MTB HTTP 503",
+        "Varese iCal events discovery-limit 93 candidates"
+      ],
+      "collectorQa": "cache maps requested annual URL to existing 2025 PDF; body/status evidence incomplete for freshness; no report claims empty calendar",
+      "importerQa": "PASS manifest/catalog hashes; HOLD source freshness; no DB",
+      "backendTests": "205/205; all six backend/frontend public JSON hashes unchanged during tests",
+      "manifestSha256": "c4e31bb73fc0a1417d9fc0efe7a87a901974ad4d32dd84d72369c49a8b8b45ae",
+      "runStateSha256": "535f0bf825e9b07b9e56da7e64371e142d4fa23cf8597a9574cc1efd97cbc69f",
+      "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-varese-calendar01/collection-report.md",
       "coordinatesAdded": 0,
       "dbWrites": 0,
-      "openIssues": [
-        "prior SIEL programme download-aborted remains open; not retried",
-        "summary PDF size-limit remains open",
-        "Varese 503 on separate endpoint"
-      ]
+      "reportSha256": "ae28e7dc12f8b086649987afdc7be91b32bf81e72692d5059f5cdb9bf5144012"
     },
-    "nextAction": "Checkpoint remoto del preflight Varese. Poi un solo run cai-20261022-lombardia-varese-calendar01 sulla URL https://www.caivarese.it/calendarioannuale, max1 documento/120s/concurrency1. Non seguire la coda iCal discovery-limit né ripetere il distinto endpoint 503."
+    "nextAction": "Checkpoint remoto del report e dei file Varese; poi un solo run cai-20261022-lombardia-lissone-escursionismo01 sulla URL ufficiale https://cai-lissone.it/escursionismo/, max1 documento/120s/concurrency1. Non seguire la discovery-limit su num=255."
   },
-  "repositoryCommit": "46a7c853d363eb40bc7ae99547f44f6e7c478cd9",
+  "repositoryCommit": "2c3a5d82304c63b1277a91e08df7bf2edd441951",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -482,18 +498,19 @@
       "afterQueryAt": "2026-10-22T22:33:30.892756Z"
     }
   },
-  "tests": "After the Castrovillari01 collection finished, backend npm test passed 205/205; SHA-256 for six public JSON files was identical before/after. No tests were run concurrently with collection.",
-  "updatedAt": "2026-10-22T23:53:08.926099+00:00",
+  "tests": "After Varese collection: backend npm test 205/205; six public JSON SHA-256 values identical before/after (including frontend/public/excursions.json).",
+  "updatedAt": "2026-10-22T23:58:30Z",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:52:00Z",
-  "regionCurrent": "Lombardia — Somma Blinnenhorn01: PDF specifico letto, nessuna data uscita, 0 eventi; 14 righe invariate, nessun DB. Checkpoint 46a7c85.",
-  "regionNext": "Lombardia — CAI Varese calendario annuale, pagina ufficiale distinta e non visitata; il 503/cooldown riguarda un altro endpoint iCal, che non sarà seguito.",
+  "regionCurrent": "Lombardia — Varese calendarannual: richiesta risolta a PDF 2025 già presente, 0 delta; freshness non attestata perché cache non registra HTTP status; fonte resta partial. 3.371 catalog IDs e 58 Varese rows invariati. Nessun DB.",
+  "regionNext": "Lombardia — CAI Lissone (`cai-lissone-9216040`), URL Escursionismo preflightata offline e distinta; dopo checkpoint Varese, una pagina sola max1/120s/concurrency1.",
   "preflight": {
-    "at": "2026-10-22T23:28:13Z",
-    "sourceId": "cai-pavullo-nel-frignano-9224020",
-    "scope": "offline source registry, status/document history, run artifacts, cache, FAILURES/cooldown",
-    "result": "one exact same-host official calendar URL eligible for bounded sample",
-    "reason": "registered calendarEvidence label Calendario 2026; exact URL absent from status/documents/cache/run history/FAILURES. Other source issues are separate: ICS discovery 5; excursion PDF OCR yielded 7; cultural PDF timeout with no-automatic-retry policy.",
-    "next": "publish Cesena escursionismo01 checkpoint, then one explicit URL fetch at max1 document/120s/concurrency1"
+    "at": "2026-10-22T23:58:30Z",
+    "sourceId": "cai-lissone-9216040",
+    "scope": "offline registry, status/document history, cache, FAILURES/cooldown, run history",
+    "result": "one exact official same-host Escursionismo URL selected for a bounded sample",
+    "reason": "registry calendarEvidence labels Escursionismo and links from official activities page; exact target absent from status/cache/FAILURES/run history. Hosts cai-lissone.it/www are allowlisted. Source partial with 40 documents; separate discovery-limit 65 on num=255 is not followed.",
+    "next": "after remote Varese files/report checkpoint, one explicit target only, max1 document/120s/concurrency1; do not claim zero-event completion absent a legible calendar",
+    "networkFetchPerformed": false
   },
   "databasePreflight": {
     "observedAt": "2026-10-22T22:30:21.913236Z",
@@ -533,48 +550,52 @@
     "independentImporterQa": "PASS"
   },
   "lastRegionalAttempt": {
-    "runId": "cai-20261022-lombardia-somma-blinnenhorn01",
+    "runId": "cai-20261022-lombardia-varese-calendar01",
     "region": "Lombardia",
-    "sourceId": "cai-somma-lombardo-9216065",
-    "requestedUrl": "https://www.caisomma.it/wp-content/uploads/pdf/Escursioni/2026/Rifugio%20Somma%20-%20Blinnenhorn%20(EE).pdf",
+    "sourceId": "cai-varese-9216009",
+    "requestedUrl": "https://www.caivarese.it/calendarioannuale",
     "collection": "partial",
-    "files": "ready; importer QA PASS; backend tests 205/205 after collection; six public JSON hashes unchanged; checkpoint pending",
-    "database": "not applicable; no event date/candidate",
-    "baselineCommit": "cdfae59e84e793091d11ab199612561dcaf6224c",
-    "runFolder": "backend/data/agent-runs/cai-20261022-lombardia-somma-blinnenhorn01",
-    "manifestSha256": "7d1be91a308365001813f21ec6456613d2db20d444dc02e5df5c9851f60a34e7",
-    "runStateSha256": "2a566c12e6b65783580ff469bd9b08cd2d60aa6bdc86f0eb37d756a0a3a50e4f",
-    "reportSha256": "6c12db4ad10596ca74db8b5c4a4f0a629b81d3e05fe7e1d89604e1b90ac54b11",
-    "evidenceSha256": "a737ab7c993163ea37d2e7316763799c04ccddd0f97b76801748fd6799f5a3d8",
-    "bodySha256": "c9f7cab19bc7993fb7e3db8e4dc39ebb8aa29039c98cc27dd3a1cc016af4e1af",
+    "files": "ready; importer catalog/manifest QA PASS, source freshness HOLD",
+    "database": "pending; no verified event delta; no query/write",
+    "baselineCommit": "2c3a5d82304c63b1277a91e08df7bf2edd441951",
+    "runFolder": "backend/data/agent-runs/cai-20261022-lombardia-varese-calendar01",
+    "requestedUrlCacheKeySha256": "d0686bc332e9b91ef146fbf163d684572b07c6ede0282ab7d9101eb52b0d3be4",
+    "finalUrl": "https://www.caivarese.it/wp-content/uploads/2025/02/A4-CAI_Calendar2025.pdf",
+    "contentType": "application/pdf",
+    "bodyBytes": 3208298,
+    "bodySha256": "ce93c4c3b0cfeff2da1f94641a43dc698920c7440ef959e4af5812ae285f09ce",
+    "httpStatus": "not recorded; cannot distinguish 200 from 304",
     "catalogBefore": 3371,
     "catalogAfter": 3371,
-    "sourceRowsBefore": 14,
-    "sourceRowsAfter": 14,
+    "sourceRowsBefore": 58,
+    "sourceRowsAfter": 58,
     "added": 0,
     "removed": 0,
     "changed": 0,
-    "eventsExtracted": 0,
+    "eventsVerified": 0,
     "duplicateIdsExcluded": 0,
     "sectionsChecked": 1,
     "complete": 0,
     "partial": 1,
     "unreachable": 0,
-    "coordinatesAdded": 0,
     "failuresResolved": [],
     "failuresOpen": [
-      "historical SIEL full-programme PDF download-aborted issue",
-      "historical summary PDF size-limit issue",
-      "Varese 503 separate source/endpoint"
+      "Varese iCal MTB HTTP 503",
+      "Varese iCal events discovery-limit 93 candidates"
     ],
-    "collectorQa": "official source flyer, document body and date semantics checked",
-    "importerQa": "PASS independent; 14 source rows unchanged, artifact hashes and mirrors valid",
-    "backendTests": "205/205 after collection; six public hashes stable",
-    "dbWrites": 0
+    "collectorQa": "cache maps requested annual URL to existing 2025 PDF; body/status evidence incomplete for freshness; no report claims empty calendar",
+    "importerQa": "PASS manifest/catalog hashes; HOLD source freshness; no DB",
+    "backendTests": "205/205; all six backend/frontend public JSON hashes unchanged during tests",
+    "manifestSha256": "c4e31bb73fc0a1417d9fc0efe7a87a901974ad4d32dd84d72369c49a8b8b45ae",
+    "runStateSha256": "535f0bf825e9b07b9e56da7e64371e142d4fa23cf8597a9574cc1efd97cbc69f",
+    "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-varese-calendar01/collection-report.md",
+    "coordinatesAdded": 0,
+    "dbWrites": 0,
+    "reportSha256": "ae28e7dc12f8b086649987afdc7be91b32bf81e72692d5059f5cdb9bf5144012"
   },
   "regionalCoverage": {
     "region": "Lombardia",
-    "scope": "Sesto index and Somma flyer sampled; Varese annual page selected next; no regional total freshly queried",
+    "scope": "Sesto Calende, Somma Lombardo, Varese sampled one bounded URL at a time; no regional total freshly queried",
     "status": "open",
     "currentRunCounts": {
       "sectionsChecked": 1,
@@ -585,11 +606,11 @@
       "newIds": 0,
       "dbPlacesInserted": 0,
       "dbClassificationsInserted": 0,
-      "nextStep": "Checkpoint Varese preflight then one page fetch; do not follow iCal queue."
+      "nextStep": "Push Varese review checkpoint, then preflight one distinct workable Lombardia source; keep Varese partial and do not repeat iCal backlog."
     },
     "historicalSnapshot": {
       "asOf": "2026-10-20",
-      "note": "Historical only."
+      "note": "Historical only; not a current query."
     }
   },
   "deltaDeliveryHistory": [
@@ -717,12 +738,12 @@
   ],
   "nextSourcePreflight": {
     "region": "Lombardia",
-    "sourceId": "cai-varese-9216009",
-    "sourceName": "CAI Varese",
-    "url": "https://www.caivarese.it/calendarioannuale",
-    "status": "offline selected; bounded sample pending remote checkpoint",
-    "evidence": "registry identifies Calendar annual and links from official Escursionismo page; absent from status documents/issues, deterministic cache, FAILURES URL records and prior runs. Section partial has 39 docs and 2 issues. Known 503 and six-hour cooldown belongs to separate iCal URL; elapsed, do not revisit it.",
-    "scope": "one explicit calendarannual page, max1 document/120s/concurrency1; no iCal discovery follow-up",
+    "sourceId": "cai-lissone-9216040",
+    "sourceName": "CAI Lissone",
+    "url": "https://cai-lissone.it/escursionismo/",
+    "status": "offline selected; bounded sample pending Varese remote checkpoint",
+    "evidence": "CalendarEvidence label Escursionismo and official same-source activity page link; exact URL absent from status documents/issues, cache, FAILURES, and prior runs. Allowlisted host; source partial 40 docs and separate discovery-limit 65 on num=255.",
+    "scope": "one explicit URL, max1 document/120s/concurrency1; no discovery follow-up",
     "networkFetchPerformed": false
   }
 }
