@@ -41,3 +41,12 @@ Dopo il checkpoint del classificatore: scegliere un piccolo gruppo di fonti Lomb
 - "Complete" descrive l’esito della raccolta salvata, non la verifica che il sito abbia pubblicato tutti i suoi eventi.
 - I duplicati semantici tra titoli diversi non sono conteggiati da questa tabella; consultare QA e run report prima di dichiarare un duplicato.
 - Gli errori risolti storicamente e il numero di richieste HTTP reali non si ricavano dai contatori per fonte; usare .agents/cai/FAILURES.json e i rapporti del run.
+
+
+## Campione corrente Lombardia — 22 ottobre 2026
+
+| Run | Sezioni controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | ID duplicati esatti esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---:|---:|---|---|---|
+| `cai-20261022-lombardia-brescia02` — CAI Brescia | 1 | 0 | 1 | 0 | 1 evento ufficiale del cinema (classificazione DB in attesa) | 0; duplicati semantici non determinati | Falso `durationHours=26` dal suffisso anno corretto; fixture/test e run reale verificati | Discovery limit: 14 documenti; 2 URL con storico 403 tenuti in cooldown (13 voci ripetute, nessun retry) | Pubblicare checkpoint, poi campione limitato ai residui della stessa sezione |
+
+Questi valori descrivono esclusivamente il singolo run Brescia. I conteggi Lombardia complessivi (229/125/56/68/1/104) restano quelli dello snapshot storico del 20 ottobre, non sono stati ricalcolati. Sono stati rigenerati contatori `excursions` in record status globali senza ricontrollare le relative fonti; non considerarli copertura aggiornata.

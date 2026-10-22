@@ -1,6 +1,6 @@
 # Passaggio operativo CAI — classificazione catalogo mappa
 
-## Stato al 22 ottobre 2026
+## Stato al 22 ottobre 2026 — storico fino alla classificazione completa
 
 Branch `codex/cai-orchestrator-luna`, repository `raffica93/trekking-lazio-portal`. Il checkpoint precedente è stato recuperato e il branch remoto aggiornato. I commit di codice `902a180` e `3f93525` sono stati pushati e letti di nuovo da origin. Non sono state fatte scritture DB.
 
@@ -26,9 +26,9 @@ Esito effettivo campione: 5 trekking, 3 non-trekking, 12 da verificare. Il QA ha
 
 Query Supabase osservata il 22 ottobre 2026 alle 17:27:56 UTC: 4.346 pubblicati totali; 3.307 con `date >= 2026-10-01`; 3.300 con `date_end >= 2026-10-01`; 3.336 unici soddisfano l’OR effettivo; tabella `place_classifications` assente. Export via Data API osservato alle 17:25:59 UTC: 3.336 righe, 3.336 source ID univoci, SHA-256 `2963f287c4ccedb20a70068b2551dad3565b264d871194ec91324d0f98bb0687` in `backend/data/agent-runs/cai-map-20261022-full01/input.json`. La query e l’export sono distinti per osservazione e metodo; i conteggi sono osservazioni correnti, non la baseline storica.
 
-Dopo push e verifica del checkpoint di questo handoff, eseguire il run nuovo `cai-map-20261022-full01` con input sigillato, cache campione riutilizzata, concurrency 4 e rate 200 ms. Usare solo il modello Mercury attestato; fermare il batch su auth/quota/429 o modello non verificato. Non avviare raccolta Lombardia mentre il batch è in corso. Dopo output pronto, QA indipendente degli esclusi e dei dubbi, override con evidenza tracciabile, report e manifest, commit/push verificato. Solo dopo questo checkpoint l’importer può applicare la migration e l’upsert classification-only, senza modificare `places` o righe preesistenti. Verificare query/ricevuta e comportamento mappa; nessun deploy implicito.
+Piano iniziale completato e superato: `cai-map-20261022-full01` è stato sigillato, verificato, importato classification-only e riconciliato. La ricevuta DB e i conteggi osservati sono nella sezione successiva; non usare questo paragrafo come istruzione operativa corrente.
 
-La migration non è applicata e la tabella classificazioni non esisteva nell’ultima query. Il sito live non è stato controllato/aggiornato; le modifiche frontend mappa non sono state deployate. Il codice sul branch non equivale al comportamento in produzione.
+La migration è stata applicata e verificata nella ricevuta successiva. Il sito live non è stato controllato/aggiornato; le modifiche frontend mappa non sono state deployate. Il codice sul branch non equivale al comportamento in produzione.
 
 ## Baseline distinta
 
@@ -65,3 +65,16 @@ La riconciliazione post-import ha confrontato ogni colonna applicativa della tab
 Invarianti editoriali prima/dopo: digest ordinato di `id,title,status,cover_image_path` identico `5ed97ae6d6fa8274e66663ba66f28a45`; max `places.updated_at` identico `2026-10-20T11:51:23.239637Z`. Nessuna modifica a titolo, stato, foto, località o coordinate. Nessun delete. Nessun deploy: codice filtro mappa è sul branch ma il sito live non è stato aggiornato. Nessun merge, cron o deploy.
 
 Il checkpoint DB è registrato in `.agents/cai/STATE.json`; prossimo passo riprende Lombardia, ultima regione aperta, a campioni circoscritti e una sezione per volta. Storico handoff: 229 sezioni, 125 controllate, 56 complete, 68 parziali, 1 irraggiungibile, 104 non verificate; sono valori storici, non una query attuale. Nessuna raccolta si è sovrapposta al batch o import.
+
+
+## Ripresa operativa — Lombardia/Brescia, 22 ottobre 2026
+
+Il checkpoint classificazione è chiuso e riconciliato nel DB come riportato sopra. L’istanza cloud corrente è connessa, rete enforced, `OPENROUTER_API_KEY` presente e limitata a `openrouter.ai` (controllo booleano; il valore non è stato letto). La UI conferma GPT-6 Luna high per orchestratore/agenti, ma la telemetria runtime non attesta il modello effettivo. Mercury resta separato dalla raccolta geografica.
+
+Run `cai-20261022-lombardia-brescia02` (source `cai-brescia-9216005`): `collection=partial`, `files=ready`, `database=pending`. Sono stati osservati 12 URL, una sola sezione, 44 eventi risultanti e 93 estrazioni documentali registrate; restano 14 candidati discovery. Il run non ha aggiunto nuovi ID rispetto al risultato corretto: nel confronto con il checkpoint `6d0bd13`, il catalogo ha un solo nuovo ID Brescia (`cai-brescia-9216005-3badd4cc403c`), 0 rimozioni, 0 modifiche esistenti e 3.338 ID unici. La card CAI ufficiale attesta una serata cinema il 21 ottobre; è stato rimosso il falso `durationHours=26`, senza inferire luogo o coordinate. Questo evento resta fuori dal DB finché la classificazione e il trattamento sicuro non siano definiti.
+
+Il bug del parser era il match del suffisso `26 ore` dentro `2026 ore 20,45`. La regex ora richiede un confine numerico a sinistra. Fixture `backend/test/fixtures/cai-brescia-cinema-time.json`, test `backend/test/scraper.test.js`; suite backend completa 175/175. QA read-only indipendente importer: PASS, manifest/hash/copie backend-frontend corretti, nessuna modifica alle righe esistenti. Manifest SHA `092ad634fd84e60a307349661026423e18a2fd1e75c4422f5b936ab973dded77`; report SHA `7c65412514a18d03cc08c230e5fca09bfc8d1ddc8afd8351f1c91453abe1d852`. Run01 è uno snapshot superato e non importabile.
+
+Le 13 occorrenze `previous-unavailable-skipped` del report rappresentano 2 URL storici HTTP 403 (12 voci Scuola Adamello e 1 archivio), saltati per cooldown e non ritentati. Resta inoltre un problema discovery-limit con 14 documenti. Nessuna raccolta su altre sezioni. Il pipeline ha aggiornato anche alcuni contatori derivati nello stato globale: ciò non significa che quelle fonti siano state ricontrollate. La tabella `REGIONS.md` distingue questi dati dal conteggio storico.
+
+**Passi separati:** raccolta completa solo per il perimetro limitato del run; file pronti/verificati; test passati; commit/push da completare; import DB in attesa e da non eseguire per il record cinema senza classificazione; copertura Lombardia ancora aperta (1 parziale, 0 complete, 0 irraggiungibili nel campione corrente). Prossimo: pubblicare il checkpoint, poi un nuovo run circoscritto ai residui Brescia, senza ampliare la regione. Nessun merge, deploy o cron.

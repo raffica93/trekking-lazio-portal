@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T08:09:26.672Z",
+  "generatedAt": "2026-10-22T18:30:08.856Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -7,7 +7,7 @@
     "parsed": 1,
     "unsupported": 0,
     "failed": 0,
-    "located": 487
+    "located": 548
   },
   "sources": [
     {
@@ -260,7 +260,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 48,
+      "excursions": 52,
       "error": null,
       "hash": "5f3f80ac1840460cd544d07406102005e3db8351353d743af0fd067da9603b7e",
       "updatedAt": "2026-10-19T18:24:35.762Z",
@@ -376,7 +376,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 51,
+      "excursions": 109,
       "error": null,
       "hash": "8e529c1411b8fa2278c988cc8acb34eca23ab066045118a92daa1ea5d2269390",
       "updatedAt": "2026-10-19T18:24:35.762Z",
@@ -494,7 +494,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 31,
+      "excursions": 40,
       "error": null,
       "hash": "3856e42fe41ee0c89106bef84bfd12861fc598331d7f67cd71e81c672535264d",
       "updatedAt": "2026-10-19T18:24:35.762Z",
@@ -823,7 +823,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 9,
+      "excursions": 10,
       "error": null,
       "hash": "c42b13ef2d1c3f9977dff7544d4eaf90232c1c65584f796b6699da700bb47fd6",
       "updatedAt": "2026-10-19T18:24:35.762Z",
@@ -876,7 +876,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 8,
+      "excursions": 11,
       "error": null,
       "hash": "1ff987f249d9ba46ad6c16dac41ac438efac885e02304437a5fe2e911c31929c",
       "updatedAt": "2026-10-19T18:24:35.762Z",
@@ -993,7 +993,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 11,
+      "excursions": 16,
       "error": null,
       "hash": "3aebc44db8ef66cd4849edfd683d87897b829eccaad5560f0636aeab9eb32f16",
       "updatedAt": "2026-10-19T18:24:35.762Z",
@@ -2560,7 +2560,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 38,
+      "excursions": 47,
       "error": null,
       "hash": "1c145feb733951f3c270d6513c82f48c20380905c30ef13ab901ba5b98b3d0a2",
       "updatedAt": "2026-10-19T18:24:35.762Z",
@@ -6540,7 +6540,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 54,
       "error": null,
       "hash": "31d604c4d4ad9461089ce4b45b9552843535fc9cf2bc4fc6d1c94e1c2ebd24d2",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -6582,7 +6582,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 54,
       "error": null,
       "hash": "31d604c4d4ad9461089ce4b45b9552843535fc9cf2bc4fc6d1c94e1c2ebd24d2",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -6624,7 +6624,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 54,
       "error": null,
       "hash": "31d604c4d4ad9461089ce4b45b9552843535fc9cf2bc4fc6d1c94e1c2ebd24d2",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -6666,7 +6666,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 54,
       "error": null,
       "hash": "31d604c4d4ad9461089ce4b45b9552843535fc9cf2bc4fc6d1c94e1c2ebd24d2",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -6708,7 +6708,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 54,
       "error": null,
       "hash": "31d604c4d4ad9461089ce4b45b9552843535fc9cf2bc4fc6d1c94e1c2ebd24d2",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -6750,7 +6750,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 54,
       "error": null,
       "hash": "31d604c4d4ad9461089ce4b45b9552843535fc9cf2bc4fc6d1c94e1c2ebd24d2",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -6792,7 +6792,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 54,
       "error": null,
       "hash": "31d604c4d4ad9461089ce4b45b9552843535fc9cf2bc4fc6d1c94e1c2ebd24d2",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -6834,7 +6834,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 54,
       "error": null,
       "hash": "31d604c4d4ad9461089ce4b45b9552843535fc9cf2bc4fc6d1c94e1c2ebd24d2",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -6876,7 +6876,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 54,
       "error": null,
       "hash": "093668ddc3a88ba67872fb3295be55b1a44060c97694b7c53bd96b3377c2cd3e",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -6924,7 +6924,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 54,
       "error": null,
       "hash": "31d604c4d4ad9461089ce4b45b9552843535fc9cf2bc4fc6d1c94e1c2ebd24d2",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -6966,7 +6966,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 54,
       "error": null,
       "hash": "31d604c4d4ad9461089ce4b45b9552843535fc9cf2bc4fc6d1c94e1c2ebd24d2",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -7008,7 +7008,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 3,
+      "excursions": 8,
       "error": null,
       "hash": "01bc7fb67b529d82c9c5f23358c98158796c437f1363ad289314e2f6f9d4df37",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -7050,7 +7050,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 3,
+      "excursions": 6,
       "error": null,
       "hash": "01bc7fb67b529d82c9c5f23358c98158796c437f1363ad289314e2f6f9d4df37",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -7092,7 +7092,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 4,
+      "excursions": 9,
       "error": null,
       "hash": "01bc7fb67b529d82c9c5f23358c98158796c437f1363ad289314e2f6f9d4df37",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -7134,7 +7134,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 5,
       "error": null,
       "hash": "01bc7fb67b529d82c9c5f23358c98158796c437f1363ad289314e2f6f9d4df37",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -7189,7 +7189,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 8,
       "error": null,
       "hash": "80e5a42de365bbb4e29a432c6150a9e62b44d1b4e891085a0ee0876f3a3171b7",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -7294,7 +7294,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 8,
       "error": null,
       "hash": "d0240cbc45757c49b0399d597f90daa3141b784b59d764a639107ae95ff52047",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -7336,7 +7336,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 8,
       "error": null,
       "hash": "d0240cbc45757c49b0399d597f90daa3141b784b59d764a639107ae95ff52047",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -7390,7 +7390,7 @@
       "template": "icalendar",
       "extractor": "deterministic",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 9,
       "error": null,
       "hash": "39425ca63c6c8fe319d05c62b2ac978b7b60b28fab741a2ee9b532369a88c3d0",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -7527,7 +7527,7 @@
       "template": "icalendar",
       "extractor": "deterministic",
       "enabled": true,
-      "excursions": 1,
+      "excursions": 9,
       "error": null,
       "hash": "20ea9988f014e290858eb868e145f85b42a2f37498f227b27dab4b866f756ad0",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -7669,7 +7669,7 @@
       "template": "icalendar",
       "extractor": "deterministic",
       "enabled": true,
-      "excursions": 1,
+      "excursions": 9,
       "error": null,
       "hash": "39425ca63c6c8fe319d05c62b2ac978b7b60b28fab741a2ee9b532369a88c3d0",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -7806,7 +7806,7 @@
       "template": "icalendar",
       "extractor": "deterministic",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 9,
       "error": null,
       "hash": "39425ca63c6c8fe319d05c62b2ac978b7b60b28fab741a2ee9b532369a88c3d0",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -7943,7 +7943,7 @@
       "template": "icalendar",
       "extractor": "deterministic",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 9,
       "error": null,
       "hash": "39425ca63c6c8fe319d05c62b2ac978b7b60b28fab741a2ee9b532369a88c3d0",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -8080,7 +8080,7 @@
       "template": "icalendar",
       "extractor": "deterministic",
       "enabled": true,
-      "excursions": 1,
+      "excursions": 9,
       "error": null,
       "hash": "39425ca63c6c8fe319d05c62b2ac978b7b60b28fab741a2ee9b532369a88c3d0",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -8252,7 +8252,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 1,
       "error": null,
       "hash": "21858b77759ce1cd2f0f7198ae587704acb796fc3704b984b3361860e991d6e9",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -8302,7 +8302,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 1,
+      "excursions": 2,
       "error": null,
       "hash": "1e5361651dc856e289b358ec8345ab480714f69053a8ade980695d5deb85b8c3",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -8435,7 +8435,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 1,
       "error": null,
       "hash": "21858b77759ce1cd2f0f7198ae587704acb796fc3704b984b3361860e991d6e9",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -8484,7 +8484,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 6,
+      "excursions": 5,
       "error": null,
       "hash": "f2e8959a50c84bc5a63de5a41a5a9c07e1396fe06d48206e20021d721b15c5ef",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -8958,7 +8958,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 9,
+      "excursions": 8,
       "error": null,
       "hash": "27daf1b8e08466340bf7dd5777848e1dde3485ec8ece5322a16c5383bb593366",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -9204,7 +9204,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 5,
+      "excursions": 3,
       "error": null,
       "hash": "7379b2cb8c720935ff08285b6c9c092513736542aae193d2f2fb0666db22414f",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -9311,7 +9311,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 11,
+      "excursions": 7,
       "error": null,
       "hash": "d44510b872cfa1a611a6d60e94427931d5ae799794ddcefe707b4a7f60649931",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -9521,7 +9521,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 46,
+      "excursions": 0,
       "error": null,
       "hash": "bfcf7fc98e71d1d236138b73d41cf55c937002a38c099db9c3c56ef82fc5c62f",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -9625,7 +9625,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 8,
+      "excursions": 57,
       "error": null,
       "hash": "2f4f27b01118eea561d0eccb4e2c44ad94434e6a4f9a78d489c96cf17d588b54",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -10113,7 +10113,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 14,
+      "excursions": 13,
       "error": null,
       "hash": "c6847d885b21c00d92cf8a21362a7dea04c448a96bc5988b496b7f3b5a827cdf",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -10883,7 +10883,7 @@
       "template": "icalendar",
       "extractor": "deterministic",
       "enabled": true,
-      "excursions": 2,
+      "excursions": 1,
       "error": null,
       "hash": "e77272e9546e923714747288b73ec76c32e4e9656f7ac7c2e55506d0a7ac851e",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -11091,7 +11091,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 6,
+      "excursions": 5,
       "error": null,
       "hash": "c56dbb26daf9fab26db08c150d55cad0737ace7db6125db42591998f1c049499",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -11127,7 +11127,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 1,
+      "excursions": 0,
       "error": null,
       "hash": "46a558b51ba3e8f81a1389480c4cb8aac0e45d3ca806d561265196e08f48a8d6",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -11163,7 +11163,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 4,
+      "excursions": 3,
       "error": null,
       "hash": "8003a205c860f2f12c6530edd52557f1d7e721b3923dc8d5e1cc73faf2f03f48",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -11523,7 +11523,7 @@
       "template": "html-calendario",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 2,
+      "excursions": 1,
       "error": null,
       "hash": "9e1f6f75d473550db536fd5ee27247b427e127d9bc302372455197fde501d24d",
       "updatedAt": "2026-10-20T08:06:41.363Z",
@@ -11614,10 +11614,10 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 43,
+      "excursions": 44,
       "error": null,
-      "hash": "64fa8856bb3f7b5b273b28ca8634a9e23689a533e9919904d147fad937f49afa",
-      "updatedAt": "2026-10-20T03:47:30.276Z",
+      "hash": "1f3626f90585211bcd406f2bd8907413cafc6ce1d73d7216c262930ee853ee13",
+      "updatedAt": "2026-10-22T18:30:08.856Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-brescia/wp-content/uploads/sites/7/2026/02/Programma-Escursionismo-2026.pdf",
@@ -11633,19 +11633,19 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/gruppo-juniores/juniores2026/",
-          "hash": "53975c1a637296e76c1d62a7de5f60facc0f34ecbd723397f6086856a64f0a11",
+          "hash": "4adef65f8fdab03013d351abb6dbc748b34fca5be3496b525baf0082b51f0803",
           "events": 4,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/escursionismo/commissione-escursionismo/",
-          "hash": "6228b57214c01ef02e514d8a65af139847ea353648e36a2e2d82d0b78c6e391d",
+          "hash": "6f0482e9793cd499b1bd9cf93480c818dbe4199a6a810f82297f6267bc8ca6ea",
           "events": 26,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/2025/12/gruppo-escursionistico-seniores-1997-calendario-escursioni-trekking-2026/",
-          "hash": "f4e6daca9f1ad31bd776e7f329b9376fbc18e9a9bf95ba2788a619ed725a51f6",
+          "hash": "42ba122dcbcd584ac4a8bd1bfc300949376d4d6ccfb354f38f448eb299eb02ab",
           "events": 0,
           "method": null
         },
@@ -11663,13 +11663,13 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/",
-          "hash": "4f5f935b11ce2d5541c2d152c907a6bb4ad2ab1f57e5163b909904a843dddf5e",
-          "events": 2,
+          "hash": "ed1cc00ad68cf4cb3d5e8cb9c223848c024fc51c70e1ec146b36048c9ecc4ed2",
+          "events": 3,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-10-01&per_page=100",
-          "hash": "eaca2e80a2cfb766900fa54fd286638f08c31dac887cf9ebd5869b7f15e46a84",
+          "hash": "6c0f37426b628d04f19d67bfa81b0c2cc8984cf143db381fc1c6fc5db4cf5825",
           "events": 0,
           "method": "wordpress-events"
         },
@@ -11680,182 +11680,14 @@
           "method": "pdf-text"
         },
         {
-          "url": "https://organizzazione.cai.it/sez-brescia/2026/07/gruppo-escursionistico-seniores-1997-preiscrizioni-al-trekking-traversata-delle-langhe-piemonte/",
-          "hash": "036c42b28f41584ea0602ffb3c29754b1a301653fcd651ef7653fe32dbfeef08",
-          "events": 0,
-          "method": null
-        },
-        {
           "url": "https://organizzazione.cai.it/sez-brescia/2026/09/54corso-sci-di-fondo-escursionistico-anno-2026-2027/",
-          "hash": "52ff79e802dde075b3136942235ad04ba219fc3ec62e547e7ca5331bdd8b4f34",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/2026/10/gruppo-escursionistico-seniores-1997-escursione-martedi-27-10-26-o-mercoledi-28-10-26-chiusa-val-isarco-bressanone-4-e-ultima-tappa-sentiero-del-castagno-trentino-a-a/",
-          "hash": "f150ea5ef202999aa09ac2b06db5fdbb11d01c8f08cbf1e760f8c5b7eee8bb49",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/2026/10/gruppo-escursionistico-seniores-1997-escursione-martedi-20-10-26-o-mercoledi-21-10-26-albino-anello-della-cornagera-monte-poieto-val-seriana-bg/",
-          "hash": "beb7de5788faf1417f28ef6233f70aa0bd9a565eb188c254e83f501c4ed8fb26",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/2026/10/commissione-escursionismo-domenica-18-ottobre-rifugio-azzoni-e-monte-resegone/",
-          "hash": "479a4b31dc6ea45fce8696af194e2ca9b29c550a1dbdf46275e3b20ab86713a6",
+          "hash": "27b919abf1a39a664b43b836286725a713b67caf5bd30ec9b5caef17529a186b",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/2026/10/gruppo-escursionistico-seniores-1997-settimana-escursionistica-invernale-a-moena-val-di-fassa-trentino-a-a/",
-          "hash": "144fb55dd7f0b3d918dfb8b78bc75b9b9d2f51510bd05ee56574c31c5e451c2f",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/",
-          "hash": "8eb5d3c1da1d3025f2d87f7f8815e420ab869a5ea50b321ee4df937c1f9bce6e",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/",
-          "hash": "752ea34e924957d769f5986a92d116d7c452711d1d746045c89b06086e935db3",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-a1-alpinismo-base/",
-          "hash": "b61ad2eaebde8c0df4f3ba84a7caf9ffa989c61317c66f71356de6477c566548",
-          "events": 13,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-acg1-cascate-di-ghiaccio/",
-          "hash": "a4b3606e876b121c2f83ef1cf69cfa73f629701d7ff0989f2d97ff6d1196808f",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-sa1-scialpinismo-base/",
-          "hash": "c0ec475c610e06fcc9261fd6376a0c8157e3d3888fbb736fef116b8aa59e2e00",
-          "events": 10,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-sa2-scialpinismo-avanzato/",
-          "hash": "d503cda7127bd44b0a57ccfc8bf6263b8de1eb756cd26abbc64f257207db9564",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-al1-arrampicata-libera-base/",
-          "hash": "2a3a60a1ccb097fab6766e3d692b4819fb8ad324ae3aebb0434ceba440d1ff44",
-          "events": 5,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-al2-arrampicata-libera-avanzato/",
-          "hash": "049e2bef318210c1298fb00054b3475e15e32bdfdcc527a2bb81ef624b6e3906",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-ar1-arrampicata-su-roccia/",
-          "hash": "16c045d28b1d4a731c96ee377b913a62dee4bde9c0311018b25c20d9fc3fd025",
-          "events": 11,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-m-av-autosoccorso-in-valanga/",
-          "hash": "8c17d5ac27cacca51c78bc366f29065683a1fd9f9420cd727f4cf3823b2a4634",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/la-nostra-storia-2/",
-          "hash": "577ef7ec6b9bca29116c196fbb22a28e3ed333fef0d8758663fbddd02a4ac6f4",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/gruppo-gite-alpinismo-gga/",
-          "hash": "337e85fe61d623d6d3d0832407ba3701fecb6f85f2113a2333433f9e1897f33b",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/gruppo-gite-scialpinismo-ggs/",
-          "hash": "3fa059044e5aa4cac49cecd1997ba763a2afddf69590661f340427b9cca868f4",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/gruppo-gite-scialpinismo-ggs/programmi-anni-precedenti/",
-          "hash": "f3daaaea9b19a4ea4bf8788abbcbb53a64ddf1998ae7ef422d758c64fdadfdfa",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/gruppo-juniores/",
-          "hash": "82333cfe7ec515f5fc9805a7e8e36f8a1f387e222009b8508b2c592ad0f71af0",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/escursionismo/",
-          "hash": "104d42de11af7d2424b56465c106784358aea3465f175de44c8a8e08fd8d0d18",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/escursionismo/gpe-seniores-1987/",
-          "hash": "a2351fc8830c788f33ac0ae61a2a2a501f9c3ec392fb67d716d779ed34653bba",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/escursionismo/gpe-seniores/",
-          "hash": "983ab712ff1e5d50b64454e60ffa229fe9eb85e2c55744d3cce2812c7a20ad23",
-          "events": 5,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/alpinismo-giovanile/",
-          "hash": "b905fc56bada26e4384e53634a9d8fce3eacb9cdb568d9da1ba46f811cbb883d",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/commissione-sanitaria/",
-          "hash": "8bd0fcba28ab29eadc4bf87f203dc48c4bba289c6aa362c618cb63383965004a",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-di-sciescursionismo/",
-          "hash": "2639fcb0461113c7fdd226c7d6a4fd3271526e50f7b22eb245a25aaeff8f16ca",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/tutela-ambiente-montano-tam/",
-          "hash": "1127954ba38196425419c81adce82206a3e065e787d5cf1d1766c6d1eb394d66",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/tutela-ambiente-montano-tam/archivio/",
-          "hash": "81c87ad7f3cba8a28540b36afd0dc0847c3f96c6aef6e75a0acb5726b00bbae5",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/escursioni-di-sci-fondo-escursionismo/",
-          "hash": "9b03eab9125fe9a87fc33503c3d371f1fc24b6ef66243b2621bd681442b842f1",
+          "hash": "0085f5fc4d07962c48be2784ecf973a4cc1a047e9daac85ea234c583db879916",
           "events": 0,
           "method": null
         }
@@ -11869,25 +11701,114 @@
         {
           "url": "https://archivio.cai.it/sezione/brescia/calendario-iniziative/",
           "code": "previous-unavailable-skipped",
-          "message": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden"
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
           "code": "previous-unavailable-skipped",
-          "message": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden"
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
         },
         {
-          "url": "https://organizzazione.cai.it/sez-brescia/2025/11/programma-gite-ggs-gruppo-gite-scialpinismo-2026/",
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
           "code": "previous-unavailable-skipped",
-          "message": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Request failed with status code 404"
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/wp-content/uploads/sites/7/2026/02/Programma-Escursionismo-2026.pdf",
-          "message": "Discovery budget reached; 2 candidate documents remain.",
+          "message": "Discovery budget reached; 14 candidate documents remain.",
           "code": "discovery-limit"
         }
       ],
-      "extractedEvents": 138
+      "extractedEvents": 93
     },
     {
       "id": "cai-cidneo-o-m-9116019",
@@ -16501,7 +16422,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 3,
+      "excursions": 4,
       "error": null,
       "hash": "a6fe8b15b335fc155999e56a29637c58294dae4f2aa87bd0b8c0a0d4cd44dbf4",
       "updatedAt": "2026-10-20T03:51:30.369Z",
@@ -19683,7 +19604,7 @@
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 17,
+      "excursions": 18,
       "error": null,
       "hash": "a6893326cce9a8a8a0d545687053f2c220937146beb4538cf8463c7715115ee6",
       "updatedAt": "2026-10-20T02:25:51.584Z",

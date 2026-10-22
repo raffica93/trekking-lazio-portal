@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-lombardia-brescia02",
+  "createdAt": "2026-10-22T18:30:09.043Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "8dcc64ccc225eed1a858d376234409af7d219b579e0c5221e59592de2da35cfe"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "055647e6203c391679481ed63dae7b361f3c133fe7d4016580e6d66d08785a96"
+    }
+  ]
+}

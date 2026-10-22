@@ -1,6 +1,6 @@
 # Piano di passaggio al lavoro interamente cloud
 
-Stato aggiornato al 22 ottobre 2026: codice correttivo pubblicato, runtime cloud verificato, campione reale classificato/QA e input completo sigillato. Il batch completo è il prossimo passo; nessuna scrittura DB anticipa il checkpoint dei file. La raccolta regionale resta sospesa durante batch/import.
+Stato aggiornato al 22 ottobre 2026: classificazione completa del catalogo importata e riconciliata. Il lavoro attivo è la ripresa regionale Lombardia a campioni limitati; le sezioni più sotto che indicano il batch come prossimo passo sono piano storico, superato dalla ricevuta DB e dagli aggiornamenti finali.
 
 ## Sequenza
 
@@ -62,7 +62,7 @@ dell'ambiente, merge, deploy o scheduler. Le prove già registrate non equivalgo
 a un collaudo del runtime cloud corrente.
 
 
-## Stato 2026-10-22 — classificazione catalogo mappa
+## Stato 2026-10-22 — classificazione catalogo mappa (piano storico, completato)
 
 - S0–S4 completati: branch e runtime verificati, input mappa 3.336 ID sigillato, run Mercury pronto senza errori, QA fonti e verifica indipendente importer concluse.
 - QA fonti indipendente: 157/462 candidati originari esaminati in 11 gruppi; 8 esclusioni documentate, 5 falsi negativi portati a trekking, 27 misti/mismatch e 117 inconclusivi restano da verificare; 305 non esaminati singolarmente.
@@ -74,3 +74,11 @@ a un collaudo del runtime cloud corrente.
 ## Ricevuta DB — 22 ottobre 2026, 18:20 UTC
 
 Migration `create_place_classifications_20261021090000` registrata dal progetto Supabase come versione `20261022181444`. Inseriti 3.336 record solo in `public.place_classifications`, con `ON CONFLICT DO NOTHING`: 3.336 nuovi, 0 conflitti preesistenti. Riconciliazione esatta di tutti i 17 campi applicativi: 3.336 confrontati, 0 differenze. Conteggi effettivi: 969 trekking, 9 non trekking, 2.358 da verificare; 496 con review metadata. Query della mappa: 3.336/3.336 classificati, 9 non trekking esclusi, 2.358 dubbi conservati, 3.327 visibili nel default. Digest editoriale `places` prima/dopo identico (`5ed97ae6d6fa8274e66663ba66f28a45`), latest `places.updated_at` identico, nessuna write/delete su `places`. Repository/app non deployati: la UI live non è stata aggiornata. S7 riapre ora Lombardia dopo la ricevuta pubblicata.
+
+
+## Avanzamento dopo import classificazioni — 22 ottobre 2026
+
+- Completata la riconciliazione classification-only DB (3.336 righe, zero differenze; vedere HANDOFF/STATE), poi ripresa Lombardia.
+- Run Brescia `cai-20261022-lombardia-brescia02`: manifest e report validati indipendentemente; 1 sezione parziale, 12 URL osservati, 14 candidati residui, nessuna write DB. Il cinema del 21 ottobre è ufficiale, ma non va importato privo di classificazione.
+- Correzione parser su confine sinistro numerico verificata: fixture/test, 175/175 suite backend. Commit/push del checkpoint Brescia è il prossimo gate; dopo, nuovo campione circoscritto agli stessi residui.
+- I contatori rigenerati su altre righe status non sono nuova copertura. Nessun import, merge, deploy o cron.

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T17:27:21.366Z",
-  "repositoryCommit": "3f93525f4f52dff9dd322278a6b3e4759455648b",
+  "generatedAt": "2026-10-22T18:33:25Z",
+  "repositoryCommit": "6d0bd139282008aca7e7c6dabe455eb678725f91",
   "baseline": {
     "commit": "9919927d4cbef6d154c4dae1441d64cd01c70ad4",
     "runId": "cai-20261020-piemonte-01"
@@ -44181,6 +44181,61 @@
         "currentCycle": false
       },
       "policyStatus": "candidate_pending_test"
+    },
+    {
+      "id": "CAI-F-ff7bd547825e5199",
+      "sourceId": "cai-brescia-9216005",
+      "url": "https://organizzazione.cai.it/sez-brescia/",
+      "phase": "parsing",
+      "failureClass": "duration-year-suffix-match",
+      "httpStatus": null,
+      "firstObservedAt": "2026-10-22T18:29:50.357Z",
+      "lastObservedAt": "2026-10-22T18:30:09.043Z",
+      "observationBasis": "run state timestamps; no request timing asserted",
+      "history": {
+        "runIds": [
+          "cai-20261022-lombardia-brescia01",
+          "cai-20261022-lombardia-brescia02"
+        ],
+        "snapshotCopies": 2,
+        "issueCodes": [],
+        "sourceStatuses": [
+          "partial"
+        ]
+      },
+      "attempts": {
+        "actualHistoricalRequests": "not applicable",
+        "currentCycleRequests": 0,
+        "recoveryAttempts": []
+      },
+      "cooldown": {
+        "policy": "not applicable; deterministic parser correction",
+        "nextEligibleAt": null
+      },
+      "evidence": {
+        "representativeMessages": [
+          "Run01 parsed the year suffix in “2026 ore 20,45” as durationHours=26. Run02 on the same official page no longer emits durationHours."
+        ],
+        "sourceUpdatedAt": [
+          "2026-10-22T18:30:08.856Z"
+        ]
+      },
+      "strategy": "Require a non-digit boundary before duration numeric tokens; retain clock-time parsing as time, not duration.",
+      "status": "recheck_resolved",
+      "owner": "cai-collector",
+      "outcome": "Corrected with official minimized fixture and backend test; full backend suite passed. Run02 real event has no durationHours.",
+      "correctionRef": "backend/scraper.js",
+      "testRefs": [
+        "backend/test/fixtures/cai-brescia-cinema-time.json",
+        "backend/test/scraper.test.js"
+      ],
+      "resolutionCheck": {
+        "runId": "cai-20261022-lombardia-brescia02",
+        "manifestSha256": "092ad634fd84e60a307349661026423e18a2fd1e75c4422f5b936ab973dded77",
+        "test": "backend npm test: 175 passed, 0 failed",
+        "commit": null
+      },
+      "policyStatus": "verified-after-commit-pending"
     }
   ],
   "schema": {

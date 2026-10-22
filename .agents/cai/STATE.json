@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "classification-import-reconciled",
+  "phase": "regional-collection-partial-files-verified",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -13,7 +13,7 @@
   "planningExecutionScope": "remote-cloud-checkout",
   "runtimeReadiness": {
     "status": "current-runtime-observed-and-live-sample-verified",
-    "observedAt": "2026-10-22T17:25:00Z",
+    "observedAt": "2026-10-22T18:33:00Z",
     "connectivity": "connected",
     "desiredPhase": "running",
     "observationsCurrent": true,
@@ -28,7 +28,7 @@
     "sessionModel": {
       "requested": "gpt-6-luna",
       "effort": "high",
-      "selection": "user-confirmed UI; runtime telemetry does not expose model identity"
+      "selection": "user-confirmed GPT-6 Luna high UI; current runtime telemetry does not attest effective model identity"
     },
     "node": "v24.19.0",
     "pdftoppm": true,
@@ -202,12 +202,12 @@
       "id": "S7",
       "status": "in-progress",
       "owner": "orchestrator + cai-collector",
-      "result": "Resume Lombardia with bounded section/source sample; no batch/import overlap."
+      "result": "Lombardia source sample cai-brescia-9216005 completed: 12 URLs checked, 14 discovery candidates remain; collection partial, files ready, database pending. Corrected parser duration bug is covered by fixture/test and confirmed absent on the real event in run02. Independent importer QA PASS; no DB access/write."
     }
   ],
   "nextAction": {
     "step": "S7",
-    "instruction": "Continue Lombardia from the documented open region using bounded source samples, one section at a time. Record complete/partial/unreachable sources, verified events, duplicates removed, resolved/open failures and next action. Keep coordinates evidence-backed and unverified cases explicit."
+    "instruction": "Commit/push the verified Brescia run02 + parser fixture/test + updated ledger, verify the remote commit; then resume Lombardia Brescia residual discovery with a new bounded run. Do not import the newly extracted cinema event until classification and safe DB handling are established."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -217,7 +217,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
+    "branchHead": "6d0bd139282008aca7e7c6dabe455eb678725f91",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -348,8 +348,24 @@
     },
     "regionalCoverage": {
       "region": "Lombardia",
-      "status": "open-not-run-during-classification",
-      "lastKnownSnapshot": {
+      "status": "open; one current partial section checked in cai-20261022-lombardia-brescia02",
+      "currentRunCounts": {
+        "sectionsChecked": 1,
+        "complete": 0,
+        "partial": 1,
+        "unreachable": 0,
+        "verifiedEvents": 1,
+        "exactDuplicateIdsExcluded": 0,
+        "semanticDuplicates": "not established",
+        "failuresResolved": [
+          "duration parser false-positive from year 2026 corrected and tested"
+        ],
+        "failuresOpen": [
+          "14 discovery candidates for Brescia",
+          "two historical HTTP 403 URLs remain in cooldown"
+        ]
+      },
+      "historicalSnapshot": {
         "sections": 229,
         "checked": 125,
         "complete": 56,
@@ -357,14 +373,17 @@
         "unreachable": 1,
         "unchecked": 104
       },
-      "source": "historical handoff snapshot; not a current query"
+      "historicalSnapshotNote": "historical handoff only; not a current region-wide query. Current run inspected Brescia alone."
     },
     "ocrItalian": false,
     "agentStatus": {
-      "caiCollector": "completed",
-      "caiImporter": "completed"
+      "caiCollector": "completed run02; available for follow-up",
+      "caiImporter": "completed read-only QA run02; available for follow-up",
+      "agentRequestedModel": "gpt-6-luna",
+      "agentRequestedEffort": "high",
+      "effectiveModelTelemetry": "not exposed"
     },
-    "nextPhase": "Publish verified run checkpoint; then apply classification-only migration and inserts through Supabase MCP; reconcile before/after; only then resume Lombardia",
+    "nextPhase": "Publish the verified Lombardia run and parser correction checkpoint; then resume a bounded sample of the same Brescia source residuals. Keep the cinema event out of DB until classification/import handling is resolved.",
     "databaseReadOnlyObservation": {
       "observedAt": "2026-10-22T18:12:15.676Z",
       "source": "authorized Supabase read-only SQL and map predicate",
@@ -378,9 +397,9 @@
       "writes": 0
     },
     "tests": {
-      "backend": "npm test: 174 passed, 0 failed (2026-10-22 full classification suite included)",
-      "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
-      "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
+      "backend": "npm test: 175 passed, 0 failed; includes real-case parser regression and duration positive control",
+      "parserFocused": "13/13 run before run02; full suite includes parser fixture",
+      "publicCatalogTestIsolation": "tests run after collection completed; no concurrent collection; verified parser suite writes only temp data"
     },
     "regionCurrent": "Lombardia — open, next bounded coverage; classification import closed and reconciled",
     "regionNext": "Complete Lombardia source-by-source before opening another region; use explicit evidence for any geolocation",
@@ -413,9 +432,38 @@
       "doubtfulVisible": 2358,
       "editorialDigest": "5ed97ae6d6fa8274e66663ba66f28a45"
     },
-    "liveSiteStatus": "Database classification is installed and verified; repository map filtering code is not deployed. No deploy performed."
+    "liveSiteStatus": "Database classification is installed and verified; repository map filtering code is not deployed. No deploy performed.",
+    "regionalRun": {
+      "runId": "cai-20261022-lombardia-brescia02",
+      "sourceId": "cai-brescia-9216005",
+      "collection": "partial",
+      "files": "ready",
+      "database": "pending",
+      "controlledSections": 1,
+      "completeSections": 0,
+      "partialSections": 1,
+      "unreachableSections": 0,
+      "observedUrls": 12,
+      "remainingDiscoveryCandidates": 14,
+      "sectionEventCount": 44,
+      "documentExtractions": 93,
+      "verifiedNewEventIds": 0,
+      "catalogDelta": {
+        "added": 1,
+        "removed": 0,
+        "changedExisting": 0,
+        "uniqueIds": 3338
+      },
+      "newRecordId": "cai-brescia-9216005-3badd4cc403c",
+      "newRecordEvidence": "Official CAI page/card; dated 2026-10-21; no duration/location/coordinates inferred; classification not yet reconciled to DB.",
+      "issueSummary": "13 previous-unavailable-skipped entries map to 2 historical HTTP 403 URLs (12+1); not retried in this run; one discovery-limit issue.",
+      "parserCorrection": "(?<!\\d) left boundary for duration patterns; official fixture and real event verification, 13 focused tests passed; full backend suite 175/175.",
+      "manifestSha256": "092ad634fd84e60a307349661026423e18a2fd1e75c4422f5b936ab973dded77",
+      "reportSha256": "7c65412514a18d03cc08c230e5fca09bfc8d1ddc8afd8351f1c91453abe1d852",
+      "importerQa": "PASS; compared to commit 6d0bd13; 3,338 unique IDs, +1 only, no existing changes; no DB queried."
+    }
   },
-  "repositoryCommit": "25f1750d6446736b6176c85b028cbcb73ea78e9b",
+  "repositoryCommit": "6d0bd139282008aca7e7c6dabe455eb678725f91",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -433,5 +481,8 @@
     "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
     "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
   },
-  "updatedAt": "2026-10-22T18:22:00Z"
+  "updatedAt": "2026-10-22T18:33:25Z",
+  "repositoryRemoteCheckpointVerifiedAt": null,
+  "regionCurrent": "Lombardia — current bounded sample: Brescia partial; 14 discovery candidates remain; source-level counts only",
+  "regionNext": "Finish the Brescia partial sample before moving to another Lombardia section; explicit geolocation evidence only."
 }
