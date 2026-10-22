@@ -19,7 +19,7 @@
   },
   "collection": "partial",
   "files": "ready",
-  "database": "pending",
+  "database": "completed",
   "sources": [
     {
       "id": "roma",
@@ -11377,9 +11377,15 @@
     {
       "at": "2026-10-22T22:22:15.421Z",
       "event": "files-verified"
+    },
+    {
+      "at": "2026-10-22T22:33:30.892756Z",
+      "event": "database-import-completed",
+      "receipt": "backend/data/agent-runs/cai-map-20261022-campobasso01/delta-import-receipt.json"
     }
   ],
-  "updatedAt": "2026-10-22T22:22:15.421Z",
+  "updatedAt": "2026-10-22T22:33:30.892756Z",
   "manifest": "backend/data/agent-runs/cai-20261022-molise-campobasso01/manifest.json",
-  "events": 3366
+  "events": 3366,
+  "databaseReceipt": "backend/data/agent-runs/cai-map-20261022-campobasso01/delta-import-receipt.json"
 }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T22:28:16.309Z",
+  "generatedAt": "2026-10-22T22:33:30.892756Z",
   "repositoryCommit": "d16ebc0",
   "baseline": {
     "commit": "9919927d4cbef6d154c4dae1441d64cd01c70ad4",
@@ -10,7 +10,7 @@
   "historyScope": {
     "runStateFiles": 20,
     "serializedIssueCopies": 9994,
-    "uniqueSourceUrlClassRecords": 706,
+    "uniqueSourceUrlClassRecords": 707,
     "uniqueUrls": 619,
     "attemptInterpretation": "Historical issue appearances in run snapshots are not treated as fresh network attempts. actualHistoricalRequests is unknown except where an execution is explicitly documented.",
     "currentCycleAttempts": 0
@@ -26,7 +26,8 @@
       "download": 11,
       "pdf": 1,
       "parsing": 1,
-      "discovery-status-merge": 1
+      "discovery-status-merge": 1,
+      "database": 1
     },
     "classes": {
       "discovery-budget-exhausted": 195,
@@ -50,7 +51,8 @@
       "pdf-render-or-decode": 1,
       "quality-manual-qa-multicolumn-date-skipped": 1,
       "official-calendar-grid-unrecognized": 1,
-      "bounded-continuation-cleared-discovery-limit": 1
+      "bounded-continuation-cleared-discovery-limit": 1,
+      "database-payload-transcription": 1
     }
   },
   "records": [
@@ -44588,6 +44590,77 @@
       ],
       "resolutionCheck": null,
       "policyStatus": "observed_open"
+    },
+    {
+      "id": "CAI-F-f7c0ef2f3348b9b2",
+      "sourceId": "cai-campobasso-9236001",
+      "affectedSourceIds": [
+        "cai-campobasso-9236001-a99c427d4321"
+      ],
+      "url": "https://caicampobasso.it/calendario-delle-attivita/",
+      "phase": "database",
+      "failureClass": "database-payload-transcription",
+      "httpStatus": null,
+      "firstObservedAt": "2026-10-22T22:32:45.5105Z",
+      "lastObservedAt": "2026-10-22T22:33:30.892756Z",
+      "observationBasis": "Authorized MCP insert statement and independent joined post-select; no credentials or secrets recorded.",
+      "history": {
+        "runIds": [
+          "cai-map-20261022-campobasso01"
+        ],
+        "snapshotCopies": 1,
+        "issueCodes": [
+          "database-payload-transcription"
+        ],
+        "sourceStatuses": [
+          "completed after CAS recovery"
+        ]
+      },
+      "attempts": {
+        "actualHistoricalRequests": "not applicable",
+        "currentCycleRequests": "one bounded insert-only CTE, one read-only mismatch check, one single-column CAS correction, one read-only final joined verification",
+        "recoveryAttempts": [
+          {
+            "at": "2026-10-22T22:33:19.303563Z",
+            "method": "CAS UPDATE to place_classifications.fingerprint guarded by the exact prior truncated fingerprint and all other sealed classification fields",
+            "outcome": "One row returned; changed only fingerprint to the sealed value."
+          }
+        ]
+      },
+      "cooldown": {
+        "policy": "No retry needed after final verification; do not replay the delta or modify any other field.",
+        "nextEligibleAt": null
+      },
+      "evidence": {
+        "representativeMessages": [
+          "Initial payload transcription truncated the Lago Vivo fingerprint; post-select caught mismatch.",
+          "Final joined verification returned 2/2 places and classifications with zero mismatches."
+        ],
+        "runId": "cai-map-20261022-campobasso01",
+        "classifierManifestSha256": "80d7f646b0c12cdd35943248429243fad7c364c554f4c03e0dfce52d84733925",
+        "sealedFingerprint": "6c7e6187d9094c7c2f355be269040c5996069de1c877eaefb4fc1ff0e015160a",
+        "initiallyPersistedFingerprint": "6c7e6187d9094c7c2f355be269040c5996069de1c877eaef70"
+      },
+      "strategy": "Use only values materialized from sealed importer transformations; compare exact sealed row before any correction; reconcile all fields after a single guarded fix.",
+      "status": "recheck_resolved",
+      "owner": "cai-importer",
+      "outcome": "The insert payload had a manually truncated fingerprint. A guarded one-column CAS corrected it; all other classification fields and all place fields remained as sealed. Final joined post-select matched both sealed records.",
+      "correctionRef": "backend/data/agent-runs/cai-map-20261022-campobasso01/delta-import-receipt.json",
+      "testRefs": [],
+      "resolutionCheck": {
+        "runId": "cai-map-20261022-campobasso01",
+        "repositoryCommit": "31d81eafdb6def6b9cb376b575f194ca92b87612",
+        "manifestSha256": "80d7f646b0c12cdd35943248429243fad7c364c554f4c03e0dfce52d84733925",
+        "finalQueryAt": "2026-10-22T22:33:30.892756Z",
+        "placesInserted": 2,
+        "classificationsInserted": 2,
+        "classificationFingerprintCorrections": 1,
+        "finalMissing": 0,
+        "finalMismatches": 0,
+        "placesUpdated": 0,
+        "deletes": 0
+      },
+      "policyStatus": "verified"
     }
   ],
   "schema": {

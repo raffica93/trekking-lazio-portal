@@ -371,3 +371,8 @@ Stato separato: raccolta `partial`; file/classificazione pronti con QA; consegna
 ### Regione successiva
 
 Dopo la ricevuta Campobasso, selezionare in sola lettura la prossima fonte ufficiale non esaurita; evitare il replay della pagina Campobasso e del PDF senza URL residui stabili. In Molise è abilitata una sola sezione nota. Conservare separati conteggi del campione, conteggi di raccolta, file e righe DB; i totali di copertura storici del 20 ottobre non sono query attuali.
+
+
+### Esito import Campobasso — 22 ottobre 2026, 22:33 UTC
+
+Import exact delta completato via Supabase MCP dopo checkpoint file remoto. Preflight immediato: 0/2 `places`, 0/2 classificazioni, nessun conflitto ID/slug. La CTE insert-only ha creato 2 place (`published`) e 2 classificazioni. La prima query ha trovato il fingerprint Lago Vivo troncato, dovuto a trascrizione del payload: un precheck read-only ha verificato tutti gli altri campi della classificazione, `review_metadata` nullo e place corretto. Un singolo CAS ha modificato soltanto quel fingerprint al valore sealato. Query joined finale alle `22:33:30.892756Z`: 2/2 place e 2/2 classificazioni corrispondenti, 0 missing/mismatch, 0 update place, 0 delete; località ancora da verificare e coordinate/geoevidence nulle. Ricevuta SHA `134ff85bba4c35c7312597a57b2320bfe9c69eb7ec5117d992a874a2be551715`, report SHA `cf778a3c77a45c55ec8af0b570d6d50eced1d3b69ccc405d4ab67ed20263e265`; da pubblicare in checkpoint separato. La raccolta rimane partial con backlog distinto: PDF 37, HTML continuation 1 senza URL esatto.

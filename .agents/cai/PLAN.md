@@ -1,6 +1,6 @@
 # Piano di passaggio al lavoro interamente cloud
 
-Stato aggiornato al 22 ottobre 2026: classificazione completa del catalogo e delta Valmadrera sono già importati e riconciliati; Pinasca02 è anch'esso consegnato con ricevuta. Attività corrente: Campobasso, file e classificazione di due nuovi ID pronti e verificati; checkpoint remoto ancora da pubblicare, quindi nessuna scrittura DB finora. Dopo verifica remota, import esatto insert-only e ricevuta; poi ripresa regionale per fonti lavorabili. Le sezioni operative più sotto che indicano batch o lotti già consegnati come prossimi passi sono storiche.
+Stato aggiornato al 22 ottobre 2026: classificazione completa del catalogo e delta Valmadrera sono già importati e riconciliati; Pinasca02 è anch'esso consegnato con ricevuta. Attività corrente: Campobasso, file/classificazione pubblicati e 2 nuovi ID consegnati al DB con riconciliazione finale 2/2; il checkpoint remoto della ricevuta è il prossimo gate. Poi ripresa regionale per fonti lavorabili. Le sezioni operative più sotto che indicano batch o lotti già consegnati come prossimi passi sono storiche.
 
 ## Sequenza
 

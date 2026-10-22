@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "status": "completed",
+  "mode": "delta-only",
+  "runId": "cai-map-20261022-campobasso01",
+  "collectionRunId": "cai-20261022-molise-campobasso01",
+  "projectRef": "snwzxegtqnnuvlawnpgl",
+  "writer": "authorized Supabase MCP execute_sql; payloads derived from verifyReadyClassificationRun, validateImportEvents, toPlaceRow, and classificationToRow; ON CONFLICT DO NOTHING",
+  "sourceCommit": "31d81eafdb6def6b9cb376b575f194ca92b87612",
+  "manifestPath": "backend/data/agent-runs/cai-map-20261022-campobasso01/manifest.json",
+  "manifestSha256": "80d7f646b0c12cdd35943248429243fad7c364c554f4c03e0dfce52d84733925",
+  "inputSha256": "a0cab9771df021bd96c7baca7fcab0c170bab0cf1137cba1a7bded35ef14d700",
+  "outputSha256": "d6e54aa214d648b4b6d9351d417a0dd7fb10fe01ea80e0bae0dd148b863038fd",
+  "collectionManifestSha256": "be53777def101bac5f73e37aeca8b96b72c637c85a64e657723c48b3762fa667",
+  "sourceBodySha256": "5b97e1aa0639efcebafbba3153c03dc0ee00d432b527f276c4d0dc08ee2363ed",
+  "verifiedAt": "2026-10-22T22:33:30.892756Z",
+  "preflight": {
+    "queriedAt": "2026-10-22T22:31:58.136473Z",
+    "sourceIds": [
+      "cai-campobasso-9236001-8e0c09de00c9",
+      "cai-campobasso-9236001-a99c427d4321"
+    ],
+    "placesExisting": 0,
+    "classificationsExisting": 0,
+    "sourceIdOrSlugConflicts": 0,
+    "placesEmptyDigestMd5": "d751713988987e9331980363e24189ce",
+    "classificationsEmptyDigestMd5": "d751713988987e9331980363e24189ce"
+  },
+  "write": {
+    "writtenAt": "2026-10-22T22:32:35.931546Z",
+    "places": {
+      "input": 2,
+      "inserted": 2,
+      "insertedSourceIds": [
+        "cai-campobasso-9236001-8e0c09de00c9",
+        "cai-campobasso-9236001-a99c427d4321"
+      ],
+      "existingPreserved": 0,
+      "skipped": 0,
+      "missing": 0,
+      "updated": 0,
+      "deleted": 0
+    },
+    "classifications": {
+      "input": 2,
+      "inserted": 2,
+      "insertedSourceIds": [
+        "cai-campobasso-9236001-8e0c09de00c9",
+        "cai-campobasso-9236001-a99c427d4321"
+      ],
+      "existingPreserved": 0,
+      "mismatched": [],
+      "updated": 1,
+      "deleted": 0,
+      "correctiveUpdate": {
+        "source_id": "cai-campobasso-9236001-a99c427d4321",
+        "field": "fingerprint",
+        "previous": "6c7e6187d9094c7c2f355be269040c5996069de1c877eaef70",
+        "final": "6c7e6187d9094c7c2f355be269040c5996069de1c877eaefb4fc1ff0e015160a",
+        "method": "single-column compare-and-swap UPDATE, guarded by exact prior fingerprint and all other sealed classification fields; affected one row"
+      }
+    },
+    "statementUpdates": 1,
+    "statementDeletes": 0,
+    "correctiveUpdatePrecheckAt": "2026-10-22T22:33:19.303563Z",
+    "correctiveUpdateReturnedSourceId": "cai-campobasso-9236001-a99c427d4321",
+    "placesUpdated": 0,
+    "classificationRowsUpdated": 1
+  },
+  "verification": {
+    "queriedAt": "2026-10-22T22:33:30.892756Z",
+    "joinedRowsPresent": 2,
+    "missingPlaces": 0,
+    "missingClassifications": 0,
+    "placeProtectedFieldMismatches": [],
+    "placeGeography": {
+      "locations": [
+        "Località da verificare",
+        "Località da verificare"
+      ],
+      "latitudeLongitudeNull": true,
+      "coordinatesQualityNull": true,
+      "geoEvidenceNull": true
+    },
+    "classificationMatched": 2,
+    "classificationMismatchedSourceIds": [],
+    "classificationMismatchDetails": [],
+    "placesTouchedAllTargetIdsOnly": true
+  },
+  "updates": 1,
+  "deletes": 0,
+  "nextAction": "Delta delivery reconciled: 2 places inserted, 2 classifications inserted, one fingerprint-only CAS recovery recorded; final joined verification has zero missing rows or mismatches. No place updates or deletes.",
+  "placeUpdates": 0,
+  "classificationCorrectiveUpdates": 1,
+  "incidents": [
+    {
+      "type": "manual_payload_fingerprint_truncation",
+      "source_id": "cai-campobasso-9236001-a99c427d4321",
+      "detectedAt": "2026-10-22T22:32:45.5105Z",
+      "expectedFingerprint": "6c7e6187d9094c7c2f355be269040c5996069de1c877eaefb4fc1ff0e015160a",
+      "initiallyWrittenFingerprint": "6c7e6187d9094c7c2f355be269040c5996069de1c877eaef70",
+      "resolution": "After read-only verification confirmed every other classification field matched the sealed output and review_metadata was null, one CAS update changed only fingerprint to the sealed value. Final joined verification passes."
+    }
+  ]
+}
