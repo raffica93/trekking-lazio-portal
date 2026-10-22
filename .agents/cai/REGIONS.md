@@ -283,3 +283,19 @@ Abruzzo non è completo; si passa alla regione successiva solo perché non c'è 
 Righe selezionate per prefisso `event.id`: 12→12; 0 add/remove/change; SHA canonico `bc44d552e7eaf43748fcea8849a6d5d13ec383115fd06cb0ee3b14cdcaa52407`. Catalogo nazionale 3366→3366 ID. SHA completo excursions `dd756f6f…`→`704ea832…` per metadata generatedAt/sourceHashes; status `a58baf3e…`; sections `f0245e11…`. Mirror backend/frontend identici. QA importer PASS dopo correzione del selettore iniziale errato su `sourceId`; 205/205 backend test dopo il run e sei JSON pubblici invariati durante i test. Nessuna classificazione/import/DB.
 
 La pagina indice rivela link ufficiali a un PDF gruppo Corigliano/Rossano, PDF sottosezione Cerchiara, e proposta attività; confrontare ogni target con history/cache prima di sceglierne uno, evitando il PDF annuale Castrovillari già letto e con OCR failure. Cumulative Calabria counts restano storico 20 ottobre, non ricalcolati.
+
+## Esito preflight Calabria → Campania — 22 ottobre 2026
+
+| Regione | Sezioni controllate in questo preflight | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| Calabria, CAI Castrovillari | 4 link dell'indice verificati offline | 0 | 4 esiti non lavorabili (uno già letto, due non attribuibili, uno non calendario) | 0 | 0 nuovi; i 12 record esistenti restano invariati dal run Castrovillari01 | 0 | Nessuno | PDF OCR pagina 2/discovery8; HTML index discovery1 | Passare al preflight offline Campania; nessuna dichiarazione di copertura completa |
+
+Dettaglio: `programmacerchiara26.pdf` replay già letto sotto CAI Cerchiara; `programmacoro26.pdf` appartiene a gruppo Corigliano/Rossano non registrato; `familycaimorano.pdf` non ha attribuzione sufficiente per CAI Morano; `proposta25.pdf` è una proposta, non un programma eventi. Nessun fetch, test o DB in questo preflight. Campania: CAI Caserta PDF ha già `discovery-limit` aperto; è solo candidato al controllo offline, non autorizzazione a ripeterlo. I conteggi regionali cumulativi in tabella restano snapshot storico del 20 ottobre e non sono query correnti.
+
+## Campania — preflight offline CAI Caserta (22 ottobre 2026)
+
+| Regione | Sezioni controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| Campania, CAI Caserta `cai-caserta-9245001` | 7 fonti enabled controllate offline; 1 indice specifico idoneo | 0 nuove verifiche evento | 7 status già partial/complete, nessun aggiornamento live | 0 nuove | Nessuno nel preflight; nessuna pagina letta | 0 | Nessuno | PDF annuale Caserta `CAI-F-d8cbb0f4bd01c6f5` discovery-budget-exhausted; altre code discovery restano da lavorare | Dopo checkpoint remoto, un solo run `https://www.caicaserta.it/escursioni.html`, max1 doc/120s/concurrency1 |
+
+La pagina `/escursioni.html` è registrata come URL ufficiale (`calendarUrls` e `calendarEvidence`, `foundOn=self`), e manca da status documents, history dei run, cache con body/meta e FAILURES. Il suo cache key non ha contenuti persistiti. Il PDF annuale non va ripetuto: applicare solo la strategia bounded all'indice, senza seguire automaticamente i figli. Conteggi cumulativi Campania restano lo snapshot storico in testa al file, non una query attuale.

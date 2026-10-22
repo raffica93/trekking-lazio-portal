@@ -149,3 +149,11 @@ Il preflight collector ha escluso replay o URL con failure/cooldown: per Penne l
 Run unico HTML `cai-20261022-calabria-castrovillari01`: pagina indice 9.830 byte acquisita, `method=null`, 0 eventi, 1 residuo discovery HTML; PDF annuale non ritentato (OCR failure pagina 2/discovery8 conservati). Catalog rows correttamente selezionati via prefisso ID: 12→12, zero cambi; il source-evidence è stato corretto dopo un filtro errato su `sourceId` assente, e report/evidence-manifest ora allineati. Hash e QA importer PASS indicati in HANDOFF. Backend test 205/205 dopo la raccolta; sei JSON pubblici stabili. Nessuna classificazione/DB.
 
 Dopo il checkpoint remoto `6e10ae12b6d521c6035de81b9c5cbf1c1dd2f18e`, preflight offline dei link ufficiali PDF apparsi nella pagina, verificando history/cache/failure prima di selezionare al massimo un URL distinto. Non ripetere il PDF annuale né dichiarare copertura completa.
+
+## Ripresa operativa — 22 ottobre 2026
+
+Castrovillari01 è completato e remoto; il preflight dei quattro link non ha trovato una fonte sicura non letta: Cerchiara è già visitata, Corigliano/Rossano e Morano non sono fonti registrate, `proposta25.pdf` non è un calendario. Non ripetere quei link né il PDF annuale Castrovillari. La prossima attività è il solo preflight offline Campania di cai-collector, con Caserta come candidato da verificare (PDF già letto, discovery-limit aperto). Per un eventuale nuovo run servono target figlio distinto, prove d'attribuzione, assenza di cooldown e checkpoint prima del fetch. Lombardia/Calabria e le altre regioni restano parziali finché le fonti aperte non sono risolte.
+
+### Campania — target dopo preflight offline (22 ottobre 2026)
+
+Unica fonte selezionata per il prossimo campione: `cai-caserta-9245001`, `https://www.caicaserta.it/escursioni.html`. È una pagina indice ufficiale distinta, registrata e senza history/cache/failure specifica. Il PDF annuale resta bloccato da `CAI-F-d8cbb0f4bd01c6f5` (`discovery-budget-exhausted`), quindi il run deve specificare soltanto l'indice e limitare a un documento/120s/concurrency1. Fare prima push e verifica remota di questo checkpoint; dopo raccolta, fermare ogni ulteriore fetch, poi QA importer e test backend seriali.
