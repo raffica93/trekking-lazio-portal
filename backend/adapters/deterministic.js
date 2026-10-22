@@ -12,7 +12,8 @@ const { DateTime } = require('luxon');
 const { ocrPdfLines, ocrPdfPageLines, ocrPdfFilePages, ocrImageLines } = require('./pdf-ocr');
 const { parseCaiRomaHtml, stableId, tripDays, parseDistanceKm, parseDurationHours } = require('../scraper');
 
-const VERSION = 10;
+// Bump this when deterministic extraction changes so cached documents are reparsed.
+const VERSION = 11;
 const MONTHS = { gennaio: 1, febbraio: 2, marzo: 3, aprile: 4, maggio: 5, giugno: 6, luglio: 7, agosto: 8, settembre: 9, ottobre: 10, novembre: 11, dicembre: 12 };
 const MONTH_PATTERN = Object.keys(MONTHS).join('|');
 const REGIONS = ['Abruzzo', 'Basilicata', 'Calabria', 'Campania', 'Emilia-Romagna', 'Friuli-Venezia Giulia', 'Lazio', 'Liguria', 'Lombardia', 'Marche', 'Molise', 'Piemonte', 'Puglia', 'Sardegna', 'Sicilia', 'Toscana', 'Trentino-Alto Adige', 'Umbria', "Valle d'Aosta", 'Veneto'];
@@ -25,7 +26,7 @@ const PRIOR_ACCESS_RETRY_AFTER_MS = 30 * 24 * 60 * 60 * 1000;
 const PRIOR_REMOVED_RECHECK_AFTER_MS = 90 * 24 * 60 * 60 * 1000;
 const MAX_PRIOR_FAILURE_RETRIES_PER_SOURCE = 2;
 const execFileAsync = promisify(execFile);
-const EVENT_WORDS = /escursion|trekking|sentiero|rifugio|\balpe\b|monte\b|monti\b|cima\b|anello\b|traversata|ferrata|alpinis|ciaspol|sci\b|cicloescursion|passeggiata|camminat|cammino|gita\b|uscita\b|assemblea|convegno|serata|incontro|corso\b|arrampic|torrent|speleolog|raduno|castagn|casatagn|pranzo|cena|befan|campeggi|discesa|festa|lag(?:o|hi)/i;
+const EVENT_WORDS = /escursion|trekking|sentiero|rifugio|\balpe\b|monte\b|monti\b|montagna\b|moregallo\b|cima\b|anello\b|traversata|ferrata|alpinis|ciaspol|sci\b|cicloescursion|passeggiata|camminat|cammino|gita\b|uscita\b|assemblea|convegno|serata|incontro|corso\b|arrampic|torrent|speleolog|raduno|castagn|casatagn|pranzo|cena|befan|campeggi|discesa|festa|lag(?:o|hi)/i;
 const CALENDAR_WORDS = /calendari|programm[ai]|escursion|attivit|eventi|gite|agenda|trekking/i;
 const digest = (value) => crypto.createHash('sha256').update(value).digest('hex');
 const clean = (value) => cheerio.load(String(value || '')).text().replace(/\s+/g, ' ').trim();
@@ -215,7 +216,136 @@ function documentYear(text, url, fallback) {
   return heading ? Number(heading[1]) : (urlYear?.at(-1) || (standalone && Number(standalone[1])) || fallback);
 }
 
+function parseCalendarGridLines(lines, source, url, fallbackYear, method) {
+  const events = [];
+  const monthHeading = new RegExp(`^(${MONTH_PATTERN})\\s+(20\\d{2})$`, 'i');
+  const weekdayPattern = /lun(?:ed[iì])?|mar(?:ted[iì])?|mer(?:coled[iì])?|gio(?:ved[iì])?|ven(?:erd[iì])?|sabato|dom(?:enica)?/gi;
+  const dayTokenPattern = /(?<!\S)(\d{1,2})(?=\s|$)/g;
+  const dayRows = (start, end) => {
+    const rows = [];
+    for (let index = start; index < end; index += 1) {
+      const text = String(lines[index] || '').replace(/\f/g, '');
+      const tokens = [...text.matchAll(dayTokenPattern)];
+      if (![1, 2, 5, 6, 7].includes(tokens.length) || tokens.some((token) => Number(token[1]) < 1 || Number(token[1]) > 31)) continue;
+      rows.push({ index, tokens });
+    }
+    return rows;
+  };
+
+  for (let headingIndex = 0; headingIndex < lines.length; headingIndex += 1) {
+    const headingText = String(lines[headingIndex] || '').replace(/\f/g, '').trim();
+    const heading = headingText.match(monthHeading);
+    if (!heading) continue;
+    const month = MONTHS[heading[1].toLowerCase()];
+    const year = Number(heading[2]) || fallbackYear;
+    let endIndex = lines.length;
+    for (let index = headingIndex + 1; index < lines.length; index += 1) {
+      if (monthHeading.test(String(lines[index] || '').replace(/\f/g, '').trim())) { endIndex = index; break; }
+    }
+
+    const rows = dayRows(headingIndex + 1, endIndex);
+    if (rows.length < 2) continue;
+    let weekdayStarts = null;
+    for (let index = headingIndex + 1; index < rows[0].index; index += 1) {
+      const text = String(lines[index] || '').replace(/\f/g, '');
+      const matches = [...text.matchAll(weekdayPattern)];
+      if (matches.length === 7) { weekdayStarts = matches.map((match) => match.index); break; }
+    }
+    if (!weekdayStarts) continue;
+    const cellCenters = rows.find((row) => row.tokens.length === 7)?.tokens.map((token) => token.index);
+    if (!cellCenters) continue;
+
+    // pdf.js can place a highlighted Sunday number a couple of points lower
+    // than the other six dates. It then appears on a separate text line after
+    // that week's activity labels. Rejoin only when the x positions prove the
+    // first line is six distinct weekday cells and the single token fills the
+    // one missing cell. This also handles holidays such as Dec 8 whose day
+    // number shares a lower baseline with its label.
+    const nearestDateColumn = (x) => cellCenters.reduce((best, center, column) =>
+      Math.abs(center - x) < Math.abs(cellCenters[best] - x) ? column : best, 0);
+    const nearestEventColumn = (x) => weekdayStarts.reduce((best, start, column) =>
+      Math.abs(start - x) < Math.abs(weekdayStarts[best] - x) ? column : best, 0);
+    const mergedRows = [];
+    const consumedRows = new Set();
+    for (let rowIndex = 0; rowIndex < rows.length; rowIndex += 1) {
+      if (consumedRows.has(rowIndex)) continue;
+      const row = rows[rowIndex];
+      const columns = row.tokens.map((token) => nearestDateColumn(token.index));
+      if ((row.tokens.length === 5 || row.tokens.length === 6) && new Set(columns).size === row.tokens.length) {
+        const nextIndex = rows.findIndex((candidate, index) => index > rowIndex && !consumedRows.has(index));
+        const next = rows[nextIndex];
+        const companionColumns = next?.tokens.map((token) => nearestDateColumn(token.index)) || [];
+        if (next && next.tokens.length <= 2 && next.tokens.length > 0 && next.index - row.index <= 12
+            && new Set([...columns, ...companionColumns]).size === 7) {
+          mergedRows.push({ index: row.index, tokens: [...row.tokens, ...next.tokens].sort((a, b) => a.index - b.index), dateLineIndices: [row.index, next.index] });
+          consumedRows.add(nextIndex);
+          continue;
+        }
+      }
+      if (row.tokens.length === 7) mergedRows.push(row);
+    }
+    rows.splice(0, rows.length, ...mergedRows);
+
+    let anchorRow = -1;
+    let anchorColumn = -1;
+    for (let rowIndex = 0; rowIndex < rows.length && anchorRow < 0; rowIndex += 1) {
+      const dayIndex = rows[rowIndex].tokens.findIndex((token) => Number(token[1]) === 1);
+      if (dayIndex >= 0) { anchorRow = rowIndex; anchorColumn = dayIndex; }
+    }
+    if (anchorRow < 0) continue;
+
+    const firstOfMonth = DateTime.fromObject({ year, month, day: 1 }, { zone: 'UTC' });
+    if (!firstOfMonth.isValid) continue;
+    const columnDate = (rowIndex, column) => firstOfMonth.plus({ days: ((rowIndex - anchorRow) * 7) + column - anchorColumn }).toISODate();
+    for (let rowIndex = 0; rowIndex < rows.length; rowIndex += 1) {
+      const row = rows[rowIndex];
+      const nextRowIndex = rows[rowIndex + 1]?.index ?? endIndex;
+      const perColumn = Array.from({ length: 7 }, () => []);
+      let blockHasText = false;
+      const flushBlock = () => {
+        if (!blockHasText) return;
+        for (let column = 0; column < perColumn.length; column += 1) {
+          const title = clean(perColumn[column].join(' '));
+          if (!title || !EVENT_WORDS.test(title)) continue;
+          const event = normalizeEvent({ title, date: columnDate(rowIndex, column), description: title }, source, url, method);
+          if (event) events.push(event);
+          perColumn[column] = [];
+        }
+        for (const values of perColumn) values.length = 0;
+        blockHasText = false;
+      };
+
+      for (let index = row.index + 1; index < nextRowIndex; index += 1) {
+        if (row.dateLineIndices?.includes(index)) continue;
+        const line = String(lines[index] || '').replace(/\f/g, '');
+        if (/\bnote\b/i.test(line)) { flushBlock(); break; }
+        if (!line.trim()) { flushBlock(); continue; }
+        const runs = [...line.matchAll(/\S.*?(?=\s{2,}|$)/g)];
+        if (!runs.length) continue;
+        for (const run of runs) {
+          const text = run[0].trim();
+          if (!text) continue;
+          const column = nearestEventColumn(run.index);
+          perColumn[column].push(text);
+          blockHasText = true;
+        }
+      }
+      flushBlock();
+    }
+  }
+
+  const unique = new Map();
+  for (const event of events) unique.set(event.id, event);
+  return unique.size ? [...unique.values()] : null;
+}
+
 function parseCalendarLines(lines, source, url, year, method) {
+  const gridEvents = parseCalendarGridLines(lines, source, url, year, method);
+  if (gridEvents) return gridEvents;
+  return parseCalendarLinearLines(lines, source, url, year, method);
+}
+
+function parseCalendarLinearLines(lines, source, url, year, method) {
   const events = [];
   let month;
   for (let index = 0; index < lines.length; index += 1) {
@@ -339,6 +469,22 @@ async function pdfText(buffer) {
   try {
     // Annual section programs are bounded documents; record oversize documents as unsupported instead of silently truncating.
     if (doc.numPages > 160) throw new Error(`PDF too long for automatic calendar extraction: ${doc.numPages} pages`);
+    const layoutLine = (items, width) => {
+      const charWidth = width / 160;
+      const characters = [];
+      for (const item of [...items].sort((a, b) => a.x - b.x)) {
+        const text = String(item.text || '').trim();
+        if (!text) continue;
+        let start = Math.max(0, Math.round(item.x / charWidth));
+        // Keep adjacent PDF text items distinguishable as separate column
+        // runs, even when their measured glyph boxes leave only one character
+        // cell between them (or overlap after rounding).
+        if (start <= characters.length + 1) start = characters.length + 2;
+        while (characters.length < start) characters.push(' ');
+        for (let offset = 0; offset < text.length; offset += 1) characters[start + offset] = text[offset];
+      }
+      return characters.join('').trimEnd();
+    };
     for (let pageNo = 1; pageNo <= doc.numPages; pageNo += 1) {
       const page = await doc.getPage(pageNo);
       const content = await page.getTextContent();
@@ -346,19 +492,26 @@ async function pdfText(buffer) {
       const groups = new Map();
       for (const item of content.items) {
         if (!item.str?.trim()) continue;
-        const y = Math.round(item.transform[5] / 3) * 3;
+        // Calendar grid labels and Sunday day numbers can differ by ~2 points vertically
+        // while occupying the same visual row (e.g. highlighted cells in the CAI booklet).
+        const y = Math.round(item.transform[5] / 5) * 5;
         if (!groups.has(y)) groups.set(y, []);
         groups.get(y).push({ x: item.transform[4], text: item.str });
       }
       const orderedGroups = [...groups].sort((a, b) => b[0] - a[0]);
-      for (const [, items] of orderedGroups) lines.push(items.sort((a, b) => a.x - b.x).map((item) => item.text).join(' '));
+      let previousY = null;
+      for (const [y, items] of orderedGroups) {
+        if (previousY != null && previousY - y > 15) lines.push('');
+        lines.push(layoutLine(items, width));
+        previousY = y;
+      }
       const items = content.items.filter((item) => item.str?.trim());
       const split = findPdfColumnSplit(items, width);
       if (split) {
         for (const side of ['left', 'right']) {
           for (const [, rowItems] of orderedGroups) {
             const column = rowItems.filter((item) => side === 'left' ? item.x < split : item.x >= split);
-            if (column.length) columnLines.push(column.sort((a, b) => a.x - b.x).map((item) => item.text).join(' '));
+            if (column.length) columnLines.push(layoutLine(column, width));
           }
         }
       } else {

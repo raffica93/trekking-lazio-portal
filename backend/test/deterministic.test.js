@@ -7,7 +7,7 @@ const http = require('node:http');
 const crypto = require('node:crypto');
 const axios = require('axios');
 const { DateTime } = require('luxon');
-const { monthFloor, parseDates, normalizeEvent, parseIcs, parseJsonLd, parseWordPress, parseCalendarLines, parseTivoliPdf, parseHtmlCalendar, discoverLinks, fetchDocument, scrapeDeterministic } = require('../adapters/deterministic');
+const { monthFloor, parseDates, normalizeEvent, parseIcs, parseJsonLd, parseWordPress, parseCalendarLines, parseTivoliPdf, parseHtmlCalendar, discoverLinks, fetchDocument, scrapeDeterministic, pdfText } = require('../adapters/deterministic');
 const { parseScrapeArgs, scrapeAll } = require('../pipeline');
 const source = { id: 'test-section', organizer: 'CAI Prova', region: 'Lombardia', url: 'https://section.example/calendario-2026/', enabled: true, extractor: 'deterministic' };
 const now = DateTime.fromISO('2026-09-05T12:00:00', { zone: 'Europe/Rome' });
@@ -66,6 +66,48 @@ test('annual line patterns exclude narrative dates and unknown years', () => {
   assert.equal(parseCalendarLines(['12 settembre Escursione Monte Rosa'], source, source.url, undefined, 'pdf').length, 0);
   assert.equal(parseCalendarLines(['La prima escursione è sabato 12 settembre'], source, source.url, 2026, 'pdf').length, 0);
   assert.equal(parseCalendarLines(['SETTEMBRE', '12 Escursionismo'], source, source.url, 2026, 'pdf').length, 0);
+});
+
+test('Valmadrera 2026 PDF month grid maps labels to weekday cells and preserves non-trekking candidates', async () => {
+  // The binary fixture is the cached official PDF; the text fixture retains its production pdf.js output.
+  const pdfBytes = await fs.readFile(path.join(__dirname, 'fixtures', 'cai-valmadrera-2026-calendar.pdf'));
+  assert.equal(crypto.createHash('sha256').update(pdfBytes).digest('hex'), 'f3939cb69b55824e4db4026d989acea993a58e7fa81671d8c7a3093d3b4103e9');
+  const extracted = await pdfText(pdfBytes);
+  assert.equal(extracted.pageCount, 12);
+  const fixtureLines = (await fs.readFile(path.join(__dirname, 'fixtures', 'cai-valmadrera-2026-calendar-pdfjs.txt'), 'utf8')).split(/\r?\n/);
+  const valmadrera = { id: 'cai-valmadrera-9216081', organizer: 'CAI Valmadrera', region: 'Lombardia' };
+  const pdfUrl = 'https://organizzazione.cai.it/sez-valmadrera/wp-content/uploads/sites/56/2026/03/Calendario-attivita-2026_rev.04_16-03-2026.pdf';
+  const expected = [
+    ['2026-10-04', 'Scuola PIACCO CORSO ARRAMPICATA'],
+    ['2026-10-10', 'Scuola PIACCO CORSO ARRAMPICATA'],
+    ['2026-10-11', 'GITA SOCIALE MEDIA MONTAGNA Presolana'],
+    ['2026-10-17', 'RACCONTAMI LA MONTAGNA'],
+    ['2026-10-18', 'VIVI IL MOREGALLO'],
+    ['2026-10-17', 'Alp. Giovanile Uscita corso'],
+    ['2026-10-18', 'Alp. Giovanile Uscita corso'],
+    ['2026-10-25', 'Scuola PIACCO CORSO ARRAMPICATA'],
+    ['2026-11-01', 'GITA SOCIALE MEDIA MONTAGNA Valmalenco'],
+    ['2026-11-08', 'Scuola PIACCO CORSO ARRAMPICATA'],
+    ['2026-11-14', 'Scuola PIACCO CORSO ARRAMPICATA'],
+    ['2026-11-15', 'Scuola PIACCO CORSO ARRAMPICATA'],
+    ['2026-11-22', 'GITA CULTURALE Enogastronomica'],
+    ['2026-12-04', 'CENA SOCIALE']
+  ];
+  const verifyEvents = (events, label) => {
+    const futureEvents = events.filter((event) => event.date >= '2026-10-01');
+    const byDateAndTitle = new Map(futureEvents.map((event) => [`${event.date}|${event.title}`, event]));
+    assert.equal(futureEvents.length, 14, `${label}: October–December event count`);
+    for (const [date, title] of expected) assert.ok(byDateAndTitle.has(`${date}|${title}`), `${label}: missing ${date} ${title}`);
+    assert.equal(byDateAndTitle.has('2026-10-24|Scuola PIACCO CORSO ARRAMPICATA'), false, `${label}: Oct 24 must remain blank`);
+    for (const event of events) {
+      assert.equal(event.sourceDocument, pdfUrl);
+      assert.equal(event.location, 'Località da verificare');
+      assert.equal(event.lat, undefined);
+      assert.equal(event.lng, undefined);
+    }
+  };
+  verifyEvents(parseCalendarLines(fixtureLines, valmadrera, pdfUrl, 2026, 'pdf-text'), 'captured pdf.js fixture');
+  verifyEvents(parseCalendarLines(extracted.lines, valmadrera, pdfUrl, 2026, 'pdf-text'), 'production PDF extraction');
 });
 
 test('Tivoli booklet associates title before day, region after day and official difficulty', () => {

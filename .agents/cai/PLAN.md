@@ -106,3 +106,13 @@ Migration `create_place_classifications_20261021090000` registrata dal progetto 
 - Catalogo 3.345 ID: 0 aggiunte/rimozioni, 5 record esistenti con cambi di provenienza/descrizione; nessun campo geografico/editoriale amministrato alterato e nessuna coordinata nuova. Nessun DB import/query.
 - Importer QA PASS, backend `npm test` 186/186, copie output pubblico/backend identiche. Report e manifest SHA in HANDOFF. Checkpoint run06 da pushare e verificare.
 - Poi valutare un solo run esplicito, max1 doc/180s, per il PDF calendario 2026 se è ancora candidato distinto; non estendere oltre e preservare cache su errore.
+
+## Problema parsing PDF Valmadrera — 22 ottobre 2026
+
+Il PDF ufficiale `Calendario-attivita-2026_rev.04_16-03-2026.pdf` è in cache e leggibile: 12 pagine, `pdftotext -layout` mostra righe future (1 e 22 novembre), ma l’adapter restituisce `recognized=false`, zero eventi e zero issue. Questo non è un calendario vuoto: fallimento registrato in FAILURES come `official-calendar-grid-unrecognized`, fase parsing, status open. Il collector sta verificando una fixture dalle pagine cached e un parser a griglia con mapping cella/data verificato; niente coordinate inferite. Dopo test, rielaborare solo il PDF da cache in un run max1 e valutare la classificazione dei nuovi eventi prima di ogni import.
+
+## Correzione parser griglia PDF Valmadrera — candidata verificata
+
+- Fixture reale end-to-end con PDF cache (SHA `f3939cb69b...3b4103e9`) e output pdf.js; parser a griglia per header mese/giorni/colonne, merge del giorno separato solo se coordinate X completano sette celle; cache version 10→11.
+- Rileva 14 attività con date corrette Oct–Dec 2026, inclusi attività trekking e non trekking; test rifiuta Oct24 e assenza di coordinate inventate. Focused 20/20, suite backend 187/187, importer QA PASS.
+- Codice non ancora checkpointato e FAILURES rimane open fino alla verifica run orchestrato. Dopo push, un solo documento PDF da cache con `SCRAPE_MAX_DOCUMENTS=1`; poi QA file e classificazione Mercury per gli ID nuovi prima dell’eventuale DB import. No rete/DB prima del checkpoint.
