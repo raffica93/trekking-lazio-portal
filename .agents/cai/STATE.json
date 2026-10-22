@@ -398,8 +398,8 @@
       "writes": 0
     },
     "tests": "Backend npm test 186/186 after Valmadrera run06; backend/frontend catalog files remained byte-identical and hashes unchanged by tests.",
-    "regionCurrent": "Lombardia — Valmadrera run06 partial, importer QA PASS, backend tests 186/186; checkpoint pending; 19 candidates remain.",
-    "regionNext": "After remote run06 checkpoint, inspect and if appropriate fetch the official 2026 calendar PDF as one bounded source-url document. Preserve cache on failure; no DB import unless QA confirms new IDs.",
+    "regionCurrent": "Lombardia — Valmadrera run06 partial, files/report QA verified, tests 186/186, remote checkpoint verified; 19 candidates remain.",
+    "regionNext": "One bounded run may inspect the official 2026 activity calendar PDF as a distinct explicit candidate, max 1 document/180 s. Preserve cache on failure; no DB import unless QA confirms new IDs.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
     "remoteCheckpointVerifiedAt": "2026-10-22T19:25:20Z",
@@ -463,9 +463,11 @@
       "sectionsSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
       "scrapeStatusSha256": "1e23da5325c270c8344a1280f1f09d8ffc1d983b6f6a259b97b49534315faaf7",
       "baselineCommit": "f00a1e4eb4eaea4a2eb916578ba1d6dce7e3d377",
-      "validation": "Importer QA PASS; backend npm test 186/186; backend/frontend copies remained identical; no DB query/write."
+      "validation": "Importer QA PASS; backend npm test 186/186; backend/frontend copies remained identical; no DB query/write.",
+      "checkpointCommit": "488e56407cf7d1de82166c8d8a10f641504c306a",
+      "checkpointVerifiedAt": "2026-10-22T19:45:59Z"
     },
-    "regionalCheckpointCommit": "28d4e9a41966c0875e428423d27bfb6d27859558",
+    "regionalCheckpointCommit": "488e56407cf7d1de82166c8d8a10f641504c306a",
     "regionalRunHistory": [
       {
         "runId": "cai-20261022-lombardia-brescia02",
@@ -765,9 +767,9 @@
         "validation": "Importer QA PASS; backend npm test 186/186; backend/frontend copies remained identical; no DB query/write."
       }
     ],
-    "repositoryCheckpointCommit": "28d4e9a41966c0875e428423d27bfb6d27859558",
-    "updatedAt": "2026-10-22T19:46:00Z",
-    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:40:42Z",
+    "repositoryCheckpointCommit": "488e56407cf7d1de82166c8d8a10f641504c306a",
+    "updatedAt": "2026-10-22T19:45:59Z",
+    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:45:59Z",
     "continuationMechanism": {
       "flag": "--source-url URL (repeatable) with exactly one --source ID",
       "safety": "Exact official hostname, HTTP(S), no credentials/custom port; redirect guard in continuation mode permits only HTTPS same-host redirects on default/443 without auth. Existing cooldown/cache and bounded document/time limits retained.",
@@ -777,7 +779,7 @@
       "backendTests": "186/186"
     }
   },
-  "repositoryCommit": "28d4e9a41966c0875e428423d27bfb6d27859558",
+  "repositoryCommit": "488e56407cf7d1de82166c8d8a10f641504c306a",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -795,10 +797,10 @@
     "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
     "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
   },
-  "updatedAt": "2026-10-22T19:46:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:40:42Z",
-  "regionCurrent": "Lombardia — Valmadrera run06 partial, importer QA PASS, backend tests 186/186; checkpoint pending; 19 candidates remain.",
-  "regionNext": "After remote run06 checkpoint, inspect and if appropriate fetch the official 2026 calendar PDF as one bounded source-url document. Preserve cache on failure; no DB import unless QA confirms new IDs.",
+  "updatedAt": "2026-10-22T19:45:59Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:45:59Z",
+  "regionCurrent": "Lombardia — Valmadrera run06 partial, files/report QA verified, tests 186/186, remote checkpoint verified; 19 candidates remain.",
+  "regionNext": "One bounded run may inspect the official 2026 activity calendar PDF as a distinct explicit candidate, max 1 document/180 s. Preserve cache on failure; no DB import unless QA confirms new IDs.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
     "sourceId": "cai-varese-9216009",
