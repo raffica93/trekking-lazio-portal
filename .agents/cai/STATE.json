@@ -401,34 +401,33 @@
       "copiesIdentical": true
     },
     "regionalCoverage": {
-      "region": "Lombardia",
-      "status": "open; Busto page is expired 2026 winter programme with one residual candidate; S.E.M. and Missaglia remain partial; regional coverage not recounted.",
+      "region": "Abruzzo",
+      "scope": "single bounded Penne source sample; not cumulative region coverage",
+      "status": "open; Penne partial and no-progress; continue only on distinct work-ready sources",
       "currentRunCounts": {
         "sectionsChecked": 1,
         "complete": 0,
         "partial": 1,
         "unreachable": 0,
-        "verifiedNewEvents": 0,
-        "sourceEvents": 1,
-        "documentExtractions": 2,
+        "eventsParsedThisRun": 0,
+        "existingPenneCatalogRowsVerified": 8,
+        "newIds": 0,
+        "removedIds": 0,
+        "changedRows": 0,
         "exactDuplicateIdsExcluded": 0,
-        "semanticDuplicates": "No catalog ID duplicates; one source event remains unchanged.",
-        "failuresResolved": [
-          "Official Busto winter page read through same-host canonical redirect; all listed dates are past and obsolete oEmbed candidates remain excluded."
-        ],
+        "dbPlacesInserted": 0,
+        "dbClassificationsInserted": 0,
+        "failuresResolved": [],
         "failuresOpen": [
-          "Busto has one unvisited discovery candidate; no 2027 calendar visible. Broader Lombardia coverage remains open."
-        ]
+          "CAI Penne official annual PDF discovery-limit 60",
+          "CAI Penne HTML continuation residual 1; the attempted URL canonicalized to previously read page; no distinct continuation saved"
+        ],
+        "nextStep": "Checkpoint Penne verified at 1954838; run the single bounded CAI L’Aquila URL next."
       },
       "historicalSnapshot": {
-        "sections": 229,
-        "checked": 125,
-        "complete": 56,
-        "partial": 68,
-        "unreachable": 1,
-        "unchecked": 104
-      },
-      "historicalSnapshotNote": "Historical handoff only; current sample covers Busto Arsizio alone; no Lombardia-wide recount."
+        "asOf": "2026-10-20",
+        "note": "Historical only; not a fresh regional query."
+      }
     },
     "ocrItalian": false,
     "agentStatus": {
@@ -452,8 +451,8 @@
       "writes": 0
     },
     "tests": "After run07 stopped, backend npm test passed 187/187. Backend/frontend excursions SHA256 6e46cec85daae67e6da0a98afb36d4fbf72b3790b2246dfcdf3837ea9a0ff99b and scrape-status SHA256 da7fa46626cfd3c7e29cc59e0eb66c85f2374a70d0d325a68caba38308dd8450 remained byte-identical after tests.",
-    "regionCurrent": "Lombardia — Strada Storta run02: 1 nuovo candidato consegnato e riconciliato; file/receipt remoto verificati. Nessun target Lombardia inedito tra i candidati offline selezionati; restano discovery-limit e attribuzione luogo da verificare, quindi nessuna copertura regionale completa dichiarata.",
-    "regionNext": "Piemonte — preflight read-only seleziona CAI Pinasca, URL ufficiale calendario non visitata, fonte unsupported con precedente issue OCR sul PDF; eseguire un campione HTML singolo limitato a 1 documento/120s.",
+    "regionCurrent": "Abruzzo — CAI Penne sample completed with zero event delta; files remote-verified at 1954838. Source partial; 8 rows unchanged, no DB query/write.",
+    "regionNext": "CAI L’Aquila official commissioni=escursionismo URL is preflighted and ready for one bounded fetch; stop on 403.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
     "remoteCheckpointVerifiedAt": "2026-10-22T19:25:20Z",
@@ -982,7 +981,7 @@
       }
     ],
     "repositoryCheckpointCommit": "19548380898b52fcf867b6f9e3943d2556351ce4",
-    "updatedAt": "2026-10-22T22:45:33.908Z",
+    "updatedAt": "2026-10-22T22:45:55.539Z",
     "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:45:33.908Z",
     "continuationMechanism": {
       "flag": "--source-url URL (repeatable) with exactly one --source ID",
@@ -1260,10 +1259,10 @@
     }
   },
   "tests": "After Penne01 collection: backend npm test 205/205; six public JSON SHA-256 values unchanged by test execution. No production code changed after that test.",
-  "updatedAt": "2026-10-22T22:45:33.908Z",
+  "updatedAt": "2026-10-22T22:45:55.539Z",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:45:33.908Z",
   "regionCurrent": "Abruzzo — campione circoscritto CAI Penne concluso senza delta: la pagina richiesta canonizza sul contenuto già letto del 7 marzo; 8 righe Penne invariate; fonte ancora partial con discovery PDF 60 + continuation HTML 1. Non è prova di calendario vuoto.",
-  "regionNext": "Attendere il preflight offline del collector per un URL ufficiale distinto e recuperabile in Abruzzo. Dopo il checkpoint Penne, proseguire una fonte per volta; se non c’è un target distinto, registrare i residui e passare alla regione successiva.",
+  "regionNext": "Run CAI L’Aquila bounded sample now; exact official URL is preflighted, prior Penne checkpoint is remote verified. Stop on 403. After QA/file checkpoint and any exact delta delivery, continue one source at a time; cumulative regional snapshot remains historical.",
   "preflight": {
     "at": "2026-10-22T22:30:21.913236Z",
     "sourceId": "cai-campobasso-9236001",
@@ -1322,7 +1321,7 @@
     "sourceId": "cai-penne-9234006",
     "requestedUrl": "https://caipenne.it/2026/03/09/programma-sezionale-2026/",
     "collection": "partial",
-    "files": "ready; importer QA PASS; Penne checkpoint pending",
+    "files": "ready; importer QA PASS; file/report/evidence checkpoint remote-verified at 19548380898b52fcf867b6f9e3943d2556351ce4",
     "database": "not-applicable-no-delta; no DB query or write",
     "manifestPath": "backend/data/agent-runs/cai-20261022-abruzzo-penne01/manifest.json",
     "manifestSha256": "7d56c8295209f5dd4616289461e1c2e7952323272c90d849cd57934f2a23d2c3",
@@ -1381,7 +1380,7 @@
         "CAI Penne official annual PDF discovery-limit 60",
         "CAI Penne HTML continuation residual 1; the attempted URL canonicalized to previously read page; no distinct continuation saved"
       ],
-      "nextStep": "Checkpoint Penne files/metadata, then continue with a distinct official source selected offline."
+      "nextStep": "Checkpoint Penne verified at 1954838; run the single bounded CAI L’Aquila URL next."
     },
     "historicalSnapshot": {
       "asOf": "2026-10-20",

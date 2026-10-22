@@ -41,7 +41,7 @@ non dimostra che una chat nuova possa recuperare il lavoro.
 
 ## Stato di questo passaggio — 22 ottobre 2026
 
-Branch `codex/cai-orchestrator-luna`. Checkpoint remoto corrente all'apertura `805d90922c605a5893edb6a20629c1c00f18647c`; Penne01 e registro aggiornato sono in preparazione al checkpoint successivo. È completato il delta Campobasso: 2 places + 2 classificazioni riconciliati, ricevuta remota al commit `9bc54c5`. Il campione CAI Penne `cai-20261022-abruzzo-penne01` ha 0 nuovi ID, 8 righe identiche, 0 query/scritture DB; fonte partial (PDF discovery 60, HTML continuation 1). La pagina richiesta è la canonical già nota, con `method=null`: zero estrazioni non prova un calendario vuoto. Il run ha rigenerato metadata excursions, esplicitati nel report e nel relativo evidence manifest.
+Branch `codex/cai-orchestrator-luna`. Checkpoint remoto corrente `259c50575d96796119343c421d9872ae151dd693`; il checkpoint file Penne è pubblicato e verificato al commit `19548380898b52fcf867b6f9e3943d2556351ce4`. È completato il delta Campobasso: 2 places + 2 classificazioni riconciliati, ricevuta remota al commit `9bc54c5`. Il campione CAI Penne `cai-20261022-abruzzo-penne01` ha 0 nuovi ID, 8 righe identiche, 0 query/scritture DB; fonte partial (PDF discovery 60, HTML continuation 1). La pagina richiesta è la canonical già nota, con `method=null`: zero estrazioni non prova un calendario vuoto. Il run ha rigenerato metadata excursions, esplicitati nel report e nel relativo evidence manifest.
 
 Test backend 205/205 sono passati dopo la raccolta Penne e i sei hash dei JSON pubblici sono rimasti stabili durante il test. Importer ha passato QA di manifest, report, sidecar, mirror e righe evento. Nessun batch nazionale o lotto storico viene ripetuto.
 
