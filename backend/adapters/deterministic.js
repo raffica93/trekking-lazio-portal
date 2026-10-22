@@ -345,6 +345,19 @@ function parseCalendarLines(lines, source, url, year, method) {
   return parseCalendarLinearLines(lines, source, url, year, method);
 }
 
+function cleanKnownPdfOcrArtifact(value, source, method) {
+  // The Cernusco annual scan has a side panel with the course leader next to
+  // the October calendar cell. Full-page OCR sometimes joins that panel to the
+  // 25 October event; the rendered PDF shows only “Alpe Devero (VB)” in the cell.
+  if (source?.id === 'cai-cernusco-sul-naviglio-9216051' && method === 'pdf-ocr') {
+    const text = String(value || '').trim();
+    const knownRow = /^(?:25\s+ottobre\s*[-–—]\s*)?Alpe\s+Devero\s*\(VB\)\s+j\s+Cesare\s+Andreoni\s+2026\b/i;
+    if (knownRow.test(text)) return text.replace(/\s+j\s+Cesare\s+Andreoni\s+2026\b.*$/i, '').trim();
+    return value;
+  }
+  return value;
+}
+
 function parseCalendarLinearLines(lines, source, url, year, method) {
   const events = [];
   let month;
@@ -384,6 +397,9 @@ function parseCalendarLinearLines(lines, source, url, year, method) {
       || /^\s*\d+\)/.test(title) || /^(?:le escursioni sono|il programma potr[aà]|\(cai [^)]+\) in relazione|per una corretta pratica|modalit[aà] di partecipazione)/i.test(title)
       || /^(?:la prima|la prossima) escursione\b/i.test(title)
       || /pubblicat|aggiornat|copyright|cookie|privacy|tesseramento|contattaci|leggi tutto|orario di apertura|regolamento|iscrizion[ei]|quote obbligatorie|partecipazione alle escursioni/i.test(title)) continue;
+    title = cleanKnownPdfOcrArtifact(title, source, method);
+    eventLine = cleanKnownPdfOcrArtifact(eventLine, source, method);
+    if (!title) continue;
     const event = normalizeEvent({ title, ...range, description: eventLine }, source, url, method);
     if (event) events.push(event);
   }

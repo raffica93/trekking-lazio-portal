@@ -47,6 +47,57 @@ test('buildScrapeStatus merges a run onto the full catalog', () => {
   assert.equal(status.sources.length, SOURCES.length);
 });
 
+test('explicit single-source continuation retains document history and unresolved issues as partial', () => {
+  const source = findSource('cai-cernusco-sul-naviglio-9216051');
+  const pdfUrl = 'https://organizzazione.cai.it/sez-cernusco-sul-naviglio/wp-content/uploads/sites/19/2025/12/Locandina-programma-2026.pdf';
+  const oldUrl = 'https://organizzazione.cai.it/sez-cernusco-sul-naviglio/eventi/elenco/?eventDisplay=past&outlook-ical=1';
+  const priorDocuments = Array.from({ length: 35 }, (_, index) => ({
+    url: index === 0 ? pdfUrl : `https://organizzazione.cai.it/sez-cernusco-sul-naviglio/doc-${index}`,
+    method: index === 0 ? 'pdf-ocr' : 'html-calendar',
+    status: 'ok'
+  }));
+  const refreshedPdf = { url: pdfUrl, method: 'pdf-ocr', status: 'ok', hash: 'fresh' };
+  const status = buildScrapeStatus({
+    sources: [source],
+    existingStatus: {
+      sources: [{
+        id: source.id,
+        status: 'partial',
+        hash: 'historical-hash',
+        documents: priorDocuments,
+        methods: ['html-calendar', 'pdf-ocr'],
+        issues: [{ url: oldUrl, message: 'previous timeout' }],
+        extractedEvents: 4
+      }]
+    },
+    result: {
+      excursions: [{ id: `${source.id}-existing` }],
+      results: [{
+        source,
+        status: 'ok',
+        excursions: [{ id: `${source.id}-existing` }],
+        documents: [refreshedPdf],
+        methods: ['pdf-ocr'],
+        issues: [],
+        extractedEvents: 5,
+        hash: 'single-document-hash'
+      }],
+      failures: []
+    },
+    continuationSourceId: source.id,
+    continuationSourceUrls: [pdfUrl],
+    generatedAt: '2026-10-22T00:00:00.000Z'
+  });
+  const row = status.sources[0];
+  assert.equal(row.status, 'partial');
+  assert.equal(row.documents.length, 35);
+  assert.deepEqual(row.documents[0], refreshedPdf);
+  assert.equal(row.documents.some((document) => document.url === priorDocuments[34].url), true);
+  assert.deepEqual(row.issues, [{ url: oldUrl, message: 'previous timeout' }]);
+  assert.equal(row.hash, 'historical-hash');
+  assert.equal(row.extractedEvents, 4);
+});
+
 test('hardFailures ignores sources that still have cache', () => {
   const sora = findSource('sora');
   const existing = [{ id: 'sora-old' }];

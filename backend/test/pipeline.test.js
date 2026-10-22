@@ -104,6 +104,45 @@ test('preserveEnrichment keeps Grok fields when the scrape id is unchanged', () 
   assert.equal(merged[0].title, scraped.title);
 });
 
+test('preserveEnrichment keeps existing administrative and geographic fields exactly', () => {
+  const scraped = sample({
+    title: 'Refreshed source title',
+    lat: 46.1,
+    lng: 9.2,
+    locationSource: 'collector',
+    region: 'Piemonte',
+    startPlace: 'Nuovo punto di partenza',
+    mountainGroup: 'Gruppo nuovo',
+    status: 'pending',
+    coverImagePath: '/new-image.jpg',
+    databaseId: 'new-db-id'
+  });
+  const existing = {
+    ...sample(),
+    title: 'Curated title',
+    lat: null,
+    lng: 9.125,
+    locationSource: 'admin-review',
+    region: 'Lazio',
+    startPlace: 'Capistrello',
+    mountainGroup: 'Ernici',
+    status: 'published',
+    coverImagePath: '/curated.jpg',
+    databaseId: 'db-123',
+    geoEvidence: { source: 'official', url: 'https://section.example/track.gpx' },
+    geoPointType: 'start',
+    geoPrecision: 'trailhead',
+    geoReviewState: 'verified'
+  };
+  const merged = preserveEnrichment([scraped], [existing])[0];
+  for (const field of [
+    'title', 'lat', 'lng', 'locationSource', 'region', 'startPlace', 'mountainGroup', 'status', 'coverImagePath',
+    'databaseId', 'geoEvidence', 'geoPointType', 'geoPrecision', 'geoReviewState'
+  ]) {
+    assert.deepEqual(merged[field], existing[field], `${field} must remain unchanged`);
+  }
+});
+
 test('scrapeAll merges Roma with a Grok source and keeps ids stable', async () => {
   const roma = [sample()];
   const tivoli = [sample({

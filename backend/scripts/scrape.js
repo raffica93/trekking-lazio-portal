@@ -52,6 +52,8 @@ async function persistStatus({
   existingStatus,
   dryRun,
   log,
+  continuationSourceId = null,
+  continuationSourceUrls = [],
   statusFile = statusPath,
   copyFrontend = true
 }) {
@@ -61,6 +63,8 @@ async function persistStatus({
     existingStatus: existingStatus || {},
     result,
     excursions: result.excursions,
+    continuationSourceId,
+    continuationSourceUrls,
     generatedAt
   });
   if (!dryRun) {
@@ -111,6 +115,8 @@ async function runScrape({
     existingStatus,
     dryRun: args.dryRun,
     log,
+    continuationSourceId: args.sourceUrls.length ? args.sources[0] : null,
+    continuationSourceUrls: args.sourceUrls,
     statusFile,
     copyFrontend: copyFrontend && statusFile === statusPath
   });

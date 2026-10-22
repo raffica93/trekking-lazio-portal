@@ -33,10 +33,23 @@ function preserveEnrichment(scrapedList, existingList = []) {
   const existingById = new Map((existingList || []).map((item) => [item.id, item]));
   return scrapedList.map((scraped) => {
     const existing = existingById.get(scraped.id);
-    if (isReusableEnrichment(scraped, existing)) {
-      return mergeEnrichment(scraped, existing);
+    const merged = isReusableEnrichment(scraped, existing)
+      ? mergeEnrichment(scraped, existing)
+      : scraped;
+    if (!existing) return merged;
+
+    // Scraping refreshes source evidence, but must not erase values curated or
+    // administered outside the collector. Preserve explicit nulls as well.
+    const protectedFields = [
+      'title', 'status', 'coverImagePath', 'databaseId',
+      'lat', 'lng', 'location', 'locationSource', 'region', 'startPlace', 'mountainGroup', 'coordinatesQuality',
+      'geoEvidence', 'geoPointType', 'geoPrecision', 'geoReviewState'
+    ];
+    const preserved = { ...merged };
+    for (const field of protectedFields) {
+      if (Object.prototype.hasOwnProperty.call(existing, field)) preserved[field] = existing[field];
     }
-    return scraped;
+    return preserved;
   });
 }
 

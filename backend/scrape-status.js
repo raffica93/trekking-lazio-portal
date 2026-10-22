@@ -34,6 +34,8 @@ function buildScrapeStatus({
   existingStatus = {},
   result = null,
   excursions = [],
+  continuationSourceId = null,
+  continuationSourceUrls = [],
   generatedAt = new Date().toISOString()
 } = {}) {
   const previous = new Map(
@@ -53,6 +55,44 @@ function buildScrapeStatus({
     const prior = previous.get(source.id) || {};
     const run = resultsById.get(source.id);
     if (run) {
+      if (source.id === continuationSourceId) {
+        const requested = new Set((continuationSourceUrls || []).map((url) => String(url)));
+        const currentDocuments = Array.isArray(run.documents) ? run.documents : [];
+        const priorDocuments = Array.isArray(prior.documents) ? prior.documents : [];
+        const documentsByUrl = new Map();
+        for (const document of priorDocuments) {
+          if (document?.url) documentsByUrl.set(document.url, document);
+        }
+        for (const document of currentDocuments) {
+          if (document?.url) documentsByUrl.set(document.url, document);
+        }
+        const documents = [...documentsByUrl.values()];
+        const currentIssues = Array.isArray(run.issues) ? run.issues : [];
+        // An old issue only clears when its exact URL was explicitly retried.
+        const retainedIssues = (Array.isArray(prior.issues) ? prior.issues : [])
+          .filter((issue) => !issue?.url || !requested.has(issue.url));
+        const issues = [...retainedIssues, ...currentIssues];
+        const unvisitedPriorDocuments = priorDocuments.some((document) => (
+          document?.url && !requested.has(document.url)
+        ));
+        const incomplete = unvisitedPriorDocuments || retainedIssues.length > 0
+          || (prior.status === 'partial' && currentDocuments.length < priorDocuments.length);
+        const methods = [...new Set([
+          ...(Array.isArray(prior.methods) ? prior.methods : []),
+          ...(Array.isArray(run.methods) ? run.methods : [])
+        ])];
+        return catalogRow(source, {
+          status: incomplete ? 'partial' : run.status,
+          excursions: run.excursions.length,
+          error: failuresById.get(source.id) || (issues.length ? prior.error || null : null),
+          hash: incomplete ? prior.hash || run.hash || null : run.hash || null,
+          updatedAt: generatedAt,
+          documents,
+          methods,
+          issues,
+          extractedEvents: incomplete ? prior.extractedEvents ?? run.extractedEvents : run.extractedEvents
+        });
+      }
       return catalogRow(source, {
         status: run.status,
         excursions: run.excursions.length,

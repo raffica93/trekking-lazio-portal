@@ -68,6 +68,25 @@ test('annual line patterns exclude narrative dates and unknown years', () => {
   assert.equal(parseCalendarLines(['SETTEMBRE', '12 Escursionismo'], source, source.url, 2026, 'pdf').length, 0);
 });
 
+test('Cernusco OCR cross-column side-panel text does not contaminate the October event', async () => {
+  const fixture = JSON.parse(await fs.readFile(
+    path.join(__dirname, 'fixtures', 'cai-cernusco-2026-ocr-cross-column.json'), 'utf8'
+  ));
+  const section = {
+    id: fixture.sourceId,
+    organizer: 'CAI Cernusco Sul Naviglio',
+    region: 'Lombardia'
+  };
+  const events = parseCalendarLines([fixture.ocrLine], section, fixture.officialPdf, 2026, fixture.method);
+  assert.equal(events.length, 1);
+  assert.equal(events[0].date, fixture.expectedDate);
+  assert.equal(events[0].title, fixture.expectedTitle);
+  assert.equal(events[0].sourceDocument, fixture.officialPdf);
+  const control = parseCalendarLines([fixture.controlLine], section, fixture.officialPdf, 2026, fixture.method);
+  assert.equal(control.length, 1);
+  assert.equal(control[0].title, fixture.expectedControlTitle, 'cleanup must not affect other OCR rows from the same PDF');
+});
+
 test('Valmadrera 2026 PDF month grid maps labels to weekday cells and preserves non-trekking candidates', async () => {
   // The binary fixture is the cached official PDF; the text fixture retains its production pdf.js output.
   const pdfBytes = await fs.readFile(path.join(__dirname, 'fixtures', 'cai-valmadrera-2026-calendar.pdf'));
