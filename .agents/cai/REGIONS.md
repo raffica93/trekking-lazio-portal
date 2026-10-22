@@ -317,3 +317,11 @@ Checkpoint completo di `cai-20261022-campania-caserta-index01` verificato sul br
 | Campania, `cai-caserta-9238006` | 7 link dalla pagina index checkpointata | 1: scheda Monte Scalambra, 25 ottobre (contesto 2026; anno da attestare nel PDF) | 2 eventi passati (17/18 ottobre), archivio 2025, flyer senza data, regolamento; PDF annuale bloccato già escluso | Nessun issue specifico sul dettaglio; annuale resta `discovery-budget-exhausted` | Dopo checkpoint remoto, un solo URL Monte Scalambra max1/120s/concurrency1; stop senza discovery |
 
 Il target `https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf` è linkato accanto al testo che identifica Serrone, Monte Scalambra ed Eremo San Michele; è assente da status/history/cache/FAILURES. Il sample dovrà verificare evidenza nel documento e non assumere l'anno. Nessuna richiesta di rete nel preflight; nessun evento è contato o importato.
+
+## Campania — CAI Caserta Scalambra01 (22 ottobre 2026)
+
+| Regione / run | Sezioni controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | DB consegnati | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---:|---|
+| Campania, `cai-20261022-campania-caserta-scalambra01` | 1 | 0 | 1 | 0 | 1 evento esistente corroborato dal PDF; 0 candidati parser; 50 righe sezione identiche | 0 | Nessuno | Annual discovery 5; index continuation 1; OCR failure PDF Francigena | 0; no classification/query/write | Checkpoint remoto, poi preflight offline altre fonti Campania |
+
+PDF ufficiale della scheda Scalambra letto: 244.304 byte, SHA `d239fdc33cf9583b292bf84189c0c3b2dce0532a289b660b133e420a62142b9b`; il corpo attesta CAI Caserta, 25-10-2026, Anello Monte Scalambra 1420 m, E, Serrone/Eremo. Corrobora `cai-caserta-9238006-8ca304031e6a`; 3366 ID totali e 50 Caserta unchanged, zero delta; row hash `b517322f…3babb9`. Le coordinate esistenti `41.802,13.486` quality `massif` sono preservate e non attestate dal PDF. Properties del file hanno title/author estranei, caveat nel report; l'attribuzione deriva da body e pagina ufficiale linkante. Test backend 205/205, sei JSON stabili; importer QA PASS. Nessun DB. Caserta e Campania restano parziali; conteggi cumulativi in testa sono storico 20 ottobre.

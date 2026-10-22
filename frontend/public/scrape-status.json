@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T22:59:45.062Z",
+  "generatedAt": "2026-10-22T23:07:24.372Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -3152,7 +3152,7 @@
       "excursions": 50,
       "error": null,
       "hash": "f6998d81a962d63700ae897c5035901139be5ec22feb142ae49f76b662d7a94a",
-      "updatedAt": "2026-10-22T22:59:45.062Z",
+      "updatedAt": "2026-10-22T23:07:24.372Z",
       "documents": [
         {
           "url": "https://www.caicaserta.it/documenti/Calendario%20escursionistico%202026.pdf",
@@ -3183,6 +3183,12 @@
           "hash": "bb3bf1b613641c692e434db5496e461858509686bd2600b0cf299b80dd6ce039",
           "events": 0,
           "method": null
+        },
+        {
+          "url": "https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf",
+          "hash": "d239fdc33cf9583b292bf84189c0c3b2dce0532a289b660b133e420a62142b9b",
+          "events": 0,
+          "method": "pdf-text"
         }
       ],
       "methods": [

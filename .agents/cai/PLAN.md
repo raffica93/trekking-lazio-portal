@@ -167,3 +167,7 @@ Il checkpoint remoto `52deb84835e47a355d66da4662dc7e9a877f2ab4` è verificato (r
 ### Preflight link figli Caserta
 
 Un solo figlio work-ready: PDF scheda Monte Scalambra `https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf`, linkato dall'indice ufficiale accanto all'evento del 25 ottobre da Serrone. La pagina inquadra il programma 2026 ma l'anno non è adiacente alla data; il documento deve attestare l'anno/titolo/attribuzione. È assente da history/cache/FAILURES. Dopo il checkpoint remoto del preflight, un solo run explicit URL `cai-20261022-campania-caserta-scalambra01`, max1/120s/concurrency1, senza seguire discovery. Gli altri link sono passati, archivio, flyer senza data o regolamento.
+
+### Esito Scalambra01
+
+Un solo PDF detail letto e QA-validato: il corpo attesta il 25 ottobre 2026 e corrobora un evento già presente; metadata PDF discordanti sono esplicitamente segnalati. Zero candidati parser, nessuna riga nuova/modificata, coordinate curate non toccate/non riattestate. Importer PASS; backend test 205/205 con sei hash JSON stabili. Caserta resta parziale per annual discovery, indice continuation e OCR Francigena. Pubblicare il run completo prima di qualunque altra richiesta; poi preflight offline le restanti fonti Campania abilitate.
