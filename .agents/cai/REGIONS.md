@@ -368,3 +368,12 @@ Il campione è parziale. La pagina ufficiale restituisce 23 righe; catalogo 3.36
 ### Pavullo database delivery (22 ottobre 2026)
 
 1 place + 1 classification realmente inseriti: `cai-pavullo-nel-frignano-9224020-195cdeaaefee`. DB place count 4.422→4.423; target assente in entrambe le tabelle prima dell’import, joined 1/1 dopo. Saltati 0, update/delete 0. Nessuna coordinata o cover assegnata. Quattro candidati in revisione non inclusi. Ricevuta `backend/data/agent-runs/cai-20261022-emilia-pavullo-deliver01/output/delta-import-receipt.json`; commit dati `5697dcd`.
+
+
+## Lombardia — CAI Sesto Calende preflight offline (22 ottobre 2026)
+
+| Regione / fonte | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Issue aperte | Prossimo passo |
+|---|---:|---:|---:|---:|---|---|---|---|
+| Lombardia, `cai-sesto-calende-9216044` | 1 URL in sola lettura offline | 0 | fonte già parziale, 0 nuovi fetch | 0 | 0 nel preflight | n/a | PDF annuale con OCR/dimensione bloccata | Dopo checkpoint, un solo fetch pagina HTML max1/120s/concurrency1; non ripetere PDF annuale |
+
+La URL `https://caisestocalende.it/calendario-sezionale/` è collegata alla fonte da `calendarUrls`/`calendarEvidence`, assente da status, cache e FAILURES; nessun cooldown specifico. Nessun evento o stato calendario dedotto dall’indice non letto. Nessuna rete nel preflight.

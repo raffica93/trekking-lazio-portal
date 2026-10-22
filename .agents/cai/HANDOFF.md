@@ -528,3 +528,10 @@ Artefatti principali: collection manifest `d62d10c601192773fa611f2eeaf955198ca5d
 ### Pavullo delta delivery completed
 
 The sealed one-row run was importer-QA PASS and its manifest was remote-verified at source checkpoint `5697dcd688a6217a6cc98e1a8794540c8ddeab13`. Supabase read-only prequery at 2026-10-22 23:40:29 UTC found 4,422 places and no Hoabonti place or classification; FK is RESTRICT. The local importer CLI exited before connection (`SUPABASE_URL` absent, no DB mutation). The approved connector bridge then executed the importer-generated 35-field place and 17-field classification mappings with conflict-ignore semantics. It inserted exactly 1 place + 1 classification for `cai-pavullo-nel-frignano-9224020-195cdeaaefee`; no skips, existing rows, updates or deletes. Post-query at 23:41 UTC found 4,423 places and joined 1/1; all 52 mapped fields matched, with no cover or coordinates. Receipt SHA-256 `c30639803362854c9f9c5f778fd2b4d9291a22e06852c326005171c67a56a3cc`. Other four candidates remain held and untouched. Next action: offline preflight a distinct eligible Emilia-Romagna source; do not retry holds or blocked Pavullo sources absent new evidence.
+
+
+## Lombardia preflight — CAI Sesto Calende calendar (22 ottobre 2026)
+
+Dopo la ricevuta Pavullo `3d28e263703b1b1c7bb49e83094669103a40b1ce`, cai-collector ha esaminato offline registry, status, cache e FAILURES. Target: `cai-sesto-calende-9216044`, pagina ufficiale `https://caisestocalende.it/calendario-sezionale/`, label di registry “Calendario Sezionale” e contesto di link sulla pagina escursionistica ufficiale. URL assente dai documenti status e dalla cache deterministica; nessun failure/cooldown specifico per questa pagina. La sezione è partial; il suo PDF annuale ha issue OCR/dimensione già note e non verrà ripetuto automaticamente. Nessuna rete, raccolta, test o DB nel preflight.
+
+Dopo questo checkpoint remoto, un solo run `cai-20261022-lombardia-sesto01`, max1 URL/documento, budget120s, concurrency1. Nessun child fetch automatico; se la pagina rimanda al PDF annuale già visto, registrare il link e fermarsi senza ripetere il file bloccato.

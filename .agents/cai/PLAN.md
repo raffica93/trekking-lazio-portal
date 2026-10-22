@@ -1,6 +1,6 @@
 # Piano di passaggio al lavoro interamente cloud
 
-Stato aggiornato al 22 ottobre 2026: catalogo classification e delta già consegnati restano chiusi; non ripetere batch storici. Emilia-Romagna: Cesena index e poster sono checkpointati; Pavullo calendar01 ha aggiunto 5 ID, Mercury 5/5, review/importer QA consente un solo delta Hoabonti e trattiene quattro possibili duplicati. Backend test 205/205 dopo raccolta. File del run e manifest isolato di consegna devono essere checkpointati prima dell’import mirato; poi query/ricevuta e successivo preflight di fonte distinta. Le tabelle di piano sottostanti che descrivono lotti già consegnati sono storiche.
+Stato aggiornato al 22 ottobre 2026: delta Pavullo consegnato con ricevuta remota `3d28e26` (1 place +1 classification, 4 hold). Prossimo lavoro Lombardia: preflightato offline un solo URL calendario ufficiale distinto CAI Sesto Calende; dopo checkpoint, una richiesta bounded max1/120s/concurrency1. Il PDF annuale bloccato non si ritenta. Test backend 205/205 dopo l’ultima raccolta; nessun test è stato eseguito in parallelo alla raccolta.
 
 ## Sequenza
 

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "emilia-romagna-pavullo-delta-delivered",
+  "phase": "lombardia-sesto-calendario-preflight-selected",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -383,11 +383,16 @@
     },
     {
       "id": "S40",
+      "status": "completed",
+      "result": "Preflight offline Lombardia: CAI Sesto Calende (cai-sesto-calende-9216044) ha URL calendario sezionale ufficiale non presente in status, cache o FAILURES; nessun cooldown specifico. PDF annuale resta bloccato, nessun retry. Nessuna rete/collection/test."
+    },
+    {
+      "id": "S41",
       "status": "in_progress",
-      "result": "Offline preflight next distinct uncached Emilia-Romagna source; preserve sequential one-source collection and checkpoint-before-write flow."
+      "result": "Dopo il checkpoint remoto del preflight, un solo sample URL Sesto Calende, max1 doc/120s/concurrency1; se linka PDF annuale già visitato, fermarsi prima del retry."
     }
   ],
-  "nextAction": "Preflight offline the next distinct, uncached official Emilia-Romagna source. Do not retry the four held Pavullo candidates without identity evidence.",
+  "nextAction": "Checkpoint remoto di questo preflight. Poi eseguire una sola collect via npm run orchestrate per cai-sesto-calende-9216044 su https://caisestocalende.it/calendario-sezionale/, max1 documento/120s/concurrency1. Se la pagina rimanda al PDF annuale già esaminato, non ripeterlo senza strategia distinta.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -396,7 +401,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "8df4daca5ae92193da9e40e9e8821267eb0c8bf3",
+    "branchHead": "3d28e263703b1b1c7bb49e83094669103a40b1ce",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
       "runId": "cai-20261022-emilia-pavullo-calendar01",
@@ -449,7 +454,7 @@
       "databaseSkippedIds": [],
       "databaseUpdatedDeleted": 0
     },
-    "nextAction": "Preflight offline the next distinct, uncached official Emilia-Romagna source. Do not retry the four held Pavullo candidates without identity evidence."
+    "nextAction": "Checkpoint remoto di questo preflight. Poi eseguire una sola collect via npm run orchestrate per cai-sesto-calende-9216044 su https://caisestocalende.it/calendario-sezionale/, max1 documento/120s/concurrency1. Se la pagina rimanda al PDF annuale già esaminato, non ripeterlo senza strategia distinta."
   },
   "repositoryCommit": "5697dcd688a6217a6cc98e1a8794540c8ddeab13",
   "databaseReadOnlyObservation": {
@@ -474,10 +479,10 @@
     }
   },
   "tests": "After the Castrovillari01 collection finished, backend npm test passed 205/205; SHA-256 for six public JSON files was identical before/after. No tests were run concurrently with collection.",
-  "updatedAt": "2026-10-22T23:42:04.129906+00:00",
+  "updatedAt": "2026-10-22T23:43:55.837936+00:00",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:39:00Z",
-  "regionCurrent": "Emilia-Romagna — CAI Pavullo: una pagina ufficiale, 5 nuovi candidati; classificazione Mercury 5/5; 1 approvato per delta, 4 in revisione per possibili doppioni o categoria incoerente. Raccolta e test conclusi; DB ancora pending.",
-  "regionNext": "Dopo checkpoint remoto dei file Pavullo e del manifest sealed di consegna: query live dell’ID Hoabonti, import delta-only 1 place + classification se assente, ricevuta e query post-import; poi preflight offline della prossima URL distinta lavorabile.",
+  "regionCurrent": "Emilia-Romagna — CAI Pavullo delta completato e ricevuta remota al commit 3d28e26: 1 place + 1 classificazione inseriti, quattro candidati hold; source parziale.",
+  "regionNext": "Lombardia — CAI Sesto Calende, un solo URL calendario ufficiale non visitato, max1 documento/120s/concurrency1; verificare se rimanda a PDF annuale già bloccato senza ripeterlo.",
   "preflight": {
     "at": "2026-10-22T23:28:13Z",
     "sourceId": "cai-pavullo-nel-frignano-9224020",
@@ -586,33 +591,18 @@
     "databaseReceiptSha256": "c30639803362854c9f9c5f778fd2b4d9291a22e06852c326005171c67a56a3cc"
   },
   "regionalCoverage": {
-    "region": "Emilia-Romagna",
-    "scope": "one CAI Pavullo official 2026 calendar page; other regional sources remain to preflight",
-    "status": "open; Pavullo partial with remaining blockers",
+    "region": "Lombardia",
+    "scope": "one official distinct Sesto Calende calendar page selected offline after delivered Emilia delta",
+    "status": "open; existing Lombardia source issues remain",
     "currentRunCounts": {
-      "sectionsChecked": 1,
+      "sectionsChecked": 0,
       "complete": 0,
-      "partial": 1,
+      "partial": 0,
       "unreachable": 0,
-      "rowsParsed": 23,
-      "newIds": 5,
-      "approvedForDelivery": 1,
-      "heldForReview": 4,
-      "duplicatesExcluded": "exact count not persisted",
-      "placesInserted": 1,
-      "classificationsInserted": 1,
-      "skipped": 0,
-      "updated": 0,
-      "deleted": 0,
-      "coordinatesAdded": 0,
-      "failuresResolved": [],
-      "failuresOpen": [
-        "prior Pavullo cultural PDF timeout",
-        "prior iCal discovery-limit 5",
-        "calendar continuation 1",
-        "2025 table header vs 2026 title/weekday discrepancy"
-      ],
-      "nextStep": "Offline preflight a distinct eligible Emilia-Romagna source; no retry of Pavullo semantic holds or blocked URLs without new evidence."
+      "eventsVerified": 0,
+      "dbPlacesInserted": 0,
+      "dbClassificationsInserted": 0,
+      "nextStep": "After preflight checkpoint, collect one URL at max1/120s/concurrency1; inspect any child PDF offline before deciding."
     },
     "historicalSnapshot": {
       "asOf": "2026-10-20",
@@ -743,9 +733,13 @@
     }
   ],
   "nextSourcePreflight": {
-    "region": "Emilia-Romagna",
-    "status": "pending offline selection after completed Pavullo delivery",
-    "scope": "select one unvisited official same-host URL; compare cache, history, failures and cooldown before any fetch",
+    "region": "Lombardia",
+    "sourceId": "cai-sesto-calende-9216044",
+    "sourceName": "CAI Sesto Calende",
+    "url": "https://caisestocalende.it/calendario-sezionale/",
+    "status": "offline preflight selected; bounded sample pending remote checkpoint",
+    "evidence": "Registry calendarUrls/calendarEvidence label Calendario Sezionale and link context on official hiking page; absent from scrape-status documents, FAILURES and deterministic cache; no cooldown for this HTML URL. Existing annual PDF has separate OCR/size failure and is not eligible for retry.",
+    "scope": "one explicit URL, max1 document, 120s, concurrency1; no automatic child fetch; if it points to already-consumed PDF, do not repeat",
     "networkFetchPerformed": false
   }
 }
