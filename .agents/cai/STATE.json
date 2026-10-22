@@ -207,7 +207,7 @@
   ],
   "nextAction": {
     "step": "S7",
-    "instruction": "Commit/push the verified Brescia run02 + parser fixture/test + updated ledger, verify the remote commit; then resume Lombardia Brescia residual discovery with a new bounded run. Do not import the newly extracted cinema event until classification and safe DB handling are established."
+    "instruction": "Run a new bounded collector sample on only the 14 Brescia residual documents, with source/coordinate provenance review where records support it. Then importer read-only QA, isolated tests after collection, update separate phase states, and checkpoint verified files before any DB decision."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -217,7 +217,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "6d0bd139282008aca7e7c6dabe455eb678725f91",
+    "branchHead": "cb7148ff0d69944a34fd8e606f3e61ab42238d31",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -377,13 +377,13 @@
     },
     "ocrItalian": false,
     "agentStatus": {
-      "caiCollector": "completed run02; available for follow-up",
+      "caiCollector": "assigned next bounded Brescia residual sample and geolocation evidence review",
       "caiImporter": "completed read-only QA run02; available for follow-up",
       "agentRequestedModel": "gpt-6-luna",
       "agentRequestedEffort": "high",
       "effectiveModelTelemetry": "not exposed"
     },
-    "nextPhase": "Publish the verified Lombardia run and parser correction checkpoint; then resume a bounded sample of the same Brescia source residuals. Keep the cinema event out of DB until classification/import handling is resolved.",
+    "nextPhase": "Resume bounded discovery of Brescia residual documents under a new run ID; include evidence-based locality/coordinate review, then independent file QA before any import consideration.",
     "databaseReadOnlyObservation": {
       "observedAt": "2026-10-22T18:12:15.676Z",
       "source": "authorized Supabase read-only SQL and map predicate",
@@ -460,10 +460,13 @@
       "parserCorrection": "(?<!\\d) left boundary for duration patterns; official fixture and real event verification, 13 focused tests passed; full backend suite 175/175.",
       "manifestSha256": "092ad634fd84e60a307349661026423e18a2fd1e75c4422f5b936ab973dded77",
       "reportSha256": "7c65412514a18d03cc08c230e5fca09bfc8d1ddc8afd8351f1c91453abe1d852",
-      "importerQa": "PASS; compared to commit 6d0bd13; 3,338 unique IDs, +1 only, no existing changes; no DB queried."
-    }
+      "importerQa": "PASS; compared to commit 6d0bd13; 3,338 unique IDs, +1 only, no existing changes; no DB queried.",
+      "commit": "cb7148ff0d69944a34fd8e606f3e61ab42238d31",
+      "remoteVerifiedAt": "2026-10-22T18:34:10Z"
+    },
+    "regionalCheckpointCommit": "cb7148ff0d69944a34fd8e606f3e61ab42238d31"
   },
-  "repositoryCommit": "6d0bd139282008aca7e7c6dabe455eb678725f91",
+  "repositoryCommit": "cb7148ff0d69944a34fd8e606f3e61ab42238d31",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -481,8 +484,8 @@
     "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
     "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
   },
-  "updatedAt": "2026-10-22T18:33:25Z",
-  "repositoryRemoteCheckpointVerifiedAt": null,
+  "updatedAt": "2026-10-22T18:34:10Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T18:34:10Z",
   "regionCurrent": "Lombardia — current bounded sample: Brescia partial; 14 discovery candidates remain; source-level counts only",
   "regionNext": "Finish the Brescia partial sample before moving to another Lombardia section; explicit geolocation evidence only."
 }

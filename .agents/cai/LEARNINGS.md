@@ -31,3 +31,11 @@
 
 - Quando il runtime di backend non espone Supabase URL/ruolo ma il connettore MCP è autorizzato, verificare prima assenza tabella/conflitti, poi applicare migration e inserire piccoli batch derivati da `verifyReadyClassificationRun`. `ON CONFLICT DO NOTHING` rende la ripresa idempotente; l’importer locale non deve interpretare una risposta MCP di forma differente come prova che il blocco non sia stato applicato: controllare stato SQL prima di ripetere.
 - Una query SQL di riconciliazione può confrontare campi scalari con `IS DISTINCT FROM` e metadata `jsonb` direttamente, senza trasferire migliaia di record all’interprete; conservare conteggi e digest prima/dopo.
+
+
+## 2026-10-22 — ora d’orario distinta dalla durata
+
+- Problema reale: la regex poteva leggere le ultime cifre dell’anno (`2026 ore 20,45`) come `26 ore`.
+- Correzione: richiedere un confine numerico a sinistra per i pattern di durata; l’orario continua a non essere una durata e il formato esplicito `Durata: 6 ore` resta valido.
+- Evidenza: fixture ufficiale minimizzata `backend/test/fixtures/cai-brescia-cinema-time.json`; test in `backend/test/scraper.test.js`; run reale corretto `cai-20261022-lombardia-brescia02` non contiene `durationHours`; `backend npm test` 175/175.
+- Commit remoto: `cb7148ff0d69944a34fd8e606f3e61ab42238d31`.
