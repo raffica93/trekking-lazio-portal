@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "regional-collection-partial-files-verified-checkpoint-pending",
+  "phase": "regional-collection-partial-checkpointed",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -207,7 +207,7 @@
   ],
   "nextAction": {
     "step": "S7",
-    "instruction": "Publish the run04 checkpoint. Then continue with a bounded run05 only on the two residual Brescia discovery candidates; do not expand to another section or import without a new classified event delta."
+    "instruction": "Run bounded run05 only on the two residual Brescia candidates after offline queue reconstruction. Preserve cooldown on the two historical 403 URLs, then QA, test after collection, checkpoint, and only then decide the next step."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -217,7 +217,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "c46f8c8064795204ddec37f8e05f730b11d47194",
+    "branchHead": "1d73684492ffdf330f7ac8bb43b39d16ddcf096b",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -385,7 +385,7 @@
       "agentRequestedEffort": "high",
       "effectiveModelTelemetry": "not exposed"
     },
-    "nextPhase": "Publish run04 files/report; then one bounded run05 on the two residual Brescia discovery candidates. Do not import without a new classified event delta and independent QA.",
+    "nextPhase": "Run05 only on the two exact residual Brescia candidates after offline queue reconstruction; then importer QA, tests after collection, and checkpoint. Do not import without a new classified event delta.",
     "databaseReadOnlyObservation": {
       "observedAt": "2026-10-22T18:12:15.676Z",
       "source": "authorized Supabase read-only SQL and map predicate",
@@ -402,11 +402,11 @@
       "backend": "npm test after run04 collection: 178 passed, 0 failed (2026-10-22T19:01Z)",
       "publicCatalogTestIsolation": "test suite ran after collection completed; backend/frontend excursions identical SHA256 accf5df32091ef5451ba10c850831a4c549e5f21891b45a5769067f62a65566a; scrape-status identical SHA256 997099ec6ca93a3e27870987db0b71af671eeea89f74f750ea54233eedcdbe7"
     },
-    "regionCurrent": "Lombardia — CAI Brescia is the only section checked in this current sample; partial, 0 new catalog events in run04",
-    "regionNext": "Checkpoint run04; continue only with a bounded run05 for the two residual Brescia candidates.",
+    "regionCurrent": "Lombardia — CAI Brescia remains partial after run04; checkpoint 1d73684 published and verified",
+    "regionNext": "Identify the exact two run04 residual candidates from cache, then continue with bounded run05 only.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
-    "remoteCheckpointVerifiedAt": "2026-10-22T18:54:25Z",
+    "remoteCheckpointVerifiedAt": "2026-10-22T19:01:51Z",
     "operationalRecovery": {
       "incident": "An intermediate overlay command briefly reduced an uncommitted working output to a one-row transfer fixture. It was recovered from the sealed 3336-row input and existing classifier cache before QA, with no DB writes. The final full output was rebuilt and importer-validated.",
       "status": "recovered-before-checkpoint",
@@ -467,10 +467,10 @@
       "scrapeStatusSha256": "997099ec6ca93a3e27870987db0b71af671eeea89f74f750ea54233eedcdbe7",
       "importerQa": "PASS; independent comparison to c46f8c8; 3345 unique IDs, zero add/remove/change; hashes/copies/accounting verified; no DB query/write.",
       "tests": "Backend npm test 178/178 after collection; catalog hashes remained identical across backend/frontend copies.",
-      "commit": null,
-      "remoteVerifiedAt": null
+      "commit": "1d73684492ffdf330f7ac8bb43b39d16ddcf096b",
+      "remoteVerifiedAt": "2026-10-22T19:01:51Z"
     },
-    "regionalCheckpointCommit": "831e031808af7bdd01508e83afd023b02f6ae7d5",
+    "regionalCheckpointCommit": "1d73684492ffdf330f7ac8bb43b39d16ddcf096b",
     "regionalRunHistory": [
       {
         "runId": "cai-20261022-lombardia-brescia02",
@@ -539,10 +539,10 @@
         "remoteVerifiedAt": "2026-10-22T18:54:25Z"
       }
     ],
-    "repositoryCheckpointCommit": "831e031808af7bdd01508e83afd023b02f6ae7d5",
-    "updatedAt": "2026-10-22T19:01:21Z"
+    "repositoryCheckpointCommit": "1d73684492ffdf330f7ac8bb43b39d16ddcf096b",
+    "updatedAt": "2026-10-22T19:01:51Z"
   },
-  "repositoryCommit": "831e031808af7bdd01508e83afd023b02f6ae7d5",
+  "repositoryCommit": "1d73684492ffdf330f7ac8bb43b39d16ddcf096b",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -560,8 +560,8 @@
     "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
     "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
   },
-  "updatedAt": "2026-10-22T19:01:21Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T18:54:25Z",
-  "regionCurrent": "Lombardia — CAI Brescia is the only section checked in this current sample; partial, 0 new catalog events in run04",
-  "regionNext": "Checkpoint run04; continue only with a bounded run05 for the two residual Brescia candidates."
+  "updatedAt": "2026-10-22T19:01:51Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:01:51Z",
+  "regionCurrent": "Lombardia — CAI Brescia remains partial after run04; checkpoint 1d73684 published and verified",
+  "regionNext": "Identify the exact two run04 residual candidates from cache, then continue with bounded run05 only."
 }

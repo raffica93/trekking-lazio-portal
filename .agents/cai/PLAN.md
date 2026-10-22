@@ -80,5 +80,5 @@ Migration `create_place_classifications_20261021090000` registrata dal progetto 
 
 - Completata la riconciliazione classification-only DB (3.336 righe, zero differenze; vedere HANDOFF/STATE), poi ripresa Lombardia.
 - Run Brescia `cai-20261022-lombardia-brescia04`: 38 URL univoci, 26 già visti e 12 nuovi, 143 estrazioni; 0 delta catalogo, 2 candidati e 1 URL 404, 2 URL 403 in cooldown. Sezione parziale, QA indipendente PASS e backend 178/178. Nessun accesso DB.
-- Checkpoint run03/importer verificato in `831e031`; report run04 e stato raccolta sono pronti per il prossimo push. Poi run05 solo sui due residui Brescia; nessuna espansione o import senza nuovo delta classificato e QA.
+- Checkpoint run03/importer verificato in `831e031`; report run04 e stato raccolta pubblicati in `1d73684492ffdf330f7ac8bb43b39d16ddcf096b`. Ora run05 solo sui due residui Brescia; nessuna espansione o import senza nuovo delta classificato e QA.
 - I contatori rigenerati su altre righe status non sono nuova copertura. Nessun import, merge, deploy o cron.
