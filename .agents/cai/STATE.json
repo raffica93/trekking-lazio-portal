@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "classification-sample-reviewed-full-batch-ready",
+  "phase": "classification-full-run-ready",
   "fullCloudQualified": false,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -176,7 +176,7 @@
     },
     {
       "id": "S3",
-      "status": "ready-after-checkpoint",
+      "status": "ready",
       "owner": "orchestrator",
       "result": "full population input sealed from fresh Supabase REST export: 3336 rows/unique source_ids; run cai-map-20261022-full01; use sample cache; concurrency 4/rate-ms 200; fail fast on auth/quota/429/unverified model"
     },
@@ -207,7 +207,7 @@
   ],
   "nextAction": {
     "step": "S3",
-    "instruction": "Commit/push and verify sample QA artifacts plus full input, then run cai-map-20261022-full01 with Mercury only, concurrency 4, rate 200 ms, reusing sample cache. Stop on auth/quota/429 or unverified model; QA full output and checkpoint before any migration/upsert."
+    "instruction": "Run cai-map-20261022-full01 from the committed input.json using only inception/mercury-decide, concurrency 4, rate-ms 200, and the sample cache. Stop on auth/quota/429 or unverified response model; do not start regional collection. After file completion, QA excluded/uncertain candidates and publish verified manifest before any DB write."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -217,7 +217,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "3f93525f4f52dff9dd322278a6b3e4759455648b",
+    "branchHead": "25f1750d6446736b6176c85b028cbcb73ea78e9b",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -245,7 +245,7 @@
     },
     "fullClassificationRun": {
       "runId": "cai-map-20261022-full01",
-      "status": "not-started",
+      "status": "ready-checkpoint-verified",
       "inputPath": "backend/data/agent-runs/cai-map-20261022-full01/input.json",
       "inputSha256": "2963f287c4ccedb20a70068b2551dad3565b264d871194ec91324d0f98bb0687",
       "inputBytes": 3956792,
@@ -312,7 +312,9 @@
     },
     "regionCurrent": "Lombardia remains open; historical snapshot only, no regional collection while classification active",
     "regionNext": "After batch/import receipt closes, resume Lombardia with bounded source samples, then one region at a time",
-    "updatedChatRecipient": null
+    "updatedChatRecipient": null,
+    "artifactCheckpointCommit": "25f1750d6446736b6176c85b028cbcb73ea78e9b",
+    "remoteCheckpointVerifiedAt": "2026-10-22T17:30:00Z"
   },
-  "repositoryCommit": "3f93525f4f52dff9dd322278a6b3e4759455648b"
+  "repositoryCommit": "25f1750d6446736b6176c85b028cbcb73ea78e9b"
 }
