@@ -2,11 +2,18 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
+const os = require('node:os');
+const { DateTime } = require('luxon');
 const { buildScrapeStatus, hardFailures } = require('../scrape-status');
+const { scrapeDeterministic } = require('../adapters/deterministic');
 const { enabledSources, findSource, SOURCES } = require('../sources');
 
 const pinascaStatusFixture = JSON.parse(fs.readFileSync(
   path.join(__dirname, 'fixtures', 'cai-pinasca-partial-extraction-status.json'),
+  'utf8'
+));
+const campobassoDiscoveryFixture = JSON.parse(fs.readFileSync(
+  path.join(__dirname, 'fixtures', 'cai-campobasso-continuation-discovery.json'),
   'utf8'
 ));
 
@@ -267,6 +274,69 @@ test('continuation keeps the newest discovery-limit count for the same URL', () 
     { url: pdfUrl, message: 'Discovery budget reached; 4 candidate documents remain.', code: 'discovery-limit' }
   ]);
   assert.equal(status.sources[0].status, 'partial');
+});
+
+test('Campobasso bounded HTML continuation keeps PDF discovery count separate from its local residual queue', async (t) => {
+  const fixture = campobassoDiscoveryFixture;
+  const source = findSource(fixture.sourceId);
+  assert.equal(source.url, fixture.sourceUrl);
+  const tempCache = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'cai-campobasso-continuation-'));
+  t.after(() => fs.promises.rm(tempCache, { recursive: true, force: true }));
+  const fetched = [];
+  const priorIssue = {
+    url: fixture.sourceUrl,
+    message: `Discovery budget reached; ${fixture.priorRemaining} candidate documents remain.`,
+    code: 'discovery-limit'
+  };
+  const priorStatus = {
+    sources: [{
+      id: source.id,
+      status: 'partial',
+      updatedAt: '2026-10-19T18:24:35.762Z',
+      documents: [{ url: fixture.sourceUrl, hash: 'prior-pdf-hash', events: 48, method: 'pdf-text' }],
+      methods: ['pdf-text'],
+      extractedEvents: 304,
+      issues: [priorIssue]
+    }]
+  };
+  const collection = await scrapeDeterministic(source, {
+    now: DateTime.fromISO('2026-10-22T12:00:00', { zone: 'Europe/Rome' }),
+    cacheDir: tempCache,
+    maxDocuments: 1,
+    budgetMs: 120_000,
+    initialUrls: [fixture.continuationUrl],
+    previousStatus: priorStatus,
+    fetchDoc: async (url) => {
+      fetched.push(url);
+      return {
+        url,
+        text: fixture.html,
+        hash: 'fixture-html-hash',
+        contentType: 'text/html'
+      };
+    }
+  });
+
+  assert.deepEqual(fetched, [fixture.continuationUrl], 'only the requested index is fetched; discovered child stays queued');
+  assert.equal(collection.documents.length, 1);
+  assert.equal(collection.discovery.complete, false);
+  assert.equal(collection.discovery.remainingCandidates, 1);
+  assert.deepEqual(collection.issues, [fixture.expectedContinuationIssue]);
+
+  const status = buildScrapeStatus({
+    sources: [source],
+    existingStatus: priorStatus,
+    result: {
+      excursions: collection.excursions,
+      results: [{ source, ...collection }],
+      failures: []
+    },
+    continuationSourceId: source.id,
+    continuationSourceUrls: [fixture.continuationUrl],
+    generatedAt: '2026-10-22T12:00:00.000Z'
+  });
+  assert.equal(status.sources[0].status, 'partial');
+  assert.deepEqual(status.sources[0].issues, [priorIssue, fixture.expectedContinuationIssue]);
 });
 
 test('hardFailures ignores sources that still have cache', () => {

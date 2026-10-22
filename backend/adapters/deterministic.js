@@ -962,7 +962,12 @@ async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fe
             links.push(link);
           }
           // Document links outrank detail pages; read linked annual programs even when the homepage only shows this month.
-          queue.push(...links.slice(0, maxDocuments).map((link) => ({ ...link, score: link.score - candidate.depth * 10, depth: candidate.depth + 1 })));
+          queue.push(...links.slice(0, maxDocuments).map((link) => ({
+            ...link,
+            score: link.score - candidate.depth * 10,
+            depth: candidate.depth + 1,
+            ...(continuationUrls.length ? { originUrl: document.url || url } : {})
+          })));
         }
       }
       documents.push({ url: document.url || url, hash: document.hash, events: parsed.events.length, method: parsed.method });
@@ -972,8 +977,20 @@ async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fe
       issues.push(...(parsed.issues || []).map((message) => ({ url, message })));
     } catch (error) { issues.push(failureIssue(url, error)); }
   }
-  const remaining = queue.filter((candidate) => !visited.has(candidate.url)).length;
-  if (remaining) issues.push({ url: source.url, message: `Discovery budget reached; ${remaining} candidate documents remain.`, code: 'discovery-limit' });
+  const remainingByScope = new Map();
+  for (const candidate of queue.filter((entry) => !visited.has(entry.url))) {
+    // For a bounded continuation, identify the document/seed whose local
+    // discovery queue remains open. source.url can be an unrelated annual PDF
+    // and would collide with that PDF's persisted discovery-limit issue.
+    const issueUrl = continuationUrls.length
+      ? (candidate.originUrl || candidate.url)
+      : source.url;
+    remainingByScope.set(issueUrl, (remainingByScope.get(issueUrl) || 0) + 1);
+  }
+  const remaining = [...remainingByScope.values()].reduce((total, count) => total + count, 0);
+  for (const [issueUrl, count] of remainingByScope) {
+    issues.push({ url: issueUrl, message: `Discovery budget reached; ${count} candidate documents remain.`, code: 'discovery-limit' });
+  }
   if (!documents.length) { const error = new Error(issues[0]?.message || 'No public calendar URL available'); error.details = issues; throw error; }
   const unique = new Map();
   for (const event of events) {

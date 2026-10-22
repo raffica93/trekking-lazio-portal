@@ -1,0 +1,12 @@
+{
+  "sourceId": "cai-campobasso-9236001",
+  "sourceUrl": "https://caicampobasso.it/wp-content/uploads/2026/01/Programma-CAI-Sezioni-Molisane-2026.pdf",
+  "continuationUrl": "https://caicampobasso.it/calendario-delle-attivita/",
+  "priorRemaining": 37,
+  "html": "<!doctype html><html><head><title>Calendario CAI Campobasso 2026</title></head><body><main><h1>Calendario CAI Campobasso 2026</h1><a href=\"/wp-content/uploads/2026/10/programma-autunno-2026.pdf\">Programma escursionismo 2026 PDF</a></main></body></html>",
+  "expectedContinuationIssue": {
+    "url": "https://caicampobasso.it/calendario-delle-attivita/",
+    "message": "Discovery budget reached; 1 candidate documents remain.",
+    "code": "discovery-limit"
+  }
+}
