@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "piemonte-pinasca-delivery-complete",
+  "phase": "marche-potenza-picena-preflight",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -230,8 +230,8 @@
     }
   ],
   "nextAction": {
-    "step": "PUBLISH-PINASCA02-RECEIPT-THEN-MARCHE-POTENZA-PICENA-01",
-    "instruction": "Pinasca02 delivery completato: remoto file commit 90f7f7a, DB 4 places + 4 classifications, query post 4/4 join, zero mismatch/update/delete; receipt/report locali vanno aggiunti e pushati come checkpoint separato, verificarli da remote. Poi avvia run univoco cai-20261022-marche-potenzapicena01 sul solo URL ufficiale https://www.caipotenzapicena.it/attivita2026, una source, max 1 documento/120s/concurrency1. Source partial, 11 candidate discovery storici, target esatto non in cache/docs; non dichiarare complete salvo prova. Campiona regione per regione; non ripetere Pinasca PDF/HTML finché non appare nuovo URL mirato."
+    "step": "MARCHE-POTENZA-PICENA-BOUNDED-SAMPLE",
+    "instruction": "Pinasca receipt/report/checkpoint sono verificati dal remoto al commit 0d5f978. Delivery completato: 4 places + 4 classifications, 4/4 reconciled, 0 missing/mismatch, 0 update/delete. Avvia adesso run univoco `cai-20261022-marche-potenzapicena01` per CAI Potenza Picena `cai-potenza-picena-9228014`, URL ufficiale `https://www.caipotenzapicena.it/attivita2026`, solo 1 source-url, max 1 doc/120s/concurrency1. Baseline file corrente è già pubblicata; non ripetere l’HTML/PDF Pinasca senza nuovo target. Fonte Marche partial, target esatto non in cache/docs, discovery storico 11 senza cooldown o HTTP status."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -1257,7 +1257,7 @@
       "receiptCheckpointSha256": "bef3ff50b4266d0486eb343f9c281fdb96ea3a14b2f6a07727be57e2d00acf32"
     }
   },
-  "repositoryCommit": "90f7f7a41d6896ccf154d67c66b0399e5dcd1240",
+  "repositoryCommit": "0d5f978",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -1271,10 +1271,10 @@
     "writes": 0
   },
   "tests": "After Pinasca02 collection, backend npm test 204/204. Six public catalog/status JSON SHA-256 values were unchanged before/after the test run.",
-  "updatedAt": "2026-10-22T22:16:45.661Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:16:45.661Z",
+  "updatedAt": "2026-10-22T22:17:08.252Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:17:08.252Z",
   "regionCurrent": "Piemonte — CAI Pinasca run02: 4 ID, 4 place + 4 classification inseriti e riconciliati; file e ricevuta pubblicati. Sezione resta partial per OCR PDF/discovery-limit.",
-  "regionNext": "Marche — CAI Potenza Picena (`cai-potenza-picena-9228014`), pagina ufficiale attività 2026, discovery residuo non visitato/non in cache, nessun cooldown; prossimo campione max1 documento/120s/concurrency1. Lombardia resta aperta, senza target Lombardia inedito attualmente confermato.",
+  "regionNext": "Marche — CAI Potenza Picena (`cai-potenza-picena-9228014`), `https://www.caipotenzapicena.it/attivita2026`; preflight read-only conferma URL ufficiale, target non presente in documenti/cache e nessun cooldown; fonte partial con 11 candidati discovery storici.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
     "sourceId": "cai-varese-9216009",
@@ -1301,7 +1301,7 @@
   "deltaDelivery": {
     "regionalRunId": "cai-20261022-piemonte-pinasca02",
     "classificationRunId": "cai-map-20261022-pinasca02",
-    "status": "completed-4-row-delta-reconciled-receipt-published-pending-receipt-checkpoint",
+    "status": "completed-4-row-delta-reconciled-receipt-published-and-remote-verified",
     "candidateIds": 4,
     "classificationCounts": {
       "trekking": 2,
@@ -1330,7 +1330,7 @@
       "updates": 0,
       "deletes": 0
     },
-    "receiptCheckpointCommit": null
+    "receiptCheckpointCommit": "0d5f978"
   },
   "lastCodeCorrection": {
     "commit": "a015865283f0097d22036a9d75f4e0e17cd94bbb",
@@ -1526,7 +1526,7 @@
     {
       "regionalRunId": "cai-20261022-piemonte-pinasca02",
       "classificationRunId": "cai-map-20261022-pinasca02",
-      "status": "DB-completed-receipt-checkpoint-pending",
+      "status": "completed-receipt-remote-verified",
       "candidateIds": 4,
       "classificationCounts": {
         "trekking": 2,
@@ -1544,7 +1544,7 @@
       "preflightTimestamp": null,
       "writeTimestamp": "2026-10-22 22:14:25.13088+00",
       "postQueryTimestamp": "2026-10-22 22:15:18.267267+00",
-      "receiptCheckpointCommit": null
+      "receiptCheckpointCommit": "0d5f978"
     }
   ]
 }
