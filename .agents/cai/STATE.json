@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "abruzzo-penne-checkpoint-pending",
+  "phase": "abruzzo-l-aquila-bounded-run",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -248,12 +248,18 @@
     },
     {
       "id": "S15",
-      "status": "in_progress",
+      "status": "completed",
       "owner": "orchestrator + cai-collector",
-      "result": "Amend current docs/FAILURES, verify immutable run/evidence hashes and public mirrors, publish the Penne checkpoint, then resume one distinct work-ready source selected by offline preflight."
+      "result": "Penne artifacts, public mirrors and register committed/pushed; remote branch fetch returned 19548380898b52fcf867b6f9e3943d2556351ce4 and sealed blobs matched all recorded SHA-256 values."
+    },
+    {
+      "id": "S16",
+      "status": "in_progress",
+      "owner": "cai-collector + orchestrator",
+      "result": "Execute the preflighted single official CAI L’Aquila commissioni=escursionismo URL only after Penne checkpoint; max1 document/120s/concurrency1; stop on 403."
     }
   ],
-  "nextAction": "Commit/push the verified Penne01 artifacts and regional register, confirm the fetched remote commit and sealed blob hashes, then run exactly one bounded CAI L’Aquila collection (1 URL/document, 120s, concurrency 1); stop immediately on 403.",
+  "nextAction": "Penne01 files/report/evidence and updated regional register are checkpointed and remotely verified at 19548380898b52fcf867b6f9e3943d2556351ce4. Run one CAI L’Aquila official commissioni=escursionismo URL, max1 document/120s/concurrency1; stop immediately on 403.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -262,7 +268,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "805d90922c605a5893edb6a20629c1c00f18647c",
+    "branchHead": "19548380898b52fcf867b6f9e3943d2556351ce4",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -432,7 +438,7 @@
       "agentRequestedEffort": "high",
       "effectiveModelTelemetry": "not exposed"
     },
-    "nextPhase": "Penne01 produced zero event delta; publish the current files/report/metadata and updated register. Then run one bounded official CAI L’Aquila commissioni=escursionismo URL in Abruzzo; stop on first 403. No tests in parallel with collection.",
+    "nextPhase": "Penne01 checkpoint remote-verified at 1954838. Start one bounded CAI L’Aquila fetch under the exact preflight; do not start concurrent tests and stop immediately on 403.",
     "databaseReadOnlyObservation": {
       "observedAt": "2026-10-22T18:12:15.676Z",
       "source": "authorized Supabase read-only SQL and map predicate",
@@ -975,9 +981,9 @@
         "checkpointCommit": "pending"
       }
     ],
-    "repositoryCheckpointCommit": "805d90922c605a5893edb6a20629c1c00f18647c",
-    "updatedAt": "2026-10-22T22:44:31.804Z",
-    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:44:31.804Z",
+    "repositoryCheckpointCommit": "19548380898b52fcf867b6f9e3943d2556351ce4",
+    "updatedAt": "2026-10-22T22:45:33.908Z",
+    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:45:33.908Z",
     "continuationMechanism": {
       "flag": "--source-url URL (repeatable) with exactly one --source ID",
       "safety": "Exact official hostname, HTTP(S), no credentials/custom port; redirect guard in continuation mode permits only HTTPS same-host redirects on default/443 without auth. Existing cooldown/cache and bounded document/time limits retained.",
@@ -1092,7 +1098,7 @@
       "sourceId": "cai-penne-9234006",
       "requestedUrl": "https://caipenne.it/2026/03/09/programma-sezionale-2026/",
       "collection": "partial",
-      "files": "ready; importer QA PASS; Penne checkpoint pending",
+      "files": "ready; importer QA PASS; file/report/evidence checkpoint remote-verified at 19548380898b52fcf867b6f9e3943d2556351ce4",
       "database": "not-applicable-no-delta; no DB query or write",
       "manifestPath": "backend/data/agent-runs/cai-20261022-abruzzo-penne01/manifest.json",
       "manifestSha256": "7d56c8295209f5dd4616289461e1c2e7952323272c90d849cd57934f2a23d2c3",
@@ -1187,7 +1193,7 @@
       "sourceId": "cai-penne-9234006",
       "requestedUrl": "https://caipenne.it/2026/03/09/programma-sezionale-2026/",
       "collection": "partial",
-      "files": "ready; importer QA PASS; Penne checkpoint pending",
+      "files": "ready; importer QA PASS; file/report/evidence checkpoint remote-verified at 19548380898b52fcf867b6f9e3943d2556351ce4",
       "database": "not-applicable-no-delta; no DB query or write",
       "manifestPath": "backend/data/agent-runs/cai-20261022-abruzzo-penne01/manifest.json",
       "manifestSha256": "7d56c8295209f5dd4616289461e1c2e7952323272c90d849cd57934f2a23d2c3",
@@ -1227,9 +1233,10 @@
   },
   "repositoryCommit": {
     "branch": "codex/cai-orchestrator-luna",
-    "head": "805d90922c605a5893edb6a20629c1c00f18647c",
+    "head": "19548380898b52fcf867b6f9e3943d2556351ce4",
     "remoteVerified": true,
-    "fetchHead": "805d90922c605a5893edb6a20629c1c00f18647c"
+    "fetchHead": "19548380898b52fcf867b6f9e3943d2556351ce4",
+    "checkpointKind": "Penne01 files + report/evidence + state/handoff/region/failure register"
   },
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
@@ -1253,8 +1260,8 @@
     }
   },
   "tests": "After Penne01 collection: backend npm test 205/205; six public JSON SHA-256 values unchanged by test execution. No production code changed after that test.",
-  "updatedAt": "2026-10-22T22:45:03.847Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:44:31.804Z",
+  "updatedAt": "2026-10-22T22:45:33.908Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:45:33.908Z",
   "regionCurrent": "Abruzzo — campione circoscritto CAI Penne concluso senza delta: la pagina richiesta canonizza sul contenuto già letto del 7 marzo; 8 righe Penne invariate; fonte ancora partial con discovery PDF 60 + continuation HTML 1. Non è prova di calendario vuoto.",
   "regionNext": "Attendere il preflight offline del collector per un URL ufficiale distinto e recuperabile in Abruzzo. Dopo il checkpoint Penne, proseguire una fonte per volta; se non c’è un target distinto, registrare i residui e passare alla regione successiva.",
   "preflight": {
@@ -1509,7 +1516,7 @@
     "sourceId": "cai-l-aquila-9234002",
     "sourceName": "CAI L’Aquila",
     "url": "https://cailaquila.it/le-attivita-del-cai/programma-2026/?commissioni=escursionismo",
-    "status": "offline/read-only preflight PASS; exact bounded run approved after Penne checkpoint",
+    "status": "checkpointed predecessor; exact bounded collection may start",
     "evidence": "enabled official source; URL in calendarUrls/calendarEvidence; no exact cache/source document and no failure/cooldown for this URL; sibling commissioni=legale previously 403",
     "scope": "one URL, max 1 document, 120 seconds, concurrency 1; stop immediately on 403",
     "networkFetchPerformed": false
