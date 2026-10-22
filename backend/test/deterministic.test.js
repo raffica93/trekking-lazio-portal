@@ -227,6 +227,9 @@ test('explicit continuation URLs replace source seeds and remain inside the offi
   assert.deepEqual(result.documents.map((document) => document.url), targets);
   assert.deepEqual(redirectPolicies, targets.map(() => ({ host: 'section.example' })));
   assert.equal(calls.includes(source.url), false);
+  assert.deepEqual(result.discovery, {
+    complete: false, knownCandidates: targets.length, visitedCandidates: targets.length, remainingCandidates: 0
+  }, 'selected continuation URLs are only a subset, not proof of queue exhaustion');
 
   const defaultCalls = [];
   const defaults = {
@@ -235,11 +238,15 @@ test('explicit continuation URLs replace source seeds and remain inside the offi
     website: 'https://section.example/about',
     calendarUrls: ['https://section.example/seed-calendar']
   };
-  await scrapeDeterministic(defaults, {
+  const fullDiscovery = await scrapeDeterministic(defaults, {
     now, cacheDir: tmp, previousStatus: { sources: [] },
     fetchDoc: async (url) => { defaultCalls.push(url); return { url, text: '<h1>Pagina senza link aggiuntivi</h1>', hash: `default-${url}`, contentType: 'text/html' }; }
   });
   assert.deepEqual(defaultCalls, [defaults.calendarUrls[0], defaults.url, defaults.website]);
+  assert.deepEqual(fullDiscovery.discovery, {
+    complete: true, knownCandidates: defaults.calendarUrls.length + 2,
+    visitedCandidates: defaults.calendarUrls.length + 2, remainingCandidates: 0
+  }, 'full seed traversal with no residual candidates proves the discovered queue was exhausted');
 });
 
 test('continuation fetch blocks a same-host URL redirecting to an external private host', async (t) => {

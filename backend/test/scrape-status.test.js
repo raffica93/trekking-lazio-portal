@@ -66,7 +66,11 @@ test('explicit single-source continuation retains document history and unresolve
         hash: 'historical-hash',
         documents: priorDocuments,
         methods: ['html-calendar', 'pdf-ocr'],
-        issues: [{ url: oldUrl, message: 'previous timeout' }],
+        issues: [
+          { url: oldUrl, message: 'previous timeout', code: 'http-error' },
+          { url: pdfUrl, message: 'prior fetch failed', code: 'http-error' },
+          { url: pdfUrl, message: 'Discovery budget reached; 12 candidate documents remain.', code: 'discovery-limit' }
+        ],
         extractedEvents: 4
       }]
     },
@@ -80,7 +84,8 @@ test('explicit single-source continuation retains document history and unresolve
         methods: ['pdf-ocr'],
         issues: [],
         extractedEvents: 5,
-        hash: 'single-document-hash'
+        hash: 'single-document-hash',
+        discovery: { complete: false, knownCandidates: 1, visitedCandidates: 1, remainingCandidates: 0 }
       }],
       failures: []
     },
@@ -93,9 +98,103 @@ test('explicit single-source continuation retains document history and unresolve
   assert.equal(row.documents.length, 35);
   assert.deepEqual(row.documents[0], refreshedPdf);
   assert.equal(row.documents.some((document) => document.url === priorDocuments[34].url), true);
-  assert.deepEqual(row.issues, [{ url: oldUrl, message: 'previous timeout' }]);
+  assert.deepEqual(row.issues, [
+    { url: oldUrl, message: 'previous timeout', code: 'http-error' },
+    { url: pdfUrl, message: 'Discovery budget reached; 12 candidate documents remain.', code: 'discovery-limit' }
+  ]);
   assert.equal(row.hash, 'historical-hash');
   assert.equal(row.extractedEvents, 4);
+});
+
+test('a full-source run clears a prior discovery-limit when its current queue has none', () => {
+  const source = findSource('cai-cernusco-sul-naviglio-9216051');
+  const pdfUrl = 'https://organizzazione.cai.it/sez-cernusco-sul-naviglio/wp-content/uploads/sites/19/2025/12/Locandina-programma-2026.pdf';
+  const status = buildScrapeStatus({
+    sources: [source],
+    existingStatus: { sources: [{
+      id: source.id,
+      status: 'partial',
+      documents: [{ url: pdfUrl, status: 'ok' }],
+      issues: [{ url: pdfUrl, message: 'Discovery budget reached; 12 candidate documents remain.', code: 'discovery-limit' }]
+    }] },
+    result: { excursions: [], results: [{
+      source, status: 'ok', excursions: [], documents: [{ url: pdfUrl, status: 'ok' }],
+      methods: [], issues: [], extractedEvents: 0,
+      discovery: { complete: true, knownCandidates: 1, visitedCandidates: 1, remainingCandidates: 0 }
+    }], failures: [] },
+  });
+  assert.deepEqual(status.sources[0].issues, []);
+  assert.equal(status.sources[0].status, 'ok');
+});
+
+test('a full-source result without exhaustion proof retains a discovery-limit even if issues are empty', () => {
+  const source = findSource('cai-cernusco-sul-naviglio-9216051');
+  const pdfUrl = 'https://organizzazione.cai.it/sez-cernusco-sul-naviglio/wp-content/uploads/sites/19/2025/12/Locandina-programma-2026.pdf';
+  const status = buildScrapeStatus({
+    sources: [source],
+    existingStatus: { sources: [{
+      id: source.id,
+      status: 'partial',
+      documents: [{ url: pdfUrl, status: 'ok' }],
+      issues: [{ url: pdfUrl, message: 'Discovery budget reached; 12 candidate documents remain.', code: 'discovery-limit' }]
+    }] },
+    result: { excursions: [], results: [{
+      source, status: 'ok', excursions: [], documents: [{ url: pdfUrl, status: 'ok' }],
+      methods: [], issues: [], extractedEvents: 0,
+      discovery: { complete: false, knownCandidates: 10, visitedCandidates: 6, remainingCandidates: 4 }
+    }], failures: [] }
+  });
+  assert.deepEqual(status.sources[0].issues, [
+    { url: pdfUrl, message: 'Discovery budget reached; 12 candidate documents remain.', code: 'discovery-limit' }
+  ]);
+  assert.equal(status.sources[0].status, 'partial');
+});
+
+test('a failed retry without a successful document keeps its prior URL error', () => {
+  const source = findSource('cai-cernusco-sul-naviglio-9216051');
+  const pdfUrl = 'https://organizzazione.cai.it/sez-cernusco-sul-naviglio/wp-content/uploads/sites/19/2025/12/Locandina-programma-2026.pdf';
+  const status = buildScrapeStatus({
+    sources: [source],
+    existingStatus: { sources: [{
+      id: source.id,
+      status: 'partial',
+      documents: [],
+      issues: [{ url: pdfUrl, message: 'prior fetch failed', code: 'http-error' }]
+    }] },
+    result: { excursions: [], results: [{
+      source, status: 'ok', excursions: [], documents: [], methods: [], issues: [], extractedEvents: 0
+    }], failures: [] },
+    continuationSourceId: source.id,
+    continuationSourceUrls: [pdfUrl]
+  });
+  assert.deepEqual(status.sources[0].issues, [
+    { url: pdfUrl, message: 'prior fetch failed', code: 'http-error' }
+  ]);
+  assert.equal(status.sources[0].status, 'partial');
+});
+
+test('continuation keeps the newest discovery-limit count for the same URL', () => {
+  const source = findSource('cai-cernusco-sul-naviglio-9216051');
+  const pdfUrl = 'https://organizzazione.cai.it/sez-cernusco-sul-naviglio/wp-content/uploads/sites/19/2025/12/Locandina-programma-2026.pdf';
+  const status = buildScrapeStatus({
+    sources: [source],
+    existingStatus: { sources: [{
+      id: source.id,
+      status: 'partial',
+      documents: [],
+      issues: [{ url: pdfUrl, message: 'Discovery budget reached; 12 candidate documents remain.', code: 'discovery-limit' }]
+    }] },
+    result: { excursions: [], results: [{
+      source, status: 'partial', excursions: [], documents: [{ url: pdfUrl, status: 'ok' }],
+      methods: [], issues: [{ url: pdfUrl, message: 'Discovery budget reached; 4 candidate documents remain.', code: 'discovery-limit' }], extractedEvents: 0
+    }], failures: [] },
+    continuationSourceId: source.id,
+    continuationSourceUrls: [pdfUrl]
+  });
+  assert.deepEqual(status.sources[0].issues, [
+    { url: pdfUrl, message: 'Discovery budget reached; 4 candidate documents remain.', code: 'discovery-limit' }
+  ]);
+  assert.equal(status.sources[0].status, 'partial');
 });
 
 test('hardFailures ignores sources that still have cache', () => {

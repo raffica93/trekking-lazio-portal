@@ -29,6 +29,16 @@ function catalogRow(source, extras = {}) {
   };
 }
 
+function discoveryQueueComplete(run) {
+  const discovery = run?.discovery;
+  return discovery?.complete === true
+    && Number.isInteger(discovery.knownCandidates)
+    && Number.isInteger(discovery.visitedCandidates)
+    && Number.isInteger(discovery.remainingCandidates)
+    && discovery.remainingCandidates === 0
+    && discovery.visitedCandidates >= discovery.knownCandidates;
+}
+
 function buildScrapeStatus({
   sources = SOURCES,
   existingStatus = {},
@@ -68,10 +78,25 @@ function buildScrapeStatus({
         }
         const documents = [...documentsByUrl.values()];
         const currentIssues = Array.isArray(run.issues) ? run.issues : [];
-        // An old issue only clears when its exact URL was explicitly retried.
+        const successfulUrls = new Set(currentDocuments.map((document) => document?.url).filter(Boolean));
+        // Ordinary URL-scoped failures clear when explicitly retried. A
+        // discovery-limit is different: re-reading its URL through a bounded
+        // --source-url continuation does not traverse the old candidate queue.
+        // Only a normal full-source run can clear it, by replacing the issue
+        // list with its current result below.
         const retainedIssues = (Array.isArray(prior.issues) ? prior.issues : [])
-          .filter((issue) => !issue?.url || !requested.has(issue.url));
-        const issues = [...retainedIssues, ...currentIssues];
+          .filter((issue) => issue?.code === 'discovery-limit'
+            || !issue?.url
+            || !requested.has(issue.url)
+            || !successfulUrls.has(issue.url));
+        const mergedIssues = new Map();
+        for (const issue of [...retainedIssues, ...currentIssues]) {
+          const key = `${issue?.code || ''}\u0000${issue?.url || ''}`;
+          // Prefer the latest issue for the same code and URL, including an
+          // updated remaining-candidate count.
+          mergedIssues.set(key, issue);
+        }
+        const issues = [...mergedIssues.values()];
         const unvisitedPriorDocuments = priorDocuments.some((document) => (
           document?.url && !requested.has(document.url)
         ));
@@ -93,15 +118,25 @@ function buildScrapeStatus({
           extractedEvents: incomplete ? prior.extractedEvents ?? run.extractedEvents : run.extractedEvents
         });
       }
+      const currentIssues = Array.isArray(run.issues) ? run.issues : [];
+      const retainedDiscoveryIssues = discoveryQueueComplete(run)
+        ? []
+        : (Array.isArray(prior.issues) ? prior.issues : []).filter((issue) => issue?.code === 'discovery-limit');
+      const mergedIssues = new Map();
+      for (const issue of [...retainedDiscoveryIssues, ...currentIssues]) {
+        const key = `${issue?.code || ''}\u0000${issue?.url || ''}`;
+        mergedIssues.set(key, issue);
+      }
+      const issues = [...mergedIssues.values()];
       return catalogRow(source, {
-        status: run.status,
+        status: issues.length && run.status !== 'failed' ? 'partial' : run.status,
         excursions: run.excursions.length,
-        error: failuresById.get(source.id) || null,
+        error: failuresById.get(source.id) || (issues.length ? prior.error || null : null),
         hash: run.hash || null,
         updatedAt: generatedAt,
         documents: run.documents,
         methods: run.methods,
-        issues: run.issues,
+        issues,
         extractedEvents: run.extractedEvents
       });
     }

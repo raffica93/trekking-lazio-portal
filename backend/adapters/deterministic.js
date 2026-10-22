@@ -975,6 +975,15 @@ async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fe
     status: excursions.length ? (issues.length ? 'partial' : 'ok') : (recognized && !issues.length ? 'no-upcoming' : 'unsupported'),
     excursions, hash: digest(documents.map((doc) => `${doc.url}|${doc.hash}`).sort().join('\n')),
     documents, issues, methods: [...methods], recognized, extractedEvents: eventCount, processedDocuments: documents.length,
+    // Explicit URL continuations replace the discovery queue. Exhausting that
+    // caller-selected subset is not evidence that the source's prior
+    // discovery-limit queue has been exhausted.
+    discovery: {
+      knownCandidates: queued.size,
+      visitedCandidates: [...queued].filter((url) => visited.has(url)).length,
+      remainingCandidates: remaining,
+      complete: continuationUrls.length === 0 && remaining === 0 && visited.size >= queued.size
+    },
     partial: issues.length > 0 || !recognized, elapsedMs: Date.now() - started
   };
 }
