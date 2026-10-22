@@ -116,3 +116,7 @@ Il PDF ufficiale `Calendario-attivita-2026_rev.04_16-03-2026.pdf` è in cache e 
 - Fixture reale end-to-end con PDF cache (SHA `f3939cb69b...3b4103e9`) e output pdf.js; parser a griglia per header mese/giorni/colonne, merge del giorno separato solo se coordinate X completano sette celle; cache version 10→11.
 - Rileva 14 attività con date corrette Oct–Dec 2026, inclusi attività trekking e non trekking; test rifiuta Oct24 e assenza di coordinate inventate. Focused 20/20, suite backend 187/187, importer QA PASS.
 - Codice non ancora checkpointato e FAILURES rimane open fino alla verifica run orchestrato. Dopo push, un solo documento PDF da cache con `SCRAPE_MAX_DOCUMENTS=1`; poi QA file e classificazione Mercury per gli ID nuovi prima dell’eventuale DB import. No rete/DB prima del checkpoint.
+
+## Prossima fase — Valmadrera run07
+
+Run `cai-20261022-lombardia-valmadrera07` ha rielaborato il PDF CAI ufficiale con parser VERSION 11: 65 righe, 14 nuovi ID, source status ok. QA indipendente PASS e backend 187/187. Prima pubblicare il checkpoint file/report. Poi classificare in Mercury esclusivamente i 14 ID nuovi con run/output isolati, verificare modello richiesto/attestato, fixture/contratto e QA importer. Pubblicare manifest e checkpoint verificabili prima della scrittura DB; poi upsert soltanto delle classificazioni mancanti, `ON CONFLICT DO NOTHING`, senza chiamare import generale su `places`; fare query/ricevuta esatta. Se il modello opzionale fallisce, mantenere file classificati pending e proseguire solo attività deterministiche indipendenti.

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "regional-collection-partial-checkpointed",
+  "phase": "regional-files-verified-awaiting-classification",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -200,14 +200,14 @@
     },
     {
       "id": "S7",
-      "status": "in-progress",
-      "owner": "orchestrator + cai-collector",
-      "result": "Run `cai-20261022-lombardia-valmadrera04` processed 40 documents, with 41 document-level extractions; 7 source events remain unchanged. The discovery queue fell from 23 to 12; no HTTP failures or DB access. Catalog delta 0 on 3,345 unique IDs. Backend tests 178/178 after collection. Report SHA `36bd0391cb8cd48e85df22bb095e39dc347ed6ed2fa4275fc9a1ad6f9891af02`, manifest SHA `e7df409743d2265e64d0862abfcd24d4be02c8e9a01e9690f6ff97385cd6c6f6`."
+      "status": "completed",
+      "owner": "orchestrator + cai-collector + cai-importer",
+      "result": "Run cai-20261022-lombardia-valmadrera07 reprocessed the single official 2026 PDF with deterministic parser VERSION 11: 65 document rows reconciled to 21 future catalog events (7 existing + 14 new), with 0 existing-row changes/removals. Parser failure resolved by the source run. One conditional GET succeeded through the inherited proxy; exact HTTP status is not persisted (304 inferred from unchanged cache mtimes). Independent importer QA PASS; backend tests 187/187. Files are ready, database pending classification of the 14 new IDs."
     }
   ],
   "nextAction": {
-    "step": "S7",
-    "instruction": "From verified code commit 20dbaf2 and run04 file checkpoint, run one explicit URL continuation over the 12 documented Valmadrera candidates with one source, max 20 documents/180s/concurrency1. Audit URLs reached/remaining; then QA, tests and checkpoint. No DB import unless a verified catalog delta exists."
+    "step": "S8",
+    "instruction": "Checkpoint the verified run07 regional files/report on origin, then classify only the 14 newly added Valmadrera source IDs with the verified Mercury contract in an isolated run. Independent QA and a second remote file checkpoint must precede any classification-only DB upsert. Do not reimport existing rows or alter places."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -217,7 +217,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "20dbaf2e1b8a8b6f63c97efe2d3e96c06bc6910c",
+    "branchHead": "e65379e4791bddbb92f8898767f0951135a04173",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -348,22 +348,22 @@
     },
     "regionalCoverage": {
       "region": "Lombardia",
-      "status": "open; Brescia remains partial on unavailable URLs; Valmadrera discovery backlog reduced but not exhausted",
+      "status": "open; Valmadrera PDF parsing is verified, while other Lombardia sources and regional coverage remain partial.",
       "currentRunCounts": {
         "sectionsChecked": 1,
         "complete": 0,
         "partial": 1,
         "unreachable": 0,
-        "verifiedNewEvents": 0,
-        "sectionEventsReported": 7,
-        "documentExtractions": 41,
+        "verifiedNewEvents": 14,
+        "sectionEventsReported": 21,
+        "documentExtractions": 65,
         "exactDuplicateIdsExcluded": 0,
-        "semanticDuplicates": "not established; catalog delta zero",
+        "semanticDuplicates": "No catalog ID duplicates; document-row semantic overlap not exposed.",
         "failuresResolved": [
-          "Valmadrera discovery queue reduced from 23 to 12; daily pages through 2026-10-17 reached; no HTTP failures observed."
+          "CAI Valmadrera annual PDF month-grid parser failure: run07 source status ok and 14 new future events extracted using parser VERSION 11."
         ],
         "failuresOpen": [
-          "Valmadrera discovery-limit remains with 12 candidates. Brescia retains 3 distinct unavailable URLs."
+          "Broader Lombardia coverage remains incomplete; Brescia unavailable URLs and other pending sources have not been recounted in this run."
         ]
       },
       "historicalSnapshot": {
@@ -397,9 +397,9 @@
       "classificationTablesFound": false,
       "writes": 0
     },
-    "tests": "Backend npm test 186/186 after Valmadrera run06; backend/frontend catalog files remained byte-identical and hashes unchanged by tests.",
-    "regionCurrent": "Lombardia — Valmadrera parser correction committed and remote-verified at 75be6e65b19a727250346c5e1c4e3c4287f9b277; fixture tests 20/20, backend 187/187. Source re-evaluation remains.",
-    "regionNext": "Run exactly one bounded orchestrator continuation for the Valmadrera 2026 PDF using the already verified local cache and parser VERSION 11; no live fetch if cache succeeds. QA manifest/output, then classify new IDs through Mercury before deciding on DB import.",
+    "tests": "After run07 stopped, backend npm test passed 187/187. Backend/frontend excursions SHA256 6e46cec85daae67e6da0a98afb36d4fbf72b3790b2246dfcdf3837ea9a0ff99b and scrape-status SHA256 da7fa46626cfd3c7e29cc59e0eb66c85f2374a70d0d325a68caba38308dd8450 remained byte-identical after tests.",
+    "regionCurrent": "Lombardia — CAI Valmadrera official PDF reprocessed under parser VERSION 11 in run cai-20261022-lombardia-valmadrera07; 14 new events verified, importer QA PASS, backend 187/187. Files await remote checkpoint; DB pending classification of the 14 new IDs.",
+    "regionNext": "After remote file checkpoint, classify only the 14 new Valmadrera IDs with the verified Mercury contract in an isolated run; preserve requested/attested model fields. Importer QA and a second remote checkpoint precede classification-only DB reconciliation. Then continue Lombardia one source at a time.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
     "remoteCheckpointVerifiedAt": "2026-10-22T19:25:20Z",
@@ -431,7 +431,7 @@
     },
     "liveSiteStatus": "Database classification is installed and verified; repository map filtering code is not deployed. No deploy performed.",
     "regionalRun": {
-      "runId": "cai-20261022-lombardia-valmadrera06",
+      "runId": "cai-20261022-lombardia-valmadrera07",
       "sourceId": "cai-valmadrera-9216081",
       "region": "Lombardia",
       "collection": "partial",
@@ -441,31 +441,31 @@
       "completeSections": 0,
       "partialSections": 1,
       "unreachableSections": 0,
-      "documentsProcessed": 8,
-      "remainingDiscoveryCandidates": 19,
-      "sectionEventCount": 7,
-      "documentExtractions": 8,
-      "verifiedNewEventIds": 0,
+      "documentsProcessed": 1,
+      "remainingDiscoveryCandidates": 0,
+      "sectionEventCount": 21,
+      "documentExtractions": 65,
+      "verifiedNewEventIds": 14,
       "catalogDelta": {
-        "added": 0,
+        "added": 14,
         "removed": 0,
-        "changedExisting": 5,
-        "uniqueIds": 3345
+        "changedExisting": 0,
+        "uniqueIds": 3359
       },
-      "exactDuplicateIdsExcluded": 1,
-      "semanticDuplicates": "1 duplicate row among document extracts excluded; catalog contains 7 unique existing section records; further semantic overlap not established",
-      "issueSummary": "All 8 selected URLs reached with no per-run HTTP/source failures. Discovery stopped at maxDocs with 19 candidates remaining associated with the official 2026 calendar PDF. No additional section attempted.",
-      "geolocation": "No location/coordinate fields changed; no geocoding added.",
-      "manifestSha256": "f673039b1a8b2286067637a9ddb524c04868656bc1a6e6505b2ac6252934d64d",
-      "reportSha256": "42837b9104b440128911a879b2a0b9adcda54699eaf5983835f7b4f5dc0ff082",
-      "stateSha256": "fa591cf1518d99234684474b66bea5b19b8cf113c96d809b6879c4db9306668f",
-      "catalogSha256": "bb0a6a511a8bb033ca5611508cb731aa933d88d377d9075fe0f3b08c13d1264f",
+      "exactDuplicateIdsExcluded": 0,
+      "semanticDuplicates": "No catalog ID duplicates; cross-row semantic duplicate count is not exposed by the extractor.",
+      "issueSummary": "The exact official PDF source completed with status ok. 65 document rows reconciled to 21 future catalog events; no source issues. Overall orchestrator remains partial because other regional/national sources are incomplete. One conditional request succeeded through inherited proxy; HTTP status is not recorded, with 304 inferred from unchanged body/cache mtimes.",
+      "geolocation": "All 14 new records retain Località da verificare and have no latitude/longitude; no geocoding was attempted.",
+      "manifestSha256": "80338c4a5952334c28cb8dc7ce436e6b0d8ea0aea9309046356e7909bc3a9335",
+      "reportSha256": "66cfdef7a09d8b998a4da3dc50625b11493968ed0bece873191651518b5873ca",
+      "stateSha256": "f54437f765a93c5affb604b478f5c778bec07f4152308e069b2ba4ed63564140",
+      "catalogSha256": "6e46cec85daae67e6da0a98afb36d4fbf72b3790b2246dfcdf3837ea9a0ff99b",
       "sectionsSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
-      "scrapeStatusSha256": "1e23da5325c270c8344a1280f1f09d8ffc1d983b6f6a259b97b49534315faaf7",
-      "baselineCommit": "f00a1e4eb4eaea4a2eb916578ba1d6dce7e3d377",
-      "validation": "Importer QA PASS; backend npm test 186/186; backend/frontend copies remained identical; no DB query/write.",
-      "checkpointCommit": "488e56407cf7d1de82166c8d8a10f641504c306a",
-      "checkpointVerifiedAt": "2026-10-22T19:45:59Z"
+      "scrapeStatusSha256": "da7fa46626cfd3c7e29cc59e0eb66c85f2374a70d0d325a68caba38308dd8450",
+      "baselineCommit": "e65379e4791bddbb92f8898767f0951135a04173",
+      "validation": "Independent importer QA PASS; backend npm test 187/187 after collection; backend/frontend catalog and scrape-status copies remained byte-identical after tests. No DB query/write.",
+      "checkpointCommit": "pending",
+      "checkpointVerifiedAt": null
     },
     "regionalCheckpointCommit": "75be6e65b19a727250346c5e1c4e3c4287f9b277",
     "regionalRunHistory": [
@@ -765,6 +765,40 @@
         "scrapeStatusSha256": "1e23da5325c270c8344a1280f1f09d8ffc1d983b6f6a259b97b49534315faaf7",
         "baselineCommit": "f00a1e4eb4eaea4a2eb916578ba1d6dce7e3d377",
         "validation": "Importer QA PASS; backend npm test 186/186; backend/frontend copies remained identical; no DB query/write."
+      },
+      {
+        "runId": "cai-20261022-lombardia-valmadrera07",
+        "sourceId": "cai-valmadrera-9216081",
+        "collection": "partial",
+        "files": "ready",
+        "database": "pending",
+        "controlledSections": 1,
+        "completeSections": 0,
+        "partialSections": 1,
+        "unreachableSections": 0,
+        "observedDocuments": 1,
+        "remainingDiscoveryCandidates": 0,
+        "sectionEventCount": 21,
+        "documentExtractions": 65,
+        "verifiedNewEventIds": 14,
+        "catalogDelta": {
+          "added": 14,
+          "removed": 0,
+          "changedExisting": 0,
+          "uniqueIds": 3359
+        },
+        "exactDuplicateIdsExcluded": 0,
+        "semanticDuplicates": "Catalog IDs unique; extractor does not expose semantic duplicate count.",
+        "issueSummary": "Official PDF source status ok, no issues; overall national run state partial because other sources remain incomplete. HTTP status unpersisted; 304 inferred from cache timestamps.",
+        "geolocation": "No coordinates or location inferred; all new events stay Località da verificare.",
+        "manifestSha256": "80338c4a5952334c28cb8dc7ce436e6b0d8ea0aea9309046356e7909bc3a9335",
+        "reportSha256": "66cfdef7a09d8b998a4da3dc50625b11493968ed0bece873191651518b5873ca",
+        "catalogSha256": "6e46cec85daae67e6da0a98afb36d4fbf72b3790b2246dfcdf3837ea9a0ff99b",
+        "scrapeStatusSha256": "da7fa46626cfd3c7e29cc59e0eb66c85f2374a70d0d325a68caba38308dd8450",
+        "importerQa": "PASS; report/manifest/output hashes and all 14 event/date pairs checked, existing records unchanged, no DB query/write.",
+        "tests": "Backend npm test 187/187; catalog and status copies remained byte-identical.",
+        "commit": "pending",
+        "remoteVerifiedAt": null
       }
     ],
     "repositoryCheckpointCommit": "75be6e65b19a727250346c5e1c4e3c4287f9b277",
@@ -784,11 +818,11 @@
       "url": "https://organizzazione.cai.it/sez-valmadrera/wp-content/uploads/sites/56/2026/03/Calendario-attivita-2026_rev.04_16-03-2026.pdf",
       "phase": "parsing",
       "failureClass": "official-calendar-grid-unrecognized",
-      "status": "open",
+      "status": "recheck_resolved",
       "observedAt": "2026-10-22T19:46:00Z",
-      "evidence": "Cached 12-page PDF readable by pdftotext -layout; parser cache is pdf-text, recognized=false, 0 events, no issues. Future calendar entries visible for 2026-11-01 and 2026-11-22. No network request.",
+      "evidence": "Run cai-20261022-lombardia-valmadrera07 selected the exact official PDF; source status ok, parser VERSION 11 extracted 65 rows and reconciled 21 future events (7 existing +14 new). The old zero-event result is resolved by the run and PDF-backed fixture test. A single conditional GET succeeded via inherited proxy; exact HTTP status not persisted, 304 inferred from unchanged cache timestamps.",
       "resolutionCandidate": {
-        "status": "candidate-verified-awaiting-checkpoint-and-cache-rerun",
+        "status": "verified-by-orchestrator-run-awaiting-remote-checkpoint",
         "deterministicVersion": "10→11",
         "fixturePdfSha256": "f3939cb69b55824e4db4026d989acea993a58e7fa81671d8c7a3093d3b4103e9",
         "fixtureTextSha256": "38af603c521ed5c5f64c1bc0e856ad545d853bc57dfb7287af8eb031a34bd911",
@@ -796,10 +830,13 @@
         "focusedTests": "20/20",
         "backendTests": "187/187",
         "importerQa": "PASS; geo/editorial/DB boundary checked",
-        "catalogChanges": 0,
+        "catalogChanges": 14,
         "dbWrites": 0,
         "commit": "75be6e65b19a727250346c5e1c4e3c4287f9b277",
-        "remoteVerifiedAt": "2026-10-22T20:07:30Z"
+        "remoteVerifiedAt": null,
+        "runId": "cai-20261022-lombardia-valmadrera07",
+        "reportSha256": "66cfdef7a09d8b998a4da3dc50625b11493968ed0bece873191651518b5873ca",
+        "manifestSha256": "80338c4a5952334c28cb8dc7ce436e6b0d8ea0aea9309046356e7909bc3a9335"
       }
     },
     "parserCorrection": {
@@ -817,7 +854,7 @@
       "remoteVerifiedAt": "2026-10-22T20:07:30Z"
     }
   },
-  "repositoryCommit": "75be6e65b19a727250346c5e1c4e3c4287f9b277",
+  "repositoryCommit": "e65379e4791bddbb92f8898767f0951135a04173",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -835,7 +872,7 @@
     "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
     "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
   },
-  "updatedAt": "2026-10-22T20:07:30Z",
+  "updatedAt": "2026-10-22T20:30:00Z",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T20:07:30Z",
   "regionCurrent": "Lombardia — Valmadrera parser correction committed and remote-verified at 75be6e65b19a727250346c5e1c4e3c4287f9b277; fixture tests 20/20, backend 187/187. Source re-evaluation remains.",
   "regionNext": "Run exactly one bounded orchestrator continuation for the Valmadrera 2026 PDF using the already verified local cache and parser VERSION 11; no live fetch if cache succeeds. QA manifest/output, then classify new IDs through Mercury before deciding on DB import.",

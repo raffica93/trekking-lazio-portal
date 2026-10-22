@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T20:07:30Z",
+  "generatedAt": "2026-10-22T20:30:00Z",
   "repositoryCommit": "75be6e65b19a727250346c5e1c4e3c4287f9b277",
   "baseline": {
     "commit": "9919927d4cbef6d154c4dae1441d64cd01c70ad4",
@@ -44359,13 +44359,13 @@
       "phase": "parsing",
       "failureClass": "official-calendar-grid-unrecognized",
       "firstObservedAt": "2026-10-22T19:46:00Z",
-      "lastObservedAt": "2026-10-22T19:46:00Z",
-      "attempts": "unknown historical cache/run processing; no new request in current preflight",
+      "lastObservedAt": "2026-10-22T20:09:25Z",
+      "attempts": "One bounded orchestrator run cai-20261022-lombardia-valmadrera07; one conditional GET via inherited proxy; source status ok; no retry.",
       "cooldown": "not applicable; usable local PDF/extraction cache exists",
-      "evidence": "Cached PDF SHA256 f3939cb69b55824e4db4026d989acea993a58e7fa81671d8c7a3093d3b4103e9, 375821 bytes, 12 pages. Current adapter extraction cache reports method=pdf-text, recognized=false, events=[], issues=[]. pdftotext -layout reads month grids; Oct/Nov/Dec 2026 contain schedule entries including Nov 1 Gita sociale media montagna Valmalenco and Nov 22 Gita culturale Enogastronomica. Prior Valmadrera run01/run03 reports also recorded PDF-text with zero extracted rows. No network request made in this observation. Offline visual/pdf.js review verified 14 dated Oct–Dec entries: Oct 04/10 Scuola PIACCO, Oct11 Gita sociale Presolana, Oct17 Raccontami + Alp. Giovanile, Oct18 Vivi Moregallo + Alp. Giovanile, Oct25 Scuola PIACCO (Oct24 blank), Nov01 Gita sociale Valmalenco, Nov08/14/15 Scuola PIACCO, Nov22 Gita culturale, Dec04 Cena sociale. New integration fixture checks source PDF + production pdfText/parser output, exact dates, no coordinates.",
-      "status": "open",
-      "owner": "cai-collector",
-      "resolutionCheck": "Parser correction committed and verified on origin/codex/cai-orchestrator-luna at 75be6e65b19a727250346c5e1c4e3c4287f9b277; deterministic VERSION 10→11; actual PDF integration fixture; focused tests 20/20 and full backend 187/187; importer QA PASS. Awaiting one bounded cached orchestrator run to close source issue. No DB write."
+      "evidence": "Cached PDF SHA256 f3939cb69b55824e4db4026d989acea993a58e7fa81671d8c7a3093d3b4103e9, 375821 bytes, 12 pages. Current adapter extraction cache reports method=pdf-text, recognized=false, events=[], issues=[]. pdftotext -layout reads month grids; Oct/Nov/Dec 2026 contain schedule entries including Nov 1 Gita sociale media montagna Valmalenco and Nov 22 Gita culturale Enogastronomica. Prior Valmadrera run01/run03 reports also recorded PDF-text with zero extracted rows. No network request made in this observation. Offline visual/pdf.js review verified 14 dated Oct–Dec entries: Oct 04/10 Scuola PIACCO, Oct11 Gita sociale Presolana, Oct17 Raccontami + Alp. Giovanile, Oct18 Vivi Moregallo + Alp. Giovanile, Oct25 Scuola PIACCO (Oct24 blank), Nov01 Gita sociale Valmalenco, Nov08/14/15 Scuola PIACCO, Nov22 Gita culturale, Dec04 Cena sociale. New integration fixture checks source PDF + production pdfText/parser output, exact dates, no coordinates. Run07 with deterministic VERSION 11 extracted 65 rows from the same PDF and reconciled 21 future catalog events, including 14 new IDs; independent importer QA PASS and backend tests 187/187. PDF body SHA unchanged.",
+      "status": "recheck_resolved",
+      "owner": "orchestrator",
+      "resolutionCheck": "Resolved by run cai-20261022-lombardia-valmadrera07: 14 new verified records, 0 removals/changes to existing records, report SHA 66cfdef7a09d8b998a4da3dc50625b11493968ed0bece873191651518b5873ca, manifest SHA 80338c4a5952334c28cb8dc7ce436e6b0d8ea0aea9309046356e7909bc3a9335. HTTP 304 inferred from unchanged cache timestamps; exact response status is not persisted. DB writes 0."
     }
   ],
   "schema": {
