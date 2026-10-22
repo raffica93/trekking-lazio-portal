@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "delta-file-checkpoint-ready-awaiting-db-import",
+  "phase": "migration-fix-checkpoint-pending",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -209,11 +209,17 @@
       "status": "completed",
       "owner": "collector + importer + orchestrator",
       "result": "Run07 semantic duplicate review excluded 2 confirmed and held 2 probable duplicates; Mercury batch cai-map-20261022-valmadrera01 classified the remaining 10 (8 non_trekking supported by official PDF, 2 da_verificare, 0 trekking, 0 errors). Collector QA and importer schema/integrity QA PASS. Added insert-only bounded delta importer, resumable partial receipt state, and portable repo-relative input paths; backend npm test 193/193. No DB writes."
+    },
+    {
+      "id": "S9",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "The checkpointed geo-evidence migration was attempted after schema inspection; DB rejected jsonb_object_length(jsonb), which is unavailable. Read-only verification confirmed the failed DDL transaction added neither column nor migration record, and no event data was written. Replaced object-length check with exact-key JSONB subtraction expression and added migration regression assertions; importer suite 34/34 passes. Fix awaits a new remote checkpoint before retrying DDL."
     }
   ],
   "nextAction": {
-    "step": "S9",
-    "instruction": "Commit and push the verified importer/orchestrator changes plus the sealed 10-event classification delta and duplicate/source QA artifacts. Verify remote ref and blob hashes. Only then repeat the read-only target-ID and editorial-digest query, run the published insert-only delta through the importer, save the receipt, and verify the after-state. Do not scrape or reimport the 3,336 classified baseline rows."
+    "step": "S10",
+    "instruction": "Checkpoint and verify the corrected geo-evidence migration and test. Apply that additive migration only after remote checkpoint; verify geo_evidence and the existing FK. Then perform a fresh read-only target-ID/editorial-digest query, deliver the 10-row delta via the authorized Supabase channel under the importer insert-only contract, and save/reconcile the receipt."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -908,7 +914,7 @@
   "deltaDelivery": {
     "regionalRunId": "cai-20261022-lombardia-valmadrera07",
     "classificationRunId": "cai-map-20261022-valmadrera01",
-    "status": "files-ready-db-pending-checkpoint",
+    "status": "schema-migration-fix-awaiting-checkpoint",
     "candidateIds": 10,
     "confirmedDuplicatesExcluded": 2,
     "probableDuplicatesHeld": 2,
@@ -920,6 +926,6 @@
     },
     "coordinatesAdded": 0,
     "writeContract": "insert-only places + missing classifications; conflict-ignore; no deletes/updates",
-    "next": "commit/push and verify the sealed input/output and importer code; then fresh read-only DB check, published insert-only delta, verify receipt and after-query"
+    "next": "push the migration compatibility fix and test; apply the corrected additive migration; then recheck target IDs and editorial digest and import the 10-row sealed delta"
   }
 }

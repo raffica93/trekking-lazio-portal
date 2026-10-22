@@ -698,7 +698,8 @@ test('geo evidence migration is additive, checked, and has no backfill or write 
   const migration = fs.readFileSync(path.join(__dirname, '../../supabase/migrations/20261022200000_places_geo_evidence.sql'), 'utf8');
   assert.match(migration, /add column if not exists geo_evidence jsonb/i);
   assert.match(migration, /places_geo_evidence_valid_check/i);
-  assert.match(migration, /jsonb_object_length\(geo_evidence\) = 5/i);
+  assert.doesNotMatch(migration, /jsonb_object_length/i);
+  assert.match(migration, /geo_evidence - array\['status', 'pointType', 'precision', 'sourceKind', 'sourceUrl'\] = '\{\}'::jsonb/i);
   assert.match(migration, /'verified', 'needs_review', 'unknown'/i);
   assert.match(migration, /'start', 'summit', 'area'/i);
   assert.match(migration, /'official', 'gpx', 'map'/i);

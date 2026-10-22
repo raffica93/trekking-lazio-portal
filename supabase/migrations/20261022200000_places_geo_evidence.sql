@@ -10,8 +10,8 @@ alter table public.places
     geo_evidence is null
     or (
       jsonb_typeof(geo_evidence) = 'object'
-      and jsonb_object_length(geo_evidence) = 5
       and geo_evidence ?& array['status', 'pointType', 'precision', 'sourceKind', 'sourceUrl']
+      and geo_evidence - array['status', 'pointType', 'precision', 'sourceKind', 'sourceUrl'] = '{}'::jsonb
       and jsonb_typeof(geo_evidence->'status') = 'string'
       and geo_evidence->>'status' in ('verified', 'needs_review', 'unknown')
       and jsonb_typeof(geo_evidence->'pointType') = 'string'
