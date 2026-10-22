@@ -26,3 +26,7 @@ Le impostazioni desiderate e la disponibilità osservata nel runtime sono due
 informazioni distinte. Uno strumento non disponibile non equivale a un check
 riuscito; una variabile proxy con placeholder non equivale a una credenziale
 mancante.
+
+| 2026-10-22 | Conservare in DB sia candidato Mercury sia decisione/categoria effettive QA, con motivo e URL di evidenza. | Le fonti 404 e le attribuzioni/data discordanti non devono diventare esclusioni automatiche; report e override devono essere verificabili. |
+| 2026-10-22 | Arrestare un batch su 401/402/403/429 o risposta con modello non allowlisted. | Evitare migliaia di chiamate invalide; riprendere solo dopo la causa risolta, senza retry infiniti. |
+| 2026-10-22 | Nessuna scrittura classification DB prima di output QA e manifest verificati su GitHub. | Il lavoro deve essere recuperabile e l’import classification-only deve preservare conflitti e campi editoriali. |

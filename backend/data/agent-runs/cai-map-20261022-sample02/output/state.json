@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "runId": "cai-map-20261022-sample02",
+  "status": "ready",
+  "input": "/workspace/trekking-lazio-portal-cai/backend/data/agent-runs/cai-map-20261022-sample02/input.json",
+  "inputSha256": "7b6cc657343149a10dad55faab3928cef35049638dada7f08da301b1021c6631",
+  "modelRequested": "inception/mercury-decide",
+  "policyVersion": "cai-trekking-v2",
+  "createdAt": "2026-10-22T17:06:54.276Z",
+  "updatedAt": "2026-10-22T17:06:58.421Z",
+  "concurrency": 4,
+  "rateLimitMs": 200,
+  "total": 20,
+  "completed": 20,
+  "processed": 20,
+  "counts": {
+    "total": 20,
+    "byDecision": {
+      "trekking": 5,
+      "non_trekking": 5,
+      "da_verificare": 10
+    },
+    "byCategory": {
+      "a piedi": 4,
+      "ciaspole": 0,
+      "alpinismo/ferrata": 1,
+      "bici": 0,
+      "sci": 0,
+      "sociale/culturale": 8,
+      "corso/riunione": 0,
+      "altro": 7
+    },
+    "errors": 0
+  },
+  "errors": []
+}

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-21T00:00:00.000Z",
-  "repositoryCommit": "8e7626992f7b193f331d409d983c4667904bf0b8",
+  "generatedAt": "2026-10-22T17:27:21.366Z",
+  "repositoryCommit": "3f93525f4f52dff9dd322278a6b3e4759455648b",
   "baseline": {
     "commit": "9919927d4cbef6d154c4dae1441d64cd01c70ad4",
     "runId": "cai-20261020-piemonte-01"
@@ -44198,5 +44198,40 @@
     "owner": "cai-collector|cai-importer|orchestrator",
     "resolutionCheck": "execution, commit, and test evidence"
   },
-  "policyStatus": "historical_classification_unverified"
+  "policyStatus": "historical_classification_unverified",
+  "mapClassificationSample": {
+    "runId": "cai-map-20261022-sample02",
+    "observedAt": "2026-10-22T17:27:21.366Z",
+    "providerRequests": 20,
+    "httpSuccess": 20,
+    "providerErrors": 0,
+    "modelRequested": "inception/mercury-decide",
+    "responseModel": "inception/mercury-decide-20260930",
+    "modelAttested": true,
+    "sourceChecks": {
+      "checked": 20,
+      "http200": 18,
+      "http404": 2
+    },
+    "failures": [
+      {
+        "sourceId": "cai-s-a-t-cavalese-9118022-1555753870db",
+        "url": "https://www.satcavalese.it/event/lago-di-limo-dolomiti-di-fanis/",
+        "phase": "source-quality-review",
+        "failureClass": "official-link-resource-removed",
+        "httpStatus": 404,
+        "resolution": "Preserve candidate as da_verificare; no exclusion or inference without an official replacement."
+      },
+      {
+        "sourceId": "cai-sacile-9222024-79e8babd63a6",
+        "url": "https://organizzazione.cai.it/sez-sacile/evento/ag-2026-castagnata-in-casera-ceresera/",
+        "phase": "source-quality-review",
+        "failureClass": "official-link-resource-removed",
+        "httpStatus": 404,
+        "resolution": "QA override to da_verificare; do not exclude as non_trekking until evidence is recovered."
+      }
+    ],
+    "qaOverrides": 6,
+    "dbWrites": 0
+  }
 }

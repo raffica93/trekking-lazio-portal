@@ -1,49 +1,35 @@
-# Passaggio operativo CAI — checkpoint per la nuova chat cloud
+# Passaggio operativo CAI — classificazione catalogo mappa
 
-## Destinatario e stato al 21 ottobre 2026
+## Stato al 22 ottobre 2026
 
-La prossima sessione operativa è la chat Codex Cloud `01a1604c-7018-7460-8316-df3c57dfd077`, “Orchestratore CAI cloud — ripresa regionale”. Questa sessione non la contatta. Il codice è pubblicato sul branch `codex/cai-orchestrator-luna` al commit `3469923fe6c21e28f2182753b7b5c4aa528baa91`; questo handoff sarà incluso nel commit documentale successivo. La nuova chat deve fare fetch e verificare il branch.
+Branch `codex/cai-orchestrator-luna`, repository `raffica93/trekking-lazio-portal`. Il checkpoint precedente è stato recuperato e il branch remoto aggiornato. I commit di codice `902a180` e `3f93525` sono stati pushati e letti di nuovo da origin. Non sono state fatte scritture DB.
 
-I due agenti autorizzati (`cai-collector` e `cai-importer`, configurati GPT-6 Luna high) hanno completato i rispettivi cambiamenti e sono idle/completed. Nessun terzo agente è stato creato. In questa sessione sono stati eseguiti solo test offline e query di lettura riferite dalla chat aggiornata: nessun run di raccolta/classificazione, nessun file catalogo classificato, nessuna migration o scrittura DB.
+La sessione ha usato l’orchestratore GPT-6 Luna high richiesto; l’utente ha confermato la selezione UI. L’API di stato cloud mostra runtime connesso, rete enforced, osservazioni correnti e segreto `OPENROUTER_API_KEY` pronto solo per `openrouter.ai`. La chiave non è stata letta o stampata. Per Mercury si usa soltanto POST `https://openrouter.ai/api/alpha/decisions`, modello richiesto `inception/mercury-decide`; il campione ha ricevuto e attestato `inception/mercury-decide-20260930`. L’identità/effort runtime di Luna non è esposta dalla telemetria.
 
-## Verifiche di questo checkpoint
+I due soli agenti autorizzati, `cai-collector` e `cai-importer`, entrambi configurati Luna high, hanno completato i compiti indicati sotto. Tesseract 5 dispone solo di `eng` e `osd`; OCR italiano resta indisponibile. Nessun cron, merge o deploy.
 
-- `cd backend && npm test`: 161 passati, 0 falliti dopo la correzione di “Escursione in bici” e l’aspettativa corretta sui messaggi provider sanitizzati.
-- `cd frontend && npm test -- --watch=false`: 43 passati in 11 file.
-- Il catalogo non è cambiato: `backend/data/excursions.json` e `frontend/public/excursions.json` hanno entrambi SHA-256 `1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877`.
-- Migrazione `place_classifications` preparata ma non applicata. La classification è separata da titolo, stato, foto e altri campi editoriali. La mappa filtra soltanto record con decisione trekking; errore/assenza classificazione non comporta esclusione automatica.
-- Il modello è richiesto come `inception/mercury-decide` via `POST https://openrouter.ai/api/alpha/decisions`. La risposta live riferita non include `model`; il codice conserva `model_requested` e non inventa `response_model` o attestazione.
-- L’utente riferisce dalla sessione aggiornata una smoke sintetica HTTP 200 e un’evaluation 12/12 casi sintetici, tutti HTTP 200, zero retry. SHA dell’artefatto dichiarato: `1217543a8ec74d875bc5d6243a0b3ae0b020c62d450f9c5160eba6e9a79fea7b`. Il file `/tmp/mercury-decide-live-evaluation-20261021.json` non è presente qui: non è incluso né attestato da questo checkpoint. Nessun dato reale del catalogo è stato valutato.
-- Query in sola lettura riferita dall’utente, progetto `snwzxegtqnnuvlawnpgl`, 2026-10-21 21:11:27 UTC: 4.405 `places`, 4.346 published, 3.307 published con `date >= 2026-10-01`, nessuna tabella `classif`/`trek` trovata. Questi numeri sono una nuova osservazione esterna, non la baseline storica.
+## Codice e test
 
-## Ripresa classificatore — non iniziare dal solo JSON
+- Commit `902a180`: arresto del lotto su HTTP 401/402/403/429 e risposta con modello non verificato; attese in corso concluse ma non si avviano nuove POST. Gli errori restano sanitizzati e il run parziale/non importabile.
+- Commit `3f93525`: l’import classification-only conserva `candidate_decision`/`candidate_category` Mercury e registra `decision`/`category` effettive più `review_metadata`; primo caricamento preserva conflitti, migration usa FK `ON DELETE RESTRICT`, RLS/ruoli restano abilitati.
+- Backend `npm test`: 173/173; test specifici importer 28/28. Frontend 43/43 su 11 file dopo le modifiche mappa già presenti nel commit precedente. Cataloghi pubblici invariati: entrambi SHA-256 `1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877`.
 
-La UI legge da Supabase `places` pubblicati con `date >= Rome current-month start OR date_end >= start`, poi carica classificazioni per `source_id`. Il catalogo statico contiene 3.337 righe e non copre da solo tutta la popolazione attuale della mappa. Nella nuova chat esportare tramite connettore Supabase già autorizzato la popolazione DB effettiva della mappa, inclusi almeno `source_id`, titoli, descrizione/evidenze, date, URL e posizione disponibili. Non trasferire o creare chiavi.
+## Campione reale e QA
 
-Prima fare un run isolato di campione (una riga reale con fonte ufficiale/evidenza verificabile) e un controllo umano dei candidati esclusi e dubbi; poi classificazione idempotente completa, con manifest SHA-256 e output isolato. Il batch non può usare fallback offline per dichiararsi pronto. Usare decisioni conservative; errori, output invalidi e ambiguità restano da verificare. La 12-case sintetica non sostituisce questa QA.
+Run `cai-map-20261022-sample02`: 20 righe, 20 HTTP success, 0 errori, modello attestato per le risposte. Input SHA-256 `7b6cc657343149a10dad55faab3928cef35049638dada7f08da301b1021c6631`. Catalogo dopo QA SHA-256 `4c6fee6b09bf6f5cba10dc627e3dd53494ed0098a4fa230b6555b48a35c9c760`; stato SHA-256 `12f3c02e4d7b1a2f9cec1562a7848fcf1466573f60602772ece2c64e281efe5a`; manifest SHA-256 `1ca628106e2af3b12143c786a0886df842d65398463c4b875ca74a186ca9a7bc`; report QA SHA-256 `0ebedcc73665812e413fc331cbc4107dd14468079aeec8639f89d09019b7a509`.
 
-Esempio per il run completo dopo la verifica del campione, usando file esportato e directory nuovi:
+Il collector ha verificato 18 fonti su 20; i due link 404 sono Lago di Limo (SAT Cavalese) e Castagnata in Casera Ceresera (CAI Sacile). I 6 override tracciati nel catalogo sigillato sono: Sacile non provato → `da_verificare`; Santuario di Monte Tranquillo ad Alatri → `da_verificare` per data non corrispondente (record 10 ottobre vs calendario 22 febbraio); pranzo attribuito ad Arosio → `da_verificare` perché il PDF attribuisce a Seregno; Castagnata a Crocette → `da_verificare` perché il PDF attribuisce a Piedimulera; Omegna → `trekking/a piedi` in base al PDF Est Monte Rosa (difficoltà E), con luogo indefinito e coordinate nulle; parete CAI Vimodrone → `non_trekking` perché il PDF la descrive come attività indoor settimanale. Rimangono intatti i candidati Mercury originali. Alatri Monte Gemma, Napoli, Varese e Padova hanno riscontro ufficiale; i punti di partenza/itinerari non deducibili restano senza coordinate nuove.
 
-```bash
-cd backend
-MERCURY_DECIDE_ENABLED=1 OPENROUTER_ALLOWED_HOSTS=openrouter.ai npm run classify:catalog -- --input /path/db-map-candidates.json --output /path/cai-classify-map-20261021 --run cai-classify-map-20261021 --concurrency 2 --rate-ms 1000
-```
+Esito effettivo campione: 5 trekking, 3 non-trekking, 12 da verificare. Il QA ha escluso soltanto attività sociali o indoor supportate; i casi con fonte 404 o attribuzione dubbia non sono esclusioni. L’importer ha validato le 20 righe dal manifest. DB non toccato.
 
-La chiave deve essere già ereditata dal runtime; non metterla in CLI, file, log o report. Per campione e batch usare run ID distinti. Prima di migration/upsert verificare conteggi, esclusioni, dubbi, manifest, hash e checkpoint remoto. Importare soltanto risultati validi conservando deduplica `source_id` e campi amministrati. Verificare dopo con query DB e ricevuta. Nessuna cancellazione, merge o deploy.
+## Input completo e prossimi passi
 
-## Raccolta regionale
+Query Supabase osservata il 22 ottobre 2026 alle 17:27:56 UTC: 4.346 pubblicati totali; 3.307 con `date >= 2026-10-01`; 3.300 con `date_end >= 2026-10-01`; 3.336 unici soddisfano l’OR effettivo; tabella `place_classifications` assente. Export via Data API osservato alle 17:25:59 UTC: 3.336 righe, 3.336 source ID univoci, SHA-256 `2963f287c4ccedb20a70068b2551dad3565b264d871194ec91324d0f98bb0687` in `backend/data/agent-runs/cai-map-20261022-full01/input.json`. La query e l’export sono distinti per osservazione e metodo; i conteggi sono osservazioni correnti, non la baseline storica.
 
-La raccolta regionale rimane separata dalla classificazione mappa. La priorità corrente è Lombardia: lo snapshot del 20 ottobre riporta 229 sezioni, 125 controllate, 56 complete, 68 parziali, 1 irraggiungibile e 104 non verificate; 69 fonti parziali/irraggiungibili restano aperte. Sono dati storici aggregati, non nuova verifica live. Non aprire un’altra regione prima di un checkpoint circoscritto Lombardia; una fonte parziale resta aperta anche se i suoi eventi validi risultano importati.
+Dopo push e verifica del checkpoint di questo handoff, eseguire il run nuovo `cai-map-20261022-full01` con input sigillato, cache campione riutilizzata, concurrency 4 e rate 200 ms. Usare solo il modello Mercury attestato; fermare il batch su auth/quota/429 o modello non verificato. Non avviare raccolta Lombardia mentre il batch è in corso. Dopo output pronto, QA indipendente degli esclusi e dei dubbi, override con evidenza tracciabile, report e manifest, commit/push verificato. Solo dopo questo checkpoint l’importer può applicare la migration e l’upsert classification-only, senza modificare `places` o righe preesistenti. Verificare query/ricevuta e comportamento mappa; nessun deploy implicito.
 
-Il lotto Piemonte `cai-20261020-piemonte-01` (commit storico `9919927`) resta la baseline, 3.337 ID e import storico +40. Non confondere con copertura nazionale completa.
+La migration non è applicata e la tabella classificazioni non esisteva nell’ultima query. Il sito live non è stato controllato/aggiornato; le modifiche frontend mappa non sono state deployate. Il codice sul branch non equivale al comportamento in produzione.
 
-## Ordine di ripresa
+## Baseline distinta
 
-1. Fetch del branch e verifica di commit/status/test.
-2. Usare la connessione Supabase già autorizzata per ricavare la popolazione completa corrente della mappa; non classificare soltanto il JSON statico.
-3. Run campione reale Mercury, controllare evidenze e falsi positivi, salvare report.
-4. Batch con output/manifest isolati, review indipendente e checkpoint remoto.
-5. Applicare migration e upsert solo dopo il gate file pronti; preservare campi admin e verificare con query/ricevuta.
-6. Riprendere un piccolo gruppo verificabile di fonti Lombardia, chiudere il relativo lotto prima di ampliare.
-
-Dettagli macchina, baseline, osservazioni e test sono in `.agents/cai/STATE.json`; il registro storico dei problemi è `.agents/cai/FAILURES.json`, e la copertura regionale aggregata è `REGIONS.md`.
+La baseline storica resta run `cai-20261020-piemonte-01`, commit `9919927`, 3.337 ID e 40 nuovi eventi Piemonte. `cai-20261020-piemonte-ocr-01` è un run OCR pending, non baseline da reimportare. Lombardia rimane la regione aperta; ultimo handoff storico: 229 sezioni, 125 controllate, 56 complete, 68 parziali, 1 irraggiungibile, 104 non verificate e 69 fonti parziali/irraggiungibili. Questi sono conteggi storici, non risultati query attuali.

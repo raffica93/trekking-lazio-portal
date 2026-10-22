@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "runId": "cai-map-20261022-sample02",
+  "createdAt": "2026-10-22T17:06:58.423Z",
+  "input": {
+    "path": "/workspace/trekking-lazio-portal-cai/backend/data/agent-runs/cai-map-20261022-sample02/input.json",
+    "sha256": "7b6cc657343149a10dad55faab3928cef35049638dada7f08da301b1021c6631"
+  },
+  "files": [
+    {
+      "path": "classified-catalog.json",
+      "sha256": "4c6fee6b09bf6f5cba10dc627e3dd53494ed0098a4fa230b6555b48a35c9c760",
+      "bytes": 48744
+    },
+    {
+      "path": "state.json",
+      "sha256": "12f3c02e4d7b1a2f9cec1562a7848fcf1466573f60602772ece2c64e281efe5a",
+      "bytes": 916
+    }
+  ]
+}

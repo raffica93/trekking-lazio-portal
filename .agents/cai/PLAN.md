@@ -1,8 +1,6 @@
 # Piano di passaggio al lavoro interamente cloud
 
-Stato al 21 ottobre 2026: revisione e spazio operativo predisposti; implementazione
-e qualifica dei punti seguenti ancora da eseguire. Il codice del portale, i dati
-e le procedure esistenti sono il punto di partenza.
+Stato aggiornato al 22 ottobre 2026: codice correttivo pubblicato, runtime cloud verificato, campione reale classificato/QA e input completo sigillato. Il batch completo è il prossimo passo; nessuna scrittura DB anticipa il checkpoint dei file. La raccolta regionale resta sospesa durante batch/import.
 
 ## Sequenza
 

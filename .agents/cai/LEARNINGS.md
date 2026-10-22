@@ -11,3 +11,9 @@
 - Soluzione: adapter usa solo `POST /api/alpha/decisions` con modello richiesto `inception/mercury-decide`; conserva evidence/fingerprint/policy/confidenza e distingue il modello richiesto dall’eventuale modello attestato in risposta. Risposte senza campo model non ricevono attestazione inventata; modello discordante, errore API e output invalido non sono classificazioni valide. Bici/sci puri sono esclusi, ambiguità e ferrata/alpinismo senza componente a piedi restano da verificare. Le classificazioni risiedono in tabella separata; i pin mappa richiedono una classificazione trekking esplicita e i campi editoriali restano distinti.
 - Verifica: `backend npm test` 161/161 e `frontend npm test -- --watch=false` 43/43, incluso il caso “Escursione in bici”. Le smoke/evaluation Mercury live sono riferite dall’utente in un’altra chat e non attestano dati reali.
 - Commit: `3469923fe6c21e28f2182753b7b5c4aa528baa91`.
+
+## Arresto sicuro batch Mercury e revisione QA separata
+
+- Soluzione: il batch si arresta su 401/402/403/429 o attestazione modello non allowlisted; il run parziale non è importabile. L’importer conserva decisione/categoria candidate Mercury e valore effettivo separato con metadata QA verificabili, senza sovrascrivere i conflitti esistenti.
+- Verifica: test circuito interruttore su status/model e persistenza run parziale; fixture per Sacile, Alatri e Omegna; `backend npm test` 173/173 e test importer 28/28.
+- Commit: `902a1802dade16bead38f3aa61f3026f84e3ec49`, `3f93525f4f52dff9dd322278a6b3e4759455648b`.

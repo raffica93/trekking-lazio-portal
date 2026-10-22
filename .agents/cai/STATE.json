@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedOn": "2026-10-21",
+  "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "verified-code-checkpoint-ready-for-publication",
+  "phase": "classification-sample-reviewed-full-batch-ready",
   "fullCloudQualified": false,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -12,13 +12,24 @@
   "coordinationSpace": ".agents/cai",
   "planningExecutionScope": "remote-cloud-checkout",
   "runtimeReadiness": {
-    "status": "updated-chat-live-smoke-user-confirmed; this-checkout-live-batch-not-run",
-    "observedAt": "2026-10-21",
+    "status": "current-runtime-observed-and-live-sample-verified",
+    "observedAt": "2026-10-22T17:25:00Z",
     "connectivity": "connected",
     "desiredPhase": "running",
-    "networkEnforced": "unknown",
-    "openRouterHostAllowed": false,
-    "openRouterApiKeyPresent": false,
+    "observationsCurrent": true,
+    "networkPolicy": "enforced",
+    "openRouterHostAllowed": true,
+    "openRouterApiKeyPresent": true,
+    "openRouterApiKeyReadable": false,
+    "openRouterAllowedDomains": [
+      "openrouter.ai"
+    ],
+    "runtimeVariableOpenrouter": "ready",
+    "sessionModel": {
+      "requested": "gpt-6-luna",
+      "effort": "high",
+      "selection": "user-confirmed UI; runtime telemetry does not expose model identity"
+    },
     "node": "v24.19.0",
     "pdftoppm": true,
     "tesseract": {
@@ -33,79 +44,41 @@
       "caiCollector": {
         "configuredModel": "gpt-6-luna",
         "configuredEffort": "high",
-        "runtimeTelemetry": "agent reports generic GPT-6; exact variant/effort not exposed"
+        "status": "completed sample source QA and breaker patch"
       },
       "caiImporter": {
         "configuredModel": "gpt-6-luna",
-        "configuredEffort": "high"
+        "configuredEffort": "high",
+        "status": "completed import contract QA and review overlay patch"
       }
     },
-    "effectiveAllowedHostCount": 820,
-    "updatedChatUserObservedSmoke": {
+    "effectiveAllowedHostCount": 822,
+    "mercury": {
       "endpoint": "https://openrouter.ai/api/alpha/decisions",
-      "httpStatus": 200,
       "requestedModel": "inception/mercury-decide",
-      "responseModel": null,
-      "modelAttested": false,
-      "case": "synthetic assembly/budget/dinner without excursion",
-      "decision": "non_trekking",
-      "probability": 0.999788826,
-      "confidence": 0.999683238,
-      "probabilities": {
-        "trekking": 0.000108886,
-        "da_verificare": 0.000102289
-      },
-      "usage": {
-        "inputTokens": 127,
-        "outputTokens": 1,
-        "costUsd": 2.54e-06
-      },
-      "databaseWrites": 0,
-      "source": "user-confirmed smoke in separately updated cloud chat; not executed by this checkout"
-    },
-    "updatedChatLiveEvaluation": {
-      "date": "2026-10-21",
-      "cases": "12/12 synthetic labelled cases correct",
-      "http": "12/12 HTTP 200",
-      "retries": 0,
-      "coverage": [
-        "hike",
-        "snowshoe",
-        "coastal trail",
-        "assembly",
-        "dinner",
-        "conference",
-        "MTB",
-        "alpine skiing",
-        "classroom course",
-        "indoor climbing",
-        "ambiguous program",
-        "prompt injection"
-      ],
-      "evidencePath": "/tmp/mercury-decide-live-evaluation-20261021.json",
-      "evidenceSha256": "1217543a8ec74d875bc5d6243a0b3ae0b020c62d450f9c5160eba6e9a79fea7b",
-      "source": "user-confirmed in the separately updated chat; artifact not present in this checkout",
-      "catalogRowsProcessed": 0,
-      "databaseWrites": 0,
-      "artifactAvailableInThisCheckout": false
-    },
-    "note": "The separate republished chat reports one HTTP 200 synthetic smoke and 12/12 synthetic labeled cases. This checkout did not process catalog rows. The 12-case artifact is not present here."
+      "responseModel": "inception/mercury-decide-20260930",
+      "modelAttested": true,
+      "liveSampleRequests": 20,
+      "httpSuccess": 20,
+      "providerErrors": 0,
+      "classificationPolicyVersion": "cai-trekking-v2"
+    }
   },
   "roles": {
-    "orchestrator": "coordination-and-checkpoints",
+    "orchestrator": "coordination-and-checkpoints; sole writer for run logs and acceptance",
     "collector": {
       "name": "cai-collector",
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
-      "ownership": "historical source failures, deterministic retry correction, Mercury Decide adapter/classifier fixtures",
-      "status": "completed; offline tests incorporated"
+      "ownership": "official source QA, bounded provider circuit breaker, adapter/tests",
+      "status": "completed sample source QA, geolocation evidence checks, and circuit breaker correction"
     },
     "importer": {
       "name": "cai-importer",
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
-      "ownership": "manifest validation, classification persistence and DB protections, map reads and frontend tests",
-      "status": "completed; offline tests incorporated"
+      "ownership": "classification manifest validator, candidate/effective QA schema, conflicts/reconciliation and DB safety",
+      "status": "completed classification-only contract QA override, DB safety checks and migration/tests"
     }
   },
   "baseline": {
@@ -189,54 +162,52 @@
     {
       "id": "S0",
       "status": "completed",
-      "result": "repository context and historical baseline recovered"
+      "result": "checkpoint c177672 handoff accepted; branch recovered in isolated worktree and latest code commits verified remotely"
     },
     {
       "id": "S1",
       "status": "completed",
-      "result": "persistent failure registry, retry recovery, Mercury Decide classifier, importer contract and map filter implemented; tests pass"
+      "result": "runtime/model/network preflight; sample02 processed 20/20; candidate/output files sealed; independent source QA and review overrides added; importer validates 20 rows"
     },
     {
       "id": "S2",
-      "status": "todo",
-      "owner": "new cloud session cai-collector",
-      "result": "one-region-at-a-time collection; Lombardia remains partial"
+      "status": "completed",
+      "result": "backend npm test 173/173; catalog public hashes unchanged; code commits 902a180 and 3f93525 pushed and read back"
     },
     {
       "id": "S3",
-      "status": "todo",
-      "owner": "new cloud session orchestrator",
-      "result": "classify a small real DB-backed map sample in isolated run and review exclusions/uncertain rows"
+      "status": "ready-after-checkpoint",
+      "owner": "orchestrator",
+      "result": "full population input sealed from fresh Supabase REST export: 3336 rows/unique source_ids; run cai-map-20261022-full01; use sample cache; concurrency 4/rate-ms 200; fail fast on auth/quota/429/unverified model"
     },
     {
       "id": "S4",
-      "status": "todo",
-      "owner": "new cloud session cai-importer",
-      "result": "validate/export full current-and-future published DB map population, not static JSON alone"
+      "status": "pending",
+      "owner": "cai-collector + cai-importer",
+      "result": "review all non_trekking candidates and ambiguous/failed rows; apply evidence-backed QA overrides; produce final sealed report"
     },
     {
       "id": "S5",
-      "status": "todo",
-      "owner": "new cloud session cai-importer",
-      "result": "apply migration and upsert only after verified files/checkpoint, preserve editorial fields"
+      "status": "pending",
+      "owner": "cai-importer",
+      "result": "after ready files and remote checkpoint, apply classification-only migration/upsert; preserve conflict rows; no places writes"
     },
     {
       "id": "S6",
-      "status": "todo",
-      "owner": "new cloud session orchestrator",
-      "result": "verify query counts/receipt and resume regional backlog"
+      "status": "pending",
+      "owner": "orchestrator",
+      "result": "fresh before/after DB invariants, reconciliation receipt, effective map eligibility query; no deploy"
     },
     {
       "id": "S7",
-      "status": "todo",
-      "owner": "orchestrator",
-      "result": "publish follow-up checkpoint; no merge/deploy"
+      "status": "pending",
+      "owner": "orchestrator + cai-collector",
+      "result": "resume one-region-at-a-time Lombardia after classification batch/import is closed"
     }
   ],
   "nextAction": {
     "step": "S3",
-    "recipientChat": "01a1604c-7018-7460-8316-df3c57dfd077",
-    "instruction": "Fetch codex/cai-orchestrator-luna at the pushed checkpoint. Verify status and tests. Use the authorized Supabase connector to export exactly the places feeding the live map (status=published and date>=Rome current-month start OR date_end>=start), including source_id and classifier evidence fields; do not rely only on backend/data/excursions.json. Make one isolated one-row/sample run, inspect decisions, then full idempotent batch with bounded concurrency/rate, manifest and checkpoint before migration/upserts. Region work remains separately one region at a time, starting with unresolved Lombardia sources."
+    "instruction": "Commit/push and verify sample QA artifacts plus full input, then run cai-map-20261022-full01 with Mercury only, concurrency 4, rate 200 ms, reusing sample cache. Stop on auth/quota/429 or unverified model; QA full output and checkpoint before any migration/upsert."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -246,40 +217,102 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "3469923fe6c21e28f2182753b7b5c4aa528baa91",
+    "branchHead": "3f93525f4f52dff9dd322278a6b3e4759455648b",
     "recoverableRemoteCheckpoint": true,
-    "codeCheckpoint": "3469923fe6c21e28f2182753b7b5c4aa528baa91 pushed and verified on origin/codex/cai-orchestrator-luna; final handoff docs are being committed",
-    "collectionRun": null,
-    "collection": "not-started-this-session",
-    "files": "no catalog classification output or manifest created in this session",
-    "database": "no writes; migration not applied",
-    "openRouterLiveCalls": "0 in this checkout; separate updated chat user-reports 1 synthetic smoke plus 12/12 synthetic labeled evaluation",
-    "openRouterResponseAttestation": "smoke response omitted model; do not claim server model attestation",
-    "externalEvidence": "Sanitized 12-case file was reported at /tmp/mercury-decide-live-evaluation-20261021.json with SHA256 1217543a8ec74d875bc5d6243a0b3ae0b020c62d450f9c5160eba6e9a79fea7b; file is not in this checkout",
-    "databaseReadOnlyObservation": {
-      "observedAt": "2026-10-21T21:11:27Z",
-      "source": "user-confirmed authorized Supabase connector query in updated chat",
-      "projectRef": "snwzxegtqnnuvlawnpgl",
-      "places": 4405,
-      "published": 4346,
-      "publishedDateGte2026_10_01": 3307,
-      "classificationTablesFound": false,
-      "writes": 0
+    "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
+    "sampleRun": {
+      "runId": "cai-map-20261022-sample02",
+      "inputSha256": "7b6cc657343149a10dad55faab3928cef35049638dada7f08da301b1021c6631",
+      "catalogSha256": "4c6fee6b09bf6f5cba10dc627e3dd53494ed0098a4fa230b6555b48a35c9c760",
+      "stateSha256": "12f3c02e4d7b1a2f9cec1562a7848fcf1466573f60602772ece2c64e281efe5a",
+      "manifestSha256": "1ca628106e2af3b12143c786a0886df842d65398463c4b875ca74a186ca9a7bc",
+      "qaReportSha256": "0ebedcc73665812e413fc331cbc4107dd14468079aeec8639f89d09019b7a509",
+      "status": "ready",
+      "completed": 20,
+      "errors": 0,
+      "reviewed": 6,
+      "candidateCounts": {
+        "trekking": 5,
+        "non_trekking": 5,
+        "da_verificare": 10
+      },
+      "effectiveCounts": {
+        "trekking": 5,
+        "non_trekking": 3,
+        "da_verificare": 12
+      },
+      "dbWrites": 0
     },
-    "staticCatalogRows": 3337,
-    "regionCurrent": "Lombardia remains open: historical snapshot 229 sections, 125 checked, 56 complete, 68 partial, 1 unreachable, 104 unchecked; 503 event rows reported; 69 partial/unreachable sources. Snapshot data only, not fresh.",
-    "regionNext": "Do not open a second region before a focused Lombardia checkpoint; no collection run was started here.",
-    "newChatRecipient": "01a1604c-7018-7460-8316-df3c57dfd077",
-    "tests": {
-      "backend": "npm test: 161 passed, 0 failed after fixing two exposed issues",
-      "frontend": "npm test -- --watch=false: 43 passed in 11 files",
-      "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
+    "fullClassificationRun": {
+      "runId": "cai-map-20261022-full01",
+      "status": "not-started",
+      "inputPath": "backend/data/agent-runs/cai-map-20261022-full01/input.json",
+      "inputSha256": "2963f287c4ccedb20a70068b2551dad3565b264d871194ec91324d0f98bb0687",
+      "inputBytes": 3956792,
+      "rows": 3336,
+      "uniqueSourceIds": 3336,
+      "exportObservedAt": "2026-10-22T17:25:59.485Z",
+      "dbQueryObservedAt": "2026-10-22T17:27:56.333893Z",
+      "publishedTotal": 4346,
+      "mapCandidates": 3336,
+      "dateGte": 3307,
+      "dateEndGte": 3300,
+      "classificationTableExists": false,
+      "sourceCommit": "3f93525f4f52dff9dd322278a6b3e4759455648b",
+      "plannedConcurrency": 4,
+      "plannedRateMs": 200,
+      "cachePath": "backend/data/agent-runs/cai-map-20261022-sample02/cache",
+      "outputPath": "backend/data/agent-runs/cai-map-20261022-full01/output"
     },
+    "database": {
+      "classificationTableExists": false,
+      "lastObservedAt": "2026-10-22T17:27:56.333893Z",
+      "migrationApplied": false,
+      "writes": 0,
+      "placesTouched": false
+    },
+    "catalogHashes": {
+      "backendData": "1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877",
+      "frontendPublic": "1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
+    },
+    "regionalCoverage": {
+      "region": "Lombardia",
+      "status": "open-not-run-during-classification",
+      "lastKnownSnapshot": {
+        "sections": 229,
+        "checked": 125,
+        "complete": 56,
+        "partial": 68,
+        "unreachable": 1,
+        "unchecked": 104
+      },
+      "source": "historical handoff snapshot; not a current query"
+    },
+    "ocrItalian": false,
     "agentStatus": {
       "caiCollector": "completed",
       "caiImporter": "completed"
     },
-    "nextPhase": "The recipient chat is the next operational single-writer. Fetch the published branch, export DB rows feeding the map, then run a sample before full classification. This session started no run and performed no DB writes."
+    "nextPhase": "Commit and push the sample QA + full input checkpoint; verify remote head; then start cai-map-20261022-full01.",
+    "databaseReadOnlyObservation": {
+      "observedAt": "2026-10-22T17:27:56.333893Z",
+      "source": "authorized Supabase SQL + public REST export",
+      "projectRef": "snwzxegtqnnuvlawnpgl",
+      "published": 4346,
+      "mapCandidates": 3336,
+      "publishedDateGte2026_10_01": 3307,
+      "publishedDateEndGte2026_10_01": 3300,
+      "classificationTablesFound": false,
+      "writes": 0
+    },
+    "tests": {
+      "backend": "npm test: 173 passed, 0 failed",
+      "frontend": "43 passed in 11 files on same code behavior; no frontend edits in latest commits",
+      "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
+    },
+    "regionCurrent": "Lombardia remains open; historical snapshot only, no regional collection while classification active",
+    "regionNext": "After batch/import receipt closes, resume Lombardia with bounded source samples, then one region at a time",
+    "updatedChatRecipient": null
   },
-  "repositoryCommit": "3469923fe6c21e28f2182753b7b5c4aa528baa91"
+  "repositoryCommit": "3f93525f4f52dff9dd322278a6b3e4759455648b"
 }
