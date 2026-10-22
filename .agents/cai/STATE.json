@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "campania-caserta-scalambra-checkpoint-pending",
+  "phase": "campania-next-source-offline-preflight",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -333,11 +333,16 @@
     },
     {
       "id": "S30",
+      "status": "completed",
+      "result": "Scalambra01 PDF/report/evidence/catalog/status and regional handoff published and remote-verified at ae663ecfe2e1b7bb821832cf8f1b0e6bac6a94d3; tree and all changed blobs match the importer-validated files."
+    },
+    {
+      "id": "S31",
       "status": "in_progress",
-      "result": "Publish exact Scalambra run/PDF/evidence, catalog/status mirrors and current regional handoff; verify remote tree and blobs before next preflight/fetch."
+      "result": "Offline-preflight remaining enabled Campania sources for one distinct work-ready URL. No network until selection and checkpoint."
     }
   ],
-  "nextAction": "Scalambra01 complete: one future event corroborated by the official detail body, zero new event candidates, 50 Caserta rows unchanged; test suite passed with stable hashes. Publish and remotely verify the run/PDF/evidence/catalog/status checkpoint before any next request; then offline-preflight the next distinct Campania source.",
+  "nextAction": "Scalambra01 checkpoint ae663ecfe2e1b7bb821832cf8f1b0e6bac6a94d3 verified; PDF body corroborates one existing event, no delta or DB. Existing cai-collector is preflighting remaining Campania sources offline for one eligible target. No network until exact URL is selected and checkpointed.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -346,7 +351,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "c110d172a012242c43c97a35283e63f164e7472c",
+    "branchHead": "ae663ecfe2e1b7bb821832cf8f1b0e6bac6a94d3",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -509,13 +514,13 @@
     },
     "ocrItalian": false,
     "agentStatus": {
-      "caiCollector": "Scalambra01 collection stopped after one PDF; no candidates/DB",
-      "caiImporter": "Independent QA PASS for PDF evidence, row invariants and hashes",
+      "caiCollector": "Scalambra01 checkpoint complete; offline preflight of remaining Campania sources in progress",
+      "caiImporter": "Scalambra01 QA PASS; no DB",
       "agentRequestedModel": "gpt-6-luna",
       "agentRequestedEffort": "high",
       "effectiveModelTelemetry": "not exposed"
     },
-    "nextPhase": "campania-remaining-source-preflight",
+    "nextPhase": "campania-next-source-offline-preflight",
     "databaseReadOnlyObservation": {
       "observedAt": "2026-10-22T18:12:15.676Z",
       "source": "authorized Supabase read-only SQL and map predicate",
@@ -530,7 +535,7 @@
     },
     "tests": "After run07 stopped, backend npm test passed 187/187. Backend/frontend excursions SHA256 6e46cec85daae67e6da0a98afb36d4fbf72b3790b2246dfcdf3837ea9a0ff99b and scrape-status SHA256 da7fa46626cfd3c7e29cc59e0eb66c85f2374a70d0d325a68caba38308dd8450 remained byte-identical after tests.",
     "regionCurrent": "Campania — CAI Caserta Scalambra01 partial; one official detail PDF directly corroborates an existing 25-Oct event; 50 section rows unchanged; 0 parser candidates, no DB; annual/index/OCR issues remain open.",
-    "regionNext": "After remote run checkpoint, offline-preflight remaining Campania enabled partial sources; do not retry Caserta annual PDF automatically or treat zero candidates as empty calendar.",
+    "regionNext": "Offline-preflight remaining enabled Campania sources after Caserta; choose one distinct eligible URL only and checkpoint it before any fetch.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
     "remoteCheckpointVerifiedAt": "2026-10-22T19:25:20Z",
@@ -567,7 +572,7 @@
       "sourceId": "cai-caserta-9238006",
       "requestedUrl": "https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf",
       "collection": "partial; one PDF read; pdf-text; 0 parser candidates; official body corroborates 1 existing 25-Oct event",
-      "files": "ready; importer QA PASS; backend npm test 205/205; public JSON hashes unchanged during tests; remote checkpoint pending",
+      "files": "ready; importer QA PASS; backend npm test 205/205; all six public JSON hashes stable; remotely verified at ae663ecfe2e1b7bb821832cf8f1b0e6bac6a94d3",
       "database": "not-applicable-no-event-delta; no classification, query or write",
       "baselineCommit": "775d3604840d636637af1e0be804708ccf03febf",
       "runFolder": "backend/data/agent-runs/cai-20261022-campania-caserta-scalambra01",
@@ -614,7 +619,9 @@
       },
       "backendTests": "205/205 passed after collection; all six JSON hashes byte-identical before/after tests",
       "importerQa": "PASS; PDF/body/source attribution, manifest hashes, no delta, existing row/curated coordinates unchanged",
-      "next": "Checkpoint PDF and all run evidence/catalog/status/doc files remotely; then offline-preflight remaining Campania sources. Caserta remains partial; do not retry annual PDF automatically."
+      "next": "Checkpoint PDF and all run evidence/catalog/status/doc files remotely; then offline-preflight remaining Campania sources. Caserta remains partial; do not retry annual PDF automatically.",
+      "checkpointCommit": "ae663ecfe2e1b7bb821832cf8f1b0e6bac6a94d3",
+      "remoteVerifiedAt": "2026-10-22T23:31:00Z"
     },
     "regionalCheckpointCommit": "d45f27136177ce05181d69f87e00a8d7bb96a3cb",
     "regionalRunHistory": [
@@ -1089,9 +1096,9 @@
         "next": "Checkpoint PDF and all run evidence/catalog/status/doc files remotely; then offline-preflight remaining Campania sources. Caserta remains partial; do not retry annual PDF automatically."
       }
     ],
-    "repositoryCheckpointCommit": "c110d172a012242c43c97a35283e63f164e7472c",
-    "updatedAt": "2026-10-22T23:25:00Z",
-    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:17:00Z",
+    "repositoryCheckpointCommit": "ae663ecfe2e1b7bb821832cf8f1b0e6bac6a94d3",
+    "updatedAt": "2026-10-22T23:31:00Z",
+    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:31:00Z",
     "continuationMechanism": {
       "flag": "--source-url URL (repeatable) with exactly one --source ID",
       "safety": "Exact official hostname, HTTP(S), no credentials/custom port; redirect guard in continuation mode permits only HTTPS same-host redirects on default/443 without auth. Existing cooldown/cache and bounded document/time limits retained.",
@@ -1149,7 +1156,7 @@
       "sourceId": "cai-caserta-9238006",
       "requestedUrl": "https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf",
       "collection": "partial; one PDF read; pdf-text; 0 parser candidates; official body corroborates 1 existing 25-Oct event",
-      "files": "ready; importer QA PASS; backend npm test 205/205; public JSON hashes unchanged during tests; remote checkpoint pending",
+      "files": "ready; importer QA PASS; backend npm test 205/205; all six public JSON hashes stable; remotely verified at ae663ecfe2e1b7bb821832cf8f1b0e6bac6a94d3",
       "database": "not-applicable-no-event-delta; no classification, query or write",
       "baselineCommit": "775d3604840d636637af1e0be804708ccf03febf",
       "runFolder": "backend/data/agent-runs/cai-20261022-campania-caserta-scalambra01",
@@ -1196,7 +1203,9 @@
       },
       "backendTests": "205/205 passed after collection; all six JSON hashes byte-identical before/after tests",
       "importerQa": "PASS; PDF/body/source attribution, manifest hashes, no delta, existing row/curated coordinates unchanged",
-      "next": "Checkpoint PDF and all run evidence/catalog/status/doc files remotely; then offline-preflight remaining Campania sources. Caserta remains partial; do not retry annual PDF automatically."
+      "next": "Checkpoint PDF and all run evidence/catalog/status/doc files remotely; then offline-preflight remaining Campania sources. Caserta remains partial; do not retry annual PDF automatically.",
+      "checkpointCommit": "ae663ecfe2e1b7bb821832cf8f1b0e6bac6a94d3",
+      "remoteVerifiedAt": "2026-10-22T23:31:00Z"
     },
     "lastCodeCorrection": {
       "commit": "010af3796a99d01e8081d45ef625b2344ec134c7",
@@ -1218,7 +1227,7 @@
       "sourceId": "cai-caserta-9238006",
       "requestedUrl": "https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf",
       "collection": "partial; one PDF read; pdf-text; 0 parser candidates; official body corroborates 1 existing 25-Oct event",
-      "files": "ready; importer QA PASS; backend npm test 205/205; public JSON hashes unchanged during tests; remote checkpoint pending",
+      "files": "ready; importer QA PASS; backend npm test 205/205; all six public JSON hashes stable; remotely verified at ae663ecfe2e1b7bb821832cf8f1b0e6bac6a94d3",
       "database": "not-applicable-no-event-delta; no classification, query or write",
       "baselineCommit": "775d3604840d636637af1e0be804708ccf03febf",
       "runFolder": "backend/data/agent-runs/cai-20261022-campania-caserta-scalambra01",
@@ -1265,16 +1274,18 @@
       },
       "backendTests": "205/205 passed after collection; all six JSON hashes byte-identical before/after tests",
       "importerQa": "PASS; PDF/body/source attribution, manifest hashes, no delta, existing row/curated coordinates unchanged",
-      "next": "Checkpoint PDF and all run evidence/catalog/status/doc files remotely; then offline-preflight remaining Campania sources. Caserta remains partial; do not retry annual PDF automatically."
+      "next": "Checkpoint PDF and all run evidence/catalog/status/doc files remotely; then offline-preflight remaining Campania sources. Caserta remains partial; do not retry annual PDF automatically.",
+      "checkpointCommit": "ae663ecfe2e1b7bb821832cf8f1b0e6bac6a94d3",
+      "remoteVerifiedAt": "2026-10-22T23:31:00Z"
     },
     "nextSourcePreflight": {
       "region": "Campania",
       "sourceId": null,
       "sourceName": null,
       "url": null,
-      "status": "Scalambra01 collection/QA/tests complete; remote checkpoint pending before next-source offline preflight",
-      "evidence": "run cai-20261022-campania-caserta-scalambra01 complete; remaining Caserta links had no other future attributed target in index preflight",
-      "scope": "preflight next enabled Campania source offline only after remote checkpoint",
+      "status": "Scalambra01 remote checkpoint verified; remaining Campania source preflight in progress",
+      "evidence": "run cai-20261022-campania-caserta-scalambra01 and source registry/history/cache/FAILURES",
+      "scope": "offline source selection only; no network until exact URL checkpointed",
       "networkFetchPerformed": false
     },
     "lastSourcePreflight": {
@@ -1315,7 +1326,7 @@
       "sourceId": "cai-caserta-9238006",
       "requestedUrl": "https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf",
       "collection": "partial; one PDF read; pdf-text; 0 parser candidates; official body corroborates 1 existing 25-Oct event",
-      "files": "ready; importer QA PASS; backend npm test 205/205; public JSON hashes unchanged during tests; remote checkpoint pending",
+      "files": "ready; importer QA PASS; backend npm test 205/205; all six public JSON hashes stable; remotely verified at ae663ecfe2e1b7bb821832cf8f1b0e6bac6a94d3",
       "database": "not-applicable-no-event-delta; no classification, query or write",
       "baselineCommit": "775d3604840d636637af1e0be804708ccf03febf",
       "runFolder": "backend/data/agent-runs/cai-20261022-campania-caserta-scalambra01",
@@ -1362,16 +1373,18 @@
       },
       "backendTests": "205/205 passed after collection; all six JSON hashes byte-identical before/after tests",
       "importerQa": "PASS; PDF/body/source attribution, manifest hashes, no delta, existing row/curated coordinates unchanged",
-      "next": "Checkpoint PDF and all run evidence/catalog/status/doc files remotely; then offline-preflight remaining Campania sources. Caserta remains partial; do not retry annual PDF automatically."
+      "next": "Checkpoint PDF and all run evidence/catalog/status/doc files remotely; then offline-preflight remaining Campania sources. Caserta remains partial; do not retry annual PDF automatically.",
+      "checkpointCommit": "ae663ecfe2e1b7bb821832cf8f1b0e6bac6a94d3",
+      "remoteVerifiedAt": "2026-10-22T23:31:00Z"
     },
-    "nextAction": "Scalambra01 complete: one future event corroborated by the official detail body, zero new event candidates, 50 Caserta rows unchanged; test suite passed with stable hashes. Publish and remotely verify the run/PDF/evidence/catalog/status checkpoint before any next request; then offline-preflight the next distinct Campania source."
+    "nextAction": "Scalambra01 checkpoint ae663ecfe2e1b7bb821832cf8f1b0e6bac6a94d3 verified; PDF body corroborates one existing event, no delta or DB. Existing cai-collector is preflighting remaining Campania sources offline for one eligible target. No network until exact URL is selected and checkpointed."
   },
   "repositoryCommit": {
     "branch": "codex/cai-orchestrator-luna",
-    "head": "c110d172a012242c43c97a35283e63f164e7472c",
+    "head": "ae663ecfe2e1b7bb821832cf8f1b0e6bac6a94d3",
     "remoteVerified": true,
-    "fetchHead": "c110d172a012242c43c97a35283e63f164e7472c",
-    "checkpointKind": "Caserta index child-link preflight; one future event detail URL selected"
+    "fetchHead": "ae663ecfe2e1b7bb821832cf8f1b0e6bac6a94d3",
+    "checkpointKind": "Scalambra01 run PDF/evidence/catalog/status and coverage handoff"
   },
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
@@ -1395,10 +1408,10 @@
     }
   },
   "tests": "After the Castrovillari01 collection finished, backend npm test passed 205/205; SHA-256 for six public JSON files was identical before/after. No tests were run concurrently with collection.",
-  "updatedAt": "2026-10-22T23:25:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:17:00Z",
+  "updatedAt": "2026-10-22T23:31:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:31:00Z",
   "regionCurrent": "Campania — CAI Caserta Scalambra01 partial; one official detail PDF directly corroborates an existing 25-Oct event; 50 section rows unchanged; 0 parser candidates, no DB; annual/index/OCR issues remain open.",
-  "regionNext": "After remote run checkpoint, offline-preflight remaining Campania enabled partial sources; do not retry Caserta annual PDF automatically or treat zero candidates as empty calendar.",
+  "regionNext": "Offline-preflight remaining enabled Campania sources after Caserta; choose one distinct eligible URL only and checkpoint it before any fetch.",
   "preflight": {
     "at": "2026-10-22T22:30:21.913236Z",
     "sourceId": "cai-campobasso-9236001",
@@ -1647,9 +1660,9 @@
     "sourceId": null,
     "sourceName": null,
     "url": null,
-    "status": "Scalambra01 collection/QA/tests complete; remote checkpoint pending before next-source offline preflight",
-    "evidence": "run cai-20261022-campania-caserta-scalambra01 complete; remaining Caserta links had no other future attributed target in index preflight",
-    "scope": "preflight next enabled Campania source offline only after remote checkpoint",
+    "status": "Scalambra01 remote checkpoint verified; remaining Campania source preflight in progress",
+    "evidence": "run cai-20261022-campania-caserta-scalambra01 and source registry/history/cache/FAILURES",
+    "scope": "offline source selection only; no network until exact URL checkpointed",
     "networkFetchPerformed": false
   }
 }

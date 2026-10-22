@@ -473,3 +473,7 @@ La sezione rimane parziale: sei documenti ora registrati; annual PDF discovery 5
 Run hashes: manifest `b2510facb3519a65fed6917dca1999a3fcbfb53022556530d79ee06e729254fa`; state `9495c9bc8f2962a1a98ee9c36bb6fbde3d5a82586e500c7e93cc163fc4d6b448`; report `e60b808582ba71f6e863716a8b6fce749bd67d3028e89b4ad34b47c271c2babb`; source-evidence `14561ac657a43824b7c513fb4580dc1013a76d42b038034582437ba2881ff667`; evidence-manifest `ce2df0686c76db00be47252792a11bfb130ad80de359239b15b9369b686fc6e7`.
 
 Dopo il checkpoint remoto corrente, preflight offline delle altre fonti Campania parziali abilitate; Caserta non ha un altro link futuro attribuito dalla pagina, mentre i blocchi annuale/OCR/discovery restano registrati. Non avviare retry automatico o dichiarare completa la sezione/regione.
+
+### Scalambra01 checkpoint remoto verificato
+
+Run, PDF, report, evidence, catalog/status e coverage sono pubblicati al commit remoto `ae663ecfe2e1b7bb821832cf8f1b0e6bac6a94d3`; fetch e API ref concordano e tree/blob corrispondono ai file QA-validati. Test 205/205 e hash pubblici invariati durante i test. La scheda corrobora un record esistente, non modifica coordinate né crea delta; DB non applicabile. Il collector preflighta offline le altre fonti Campania. Nessuna nuova richiesta live prima della selezione e del checkpoint esatto.

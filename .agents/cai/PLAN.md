@@ -171,3 +171,5 @@ Un solo figlio work-ready: PDF scheda Monte Scalambra `https://www.caicaserta.it
 ### Esito Scalambra01
 
 Un solo PDF detail letto e QA-validato: il corpo attesta il 25 ottobre 2026 e corrobora un evento già presente; metadata PDF discordanti sono esplicitamente segnalati. Zero candidati parser, nessuna riga nuova/modificata, coordinate curate non toccate/non riattestate. Importer PASS; backend test 205/205 con sei hash JSON stabili. Caserta resta parziale per annual discovery, indice continuation e OCR Francigena. Pubblicare il run completo prima di qualunque altra richiesta; poi preflight offline le restanti fonti Campania abilitate.
+
+Scalambra01 è checkpointato e verificato al commit remoto `ae663ecfe2e1b7bb821832cf8f1b0e6bac6a94d3`; i file testati e i mirror pubblici sono recuperabili. Prossimo solo preflight offline delle restanti fonti Campania, poi singolo target bounded con checkpoint prima del fetch.
