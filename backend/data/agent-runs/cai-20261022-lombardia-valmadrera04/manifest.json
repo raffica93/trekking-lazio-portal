@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-lombardia-valmadrera04",
+  "createdAt": "2026-10-22T19:23:58.679Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "f76cec588d902407541d45cb797d20e3541d2dd78f3df7eedcffb9bc222c4369"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "56606a7db99814a06639fb595823fd9ca9b2139893a818d83f842b7068bfff3d"
+    }
+  ]
+}

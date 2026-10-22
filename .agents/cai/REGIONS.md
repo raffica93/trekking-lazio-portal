@@ -76,3 +76,12 @@ Il catalogo resta a 3.345 ID unici: 0 aggiunte, 0 rimozioni, 0 modifiche. La sez
 | `cai-20261022-lombardia-valmadrera03` — CAI Valmadrera | 1 | 0 | 1 | 0 | 0 nuovi/cambiati; 7 eventi esistenti invariati; 19 estrazioni documento | 0 duplicati ID nel catalogo; overlap tra estrazioni non esposto | 5 dei 7 candidati preesistenti raggiunti; zero errori HTTP osservati | discovery-limit: 23 candidati; 2 precedenti non visitati (`/eventi/oggi/`, `/eventi/elenco/?eventDisplay=past`) | Dopo QA/test/checkpoint, run04 max40 documenti/240 s sulla stessa sezione |
 
 Il run02 ha ripetuto i primi 12 documenti senza avanzare la coda e non è stato checkpointato separatamente; run03 ha allargato il campione e ha aperto ulteriori pagine candidate. Catalogo invariato a 3.345 ID unici. Report SHA `befb8a7914e6d6dbe835b9d56678a22e8c3f984bcb132a23ffd8e3d2ec61b255`, manifest SHA `5370bb422bcb39ef0b44a31f1379f98d066aaaeb49a311d0f9bcd3eb45466897`. Nessun import DB; i conteggi regionali complessivi non sono stati aggiornati.
+
+
+## CAI Valmadrera bounded sample 04 — 22 ottobre 2026
+
+| Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | ID duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| `cai-20261022-lombardia-valmadrera04` — CAI Valmadrera | 1 | 0 | 1 | 0 | 0 nuovi/cambiati; 7 eventi esistenti invariati; 41 estrazioni documento | 0 ID duplicati nel catalogo; overlap estrazioni non esposto | Coda discovery 23→12; pagine giornaliere raggiunte fino al 17 ottobre; zero errori HTTP | 12 candidati discovery non visitati | Dopo QA/test/checkpoint, un altro campione Valmadrera delimitato |
+
+Il catalogo resta a 3.345 ID unici, delta 0. Nessun nuovo punto geografico. Sezione parziale; non si assume calendario vuoto dai documenti non visitati. Report SHA `fd1776b3354afaa3575c048d8db5a421dec2b45180fa2305ba9948c7081d709b`, manifest SHA `e7df409743d2265e64d0862abfcd24d4be02c8e9a01e9690f6ff97385cd6c6f6`. Nessun import DB. Conteggi regionali complessivi restano snapshot storico del 20 ottobre.

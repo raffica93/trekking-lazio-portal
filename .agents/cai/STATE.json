@@ -202,12 +202,12 @@
       "id": "S7",
       "status": "in-progress",
       "owner": "orchestrator + cai-collector",
-      "result": "Run03 `cai-20261022-lombardia-valmadrera03` processed 20 documents and produced 19 document-level extractions; 7 existing source events remain unchanged. Five of the seven prior residual URLs were reached, while two remain unvisited; newly discovered links expand the queue to 23. Catalog delta 0; no HTTP failures or DB access. Report SHA `befb8a7914e6d6dbe835b9d56678a22e8c3f984bcb132a23ffd8e3d2ec61b255`, manifest SHA `5370bb422bcb39ef0b44a31f1379f98d066aaaeb49a311d0f9bcd3eb45466897`."
+      "result": "Run `cai-20261022-lombardia-valmadrera04` processed 40 documents, with 41 document-level extractions; 7 source events remain unchanged. The discovery queue fell from 23 to 12; no HTTP failures or DB access. Catalog delta 0 on 3,345 unique IDs. Backend tests 178/178 after collection. Report SHA `36bd0391cb8cd48e85df22bb095e39dc347ed6ed2fa4275fc9a1ad6f9891af02`, manifest SHA `e7df409743d2265e64d0862abfcd24d4be02c8e9a01e9690f6ff97385cd6c6f6`."
     }
   ],
   "nextAction": {
     "step": "S7",
-    "instruction": "Run one Valmadrera sample from verified checkpoint 9045ec8 (max 40 docs/240s/concurrency1); report exact queued URLs reached and remaining. Then independent QA, backend tests after collection, and checkpoint. No DB import unless catalog delta appears."
+    "instruction": "Publish run04 verified files/report; then address the demonstrated replay-of-first-40 limit with an explicit source-scoped, same-host URL target option and tests before the next live collection. No DB import at zero catalog delta."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -217,7 +217,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "9045ec84b981193669deaa2e82dd075c3609cf6d",
+    "branchHead": "c012026eded2265d317c784dcfdced6928f5b90a",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -348,7 +348,7 @@
     },
     "regionalCoverage": {
       "region": "Lombardia",
-      "status": "open; Brescia remains partial on unavailable URLs; Valmadrera remains partial with expanded discovery queue",
+      "status": "open; Brescia remains partial on unavailable URLs; Valmadrera discovery backlog reduced but not exhausted",
       "currentRunCounts": {
         "sectionsChecked": 1,
         "complete": 0,
@@ -356,14 +356,14 @@
         "unreachable": 0,
         "verifiedNewEvents": 0,
         "sectionEventsReported": 7,
-        "documentExtractions": 19,
+        "documentExtractions": 41,
         "exactDuplicateIdsExcluded": 0,
-        "semanticDuplicates": "not established; catalog delta is zero",
+        "semanticDuplicates": "not established; catalog delta zero",
         "failuresResolved": [
-          "Five of seven prior Valmadrera discovery candidates were reached in bounded run03; no HTTP failures observed."
+          "Valmadrera discovery queue reduced from 23 to 12; daily pages through 2026-10-17 reached; no HTTP failures observed."
         ],
         "failuresOpen": [
-          "Discovery queue expanded to 23 candidates. Two earlier residuals /eventi/oggi/ and /eventi/elenco/?eventDisplay=past remain unvisited. Brescia retains 3 distinct unavailable URLs."
+          "Valmadrera discovery-limit remains with 12 candidates. Brescia retains 3 distinct unavailable URLs."
         ]
       },
       "historicalSnapshot": {
@@ -374,7 +374,7 @@
         "unreachable": 1,
         "unchecked": 104
       },
-      "historicalSnapshotNote": "Historical handoff only; current run covers Valmadrera alone and does not recalculate Lombardia-wide totals."
+      "historicalSnapshotNote": "Historical handoff only; current sample covers Valmadrera alone; no Lombardia-wide recount."
     },
     "ocrItalian": false,
     "agentStatus": {
@@ -398,11 +398,11 @@
       "writes": 0
     },
     "tests": {
-      "backend": "npm test after Valmadrera run03 collection: 178 passed, 0 failed (2026-10-22).",
-      "publicCatalogTestIsolation": "Tests were run after collection. Manifest file hashes remained stable; backend/frontend excursions, cai-sections, scrape-status copies are byte-identical."
+      "backend": "npm test after Valmadrera run04 collection: 178 passed, 0 failed (2026-10-22).",
+      "publicCatalogTestIsolation": "Tests ran after collection; manifest files remained stable and backend/frontend excursions, cai-sections, scrape-status copies are byte-identical."
     },
-    "regionCurrent": "Lombardia — Valmadrera run03 partial, 23 candidates remain; report, files, QA and backend tests checkpointed remotely at 9045ec8",
-    "regionNext": "Run bounded Valmadrera run04 on the cached official queue: max 40 documents, 240 s, concurrency 1; then QA/tests/checkpoint.",
+    "regionCurrent": "Lombardia — Valmadrera run04 partial; discovery backlog 12; files/report/QA/test ready for checkpoint; catalog delta zero",
+    "regionNext": "Checkpoint run04, then implement and test an explicit same-host source URL continuation option so the next bounded run can reach queued URLs without replaying 40 seeds.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
     "remoteCheckpointVerifiedAt": "2026-10-22T19:21:20Z",
@@ -434,7 +434,7 @@
     },
     "liveSiteStatus": "Database classification is installed and verified; repository map filtering code is not deployed. No deploy performed.",
     "regionalRun": {
-      "runId": "cai-20261022-lombardia-valmadrera03",
+      "runId": "cai-20261022-lombardia-valmadrera04",
       "sourceId": "cai-valmadrera-9216081",
       "region": "Lombardia",
       "collection": "partial",
@@ -444,10 +444,10 @@
       "completeSections": 0,
       "partialSections": 1,
       "unreachableSections": 0,
-      "documentsProcessed": 20,
-      "remainingDiscoveryCandidates": 23,
+      "documentsProcessed": 40,
+      "remainingDiscoveryCandidates": 12,
       "sectionEventCount": 7,
-      "documentExtractions": 19,
+      "documentExtractions": 41,
       "verifiedNewEventIds": 0,
       "catalogDelta": {
         "added": 0,
@@ -456,17 +456,17 @@
         "uniqueIds": 3345
       },
       "exactDuplicateIdsExcluded": 0,
-      "semanticDuplicates": "not established; per-document extraction IDs not exposed; 7 catalog rows were unchanged",
-      "issueSummary": "Discovery-limit leaves 23 candidate documents. Five of seven prior residual URLs reached; /eventi/oggi/ and /eventi/elenco/?eventDisplay=past remain unvisited. No HTTP failures observed.",
-      "geolocation": "No coordinates or place attribution added; existing values remain Località da verificare.",
-      "manifestSha256": "5370bb422bcb39ef0b44a31f1379f98d066aaaeb49a311d0f9bcd3eb45466897",
-      "reportSha256": "befb8a7914e6d6dbe835b9d56678a22e8c3f984bcb132a23ffd8e3d2ec61b255",
-      "catalogSha256": "a0ff330652a81d19459680148d98a2c4b9bc7df54ee8e76734d4ad7bfddacdac",
+      "semanticDuplicates": "not established; extraction IDs not exposed; all 7 catalog events unchanged",
+      "issueSummary": "Discovery-limit reduced from 23 to 12 candidates. Daily pages through 2026-10-17 were reached. No HTTP failures observed.",
+      "geolocation": "No coordinates/place attribution added; existing records retain Località da verificare.",
+      "manifestSha256": "e7df409743d2265e64d0862abfcd24d4be02c8e9a01e9690f6ff97385cd6c6f6",
+      "reportSha256": "fd1776b3354afaa3575c048d8db5a421dec2b45180fa2305ba9948c7081d709b",
+      "catalogSha256": "f76cec588d902407541d45cb797d20e3541d2dd78f3df7eedcffb9bc222c4369",
       "sectionsSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
-      "scrapeStatusSha256": "ac6e371920506dcd32c8fed1af4976217a89bee8eb3b7c1c83a96589f3cd75e3",
-      "baselineCommit": "2e4b63b7b7e621dd55f716473cea5c596719e8e6"
+      "scrapeStatusSha256": "56606a7db99814a06639fb595823fd9ca9b2139893a818d83f842b7068bfff3d",
+      "baselineCommit": "c012026eded2265d317c784dcfdced6928f5b90a"
     },
-    "regionalCheckpointCommit": "9045ec84b981193669deaa2e82dd075c3609cf6d",
+    "regionalCheckpointCommit": "c012026eded2265d317c784dcfdced6928f5b90a",
     "regionalRunHistory": [
       {
         "runId": "cai-20261022-lombardia-brescia02",
@@ -662,10 +662,43 @@
         "sectionsSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
         "scrapeStatusSha256": "ac6e371920506dcd32c8fed1af4976217a89bee8eb3b7c1c83a96589f3cd75e3",
         "baselineCommit": "2e4b63b7b7e621dd55f716473cea5c596719e8e6"
+      },
+      {
+        "runId": "cai-20261022-lombardia-valmadrera04",
+        "sourceId": "cai-valmadrera-9216081",
+        "region": "Lombardia",
+        "collection": "partial",
+        "files": "ready",
+        "database": "pending",
+        "controlledSections": 1,
+        "completeSections": 0,
+        "partialSections": 1,
+        "unreachableSections": 0,
+        "documentsProcessed": 40,
+        "remainingDiscoveryCandidates": 12,
+        "sectionEventCount": 7,
+        "documentExtractions": 41,
+        "verifiedNewEventIds": 0,
+        "catalogDelta": {
+          "added": 0,
+          "removed": 0,
+          "changedExisting": 0,
+          "uniqueIds": 3345
+        },
+        "exactDuplicateIdsExcluded": 0,
+        "semanticDuplicates": "not established; extraction IDs not exposed; all 7 catalog events unchanged",
+        "issueSummary": "Discovery-limit reduced from 23 to 12 candidates. Daily pages through 2026-10-17 were reached. No HTTP failures observed.",
+        "geolocation": "No coordinates/place attribution added; existing records retain Località da verificare.",
+        "manifestSha256": "e7df409743d2265e64d0862abfcd24d4be02c8e9a01e9690f6ff97385cd6c6f6",
+        "reportSha256": "fd1776b3354afaa3575c048d8db5a421dec2b45180fa2305ba9948c7081d709b",
+        "catalogSha256": "f76cec588d902407541d45cb797d20e3541d2dd78f3df7eedcffb9bc222c4369",
+        "sectionsSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+        "scrapeStatusSha256": "56606a7db99814a06639fb595823fd9ca9b2139893a818d83f842b7068bfff3d",
+        "baselineCommit": "c012026eded2265d317c784dcfdced6928f5b90a"
       }
     ],
-    "repositoryCheckpointCommit": "9045ec84b981193669deaa2e82dd075c3609cf6d",
-    "updatedAt": "2026-10-22T19:21:20Z",
+    "repositoryCheckpointCommit": "c012026eded2265d317c784dcfdced6928f5b90a",
+    "updatedAt": "2026-10-22T19:24:10Z",
     "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:17:43Z"
   },
   "repositoryCommit": "9045ec84b981193669deaa2e82dd075c3609cf6d",
@@ -686,10 +719,10 @@
     "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
     "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
   },
-  "updatedAt": "2026-10-22T19:21:20Z",
+  "updatedAt": "2026-10-22T19:24:10Z",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:21:20Z",
-  "regionCurrent": "Lombardia — Valmadrera run03 partial, 23 candidates remain; report, files, QA and backend tests checkpointed remotely at 9045ec8",
-  "regionNext": "Run bounded Valmadrera run04 on the cached official queue: max 40 documents, 240 s, concurrency 1; then QA/tests/checkpoint.",
+  "regionCurrent": "Lombardia — Valmadrera run04 partial; discovery backlog 12; files/report/QA/test ready for checkpoint; catalog delta zero",
+  "regionNext": "Checkpoint run04, then implement and test an explicit same-host source URL continuation option so the next bounded run can reach queued URLs without replaying 40 seeds.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
     "sourceId": "cai-varese-9216009",
