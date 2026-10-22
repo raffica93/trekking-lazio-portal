@@ -262,4 +262,4 @@ Run `cai-20261022-abruzzo-laquila01` è distinto dal precedente Penne01. Catalog
 
 Il report dice anche che lo status source-level conserva `url` configurato `?commissioni=legale` e non materializza `issues`/`documents`; l'associazione del 403 a `?commissioni=escursionismo` deriva dal run state/output e sidecar. Report SHA `b3b15f1af73988430f5d3153e361725f4c9c2d5aac38211dca468edccd2cb834`; evidence-manifest SHA `7830f4a30c7f92dc1337c771e8b4e823c8f74318e560d33d21153d8fd7dc53cc`.
 
-Verifica suite dopo il run L'Aquila01: backend `npm test` 205/205; checksum dei sei JSON pubblici identici prima e dopo i test. Non è stata eseguita raccolta in parallelo ai test. Run e aggiornamento failure restano da checkpointare prima del prossimo preflight operativo.
+Verifica suite dopo il run L'Aquila01: backend `npm test` 205/205; checksum dei sei JSON pubblici identici prima e dopo i test. Non è stata eseguita raccolta in parallelo ai test. Run e aggiornamento failure sono remoti/verificati al commit `d9fbdca0ab0cafdc4e8ca1c91c534df4a026b7cf`; il preflight successivo è in sola lettura e non riapre questa URL.

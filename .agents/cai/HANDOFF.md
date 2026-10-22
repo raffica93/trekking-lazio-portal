@@ -402,7 +402,7 @@ QA indipendente importer PASS su manifest e sidecar. Nota: lo scrape-status ha s
 
 Il report originario ha SHA `88b17e4f2e8ab05adfed045b55f316f2697ebe81f2a9c5bd48824425b9805dbe`; source-evidence `8fd0c2d3a51aa616103c418199ba8c42e2b1bdef65119eaf7151f388b30b2b9d`; manifest orchestratore `6b11181be1a701a8e9d03171c8b26c4cde4df9ef34b07fda2adfd115b4617687`. Dopo la correzione terminologica report/evidence-manifest e gli altri hash vanno sigillati nel checkpoint. Nessun test è stato lanciato in parallelo alla raccolta; backend 205/205 dal campione Penne, codice invariato.
 
-Il checkpoint Penne precedente resta a `1954838`; il checkpoint L’Aquila e il registro 403 sono il lavoro da pubblicare ora. Prossimo: dopo il push, preflight offline una fonte ufficiale distinta senza retry della pagina negata. Se non c'è target lavorabile in Abruzzo, registrare i blocchi e passare alla regione successiva.
+Il checkpoint Penne precedente resta a `1954838`; il checkpoint L’Aquila e il registro 403 sono pubblicati/verificati al commit `d9fbdca0ab0cafdc4e8ca1c91c534df4a026b7cf`. Prossimo: preflight offline una fonte ufficiale distinta senza retry della pagina negata; il collector è attivo in sola lettura. Se non c'è target lavorabile in Abruzzo, registrare i blocchi e passare alla regione successiva.
 
 ## Verifica test dopo L'Aquila01
 

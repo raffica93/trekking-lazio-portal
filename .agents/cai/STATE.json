@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "abruzzo-laquila-partial-checkpoint",
+  "phase": "abruzzo-next-source-preflight",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -260,12 +260,18 @@
     },
     {
       "id": "S17",
-      "status": "in_progress",
+      "status": "completed",
       "owner": "orchestrator + cai-collector + cai-importer",
-      "result": "Importer QA PASS after report wording correction; backend npm test 205/205 after both collections; six public JSON SHA-256 values stable. Current task: checkpoint L’Aquila status/report/evidence and 403 registry, then preflight a distinct source."
+      "result": "L’Aquila01 report/evidence correction verified by importer; backend npm test 205/205 after both runs and six public JSON hashes stable. Status/report/failure docs pushed and remotely verified at d9fbdca; remote blobs match manifest SHA."
+    },
+    {
+      "id": "S18",
+      "status": "in_progress",
+      "owner": "cai-collector + orchestrator",
+      "result": "Offline/read-only preflight of another distinct enabled official source in Abruzzo; no network, collection or tests until an exact bounded target is selected."
     }
   ],
-  "nextAction": "L’Aquila01 exact URL was denied with HTTP 403 and has been recorded. Do not retry. Publish the partial/status/evidence checkpoint; then have the collector offline-preflight one distinct enabled official source in Abruzzo, or move to the next region if no target is workable.",
+  "nextAction": "L’Aquila01 and its 403 evidence are checkpointed and remote-verified at d9fbdca. The exact denied URL is closed for this cycle. Collector is performing read-only preflight for another distinct official source; no collection has started.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -274,7 +280,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "19548380898b52fcf867b6f9e3943d2556351ce4",
+    "branchHead": "d9fbdca0ab0cafdc4e8ca1c91c534df4a026b7cf",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -443,7 +449,7 @@
       "agentRequestedEffort": "high",
       "effectiveModelTelemetry": "not exposed"
     },
-    "nextPhase": "Publish the L’Aquila01 partial/status/evidence checkpoint; then offline-preflight a distinct official Abruzzo source. Do not retry the denied URL or start another queue without a bounded target.",
+    "nextPhase": "L’Aquila01 denied URL and failure record are published/verified at d9fbdca. Do not replay. Offline-preflight a distinct source; if none is workable, pass to the next region.",
     "databaseReadOnlyObservation": {
       "observedAt": "2026-10-22T18:12:15.676Z",
       "source": "authorized Supabase read-only SQL and map predicate",
@@ -458,7 +464,7 @@
     },
     "tests": "After run07 stopped, backend npm test passed 187/187. Backend/frontend excursions SHA256 6e46cec85daae67e6da0a98afb36d4fbf72b3790b2246dfcdf3837ea9a0ff99b and scrape-status SHA256 da7fa46626cfd3c7e29cc59e0eb66c85f2374a70d0d325a68caba38308dd8450 remained byte-identical after tests.",
     "regionCurrent": "Abruzzo — CAI Penne remained partial/no delta; CAI L’Aquila bounded run stopped on one HTTP 403, no cache/body and no events. No DB query/write.",
-    "regionNext": "Preflight a different enabled official source after checkpoint; pass to next region if none is work-ready.",
+    "regionNext": "Wait for offline selection of a distinct official source; if none is workable, continue with the next region.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
     "remoteCheckpointVerifiedAt": "2026-10-22T19:25:20Z",
@@ -986,9 +992,9 @@
         "checkpointCommit": "pending"
       }
     ],
-    "repositoryCheckpointCommit": "19548380898b52fcf867b6f9e3943d2556351ce4",
-    "updatedAt": "2026-10-22T22:48:57.591Z",
-    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:45:33.908Z",
+    "repositoryCheckpointCommit": "d9fbdca0ab0cafdc4e8ca1c91c534df4a026b7cf",
+    "updatedAt": "2026-10-22T22:49:27.983Z",
+    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:49:27.983Z",
     "continuationMechanism": {
       "flag": "--source-url URL (repeatable) with exactly one --source ID",
       "safety": "Exact official hostname, HTTP(S), no credentials/custom port; redirect guard in continuation mode permits only HTTPS same-host redirects on default/443 without auth. Existing cooldown/cache and bounded document/time limits retained.",
@@ -1103,7 +1109,7 @@
       "sourceId": "cai-l-aquila-9234002",
       "requestedUrl": "https://cailaquila.it/le-attivita-del-cai/programma-2026/?commissioni=escursionismo",
       "collection": "partial; exact request HTTP 403",
-      "files": "ready; importer QA PASS after report correction; backend tests 205/205 and six public JSON hashes stable; checkpoint pending",
+      "files": "ready; importer QA PASS; backend tests 205/205, six public JSON hashes stable; remote checkpoint d9fbdca verified",
       "database": "not-applicable-no-event-delta; no DB query or write",
       "baselineCommit": "9853c72a5b04fae05994828bb85a9686ed74b674",
       "runFolder": "backend/data/agent-runs/cai-20261022-abruzzo-laquila01",
@@ -1140,7 +1146,7 @@
       "sourceId": null,
       "sourceName": null,
       "url": null,
-      "status": "pending offline read-only preflight for a distinct source; L’Aquila denied URL is closed for this cycle",
+      "status": "collector read-only offline preflight active after d9fbdca checkpoint",
       "evidence": "Previous L’Aquila commissioni=escursionismo URL returned one HTTP403 and is in FAILURES; do not replay",
       "scope": "read-only local registry/cache/history/cooldown inspection; no network, tests or collection",
       "networkFetchPerformed": false
@@ -1185,7 +1191,7 @@
       "sourceId": "cai-l-aquila-9234002",
       "requestedUrl": "https://cailaquila.it/le-attivita-del-cai/programma-2026/?commissioni=escursionismo",
       "collection": "partial; exact request HTTP 403",
-      "files": "ready; importer QA PASS after report correction; backend tests 205/205 and six public JSON hashes stable; checkpoint pending",
+      "files": "ready; importer QA PASS; backend tests 205/205, six public JSON hashes stable; remote checkpoint d9fbdca verified",
       "database": "not-applicable-no-event-delta; no DB query or write",
       "baselineCommit": "9853c72a5b04fae05994828bb85a9686ed74b674",
       "runFolder": "backend/data/agent-runs/cai-20261022-abruzzo-laquila01",
@@ -1220,10 +1226,10 @@
   },
   "repositoryCommit": {
     "branch": "codex/cai-orchestrator-luna",
-    "head": "9853c72a5b04fae05994828bb85a9686ed74b674",
+    "head": "d9fbdca0ab0cafdc4e8ca1c91c534df4a026b7cf",
     "remoteVerified": true,
-    "fetchHead": "9853c72a5b04fae05994828bb85a9686ed74b674",
-    "checkpointKind": "baseline for bounded L’Aquila01 run"
+    "fetchHead": "d9fbdca0ab0cafdc4e8ca1c91c534df4a026b7cf",
+    "checkpointKind": "L’Aquila01 status/evidence, 403 failure record, and region/state docs"
   },
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
@@ -1247,10 +1253,10 @@
     }
   },
   "tests": "After both Penne01 and L’Aquila01 collections completed serially: backend npm test 205/205; SHA-256 values for backend/frontend excursions, cai-sections, and scrape-status were identical before and after the test. No code changed.",
-  "updatedAt": "2026-10-22T22:48:57.591Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:45:33.908Z",
+  "updatedAt": "2026-10-22T22:49:27.983Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:49:27.983Z",
   "regionCurrent": "Abruzzo — CAI Penne partial with no event delta; CAI L’Aquila tested one official URL and received HTTP 403. No body/cache, extraction or event delta. No calendar-empty claim.",
-  "regionNext": "Publish the failed-source checkpoint, then offline-preflight a distinct enabled source. If Abruzzo has no work-ready target, record residuals and continue to the next region.",
+  "regionNext": "Wait for offline selection of a distinct official source; if none is workable, continue with the next region.",
   "preflight": {
     "at": "2026-10-22T22:30:21.913236Z",
     "sourceId": "cai-campobasso-9236001",
@@ -1303,7 +1309,7 @@
     "sourceId": "cai-l-aquila-9234002",
     "requestedUrl": "https://cailaquila.it/le-attivita-del-cai/programma-2026/?commissioni=escursionismo",
     "collection": "partial; exact request HTTP 403",
-    "files": "ready; importer QA PASS after report correction; backend tests 205/205 and six public JSON hashes stable; checkpoint pending",
+    "files": "ready; importer QA PASS; backend tests 205/205, six public JSON hashes stable; remote checkpoint d9fbdca verified",
     "database": "not-applicable-no-event-delta; no DB query or write",
     "baselineCommit": "9853c72a5b04fae05994828bb85a9686ed74b674",
     "runFolder": "backend/data/agent-runs/cai-20261022-abruzzo-laquila01",
@@ -1491,7 +1497,7 @@
     "sourceId": null,
     "sourceName": null,
     "url": null,
-    "status": "pending offline read-only preflight for a distinct source; L’Aquila denied URL is closed for this cycle",
+    "status": "collector read-only offline preflight active after d9fbdca checkpoint",
     "evidence": "Previous L’Aquila commissioni=escursionismo URL returned one HTTP403 and is in FAILURES; do not replay",
     "scope": "read-only local registry/cache/history/cooldown inspection; no network, tests or collection",
     "networkFetchPerformed": false
