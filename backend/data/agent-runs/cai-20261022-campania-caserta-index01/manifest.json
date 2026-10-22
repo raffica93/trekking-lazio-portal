@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-campania-caserta-index01",
+  "createdAt": "2026-10-22T22:59:45.254Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "d3e8e73a66063319c606fbe921695f08f4336ca50dc0ebfb3f69cd29d34f426f"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "dfd5fd676ec87d5b3e4897cbd067ed86875707ec6fb326364609e0dca3adc3e3"
+    }
+  ]
+}

@@ -157,3 +157,7 @@ Castrovillari01 è completato e remoto; il preflight dei quattro link non ha tro
 ### Campania — target dopo preflight offline (22 ottobre 2026)
 
 Unica fonte selezionata per il prossimo campione: `cai-caserta-9238006`, `https://www.caicaserta.it/escursioni.html`. È una pagina indice ufficiale distinta, registrata e senza history/cache/failure specifica. Il PDF annuale resta bloccato da `CAI-F-d8cbb0f4bd01c6f5` (`discovery-budget-exhausted`), quindi il run deve specificare soltanto l'indice e limitare a un documento/120s/concurrency1. Fare prima push e verifica remota di questo checkpoint; dopo raccolta, fermare ogni ulteriore fetch, poi QA importer e test backend seriali.
+
+### Esito CAI Caserta index01
+
+Il solo campione sull'indice `/escursioni.html` è concluso: una pagina/7.179 byte, `method=null`, 0 candidati. La fonte resta parziale e i 50 record Caserta, su 3.366 totali, sono invariati; nessun import. QA importer PASS; test backend 205/205 eseguiti dopo la raccolta, i JSON post-test corrispondono al manifest e i mirror coincidono. Prima di un'altra richiesta, pubblicare questo run e poi preflight offline i link figli esatti contro storico, cache e FAILURES; il PDF annuale resta bloccato. Il risultato non è prova di calendario vuoto.

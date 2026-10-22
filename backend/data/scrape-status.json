@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T22:50:43.793Z",
+  "generatedAt": "2026-10-22T22:59:45.062Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -3152,7 +3152,7 @@
       "excursions": 50,
       "error": null,
       "hash": "f6998d81a962d63700ae897c5035901139be5ec22feb142ae49f76b662d7a94a",
-      "updatedAt": "2026-10-19T18:24:35.762Z",
+      "updatedAt": "2026-10-22T22:59:45.062Z",
       "documents": [
         {
           "url": "https://www.caicaserta.it/documenti/Calendario%20escursionistico%202026.pdf",
@@ -3177,6 +3177,12 @@
           "hash": "6ea9d8b5d9e1ab0675efa0b4ae109f5b0979e9c535ff11d0bae2e6085152a3e5",
           "events": 0,
           "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caicaserta.it/escursioni.html",
+          "hash": "bb3bf1b613641c692e434db5496e461858509686bd2600b0cf299b80dd6ce039",
+          "events": 0,
+          "method": null
         }
       ],
       "methods": [
@@ -3190,6 +3196,11 @@
         {
           "url": "https://www.caicaserta.it/documenti/Calendario%20escursionistico%202026.pdf",
           "message": "Discovery budget reached; 5 candidate documents remain.",
+          "code": "discovery-limit"
+        },
+        {
+          "url": "https://www.caicaserta.it/escursioni.html",
+          "message": "Discovery budget reached; 1 candidate documents remain.",
           "code": "discovery-limit"
         }
       ],
