@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T18:56:33.228Z",
+  "generatedAt": "2026-10-22T19:05:14.667Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -11616,8 +11616,8 @@
       "enabled": true,
       "excursions": 51,
       "error": null,
-      "hash": "6b330b408465610c43274b82a44978a35bb64877e620e46e18421e27976f0956",
-      "updatedAt": "2026-10-22T18:56:33.228Z",
+      "hash": "8c3531eb0b31a41cbcbb5cf7a8667a3d0019b500cf8192519f95faf83d8de71f",
+      "updatedAt": "2026-10-22T19:05:14.667Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-brescia/wp-content/uploads/sites/7/2026/02/Programma-Escursionismo-2026.pdf",
@@ -11633,19 +11633,19 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/gruppo-juniores/juniores2026/",
-          "hash": "a9087f46e6167a9573dc22f57401a69d1c46fa4076f8c24af4590047fd1dc6f0",
+          "hash": "5b14b9ac72a6ab989c0ae301f6bec1358afa04a57aed0d40408588eee15c6944",
           "events": 4,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/escursionismo/commissione-escursionismo/",
-          "hash": "a4ea631aa8c483bc6f8eea07b80de71dee6c20ff0ff22411ef09d63e60c1bd66",
+          "hash": "6b2c01a66323d53e35f50c7747fab481b975f1b45fa251eb4eb9c9b190507c92",
           "events": 26,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/2025/12/gruppo-escursionistico-seniores-1997-calendario-escursioni-trekking-2026/",
-          "hash": "d22579c3ba7d4468fbffc58010feb7690f28f398434da40799c5e6a7cdb4b1be",
+          "hash": "f6802580ca2e0c19cd8acb5f356dfbe03d5980dcf9955989d5dc9c2ccab4df94",
           "events": 0,
           "method": null
         },
@@ -11663,7 +11663,7 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/",
-          "hash": "8e16b7bb070ba0949f5c3db9a29b9e10d682bcf8065c42d6f298b9489645a52e",
+          "hash": "346f61c5569cc9c72c7828f570034c4ba4c6d09fd51de185d51fac980635dbee",
           "events": 3,
           "method": "html-calendar"
         },
@@ -11681,169 +11681,181 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/2026/09/54corso-sci-di-fondo-escursionistico-anno-2026-2027/",
-          "hash": "fbc408fe39a76c0c1f10c0a16e201b2bc15ab9bb5aa836edf4c77320c2048665",
+          "hash": "2ed40383a718901fdca18c53d7935458991bfc0d2e3b8107a419285f4a70c429",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/2026/10/gruppo-escursionistico-seniores-1997-settimana-escursionistica-invernale-a-moena-val-di-fassa-trentino-a-a/",
-          "hash": "74b556c4cd536da7a725ab8568b01a448c44e926de03bd26fbf57d6222e9e3a5",
+          "hash": "f92f9672f88b92fc87131bf1f44cccad593ff1f1e925453fa4806ef46edf136e",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/2026/10/gruppo-escursionistico-seniores-1997-escursione-martedi-27-10-26-o-mercoledi-28-10-26-chiusa-val-isarco-bressanone-4-e-ultima-tappa-sentiero-del-castagno-trentino-a-a/",
-          "hash": "d8b8c0c5bf5ee8b755c87160ac5e6d428e207da6d48f31776d36e80bbe66bd1c",
+          "hash": "3d413bc576988694de8b5598dd1e87a3f15c30388016902299573bedb3f7c9b2",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/2026/10/gruppo-escursionistico-seniores-1997-escursione-martedi-20-10-26-o-mercoledi-21-10-26-albino-anello-della-cornagera-monte-poieto-val-seriana-bg/",
-          "hash": "cea466502e4a7b74dc60a35ba10b1d4fa94cc536e61aac8cc49c374c740b9506",
+          "hash": "37e0796db63172c62e7274ae0a72fcafa66c6508340b874c04ae9e1e59108eac",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/",
-          "hash": "085fee630370b5632a7755e620b724a62ade69a61c6900a2dc2ffa9ec8ecc3ad",
+          "hash": "5337a07bf9d0fdd49048e656287d7f9640885735f5873d335cbbb7b1c0b21004",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/",
-          "hash": "f8e7b5d30364099d1a944df9cc6188c4783266ddd00ab1603a3afb76a47aa27d",
+          "hash": "04cb76af564713c4b703c6aa0e260a1c9bf8f244ab137f7e8adca36e8f770657",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-a1-alpinismo-base/",
-          "hash": "4000f50bf4a89a81deacbfae3eaff4ee1bb86953aff1a87d13374784b411db76",
+          "hash": "a58cf735301303343b84520b78f72ca4bec58e701ed594be4f5d152e3267ac19",
           "events": 13,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-acg1-cascate-di-ghiaccio/",
-          "hash": "f983c5b748ccd1a6935bfc7d70b676c23e6cde10a9a0eecae241e4fa50250663",
+          "hash": "0124427898781e13441f30835d25652e2c2a348ed04447d28559887a747caf71",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-sa1-scialpinismo-base/",
-          "hash": "0b1bd8341ccddde6046f1f479b4485ce552e52ecd5cdeaaee559da88837e1571",
+          "hash": "29d4e60cf445b4901cabba8a253bd08dbcea28bb77b7ef2e0926dbb18b33bd63",
           "events": 10,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-sa2-scialpinismo-avanzato/",
-          "hash": "661972b40ef3675d225ce1a0c11f4a24a753a8bccb652e9f12093fe4d69aa06a",
+          "hash": "068af1217d5ae8123d10a34a74a4bf7be2951544628102ca7e72e192ccd43783",
           "events": 5,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-al1-arrampicata-libera-base/",
-          "hash": "b08fa7fc387631e526d1e98881219b5651596224af3d3516b9303d391a58111a",
+          "hash": "4c5ad2ebc62d48777372d578fdd8026188e7f86d3990920755e5f44f1123ab34",
           "events": 5,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-al2-arrampicata-libera-avanzato/",
-          "hash": "e4872b04924efd54d7f141ac4ce8888f10a532643fba6ce2274c4ab2fd78ada4",
+          "hash": "790517613f583b622164bb9c27f48ebfd6505ea10d45bfb43a8c9ddddd52d9ec",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-ar1-arrampicata-su-roccia/",
-          "hash": "491929e1eeacf45bc3ef0aaf350bf7547325eb9f18333dbabf31357ca9d9ffc5",
+          "hash": "dd144cc1528b4d4443e857f2a4c5c001c805ac086a6dd99e245ddde98438523e",
           "events": 10,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-m-av-autosoccorso-in-valanga/",
-          "hash": "e8d8ee949e5c8be4923865b4675cc688cdad4daf21c9440a2d8f000ef46ba481",
+          "hash": "3d417614c7ca293e41fea4572b86da3b3d644bdc5bf37cd495a2645fe72fff3a",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/la-nostra-storia-2/",
-          "hash": "ea0c116b5c8fc06dac138f78b08e19f35873753e4277e652e2e81d39db40678a",
+          "hash": "39285d099f45b430f4faf524d6e50bdf8921b39479b117bc49610a25fde0b48e",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/gruppo-gite-alpinismo-gga/",
-          "hash": "a70b57f60b0f9fda31941ef7bf5f54a640eca36de000cb54640bb22f49962f8b",
+          "hash": "9547d6c37f837ab796cbf50f7ed0b312fc8099f36583d7ceaad1d66ef25f34af",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/gruppo-gite-scialpinismo-ggs/",
-          "hash": "97c26925e7e54ffc26e12e65e5e3da6517dabd5b532ae114a7e2487d38df76b5",
+          "hash": "c41de33829c51a968ab5455f03d01210753e0e91d6b77afd9a72512eb934f40f",
           "events": 1,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/gruppo-gite-scialpinismo-ggs/programmi-anni-precedenti/",
-          "hash": "640fb8303f3f0a96c0ce4465edcd12e68d0b39699accfb9ef32fbbead5c3df4a",
+          "hash": "54c925373d77c41f4bde9a064ba056a1d3b98dcf10d51c5460a6014168b6d49d",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/gruppo-juniores/",
-          "hash": "e916123e1983b8bd49a6fc3f98219bc816ab89313701c2b010b72c0b8721766c",
+          "hash": "bcb90887d7d3c950c8c4f59440c015ac0a3439865e0a347f743aa49fb474e4d6",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/escursionismo/",
-          "hash": "41029cc4d531c2bdf4b53b02999dac874a0442f7ad91a32c28682ee18cc30278",
+          "hash": "5aee41797d2688f1c97cc7ab1c12487ccefc0bbf03c76fcc6bca71f7341a728e",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/escursionismo/gpe-seniores-1987/",
-          "hash": "5e01c0a562cc74a3781c7e8205e49202bddffd034d50b15484711bc7911ef537",
+          "hash": "62868875f2ebbd25428a91ef20bda00c6af7620a500ed6a5d6fd6bdabcbc1ce3",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/escursionismo/gpe-seniores/",
-          "hash": "3e4a79b9a416793e034e92c630d08fee5940412c3e638f49105d8dc2075c7de4",
+          "hash": "a8e76a93fb22fdbe7c7d4323dc7662a42247671692cf734b029db0737d0a6596",
           "events": 5,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/alpinismo-giovanile/",
-          "hash": "4885107c73594bdebb859d8e6715157c21834a0c2eedb7ef9322308dac4906ec",
+          "hash": "a143b4278c7ae2d318f8a1f0d64c018d4c639e2e55edb8ea3fcc6a6b560319b8",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/commissione-sanitaria/",
-          "hash": "801a49b0d6ed9e7be906cfbf9bf24ececa3ba1c7c8dd5ef18bbf7910a1a01203",
+          "hash": "4c9e690a5eb20f379bfde63d0d8c3aea108fc2bf34bcca5382a5d810ae38940e",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-di-sciescursionismo/",
-          "hash": "ac790e64fc5823840969edc6200d66bb55fa9f6af1a23859458b99bf6b358701",
+          "hash": "1d1773287ae48dbe3c4f8a8bf97c8509c1982788af192c4960affa4313d5e909",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/tutela-ambiente-montano-tam/",
-          "hash": "8b0837dfb5a3bceb1cf545d9d8640330476434bbf4620b374fba2c9cd8ad010b",
+          "hash": "b066b40fce62d0dd7b5dc60588364f52ab92f97fe383cef084855cb93588af20",
           "events": 1,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/tutela-ambiente-montano-tam/archivio/",
-          "hash": "d9e7533812842c9448065c02a6dad041436170dac582a2c8f7cb9b2fa2c365de",
+          "hash": "020b8cbafcc46058194e75379440a207b7be3d8479d51b09a64812194b3ea8fc",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/escursioni-di-sci-fondo-escursionismo/",
-          "hash": "8826562fecebd64f9b6c126b433d0aab29079b6420c91ad96ad51728e95f04bf",
+          "hash": "e77104263a8b7c2fc6068faf4b9ece6c9446e38761911f5d51c092f4a5e30eb0",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/wp-content/uploads/sites/7/2026/01/elenco-escursioni-fondo-2026.pdf",
+          "hash": "8fdea80e94f0e10f0ced300a53b63b0ccfac53a32eed3b572cb0713d3e046592",
+          "events": 0,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/category/attivita/",
+          "hash": "1aff700d90bcf7581b4580265cef7c3fc5d92d1afd69eaac3e0b11fa8fd49005",
           "events": 0,
           "method": null
         }
@@ -12191,28 +12203,12 @@
           "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
         },
         {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
-          "code": "previous-unavailable-skipped",
-          "httpStatus": 403,
-          "failureAt": "2026-10-20T03:47:30.276Z",
-          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
-          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
-          "code": "previous-unavailable-skipped",
-          "httpStatus": 403,
-          "failureAt": "2026-10-20T03:47:30.276Z",
-          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
-          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
-        },
-        {
           "url": "https://organizzazione.cai.it/sez-brescia/2025/11/programma-gite-ggs-gruppo-gite-scialpinismo-2026/",
-          "code": "http-removed",
+          "code": "previous-unavailable-skipped",
           "httpStatus": 404,
           "failureAt": "2026-10-22T18:56:18.826Z",
           "failureMessage": "Request failed with status code 404",
-          "message": "Request failed with status code 404"
+          "message": "Official URL previously returned HTTP 404; searching the section's official pages for a replacement."
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
@@ -12391,9 +12387,36 @@
           "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
         },
         {
-          "url": "https://organizzazione.cai.it/sez-brescia/wp-content/uploads/sites/7/2026/02/Programma-Escursionismo-2026.pdf",
-          "message": "Discovery budget reached; 2 candidate documents remain.",
-          "code": "discovery-limit"
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
         }
       ],
       "extractedEvents": 143

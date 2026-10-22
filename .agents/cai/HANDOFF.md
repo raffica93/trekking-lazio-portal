@@ -79,7 +79,7 @@ Le 13 occorrenze `previous-unavailable-skipped` del report rappresentano 2 URL s
 
 **Passi separati:** raccolta completa solo per il perimetro limitato del run; file pronti/verificati; test passati; commit/push da completare; import DB in attesa e da non eseguire per il record cinema senza classificazione; copertura Lombardia ancora aperta (1 parziale, 0 complete, 0 irraggiungibili nel campione corrente). Prossimo: pubblicare il checkpoint, poi un nuovo run circoscritto ai residui Brescia, senza ampliare la regione. Nessun merge, deploy o cron.
 
-## Ultimo avanzamento operativo — Lombardia/Brescia, run03
+## Run03 — campione Brescia e correzione parser, 22 ottobre 2026
 
 Run `cai-20261022-lombardia-brescia03` ha ricontrollato una sola sezione (CAI Brescia) con 26 documenti, 51 eventi di sezione e 136 righe estratte. Esito `collection=partial`, `files=ready`, `database=pending`: +7 ID, 0 modifiche e 0 rimozioni; totale catalogo 3.345 ID unici. Il manifest SHA-256 è `17106240bf08667584315cb48922060c00c673e265c7cc898adfaf57a75f3ec3`, il report SHA-256 `d4dec037f4c99b299b9d3c0ea64c92dd21432213d9264e9af22fba5f28f54388`. Le copie backend/frontend di `excursions.json` e `scrape-status.json` coincidono byte per byte. Importer QA indipendente: PASS; nessuna query o scrittura DB.
 
@@ -96,3 +96,13 @@ Checkpoint di partenza `c46f8c8064795204ddec37f8e05f730b11d47194`, checkout remo
 Delta catalogo rispetto al checkpoint: 3.345 ID unici prima e dopo, 0 aggiunte, 0 rimozioni, 0 modifiche; nessun nuovo punto geografico da classificare o geolocalizzare. Sezione: 1 controllata, 0 complete, 1 partial, 0 unreachable; nuovi eventi verificati 0, duplicati ID esclusi 0, duplicati semantici non stabiliti. Issue: 66 skip cooldown ripetuti su 2 URL storici HTTP 403 (nessun retry); un URL annuale di GGS ha restituito HTTP 404 e resta senza sostituto accertato; discovery-limit con 2 residui. Importer QA indipendente PASS, senza DB; backend `npm test` dopo la raccolta 178/178; copie backend/frontend e catalogo invariati dopo i test.
 
 **Stati indipendenti:** raccolta parziale; file pronti/verificati; checkpoint run04 `1d73684492ffdf330f7ac8bb43b39d16ddcf096b` pushato e verificato; DB pending e non scritto; copertura Lombardia limitata a Brescia, ancora parziale. Prossimo: ricostruire offline i due URL residui e svolgere run05 solo su Brescia, evitando retry dei due URL 403.
+
+## Run05 — esaurimento coda Brescia, 22 ottobre 2026
+
+Run `cai-20261022-lombardia-brescia05`, una sola collect e solo la sezione `cai-brescia-9216005`, concurrency 1, massimo 40 documenti/240 s, nessun retry-failed. Il checkpoint di partenza era `273fcb67894a192895cc688e27675abe3843156b`. Sono stati registrati 40 documenti e 143 estrazioni; i due residui run04 sono stati entrambi raggiunti. Esito `collection=partial`, `files=ready`, `database=pending`; discovery-limit assente. Il catalogo resta a 3.345 ID: 0 aggiunte, 0 modifiche e 0 rimozioni. QA importer indipendente PASS; nessun accesso o scrittura DB.
+
+Il PDF ufficiale “Programma escursioni 2026” del fondo è stato estratto (una pagina, 40 righe) e verificato manualmente: le sole date riportate sono 1 febbraio, 5–8 febbraio, 22 febbraio e 8 marzo 2026, tutte passate al 22 ottobre. Lo zero di eventi futuri è quindi un calendario letto correttamente. La pagina `/category/attivita/` non ha parser; il suo zero estrazioni non viene trattato come calendario vuoto. Nessun nuovo evento o punto geografico è stato creato.
+
+La sezione Brescia resta parziale esclusivamente per 3 URL distinti già non disponibili: 2 con storico HTTP 403 e il permalink GGS con HTTP 404 nel run04. Run05 contiene 69 voci `previous-unavailable-skipped` (1 archivio 403, 67 scuola 403, 1 permalink GGS 404); non è stato ritentato nessun URL. Il parser discovery non segnala più candidati. Il report sigillato con la verifica manuale ha SHA `315eda0b3c37eae0e5d2e5e693729f7f1d7d1c8b3233f131d9c08d77f2409ee2`; il manifest è `d3088019fa7840f7002b472611207356e237b662350c135d7861cd4475fc17e6`.
+
+**Stati indipendenti:** raccolta parziale per cooldown; file pronti/verificati; checkpoint run05 da pubblicare; DB pending e non toccato; Lombardia resta la regione corrente. Dopo il checkpoint, il prossimo campione è una sola fonte Lombardia: CAI Varese (`cai-varese-9216009`), massimo 12 documenti/120 s, concurrency 1. Il suo 503 storico resta senza retry; i 3 Brescia URL restano in cooldown. Suite backend dopo raccolta: 178/178; copie backend/frontend identiche.

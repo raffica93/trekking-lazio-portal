@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T19:01:21Z",
+  "generatedAt": "2026-10-22T19:09:33Z",
   "repositoryCommit": "cb7148ff0d69944a34fd8e606f3e61ab42238d31",
   "baseline": {
     "commit": "9919927d4cbef6d154c4dae1441d64cd01c70ad4",
@@ -4585,9 +4585,10 @@
           "cai-20261020-lombardia-deep-14",
           "cai-20261020-lombardia-deep-15",
           "cai-20261020-piemonte-01",
-          "cai-20261020-piemonte-ocr-01"
+          "cai-20261020-piemonte-ocr-01",
+          "cai-20261022-lombardia-brescia05"
         ],
-        "snapshotCopies": 16,
+        "snapshotCopies": 17,
         "issueCodes": [
           "previous-unavailable-skipped"
         ],
@@ -4607,13 +4608,15 @@
       },
       "evidence": {
         "representativeMessages": [
-          "Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden"
+          "Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "Run05 skipped this URL due to prior HTTP 403 cooldown; no request retried."
         ],
         "sourceUpdatedAt": [
           "2026-10-20T01:19:56.146Z",
           "2026-10-20T01:39:57.342Z",
           "2026-10-20T01:51:46.287Z",
-          "2026-10-20T03:47:30.276Z"
+          "2026-10-20T03:47:30.276Z",
+          "2026-10-22T19:05:14.667Z"
         ]
       },
       "strategy": "Classify evidence, preserve valid cache, then retry/re-discover with a bounded policy appropriate to the class.",
@@ -16647,9 +16650,10 @@
           "cai-20261020-lombardia-deep-14",
           "cai-20261020-lombardia-deep-15",
           "cai-20261020-piemonte-01",
-          "cai-20261020-piemonte-ocr-01"
+          "cai-20261020-piemonte-ocr-01",
+          "cai-20261022-lombardia-brescia05"
         ],
-        "snapshotCopies": 19,
+        "snapshotCopies": 20,
         "issueCodes": [
           "previous-unavailable-skipped"
         ],
@@ -16669,7 +16673,8 @@
       },
       "evidence": {
         "representativeMessages": [
-          "Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden"
+          "Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "Run05 skipped this URL due to prior HTTP 403 cooldown; no request retried."
         ],
         "sourceUpdatedAt": [
           "2026-10-19T18:24:35.762Z",
@@ -16677,7 +16682,8 @@
           "2026-10-20T01:19:56.146Z",
           "2026-10-20T01:39:57.342Z",
           "2026-10-20T01:51:46.287Z",
-          "2026-10-20T03:47:30.276Z"
+          "2026-10-20T03:47:30.276Z",
+          "2026-10-22T19:05:14.667Z"
         ]
       },
       "strategy": "Classify evidence, preserve valid cache, then retry/re-discover with a bounded policy appropriate to the class.",
@@ -18604,9 +18610,10 @@
           "cai-20261020-lombardia-deep-15",
           "cai-20261020-piemonte-01",
           "cai-20261020-piemonte-ocr-01",
-          "cai-20261022-lombardia-brescia04"
+          "cai-20261022-lombardia-brescia04",
+          "cai-20261022-lombardia-brescia05"
         ],
-        "snapshotCopies": 17,
+        "snapshotCopies": 18,
         "issueCodes": [
           "previous-unavailable-skipped",
           "http-removed"
@@ -18617,7 +18624,7 @@
       },
       "attempts": {
         "actualHistoricalRequests": "unknown",
-        "currentCycleRequests": 1,
+        "currentCycleRequests": 0,
         "recoveryAttempts": [
           {
             "runId": "cai-20261022-lombardia-brescia04",
@@ -18634,14 +18641,16 @@
       "evidence": {
         "representativeMessages": [
           "Request failed with status code 404",
-          "Run04 rechecked candidate; HTTP 404."
+          "Run04 rechecked candidate; HTTP 404.",
+          "Run05 skipped this URL due to prior HTTP 404 cooldown; no request retried."
         ],
         "sourceUpdatedAt": [
           "2026-10-20T01:19:56.146Z",
           "2026-10-20T01:39:57.342Z",
           "2026-10-20T01:51:46.287Z",
           "2026-10-20T03:47:30.276Z",
-          "2026-10-22T18:56:33.228Z"
+          "2026-10-22T18:56:33.228Z",
+          "2026-10-22T19:05:14.667Z"
         ]
       },
       "strategy": "Classify evidence, preserve valid cache, then retry/re-discover with a bounded policy appropriate to the class.",
@@ -44260,14 +44269,15 @@
       "failureClass": "discovery-budget-exhausted",
       "httpStatus": null,
       "firstObservedAt": "2026-10-22T18:37:27.020Z",
-      "lastObservedAt": "2026-10-22T18:56:33.433Z",
+      "lastObservedAt": "2026-10-22T19:05:14.859Z",
       "observationBasis": "persisted state timestamp; not an individual request timestamp",
       "history": {
         "runIds": [
           "cai-20261022-lombardia-brescia03",
-          "cai-20261022-lombardia-brescia04"
+          "cai-20261022-lombardia-brescia04",
+          "cai-20261022-lombardia-brescia05"
         ],
-        "snapshotCopies": 2,
+        "snapshotCopies": 3,
         "issueCodes": [
           "discovery-limit"
         ],
@@ -44287,26 +44297,28 @@
       "evidence": {
         "representativeMessages": [
           "Discovery budget reached; 13 candidate documents remain.",
-          "Run04 discovery budget reached; 2 candidate documents remain."
+          "Run04 discovery budget reached; 2 candidate documents remain.",
+          "Run05 reached both residual candidates; discovery-limit no longer reported."
         ],
         "sourceUpdatedAt": [
           "2026-10-22T18:37:26.824Z",
-          "2026-10-22T18:56:33.228Z"
+          "2026-10-22T18:56:33.228Z",
+          "2026-10-22T19:05:14.667Z"
         ]
       },
       "strategy": "Use an explicit bounded residual list/plan; preserve the valid source cache and do not mark source complete until discovery is resolved.",
-      "status": "open",
+      "status": "recheck_resolved",
       "owner": "cai-collector",
-      "outcome": "Run03 residuals were reduced to 2 after run04; continue with a bounded candidate-only plan. No automatic retry.",
+      "outcome": "The two residual candidate URLs were recorded in run05; no discovery-limit remains. Brescia is still partial on unavailable URLs.",
       "correctionRef": null,
       "testRefs": [],
       "resolutionCheck": {
-        "runId": "cai-20261022-lombardia-brescia04",
-        "remainingCandidates": 2,
-        "reportSha256": "5fd661f1ad357553cf8e7c4945da1be935845b56b7786f0ea8d8cd564a6b24b6",
+        "runId": "cai-20261022-lombardia-brescia05",
+        "remainingCandidates": 0,
+        "reportSha256": "315eda0b3c37eae0e5d2e5e693729f7f1d7d1c8b3233f131d9c08d77f2409ee2",
         "databaseWrites": 0
       },
-      "policyStatus": "current_cycle_observed"
+      "policyStatus": "verified"
     }
   ],
   "schema": {

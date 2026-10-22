@@ -79,6 +79,6 @@ Migration `create_place_classifications_20261021090000` registrata dal progetto 
 ## Avanzamento dopo import classificazioni — 22 ottobre 2026
 
 - Completata la riconciliazione classification-only DB (3.336 righe, zero differenze; vedere HANDOFF/STATE), poi ripresa Lombardia.
-- Run Brescia `cai-20261022-lombardia-brescia04`: 38 URL univoci, 26 già visti e 12 nuovi, 143 estrazioni; 0 delta catalogo, 2 candidati e 1 URL 404, 2 URL 403 in cooldown. Sezione parziale, QA indipendente PASS e backend 178/178. Nessun accesso DB.
-- Checkpoint run03/importer verificato in `831e031`; report run04 e stato raccolta pubblicati in `1d73684492ffdf330f7ac8bb43b39d16ddcf096b`. Ora run05 solo sui due residui Brescia; nessuna espansione o import senza nuovo delta classificato e QA.
+- Run Brescia `cai-20261022-lombardia-brescia05`: 40 documenti, 143 estrazioni, entrambi i residui raggiunti, 0 delta catalogo. PDF fondo riletto: quattro date tutte passate; pagina categoria senza parser non è prova di calendario vuoto. Sezione partial per 3 URL non disponibili distinti, zero retry; importer QA PASS, backend 178/178, nessun accesso DB.
+- Checkpoint run04 pubblicato in `1d73684492ffdf330f7ac8bb43b39d16ddcf096b`; run05 e verifica manuale del PDF sono pronti per il checkpoint. Poi campionare una sola fonte aperta in Lombardia: CAI Varese `cai-varese-9216009`, max 12 documenti/120 s/concurrency 1. Non ritentare l’endpoint con storico 503 né i tre URL Brescia in cooldown.
 - I contatori rigenerati su altre righe status non sono nuova copertura. Nessun import, merge, deploy o cron.
