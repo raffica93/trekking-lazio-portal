@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "lombardia-somma-blinnenhorn01-no-event-qa-tested-checkpoint-pending",
+  "phase": "lombardia-varese-calendar-preflight-selected",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -403,11 +403,16 @@
     },
     {
       "id": "S44",
+      "status": "completed",
+      "result": "Somma flyer checkpointed e remote-verified 46a7c85; no events/no DB. Offline Lombardia preflight selects distinct official Varese calendarannual page; known 503/cooldown is a different iCal endpoint, elapsed, not to retry."
+    },
+    {
+      "id": "S45",
       "status": "in_progress",
-      "result": "Checkpoint Somma files and handoff, then offline preflight a distinct workable Lombardia source; no retry of SIEL/summary/Varese blockers."
+      "result": "After preflight checkpoint, fetch one Varese calendarannual page max1/120s/concurrency1, no iCal queue expansion."
     }
   ],
-  "nextAction": "Checkpoint remoto del run Somma (PDF/evidence/report/catalog/status e QA/test). Poi preflight offline della prossima fonte Lombardia distinta; nessuna classificazione o import per Somma perché manca la data dell’uscita.",
+  "nextAction": "Checkpoint remoto del preflight Varese. Poi un solo run cai-20261022-lombardia-varese-calendar01 sulla URL https://www.caivarese.it/calendarioannuale, max1 documento/120s/concurrency1. Non seguire la coda iCal discovery-limit né ripetere il distinto endpoint 503.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -416,7 +421,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "cdfae59e84e793091d11ab199612561dcaf6224c",
+    "branchHead": "46a7c853d363eb40bc7ae99547f44f6e7c478cd9",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
       "runId": "cai-20261022-lombardia-somma-blinnenhorn01",
@@ -453,9 +458,9 @@
         "Varese 503 on separate endpoint"
       ]
     },
-    "nextAction": "Checkpoint remoto del run Somma (PDF/evidence/report/catalog/status e QA/test). Poi preflight offline della prossima fonte Lombardia distinta; nessuna classificazione o import per Somma perché manca la data dell’uscita."
+    "nextAction": "Checkpoint remoto del preflight Varese. Poi un solo run cai-20261022-lombardia-varese-calendar01 sulla URL https://www.caivarese.it/calendarioannuale, max1 documento/120s/concurrency1. Non seguire la coda iCal discovery-limit né ripetere il distinto endpoint 503."
   },
-  "repositoryCommit": "cdfae59e84e793091d11ab199612561dcaf6224c",
+  "repositoryCommit": "46a7c853d363eb40bc7ae99547f44f6e7c478cd9",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -478,10 +483,10 @@
     }
   },
   "tests": "After the Castrovillari01 collection finished, backend npm test passed 205/205; SHA-256 for six public JSON files was identical before/after. No tests were run concurrently with collection.",
-  "updatedAt": "2026-10-22T23:52:05.184423+00:00",
+  "updatedAt": "2026-10-22T23:53:08.926099+00:00",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:52:00Z",
-  "regionCurrent": "Lombardia — CAI Somma Lombardo: flyer specifico letto, PDF-text 0 candidati evento; data uscita assente, solo scadenza iscrizione; 14 righe esistenti invarianti. Test/QA PASS, no DB.",
-  "regionNext": "Lombardia — dopo checkpoint Somma, preflight offline di una distinta fonte ufficiale ancora aperta; rispettare cooldown/503 e non ripetere SIEL o scheda riepilogativa bloccati.",
+  "regionCurrent": "Lombardia — Somma Blinnenhorn01: PDF specifico letto, nessuna data uscita, 0 eventi; 14 righe invariate, nessun DB. Checkpoint 46a7c85.",
+  "regionNext": "Lombardia — CAI Varese calendario annuale, pagina ufficiale distinta e non visitata; il 503/cooldown riguarda un altro endpoint iCal, che non sarà seguito.",
   "preflight": {
     "at": "2026-10-22T23:28:13Z",
     "sourceId": "cai-pavullo-nel-frignano-9224020",
@@ -569,28 +574,18 @@
   },
   "regionalCoverage": {
     "region": "Lombardia",
-    "scope": "Sesto index and Somma flyer sampled; no region-wide fresh count",
-    "status": "open; several known partial/blocked sources remain",
+    "scope": "Sesto index and Somma flyer sampled; Varese annual page selected next; no regional total freshly queried",
+    "status": "open",
     "currentRunCounts": {
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
-      "sourceRowsVerified": 14,
-      "eventsExtracted": 0,
+      "eventsVerified": 0,
       "newIds": 0,
-      "removedIds": 0,
-      "changedRows": 0,
-      "placesInserted": 0,
-      "classificationsInserted": 0,
-      "coordinatesAdded": 0,
-      "failuresResolved": [],
-      "failuresOpen": [
-        "Somma SIEL full programme download-aborted",
-        "Somma summary PDF size-limit",
-        "Varese 503 endpoint"
-      ],
-      "nextStep": "Publish Somma artifact checkpoint, then offline preflight another distinct Lombardia source."
+      "dbPlacesInserted": 0,
+      "dbClassificationsInserted": 0,
+      "nextStep": "Checkpoint Varese preflight then one page fetch; do not follow iCal queue."
     },
     "historicalSnapshot": {
       "asOf": "2026-10-20",
@@ -722,8 +717,12 @@
   ],
   "nextSourcePreflight": {
     "region": "Lombardia",
-    "status": "offline preflight pending after Somma no-event checkpoint",
-    "scope": "review remaining open official URLs vs status/cache/FAILURES/cooldown; select at most one distinct workable target",
+    "sourceId": "cai-varese-9216009",
+    "sourceName": "CAI Varese",
+    "url": "https://www.caivarese.it/calendarioannuale",
+    "status": "offline selected; bounded sample pending remote checkpoint",
+    "evidence": "registry identifies Calendar annual and links from official Escursionismo page; absent from status documents/issues, deterministic cache, FAILURES URL records and prior runs. Section partial has 39 docs and 2 issues. Known 503 and six-hour cooldown belongs to separate iCal URL; elapsed, do not revisit it.",
+    "scope": "one explicit calendarannual page, max1 document/120s/concurrency1; no iCal discovery follow-up",
     "networkFetchPerformed": false
   }
 }

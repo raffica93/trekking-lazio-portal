@@ -409,3 +409,12 @@ Il primo `orchestrate init` sull’host apex è stato rifiutato prima della rete
 | `cai-20261022-lombardia-somma-blinnenhorn01`, Somma Lombardo | 1 PDF puntuale | 0 | 1 | 0 | 0 eventi completi; flyer attesta itinerario EE ma non data dell’uscita; scadenza iscrizione 25/07/2026 esclusa | 0 | Nessuno | SIEL full-PDF download-aborted; scheda riepilogativa size-limit; Varese endpoint 503 | Checkpoint e poi preflight offline altra fonte Lombardia distinta |
 
 Il catalogo resta 3.371 ID; 14 righe Somma invariate. No coordinates, classification, query or DB write. Importer QA PASS; backend tests 205/205; sei public JSON stabili.
+
+
+## Lombardia — CAI Varese calendarannual preflight (22 ottobre 2026)
+
+| Regione / fonte | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Issue aperte | Prossimo passo |
+|---|---:|---:|---:|---:|---|---|---|---|
+| `cai-varese-9216009` | 1 URL selezionata offline | 0 | fonte partial, 39 documenti / 2 issue | 0 | 0 nel preflight | n/a | 503/cooldown trascorso su iCal distinto; iCal discovery-limit | Checkpoint e fetch solo della pagina annuale max1/120s/concurrency1 |
+
+`https://www.caivarese.it/calendarioannuale` è registrata come calendario annuale ufficiale e assente da cache/status/FAILURES/run precedenti. Il 503 non riguarda questa URL; l’iCal non verrà seguito. Nessuna richiesta di rete nel preflight.
