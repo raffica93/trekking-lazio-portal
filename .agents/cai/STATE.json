@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "regional-collection-partial-files-verified-checkpoint-pending",
+  "phase": "regional-collection-partial-checkpointed",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -207,7 +207,7 @@
   ],
   "nextAction": {
     "step": "S7",
-    "instruction": "Publish run05 report/state and updated failure register. Then sample only CAI Varese (`cai-varese-9216009`) in Lombardia, max 12 documents/120 seconds/concurrency 1; avoid retry of the previously unavailable 503 endpoint."
+    "instruction": "Preflight CAI Varese prior HTTP 503 endpoint and its cooldown/skip control. Proceed with one bounded Varese sample only if the endpoint is guaranteed not to be retried; otherwise keep it blocked and choose another eligible Lombardia source."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -217,7 +217,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "1d73684492ffdf330f7ac8bb43b39d16ddcf096b",
+    "branchHead": "92ac86393416325560e753e43b8bd022741cb708",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -386,7 +386,7 @@
       "agentRequestedEffort": "high",
       "effectiveModelTelemetry": "not exposed"
     },
-    "nextPhase": "Publish run05; then a bounded CAI Varese sample as the next single source within Lombardia. Do not expand the sample or retry the prior 503 endpoint.",
+    "nextPhase": "Preflight CAI Varese prior 503 endpoint and ensure the collector can skip it safely; only then run one bounded Varese sample. If it cannot be skipped, keep source blocked and choose another eligible Lombardia source.",
     "databaseReadOnlyObservation": {
       "observedAt": "2026-10-22T18:12:15.676Z",
       "source": "authorized Supabase read-only SQL and map predicate",
@@ -403,11 +403,11 @@
       "backend": "npm test after run05 collection: 178 passed, 0 failed (2026-10-22)",
       "publicCatalogTestIsolation": "tests ran after collection; catalog SHA remained stable and backend/frontend copies match: excursions 740bd4a3baa5dd7ba7380359f041808938fd0246f2e055b17302c9caa7ccd09f; scrape-status b3781bedb1dd3e28cf631ecb41141d073675ab5fc61f9826e99301bd4b89b1ce"
     },
-    "regionCurrent": "Lombardia — run05 reached both Brescia discovery residuals; section remains partial due two 403 URLs and one 404 in cooldown",
-    "regionNext": "After run05 checkpoint, sample one other Lombardia section: CAI Varese (cai-varese-9216009), bounded to 12 documents/120 seconds, concurrency 1; no retry of its prior 503 endpoint.",
+    "regionCurrent": "Lombardia — Brescia discovery queue exhausted for current cache; source remains partial on unavailable URLs; run05 checkpoint published",
+    "regionNext": "Preflight CAI Varese source and ensure its previously unavailable 503 endpoint will not be retried before bounded collection.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
-    "remoteCheckpointVerifiedAt": "2026-10-22T19:01:51Z",
+    "remoteCheckpointVerifiedAt": "2026-10-22T19:11:40Z",
     "operationalRecovery": {
       "incident": "An intermediate overlay command briefly reduced an uncommitted working output to a one-row transfer fixture. It was recovered from the sealed 3336-row input and existing classifier cache before QA, with no DB writes. The final full output was rebuilt and importer-validated.",
       "status": "recovered-before-checkpoint",
@@ -482,10 +482,10 @@
       "scrapeStatusSha256": "b3781bedb1dd3e28cf631ecb41141d073675ab5fc61f9826e99301bd4b89b1ce",
       "importerQa": "PASS; compared to 273fcb6; 3345 unique IDs, zero add/remove/change; manifest/copies/candidate accounting checked; no DB query/write.",
       "tests": "Backend npm test 178/178 after collection; catalog hashes stable and frontend/backend copies byte-identical.",
-      "commit": null,
-      "remoteVerifiedAt": null
+      "commit": "92ac86393416325560e753e43b8bd022741cb708",
+      "remoteVerifiedAt": "2026-10-22T19:11:40Z"
     },
-    "regionalCheckpointCommit": "1d73684492ffdf330f7ac8bb43b39d16ddcf096b",
+    "regionalCheckpointCommit": "92ac86393416325560e753e43b8bd022741cb708",
     "regionalRunHistory": [
       {
         "runId": "cai-20261022-lombardia-brescia02",
@@ -590,10 +590,10 @@
         "remoteVerifiedAt": "2026-10-22T19:01:51Z"
       }
     ],
-    "repositoryCheckpointCommit": "1d73684492ffdf330f7ac8bb43b39d16ddcf096b",
-    "updatedAt": "2026-10-22T19:11:04Z"
+    "repositoryCheckpointCommit": "92ac86393416325560e753e43b8bd022741cb708",
+    "updatedAt": "2026-10-22T19:11:40Z"
   },
-  "repositoryCommit": "1d73684492ffdf330f7ac8bb43b39d16ddcf096b",
+  "repositoryCommit": "92ac86393416325560e753e43b8bd022741cb708",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -611,8 +611,8 @@
     "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
     "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
   },
-  "updatedAt": "2026-10-22T19:11:04Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:01:51Z",
-  "regionCurrent": "Lombardia — run05 reached both Brescia discovery residuals; section remains partial due two 403 URLs and one 404 in cooldown",
-  "regionNext": "After run05 checkpoint, sample one other Lombardia section: CAI Varese (cai-varese-9216009), bounded to 12 documents/120 seconds, concurrency 1; no retry of its prior 503 endpoint."
+  "updatedAt": "2026-10-22T19:11:40Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:11:40Z",
+  "regionCurrent": "Lombardia — Brescia discovery queue exhausted for current cache; source remains partial on unavailable URLs; run05 checkpoint published",
+  "regionNext": "Preflight CAI Varese source and ensure its previously unavailable 503 endpoint will not be retried before bounded collection."
 }
