@@ -49,6 +49,8 @@ Orchestratore e due ruoli cai-collector/cai-importer sono richiesti/configurati 
 
 Dopo Penne il run CAI L'Aquila `cai-20261022-abruzzo-laquila01` ha provato una sola URL ufficiale e ricevuto HTTP 403; stop immediato, nessun retry/body/cache, nessun delta o DB. Il report chiarisce che lo status source-level mantiene la sorella `?commissioni=legale`; l'URL tentata è attestata dai sidecar. Il risultato L'Aquila e il registro 403 sono pubblicati/verificati al commit `d9fbdca0ab0cafdc4e8ca1c91c534df4a026b7cf`; il preflight offline ha escluso Abruzzo e Basilicata come fonti senza target distinto; il prossimo target è CAI Castrovillari in Calabria, URL ufficiale non letta `/prog.php`, limitata a una sola pagina dopo questo checkpoint.
 
+Castrovillari01 ha acquisito l'indice ufficiale HTML; 12 righe di catalogo sono identiche prima/dopo, la pagina ha estratto zero eventi e conserva un residuo HTML. Il PDF annuale mantiene OCR failure pagina 2 e discovery 8. Il report/source-evidence/evidence-manifest sono stati corretti e hanno QA importer PASS; backend npm test dopo la raccolta 205/205 e tutti i sei hash JSON pubblici invariati. Nessuna classificazione o scrittura DB. Il checkpoint Castrovillari corrente è in preparazione; poi preflight offline di un solo link PDF ufficiale distinto.
+
 ## Responsabilità
 
 - Orchestratore: aggiorna questo spazio, assegna il run, verifica i checkpoint e

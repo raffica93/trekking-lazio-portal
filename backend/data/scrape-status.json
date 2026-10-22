@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-22T22:46:12.099Z",
+  "generatedAt": "2026-10-22T22:50:43.793Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
+    "withEvents": 1,
     "parsed": 0,
-    "unsupported": 0,
-    "failed": 1,
+    "unsupported": 1,
+    "failed": 0,
     "located": 548
   },
   "sources": [
@@ -2392,7 +2392,7 @@
       "directoryId": "9244005",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "unsupported",
+      "status": "partial",
       "url": "https://www.caicastrovillari.it/images/programma2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
@@ -2401,13 +2401,19 @@
       "excursions": 12,
       "error": null,
       "hash": "1a48f2c10d7ffce219250012e985fd478968f8b6ab7a685d7fc67f5408f34dba",
-      "updatedAt": "2026-10-19T18:24:35.762Z",
+      "updatedAt": "2026-10-22T22:50:43.793Z",
       "documents": [
         {
           "url": "https://www.caicastrovillari.it/images/programma2026.pdf",
           "hash": "61b6964088d7ad876ebc08e455c4f32478abb3369f3b5328e791c6604af82709",
           "events": 0,
           "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caicastrovillari.it/prog.php",
+          "hash": "4cf633e1d05adefd69e52b79ab517cc842a5f7d72b545281b54b2f3169e70c3b",
+          "events": 0,
+          "method": null
         }
       ],
       "methods": [
@@ -2421,6 +2427,11 @@
         {
           "url": "https://www.caicastrovillari.it/images/programma2026.pdf",
           "message": "Discovery budget reached; 8 candidate documents remain.",
+          "code": "discovery-limit"
+        },
+        {
+          "url": "https://www.caicastrovillari.it/prog.php",
+          "message": "Discovery budget reached; 1 candidate documents remain.",
           "code": "discovery-limit"
         }
       ],

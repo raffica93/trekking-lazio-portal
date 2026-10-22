@@ -143,3 +143,9 @@ Dopo checkpoint Penne (1954838), run univoco `cai-20261022-abruzzo-laquila01` ha
 ## Passaggio regionale 2026-10-22 — Abruzzo non ha target offline sicuri
 
 Il preflight collector ha escluso replay o URL con failure/cooldown: per Penne la continuazione canonizza sul contenuto già letto, L'Aquila ha il 403 appena osservato, e i residui delle altre sezioni sono già consumati/non persistiti o soggetti a size/cooldown. Basilicata ugualmente non ha URL attuale distinta. Abruzzo e Basilicata rimangono con copertura aperta/parziale, senza dichiarazione di completezza. Primo target work-ready: CAI Castrovillari (`cai-castrovillari-9244005`), `https://www.caicastrovillari.it/prog.php`, URL ufficiale calendar registry non presente in history/cache/FAILURES; il PDF 2026 è già partial con OCR failure/discovery 8. Dopo checkpoint regionale eseguire una sola pagina max1/120s/concurrency1, senza allargare la coda.
+
+## Stato corrente — Calabria, Castrovillari01
+
+Run unico HTML `cai-20261022-calabria-castrovillari01`: pagina indice 9.830 byte acquisita, `method=null`, 0 eventi, 1 residuo discovery HTML; PDF annuale non ritentato (OCR failure pagina 2/discovery8 conservati). Catalog rows correttamente selezionati via prefisso ID: 12→12, zero cambi; il source-evidence è stato corretto dopo un filtro errato su `sourceId` assente, e report/evidence-manifest ora allineati. Hash e QA importer PASS indicati in HANDOFF. Backend test 205/205 dopo la raccolta; sei JSON pubblici stabili. Nessuna classificazione/DB.
+
+Dopo checkpoint remoto, preflight offline dei link ufficiali PDF apparsi nella pagina, verificando history/cache/failure prima di selezionare al massimo un URL distinto. Non ripetere il PDF annuale né dichiarare copertura completa.

@@ -273,3 +273,13 @@ Abruzzo non è completo; si passa alla regione successiva solo perché non c'è 
 | Run pianificato | Regione | Sezione | URL | Scope | Evidenza preflight | Limiti aperti | Prossimo passo |
 |---|---|---|---|---|---|---|---|
 | `cai-20261022-calabria-castrovillari01` | Calabria | CAI Castrovillari `cai-castrovillari-9244005` | `https://www.caicastrovillari.it/prog.php` | Una URL, max1 doc/120s/concurrency1 | URL da calendarUrls/calendarEvidence, linkata da sito ufficiale; non in documents/cache/FAILURES | PDF 2026 già partial: OCR failure e discovery-limit 8; pagina può non essere estrattiva | Pubblicare questo preflight; poi una sola raccolta bounded, nessuna deduzione da method=null |
+
+## CAI Castrovillari bounded sample — Calabria, 22 ottobre 2026
+
+| Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Nuovi ID file | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | DB consegnati | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---:|---|---|---:|---|
+| `cai-20261022-calabria-castrovillari01` — CAI Castrovillari | 1 URL ufficiale | 0 | 1 | 0 | 12 righe catalogo preesistenti verificate invariate; 0 eventi estratti dall'HTML indice | 0 | 0 | Nessuno | PDF annuale OCR failure pagina 2 + discovery 8; HTML `/prog.php` discovery 1 | 0; nessun candidato/query DB | Checkpoint report/source-evidence/evidence-manifest corretti; poi preflight offline di un singolo PDF ufficiale distinto |
+
+Righe selezionate per prefisso `event.id`: 12→12; 0 add/remove/change; SHA canonico `bc44d552e7eaf43748fcea8849a6d5d13ec383115fd06cb0ee3b14cdcaa52407`. Catalogo nazionale 3366→3366 ID. SHA completo excursions `dd756f6f…`→`704ea832…` per metadata generatedAt/sourceHashes; status `a58baf3e…`; sections `f0245e11…`. Mirror backend/frontend identici. QA importer PASS dopo correzione del selettore iniziale errato su `sourceId`; 205/205 backend test dopo il run e sei JSON pubblici invariati durante i test. Nessuna classificazione/import/DB.
+
+La pagina indice rivela link ufficiali a un PDF gruppo Corigliano/Rossano, PDF sottosezione Cerchiara, e proposta attività; confrontare ogni target con history/cache prima di sceglierne uno, evitando il PDF annuale Castrovillari già letto e con OCR failure. Cumulative Calabria counts restano storico 20 ottobre, non ricalcolati.

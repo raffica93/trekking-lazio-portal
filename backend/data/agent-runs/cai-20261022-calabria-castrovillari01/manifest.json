@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-calabria-castrovillari01",
+  "createdAt": "2026-10-22T22:50:44.001Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "704ea8322b02b6ce479338df3855da7974ed25d94bfabffe5536d721b3bb88d2"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "a58baf3e0e6d71730a6ecc70bbbbd85215d531afe5f57508647fa98d59cbad71"
+    }
+  ]
+}

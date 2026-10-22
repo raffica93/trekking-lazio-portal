@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T22:48:05.619Z",
-  "repositoryCommit": "9853c72a5b04fae05994828bb85a9686ed74b674",
+  "generatedAt": "2026-10-22T22:54:12.169Z",
+  "repositoryCommit": "1f8616499731aa067198da7432dc4587c43002a7",
   "baseline": {
     "commit": "9919927d4cbef6d154c4dae1441d64cd01c70ad4",
     "runId": "cai-20261020-piemonte-01"
@@ -14797,8 +14797,8 @@
       "failureClass": "ocr-runtime-or-confidence",
       "httpStatus": null,
       "firstObservedAt": "2026-10-19T18:02:55.761Z",
-      "lastObservedAt": "2026-10-20T08:08:31.672Z",
-      "observationBasis": "timestamps from persisted run/source status snapshots; not request timestamps",
+      "lastObservedAt": "2026-10-22T22:50:43.793Z",
+      "observationBasis": "Merged source-status snapshot from the bounded run; this timestamp is source updatedAt, not a separate request timestamp.",
       "history": {
         "runIds": [
           "cai-20261019-cloud-01",
@@ -14819,12 +14819,14 @@
           "cai-20261020-lombardia-deep-14",
           "cai-20261020-lombardia-deep-15",
           "cai-20261020-piemonte-01",
-          "cai-20261020-piemonte-ocr-01"
+          "cai-20261020-piemonte-ocr-01",
+          "cai-20261022-calabria-castrovillari01"
         ],
-        "snapshotCopies": 19,
+        "snapshotCopies": 20,
         "issueCodes": [],
         "sourceStatuses": [
-          "unsupported"
+          "unsupported",
+          "partial"
         ]
       },
       "attempts": {
@@ -14838,20 +14840,21 @@
       },
       "evidence": {
         "representativeMessages": [
-          "PDF OCR unavailable or failed: Command failed: tesseract /tmp/cai-pdf-ocr-SLMMES/page-2.png stdout -l ita+eng --psm 6"
+          "PDF OCR unavailable or failed: Command failed: tesseract /tmp/cai-pdf-ocr-SLMMES/page-2.png stdout -l ita+eng --psm 6",
+          "cai-20261022-calabria-castrovillari01 retained the PDF issue in merged source status; the PDF itself was not retried."
         ],
         "sourceUpdatedAt": [
           "2026-10-19T18:24:35.762Z"
         ]
       },
       "strategy": "Classify evidence, preserve valid cache, then retry/re-discover with a bounded policy appropriate to the class.",
-      "status": "historical_classified_unverified",
+      "status": "recheck_open",
       "owner": "cai-collector",
-      "outcome": "No resolution check in the current cycle yet.",
+      "outcome": "The prior PDF document remains in the merged current status with page-2 OCR unavailable/failed; this bounded run did not refetch or retry the PDF. Keep the issue open and preserve its cache.",
       "correctionRef": null,
       "testRefs": [],
       "resolutionCheck": null,
-      "policyStatus": "candidate_pending_test"
+      "policyStatus": "observed_open"
     },
     {
       "id": "CAI-F-5c0db65d55ff3bd1",
@@ -24615,8 +24618,8 @@
       "failureClass": "discovery-budget-exhausted",
       "httpStatus": null,
       "firstObservedAt": "2026-10-19T18:02:55.761Z",
-      "lastObservedAt": "2026-10-20T08:08:31.672Z",
-      "observationBasis": "timestamps from persisted run/source status snapshots; not request timestamps",
+      "lastObservedAt": "2026-10-22T22:50:43.793Z",
+      "observationBasis": "Merged source-status snapshot from the bounded run; this timestamp is source updatedAt, not a separate request timestamp.",
       "history": {
         "runIds": [
           "cai-20261019-cloud-01",
@@ -24637,14 +24640,16 @@
           "cai-20261020-lombardia-deep-14",
           "cai-20261020-lombardia-deep-15",
           "cai-20261020-piemonte-01",
-          "cai-20261020-piemonte-ocr-01"
+          "cai-20261020-piemonte-ocr-01",
+          "cai-20261022-calabria-castrovillari01"
         ],
-        "snapshotCopies": 19,
+        "snapshotCopies": 20,
         "issueCodes": [
           "discovery-limit"
         ],
         "sourceStatuses": [
-          "unsupported"
+          "unsupported",
+          "partial"
         ]
       },
       "attempts": {
@@ -24658,20 +24663,21 @@
       },
       "evidence": {
         "representativeMessages": [
-          "Discovery budget reached; 8 candidate documents remain."
+          "Discovery budget reached; 8 candidate documents remain.",
+          "cai-20261022-calabria-castrovillari01 retained the PDF issue in merged source status; the PDF itself was not retried."
         ],
         "sourceUpdatedAt": [
           "2026-10-19T18:24:35.762Z"
         ]
       },
       "strategy": "Classify evidence, preserve valid cache, then retry/re-discover with a bounded policy appropriate to the class.",
-      "status": "historical_classified_unverified",
+      "status": "recheck_open",
       "owner": "cai-collector",
-      "outcome": "No resolution check in the current cycle yet.",
+      "outcome": "The prior PDF discovery backlog remains 8 candidates in the merged current status; the bounded run read only the distinct HTML index and did not advance the PDF queue. Keep this issue open.",
       "correctionRef": null,
       "testRefs": [],
       "resolutionCheck": null,
-      "policyStatus": "candidate_pending_test"
+      "policyStatus": "observed_open"
     },
     {
       "id": "CAI-F-95dfe3badcbd5ec8",
@@ -44730,6 +44736,60 @@
       "status": "recheck_open",
       "owner": "cai-collector",
       "outcome": "One bounded request was denied with HTTP 403. No cache/body was available. The section has no parsed events; this does not establish an empty calendar.",
+      "correctionRef": null,
+      "testRefs": [],
+      "resolutionCheck": null,
+      "policyStatus": "observed_open"
+    },
+    {
+      "id": "CAI-F-3fd76023aa00af28",
+      "sourceId": "cai-castrovillari-9244005",
+      "url": "https://www.caicastrovillari.it/prog.php",
+      "phase": "discovery",
+      "failureClass": "discovery-budget-exhausted",
+      "httpStatus": null,
+      "firstObservedAt": "2026-10-22T22:50:43.793Z",
+      "lastObservedAt": "2026-10-22T22:50:43.793Z",
+      "observationBasis": "Current orchestrator run report/status snapshot timestamp, not HTTP request timestamp.",
+      "history": {
+        "runIds": [
+          "cai-20261022-calabria-castrovillari01"
+        ],
+        "snapshotCopies": 1,
+        "issueCodes": [
+          "discovery-limit"
+        ],
+        "sourceStatuses": [
+          "partial"
+        ]
+      },
+      "attempts": {
+        "actualHistoricalRequests": "unknown",
+        "currentCycleRequests": 1,
+        "recoveryAttempts": [
+          {
+            "runId": "cai-20261022-calabria-castrovillari01",
+            "scope": "one explicit official HTML index URL; max1 document/120s/concurrency1",
+            "httpStatus": "not persisted",
+            "outcome": "HTML page reached and cached; parser method null with zero extracted events; one discovery candidate remains on this page."
+          }
+        ]
+      },
+      "cooldown": {
+        "policy": "Do not repeat the same explicit HTML index without a distinct child URL; use a bounded continuation if a newly evidenced official document is selected.",
+        "nextEligibleAt": null
+      },
+      "evidence": {
+        "representativeMessages": [
+          "Discovery budget reached; 1 candidate documents remain."
+        ],
+        "bodySha256": "4cf633e1d05adefd69e52b79ab517cc842a5f7d72b545281b54b2f3169e70c3b",
+        "cacheBodyBytes": 9830
+      },
+      "strategy": "Inspect the newly visible official PDF links offline against history/cache and select at most one distinct unvisited target; preserve all existing rows and avoid empty-calendar inference.",
+      "status": "recheck_open",
+      "owner": "cai-collector",
+      "outcome": "The page is an official program index, not parsed event data; one candidate remains. Keep source partial.",
       "correctionRef": null,
       "testRefs": [],
       "resolutionCheck": null,
