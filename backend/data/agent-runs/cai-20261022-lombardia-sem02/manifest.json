@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-lombardia-sem02",
+  "createdAt": "2026-10-22T21:33:09.175Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "c8931d47b067066d95e532299b38463a5cf656f253d08ecc6b86bfdcb5899cd1"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "39efc436e20ea100d475403f1aec2297fde9a916034e59a6a678f2725c5ed841"
+    }
+  ]
+}

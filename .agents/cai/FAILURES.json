@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T20:30:00Z",
-  "repositoryCommit": "75be6e65b19a727250346c5e1c4e3c4287f9b277",
+  "generatedAt": "2026-10-22T21:33:09.175Z",
+  "repositoryCommit": "c43b32101de52739bab3237f5bddf3eb343b788b",
   "baseline": {
     "commit": "9919927d4cbef6d154c4dae1441d64cd01c70ad4",
     "runId": "cai-20261020-piemonte-01"
@@ -25,7 +25,8 @@
       "unknown": 3,
       "download": 11,
       "pdf": 1,
-      "parsing": 1
+      "parsing": 1,
+      "discovery-status-merge": 1
     },
     "classes": {
       "discovery-budget-exhausted": 193,
@@ -48,7 +49,8 @@
       "download-aborted": 1,
       "pdf-render-or-decode": 1,
       "quality-manual-qa-multicolumn-date-skipped": 1,
-      "official-calendar-grid-unrecognized": 1
+      "official-calendar-grid-unrecognized": 1,
+      "bounded-continuation-cleared-discovery-limit": 1
     }
   },
   "records": [
@@ -44366,6 +44368,70 @@
       "status": "recheck_resolved",
       "owner": "orchestrator",
       "resolutionCheck": "Resolved by run cai-20261022-lombardia-valmadrera07: 14 new verified records, 0 removals/changes to existing records, report SHA 66cfdef7a09d8b998a4da3dc50625b11493968ed0bece873191651518b5873ca, manifest SHA 80338c4a5952334c28cb8dc7ce436e6b0d8ea0aea9309046356e7909bc3a9335. HTTP 304 inferred from unchanged cache timestamps; exact response status is not persisted. DB writes 0."
+    },
+    {
+      "id": "CAI-F-4e3c3fa4c4ea6b2d",
+      "sourceId": "cai-s-e-m-9216028",
+      "url": "https://www.caisem.org/sezione/gitesociali/pdf/GiteSEM2026.pdf?ed1601",
+      "phase": "discovery-status-merge",
+      "failureClass": "bounded-continuation-cleared-discovery-limit",
+      "firstObservedAt": "2026-10-22T21:27:17.309Z",
+      "lastObservedAt": "2026-10-22T21:33:09.175Z",
+      "observationBasis": "orchestrator run-state timestamps; HTTP request count not separately recorded",
+      "history": {
+        "runIds": [
+          "cai-20261022-lombardia-sem01",
+          "cai-20261022-lombardia-sem02"
+        ],
+        "snapshotCopies": 2,
+        "issueCodes": [
+          "discovery-limit"
+        ],
+        "sourceStatuses": [
+          "partial"
+        ]
+      },
+      "attempts": {
+        "actualHistoricalRequests": "not applicable; deterministic status merge regression",
+        "currentCycleRequests": "one bounded official PDF target; request count not separately recorded",
+        "recoveryAttempts": [
+          {
+            "at": "2026-10-22T21:33:09.175Z",
+            "method": "bounded orchestrator continuation after c43b321",
+            "outcome": "prior discovery-limit retained at 12 candidates; no catalog delta"
+          }
+        ]
+      },
+      "cooldown": {
+        "policy": "not applicable; resolved deterministic status handling defect",
+        "nextEligibleAt": null
+      },
+      "evidence": {
+        "representativeMessages": [
+          "sem01 successful read cleared the prior discovery-limit despite not traversing the residual queue",
+          "sem02 retained the prior discovery-limit with 12 candidate documents remaining"
+        ],
+        "sourceUpdatedAt": [
+          "2026-10-22T21:27:17.112Z",
+          "2026-10-22T21:33:08.998Z"
+        ]
+      },
+      "strategy": "Keep a discovery-limit open across explicit URL continuations; clear it only when a full-source run carries structured complete-queue evidence. Clear ordinary URL errors on continuation only when a document for that URL was successfully read.",
+      "status": "recheck_resolved",
+      "owner": "cai-collector",
+      "outcome": "sem01 is rejected as a coverage checkpoint. Regression covered by status/adapter fixtures; sem02 remains partial with 12 residual candidates and zero event delta.",
+      "correctionRef": "backend/scrape-status.js@c43b32101de52739bab3237f5bddf3eb343b788b",
+      "testRefs": [
+        "backend/test/scrape-status.test.js",
+        "backend/test/deterministic.test.js"
+      ],
+      "resolutionCheck": {
+        "runId": "cai-20261022-lombardia-sem02",
+        "manifestSha256": "cc2edad797f5ced938dbad2ebf013a14504c1eecd0681f7026dfc3216357485f",
+        "test": "backend npm test: 201 passed, 0 failed",
+        "commit": "c43b32101de52739bab3237f5bddf3eb343b788b"
+      },
+      "policyStatus": "verified"
     }
   ],
   "schema": {

@@ -146,6 +146,15 @@ Catalogo invariato a 3.359 ID quanto a cardinalità: zero aggiunti/rimossi e una
 
 | Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
 |---|---:|---:|---:|---:|---|---:|---|---|---|
-| `cai-20261022-lombardia-premana02` — CAI Premana | 2 URL ufficiali mirati | 0 | 1 | 0 | 9 eventi storici controllati, 0 prossimi, 0 ID nuovi | 0 | `/oggi/` e listing archivio letti; nessun evento futuro dal campione | Discovery 2→4 residui; esatti quattro URL non salvati; fonte in pausa per prevenire replay | Checkpoint; poi altra fonte Lombardia con campione ufficiale delimitato |
+| `cai-20261022-lombardia-premana02` — CAI Premana | 2 URL ufficiali mirati | 0 | 1 | 0 | 9 eventi storici controllati, 0 prossimi, 0 ID nuovi | 0 | `/oggi/` e listing archivio letti; nessun evento futuro dal campione | Discovery 2→4 residui; esatti quattro URL non salvati; fonte in pausa per prevenire replay | Checkpoint 10178cd verificato; poi altra fonte Lombardia con campione ufficiale delimitato |
 
 Il catalogo resta a 3.359 ID e non ha righe evento cambiate; sono cambiati i due hash dei documenti, la metadata di coverage e la issue con la nuova coda. La status history conserva 40 URL, zero aggiunti/rimossi. La CLI sul sottoinsieme ha segnalato `unsupported`, il run e la sezione restano `partial`; non è un calendario vuoto e non è complete coverage. Nessuna classification/import DB. Report SHA `88e6e56c0da6a4d89da4212015886dba6fcef4cc1f05cbf25e7b78cdfa067551`; manifest SHA `4b00cb7e88e787e93cf47d08960c80ecf48dfc8e1e42d11cc29669070206990d`; test backend 197/197, copie identiche. Non sono stati ricalcolati i totali regionali.
+
+
+## CAI S.E.M. bounded continuation 02 — 22 ottobre 2026
+
+| Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| `cai-20261022-lombardia-sem02` — CAI S.E.M. | 1 PDF ufficiale mirato | 0 | 1 | 0 | 14 eventi esistenti; 33 righe estratte; 0 nuovi ID | 0 ID duplicati nel catalogo; duplicati di righe sorgente non esposti | Merge status corretto e verificato in sem02 | Discovery-limit esatto: 12 candidati residui; nessun URL specifico persistito | Checkpoint file, poi read-only preflight su un'altra fonte Lombardia; non ripetere il medesimo PDF |
+
+Catalogo: 3.359→3.359 ID unici; zero aggiunti, rimossi o righe evento cambiate. Fonte `partial`, 40 documenti conservati; il conteggio residuo 12 è mantenuto dopo la continuation. Importer QA PASS; backend npm test 201/201 dopo la raccolta. Stato run `collection=partial`, `files=ready`, `database=pending`; nessun accesso/scrittura DB a delta eventi zero. Report SHA `ad5609b4fd7a281e281b53ff8698e5584a681da01b46420420f99e9858565105`; manifest SHA `cc2edad797f5ced938dbad2ebf013a14504c1eecd0681f7026dfc3216357485f`; state SHA `9668cdaf1cb18c2251be3c603527f505ceb4372f2c9dfd85c4afaa893f867a12`. Copie backend/frontend identiche. Conteggi globali Lombardia non ricalcolati.

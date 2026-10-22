@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-22T21:23:01.641Z",
+  "generatedAt": "2026-10-22T21:33:08.998Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 1,
-    "parsed": 0,
-    "unsupported": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 548
   },
@@ -19860,7 +19860,7 @@
       "excursions": 14,
       "error": null,
       "hash": "c91dc6a467283996490e8aa639310f324cdd3567ab0175358f76720b2c79c007",
-      "updatedAt": "2026-10-20T02:33:43.210Z",
+      "updatedAt": "2026-10-22T21:33:08.998Z",
       "documents": [
         {
           "url": "https://www.caisem.org/sezione/gitesociali/pdf/GiteSEM2026.pdf?ed1601",

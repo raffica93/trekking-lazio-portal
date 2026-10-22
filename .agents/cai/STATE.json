@@ -225,7 +225,7 @@
   ],
   "nextAction": {
     "step": "LOMBARDIA-SELECT-NEXT-SOURCE",
-    "instruction": "Publish Premana02 file/status/report checkpoint and verify remote. Stop Premana for now because the queue expanded 2→4 and the next exact URLs are not persisted; do not replay the same discovery page. Have collector select another workable official Lombardia source by read-only preflight, then run one bounded sample."
+    "instruction": "Checkpoint sem02 files/report/status on origin and verify Git blobs. Then use collector read-only preflight to select one different workable official Lombardia source. Keep S.E.M. partial with 12 residual discovery candidates; do not replay the same PDF. Avoid Brescia/Varese cooldown and all prior queues without exact recoverable URLs."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -235,7 +235,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "ba079704bac2524f87a22140d59b390ff30f8e5c",
+    "branchHead": "c43b32101de52739bab3237f5bddf3eb343b788b",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -369,22 +369,22 @@
     },
     "regionalCoverage": {
       "region": "Lombardia",
-      "status": "open; Valmadrera PDF parsing is verified, while other Lombardia sources and regional coverage remain partial.",
+      "status": "open; S.E.M. remains partial with 12 residual candidates; other Lombardia sources still need bounded coverage.",
       "currentRunCounts": {
         "sectionsChecked": 1,
         "complete": 0,
         "partial": 1,
         "unreachable": 0,
-        "verifiedNewEvents": 14,
-        "sectionEventsReported": 21,
-        "documentExtractions": 65,
+        "verifiedNewEvents": 0,
+        "sourceEvents": 14,
+        "documentExtractions": 33,
         "exactDuplicateIdsExcluded": 0,
-        "semanticDuplicates": "No catalog ID duplicates; document-row semantic overlap not exposed.",
+        "semanticDuplicates": "No catalog ID duplicates; source-row semantic duplicate count is not exposed.",
         "failuresResolved": [
-          "CAI Valmadrera annual PDF month-grid parser failure: run07 source status ok and 14 new future events extracted using parser VERSION 11."
+          "Lost discovery-limit from sem01 resolved with c43b321 and sem02 retains 12 candidates."
         ],
         "failuresOpen": [
-          "Broader Lombardia coverage remains incomplete; Brescia unavailable URLs and other pending sources have not been recounted in this run."
+          "S.E.M. has 12 unvisited candidates; exact candidate URLs not persisted. Broader Lombardia coverage remains open."
         ]
       },
       "historicalSnapshot": {
@@ -395,7 +395,7 @@
         "unreachable": 1,
         "unchecked": 104
       },
-      "historicalSnapshotNote": "Historical handoff only; current sample covers Valmadrera alone; no Lombardia-wide recount."
+      "historicalSnapshotNote": "Historical handoff only; current sample covers S.E.M. only; no Lombardia-wide recount."
     },
     "ocrItalian": false,
     "agentStatus": {
@@ -419,8 +419,8 @@
       "writes": 0
     },
     "tests": "After run07 stopped, backend npm test passed 187/187. Backend/frontend excursions SHA256 6e46cec85daae67e6da0a98afb36d4fbf72b3790b2246dfcdf3837ea9a0ff99b and scrape-status SHA256 da7fa46626cfd3c7e29cc59e0eb66c85f2374a70d0d325a68caba38308dd8450 remained byte-identical after tests.",
-    "regionCurrent": "Lombardia — CAI Valmadrera official PDF reprocessed under parser VERSION 11 in run cai-20261022-lombardia-valmadrera07; 14 new events verified, importer QA PASS, backend 187/187. Files await remote checkpoint; DB pending classification of the 14 new IDs.",
-    "regionNext": "After remote file checkpoint, classify only the 14 new Valmadrera IDs with the verified Mercury contract in an isolated run; preserve requested/attested model fields. Importer QA and a second remote checkpoint precede classification-only DB reconciliation. Then continue Lombardia one source at a time.",
+    "regionCurrent": "Lombardia — S.E.M. run sem02 refreshed the official PDF; parser extracted 33 rows reconciled to 14 existing events, zero event-row delta; source partial with 12 residual discovery candidates.",
+    "regionNext": "Publish and verify sem02 file checkpoint; then collector performs read-only preflight for a different workable official Lombardia source. Brescia/Varese remain subject to cooldown.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
     "remoteCheckpointVerifiedAt": "2026-10-22T19:25:20Z",
@@ -946,18 +946,33 @@
     "receiptCheckpoint": "50352f7fde1a638e6541aab048fcdacfb834324b",
     "resumeNote": "Valmadrera delta receipt and DB reconciliation are complete. Do not repeat the 10-row delta or historical 3,336 classification baseline.",
     "lastRegionalAttempt": {
-      "runId": "cai-20261022-lombardia-cernusco02",
-      "status": "rejected-cache-version",
-      "sourceId": "cai-cernusco-sul-naviglio-9216051",
-      "documentSha256": "654a51f8d310cd6b65ad6e99a5a74ef05165a18d6e6411f6e21e9389720aa291",
-      "sourceStatus": "partial; 36 documents and 3 historical issues preserved",
+      "runId": "cai-20261022-lombardia-sem02",
+      "sourceId": "cai-s-e-m-9216028",
+      "sourceName": "CAI S.E.M.",
       "collection": "partial",
-      "files": "ready but rejected; false OCR candidate was reintroduced",
-      "database": "pending; no DB writes",
-      "oldExtractionCachePath": "backend/node_modules/.cache/cai/events-392f980c46fba9e4f53542b372927fd918df7b6a018f120da436c5a6885bf7d6.json",
-      "rootCause": "Parser correction changed behavior without bumping deterministic VERSION 11, so the cached extracted output containing the false OCR ID was reused.",
-      "verifiedBaseline": "The rejected ID cb33842fc3c2 is absent from committed HEAD 010af37.",
-      "next": "Bump VERSION 11→12, test, checkpoint code, restore baseline, rerun once."
+      "files": "ready; file checkpoint pending",
+      "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-sem02/manifest.json",
+      "manifestSha256": "cc2edad797f5ced938dbad2ebf013a14504c1eecd0681f7026dfc3216357485f",
+      "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-sem02/collection-report.md",
+      "reportSha256": "ad5609b4fd7a281e281b53ff8698e5584a681da01b46420420f99e9858565105",
+      "stateSha256": "9668cdaf1cb18c2251be3c603527f505ceb4372f2c9dfd85c4afaa893f867a12",
+      "sectionsChecked": 1,
+      "complete": 0,
+      "partial": 1,
+      "unreachable": 0,
+      "sourceEvents": 14,
+      "documentRowsExtracted": 33,
+      "newIds": 0,
+      "removedIds": 0,
+      "changedEventRows": 0,
+      "duplicateIdsExcluded": 0,
+      "discoveryLimitRemaining": 12,
+      "database": "pending; no DB access or write because event delta is zero",
+      "importerQa": "PASS; all manifest file hashes and backend/frontend mirrors verified read-only",
+      "backendTest": "201/201 after collection; catalog/status files remained at manifest hashes",
+      "codeCommit": "c43b32101de52739bab3237f5bddf3eb343b788b",
+      "fileCheckpointCommit": "pending",
+      "remoteVerified": false
     },
     "lastCodeCorrection": {
       "commit": "010af3796a99d01e8081d45ef625b2344ec134c7",
@@ -974,43 +989,36 @@
       ]
     },
     "latestRegionalRun": {
-      "runId": "cai-20261022-lombardia-premana02",
-      "sourceId": "cai-premana-9216089",
-      "sourceUrls": [
-        "https://organizzazione.cai.it/sez-premana/eventi/oggi/",
-        "https://organizzazione.cai.it/sez-premana/eventi/elenco/?eventDisplay=past"
-      ],
+      "runId": "cai-20261022-lombardia-sem02",
+      "sourceId": "cai-s-e-m-9216028",
+      "sourceName": "CAI S.E.M.",
       "collection": "partial",
-      "files": "ready",
-      "database": "pending",
-      "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-premana02/manifest.json",
-      "manifestSha256": "4b00cb7e88e787e93cf47d08960c80ecf48dfc8e1e42d11cc29669070206990d",
-      "statePath": "backend/data/agent-runs/cai-20261022-lombardia-premana02/state.json",
-      "stateSha256": "4e6c2a3aa9b93dfb6413f6045458254105ce0bb346e73a815062a79b605b99e6",
-      "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-premana02/collection-report.md",
-      "reportSha256": "88e6e56c0da6a4d89da4212015886dba6fcef4cc1f05cbf25e7b78cdfa067551",
-      "sourceStatus": "partial",
-      "cliSliceStatus": "unsupported",
-      "sourceDocumentsRetained": 40,
-      "sourceUrlsAdded": 0,
-      "sourceUrlsRemoved": 0,
-      "candidateQueueBefore": 2,
-      "candidateQueueAfter": 4,
-      "exactNextUrlsPersisted": false,
-      "catalogBefore": 3359,
-      "catalogAfter": 3359,
+      "files": "ready; file checkpoint pending",
+      "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-sem02/manifest.json",
+      "manifestSha256": "cc2edad797f5ced938dbad2ebf013a14504c1eecd0681f7026dfc3216357485f",
+      "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-sem02/collection-report.md",
+      "reportSha256": "ad5609b4fd7a281e281b53ff8698e5584a681da01b46420420f99e9858565105",
+      "stateSha256": "9668cdaf1cb18c2251be3c603527f505ceb4372f2c9dfd85c4afaa893f867a12",
+      "sectionsChecked": 1,
+      "complete": 0,
+      "partial": 1,
+      "unreachable": 0,
+      "sourceEvents": 14,
+      "documentRowsExtracted": 33,
       "newIds": 0,
       "removedIds": 0,
-      "changedRows": 0,
-      "verifiedPastEvents": 9,
-      "upcomingEvents": 0,
+      "changedEventRows": 0,
       "duplicateIdsExcluded": 0,
-      "dbWrites": 0,
-      "collectorQa": "PASS: exact URLs fetched; today page yielded zero events and past listing yielded 9 historical rows; no catalog delta; stop to avoid queue replay.",
-      "importerQa": "PASS: manifest, status, copies verified; no DB delivery."
+      "discoveryLimitRemaining": 12,
+      "database": "pending; no DB access or write because event delta is zero",
+      "importerQa": "PASS; all manifest file hashes and backend/frontend mirrors verified read-only",
+      "backendTest": "201/201 after collection; catalog/status files remained at manifest hashes",
+      "codeCommit": "c43b32101de52739bab3237f5bddf3eb343b788b",
+      "fileCheckpointCommit": "pending",
+      "remoteVerified": false
     }
   },
-  "repositoryCommit": "ba079704bac2524f87a22140d59b390ff30f8e5c",
+  "repositoryCommit": "c43b32101de52739bab3237f5bddf3eb343b788b",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -1034,10 +1042,10 @@
       "copiesIdentical": true
     }
   },
-  "updatedAt": "2026-10-22T21:25:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T21:22:23Z",
-  "regionCurrent": "Lombardia — Premana residual run02 inspected exactly two official URLs; no upcoming/new IDs; queue grew 2→4 without persisted target URLs, so source paused to avoid no-progress loop.",
-  "regionNext": "Publish Premana02 checkpoint. Move to a different Lombardia source after bounded read-only collector preflight; Premana remains partial until exact residual URLs are recoverable.",
+  "updatedAt": "2026-10-22T21:35:06Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T21:35:06Z",
+  "regionCurrent": "Lombardia — S.E.M. run sem02 refreshed the official PDF; parser extracted 33 rows reconciled to 14 existing events, zero event-row delta; source partial with 12 residual discovery candidates.",
+  "regionNext": "Publish and verify sem02 file checkpoint; then collector performs read-only preflight for a different workable official Lombardia source. Brescia/Varese remain subject to cooldown.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
     "sourceId": "cai-varese-9216009",
@@ -1139,43 +1147,62 @@
     "independentImporterQa": "PASS"
   },
   "lastRegionalAttempt": {
-    "runId": "cai-20261022-lombardia-premana02",
-    "status": "file-checkpoint-ready-no-db-delta",
-    "sourceId": "cai-premana-9216089",
+    "runId": "cai-20261022-lombardia-sem02",
+    "sourceId": "cai-s-e-m-9216028",
+    "sourceName": "CAI S.E.M.",
     "collection": "partial",
-    "files": "ready; pending Git checkpoint",
-    "database": "pending; no new source ID; no DB operation",
-    "catalog": "3359 before/after; zero IDs added/removed/changed",
-    "sourceHistory": "40 URLs retained; two selected hashes refreshed; queue 2→4; next four URLs are not persisted",
-    "cliSliceStatus": "unsupported (0 upcoming from the selected pages); orchestrator run/source status remains partial due preserved unvisited history/issues",
-    "manifestSha256": "4b00cb7e88e787e93cf47d08960c80ecf48dfc8e1e42d11cc29669070206990d",
-    "stateSha256": "4e6c2a3aa9b93dfb6413f6045458254105ce0bb346e73a815062a79b605b99e6",
-    "reportSha256": "88e6e56c0da6a4d89da4212015886dba6fcef4cc1f05cbf25e7b78cdfa067551",
-    "test": "backend npm test 197/197; four public catalog/status hashes unchanged during tests.",
-    "next": "Publish checkpoint; stop Premana until exact residual URLs can be recovered; select another official Lombardia source."
+    "files": "ready; file checkpoint pending",
+    "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-sem02/manifest.json",
+    "manifestSha256": "cc2edad797f5ced938dbad2ebf013a14504c1eecd0681f7026dfc3216357485f",
+    "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-sem02/collection-report.md",
+    "reportSha256": "ad5609b4fd7a281e281b53ff8698e5584a681da01b46420420f99e9858565105",
+    "stateSha256": "9668cdaf1cb18c2251be3c603527f505ceb4372f2c9dfd85c4afaa893f867a12",
+    "sectionsChecked": 1,
+    "complete": 0,
+    "partial": 1,
+    "unreachable": 0,
+    "sourceEvents": 14,
+    "documentRowsExtracted": 33,
+    "newIds": 0,
+    "removedIds": 0,
+    "changedEventRows": 0,
+    "duplicateIdsExcluded": 0,
+    "discoveryLimitRemaining": 12,
+    "database": "pending; no DB access or write because event delta is zero",
+    "importerQa": "PASS; all manifest file hashes and backend/frontend mirrors verified read-only",
+    "backendTest": "201/201 after collection; catalog/status files remained at manifest hashes",
+    "codeCommit": "c43b32101de52739bab3237f5bddf3eb343b788b",
+    "fileCheckpointCommit": "pending",
+    "remoteVerified": false
   },
   "regionalCoverage": {
     "region": "Lombardia",
-    "status": "open; Premana remains partial and is paused because the next discovery URLs are not persisted; other sources remain.",
+    "status": "open; S.E.M. remains partial with 12 residual candidates; other Lombardia sources still need bounded coverage.",
     "currentRunCounts": {
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
-      "verifiedPastEvents": 9,
-      "upcomingEvents": 0,
-      "newEvents": 0,
-      "residualCandidatesBefore": 2,
-      "residualCandidatesAfter": 4,
+      "verifiedNewEvents": 0,
+      "sourceEvents": 14,
+      "documentExtractions": 33,
       "exactDuplicateIdsExcluded": 0,
+      "semanticDuplicates": "No catalog ID duplicates; source-row semantic duplicate count is not exposed.",
       "failuresResolved": [
-        "Two exact Premana residual URLs were fetched and parsed; page results were classified correctly as zero current events and nine historical events."
+        "Lost discovery-limit from sem01 resolved with c43b321 and sem02 retains 12 candidates."
       ],
       "failuresOpen": [
-        "Premana has four unresolved candidates not persisted as URLs; source paused to avoid a replay/no-progress loop. Broader Lombardia coverage remains incomplete."
+        "S.E.M. has 12 unvisited candidates; exact candidate URLs not persisted. Broader Lombardia coverage remains open."
       ]
     },
-    "historicalSnapshot": {},
-    "historicalSnapshotNote": "Historical handoff only; current sample covers Premana only; no Lombardia-wide recount."
+    "historicalSnapshot": {
+      "sections": 229,
+      "checked": 125,
+      "complete": 56,
+      "partial": 68,
+      "unreachable": 1,
+      "unchecked": 104
+    },
+    "historicalSnapshotNote": "Historical handoff only; current sample covers S.E.M. only; no Lombardia-wide recount."
   }
 }
