@@ -352,3 +352,22 @@ Run `cai-20261022-marche-potenzapicena01` read one official URL (`https://www.ca
 ### Preflight Molise dopo Potenza Picena — 22 ottobre 2026
 
 Le Marche non hanno restituito un URL ufficiale inedito mirabile; i calendari attivi noti sono già visitati o conservano una coda discovery senza URL stabili. Potenza Picena `/attivita2026` non è stato riletto: il campione appena verificato termina su pagina Wix generica e rimane `method=null`. In Molise solo CAI Campobasso (`cai-campobasso-9236001`) è enabled. Le 12 URL nel suo status risultano visitate, ma il calendario HTML ufficiale `https://caicampobasso.it/calendario-delle-attivita/` è una pagina indice da 118 righe estratte, body hash storico `ce4421de6c30de30d0d50ce79627b65f6e62932ca519cb0c5e03ad4dea7acbbc`; status snapshot 19 ottobre, fonte partial con discovery-limit 37 sull’URL del PDF annuale. Si autorizza un solo refresh bounded di tale indice al run nuovo `cai-20261022-molise-campobasso01`, max1 URL/doc, 120s, concurrency1 per verificare aggiornamenti recenti. Non dichiarare complete la fonte; se il body non cambia/nessun delta, non ripetere e passare oltre.
+
+
+## Stato operativo corrente — Campobasso delta, 22 ottobre 2026
+
+Sostituisce le prossime azioni operative più vecchie sopra: i run successivi sono stati chiusi o messi in pausa come indicato nei rispettivi rapporti. Il branch remoto `codex/cai-orchestrator-luna` è stato letto con `git fetch origin codex/cai-orchestrator-luna` e coincide con `d16ebc0ea29118199f6deb3e9821ee3d4efef191`; il riferimento locale `origin/...` era stantio prima del fetch. La patch fixture-backed per lo scope delle continuation è pubblicata lì. Test mirati `scrape-status` 11/11 e backend `npm test` 205/205 sono terminati dopo la raccolta; i sei JSON pubblici sono rimasti stabili durante i test.
+
+### Campobasso: raccolta, file, classificazione, DB
+
+Run raccolta `cai-20261022-molise-campobasso01`: una sola pagina indice ufficiale aggiornata, SHA body `5b97e1aa0639efcebafbba3153c03dc0ee00d432b527f276c4d0dc08ee2363ed`, 127 righe fonte. Il catalogo è passato da 3.364 a 3.366 ID: due nuovi ID, zero rimozioni, una riga preesistente aggiornata solo nei campi source/link/description; campi editoriali e coordinate amministrati invariati. Nessuna coordinata nuova; entrambi i nuovi luoghi restano da verificare. La fonte è `partial`, non un calendario completo.
+
+Gli artefatti sono nel run: manifest `be53777def101bac5f73e37aeca8b96b72c637c85a64e657723c48b3762fa667`; report raccolta `cbe1cac905b10f0d8a9264714f19c55b9195397effd34104a58b19a71cdf7340`; input candidati (2 ID) `a0cab9771df021bd96c7baca7fcab0c170bab0cf1137cba1a7bded35ef14d700`; evidence manifest `2acd0a294dd98b4a5f7564bf1edff2a3cc0632f27791c8f230305b6364545cd3`. La correzione del contatore, verificata al commit `d16ebc0`, distingue il residuo della pagina HTML (1 candidato non salvato con URL) dalla coda del PDF annuale (37). Entrambe restano aperte e la sezione resta partial.
+
+Run classificazione `cai-map-20261022-campobasso01`: QA indipendente importer PASS, 2/2, zero errori. Manifest SHA `80d7f646b0c12cdd35943248429243fad7c364c554f4c03e0dfce52d84733925`, output SHA `d6e54aa214d648b4b6d9351d417a0dd7fb10fe01ea80e0bae0dd148b863038fd`, report SHA `226b6b6b9f3e129a43084c03d3e0f8decd8fdb152acf5734846804fd1a3959b4`. Conteggi: 1 `trekking/altro`, 1 `da_verificare/altro`, 0 `non_trekking`, 0 errori. Modello richiesto `inception/mercury-decide`; modello risposta/versione attestato `inception/mercury-decide-20260930`. L’evento Sila è datato 16–18 ottobre (passato alla data della raccolta), Lago Vivo 6 dicembre. Entrambi mantengono luogo non verificato e coordinate nulle. Nessuna query/scrittura DB inclusa nel checkpoint.
+
+Stato separato: raccolta `partial`; file/classificazione pronti con QA; consegna DB `pending`. L’importer esegue ora solo query preimport e verifica FK sugli esatti due source ID. Prossimo gate: commit/push dei file e verifica remota dei blob; quindi import insert-only mirato, con conflitti preservati e zero update/delete, query post-import e ricevuta. Non usare l’import generale o riclassificare il batch storico.
+
+### Regione successiva
+
+Dopo la ricevuta Campobasso, selezionare in sola lettura la prossima fonte ufficiale non esaurita; evitare il replay della pagina Campobasso e del PDF senza URL residui stabili. In Molise è abilitata una sola sezione nota. Conservare separati conteggi del campione, conteggi di raccolta, file e righe DB; i totali di copertura storici del 20 ottobre non sono query attuali.

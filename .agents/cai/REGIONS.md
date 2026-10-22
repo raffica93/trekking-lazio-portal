@@ -221,3 +221,12 @@ Catalogo 3.364→3.364 ID unici, 0 aggiunti/rimossi/cambiati. Status source part
 ## Preflight prossimo campione — Molise
 
 Marche: nessun target ufficiale inedito mirabile nel preflight; Potenza Picena resta partial/unreadable. Molise: l’unica sezione enabled è CAI Campobasso. Tutte le 12 URL registrate sono state visitate; per verificare eventuali aggiornamenti recenti è selezionato un solo refresh dell’indice ufficiale `https://caicampobasso.it/calendario-delle-attivita/` (precedente 118 estrazioni, hash body `ce4421de6c30de30d0d50ce79627b65f6e62932ca519cb0c5e03ad4dea7acbbc`; snapshot 19 ottobre). PDF annuale ha discovery-limit 37 senza URL residui stabili. Run pianificato `cai-20261022-molise-campobasso01`, max1 documento/120s/concurrency1; eventuale esito invariato significa zero progresso e no replay.
+
+
+## Campione corrente Molise — CAI Campobasso, 22 ottobre 2026
+
+| Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi fonte verificati | Nuovi ID file | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | DB consegnati | Prossimo passo |
+|---|---:|---:|---:|---:|---:|---:|---:|---|---|---:|---|
+| `cai-20261022-molise-campobasso01` — CAI Campobasso | 1 indice HTML ufficiale | 0 | 1 | 0 | 127 righe | 2 | 0 | Scope discovery-limit corretto con fixture/test `d16ebc0`; PDF count 37 separato dall’indice HTML count 1 | Coda PDF 37; continuation HTML 1 senza URL esatto persistito | 0 (checkpoint/import pending) | Pubblicare artefatti file; dopo verifica remota import mirato dei 2 ID e riconciliazione, poi fonte successiva senza replay |
+
+Delta catalogo 3.364→3.366 ID unici, zero rimozioni, una riga preesistente modificata solo in source/link/description, coordinate nuove 0. Classificazione Mercury QA PASS: 1 trekking/altro, 0 non trekking, 1 da verificare/altro, 0 errori; modello richiesto `inception/mercury-decide`, risposta attestata `inception/mercury-decide-20260930`. DB non interrogato/scritto nel checkpoint file. Fonte partial: nessun zero-event assumption. I conteggi storici aggregati non sono ricalcolati.

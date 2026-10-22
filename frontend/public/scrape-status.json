@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-22T22:17:34.055Z",
+  "generatedAt": "2026-10-22T22:22:15.238Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 1,
-    "parsed": 0,
-    "unsupported": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 548
   },
@@ -37088,10 +37088,10 @@
       "template": "pdf-programma",
       "extractor": "deterministic",
       "enabled": true,
-      "excursions": 43,
+      "excursions": 45,
       "error": null,
       "hash": "3b44f98c44a9f0b8ca266325a9c01d26934802a590144aff362ededf9120c949",
-      "updatedAt": "2026-10-19T18:24:35.762Z",
+      "updatedAt": "2026-10-22T22:22:15.238Z",
       "documents": [
         {
           "url": "https://caicampobasso.it/wp-content/uploads/2026/01/Programma-CAI-Sezioni-Molisane-2026.pdf",
@@ -37113,8 +37113,8 @@
         },
         {
           "url": "https://caicampobasso.it/calendario-delle-attivita/",
-          "hash": "ce4421de6c30de30d0d50ce79627b65f6e62932ca519cb0c5e03ad4dea7acbbc",
-          "events": 118,
+          "hash": "5b97e1aa0639efcebafbba3153c03dc0ee00d432b527f276c4d0dc08ee2363ed",
+          "events": 127,
           "method": "html-calendar"
         },
         {
@@ -37176,9 +37176,14 @@
           "url": "https://caicampobasso.it/wp-content/uploads/2026/01/Programma-CAI-Sezioni-Molisane-2026.pdf",
           "message": "Discovery budget reached; 37 candidate documents remain.",
           "code": "discovery-limit"
+        },
+        {
+          "url": "https://caicampobasso.it/calendario-delle-attivita/",
+          "message": "Discovery budget reached; 1 candidate document remains on this explicit continuation; candidate URL is not persisted.",
+          "code": "discovery-limit"
         }
       ],
-      "extractedEvents": 304
+      "extractedEvents": 313
     },
     {
       "id": "cai-isernia-9236002",

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "molise-campobasso-calendar-refresh",
+  "phase": "molise-campobasso-delta-file-checkpoint",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -227,12 +227,15 @@
       "status": "completed",
       "owner": "cai-collector + cai-importer + orchestrator",
       "result": "Strada Storta02 parser v13 fixture-backed; 6 official HTML cards extracted; catalog +1/5 provenance-description-only/0 removed, classified only new ID with Mercury (da_verificare/altro), importer QA PASS. File checkpoint 12b073f remote verified; delta-only MCP insert 1 place+1 classification, before 0/0 after 1/1, mismatches 0, updates/deletes 0; receipt awaits checkpoint. Receipt/report published and remote blobs verified at 2ac9c8b."
+    },
+    {
+      "id": "S12",
+      "status": "in_progress",
+      "owner": "orchestrator + cai-collector + cai-importer",
+      "result": "Campobasso bounded refresh and 2-ID Mercury classification complete; collector status-scope fix published at d16ebc0; importer file/classification QA PASS. Read-only Supabase exact-ID preflight found 0 places, 0 classifications, 0 id/slug conflicts and ON DELETE RESTRICT. File checkpoint for this delta pending; no DB writes until remote verification."
     }
   ],
-  "nextAction": {
-    "step": "MOLISE-CAMPOBASSO-BOUNDED-CALENDAR-REFRESH",
-    "instruction": "Potenza Picena01 file e fallimenti sono pubblicati/verificati al commit 90f20d9. Marche resta senza nuovo target utile; non ripetere la pagina Wix. In Molise CAI Campobasso è l’unica sezione enabled; tutte le 12 URL note sono state viste. Fai un singolo refresh bounded dell’indice ufficiale `https://caicampobasso.it/calendario-delle-attivita/` (body precedente hash ce4421de6c30de30d0d50ce79627b65f6e62932ca519cb0c5e03ad4dea7acbbc, 118 righe), max1 doc/120s/concurrency1, run ID nuovo `cai-20261022-molise-campobasso01`; solo per verificare possibili aggiornamenti dalla lettura del 19 ottobre. Se invariato, registrare zero progresso e passare oltre senza replay. I 37 candidate residui del PDF restano senza URL stabili, no retry broad."
-  },
+  "nextAction": "Completare la QA del preflight Supabase read-only per i due nuovi ID Campobasso; checkpointare file e report su codex/cai-orchestrator-luna, verificarne i blob remoti; solo dopo il checkpoint eseguire l’import insert-only esatto dei due ID e riconciliare query/ricevuta. Poi passare a una fonte lavorabile successiva, senza ripetere Potenza Picena o le code Campobasso non mirabili.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -241,7 +244,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "2ac9c8bbe148ae070e16f095e048b5412f57b05a",
+    "branchHead": "d16ebc0ea29118199f6deb3e9821ee3d4efef191",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -1255,9 +1258,60 @@
       "reportSha256": "71d75fe727139578825bdf959a019dfdebf4fa1426b6ec8d393f9bd8ab6cb470",
       "remoteReceiptCheckpoint": "2ac9c8bbe148ae070e16f095e048b5412f57b05a",
       "receiptCheckpointSha256": "bef3ff50b4266d0486eb343f9c281fdb96ea3a14b2f6a07727be57e2d00acf32"
+    },
+    "activeRegionalRun": {
+      "runId": "cai-20261022-molise-campobasso01",
+      "sourceId": "cai-campobasso-9236001",
+      "region": "Molise",
+      "collection": "partial",
+      "files": "ready; importer QA PASS; checkpoint pending",
+      "database": "pending; read-only preflight assigned, no DML",
+      "manifestPath": "backend/data/agent-runs/cai-20261022-molise-campobasso01/manifest.json",
+      "manifestSha256": "be53777def101bac5f73e37aeca8b96b72c637c85a64e657723c48b3762fa667",
+      "stateSha256": "34445b35794fadb0f9a4ed0827cef9a77f72d15b398017dad830405543995296",
+      "collectionReportPath": "backend/data/agent-runs/cai-20261022-molise-campobasso01/collection-report.md",
+      "collectionReportSha256": "cbe1cac905b10f0d8a9264714f19c55b9195397effd34104a58b19a71cdf7340",
+      "sourceEvidenceSha256": "7042a498eb9911ffaee2f1f5e40dafbeed829346536622167944cbd7f73ab0ad",
+      "candidateInputSha256": "a0cab9771df021bd96c7baca7fcab0c170bab0cf1137cba1a7bded35ef14d700",
+      "evidenceManifestSha256": "2acd0a294dd98b4a5f7564bf1edff2a3cc0632f27791c8f230305b6364545cd3",
+      "classificationRunId": "cai-map-20261022-campobasso01",
+      "classificationStatus": "ready",
+      "classificationCounts": {
+        "trekking": 1,
+        "non_trekking": 0,
+        "da_verificare": 1,
+        "errors": 0
+      },
+      "classificationManifestSha256": "80d7f646b0c12cdd35943248429243fad7c364c554f4c03e0dfce52d84733925",
+      "classificationOutputSha256": "d6e54aa214d648b4b6d9351d417a0dd7fb10fe01ea80e0bae0dd148b863038fd",
+      "classificationReportSha256": "226b6b6b9f3e129a43084c03d3e0f8decd8fdb152acf5734846804fd1a3959b4",
+      "modelRequested": "inception/mercury-decide",
+      "responseModel": "inception/mercury-decide-20260930",
+      "modelAttested": true,
+      "importerQa": "PASS; no DB access/write",
+      "sourceDelta": {
+        "catalogBefore": 3364,
+        "catalogAfter": 3366,
+        "newIds": 2,
+        "removedIds": 0,
+        "changedExistingRows": 1,
+        "duplicateIdsExcluded": 0,
+        "coordinatesAdded": 0
+      },
+      "openDiscovery": {
+        "annualPdfCandidates": 37,
+        "htmlContinuationCandidates": 1,
+        "exactHtmlCandidateUrlPersisted": false
+      }
     }
   },
-  "repositoryCommit": "90f20d9",
+  "repositoryCommit": {
+    "branch": "codex/cai-orchestrator-luna",
+    "head": "d16ebc0ea29118199f6deb3e9821ee3d4efef191",
+    "remoteVerified": true,
+    "fetchHead": "d16ebc0ea29118199f6deb3e9821ee3d4efef191",
+    "note": "origin tracking ref era stale; fetch origin codex/cai-orchestrator-luna ha verificato che il remoto coincide con HEAD"
+  },
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -1271,136 +1325,145 @@
     "writes": 0
   },
   "tests": "After Potenza Picena01 collection, backend npm test passed 204/204. Six public catalog/status JSON SHA-256 values unchanged before and after tests.",
-  "updatedAt": "2026-10-22T22:21:50.897Z",
+  "updatedAt": "2026-10-22T22:30:59.323Z",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:21:50.896Z",
-  "regionCurrent": "Marche — CAI Potenza Picena run01: 1 pagina ufficiale letta, ma Wix generico non interpretabile (method=null, 0 estrazioni); delta evento 0 e unica riga esistente preservata. La fonte resta partial, discovery-limit 11. Nessun DB.",
-  "regionNext": "Molise — CAI Campobasso (`cai-campobasso-9236001`), refresh singolo del calendario HTML ufficiale `https://caicampobasso.it/calendario-delle-attivita/` già letto il 19 ottobre (118 righe, cache presente). Verifica aggiornamento, non promettere progresso; nessuna seconda URL.",
+  "regionCurrent": "Molise — CAI Campobasso: refresh dell’indice HTML ufficiale raccolto; 2 nuovi ID, fonte partial (37 candidati PDF e 1 continuazione HTML non visitati). Classificazione Mercury 1 trekking + 1 da_verificare, QA importer PASS; DB ancora pending.",
+  "regionNext": "Dopo consegna/ricevuta Campobasso, preflight read-only della prossima fonte ufficiale non già esaurita. In Molise la sezione Campobasso resta partial; nessun altro target enabled noto nel registro.",
   "preflight": {
-    "at": "2026-10-22T19:13:02Z",
-    "sourceId": "cai-varese-9216009",
-    "url": "https://www.caivarese.it/?post_type=tribe_events&ical=1&eventDisplay=list&tribe_events_cat=cicloescursionismo-mtb",
-    "result": "blocked-before-request",
-    "reason": "Expired 6h cooldown makes collector schedule historical 503 URL; no exact exclusion option. No network request, no collection, no files or DB changed.",
-    "next": "Select a different official Lombardia source after read-only queue/cooldown review."
+    "at": "2026-10-22T22:30:21.913236Z",
+    "sourceId": "cai-campobasso-9236001",
+    "scope": "exact two source IDs and proposed slugs; read-only",
+    "result": "no-conflicts",
+    "reason": "Both IDs absent from places/place_classifications at 22:30:02.621876Z; exact source_id/slug conflict query returned empty at 22:30:21.913236Z; no DDL/DML.",
+    "next": "Publish and verify this file checkpoint remotely, then rerun prequery before exact-ID insert-only import."
   },
   "databasePreflight": {
-    "observedAt": "2026-10-22T20:28:47.638735Z",
+    "observedAt": "2026-10-22T22:30:21.913236Z",
     "method": "authorized-supabase-mcp-read-only",
     "projectRef": "snwzxegtqnnuvlawnpgl",
-    "placesTotal": 4405,
-    "publishedTotal": 4346,
-    "currentMapCandidates": 3336,
-    "classificationsTotal": 3336,
-    "targetPlaceRows": 0,
-    "targetClassificationRows": 0,
-    "placesLastUpdated": "2026-10-20T11:51:23.239637Z",
-    "editorialDigest": "b52a6bcc1c0d4779ffeb112e5547c891",
-    "fk": "place_classifications.source_id -> places.source_id ON DELETE RESTRICT",
+    "scopeSourceIds": [
+      "cai-campobasso-9236001-8e0c09de00c9",
+      "cai-campobasso-9236001-a99c427d4321"
+    ],
+    "targetPlaces": 0,
+    "targetClassifications": 0,
+    "sourceIdOrSlugConflicts": 0,
+    "protectedFieldsMd5": "d751713988987e9331980363e24189ce",
+    "schema": {
+      "placesSourceId": "UNIQUE",
+      "classificationSourceId": "PRIMARY KEY",
+      "classificationForeignKey": "place_classifications.source_id -> places.source_id ON DELETE RESTRICT",
+      "requiredGeoEvidenceColumn": "places.geo_evidence jsonb nullable"
+    },
     "writePerformed": false
   },
   "deltaDelivery": {
-    "regionalRunId": "cai-20261022-piemonte-pinasca02",
-    "classificationRunId": "cai-map-20261022-pinasca02",
-    "status": "completed-4-row-delta-reconciled-receipt-published-and-remote-verified",
-    "candidateIds": 4,
+    "regionalRunId": "cai-20261022-molise-campobasso01",
+    "classificationRunId": "cai-map-20261022-campobasso01",
+    "status": "file-ready-awaiting-remote-checkpoint",
+    "candidateIds": 2,
     "classificationCounts": {
-      "trekking": 2,
-      "non_trekking": 2,
-      "da_verificare": 0,
+      "trekking": 1,
+      "non_trekking": 0,
+      "da_verificare": 1,
       "errors": 0
     },
     "coordinatesAdded": 0,
-    "writeContract": "exact four IDs; insert-only places + classifications; conflict-ignore; no deletes/updates; no general import",
-    "sourceCommit": "90f7f7a41d6896ccf154d67c66b0399e5dcd1240",
-    "databaseReceipt": {
-      "path": "backend/data/agent-runs/cai-20261022-piemonte-pinasca02/delta-import-receipt.json",
-      "sha256": "7baeb4307d6d8ef91d2dfd42a05f84e936ff9126dee9c83ba379ae99c2d3d41a",
-      "placesInserted": 4,
-      "classificationsInserted": 4,
-      "before": {
-        "places": 0,
-        "classifications": 0
-      },
-      "after": {
-        "places": 4,
-        "classifications": 4,
-        "joinedRows": 4
-      },
-      "mismatches": 0,
-      "updates": 0,
-      "deletes": 0
+    "writeContract": "exact two IDs; insert-only places then missing classifications; conflict-ignore; no delete/update; no general import",
+    "preImportReadOnly": {
+      "observedAt": "2026-10-22T22:30:21.913236Z",
+      "placesPresent": 0,
+      "classificationsPresent": 0,
+      "idOrSlugConflicts": 0,
+      "writePerformed": false
     },
-    "receiptCheckpointCommit": "0d5f978"
+    "plannedImporterCommand": "npm run import:supabase -- --delta-only --manifest backend/data/agent-runs/cai-map-20261022-campobasso01/manifest.json",
+    "databaseReceipt": null,
+    "receiptCheckpointCommit": null
   },
   "lastCodeCorrection": {
-    "commit": "a015865283f0097d22036a9d75f4e0e17cd94bbb",
+    "commit": "d16ebc0ea29118199f6deb3e9821ee3d4efef191",
     "remoteVerified": true,
-    "correction": "deterministic extraction VERSION 11→12 invalidates stale OCR event cache without deleting old cache",
-    "test": "backend/test/deterministic.test.js: v11 stale extraction ignored and v12 cache written",
-    "focused": "22/22",
-    "backend": "197/197",
+    "correction": "Continuation discovery-limit attribution now scopes to the actual originating document URL; an HTML child no longer overwrites the independent annual PDF backlog.",
+    "fixture": "backend/test/fixtures/cai-campobasso-continuation-discovery.json",
+    "test": "backend/test/scrape-status.test.js: 11/11 focused; PDF 37 and HTML 1 remain separate, status partial",
+    "backend": "205/205 after collection; six public JSON hashes stable during tests",
     "independentImporterQa": "PASS"
   },
   "lastRegionalAttempt": {
-    "runId": "cai-20261022-marche-potenzapicena01",
-    "sourceId": "cai-potenza-picena-9228014",
-    "sourceName": "CAI Potenza Picena",
-    "region": "Marche",
-    "requestedUrl": "https://www.caipotenzapicena.it/attivita2026",
-    "canonicalUrl": "https://www.caipotenzapicena.it/attivita-temp",
+    "runId": "cai-20261022-molise-campobasso01",
+    "sourceId": "cai-campobasso-9236001",
+    "sourceName": "CAI Campobasso",
+    "region": "Molise",
+    "requestedUrl": "https://caicampobasso.it/calendario-delle-attivita/",
     "collection": "partial",
     "files": "ready; importer QA PASS; checkpoint pending",
-    "database": "pending; no query/write; zero catalog event delta",
-    "manifestPath": "backend/data/agent-runs/cai-20261022-marche-potenzapicena01/manifest.json",
-    "manifestSha256": "2d5dd8ebca32ea25fdf52a84679cf553f42475d4791845cf875b509dfed39fa1",
-    "stateSha256": "5ec1fc1d2d3b4667a7e2bc1d1231130c2efdb1c99afc045e976fbad57a663a84",
-    "reportPath": "backend/data/agent-runs/cai-20261022-marche-potenzapicena01/collection-report.md",
-    "reportSha256": "28df16309f4e8a296020f5d37b7153a276faa3ad8b1525ac35030ebf8ade7b3a",
+    "database": "pending; read-only preflight assigned; no DML",
+    "manifestPath": "backend/data/agent-runs/cai-20261022-molise-campobasso01/manifest.json",
+    "manifestSha256": "be53777def101bac5f73e37aeca8b96b72c637c85a64e657723c48b3762fa667",
+    "stateSha256": "34445b35794fadb0f9a4ed0827cef9a77f72d15b398017dad830405543995296",
+    "reportPath": "backend/data/agent-runs/cai-20261022-molise-campobasso01/collection-report.md",
+    "reportSha256": "cbe1cac905b10f0d8a9264714f19c55b9195397effd34104a58b19a71cdf7340",
     "sectionsChecked": 1,
     "complete": 0,
     "partial": 1,
     "unreachable": 0,
-    "sourceEvents": 1,
-    "sourceHistoryExtractedEvents": 2,
-    "targetHtmlBytes": 654389,
-    "targetHtmlSha256": "410c8d0f4dba157c141e7a56029ad32fd7ff9852dd217395895b637d14a4b96d",
-    "targetMethod": null,
-    "targetExtractedEvents": 0,
-    "newIds": 0,
+    "sourceEvents": 127,
+    "sourceHistoryExtractedEvents": 127,
+    "targetRowsExtracted": 127,
+    "verifiedNewEventCandidates": 2,
+    "catalogBefore": 3364,
+    "catalogAfter": 3366,
+    "newIds": 2,
     "removedIds": 0,
-    "changedEventRows": 0,
+    "changedEventRows": 1,
     "duplicateIdsExcluded": 0,
-    "discoveryLimitRemaining": 11,
-    "existingEventPreserved": "cai-potenza-picena-9228014-548230c7292d — Ferrata Bertona Gran Sasso, 2026-10-24",
+    "discoveryLimits": {
+      "annualPdf": 37,
+      "htmlContinuation": 1
+    },
     "coordinatesAdded": 0,
-    "collectorQa": "bounded single fetch; same-host Wix generic page unreadable; no retries",
-    "importerQa": "PASS read-only; mirrors, hashes, delta and existing event verified",
-    "backendTests": "204/204 after collection; six public JSON hashes unchanged",
+    "classificationRunId": "cai-map-20261022-campobasso01",
+    "classificationCounts": {
+      "trekking": 1,
+      "non_trekking": 0,
+      "da_verificare": 1,
+      "errors": 0
+    },
+    "collectorQa": "HTML official calendar refresh bounded to one index URL; source backlog scope corrected by fixture-backed test",
+    "importerQa": "PASS read-only; source and classification artifacts, hashes, IDs, fields and model attestation checked",
+    "backendTests": "205/205 after collection/code correction; public JSON hashes stable during tests",
     "dbWrites": 0
   },
   "regionalCoverage": {
-    "region": "Marche",
-    "status": "Potenza Picena01 è un campione parziale non interpretabile: page Wix generica, zero estrazioni non attesta calendario vuoto. Nessun delta; non ripetere senza nuova evidenza. Conteggi regionali aggregati non ricalcolati.",
+    "region": "Molise",
+    "status": "Current observation is one partial Campobasso HTML-index refresh; not full regional coverage. Historical national/regional snapshots remain historical only.",
     "currentRunCounts": {
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
-      "sourceEvents": 1,
-      "historyExtractedEvents": 2,
-      "targetRowsExtracted": 0,
-      "verifiedNewEventCandidates": 0,
-      "catalogNewIds": 0,
+      "sourceCalendarRows": 127,
+      "verifiedNewEventCandidates": 2,
+      "catalogNewIds": 2,
       "removedIds": 0,
-      "changedEventRows": 0,
+      "changedExistingRows": 1,
       "exactDuplicateIdsExcluded": 0,
-      "databaseInserted": 0,
-      "classificationCounts": null,
-      "failuresResolved": [],
-      "failuresOpen": [
-        "Official 2026 URL resolves to a generic Wix page, extractor method null/events 0; discovery-limit 11 remains."
+      "databaseInserted": null,
+      "classificationCounts": {
+        "trekking": 1,
+        "non_trekking": 0,
+        "da_verificare": 1,
+        "errors": 0
+      },
+      "failuresResolved": [
+        "Mis-scoped continuation discovery counter corrected by deterministic adapter fixture/test, commit d16ebc0; PDF backlog count preserved separately."
       ],
-      "nextStep": "Checkpoint file/registry, then preflight a different official source; do not replay same Potenza URL.",
+      "failuresOpen": [
+        "Annual PDF discovery-limit 37 remains; no stable residual URL recovered.",
+        "HTML continuation has one candidate but exact URL was not persisted; source remains partial."
+      ],
+      "nextStep": "Checkpoint verified files on remote; after exact-ID import/reconciliation, preflight a distinct workable official source without replaying the same Campobasso queues.",
       "deliveredPlaces": 0,
       "deliveredClassifications": 0
     },
@@ -1412,7 +1475,7 @@
       "unreachable": 1,
       "unchecked": 104
     },
-    "historicalSnapshotNote": "Historical 2026-10-20 only; current Strada Storta sample is one partial source and does not recalculate regional coverage."
+    "historicalSnapshotNote": "Snapshot dated 2026-10-20; not a current query or recalculated coverage."
   },
   "deltaDeliveryHistory": [
     {
@@ -1505,6 +1568,30 @@
       "writeTimestamp": "2026-10-22 22:14:25.13088+00",
       "postQueryTimestamp": "2026-10-22 22:15:18.267267+00",
       "receiptCheckpointCommit": "0d5f978"
+    },
+    {
+      "regionalRunId": "cai-20261022-molise-campobasso01",
+      "classificationRunId": "cai-map-20261022-campobasso01",
+      "status": "files-ready-classified-db-pending-checkpoint",
+      "candidateIds": 2,
+      "classificationCounts": {
+        "trekking": 1,
+        "non_trekking": 0,
+        "da_verificare": 1,
+        "errors": 0
+      },
+      "modelRequested": "inception/mercury-decide",
+      "responseModel": "inception/mercury-decide-20260930",
+      "modelAttested": true,
+      "placesInserted": null,
+      "classificationsInserted": null,
+      "missing": null,
+      "mismatches": null,
+      "updates": 0,
+      "deletes": 0,
+      "receipt": null,
+      "filesCheckpointCommit": null,
+      "note": "No DB mutation before remote file checkpoint; exact-ID importer read-only preflight pending."
     }
   ]
 }

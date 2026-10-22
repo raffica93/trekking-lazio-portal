@@ -1,6 +1,6 @@
 # Piano di passaggio al lavoro interamente cloud
 
-Stato aggiornato al 22 ottobre 2026: classificazione completa del catalogo importata e riconciliata. La raccolta Valmadrera run07 e il delta classificato sono già pronti; il lavoro attivo è pubblicare il checkpoint delta, consegnare soltanto i 10 eventi non duplicati con importer insert-only e riconciliare la ricevuta DB. Nessun nuovo scrape mentre il delivery è in corso; le sezioni più sotto che indicano il batch come prossimo passo sono piano storico.
+Stato aggiornato al 22 ottobre 2026: classificazione completa del catalogo e delta Valmadrera sono già importati e riconciliati; Pinasca02 è anch'esso consegnato con ricevuta. Attività corrente: Campobasso, file e classificazione di due nuovi ID pronti e verificati; checkpoint remoto ancora da pubblicare, quindi nessuna scrittura DB finora. Dopo verifica remota, import esatto insert-only e ricevuta; poi ripresa regionale per fonti lavorabili. Le sezioni operative più sotto che indicano batch o lotti già consegnati come prossimi passi sono storiche.
 
 ## Sequenza
 
@@ -120,3 +120,12 @@ Il PDF ufficiale `Calendario-attivita-2026_rev.04_16-03-2026.pdf` è in cache e 
 ## Prossima fase — Valmadrera run07
 
 Run `cai-20261022-lombardia-valmadrera07` ha rielaborato il PDF CAI ufficiale con parser VERSION 11: 65 righe, 14 nuovi ID, source status ok. QA indipendente PASS e backend 187/187. Prima pubblicare il checkpoint file/report. Poi classificare in Mercury esclusivamente i 14 ID nuovi con run/output isolati, verificare modello richiesto/attestato, fixture/contratto e QA importer. Pubblicare manifest e checkpoint verificabili prima della scrittura DB; poi upsert soltanto delle classificazioni mancanti, `ON CONFLICT DO NOTHING`, senza chiamare import generale su `places`; fare query/ricevuta esatta. Se il modello opzionale fallisce, mantenere file classificati pending e proseguire solo attività deterministiche indipendenti.
+
+
+## Attività corrente — Campobasso, 22 ottobre 2026
+
+- Raccolta `cai-20261022-molise-campobasso01`: 1 indice HTML, 127 righe fonte, 2 nuovi ID, 0 rimossi, 1 riga esistente con soli campi source/link/description aggiornati; fonte `partial` (PDF 37 residui e HTML continuation 1 senza URL persistito).
+- Classificazione `cai-map-20261022-campobasso01`: 1 `trekking`, 1 `da_verificare`, 0 errori; QA importer PASS e modello Mercury attestato.
+- Preflight DB in sola lettura: target assenti da `places` e `place_classifications`, nessun conflitto ID/slug; schema FK verificato `ON DELETE RESTRICT`. Nessuna DDL/DML.
+- Gate: pubblicare manifest/evidenze/cataloghi/report e stato; verificare i blob dal branch remoto. Poi l'importer ripete il preflight e inserisce solo i due ID classificati con `--delta-only`, conflitti preservati; query joined e ricevuta.
+- Dopo la ricevuta: selezionare un'altra fonte ufficiale lavorabile; non ripetere l'indice Campobasso o le code non mirabili. Nessun cron, merge o deploy.

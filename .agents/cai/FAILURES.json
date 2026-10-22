@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T22:19:49.601Z",
-  "repositoryCommit": "f4d86ea67c1037820c62a5da9ead6d761e183152",
+  "generatedAt": "2026-10-22T22:28:16.309Z",
+  "repositoryCommit": "d16ebc0",
   "baseline": {
     "commit": "9919927d4cbef6d154c4dae1441d64cd01c70ad4",
     "runId": "cai-20261020-piemonte-01"
@@ -17,7 +17,7 @@
   },
   "distribution": {
     "phases": {
-      "discovery": 280,
+      "discovery": 281,
       "http": 346,
       "quality-review": 5,
       "attribution": 41,
@@ -29,7 +29,7 @@
       "discovery-status-merge": 1
     },
     "classes": {
-      "discovery-budget-exhausted": 194,
+      "discovery-budget-exhausted": 195,
       "network-policy-denied": 162,
       "http-resource-removed": 106,
       "non-calendar-candidate-skipped": 86,
@@ -44531,6 +44531,63 @@
         "databaseWrites": 0
       },
       "policyStatus": "candidate_pending_test"
+    },
+    {
+      "id": "CAI-F-fce35470ecfcb42a",
+      "sourceId": "cai-campobasso-9236001",
+      "url": "https://caicampobasso.it/calendario-delle-attivita/",
+      "phase": "discovery",
+      "failureClass": "discovery-budget-exhausted",
+      "httpStatus": null,
+      "firstObservedAt": "2026-10-22T22:17:34.233Z",
+      "lastObservedAt": "2026-10-22T22:17:34.233Z",
+      "observationBasis": "current bounded run artifacts; not request timestamp",
+      "history": {
+        "runIds": [
+          "cai-20261022-molise-campobasso01"
+        ],
+        "snapshotCopies": 1,
+        "issueCodes": [
+          "discovery-limit"
+        ],
+        "sourceStatuses": [
+          "partial"
+        ]
+      },
+      "attempts": {
+        "actualHistoricalRequests": "unknown",
+        "currentCycleRequests": 1,
+        "recoveryAttempts": [
+          {
+            "runId": "cai-20261022-molise-campobasso01",
+            "scope": "explicit HTML continuation only",
+            "remainingCandidates": 1,
+            "candidateUrlPersisted": false
+          }
+        ]
+      },
+      "cooldown": {
+        "policy": "Do not retry without a stable official candidate URL; avoid broad replay of the same queue",
+        "nextEligibleAt": null
+      },
+      "evidence": {
+        "representativeMessages": [
+          "Discovery budget reached; 1 candidate document remains on the explicit HTML continuation; exact candidate URL not persisted."
+        ],
+        "bodySha256": "5b97e1aa0639efcebafbba3153c03dc0ee00d432b527f276c4d0dc08ee2363ed"
+      },
+      "strategy": "Wait for a stable official target URL from future page discovery; keep PDF discovery count 37 as a separate scope.",
+      "status": "recheck_open",
+      "owner": "cai-collector",
+      "outcome": "One HTML continuation candidate remains unvisited; not a proof of full source completeness.",
+      "correctionRef": "backend/adapters/deterministic.js@d16ebc0",
+      "testRefs": [
+        "backend/test/fixtures/cai-campobasso-continuation-discovery.json",
+        "backend/test/scrape-status.test.js (11/11)",
+        "backend npm test 205/205"
+      ],
+      "resolutionCheck": null,
+      "policyStatus": "observed_open"
     }
   ],
   "schema": {
