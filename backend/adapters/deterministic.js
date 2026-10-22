@@ -13,7 +13,7 @@ const { ocrPdfLines, ocrPdfPageLines, ocrPdfFilePages, ocrImageLines } = require
 const { parseCaiRomaHtml, stableId, tripDays, parseDistanceKm, parseDurationHours } = require('../scraper');
 
 // Bump this when deterministic extraction changes so cached documents are reparsed.
-const VERSION = 11;
+const VERSION = 12;
 const MONTHS = { gennaio: 1, febbraio: 2, marzo: 3, aprile: 4, maggio: 5, giugno: 6, luglio: 7, agosto: 8, settembre: 9, ottobre: 10, novembre: 11, dicembre: 12 };
 const MONTH_PATTERN = Object.keys(MONTHS).join('|');
 const REGIONS = ['Abruzzo', 'Basilicata', 'Calabria', 'Campania', 'Emilia-Romagna', 'Friuli-Venezia Giulia', 'Lazio', 'Liguria', 'Lombardia', 'Marche', 'Molise', 'Piemonte', 'Puglia', 'Sardegna', 'Sicilia', 'Toscana', 'Trentino-Alto Adige', 'Umbria', "Valle d'Aosta", 'Veneto'];

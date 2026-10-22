@@ -7,7 +7,7 @@ const http = require('node:http');
 const crypto = require('node:crypto');
 const axios = require('axios');
 const { DateTime } = require('luxon');
-const { monthFloor, parseDates, normalizeEvent, parseIcs, parseJsonLd, parseWordPress, parseCalendarLines, parseTivoliPdf, parseHtmlCalendar, discoverLinks, fetchDocument, scrapeDeterministic, pdfText } = require('../adapters/deterministic');
+const { VERSION, monthFloor, parseDates, normalizeEvent, parseIcs, parseJsonLd, parseWordPress, parseCalendarLines, parseTivoliPdf, parseHtmlCalendar, discoverLinks, fetchDocument, scrapeDeterministic, pdfText } = require('../adapters/deterministic');
 const { parseScrapeArgs, scrapeAll } = require('../pipeline');
 const source = { id: 'test-section', organizer: 'CAI Prova', region: 'Lombardia', url: 'https://section.example/calendario-2026/', enabled: true, extractor: 'deterministic' };
 const now = DateTime.fromISO('2026-09-05T12:00:00', { zone: 'Europe/Rome' });
@@ -85,6 +85,58 @@ test('Cernusco OCR cross-column side-panel text does not contaminate the October
   const control = parseCalendarLines([fixture.controlLine], section, fixture.officialPdf, 2026, fixture.method);
   assert.equal(control.length, 1);
   assert.equal(control[0].title, fixture.expectedControlTitle, 'cleanup must not affect other OCR rows from the same PDF');
+});
+
+test('deterministic parser version invalidates a cached Cernusco PDF extraction from v11', async (t) => {
+  const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'cai-parser-version-cache-'));
+  t.after(() => fs.rm(tmp, { recursive: true, force: true }));
+  const pdfBytes = await fs.readFile(path.join(__dirname, 'fixtures', 'cai-valmadrera-2026-calendar.pdf'));
+  const sourceId = 'cai-cernusco-sul-naviglio-9216051';
+  const url = 'https://organizzazione.cai.it/sez-cernusco-sul-naviglio/wp-content/uploads/sites/19/2025/12/Locandina-programma-2026.pdf';
+  const hash = crypto.createHash('sha256').update(pdfBytes).digest('hex');
+  const pageRanges = JSON.parse(process.env.SCRAPE_PDF_PAGE_RANGES || '{}');
+  const ocrPages = JSON.parse(process.env.SCRAPE_PDF_OCR_PAGES || '{}');
+  const pageRangeKey = JSON.stringify(pageRanges[sourceId] || null);
+  const ocrPageKey = JSON.stringify(ocrPages[sourceId] || null);
+  const previousKey = crypto.createHash('sha256')
+    .update(`11|${sourceId}|${hash}|${now.year}|${pageRangeKey}|${ocrPageKey}`).digest('hex');
+  const previousCachePath = path.join(tmp, `events-${previousKey}.json`);
+  const staleEvent = {
+    id: `${sourceId}-cb33842fc3c2`,
+    title: 'Alpe Devero (VB) j Cesare Andreoni 2026 Feigao ae SS a',
+    date: '2026-10-25'
+  };
+  await fs.writeFile(previousCachePath, JSON.stringify({
+    events: [staleEvent], recognized: true, method: 'pdf-ocr', issues: []
+  }));
+
+  const result = await scrapeDeterministic({
+    id: sourceId,
+    organizer: 'CAI Cernusco Sul Naviglio',
+    region: 'Lombardia',
+    url,
+    website: 'https://organizzazione.cai.it/sez-cernusco-sul-naviglio/'
+  }, {
+    now,
+    cacheDir: tmp,
+    initialUrls: [url],
+    previousStatus: { sources: [] },
+    fetchDoc: async (requestedUrl) => ({
+      url: requestedUrl,
+      buffer: pdfBytes,
+      contentType: 'application/pdf',
+      hash
+    })
+  });
+
+  assert.equal(VERSION, 12);
+  assert.equal(result.documents[0].method, 'pdf-text');
+  assert.equal(result.excursions.some((event) => event.id === staleEvent.id), false);
+  assert.equal(result.excursions.some((event) => event.title === staleEvent.title), false);
+  assert.equal(JSON.parse(await fs.readFile(previousCachePath, 'utf8')).events[0].title, staleEvent.title);
+  const currentKey = crypto.createHash('sha256')
+    .update(`${VERSION}|${sourceId}|${hash}|${now.year}|${pageRangeKey}|${ocrPageKey}`).digest('hex');
+  await assert.doesNotReject(fs.access(path.join(tmp, `events-${currentKey}.json`)));
 });
 
 test('Valmadrera 2026 PDF month grid maps labels to weekday cells and preserves non-trekking candidates', async () => {
