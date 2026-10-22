@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "molise-campobasso-residual-source-preflight",
+  "phase": "abruzzo-penne-bounded-source-sample",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -233,9 +233,15 @@
       "status": "completed",
       "owner": "orchestrator + cai-collector + cai-importer",
       "result": "Campobasso bounded refresh: 2 new IDs, collection partial; Mercury 1 trekking + 1 da_verificare. Files remote-verified at 31d81ea. Importer read-only QA/preflight PASS; exact delta inserted 2 places + 2 classes, then caught and CAS-corrected only one manually truncated fingerprint. Final joined query 2/2, zero missing/mismatches; place updates/deletes 0, class corrective fingerprint update 1. Receipt awaits a separate remote checkpoint."
+    },
+    {
+      "id": "S13",
+      "status": "in_progress",
+      "owner": "cai-collector + orchestrator",
+      "result": "Read-only local preflight: Campobasso residual URL candidates not recoverable without replay; source remains partial, delivered 2/2 via receipt at 9bc54c5. Selected new Abruzzo target CAI Penne /2026/03/09/programma-sezionale-2026/; next bounded run max1/120s/concurrency1 after this checkpoint."
     }
   ],
-  "nextAction": "Concludere preflight collector offline sulle 38 continuation/discovery residue Campobasso. Se non esistono URL ufficiali stabili recuperabili dagli artefatti, registrare Molise come fonte parziale bloccata e passare alla successiva regione con una fonte preflightata. Nessun replay della stessa pagina o PDF.",
+  "nextAction": "Campobasso è esaurita per URL residue non mirabili; receipt DB verificata al commit 9bc54c5. Eseguire un solo run orchestrato cai-20261022-abruzzo-penne01 su CAI Penne, URL ufficiale /2026/03/09/programma-sezionale-2026/, max1 documento/120s/concurrency1. Può duplicare la pagina 7 marzo: trattare come sola verifica documentale, niente delta presunto.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -1326,10 +1332,10 @@
     "writes": 0
   },
   "tests": "After Potenza Picena01 collection, backend npm test passed 204/204. Six public catalog/status JSON SHA-256 values unchanged before and after tests.",
-  "updatedAt": "2026-10-22T22:36:10.292Z",
+  "updatedAt": "2026-10-22T22:38:12.724Z",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:21:50.896Z",
-  "regionCurrent": "Molise — Campobasso: campione parziale (127 righe fonte; 2 nuovi ID) e consegna DB del delta completata: 2 place + 2 classificazioni, 0 mancanti/mismatch. Restano 37 candidati PDF annuale e 1 continuation HTML senza URL; non dichiarare copertura completa.",
-  "regionNext": "Campobasso: collector verifica solo cache/status i 37 residui PDF + 1 HTML; se non mirabili, passare alla prossima fonte ufficiale non esaurita in Abruzzo, selezionata da cai-sections/status senza rete.",
+  "regionCurrent": "Abruzzo — CAI Penne bounded source refresh, una pagina ufficiale non ancora letta. URL /2026/03/09/programma-sezionale-2026/; fonte partial, PDF annuale con discovery-limit storico 60, nessun HTTP failure/cooldown. Campione non implica copertura regione.",
+  "regionNext": "Dopo questo campione, verificare una fonte per volta; se non produce progresso e la coda non è mirabile, registrare i limiti e passare alla regione successiva.",
   "preflight": {
     "at": "2026-10-22T22:30:21.913236Z",
     "sourceId": "cai-campobasso-9236001",
@@ -1462,7 +1468,7 @@
   },
   "regionalCoverage": {
     "region": "Molise",
-    "status": "Current observation is one partial Campobasso HTML-index refresh; not full regional coverage. Historical national/regional snapshots remain historical only.",
+    "status": "Campobasso parziale; nessun target residuale non duplicato recuperabile dagli artefatti locali. Il PDF con 37 candidati non è in cache e non espone URL candidate persistite; l’unico HTML candidate ricostruito offline è già in history. Altre sezioni Molise non risultano enabled nel registro locale.",
     "currentRunCounts": {
       "sectionsChecked": 1,
       "complete": 0,
@@ -1485,10 +1491,10 @@
         "Mis-scoped continuation discovery counter corrected by deterministic adapter fixture/test, commit d16ebc0; PDF backlog count preserved separately."
       ],
       "failuresOpen": [
-        "Annual PDF discovery-limit 37 remains; no stable residual URL recovered.",
-        "HTML continuation has one candidate but exact URL was not persisted; source remains partial."
+        "PDF annuale: 37 residui indicati, nessuna URL figlia persistita né body in cache.",
+        "HTML: 1 residuo non persistito; ricostruzione offline porta alla pagina 17 gennaio già letta (hash 61447a1b…, no replay)."
       ],
-      "nextStep": "Concludere preflight collector offline sulle 38 continuation/discovery residue Campobasso. Se non esistono URL ufficiali stabili recuperabili dagli artefatti, registrare Molise come fonte parziale bloccata e passare alla successiva regione con una fonte preflightata. Nessun replay della stessa pagina o PDF.",
+      "nextStep": "Campobasso consegnata/reconciliata (receipt remoto 9bc54c5). Passare al campione bounded CAI Penne in Abruzzo; nessun replay Campobasso.",
       "deliveredPlaces": 2,
       "deliveredClassifications": 2,
       "databaseMismatches": 0,
@@ -1502,7 +1508,7 @@
       "unreachable": 1,
       "unchecked": 104
     },
-    "historicalSnapshotNote": "Snapshot dated 2026-10-20; not a current query or recalculated coverage."
+    "historicalSnapshotNote": "Snapshot 2026-10-20: storico, non query attuale."
   },
   "deltaDeliveryHistory": [
     {
@@ -1626,5 +1632,16 @@
       "afterQueryAt": "2026-10-22T22:33:30.892756Z",
       "receiptCheckpointCommit": "9bc54c562c56a9ebe0b9c68e728e51a650584222"
     }
-  ]
+  ],
+  "nextSourcePreflight": {
+    "region": "Abruzzo",
+    "sourceId": "cai-penne-9234006",
+    "sourceName": "CAI Penne",
+    "url": "https://caipenne.it/2026/03/09/programma-sezionale-2026/",
+    "evidence": "Official calendar URL from local source registry/calendar evidence; not present among 12 currently visited docs. The /2026/03/07/ page and official PDF are already read.",
+    "priorIssue": "discovery-limit 60 on PDF; no HTTP failure/cooldown",
+    "scope": "one URL; max 1 document; 120000 ms; concurrency 1",
+    "risk": "May duplicate 7 March programme page; no event delta presumed.",
+    "networkFetchPerformed": false
+  }
 }

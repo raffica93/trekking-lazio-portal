@@ -232,3 +232,12 @@ Marche: nessun target ufficiale inedito mirabile nel preflight; Potenza Picena r
 Delta catalogo 3.364→3.366 ID unici, zero rimozioni, una riga preesistente modificata solo in source/link/description, coordinate nuove 0. Classificazione Mercury QA PASS: 1 trekking/altro, 0 non trekking, 1 da verificare/altro, 0 errori; modello richiesto `inception/mercury-decide`, risposta attestata `inception/mercury-decide-20260930`. DB non interrogato/scritto nel checkpoint file. Fonte partial: nessun zero-event assumption. I conteggi storici aggregati non sono ricalcolati.
 
 Il delta `cai-map-20261022-campobasso01` è stato consegnato via insert-only: 2 `places` pubblicati e 2 classificazioni; dopo un singolo CAS sul solo fingerprint Lago Vivo, query joined finale 2/2, zero mismatch/missing, zero update `places` e zero delete. Ricevuta/report sono pubblicati e verificati al commit `9bc54c5`. Il run di raccolta resta partial: consegna DB non equivale a copertura completa.
+
+
+## Preflight offline successivo — Abruzzo / CAI Penne, 22 ottobre 2026
+
+| Fonte | Regione | URL mirata | Precedenti e cooldown | Esito preflight | Prossimo passo |
+|---|---|---|---|---|---|
+| CAI Penne `cai-penne-9234006` | Abruzzo | `https://caipenne.it/2026/03/09/programma-sezionale-2026/` | Discovery-limit 60 sull’URL PDF annuale; nessun HTTP failure/cooldown; articolo 7 marzo e PDF già letti | Pagina 9 marzo elencata nelle evidenze calendar URL ufficiali, non nei 12 documenti visitati; può duplicare il programma già letto | Run nuovo `cai-20261022-abruzzo-penne01`, una sola URL, max1 documento/120s/concurrency1; no delta presunto |
+
+Molise resta parziale: PDF 37 residui senza URL persistite né body cache; continuation HTML 1 non persistita, unica URL ricostruibile già nella history. Nessuna nuova raccolta o rete nel preflight.
