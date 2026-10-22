@@ -363,3 +363,8 @@ Il JPEG ufficiale 2026 pesa 685.319 byte (SHA `6c11893a0b371c51650c39a8275a777d1
 | Emilia-Romagna, `cai-pavullo-nel-frignano-9224020` | 1 URL | 0 | 1 | 0 | 5 ID nuovi estratti; 1 approvato per consegna; 4 `da_verificare` per possibile sovrapposizione o categoria incoerente | Conteggio semantico esatto non persistito | Nessuno | PDF legacy timeout; iCal discovery5; calendario continuation1; incongruenza header anno | Dopo checkpoint e consegna mirata Hoabonti, preflight offline della successiva URL distinta lavorabile |
 
 Il campione è parziale. La pagina ufficiale restituisce 23 righe; catalogo 3.366→3.371 ID, zero rimozioni/modifiche alle righe esistenti. Mercury richiesto `inception/mercury-decide`, risposta attestata `inception/mercury-decide-20260930`, 5/5 senza errori. La review approva solo Monte Hoabonti/Monte Cola (EE), categoria effettiva `a piedi`; holds: Spigolo Bianco, Anello dei Colli, Lago Terzo, Giro del Colbricon. Nessuna coordinata. Test backend 205/205 dopo raccolta, sei JSON pubblici invariati. Preflight DB: 4.422 places, Hoabonti assente, tabella classification presente, FK RESTRICT; scrittura ancora pending.
+
+
+### Pavullo database delivery (22 ottobre 2026)
+
+1 place + 1 classification realmente inseriti: `cai-pavullo-nel-frignano-9224020-195cdeaaefee`. DB place count 4.422→4.423; target assente in entrambe le tabelle prima dell’import, joined 1/1 dopo. Saltati 0, update/delete 0. Nessuna coordinata o cover assegnata. Quattro candidati in revisione non inclusi. Ricevuta `backend/data/agent-runs/cai-20261022-emilia-pavullo-deliver01/output/delta-import-receipt.json`; commit dati `5697dcd`.

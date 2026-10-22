@@ -19,7 +19,7 @@
   },
   "collection": "partial",
   "files": "ready",
-  "database": "pending",
+  "database": "completed",
   "sources": [
     {
       "id": "roma",
@@ -11407,9 +11407,54 @@
     {
       "at": "2026-10-22T23:31:16.981Z",
       "event": "files-verified"
+    },
+    {
+      "at": "2026-10-22T23:40:37.044Z",
+      "event": "database-started"
+    },
+    {
+      "at": "2026-10-22T23:40:37.073Z",
+      "event": "import-failed"
+    },
+    {
+      "at": "2026-10-22T23:42:04.121522+00:00",
+      "event": "database-delta-bridge-completed",
+      "receiptSha256": "c30639803362854c9f9c5f778fd2b4d9291a22e06852c326005171c67a56a3cc",
+      "placeInserts": 1,
+      "classificationInserts": 1
     }
   ],
-  "updatedAt": "2026-10-22T23:31:16.981Z",
+  "updatedAt": "2026-10-22T23:42:04.121522+00:00",
   "manifest": "backend/data/agent-runs/cai-20261022-emilia-pavullo-calendar01/manifest.json",
-  "events": 3371
+  "events": 3371,
+  "databaseImport": {
+    "mode": "delta-only",
+    "manifestPath": "backend/data/agent-runs/cai-20261022-emilia-pavullo-deliver01/output/manifest.json",
+    "executionChannel": "Supabase MCP execute_sql bridge",
+    "cliAttempt": "failed-before-connection: SUPABASE_URL missing; no DB mutation from CLI"
+  },
+  "importResult": {
+    "status": "completed",
+    "places": {
+      "inserted": 1,
+      "insertedSourceIds": [
+        "cai-pavullo-nel-frignano-9224020-195cdeaaefee"
+      ],
+      "existingPreserved": 0,
+      "skipped": 0,
+      "updated": 0,
+      "deleted": 0
+    },
+    "classifications": {
+      "inserted": 1,
+      "insertedSourceIds": [
+        "cai-pavullo-nel-frignano-9224020-195cdeaaefee"
+      ],
+      "matched": 1,
+      "mismatched": []
+    },
+    "receiptPath": "backend/data/agent-runs/cai-20261022-emilia-pavullo-deliver01/output/delta-import-receipt.json",
+    "receiptSha256": "c30639803362854c9f9c5f778fd2b4d9291a22e06852c326005171c67a56a3cc"
+  },
+  "databaseReceipt": "backend/data/agent-runs/cai-20261022-emilia-pavullo-deliver01/output/delta-import-receipt.json"
 }

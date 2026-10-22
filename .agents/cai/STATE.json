@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "emilia-romagna-pavullo-calendar01-files-ready-classification-qa-pass",
+  "phase": "emilia-romagna-pavullo-delta-delivered",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -378,11 +378,16 @@
     },
     {
       "id": "S39",
+      "status": "completed",
+      "result": "Pavullo delta checkpoint remote-verified at 5697dcd. Read-only prequery: 4,422 places, Hoabonti absent, classification absent, RESTRICT FK. Authorized MCP insert: 1 place +1 classification, 0 skipped/update/delete. Joined post-query exact match against 35 place and 17 classification fields; place count 4,423. Receipt recorded. CLI importer attempted but stopped before connection due missing SUPABASE_URL; bridge used after QA PASS."
+    },
+    {
+      "id": "S40",
       "status": "in_progress",
-      "result": "Publish and verify Pavullo collection/classification/subset artifacts and current handoff; prequery Hoabonti absent and FK RESTRICT already verified read-only. Then one-ID delta import and receipt."
+      "result": "Offline preflight next distinct uncached Emilia-Romagna source; preserve sequential one-source collection and checkpoint-before-write flow."
     }
   ],
-  "nextAction": "Publish and verify the Pavullo collection/classification/delivery artifacts and state/handoff checkpoint. Then re-query only Hoabonti, obtain importer QA PASS for one-row sealed delta, and insert only if still absent; record receipt and post-query.",
+  "nextAction": "Preflight offline the next distinct, uncached official Emilia-Romagna source. Do not retry the four held Pavullo candidates without identity evidence.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -397,7 +402,7 @@
       "runId": "cai-20261022-emilia-pavullo-calendar01",
       "collection": "partial",
       "files": "ready",
-      "database": "pending; read-only preflight found Hoabonti absent from places, classification table present, FK RESTRICT",
+      "database": "completed through authorized Supabase MCP bridge; CLI importer unavailable in runtime because SUPABASE_URL absent",
       "sourceId": "cai-pavullo-nel-frignano-9224020",
       "sourceUrl": "https://www.caipavullo.it/calendario-2026/",
       "documentsRead": 1,
@@ -431,13 +436,22 @@
       "review": "1 approved for delivery (Hoabonti, effective trekking/a piedi); 4 held da_verificare",
       "isolatedDeliveryRun": "cai-20261022-emilia-pavullo-deliver01",
       "isolatedDeliveryManifestSha256": "8adc520ba07591f3e00c815579c4157a3a8027e8d3ab1fc1d11108d7f55ca24e",
-      "importerQa": "pending independent validation",
+      "importerQa": "PASS; single-ID sealed manifest validated; MCP result reconciled against importer transformations (35 place/17 classification fields)",
       "backendTests": "205/205 after collection; public JSON stable across test run; tests not concurrent with collection",
-      "dbWrites": 0
+      "dbWrites": 0,
+      "databaseReceiptSha256": "c30639803362854c9f9c5f778fd2b4d9291a22e06852c326005171c67a56a3cc",
+      "databaseInsertedPlaceIds": [
+        "cai-pavullo-nel-frignano-9224020-195cdeaaefee"
+      ],
+      "databaseInsertedClassificationIds": [
+        "cai-pavullo-nel-frignano-9224020-195cdeaaefee"
+      ],
+      "databaseSkippedIds": [],
+      "databaseUpdatedDeleted": 0
     },
-    "nextAction": "Publish and verify the Pavullo collection/classification/delivery artifacts and state/handoff checkpoint. Then re-query only Hoabonti, obtain importer QA PASS for one-row sealed delta, and insert only if still absent; record receipt and post-query."
+    "nextAction": "Preflight offline the next distinct, uncached official Emilia-Romagna source. Do not retry the four held Pavullo candidates without identity evidence."
   },
-  "repositoryCommit": "8df4daca5ae92193da9e40e9e8821267eb0c8bf3",
+  "repositoryCommit": "5697dcd688a6217a6cc98e1a8794540c8ddeab13",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -460,8 +474,8 @@
     }
   },
   "tests": "After the Castrovillari01 collection finished, backend npm test passed 205/205; SHA-256 for six public JSON files was identical before/after. No tests were run concurrently with collection.",
-  "updatedAt": "2026-10-22T23:39:39.496012+00:00",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:30:31Z",
+  "updatedAt": "2026-10-22T23:42:04.129906+00:00",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:39:00Z",
   "regionCurrent": "Emilia-Romagna — CAI Pavullo: una pagina ufficiale, 5 nuovi candidati; classificazione Mercury 5/5; 1 approvato per delta, 4 in revisione per possibili doppioni o categoria incoerente. Raccolta e test conclusi; DB ancora pending.",
   "regionNext": "Dopo checkpoint remoto dei file Pavullo e del manifest sealed di consegna: query live dell’ID Hoabonti, import delta-only 1 place + classification se assente, ricevuta e query post-import; poi preflight offline della prossima URL distinta lavorabile.",
   "preflight": {
@@ -496,13 +510,29 @@
     "regionalRunId": "cai-20261022-emilia-pavullo-calendar01",
     "classificationRunId": "cai-20261022-emilia-pavullo-classify01",
     "deliveryRunId": "cai-20261022-emilia-pavullo-deliver01",
-    "status": "checkpoint-and-importer-qa-pending",
+    "status": "completed",
     "candidateIds": 5,
     "approvedForDelivery": 1,
     "heldForReview": 4,
+    "prequeryPlacesCount": 4422,
+    "prequeryTargetPlaceRows": 0,
+    "prequeryTargetClassificationRows": 0,
+    "postqueryPlacesCount": 4423,
+    "postqueryClassificationCount": 3354,
     "databaseQueryPerformed": true,
-    "databaseWritePerformed": false,
-    "readOnlyPreflight": "Hoabonti absent from public.places; public.place_classifications exists and FK source_id -> places.source_id ON DELETE RESTRICT; fresh total places observed 4422."
+    "databaseWritePerformed": true,
+    "insertedPlaceIds": [
+      "cai-pavullo-nel-frignano-9224020-195cdeaaefee"
+    ],
+    "insertedClassificationIds": [
+      "cai-pavullo-nel-frignano-9224020-195cdeaaefee"
+    ],
+    "skippedIds": [],
+    "updated": 0,
+    "deleted": 0,
+    "receipt": "backend/data/agent-runs/cai-20261022-emilia-pavullo-deliver01/output/delta-import-receipt.json",
+    "receiptSha256": "c30639803362854c9f9c5f778fd2b4d9291a22e06852c326005171c67a56a3cc",
+    "note": "One source_id delivered via authorized Supabase MCP bridge using the existing importer mapping; importer CLI blocked before DB by missing SUPABASE_URL."
   },
   "lastCodeCorrection": {
     "commit": "d16ebc0ea29118199f6deb3e9821ee3d4efef191",
@@ -519,8 +549,8 @@
     "sourceId": "cai-pavullo-nel-frignano-9224020",
     "requestedUrl": "https://www.caipavullo.it/calendario-2026/",
     "collection": "partial",
-    "files": "ready; 23 rows parsed; 5 new IDs, 0 removal/change; importer source QA pending; backend tests 205/205 after collection; checkpoint pending",
-    "database": "pending; preflight absent Hoabonti and RESTRICT FK; no writes",
+    "files": "ready, published at 5697dcd; importer QA PASS; backend 205/205 after collection",
+    "database": "completed through Supabase MCP bridge: 1 place + 1 classification inserted, 0 updates/deletes/skips; receipt in deliver01",
     "baselineCommit": "8df4daca5ae92193da9e40e9e8821267eb0c8bf3",
     "runFolder": "backend/data/agent-runs/cai-20261022-emilia-pavullo-calendar01",
     "manifestSha256": "d62d10c601192773fa611f2eeaf955198ca5d417fb597c5fb0e23f4ba8004686",
@@ -551,31 +581,38 @@
     "collectorQa": "source body, parser output, catalog delta and mirrors checked",
     "importerQa": "independent full-run QA PASS; isolated one-row delivery verification pending",
     "backendTests": "205/205 after collection, six public JSON hashes unchanged",
-    "dbWrites": 0
+    "dbWrites": 0,
+    "databaseWrites": 1,
+    "databaseReceiptSha256": "c30639803362854c9f9c5f778fd2b4d9291a22e06852c326005171c67a56a3cc"
   },
   "regionalCoverage": {
-    "region": "Calabria",
-    "scope": "one bounded official HTML index; cumulative regional snapshot remains historical",
-    "status": "open; current source partial and unresolved PDFs",
+    "region": "Emilia-Romagna",
+    "scope": "one CAI Pavullo official 2026 calendar page; other regional sources remain to preflight",
+    "status": "open; Pavullo partial with remaining blockers",
     "currentRunCounts": {
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
-      "catalogRowsVerified": 12,
-      "eventsExtractedFromCurrentPage": 0,
-      "newIds": 0,
-      "removedIds": 0,
-      "changedRows": 0,
-      "duplicateIdsExcluded": 0,
-      "dbPlacesInserted": 0,
-      "dbClassificationsInserted": 0,
+      "rowsParsed": 23,
+      "newIds": 5,
+      "approvedForDelivery": 1,
+      "heldForReview": 4,
+      "duplicatesExcluded": "exact count not persisted",
+      "placesInserted": 1,
+      "classificationsInserted": 1,
+      "skipped": 0,
+      "updated": 0,
+      "deleted": 0,
+      "coordinatesAdded": 0,
       "failuresResolved": [],
       "failuresOpen": [
-        "PDF 2026 OCR failed on page 2; discovery-limit 8",
-        "HTML /prog.php continuation discovery-limit 1; exact child target to preflight"
+        "prior Pavullo cultural PDF timeout",
+        "prior iCal discovery-limit 5",
+        "calendar continuation 1",
+        "2025 table header vs 2026 title/weekday discrepancy"
       ],
-      "nextStep": "After current files/status/evidence checkpoint, inspect offline the official PDF links exposed by the HTML index and select at most one distinct not-cached URL; no repeated PDF OCR run without a specific justified bounded plan."
+      "nextStep": "Offline preflight a distinct eligible Emilia-Romagna source; no retry of Pavullo semantic holds or blocked URLs without new evidence."
     },
     "historicalSnapshot": {
       "asOf": "2026-10-20",
@@ -707,12 +744,8 @@
   ],
   "nextSourcePreflight": {
     "region": "Emilia-Romagna",
-    "sourceId": "cai-pavullo-nel-frignano-9224020",
-    "sourceName": "CAI Pavullo nel Frignano",
-    "url": "https://www.caipavullo.it/calendario-2026/",
-    "status": "one bounded calendar sample collected; source partial",
-    "evidence": "Official calendar URL fetched once; parsed 23 rows; 5 new unique IDs, semantic review still holds 4",
-    "scope": "No follow-up until checkpoint and one-ID delta delivery are complete",
-    "networkFetchPerformed": true
+    "status": "pending offline selection after completed Pavullo delivery",
+    "scope": "select one unvisited official same-host URL; compare cache, history, failures and cooldown before any fetch",
+    "networkFetchPerformed": false
   }
 }
