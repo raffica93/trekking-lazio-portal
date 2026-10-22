@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T18:37:26.824Z",
+  "generatedAt": "2026-10-22T18:56:33.228Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -11616,8 +11616,8 @@
       "enabled": true,
       "excursions": 51,
       "error": null,
-      "hash": "5c54e5ad861e9522ad580820fb7930d91fd417b6a133fce11ee6d78c2fe64931",
-      "updatedAt": "2026-10-22T18:37:26.824Z",
+      "hash": "6b330b408465610c43274b82a44978a35bb64877e620e46e18421e27976f0956",
+      "updatedAt": "2026-10-22T18:56:33.228Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-brescia/wp-content/uploads/sites/7/2026/02/Programma-Escursionismo-2026.pdf",
@@ -11633,19 +11633,19 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/gruppo-juniores/juniores2026/",
-          "hash": "8263a096257549a277bf64c92d00674a52c9951f141318a5caf16ccd7ff715da",
+          "hash": "a9087f46e6167a9573dc22f57401a69d1c46fa4076f8c24af4590047fd1dc6f0",
           "events": 4,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/escursionismo/commissione-escursionismo/",
-          "hash": "72d20ddff8341e43b25d8edf7d5883a4e85d6fc6540033d7dcf1e54366397a85",
+          "hash": "a4ea631aa8c483bc6f8eea07b80de71dee6c20ff0ff22411ef09d63e60c1bd66",
           "events": 26,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/2025/12/gruppo-escursionistico-seniores-1997-calendario-escursioni-trekking-2026/",
-          "hash": "4951d42a6804f89baf8f7fc5c63c08915652ff97b883c8b49b78cbafbfe2db38",
+          "hash": "d22579c3ba7d4468fbffc58010feb7690f28f398434da40799c5e6a7cdb4b1be",
           "events": 0,
           "method": null
         },
@@ -11663,7 +11663,7 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/",
-          "hash": "b47a9b09caa30a3db8dfa93f1dcad8860287fe6fd057a593c6b38a0becd902cc",
+          "hash": "8e16b7bb070ba0949f5c3db9a29b9e10d682bcf8065c42d6f298b9489645a52e",
           "events": 3,
           "method": "html-calendar"
         },
@@ -11681,97 +11681,169 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/2026/09/54corso-sci-di-fondo-escursionistico-anno-2026-2027/",
-          "hash": "1fa71d4c31404b527d117eae324b4e9f6c026c65daa43e0e7aa834f5dca18d40",
+          "hash": "fbc408fe39a76c0c1f10c0a16e201b2bc15ab9bb5aa836edf4c77320c2048665",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/2026/10/gruppo-escursionistico-seniores-1997-settimana-escursionistica-invernale-a-moena-val-di-fassa-trentino-a-a/",
-          "hash": "d03dc298018c2768f8cf03a5020982b6703ece7ca322a7d5155336241ec72ad2",
+          "hash": "74b556c4cd536da7a725ab8568b01a448c44e926de03bd26fbf57d6222e9e3a5",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/2026/10/gruppo-escursionistico-seniores-1997-escursione-martedi-27-10-26-o-mercoledi-28-10-26-chiusa-val-isarco-bressanone-4-e-ultima-tappa-sentiero-del-castagno-trentino-a-a/",
-          "hash": "c046745f2d8e4b31fcc3265dbf4aefc1c2d9004ea52085a561ece26254ee3841",
+          "hash": "d8b8c0c5bf5ee8b755c87160ac5e6d428e207da6d48f31776d36e80bbe66bd1c",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/2026/10/gruppo-escursionistico-seniores-1997-escursione-martedi-20-10-26-o-mercoledi-21-10-26-albino-anello-della-cornagera-monte-poieto-val-seriana-bg/",
-          "hash": "ceea3c406d49cab141bad56b0c8222b0ba5a7ffd4379e7a2da94fa86f12a667a",
+          "hash": "cea466502e4a7b74dc60a35ba10b1d4fa94cc536e61aac8cc49c374c740b9506",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/",
-          "hash": "669b8e149ae6c9ccdcca400e71a833dd0c6b076d92e4c7d3b96b71e2e2a732c1",
+          "hash": "085fee630370b5632a7755e620b724a62ade69a61c6900a2dc2ffa9ec8ecc3ad",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/",
-          "hash": "b60e23aa9b90bcfbb2fb05733959eeb14faceb29f7e84031b8954bd3c7f9a3ac",
+          "hash": "f8e7b5d30364099d1a944df9cc6188c4783266ddd00ab1603a3afb76a47aa27d",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-a1-alpinismo-base/",
-          "hash": "9e797bfa33b27e7f0840669e3787efa060361ab8ca5dc3596ae5a60eddc9d4c1",
+          "hash": "4000f50bf4a89a81deacbfae3eaff4ee1bb86953aff1a87d13374784b411db76",
           "events": 13,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-acg1-cascate-di-ghiaccio/",
-          "hash": "759cc4485f1a39c23d21d0d77be7a2a40f054047a5681753594744676293a1b5",
+          "hash": "f983c5b748ccd1a6935bfc7d70b676c23e6cde10a9a0eecae241e4fa50250663",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-sa1-scialpinismo-base/",
-          "hash": "85c30e51214ca08285cf94ffda6f86f78c7fc6b410808113b9ea72220bcab4c2",
+          "hash": "0b1bd8341ccddde6046f1f479b4485ce552e52ecd5cdeaaee559da88837e1571",
           "events": 10,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-sa2-scialpinismo-avanzato/",
-          "hash": "801abee4bc9924837cfa03297f0c0db3baa325b29942afaee6ec176df8da5a6c",
+          "hash": "661972b40ef3675d225ce1a0c11f4a24a753a8bccb652e9f12093fe4d69aa06a",
           "events": 5,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-al1-arrampicata-libera-base/",
-          "hash": "a051a16858f2217a7158de781c9bf3fbe873744788966bd6603c7dc855bdc6a3",
+          "hash": "b08fa7fc387631e526d1e98881219b5651596224af3d3516b9303d391a58111a",
           "events": 5,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-al2-arrampicata-libera-avanzato/",
-          "hash": "7efa8be88747a85b66e11ddec6732b4b68c961194b01a027b54ad923b85dbb60",
+          "hash": "e4872b04924efd54d7f141ac4ce8888f10a532643fba6ce2274c4ab2fd78ada4",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-ar1-arrampicata-su-roccia/",
-          "hash": "1b1c5886421d0678c2d3fd6476e5608ac7c5ecc0d4709b5ae55464f63113db57",
+          "hash": "491929e1eeacf45bc3ef0aaf350bf7547325eb9f18333dbabf31357ca9d9ffc5",
           "events": 10,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/corso-m-av-autosoccorso-in-valanga/",
-          "hash": "c80bc3ea09d2fba242cb5fb9bae495bf9b3e7feca3774271d25ef46bff481396",
+          "hash": "e8d8ee949e5c8be4923865b4675cc688cdad4daf21c9440a2d8f000ef46ba481",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/la-nostra-storia-2/",
-          "hash": "a69262798293b459057511dac533bfb938af03e3d6f8d8e1ee6669aa12dbb9e4",
+          "hash": "ea0c116b5c8fc06dac138f78b08e19f35873753e4277e652e2e81d39db40678a",
           "events": 0,
           "method": null
         },
         {
           "url": "https://organizzazione.cai.it/sez-brescia/attivita/gruppo-gite-alpinismo-gga/",
-          "hash": "52f8cffb847f5361de09e96bfae6f713fccda7e89dcdb928e2124a01f9031aa3",
+          "hash": "a70b57f60b0f9fda31941ef7bf5f54a640eca36de000cb54640bb22f49962f8b",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/gruppo-gite-scialpinismo-ggs/",
+          "hash": "97c26925e7e54ffc26e12e65e5e3da6517dabd5b532ae114a7e2487d38df76b5",
+          "events": 1,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/gruppo-gite-scialpinismo-ggs/programmi-anni-precedenti/",
+          "hash": "640fb8303f3f0a96c0ce4465edcd12e68d0b39699accfb9ef32fbbead5c3df4a",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/gruppo-juniores/",
+          "hash": "e916123e1983b8bd49a6fc3f98219bc816ab89313701c2b010b72c0b8721766c",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/escursionismo/",
+          "hash": "41029cc4d531c2bdf4b53b02999dac874a0442f7ad91a32c28682ee18cc30278",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/escursionismo/gpe-seniores-1987/",
+          "hash": "5e01c0a562cc74a3781c7e8205e49202bddffd034d50b15484711bc7911ef537",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/escursionismo/gpe-seniores/",
+          "hash": "3e4a79b9a416793e034e92c630d08fee5940412c3e638f49105d8dc2075c7de4",
+          "events": 5,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/alpinismo-giovanile/",
+          "hash": "4885107c73594bdebb859d8e6715157c21834a0c2eedb7ef9322308dac4906ec",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/commissione-sanitaria/",
+          "hash": "801a49b0d6ed9e7be906cfbf9bf24ececa3ba1c7c8dd5ef18bbf7910a1a01203",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-di-sciescursionismo/",
+          "hash": "ac790e64fc5823840969edc6200d66bb55fa9f6af1a23859458b99bf6b358701",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/tutela-ambiente-montano-tam/",
+          "hash": "8b0837dfb5a3bceb1cf545d9d8640330476434bbf4620b374fba2c9cd8ad010b",
+          "events": 1,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/tutela-ambiente-montano-tam/archivio/",
+          "hash": "d9e7533812842c9448065c02a6dad041436170dac582a2c8f7cb9b2fa2c365de",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/escursioni-di-sci-fondo-escursionismo/",
+          "hash": "8826562fecebd64f9b6c126b433d0aab29079b6420c91ad96ad51728e95f04bf",
           "events": 0,
           "method": null
         }
@@ -12119,12 +12191,212 @@
           "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
         },
         {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/2025/11/programma-gite-ggs-gruppo-gite-scialpinismo-2026/",
+          "code": "http-removed",
+          "httpStatus": 404,
+          "failureAt": "2026-10-22T18:56:18.826Z",
+          "failureMessage": "Request failed with status code 404",
+          "message": "Request failed with status code 404"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-brescia/attivita/scuola-adamello-tullio-corbellini/chi-siamo-2/",
+          "code": "previous-unavailable-skipped",
+          "httpStatus": 403,
+          "failureAt": "2026-10-20T03:47:30.276Z",
+          "failureMessage": "Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Skipped URL previously confirmed unavailable: Failed to establish tunnel to accesso.cai.it:443 via http://proxy:8080: HTTP/1.1 403 Forbidden",
+          "message": "Official URL previously returned HTTP 403; access will be rechecked after the cooldown."
+        },
+        {
           "url": "https://organizzazione.cai.it/sez-brescia/wp-content/uploads/sites/7/2026/02/Programma-Escursionismo-2026.pdf",
-          "message": "Discovery budget reached; 13 candidate documents remain.",
+          "message": "Discovery budget reached; 2 candidate documents remain.",
           "code": "discovery-limit"
         }
       ],
-      "extractedEvents": 136
+      "extractedEvents": 143
     },
     {
       "id": "cai-cidneo-o-m-9116019",

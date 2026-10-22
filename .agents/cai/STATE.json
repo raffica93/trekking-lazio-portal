@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "regional-collection-partial-checkpointed",
+  "phase": "regional-collection-partial-files-verified-checkpoint-pending",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -202,12 +202,12 @@
       "id": "S7",
       "status": "in-progress",
       "owner": "orchestrator + cai-collector",
-      "result": "Run03 and geo-aware importer checkpoint published and verified at 831e031808af7bdd01508e83afd023b02f6ae7d5. Brescia remains partial (13 discovery candidates); collection files ready, database pending. Backend suite 178/178; independent importer QA PASS; no regional DB writes."
+      "result": "Latest bounded Lombardia sample cai-brescia-9216005 (`cai-20261022-lombardia-brescia04`) remains partial, files ready, database pending. Independent importer QA PASS: 38 unique URLs (26 overlap, 12 new), 143 extractions, 0 catalog delta. Backend npm test 178/178; no DB access/write."
     }
   ],
   "nextAction": {
     "step": "S7",
-    "instruction": "Continue with a bounded run04 limited to the 13 residual CAI Brescia candidates after collector prepares the shortlist; do not expand to another section or import until new events are classified and files independently verified."
+    "instruction": "Publish the run04 checkpoint. Then continue with a bounded run05 only on the two residual Brescia discovery candidates; do not expand to another section or import without a new classified event delta."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -217,7 +217,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "831e031808af7bdd01508e83afd023b02f6ae7d5",
+    "branchHead": "c46f8c8064795204ddec37f8e05f730b11d47194",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -348,23 +348,23 @@
     },
     "regionalCoverage": {
       "region": "Lombardia",
-      "status": "open; latest current bounded run cai-20261022-lombardia-brescia03 checked Brescia only and remains partial",
+      "status": "open; latest current bounded run cai-20261022-lombardia-brescia04 checked Brescia only and remains partial",
       "currentRunCounts": {
         "sectionsChecked": 1,
         "complete": 0,
         "partial": 1,
         "unreachable": 0,
-        "verifiedEvents": 7,
+        "verifiedNewEvents": 0,
+        "sectionEventsReported": 51,
         "exactDuplicateIdsExcluded": 0,
-        "semanticDuplicates": "not established; pipeline report cannot reliably count cross-document overlap",
+        "semanticDuplicates": "not established; cross-document overlap is not a reliable duplicate count",
         "failuresResolved": [
-          "2026-10-22: official CAI cinema duration year-suffix parser defect corrected in cb7148f; full suite confirms regression",
-          "2026-10-22: geolocation importer now requires sourced/ranged verified coords and preserves existing finite/partial coordinates; repo tests pass, migration not applied"
+          "The run03 parser correction remains regression-tested: official cinema year suffix is not parsed as duration."
         ],
         "failuresOpen": [
-          "13 residual discovery candidates for Brescia after run03 bounded expansion",
-          "two distinct historical HTTP 403 URLs remain in cooldown; run03 made no retries",
-          "geo_evidence additive migration pending DB application; no regional DB import pending classification and checkpoint"
+          "2 discovery candidates remain after bounded run04",
+          "1 official candidate URL returned HTTP 404; replacement not established",
+          "2 distinct historical HTTP 403 URLs are in cooldown; 66 repeated issue entries were not retried"
         ]
       },
       "historicalSnapshot": {
@@ -379,13 +379,13 @@
     },
     "ocrItalian": false,
     "agentStatus": {
-      "caiCollector": "completed bounded Brescia run03 and evidence report; available for next bounded source sample",
-      "caiImporter": "completed independent QA for run03 and geo-aware importer safety patch; migration unapplied",
+      "caiCollector": "completed bounded run04; offline queue plan available for run05",
+      "caiImporter": "independent read-only QA PASS for run04",
       "agentRequestedModel": "gpt-6-luna",
       "agentRequestedEffort": "high",
       "effectiveModelTelemetry": "not exposed"
     },
-    "nextPhase": "Bounded Brescia run04 on 13 residual discovery candidates; classify any newly added real events before considering a future DB import.",
+    "nextPhase": "Publish run04 files/report; then one bounded run05 on the two residual Brescia discovery candidates. Do not import without a new classified event delta and independent QA.",
     "databaseReadOnlyObservation": {
       "observedAt": "2026-10-22T18:12:15.676Z",
       "source": "authorized Supabase read-only SQL and map predicate",
@@ -399,11 +399,11 @@
       "writes": 0
     },
     "tests": {
-      "backend": "npm test after importer migration/test patch: 178 passed, 0 failed (2026-10-22T18:52Z)",
-      "publicCatalogTestIsolation": "collection finished before tests; backend/frontend catalog copies byte-identical; sha256 excursions 5a828c3b661159f8fda2cb1c0aac99e5222491a7d83ba7afae82549cd69d29a5; scrape-status ca3c14231706234d1835cb174de21b079705c28c7e45d0b200118aba283e5692"
+      "backend": "npm test after run04 collection: 178 passed, 0 failed (2026-10-22T19:01Z)",
+      "publicCatalogTestIsolation": "test suite ran after collection completed; backend/frontend excursions identical SHA256 accf5df32091ef5451ba10c850831a4c549e5f21891b45a5769067f62a65566a; scrape-status identical SHA256 997099ec6ca93a3e27870987db0b71af671eeea89f74f750ea54233eedcdbe7"
     },
-    "regionCurrent": "Lombardia — CAI Brescia remains partial after run03; checkpoint 831e031 published, 13 discovery candidates open",
-    "regionNext": "Continue only with the bounded run04 residual Brescia sample; await collector shortlist before live collection.",
+    "regionCurrent": "Lombardia — CAI Brescia is the only section checked in this current sample; partial, 0 new catalog events in run04",
+    "regionNext": "Checkpoint run04; continue only with a bounded run05 for the two residual Brescia candidates.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
     "remoteCheckpointVerifiedAt": "2026-10-22T18:54:25Z",
@@ -435,7 +435,7 @@
     },
     "liveSiteStatus": "Database classification is installed and verified; repository map filtering code is not deployed. No deploy performed.",
     "regionalRun": {
-      "runId": "cai-20261022-lombardia-brescia03",
+      "runId": "cai-20261022-lombardia-brescia04",
       "sourceId": "cai-brescia-9216005",
       "collection": "partial",
       "files": "ready",
@@ -444,30 +444,31 @@
       "completeSections": 0,
       "partialSections": 1,
       "unreachableSections": 0,
-      "observedDocuments": 26,
-      "previouslyObservedUrls": 12,
-      "newlyReachedUrls": 14,
-      "remainingDiscoveryCandidates": 13,
+      "completedUniqueUrls": 38,
+      "overlapWithRun03": 26,
+      "newUrlsComparedWithRun03": 12,
+      "remainingDiscoveryCandidates": 2,
       "sectionEventCount": 51,
-      "documentExtractions": 136,
-      "verifiedNewEventIds": 7,
+      "documentExtractions": 143,
+      "verifiedNewEventIds": 0,
       "catalogDelta": {
-        "added": 7,
+        "added": 0,
         "removed": 0,
         "changedExisting": 0,
         "uniqueIds": 3345
       },
       "exactDuplicateIdsExcluded": 0,
       "semanticDuplicates": "not established",
-      "issueSummary": "42 repeated cooldown entries represent 2 distinct historical HTTP 403 URLs; no retries. One discovery-budget issue leaves 13 candidates.",
-      "geolocation": "No coordinates assigned. The seven records provide no verified hiking start/summit/area; two mention CAI meeting-room venue only. Provenance/type/precision remain unknown or review-required; no headquarters/capoluogo fallback.",
-      "manifestSha256": "17106240bf08667584315cb48922060c00c673e265c7cc898adfaf57a75f3ec3",
-      "reportSha256": "d4dec037f4c99b299b9d3c0ea64c92dd21432213d9264e9af22fba5f28f54388",
-      "catalogSha256": "5a828c3b661159f8fda2cb1c0aac99e5222491a7d83ba7afae82549cd69d29a5",
-      "scrapeStatusSha256": "ca3c14231706234d1835cb174de21b079705c28c7e45d0b200118aba283e5692",
-      "importerQa": "PASS; 3,338 to 3,345 unique IDs, +7, zero changed/removed; artifacts cross-checked, no DB query/write. Source content not independently refetched.",
-      "commit": "831e031808af7bdd01508e83afd023b02f6ae7d5",
-      "remoteVerifiedAt": "2026-10-22T18:54:25Z"
+      "issueSummary": "66 repeated cooldown issue entries represent 2 distinct historical HTTP 403 URLs; no retries. One candidate URL returned HTTP 404. Discovery limit leaves 2 candidate documents.",
+      "geolocation": "No catalog delta; no new/changed geolocation values to inspect. No venue geocoding or coordinates were added.",
+      "manifestSha256": "97ee22d3b78840a6327b7869bbad8139481457239cbf6b9282bbdde688a10ff5",
+      "reportSha256": "5fd661f1ad357553cf8e7c4945da1be935845b56b7786f0ea8d8cd564a6b24b6",
+      "catalogSha256": "accf5df32091ef5451ba10c850831a4c549e5f21891b45a5769067f62a65566a",
+      "scrapeStatusSha256": "997099ec6ca93a3e27870987db0b71af671eeea89f74f750ea54233eedcdbe7",
+      "importerQa": "PASS; independent comparison to c46f8c8; 3345 unique IDs, zero add/remove/change; hashes/copies/accounting verified; no DB query/write.",
+      "tests": "Backend npm test 178/178 after collection; catalog hashes remained identical across backend/frontend copies.",
+      "commit": null,
+      "remoteVerifiedAt": null
     },
     "regionalCheckpointCommit": "831e031808af7bdd01508e83afd023b02f6ae7d5",
     "regionalRunHistory": [
@@ -501,9 +502,45 @@
         "importerQa": "PASS; compared to commit 6d0bd13; 3,338 unique IDs, +1 only, no existing changes; no DB queried.",
         "commit": "cb7148ff0d69944a34fd8e606f3e61ab42238d31",
         "remoteVerifiedAt": "2026-10-22T18:34:10Z"
+      },
+      {
+        "runId": "cai-20261022-lombardia-brescia03",
+        "sourceId": "cai-brescia-9216005",
+        "collection": "partial",
+        "files": "ready",
+        "database": "pending",
+        "controlledSections": 1,
+        "completeSections": 0,
+        "partialSections": 1,
+        "unreachableSections": 0,
+        "observedDocuments": 26,
+        "previouslyObservedUrls": 12,
+        "newlyReachedUrls": 14,
+        "remainingDiscoveryCandidates": 13,
+        "sectionEventCount": 51,
+        "documentExtractions": 136,
+        "verifiedNewEventIds": 7,
+        "catalogDelta": {
+          "added": 7,
+          "removed": 0,
+          "changedExisting": 0,
+          "uniqueIds": 3345
+        },
+        "exactDuplicateIdsExcluded": 0,
+        "semanticDuplicates": "not established",
+        "issueSummary": "42 repeated cooldown entries represent 2 distinct historical HTTP 403 URLs; no retries. One discovery-budget issue leaves 13 candidates.",
+        "geolocation": "No coordinates assigned. The seven records provide no verified hiking start/summit/area; two mention CAI meeting-room venue only. Provenance/type/precision remain unknown or review-required; no headquarters/capoluogo fallback.",
+        "manifestSha256": "17106240bf08667584315cb48922060c00c673e265c7cc898adfaf57a75f3ec3",
+        "reportSha256": "d4dec037f4c99b299b9d3c0ea64c92dd21432213d9264e9af22fba5f28f54388",
+        "catalogSha256": "5a828c3b661159f8fda2cb1c0aac99e5222491a7d83ba7afae82549cd69d29a5",
+        "scrapeStatusSha256": "ca3c14231706234d1835cb174de21b079705c28c7e45d0b200118aba283e5692",
+        "importerQa": "PASS; 3,338 to 3,345 unique IDs, +7, zero changed/removed; artifacts cross-checked, no DB query/write. Source content not independently refetched.",
+        "commit": "831e031808af7bdd01508e83afd023b02f6ae7d5",
+        "remoteVerifiedAt": "2026-10-22T18:54:25Z"
       }
     ],
-    "repositoryCheckpointCommit": "831e031808af7bdd01508e83afd023b02f6ae7d5"
+    "repositoryCheckpointCommit": "831e031808af7bdd01508e83afd023b02f6ae7d5",
+    "updatedAt": "2026-10-22T19:01:21Z"
   },
   "repositoryCommit": "831e031808af7bdd01508e83afd023b02f6ae7d5",
   "databaseReadOnlyObservation": {
@@ -523,8 +560,8 @@
     "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
     "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
   },
-  "updatedAt": "2026-10-22T18:54:25Z",
+  "updatedAt": "2026-10-22T19:01:21Z",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T18:54:25Z",
-  "regionCurrent": "Lombardia — CAI Brescia remains partial after run03; checkpoint 831e031 published, 13 discovery candidates open",
-  "regionNext": "Continue only with the bounded run04 residual Brescia sample; await collector shortlist before live collection."
+  "regionCurrent": "Lombardia — CAI Brescia is the only section checked in this current sample; partial, 0 new catalog events in run04",
+  "regionNext": "Checkpoint run04; continue only with a bounded run05 for the two residual Brescia candidates."
 }

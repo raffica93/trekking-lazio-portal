@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T18:52:06Z",
+  "generatedAt": "2026-10-22T19:01:21Z",
   "repositoryCommit": "cb7148ff0d69944a34fd8e606f3e61ab42238d31",
   "baseline": {
     "commit": "9919927d4cbef6d154c4dae1441d64cd01c70ad4",
@@ -18584,7 +18584,7 @@
       "failureClass": "http-resource-removed",
       "httpStatus": 404,
       "firstObservedAt": "2026-10-20T01:10:20.456Z",
-      "lastObservedAt": "2026-10-20T08:08:31.672Z",
+      "lastObservedAt": "2026-10-22T18:56:18.826Z",
       "observationBasis": "timestamps from persisted run/source status snapshots; not request timestamps",
       "history": {
         "runIds": [
@@ -18603,11 +18603,13 @@
           "cai-20261020-lombardia-deep-14",
           "cai-20261020-lombardia-deep-15",
           "cai-20261020-piemonte-01",
-          "cai-20261020-piemonte-ocr-01"
+          "cai-20261020-piemonte-ocr-01",
+          "cai-20261022-lombardia-brescia04"
         ],
-        "snapshotCopies": 16,
+        "snapshotCopies": 17,
         "issueCodes": [
-          "previous-unavailable-skipped"
+          "previous-unavailable-skipped",
+          "http-removed"
         ],
         "sourceStatuses": [
           "partial"
@@ -18615,8 +18617,14 @@
       },
       "attempts": {
         "actualHistoricalRequests": "unknown",
-        "currentCycleRequests": 0,
-        "recoveryAttempts": []
+        "currentCycleRequests": 1,
+        "recoveryAttempts": [
+          {
+            "runId": "cai-20261022-lombardia-brescia04",
+            "at": "2026-10-22T18:56:18.826Z",
+            "result": "HTTP 404"
+          }
+        ]
       },
       "cooldown": {
         "policy": "re-check official section pages after 90d; search for replacement before treating URL as removed",
@@ -18625,23 +18633,30 @@
       },
       "evidence": {
         "representativeMessages": [
-          "Request failed with status code 404"
+          "Request failed with status code 404",
+          "Run04 rechecked candidate; HTTP 404."
         ],
         "sourceUpdatedAt": [
           "2026-10-20T01:19:56.146Z",
           "2026-10-20T01:39:57.342Z",
           "2026-10-20T01:51:46.287Z",
-          "2026-10-20T03:47:30.276Z"
+          "2026-10-20T03:47:30.276Z",
+          "2026-10-22T18:56:33.228Z"
         ]
       },
       "strategy": "Classify evidence, preserve valid cache, then retry/re-discover with a bounded policy appropriate to the class.",
-      "status": "historical_classified_unverified",
+      "status": "recheck_failed",
       "owner": "cai-collector",
-      "outcome": "No resolution check in the current cycle yet.",
+      "outcome": "Run04 confirmed this official URL is HTTP 404; no replacement or event was inferred, and section remains partial.",
       "correctionRef": null,
       "testRefs": [],
-      "resolutionCheck": null,
-      "policyStatus": "candidate_pending_test"
+      "resolutionCheck": {
+        "runId": "cai-20261022-lombardia-brescia04",
+        "httpStatus": 404,
+        "reportSha256": "5fd661f1ad357553cf8e7c4945da1be935845b56b7786f0ea8d8cd564a6b24b6",
+        "databaseWrites": 0
+      },
+      "policyStatus": "verified_http_404_current_cycle"
     },
     {
       "id": "CAI-F-71fbaf1290c270c5",
@@ -44245,13 +44260,14 @@
       "failureClass": "discovery-budget-exhausted",
       "httpStatus": null,
       "firstObservedAt": "2026-10-22T18:37:27.020Z",
-      "lastObservedAt": "2026-10-22T18:37:27.020Z",
+      "lastObservedAt": "2026-10-22T18:56:33.433Z",
       "observationBasis": "persisted state timestamp; not an individual request timestamp",
       "history": {
         "runIds": [
-          "cai-20261022-lombardia-brescia03"
+          "cai-20261022-lombardia-brescia03",
+          "cai-20261022-lombardia-brescia04"
         ],
-        "snapshotCopies": 1,
+        "snapshotCopies": 2,
         "issueCodes": [
           "discovery-limit"
         ],
@@ -44270,19 +44286,26 @@
       },
       "evidence": {
         "representativeMessages": [
-          "Discovery budget reached; 13 candidate documents remain."
+          "Discovery budget reached; 13 candidate documents remain.",
+          "Run04 discovery budget reached; 2 candidate documents remain."
         ],
         "sourceUpdatedAt": [
-          "2026-10-22T18:37:26.824Z"
+          "2026-10-22T18:37:26.824Z",
+          "2026-10-22T18:56:33.228Z"
         ]
       },
       "strategy": "Use an explicit bounded residual list/plan; preserve the valid source cache and do not mark source complete until discovery is resolved.",
       "status": "open",
       "owner": "cai-collector",
-      "outcome": "13 discovery candidates remain after bounded run03; section remains partial.",
+      "outcome": "Run03 residuals were reduced to 2 after run04; continue with a bounded candidate-only plan. No automatic retry.",
       "correctionRef": null,
       "testRefs": [],
-      "resolutionCheck": null,
+      "resolutionCheck": {
+        "runId": "cai-20261022-lombardia-brescia04",
+        "remainingCandidates": 2,
+        "reportSha256": "5fd661f1ad357553cf8e7c4945da1be935845b56b7786f0ea8d8cd564a6b24b6",
+        "databaseWrites": 0
+      },
       "policyStatus": "current_cycle_observed"
     }
   ],
