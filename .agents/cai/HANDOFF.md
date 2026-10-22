@@ -407,3 +407,9 @@ Il checkpoint Penne precedente resta a `1954838`; il checkpoint L’Aquila e il 
 ## Verifica test dopo L'Aquila01
 
 Il backend `npm test` è stato eseguito serialmente dopo la fine delle raccolte Penne01 e L'Aquila01 (nessun lock attivo): 205/205, 0 fail. Hash SHA-256 di `backend/data/` e `frontend/public/` per `excursions.json`, `cai-sections.json` e `scrape-status.json` identici prima/dopo. Nessuna modifica codice, scrittura DB o import.
+
+## Passaggio Abruzzo → Calabria dopo preflight offline (22 ottobre 2026)
+
+L'Abruzzo non è completo: Penne resta `partial` con PDF discovery 60 e HTML continuation 1 senza URL distinta; il campione ha ripetuto canonicalmente la pagina nota e non ha prodotto estrazioni. CAI L'Aquila ha un 403 esatto registrato sul target `commissioni=escursionismo`; non riprovare né allargare la coda sorella. Il collector ha controllato offline registry, storico source documents, cache e failure/cooldown: altre fonti Abruzzo non offrono URL distinta sicura (replay canonical, URL consumate o issue/cooldown aperti). Anche la regione Basilicata non ha un target current unvisited: i residui sono non persistiti, alias canonical già letti, `no-upcoming` o vecchi programmi archiviati. Si passa quindi alla prima fonte ufficiale work-ready Calabria senza dichiarare Abruzzo/Basilicata complete.
+
+Preflight selezionato: CAI Castrovillari (`cai-castrovillari-9244005`), URL ufficiale registrata `https://www.caicastrovillari.it/prog.php`, “Programma escursioni” linkato da `https://www.caicastrovillari.it/racc.php`; non compare in `status.documents`, cache o FAILURES. Il PDF 2026 della fonte è già visitato ma resta unsupported (OCR failure e discovery-limit 8). Usare un nuovo run una URL/max1 documento/120s/concurrency1; il delta è incerto e un `method=null` non prova calendario vuoto. Checkpoint preflight da verificare prima di partire; no test in parallelo, no import senza delta classificato e file checkpointati.

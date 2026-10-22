@@ -263,3 +263,13 @@ Run `cai-20261022-abruzzo-laquila01` è distinto dal precedente Penne01. Catalog
 Il report dice anche che lo status source-level conserva `url` configurato `?commissioni=legale` e non materializza `issues`/`documents`; l'associazione del 403 a `?commissioni=escursionismo` deriva dal run state/output e sidecar. Report SHA `b3b15f1af73988430f5d3153e361725f4c9c2d5aac38211dca468edccd2cb834`; evidence-manifest SHA `7830f4a30c7f92dc1337c771e8b4e823c8f74318e560d33d21153d8fd7dc53cc`.
 
 Verifica suite dopo il run L'Aquila01: backend `npm test` 205/205; checksum dei sei JSON pubblici identici prima e dopo i test. Non è stata eseguita raccolta in parallelo ai test. Run e aggiornamento failure sono remoti/verificati al commit `d9fbdca0ab0cafdc4e8ca1c91c534df4a026b7cf`; il preflight successivo è in sola lettura e non riapre questa URL.
+
+## Copertura Abruzzo — esito del preflight di avanzamento
+
+Abruzzo non è completo; si passa alla regione successiva solo perché non c'è un altro target distinto sicuro in cache/registry. La tabella corrente ha 1 sezione parziale (Penne) e 1 irraggiungibile (L'Aquila), eventi estratti da Penne non nuovi, L'Aquila 0 estrazioni; nessun import DB nel passaggio. Penne open: PDF discovery 60 + HTML continuation 1 non persistita, URL testata è alias canonical già letto. L'Aquila open: 403 sulla sola query escursionismo, niente body/cache, stop/no retry. Preflight offline ha escluso URL consumate, canonical replay, residui senza URL e fonti con cooldown/access failure. Conteggi cumulativi Abruzzo restano lo snapshot storico al 20 ottobre e non vengono ricalcolati.
+
+## Prossimo campione — Calabria, CAI Castrovillari
+
+| Run pianificato | Regione | Sezione | URL | Scope | Evidenza preflight | Limiti aperti | Prossimo passo |
+|---|---|---|---|---|---|---|---|
+| `cai-20261022-calabria-castrovillari01` | Calabria | CAI Castrovillari `cai-castrovillari-9244005` | `https://www.caicastrovillari.it/prog.php` | Una URL, max1 doc/120s/concurrency1 | URL da calendarUrls/calendarEvidence, linkata da sito ufficiale; non in documents/cache/FAILURES | PDF 2026 già partial: OCR failure e discovery-limit 8; pagina può non essere estrattiva | Pubblicare questo preflight; poi una sola raccolta bounded, nessuna deduzione da method=null |

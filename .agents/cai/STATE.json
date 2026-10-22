@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "abruzzo-next-source-preflight",
+  "phase": "calabria-castrovillari-preflight",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -266,12 +266,18 @@
     },
     {
       "id": "S18",
-      "status": "in_progress",
+      "status": "completed",
       "owner": "cai-collector + orchestrator",
-      "result": "Offline/read-only preflight of another distinct enabled official source in Abruzzo; no network, collection or tests until an exact bounded target is selected."
+      "result": "Collector offline preflight found no safe, distinct enabled source in Abruzzo: remaining URLs are canonical replays, consumed, or have active failures/cooldowns. Basilicata also has no current unvisited target; first work-ready next region is Calabria, CAI Castrovillari official /prog.php, bounded one document."
+    },
+    {
+      "id": "S19",
+      "status": "in_progress",
+      "owner": "orchestrator",
+      "result": "Publish regional preflight handoff and selected Calabria source; verify remote checkpoint before a single bounded collection."
     }
   ],
-  "nextAction": "L’Aquila01 and its 403 evidence are checkpointed and remote-verified at d9fbdca. The exact denied URL is closed for this cycle. Collector is performing read-only preflight for another distinct official source; no collection has started.",
+  "nextAction": "Abruzzo has no distinct offline-confirmed target: record Penne partial backlog and the single L’Aquila 403, then continue at the first work-ready source in Calabria, CAI Castrovillari /prog.php, max1 document/120s/concurrency1 after this preflight checkpoint.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -449,7 +455,7 @@
       "agentRequestedEffort": "high",
       "effectiveModelTelemetry": "not exposed"
     },
-    "nextPhase": "L’Aquila01 denied URL and failure record are published/verified at d9fbdca. Do not replay. Offline-preflight a distinct source; if none is workable, pass to the next region.",
+    "nextPhase": "Checkpoint L’Aquila and offline source selection are complete; commit this preflight (Abruzzo/Basilicata no safe URLs), then run one bounded CAI Castrovillari /prog.php collection in Calabria.",
     "databaseReadOnlyObservation": {
       "observedAt": "2026-10-22T18:12:15.676Z",
       "source": "authorized Supabase read-only SQL and map predicate",
@@ -463,8 +469,8 @@
       "writes": 0
     },
     "tests": "After run07 stopped, backend npm test passed 187/187. Backend/frontend excursions SHA256 6e46cec85daae67e6da0a98afb36d4fbf72b3790b2246dfcdf3837ea9a0ff99b and scrape-status SHA256 da7fa46626cfd3c7e29cc59e0eb66c85f2374a70d0d325a68caba38308dd8450 remained byte-identical after tests.",
-    "regionCurrent": "Abruzzo — CAI Penne remained partial/no delta; CAI L’Aquila bounded run stopped on one HTTP 403, no cache/body and no events. No DB query/write.",
-    "regionNext": "Wait for offline selection of a distinct official source; if none is workable, continue with the next region.",
+    "regionCurrent": "Abruzzo — bounded Penne01 and L’Aquila01 results recorded. Penne remains partial (PDF discovery60 + HTML1); L’Aquila URL received one 403. No safe distinct source remains offline-selectable; do not replay.",
+    "regionNext": "Calabria — CAI Castrovillari /prog.php; one official registered URL, not in history/cache/failure; bounded one-document check after this checkpoint. Existing PDF OCR failure/discovery8 remains separate.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
     "remoteCheckpointVerifiedAt": "2026-10-22T19:25:20Z",
@@ -993,7 +999,7 @@
       }
     ],
     "repositoryCheckpointCommit": "d9fbdca0ab0cafdc4e8ca1c91c534df4a026b7cf",
-    "updatedAt": "2026-10-22T22:49:27.983Z",
+    "updatedAt": "2026-10-22T22:50:27.233Z",
     "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:49:27.983Z",
     "continuationMechanism": {
       "flag": "--source-url URL (repeatable) with exactly one --source ID",
@@ -1142,21 +1148,19 @@
       "dbWrites": 0
     },
     "nextSourcePreflight": {
-      "region": "Abruzzo",
-      "sourceId": null,
-      "sourceName": null,
-      "url": null,
-      "status": "collector read-only offline preflight active after d9fbdca checkpoint",
-      "evidence": "Previous L’Aquila commissioni=escursionismo URL returned one HTTP403 and is in FAILURES; do not replay",
-      "scope": "read-only local registry/cache/history/cooldown inspection; no network, tests or collection",
+      "region": "Calabria",
+      "sourceId": "cai-castrovillari-9244005",
+      "sourceName": "CAI Castrovillari",
+      "url": "https://www.caicastrovillari.it/prog.php",
+      "status": "offline/read-only preflight PASS; distinct official URL not in source documents/cache/FAILURES; one bounded run candidate",
+      "evidence": "registered under calendarUrls/calendarEvidence as Programma escursioni; linked from official https://www.caicastrovillari.it/racc.php; not in status.documents or cache; PDF 2026 was already visited and remains unsupported with OCR failure/discovery 8",
+      "scope": "one URL, max1 document, 120 seconds, concurrency1; no broader queue; no empty-calendar inference if method=null",
       "networkFetchPerformed": false
     },
     "lastSourcePreflight": {
       "region": "Abruzzo",
-      "sourceId": "cai-l-aquila-9234002",
-      "url": "https://cailaquila.it/le-attivita-del-cai/programma-2026/?commissioni=escursionismo",
-      "status": "attempted once; 403; no cache/body; closed this cycle",
-      "networkFetchPerformed": true
+      "status": "completed read-only preflight; no safe distinct target; yielded to Calabria",
+      "networkFetchPerformed": false
     },
     "pendingDeltaDelivery": {
       "regionalRunId": "cai-20261022-lombardia-stradastorta02",
@@ -1226,10 +1230,10 @@
   },
   "repositoryCommit": {
     "branch": "codex/cai-orchestrator-luna",
-    "head": "d9fbdca0ab0cafdc4e8ca1c91c534df4a026b7cf",
+    "head": "0d08224ec4ebe5a104e38d8db8f20bdc58686363",
     "remoteVerified": true,
-    "fetchHead": "d9fbdca0ab0cafdc4e8ca1c91c534df4a026b7cf",
-    "checkpointKind": "L’Aquila01 status/evidence, 403 failure record, and region/state docs"
+    "fetchHead": "0d08224ec4ebe5a104e38d8db8f20bdc58686363",
+    "checkpointKind": "L’Aquila status/failure and regional preflight checkpoint"
   },
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
@@ -1253,10 +1257,10 @@
     }
   },
   "tests": "After both Penne01 and L’Aquila01 collections completed serially: backend npm test 205/205; SHA-256 values for backend/frontend excursions, cai-sections, and scrape-status were identical before and after the test. No code changed.",
-  "updatedAt": "2026-10-22T22:49:27.983Z",
+  "updatedAt": "2026-10-22T22:50:27.233Z",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:49:27.983Z",
-  "regionCurrent": "Abruzzo — CAI Penne partial with no event delta; CAI L’Aquila tested one official URL and received HTTP 403. No body/cache, extraction or event delta. No calendar-empty claim.",
-  "regionNext": "Wait for offline selection of a distinct official source; if none is workable, continue with the next region.",
+  "regionCurrent": "Abruzzo — bounded Penne01 and L’Aquila01 results recorded. Penne remains partial (PDF discovery60 + HTML1); L’Aquila URL received one 403. No safe distinct source remains offline-selectable; do not replay.",
+  "regionNext": "Calabria — CAI Castrovillari /prog.php; one official registered URL, not in history/cache/failure; bounded one-document check after this checkpoint. Existing PDF OCR failure/discovery8 remains separate.",
   "preflight": {
     "at": "2026-10-22T22:30:21.913236Z",
     "sourceId": "cai-campobasso-9236001",
@@ -1362,7 +1366,7 @@
         "Penne annual PDF discovery 60 + HTML continuation 1; canonical page replay produced no extraction.",
         "CAI L’Aquila commissioni=escursionismo: one HTTP 403; no body/cache; no retry."
       ],
-      "nextStep": "Publish the failed-source checkpoint, then offline-preflight a distinct enabled source. If Abruzzo has no work-ready target, record residuals and continue to the next region."
+      "nextStep": "Calabria — CAI Castrovillari /prog.php; one official registered URL, not in history/cache/failure; bounded one-document check after this checkpoint. Existing PDF OCR failure/discovery8 remains separate."
     },
     "historicalSnapshot": {
       "asOf": "2026-10-20",
@@ -1493,13 +1497,13 @@
     }
   ],
   "nextSourcePreflight": {
-    "region": "Abruzzo",
-    "sourceId": null,
-    "sourceName": null,
-    "url": null,
-    "status": "collector read-only offline preflight active after d9fbdca checkpoint",
-    "evidence": "Previous L’Aquila commissioni=escursionismo URL returned one HTTP403 and is in FAILURES; do not replay",
-    "scope": "read-only local registry/cache/history/cooldown inspection; no network, tests or collection",
+    "region": "Calabria",
+    "sourceId": "cai-castrovillari-9244005",
+    "sourceName": "CAI Castrovillari",
+    "url": "https://www.caicastrovillari.it/prog.php",
+    "status": "offline/read-only preflight PASS; distinct official URL not in source documents/cache/FAILURES; one bounded run candidate",
+    "evidence": "registered under calendarUrls/calendarEvidence as Programma escursioni; linked from official https://www.caicastrovillari.it/racc.php; not in status.documents or cache; PDF 2026 was already visited and remains unsupported with OCR failure/discovery 8",
+    "scope": "one URL, max1 document, 120 seconds, concurrency1; no broader queue; no empty-calendar inference if method=null",
     "networkFetchPerformed": false
   }
 }
