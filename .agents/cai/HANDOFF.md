@@ -451,3 +451,7 @@ Confronto catalogo con commit base `16204f085ae88c110fde2d5335bec7c228e074e4`: 3
 Dopo la fine della raccolta, `npm test` backend ha passato 205/205. I sei JSON pubblici post-test corrispondono agli hash sigillati nel run e i mirror sono byte-identici. Hash run: manifest `66d063ef486f6713669ae41b164678ee508f3be0b8369a742153d9b51f6ad24c`; state `ec85f72e3bf66489c4ffa2c2db468324b741d6525bbbf275eee5b70b69e81493`; report `8d56fff3be08537228d3ace4817ac205cff982973b600c4e7be0f64a68aadb34`; source-evidence `2a0f7fc8a5ce9d550eb176c1764cc1c246467019a21317444f8b8f5cb47bc9fd`; evidence-manifest `71c8b354bd6f24174c87d583fedc3cc6156dbb20406b0199c5ae2bf69f6f2e13`.
 
 Prossimo passo, solo dopo checkpoint remoto di file e handoff: preflight offline dei link esatti mostrati dall'indice, confrontati con storico/cache/FAILURES; selezionare al massimo un URL figlio distinto e sicuro. Nessun run figlio automatico.
+
+### Checkpoint remoto Caserta index01 verificato
+
+Il pacchetto di run e il handoff sono ora pubblicati sul branch `codex/cai-orchestrator-luna` al commit `52deb84835e47a355d66da4662dc7e9a877f2ab4`; ref remoto, tree `0af2ec2ab5aacec18ec799d0876910a1f85a6d93` e SHA dei blob corrispondono ai file QA-validati localmente. Il vecchio riferimento “serve ripubblicare” è soddisfatto. Dopo questa prova, cai-collector sta controllando offline i link figli della pagina salvata: nessun fetch finché non viene selezionato e checkpointato un singolo target distinto.

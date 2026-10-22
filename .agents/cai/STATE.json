@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "campania-caserta-index-checkpoint-pending",
+  "phase": "campania-caserta-child-link-preflight",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -313,11 +313,16 @@
     },
     {
       "id": "S26",
+      "status": "completed",
+      "result": "Caserta index run artifacts, exact catalog/status mirrors, and regional docs are recoverably published and independently verified at remote commit 52deb84835e47a355d66da4662dc7e9a877f2ab4; tree and all changed blob SHAs match local."
+    },
+    {
+      "id": "S27",
       "status": "in_progress",
-      "result": "Publish and remotely verify exact run artifacts, generated catalog/status mirrors, and updated regional handoff before offline-preflighting any child URL."
+      "result": "Offline preflight the exact child URLs from the checkpointed Caserta index against history/cache/FAILURES/cooldown before selecting any single follow-up URL."
     }
   ],
-  "nextAction": "Run cai-20261022-campania-caserta-index01 completed and QA PASS. Backend tests 205/205; sealed catalog hashes match after test. Publish/verify report, evidence, catalog/status mirrors, and handoff before any next fetch; then inspect exact child links offline.",
+  "nextAction": "Remote checkpoint 52deb84835e47a355d66da4662dc7e9a877f2ab4 verified; all run artifacts/catalog hashes match. Existing cai-collector is doing offline child-link preflight from the saved Caserta index; no network until one distinct eligible URL is checkpointed.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -326,7 +331,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "8ed9f735f6ae5f36af2e5dd7f94517ab0472722e",
+    "branchHead": "52deb84835e47a355d66da4662dc7e9a877f2ab4",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -489,8 +494,8 @@
     },
     "ocrItalian": false,
     "agentStatus": {
-      "caiCollector": "Caserta index collection complete; stopped after one URL",
-      "caiImporter": "Independent Caserta run and handoff QA in progress; no DB",
+      "caiCollector": "Caserta index run complete; offline child-link preflight in progress",
+      "caiImporter": "Independent read-only QA PASS for run artifacts/docs; no DB",
       "agentRequestedModel": "gpt-6-luna",
       "agentRequestedEffort": "high",
       "effectiveModelTelemetry": "not exposed"
@@ -510,7 +515,7 @@
     },
     "tests": "After run07 stopped, backend npm test passed 187/187. Backend/frontend excursions SHA256 6e46cec85daae67e6da0a98afb36d4fbf72b3790b2246dfcdf3837ea9a0ff99b and scrape-status SHA256 da7fa46626cfd3c7e29cc59e0eb66c85f2374a70d0d325a68caba38308dd8450 remained byte-identical after tests.",
     "regionCurrent": "Campania — CAI Caserta index01 partial; one official page read, method=null/0 events (calendar not proven empty), 50 existing event rows unchanged, annual PDF and index discovery issues remain.",
-    "regionNext": "After remote run checkpoint, offline-preflight the exact official child links found on /escursioni.html against history/cache/FAILURES; no child fetch before this preflight.",
+    "regionNext": "Offline compare each exact official child link in checkpointed /escursioni.html to prior documents/cache/FAILURES/cooldowns; select at most one distinct target. No live fetch before preflight report and checkpoint.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
     "remoteCheckpointVerifiedAt": "2026-10-22T19:25:20Z",
@@ -547,7 +552,7 @@
       "sourceId": "cai-caserta-9238006",
       "requestedUrl": "https://www.caicaserta.it/escursioni.html",
       "collection": "partial; one page persisted; method=null; 0 event candidates (not evidence of empty calendar)",
-      "files": "ready; importer QA PASS; backend npm test 205/205; remote checkpoint pending",
+      "files": "ready; importer QA PASS; backend npm test 205/205; run and catalog remotely verified at 52deb84835e47a355d66da4662dc7e9a877f2ab4",
       "database": "not-applicable-no-event-delta; no classification, query or write",
       "baselineCommit": "16204f085ae88c110fde2d5335bec7c228e074e4",
       "runFolder": "backend/data/agent-runs/cai-20261022-campania-caserta-index01",
@@ -588,7 +593,9 @@
         "scrapeStatus": "dfd5fd676ec87d5b3e4897cbd067ed86875707ec6fb326364609e0dca3adc3e3"
       },
       "backendTests": "205/205 passed after collection; current six public JSON hashes equal the sealed run values; mirrors byte-identical",
-      "next": "Checkpoint report, evidence, and catalog/status files remotely; then offline-preflight exact child links before any further fetch."
+      "next": "Checkpoint report, evidence, and catalog/status files remotely; then offline-preflight exact child links before any further fetch.",
+      "checkpointCommit": "52deb84835e47a355d66da4662dc7e9a877f2ab4",
+      "remoteVerifiedAt": "2026-10-22T23:10:00Z"
     },
     "regionalCheckpointCommit": "d45f27136177ce05181d69f87e00a8d7bb96a3cb",
     "regionalRunHistory": [
@@ -1008,9 +1015,9 @@
         "checkpointCommit": "pending"
       }
     ],
-    "repositoryCheckpointCommit": "16204f085ae88c110fde2d5335bec7c228e074e4",
+    "repositoryCheckpointCommit": "52deb84835e47a355d66da4662dc7e9a877f2ab4",
     "updatedAt": "2026-10-22T23:05:00Z",
-    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:02:15Z",
+    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:10:00Z",
     "continuationMechanism": {
       "flag": "--source-url URL (repeatable) with exactly one --source ID",
       "safety": "Exact official hostname, HTTP(S), no credentials/custom port; redirect guard in continuation mode permits only HTTPS same-host redirects on default/443 without auth. Existing cooldown/cache and bounded document/time limits retained.",
@@ -1068,7 +1075,7 @@
       "sourceId": "cai-caserta-9238006",
       "requestedUrl": "https://www.caicaserta.it/escursioni.html",
       "collection": "partial; one page persisted; method=null; 0 event candidates (not evidence of empty calendar)",
-      "files": "ready; importer QA PASS; backend npm test 205/205; remote checkpoint pending",
+      "files": "ready; importer QA PASS; backend npm test 205/205; run and catalog remotely verified at 52deb84835e47a355d66da4662dc7e9a877f2ab4",
       "database": "not-applicable-no-event-delta; no classification, query or write",
       "baselineCommit": "16204f085ae88c110fde2d5335bec7c228e074e4",
       "runFolder": "backend/data/agent-runs/cai-20261022-campania-caserta-index01",
@@ -1109,7 +1116,9 @@
         "scrapeStatus": "dfd5fd676ec87d5b3e4897cbd067ed86875707ec6fb326364609e0dca3adc3e3"
       },
       "backendTests": "205/205 passed after collection; current six public JSON hashes equal the sealed run values; mirrors byte-identical",
-      "next": "Checkpoint report, evidence, and catalog/status files remotely; then offline-preflight exact child links before any further fetch."
+      "next": "Checkpoint report, evidence, and catalog/status files remotely; then offline-preflight exact child links before any further fetch.",
+      "checkpointCommit": "52deb84835e47a355d66da4662dc7e9a877f2ab4",
+      "remoteVerifiedAt": "2026-10-22T23:10:00Z"
     },
     "lastCodeCorrection": {
       "commit": "010af3796a99d01e8081d45ef625b2344ec134c7",
@@ -1131,7 +1140,7 @@
       "sourceId": "cai-caserta-9238006",
       "requestedUrl": "https://www.caicaserta.it/escursioni.html",
       "collection": "partial; one page persisted; method=null; 0 event candidates (not evidence of empty calendar)",
-      "files": "ready; importer QA PASS; backend npm test 205/205; remote checkpoint pending",
+      "files": "ready; importer QA PASS; backend npm test 205/205; run and catalog remotely verified at 52deb84835e47a355d66da4662dc7e9a877f2ab4",
       "database": "not-applicable-no-event-delta; no classification, query or write",
       "baselineCommit": "16204f085ae88c110fde2d5335bec7c228e074e4",
       "runFolder": "backend/data/agent-runs/cai-20261022-campania-caserta-index01",
@@ -1172,16 +1181,18 @@
         "scrapeStatus": "dfd5fd676ec87d5b3e4897cbd067ed86875707ec6fb326364609e0dca3adc3e3"
       },
       "backendTests": "205/205 passed after collection; current six public JSON hashes equal the sealed run values; mirrors byte-identical",
-      "next": "Checkpoint report, evidence, and catalog/status files remotely; then offline-preflight exact child links before any further fetch."
+      "next": "Checkpoint report, evidence, and catalog/status files remotely; then offline-preflight exact child links before any further fetch.",
+      "checkpointCommit": "52deb84835e47a355d66da4662dc7e9a877f2ab4",
+      "remoteVerifiedAt": "2026-10-22T23:10:00Z"
     },
     "nextSourcePreflight": {
       "region": "Campania",
       "sourceId": "cai-caserta-9238006",
       "sourceName": "CAI Caserta",
       "url": null,
-      "status": "collection complete; offline preflight of exact index child links pending after remote run checkpoint",
-      "evidence": "see run cai-20261022-campania-caserta-index01, source-page.html and collection-report.md",
-      "scope": "offline exact-link comparison with source history/cache/FAILURES; no network until a distinct target is selected",
+      "status": "index run checkpointed remotely; offline child-link preflight in progress",
+      "evidence": "backend/data/agent-runs/cai-20261022-campania-caserta-index01/source-page.html and collection-report.md at commit 52deb848",
+      "scope": "offline history/cache/failure comparison only; no network until target checkpoint",
       "networkFetchPerformed": false
     },
     "lastSourcePreflight": {
@@ -1222,7 +1233,7 @@
       "sourceId": "cai-caserta-9238006",
       "requestedUrl": "https://www.caicaserta.it/escursioni.html",
       "collection": "partial; one page persisted; method=null; 0 event candidates (not evidence of empty calendar)",
-      "files": "ready; importer QA PASS; backend npm test 205/205; remote checkpoint pending",
+      "files": "ready; importer QA PASS; backend npm test 205/205; run and catalog remotely verified at 52deb84835e47a355d66da4662dc7e9a877f2ab4",
       "database": "not-applicable-no-event-delta; no classification, query or write",
       "baselineCommit": "16204f085ae88c110fde2d5335bec7c228e074e4",
       "runFolder": "backend/data/agent-runs/cai-20261022-campania-caserta-index01",
@@ -1263,16 +1274,18 @@
         "scrapeStatus": "dfd5fd676ec87d5b3e4897cbd067ed86875707ec6fb326364609e0dca3adc3e3"
       },
       "backendTests": "205/205 passed after collection; current six public JSON hashes equal the sealed run values; mirrors byte-identical",
-      "next": "Checkpoint report, evidence, and catalog/status files remotely; then offline-preflight exact child links before any further fetch."
+      "next": "Checkpoint report, evidence, and catalog/status files remotely; then offline-preflight exact child links before any further fetch.",
+      "checkpointCommit": "52deb84835e47a355d66da4662dc7e9a877f2ab4",
+      "remoteVerifiedAt": "2026-10-22T23:10:00Z"
     },
-    "nextAction": "Run cai-20261022-campania-caserta-index01 completed and QA PASS. Backend tests 205/205; sealed catalog hashes match after test. Publish/verify report, evidence, catalog/status mirrors, and handoff before any next fetch; then inspect exact child links offline."
+    "nextAction": "Remote checkpoint 52deb84835e47a355d66da4662dc7e9a877f2ab4 verified; all run artifacts/catalog hashes match. Existing cai-collector is doing offline child-link preflight from the saved Caserta index; no network until one distinct eligible URL is checkpointed."
   },
   "repositoryCommit": {
     "branch": "codex/cai-orchestrator-luna",
-    "head": "8ed9f735f6ae5f36af2e5dd7f94517ab0472722e",
+    "head": "52deb84835e47a355d66da4662dc7e9a877f2ab4",
     "remoteVerified": true,
-    "fetchHead": "8ed9f735f6ae5f36af2e5dd7f94517ab0472722e",
-    "checkpointKind": "Correct Caserta source ID in STATE/HANDOFF/PLAN/REGIONS; bounded index sample authorized"
+    "fetchHead": "52deb84835e47a355d66da4662dc7e9a877f2ab4",
+    "checkpointKind": "Caserta index01 run, catalog/status and regional handoff"
   },
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
@@ -1296,10 +1309,10 @@
     }
   },
   "tests": "After the Castrovillari01 collection finished, backend npm test passed 205/205; SHA-256 for six public JSON files was identical before/after. No tests were run concurrently with collection.",
-  "updatedAt": "2026-10-22T23:05:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:02:15Z",
+  "updatedAt": "2026-10-22T23:10:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:10:00Z",
   "regionCurrent": "Campania — CAI Caserta index01 partial; one official page read, method=null/0 events (calendar not proven empty), 50 existing event rows unchanged, annual PDF and index discovery issues remain.",
-  "regionNext": "After remote run checkpoint, offline-preflight the exact official child links found on /escursioni.html against history/cache/FAILURES; no child fetch before this preflight.",
+  "regionNext": "Offline compare each exact official child link in checkpointed /escursioni.html to prior documents/cache/FAILURES/cooldowns; select at most one distinct target. No live fetch before preflight report and checkpoint.",
   "preflight": {
     "at": "2026-10-22T22:30:21.913236Z",
     "sourceId": "cai-campobasso-9236001",
@@ -1548,9 +1561,9 @@
     "sourceId": "cai-caserta-9238006",
     "sourceName": "CAI Caserta",
     "url": null,
-    "status": "collection complete; offline preflight of exact index child links pending after remote run checkpoint",
-    "evidence": "see run cai-20261022-campania-caserta-index01, source-page.html and collection-report.md",
-    "scope": "offline exact-link comparison with source history/cache/FAILURES; no network until a distinct target is selected",
+    "status": "index run checkpointed remotely; offline child-link preflight in progress",
+    "evidence": "backend/data/agent-runs/cai-20261022-campania-caserta-index01/source-page.html and collection-report.md at commit 52deb848",
+    "scope": "offline history/cache/failure comparison only; no network until target checkpoint",
     "networkFetchPerformed": false
   }
 }
