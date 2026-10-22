@@ -15,11 +15,13 @@ const {
   classificationToRow,
   prepareClassifications,
   upsertClassifications,
+  insertMissingClassifications,
   verifyImportManifest,
   manifestArgument,
   main
 } = require('../scripts/import-supabase');
 const { DEFAULT_COORDS } = require('../scraper');
+const { classifyRules } = require('../adapters/mercury-decide');
 
 test('import manifest verifies every listed file and required source coverage', (t) => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'cai-import-'));
@@ -79,6 +81,7 @@ function sampleExcursion(overrides = {}) {
 function createFakeSupabase({
   existingSourceIds = [],
   existingRows = null,
+  existingClassificationRows = [],
   selectError = null,
   insertError = null,
   updateError = null
@@ -87,6 +90,8 @@ function createFakeSupabase({
   const updates = [];
   const selects = [];
   const classificationUpserts = [];
+  const classificationRows = existingClassificationRows.map((row) => ({ ...row }));
+  const tables = [];
   const rows = existingRows || existingSourceIds.map((source_id) => ({
     source_id,
     latitude: 42.473,
@@ -99,7 +104,10 @@ function createFakeSupabase({
     updates,
     selects,
     classificationUpserts,
+    classificationRows,
+    tables,
     from(table) {
+      tables.push(table);
       assert.ok(['places', 'place_classifications'].includes(table));
       return {
         select(columns) {
@@ -107,7 +115,8 @@ function createFakeSupabase({
             async in(column, ids) {
               selects.push({ columns, column, ids: [...ids] });
               if (selectError) return { data: null, error: selectError };
-              const data = table === 'places' ? rows.filter((row) => ids.includes(row.source_id)) : [];
+              const source = table === 'places' ? rows : classificationRows;
+              const data = source.filter((row) => ids.includes(row.source_id));
               return { data, error: null };
             }
           };
@@ -128,10 +137,19 @@ function createFakeSupabase({
             }
           };
         },
-        upsert() {
+        upsert(batch, options) {
           if (table === 'places') throw new Error('places import must insert new rows, not upsert');
-          classificationUpserts.push(arguments[0]);
-          return Promise.resolve({ data: arguments[0], error: null });
+          classificationUpserts.push(batch);
+          const inserted = [];
+          if (options?.ignoreDuplicates) {
+            for (const row of batch) if (!classificationRows.some((entry) => entry.source_id === row.source_id)) {
+              classificationRows.push({ ...row });
+              inserted.push(row);
+            }
+          }
+          const result = Promise.resolve({ data: batch, error: null });
+          result.select = async () => ({ data: inserted.map(({ source_id }) => ({ source_id })), error: null });
+          return result;
         }
       };
     }
@@ -193,7 +211,7 @@ test('classification contract is persisted separately and is keyed to the same s
       rationale: 'Percorso escursionistico', evidenceOriginal: 'Escursione al rifugio',
       source_id: 'roma-2026-09-monte-terminillo', fingerprint: 'sha256:fixture',
       modelRequested: null, responseModel: null, modelAttested: false,
-      method: 'rules-v1', policyVersion: 'cai-trekking-v1', modelVersion: null
+      method: 'rules-v1', policyVersion: 'cai-trekking-v2', modelVersion: null
     }
   });
   const row = classificationToRow(event.id, event.classification);
@@ -212,10 +230,26 @@ test('classification contract is persisted separately and is keyed to the same s
   assert.equal(unverifiedMercury.model_requested, 'inception/mercury-decide');
   assert.equal(unverifiedMercury.response_model, null);
   assert.equal(unverifiedMercury.model_attested, false);
+  const verifiedSnapshot = classificationToRow(event.id, {
+    ...event.classification,
+    method: 'mercury-decide', modelRequested: 'inception/mercury-decide',
+    responseModel: 'inception/mercury-decide-20260930', modelAttested: true,
+    modelVersion: 'inception/mercury-decide-20260930'
+  });
+  assert.equal(verifiedSnapshot.model_requested, 'inception/mercury-decide');
+  assert.equal(verifiedSnapshot.response_model, 'inception/mercury-decide-20260930');
+  assert.equal(verifiedSnapshot.model_attested, true);
+  assert.equal(verifiedSnapshot.model_version, 'inception/mercury-decide-20260930');
   assert.throws(() => classificationToRow(event.id, {
     ...event.classification,
     method: 'mercury-decide', modelRequested: 'inception/mercury-decide',
     responseModel: 'other/model', modelAttested: true, modelVersion: 'other/model'
+  }), /inconsistent Mercury model attestation/);
+  assert.throws(() => classificationToRow(event.id, {
+    ...event.classification,
+    method: 'mercury-decide', modelRequested: 'inception/mercury-decide',
+    responseModel: 'inception/mercury-decide-20990101', modelAttested: true,
+    modelVersion: 'inception/mercury-decide-20990101'
   }), /inconsistent Mercury model attestation/);
   const supabase = createFakeSupabase();
   assert.equal(await upsertClassifications({ supabase, excursions: [event] }), 1);
@@ -236,6 +270,110 @@ test('classification contract is persisted separately and is keyed to the same s
     rows: [],
     skipped: [{ source_id: event.id, reason: `Excursion ${event.id} has an error or invalid classification response` }]
   });
+});
+
+test('classification-only insertion preserves conflicts, reconciles new rows, and never writes places', async () => {
+  const first = {
+    source_id: 'preexisting-source', decision: 'non_trekking', category: 'corso/riunione',
+    confidence: 0.91, probability: null, rationale: 'Admin-reviewed', evidence_original: 'admin',
+    fingerprint: 'admin-fingerprint', method: 'rules-v1', model_requested: null,
+    response_model: null, model_attested: false, policy_version: 'admin-policy', model_version: null
+  };
+  const supabase = createFakeSupabase({ existingClassificationRows: [first] });
+  const conflict = { ...first, decision: 'trekking', category: 'a piedi', rationale: 'New classifier proposal' };
+  const newRow = { ...first, source_id: 'new-source', decision: 'trekking', fingerprint: 'new-fingerprint' };
+  const result = await insertMissingClassifications({ supabase, rows: [conflict, newRow] });
+  assert.equal(result.attempted, 2);
+  assert.equal(result.insertAttempts, 1);
+  assert.deepEqual(result.insertedSourceIds, ['new-source']);
+  assert.equal(result.matched, 1);
+  assert.deepEqual(result.preservedSourceIds, ['preexisting-source']);
+  assert.deepEqual(result.mismatchedSourceIds, ['preexisting-source']);
+  assert.equal(supabase.classificationRows.length, 2);
+  assert.equal(supabase.classificationRows[0].rationale, 'Admin-reviewed');
+  assert.equal(supabase.classificationRows[1].source_id, 'new-source');
+  assert.equal(supabase.inserts.length, 0);
+  assert.equal(supabase.updates.length, 0);
+  assert.equal(supabase.classificationUpserts.length, 1);
+  const retry = await insertMissingClassifications({ supabase, rows: [conflict, newRow] });
+  assert.equal(retry.insertedSourceIds.length, 0);
+  assert.deepEqual(retry.preservedSourceIds.sort(), ['new-source', 'preexisting-source']);
+  assert.deepEqual(retry.mismatchedSourceIds, ['preexisting-source']);
+  assert.equal(supabase.classificationUpserts.length, 1);
+});
+
+test('classification-only CLI verifies a sealed classifier run and touches only place_classifications', async (t) => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'cai-classification-only-'));
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const runDir = path.join(root, 'backend', 'data', 'agent-runs', 'real-batch-01');
+  fs.mkdirSync(runDir, { recursive: true });
+  const source = { id: 'classification-only-source', title: 'Escursione al rifugio', date: '2026-11-02' };
+  const input = { excursions: [source] };
+  const inputBytes = Buffer.from(JSON.stringify(input));
+  const inputPath = path.join(runDir, 'input.json');
+  fs.writeFileSync(inputPath, inputBytes);
+  const inputSha256 = crypto.createHash('sha256').update(inputBytes).digest('hex');
+  const classified = { excursions: [{ ...source, classification: classifyRules(source) }] };
+  const outputBytes = Buffer.from(JSON.stringify(classified));
+  fs.writeFileSync(path.join(runDir, 'classified-catalog.json'), outputBytes);
+  const state = {
+    runId: 'real-batch-01', status: 'ready', input: inputPath,
+    inputSha256, total: 1, completed: 1, processed: 1, errors: []
+  };
+  const stateBytes = Buffer.from(JSON.stringify(state));
+  fs.writeFileSync(path.join(runDir, 'state.json'), stateBytes);
+  const manifestPath = path.join(runDir, 'manifest.json');
+  fs.writeFileSync(manifestPath, JSON.stringify({
+    version: 1, runId: state.runId, createdAt: new Date().toISOString(),
+    input: { path: inputPath, sha256: inputSha256 },
+    files: [
+      { path: 'classified-catalog.json', sha256: crypto.createHash('sha256').update(outputBytes).digest('hex'), bytes: outputBytes.length },
+      { path: 'state.json', sha256: crypto.createHash('sha256').update(stateBytes).digest('hex'), bytes: stateBytes.length }
+    ]
+  }));
+
+  const supabase = createFakeSupabase();
+  let clientCreated = false;
+  const receipt = await main({
+    argv: ['--classifications-only', '--classification-manifest', manifestPath],
+    env: { SUPABASE_URL: 'https://snwzxegtqnnuvlawnpgl.supabase.co', SUPABASE_SERVICE_ROLE_KEY: 'test-only' },
+    supabaseFactory: () => { clientCreated = true; return supabase; },
+    files: { repoRoot: root },
+    now: () => '2026-10-22T12:00:00.000Z'
+  });
+  assert.equal(clientCreated, true);
+  assert.deepEqual([...new Set(supabase.tables)], ['place_classifications']);
+  assert.equal(receipt.mode, 'classification-only');
+  assert.equal(receipt.status, 'completed');
+  assert.equal(receipt.classifications.input, 1);
+  assert.equal(receipt.classifications.inserted, 1);
+  assert.equal(receipt.classifications.byDecision.trekking, 1);
+  assert.equal(receipt.placesTouched, false);
+  assert.equal(receipt.sectionsTouched, false);
+
+  state.status = 'partial';
+  const partialStateBytes = Buffer.from(JSON.stringify(state));
+  fs.writeFileSync(path.join(runDir, 'state.json'), partialStateBytes);
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  const stateEntry = manifest.files.find((entry) => entry.path === 'state.json');
+  stateEntry.sha256 = crypto.createHash('sha256').update(partialStateBytes).digest('hex');
+  stateEntry.bytes = partialStateBytes.length;
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest));
+  let partialClientCreated = false;
+  await assert.rejects(main({
+    argv: ['--classifications-only', '--classification-manifest', manifestPath],
+    env: { SUPABASE_URL: 'https://snwzxegtqnnuvlawnpgl.supabase.co', SUPABASE_SERVICE_ROLE_KEY: 'test-only' },
+    supabaseFactory: () => { partialClientCreated = true; return supabase; },
+    files: { repoRoot: root }
+  }), /status=ready/);
+  assert.equal(partialClientCreated, false);
+});
+
+test('classification migration protects place rows and accepts only verified Mercury snapshot identity', () => {
+  const migration = fs.readFileSync(path.join(__dirname, '../../supabase/migrations/20261021090000_place_classifications.sql'), 'utf8');
+  assert.match(migration, /references public\.places\(source_id\) on delete restrict/i);
+  assert.match(migration, /in \('inception\/mercury-decide', 'inception\/mercury-decide-20260930'\)/);
+  assert.doesNotMatch(migration, /on delete cascade/i);
 });
 
 test('toPlaceRow drops durations that overflow numeric(5,2)', () => {

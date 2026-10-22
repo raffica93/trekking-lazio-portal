@@ -6,7 +6,10 @@ const path = require('node:path');
 
 const ENDPOINT = 'https://openrouter.ai/api/alpha/decisions';
 const MODEL = 'inception/mercury-decide';
-const POLICY_VERSION = 'cai-trekking-v1';
+// Exact snapshot verified from OpenRouter's public models metadata on 2026-10-21.
+// Do not broaden this to arbitrary dated snapshots or provider model aliases.
+const VERIFIED_RESPONSE_MODELS = new Set([MODEL, 'inception/mercury-decide-20260930']);
+const POLICY_VERSION = 'cai-trekking-v2';
 const DECISIONS = new Set(['trekking', 'non_trekking', 'da_verificare']);
 const CATEGORIES = new Set([
   'a piedi', 'ciaspole', 'alpinismo/ferrata', 'bici', 'sci',
@@ -154,8 +157,16 @@ function normalizeScore(value) {
 }
 
 function scoreFor(answer) {
-  const confidence = normalizeScore(answer?.confidence);
+  const confidence = confidenceFor(answer);
   if (confidence !== null) return confidence;
+  return probabilityFor(answer);
+}
+
+function confidenceFor(answer) {
+  return normalizeScore(answer?.confidence);
+}
+
+function probabilityFor(answer) {
   const choice = answer?.choice;
   const probabilities = answer?.probabilities;
   if (typeof probabilities === 'number') return normalizeScore(probabilities);
@@ -163,27 +174,34 @@ function scoreFor(answer) {
   return null;
 }
 
+function isVerifiedResponseModel(value) {
+  return typeof value === 'string' && VERIFIED_RESPONSE_MODELS.has(value);
+}
+
 function modelClassification(event, answerPayload) {
   const answers = answerPayload?.answers;
   const decision = answers?.decision?.choice;
   const category = answers?.category?.choice;
   const decisionScore = scoreFor(answers?.decision);
+  const decisionConfidence = confidenceFor(answers?.decision);
   const categoryScore = scoreFor(answers?.category);
   const responseModel = typeof answerPayload?.model === 'string'
     ? answerPayload.model
     : typeof answerPayload?.model_id === 'string' ? answerPayload.model_id : null;
-  const modelAttested = responseModel === MODEL;
+  const modelAttested = isVerifiedResponseModel(responseModel);
+  const decisionProbability = probabilityFor(answers?.decision);
   const base = classifyRules({ ...event, description: event.description || event.summary });
+  const invalidModel = responseModel !== null && !modelAttested;
+  const invalidShape = !DECISIONS.has(decision) || !CATEGORIES.has(category) || decisionScore === null;
   if (!DECISIONS.has(decision) || !CATEGORIES.has(category) || decisionScore === null
-    || decisionScore < MIN_CONFIDENCE || (responseModel !== null && responseModel !== MODEL)) {
+    || decisionScore < MIN_CONFIDENCE || invalidModel) {
     return {
       ...base,
-      ...(DECISIONS.has(decision) && CATEGORIES.has(category) && decisionScore !== null && decisionScore < MIN_CONFIDENCE
-        ? {} : { valid: false, errorCode: 'invalid-model-response' }),
+      ...(invalidModel || invalidShape ? { valid: false, errorCode: 'invalid-model-response' } : {}),
       decision: 'da_verificare',
       category: CATEGORIES.has(category) && categoryScore !== null && categoryScore >= MIN_CONFIDENCE ? category : 'altro',
-      confidence: decisionScore,
-      probability: decisionScore,
+      confidence: decisionConfidence,
+      probability: decisionProbability,
       rationale: 'La risposta del classificatore è incompleta o sotto la soglia di confidenza; serve verifica.',
       model: responseModel,
       modelRequested: MODEL,
@@ -199,8 +217,8 @@ function modelClassification(event, answerPayload) {
     ...base,
     decision,
     category: chosenCategory,
-    confidence: decisionScore,
-    probability: decisionScore,
+    confidence: decisionConfidence,
+    probability: decisionProbability,
     rationale: `Mercury Decide: ${decision}${chosenCategory === 'altro' ? '; categoria da verificare' : `; categoria ${chosenCategory}`}.`,
     model: responseModel,
     modelRequested: MODEL,
@@ -213,14 +231,7 @@ function modelClassification(event, answerPayload) {
 }
 
 function buildRequestState(event) {
-  const evidence = eventEvidence(event);
-  return {
-    title: evidence.title,
-    description: evidence.description,
-    organizer: evidence.organizer,
-    location: evidence.location,
-    sourceEvidence: evidence.sourceEvidence
-  };
+  return eventEvidence(event);
 }
 
 function hostIsAllowed(env = process.env) {
@@ -242,8 +253,8 @@ async function readCache(cacheDir, fingerprint) {
       && parsed?.valid !== false && DECISIONS.has(parsed.decision) && CATEGORIES.has(parsed.category)
       && parsed.policyVersion === POLICY_VERSION && parsed.modelRequested === MODEL
       && parsed.model === parsed.responseModel
-      && parsed.modelAttested === (parsed.responseModel === MODEL)
-      && parsed.modelVersion === (parsed.modelAttested ? MODEL : null)) return parsed;
+      && parsed.modelAttested === isVerifiedResponseModel(parsed.responseModel)
+      && parsed.modelVersion === (parsed.modelAttested ? parsed.responseModel : null)) return parsed;
   } catch {}
   return null;
 }
@@ -358,6 +369,7 @@ module.exports = {
   DECISIONS,
   ENDPOINT,
   MODEL,
+  VERIFIED_RESPONSE_MODELS,
   POLICY_VERSION,
   QUESTIONS,
   buildRequestState,
@@ -366,6 +378,7 @@ module.exports = {
   classifyRules,
   eventEvidence,
   fingerprintFor,
+  isVerifiedResponseModel,
   modelClassification,
   remoteConfig
 };

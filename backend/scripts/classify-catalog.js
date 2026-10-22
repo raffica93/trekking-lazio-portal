@@ -8,6 +8,7 @@ const {
   CATEGORIES,
   DECISIONS,
   MODEL,
+  isVerifiedResponseModel,
   POLICY_VERSION,
   classifyEvents,
   fingerprintFor,
@@ -33,7 +34,9 @@ function parseArgs(argv) {
     }
     const value = String(argv[index + 1] || '').trim();
     if (!value || value.startsWith('--')) throw new Error(`Missing value for ${token}`);
-    args[token.slice(2).replace(/-([a-z])/g, (_match, letter) => letter.toUpperCase())] = value;
+    const key = token === '--rate-ms' ? 'rateLimitMs'
+      : token.slice(2).replace(/-([a-z])/g, (_match, letter) => letter.toUpperCase());
+    args[key] = value;
     index += 1;
   }
   for (const key of ['input', 'output', 'run']) if (!args[key]) throw new Error(`Required argument: --${key}`);
@@ -72,10 +75,10 @@ function validClassification(event, classification) {
       ? classification.model === null && classification.modelVersion === null
         && classification.modelRequested === null && classification.responseModel === null && classification.modelAttested === false
       : classification.modelRequested === MODEL
-        && (classification.responseModel === null || typeof classification.responseModel === 'string')
+        && (classification.responseModel === null || isVerifiedResponseModel(classification.responseModel))
         && classification.model === classification.responseModel
-        && classification.modelAttested === (classification.responseModel === MODEL)
-        && classification.modelVersion === (classification.modelAttested ? MODEL : null))
+        && classification.modelAttested === isVerifiedResponseModel(classification.responseModel)
+        && classification.modelVersion === (classification.modelAttested ? classification.responseModel : null))
     && typeof classification.rationale === 'string' && classification.rationale.trim()
     && typeof classification.evidenceOriginal === 'string'
     && validScore(classification.confidence)
@@ -307,7 +310,7 @@ async function runCatalogClassification({
   return state;
 }
 
-async function main(argv = process.argv.slice(2), { log = console } = {}) {
+async function main(argv = process.argv.slice(2), { log = console, env = process.env } = {}) {
   if (argv.length === 1 && (argv[0] === '--help' || argv[0] === '-h')) {
     log.log(USAGE);
     return null;
@@ -319,7 +322,8 @@ async function main(argv = process.argv.slice(2), { log = console } = {}) {
     runId: args.run,
     concurrency: args.concurrency,
     rateLimitMs: args.rateLimitMs,
-    cacheDir: args.cacheDir
+    cacheDir: args.cacheDir,
+    env
   });
   log.log(JSON.stringify({ runId: state.runId, status: state.status, counts: state.counts, output: path.resolve(args.output) }, null, 2));
   return state;

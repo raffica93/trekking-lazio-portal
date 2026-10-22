@@ -11,8 +11,10 @@ const {
   MANIFEST_NAME,
   OUTPUT_NAME,
   STATE_NAME,
+  main,
   parseArgs,
-  runCatalogClassification
+  runCatalogClassification,
+  validClassification
 } = require('../scripts/classify-catalog');
 
 function answer(event, decision, category) {
@@ -49,6 +51,46 @@ test('CLI parser requires explicit paths/run and bounds concurrency/rate', () =>
   });
   assert.throws(() => parseArgs(['--input', 'a', '--output', 'b', '--run', 'c', '--concurrency', '9']), /concurrency/);
   assert.throws(() => parseArgs(['--input', 'a', '--output', 'b', '--run', '../unsafe']), /Run ID/);
+  assert.equal(parseArgs(['--input', 'a', '--output', 'b', '--run', 'rate-test', '--rate-ms', '4321']).rateLimitMs, 4321);
+});
+
+test('batch validator rejects unknown response models even when marked unattested', () => {
+  const event = { id: 'untrusted-model-fixture', title: 'Escursione al Monte Rosa' };
+  const classification = {
+    ...classifyRules(event),
+    decision: 'trekking',
+    category: 'a piedi',
+    confidence: 0.93,
+    probability: 0.93,
+    rationale: 'Fixture con identità provider non verificata.',
+    model: 'inception/mercury-decide-v999999',
+    modelRequested: 'inception/mercury-decide',
+    responseModel: 'inception/mercury-decide-v999999',
+    modelAttested: false,
+    method: 'mercury-decide',
+    modelVersion: null,
+    mapEligible: true
+  };
+  assert.equal(validClassification(event, classification), false);
+});
+
+test('CLI --rate-ms non-default value is written into the run state', async () => {
+  const temp = await workspace();
+  const event = { id: 'rate-state-fixture', title: 'Escursione al rifugio' };
+  const { classifyRules } = require('../adapters/mercury-decide');
+  event.classification = classifyRules(event);
+  await fs.writeFile(temp.input, JSON.stringify([event]));
+  try {
+    const state = await main([
+      '--input', temp.input, '--output', temp.output, '--run', 'rate-state-01', '--rate-ms', '4321'
+    ], {
+      env: { OPENROUTER_API_KEY: 'test-only', MERCURY_DECIDE_ENABLED: '1', OPENROUTER_ALLOWED_HOSTS: 'openrouter.ai' },
+      log: { log() {} }
+    });
+    assert.equal(state.rateLimitMs, 4321);
+    const persisted = JSON.parse(await fs.readFile(path.join(temp.output, STATE_NAME), 'utf8'));
+    assert.equal(persisted.rateLimitMs, 4321);
+  } finally { await fs.rm(temp.root, { recursive: true, force: true }); }
 });
 
 test('run writes isolated catalog, state, decision/category counts and verifiable manifest; sealed resume is idempotent', async () => {

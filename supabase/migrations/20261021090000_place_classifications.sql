@@ -2,7 +2,7 @@
 -- Reclassification can therefore never replace title, status, activity_type,
 -- terrain, difficulty_note, cover_image_path, or other curated place values.
 create table public.place_classifications (
-  source_id text primary key references public.places(source_id) on delete cascade,
+  source_id text primary key references public.places(source_id) on delete restrict,
   decision text not null check (decision in ('trekking', 'non_trekking', 'da_verificare')),
   category text not null check (category in (
     'a piedi', 'ciaspole', 'alpinismo/ferrata', 'bici', 'sci',
@@ -25,7 +25,9 @@ create table public.place_classifications (
       method = 'mercury-decide'
       and model_requested = 'inception/mercury-decide'
       and (
-        (model_attested and response_model = model_requested and model_version = response_model)
+        (model_attested
+          and response_model in ('inception/mercury-decide', 'inception/mercury-decide-20260930')
+          and model_version = response_model)
         or (not model_attested and response_model is null and model_version is null)
       )
     )

@@ -33,6 +33,7 @@ export interface Excursion {
 export type ExcursionClassificationDecision = 'trekking' | 'non_trekking' | 'da_verificare';
 
 export interface ExcursionClassification {
+  valid?: boolean;
   decision: ExcursionClassificationDecision;
   category: string;
   confidence: number | null;

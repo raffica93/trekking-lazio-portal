@@ -3,6 +3,8 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const { execFileSync } = require('node:child_process');
 const { createClient } = require('@supabase/supabase-js');
+const { MODEL, isVerifiedResponseModel } = require('../adapters/mercury-decide');
+const { eventsFrom: classificationEventsFrom, validClassification } = require('./classify-catalog');
 const {
   PRECISE_COORD_QUALITY,
   hasFiniteCoords,
@@ -240,13 +242,13 @@ function classificationToRow(sourceId, classification) {
     || (!modelAttested && responseModel !== null)) {
     throw new Error(`Excursion ${sourceId} has an invalid classification`);
   }
-  if (method === 'mercury-decide' && modelRequested !== 'inception/mercury-decide') {
+  if (method === 'mercury-decide' && modelRequested !== MODEL) {
     throw new Error(`Excursion ${sourceId} has an unexpected requested Mercury model`);
   }
   if (method === 'mercury-decide'
-    && (responseModel !== null && responseModel !== 'inception/mercury-decide'
-      || modelAttested !== (responseModel === 'inception/mercury-decide')
-      || modelVersion !== (modelAttested ? 'inception/mercury-decide' : null))) {
+    && (responseModel !== null && !isVerifiedResponseModel(responseModel)
+      || modelAttested !== isVerifiedResponseModel(responseModel)
+      || modelVersion !== (modelAttested ? responseModel : null))) {
     throw new Error(`Excursion ${sourceId} has inconsistent Mercury model attestation`);
   }
   if (method === 'rules-v1' && (modelRequested !== null || responseModel !== null || modelAttested || modelVersion !== null)) {
@@ -291,6 +293,39 @@ async function upsertClassifications({ supabase, excursions = [], rows = prepare
     if (error) throw error;
   }
   return rows.length;
+}
+
+// Classification-only first loads must never update an existing decision. Read all
+// conflicts first, then insert missing source_ids with ON CONFLICT DO NOTHING semantics.
+async function insertMissingClassifications({ supabase, rows = [] }) {
+  const fields = 'source_id';
+  const existingIds = new Set();
+  for (const batch of chunk(rows.map((row) => row.source_id))) {
+    const { data, error } = await supabase.from('place_classifications').select(fields).in('source_id', batch);
+    if (error) throw error;
+    for (const row of data || []) existingIds.add(row.source_id);
+  }
+  const preservedSourceIds = [...existingIds];
+  const missing = rows.filter((row) => !existingIds.has(row.source_id));
+  const insertedIds = new Set();
+  for (const batch of chunk(missing)) {
+    const { data, error } = await supabase.from('place_classifications').upsert(batch, {
+      onConflict: 'source_id', ignoreDuplicates: true
+    }).select('source_id');
+    if (error) throw error;
+    for (const row of data || []) insertedIds.add(row.source_id);
+  }
+  const verification = await reconcileClassifications({ supabase, rows });
+  const concurrentConflictIds = missing.map((row) => row.source_id).filter((sourceId) => !insertedIds.has(sourceId));
+  return {
+    attempted: rows.length,
+    insertAttempts: missing.length,
+    insertedSourceIds: [...insertedIds],
+    matched: verification.matched,
+    preservedSourceIds,
+    concurrentConflictIds,
+    mismatchedSourceIds: verification.mismatchedSourceIds
+  };
 }
 
 async function reconcileClassifications({ supabase, excursions = [], rows = prepareClassifications(excursions).rows }) {
@@ -532,6 +567,85 @@ function manifestArgument(argv = process.argv.slice(2), env = process.env) {
   return env.SUPABASE_IMPORT_MANIFEST || null;
 }
 
+function classificationManifestArgument(argv = process.argv.slice(2), env = process.env) {
+  const index = argv.indexOf('--classification-manifest');
+  if (index !== -1) {
+    if (!argv[index + 1] || argv[index + 1].startsWith('--')) throw new Error('--classification-manifest requires a file path');
+    return argv[index + 1];
+  }
+  return env.SUPABASE_CLASSIFICATION_MANIFEST || null;
+}
+
+function verifyReadyClassificationRun({ manifestPath, repoRoot = REPO_ROOT }) {
+  if (!manifestPath) throw new Error('Classification-only import requires --classification-manifest <path>');
+  const resolvedManifest = path.resolve(manifestPath);
+  const runDir = path.dirname(resolvedManifest);
+  const allowedRuns = path.resolve(repoRoot, 'backend/data/agent-runs');
+  if (runDir !== allowedRuns && !runDir.startsWith(`${allowedRuns}${path.sep}`)) {
+    throw new Error('Classification run manifest must be inside backend/data/agent-runs');
+  }
+  const manifestBytes = fs.readFileSync(resolvedManifest);
+  const manifest = JSON.parse(manifestBytes.toString('utf8'));
+  if (manifest.version !== 1 || typeof manifest.runId !== 'string' || !manifest.runId.trim()
+    || !manifest.input || typeof manifest.input.path !== 'string'
+    || !/^[a-f0-9]{64}$/i.test(manifest.input.sha256 || '')
+    || !Array.isArray(manifest.files)) {
+    throw new Error('Classification manifest is missing run, input, or file integrity metadata');
+  }
+  const allowedFiles = new Set(['classified-catalog.json', 'state.json']);
+  const verifiedFiles = new Map();
+  for (const entry of manifest.files) {
+    if (!entry || !allowedFiles.has(entry.path) || !/^[a-f0-9]{64}$/i.test(entry.sha256 || '')) {
+      throw new Error('Classification manifest contains an invalid output file entry');
+    }
+    if (verifiedFiles.has(entry.path)) throw new Error(`Duplicate classification manifest file: ${entry.path}`);
+    const bytes = fs.readFileSync(path.join(runDir, entry.path));
+    const actual = crypto.createHash('sha256').update(bytes).digest('hex');
+    if (actual.toLowerCase() !== entry.sha256.toLowerCase()) throw new Error(`Classification manifest checksum mismatch: ${entry.path}`);
+    if (entry.bytes != null && entry.bytes !== bytes.length) throw new Error(`Classification manifest byte count mismatch: ${entry.path}`);
+    verifiedFiles.set(entry.path, bytes);
+  }
+  if (verifiedFiles.size !== 2 || !verifiedFiles.has('classified-catalog.json') || !verifiedFiles.has('state.json')) {
+    throw new Error('Classification manifest must seal classified-catalog.json and state.json');
+  }
+  const state = JSON.parse(verifiedFiles.get('state.json').toString('utf8'));
+  if (state.runId !== manifest.runId || state.status !== 'ready'
+    || state.inputSha256 !== manifest.input.sha256 || state.errors?.length
+    || state.completed !== state.total || state.processed !== state.total) {
+    throw new Error('Classification batch must have matching runId, status=ready, full completion, and zero errors');
+  }
+  const inputPath = path.resolve(manifest.input.path);
+  if (state.input && path.resolve(state.input) !== inputPath) {
+    throw new Error('Classification state input path does not match the sealed manifest');
+  }
+  const inputBytes = fs.readFileSync(inputPath);
+  const inputSha256 = crypto.createHash('sha256').update(inputBytes).digest('hex');
+  if (inputSha256.toLowerCase() !== manifest.input.sha256.toLowerCase()) {
+    throw new Error('Classification manifest input checksum mismatch');
+  }
+  const inputEvents = classificationEventsFrom(JSON.parse(inputBytes.toString('utf8')));
+  const outputEvents = classificationEventsFrom(JSON.parse(verifiedFiles.get('classified-catalog.json').toString('utf8')));
+  if (!inputEvents.length || inputEvents.length !== outputEvents.length || state.total !== inputEvents.length) {
+    throw new Error('Sealed classification output does not cover the complete input catalog');
+  }
+  const rows = outputEvents.map((event, index) => {
+    const sourceId = String(event.source_id || event.id || '').trim();
+    const inputSourceId = String(inputEvents[index].source_id || inputEvents[index].id || '').trim();
+    if (!sourceId || sourceId !== inputSourceId || !validClassification(inputEvents[index], event.classification)) {
+      throw new Error(`Invalid or misaligned classification in sealed run for source_id ${sourceId || inputSourceId || '(missing)'}`);
+    }
+    return classificationToRow(sourceId, event.classification);
+  });
+  return {
+    manifest,
+    manifestPath: resolvedManifest,
+    manifestSha256: crypto.createHash('sha256').update(manifestBytes).digest('hex'),
+    inputSha256,
+    outputSha256: crypto.createHash('sha256').update(verifiedFiles.get('classified-catalog.json')).digest('hex'),
+    rows
+  };
+}
+
 function verifyReadyRunState({ manifest, manifestPath, repoRoot = REPO_ROOT }) {
   const statePath = path.join(path.dirname(manifestPath), 'state.json');
   const state = JSON.parse(fs.readFileSync(statePath, 'utf8'));
@@ -618,6 +732,55 @@ async function main({
   files = { data: DATA_FILE, registry: REGISTRY_FILE, status: STATUS_FILE, repoRoot: REPO_ROOT },
   now = () => new Date().toISOString()
 } = {}) {
+  if (argv.includes('--classifications-only')) {
+    const classificationRun = verifyReadyClassificationRun({
+      manifestPath: classificationManifestArgument(argv, env),
+      repoRoot: files.repoRoot
+    });
+    const supabase = supabaseFactory(
+      requiredEnvironment('SUPABASE_URL', env),
+      requiredEnvironment('SUPABASE_SERVICE_ROLE_KEY', env),
+      { auth: { autoRefreshToken: false, persistSession: false, detectSessionInUrl: false } }
+    );
+    const result = await insertMissingClassifications({ supabase, rows: classificationRun.rows });
+    const byDecision = { trekking: 0, non_trekking: 0, da_verificare: 0 };
+    const byCategory = Object.fromEntries([...CLASSIFICATION_CATEGORIES].map((category) => [category, 0]));
+    for (const row of classificationRun.rows) {
+      byDecision[row.decision] += 1;
+      byCategory[row.category] += 1;
+    }
+    const receipt = {
+      schemaVersion: 1,
+      status: result.mismatchedSourceIds.length ? 'partial' : 'completed',
+      mode: 'classification-only',
+      runId: classificationRun.manifest.runId,
+      projectRef: projectRefFromUrl(requiredEnvironment('SUPABASE_URL', env)),
+      sourceCommit: sourceCommit(files.repoRoot),
+      manifestPath: path.relative(files.repoRoot, classificationRun.manifestPath).split(path.sep).join('/'),
+      manifestSha256: classificationRun.manifestSha256,
+      inputSha256: classificationRun.inputSha256,
+      outputSha256: classificationRun.outputSha256,
+      verifiedAt: now(),
+      classifications: {
+        input: classificationRun.rows.length,
+        inserted: result.insertedSourceIds.length,
+        preexistingPreserved: result.preservedSourceIds.length,
+        concurrentPreserved: result.concurrentConflictIds.length,
+        matched: result.matched,
+        mismatched: result.mismatchedSourceIds,
+        excluded: byDecision.non_trekking,
+        review: byDecision.da_verificare,
+        errors: result.mismatchedSourceIds.length,
+        byDecision,
+        byCategory
+      },
+      placesTouched: false,
+      sectionsTouched: false
+    };
+    const receiptPath = path.join(path.dirname(classificationRun.manifestPath), 'classification-import-receipt.json');
+    writeJsonAtomic(receiptPath, receipt);
+    return { ...receipt, receiptPath, receiptSha256: crypto.createHash('sha256').update(fs.readFileSync(receiptPath)).digest('hex') };
+  }
   const status = importStatus(env);
   const manifestPath = manifestArgument(argv, env);
   if (!manifestPath) throw new Error('A verified import manifest is required; pass --manifest <path>');
@@ -749,8 +912,11 @@ module.exports = {
   importSections,
   classificationToRow,
   upsertClassifications,
+  insertMissingClassifications,
   prepareClassifications,
   reconcileClassifications,
+  classificationManifestArgument,
+  verifyReadyClassificationRun,
   sectionToRow,
   sectionUpsertRow,
   attachSectionMetadata,

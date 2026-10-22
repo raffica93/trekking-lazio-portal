@@ -265,9 +265,15 @@ export class App implements OnInit {
 
   private applyFilters() {
     this.excursions = applyFilters(this.allExcursions, this.filters);
-    // Only explicit, current trekking classifications are eligible for map pins.
-    // Calendar cards remain visible when the static snapshot has no classification.
-    this.mapExcursions = this.excursions.filter((excursion) => excursion.classification?.decision === 'trekking');
+    // Hide only a valid, explicit non-trekking decision. Unclassified and review
+    // records stay visible so provider errors or a missing classification table
+    // cannot silently remove otherwise valid calendar events from the map.
+    this.mapExcursions = this.excursions.filter((excursion) => {
+      const classification = excursion.classification;
+      return !(classification?.decision === 'non_trekking'
+        && classification.valid !== false
+        && classification.mapEligible === false);
+    });
     this.excursionList?.nativeElement.scrollTo?.({ top: 0 });
     if (this.selectedId && !this.excursions.some(excursion => excursion.id === this.selectedId)) {
       this.selectedId = null;
