@@ -593,7 +593,7 @@
     "repositoryCheckpointCommit": "92ac86393416325560e753e43b8bd022741cb708",
     "updatedAt": "2026-10-22T19:11:40Z"
   },
-  "repositoryCommit": "92ac86393416325560e753e43b8bd022741cb708",
+  "repositoryCommit": "1313739451d6b83cb9313d56db236643bdfc1253",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -611,8 +611,16 @@
     "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
     "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
   },
-  "updatedAt": "2026-10-22T19:11:40Z",
+  "updatedAt": "2026-10-22T19:13:02Z",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:11:40Z",
-  "regionCurrent": "Lombardia — Brescia discovery queue exhausted for current cache; source remains partial on unavailable URLs; run05 checkpoint published",
-  "regionNext": "Preflight CAI Varese source and ensure its previously unavailable 503 endpoint will not be retried before bounded collection."
+  "regionCurrent": "Lombardia — Brescia run05 checkpoint published; unavailable URLs remain partial; current source preflight blocked CAI Varese 503 retry",
+  "regionNext": "Read-only preflight and bounded sample of a different official Lombardia source with no expired-cooldown URLs; do not run Varese until exact exclusion is implemented and tested",
+  "preflight": {
+    "at": "2026-10-22T19:13:02Z",
+    "sourceId": "cai-varese-9216009",
+    "url": "https://www.caivarese.it/?post_type=tribe_events&ical=1&eventDisplay=list&tribe_events_cat=cicloescursionismo-mtb",
+    "result": "blocked-before-request",
+    "reason": "Expired 6h cooldown makes collector schedule historical 503 URL; no exact exclusion option. No network request, no collection, no files or DB changed.",
+    "next": "Select a different official Lombardia source after read-only queue/cooldown review."
+  }
 }

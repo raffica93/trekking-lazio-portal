@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T19:11:40Z",
+  "generatedAt": "2026-10-22T19:13:02Z",
   "repositoryCommit": "cb7148ff0d69944a34fd8e606f3e61ab42238d31",
   "baseline": {
     "commit": "9919927d4cbef6d154c4dae1441d64cd01c70ad4",
@@ -32546,10 +32546,14 @@
       "strategy": "Classify evidence, preserve valid cache, then retry/re-discover with a bounded policy appropriate to the class.",
       "status": "historical_classified_unverified",
       "owner": "cai-collector",
-      "outcome": "No resolution check in the current cycle yet.",
+      "outcome": "Read-only preflight 2026-10-22: no request made. The transient 6h cooldown expired; standard collector would schedule this 503 URL and no exact URL exclusion is available. Keep unresolved; use another Lombardia source or add/test an explicit bounded skip before any Varese run.",
       "correctionRef": null,
       "testRefs": [],
-      "resolutionCheck": null,
+      "resolutionCheck": {
+        "checkedAt": "2026-10-22T19:13:02Z",
+        "result": "blocked-before-request",
+        "evidence": "Collector pipeline review: cooldown expired, URL is second initial candidate; no point-exclusion option. No network attempt, no cache change."
+      },
       "policyStatus": "candidate_pending_test"
     },
     {

@@ -53,3 +53,8 @@ Dopo il checkpoint del classificatore: scegliere un piccolo gruppo di fonti Lomb
 | `cai-20261022-lombardia-brescia05` — CAI Brescia | 1 | 0 | 1 | 0 | 0 nuovi; 51 eventi sezione esistenti | 0 aggiunti/rimossi/cambiati; overlap semantico non applicabile | Due candidati residuali raggiunti; PDF letto, quattro date passate; `/category/attivita/` senza parser (zero estrazioni non prova calendario vuoto); importer QA PASS; backend 178/178 | 69 skip cooldown su 3 URL distinti (2 storici 403, 1 GGS 404); nessun retry. Nessun discovery-limit residuo | Checkpoint pubblicato; preflight del cooldown 503 CAI Varese prima di ogni run |
 
 Questi valori descrivono esclusivamente il singolo run Brescia. I conteggi Lombardia complessivi (229/125/56/68/1/104) restano quelli dello snapshot storico del 20 ottobre, non sono stati ricalcolati. Sono stati rigenerati contatori `excursions` in record status globali senza ricontrollare le relative fonti; non considerarli copertura aggiornata.
+
+
+## Preflight CAI Varese — 22 ottobre 2026
+
+Nessuna raccolta avviata. L’endpoint iCal cicloescursionismo `https://www.caivarese.it/?post_type=tribe_events&ical=1&eventDisplay=list&tribe_events_cat=cicloescursionismo-mtb` ha storico HTTP 503. Il cooldown transitorio di 6 ore è scaduto e il collector standard lo pianificherebbe; non esiste un’esclusione puntuale. Il preflight è solo codice/stato in lettura e non ha effettuato richieste. Varese resta bloccata prima del run. Prossimo passo: selezionare una diversa fonte ufficiale Lombardia e verificare preventivamente che la coda non includa URL in cooldown scaduto/non disponibili.
