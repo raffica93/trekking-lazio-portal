@@ -19,7 +19,7 @@
   },
   "collection": "partial",
   "files": "ready",
-  "database": "pending",
+  "database": "completed",
   "sources": [
     {
       "id": "roma",
@@ -11377,9 +11377,15 @@
     {
       "at": "2026-10-22T22:09:30.099Z",
       "event": "files-verified"
+    },
+    {
+      "at": "2026-10-22T22:15:18.267267Z",
+      "event": "database-import-completed",
+      "receipt": "backend/data/agent-runs/cai-map-20261022-pinasca02/delta-import-receipt.json"
     }
   ],
-  "updatedAt": "2026-10-22T22:09:30.099Z",
+  "updatedAt": "2026-10-22T22:15:18.267267Z",
   "manifest": "backend/data/agent-runs/cai-20261022-piemonte-pinasca02/manifest.json",
-  "events": 3364
+  "events": 3364,
+  "databaseReceipt": "backend/data/agent-runs/cai-map-20261022-pinasca02/delta-import-receipt.json"
 }

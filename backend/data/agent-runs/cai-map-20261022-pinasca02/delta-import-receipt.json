@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "status": "completed",
+  "mode": "delta-only",
+  "deliveryMethod": "supabase_execute_sql_atomic_insert_only_cte",
+  "projectRef": "snwzxegtqnnuvlawnpgl",
+  "classificationRunId": "cai-map-20261022-pinasca02",
+  "collectionRunId": "cai-20261022-piemonte-pinasca02",
+  "sourceCommit": "90f7f7a41d6896ccf154d67c66b0399e5dcd1240",
+  "manifestHashes": {
+    "collectionManifestSha256": "4bec0f0bf1067f7ef6b1075b7d9341892e8c7bc2b6df9d0b4f4857b5d9848182",
+    "classificationManifestSha256": "3dd59a810621ede84d09b4b3bb7bed0b0c766bc1c215f86ef2245defd881ffd5",
+    "classificationInputSha256": "85b20198a72956266751a9b13ca86fd9b6e59b3b3a1db4d342d108432f460edf",
+    "classificationOutputSha256": "133d5a7b7aba43ebd27b51481a128fb6d80b2f591fdad525c2f8d8779883fdae",
+    "collectionCatalogSha256": "d8063c5ea5f51e3ffe6a809c9e6a41686986f3023ad8ab8798b2c59f575e5c91",
+    "collectionSectionsSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+    "collectionStatusSha256": "c341dcc7789be59e3e6a3d5173be86b61f970e207a384c785e4852b27b366d23"
+  },
+  "queryTimes": {
+    "preflight": null,
+    "preflightNote": "Immediate exact-ID preflight was executed before DML; Supabase MCP did not return a server timestamp for that SELECT.",
+    "writeStatement": "2026-10-22 22:14:25.13088+00",
+    "postSelect": "2026-10-22 22:15:18.267267+00"
+  },
+  "sourceIds": [
+    "cai-pinasca-9212062-047463b0f746",
+    "cai-pinasca-9212062-ce28b47a3fe7",
+    "cai-pinasca-9212062-388931f47072",
+    "cai-pinasca-9212062-a893a3ca9989"
+  ],
+  "before": {
+    "placesPresent": 0,
+    "classificationsPresent": 0,
+    "placeRows": 0,
+    "classificationRows": 0,
+    "protectedEditorialSnapshotSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "geographySnapshotSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "writeResult": {
+    "placesInserted": 4,
+    "placesAvailable": 4,
+    "classificationsInserted": 4,
+    "statementTimestamp": "2026-10-22 22:14:25.13088+00",
+    "conflictBehavior": "ON CONFLICT (source_id) DO NOTHING",
+    "placeUpdates": 0,
+    "placeDeletes": 0,
+    "classificationUpdates": 0,
+    "classificationDeletes": 0
+  },
+  "after": {
+    "placeRows": 4,
+    "classificationRows": 4,
+    "joinedRows": 4,
+    "missingPlaceSourceIds": [],
+    "missingClassificationSourceIds": [],
+    "mismatches": [],
+    "protectedEditorialSnapshotSha256": "bf539ad82fa9f5688de894aff1c8267584c765e05e1a52d85e13637d40e6fc33",
+    "geographySnapshotSha256": "e3bf5a72574608be9f7ce39f8300b5de4219519587036cbfa279731396124649",
+    "snapshotCanonicalization": "JSON.stringify-style canonical JSON: object keys sorted, no whitespace; rows sorted by source_id"
+  },
+  "classificationCounts": {
+    "trekking": 2,
+    "non_trekking": 2,
+    "da_verificare": 0,
+    "category_a_piedi": 2,
+    "category_sociale_culturale": 2
+  },
+  "model": {
+    "requested": "inception/mercury-decide",
+    "responseModel": "inception/mercury-decide-20260930",
+    "modelVersion": "inception/mercury-decide-20260930",
+    "attested": true,
+    "policyVersion": "cai-trekking-v2"
+  },
+  "geography": {
+    "location": "Località da verificare",
+    "latitude": null,
+    "longitude": null,
+    "coordinatesQuality": null,
+    "geoEvidence": null
+  },
+  "issues": [],
+  "noGeneralImport": true,
+  "noDdl": true,
+  "noOtherSourceIds": true
+}

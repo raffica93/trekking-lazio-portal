@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "piemonte-pinasca-delta-checkpoint",
+  "phase": "piemonte-pinasca-delivery-complete",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -71,14 +71,14 @@
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "official source QA, bounded provider circuit breaker, adapter/tests",
-      "status": "Strada Storta run02 complete; parser v13 fix committed; six official cards extracted"
+      "status": "Pinasca02 official HTML sample complete, source partial (PDF OCR/discovery open); read-only preflight selects Potenza Picena Marche next."
     },
     "importer": {
       "name": "cai-importer",
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "classification manifest validator, candidate/effective QA schema, conflicts/reconciliation and DB safety",
-      "status": "Strada Storta02 exact-ID delta delivered via authorized Supabase MCP, 1 place + 1 classification; post-query PASS; receipt awaiting checkpoint"
+      "status": "Pinasca02 independent QA PASS; 4 places + 4 classifications inserted and post-query reconciled; receipt/report ready for checkpoint."
     }
   },
   "baseline": {
@@ -230,8 +230,8 @@
     }
   ],
   "nextAction": {
-    "step": "PUBLISH-PINASCA02-FILES-THEN-DELIVER-DELTA",
-    "instruction": "Pinasca02 ha 4 nuovi ID e classificazione QA PASS; backend npm test 204/204, hash dei sei JSON pubblici invariati. Prima pushare manifest, report, input/output di classificazione, cataloghi e stato; verificare blob/hash dal remoto. Solo dopo importer può fare query esatta sui 4 ID e insert-only idempotente di places/classificazioni mancanti, conflitti preservati, zero update/delete, poi query post e ricevuta. Nessun import generale o replay dei 3336 record storici. Fonti Pinasca: HTML ufficiale letto, PDF OCR fallito, discovery-limit 1 aperto; non dichiarare completa la sezione."
+    "step": "PUBLISH-PINASCA02-RECEIPT-THEN-MARCHE-POTENZA-PICENA-01",
+    "instruction": "Pinasca02 delivery completato: remoto file commit 90f7f7a, DB 4 places + 4 classifications, query post 4/4 join, zero mismatch/update/delete; receipt/report locali vanno aggiunti e pushati come checkpoint separato, verificarli da remote. Poi avvia run univoco cai-20261022-marche-potenzapicena01 sul solo URL ufficiale https://www.caipotenzapicena.it/attivita2026, una source, max 1 documento/120s/concurrency1. Source partial, 11 candidate discovery storici, target esatto non in cache/docs; non dichiarare complete salvo prova. Campiona regione per regione; non ripetere Pinasca PDF/HTML finché non appare nuovo URL mirato."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -1257,7 +1257,7 @@
       "receiptCheckpointSha256": "bef3ff50b4266d0486eb343f9c281fdb96ea3a14b2f6a07727be57e2d00acf32"
     }
   },
-  "repositoryCommit": "4175eb9702021e9d6fda771db82bee5122bf8bd4",
+  "repositoryCommit": "90f7f7a41d6896ccf154d67c66b0399e5dcd1240",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -1271,10 +1271,10 @@
     "writes": 0
   },
   "tests": "After Pinasca02 collection, backend npm test 204/204. Six public catalog/status JSON SHA-256 values were unchanged before/after the test run.",
-  "updatedAt": "2026-10-22T22:12:59.096Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:02:50Z",
-  "regionCurrent": "Piemonte — CAI Pinasca run02: raccolta parziale ma leggibile; 4 nuove righe verificate, classificate 2 trekking/2 non trekking; QA importer PASS. DB ancora pending fino al checkpoint file remoto.",
-  "regionNext": "Dopo ricevuta DB Pinasca02, riprendere una fonte Piemonte diversa o un candidato Pinasca recuperabile senza ripetere l’HTML già letto; quindi passare alla regione con fonti lavorabili. Lombardia resta aperta: nessuna copertura totale dichiarata.",
+  "updatedAt": "2026-10-22T22:16:45.661Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:16:45.661Z",
+  "regionCurrent": "Piemonte — CAI Pinasca run02: 4 ID, 4 place + 4 classification inseriti e riconciliati; file e ricevuta pubblicati. Sezione resta partial per OCR PDF/discovery-limit.",
+  "regionNext": "Marche — CAI Potenza Picena (`cai-potenza-picena-9228014`), pagina ufficiale attività 2026, discovery residuo non visitato/non in cache, nessun cooldown; prossimo campione max1 documento/120s/concurrency1. Lombardia resta aperta, senza target Lombardia inedito attualmente confermato.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
     "sourceId": "cai-varese-9216009",
@@ -1299,38 +1299,38 @@
     "writePerformed": false
   },
   "deltaDelivery": {
-    "regionalRunId": "cai-20261022-lombardia-stradastorta02",
-    "classificationRunId": "cai-map-20261022-stradastorta02",
-    "status": "completed-1-row-delta-reconciled-receipt-published-and-remote-verified",
-    "candidateIds": 1,
+    "regionalRunId": "cai-20261022-piemonte-pinasca02",
+    "classificationRunId": "cai-map-20261022-pinasca02",
+    "status": "completed-4-row-delta-reconciled-receipt-published-pending-receipt-checkpoint",
+    "candidateIds": 4,
     "classificationCounts": {
-      "trekking": 0,
-      "non_trekking": 0,
-      "da_verificare": 1,
+      "trekking": 2,
+      "non_trekking": 2,
+      "da_verificare": 0,
       "errors": 0
     },
     "coordinatesAdded": 0,
-    "writeContract": "single ID; insert-only places + missing classification; conflict-ignore; no deletes/updates; no general import",
-    "sourceCommit": "12b073fb469a209217ed149c00657a1f7e19e0a3",
+    "writeContract": "exact four IDs; insert-only places + classifications; conflict-ignore; no deletes/updates; no general import",
+    "sourceCommit": "90f7f7a41d6896ccf154d67c66b0399e5dcd1240",
     "databaseReceipt": {
-      "path": "backend/data/agent-runs/cai-map-20261022-stradastorta02/delta-import-receipt.json",
-      "sha256": "bef3ff50b4266d0486eb343f9c281fdb96ea3a14b2f6a07727be57e2d00acf32",
-      "placesInserted": 1,
-      "classificationsInserted": 1,
+      "path": "backend/data/agent-runs/cai-20261022-piemonte-pinasca02/delta-import-receipt.json",
+      "sha256": "7baeb4307d6d8ef91d2dfd42a05f84e936ff9126dee9c83ba379ae99c2d3d41a",
+      "placesInserted": 4,
+      "classificationsInserted": 4,
       "before": {
         "places": 0,
         "classifications": 0
       },
       "after": {
-        "places": 1,
-        "classifications": 1,
-        "joinedRows": 1
+        "places": 4,
+        "classifications": 4,
+        "joinedRows": 4
       },
       "mismatches": 0,
       "updates": 0,
       "deletes": 0
     },
-    "receiptCheckpointCommit": "2ac9c8bbe148ae070e16f095e048b5412f57b05a"
+    "receiptCheckpointCommit": null
   },
   "lastCodeCorrection": {
     "commit": "a015865283f0097d22036a9d75f4e0e17cd94bbb",
@@ -1348,8 +1348,8 @@
     "region": "Piemonte",
     "requestedUrl": "https://www.caipinasca.it/index.php/calendario-gite",
     "collection": "partial",
-    "files": "ready; collection/classification QA PASS; checkpoint pending",
-    "database": "pending; no query/write yet",
+    "files": "ready; checkpoint remoto 90f7f7a verificato; receipt pronto e localmente verificato",
+    "database": "completed; 4 places + 4 classifications, post-query 4/4 join, 0 mismatches, 0 updates/deletes",
     "manifestPath": "backend/data/agent-runs/cai-20261022-piemonte-pinasca02/manifest.json",
     "manifestSha256": "4bec0f0bf1067f7ef6b1075b7d9341892e8c7bc2b6df9d0b4f4857b5d9848182",
     "collectionReportPath": "backend/data/agent-runs/cai-20261022-piemonte-pinasca02/collection-report.md",
@@ -1387,7 +1387,25 @@
       "httpStatus": "not persisted"
     },
     "coordinatesAdded": 0,
-    "backendTests": "204/204; six public JSON hashes unchanged"
+    "backendTests": "204/204; six public JSON hashes unchanged",
+    "databaseReceiptPath": "backend/data/agent-runs/cai-20261022-piemonte-pinasca02/delta-import-receipt.json",
+    "databaseReceiptSha256": "7baeb4307d6d8ef91d2dfd42a05f84e936ff9126dee9c83ba379ae99c2d3d41a",
+    "databaseReportPath": "backend/data/agent-runs/cai-20261022-piemonte-pinasca02/delta-import-report.md",
+    "databaseReportSha256": "0d384f9cbe614b480d8b1d37708efcbaf49adc1287550dcdf7a54064a4ce4422",
+    "databaseBefore": {
+      "places": 0,
+      "classifications": 0
+    },
+    "databaseAfter": {
+      "places": 4,
+      "classifications": 4,
+      "joinedRows": 4
+    },
+    "databaseUpdates": 0,
+    "databaseDeletes": 0,
+    "preflightTimestamp": "not returned by MCP",
+    "writeTimestamp": "2026-10-22 22:14:25.13088+00",
+    "postQueryTimestamp": "2026-10-22 22:15:18.267267+00"
   },
   "regionalCoverage": {
     "region": "Piemonte",
@@ -1409,16 +1427,22 @@
         "da_verificare": 0,
         "errors": 0
       },
-      "databaseInserted": null,
+      "databaseInserted": 4,
       "failuresResolved": [
         "Scrape-status partial continuation recomputes extractedEvents across merged documents; fixture-backed correction at 4175eb9702021e9d6fda771db82bee5122bf8bd4, test included in 204/204."
       ],
       "failuresOpen": [
         "Official calendar PDF OCR failed; discovery-limit has 1 candidate remaining."
       ],
-      "nextStep": "Remote checkpoint of Pinasca02 files, then exact-ID DB delivery and receipt; after that continue to a different workable regional source.",
-      "deliveredPlaces": null,
-      "deliveredClassifications": null
+      "nextStep": "Publish receipt checkpoint; then bounded sample CAI Potenza Picena (Marche) official activities2026 URL.",
+      "deliveredPlaces": 4,
+      "deliveredClassifications": 4,
+      "databaseTargetMissingAfter": 0,
+      "databaseMismatches": 0,
+      "databaseUpdates": 0,
+      "databaseDeletes": 0,
+      "receiptPath": "backend/data/agent-runs/cai-20261022-piemonte-pinasca02/delta-import-receipt.json",
+      "receiptSha256": "7baeb4307d6d8ef91d2dfd42a05f84e936ff9126dee9c83ba379ae99c2d3d41a"
     },
     "historicalSnapshot": {
       "sections": 229,
@@ -1498,6 +1522,29 @@
         "noRowsChanged": true
       },
       "completedAt": "2026-10-22T20:34:53.834321Z"
+    },
+    {
+      "regionalRunId": "cai-20261022-piemonte-pinasca02",
+      "classificationRunId": "cai-map-20261022-pinasca02",
+      "status": "DB-completed-receipt-checkpoint-pending",
+      "candidateIds": 4,
+      "classificationCounts": {
+        "trekking": 2,
+        "non_trekking": 2,
+        "da_verificare": 0,
+        "errors": 0
+      },
+      "databaseReceiptSha256": "7baeb4307d6d8ef91d2dfd42a05f84e936ff9126dee9c83ba379ae99c2d3d41a",
+      "placesInserted": 4,
+      "classificationsInserted": 4,
+      "missing": 0,
+      "mismatches": 0,
+      "updates": 0,
+      "deletes": 0,
+      "preflightTimestamp": null,
+      "writeTimestamp": "2026-10-22 22:14:25.13088+00",
+      "postQueryTimestamp": "2026-10-22 22:15:18.267267+00",
+      "receiptCheckpointCommit": null
     }
   ]
 }
