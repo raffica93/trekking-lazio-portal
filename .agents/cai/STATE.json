@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "classification-checkpoint-ready",
+  "phase": "classification-import-reconciled",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -188,26 +188,26 @@
     },
     {
       "id": "S5",
-      "status": "in-progress",
+      "status": "completed",
       "owner": "cai-importer",
-      "result": "Checkpoint files/tests/QA on remote first, then apply classification-only migration and insert missing classification rows; preserve conflicts and never update places."
+      "result": "Migration applied via authorized Supabase MCP after remote file checkpoint; classification-only inserts completed with ON CONFLICT DO NOTHING. 3336 rows inserted, no preexisting conflicts."
     },
     {
       "id": "S6",
-      "status": "pending",
+      "status": "completed",
       "owner": "orchestrator",
-      "result": "fresh before/after DB invariants, reconciliation receipt, effective map eligibility query; no deploy"
+      "result": "Fresh after-query: 3336/3336 map rows classified, exact field-by-field reconciliation 3336 rows / 0 mismatches; map eligibility counts 969 trekking visible, 9 verified non-trekking excluded, 2358 doubtful visible. Editorial digest and latest places.updated_at unchanged."
     },
     {
       "id": "S7",
-      "status": "pending",
+      "status": "in-progress",
       "owner": "orchestrator + cai-collector",
-      "result": "resume one-region-at-a-time Lombardia after classification batch/import is closed"
+      "result": "Resume Lombardia with bounded section/source sample; no batch/import overlap."
     }
   ],
   "nextAction": {
-    "step": "S5",
-    "instruction": "Push and verify this sealed run checkpoint on codex/cai-orchestrator-luna. Then use authorized Supabase MCP to apply migration and classification-only insert, with ON CONFLICT DO NOTHING; fresh before/after reconciliation and map eligibility receipt. No places updates, deletes, merge or deploy."
+    "step": "S7",
+    "instruction": "Continue Lombardia from the documented open region using bounded source samples, one section at a time. Record complete/partial/unreachable sources, verified events, duplicates removed, resolved/open failures and next action. Keep coordinates evidence-backed and unverified cases explicit."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -217,7 +217,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "ee1eb5114703265f787fd7635677767bc3efa247",
+    "branchHead": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -245,7 +245,7 @@
     },
     "fullClassificationRun": {
       "runId": "cai-map-20261022-full01",
-      "status": "ready-qa-complete-checkpoint-pending",
+      "status": "imported-and-reconciled",
       "inputPath": "backend/data/agent-runs/cai-map-20261022-full01/input.json",
       "inputSha256": "2963f287c4ccedb20a70068b2551dad3565b264d871194ec91324d0f98bb0687",
       "rows": 3336,
@@ -290,15 +290,57 @@
       "stateSha256": "180c28394488e942d7c31b5715b7103d2ce5f1105aef718b6a03d054586fbf10",
       "qaReportSha256": "0f828750cda80138c2d32599be0154e80033a6938601692e40ffc22152cb310a",
       "independentImporterQa": "PASS; manifest 5d7b2423...; 3336 aligned unique rows, model identity attested, review overlays verified",
-      "dbWrites": 0
+      "dbWrites": 3336
     },
     "database": {
-      "classificationTableExists": false,
-      "lastObservedAt": "2026-10-22T18:12:15.676Z",
-      "migrationApplied": false,
-      "writes": 0,
+      "classificationTableExists": true,
+      "lastObservedAt": "2026-10-22T18:20:59.696710Z",
+      "migrationApplied": true,
+      "migrationVersion": "20261022181444",
+      "migrationName": "create_place_classifications_20261021090000",
+      "writes": 3336,
       "placesTouched": false,
-      "writePath": "authorized Supabase MCP; local SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY absent"
+      "conflictsPreserved": 0,
+      "inserted": 3336,
+      "reconciliation": {
+        "expected": 3336,
+        "matched": 3336,
+        "mismatched": 0,
+        "method": "Supabase SQL exact field-by-field comparison in 84 bounded batches"
+      },
+      "rowCounts": {
+        "trekking": 969,
+        "non_trekking": 9,
+        "da_verificare": 2358,
+        "reviewed": 496
+      },
+      "modelIdentity": {
+        "correctlyAttested": 3336,
+        "invalid": 0,
+        "requested": "inception/mercury-decide",
+        "response": "inception/mercury-decide-20260930"
+      },
+      "mapEligibility": {
+        "publishedMapRows": 3336,
+        "classified": 3336,
+        "unclassified": 0,
+        "explicitTrekkingVisible": 969,
+        "verifiedNonTrekkingExcluded": 9,
+        "doubtfulVisible": 2358,
+        "defaultVisible": 3327
+      },
+      "invariants": {
+        "placesTotal": 4405,
+        "publishedTotal": 4346,
+        "mapCandidates": 3336,
+        "uniqueMapSourceIds": 3336,
+        "editorialDigestBefore": "5ed97ae6d6fa8274e66663ba66f28a45",
+        "editorialDigestAfter": "5ed97ae6d6fa8274e66663ba66f28a45",
+        "latestPlacesUpdatedAtBefore": "2026-10-20T11:51:23.239637Z",
+        "latestPlacesUpdatedAtAfter": "2026-10-20T11:51:23.239637Z",
+        "rlsEnabled": true,
+        "restrictForeignKeys": 1
+      }
     },
     "catalogHashes": {
       "backendData": "1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877",
@@ -340,17 +382,38 @@
       "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
       "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
     },
-    "regionCurrent": "Lombardia remains open; historical snapshot only, no regional collection while classification active",
-    "regionNext": "After batch/import receipt closes, resume Lombardia with bounded source samples, then one region at a time",
+    "regionCurrent": "Lombardia — open, next bounded coverage; classification import closed and reconciled",
+    "regionNext": "Complete Lombardia source-by-source before opening another region; use explicit evidence for any geolocation",
     "updatedChatRecipient": null,
-    "artifactCheckpointCommit": null,
-    "remoteCheckpointVerifiedAt": null,
+    "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
+    "remoteCheckpointVerifiedAt": "2026-10-22T18:12:00Z",
     "operationalRecovery": {
       "incident": "An intermediate overlay command briefly reduced an uncommitted working output to a one-row transfer fixture. It was recovered from the sealed 3336-row input and existing classifier cache before QA, with no DB writes. The final full output was rebuilt and importer-validated.",
       "status": "recovered-before-checkpoint",
       "testRef": "backend/test/full-classification-source-qa.test.js"
     },
-    "qaStatus": "independent source QA complete; importer independently PASS; no DB writes"
+    "qaStatus": "independent source QA complete; importer independently PASS; no DB writes",
+    "databaseImportReceipt": {
+      "runId": "cai-map-20261022-full01",
+      "checkpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
+      "migrationAppliedAt": "2026-10-22T18:14:44Z",
+      "beforeQueryAt": "2026-10-22T18:14:37.813252Z",
+      "emptyTableQueryAt": "2026-10-22T18:15:02.935252Z",
+      "afterQueryAt": "2026-10-22T18:20:59.696710Z",
+      "migrationVersion": "20261022181444",
+      "inputRows": 3336,
+      "inserted": 3336,
+      "preservedConflicts": 0,
+      "exactlyReconciled": 3336,
+      "mismatches": 0,
+      "placesWrites": 0,
+      "placesDeletes": 0,
+      "mapVisible": 3327,
+      "verifiedNonTrekkingExcluded": 9,
+      "doubtfulVisible": 2358,
+      "editorialDigest": "5ed97ae6d6fa8274e66663ba66f28a45"
+    },
+    "liveSiteStatus": "Database classification is installed and verified; repository map filtering code is not deployed. No deploy performed."
   },
   "repositoryCommit": "25f1750d6446736b6176c85b028cbcb73ea78e9b",
   "databaseReadOnlyObservation": {
@@ -370,5 +433,5 @@
     "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
     "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
   },
-  "updatedAt": "2026-10-22T18:20:00Z"
+  "updatedAt": "2026-10-22T18:22:00Z"
 }

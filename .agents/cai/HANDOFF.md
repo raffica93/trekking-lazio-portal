@@ -54,3 +54,14 @@ Artifact da pubblicare: input `2963f287c4ccedb20a70068b2551dad3565b264d871194ec9
 Un artefatto intermedio dell’overlay si è ridotto a un record per errore di preparazione input. È stato ripristinato dall’input completo e dalla cache prima del QA, rigenerato e poi verificato dall’importer; non è avvenuta alcuna scrittura DB. I due backup corrotti sono stati rimossi.
 
 **Gate:** nessuna migration o import prima che commit e push del checkpoint file siano riletti su `origin/codex/cai-orchestrator-luna`. Dopo il push, applicare solo la migration `place_classifications` e inserire record classificazione mancanti; conflitti preesistenti restano intatti, nessuna UPDATE/DELETE su `places`. Usare Supabase MCP perché `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` non sono presenti nel runtime backend. Fare query digest/invarianti immediatamente prima e dopo, salvare ricevuta recuperabile in un checkpoint successivo, poi soltanto riprendere Lombardia. Nessun deploy, merge o scheduler.
+
+
+## Ricevuta database e ripresa Lombardia — 22 ottobre 2026
+
+Dopo il checkpoint remoto `0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7`, applicata via Supabase MCP migration `create_place_classifications_20261021090000`, migration version `20261022181444`. La tabella era vuota alla verifica 18:15:02 UTC. Sono stati inseriti 3.336/3.336 record classificazione, con `ON CONFLICT DO NOTHING`; conflitti preservati: 0. L’import è classification-only: nessun `UPDATE`/`DELETE` o altra write su `places`.
+
+La riconciliazione post-import ha confrontato ogni colonna applicativa della tabella con l’output sigillato in 84 batch SQL: 3.336 matched, 0 mismatches. Query fresca 18:20:59.696 UTC: 4.405 places, 4.346 published, 3.336 righe nella mappa (3.336 source ID univoci), 3.336 classificate. Valori effettivi: 969 trekking, 9 non trekking validi, 2.358 da verificare; review metadata su 496. Il default app rende visibili 3.327 righe (trekking + dubbi), esclude soltanto 9 non trekking confermati; 0 righe senza classificazione. Modello richiesto `inception/mercury-decide`; tutte le 3.336 righe sono attestate come `inception/mercury-decide-20260930`. RLS attivo e FK `ON DELETE RESTRICT`.
+
+Invarianti editoriali prima/dopo: digest ordinato di `id,title,status,cover_image_path` identico `5ed97ae6d6fa8274e66663ba66f28a45`; max `places.updated_at` identico `2026-10-20T11:51:23.239637Z`. Nessuna modifica a titolo, stato, foto, località o coordinate. Nessun delete. Nessun deploy: codice filtro mappa è sul branch ma il sito live non è stato aggiornato. Nessun merge, cron o deploy.
+
+Il checkpoint DB è registrato in `.agents/cai/STATE.json`; prossimo passo riprende Lombardia, ultima regione aperta, a campioni circoscritti e una sezione per volta. Storico handoff: 229 sezioni, 125 controllate, 56 complete, 68 parziali, 1 irraggiungibile, 104 non verificate; sono valori storici, non una query attuale. Nessuna raccolta si è sovrapposta al batch o import.

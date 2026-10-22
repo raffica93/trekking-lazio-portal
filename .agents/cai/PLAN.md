@@ -69,3 +69,8 @@ a un collaudo del runtime cloud corrente.
 - Conteggi candidati definitivi: trekking 973, non trekking 478, da verificare 1.885. Conteggi effettivi dopo QA: trekking 969, non trekking 9, da verificare 2.358. Nessun errore Mercury.
 - Test backend 174/174; cataloghi pubblici invariati. Importer PASS su manifest/output; database ancora senza tabella classificazioni e senza scritture.
 - Prossimo: commit/push di file e report e verifica del ref remoto. Poi migration classification-only + inserimenti mancanti con conflitti preservati via Supabase MCP. Query/ricevuta prima e dopo, mai aggiornare `places`. Nessun deploy. Lombardia resta ferma finché l’import non è riconciliato.
+
+
+## Ricevuta DB — 22 ottobre 2026, 18:20 UTC
+
+Migration `create_place_classifications_20261021090000` registrata dal progetto Supabase come versione `20261022181444`. Inseriti 3.336 record solo in `public.place_classifications`, con `ON CONFLICT DO NOTHING`: 3.336 nuovi, 0 conflitti preesistenti. Riconciliazione esatta di tutti i 17 campi applicativi: 3.336 confrontati, 0 differenze. Conteggi effettivi: 969 trekking, 9 non trekking, 2.358 da verificare; 496 con review metadata. Query della mappa: 3.336/3.336 classificati, 9 non trekking esclusi, 2.358 dubbi conservati, 3.327 visibili nel default. Digest editoriale `places` prima/dopo identico (`5ed97ae6d6fa8274e66663ba66f28a45`), latest `places.updated_at` identico, nessuna write/delete su `places`. Repository/app non deployati: la UI live non è stata aggiornata. S7 riapre ora Lombardia dopo la ricevuta pubblicata.

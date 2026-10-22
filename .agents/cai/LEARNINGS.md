@@ -25,3 +25,9 @@
 - Le risposte Mercury non sono deterministiche anche con stesso run/input. Alla ripresa verificare sempre output/manifest finali e non riutilizzare conteggi di un output precedente.
 - Non escludere in massa candidati `non_trekking` basandosi soltanto sul modello o su PDF condivisi tra sezioni. QA puntuale ha confermato solo 8 esclusioni; candidati ambigui/non revisionati restano `da_verificare`.
 - Controllare il ref remoto con `git ls-remote`: la cache del ref `origin/*` locale può essere indietro rispetto al branch effettivo.
+
+
+## 2026-10-22 — import classification-only con Supabase MCP
+
+- Quando il runtime di backend non espone Supabase URL/ruolo ma il connettore MCP è autorizzato, verificare prima assenza tabella/conflitti, poi applicare migration e inserire piccoli batch derivati da `verifyReadyClassificationRun`. `ON CONFLICT DO NOTHING` rende la ripresa idempotente; l’importer locale non deve interpretare una risposta MCP di forma differente come prova che il blocco non sia stato applicato: controllare stato SQL prima di ripetere.
+- Una query SQL di riconciliazione può confrontare campi scalari con `IS DISTINCT FROM` e metadata `jsonb` direttamente, senza trasferire migliaia di record all’interprete; conservare conteggi e digest prima/dopo.
