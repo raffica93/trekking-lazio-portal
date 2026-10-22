@@ -10501,7 +10501,7 @@
     "cai-fossano-9212034": "bfcf7fc98e71d1d236138b73d41cf55c937002a38c099db9c3c56ef82fc5c62f",
     "cai-mondovi-9212010": "54be02a6bb67b9dc04d2694c50c85a23a8c90e81335db72bf0886d46f5c46aa3",
     "cai-romano-di-lombardia-9216087": "703c3ca55eea6bef05be53b28ec1cee9b37091f76e15b039fcecc9e728a7bf6d",
-    "cai-premana-9216089": "a0f8ac009ae71fa26bf3e5765ca9377f41b2ed738e5e064900a6ca1cd1cc2b3d",
+    "cai-premana-9216089": "30e1aa7456d56aab395715f69ebce631ea646b266c95d870e62d1095506c6b54",
     "cai-ghemme-9112027": "39425ca63c6c8fe319d05c62b2ac978b7b60b28fab741a2ee9b532369a88c3d0",
     "cai-gozzano-9212037": "2f4f27b01118eea561d0eccb4e2c44ad94434e6a4f9a78d489c96cf17d588b54",
     "cai-grignasco-9112028": "39425ca63c6c8fe319d05c62b2ac978b7b60b28fab741a2ee9b532369a88c3d0",
@@ -10773,7 +10773,7 @@
     "cai-busca-9112010": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967",
     "cai-dronero-9112012": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967"
   },
-  "generatedAt": "2026-10-22T21:15:12.867Z",
+  "generatedAt": "2026-10-22T21:19:38.829Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
@@ -44720,7 +44720,7 @@
       "privateCar": null,
       "coordinatesQuality": "unknown",
       "locationSource": "ics",
-      "sourceDocument": "https://organizzazione.cai.it/sez-premana/eventi/?ical=1"
+      "sourceDocument": "https://organizzazione.cai.it/sez-premana/eventi/elenco/"
     },
     {
       "id": "cai-s-a-t-cavalese-9118022-22a020722dcf",

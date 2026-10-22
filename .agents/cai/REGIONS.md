@@ -128,6 +128,15 @@ Report SHA `66cfdef7a09d8b998a4da3dc50625b11493968ed0bece873191651518b5873ca`; m
 
 | Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
 |---|---:|---:|---:|---:|---|---:|---|---|---|
-| `cai-20261022-lombardia-cernusco03` — CAI Cernusco sul Naviglio | 1 PDF ufficiale | 0 | 1 | 0 | 4 ID sezione già presenti; zero nuovi; 8 righe estratte dal PDF | 0 | Cache estrazione OCR v11 invalidata con VERSION 12; falso ID `cb33842fc3c2` assente; record Alpe Devero esistente confermato | 3 issue storiche restano, 36 documenti di fonte preservati; regione ancora incompleta | Pubblicare il checkpoint file; poi valutare una diversa fonte Lombardia circoscritta |
+| `cai-20261022-lombardia-cernusco03` — CAI Cernusco sul Naviglio | 1 PDF ufficiale | 0 | 1 | 0 | 4 ID sezione già presenti; zero nuovi; 8 righe estratte dal PDF | 0 | Cache estrazione OCR v11 invalidata con VERSION 12; falso ID `cb33842fc3c2` assente; record Alpe Devero esistente confermato | 3 issue storiche restano, 36 documenti di fonte preservati; regione ancora incompleta | Checkpoint dcbee9e pubblicato e verificato; collector sceglie una diversa fonte Lombardia con preflight in lettura |
 
 Catalogo: 3.359→3.359 ID, zero aggiunti/rimossi, una sola descrizione aggiunta al record 13 dicembre; campi amministrati e geografici invariati. Copie backend/frontend identiche. Report SHA `d2a14c92fc8a918596d6ab6e68044b28b0278d857805fc874f067f5a4863068a`; manifest SHA `c9164d3839dd1abebc62e9262fb40aca590fe7812e4f7c33e8a76c35ea2bba14`; stato run SHA prima dell'aggiornamento report `218b54ee8afce0a9bb4dd1113715668165bf3eeb6b9adf7006f441bfffe6b7c2`. Backend npm test 197/197 dopo raccolta, hash dei quattro file pubblici invariati dai test. Nessuna classificazione o scrittura DB; `database=pending` descrive solo che il run non ha richiesto delivery, non un import incompleto. I totali Lombardia complessivi restano lo snapshot storico del 20 ottobre e non sono query correnti.
+
+
+## CAI Premana bounded continuation 01 — 22 ottobre 2026
+
+| Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| `cai-20261022-lombardia-premana01` — CAI Premana | 1 pagina ufficiale | 0 | 1 | 0 | Un evento esistente CENA SOCIALE (24-10-2026), JSON-LD ufficiale; 0 nuovi ID | 0 | Coda discovery avanzata da 10 a 2 candidati | Due candidati non ancora letti; fonte parziale, 40 URL storici conservati | Dopo checkpoint, identificare localmente i due URL e proseguire solo se mirabili senza replay; altrimenti altra fonte Lombardia |
+
+Catalogo invariato a 3.359 ID quanto a cardinalità: zero aggiunti/rimossi e una sola variazione del campo `sourceDocument` per l’evento esistente. Nessuna coordinata o evento inventato; nessuna classificazione/import DB. Report SHA `77f32437389b7be23778640b826659e65160a21cca9d354d401d244a5d86f322`; manifest SHA `abf50e4b5e4cd5532755beb85c9446836c03b26b7bead244e42e5ce4e868f6d4`. Suite backend 197/197 dopo la raccolta; copie backend/frontend identiche e i quattro hash invariati dai test. La regione Lombardia complessiva non è stata ricalcolata.

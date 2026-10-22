@@ -224,8 +224,8 @@
     }
   ],
   "nextAction": {
-    "step": "LOMBARDIA-NEXT-SOURCE",
-    "instruction": "Run cai-20261022-lombardia-cernusco03 has a verified file checkpoint candidate with zero new IDs; after publishing and rereading it from origin, preflight one different workable Lombardia source (do not retry the historical Cernusco timeout or reopen rejected run01/run02). Continue sequentially one bounded source at a time."
+    "step": "PREMANA-RESIDUAL-QUEUE",
+    "instruction": "Checkpoint cai-20261022-lombardia-premana01 file outputs and report to origin first. Then use only existing local cache/status evidence to identify the exact two residual official URLs and resume them with a new bounded run if targeted without replay; otherwise record queue blocked and select another workable Lombardia source. No repeat of the same URL queue without evidence of progress."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -235,7 +235,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "a015865283f0097d22036a9d75f4e0e17cd94bbb",
+    "branchHead": "dcbee9e305c0e0ad0a5dc950a8fd67b339134e3c",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -361,10 +361,11 @@
       }
     },
     "catalogHashes": {
-      "backendExcursions": "ce930618a8e0e925f43703b5a5f10347312fea602843aab77f6136b191c895a1",
-      "frontendExcursions": "ce930618a8e0e925f43703b5a5f10347312fea602843aab77f6136b191c895a1",
-      "backendScrapeStatus": "0cddc15b8f41a6220d96ffec93096dba608d24fd7b042e4e915666cf7565a4bd",
-      "frontendScrapeStatus": "0cddc15b8f41a6220d96ffec93096dba608d24fd7b042e4e915666cf7565a4bd"
+      "backendExcursions": "4b69669347c569058db1d776327b6253a3ac7d01decbe76bf275de3ce4c42827",
+      "frontendExcursions": "4b69669347c569058db1d776327b6253a3ac7d01decbe76bf275de3ce4c42827",
+      "backendScrapeStatus": "f8dbb427c647239a2e91f19f76d3938786c355e82dfcb407edaa65e83b1bb102",
+      "frontendScrapeStatus": "f8dbb427c647239a2e91f19f76d3938786c355e82dfcb407edaa65e83b1bb102",
+      "copiesIdentical": true
     },
     "regionalCoverage": {
       "region": "Lombardia",
@@ -819,6 +820,40 @@
         "tests": "Backend npm test 187/187; catalog and status copies remained byte-identical.",
         "commit": "d45f27136177ce05181d69f87e00a8d7bb96a3cb",
         "remoteVerifiedAt": "2026-10-22T20:15:58Z"
+      },
+      {
+        "runId": "cai-20261022-lombardia-cernusco03",
+        "sourceId": "cai-cernusco-sul-naviglio-9216051",
+        "collection": "partial",
+        "files": "ready",
+        "database": "pending",
+        "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-cernusco03/manifest.json",
+        "manifestSha256": "c9164d3839dd1abebc62e9262fb40aca590fe7812e4f7c33e8a76c35ea2bba14",
+        "statePath": "backend/data/agent-runs/cai-20261022-lombardia-cernusco03/state.json",
+        "stateSha256": "218b54ee8afce0a9bb4dd1113715668165bf3eeb6b9adf7006f441bfffe6b7c2",
+        "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-cernusco03/collection-report.md",
+        "reportSha256": "d2a14c92fc8a918596d6ab6e68044b28b0278d857805fc874f067f5a4863068a",
+        "sourceStatus": "partial",
+        "sourceDocumentsRetained": 36,
+        "sourceIssuesRetained": 3,
+        "documentsRead": 1,
+        "extractedPdfEvents": 8,
+        "catalogBefore": 3359,
+        "catalogAfter": 3359,
+        "newIds": 0,
+        "removedIds": 0,
+        "changedRows": 1,
+        "changedRow": "cai-cernusco-sul-naviglio-9216051-61c82c9856f6",
+        "changedFields": [
+          "description"
+        ],
+        "falseOcrIdAbsent": true,
+        "duplicateIdsExcluded": 0,
+        "dbWrites": 0,
+        "collectorQa": "PASS: v12 official PDF cache reprocessed; clean Alpe Devero 25 October; false OCR candidate absent.",
+        "importerQa": "PASS: hashes and admin/geographic fields verified; no DB delivery warranted.",
+        "fileCheckpointCommit": "dcbee9e305c0e0ad0a5dc950a8fd67b339134e3c",
+        "remoteVerified": true
       }
     ],
     "repositoryCheckpointCommit": "d45f27136177ce05181d69f87e00a8d7bb96a3cb",
@@ -904,39 +939,40 @@
       ]
     },
     "latestRegionalRun": {
-      "runId": "cai-20261022-lombardia-cernusco03",
-      "sourceId": "cai-cernusco-sul-naviglio-9216051",
+      "runId": "cai-20261022-lombardia-premana01",
+      "sourceId": "cai-premana-9216089",
+      "sourceUrl": "https://organizzazione.cai.it/sez-premana/eventi/elenco/",
       "collection": "partial",
       "files": "ready",
       "database": "pending",
-      "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-cernusco03/manifest.json",
-      "manifestSha256": "c9164d3839dd1abebc62e9262fb40aca590fe7812e4f7c33e8a76c35ea2bba14",
-      "statePath": "backend/data/agent-runs/cai-20261022-lombardia-cernusco03/state.json",
-      "stateSha256": "218b54ee8afce0a9bb4dd1113715668165bf3eeb6b9adf7006f441bfffe6b7c2",
-      "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-cernusco03/collection-report.md",
-      "reportSha256": "d2a14c92fc8a918596d6ab6e68044b28b0278d857805fc874f067f5a4863068a",
+      "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-premana01/manifest.json",
+      "manifestSha256": "abf50e4b5e4cd5532755beb85c9446836c03b26b7bead244e42e5ce4e868f6d4",
+      "statePath": "backend/data/agent-runs/cai-20261022-lombardia-premana01/state.json",
+      "stateSha256": "383dab5910e8f7420b1df83bca9d864579f5de5c94f0cec674b620670257a652",
+      "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-premana01/collection-report.md",
+      "reportSha256": "77f32437389b7be23778640b826659e65160a21cca9d354d401d244a5d86f322",
       "sourceStatus": "partial",
-      "sourceDocumentsRetained": 36,
+      "sourceDocumentsRetained": 40,
       "sourceIssuesRetained": 3,
-      "documentsRead": 1,
-      "extractedPdfEvents": 8,
+      "residualCandidatesBefore": 10,
+      "residualCandidatesAfter": 2,
+      "verifiedEvents": 1,
       "catalogBefore": 3359,
       "catalogAfter": 3359,
       "newIds": 0,
       "removedIds": 0,
       "changedRows": 1,
-      "changedRow": "cai-cernusco-sul-naviglio-9216051-61c82c9856f6",
+      "changedRow": "cai-premana-9216089-b4e7ad624a0a",
       "changedFields": [
-        "description"
+        "sourceDocument"
       ],
-      "falseOcrIdAbsent": true,
       "duplicateIdsExcluded": 0,
       "dbWrites": 0,
-      "collectorQa": "PASS: v12 official PDF cache reprocessed; clean Alpe Devero 25 October; false OCR candidate absent.",
-      "importerQa": "PASS: hashes and admin/geographic fields verified; no DB delivery warranted."
+      "collectorQa": "PASS: official HTML JSON-LD verifies existing CENA SOCIALE on 2026-10-24, Premana; no coordinates added.",
+      "importerQa": "PASS: no new ID or classification/DB delta; history and all other row fields preserved."
     }
   },
-  "repositoryCommit": "a015865283f0097d22036a9d75f4e0e17cd94bbb",
+  "repositoryCommit": "dcbee9e305c0e0ad0a5dc950a8fd67b339134e3c",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -950,20 +986,20 @@
     "writes": 0
   },
   "tests": {
-    "backend": "npm test: 197 passed, 0 failed after run cai-20261022-lombardia-cernusco03; all four catalog/status backend/frontend hashes unchanged by tests.",
+    "backend": "npm test: 197 passed, 0 failed after Premana01 collection; four public catalog/status hashes unchanged by tests.",
     "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
     "catalogHashes": {
-      "backendExcursions": "ce930618a8e0e925f43703b5a5f10347312fea602843aab77f6136b191c895a1",
-      "frontendExcursions": "ce930618a8e0e925f43703b5a5f10347312fea602843aab77f6136b191c895a1",
-      "backendScrapeStatus": "0cddc15b8f41a6220d96ffec93096dba608d24fd7b042e4e915666cf7565a4bd",
-      "frontendScrapeStatus": "0cddc15b8f41a6220d96ffec93096dba608d24fd7b042e4e915666cf7565a4bd",
+      "backendExcursions": "4b69669347c569058db1d776327b6253a3ac7d01decbe76bf275de3ce4c42827",
+      "frontendExcursions": "4b69669347c569058db1d776327b6253a3ac7d01decbe76bf275de3ce4c42827",
+      "backendScrapeStatus": "f8dbb427c647239a2e91f19f76d3938786c355e82dfcb407edaa65e83b1bb102",
+      "frontendScrapeStatus": "f8dbb427c647239a2e91f19f76d3938786c355e82dfcb407edaa65e83b1bb102",
       "copiesIdentical": true
     }
   },
-  "updatedAt": "2026-10-22T21:16:29Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T21:14:00Z",
-  "regionCurrent": "Lombardia — Cernusco03 corrected OCR and preserved 36-document history; files verified, no event delta, no DB write. Broader region remains open.",
-  "regionNext": "Publish run03 report/manifest/catalog/status checkpoint and verify remote. Then select a different Lombardia source with an official current calendar and bounded source scope; keep Brescia/Varese cooldowns.",
+  "updatedAt": "2026-10-22T21:19:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T21:17:54Z",
+  "regionCurrent": "Lombardia — Premana01 checked one official HTML listing; one existing event verified, 0 new IDs; discovery queue advanced 10→2; source remains partial.",
+  "regionNext": "Publish and verify Premana01 files. Then inspect exact residual candidate URLs from local cache/status and continue only if targeted; otherwise move to another workable source.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
     "sourceId": "cai-varese-9216009",
@@ -1065,41 +1101,41 @@
     "independentImporterQa": "PASS"
   },
   "lastRegionalAttempt": {
-    "runId": "cai-20261022-lombardia-cernusco03",
+    "runId": "cai-20261022-lombardia-premana01",
     "status": "file-checkpoint-ready-no-db-delta",
-    "sourceId": "cai-cernusco-sul-naviglio-9216051",
-    "documentSha256": "654a51f8d310cd6b65ad6e99a5a74ef05165a18d6e6411f6e21e9389720aa291",
-    "sourceStatus": "partial; 36 documents and 3 issues retained",
+    "sourceId": "cai-premana-9216089",
     "collection": "partial",
     "files": "ready; pending Git checkpoint",
-    "database": "pending; no IDs/classification to deliver; no DB operation",
-    "catalog": "3359 before/after; 0 added, 0 removed, 1 description-only change",
-    "staleOcrId": "cb33842fc3c2 absent",
-    "manifestSha256": "c9164d3839dd1abebc62e9262fb40aca590fe7812e4f7c33e8a76c35ea2bba14",
-    "stateSha256": "218b54ee8afce0a9bb4dd1113715668165bf3eeb6b9adf7006f441bfffe6b7c2",
-    "reportSha256": "d2a14c92fc8a918596d6ab6e68044b28b0278d857805fc874f067f5a4863068a",
-    "test": "backend npm test 197/197; four public catalog/status hashes unchanged by tests",
-    "next": "Publish verified file checkpoint, then bounded preflight/run on a different workable Lombardia source."
+    "database": "pending; no new source ID; no DB operation",
+    "catalog": "3359 before/after; zero IDs added/removed; one sourceDocument-only change",
+    "documents": "40 retained; 3 issues; residual candidates reduced 10→2",
+    "manifestSha256": "abf50e4b5e4cd5532755beb85c9446836c03b26b7bead244e42e5ce4e868f6d4",
+    "stateSha256": "383dab5910e8f7420b1df83bca9d864579f5de5c94f0cec674b620670257a652",
+    "reportSha256": "77f32437389b7be23778640b826659e65160a21cca9d354d401d244a5d86f322",
+    "test": "backend npm test 197/197; four public catalog/status hashes unchanged by tests.",
+    "next": "Checkpoint files, then inspect exact residual official URLs locally before deciding to continue Premana or move on."
   },
   "regionalCoverage": {
     "region": "Lombardia",
-    "status": "open; Cernusco03 corrected stale OCR cache and retained source history; many other Lombardia sources remain partial/unverified.",
+    "status": "open; Cernusco OCR correction is checkpointed; Premana discovery queue advanced but remains partial; other regional sources are not recounted.",
     "currentRunCounts": {
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
-      "verifiedExistingEvents": 4,
+      "verifiedExistingEvents": 1,
       "newEvents": 0,
+      "residualCandidatesBefore": 10,
+      "residualCandidatesAfter": 2,
       "exactDuplicateIdsExcluded": 0,
       "failuresResolved": [
-        "Stale OCR event extraction cache from deterministic v11 bypassed after VERSION 12; false ID absent; Cernusco source history restored/preserved."
+        "Premana official HTML continuation confirms existing CENA SOCIALE record and advances discovery candidates 10→2."
       ],
       "failuresOpen": [
-        "Cernusco remains partial with three historical issues; broader Lombardia coverage remains incomplete."
+        "Premana has two discovery candidates remaining and stays partial; broader Lombardia coverage remains incomplete."
       ]
     },
     "historicalSnapshot": {},
-    "historicalSnapshotNote": "Historical handoff only; current sample covers Cernusco alone; no Lombardia-wide recount."
+    "historicalSnapshotNote": "Historical handoff only; current sample covers Premana alone; no Lombardia-wide recount."
   }
 }

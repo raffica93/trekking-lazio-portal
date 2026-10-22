@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T21:15:12.892Z",
+  "generatedAt": "2026-10-22T21:19:38.856Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -13876,29 +13876,29 @@
       "excursions": 1,
       "error": null,
       "hash": "a0f8ac009ae71fa26bf3e5765ca9377f41b2ed738e5e064900a6ca1cd1cc2b3d",
-      "updatedAt": "2026-10-20T03:37:26.746Z",
+      "updatedAt": "2026-10-22T21:19:38.856Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-premana/eventi/?ical=1",
-          "hash": "625ca9a3cf99d59a72cd625105027b4f7e90bb125e8419fab9371f30aa08d4d7",
+          "hash": "1d25db9123a84d9ba82b01a9b6a6421d3a77f5a46091786105aab27c72689358",
           "events": 1,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-premana/eventi/",
-          "hash": "fb309031593f71cc6e43c6dae8eed794442336e2b2cc174fc7b30396b067562e",
+          "hash": "3daa09cc524145122bbe22a7be7a18500654bf2e8adcf2c2a1ed0cb6ed6baad2",
           "events": 1,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-premana/eventi/elenco/",
-          "hash": "e25fd6aac10af66deded9df5487802f58b52d29c00c7cde5291fba3467d7a6ed",
+          "hash": "bb4917edd3d73e08bf1ad047b79b27dac503b10f853e83a5ee0d7b8e66c6a3c3",
           "events": 1,
           "method": "html-calendar"
         },
         {
           "url": "https://organizzazione.cai.it/sez-premana/eventi/mese/",
-          "hash": "3c4a250cb99a39aea8f0eff5d33004c3ee806093c5d20d1b596e365500100d71",
+          "hash": "3c81a69412b227bdd24ae4fbbbed74335a2197aae94286f4c0cd48b1c36cc938",
           "events": 1,
           "method": "html-calendar"
         },
@@ -13928,31 +13928,31 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-premana/eventi/elenco/?ical=1",
-          "hash": "88a6e6191f2aa6ab4ffa496626b5a01e93a870ecd5c0bc59c1043a0e5f41ef6f",
+          "hash": "f1a05d67747a07c5b83474279f8c17fe25fac594a77d1863776757189d36e991",
           "events": 1,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-premana/eventi/elenco/?outlook-ical=1",
-          "hash": "6791db6fd4d526daba5ee4a88774807b04db74cb4c02829a5da65a04551c26fb",
+          "hash": "dcc48ac6ae055d561f7ba8a34ab9fc83da1f2d46a5cd9e1e3c9e9a39204540d2",
           "events": 1,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-10-01&per_page=100",
-          "hash": "eaca2e80a2cfb766900fa54fd286638f08c31dac887cf9ebd5869b7f15e46a84",
+          "hash": "6c0f37426b628d04f19d67bfa81b0c2cc8984cf143db381fc1c6fc5db4cf5825",
           "events": 0,
           "method": "wordpress-events"
         },
         {
           "url": "https://organizzazione.cai.it/sez-premana/eventi/mese/?ical=1",
-          "hash": "8df1a9c03b1b510a7ef12bc9bc38789b2897c3efac9860e9bded874799ef19a9",
+          "hash": "8303151dcfe0ca1a0af59a1a522f9550ade7777a4d713f56e9b9a38c76babd1f",
           "events": 1,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-premana/eventi/mese/?outlook-ical=1",
-          "hash": "1f40e64bd9bd36796226b3223e2aa227f7f4fd172b4d9d9ae30f9df449ce6c64",
+          "hash": "ae546b0e99bf894fca0ec121f790966d0aa333c685782affc47114233bf27563",
           "events": 1,
           "method": "ics"
         },
@@ -13982,13 +13982,13 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-premana/?post_type=tribe_events&ical=1&eventDisplay=list",
-          "hash": "59ee50012e74aa9485c669c7a81b71f9153768d0e4529074039780493f2cd9cb",
+          "hash": "88ac05b5aa4964fd65c1ed154b589514ff2abe9fb07fee973413d1d1a2723bc4",
           "events": 1,
           "method": "ics"
         },
         {
           "url": "https://organizzazione.cai.it/sez-premana/eventi/2026-10-24/",
-          "hash": "ba61c3d77fb12a4d1ab4e1e60e62a5d6e38880b7cb1d2c4f3fba4ea2fd1ad5de",
+          "hash": "3141ac358febb65b626139279ca832b67f62e46bc0c0432505db3db6f2e2f4c7",
           "events": 1,
           "method": "html-calendar"
         },
@@ -14012,7 +14012,7 @@
         },
         {
           "url": "https://organizzazione.cai.it/sez-premana/eventi/mese/2026-09/",
-          "hash": "795d882ac49e6800b41b863e0450b28c22a023ea0b1c3f1cb844bc4e31c418f3",
+          "hash": "ba29992c7df47205b10e821e0686f2fe3c576669453a37dd08f302265ead0b2e",
           "events": 0,
           "method": null
         },
@@ -14133,6 +14133,11 @@
         {
           "url": "https://organizzazione.cai.it/sez-premana/eventi/?ical=1",
           "message": "Discovery budget reached; 10 candidate documents remain.",
+          "code": "discovery-limit"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-premana/eventi/?ical=1",
+          "message": "Discovery budget reached; 2 candidate documents remain.",
           "code": "discovery-limit"
         }
       ],
