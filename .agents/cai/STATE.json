@@ -202,12 +202,12 @@
       "id": "S7",
       "status": "in-progress",
       "owner": "orchestrator + cai-collector",
-      "result": "Run05 (`cai-20261022-lombardia-brescia05`) reached both residual candidates, removed discovery-limit, and verified the 2026 fondo calendar contains only past dates. Lombardia/Brescia remains partial due three distinct unavailable URLs (2 prior 403 and 1 prior 404 skipped by cooldown); catalog delta 0. Importer QA PASS, backend tests 178/178, no DB access/write."
+      "result": "Run `cai-20261022-lombardia-valmadrera01` processed 12 documents for CAI Valmadrera. Source status partial, 7 candidate documents remain; 8 document-level extracted rows; 7 existing unchanged source events reported; row-level overlap is not exposed; catalog delta 0, 3,345 unique IDs. No HTTP error or DB access/write. Backend tests 178/178 after collection. Report SHA `7862920ad009f600de515810382dd3f72a9d15b4c70b604eaa868386e657d02d`, manifest SHA `0156a229ef3e776af9f1b373d9e355e93960ae062249df11cb45d1dc97d0271a`; independent importer QA PASS."
     }
   ],
   "nextAction": {
     "step": "S7",
-    "instruction": "Preflight CAI Varese prior HTTP 503 endpoint and its cooldown/skip control. Proceed with one bounded Varese sample only if the endpoint is guaranteed not to be retried; otherwise keep it blocked and choose another eligible Lombardia source."
+    "instruction": "Independently verify Valmadrera report and run manifest; checkpoint the verified files to the branch. Then continue a single bounded Valmadrera sample. No DB import is needed unless the catalog delta is non-zero."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -217,7 +217,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "92ac86393416325560e753e43b8bd022741cb708",
+    "branchHead": "d696840b0e16d586ee9378db4a12c71197fa4128",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -348,24 +348,21 @@
     },
     "regionalCoverage": {
       "region": "Lombardia",
-      "status": "open; latest bounded sample run05 reached discovery residuals but Brescia remains partial on cooldown-only unavailable URLs",
+      "status": "open; Brescia remains partial on unavailable URLs and Valmadrera partial with 7 discovery candidates after bounded sample",
       "currentRunCounts": {
         "sectionsChecked": 1,
         "complete": 0,
         "partial": 1,
         "unreachable": 0,
         "verifiedNewEvents": 0,
-        "sectionEventsReported": 51,
+        "sectionEventsReported": 7,
         "exactDuplicateIdsExcluded": 0,
         "semanticDuplicates": "not established; catalog delta is zero",
         "failuresResolved": [
-          "Discovery budget queue reduced to zero residual candidates in run05",
-          "Official fondo 2026 PDF text fully reviewed: all four listed dates are before 2026-10-22, so zero upcoming events is verified",
-          "Duration year-suffix parser correction remains fixture/test-covered"
+          "Valmadrera discovery backlog reduced from 24 to 7 candidates in bounded 12-document sample; no HTTP failures observed in this run."
         ],
         "failuresOpen": [
-          "Two distinct historical HTTP 403 URLs remain in cooldown and were not retried",
-          "One GGS permalink returned HTTP 404 in run04 and was skipped by cooldown in run05; no replacement established"
+          "Valmadrera discovery-limit remains with 7 unvisited candidate documents; Brescia has 3 distinct unavailable URLs on cooldown."
         ]
       },
       "historicalSnapshot": {
@@ -376,7 +373,7 @@
         "unreachable": 1,
         "unchecked": 104
       },
-      "historicalSnapshotNote": "historical handoff only; not a current region-wide query. Current run inspected Brescia alone."
+      "historicalSnapshotNote": "Historical handoff only; current sample covers Valmadrera only and does not recalculate Lombardia-wide totals."
     },
     "ocrItalian": false,
     "agentStatus": {
@@ -400,11 +397,11 @@
       "writes": 0
     },
     "tests": {
-      "backend": "npm test after run05 collection: 178 passed, 0 failed (2026-10-22)",
-      "publicCatalogTestIsolation": "tests ran after collection; catalog SHA remained stable and backend/frontend copies match: excursions 740bd4a3baa5dd7ba7380359f041808938fd0246f2e055b17302c9caa7ccd09f; scrape-status b3781bedb1dd3e28cf631ecb41141d073675ab5fc61f9826e99301bd4b89b1ce"
+      "backend": "npm test after Valmadrera collection: 178 passed, 0 failed (2026-10-22).",
+      "publicCatalogTestIsolation": "Tests ran only after collection; all three backend/frontend copies remained byte-identical. excursions SHA 1fe6d927d1f4593cc8fc533cf0a8bd68462e6b06187ac683cad6f6a35c6d6b6d; cai-sections SHA f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b; scrape-status SHA ee2ba389431d4d0266c145c676a9272707359e6515ba7a89ca830d063eb96f13."
     },
-    "regionCurrent": "Lombardia — Brescia discovery queue exhausted for current cache; source remains partial on unavailable URLs; run05 checkpoint published",
-    "regionNext": "Preflight CAI Varese source and ensure its previously unavailable 503 endpoint will not be retried before bounded collection.",
+    "regionCurrent": "Lombardia — Valmadrera sample01 partial with 7 discovery candidates; Brescia remains partial on unavailable URLs; files ready and checkpoint pending",
+    "regionNext": "Publish and verify Valmadrera sample01 report/files checkpoint; then one bounded follow-up on Valmadrera. No DB import while catalog delta is zero.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
     "remoteCheckpointVerifiedAt": "2026-10-22T19:11:40Z",
@@ -436,8 +433,9 @@
     },
     "liveSiteStatus": "Database classification is installed and verified; repository map filtering code is not deployed. No deploy performed.",
     "regionalRun": {
-      "runId": "cai-20261022-lombardia-brescia05",
-      "sourceId": "cai-brescia-9216005",
+      "runId": "cai-20261022-lombardia-valmadrera01",
+      "sourceId": "cai-valmadrera-9216081",
+      "region": "Lombardia",
       "collection": "partial",
       "files": "ready",
       "database": "pending",
@@ -445,10 +443,10 @@
       "completeSections": 0,
       "partialSections": 1,
       "unreachableSections": 0,
-      "documentsRecorded": 40,
-      "remainingDiscoveryCandidates": 0,
-      "sectionEventCount": 51,
-      "documentExtractions": 143,
+      "documentsProcessed": 12,
+      "remainingDiscoveryCandidates": 7,
+      "sectionEventCount": 7,
+      "documentExtractions": 8,
       "verifiedNewEventIds": 0,
       "catalogDelta": {
         "added": 0,
@@ -457,35 +455,19 @@
         "uniqueIds": 3345
       },
       "exactDuplicateIdsExcluded": 0,
-      "semanticDuplicates": "not applicable to zero catalog delta",
-      "candidates": [
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/wp-content/uploads/sites/7/2026/01/elenco-escursioni-fondo-2026.pdf",
-          "method": "pdf-text",
-          "extractions": 0,
-          "sha256": "8fdea80e94f0e10f0ced300a53b63b0ccfac53a32eed3b572cb0713d3e046592",
-          "qa": "one-page PDF, 40 nonempty extracted lines; four dates in Feb/Mar 2026 are all past as of 2026-10-22"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-brescia/category/attivita/",
-          "method": "no-parser",
-          "extractions": 0,
-          "sha256": "1aff700d90bcf7581b4580265cef7c3fc5d92d1afd69eaac3e0b11fa8fd49005",
-          "qa": "category archive; zero rows are not treated as verified empty calendar"
-        }
-      ],
-      "issueSummary": "69 previous-unavailable-skipped issue entries: 1 archive URL HTTP 403, 67 school page occurrences HTTP 403, 1 GGS permalink previously HTTP 404; 3 distinct URLs, none retried. Discovery-limit is absent.",
-      "geolocation": "No catalog delta, so no new coordinates to review or add.",
-      "manifestSha256": "d3088019fa7840f7002b472611207356e237b662350c135d7861cd4475fc17e6",
-      "reportSha256": "315eda0b3c37eae0e5d2e5e693729f7f1d7d1c8b3233f131d9c08d77f2409ee2",
-      "catalogSha256": "740bd4a3baa5dd7ba7380359f041808938fd0246f2e055b17302c9caa7ccd09f",
-      "scrapeStatusSha256": "b3781bedb1dd3e28cf631ecb41141d073675ab5fc61f9826e99301bd4b89b1ce",
-      "importerQa": "PASS; compared to 273fcb6; 3345 unique IDs, zero add/remove/change; manifest/copies/candidate accounting checked; no DB query/write.",
-      "tests": "Backend npm test 178/178 after collection; catalog hashes stable and frontend/backend copies byte-identical.",
-      "commit": "92ac86393416325560e753e43b8bd022741cb708",
-      "remoteVerifiedAt": "2026-10-22T19:11:40Z"
+      "semanticDuplicates": "not established; extracted row IDs are not exposed; 7 catalog rows were unchanged",
+      "issueSummary": "One discovery-limit issue on the official 2026 PDF; 7 candidate documents remain. No HTTP failures observed in this sample. Prior saved state showed 24 candidates.",
+      "geolocation": "No coordinate or place attribution added; existing records remain Località da verificare.",
+      "manifestSha256": "0156a229ef3e776af9f1b373d9e355e93960ae062249df11cb45d1dc97d0271a",
+      "reportSha256": "7862920ad009f600de515810382dd3f72a9d15b4c70b604eaa868386e657d02d",
+      "catalogSha256": "1fe6d927d1f4593cc8fc533cf0a8bd68462e6b06187ac683cad6f6a35c6d6b6d",
+      "sectionsSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+      "scrapeStatusSha256": "ee2ba389431d4d0266c145c676a9272707359e6515ba7a89ca830d063eb96f13",
+      "tests": "Backend npm test after collection: 178 passed, 0 failed; output catalog hashes unchanged.",
+      "importerQa": "PASS; manifest/copies/baseline checked, 0 catalog delta; exact per-document duplicate suppression not reportable from source output; no DB access.",
+      "baselineCommit": "d696840b0e16d586ee9378db4a12c71197fa4128"
     },
-    "regionalCheckpointCommit": "92ac86393416325560e753e43b8bd022741cb708",
+    "regionalCheckpointCommit": "d696840b0e16d586ee9378db4a12c71197fa4128",
     "regionalRunHistory": [
       {
         "runId": "cai-20261022-lombardia-brescia02",
@@ -588,12 +570,47 @@
         "tests": "Backend npm test 178/178 after collection; catalog hashes remained identical across backend/frontend copies.",
         "commit": "1d73684492ffdf330f7ac8bb43b39d16ddcf096b",
         "remoteVerifiedAt": "2026-10-22T19:01:51Z"
+      },
+      {
+        "runId": "cai-20261022-lombardia-valmadrera01",
+        "sourceId": "cai-valmadrera-9216081",
+        "region": "Lombardia",
+        "collection": "partial",
+        "files": "ready",
+        "database": "pending",
+        "controlledSections": 1,
+        "completeSections": 0,
+        "partialSections": 1,
+        "unreachableSections": 0,
+        "documentsProcessed": 12,
+        "remainingDiscoveryCandidates": 7,
+        "sectionEventCount": 7,
+        "documentExtractions": 8,
+        "verifiedNewEventIds": 0,
+        "catalogDelta": {
+          "added": 0,
+          "removed": 0,
+          "changedExisting": 0,
+          "uniqueIds": 3345
+        },
+        "exactDuplicateIdsExcluded": 0,
+        "semanticDuplicates": "not established; extracted row IDs are not exposed; 7 catalog rows were unchanged",
+        "issueSummary": "One discovery-limit issue on the official 2026 PDF; 7 candidate documents remain. No HTTP failures observed in this sample. Prior saved state showed 24 candidates.",
+        "geolocation": "No coordinate or place attribution added; existing records remain Località da verificare.",
+        "manifestSha256": "0156a229ef3e776af9f1b373d9e355e93960ae062249df11cb45d1dc97d0271a",
+        "reportSha256": "7862920ad009f600de515810382dd3f72a9d15b4c70b604eaa868386e657d02d",
+        "catalogSha256": "1fe6d927d1f4593cc8fc533cf0a8bd68462e6b06187ac683cad6f6a35c6d6b6d",
+        "sectionsSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+        "scrapeStatusSha256": "ee2ba389431d4d0266c145c676a9272707359e6515ba7a89ca830d063eb96f13",
+        "tests": "Backend npm test after collection: 178 passed, 0 failed; output catalog hashes unchanged.",
+        "importerQa": "PASS; manifest/copies/baseline checked, 0 catalog delta; exact per-document duplicate suppression not reportable from source output; no DB access.",
+        "baselineCommit": "d696840b0e16d586ee9378db4a12c71197fa4128"
       }
     ],
-    "repositoryCheckpointCommit": "92ac86393416325560e753e43b8bd022741cb708",
-    "updatedAt": "2026-10-22T19:11:40Z"
+    "repositoryCheckpointCommit": "d696840b0e16d586ee9378db4a12c71197fa4128",
+    "updatedAt": "2026-10-22T19:14:12.961Z"
   },
-  "repositoryCommit": "1313739451d6b83cb9313d56db236643bdfc1253",
+  "repositoryCommit": "d696840b0e16d586ee9378db4a12c71197fa4128",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -611,10 +628,10 @@
     "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
     "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
   },
-  "updatedAt": "2026-10-22T19:13:02Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:11:40Z",
-  "regionCurrent": "Lombardia — Brescia run05 checkpoint published; unavailable URLs remain partial; current source preflight blocked CAI Varese 503 retry",
-  "regionNext": "Read-only preflight and bounded sample of a different official Lombardia source with no expired-cooldown URLs; do not run Varese until exact exclusion is implemented and tested",
+  "updatedAt": "2026-10-22T19:14:12.961Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:14:12.961Z",
+  "regionCurrent": "Lombardia — Valmadrera sample01 partial with 7 discovery candidates; Brescia remains partial on unavailable URLs; files ready and checkpoint pending",
+  "regionNext": "Publish and verify Valmadrera sample01 report/files checkpoint; then one bounded follow-up on Valmadrera. No DB import while catalog delta is zero.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
     "sourceId": "cai-varese-9216009",

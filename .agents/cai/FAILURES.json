@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T19:13:02Z",
+  "generatedAt": "2026-10-22T19:14:12.961Z",
   "repositoryCommit": "cb7148ff0d69944a34fd8e606f3e61ab42238d31",
   "baseline": {
     "commit": "9919927d4cbef6d154c4dae1441d64cd01c70ad4",
@@ -10563,9 +10563,10 @@
           "cai-20261020-lombardia-deep-14",
           "cai-20261020-lombardia-deep-15",
           "cai-20261020-piemonte-01",
-          "cai-20261020-piemonte-ocr-01"
+          "cai-20261020-piemonte-ocr-01",
+          "cai-20261022-lombardia-valmadrera01"
         ],
-        "snapshotCopies": 19,
+        "snapshotCopies": 20,
         "issueCodes": [
           "discovery-limit"
         ],
@@ -10586,7 +10587,8 @@
         "representativeMessages": [
           "Discovery budget reached; 35 candidate documents remain.",
           "Discovery budget reached; 30 candidate documents remain.",
-          "Discovery budget reached; 24 candidate documents remain."
+          "Discovery budget reached; 24 candidate documents remain.",
+          "Discovery budget reached; 7 candidate documents remain."
         ],
         "sourceUpdatedAt": [
           "2026-10-19T18:24:35.762Z",
@@ -10595,16 +10597,29 @@
           "2026-10-20T01:19:56.146Z",
           "2026-10-20T01:39:57.342Z",
           "2026-10-20T01:51:46.287Z",
-          "2026-10-20T03:37:26.746Z"
+          "2026-10-20T03:37:26.746Z",
+          "2026-10-22T19:14:12.961Z"
         ]
       },
       "strategy": "Classify evidence, preserve valid cache, then retry/re-discover with a bounded policy appropriate to the class.",
       "status": "historical_classified_unverified",
       "owner": "cai-collector",
-      "outcome": "No resolution check in the current cycle yet.",
+      "outcome": "Bounded sample cai-20261022-lombardia-valmadrera01 processed 12 documents; remaining discovery candidates fell from 24 to 7. No HTTP failure observed; unresolved discovery backlog remains.",
       "correctionRef": null,
       "testRefs": [],
-      "resolutionCheck": null,
+      "resolutionCheck": {
+        "checkedAt": "2026-10-22T19:14:12.961Z",
+        "runId": "cai-20261022-lombardia-valmadrera01",
+        "result": "partial-progress",
+        "documentsProcessed": 12,
+        "remainingCandidates": 7,
+        "httpFailuresObserved": 0,
+        "catalogDelta": {
+          "added": 0,
+          "removed": 0,
+          "changedExisting": 0
+        }
+      },
       "policyStatus": "candidate_pending_test"
     },
     {

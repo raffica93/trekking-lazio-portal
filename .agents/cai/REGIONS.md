@@ -58,3 +58,12 @@ Questi valori descrivono esclusivamente il singolo run Brescia. I conteggi Lomba
 ## Preflight CAI Varese — 22 ottobre 2026
 
 Nessuna raccolta avviata. L’endpoint iCal cicloescursionismo `https://www.caivarese.it/?post_type=tribe_events&ical=1&eventDisplay=list&tribe_events_cat=cicloescursionismo-mtb` ha storico HTTP 503. Il cooldown transitorio di 6 ore è scaduto e il collector standard lo pianificherebbe; non esiste un’esclusione puntuale. Il preflight è solo codice/stato in lettura e non ha effettuato richieste. Varese resta bloccata prima del run. Prossimo passo: selezionare una diversa fonte ufficiale Lombardia e verificare preventivamente che la coda non includa URL in cooldown scaduto/non disponibili.
+
+
+## CAI Valmadrera bounded sample — 22 ottobre 2026
+
+| Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | ID duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| `cai-20261022-lombardia-valmadrera01` — CAI Valmadrera | 1 | 0 | 1 | 0 | 0 nuovi/cambiati; 7 eventi esistenti restituiti e invariati; 8 estrazioni documento | 0 ID duplicati nel catalogo; sovrapposizione delle estrazioni non esposta dal report di raccolta | Coda discovery ridotta da 24 a 7; nessun errore HTTP nel campione | `discovery-limit`: 7 documenti candidati non ancora visitati | Pubblicare checkpoint file/report; poi un altro campione Valmadrera circoscritto |
+
+Il catalogo resta a 3.345 ID unici: 0 aggiunte, 0 rimozioni, 0 modifiche. La sezione è parziale, non è prova di calendario vuoto. Nessun dato geografico aggiunto. Test backend dopo la raccolta: 178/178; copie backend/frontend identiche. Report SHA `7862920ad009f600de515810382dd3f72a9d15b4c70b604eaa868386e657d02d`, manifest SHA `0156a229ef3e776af9f1b373d9e355e93960ae062249df11cb45d1dc97d0271a`. I totali regionali Lombardia della tabella storica del 20 ottobre non sono stati ricalcolati.
