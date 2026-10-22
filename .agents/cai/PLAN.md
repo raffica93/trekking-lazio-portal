@@ -80,5 +80,5 @@ Migration `create_place_classifications_20261021090000` registrata dal progetto 
 
 - Completata la riconciliazione classification-only DB (3.336 righe, zero differenze; vedere HANDOFF/STATE), poi ripresa Lombardia.
 - Run Brescia `cai-20261022-lombardia-brescia03`: 26 documenti, 51 eventi di sezione, 136 estrazioni, +7 ID, nessuna rimozione/modifica; una sezione ancora partial e 13 candidati discovery aperti. QA importer PASS, nessuna write DB.
-- Correzione parser precedente resta verificata dal caso reale/fixture; patch importer con protezioni classificazione e provenienza coordinate verificata con `npm test` 178/178. La migration geospaziale non è applicata. Prossimo gate: checkpoint remoto run03 e patch; poi run04 solo sui residui Brescia.
+- Correzione parser precedente resta verificata dal caso reale/fixture; patch importer con protezioni classificazione e provenienza coordinate verificata con `npm test` 178/178. La migration geospaziale non è applicata. Checkpoint run03 e patch pubblicati in `831e031808af7bdd01508e83afd023b02f6ae7d5`; prossimo passo: run04 solo sui residui Brescia.
 - I contatori rigenerati su altre righe status non sono nuova copertura. Nessun import, merge, deploy o cron.
