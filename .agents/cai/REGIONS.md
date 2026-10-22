@@ -67,3 +67,12 @@ Nessuna raccolta avviata. L’endpoint iCal cicloescursionismo `https://www.caiv
 | `cai-20261022-lombardia-valmadrera01` — CAI Valmadrera | 1 | 0 | 1 | 0 | 0 nuovi/cambiati; 7 eventi esistenti restituiti e invariati; 8 estrazioni documento | 0 ID duplicati nel catalogo; sovrapposizione delle estrazioni non esposta dal report di raccolta | Coda discovery ridotta da 24 a 7; nessun errore HTTP nel campione | `discovery-limit`: 7 documenti candidati non ancora visitati | Pubblicare checkpoint file/report; poi un altro campione Valmadrera circoscritto |
 
 Il catalogo resta a 3.345 ID unici: 0 aggiunte, 0 rimozioni, 0 modifiche. La sezione è parziale, non è prova di calendario vuoto. Nessun dato geografico aggiunto. Test backend dopo la raccolta: 178/178; copie backend/frontend identiche. Report SHA `7862920ad009f600de515810382dd3f72a9d15b4c70b604eaa868386e657d02d`, manifest SHA `0156a229ef3e776af9f1b373d9e355e93960ae062249df11cb45d1dc97d0271a`. I totali regionali Lombardia della tabella storica del 20 ottobre non sono stati ricalcolati.
+
+
+## CAI Valmadrera bounded sample 03 — 22 ottobre 2026
+
+| Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | ID duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| `cai-20261022-lombardia-valmadrera03` — CAI Valmadrera | 1 | 0 | 1 | 0 | 0 nuovi/cambiati; 7 eventi esistenti invariati; 19 estrazioni documento | 0 duplicati ID nel catalogo; overlap tra estrazioni non esposto | 5 dei 7 candidati preesistenti raggiunti; zero errori HTTP osservati | discovery-limit: 23 candidati; 2 precedenti non visitati (`/eventi/oggi/`, `/eventi/elenco/?eventDisplay=past`) | Dopo QA/test/checkpoint, run04 max40 documenti/240 s sulla stessa sezione |
+
+Il run02 ha ripetuto i primi 12 documenti senza avanzare la coda e non è stato checkpointato separatamente; run03 ha allargato il campione e ha aperto ulteriori pagine candidate. Catalogo invariato a 3.345 ID unici. Report SHA `befb8a7914e6d6dbe835b9d56678a22e8c3f984bcb132a23ffd8e3d2ec61b255`, manifest SHA `5370bb422bcb39ef0b44a31f1379f98d066aaaeb49a311d0f9bcd3eb45466897`. Nessun import DB; i conteggi regionali complessivi non sono stati aggiornati.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T19:14:12.961Z",
+  "generatedAt": "2026-10-22T19:20:16.561Z",
   "repositoryCommit": "cb7148ff0d69944a34fd8e606f3e61ab42238d31",
   "baseline": {
     "commit": "9919927d4cbef6d154c4dae1441d64cd01c70ad4",
@@ -10564,9 +10564,11 @@
           "cai-20261020-lombardia-deep-15",
           "cai-20261020-piemonte-01",
           "cai-20261020-piemonte-ocr-01",
-          "cai-20261022-lombardia-valmadrera01"
+          "cai-20261022-lombardia-valmadrera01",
+          "cai-20261022-lombardia-valmadrera02",
+          "cai-20261022-lombardia-valmadrera03"
         ],
-        "snapshotCopies": 20,
+        "snapshotCopies": 22,
         "issueCodes": [
           "discovery-limit"
         ],
@@ -10588,7 +10590,8 @@
           "Discovery budget reached; 35 candidate documents remain.",
           "Discovery budget reached; 30 candidate documents remain.",
           "Discovery budget reached; 24 candidate documents remain.",
-          "Discovery budget reached; 7 candidate documents remain."
+          "Discovery budget reached; 7 candidate documents remain.",
+          "Discovery budget reached; 23 candidate documents remain."
         ],
         "sourceUpdatedAt": [
           "2026-10-19T18:24:35.762Z",
@@ -10598,21 +10601,27 @@
           "2026-10-20T01:39:57.342Z",
           "2026-10-20T01:51:46.287Z",
           "2026-10-20T03:37:26.746Z",
-          "2026-10-22T19:14:12.961Z"
+          "2026-10-22T19:14:12.961Z",
+          "2026-10-22T19:20:16.561Z"
         ]
       },
       "strategy": "Classify evidence, preserve valid cache, then retry/re-discover with a bounded policy appropriate to the class.",
       "status": "historical_classified_unverified",
       "owner": "cai-collector",
-      "outcome": "Bounded sample cai-20261022-lombardia-valmadrera01 processed 12 documents; remaining discovery candidates fell from 24 to 7. No HTTP failure observed; unresolved discovery backlog remains.",
+      "outcome": "Bounded sample01 processed 12 docs with 7 candidates remaining; sample02 repeated the same 12 seeds without progress; sample03 processed 20 docs, reached five of the prior seven residual URLs, and generated additional queue entries, leaving 23 candidates. No HTTP failures observed.",
       "correctionRef": null,
       "testRefs": [],
       "resolutionCheck": {
-        "checkedAt": "2026-10-22T19:14:12.961Z",
-        "runId": "cai-20261022-lombardia-valmadrera01",
-        "result": "partial-progress",
-        "documentsProcessed": 12,
-        "remainingCandidates": 7,
+        "checkedAt": "2026-10-22T19:20:16.561Z",
+        "runId": "cai-20261022-lombardia-valmadrera03",
+        "result": "partial; discovery queue expanded",
+        "documentsProcessed": 20,
+        "remainingCandidates": 23,
+        "priorCandidatesReached": 5,
+        "priorCandidatesStillUnvisited": [
+          "https://organizzazione.cai.it/sez-valmadrera/eventi/oggi/",
+          "https://organizzazione.cai.it/sez-valmadrera/eventi/elenco/?eventDisplay=past"
+        ],
         "httpFailuresObserved": 0,
         "catalogDelta": {
           "added": 0,

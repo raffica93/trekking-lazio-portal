@@ -84,3 +84,5 @@ Migration `create_place_classifications_20261021090000` registrata dal progetto 
 - I contatori rigenerati su altre righe status non sono nuova copertura. Nessun import, merge, deploy o cron.
 
 - Run Valmadrera `cai-20261022-lombardia-valmadrera01`: 12 documents, 8 extracted rows, 7 existing events unchanged, 0 catalog delta; discovery backlog 7 remains. Importer PASS; backend tests 178/178. Checkpoint report/files, then continue one bounded sample on Valmadrera; no DB import unless a verified new event changes the catalog.
+
+- Run03 Valmadrera: 20 documenti, 19 estrazioni, 7 eventi preesistenti invariati, coda discovery 23; 5/7 candidati precedenti raggiunti, zero HTTP failures. Il run02 ha ripetuto i seed e non ha ridotto la coda. Dopo QA/test/checkpoint run03, un singolo run04 max40/240s/concurrency1 per la coda osservata; poi rivalutare il nuovo backlog, senza import DB a delta zero.
