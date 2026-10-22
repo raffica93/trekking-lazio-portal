@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "migration-fix-checkpoint-pending",
+  "phase": "db-delta-delivered-awaiting-receipt-checkpoint",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -215,11 +215,17 @@
       "status": "completed",
       "owner": "orchestrator",
       "result": "The checkpointed geo-evidence migration was attempted after schema inspection; DB rejected jsonb_object_length(jsonb), which is unavailable. Read-only verification confirmed the failed DDL transaction added neither column nor migration record, and no event data was written. Replaced object-length check with exact-key JSONB subtraction expression and added migration regression assertions; importer suite 34/34 passes. Fix awaits a new remote checkpoint before retrying DDL."
+    },
+    {
+      "id": "S10",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Corrected additive geo evidence migration was checkpointed at 1914bca and applied successfully before data writes. Fresh preimport query confirmed all 10 approved IDs absent and editorial digest unchanged. Insert-only MCP SQL bridge used rows validated/transformed by the committed importer: 10 published places and 10 missing classifications inserted, conflict-ignore. After query: 10/10 exact, zero missing/mismatch; existing-row editorial digest still exactly matches preimport value, prior max updated_at unchanged. Two confirmed duplicates excluded; two probable duplicates held. Receipt awaits file checkpoint."
     }
   ],
   "nextAction": {
-    "step": "S10",
-    "instruction": "Checkpoint and verify the corrected geo-evidence migration and test. Apply that additive migration only after remote checkpoint; verify geo_evidence and the existing FK. Then perform a fresh read-only target-ID/editorial-digest query, deliver the 10-row delta via the authorized Supabase channel under the importer insert-only contract, and save/reconcile the receipt."
+    "step": "S11",
+    "instruction": "Commit/push delta-import-receipt.json, the updated regional run state, and the final handoff/state. Verify remote receipt blob/hash. Then continue the separate Lombardia source-coverage work, one bounded section at a time; do not replay this completed 10-row manifest or the 3,336 classification baseline."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -914,7 +920,7 @@
   "deltaDelivery": {
     "regionalRunId": "cai-20261022-lombardia-valmadrera07",
     "classificationRunId": "cai-map-20261022-valmadrera01",
-    "status": "schema-migration-fix-awaiting-checkpoint",
+    "status": "completed-10-row-delta-awaiting-receipt-checkpoint",
     "candidateIds": 10,
     "confirmedDuplicatesExcluded": 2,
     "probableDuplicatesHeld": 2,
@@ -926,6 +932,56 @@
     },
     "coordinatesAdded": 0,
     "writeContract": "insert-only places + missing classifications; conflict-ignore; no deletes/updates",
-    "next": "push the migration compatibility fix and test; apply the corrected additive migration; then recheck target IDs and editorial digest and import the 10-row sealed delta"
+    "next": "push the migration compatibility fix and test; apply the corrected additive migration; then recheck target IDs and editorial digest and import the 10-row sealed delta",
+    "databaseReceipt": {
+      "path": "backend/data/agent-runs/cai-map-20261022-valmadrera01/delta-import-receipt.json",
+      "sha256": "b9b8a5fdcabc12f94f5aeeb39fec4e03b375098bb32837942b8c598f0cdf7cf7",
+      "placesInserted": 10,
+      "classificationsInserted": 10,
+      "missing": 0,
+      "mismatches": 0,
+      "candidateDisposition": {
+        "newCandidates": 14,
+        "inserted": 10,
+        "confirmedDuplicatesExcluded": 2,
+        "probableDuplicatesHeld": 2
+      }
+    },
+    "preImportQuery": {
+      "observedAt": "2026-10-22T20:33:42.003837Z",
+      "placesTotal": 4405,
+      "publishedTotal": 4346,
+      "mapCandidates": 3336,
+      "classificationsTotal": 3336,
+      "targetPlacesPresent": 0,
+      "targetClassificationsPresent": 0,
+      "editorialDigest": "b52a6bcc1c0d4779ffeb112e5547c891"
+    },
+    "afterQuery": {
+      "observedAt": "2026-10-22T20:34:53.834321Z",
+      "placesTotal": 4415,
+      "publishedTotal": 4356,
+      "mapCandidates": 3346,
+      "classificationsTotal": 3346,
+      "targetPlacesPresent": 10,
+      "targetPlacesMissing": 0,
+      "targetFieldMismatches": 0,
+      "targetClassificationsPresent": 10,
+      "targetClassificationMismatches": 0,
+      "classificationsByDecision": {
+        "trekking": 969,
+        "non_trekking": 17,
+        "da_verificare": 2360
+      },
+      "defaultMapVisibleRows": 3329,
+      "preexistingEditorialDigestMatchesBefore": true,
+      "preexistingLatestUpdatedAtUnchanged": true
+    },
+    "duplicateMatchQuery": {
+      "observedAt": "2026-10-22T20:36:22.256568Z",
+      "confirmedOriginalIdsPresent": 2,
+      "probableComparisonIdsPresent": 2,
+      "noRowsChanged": true
+    }
   }
 }
