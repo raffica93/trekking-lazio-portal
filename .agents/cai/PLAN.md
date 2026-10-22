@@ -126,6 +126,6 @@ Run `cai-20261022-lombardia-valmadrera07` ha rielaborato il PDF CAI ufficiale co
 
 - Raccolta `cai-20261022-molise-campobasso01`: 1 indice HTML, 127 righe fonte, 2 nuovi ID, 0 rimossi, 1 riga esistente con soli campi source/link/description aggiornati; fonte `partial` (PDF 37 residui e HTML continuation 1 senza URL persistito).
 - Classificazione `cai-map-20261022-campobasso01`: 1 `trekking`, 1 `da_verificare`, 0 errori; QA importer PASS e modello Mercury attestato.
-- Preflight DB in sola lettura: target assenti da `places` e `place_classifications`, nessun conflitto ID/slug; schema FK verificato `ON DELETE RESTRICT`. Nessuna DDL/DML.
-- Gate: pubblicare manifest/evidenze/cataloghi/report e stato; verificare i blob dal branch remoto. Poi l'importer ripete il preflight e inserisce solo i due ID classificati con `--delta-only`, conflitti preservati; query joined e ricevuta.
-- Dopo la ricevuta: selezionare un'altra fonte ufficiale lavorabile; non ripetere l'indice Campobasso o le code non mirabili. Nessun cron, merge o deploy.
+- Preflight read-only confermato 0/2 target presenti e zero conflitti ID/slug; FK `ON DELETE RESTRICT`.
+- Checkpoint file remoto `31d81ea`; poi insert-only 2 place + 2 classificazioni. Il primo controllo ha rilevato un fingerprint Lago Vivo trascritto male; CAS sul solo fingerprint, seguito da joined query 2/2 senza mismatch/missing, place update o delete.
+- Receipt/report e stato sono checkpointati e verificati a `9bc54c5`. Prossimo: preflight offline delle 38 discovery residue Campobasso; se non sono URL stabili, chiudere la regione come parziale e passare oltre. Nessun cron, merge o deploy.

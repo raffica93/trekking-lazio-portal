@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "molise-source-coverage",
+  "phase": "molise-campobasso-residual-source-preflight",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -235,7 +235,7 @@
       "result": "Campobasso bounded refresh: 2 new IDs, collection partial; Mercury 1 trekking + 1 da_verificare. Files remote-verified at 31d81ea. Importer read-only QA/preflight PASS; exact delta inserted 2 places + 2 classes, then caught and CAS-corrected only one manually truncated fingerprint. Final joined query 2/2, zero missing/mismatches; place updates/deletes 0, class corrective fingerprint update 1. Receipt awaits a separate remote checkpoint."
     }
   ],
-  "nextAction": "Campobasso delta file checkpoint 31d81ea è remoto; import completato e 2/2 riconciliati nella ricevuta locale non ancora checkpointata. Pubblicare il checkpoint receipt/run state e verificarne i blob; poi riattivare cai-collector per preflight read-only della prossima fonte ufficiale non esaurita, senza ripetere le code Campobasso non mirabili.",
+  "nextAction": "Concludere preflight collector offline sulle 38 continuation/discovery residue Campobasso. Se non esistono URL ufficiali stabili recuperabili dagli artefatti, registrare Molise come fonte parziale bloccata e passare alla successiva regione con una fonte preflightata. Nessun replay della stessa pagina o PDF.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -1265,7 +1265,7 @@
       "region": "Molise",
       "collection": "partial",
       "files": "ready; importer QA PASS; checkpoint pending",
-      "database": "pending; read-only preflight assigned, no DML",
+      "database": "completed; receipt remote verified",
       "manifestPath": "backend/data/agent-runs/cai-20261022-molise-campobasso01/manifest.json",
       "manifestSha256": "be53777def101bac5f73e37aeca8b96b72c637c85a64e657723c48b3762fa667",
       "stateSha256": "34445b35794fadb0f9a4ed0827cef9a77f72d15b398017dad830405543995296",
@@ -1302,15 +1302,16 @@
         "annualPdfCandidates": 37,
         "htmlContinuationCandidates": 1,
         "exactHtmlCandidateUrlPersisted": false
-      }
+      },
+      "receiptCheckpointCommit": "9bc54c562c56a9ebe0b9c68e728e51a650584222"
     }
   },
   "repositoryCommit": {
     "branch": "codex/cai-orchestrator-luna",
-    "head": "d16ebc0ea29118199f6deb3e9821ee3d4efef191",
+    "head": "9bc54c562c56a9ebe0b9c68e728e51a650584222",
     "remoteVerified": true,
-    "fetchHead": "d16ebc0ea29118199f6deb3e9821ee3d4efef191",
-    "note": "origin tracking ref era stale; fetch origin codex/cai-orchestrator-luna ha verificato che il remoto coincide con HEAD"
+    "fetchHead": "9bc54c562c56a9ebe0b9c68e728e51a650584222",
+    "receiptCheckpointCommit": "9bc54c562c56a9ebe0b9c68e728e51a650584222"
   },
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
@@ -1325,10 +1326,10 @@
     "writes": 0
   },
   "tests": "After Potenza Picena01 collection, backend npm test passed 204/204. Six public catalog/status JSON SHA-256 values unchanged before and after tests.",
-  "updatedAt": "2026-10-22T22:35:39.097Z",
+  "updatedAt": "2026-10-22T22:36:10.292Z",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:21:50.896Z",
   "regionCurrent": "Molise — Campobasso: campione parziale (127 righe fonte; 2 nuovi ID) e consegna DB del delta completata: 2 place + 2 classificazioni, 0 mancanti/mismatch. Restano 37 candidati PDF annuale e 1 continuation HTML senza URL; non dichiarare copertura completa.",
-  "regionNext": "Dopo checkpoint remoto della ricevuta Campobasso, preflight del collector sulla prossima fonte ufficiale lavorabile; se Campobasso è esaurita per URL residui non persistiti, registrare i blocchi e passare alla successiva regione.",
+  "regionNext": "Campobasso: collector verifica solo cache/status i 37 residui PDF + 1 HTML; se non mirabili, passare alla prossima fonte ufficiale non esaurita in Abruzzo, selezionata da cai-sections/status senza rete.",
   "preflight": {
     "at": "2026-10-22T22:30:21.913236Z",
     "sourceId": "cai-campobasso-9236001",
@@ -1360,7 +1361,7 @@
   "deltaDelivery": {
     "regionalRunId": "cai-20261022-molise-campobasso01",
     "classificationRunId": "cai-map-20261022-campobasso01",
-    "status": "completed-awaiting-receipt-checkpoint",
+    "status": "completed-reconciled-receipt-remote-verified",
     "candidateIds": 2,
     "classificationCounts": {
       "trekking": 1,
@@ -1392,7 +1393,7 @@
       "deletes": 0,
       "afterQueryAt": "2026-10-22T22:33:30.892756Z"
     },
-    "receiptCheckpointCommit": null
+    "receiptCheckpointCommit": "9bc54c562c56a9ebe0b9c68e728e51a650584222"
   },
   "lastCodeCorrection": {
     "commit": "d16ebc0ea29118199f6deb3e9821ee3d4efef191",
@@ -1456,7 +1457,8 @@
     "placeUpdates": 0,
     "classificationCorrectiveUpdates": 1,
     "deletes": 0,
-    "afterQueryAt": "2026-10-22T22:33:30.892756Z"
+    "afterQueryAt": "2026-10-22T22:33:30.892756Z",
+    "receiptCheckpointCommit": "9bc54c562c56a9ebe0b9c68e728e51a650584222"
   },
   "regionalCoverage": {
     "region": "Molise",
@@ -1486,7 +1488,7 @@
         "Annual PDF discovery-limit 37 remains; no stable residual URL recovered.",
         "HTML continuation has one candidate but exact URL was not persisted; source remains partial."
       ],
-      "nextStep": "Checkpoint receipt + completed run state; then preflight next official source without replaying Campobasso discovery queues.",
+      "nextStep": "Concludere preflight collector offline sulle 38 continuation/discovery residue Campobasso. Se non esistono URL ufficiali stabili recuperabili dagli artefatti, registrare Molise come fonte parziale bloccata e passare alla successiva regione con una fonte preflightata. Nessun replay della stessa pagina o PDF.",
       "deliveredPlaces": 2,
       "deliveredClassifications": 2,
       "databaseMismatches": 0,
@@ -1597,7 +1599,7 @@
     {
       "regionalRunId": "cai-20261022-molise-campobasso01",
       "classificationRunId": "cai-map-20261022-campobasso01",
-      "status": "completed-reconciled-awaiting-receipt-checkpoint",
+      "status": "completed-reconciled-receipt-remote-verified",
       "candidateIds": 2,
       "classificationCounts": {
         "trekking": 1,
@@ -1621,7 +1623,8 @@
       "classificationFingerprintCorrections": 1,
       "databaseReceiptSha256": "134ff85bba4c35c7312597a57b2320bfe9c69eb7ec5117d992a874a2be551715",
       "databaseReportSha256": "cf778a3c77a45c55ec8af0b570d6d50eced1d3b69ccc405d4ab67ed20263e265",
-      "afterQueryAt": "2026-10-22T22:33:30.892756Z"
+      "afterQueryAt": "2026-10-22T22:33:30.892756Z",
+      "receiptCheckpointCommit": "9bc54c562c56a9ebe0b9c68e728e51a650584222"
     }
   ]
 }
