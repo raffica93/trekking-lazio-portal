@@ -39,3 +39,9 @@
 - Correzione: richiedere un confine numerico a sinistra per i pattern di durata; l’orario continua a non essere una durata e il formato esplicito `Durata: 6 ore` resta valido.
 - Evidenza: fixture ufficiale minimizzata `backend/test/fixtures/cai-brescia-cinema-time.json`; test in `backend/test/scraper.test.js`; run reale corretto `cai-20261022-lombardia-brescia02` non contiene `durationHours`; `backend npm test` 175/175.
 - Commit remoto: `cb7148ff0d69944a34fd8e606f3e61ab42238d31`.
+
+## 2026-10-22 — preservazione geospaziale e classificazione prima dell'import
+
+- I nuovi eventi senza classificazione valida non entrano in `places`; una riga esistente non classificata resta del tutto invariata. Gli import regionali devono prima passare classificazione valida e checkpoint file.
+- Qualsiasi componente di coordinate finite, anche una coppia parziale o il fallback Rome, è trattato come dato curato: il normal importer non lo sovrascrive né lo cancella. Coordinate in ingresso si salvano solo con `geoEvidence.status=verified`, fonte e URL documentati, precisione non-unknown e lat/lng nel range. Evidenza non verificata non fornisce coordinate al DB.
+- Fixture sul record reale cinema Brescia senza classification, test di protezione coordinate esistenti e check SQL su forma esatta/range; `backend npm test` 178/178. La migration additiva `20261022200000_places_geo_evidence.sql` non è applicata al database.

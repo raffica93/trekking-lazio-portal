@@ -78,6 +78,14 @@ function sampleExcursion(overrides = {}) {
   };
 }
 
+function classificationMap(events, decision = 'da_verificare') {
+  return new Map(events.map((event) => [event.id, { decision }]));
+}
+
+function verifiedGeo(sourceKind = 'official', sourceUrl = 'https://example.org/coordinates') {
+  return { status: 'verified', pointType: 'area', precision: 'high', sourceKind, sourceUrl };
+}
+
 function createFakeSupabase({
   existingSourceIds = [],
   existingRows = null,
@@ -105,6 +113,7 @@ function createFakeSupabase({
     selects,
     classificationUpserts,
     classificationRows,
+    rows,
     tables,
     from(table) {
       tables.push(table);
@@ -145,6 +154,12 @@ function createFakeSupabase({
             for (const row of batch) if (!classificationRows.some((entry) => entry.source_id === row.source_id)) {
               classificationRows.push({ ...row });
               inserted.push(row);
+            }
+          } else {
+            for (const row of batch) {
+              const index = classificationRows.findIndex((entry) => entry.source_id === row.source_id);
+              if (index < 0) classificationRows.push({ ...row });
+              else classificationRows[index] = { ...row };
             }
           }
           const result = Promise.resolve({ data: batch, error: null });
@@ -461,6 +476,20 @@ test('classification migration protects place rows and accepts only verified Mer
   assert.doesNotMatch(migration, /on delete cascade/i);
 });
 
+test('geo evidence migration is additive, checked, and has no backfill or write side effects', () => {
+  const migration = fs.readFileSync(path.join(__dirname, '../../supabase/migrations/20261022200000_places_geo_evidence.sql'), 'utf8');
+  assert.match(migration, /add column if not exists geo_evidence jsonb/i);
+  assert.match(migration, /places_geo_evidence_valid_check/i);
+  assert.match(migration, /jsonb_object_length\(geo_evidence\) = 5/i);
+  assert.match(migration, /'verified', 'needs_review', 'unknown'/i);
+  assert.match(migration, /'start', 'summit', 'area'/i);
+  assert.match(migration, /'official', 'gpx', 'map'/i);
+  assert.match(migration, /latitude is not null and longitude is not null/i);
+  assert.match(migration, /latitude between -90 and 90/i);
+  assert.match(migration, /longitude between -180 and 180/i);
+  assert.doesNotMatch(migration, /update public\.places|insert into public\.places|delete from public\.places/i);
+});
+
 test('toPlaceRow drops durations that overflow numeric(5,2)', () => {
   const ok = toPlaceRow(sampleExcursion({ durationHours: 5.5 }), 'published');
   assert.equal(ok.duration_hours, 5.5);
@@ -485,7 +514,8 @@ test('importNewPlaces inserts missing source_id rows as published', async () => 
   const result = await importNewPlaces({
     supabase,
     excursions: [excursion],
-    status: 'published'
+    status: 'published',
+    classificationsBySourceId: classificationMap([excursion])
   });
 
   assert.equal(result.inserted, 1);
@@ -504,7 +534,8 @@ test('importNewPlaces skips source_id values already in the database', async () 
   const result = await importNewPlaces({
     supabase,
     excursions: [excursion],
-    status: 'published'
+    status: 'published',
+    classificationsBySourceId: classificationMap([excursion])
   });
 
   assert.equal(result.inserted, 0);
@@ -525,7 +556,8 @@ test('importNewPlaces inserts only the new rows in a mixed batch', async () => {
   const result = await importNewPlaces({
     supabase,
     excursions: [existing, fresh],
-    status: 'published'
+    status: 'published',
+    classificationsBySourceId: classificationMap([existing, fresh])
   });
 
   assert.equal(result.inserted, 1);
@@ -544,7 +576,8 @@ test('importNewPlaces does not update existing rows when title or date changed',
   const result = await importNewPlaces({
     supabase,
     excursions: [changed],
-    status: 'published'
+    status: 'published',
+    classificationsBySourceId: classificationMap([changed])
   });
 
   assert.equal(result.inserted, 0);
@@ -568,7 +601,8 @@ test('importNewPlaces includes excursions without coordinates in the list', asyn
   const result = await importNewPlaces({
     supabase,
     excursions: [located, unlocated],
-    status: 'published'
+    status: 'published',
+    classificationsBySourceId: classificationMap([located, unlocated])
   });
 
   assert.equal(result.inserted, 2);
@@ -587,7 +621,7 @@ test('organizer region is independent of the destination and supplements existin
   assert.equal(row.region, 'Lazio');
   assert.equal(row.organizer_region, 'Lombardia');
   const supabase = createFakeSupabase({ existingSourceIds: [excursion.id] });
-  await importNewPlaces({ supabase, excursions: [excursion], status: 'published' });
+  await importNewPlaces({ supabase, excursions: [excursion], status: 'published', classificationsBySourceId: classificationMap([excursion]) });
   assert.deepEqual(supabase.updates[0].patch, { organizer_region: 'Lombardia', cai_section_id: 'milano' });
 });
 
@@ -614,8 +648,8 @@ test('import rejects executable URLs and does not invent a missing coordinate pa
   assert.equal(row.longitude, null);
 });
 
-test('coordPatchForExisting rewrites Rome fallback and leaves classified peaks', () => {
-  assert.deepEqual(coordPatchForExisting({
+test('coordPatchForExisting preserves finite existing pairs and fills only an empty pair with verified provenance', () => {
+  assert.equal(coordPatchForExisting({
     source_id: 'esperia-1',
     latitude: DEFAULT_COORDS.lat,
     longitude: DEFAULT_COORDS.lng,
@@ -624,12 +658,9 @@ test('coordPatchForExisting rewrites Rome fallback and leaves classified peaks',
     id: 'esperia-1',
     location: 'M. Aurunci',
     lat: 41.345,
-    lng: 13.67
-  })), {
-    latitude: 41.345,
-    longitude: 13.67,
-    coordinates_quality: 'massif'
-  });
+    lng: 13.67,
+    geoEvidence: verifiedGeo('map')
+  })), null);
 
   assert.equal(coordPatchForExisting({
     source_id: 'roma-peak',
@@ -644,15 +675,27 @@ test('coordPatchForExisting rewrites Rome fallback and leaves classified peaks',
     longitude: 13.067,
     coordinates_quality: null
   }, sampleExcursion({ lat: 41.345, lng: 13.67 })), null);
+
+  assert.deepEqual(coordPatchForExisting({
+    source_id: 'empty', latitude: null, longitude: null, geo_evidence: null
+  }, sampleExcursion({
+    lat: 41.345, lng: 13.67, coordinatesQuality: 'massif', geoEvidence: verifiedGeo('official')
+  })), {
+    latitude: 41.345,
+    longitude: 13.67,
+    coordinates_quality: 'massif',
+    geo_evidence: verifiedGeo('official')
+  });
 });
 
-test('importNewPlaces updates existing Rome fallback coordinates', async () => {
+test('importNewPlaces preserves existing Rome fallback coordinates', async () => {
   const excursion = sampleExcursion({
     id: 'esperia-petrella',
     title: 'M. Petrella',
     location: 'M. Aurunci',
     lat: 41.345,
-    lng: 13.67
+    lng: 13.67,
+    geoEvidence: verifiedGeo('official')
   });
   const supabase = createFakeSupabase({
     existingRows: [{
@@ -660,27 +703,23 @@ test('importNewPlaces updates existing Rome fallback coordinates', async () => {
       latitude: DEFAULT_COORDS.lat,
       longitude: DEFAULT_COORDS.lng,
       coordinates_quality: null,
+      location: 'Roma',
+      geo_evidence: null,
       status: 'published'
     }]
   });
   const result = await importNewPlaces({
     supabase,
     excursions: [excursion],
-    status: 'published'
+    status: 'published',
+    classificationsBySourceId: classificationMap([excursion])
   });
 
   assert.equal(result.inserted, 0);
-  assert.equal(result.updated, 1);
-  assert.equal(result.skipped, 0);
+  assert.equal(result.updated, 0);
+  assert.equal(result.skipped, 1);
   assert.deepEqual(supabase.inserts, []);
-  assert.equal(supabase.updates.length, 1);
-  assert.equal(supabase.updates[0].column, 'source_id');
-  assert.equal(supabase.updates[0].value, excursion.id);
-  assert.deepEqual(supabase.updates[0].patch, {
-    latitude: 41.345,
-    longitude: 13.67,
-    coordinates_quality: 'massif'
-  });
+  assert.deepEqual(supabase.updates, []);
 });
 
 test('importNewPlaces fills coordinates that were previously missing', async () => {
@@ -690,7 +729,8 @@ test('importNewPlaces fills coordinates that were previously missing', async () 
     location: 'Rascino',
     lat: 42.291,
     lng: 13.121,
-    coordinatesQuality: 'massif'
+    coordinatesQuality: 'massif',
+    geoEvidence: verifiedGeo('map', 'https://example.org/map/monte-nuria')
   });
   const supabase = createFakeSupabase({
     existingRows: [{
@@ -698,18 +738,97 @@ test('importNewPlaces fills coordinates that were previously missing', async () 
       latitude: null,
       longitude: null,
       coordinates_quality: null,
+      geo_evidence: null,
       status: 'published'
     }]
   });
 
-  const result = await importNewPlaces({ supabase, excursions: [excursion], status: 'published' });
+  const result = await importNewPlaces({ supabase, excursions: [excursion], status: 'published', classificationsBySourceId: classificationMap([excursion]) });
 
   assert.equal(result.updated, 1);
   assert.deepEqual(supabase.updates[0].patch, {
     latitude: 42.291,
     longitude: 13.121,
-    coordinates_quality: 'massif'
+    coordinates_quality: 'massif',
+    geo_evidence: verifiedGeo('map', 'https://example.org/map/monte-nuria')
   });
+});
+
+test('classification gate and geography protection cover cinema, admin pairs, partial pairs, evidence fills, and reviewable decisions', async () => {
+  const bresciaCinema = JSON.parse(fs.readFileSync(path.join(__dirname, 'fixtures/cai-brescia-cinema-unclassified.json'), 'utf8'));
+  const cinemaPlaceCandidate = toPlaceRow(bresciaCinema, 'published');
+  assert.equal(cinemaPlaceCandidate.source_id, bresciaCinema.id);
+  assert.equal(cinemaPlaceCandidate.latitude, null);
+  assert.equal(cinemaPlaceCandidate.longitude, null);
+  const events = [
+    sampleExcursion({ id: 'admin-rome', lat: 41.4, lng: 12.5, geoEvidence: verifiedGeo('map') }),
+    sampleExcursion({ id: 'admin-curated', lat: 42.2, lng: 13.1, geoEvidence: verifiedGeo('official') }),
+    sampleExcursion({ id: 'admin-partial', lat: 43.1, lng: 14.1, geoEvidence: verifiedGeo('map') }),
+    sampleExcursion({ id: 'map-fill', lat: 42.4, lng: 12.4, geoEvidence: verifiedGeo('map', 'https://example.org/map') }),
+    sampleExcursion({ id: 'official-fill', lat: 42.5, lng: 12.5, geoEvidence: verifiedGeo('official', 'https://example.org/official') }),
+    bresciaCinema,
+    sampleExcursion({ id: 'new-unclassified', lat: null, lng: null, classification: undefined }),
+    sampleExcursion({ id: 'reviewable', lat: null, lng: null, classification: { decision: 'da_verificare' } }),
+    sampleExcursion({ id: 'partial-new', lat: 42.6, lng: null, classification: { decision: 'da_verificare' } })
+  ];
+  const supabase = createFakeSupabase({ existingRows: [
+    { source_id: 'admin-rome', location: 'Roma', latitude: DEFAULT_COORDS.lat, longitude: DEFAULT_COORDS.lng, coordinates_quality: null, geo_evidence: null, status: 'published' },
+    { source_id: 'admin-curated', location: 'Località curata', latitude: 42.2, longitude: 13.1, coordinates_quality: null, geo_evidence: null, status: 'published' },
+    { source_id: 'admin-partial', location: 'Punto parziale', latitude: 43.1, longitude: null, coordinates_quality: null, geo_evidence: null, status: 'published' },
+    { source_id: 'map-fill', location: 'Da verificare', latitude: null, longitude: null, coordinates_quality: null, geo_evidence: null, status: 'published' },
+    { source_id: 'official-fill', location: 'Da verificare', latitude: null, longitude: null, coordinates_quality: null, geo_evidence: null, status: 'published' },
+    {
+      source_id: bresciaCinema.id, title: 'Titolo editoriale Brescia', status: 'published', cover_image_path: 'admin/brescia-cover.jpg',
+      location: 'Sala amministrata', latitude: 45.54, longitude: 10.21, coordinates_quality: 'admin-curated',
+      geo_evidence: { status: 'verified', pointType: 'area', precision: 'exact', sourceKind: 'official', sourceUrl: 'https://admin.example.org/geo' }
+    }
+  ] });
+  const cinemaBefore = { ...supabase.rows.find((row) => row.source_id === bresciaCinema.id) };
+  const classified = events.filter((event) => !['new-unclassified', bresciaCinema.id].includes(event.id));
+  const result = await importNewPlaces({
+    supabase, excursions: events, status: 'published', classificationsBySourceId: classificationMap(classified)
+  });
+
+  assert.equal(result.inserted, 2);
+  assert.deepEqual(result.skippedUnclassified, [{ source_id: 'new-unclassified', reason: 'missing_valid_classification' }]);
+  assert.ok(result.preservedUnclassifiedExistingSourceIds.includes(bresciaCinema.id));
+  assert.deepEqual(supabase.rows.find((row) => row.source_id === bresciaCinema.id), cinemaBefore);
+  assert.equal(supabase.inserts.flat().some((row) => row.source_id === bresciaCinema.id), false);
+  assert.equal(supabase.updates.some(({ value }) => value === bresciaCinema.id), false);
+  assert.deepEqual(supabase.inserts[0].map((row) => row.source_id), ['reviewable', 'partial-new']);
+  assert.equal(supabase.inserts[0][0].latitude, null);
+  assert.equal(supabase.inserts[0][0].longitude, null);
+  assert.equal(supabase.inserts[0][1].latitude, null);
+  assert.equal(supabase.inserts[0][1].longitude, null);
+  assert.deepEqual(supabase.updates.map(({ value }) => value).sort(), ['map-fill', 'official-fill']);
+  assert.equal(supabase.rows.find((row) => row.source_id === 'admin-rome').latitude, DEFAULT_COORDS.lat);
+  assert.equal(supabase.rows.find((row) => row.source_id === 'admin-curated').latitude, 42.2);
+  assert.equal(supabase.rows.find((row) => row.source_id === 'admin-partial').longitude, null);
+  assert.equal(supabase.rows.find((row) => row.source_id === 'map-fill').geo_evidence.sourceKind, 'map');
+  assert.equal(supabase.rows.find((row) => row.source_id === 'official-fill').geo_evidence.sourceKind, 'official');
+  assert.deepEqual(result.geography.preservedPartialCoordinateSourceIds, ['admin-partial']);
+  assert.deepEqual(result.geography.partialIncomingCoordinateSourceIds, ['partial-new']);
+  assert.ok(result.geography.unverifiedIncomingCoordinateSourceIds.includes('partial-new'));
+  assert.ok(result.geography.preservedFiniteCoordinateSourceIds.includes('admin-rome'));
+});
+
+test('geoEvidence shape requires provenance for verified coordinates and allows review metadata without coordinates', () => {
+  const verified = toPlaceRow(sampleExcursion({
+    geoEvidence: verifiedGeo('official', 'https://example.org/official-point')
+  }), 'published');
+  assert.equal(verified.latitude, 42.473);
+  assert.equal(verified.geo_evidence.pointType, 'area');
+
+  const review = toPlaceRow(sampleExcursion({
+    lat: 42.473, lng: 12.987,
+    geoEvidence: { status: 'needs_review', pointType: 'start', precision: 'low', sourceKind: 'map', sourceUrl: 'https://example.org/rough-map' }
+  }), 'published');
+  assert.equal(review.latitude, null);
+  assert.equal(review.longitude, null);
+  assert.equal(review.geo_evidence.status, 'needs_review');
+
+  assert.throws(() => toPlaceRow(sampleExcursion({ geoEvidence: verifiedGeo('official', null) }), 'published'), /verified coordinates/);
+  assert.throws(() => toPlaceRow(sampleExcursion({ geoEvidence: { ...verifiedGeo(), pointType: 'village' } }), 'published'), /geoEvidence values/);
 });
 
 function readyRunFixture(t) {
@@ -724,7 +843,9 @@ function readyRunFixture(t) {
     repoRoot: root
   };
   fs.mkdirSync(path.dirname(files.data), { recursive: true });
-  fs.writeFileSync(files.data, JSON.stringify({ excursions: [sampleExcursion()] }));
+  const event = sampleExcursion();
+  event.classification = classifyRules(event);
+  fs.writeFileSync(files.data, JSON.stringify({ excursions: [event] }));
   fs.writeFileSync(files.registry, JSON.stringify({ sections: [] }));
   fs.writeFileSync(files.status, JSON.stringify({ sources: [] }));
   const manifestPath = path.join(runDir, 'manifest.json');
@@ -799,6 +920,8 @@ test('main imports a sealed fixture and writes a verifiable receipt after reconc
   const verification = JSON.parse(fs.readFileSync(path.join(fixture.runDir, 'db-verification.json'), 'utf8'));
   assert.deepEqual({ status: receipt.status, runId: receipt.runId, inserted: receipt.inserted, projectRef: receipt.projectRef, registrySyncPerformed: receipt.registrySyncPerformed }, { status: 'completed', runId: 'test-run', inserted: 1, projectRef: 'project', registrySyncPerformed: true });
   assert.equal(receipt.verification.protectedFieldsChanged, 0);
+  assert.equal(receipt.verification.geographyMismatched, 0);
+  assert.equal(receipt.geography.auditedRows[0].action, 'inserted');
   assert.deepEqual(verification.sourceIds, ['roma-2026-09-monte-terminillo']);
 });
 
@@ -817,10 +940,13 @@ test('invalid classification responses are skipped without classification upsert
     files: fixture.files
   });
   assert.equal(factoryCalls, 1);
-  assert.equal(result.inserted, 1);
+  assert.equal(result.inserted, 0);
+  assert.equal(result.skippedUnclassifiedNew, 1);
   assert.equal(result.classifications, 0);
   assert.equal(result.skippedClassifications, 1);
   assert.deepEqual(supabase.classificationUpserts, []);
   const receipt = JSON.parse(fs.readFileSync(path.join(fixture.runDir, 'import-receipt.json'), 'utf8'));
   assert.equal(receipt.skippedClassifications, 1);
+  assert.equal(receipt.skippedUnclassifiedNew, 1);
+  assert.equal(receipt.status, 'partial');
 });

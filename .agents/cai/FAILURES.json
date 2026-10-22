@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T18:34:10Z",
+  "generatedAt": "2026-10-22T18:52:06Z",
   "repositoryCommit": "cb7148ff0d69944a34fd8e606f3e61ab42238d31",
   "baseline": {
     "commit": "9919927d4cbef6d154c4dae1441d64cd01c70ad4",
@@ -44236,6 +44236,54 @@
         "commit": "cb7148ff0d69944a34fd8e606f3e61ab42238d31"
       },
       "policyStatus": "verified"
+    },
+    {
+      "id": "CAI-F-ef02a3de1c78c478",
+      "sourceId": "cai-brescia-9216005",
+      "url": "https://organizzazione.cai.it/sez-brescia/",
+      "phase": "discovery",
+      "failureClass": "discovery-budget-exhausted",
+      "httpStatus": null,
+      "firstObservedAt": "2026-10-22T18:37:27.020Z",
+      "lastObservedAt": "2026-10-22T18:37:27.020Z",
+      "observationBasis": "persisted state timestamp; not an individual request timestamp",
+      "history": {
+        "runIds": [
+          "cai-20261022-lombardia-brescia03"
+        ],
+        "snapshotCopies": 1,
+        "issueCodes": [
+          "discovery-limit"
+        ],
+        "sourceStatuses": [
+          "partial"
+        ]
+      },
+      "attempts": {
+        "actualHistoricalRequests": "document fetch budget was 26; individual candidate/request mapping is not available",
+        "currentCycleRequests": null,
+        "recoveryAttempts": []
+      },
+      "cooldown": {
+        "policy": "No automatic retry; next work must use a bounded residual plan",
+        "nextEligibleAt": null
+      },
+      "evidence": {
+        "representativeMessages": [
+          "Discovery budget reached; 13 candidate documents remain."
+        ],
+        "sourceUpdatedAt": [
+          "2026-10-22T18:37:26.824Z"
+        ]
+      },
+      "strategy": "Use an explicit bounded residual list/plan; preserve the valid source cache and do not mark source complete until discovery is resolved.",
+      "status": "open",
+      "owner": "cai-collector",
+      "outcome": "13 discovery candidates remain after bounded run03; section remains partial.",
+      "correctionRef": null,
+      "testRefs": [],
+      "resolutionCheck": null,
+      "policyStatus": "current_cycle_observed"
     }
   ],
   "schema": {

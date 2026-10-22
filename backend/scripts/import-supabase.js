@@ -6,9 +6,7 @@ const { createClient } = require('@supabase/supabase-js');
 const { MODEL, isVerifiedResponseModel } = require('../adapters/mercury-decide');
 const { eventsFrom: classificationEventsFrom, validClassification } = require('./classify-catalog');
 const {
-  PRECISE_COORD_QUALITY,
   hasFiniteCoords,
-  isRomeFallback,
   plausibleDurationHours
 } = require('../scraper');
 
@@ -16,6 +14,10 @@ const DISTANCE_KM_MAX = 99999.99;
 const COST_AMOUNT_MAX = 99999999.99;
 const ELEVATION_M_MAX = 2147483647;
 const DAYS_MAX = 32767;
+const GEO_STATUSES = new Set(['verified', 'needs_review', 'unknown']);
+const GEO_POINT_TYPES = new Set(['start', 'summit', 'area']);
+const GEO_PRECISIONS = new Set(['exact', 'high', 'medium', 'low', 'unknown']);
+const GEO_SOURCE_KINDS = new Set(['official', 'gpx', 'map']);
 
 const DATA_FILE = path.join(__dirname, '..', 'data', 'excursions.json');
 const REGISTRY_FILE = path.join(__dirname, '..', 'data', 'cai-sections.json');
@@ -49,6 +51,60 @@ function numberOrNull(value) {
   return typeof value === 'number' && Number.isFinite(value) ? value : null;
 }
 
+function normalizeGeoEvidence(evidence, excursion, sourceId = textOrNull(excursion?.id) || '(unknown)') {
+  if (evidence == null) return null;
+  if (!evidence || typeof evidence !== 'object' || Array.isArray(evidence)) {
+    throw new Error(`Excursion ${sourceId} has invalid geoEvidence`);
+  }
+  const required = ['status', 'pointType', 'precision', 'sourceKind', 'sourceUrl'];
+  if (required.some((key) => !Object.hasOwn(evidence, key))
+    || Object.keys(evidence).some((key) => !required.includes(key))) {
+    throw new Error(`Excursion ${sourceId} has invalid geoEvidence shape`);
+  }
+  const { status, pointType, precision } = evidence;
+  const sourceKind = evidence.sourceKind == null ? null : evidence.sourceKind;
+  const sourceUrl = evidence.sourceUrl == null ? null : textOrNull(evidence.sourceUrl);
+  if (!GEO_STATUSES.has(status) || !GEO_POINT_TYPES.has(pointType) || !GEO_PRECISIONS.has(precision)
+    || (sourceKind !== null && !GEO_SOURCE_KINDS.has(sourceKind))
+    || (evidence.sourceUrl != null && (!sourceUrl || !isHttpUrl(sourceUrl)))) {
+    throw new Error(`Excursion ${sourceId} has invalid geoEvidence values`);
+  }
+  const hasPair = hasFiniteCoords(excursion);
+  const inRange = hasPair && excursion.lat >= -90 && excursion.lat <= 90
+    && excursion.lng >= -180 && excursion.lng <= 180;
+  if (status === 'verified' && (!inRange || !GEO_SOURCE_KINDS.has(sourceKind)
+    || !sourceUrl || precision === 'unknown')) {
+    throw new Error(`Excursion ${sourceId} claims verified coordinates without a complete, sourced coordinate pair`);
+  }
+  return { status, pointType, precision, sourceKind, sourceUrl };
+}
+
+function placeGeoFields(excursion) {
+  const sourceId = textOrNull(excursion?.id) || '(unknown)';
+  const evidence = normalizeGeoEvidence(excursion.geoEvidence, excursion, sourceId);
+  const partialPair = Number.isFinite(excursion.lat) !== Number.isFinite(excursion.lng);
+  if (partialPair && evidence?.status === 'verified') {
+    throw new Error(`Excursion ${sourceId} has a partial coordinate pair marked verified`);
+  }
+  const verified = evidence?.status === 'verified' && hasFiniteCoords(excursion);
+  return {
+    latitude: verified ? excursion.lat : null,
+    longitude: verified ? excursion.lng : null,
+    coordinates_quality: verified ? textOrNull(excursion.coordinatesQuality) : null,
+    geo_evidence: evidence
+  };
+}
+
+function geoSnapshot(row) {
+  return {
+    location: row.location ?? null,
+    latitude: numberOrNull(row.latitude),
+    longitude: numberOrNull(row.longitude),
+    coordinates_quality: row.coordinates_quality ?? null,
+    geo_evidence: row.geo_evidence ?? null
+  };
+}
+
 function boundedNumber(value, max) {
   const number = numberOrNull(value);
   if (number == null || number < 0 || number > max) return null;
@@ -76,7 +132,7 @@ async function existingPlaces(supabase, sourceIds) {
   for (const batch of chunk(sourceIds)) {
     const { data, error } = await supabase
       .from('places')
-      .select('source_id, latitude, longitude, coordinates_quality, status, organizer_region, cai_section_id, title, cover_image_path')
+      .select('source_id, location, latitude, longitude, coordinates_quality, geo_evidence, status, organizer_region, cai_section_id, title, cover_image_path')
       .in('source_id', batch);
     if (error) throw error;
     for (const row of data || []) {
@@ -88,28 +144,22 @@ async function existingPlaces(supabase, sourceIds) {
 
 function coordPatchForExisting(existing, excursion) {
   if (!existing) return null;
-  if (PRECISE_COORD_QUALITY.has(existing.coordinates_quality)) return null;
-  const existingHasCoords = Number.isFinite(existing.latitude) && Number.isFinite(existing.longitude);
-  const existingIsRomeFallback = existingHasCoords
-    && isRomeFallback(existing.latitude, existing.longitude);
-  if (!hasFiniteCoords(excursion)) {
-    return existingIsRomeFallback ? {
-      latitude: null,
-      longitude: null,
-      coordinates_quality: null
-    } : null;
-  }
-  if (isRomeFallback(excursion.lat, excursion.lng)) return null;
-  if (existingHasCoords && !existingIsRomeFallback) return null;
-
-  return {
-    latitude: excursion.lat,
-    longitude: excursion.lng,
-    coordinates_quality: textOrNull(excursion.coordinatesQuality) || 'massif'
-  };
+  const hasExistingLatitude = Number.isFinite(existing.latitude);
+  const hasExistingLongitude = Number.isFinite(existing.longitude);
+  // Any finite component is treated as curated state. This deliberately preserves
+  // Rome fallback coordinates and partial pairs when their quality is unknown.
+  if (hasExistingLatitude || hasExistingLongitude || existing.geo_evidence != null) return null;
+  const incoming = placeGeoFields(excursion);
+  if (!incoming.geo_evidence && incoming.latitude == null && incoming.longitude == null) return null;
+  if (existing.coordinates_quality != null) incoming.coordinates_quality = existing.coordinates_quality;
+  return incoming;
 }
 
-async function importNewPlaces({ supabase, excursions, status }) {
+async function importNewPlaces({
+  supabase, excursions, status,
+  classificationsBySourceId = new Map(),
+  classificationErrorsBySourceId = new Map()
+}) {
   assertUniqueSourceIds(excursions);
   let skippedUnlocated = 0;
   const sourceIds = excursions.map((excursion) => textOrNull(excursion.id)).filter(Boolean);
@@ -117,26 +167,63 @@ async function importNewPlaces({ supabase, excursions, status }) {
 
   const toInsert = [];
   const toUpdate = [];
+  const skippedUnclassified = [];
+  const preservedUnclassifiedExistingSourceIds = [];
+  const geoAudit = [];
+  const partialIncomingCoordinateSourceIds = [];
+  const unverifiedIncomingCoordinateSourceIds = [];
 
   for (const excursion of excursions) {
     const sourceId = textOrNull(excursion.id);
     if (!sourceId) continue;
+    const incomingGeo = placeGeoFields(excursion);
+    const hasAnyIncomingCoordinate = Number.isFinite(excursion.lat) || Number.isFinite(excursion.lng);
+    if (Number.isFinite(excursion.lat) !== Number.isFinite(excursion.lng)) {
+      partialIncomingCoordinateSourceIds.push(sourceId);
+    }
+    if (hasAnyIncomingCoordinate && incomingGeo.geo_evidence?.status !== 'verified') {
+      unverifiedIncomingCoordinateSourceIds.push(sourceId);
+    }
 
     const row = existing.get(sourceId);
+    const hasClassification = classificationsBySourceId.has(sourceId);
     if (!row) {
-      toInsert.push(toPlaceRow(excursion, status));
+      if (!hasClassification) {
+        skippedUnclassified.push({
+          source_id: sourceId,
+          reason: classificationErrorsBySourceId.get(sourceId) || 'missing_valid_classification'
+        });
+        continue;
+      }
+      const place = toPlaceRow(excursion, status);
+      toInsert.push(place);
+      geoAudit.push({ source_id: sourceId, action: 'inserted', before: null, after: geoSnapshot(place) });
+      continue;
+    }
+
+    // Existing rows without a usable classification remain entirely untouched.
+    if (!hasClassification) {
+      preservedUnclassifiedExistingSourceIds.push(sourceId);
+      geoAudit.push({ source_id: sourceId, action: 'preserved_unclassified', before: geoSnapshot(row), after: geoSnapshot(row) });
       continue;
     }
 
     const patch = coordPatchForExisting(row, excursion) || {};
-    // Enrich organizer metadata without overwriting editorial title/status/photos.
+    // Empty importer-owned organizer metadata may be enriched, but editorial fields
+    // and all existing geographic fields remain protected by reconciliation.
     if (!row.organizer_region && textOrNull(excursion.organizerRegion)) {
       patch.organizer_region = excursion.organizerRegion.trim();
     }
     if (!row.cai_section_id && textOrNull(excursion.caiSectionId || excursion.sourceId)) {
       patch.cai_section_id = (excursion.caiSectionId || excursion.sourceId).trim();
     }
-    if (Object.keys(patch).length) toUpdate.push({ sourceId, patch });
+    const geoBefore = geoSnapshot(row);
+    if (Object.keys(patch).length) {
+      toUpdate.push({ sourceId, patch });
+      geoAudit.push({ source_id: sourceId, action: 'updated', before: geoBefore, after: geoSnapshot({ ...row, ...patch }) });
+    } else {
+      geoAudit.push({ source_id: sourceId, action: 'preserved', before: geoBefore, after: geoBefore });
+    }
   }
 
   for (const batch of chunk(toInsert)) {
@@ -156,6 +243,9 @@ async function importNewPlaces({ supabase, excursions, status }) {
     inserted: toInsert.length,
     insertedSourceIds: toInsert.map((row) => row.source_id),
     existingSourceIds: [...existing.keys()],
+    eligibleSourceIds: [...classificationsBySourceId.keys()].filter((sourceId) => existing.has(sourceId) || toInsert.some((row) => row.source_id === sourceId)),
+    skippedUnclassified,
+    preservedUnclassifiedExistingSourceIds,
     updatedSourceIds: toUpdate.map((item) => item.sourceId),
     existingProtectedFields: Object.fromEntries([...existing].map(([sourceId, row]) => [sourceId, {
       title: row.title ?? null,
@@ -163,8 +253,16 @@ async function importNewPlaces({ supabase, excursions, status }) {
       cover_image_path: row.cover_image_path ?? null
     }])),
     updated: toUpdate.length,
-    skipped: existing.size - toUpdate.length,
+    skipped: [...existing.keys()].filter((sourceId) => !toUpdate.some((item) => item.sourceId === sourceId)).length,
     skippedUnlocated,
+    geography: {
+      audit: geoAudit,
+      coordinateFillSourceIds: toUpdate.filter(({ patch }) => Number.isFinite(patch.latitude) && Number.isFinite(patch.longitude)).map(({ sourceId }) => sourceId),
+      preservedFiniteCoordinateSourceIds: [...existing].filter(([, value]) => Number.isFinite(value.latitude) || Number.isFinite(value.longitude)).map(([sourceId]) => sourceId),
+      preservedPartialCoordinateSourceIds: [...existing].filter(([, value]) => Number.isFinite(value.latitude) !== Number.isFinite(value.longitude)).map(([sourceId]) => sourceId),
+      partialIncomingCoordinateSourceIds,
+      unverifiedIncomingCoordinateSourceIds
+    },
     status
   };
 }
@@ -397,13 +495,16 @@ async function reconcileClassifications({ supabase, excursions = [], rows = prep
 }
 
 async function reconcileImportedPlaces({ supabase, excursions, imported, status }) {
-  const expected = validateImportEvents(excursions, status);
+  const eligibleIds = new Set(imported.eligibleSourceIds);
+  const expected = validateImportEvents(excursions.filter((event) => eligibleIds.has(textOrNull(event.id))), status);
   const expectedById = new Map(expected.map((row) => [row.source_id, row]));
-  const after = await existingPlaces(supabase, [...expectedById.keys()]);
+  const after = await existingPlaces(supabase, excursions.map((event) => textOrNull(event.id)).filter(Boolean));
   const missingSourceIds = [...expectedById.keys()].filter((id) => !after.has(id));
   const insertedIds = new Set(imported.insertedSourceIds);
   const protectedFieldsChanged = [];
   const insertedFieldMismatches = [];
+  const expectedGeoById = new Map(imported.geography.audit.map((item) => [item.source_id, item.after]));
+  const geographyMismatches = [];
   for (const [sourceId, row] of after) {
     const before = imported.existingProtectedFields[sourceId];
     if (before && (before.title !== (row.title ?? null)
@@ -416,8 +517,12 @@ async function reconcileImportedPlaces({ supabase, excursions, imported, status 
       if (row.title !== expectedRow.title || row.status !== status
         || (row.cover_image_path ?? null) !== null) insertedFieldMismatches.push(sourceId);
     }
+    const expectedGeo = expectedGeoById.get(sourceId);
+    if (!expectedGeo || stableJson(geoSnapshot(row)) !== stableJson(expectedGeo)) {
+      geographyMismatches.push(sourceId);
+    }
   }
-  const matchedRows = [...after.values()];
+  const matchedRows = [...expectedById.keys()].map((sourceId) => after.get(sourceId)).filter(Boolean);
   const result = {
     expectedSourceIds: expectedById.size,
     matchedSourceIds: matchedRows.length,
@@ -425,13 +530,23 @@ async function reconcileImportedPlaces({ supabase, excursions, imported, status 
     draftSourceIds: matchedRows.filter((row) => row.status === 'draft').length,
     missingSourceIds,
     protectedFieldsChanged,
-    insertedFieldMismatches
+    insertedFieldMismatches,
+    geography: {
+      expected: expectedGeoById.size,
+      matched: expectedGeoById.size - geographyMismatches.length,
+      mismatchedSourceIds: geographyMismatches,
+      auditedRows: imported.geography.audit,
+      coordinateFillSourceIds: imported.geography.coordinateFillSourceIds,
+      preservedFiniteCoordinateSourceIds: imported.geography.preservedFiniteCoordinateSourceIds,
+      preservedPartialCoordinateSourceIds: imported.geography.preservedPartialCoordinateSourceIds
+    }
   };
-  if (missingSourceIds.length || protectedFieldsChanged.length || insertedFieldMismatches.length) {
+  if (missingSourceIds.length || protectedFieldsChanged.length || insertedFieldMismatches.length || geographyMismatches.length) {
     throw new Error(`Import reconciliation failed: ${JSON.stringify({
       missing: missingSourceIds.length,
       protectedFieldsChanged: protectedFieldsChanged.length,
-      insertedFieldMismatches: insertedFieldMismatches.length
+      insertedFieldMismatches: insertedFieldMismatches.length,
+      geographyMismatches: geographyMismatches.length
     })}`);
   }
   return result;
@@ -472,8 +587,7 @@ function toPlaceRow(excursion, status) {
     municipality: textOrNull(excursion.municipality),
     province: textOrNull(excursion.province),
     region: textOrNull(excursion.region),
-    latitude: hasFiniteCoords(excursion) ? numberOrNull(excursion.lat) : null,
-    longitude: hasFiniteCoords(excursion) ? numberOrNull(excursion.lng) : null,
+    ...placeGeoFields(excursion),
     cost: textOrNull(excursion.cost),
     cost_amount: boundedNumber(excursion.costAmount, COST_AMOUNT_MAX),
     time: textOrNull(excursion.time),
@@ -484,7 +598,6 @@ function toPlaceRow(excursion, status) {
     transport: textOrNull(excursion.transport),
     private_car: typeof excursion.privateCar === 'boolean' ? excursion.privateCar : null,
     start_place: textOrNull(excursion.startPlace),
-    coordinates_quality: textOrNull(excursion.coordinatesQuality),
     summary: textOrNull(excursion.summary),
     activity_type: textOrNull(excursion.activityType),
     terrain: textOrNull(excursion.terrain),
@@ -735,7 +848,7 @@ function writeJsonAtomic(file, value) {
 function buildImportReceipt({ manifest, manifestPath, manifestSha256, projectRef, imported, verification, classificationVerification, skippedClassifications = [], registrySyncPerformed, repoRoot = REPO_ROOT, verifiedAt = new Date().toISOString() }) {
   return {
     schemaVersion: 1,
-    status: 'completed',
+    status: imported.skippedUnclassified.length || skippedClassifications.length ? 'partial' : 'completed',
     runId: manifest.runId,
     projectRef,
     method: 'supabase-js',
@@ -747,6 +860,9 @@ function buildImportReceipt({ manifest, manifestPath, manifestSha256, projectRef
     inserted: imported.inserted,
     existingPreserved: imported.existingSourceIds.length,
     updatedMetadata: imported.updated,
+    skippedUnclassifiedNew: imported.skippedUnclassified.length,
+    skippedUnclassifiedNewRows: imported.skippedUnclassified,
+    existingUnclassifiedPreserved: imported.preservedUnclassifiedExistingSourceIds.length,
     classifications: classificationVerification.expected,
     skippedClassifications: skippedClassifications.length,
     registrySyncPerformed,
@@ -757,8 +873,12 @@ function buildImportReceipt({ manifest, manifestPath, manifestSha256, projectRef
       draftSourceIds: verification.draftSourceIds,
       missingSourceIds: verification.missingSourceIds.length,
       protectedFieldsChanged: verification.protectedFieldsChanged.length,
-      insertedFieldMismatches: verification.insertedFieldMismatches.length
+      insertedFieldMismatches: verification.insertedFieldMismatches.length,
+      geographyExpected: verification.geography.expected,
+      geographyMatched: verification.geography.matched,
+      geographyMismatched: verification.geography.mismatchedSourceIds.length
     },
+    geography: verification.geography,
     classificationVerification: {
       expected: classificationVerification.expected,
       matched: classificationVerification.matched,
@@ -855,6 +975,8 @@ async function main({
   const preparedExcursions = attachSectionMetadata(excursions, SOURCES);
   validateImportEvents(preparedExcursions, status);
   const preparedClassifications = prepareClassifications(preparedExcursions);
+  const classificationsBySourceId = new Map(preparedClassifications.rows.map((row) => [row.source_id, row]));
+  const classificationErrorsBySourceId = new Map(preparedClassifications.skipped.map(({ source_id, reason }) => [source_id, reason]));
 
   const supabase = supabaseFactory(
     requiredEnvironment('SUPABASE_URL', env),
@@ -873,7 +995,9 @@ async function main({
   const result = await importNewPlaces({
     supabase,
     excursions: preparedExcursions,
-    status
+    status,
+    classificationsBySourceId,
+    classificationErrorsBySourceId
   });
   const importedClassifications = await upsertClassifications({
     supabase,
@@ -910,7 +1034,8 @@ async function main({
     runId: verified.manifest.runId,
     projectRef: receipt.projectRef,
     verifiedAt: receipt.verifiedAt,
-    sourceIds: preparedExcursions.map((excursion) => excursion.id),
+    sourceIds: result.eligibleSourceIds,
+    skippedUnclassifiedNew: result.skippedUnclassified,
     classifications: { ...classificationVerification, skipped: preparedClassifications.skipped },
     ...verification
   };
@@ -929,6 +1054,7 @@ async function main({
     updated: result.updated,
     skipped: result.skipped,
     skippedUnlocated: result.skippedUnlocated,
+    skippedUnclassifiedNew: result.skippedUnclassified.length,
     status: result.status,
     verification,
     receiptPath: path.relative(files.repoRoot, path.join(path.dirname(verified.manifestPath), 'import-receipt.json')).split(path.sep).join('/'),

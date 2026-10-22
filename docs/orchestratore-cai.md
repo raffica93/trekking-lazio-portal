@@ -114,3 +114,23 @@ coordinati nella sessione Codex Cloud, non da GitHub Actions.
 Non aggiungere trigger `schedule`. Non è necessario disattivare il workflow
 manuale per rispettare questa regola. Le pianificazioni esterne vanno controllate
 e quelle dedicate all'aggiornamento eventi disattivate se presenti.
+
+## Classificazione e provenienza geografica nell'import
+
+Prima dell'import di `places`, ogni nuovo evento deve avere una classificazione
+valida (`trekking`, `non_trekking` o `da_verificare`). I nuovi eventi senza
+decisione valida vengono saltati e descritti nella ricevuta; i record `places`
+già esistenti senza classificazione non vengono modificati. `da_verificare` resta
+disponibile per revisione e `non_trekking` resta nel catalogo DB: l'esclusione
+dalla mappa dipende dal filtro dell'applicazione.
+
+Le coordinate già presenti, anche se coincidono con il fallback Roma o hanno
+qualità ignota, non vengono mai sovrascritte o azzerate. L'import può completare
+una coppia solo quando entrambi i valori mancano e l'evidenza in ingresso è
+`verified`, completa e proviene da fonte ufficiale, GPX o cartografica. Per le
+nuove righe le coordinate sono salvate solo con tale evidenza; la provenienza
+geografica validata viene conservata in `places.geo_evidence` con tipo del punto,
+precisione e URL fonte. La migration `20261022200000_places_geo_evidence.sql` è
+additiva e non esegue backfill; va applicata separatamente prima di un import che
+scrive `places`. La ricevuta registra i campi geografici attesi e verificati,
+coordinate preservate, riempimenti autorizzati e nuovi eventi saltati.
