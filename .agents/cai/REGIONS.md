@@ -395,3 +395,8 @@ La pagina HTML ufficiale è 121.924 byte, hash `28e233db…bde8`; `method=null`,
 | `cai-somma-lombardo-9216065` | 1 URL in offline preflight | 0 | fonte attuale partial, 0 nuovi fetch | 0 | 0 nel preflight | n/a | SIEL full programme download/size/OCR issues; summary PDF size-limit; Varese 503 unrelated | Checkpoint, then one specific Blinnenhorn PDF max1/120s/concurrency1 |
 
 Il flyer puntuale `Rifugio Somma - Blinnenhorn (EE)` è registrato nella registry come evidenza ufficiale e assente da cache/status/FAILURES; nessuna richiesta di rete nel preflight. Il calendario SIEL generale e gli URL bloccati non saranno ripetuti.
+
+
+### Correzione target Somma prima del fetch
+
+Il primo `orchestrate init` sull’host apex è stato rifiutato prima della rete: il validator richiede `www.caisomma.it`. Nessun run, lock o request è stato creato. Offline registry conferma `source.website=https://www.caisomma.it/` e `calendarEvidence` registra il medesimo path flyer sull’apex; la variante www same-path è assente da cache/status/FAILURES. Dopo checkpoint, un solo fetch www bounded; risposta/redirect ancora non verificati.

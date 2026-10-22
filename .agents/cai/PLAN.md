@@ -1,6 +1,6 @@
 # Piano di passaggio al lavoro interamente cloud
 
-Stato aggiornato al 22 ottobre 2026: Sesto Calende index01 checkpointato al commit `c8abab2`, fonte partial, 0 estrazioni e 18 righe invarianti; importer QA PASS e backend test 205/205. Il prossimo preflight offline Lombardia ha selezionato un solo PDF specifico CAI Somma Lombardo (Rifugio Somma/Blinnenhorn), assente da cache/failure; dopo checkpoint, max1/120s/concurrency1. Non ripetere PDF SIEL/summary bloccati né endpoint Varese 503.
+Stato aggiornato al 22 ottobre 2026: dopo Sesto01 checkpointato (`c8abab2`), è stato selezionato offline il flyer specifico Somma/Blinnenhorn. L’init apex è stato rifiutato dal validatore prima della rete perché la fonte usa `www.caisomma.it`; nessun run/lock/fetch. Registry attesta il medesimo path flyer sull’apex e il website ufficiale www. Dopo checkpoint della variante www, un solo fetch max1/120s/concurrency1. No retry dei PDF bloccati.
 
 ## Sequenza
 
