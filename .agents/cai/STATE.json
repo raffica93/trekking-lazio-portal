@@ -224,8 +224,8 @@
     }
   ],
   "nextAction": {
-    "step": "LOMBARDIA-MISSAGLIA-BOUNDED-01",
-    "instruction": "S.E.M. sem02 file checkpoint is published and remote blobs have been verified at 3553eb6464bca382d6611709666045ce326d9cc1. Run one max-1-document, 120-second, concurrency-1 sample on official CAI Missaglia gite.php (cai-missaglia-9216150). Keep it partial unless full coverage is evidenced; do not retry any known cooldown source."
+    "step": "LOMBARDIA-BUSTO-ARSIZIO-BOUNDED-01",
+    "instruction": "After publishing and verifying Missaglia01 checkpoint files, run one bounded sample on official CAI Busto Arsizio calendar https://www.caibustoarsizio.it/attivita-invernali/ (cai-busto-arsizio-9216014), max 1 document/120 s/concurrency 1. Leave partial/unsupported unless current calendar coverage is actually proved."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -235,7 +235,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "3553eb6464bca382d6611709666045ce326d9cc1",
+    "branchHead": "7204642efea0630bed21f6db1d7a576f1db71b15",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -369,22 +369,23 @@
     },
     "regionalCoverage": {
       "region": "Lombardia",
-      "status": "open; S.E.M. remains partial with 12 residual candidates; other Lombardia sources still need bounded coverage.",
+      "status": "open; Missaglia is partial on a stale calendar page and residual discovery; broader source coverage remains.",
       "currentRunCounts": {
         "sectionsChecked": 1,
         "complete": 0,
         "partial": 1,
         "unreachable": 0,
         "verifiedNewEvents": 0,
-        "sourceEvents": 14,
-        "documentExtractions": 33,
+        "pastRowsExtracted": 1,
+        "sourceEvents": 0,
+        "documentExtractions": 1,
         "exactDuplicateIdsExcluded": 0,
-        "semanticDuplicates": "No catalog ID duplicates; source-row semantic duplicate count is not exposed.",
+        "semanticDuplicates": "No catalog ID duplicates; 2024 source row filtered as past.",
         "failuresResolved": [
-          "Lost discovery-limit from sem01 resolved with c43b321 and sem02 retains 12 candidates."
+          "Official gite.php page fetched and parsed; discovery backlog reduced 41→1; stale 2024 event filtered."
         ],
         "failuresOpen": [
-          "S.E.M. has 12 unvisited candidates; exact candidate URLs not persisted. Broader Lombardia coverage remains open."
+          "Missaglia current calendar not found; one discovery candidate remains; page-21 OCR failure persists but manual QA identifies non-calendar course text. Broader Lombardia remains open."
         ]
       },
       "historicalSnapshot": {
@@ -395,7 +396,7 @@
         "unreachable": 1,
         "unchecked": 104
       },
-      "historicalSnapshotNote": "Historical handoff only; current sample covers S.E.M. only; no Lombardia-wide recount."
+      "historicalSnapshotNote": "Historical handoff only; current sample covers Missaglia alone; no Lombardia-wide recount."
     },
     "ocrItalian": false,
     "agentStatus": {
@@ -419,8 +420,8 @@
       "writes": 0
     },
     "tests": "After run07 stopped, backend npm test passed 187/187. Backend/frontend excursions SHA256 6e46cec85daae67e6da0a98afb36d4fbf72b3790b2246dfcdf3837ea9a0ff99b and scrape-status SHA256 da7fa46626cfd3c7e29cc59e0eb66c85f2374a70d0d325a68caba38308dd8450 remained byte-identical after tests.",
-    "regionCurrent": "Lombardia — S.E.M. run sem02 refreshed the official PDF; parser extracted 33 rows reconciled to 14 existing events, zero event-row delta; source partial with 12 residual discovery candidates.",
-    "regionNext": "CAI Missaglia preflight PASS: official gite.php not present in current 1-document history; only historical discovery-limit, no HTTP status/cooldown. Try one bounded fetch max1/120s, then assess evidence.",
+    "regionCurrent": "Lombardia — Missaglia run01 read one official page headed Edizione 2014; parser extracted a single 2024 past event, zero current events, one discovery candidate remaining; source partial.",
+    "regionNext": "After Missaglia checkpoint, run one bounded Busto Arsizio sample at its official winter activities calendar; keep the source partial/unsupported absent full-calendar proof.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
     "remoteCheckpointVerifiedAt": "2026-10-22T19:25:20Z",
@@ -946,31 +947,33 @@
     "receiptCheckpoint": "50352f7fde1a638e6541aab048fcdacfb834324b",
     "resumeNote": "Valmadrera delta receipt and DB reconciliation are complete. Do not repeat the 10-row delta or historical 3,336 classification baseline.",
     "lastRegionalAttempt": {
-      "runId": "cai-20261022-lombardia-sem02",
-      "sourceId": "cai-s-e-m-9216028",
-      "sourceName": "CAI S.E.M.",
+      "runId": "cai-20261022-lombardia-missaglia01",
+      "sourceId": "cai-missaglia-9216150",
+      "sourceName": "CAI Missaglia",
       "collection": "partial",
       "files": "ready; file checkpoint pending",
-      "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-sem02/manifest.json",
-      "manifestSha256": "cc2edad797f5ced938dbad2ebf013a14504c1eecd0681f7026dfc3216357485f",
-      "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-sem02/collection-report.md",
-      "reportSha256": "ad5609b4fd7a281e281b53ff8698e5584a681da01b46420420f99e9858565105",
-      "stateSha256": "9668cdaf1cb18c2251be3c603527f505ceb4372f2c9dfd85c4afaa893f867a12",
+      "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-missaglia01/manifest.json",
+      "manifestSha256": "9f73e0a51f0cec7a7794e14b943ec9e235d7b50ecac93acf274d09e4a4d92b04",
+      "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-missaglia01/collection-report.md",
+      "reportSha256": "5a07fcf62a03965bffe7ef344558c9083707bead1de76e729223e03fbe4090c7",
+      "stateSha256": "cfac59d0bae4ad27bc47aaec354b5b11848b20f51bb0c37f913f6293c5f5eb4b",
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
-      "sourceEvents": 14,
-      "documentRowsExtracted": 33,
+      "sourceEvents": 0,
+      "pastRowsExtracted": 1,
       "newIds": 0,
       "removedIds": 0,
       "changedEventRows": 0,
       "duplicateIdsExcluded": 0,
-      "discoveryLimitRemaining": 12,
-      "database": "pending; no DB access or write because event delta is zero",
-      "importerQa": "PASS; all manifest file hashes and backend/frontend mirrors verified read-only",
-      "backendTest": "201/201 after collection; catalog/status files remained at manifest hashes",
-      "codeCommit": "c43b32101de52739bab3237f5bddf3eb343b788b",
+      "discoveryLimitRemaining": 1,
+      "ocrIssue": "page 21 failure/timeout retained; prior manual QA identifies first-aid training text, not a calendar",
+      "database": "pending; no DB access/write at zero event delta",
+      "collectorQa": "PASS: HTML is stale 2014/2024; one past event correctly filtered; zero current events is not completeness",
+      "importerQa": "PASS read-only; manifest matches; only Missaglia source status changed",
+      "backendTest": "201/201 after collection; canonical files still match manifest",
+      "sourceCommit": "7204642efea0630bed21f6db1d7a576f1db71b15",
       "fileCheckpointCommit": "pending",
       "remoteVerified": false
     },
@@ -989,44 +992,46 @@
       ]
     },
     "latestRegionalRun": {
-      "runId": "cai-20261022-lombardia-sem02",
-      "sourceId": "cai-s-e-m-9216028",
-      "sourceName": "CAI S.E.M.",
+      "runId": "cai-20261022-lombardia-missaglia01",
+      "sourceId": "cai-missaglia-9216150",
+      "sourceName": "CAI Missaglia",
       "collection": "partial",
       "files": "ready; file checkpoint pending",
-      "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-sem02/manifest.json",
-      "manifestSha256": "cc2edad797f5ced938dbad2ebf013a14504c1eecd0681f7026dfc3216357485f",
-      "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-sem02/collection-report.md",
-      "reportSha256": "ad5609b4fd7a281e281b53ff8698e5584a681da01b46420420f99e9858565105",
-      "stateSha256": "9668cdaf1cb18c2251be3c603527f505ceb4372f2c9dfd85c4afaa893f867a12",
+      "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-missaglia01/manifest.json",
+      "manifestSha256": "9f73e0a51f0cec7a7794e14b943ec9e235d7b50ecac93acf274d09e4a4d92b04",
+      "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-missaglia01/collection-report.md",
+      "reportSha256": "5a07fcf62a03965bffe7ef344558c9083707bead1de76e729223e03fbe4090c7",
+      "stateSha256": "cfac59d0bae4ad27bc47aaec354b5b11848b20f51bb0c37f913f6293c5f5eb4b",
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
-      "sourceEvents": 14,
-      "documentRowsExtracted": 33,
+      "sourceEvents": 0,
+      "pastRowsExtracted": 1,
       "newIds": 0,
       "removedIds": 0,
       "changedEventRows": 0,
       "duplicateIdsExcluded": 0,
-      "discoveryLimitRemaining": 12,
-      "database": "pending; no DB access or write because event delta is zero",
-      "importerQa": "PASS; all manifest file hashes and backend/frontend mirrors verified read-only",
-      "backendTest": "201/201 after collection; catalog/status files remained at manifest hashes",
-      "codeCommit": "c43b32101de52739bab3237f5bddf3eb343b788b",
-      "fileCheckpointCommit": "3553eb6464bca382d6611709666045ce326d9cc1",
-      "remoteVerified": true
+      "discoveryLimitRemaining": 1,
+      "ocrIssue": "page 21 failure/timeout retained; prior manual QA identifies first-aid training text, not a calendar",
+      "database": "pending; no DB access/write at zero event delta",
+      "collectorQa": "PASS: HTML is stale 2014/2024; one past event correctly filtered; zero current events is not completeness",
+      "importerQa": "PASS read-only; manifest matches; only Missaglia source status changed",
+      "backendTest": "201/201 after collection; canonical files still match manifest",
+      "sourceCommit": "7204642efea0630bed21f6db1d7a576f1db71b15",
+      "fileCheckpointCommit": "pending",
+      "remoteVerified": false
     },
     "nextSourcePreflight": {
-      "sourceId": "cai-missaglia-9216150",
-      "url": "https://www.caimissaglia.it/gite.php",
-      "basis": "official “Gite escursionist.” page; not among the current single visited document (youth alpinism manual PDF); historical discovery-limit 41 candidates; no HTTP status/cooldown documented",
+      "sourceId": "cai-busto-arsizio-9216014",
+      "url": "https://www.caibustoarsizio.it/attivita-invernali/",
+      "basis": "official registry calendar URL linked from section homepage, absent from current source history; current status unsupported with one existing event and only oEmbed skipped links; no HTTP failure/cooldown recorded for target",
       "scope": "one URL, max 1 document, budget 120 s, concurrency 1",
-      "observedAt": "2026-10-22T21:36:00Z",
+      "observedAt": "2026-10-22T21:36:16Z",
       "mode": "read-only"
     }
   },
-  "repositoryCommit": "3553eb6464bca382d6611709666045ce326d9cc1",
+  "repositoryCommit": "7204642efea0630bed21f6db1d7a576f1db71b15",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -1050,10 +1055,10 @@
       "copiesIdentical": true
     }
   },
-  "updatedAt": "2026-10-22T21:36:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T21:36:00Z",
-  "regionCurrent": "Lombardia — S.E.M. run sem02 refreshed the official PDF; parser extracted 33 rows reconciled to 14 existing events, zero event-row delta; source partial with 12 residual discovery candidates.",
-  "regionNext": "CAI Missaglia preflight PASS: official gite.php not present in current 1-document history; only historical discovery-limit, no HTTP status/cooldown. Try one bounded fetch max1/120s, then assess evidence.",
+  "updatedAt": "2026-10-22T21:36:16Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T21:36:16Z",
+  "regionCurrent": "Lombardia — Missaglia run01 read one official page headed Edizione 2014; parser extracted a single 2024 past event, zero current events, one discovery candidate remaining; source partial.",
+  "regionNext": "After Missaglia checkpoint, run one bounded Busto Arsizio sample at its official winter activities calendar; keep the source partial/unsupported absent full-calendar proof.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
     "sourceId": "cai-varese-9216009",
@@ -1155,53 +1160,55 @@
     "independentImporterQa": "PASS"
   },
   "lastRegionalAttempt": {
-    "runId": "cai-20261022-lombardia-sem02",
-    "sourceId": "cai-s-e-m-9216028",
-    "sourceName": "CAI S.E.M.",
+    "runId": "cai-20261022-lombardia-missaglia01",
+    "sourceId": "cai-missaglia-9216150",
+    "sourceName": "CAI Missaglia",
     "collection": "partial",
     "files": "ready; file checkpoint pending",
-    "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-sem02/manifest.json",
-    "manifestSha256": "cc2edad797f5ced938dbad2ebf013a14504c1eecd0681f7026dfc3216357485f",
-    "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-sem02/collection-report.md",
-    "reportSha256": "ad5609b4fd7a281e281b53ff8698e5584a681da01b46420420f99e9858565105",
-    "stateSha256": "9668cdaf1cb18c2251be3c603527f505ceb4372f2c9dfd85c4afaa893f867a12",
+    "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-missaglia01/manifest.json",
+    "manifestSha256": "9f73e0a51f0cec7a7794e14b943ec9e235d7b50ecac93acf274d09e4a4d92b04",
+    "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-missaglia01/collection-report.md",
+    "reportSha256": "5a07fcf62a03965bffe7ef344558c9083707bead1de76e729223e03fbe4090c7",
+    "stateSha256": "cfac59d0bae4ad27bc47aaec354b5b11848b20f51bb0c37f913f6293c5f5eb4b",
     "sectionsChecked": 1,
     "complete": 0,
     "partial": 1,
     "unreachable": 0,
-    "sourceEvents": 14,
-    "documentRowsExtracted": 33,
+    "sourceEvents": 0,
+    "pastRowsExtracted": 1,
     "newIds": 0,
     "removedIds": 0,
     "changedEventRows": 0,
     "duplicateIdsExcluded": 0,
-    "discoveryLimitRemaining": 12,
-    "database": "pending; no DB access or write because event delta is zero",
-    "importerQa": "PASS; all manifest file hashes and backend/frontend mirrors verified read-only",
-    "backendTest": "201/201 after collection; catalog/status files remained at manifest hashes",
-    "codeCommit": "c43b32101de52739bab3237f5bddf3eb343b788b",
-    "fileCheckpointCommit": "3553eb6464bca382d6611709666045ce326d9cc1",
-    "remoteVerified": true,
-    "next": "Preflight selected CAI Missaglia official gite.php; one bounded read-only-targeted run is next."
+    "discoveryLimitRemaining": 1,
+    "ocrIssue": "page 21 failure/timeout retained; prior manual QA identifies first-aid training text, not a calendar",
+    "database": "pending; no DB access/write at zero event delta",
+    "collectorQa": "PASS: HTML is stale 2014/2024; one past event correctly filtered; zero current events is not completeness",
+    "importerQa": "PASS read-only; manifest matches; only Missaglia source status changed",
+    "backendTest": "201/201 after collection; canonical files still match manifest",
+    "sourceCommit": "7204642efea0630bed21f6db1d7a576f1db71b15",
+    "fileCheckpointCommit": "pending",
+    "remoteVerified": false
   },
   "regionalCoverage": {
     "region": "Lombardia",
-    "status": "open; S.E.M. remains partial with 12 residual candidates; other Lombardia sources still need bounded coverage.",
+    "status": "open; Missaglia is partial on a stale calendar page and residual discovery; broader source coverage remains.",
     "currentRunCounts": {
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
       "verifiedNewEvents": 0,
-      "sourceEvents": 14,
-      "documentExtractions": 33,
+      "pastRowsExtracted": 1,
+      "sourceEvents": 0,
+      "documentExtractions": 1,
       "exactDuplicateIdsExcluded": 0,
-      "semanticDuplicates": "No catalog ID duplicates; source-row semantic duplicate count is not exposed.",
+      "semanticDuplicates": "No catalog ID duplicates; 2024 source row filtered as past.",
       "failuresResolved": [
-        "Lost discovery-limit from sem01 resolved with c43b321 and sem02 retains 12 candidates."
+        "Official gite.php page fetched and parsed; discovery backlog reduced 41→1; stale 2024 event filtered."
       ],
       "failuresOpen": [
-        "S.E.M. has 12 unvisited candidates; exact candidate URLs not persisted. Broader Lombardia coverage remains open."
+        "Missaglia current calendar not found; one discovery candidate remains; page-21 OCR failure persists but manual QA identifies non-calendar course text. Broader Lombardia remains open."
       ]
     },
     "historicalSnapshot": {
@@ -1212,6 +1219,6 @@
       "unreachable": 1,
       "unchecked": 104
     },
-    "historicalSnapshotNote": "Historical handoff only; current sample covers S.E.M. only; no Lombardia-wide recount."
+    "historicalSnapshotNote": "Historical handoff only; current sample covers Missaglia alone; no Lombardia-wide recount."
   }
 }

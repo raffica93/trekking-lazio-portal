@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-22T21:33:08.998Z",
+  "generatedAt": "2026-10-22T21:36:16.277Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 1,
-    "parsed": 1,
-    "unsupported": 0,
+    "withEvents": 0,
+    "parsed": 0,
+    "unsupported": 1,
     "failed": 0,
     "located": 548
   },
@@ -33186,7 +33186,7 @@
       "directoryId": "9216150",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "unsupported",
+      "status": "partial",
       "url": "https://www.caimissaglia.it/gite.php",
       "kind": "html",
       "template": "html-calendar",
@@ -33195,17 +33195,24 @@
       "excursions": 0,
       "error": null,
       "hash": "87418a514f98720ea0643533abee08a2e2baa17816df18ff3220ce29c086b609",
-      "updatedAt": "2026-10-20T02:11:55.267Z",
+      "updatedAt": "2026-10-22T21:36:16.277Z",
       "documents": [
         {
           "url": "https://www.caimissaglia.it/file/AlpGiovani/AndiamoMontagna.pdf",
           "hash": "587abaaf4ed50af0bc06b0fdc73b1d1f800356c2866c37828cb8f86f5ee1009d",
           "events": 0,
           "method": "pdf-ocr"
+        },
+        {
+          "url": "https://www.caimissaglia.it/gite.php",
+          "hash": "7d79468fa1afc8e581eb032c7492424b54bc4cac63a1633cd635f54717f9451c",
+          "events": 1,
+          "method": "html-calendar"
         }
       ],
       "methods": [
-        "pdf-ocr"
+        "pdf-ocr",
+        "html-calendar"
       ],
       "issues": [
         {
@@ -33214,7 +33221,7 @@
         },
         {
           "url": "https://www.caimissaglia.it/gite.php",
-          "message": "Discovery budget reached; 41 candidate documents remain.",
+          "message": "Discovery budget reached; 1 candidate documents remain.",
           "code": "discovery-limit"
         },
         {

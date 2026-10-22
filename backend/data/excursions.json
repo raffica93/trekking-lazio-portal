@@ -10434,7 +10434,7 @@
     "cai-pezzo-pontedilegno-9216124": "147ff06c1e181ee715aac4423d49274e29473f0f5a02ba883292aab666b3d01c",
     "cai-rovellasca-9216141": "a24d170f152952255787724e28f95ccb7b2a5d676df27cb88b47e8e95f488861",
     "cai-milano-9216003": "c13d0141aab843eca86d731f1fe6bca9e4d70c595e9cd4df992ef533c647bf57",
-    "cai-missaglia-9216150": "87418a514f98720ea0643533abee08a2e2baa17816df18ff3220ce29c086b609",
+    "cai-missaglia-9216150": "607ff53412877107d14d54601b092edd2e8305d0525e5dfc6b7f952f3cfff2be",
     "cai-boffalora-sopra-ticino-9216114": "83a261f1df3d815479da747008cb22387222baec0df5896f39dd83002121a0fe",
     "cai-s-fruttuoso-9116084": "2702b3c8f443759fa44589b3d255746ddea95958d01aabb94689678ae0a74401",
     "cai-nerviano-9216100": "ab5bd9f1e05f3d03f4f5c8e678f04589e6e6b2b40e15f57adaa194a961dfabf5",
@@ -10773,14 +10773,14 @@
     "cai-busca-9112010": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967",
     "cai-dronero-9112012": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967"
   },
-  "generatedAt": "2026-10-22T21:33:08.972Z",
+  "generatedAt": "2026-10-22T21:36:16.252Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 1,
-    "parsed": 1,
-    "unsupported": 0,
+    "withEvents": 0,
+    "parsed": 0,
+    "unsupported": 1,
     "failed": 0,
     "located": 548
   },

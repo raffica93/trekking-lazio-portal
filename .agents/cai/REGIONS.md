@@ -158,3 +158,12 @@ Il catalogo resta a 3.359 ID e non ha righe evento cambiate; sono cambiati i due
 | `cai-20261022-lombardia-sem02` — CAI S.E.M. | 1 PDF ufficiale mirato | 0 | 1 | 0 | 14 eventi esistenti; 33 righe estratte; 0 nuovi ID | 0 ID duplicati nel catalogo; duplicati di righe sorgente non esposti | Merge status corretto e verificato in sem02 | Discovery-limit esatto: 12 candidati residui; nessun URL specifico persistito | Checkpoint `3553eb6` verificato; poi un campione mirato su una diversa fonte Lombardia |
 
 Catalogo: 3.359→3.359 ID unici; zero aggiunti, rimossi o righe evento cambiate. Fonte `partial`, 40 documenti conservati; il conteggio residuo 12 è mantenuto dopo la continuation. Importer QA PASS; backend npm test 201/201 dopo la raccolta. Stato run `collection=partial`, `files=ready`, `database=pending`; nessun accesso/scrittura DB a delta eventi zero. Report SHA `ad5609b4fd7a281e281b53ff8698e5584a681da01b46420420f99e9858565105`; manifest SHA `cc2edad797f5ced938dbad2ebf013a14504c1eecd0681f7026dfc3216357485f`; state SHA `9668cdaf1cb18c2251be3c603527f505ceb4372f2c9dfd85c4afaa893f867a12`. Copie backend/frontend identiche. Conteggi globali Lombardia non ricalcolati.
+
+
+## CAI Missaglia bounded continuation 01 — 22 ottobre 2026
+
+| Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| `cai-20261022-lombardia-missaglia01` — CAI Missaglia | 1 URL ufficiale | 0 | 1 | 0 | 0 correnti; 1 riga 2024 estratta e filtrata come passata | 0 ID duplicati catalogo | `gite.php` letto e parsato; discovery 41→1 | Pagina vecchia (2014/2024); 1 candidato non visitato; errore OCR pagina 21 conservato, manual QA = testo corso non calendario | Checkpoint file, poi Busto Arsizio bounded max1 sul calendario invernale ufficiale |
+
+Catalogo 3.359→3.359 ID; zero aggiunti/rimossi/cambiati. Fonte `partial`; zero righe correnti non prova un calendario completo. Importer QA PASS read-only, backend npm test 201/201 dopo raccolta, mirror backend/frontend identici, nessun import DB. Report SHA `5a07fcf62a03965bffe7ef344558c9083707bead1de76e729223e03fbe4090c7`; manifest SHA `9f73e0a51f0cec7a7794e14b943ec9e235d7b50ecac93acf274d09e4a4d92b04`; state SHA `cfac59d0bae4ad27bc47aaec354b5b11848b20f51bb0c37f913f6293c5f5eb4b`. Conteggi globali regionali non ricalcolati.

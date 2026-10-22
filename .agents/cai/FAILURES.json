@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T21:33:09.175Z",
-  "repositoryCommit": "c43b32101de52739bab3237f5bddf3eb343b788b",
+  "generatedAt": "2026-10-22T21:36:16.277Z",
+  "repositoryCommit": "7204642efea0630bed21f6db1d7a576f1db71b15",
   "baseline": {
     "commit": "9919927d4cbef6d154c4dae1441d64cd01c70ad4",
     "runId": "cai-20261020-piemonte-01"
@@ -25611,7 +25611,7 @@
       "failureClass": "ocr-runtime-or-confidence",
       "httpStatus": null,
       "firstObservedAt": "2026-10-20T01:36:11.440Z",
-      "lastObservedAt": "2026-10-20T08:08:31.672Z",
+      "lastObservedAt": "2026-10-22T21:36:16.277Z",
       "observationBasis": "timestamps from persisted run/source status snapshots; not request timestamps",
       "history": {
         "runIds": [
@@ -25628,19 +25628,21 @@
           "cai-20261020-lombardia-deep-14",
           "cai-20261020-lombardia-deep-15",
           "cai-20261020-piemonte-01",
-          "cai-20261020-piemonte-ocr-01"
+          "cai-20261020-piemonte-ocr-01",
+          "cai-20261022-lombardia-missaglia01"
         ],
-        "snapshotCopies": 26,
+        "snapshotCopies": 27,
         "issueCodes": [
           "manual-qa-no-events"
         ],
         "sourceStatuses": [
-          "unsupported"
+          "unsupported",
+          "partial"
         ]
       },
       "attempts": {
         "actualHistoricalRequests": "unknown",
-        "currentCycleRequests": 0,
+        "currentCycleRequests": "No new OCR retry claimed; current Missaglia status preserved the historical page-21 OCR failure.",
         "recoveryAttempts": []
       },
       "cooldown": {
@@ -25651,18 +25653,20 @@
         "representativeMessages": [
           "PDF OCR unavailable or failed: OCR failed for page-15.png: psm 6: Command failed: tesseract /tmp/cai-pdf-ocr-CAd4eI/page-15.png stdout -l ita+eng --psm 6\n; psm 4: PDF OCR exceeded its 70765 ms time limit",
           "PDF OCR unavailable or failed: OCR failed for page-21.png: psm 6: Command failed: tesseract /tmp/cai-pdf-ocr-M1141g/page-21.png stdout -l ita+eng --psm 6\n; psm 4: PDF OCR exceeded its 80809 ms time limit",
-          "OCR pagina PDF 21: contenuto di primo soccorso in manuale didattico, nessun evento calendario."
+          "OCR pagina PDF 21: contenuto di primo soccorso in manuale didattico, nessun evento calendario.",
+          "Run cai-20261022-lombardia-missaglia01 still records page-21 OCR failure/time limit; prior manual QA says this page is first-aid course material, not a calendar."
         ],
         "sourceUpdatedAt": [
           "2026-10-20T01:39:57.342Z",
           "2026-10-20T01:51:46.287Z",
-          "2026-10-20T02:11:55.267Z"
+          "2026-10-20T02:11:55.267Z",
+          "2026-10-22T21:36:16.277Z"
         ]
       },
       "strategy": "Classify evidence, preserve valid cache, then retry/re-discover with a bounded policy appropriate to the class.",
       "status": "historical_classified_unverified",
       "owner": "cai-collector",
-      "outcome": "No resolution check in the current cycle yet.",
+      "outcome": "Still open after bounded gite.php read; manual QA classifies the PDF page as non-calendar training material.",
       "correctionRef": null,
       "testRefs": [],
       "resolutionCheck": null,
@@ -37109,7 +37113,7 @@
       "failureClass": "discovery-budget-exhausted",
       "httpStatus": null,
       "firstObservedAt": "2026-10-19T18:02:55.761Z",
-      "lastObservedAt": "2026-10-20T08:08:31.672Z",
+      "lastObservedAt": "2026-10-22T21:36:16.277Z",
       "observationBasis": "timestamps from persisted run/source status snapshots; not request timestamps",
       "history": {
         "runIds": [
@@ -37131,20 +37135,28 @@
           "cai-20261020-lombardia-deep-14",
           "cai-20261020-lombardia-deep-15",
           "cai-20261020-piemonte-01",
-          "cai-20261020-piemonte-ocr-01"
+          "cai-20261020-piemonte-ocr-01",
+          "cai-20261022-lombardia-missaglia01"
         ],
-        "snapshotCopies": 19,
+        "snapshotCopies": 20,
         "issueCodes": [
           "discovery-limit"
         ],
         "sourceStatuses": [
-          "unsupported"
+          "unsupported",
+          "partial"
         ]
       },
       "attempts": {
         "actualHistoricalRequests": "unknown",
-        "currentCycleRequests": 0,
-        "recoveryAttempts": []
+        "currentCycleRequests": "One bounded explicit target URL was requested; independent HTTP request count is not persisted.",
+        "recoveryAttempts": [
+          {
+            "at": "2026-10-22T21:36:16.277Z",
+            "method": "orchestrated explicit URL continuation of official gite.php; response reviewed from cache only",
+            "outcome": "page is readable but stale (2014/2024); parser extracted one 2024-06-15 event filtered as past; discovery-limit reduced from 41 to 1 candidate remaining"
+          }
+        ]
       },
       "cooldown": {
         "policy": "No automatic retry until a bounded strategy is assigned",
@@ -37154,7 +37166,8 @@
         "representativeMessages": [
           "Discovery budget reached; 21 candidate documents remain.",
           "Discovery budget reached; 35 candidate documents remain.",
-          "Discovery budget reached; 42 candidate documents remain."
+          "Discovery budget reached; 42 candidate documents remain.",
+          "Run cai-20261022-lombardia-missaglia01: Discovery budget reached; 1 candidate documents remain. Cached gite.php is headed Edizione 2014 and links only 2024 programmes/news."
         ],
         "sourceUpdatedAt": [
           "2026-10-19T18:24:35.762Z",
@@ -37163,16 +37176,23 @@
           "2026-10-20T01:19:56.146Z",
           "2026-10-20T01:39:57.342Z",
           "2026-10-20T01:51:46.287Z",
-          "2026-10-20T02:11:55.267Z"
+          "2026-10-20T02:11:55.267Z",
+          "2026-10-22T21:36:16.277Z"
         ]
       },
       "strategy": "Classify evidence, preserve valid cache, then retry/re-discover with a bounded policy appropriate to the class.",
-      "status": "historical_classified_unverified",
+      "status": "recheck_open",
       "owner": "cai-collector",
-      "outcome": "No resolution check in the current cycle yet.",
+      "outcome": "Bounded page was read and parsed, but it is stale and one candidate remains; do not treat zero current events as calendar completeness.",
       "correctionRef": null,
       "testRefs": [],
-      "resolutionCheck": null,
+      "resolutionCheck": {
+        "runId": "cai-20261022-lombardia-missaglia01",
+        "manifestSha256": "9f73e0a51f0cec7a7794e14b943ec9e235d7b50ecac93acf274d09e4a4d92b04",
+        "remainingCandidates": 1,
+        "reportSha256": "5a07fcf62a03965bffe7ef344558c9083707bead1de76e729223e03fbe4090c7",
+        "databaseWrites": 0
+      },
       "policyStatus": "candidate_pending_test"
     },
     {
