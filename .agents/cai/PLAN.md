@@ -148,4 +148,4 @@ Il preflight collector ha escluso replay o URL con failure/cooldown: per Penne l
 
 Run unico HTML `cai-20261022-calabria-castrovillari01`: pagina indice 9.830 byte acquisita, `method=null`, 0 eventi, 1 residuo discovery HTML; PDF annuale non ritentato (OCR failure pagina 2/discovery8 conservati). Catalog rows correttamente selezionati via prefisso ID: 12→12, zero cambi; il source-evidence è stato corretto dopo un filtro errato su `sourceId` assente, e report/evidence-manifest ora allineati. Hash e QA importer PASS indicati in HANDOFF. Backend test 205/205 dopo la raccolta; sei JSON pubblici stabili. Nessuna classificazione/DB.
 
-Dopo checkpoint remoto, preflight offline dei link ufficiali PDF apparsi nella pagina, verificando history/cache/failure prima di selezionare al massimo un URL distinto. Non ripetere il PDF annuale né dichiarare copertura completa.
+Dopo il checkpoint remoto `6e10ae12b6d521c6035de81b9c5cbf1c1dd2f18e`, preflight offline dei link ufficiali PDF apparsi nella pagina, verificando history/cache/failure prima di selezionare al massimo un URL distinto. Non ripetere il PDF annuale né dichiarare copertura completa.

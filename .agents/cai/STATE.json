@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "calabria-castrovillari-checkpoint",
+  "phase": "calabria-castrovillari-post-checkpoint-preflight",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -284,12 +284,18 @@
     },
     {
       "id": "S21",
-      "status": "in_progress",
+      "status": "completed",
       "owner": "orchestrator",
-      "result": "Checkpoint Castrovillari01 output/catalog metadata, corrected evidence, PDF/OCR and HTML-discovery failures, state/handoff/region; verify GitHub blobs before preflight."
+      "result": "Run artifacts, catalog generated metadata/status, failure records and state committed/pushed; remote fetch verified at 6e10ae12b6d521c6035de81b9c5cbf1c1dd2f18e; manifest, corrected evidence and catalog blobs SHA-256 match."
+    },
+    {
+      "id": "S22",
+      "status": "in_progress",
+      "owner": "cai-collector + orchestrator",
+      "result": "Offline-preflight one newly visible official PDF link from Castrovillari /prog.php against history/cache/cooldown; no network, tests or collection until a single distinct target is selected."
     }
   ],
-  "nextAction": "Castrovillari01 has no new event candidate; after corrected evidence, importer QA PASS, backend tests 205/205, and six public JSON hash stability, publish the run/status/failure checkpoint. Then preflight one distinct official PDF link from the newly read HTML page against history/cache.",
+  "nextAction": "Castrovillari01 is fully checkpointed and remote-verified at 6e10ae12. The collector is checking the newly discovered official PDF links offline; select at most one distinct URL and run one bounded follow-up only after this preflight.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -298,7 +304,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "d9fbdca0ab0cafdc4e8ca1c91c534df4a026b7cf",
+    "branchHead": "6e10ae12b6d521c6035de81b9c5cbf1c1dd2f18e",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -467,7 +473,7 @@
       "agentRequestedEffort": "high",
       "effectiveModelTelemetry": "not exposed"
     },
-    "nextPhase": "Castrovillari01 files and report are ready and independently QA-verified; backend test 205/205 and six public hashes stable. Publish checkpoint, then offline-preflight one distinct new official PDF link; do not retry the annual PDF.",
+    "nextPhase": "Checkpoint 6e10ae12 verified. Offline-preflight group/subsection PDF links from the new HTML index; do not repeat the main annual PDF or test during an active collection.",
     "databaseReadOnlyObservation": {
       "observedAt": "2026-10-22T18:12:15.676Z",
       "source": "authorized Supabase read-only SQL and map predicate",
@@ -1010,9 +1016,9 @@
         "checkpointCommit": "pending"
       }
     ],
-    "repositoryCheckpointCommit": "d9fbdca0ab0cafdc4e8ca1c91c534df4a026b7cf",
-    "updatedAt": "2026-10-22T22:54:23.284Z",
-    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:49:27.983Z",
+    "repositoryCheckpointCommit": "6e10ae12b6d521c6035de81b9c5cbf1c1dd2f18e",
+    "updatedAt": "2026-10-22T22:54:50.597Z",
+    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:54:50.597Z",
     "continuationMechanism": {
       "flag": "--source-url URL (repeatable) with exactly one --source ID",
       "safety": "Exact official hostname, HTTP(S), no credentials/custom port; redirect guard in continuation mode permits only HTTPS same-host redirects on default/443 without auth. Existing cooldown/cache and bounded document/time limits retained.",
@@ -1127,7 +1133,7 @@
       "sourceId": "cai-castrovillari-9244005",
       "requestedUrl": "https://www.caicastrovillari.it/prog.php",
       "collection": "partial",
-      "files": "ready; importer QA PASS; report/source-evidence/evidence-manifest corrected; backend npm test 205/205 hashes stable; checkpoint pending",
+      "files": "ready; report/source-evidence/evidence-manifest QA PASS; backend tests 205/205, public hashes stable; checkpoint remote-verified at 6e10ae12b6d521c6035de81b9c5cbf1c1dd2f18e",
       "database": "not-applicable-no-new-candidates; no DB query/write",
       "baselineCommit": "1f8616499731aa067198da7432dc4587c43002a7",
       "runFolder": "backend/data/agent-runs/cai-20261022-calabria-castrovillari01",
@@ -1170,10 +1176,10 @@
       "region": "Calabria",
       "sourceId": "cai-castrovillari-9244005",
       "sourceName": "CAI Castrovillari",
-      "url": "https://www.caicastrovillari.it/prog.php",
-      "status": "offline/read-only preflight PASS; distinct official URL not in source documents/cache/FAILURES; one bounded run candidate",
-      "evidence": "registered under calendarUrls/calendarEvidence as Programma escursioni; linked from official https://www.caicastrovillari.it/racc.php; not in status.documents or cache; PDF 2026 was already visited and remains unsupported with OCR failure/discovery 8",
-      "scope": "one URL, max1 document, 120 seconds, concurrency1; no broader queue; no empty-calendar inference if method=null",
+      "url": null,
+      "status": "post-checkpoint read-only offline preflight in progress; select one distinct official link if eligible",
+      "evidence": "checkpoint 6e10ae12 includes corrected evidence. Main annual PDF already read/OCR failed; HTML index exposed group/subsection PDFs, check exact cache/history before selection.",
+      "scope": "one exact URL maximum after local-only history/cache/failure check; no network",
       "networkFetchPerformed": false
     },
     "lastSourcePreflight": {
@@ -1214,7 +1220,7 @@
       "sourceId": "cai-castrovillari-9244005",
       "requestedUrl": "https://www.caicastrovillari.it/prog.php",
       "collection": "partial",
-      "files": "ready; importer QA PASS; report/source-evidence/evidence-manifest corrected; backend npm test 205/205 hashes stable; checkpoint pending",
+      "files": "ready; report/source-evidence/evidence-manifest QA PASS; backend tests 205/205, public hashes stable; checkpoint remote-verified at 6e10ae12b6d521c6035de81b9c5cbf1c1dd2f18e",
       "database": "not-applicable-no-new-candidates; no DB query/write",
       "baselineCommit": "1f8616499731aa067198da7432dc4587c43002a7",
       "runFolder": "backend/data/agent-runs/cai-20261022-calabria-castrovillari01",
@@ -1256,10 +1262,10 @@
   },
   "repositoryCommit": {
     "branch": "codex/cai-orchestrator-luna",
-    "head": "1f8616499731aa067198da7432dc4587c43002a7",
+    "head": "6e10ae12b6d521c6035de81b9c5cbf1c1dd2f18e",
     "remoteVerified": true,
-    "fetchHead": "1f8616499731aa067198da7432dc4587c43002a7",
-    "checkpointKind": "baseline before Castrovillari01"
+    "fetchHead": "6e10ae12b6d521c6035de81b9c5cbf1c1dd2f18e",
+    "checkpointKind": "Castrovillari01 report/source-evidence/evidence-manifest, catalog metadata/status, registry"
   },
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
@@ -1283,8 +1289,8 @@
     }
   },
   "tests": "After the Castrovillari01 collection finished, backend npm test passed 205/205; SHA-256 for six public JSON files was identical before/after. No tests were run concurrently with collection.",
-  "updatedAt": "2026-10-22T22:54:23.284Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:49:27.983Z",
+  "updatedAt": "2026-10-22T22:54:50.597Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:54:50.597Z",
   "regionCurrent": "Calabria — CAI Castrovillari bounded HTML index run: partial; 12 preexisting rows confirmed unchanged, 0 extracted from page, one HTML continuation, PDF OCR page2 failure and discovery8 remain.",
   "regionNext": "After current files/status/evidence checkpoint, inspect offline the official PDF links exposed by the HTML index and select at most one distinct not-cached URL; no repeated PDF OCR run without a specific justified bounded plan.",
   "preflight": {
@@ -1339,7 +1345,7 @@
     "sourceId": "cai-castrovillari-9244005",
     "requestedUrl": "https://www.caicastrovillari.it/prog.php",
     "collection": "partial",
-    "files": "ready; importer QA PASS; report/source-evidence/evidence-manifest corrected; backend npm test 205/205 hashes stable; checkpoint pending",
+    "files": "ready; report/source-evidence/evidence-manifest QA PASS; backend tests 205/205, public hashes stable; checkpoint remote-verified at 6e10ae12b6d521c6035de81b9c5cbf1c1dd2f18e",
     "database": "not-applicable-no-new-candidates; no DB query/write",
     "baselineCommit": "1f8616499731aa067198da7432dc4587c43002a7",
     "runFolder": "backend/data/agent-runs/cai-20261022-calabria-castrovillari01",
@@ -1535,9 +1541,9 @@
     "sourceId": "cai-castrovillari-9244005",
     "sourceName": "CAI Castrovillari",
     "url": null,
-    "status": "pending offline read-only preflight of distinct official links on prog.php, after checkpoint",
-    "evidence": "program2026.pdf already visited and OCR failed on page2; official group/subsection links were visible in newly read HTML and must be checked against source history/cache before any URL run",
-    "scope": "read-only local registry/cache/history/failure inspection; choose at most one exact URL, no network",
+    "status": "post-checkpoint read-only offline preflight in progress; select one distinct official link if eligible",
+    "evidence": "checkpoint 6e10ae12 includes corrected evidence. Main annual PDF already read/OCR failed; HTML index exposed group/subsection PDFs, check exact cache/history before selection.",
+    "scope": "one exact URL maximum after local-only history/cache/failure check; no network",
     "networkFetchPerformed": false
   }
 }
