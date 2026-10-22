@@ -544,3 +544,14 @@ Run `cai-20261022-lombardia-sesto01`, baseline remoto `bab39a8f1d25d5554ad3922ff
 Catalogo 3.371→3.371; prefisso Sesto 18→18, 0 add/remove/change. SHA-256 delle righe canoniche ordinate per id (JSON compatto) `ca5c58cb7feb133ece4c08bbd3f6e484e8730734adce3a8edbc7d5830ad2a0bc` sia prima sia dopo, verificato da orchestratore e confronto campo per campo importer. Mirror backend/frontend identici. Source report SHA `3c675e7495680726e419e9ac03b7d9461c679cf8b979c008da893b48074053da`; manifest `813864b712c7a5fc04b0c44f9ea7433654fb57737674fd11616a6582c5c8af36`; run state `25fae0f0ea28be8d8ef658498c9d062ef96df5c8304bcbbefbb14f2f2b248648`. Importer QA PASS. Backend test 205/205 dopo la raccolta; hash dei sei JSON pubblici identici pre/post test. Nessun candidato, classificazione, query o write DB.
 
 Checkpoint file ancora da pubblicare. Dopo la verifica remota, preflight offline delle altre fonti Lombardia aperte e selezione di un solo URL non consumato e fuori cooldown; non ripetere PDF annuale già letto.
+
+
+### Sesto Calende canonical digest note
+
+The independently emitted `de3eec…` was produced with Python `json.dumps(ensure_ascii=True)` and is not the digest format used in the report. The canonical comparison for Sesto is compact `JSON.stringify(rows sorted by id)`, SHA `ca5c58cb7feb133ece4c08bbd3f6e484e8730734adce3a8edbc7d5830ad2a0bc`; it matches baseline and post-run, with all 18 rows byte-identical.
+
+## Lombardia offline preflight — CAI Somma Lombardo flyer (22 ottobre 2026)
+
+After remote checkpoint `c8abab216a36c4d96e2e5d6052e47bc302c79437`, cai-collector selected one exact source-specific URL: `https://caisomma.it/wp-content/uploads/pdf/Escursioni/2026/Rifugio%20Somma%20-%20Blinnenhorn%20(EE).pdf`, section `cai-somma-lombardo-9216065`. Registry `calendarEvidence` attributes it directly to official `https://www.caisomma.it/`; absent from status documents/issues, deterministic cache and FAILURES; no cooldown. The section is partial and currently has a distinct SIEL booklet copied from CAI Gazzada, 13 events, including future Nov/Dec dates; this proposed flyer is specific to the Rifugio Somma/Blinnenhorn excursion, not the general calendar. Data/date must be supported by the PDF before any event is accepted.
+
+Do not retry the SIEL full programme (historical download-aborted/size-limit/discovery/OCR issues), summary sheet (FAILURES size-limit), or Varese endpoint (503). After this preflight is checkpointed, run one exact PDF, max1 doc/120s/concurrency1; no child fetch or retry. No network/test/DB occurred during preflight.

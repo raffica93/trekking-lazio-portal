@@ -386,3 +386,12 @@ La URL `https://caisestocalende.it/calendario-sezionale/` è collegata alla font
 | `cai-20261022-lombardia-sesto01`, CAI Sesto Calende | 1 pagina HTML | 0 | 1 | 0 | 0 estratti; 18 record Sesto esistenti invariati | 0 | Nessuno | PDF annuale storico (29 righe, manual-QA), index discovery-limit 1 | Dopo checkpoint, preflight offline prossima fonte Lombardia distinta |
 
 La pagina HTML ufficiale è 121.924 byte, hash `28e233db…bde8`; `method=null`, quindi zero estrazioni non prova calendario vuoto. Il PDF collegato è già stato letto e non è stato ritentato. Catalogo 3.371 ID invariati. Importer QA PASS; backend 205/205; sei JSON pubblici stabili; nessuna scrittura DB.
+
+
+## Lombardia — CAI Somma Lombardo preflight offline (22 ottobre 2026)
+
+| Regione / fonte | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Issue aperte | Prossimo passo |
+|---|---:|---:|---:|---:|---|---|---|---|
+| `cai-somma-lombardo-9216065` | 1 URL in offline preflight | 0 | fonte attuale partial, 0 nuovi fetch | 0 | 0 nel preflight | n/a | SIEL full programme download/size/OCR issues; summary PDF size-limit; Varese 503 unrelated | Checkpoint, then one specific Blinnenhorn PDF max1/120s/concurrency1 |
+
+Il flyer puntuale `Rifugio Somma - Blinnenhorn (EE)` è registrato nella registry come evidenza ufficiale e assente da cache/status/FAILURES; nessuna richiesta di rete nel preflight. Il calendario SIEL generale e gli URL bloccati non saranno ripetuti.

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "lombardia-sesto01-collection-qa-tested-checkpoint-pending",
+  "phase": "lombardia-somma-blinnenhorn-preflight-selected",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -393,11 +393,16 @@
     },
     {
       "id": "S42",
+      "status": "completed",
+      "result": "Sesto01 files published and remote verified at c8abab2; body/report/manifest, importer PASS, tests 205/205, public hashes stable. Lombardia next offline preflight selected Somma Lombardo specific flyer PDF, no fetch yet."
+    },
+    {
+      "id": "S43",
       "status": "in_progress",
-      "result": "Checkpoint remoto del run Sesto01, poi preflight offline di un solo target Lombardia distinto/non consumato/fuori cooldown."
+      "result": "After preflight checkpoint, read one Somma Lombardo official Blinnenhorn PDF, max1/120s/concurrency1; do not retry previously blocked SIEL/summary PDFs or Varese 503."
     }
   ],
-  "nextAction": "Checkpoint remoto del run Sesto01 con body HTML, report, manifest, cataloghi/status e QA/test. Dopo la verifica remota, preflight offline della prossima fonte Lombardia distinta; non ripetere il PDF annuale già letto.",
+  "nextAction": "Checkpoint remoto del preflight. Poi un solo run cai-20261022-lombardia-somma-blinnenhorn01: URL PDF esatta, max1 documento/120s/concurrency1. Non ritentare libretto SIEL, scheda riepilogativa size-limit o endpoint Varese 503.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -406,7 +411,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "bab39a8f1d25d5554ad3922ff872878557f79c10",
+    "branchHead": "c8abab216a36c4d96e2e5d6052e47bc302c79437",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
       "runId": "cai-20261022-lombardia-sesto01",
@@ -442,9 +447,9 @@
       "backendTests": "205/205 after collection; six public JSON SHA-256 stable",
       "dbWrites": 0
     },
-    "nextAction": "Checkpoint remoto del run Sesto01 con body HTML, report, manifest, cataloghi/status e QA/test. Dopo la verifica remota, preflight offline della prossima fonte Lombardia distinta; non ripetere il PDF annuale già letto."
+    "nextAction": "Checkpoint remoto del preflight. Poi un solo run cai-20261022-lombardia-somma-blinnenhorn01: URL PDF esatta, max1 documento/120s/concurrency1. Non ritentare libretto SIEL, scheda riepilogativa size-limit o endpoint Varese 503."
   },
-  "repositoryCommit": "bab39a8f1d25d5554ad3922ff872878557f79c10",
+  "repositoryCommit": "c8abab216a36c4d96e2e5d6052e47bc302c79437",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -467,10 +472,10 @@
     }
   },
   "tests": "After the Castrovillari01 collection finished, backend npm test passed 205/205; SHA-256 for six public JSON files was identical before/after. No tests were run concurrently with collection.",
-  "updatedAt": "2026-10-22T23:47:03.459406+00:00",
+  "updatedAt": "2026-10-22T23:48:16.059401+00:00",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:39:00Z",
-  "regionCurrent": "Lombardia — CAI Sesto Calende: una pagina letta, partial, method=null e zero estrazioni; 18 righe esistenti identiche; il PDF annuale non è stato ripetuto. Nessun delta DB.",
-  "regionNext": "Lombardia — preflight offline delle altre fonti aperte; selezionare una sola URL ufficiale distinta non consumata e fuori cooldown.",
+  "regionCurrent": "Lombardia — Sesto Calende: pagina ufficiale partial, 0 estrazioni; 18 ID invariati; test/QA PASS; checkpoint c8abab2.",
+  "regionNext": "Lombardia — CAI Somma Lombardo, singolo PDF specifico Rifugio Somma/Blinnenhorn, non visitato e fuori cooldown; verificare contenuto prima di candidare eventi.",
   "preflight": {
     "at": "2026-10-22T23:28:13Z",
     "sourceId": "cai-pavullo-nel-frignano-9224020",
@@ -558,32 +563,22 @@
   },
   "regionalCoverage": {
     "region": "Lombardia",
-    "scope": "one official Sesto Calende HTML index; wider totals are not freshly queried",
-    "status": "open; the page is partial, annual PDF issue remains",
+    "scope": "Sesto Calende index checkpointed; next one source-specific Somma flyer selected offline",
+    "status": "open",
     "currentRunCounts": {
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
       "eventsVerified": 0,
-      "catalogRowsVerified": 18,
       "newIds": 0,
-      "removedIds": 0,
-      "changedRows": 0,
-      "duplicateIdsExcluded": 0,
-      "placesInserted": 0,
-      "classificationsInserted": 0,
-      "coordinatesAdded": 0,
-      "failuresResolved": [],
-      "failuresOpen": [
-        "historical annual PDF/manual-QA issue; not retried",
-        "HTML index discovery-limit 1; exact child target not persisted"
-      ],
-      "nextStep": "Checkpoint body/report/catalog/status; then offline preflight one distinct Lombardia source."
+      "dbPlacesInserted": 0,
+      "dbClassificationsInserted": 0,
+      "nextStep": "Checkpoint Somma preflight; then one exact PDF fetch."
     },
     "historicalSnapshot": {
       "asOf": "2026-10-20",
-      "note": "Historical only; no fresh regional total queried."
+      "note": "Historical only."
     }
   },
   "deltaDeliveryHistory": [
@@ -711,8 +706,12 @@
   ],
   "nextSourcePreflight": {
     "region": "Lombardia",
-    "status": "preflight offline pending after Sesto01 checkpoint",
-    "scope": "inspect remaining enabled section URLs against history, scrape-status, cache and FAILURES/cooldowns; select one source only",
+    "sourceId": "cai-somma-lombardo-9216065",
+    "sourceName": "CAI Somma Lombardo",
+    "url": "https://caisomma.it/wp-content/uploads/pdf/Escursioni/2026/Rifugio%20Somma%20-%20Blinnenhorn%20(EE).pdf",
+    "status": "offline selected; bounded sample pending remote checkpoint",
+    "evidence": "registry calendarEvidence directly attributes this specific excursion PDF to official cai-somma.it; absent from documents, issues, cache and FAILURES. Existing source has SIEL booklet, but this is a distinct flyer.",
+    "scope": "one URL/document, max120s, concurrency1; verify content/date; no follow-up discovery",
     "networkFetchPerformed": false
   }
 }

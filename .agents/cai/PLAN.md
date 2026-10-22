@@ -1,6 +1,6 @@
 # Piano di passaggio al lavoro interamente cloud
 
-Stato aggiornato al 22 ottobre 2026: Pavullo delta è consegnato (ricevuta remota `3d28e26`). Lombardia Sesto01 ha letto una pagina, 0 estrazioni/method=null, 18 righe invariate, fonte partial; test backend 205/205 e importer QA PASS. Ora pubblicare/verificare il run Sesto e preflightare offline una diversa fonte Lombardia, senza ripetere il PDF annuale bloccato.
+Stato aggiornato al 22 ottobre 2026: Sesto Calende index01 checkpointato al commit `c8abab2`, fonte partial, 0 estrazioni e 18 righe invarianti; importer QA PASS e backend test 205/205. Il prossimo preflight offline Lombardia ha selezionato un solo PDF specifico CAI Somma Lombardo (Rifugio Somma/Blinnenhorn), assente da cache/failure; dopo checkpoint, max1/120s/concurrency1. Non ripetere PDF SIEL/summary bloccati né endpoint Varese 503.
 
 ## Sequenza
 
