@@ -183,9 +183,12 @@ I totali regionali della tabella iniziale restano lo snapshot storico 2026-10-20
 
 | Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
 |---|---:|---:|---:|---:|---|---:|---|---|---|
-| `cai-20261022-lombardia-stradastorta02` — CAI Strada Storta | 1 | 0 | 1 | 0 | 6 card parse; 1 nuovo candidato (Monte Pisello, 25-10-2026), 5 righe esistenti con soli campi sourceDocument/description | 0 duplicati ID | Parser v13 legge le card Event Manager dalla cache ufficiale; fixture e test PASS | 1 discovery-limit; destinazione aggiornata non identificata, luogo da verificare | Checkpoint remoto, query/import delta-only del solo ID nuovo, poi diversa fonte Lombardia |
+| `cai-20261022-lombardia-stradastorta02` — CAI Strada Storta | 1 | 0 | 1 | 0 | 6 card parse; 1 nuovo candidato (Monte Pisello, 25-10-2026) importato; 5 righe catalogo con soli campi sourceDocument/description | 0 duplicati ID | Parser v13 fixture-backed e importer post-query: 1 place + 1 classification riconciliati | 1 discovery-limit; destinazione aggiornata non identificata, luogo da verificare | Pubblicare ricevuta DB e verificarla da origin; poi diversa fonte Lombardia |
 
 
 ### Classificazione/delivery separato — Strada Storta
 
 Il lotto `cai-map-20261022-stradastorta02` classifica solo l’ID nuovo: 0 trekking, 0 non trekking, 1 da verificare, 0 errori. Mercury risposta attestata, nessun override. File QA PASS ma DB pending; la consegna attende checkpoint remoto. Conteggi di copertura regionali rimangono lo snapshot storico in testa a questo file.
+
+
+Il delta separato `cai-map-20261022-stradastorta02` ha 1 classificazione `da_verificare`/`altro`; receipt DB conferma 1 place + 1 classificazione inseriti, 0 mismatch, 0 update, 0 delete. Receipt SHA `bef3ff50b4266d0486eb343f9c281fdb96ea3a14b2f6a07727be57e2d00acf32`, ancora da pubblicare. Nessun nuovo punto geografico: coordinate null.

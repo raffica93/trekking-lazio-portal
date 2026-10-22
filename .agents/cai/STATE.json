@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "lombardia-stradastorta-delta-import-pending",
+  "phase": "lombardia-source-coverage",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -78,7 +78,7 @@
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "classification manifest validator, candidate/effective QA schema, conflicts/reconciliation and DB safety",
-      "status": "PASS run02 delta/admin-field QA and one-ID sealed classification validation; delta-only DB plan reviewed, no DB write"
+      "status": "Strada Storta02 exact-ID delta delivered via authorized Supabase MCP, 1 place + 1 classification; post-query PASS; receipt awaiting checkpoint"
     }
   },
   "baseline": {
@@ -221,11 +221,17 @@
       "status": "completed",
       "owner": "orchestrator",
       "result": "Corrected additive geo evidence migration was checkpointed at 1914bca and applied successfully before data writes. Fresh preimport query confirmed all 10 approved IDs absent and editorial digest unchanged. Insert-only MCP SQL bridge used rows validated/transformed by the committed importer: 10 published places and 10 missing classifications inserted, conflict-ignore. After query: 10/10 exact, zero missing/mismatch; existing-row editorial digest still exactly matches preimport value, prior max updated_at unchanged. Two confirmed duplicates excluded; two probable duplicates held. Receipt awaits file checkpoint."
+    },
+    {
+      "id": "S11",
+      "status": "completed",
+      "owner": "cai-collector + cai-importer + orchestrator",
+      "result": "Strada Storta02 parser v13 fixture-backed; 6 official HTML cards extracted; catalog +1/5 provenance-description-only/0 removed, classified only new ID with Mercury (da_verificare/altro), importer QA PASS. File checkpoint 12b073f remote verified; delta-only MCP insert 1 place+1 classification, before 0/0 after 1/1, mismatches 0, updates/deletes 0; receipt awaits checkpoint."
     }
   ],
   "nextAction": {
-    "step": "CHECKPOINT-STRADASTORTA02-THEN-DELTA-IMPORT",
-    "instruction": "Pubblica e verifica su GitHub run regionale cai-20261022-lombardia-stradastorta02, classificazione cai-map-20261022-stradastorta02, delta catalogo frontend/backend, report e stato. Dopo conferma remote, importer esegue query pre-write per il solo ID cai-strada-storta-9116052-01a8ce10aa39 e, se assente/conflict-safe, solo import --delta-only sul manifest classificazione; riconciliazione e ricevuta. Nessun import generale né aggiornamenti alle 5 righe esistenti."
+    "step": "CHECKPOINT-STRADASTORTA02-DB-RECEIPT",
+    "instruction": "La query pre-write per il singolo ID era vuota; import delta-only via MCP ha inserito 1 place + 1 classificazione e il joined post-query ha riconciliato 1/1. Pubblicare ora la ricevuta/report DB e aggiornare STATE/HANDOFF/REGIONS, verificarne i blob remoti. Poi preflight read-only di una fonte Lombardia distinta, nessun replay della coda Strada Storta."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -235,7 +241,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "4313f5159231874d59bbbc41ac641fbdb6087313",
+    "branchHead": "12b073fb469a209217ed149c00657a1f7e19e0a3",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -400,12 +406,12 @@
     "ocrItalian": false,
     "agentStatus": {
       "caiCollector": "Strada Storta run02 complete; parser v13; six cards, one new candidate, no DB",
-      "caiImporter": "PASS independent regional delta and verifyReadyClassificationRun QA; DB write awaits remote checkpoint",
+      "caiImporter": "PASS exact-ID before query, insert-only delta MCP, post-query matched 1 place + 1 classification; no updates/deletes; receipt ready",
       "agentRequestedModel": "gpt-6-luna",
       "agentRequestedEffort": "high",
       "effectiveModelTelemetry": "not exposed"
     },
-    "nextPhase": "Pubblica e verifica su GitHub run regionale cai-20261022-lombardia-stradastorta02, classificazione cai-map-20261022-stradastorta02, delta catalogo frontend/backend, report e stato. Dopo conferma remote, importer esegue query pre-write per il solo ID cai-strada-storta-9116052-01a8ce10aa39 e, se assente/conflict-safe, solo import --delta-only sul manifest classificazione; riconciliazione e ricevuta. Nessun import generale né aggiornamenti alle 5 righe esistenti.",
+    "nextPhase": "La query pre-write per il singolo ID era vuota; import delta-only via MCP ha inserito 1 place + 1 classificazione e il joined post-query ha riconciliato 1/1. Pubblicare ora la ricevuta/report DB e aggiornare STATE/HANDOFF/REGIONS, verificarne i blob remoti. Poi preflight read-only di una fonte Lombardia distinta, nessun replay della coda Strada Storta.",
     "databaseReadOnlyObservation": {
       "observedAt": "2026-10-22T18:12:15.676Z",
       "source": "authorized Supabase read-only SQL and map predicate",
@@ -419,8 +425,8 @@
       "writes": 0
     },
     "tests": "After run07 stopped, backend npm test passed 187/187. Backend/frontend excursions SHA256 6e46cec85daae67e6da0a98afb36d4fbf72b3790b2246dfcdf3837ea9a0ff99b and scrape-status SHA256 da7fa46626cfd3c7e29cc59e0eb66c85f2374a70d0d325a68caba38308dd8450 remained byte-identical after tests.",
-    "regionCurrent": "Lombardia — Strada Storta run02: un solo URL ufficiale letto dal body in cache, 6 eventi estratti, 1 nuovo candidato Monte Pisello e 5 aggiornamenti di sola provenienza/descrizione; partial con 1 discovery-limit residuo.",
-    "regionNext": "Dopo checkpoint remoto run02/classificazione, pre-query e import delta-only del singolo ID con classificazione Mercury da_verificare; poi selezionare una nuova fonte Lombardia senza ripetere coda.",
+    "regionCurrent": "Lombardia — Strada Storta02: 1 pagina ufficiale, 6 eventi estratti, 1 candidato nuovo consegnato con classificazione da_verificare; cinque record esistenti aggiornati solo nelle evidenze sourceDocument/description nel catalogo locale, senza DB update; una discovery-limit aperta.",
+    "regionNext": "Pubblicare la ricevuta DB, poi preflight in sola lettura per una fonte Lombardia diversa; lasciare aperta Strada Storta finché il candidato discovery e la destinazione dubbia non sono risolti.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
     "remoteCheckpointVerifiedAt": "2026-10-22T19:25:20Z",
@@ -456,8 +462,8 @@
       "sourceId": "cai-strada-storta-9116052",
       "region": "Lombardia",
       "collection": "partial",
-      "files": "ready; checkpoint pending",
-      "database": "pending",
+      "files": "ready; checkpoint 12b073f remote verified",
+      "database": "completed; receipt pending checkpoint",
       "controlledSections": 1,
       "completeSections": 0,
       "partialSections": 1,
@@ -485,7 +491,7 @@
         "stateSha256": "7633506ce5df59f489b171b9feed821eeaed0b295e507b30dcae39e548746d3a",
         "outputSha256": "1cdf39c31f0b7c6ff8fa213072a6b1d03ce50c4d36ae205c6ca1ed181ac68e50",
         "reportPath": "backend/data/agent-runs/cai-map-20261022-stradastorta02/classification-report.md",
-        "reportSha256": "c9f1182315d2c42e1b7a218189dd0ec757a85d9cad88fb52435906130073d25e",
+        "reportSha256": "1d68459391c098f794795f08c9e8fbc4cdeb8984498ca0d787ec14c0caadc07b",
         "inputIds": 1,
         "errors": 0,
         "decisionCounts": {
@@ -504,8 +510,29 @@
         "policyVersion": "cai-trekking-v2",
         "qa": "PASS: importer verifyReadyClassificationRun; no DB access/write"
       },
-      "checkpointCommit": "pending",
-      "checkpointVerifiedAt": null
+      "checkpointCommit": "12b073fb469a209217ed149c00657a1f7e19e0a3",
+      "checkpointVerifiedAt": "2026-10-22T21:58:00Z",
+      "databaseReceipt": {
+        "path": "backend/data/agent-runs/cai-map-20261022-stradastorta02/delta-import-receipt.json",
+        "sha256": "bef3ff50b4266d0486eb343f9c281fdb96ea3a14b2f6a07727be57e2d00acf32",
+        "reportPath": "backend/data/agent-runs/cai-map-20261022-stradastorta02/delta-import-report.md",
+        "reportSha256": "71d75fe727139578825bdf959a019dfdebf4fa1426b6ec8d393f9bd8ab6cb470",
+        "verifiedAt": "2026-10-22T21:59:44Z",
+        "placesInserted": 1,
+        "classificationsInserted": 1,
+        "targetBefore": {
+          "places": 0,
+          "classifications": 0
+        },
+        "targetAfter": {
+          "places": 1,
+          "classifications": 1,
+          "joinedRows": 1
+        },
+        "mismatches": 0,
+        "updates": 0,
+        "deletes": 0
+      }
     },
     "regionalCheckpointCommit": "d45f27136177ce05181d69f87e00a8d7bb96a3cb",
     "regionalRunHistory": [
@@ -987,8 +1014,8 @@
       "requestedUrl": "https://stradastorta.it/new/eventi/",
       "canonicalUrl": "https://stradastorta.it/eventi/",
       "collection": "partial",
-      "files": "ready; checkpoint pending",
-      "database": "pending; no DB access/write",
+      "files": "ready; checkpoint published and remote verified",
+      "database": "completed; exact-ID before/after reconciled; receipt pending checkpoint",
       "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-stradastorta02/manifest.json",
       "manifestSha256": "dd28cd5f998acc65a20fd1043d5434c78652fe7fb527f9a1fd1b2febe15e3f10",
       "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-stradastorta02/collection-report.md",
@@ -1015,8 +1042,8 @@
       "importerQa": "PASS independent manifest/delta/admin-field QA; one-ID classification manifest validation PASS",
       "backendTest": "202/202 after collection; six public JSON hashes unchanged during tests",
       "sourceCommit": "4313f5159231874d59bbbc41ac641fbdb6087313",
-      "fileCheckpointCommit": "pending",
-      "remoteVerified": false,
+      "fileCheckpointCommit": "12b073fb469a209217ed149c00657a1f7e19e0a3",
+      "remoteVerified": true,
       "classification": {
         "runId": "cai-map-20261022-stradastorta02",
         "status": "ready; remote checkpoint pending",
@@ -1025,7 +1052,7 @@
         "stateSha256": "7633506ce5df59f489b171b9feed821eeaed0b295e507b30dcae39e548746d3a",
         "outputSha256": "1cdf39c31f0b7c6ff8fa213072a6b1d03ce50c4d36ae205c6ca1ed181ac68e50",
         "reportPath": "backend/data/agent-runs/cai-map-20261022-stradastorta02/classification-report.md",
-        "reportSha256": "c9f1182315d2c42e1b7a218189dd0ec757a85d9cad88fb52435906130073d25e",
+        "reportSha256": "1d68459391c098f794795f08c9e8fbc4cdeb8984498ca0d787ec14c0caadc07b",
         "inputIds": 1,
         "errors": 0,
         "decisionCounts": {
@@ -1043,6 +1070,27 @@
         "modelAttested": true,
         "policyVersion": "cai-trekking-v2",
         "qa": "PASS: importer verifyReadyClassificationRun; no DB access/write"
+      },
+      "databaseReceipt": {
+        "path": "backend/data/agent-runs/cai-map-20261022-stradastorta02/delta-import-receipt.json",
+        "sha256": "bef3ff50b4266d0486eb343f9c281fdb96ea3a14b2f6a07727be57e2d00acf32",
+        "reportPath": "backend/data/agent-runs/cai-map-20261022-stradastorta02/delta-import-report.md",
+        "reportSha256": "71d75fe727139578825bdf959a019dfdebf4fa1426b6ec8d393f9bd8ab6cb470",
+        "verifiedAt": "2026-10-22T21:59:44Z",
+        "placesInserted": 1,
+        "classificationsInserted": 1,
+        "targetBefore": {
+          "places": 0,
+          "classifications": 0
+        },
+        "targetAfter": {
+          "places": 1,
+          "classifications": 1,
+          "joinedRows": 1
+        },
+        "mismatches": 0,
+        "updates": 0,
+        "deletes": 0
       }
     },
     "lastCodeCorrection": {
@@ -1067,8 +1115,8 @@
       "requestedUrl": "https://stradastorta.it/new/eventi/",
       "canonicalUrl": "https://stradastorta.it/eventi/",
       "collection": "partial",
-      "files": "ready; checkpoint pending",
-      "database": "pending; no DB access/write",
+      "files": "ready; checkpoint published and remote verified",
+      "database": "completed; exact-ID before/after reconciled; receipt pending checkpoint",
       "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-stradastorta02/manifest.json",
       "manifestSha256": "dd28cd5f998acc65a20fd1043d5434c78652fe7fb527f9a1fd1b2febe15e3f10",
       "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-stradastorta02/collection-report.md",
@@ -1095,8 +1143,8 @@
       "importerQa": "PASS independent manifest/delta/admin-field QA; one-ID classification manifest validation PASS",
       "backendTest": "202/202 after collection; six public JSON hashes unchanged during tests",
       "sourceCommit": "4313f5159231874d59bbbc41ac641fbdb6087313",
-      "fileCheckpointCommit": "pending",
-      "remoteVerified": false,
+      "fileCheckpointCommit": "12b073fb469a209217ed149c00657a1f7e19e0a3",
+      "remoteVerified": true,
       "classification": {
         "runId": "cai-map-20261022-stradastorta02",
         "status": "ready; remote checkpoint pending",
@@ -1105,7 +1153,7 @@
         "stateSha256": "7633506ce5df59f489b171b9feed821eeaed0b295e507b30dcae39e548746d3a",
         "outputSha256": "1cdf39c31f0b7c6ff8fa213072a6b1d03ce50c4d36ae205c6ca1ed181ac68e50",
         "reportPath": "backend/data/agent-runs/cai-map-20261022-stradastorta02/classification-report.md",
-        "reportSha256": "c9f1182315d2c42e1b7a218189dd0ec757a85d9cad88fb52435906130073d25e",
+        "reportSha256": "1d68459391c098f794795f08c9e8fbc4cdeb8984498ca0d787ec14c0caadc07b",
         "inputIds": 1,
         "errors": 0,
         "decisionCounts": {
@@ -1123,6 +1171,27 @@
         "modelAttested": true,
         "policyVersion": "cai-trekking-v2",
         "qa": "PASS: importer verifyReadyClassificationRun; no DB access/write"
+      },
+      "databaseReceipt": {
+        "path": "backend/data/agent-runs/cai-map-20261022-stradastorta02/delta-import-receipt.json",
+        "sha256": "bef3ff50b4266d0486eb343f9c281fdb96ea3a14b2f6a07727be57e2d00acf32",
+        "reportPath": "backend/data/agent-runs/cai-map-20261022-stradastorta02/delta-import-report.md",
+        "reportSha256": "71d75fe727139578825bdf959a019dfdebf4fa1426b6ec8d393f9bd8ab6cb470",
+        "verifiedAt": "2026-10-22T21:59:44Z",
+        "placesInserted": 1,
+        "classificationsInserted": 1,
+        "targetBefore": {
+          "places": 0,
+          "classifications": 0
+        },
+        "targetAfter": {
+          "places": 1,
+          "classifications": 1,
+          "joinedRows": 1
+        },
+        "mismatches": 0,
+        "updates": 0,
+        "deletes": 0
       }
     },
     "nextSourcePreflight": {
@@ -1158,17 +1227,31 @@
     "pendingDeltaDelivery": {
       "regionalRunId": "cai-20261022-lombardia-stradastorta02",
       "classificationRunId": "cai-map-20261022-stradastorta02",
+      "status": "completed; receipt pending checkpoint",
       "sourceId": "cai-strada-storta-9116052-01a8ce10aa39",
-      "status": "files-QA-ready-checkpoint-pending",
-      "expectedPlacesInsert": 1,
-      "expectedClassificationInsert": 1,
+      "sourceCommit": "12b073fb469a209217ed149c00657a1f7e19e0a3",
+      "placesInserted": 1,
+      "classificationsInserted": 1,
+      "targetBefore": {
+        "places": 0,
+        "classifications": 0
+      },
+      "targetAfter": {
+        "places": 1,
+        "classifications": 1,
+        "joinedRows": 1
+      },
+      "mismatches": 0,
       "updates": 0,
       "deletes": 0,
-      "preQuery": "pending remote checkpoint",
-      "postQueryAndReceipt": "pending"
+      "receiptPath": "backend/data/agent-runs/cai-map-20261022-stradastorta02/delta-import-receipt.json",
+      "receiptSha256": "bef3ff50b4266d0486eb343f9c281fdb96ea3a14b2f6a07727be57e2d00acf32",
+      "reportPath": "backend/data/agent-runs/cai-map-20261022-stradastorta02/delta-import-report.md",
+      "reportSha256": "71d75fe727139578825bdf959a019dfdebf4fa1426b6ec8d393f9bd8ab6cb470",
+      "remoteReceiptCheckpoint": null
     }
   },
-  "repositoryCommit": "4313f5159231874d59bbbc41ac641fbdb6087313",
+  "repositoryCommit": "12b073fb469a209217ed149c00657a1f7e19e0a3",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -1182,10 +1265,10 @@
     "writes": 0
   },
   "tests": "After Strada Storta run02, backend npm test passed 202/202; focused parser fixture 2/2 and cache invalidation 1/1; six public JSON hashes matched before/after tests.",
-  "updatedAt": "2026-10-22T21:55:50Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T21:50:00Z",
-  "regionCurrent": "Lombardia — Strada Storta run02: un solo URL ufficiale letto dal body in cache, 6 eventi estratti, 1 nuovo candidato Monte Pisello e 5 aggiornamenti di sola provenienza/descrizione; partial con 1 discovery-limit residuo.",
-  "regionNext": "Dopo checkpoint remoto run02/classificazione, pre-query e import delta-only del singolo ID con classificazione Mercury da_verificare; poi selezionare una nuova fonte Lombardia senza ripetere coda.",
+  "updatedAt": "2026-10-22T22:01:10Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T21:58:00Z",
+  "regionCurrent": "Lombardia — Strada Storta02: 1 pagina ufficiale, 6 eventi estratti, 1 candidato nuovo consegnato con classificazione da_verificare; cinque record esistenti aggiornati solo nelle evidenze sourceDocument/description nel catalogo locale, senza DB update; una discovery-limit aperta.",
+  "regionNext": "Pubblicare la ricevuta DB, poi preflight in sola lettura per una fonte Lombardia diversa; lasciare aperta Strada Storta finché il candidato discovery e la destinazione dubbia non sono risolti.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
     "sourceId": "cai-varese-9216009",
@@ -1210,72 +1293,38 @@
     "writePerformed": false
   },
   "deltaDelivery": {
-    "regionalRunId": "cai-20261022-lombardia-valmadrera07",
-    "classificationRunId": "cai-map-20261022-valmadrera01",
-    "status": "completed-10-row-delta-reconciled-and-receipt-published",
-    "candidateIds": 10,
-    "confirmedDuplicatesExcluded": 2,
-    "probableDuplicatesHeld": 2,
+    "regionalRunId": "cai-20261022-lombardia-stradastorta02",
+    "classificationRunId": "cai-map-20261022-stradastorta02",
+    "status": "completed-1-row-delta-reconciled-receipt-pending-checkpoint",
+    "candidateIds": 1,
     "classificationCounts": {
       "trekking": 0,
-      "non_trekking": 8,
-      "da_verificare": 2,
+      "non_trekking": 0,
+      "da_verificare": 1,
       "errors": 0
     },
     "coordinatesAdded": 0,
-    "writeContract": "insert-only places + missing classifications; conflict-ignore; no deletes/updates",
-    "next": "No replay. Receipt b9b8a5fdcabc12f94f5aeeb39fec4e03b375098bb32837942b8c598f0cdf7cf7 and DB reconciliation are complete at remote commit 50352f7fde1a638e6541aab048fcdacfb834324b; proceed with separate Lombardia source coverage.",
+    "writeContract": "single ID; insert-only places + missing classification; conflict-ignore; no deletes/updates; no general import",
+    "sourceCommit": "12b073fb469a209217ed149c00657a1f7e19e0a3",
     "databaseReceipt": {
-      "path": "backend/data/agent-runs/cai-map-20261022-valmadrera01/delta-import-receipt.json",
-      "sha256": "b9b8a5fdcabc12f94f5aeeb39fec4e03b375098bb32837942b8c598f0cdf7cf7",
-      "placesInserted": 10,
-      "classificationsInserted": 10,
-      "missing": 0,
-      "mismatches": 0,
-      "candidateDisposition": {
-        "newCandidates": 14,
-        "inserted": 10,
-        "confirmedDuplicatesExcluded": 2,
-        "probableDuplicatesHeld": 2
-      }
-    },
-    "preImportQuery": {
-      "observedAt": "2026-10-22T20:33:42.003837Z",
-      "placesTotal": 4405,
-      "publishedTotal": 4346,
-      "mapCandidates": 3336,
-      "classificationsTotal": 3336,
-      "targetPlacesPresent": 0,
-      "targetClassificationsPresent": 0,
-      "editorialDigest": "b52a6bcc1c0d4779ffeb112e5547c891"
-    },
-    "afterQuery": {
-      "observedAt": "2026-10-22T20:34:53.834321Z",
-      "placesTotal": 4415,
-      "publishedTotal": 4356,
-      "mapCandidates": 3346,
-      "classificationsTotal": 3346,
-      "targetPlacesPresent": 10,
-      "targetPlacesMissing": 0,
-      "targetFieldMismatches": 0,
-      "targetClassificationsPresent": 10,
-      "targetClassificationMismatches": 0,
-      "classificationsByDecision": {
-        "trekking": 969,
-        "non_trekking": 17,
-        "da_verificare": 2360
+      "path": "backend/data/agent-runs/cai-map-20261022-stradastorta02/delta-import-receipt.json",
+      "sha256": "bef3ff50b4266d0486eb343f9c281fdb96ea3a14b2f6a07727be57e2d00acf32",
+      "placesInserted": 1,
+      "classificationsInserted": 1,
+      "before": {
+        "places": 0,
+        "classifications": 0
       },
-      "defaultMapVisibleRows": 3329,
-      "preexistingEditorialDigestMatchesBefore": true,
-      "preexistingLatestUpdatedAtUnchanged": true
+      "after": {
+        "places": 1,
+        "classifications": 1,
+        "joinedRows": 1
+      },
+      "mismatches": 0,
+      "updates": 0,
+      "deletes": 0
     },
-    "duplicateMatchQuery": {
-      "observedAt": "2026-10-22T20:36:22.256568Z",
-      "confirmedOriginalIdsPresent": 2,
-      "probableComparisonIdsPresent": 2,
-      "noRowsChanged": true
-    },
-    "completedAt": "2026-10-22T20:34:53.834321Z"
+    "receiptCheckpointCommit": "pending"
   },
   "lastCodeCorrection": {
     "commit": "a015865283f0097d22036a9d75f4e0e17cd94bbb",
@@ -1294,8 +1343,8 @@
     "requestedUrl": "https://stradastorta.it/new/eventi/",
     "canonicalUrl": "https://stradastorta.it/eventi/",
     "collection": "partial",
-    "files": "ready; checkpoint pending",
-    "database": "pending; no DB access/write",
+    "files": "ready; checkpoint published and remote verified",
+    "database": "completed; exact-ID before/after reconciled; receipt pending checkpoint",
     "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-stradastorta02/manifest.json",
     "manifestSha256": "dd28cd5f998acc65a20fd1043d5434c78652fe7fb527f9a1fd1b2febe15e3f10",
     "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-stradastorta02/collection-report.md",
@@ -1322,8 +1371,8 @@
     "importerQa": "PASS independent manifest/delta/admin-field QA; one-ID classification manifest validation PASS",
     "backendTest": "202/202 after collection; six public JSON hashes unchanged during tests",
     "sourceCommit": "4313f5159231874d59bbbc41ac641fbdb6087313",
-    "fileCheckpointCommit": "pending",
-    "remoteVerified": false,
+    "fileCheckpointCommit": "12b073fb469a209217ed149c00657a1f7e19e0a3",
+    "remoteVerified": true,
     "classification": {
       "runId": "cai-map-20261022-stradastorta02",
       "status": "ready; remote checkpoint pending",
@@ -1332,7 +1381,7 @@
       "stateSha256": "7633506ce5df59f489b171b9feed821eeaed0b295e507b30dcae39e548746d3a",
       "outputSha256": "1cdf39c31f0b7c6ff8fa213072a6b1d03ce50c4d36ae205c6ca1ed181ac68e50",
       "reportPath": "backend/data/agent-runs/cai-map-20261022-stradastorta02/classification-report.md",
-      "reportSha256": "c9f1182315d2c42e1b7a218189dd0ec757a85d9cad88fb52435906130073d25e",
+      "reportSha256": "1d68459391c098f794795f08c9e8fbc4cdeb8984498ca0d787ec14c0caadc07b",
       "inputIds": 1,
       "errors": 0,
       "decisionCounts": {
@@ -1350,11 +1399,32 @@
       "modelAttested": true,
       "policyVersion": "cai-trekking-v2",
       "qa": "PASS: importer verifyReadyClassificationRun; no DB access/write"
+    },
+    "databaseReceipt": {
+      "path": "backend/data/agent-runs/cai-map-20261022-stradastorta02/delta-import-receipt.json",
+      "sha256": "bef3ff50b4266d0486eb343f9c281fdb96ea3a14b2f6a07727be57e2d00acf32",
+      "reportPath": "backend/data/agent-runs/cai-map-20261022-stradastorta02/delta-import-report.md",
+      "reportSha256": "71d75fe727139578825bdf959a019dfdebf4fa1426b6ec8d393f9bd8ab6cb470",
+      "verifiedAt": "2026-10-22T21:59:44Z",
+      "placesInserted": 1,
+      "classificationsInserted": 1,
+      "targetBefore": {
+        "places": 0,
+        "classifications": 0
+      },
+      "targetAfter": {
+        "places": 1,
+        "classifications": 1,
+        "joinedRows": 1
+      },
+      "mismatches": 0,
+      "updates": 0,
+      "deletes": 0
     }
   },
   "regionalCoverage": {
     "region": "Lombardia",
-    "status": "open; Strada Storta campione corrente partial con un discovery-limit; altri campioni Lombardia S.E.M., Missaglia, Busto e fonti pregresse restano partial; nessun recount regionale totale.",
+    "status": "open; Strada Storta partial (one discovery-limit, destination uncertain); importer has delivered one new event/classification. Other Lombardia sources remain partial; no regional recount.",
     "currentRunCounts": {
       "sectionsChecked": 1,
       "complete": 0,
@@ -1378,7 +1448,15 @@
       "failuresOpen": [
         "One discovery-limit candidate remains; Monte Pisello destination change is documented but final location is unverified."
       ],
-      "nextStep": "Pubblica e verifica su GitHub run regionale cai-20261022-lombardia-stradastorta02, classificazione cai-map-20261022-stradastorta02, delta catalogo frontend/backend, report e stato. Dopo conferma remote, importer esegue query pre-write per il solo ID cai-strada-storta-9116052-01a8ce10aa39 e, se assente/conflict-safe, solo import --delta-only sul manifest classificazione; riconciliazione e ricevuta. Nessun import generale né aggiornamenti alle 5 righe esistenti."
+      "nextStep": "Pubblicare la ricevuta DB, poi preflight in sola lettura per una fonte Lombardia diversa; lasciare aperta Strada Storta finché il candidato discovery e la destinazione dubbia non sono risolti.",
+      "deliveredPlaces": 1,
+      "deliveredClassifications": 1,
+      "databaseTargetMissingAfter": 0,
+      "databaseMismatches": 0,
+      "databaseUpdates": 0,
+      "databaseDeletes": 0,
+      "receiptPath": "backend/data/agent-runs/cai-map-20261022-stradastorta02/delta-import-receipt.json",
+      "receiptSha256": "bef3ff50b4266d0486eb343f9c281fdb96ea3a14b2f6a07727be57e2d00acf32"
     },
     "historicalSnapshot": {
       "sections": 229,
@@ -1389,5 +1467,75 @@
       "unchecked": 104
     },
     "historicalSnapshotNote": "Historical 2026-10-20 only; current Strada Storta sample is one partial source and does not recalculate regional coverage."
-  }
+  },
+  "deltaDeliveryHistory": [
+    {
+      "regionalRunId": "cai-20261022-lombardia-valmadrera07",
+      "classificationRunId": "cai-map-20261022-valmadrera01",
+      "status": "completed-10-row-delta-reconciled-and-receipt-published",
+      "candidateIds": 10,
+      "confirmedDuplicatesExcluded": 2,
+      "probableDuplicatesHeld": 2,
+      "classificationCounts": {
+        "trekking": 0,
+        "non_trekking": 8,
+        "da_verificare": 2,
+        "errors": 0
+      },
+      "coordinatesAdded": 0,
+      "writeContract": "insert-only places + missing classifications; conflict-ignore; no deletes/updates",
+      "next": "No replay. Receipt b9b8a5fdcabc12f94f5aeeb39fec4e03b375098bb32837942b8c598f0cdf7cf7 and DB reconciliation are complete at remote commit 50352f7fde1a638e6541aab048fcdacfb834324b; proceed with separate Lombardia source coverage.",
+      "databaseReceipt": {
+        "path": "backend/data/agent-runs/cai-map-20261022-valmadrera01/delta-import-receipt.json",
+        "sha256": "b9b8a5fdcabc12f94f5aeeb39fec4e03b375098bb32837942b8c598f0cdf7cf7",
+        "placesInserted": 10,
+        "classificationsInserted": 10,
+        "missing": 0,
+        "mismatches": 0,
+        "candidateDisposition": {
+          "newCandidates": 14,
+          "inserted": 10,
+          "confirmedDuplicatesExcluded": 2,
+          "probableDuplicatesHeld": 2
+        }
+      },
+      "preImportQuery": {
+        "observedAt": "2026-10-22T20:33:42.003837Z",
+        "placesTotal": 4405,
+        "publishedTotal": 4346,
+        "mapCandidates": 3336,
+        "classificationsTotal": 3336,
+        "targetPlacesPresent": 0,
+        "targetClassificationsPresent": 0,
+        "editorialDigest": "b52a6bcc1c0d4779ffeb112e5547c891"
+      },
+      "afterQuery": {
+        "observedAt": "2026-10-22T20:34:53.834321Z",
+        "placesTotal": 4415,
+        "publishedTotal": 4356,
+        "mapCandidates": 3346,
+        "classificationsTotal": 3346,
+        "targetPlacesPresent": 10,
+        "targetPlacesMissing": 0,
+        "targetFieldMismatches": 0,
+        "targetClassificationsPresent": 10,
+        "targetClassificationMismatches": 0,
+        "classificationsByDecision": {
+          "trekking": 969,
+          "non_trekking": 17,
+          "da_verificare": 2360
+        },
+        "defaultMapVisibleRows": 3329,
+        "preexistingEditorialDigestMatchesBefore": true,
+        "preexistingLatestUpdatedAtUnchanged": true
+      },
+      "duplicateMatchQuery": {
+        "observedAt": "2026-10-22T20:36:22.256568Z",
+        "confirmedOriginalIdsPresent": 2,
+        "probableComparisonIdsPresent": 2,
+        "noRowsChanged": true
+      },
+      "completedAt": "2026-10-22T20:34:53.834321Z"
+    }
+  ]
 }
