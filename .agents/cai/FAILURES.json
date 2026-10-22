@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T20:06:34Z",
-  "repositoryCommit": "27721c75c9596f3a465c7d471c75308bafe36b64",
+  "generatedAt": "2026-10-22T20:07:30Z",
+  "repositoryCommit": "75be6e65b19a727250346c5e1c4e3c4287f9b277",
   "baseline": {
     "commit": "9919927d4cbef6d154c4dae1441d64cd01c70ad4",
     "runId": "cai-20261020-piemonte-01"
@@ -44365,7 +44365,7 @@
       "evidence": "Cached PDF SHA256 f3939cb69b55824e4db4026d989acea993a58e7fa81671d8c7a3093d3b4103e9, 375821 bytes, 12 pages. Current adapter extraction cache reports method=pdf-text, recognized=false, events=[], issues=[]. pdftotext -layout reads month grids; Oct/Nov/Dec 2026 contain schedule entries including Nov 1 Gita sociale media montagna Valmalenco and Nov 22 Gita culturale Enogastronomica. Prior Valmadrera run01/run03 reports also recorded PDF-text with zero extracted rows. No network request made in this observation. Offline visual/pdf.js review verified 14 dated Oct–Dec entries: Oct 04/10 Scuola PIACCO, Oct11 Gita sociale Presolana, Oct17 Raccontami + Alp. Giovanile, Oct18 Vivi Moregallo + Alp. Giovanile, Oct25 Scuola PIACCO (Oct24 blank), Nov01 Gita sociale Valmalenco, Nov08/14/15 Scuola PIACCO, Nov22 Gita culturale, Dec04 Cena sociale. New integration fixture checks source PDF + production pdfText/parser output, exact dates, no coordinates.",
       "status": "open",
       "owner": "cai-collector",
-      "resolutionCheck": "Candidate parser correction in working tree; VERSION 10→11, actual PDF fixture test 20/20 and backend npm test 187/187 pass; importer QA PASS. Awaiting code checkpoint and one bounded cached orchestrator re-evaluation. No network/DB write."
+      "resolutionCheck": "Parser correction committed and verified on origin/codex/cai-orchestrator-luna at 75be6e65b19a727250346c5e1c4e3c4287f9b277; deterministic VERSION 10→11; actual PDF integration fixture; focused tests 20/20 and full backend 187/187; importer QA PASS. Awaiting one bounded cached orchestrator run to close source issue. No DB write."
     }
   ],
   "schema": {

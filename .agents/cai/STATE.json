@@ -398,8 +398,8 @@
       "writes": 0
     },
     "tests": "Backend npm test 186/186 after Valmadrera run06; backend/frontend catalog files remained byte-identical and hashes unchanged by tests.",
-    "regionCurrent": "Lombardia — Valmadrera run06 checkpointed. PDF grid parser correction has 14 real-event fixture assertions, focused 20/20 and full backend 187/187; code checkpoint and one cache-backed run remain.",
-    "regionNext": "Checkpoint parser correction, then re-evaluate the official Valmadrera 2026 PDF from existing cache in exactly one orchestrated document. No network fetch if cache is valid; Mercury-classify any new IDs before any DB import.",
+    "regionCurrent": "Lombardia — Valmadrera parser correction committed and remote-verified at 75be6e65b19a727250346c5e1c4e3c4287f9b277; fixture tests 20/20, backend 187/187. Source re-evaluation remains.",
+    "regionNext": "Run exactly one bounded orchestrator continuation for the Valmadrera 2026 PDF using the already verified local cache and parser VERSION 11; no live fetch if cache succeeds. QA manifest/output, then classify new IDs through Mercury before deciding on DB import.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
     "remoteCheckpointVerifiedAt": "2026-10-22T19:25:20Z",
@@ -467,7 +467,7 @@
       "checkpointCommit": "488e56407cf7d1de82166c8d8a10f641504c306a",
       "checkpointVerifiedAt": "2026-10-22T19:45:59Z"
     },
-    "regionalCheckpointCommit": "488e56407cf7d1de82166c8d8a10f641504c306a",
+    "regionalCheckpointCommit": "75be6e65b19a727250346c5e1c4e3c4287f9b277",
     "regionalRunHistory": [
       {
         "runId": "cai-20261022-lombardia-brescia02",
@@ -767,9 +767,9 @@
         "validation": "Importer QA PASS; backend npm test 186/186; backend/frontend copies remained identical; no DB query/write."
       }
     ],
-    "repositoryCheckpointCommit": "488e56407cf7d1de82166c8d8a10f641504c306a",
-    "updatedAt": "2026-10-22T20:06:34Z",
-    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:45:59Z",
+    "repositoryCheckpointCommit": "75be6e65b19a727250346c5e1c4e3c4287f9b277",
+    "updatedAt": "2026-10-22T20:07:30Z",
+    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T20:07:30Z",
     "continuationMechanism": {
       "flag": "--source-url URL (repeatable) with exactly one --source ID",
       "safety": "Exact official hostname, HTTP(S), no credentials/custom port; redirect guard in continuation mode permits only HTTPS same-host redirects on default/443 without auth. Existing cooldown/cache and bounded document/time limits retained.",
@@ -797,7 +797,9 @@
         "backendTests": "187/187",
         "importerQa": "PASS; geo/editorial/DB boundary checked",
         "catalogChanges": 0,
-        "dbWrites": 0
+        "dbWrites": 0,
+        "commit": "75be6e65b19a727250346c5e1c4e3c4287f9b277",
+        "remoteVerifiedAt": "2026-10-22T20:07:30Z"
       }
     },
     "parserCorrection": {
@@ -810,10 +812,12 @@
       "backendTests": "187/187",
       "importerQa": "PASS; geo/editorial/DB boundary checked",
       "catalogChanges": 0,
-      "dbWrites": 0
+      "dbWrites": 0,
+      "commit": "75be6e65b19a727250346c5e1c4e3c4287f9b277",
+      "remoteVerifiedAt": "2026-10-22T20:07:30Z"
     }
   },
-  "repositoryCommit": "488e56407cf7d1de82166c8d8a10f641504c306a",
+  "repositoryCommit": "75be6e65b19a727250346c5e1c4e3c4287f9b277",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -831,10 +835,10 @@
     "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
     "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
   },
-  "updatedAt": "2026-10-22T20:06:34Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:45:59Z",
-  "regionCurrent": "Lombardia — Valmadrera run06 checkpointed. PDF grid parser correction has 14 real-event fixture assertions, focused 20/20 and full backend 187/187; code checkpoint and one cache-backed run remain.",
-  "regionNext": "Checkpoint parser correction, then re-evaluate the official Valmadrera 2026 PDF from existing cache in exactly one orchestrated document. No network fetch if cache is valid; Mercury-classify any new IDs before any DB import.",
+  "updatedAt": "2026-10-22T20:07:30Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T20:07:30Z",
+  "regionCurrent": "Lombardia — Valmadrera parser correction committed and remote-verified at 75be6e65b19a727250346c5e1c4e3c4287f9b277; fixture tests 20/20, backend 187/187. Source re-evaluation remains.",
+  "regionNext": "Run exactly one bounded orchestrator continuation for the Valmadrera 2026 PDF using the already verified local cache and parser VERSION 11; no live fetch if cache succeeds. QA manifest/output, then classify new IDs through Mercury before deciding on DB import.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
     "sourceId": "cai-varese-9216009",
