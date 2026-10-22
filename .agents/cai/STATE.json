@@ -398,7 +398,7 @@
       "writes": 0
     },
     "tests": "Backend npm test 186/186 after Valmadrera run05; frontend public catalog hashes remained unchanged and byte-identical to backend copies.",
-    "regionCurrent": "Lombardia — Valmadrera run05 checkpoint in progress; files and report verified; 38 candidates remain; no import due zero new IDs.",
+    "regionCurrent": "Lombardia — Valmadrera run05 is partial, files/report QA-verified, and checkpointed at 28d4e9a41966c0875e428423d27bfb6d27859558; 38 candidates remain, no DB import warranted.",
     "regionNext": "After run05 checkpoint is verified remotely, execute one bounded source-url continuation (max 8 docs) on current/future official calendars and relevant activity categories only; omit stale past archive, uncertain root API, and unresolved single-activity pages. Preserve cache on failure.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
@@ -462,9 +462,11 @@
       "sectionsSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
       "scrapeStatusSha256": "1f48d29478ce32ef3f239b10306dc571e0276eb7901204cdb1b7be77cca8abc3",
       "baselineCommit": "c5036ff4d704ce41c60be7fa84b19b8ed99adee8",
-      "validation": "Importer QA PASS; backend npm test 186/186; backend/frontend catalog copies identical after tests; no DB query/write."
+      "validation": "Importer QA PASS; backend npm test 186/186; backend/frontend catalog copies identical after tests; no DB query/write.",
+      "checkpointCommit": "28d4e9a41966c0875e428423d27bfb6d27859558",
+      "checkpointVerifiedAt": "2026-10-22T19:40:42Z"
     },
-    "regionalCheckpointCommit": "20dbaf2e1b8a8b6f63c97efe2d3e96c06bc6910c",
+    "regionalCheckpointCommit": "28d4e9a41966c0875e428423d27bfb6d27859558",
     "regionalRunHistory": [
       {
         "runId": "cai-20261022-lombardia-brescia02",
@@ -729,9 +731,9 @@
         "validation": "Importer QA PASS; backend npm test 186/186; backend/frontend catalog copies identical after tests; no DB query/write."
       }
     ],
-    "repositoryCheckpointCommit": "20dbaf2e1b8a8b6f63c97efe2d3e96c06bc6910c",
-    "updatedAt": "2026-10-22T19:38:28Z",
-    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:17:43Z",
+    "repositoryCheckpointCommit": "28d4e9a41966c0875e428423d27bfb6d27859558",
+    "updatedAt": "2026-10-22T19:40:42Z",
+    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:40:42Z",
     "continuationMechanism": {
       "flag": "--source-url URL (repeatable) with exactly one --source ID",
       "safety": "Exact official hostname, HTTP(S), no credentials/custom port; redirect guard in continuation mode permits only HTTPS same-host redirects on default/443 without auth. Existing cooldown/cache and bounded document/time limits retained.",
@@ -741,7 +743,7 @@
       "backendTests": "186/186"
     }
   },
-  "repositoryCommit": "c5036ff4d704ce41c60be7fa84b19b8ed99adee8",
+  "repositoryCommit": "28d4e9a41966c0875e428423d27bfb6d27859558",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -759,9 +761,9 @@
     "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
     "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
   },
-  "updatedAt": "2026-10-22T19:38:28Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:38:28Z",
-  "regionCurrent": "Lombardia — Valmadrera run05 checkpoint in progress; files and report verified; 38 candidates remain; no import due zero new IDs.",
+  "updatedAt": "2026-10-22T19:40:42Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:40:42Z",
+  "regionCurrent": "Lombardia — Valmadrera run05 is partial, files/report QA-verified, and checkpointed at 28d4e9a41966c0875e428423d27bfb6d27859558; 38 candidates remain, no DB import warranted.",
   "regionNext": "After run05 checkpoint is verified remotely, execute one bounded source-url continuation (max 8 docs) on current/future official calendars and relevant activity categories only; omit stale past archive, uncertain root API, and unresolved single-activity pages. Preserve cache on failure.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
