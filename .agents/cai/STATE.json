@@ -224,8 +224,8 @@
     }
   ],
   "nextAction": {
-    "step": "LOMBARDIA-SELECT-NEXT-SOURCE",
-    "instruction": "Checkpoint sem02 files/report/status on origin and verify Git blobs. Then use collector read-only preflight to select one different workable official Lombardia source. Keep S.E.M. partial with 12 residual discovery candidates; do not replay the same PDF. Avoid Brescia/Varese cooldown and all prior queues without exact recoverable URLs."
+    "step": "LOMBARDIA-MISSAGLIA-BOUNDED-01",
+    "instruction": "S.E.M. sem02 file checkpoint is published and remote blobs have been verified at 3553eb6464bca382d6611709666045ce326d9cc1. Run one max-1-document, 120-second, concurrency-1 sample on official CAI Missaglia gite.php (cai-missaglia-9216150). Keep it partial unless full coverage is evidenced; do not retry any known cooldown source."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -235,7 +235,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "c43b32101de52739bab3237f5bddf3eb343b788b",
+    "branchHead": "3553eb6464bca382d6611709666045ce326d9cc1",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -420,7 +420,7 @@
     },
     "tests": "After run07 stopped, backend npm test passed 187/187. Backend/frontend excursions SHA256 6e46cec85daae67e6da0a98afb36d4fbf72b3790b2246dfcdf3837ea9a0ff99b and scrape-status SHA256 da7fa46626cfd3c7e29cc59e0eb66c85f2374a70d0d325a68caba38308dd8450 remained byte-identical after tests.",
     "regionCurrent": "Lombardia — S.E.M. run sem02 refreshed the official PDF; parser extracted 33 rows reconciled to 14 existing events, zero event-row delta; source partial with 12 residual discovery candidates.",
-    "regionNext": "Publish and verify sem02 file checkpoint; then collector performs read-only preflight for a different workable official Lombardia source. Brescia/Varese remain subject to cooldown.",
+    "regionNext": "CAI Missaglia preflight PASS: official gite.php not present in current 1-document history; only historical discovery-limit, no HTTP status/cooldown. Try one bounded fetch max1/120s, then assess evidence.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
     "remoteCheckpointVerifiedAt": "2026-10-22T19:25:20Z",
@@ -1014,11 +1014,19 @@
       "importerQa": "PASS; all manifest file hashes and backend/frontend mirrors verified read-only",
       "backendTest": "201/201 after collection; catalog/status files remained at manifest hashes",
       "codeCommit": "c43b32101de52739bab3237f5bddf3eb343b788b",
-      "fileCheckpointCommit": "pending",
-      "remoteVerified": false
+      "fileCheckpointCommit": "3553eb6464bca382d6611709666045ce326d9cc1",
+      "remoteVerified": true
+    },
+    "nextSourcePreflight": {
+      "sourceId": "cai-missaglia-9216150",
+      "url": "https://www.caimissaglia.it/gite.php",
+      "basis": "official “Gite escursionist.” page; not among the current single visited document (youth alpinism manual PDF); historical discovery-limit 41 candidates; no HTTP status/cooldown documented",
+      "scope": "one URL, max 1 document, budget 120 s, concurrency 1",
+      "observedAt": "2026-10-22T21:36:00Z",
+      "mode": "read-only"
     }
   },
-  "repositoryCommit": "c43b32101de52739bab3237f5bddf3eb343b788b",
+  "repositoryCommit": "3553eb6464bca382d6611709666045ce326d9cc1",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -1042,10 +1050,10 @@
       "copiesIdentical": true
     }
   },
-  "updatedAt": "2026-10-22T21:35:06Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T21:35:06Z",
+  "updatedAt": "2026-10-22T21:36:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T21:36:00Z",
   "regionCurrent": "Lombardia — S.E.M. run sem02 refreshed the official PDF; parser extracted 33 rows reconciled to 14 existing events, zero event-row delta; source partial with 12 residual discovery candidates.",
-  "regionNext": "Publish and verify sem02 file checkpoint; then collector performs read-only preflight for a different workable official Lombardia source. Brescia/Varese remain subject to cooldown.",
+  "regionNext": "CAI Missaglia preflight PASS: official gite.php not present in current 1-document history; only historical discovery-limit, no HTTP status/cooldown. Try one bounded fetch max1/120s, then assess evidence.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
     "sourceId": "cai-varese-9216009",
@@ -1172,8 +1180,9 @@
     "importerQa": "PASS; all manifest file hashes and backend/frontend mirrors verified read-only",
     "backendTest": "201/201 after collection; catalog/status files remained at manifest hashes",
     "codeCommit": "c43b32101de52739bab3237f5bddf3eb343b788b",
-    "fileCheckpointCommit": "pending",
-    "remoteVerified": false
+    "fileCheckpointCommit": "3553eb6464bca382d6611709666045ce326d9cc1",
+    "remoteVerified": true,
+    "next": "Preflight selected CAI Missaglia official gite.php; one bounded read-only-targeted run is next."
   },
   "regionalCoverage": {
     "region": "Lombardia",
