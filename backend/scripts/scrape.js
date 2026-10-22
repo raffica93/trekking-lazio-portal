@@ -10,7 +10,7 @@ const frontendPublic = path.join(__dirname, '..', '..', 'frontend', 'public');
 
 function usage() {
   return [
-    'Usage: npm run scrape -- [--all | --source id] [--region "Lazio"] [--concurrency 8] [--dry-run] [--strict]',
+    'Usage: npm run scrape -- [--all | --source id] [--source-url URL ...] [--region "Lazio"] [--concurrency 8] [--dry-run] [--strict]',
     '       npm run scrape:roma',
     '       node scripts/sede.js <id|all> [--dry-run]',
     '',
@@ -18,6 +18,7 @@ function usage() {
     'Public JSON-LD, ICS, WordPress calendars, HTML and annual PDFs; no AI key required.',
     'Previous-month events are excluded dynamically in Europe/Rome; future months have no upper limit.',
     'Incomplete sources keep their valid cache and are reported in scrape-status.json.',
+    '--source-url replaces the initial queue for exactly one deterministic --source; each URL must use that source official host.',
     '--strict exits with an error when a source fails with no cache.'
   ].join('\n');
 }
@@ -94,6 +95,7 @@ async function runScrape({
     sources,
     existingPayload: existing || {},
     sourceIds: args.sources.length > 0 ? args.sources : undefined,
+    sourceUrls: args.sourceUrls,
     region: args.region,
     concurrency: args.concurrency,
     log

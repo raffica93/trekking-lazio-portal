@@ -5,6 +5,7 @@ const os = require('node:os');
 const path = require('node:path');
 const http = require('node:http');
 const crypto = require('node:crypto');
+const axios = require('axios');
 const { DateTime } = require('luxon');
 const { monthFloor, parseDates, normalizeEvent, parseIcs, parseJsonLd, parseWordPress, parseCalendarLines, parseTivoliPdf, parseHtmlCalendar, discoverLinks, fetchDocument, scrapeDeterministic } = require('../adapters/deterministic');
 const { parseScrapeArgs, scrapeAll } = require('../pipeline');
@@ -85,6 +86,97 @@ test('structured empty calendar is distinct from unreadable HTML', async () => {
   const run = async (text) => scrapeDeterministic(source, { now, fetchDoc: async (url) => ({ url, text, hash: 'a', contentType: 'text/html' }) });
   assert.equal((await run('BEGIN:VCALENDAR\nEND:VCALENDAR')).status, 'no-upcoming');
   assert.equal((await run('<h1>Sezione CAI</h1>')).status, 'unsupported');
+});
+
+test('explicit continuation URLs replace source seeds and remain inside the official-host queue', async (t) => {
+  const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'cai-explicit-continuation-'));
+  t.after(() => fs.rm(tmp, { recursive: true, force: true }));
+  const targets = ['https://section.example/queued-a', 'https://section.example/queued-b'];
+  const calls = [];
+  const redirectPolicies = [];
+  const result = await scrapeDeterministic({
+    ...source,
+    url: 'https://section.example/index',
+    website: 'https://section.example/',
+    calendarUrls: ['https://section.example/seed-calendar']
+  }, {
+    now,
+    cacheDir: tmp,
+    previousStatus: { sources: [] },
+    initialUrls: targets,
+    fetchDoc: async (url, options) => {
+      calls.push(url);
+      redirectPolicies.push(options.redirectPolicy);
+      return { url, text: '<h1>Pagina senza link aggiuntivi</h1>', hash: url, contentType: 'text/html' };
+    }
+  });
+  assert.deepEqual(calls, targets);
+  assert.deepEqual(result.documents.map((document) => document.url), targets);
+  assert.deepEqual(redirectPolicies, targets.map(() => ({ host: 'section.example' })));
+  assert.equal(calls.includes(source.url), false);
+
+  const defaultCalls = [];
+  const defaults = {
+    ...source,
+    url: 'https://section.example/index',
+    website: 'https://section.example/about',
+    calendarUrls: ['https://section.example/seed-calendar']
+  };
+  await scrapeDeterministic(defaults, {
+    now, cacheDir: tmp, previousStatus: { sources: [] },
+    fetchDoc: async (url) => { defaultCalls.push(url); return { url, text: '<h1>Pagina senza link aggiuntivi</h1>', hash: `default-${url}`, contentType: 'text/html' }; }
+  });
+  assert.deepEqual(defaultCalls, [defaults.calendarUrls[0], defaults.url, defaults.website]);
+});
+
+test('continuation fetch blocks a same-host URL redirecting to an external private host', async (t) => {
+  const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'cai-redirect-guard-'));
+  t.after(() => fs.rm(tmp, { recursive: true, force: true }));
+  const originalGet = axios.get;
+  try {
+    axios.get = async (url, options) => {
+      assert.equal(url, 'https://section.example/allowlisted-calendar');
+      assert.equal(typeof options.beforeRedirect, 'function');
+      assert.doesNotThrow(() => options.beforeRedirect({ protocol: 'https:', hostname: 'section.example', port: '443' }));
+      options.beforeRedirect({ protocol: 'http:', hostname: '127.0.0.1', port: '80' });
+      throw new Error('redirect guard should reject the private target');
+    };
+    await assert.rejects(fetchDocument('https://section.example/allowlisted-calendar', {
+      cacheDir: tmp,
+      redirectPolicy: { host: 'section.example' }
+    }), /Blocked redirect outside official HTTPS host section.example/);
+  } finally {
+    axios.get = originalGet;
+  }
+});
+
+test('explicit continuation URLs reject malformed and cross-host values before any fetch', async (t) => {
+  const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'cai-explicit-continuation-reject-'));
+  t.after(() => fs.rm(tmp, { recursive: true, force: true }));
+  for (const invalid of ['not a URL', 'https://other.example/calendar', 'https://user:pass@section.example/calendar']) {
+    let calls = 0;
+    await assert.rejects(scrapeDeterministic(source, {
+      now, cacheDir: tmp, initialUrls: [invalid],
+      fetchDoc: async () => { calls += 1; throw new Error('must not fetch'); }
+    }), /Invalid continuation URL|Continuation URL host/);
+    assert.equal(calls, 0);
+  }
+});
+
+test('explicit continuation still honors persisted cooldown for a failed target URL', async (t) => {
+  const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'cai-explicit-continuation-cooldown-'));
+  t.after(() => fs.rm(tmp, { recursive: true, force: true }));
+  const blocked = 'https://section.example/temporarily-unavailable';
+  const reachable = 'https://section.example/reachable';
+  const updatedAt = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+  const calls = [];
+  const result = await scrapeDeterministic(source, {
+    now, cacheDir: tmp, initialUrls: [blocked, reachable],
+    previousStatus: { sources: [{ id: source.id, updatedAt, issues: [{ url: blocked, message: 'Request failed with status code 503' }] }] },
+    fetchDoc: async (url) => { calls.push(url); return { url, text: '<h1>Calendario CAI</h1>', hash: url, contentType: 'text/html' }; }
+  });
+  assert.deepEqual(calls, [reachable]);
+  assert.equal(result.issues.some((issue) => issue.url === blocked && issue.code === 'previous-unavailable-skipped'), true);
 });
 
 test('recent transient failures are skipped with their original timestamp and bounded error detail', async () => {
@@ -196,6 +288,6 @@ test('deterministic pipeline retains current-month/cache data, skips past months
 });
 
 test('national CLI validates regions and concurrency arguments', () => {
-  assert.deepEqual(parseScrapeArgs(['--all', '--region', 'Lombardia', '--concurrency', '8', '--strict']), { dryRun: false, sources: [], all: true, region: 'Lombardia', concurrency: 8, strict: true });
+  assert.deepEqual(parseScrapeArgs(['--all', '--region', 'Lombardia', '--concurrency', '8', '--strict']), { dryRun: false, sources: [], sourceUrls: [], all: true, region: 'Lombardia', concurrency: 8, strict: true });
   assert.throws(() => parseScrapeArgs(['--concurrency=0']), /Concurrency/);
 });

@@ -446,7 +446,17 @@ function discoverLinks(html, url, now) {
   return links.sort((a, b) => b.score - a.score);
 }
 
-async function fetchDocument(url, { timeoutMs = 8000, cacheDir = CACHE_DIR } = {}) {
+function validateRedirectTarget(options, policy) {
+  if (!policy) return;
+  const hostname = String(options.hostname || options.host || '').replace(/:\d+$/, '').toLowerCase();
+  const protocol = String(options.protocol || '').toLowerCase();
+  const port = String(options.port || '');
+  if (hostname !== policy.host || protocol !== 'https:' || (port && port !== '443') || options.auth) {
+    throw new Error(`Blocked redirect outside official HTTPS host ${policy.host}`);
+  }
+}
+
+async function fetchDocument(url, { timeoutMs = 8000, cacheDir = CACHE_DIR, redirectPolicy } = {}) {
   const key = digest(url);
   const metaPath = path.join(cacheDir, `${key}.json`);
   const bodyPath = path.join(cacheDir, `${key}.bin`);
@@ -457,6 +467,7 @@ async function fetchDocument(url, { timeoutMs = 8000, cacheDir = CACHE_DIR } = {
     // Axios' own env-proxy parsing is incompatible with this runtime proxy URL.
     ...(process.env.NODE_USE_ENV_PROXY === '1' ? { proxy: false } : {}),
     timeout: timeoutMs, responseType: 'stream', maxContentLength: MAX_PDF_DOWNLOAD_BYTES, maxRedirects: 4,
+    ...(redirectPolicy ? { beforeRedirect: (options) => validateRedirectTarget(options, redirectPolicy) } : {}),
     headers: { 'User-Agent': 'CAI-Italia-Calendar/1.0 (public event directory; contact through repository)', Accept: 'text/html,application/pdf,text/calendar,application/json;q=0.9,*/*;q=0.5', ...(prior?.etag ? { 'If-None-Match': prior.etag } : {}), ...(prior?.lastModified ? { 'If-Modified-Since': prior.lastModified } : {}) },
     validateStatus: (status) => status === 304 || (status >= 200 && status < 300)
   });
@@ -566,7 +577,36 @@ function failureIssue(url, error) {
   };
 }
 
-async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fetchDocument, maxDocuments = 12, budgetMs = 60_000, cacheDir = CACHE_DIR, recognizePdf = ocrPdfLines, recognizePdfPage = ocrPdfPageLines, recognizePdfFile = ocrPdfFilePages, previousStatus } = {}) {
+function validateInitialUrls(source, initialUrls) {
+  if (!Array.isArray(initialUrls) || initialUrls.length === 0) return [];
+  let officialHost;
+  try {
+    const official = new URL(source.website || source.url);
+    if (!['http:', 'https:'].includes(official.protocol)) throw new Error();
+    officialHost = official.hostname.toLowerCase();
+  } catch {
+    throw new Error(`Cannot validate continuation URLs for ${source.id}: source has no valid official website URL`);
+  }
+  const validated = [];
+  const seen = new Set();
+  for (const value of initialUrls) {
+    let candidate;
+    try { candidate = new URL(value); } catch {
+      throw new Error(`Invalid continuation URL for ${source.id}: ${value}`);
+    }
+    if (!['http:', 'https:'].includes(candidate.protocol) || candidate.username || candidate.password || candidate.port
+      || candidate.hostname.toLowerCase() !== officialHost) {
+      throw new Error(`Continuation URL host must match ${officialHost}: ${value}`);
+    }
+    if (!seen.has(candidate.href)) {
+      seen.add(candidate.href);
+      validated.push(candidate.href);
+    }
+  }
+  return validated;
+}
+
+async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fetchDocument, maxDocuments = 12, budgetMs = 60_000, cacheDir = CACHE_DIR, recognizePdf = ocrPdfLines, recognizePdfPage = ocrPdfPageLines, recognizePdfFile = ocrPdfFilePages, previousStatus, initialUrls: requestedInitialUrls = [] } = {}) {
   if (typeof now === 'string') now = DateTime.fromISO(now, { zone: 'Europe/Rome' });
   const started = Date.now();
   const pdfOnly = process.env.SCRAPE_PDF_ONLY === '1';
@@ -576,8 +616,14 @@ async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fe
   try { pdfPageRanges = JSON.parse(process.env.SCRAPE_PDF_PAGE_RANGES || '{}'); } catch { throw new Error('SCRAPE_PDF_PAGE_RANGES must be valid JSON'); }
   let pdfOcrPages = {};
   try { pdfOcrPages = JSON.parse(process.env.SCRAPE_PDF_OCR_PAGES || '{}'); } catch { throw new Error('SCRAPE_PDF_OCR_PAGES must be valid JSON'); }
-  let candidates = [...new Set([...(source.calendarUrls || []), source.url, source.website].filter(Boolean))];
-  if (pdfOnly && explicitPdfUrls.length) {
+  const continuationUrls = validateInitialUrls(source, requestedInitialUrls);
+  const continuationHost = continuationUrls.length
+    ? new URL(source.website || source.url).hostname.toLowerCase()
+    : null;
+  let candidates = continuationUrls.length
+    ? continuationUrls
+    : [...new Set([...(source.calendarUrls || []), source.url, source.website].filter(Boolean))];
+  if (!continuationUrls.length && pdfOnly && explicitPdfUrls.length) {
     const sourceHost = new URL(source.website || source.url).hostname.replace(/^www\./i, '').toLowerCase();
     candidates = explicitPdfUrls.filter((url) => {
       try { return new URL(url).hostname.replace(/^www\./i, '').toLowerCase() === sourceHost; } catch { return false; }
@@ -644,7 +690,11 @@ async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fe
     visited.add(url);
     try {
       const documentTimeout = /\.pdf(?:[?#]|$)/i.test(url) ? (longTimeoutPdfUrls.has(url) ? 180_000 : 90_000) : 8000;
-      const document = await fetchDoc(url, { timeoutMs: Math.max(1000, Math.min(documentTimeout, budgetMs - (Date.now() - started))), cacheDir });
+      const document = await fetchDoc(url, {
+        timeoutMs: Math.max(1000, Math.min(documentTimeout, budgetMs - (Date.now() - started))),
+        cacheDir,
+        ...(continuationHost ? { redirectPolicy: { host: continuationHost } } : {})
+      });
       const text = document.buffer?.toString('utf8') ?? document.text ?? '';
       const isPdf = /application\/pdf/i.test(document.contentType) || text.startsWith('%PDF') || Boolean(document.filePath && /\.pdf(?:[?#]|$)/i.test(url));
       const extractionKey = digest(`${VERSION}|${source.id}|${document.hash}|${now.year}|${JSON.stringify(pdfPageRanges[source.id] || null)}|${JSON.stringify(pdfOcrPages[source.id] || null)}`);
@@ -760,4 +810,4 @@ async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fe
   };
 }
 
-module.exports = { VERSION, monthFloor, parseDates, normalizeEvent, parseJsonLd, parseIcs, parseWordPress, parseCalendarLines, parseTivoliPdf, parseHtmlCalendar, discoverLinks, pdfLines, pdfText, pdfTextFile, fetchDocument, scrapeDeterministic, MAX_PDF_DOWNLOAD_BYTES, MAX_PDF_PAGES };
+module.exports = { VERSION, monthFloor, parseDates, normalizeEvent, parseJsonLd, parseIcs, parseWordPress, parseCalendarLines, parseTivoliPdf, parseHtmlCalendar, discoverLinks, pdfLines, pdfText, pdfTextFile, fetchDocument, scrapeDeterministic, validateInitialUrls, validateRedirectTarget, MAX_PDF_DOWNLOAD_BYTES, MAX_PDF_PAGES };

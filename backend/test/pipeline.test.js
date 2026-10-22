@@ -36,8 +36,50 @@ function sample(overrides = {}) {
 test('parseScrapeArgs reads repeated --source and dry-run', () => {
   assert.deepEqual(parseScrapeArgs(['--dry-run', '--source', 'tivoli', '--source=viterbo']), {
     dryRun: true,
-    sources: ['tivoli', 'viterbo']
+    sources: ['tivoli', 'viterbo'],
+    sourceUrls: []
   });
+});
+
+test('source URL continuation CLI requires one explicit source and preserves repeated URL order', () => {
+  assert.deepEqual(parseScrapeArgs([
+    '--source', 'cai-valmadrera-9216081',
+    '--source-url', 'https://organizzazione.cai.it/sez-valmadrera/eventi/oggi/',
+    '--source-url=https://organizzazione.cai.it/sez-valmadrera/eventi/elenco/?eventDisplay=past'
+  ]), {
+    dryRun: false,
+    sources: ['cai-valmadrera-9216081'],
+    sourceUrls: [
+      'https://organizzazione.cai.it/sez-valmadrera/eventi/oggi/',
+      'https://organizzazione.cai.it/sez-valmadrera/eventi/elenco/?eventDisplay=past'
+    ]
+  });
+  assert.throws(() => parseScrapeArgs(['--source-url', 'https://example.com/page']), /exactly one --source/);
+  assert.throws(() => parseScrapeArgs(['--source', 'a', '--source', 'b', '--source-url', 'https://example.com/page']), /exactly one --source/);
+  assert.throws(() => parseScrapeArgs(['--source', 'a', '--region', 'Lombardia', '--source-url', 'https://example.com/page']), /cannot be combined/);
+  assert.throws(() => parseScrapeArgs(['--source', 'a', '--source-url']), /Missing value/);
+});
+
+test('scrapeAll passes only validated continuation URLs to one deterministic source', async () => {
+  const urls = ['https://section.example/queued-a', 'https://section.example/queued-b'];
+  const oneSource = { id: 'local', organizer: 'CAI Locale', url: 'https://section.example/calendar', enabled: true, extractor: 'gemini' };
+  let received;
+  const result = await scrapeAll({
+    sources: [oneSource], sourceIds: [oneSource.id], sourceUrls: urls, now, apiKey: 'configured', log: { log() {}, error() {} },
+    adapter: async (_source, options) => { received = options.initialUrls; return { status: 'ok', excursions: [], issues: [] }; }
+  });
+  assert.deepEqual(received, urls);
+  assert.deepEqual(result.sources.map((item) => item.id), [oneSource.id]);
+  let fetched = false;
+  await assert.rejects(scrapeAll({
+    sources: [oneSource], sourceIds: [oneSource.id], sourceUrls: ['https://elsewhere.example/page'], now, log: { log() {}, error() {} },
+    adapter: async () => { fetched = true; return { status: 'ok', excursions: [], issues: [] }; }
+  }), /host must match section.example/);
+  assert.equal(fetched, false);
+  await assert.rejects(scrapeAll({
+    sources: [oneSource, { ...oneSource, id: 'other' }], sourceIds: [oneSource.id, 'other'], sourceUrls: urls, now, log: { log() {}, error() {} },
+    adapter: async () => { fetched = true; return { status: 'ok', excursions: [], issues: [] }; }
+  }), /exactly one selected source/);
 });
 
 test('preserveEnrichment keeps Grok fields when the scrape id is unchanged', () => {

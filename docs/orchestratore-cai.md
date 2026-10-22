@@ -65,6 +65,25 @@ esplicitamente `apiKey=null` alla pipeline: non invoca Gemini neppure quando son
 presenti chiavi legacy nell'ambiente. Gli script storici mantengono la loro
 configurazione per gli altri utilizzi.
 
+Per riprendere una coda documentale circoscritta si possono passare più
+`--source-url URL` al comando `init`, insieme a un solo `--source ID`:
+
+```bash
+npm run orchestrate -- init --run cai-20261022-lombardia-valmadrera05 \
+  --source cai-valmadrera-9216081 \
+  --source-url 'https://organizzazione.cai.it/sez-valmadrera/eventi/oggi/' \
+  --source-url 'https://organizzazione.cai.it/sez-valmadrera/eventi/elenco/?eventDisplay=past' \
+  --concurrency 1
+```
+
+Questi URL sostituiscono soltanto la coda iniziale di quella fonte; il crawler
+può ancora aggiungere collegamenti ufficiali entro i normali limiti di documenti
+e tempo. Ogni URL deve essere assoluto HTTP(S), senza credenziali o porta
+personalizzata, e usare l'host ufficiale registrato per la fonte. Un errore viene
+rifiutato prima del fetch. Se l'opzione è omessa, la coda ordinaria non cambia.
+Il checkpoint registra fonte e URL in `sourceUrlContinuation` dentro `state.json`;
+cooldown, cache e gestione degli errori restano attivi.
+
 `backend/data/agent-runs/<run>/state.json` contiene stato, cronologia, risultato
 import e attività per fonte. `manifest.json` registra SHA-256 di escursioni,
 censimento e rapporto di raccolta. L'import verifica tutti e tre i file prima

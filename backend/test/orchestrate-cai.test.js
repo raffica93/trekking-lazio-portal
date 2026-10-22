@@ -18,9 +18,10 @@ async function fixture(t) {
   }
   let imports = 0;
   let collections = 0;
+  let collectionArgv;
   const options = {
     root, runs: path.join(directory, 'agent-runs'), log: { log() {} },
-    collect: async () => { collections++; return { payload, status }; },
+    collect: async ({ argv } = {}) => { collections++; collectionArgv = argv; return { payload, status }; },
     importData: async ({ argv }) => {
       imports++;
       verifyImportManifest(argv[1], ['excursions.json', 'cai-sections.json', 'scrape-status.json'].map((name) => path.join(directory, name)), root);
@@ -28,7 +29,7 @@ async function fixture(t) {
     }
   };
   const command = (...argv) => run({ ...options, argv: [argv[0], '--run', 'test', ...argv.slice(1)] });
-  return { root, directory, options, command, imports: () => imports, collections: () => collections };
+  return { root, directory, options, command, imports: () => imports, collections: () => collections, collectionArgv: () => collectionArgv };
 }
 
 test('database waits for files, then imports once and keeps partial sources as todo', async (t) => {
@@ -83,6 +84,48 @@ test('global lock prevents overlapping collection and duplicate run cannot overw
 test('invalid IDs, dry runs and unknown import flags are rejected', () => {
   for (const argv of [['init', '--run', '../escape'], ['init', '--run', 'a', '--dry-run'], ['import', '--run', 'a', '--all']]) assert.throws(() => parseArgs(argv));
   assert.deepEqual(parseArgs(['init', '--run', 'valid', '--region', 'Lazio']).scrapeArgs, ['--region', 'Lazio']);
+});
+
+test('init persists explicit continuation URLs with their single source and rejects a cross-host URL', async (t) => {
+  const f = await fixture(t);
+  const urls = [
+    'https://organizzazione.cai.it/sez-valmadrera/eventi/oggi/',
+    'https://organizzazione.cai.it/sez-valmadrera/eventi/elenco/?eventDisplay=past'
+  ];
+  const state = await f.command('init', '--source', 'cai-valmadrera-9216081', ...urls.flatMap((url) => ['--source-url', url]));
+  assert.deepEqual(state.sourceUrlContinuation, { sourceId: 'cai-valmadrera-9216081', urls });
+  assert.deepEqual(state.scrapeArgs.slice(0, 2), ['--source', 'cai-valmadrera-9216081']);
+  assert.deepEqual(JSON.parse(await fs.readFile(path.join(f.options.runs, 'test', 'state.json'), 'utf8')).sourceUrlContinuation, state.sourceUrlContinuation);
+
+  await assert.rejects(run({ ...f.options, argv: [
+    'init', '--run', 'bad-host', '--source', 'cai-valmadrera-9216081', '--source-url', 'https://example.org/calendar'
+  ] }), /host must match/);
+  await assert.rejects(run({ ...f.options, argv: [
+    'init', '--run', 'many-sources', '--source', 'cai-valmadrera-9216081', '--source', 'roma', '--source-url', urls[0]
+  ] }), /exactly one --source/);
+});
+
+test('--retry-failed replays the persisted continuation URL list for its source', async (t) => {
+  const f = await fixture(t);
+  const sourceId = 'cai-valmadrera-9216081';
+  const urls = [
+    'https://organizzazione.cai.it/sez-valmadrera/eventi/oggi/',
+    'https://organizzazione.cai.it/sez-valmadrera/eventi/elenco/?eventDisplay=past'
+  ];
+  await f.command('init', '--source', sourceId, ...urls.flatMap((url) => ['--source-url', url]), '--concurrency', '1');
+  const statePath = path.join(f.options.runs, 'test', 'state.json');
+  const state = JSON.parse(await fs.readFile(statePath, 'utf8'));
+  state.collection = 'partial';
+  state.files = 'ready';
+  state.manifest = 'backend/data/agent-runs/test/manifest.json';
+  state.sources = [{ id: sourceId, task: 'todo' }];
+  await fs.writeFile(statePath, JSON.stringify(state));
+
+  await f.command('collect', '--retry-failed');
+  assert.deepEqual(f.collectionArgv(), [
+    `--source=${sourceId}`, '--concurrency', '1',
+    '--source-url', urls[0], '--source-url', urls[1]
+  ]);
 });
 
 test('coverage distinguishes complete, unsupported, partial and disabled sources', () => {

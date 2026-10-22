@@ -3,6 +3,8 @@ const path = require('node:path');
 const { createHash } = require('node:crypto');
 const { DateTime } = require('luxon');
 const { runScrape, writeJsonAtomic } = require('./scrape');
+const { SOURCES } = require('../sources');
+const { selectSources, validateSourceUrls } = require('../pipeline');
 
 const ROOT = path.resolve(__dirname, '../..');
 const RUNS = path.join(ROOT, 'backend/data/agent-runs');
@@ -26,11 +28,18 @@ function parseArgs(argv) {
   const retryFailed = command === 'collect' && rest.length === 1 && rest[0] === '--retry-failed';
   if (command !== 'init' && rest.length && !retryFailed) throw new Error('Scrape options belong to init only; collect accepts only --retry-failed');
   const { parseScrapeArgs } = require('../pipeline');
+  let sourceUrlContinuation = null;
   if (command === 'init') {
     const parsed = parseScrapeArgs(rest);
     if (parsed.dryRun || parsed.help) throw new Error('Orchestration requires persisted files; use scrape directly for --dry-run/--help');
+    if (parsed.sourceUrls.length) {
+      const selected = selectSources(SOURCES, parsed.sources, parsed.region);
+      if (selected.length !== 1) throw new Error('--source-url continuation requires exactly one selected source');
+      validateSourceUrls(selected[0], parsed.sourceUrls);
+      sourceUrlContinuation = { sourceId: parsed.sources[0], urls: [...parsed.sourceUrls] };
+    }
   }
-  return { command, runId, retryFailed, scrapeArgs: command === 'init' && rest.length ? rest : ['--all'] };
+  return { command, runId, retryFailed, sourceUrlContinuation, scrapeArgs: command === 'init' && rest.length ? rest : ['--all'] };
 }
 
 function coverageTasks(status) {
@@ -100,6 +109,7 @@ async function run({ argv = process.argv.slice(2), root = ROOT, runs = RUNS, col
       state = {
         version: 1, runId: args.runId, model: 'gpt-6-luna',
         createdAt: new Date().toISOString(), scrapeArgs: args.scrapeArgs,
+        ...(args.sourceUrlContinuation ? { sourceUrlContinuation: args.sourceUrlContinuation } : {}),
         collection: 'pending', files: 'pending', database: 'pending',
         sources: [], history: []
       };
@@ -122,6 +132,9 @@ async function run({ argv = process.argv.slice(2), root = ROOT, runs = RUNS, col
           const concurrencyIndex = state.scrapeArgs.indexOf('--concurrency');
           if (concurrencyIndex >= 0 && state.scrapeArgs[concurrencyIndex + 1]) {
             collectionArgs.push('--concurrency', state.scrapeArgs[concurrencyIndex + 1]);
+          }
+          if (state.sourceUrlContinuation && sourceIds.includes(state.sourceUrlContinuation.sourceId)) {
+            for (const url of state.sourceUrlContinuation.urls) collectionArgs.push('--source-url', url);
           }
         }
         state.collection = 'running';
