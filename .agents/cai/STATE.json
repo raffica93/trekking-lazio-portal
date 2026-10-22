@@ -207,7 +207,7 @@
   ],
   "nextAction": {
     "step": "S7",
-    "instruction": "Independently QA Valmadrera run03 report/manifest and catalog delta, run backend tests after collection, then checkpoint to Git. Next use one max-40-document/240 s Valmadrera run to inspect the bounded queue; do not infer zero events from unvisited pages."
+    "instruction": "Run one Valmadrera sample from verified checkpoint 9045ec8 (max 40 docs/240s/concurrency1); report exact queued URLs reached and remaining. Then independent QA, backend tests after collection, and checkpoint. No DB import unless catalog delta appears."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -217,7 +217,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "a6c27b5a5e835a6f3ac2ef3b525acf2162d6bdc0",
+    "branchHead": "9045ec84b981193669deaa2e82dd075c3609cf6d",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -401,11 +401,11 @@
       "backend": "npm test after Valmadrera run03 collection: 178 passed, 0 failed (2026-10-22).",
       "publicCatalogTestIsolation": "Tests were run after collection. Manifest file hashes remained stable; backend/frontend excursions, cai-sections, scrape-status copies are byte-identical."
     },
-    "regionCurrent": "Lombardia — Valmadrera run03 partial; 20 documents, 23 discovery candidates remain; 7 catalog events unchanged; DB pending",
-    "regionNext": "Checkpoint Valmadrera run03 files/report after independent QA and backend tests. Then one bounded run04 on same source, max 40 documents/240 s, concurrency 1; leave partial if candidate queue remains.",
+    "regionCurrent": "Lombardia — Valmadrera run03 partial, 23 candidates remain; report, files, QA and backend tests checkpointed remotely at 9045ec8",
+    "regionNext": "Run bounded Valmadrera run04 on the cached official queue: max 40 documents, 240 s, concurrency 1; then QA/tests/checkpoint.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
-    "remoteCheckpointVerifiedAt": "2026-10-22T19:17:43Z",
+    "remoteCheckpointVerifiedAt": "2026-10-22T19:21:20Z",
     "operationalRecovery": {
       "incident": "An intermediate overlay command briefly reduced an uncommitted working output to a one-row transfer fixture. It was recovered from the sealed 3336-row input and existing classifier cache before QA, with no DB writes. The final full output was rebuilt and importer-validated.",
       "status": "recovered-before-checkpoint",
@@ -466,7 +466,7 @@
       "scrapeStatusSha256": "ac6e371920506dcd32c8fed1af4976217a89bee8eb3b7c1c83a96589f3cd75e3",
       "baselineCommit": "2e4b63b7b7e621dd55f716473cea5c596719e8e6"
     },
-    "regionalCheckpointCommit": "a6c27b5a5e835a6f3ac2ef3b525acf2162d6bdc0",
+    "regionalCheckpointCommit": "9045ec84b981193669deaa2e82dd075c3609cf6d",
     "regionalRunHistory": [
       {
         "runId": "cai-20261022-lombardia-brescia02",
@@ -664,11 +664,11 @@
         "baselineCommit": "2e4b63b7b7e621dd55f716473cea5c596719e8e6"
       }
     ],
-    "repositoryCheckpointCommit": "2e4b63b7b7e621dd55f716473cea5c596719e8e6",
-    "updatedAt": "2026-10-22T19:21:00Z",
+    "repositoryCheckpointCommit": "9045ec84b981193669deaa2e82dd075c3609cf6d",
+    "updatedAt": "2026-10-22T19:21:20Z",
     "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:17:43Z"
   },
-  "repositoryCommit": "a6c27b5a5e835a6f3ac2ef3b525acf2162d6bdc0",
+  "repositoryCommit": "9045ec84b981193669deaa2e82dd075c3609cf6d",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -686,10 +686,10 @@
     "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
     "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
   },
-  "updatedAt": "2026-10-22T19:21:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:17:43Z",
-  "regionCurrent": "Lombardia — Valmadrera run03 partial; 20 documents, 23 discovery candidates remain; 7 catalog events unchanged; DB pending",
-  "regionNext": "Checkpoint Valmadrera run03 files/report after independent QA and backend tests. Then one bounded run04 on same source, max 40 documents/240 s, concurrency 1; leave partial if candidate queue remains.",
+  "updatedAt": "2026-10-22T19:21:20Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:21:20Z",
+  "regionCurrent": "Lombardia — Valmadrera run03 partial, 23 candidates remain; report, files, QA and backend tests checkpointed remotely at 9045ec8",
+  "regionNext": "Run bounded Valmadrera run04 on the cached official queue: max 40 documents, 240 s, concurrency 1; then QA/tests/checkpoint.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
     "sourceId": "cai-varese-9216009",
