@@ -85,3 +85,12 @@ Il run02 ha ripetuto i primi 12 documenti senza avanzare la coda e non è stato 
 | `cai-20261022-lombardia-valmadrera04` — CAI Valmadrera | 1 | 0 | 1 | 0 | 0 nuovi/cambiati; 7 eventi esistenti invariati; 41 estrazioni documento | 0 ID duplicati nel catalogo; overlap estrazioni non esposto | Coda discovery 23→12; pagine giornaliere raggiunte fino al 17 ottobre; zero errori HTTP | 12 candidati discovery non visitati | Dopo QA/test/checkpoint, un altro campione Valmadrera delimitato |
 
 Il catalogo resta a 3.345 ID unici, delta 0. Nessun nuovo punto geografico. Sezione parziale; non si assume calendario vuoto dai documenti non visitati. Report SHA `fd1776b3354afaa3575c048d8db5a421dec2b45180fa2305ba9948c7081d709b`, manifest SHA `e7df409743d2265e64d0862abfcd24d4be02c8e9a01e9690f6ff97385cd6c6f6`. Nessun import DB. Conteggi regionali complessivi restano snapshot storico del 20 ottobre.
+
+
+## CAI Valmadrera bounded sample 05 — 22 ottobre 2026
+
+| Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---|---|---|---|
+| `cai-20261022-lombardia-valmadrera05` — CAI Valmadrera | 1 | 0 | 1 | 0 | 7 già presenti; 0 nuovi, 20 documenti, 34 estrazioni | 0 ID duplicati nel catalogo; overlap tra righe estratte non esposto | 12 URL espliciti e 8 ICS scoperti raggiunti senza errori HTTP | 38 candidati non verificati | Dopo checkpoint, max8 URL di calendari correnti/futuri e categorie escursioni/scialpinismo; lasciare fuori archive passati, API non attribuibile e attività incerta |
+
+Delta catalogo contro `c5036ff`: 0 aggiunti, 0 rimossi, 5 modifiche a `sourceDocument` ufficiali; 2 record hanno inoltre descrizioni abbreviate. 3.345 ID unici; nessun campo editoriale/geografico modificato, nessuna coordinata aggiunta. La fonte resta parziale: zero errori di rete non equivale a calendario completo. Nessun import DB, dato che non sono emersi ID nuovi; nessuna query DB. Importer QA PASS, suite backend 186/186, copie backend/frontend identiche dopo i test. Manifest SHA `f88571727bbbcda6dceec0c5205f3da7dfdc95c4c1a70897444daf33f092e2a2`; report SHA `cc50445c9c91cedef90a672e4f0809ac7074fe6275b787ab8154f74e142cfb25`. I totali complessivi Lombardia rimangono lo snapshot storico del 20 ottobre.

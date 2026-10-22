@@ -92,3 +92,10 @@ Migration `create_place_classifications_20261021090000` registrata dal progetto 
 - Run04 leaves 12 known official URLs, and the default 40-document run restarts from the same prefix. Implement and fixture-test a source-scoped, same-host explicit URL continuation option before run05; do not claim completion by repeating the default run.
 
 - Safe continuation correction published in `20dbaf2e1b8a8b6f63c97efe2d3e96c06bc6910c` with URL allowlist, redirect guard, retry-state persistence, 40 focused / 186 full backend tests. Run05 may now target the 12 Valmadrera URLs from run04 via repeated `--source-url`, max20/180s/concurrency1; verify actual reached/remaining URLs and keep DB pending at zero delta.
+
+## Stato 2026-10-22 — Valmadrera run05
+
+- Run `cai-20261022-lombardia-valmadrera05`: 12 URL espliciti raggiunti, 8 ICS scoperti, 20 documenti/34 estrazioni; 7 eventi fonte già noti, 38 candidati ancora da verificare. Zero errori HTTP osservati; sezione ancora partial.
+- Delta contro `c5036ff`: 3.345 ID unici, zero aggiunti/rimossi, cinque righe cambiate solo nei riferimenti sorgente ufficiali e due descrizioni abbreviate. Nessun nuovo evento/coordinate; DB non consultato né scritto e nessun reimport di classificazioni.
+- Importer QA PASS; `npm test` backend 186/186; copie backend/frontend invariate. Report e manifest SHA registrati in HANDOFF. Checkpoint run05 da pushare/verificare prima di procedere.
+- Discovery offline conferma 38 residui. Dopo checkpoint, un solo continuation run max8 documenti sui calendari correnti/futuri e sulle categorie escursioni/scialpinismo. Escludere dalla lista esplicita archivio passato, programma 2024, feed di eventi già passati, API root non attribuibile e pagina attività ancora incerta. Varese resta bloccata senza richiesta per il 503 in cooldown scaduto.
