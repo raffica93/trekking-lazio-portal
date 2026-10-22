@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "marche-potenza-picena-page-unreadable",
+  "phase": "molise-campobasso-calendar-refresh",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -230,8 +230,8 @@
     }
   ],
   "nextAction": {
-    "step": "PUBLISH-POTENZA-PICENA01-FILES-THEN-CONTINUE-REGIONAL-PREFLIGHT",
-    "instruction": "Run cai-20261022-marche-potenzapicena01 ha collection partial/files ready/database pending; importer QA PASS; npm test backend 204/204 post-run e sei hash pubblici identici prima/dopo. Delta eventi 0, dunque nessuna classificazione né query/scrittura DB. Checkpoint manifest/report/stato/cataloghi e registry; quindi prosegui con il prossimo URL ufficiale mirabile proposto dal collector, senza ripetere Potenza Picena `/attivita2026` (same-host Wix generico, method null) né fare cicli sulla discovery queue."
+    "step": "MOLISE-CAMPOBASSO-BOUNDED-CALENDAR-REFRESH",
+    "instruction": "Potenza Picena01 file e fallimenti sono pubblicati/verificati al commit 90f20d9. Marche resta senza nuovo target utile; non ripetere la pagina Wix. In Molise CAI Campobasso è l’unica sezione enabled; tutte le 12 URL note sono state viste. Fai un singolo refresh bounded dell’indice ufficiale `https://caicampobasso.it/calendario-delle-attivita/` (body precedente hash ce4421de6c30de30d0d50ce79627b65f6e62932ca519cb0c5e03ad4dea7acbbc, 118 righe), max1 doc/120s/concurrency1, run ID nuovo `cai-20261022-molise-campobasso01`; solo per verificare possibili aggiornamenti dalla lettura del 19 ottobre. Se invariato, registrare zero progresso e passare oltre senza replay. I 37 candidate residui del PDF restano senza URL stabili, no retry broad."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -1257,7 +1257,7 @@
       "receiptCheckpointSha256": "bef3ff50b4266d0486eb343f9c281fdb96ea3a14b2f6a07727be57e2d00acf32"
     }
   },
-  "repositoryCommit": "f4d86ea67c1037820c62a5da9ead6d761e183152",
+  "repositoryCommit": "90f20d9",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -1271,10 +1271,10 @@
     "writes": 0
   },
   "tests": "After Potenza Picena01 collection, backend npm test passed 204/204. Six public catalog/status JSON SHA-256 values unchanged before and after tests.",
-  "updatedAt": "2026-10-22T22:19:49.601Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:17:08.252Z",
+  "updatedAt": "2026-10-22T22:21:50.897Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:21:50.896Z",
   "regionCurrent": "Marche — CAI Potenza Picena run01: 1 pagina ufficiale letta, ma Wix generico non interpretabile (method=null, 0 estrazioni); delta evento 0 e unica riga esistente preservata. La fonte resta partial, discovery-limit 11. Nessun DB.",
-  "regionNext": "Preflight read-only in corso per una diversa fonte ufficiale lavorabile, prima in Marche poi regione nazionale successiva. Non ripetere la pagina Wix senza evidenza di progresso.",
+  "regionNext": "Molise — CAI Campobasso (`cai-campobasso-9236001`), refresh singolo del calendario HTML ufficiale `https://caicampobasso.it/calendario-delle-attivita/` già letto il 19 ottobre (118 righe, cache presente). Verifica aggiornamento, non promettere progresso; nessuna seconda URL.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
     "sourceId": "cai-varese-9216009",
