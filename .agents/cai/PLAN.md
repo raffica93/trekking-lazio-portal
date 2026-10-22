@@ -163,3 +163,7 @@ Unica fonte selezionata per il prossimo campione: `cai-caserta-9238006`, `https:
 Il solo campione sull'indice `/escursioni.html` è concluso: una pagina/7.179 byte, `method=null`, 0 candidati. La fonte resta parziale e i 50 record Caserta, su 3.366 totali, sono invariati; nessun import. QA importer PASS; test backend 205/205 eseguiti dopo la raccolta, i JSON post-test corrispondono al manifest e i mirror coincidono. Prima di un'altra richiesta, pubblicare questo run e poi preflight offline i link figli esatti contro storico, cache e FAILURES; il PDF annuale resta bloccato. Il risultato non è prova di calendario vuoto.
 
 Il checkpoint remoto `52deb84835e47a355d66da4662dc7e9a877f2ab4` è verificato (run artifacts, cataloghi, status, docs e blob hashes). La fase corrente è soltanto preflight offline dei link figli della pagina Caserta già salvata; non si avvia rete prima di una selezione esatta e di un nuovo checkpoint remoto.
+
+### Preflight link figli Caserta
+
+Un solo figlio work-ready: PDF scheda Monte Scalambra `https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf`, linkato dall'indice ufficiale accanto all'evento del 25 ottobre da Serrone. La pagina inquadra il programma 2026 ma l'anno non è adiacente alla data; il documento deve attestare l'anno/titolo/attribuzione. È assente da history/cache/FAILURES. Dopo il checkpoint remoto del preflight, un solo run explicit URL `cai-20261022-campania-caserta-scalambra01`, max1/120s/concurrency1, senza seguire discovery. Gli altri link sono passati, archivio, flyer senza data o regolamento.

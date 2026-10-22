@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "campania-caserta-child-link-preflight",
+  "phase": "campania-caserta-scalambra-checkpoint-pending",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -318,11 +318,16 @@
     },
     {
       "id": "S27",
+      "status": "completed",
+      "result": "Offline preflight of the checkpointed Caserta index found one eligible future event detail PDF: Monte Scalambra, linked adjacent to official text 'domenica 25 ottobre: Da Serrone al Monte Scalambra per l'Eremo di San Michele Arcangelo'. URL absent from source documents/run history/cache/FAILURES; attribution directly to CAI Caserta. Other detail pages are past-dated, archived, undated flyer or non-calendar. No network or writes."
+    },
+    {
+      "id": "S28",
       "status": "in_progress",
-      "result": "Offline preflight the exact child URLs from the checkpointed Caserta index against history/cache/FAILURES/cooldown before selecting any single follow-up URL."
+      "result": "After remote checkpoint of this exact preflight, run one explicit-URL sample for the future Monte Scalambra detail PDF, max1 doc/120s/concurrency1; no discovery follow-up."
     }
   ],
-  "nextAction": "Remote checkpoint 52deb84835e47a355d66da4662dc7e9a877f2ab4 verified; all run artifacts/catalog hashes match. Existing cai-collector is doing offline child-link preflight from the saved Caserta index; no network until one distinct eligible URL is checkpointed.",
+  "nextAction": "Remote parent checkpoint 764e463319ca4e0050e98ca0bba53542a89e6ff8 verified. Publish this offline preflight, then run exactly cai-20261022-campania-caserta-scalambra01 on https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf, source cai-caserta-9238006, max1 document/120s/concurrency1. Do not follow discovery links or retry the annual PDF.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -494,13 +499,13 @@
     },
     "ocrItalian": false,
     "agentStatus": {
-      "caiCollector": "Caserta index run complete; offline child-link preflight in progress",
+      "caiCollector": "Caserta index child-link preflight complete; one future event detail PDF selected, sample pending remote preflight checkpoint",
       "caiImporter": "Independent read-only QA PASS for run artifacts/docs; no DB",
       "agentRequestedModel": "gpt-6-luna",
       "agentRequestedEffort": "high",
       "effectiveModelTelemetry": "not exposed"
     },
-    "nextPhase": "campania-caserta-child-link-preflight",
+    "nextPhase": "campania-caserta-scalambra-checkpoint-pending",
     "databaseReadOnlyObservation": {
       "observedAt": "2026-10-22T18:12:15.676Z",
       "source": "authorized Supabase read-only SQL and map predicate",
@@ -515,7 +520,7 @@
     },
     "tests": "After run07 stopped, backend npm test passed 187/187. Backend/frontend excursions SHA256 6e46cec85daae67e6da0a98afb36d4fbf72b3790b2246dfcdf3837ea9a0ff99b and scrape-status SHA256 da7fa46626cfd3c7e29cc59e0eb66c85f2374a70d0d325a68caba38308dd8450 remained byte-identical after tests.",
     "regionCurrent": "Campania — CAI Caserta index01 partial; one official page read, method=null/0 events (calendar not proven empty), 50 existing event rows unchanged, annual PDF and index discovery issues remain.",
-    "regionNext": "Offline compare each exact official child link in checkpointed /escursioni.html to prior documents/cache/FAILURES/cooldowns; select at most one distinct target. No live fetch before preflight report and checkpoint.",
+    "regionNext": "Publish and verify the exact Monte Scalambra child-PDF preflight; then one bounded explicit-URL sample only, no discovery expansion.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
     "remoteCheckpointVerifiedAt": "2026-10-22T19:25:20Z",
@@ -1189,10 +1194,10 @@
       "region": "Campania",
       "sourceId": "cai-caserta-9238006",
       "sourceName": "CAI Caserta",
-      "url": null,
-      "status": "index run checkpointed remotely; offline child-link preflight in progress",
-      "evidence": "backend/data/agent-runs/cai-20261022-campania-caserta-index01/source-page.html and collection-report.md at commit 52deb848",
-      "scope": "offline history/cache/failure comparison only; no network until target checkpoint",
+      "url": "https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf",
+      "status": "offline preflight selected; single sample pending checkpoint",
+      "evidence": "official saved index source-page.html links PDF next to 25 October 2026 Serrone/Monte Scalambra text; target absent from status/history/cache/FAILURES",
+      "scope": "one explicit URL, max1 document,120s,concurrency1; no discovery expansion",
       "networkFetchPerformed": false
     },
     "lastSourcePreflight": {
@@ -1278,7 +1283,7 @@
       "checkpointCommit": "52deb84835e47a355d66da4662dc7e9a877f2ab4",
       "remoteVerifiedAt": "2026-10-22T23:10:00Z"
     },
-    "nextAction": "Remote checkpoint 52deb84835e47a355d66da4662dc7e9a877f2ab4 verified; all run artifacts/catalog hashes match. Existing cai-collector is doing offline child-link preflight from the saved Caserta index; no network until one distinct eligible URL is checkpointed."
+    "nextAction": "Remote parent checkpoint 764e463319ca4e0050e98ca0bba53542a89e6ff8 verified. Publish this offline preflight, then run exactly cai-20261022-campania-caserta-scalambra01 on https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf, source cai-caserta-9238006, max1 document/120s/concurrency1. Do not follow discovery links or retry the annual PDF."
   },
   "repositoryCommit": {
     "branch": "codex/cai-orchestrator-luna",
@@ -1309,10 +1314,10 @@
     }
   },
   "tests": "After the Castrovillari01 collection finished, backend npm test passed 205/205; SHA-256 for six public JSON files was identical before/after. No tests were run concurrently with collection.",
-  "updatedAt": "2026-10-22T23:10:00Z",
+  "updatedAt": "2026-10-22T23:14:00Z",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:10:00Z",
   "regionCurrent": "Campania — CAI Caserta index01 partial; one official page read, method=null/0 events (calendar not proven empty), 50 existing event rows unchanged, annual PDF and index discovery issues remain.",
-  "regionNext": "Offline compare each exact official child link in checkpointed /escursioni.html to prior documents/cache/FAILURES/cooldowns; select at most one distinct target. No live fetch before preflight report and checkpoint.",
+  "regionNext": "Publish and verify the exact Monte Scalambra child-PDF preflight; then one bounded explicit-URL sample only, no discovery expansion.",
   "preflight": {
     "at": "2026-10-22T22:30:21.913236Z",
     "sourceId": "cai-campobasso-9236001",
@@ -1560,10 +1565,10 @@
     "region": "Campania",
     "sourceId": "cai-caserta-9238006",
     "sourceName": "CAI Caserta",
-    "url": null,
-    "status": "index run checkpointed remotely; offline child-link preflight in progress",
-    "evidence": "backend/data/agent-runs/cai-20261022-campania-caserta-index01/source-page.html and collection-report.md at commit 52deb848",
-    "scope": "offline history/cache/failure comparison only; no network until target checkpoint",
+    "url": "https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf",
+    "status": "offline preflight selected; single sample pending checkpoint",
+    "evidence": "official saved index source-page.html links PDF next to 25 October 2026 Serrone/Monte Scalambra text; target absent from status/history/cache/FAILURES",
+    "scope": "one explicit URL, max1 document,120s,concurrency1; no discovery expansion",
     "networkFetchPerformed": false
   }
 }

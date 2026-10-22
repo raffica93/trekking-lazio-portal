@@ -309,3 +309,11 @@ La pagina `/escursioni.html` è registrata come URL ufficiale (`calendarUrls` e 
 Source `cai-caserta-9238006`; indice ufficiale 7.179 byte, body SHA `bb3bf1b613641c692e434db5496e461858509686bd2600b0cf299b80dd6ce039`. Catalogo nazionale 3366→3366 ID; prefisso Caserta 50→50, 0 add/remove/change, canonical SHA `1bc3d52b28218c621596dfbeb21e00a7b90bdb9fa2b0e0c4b405557498cb3b74`. Nessuna coordinata/campo evento modificato. Excursions si è rigenerato solo per metadata/source hash; sections invariato; status registra il documento e discovery. Backend `npm test` 205/205 dopo il run; hash JSON post-test uguali ai file sigillati e mirror backend/frontend identici. Importer QA PASS. La fonte resta parziale; i conteggi cumulativi tabellari restano lo snapshot storico del 20 ottobre. Il dettaglio hash è nel HANDOFF e nel run manifest.
 
 Checkpoint completo di `cai-20261022-campania-caserta-index01` verificato sul branch al commit `52deb84835e47a355d66da4662dc7e9a877f2ab4`; manifest e blob catalogo/status corrispondono agli hash del report. Nessuna scrittura DB. Il preflight offline dei link figli è il prossimo passo, non ancora una raccolta.
+
+## Preflight offline Caserta — link evento Monte Scalambra (22 ottobre 2026)
+
+| Regione / fonte | Link verificati | Target futuri attribuibili | Già passati/archivio/non calendario | Fallimenti/cooldown | Prossimo passo |
+|---|---:|---:|---:|---|---|
+| Campania, `cai-caserta-9238006` | 7 link dalla pagina index checkpointata | 1: scheda Monte Scalambra, 25 ottobre (contesto 2026; anno da attestare nel PDF) | 2 eventi passati (17/18 ottobre), archivio 2025, flyer senza data, regolamento; PDF annuale bloccato già escluso | Nessun issue specifico sul dettaglio; annuale resta `discovery-budget-exhausted` | Dopo checkpoint remoto, un solo URL Monte Scalambra max1/120s/concurrency1; stop senza discovery |
+
+Il target `https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf` è linkato accanto al testo che identifica Serrone, Monte Scalambra ed Eremo San Michele; è assente da status/history/cache/FAILURES. Il sample dovrà verificare evidenza nel documento e non assumere l'anno. Nessuna richiesta di rete nel preflight; nessun evento è contato o importato.

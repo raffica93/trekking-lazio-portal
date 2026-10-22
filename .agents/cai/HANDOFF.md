@@ -455,3 +455,9 @@ Prossimo passo, solo dopo checkpoint remoto di file e handoff: preflight offline
 ### Checkpoint remoto Caserta index01 verificato
 
 Il pacchetto di run e il handoff sono ora pubblicati sul branch `codex/cai-orchestrator-luna` al commit `52deb84835e47a355d66da4662dc7e9a877f2ab4`; ref remoto, tree `0af2ec2ab5aacec18ec799d0876910a1f85a6d93` e SHA dei blob corrispondono ai file QA-validati localmente. Il vecchio riferimento “serve ripubblicare” è soddisfatto. Dopo questa prova, cai-collector sta controllando offline i link figli della pagina salvata: nessun fetch finché non viene selezionato e checkpointato un singolo target distinto.
+
+## Preflight offline CAI Caserta — scheda Monte Scalambra selezionata
+
+Dopo che l'indice index01 è remoto, il collector ha esaminato offline i link presenti nella pagina salvata (body SHA `bb3bf1b6…dd6ce039`). Un unico target è futuro e direttamente attribuibile: `https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf`, link “Scheda dettagliata” adiacente al testo ufficiale “domenica 25 ottobre: Da Serrone al Monte Scalambra per l'Eremo di San Michele Arcangelo”. Il contesto della pagina è il programma 2026; l'anno non è ripetuto accanto alla data, quindi il PDF deve confermare data e attribuzione prima di qualsiasi evento/file delta. L'URL non compare in `status.documents`, history run, cache con body/meta, FAILURES o cooldown; appartiene direttamente alla fonte Caserta per link e contesto della pagina ufficiale. La discovery annuale bloccata resta intatta.
+
+Gli altri link evento dettaglio sono del 17 e 18 ottobre (già passati al 22/10); il programma giovani è archivio 2025, Lifestyle è flyer senza data visibile, e regolamento non è calendario. Nessun fetch/test/DB nel preflight. Dopo checkpoint remoto di questo preflight, eseguire solo `cai-20261022-campania-caserta-scalambra01`, una URL esplicita, max1 documento/120s/concurrency1, senza discovery follow-up; poi fermarsi per QA e test seriali.
