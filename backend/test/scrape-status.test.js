@@ -1,7 +1,14 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
 const { buildScrapeStatus, hardFailures } = require('../scrape-status');
 const { enabledSources, findSource, SOURCES } = require('../sources');
+
+const pinascaStatusFixture = JSON.parse(fs.readFileSync(
+  path.join(__dirname, 'fixtures', 'cai-pinasca-partial-extraction-status.json'),
+  'utf8'
+));
 
 test('enabled catalog includes the new PDF and HTML calendars', () => {
   const ids = enabledSources().map((source) => source.id);
@@ -104,6 +111,71 @@ test('explicit single-source continuation retains document history and unresolve
   ]);
   assert.equal(row.hash, 'historical-hash');
   assert.equal(row.extractedEvents, 4);
+});
+
+test('partial continuation recomputes extracted event total from merged document results', () => {
+  const { sourceId, prior, current } = pinascaStatusFixture;
+  const source = findSource(sourceId);
+  const htmlUrl = current.documents.find((document) => document.method === 'html-calendar').url;
+  const status = buildScrapeStatus({
+    sources: [source],
+    existingStatus: { sources: [{ id: sourceId, ...prior }] },
+    result: {
+      excursions: Array.from({ length: 4 }, (_, index) => ({ id: `${sourceId}-event-${index}` })),
+      results: [{
+        source,
+        status: current.status,
+        excursions: Array.from({ length: 4 }, (_, index) => ({ id: `${sourceId}-event-${index}` })),
+        documents: current.documents,
+        methods: ['pdf-ocr', 'html-calendar'],
+        issues: current.issues,
+        extractedEvents: current.extractedEvents,
+        hash: 'partial-continuation-hash'
+      }],
+      failures: []
+    },
+    continuationSourceId: sourceId,
+    continuationSourceUrls: [htmlUrl],
+    generatedAt: '2026-10-22T00:00:00.000Z'
+  });
+  const row = status.sources[0];
+  assert.equal(row.extractedEvents, 27);
+  assert.equal(row.status, 'partial');
+  assert.deepEqual(row.documents.map((document) => document.events), [0, 27]);
+  assert.deepEqual(row.issues, prior.issues);
+});
+
+test('partial continuation preserves aggregate when merged history contains legacy documents without counts', () => {
+  const { sourceId, mixedLegacy } = pinascaStatusFixture;
+  const source = findSource(sourceId);
+  const { prior, current } = mixedLegacy;
+  const currentUrl = current.documents[0].url;
+  const status = buildScrapeStatus({
+    sources: [source],
+    existingStatus: { sources: [{ id: sourceId, ...prior }] },
+    result: {
+      excursions: [],
+      results: [{
+        source,
+        status: current.status,
+        excursions: [],
+        documents: current.documents,
+        methods: ['html-calendar'],
+        issues: current.issues,
+        extractedEvents: current.extractedEvents,
+        hash: 'mixed-legacy-continuation-hash'
+      }],
+      failures: []
+    },
+    continuationSourceId: sourceId,
+    continuationSourceUrls: [currentUrl],
+    generatedAt: '2026-10-22T00:00:00.000Z'
+  });
+  const row = status.sources[0];
+  assert.equal(row.extractedEvents, 8);
+  assert.equal(row.status, 'partial');
+  assert.equal(row.documents.length, 3);
+  assert.deepEqual(row.issues, prior.issues);
 });
 
 test('a full-source run clears a prior discovery-limit when its current queue has none', () => {

@@ -97,6 +97,18 @@ function buildScrapeStatus({
           mergedIssues.set(key, issue);
         }
         const issues = [...mergedIssues.values()];
+        // A continuation's run-level total only describes the documents it
+        // visited. Prefer the per-document counts from the merged history so
+        // a partial refresh cannot keep a stale source total (for example, a
+        // failed OCR PDF with 0 events followed by a parsed HTML calendar).
+        const hasDocumentEventCounts = documents.length > 0 && documents.every((document) => (
+          Number.isFinite(document?.events) && document.events >= 0
+        ));
+        const mergedExtractedEvents = hasDocumentEventCounts
+          ? documents.reduce((total, document) => (
+            total + (Number.isFinite(document?.events) && document.events >= 0 ? document.events : 0)
+          ), 0)
+          : null;
         const unvisitedPriorDocuments = priorDocuments.some((document) => (
           document?.url && !requested.has(document.url)
         ));
@@ -115,7 +127,8 @@ function buildScrapeStatus({
           documents,
           methods,
           issues,
-          extractedEvents: incomplete ? prior.extractedEvents ?? run.extractedEvents : run.extractedEvents
+          extractedEvents: mergedExtractedEvents
+            ?? (incomplete ? prior.extractedEvents ?? run.extractedEvents : run.extractedEvents)
         });
       }
       const currentIssues = Array.isArray(run.issues) ? run.issues : [];
