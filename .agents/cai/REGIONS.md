@@ -192,3 +192,8 @@ Il lotto `cai-map-20261022-stradastorta02` classifica solo l’ID nuovo: 0 trekk
 
 
 Il delta separato `cai-map-20261022-stradastorta02` ha 1 classificazione `da_verificare`/`altro`; receipt DB conferma 1 place + 1 classificazione inseriti, 0 mismatch, 0 update, 0 delete. Receipt SHA `bef3ff50b4266d0486eb343f9c281fdb96ea3a14b2f6a07727be57e2d00acf32`, ancora da pubblicare. Nessun nuovo punto geografico: coordinate null.
+
+
+### Prossima regione
+
+Preflight Lombardia: nessun target nuovo tra i candidati verificati offline (Sesto Calende già visitata; Carate PDF duplicato; Legnano pagina datata; Aldo Mantovani senza calendario). Non è una dichiarazione di copertura completa; problemi aperti di Lombardia restano registrati. Prossimo campione Piemonte: CAI Pinasca, URL ufficiale `https://www.caipinasca.it/index.php/calendario-gite`, fonte `unsupported` con PDF precedente non leggibile via OCR. Target URL non visitata, campione futuro max 1 documento/120 s.
