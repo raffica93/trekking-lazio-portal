@@ -205,3 +205,45 @@ Esito completo dei 14 nuovi candidati: 10 inseriti/classificati; 2 ID duplicati 
 
 
 La query read-only `2026-10-22 20:36:22.256568+00` ha inoltre confermato tutti e quattro gli originali usati nel controllo duplicati già presenti e published: i due confermati sono `...-08f80e8dc9a5` e `...-e2177dd44e1a`; i due match probabili sono `...-93f8dd640820` e `...-07c7e327bb27`. La receipt è stata aggiornata per registrare questi confronti senza alcuna fusione o sovrascrittura.
+
+
+## Ripresa orchestratore dopo delivery — 22 ottobre 2026 20:58 UTC
+
+Il checkpoint remoto effettivo del branch `codex/cai-orchestrator-luna` è `50352f7fde1a638e6541aab048fcdacfb834324b`; il delta Valmadrera non è in attesa di commit. La ricevuta pubblicata ha SHA-256 `b9b8a5fdcabc12f94f5aeeb39fec4e03b375098bb32837942b8c598f0cdf7cf7` e la query post-import registrata ha riconciliato 10/10 places e 10/10 classificazioni, zero mancanti/mismatch, senza update o delete. Non ripetere quel delta né la baseline storica da 3.336 righe. Due duplicati Valmadrera probabili restano in revisione: l'evidenza PDF/data è forte ma non identifica senza ambiguità la stessa uscita; preservare entrambe le righe.
+
+Questa sessione ha aggiornato `STATE.json` a `phase=lombardia-source-coverage`; la prossima attività è il run `cai-20261022-lombardia-cernusco01`, limitato alla sola PDF ufficiale 2026 della sezione `cai-cernusco-sul-naviglio-9216051`, `SCRAPE_MAX_DOCUMENTS=1`, budget 120000 ms, concurrency 1. Escludere l'ICS storico timeout. Lombardia resta aperta; i totali di copertura regionale in `REGIONS.md` sono snapshot storici e non query aggiornate.
+
+Il run untracked `cai-20261022-lombardia-valmadrera02` e le cache non tracciate sono stati solo ispezionati e preservati: il run non ha report e gli hash correnti di `excursions.json` e `scrape-status.json` divergono dal manifest. Non è un input consegnabile. Nessun agente ha modificato tali file. I due ruoli sono riattivati: il profilo richiesto è GPT-6 Luna high, ma la telemetria runtime disponibile non attesta il modello effettivamente eseguito. In questa sessione il runtime orchestratore è connected/running, rete enforced, e `OPENROUTER_API_KEY` risulta ready/presente solo per `openrouter.ai`; il valore non è stato letto.
+
+
+## Gate di qualità fallito — Cernusco run01, 22 ottobre 2026
+
+Il run `cai-20261022-lombardia-cernusco01` non è un checkpoint accettato e non è importabile. Il PDF `Locandina-programma-2026.pdf` (SHA-256 `654a51f8d310cd6b65ad6e99a5a74ef05165a18d6e6411f6e21e9389720aa291`) è stato l'unico documento letto. La visualizzazione della pagina 2 conferma “25 Ottobre - Alpe Devero (VB)” nella colonna escursionistica e “11 APRILE … Corso di Alpinismo Giovanile Cesare Andreoni 2026” in una colonna diversa. Il testo OCR ha fuso le due colonne creando `...cb33842fc3c2`; è un falso duplicato e non deve essere classificato né importato. L'evento pulito `...e564f9cc5caf` resta invariato.
+
+QA importer ha rilevato inoltre che lo status corrente sostituisce la cronologia dei documenti Cernusco (36→1) e marca la fonte `ok` dopo una singola URL, mentre calendario e altri link registrati non sono stati esauriti. L'evento del 13 dicembre `...61c82c9856f6` ha perso i campi già presenti `lat`, `lng`, `status`, `coverImagePath`, `databaseId` e ha cambiato locationSource. La suite backend `npm test` è passata 193/193 e gli hash backend/frontend sono rimasti invariati prima/dopo i test; ciò non risolve questi difetti del risultato di raccolta. Report SHA `77f0a14fe4a5ff865b4f6d609b443924f23012289a86f4156afd69de004fa4a4`; manifest SHA `30a8289d8fc9a1af6b37dd9401bb5eb076cc0d2d14203d22d9e81d473d53d1ea`. Nessuna classificazione, import, query o scrittura DB.
+
+Il collector ha ownership di una correzione fixture-backed per contaminazione OCR, preservazione dei campi preesistenti e merge document-history/status nelle continuazioni. Finché la correzione non passa i test e ha un checkpoint remoto, non rilanciare questo run né checkpointare i cataloghi qui prodotti. `valmadrera02` e le cache untracked restano preservati.
+
+
+## Correzione Cernusco pubblicata — 22 ottobre 2026 21:09 UTC
+
+QA importer indipendente ha approvato il patch del collector con due restrizioni aggiunte. Il commit `010af3796a99d01e8081d45ef625b2344ec134c7` è stato pushato e verificato sul branch. La fixture `backend/test/fixtures/cai-cernusco-2026-ocr-cross-column.json` prova la trasformazione parser-side e la riga di controllo; test mirati 38/38 e `backend npm test` 196/196. Il patch limita la pulizia OCR alla riga specifica 25 ottobre/Alpe Devero, preserva titoli/stato/foto/database/geografia esistenti inclusi null espliciti, e mantiene cronologia/issue e stato parziale nelle continuazioni URL circoscritte. Nessun DB o catalogo modificato dal commit codice.
+
+Run01 è respinto e resta senza classification/import. I soli quattro JSON globali generati dal run01 (cataloghi backend/frontend `excursions.json` e `scrape-status.json`) vengono ripristinati selettivamente al baseline del commit pubblicato `010af37`: ciò rimuove dal working catalog il falso ID OCR e ripristina i campi precedenti. Il report/manifest del run01 restano nel workspace come diagnosi non checkpointata; l'output era già dichiarato non consegnabile. Cache OCR e run `valmadrera02` restano intatti. Prossimo run nuovo: `cai-20261022-lombardia-cernusco02`, solo PDF ufficiale dalla cache, max 1 documento/120 s/concurrency 1.
+
+
+## Cernusco run02 fermato per cache parser obsoleta — 22 ottobre 2026 21:12 UTC
+
+Il run `cai-20261022-lombardia-cernusco02` è stato fermato prima dei test/classificazione/import. Il corpo PDF resta SHA `654a51f8d310cd6b65ad6e99a5a74ef05165a18d6e6411f6e21e9389720aa291`; la fonte risulta `partial` con 36 documenti e 3 issue conservate, e i campi preesistenti del record 13 dicembre sono preservati. Tuttavia il falso ID `...cb33842fc3c2` è riapparso. Diagnosi read-only del collector: `backend/node_modules/.cache/cai/events-392f980c46fba9e4f53542b372927fd918df7b6a018f120da436c5a6885bf7d6.json` conserva l'estrazione contaminata; il parser è stato corretto senza incrementare `deterministic.VERSION`, rimasto 11, quindi l'estrazione cache è stata riutilizzata. L'ID falso non esiste nel baseline remoto `010af37`. Nessun test dopo la raccolta, nessuna classification, nessun DB o push di artefatti.
+
+Prossimo: bump VERSION 11→12 con la fixture OCR già pubblicata/aggiunta, test mirati e backend dopo collection già terminata, verifica hash cataloghi invariati, commit/push del codice. Poi restore selettivo dei quattro JSON globali al nuovo HEAD e una sola nuova esecuzione limitata alla PDF; accettare solo se la cache di estrazione viene ricalcolata e il falso ID non compare, con cronologia/status/campi esistenti preservati. Non usare cataloghi dei run01/02 respinti.
+
+## Cernusco run03 — cache correction verified, no DB delta — 22 ottobre 2026
+
+Il branch pubblicato `a015865283f0097d22036a9d75f4e0e17cd94bbb` incrementa `deterministic.VERSION` 11→12. Il run bounded `cai-20261022-lombardia-cernusco03` ha riletto un solo PDF ufficiale (SHA `654a51f8d310cd6b65ad6e99a5a74ef05165a18d6e6411f6e21e9389720aa291`, 5.853.583 byte) usando il nuovo fingerprint cache `cf273a867bdc9017520ba45384febe343ae377ee2ecb7b2fd467326f042f08b2`. L’estrazione `pdf-ocr` è riconosciuta e contiene 8 righe; il 25 ottobre è il record già esistente “Alpe Devero (VB)” (`...e564f9cc5caf`), e il falso ID OCR `...cb33842fc3c2` è assente. Il vecchio file cache v11 è stato preservato, non riusato né cancellato.
+
+La fonte resta `partial`: sono conservati 36 documenti e le 3 issue storiche. Il catalogo resta 3.359 ID: 0 aggiunti, 0 rimossi, un solo cambiamento descrittivo al record `...61c82c9856f6`; nessuna variazione a titolo, stato, foto, database ID, coordinate, locationSource o regione. Copie backend/frontend identiche. Il run non ha nuovo source ID né classificazioni da inviare: nessuna query o scrittura DB; non va chiamato l’importer su questo output.
+
+Collector e importer hanno dato QA indipendente PASS. Dopo la raccolta, `backend npm test` ha passato 197/197 e i quattro hash di catalogo/status sono rimasti invariati durante i test. Report `backend/data/agent-runs/cai-20261022-lombardia-cernusco03/collection-report.md` SHA `d2a14c92fc8a918596d6ab6e68044b28b0278d857805fc874f067f5a4863068a`; manifest SHA `c9164d3839dd1abebc62e9262fb40aca590fe7812e4f7c33e8a76c35ea2bba14`. Il checkpoint file del run è pronto per commit/push e verifica remota; nessun deploy.
+
+Prossimo dopo il checkpoint: selezionare una diversa fonte Lombardia lavorabile e verificarla in un singolo campione delimitato. Non ripetere run01/run02 né ritentare l’URL storico in timeout; rispettare i cooldown noti di Brescia/Varese.

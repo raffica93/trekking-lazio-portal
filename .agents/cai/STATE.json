@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "db-delta-delivered-awaiting-receipt-checkpoint",
+  "phase": "lombardia-source-coverage",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -224,8 +224,8 @@
     }
   ],
   "nextAction": {
-    "step": "S11",
-    "instruction": "Commit/push delta-import-receipt.json, the updated regional run state, and the final handoff/state. Verify remote receipt blob/hash. Then continue the separate Lombardia source-coverage work, one bounded section at a time; do not replay this completed 10-row manifest or the 3,336 classification baseline."
+    "step": "LOMBARDIA-NEXT-SOURCE",
+    "instruction": "Run cai-20261022-lombardia-cernusco03 has a verified file checkpoint candidate with zero new IDs; after publishing and rereading it from origin, preflight one different workable Lombardia source (do not retry the historical Cernusco timeout or reopen rejected run01/run02). Continue sequentially one bounded source at a time."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -235,7 +235,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "d45f27136177ce05181d69f87e00a8d7bb96a3cb",
+    "branchHead": "a015865283f0097d22036a9d75f4e0e17cd94bbb",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -361,8 +361,10 @@
       }
     },
     "catalogHashes": {
-      "backendData": "1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877",
-      "frontendPublic": "1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
+      "backendExcursions": "ce930618a8e0e925f43703b5a5f10347312fea602843aab77f6136b191c895a1",
+      "frontendExcursions": "ce930618a8e0e925f43703b5a5f10347312fea602843aab77f6136b191c895a1",
+      "backendScrapeStatus": "0cddc15b8f41a6220d96ffec93096dba608d24fd7b042e4e915666cf7565a4bd",
+      "frontendScrapeStatus": "0cddc15b8f41a6220d96ffec93096dba608d24fd7b042e4e915666cf7565a4bd"
     },
     "regionalCoverage": {
       "region": "Lombardia",
@@ -870,9 +872,71 @@
       "dbWrites": 0,
       "commit": "75be6e65b19a727250346c5e1c4e3c4287f9b277",
       "remoteVerifiedAt": "2026-10-22T20:07:30Z"
+    },
+    "receiptCheckpoint": "50352f7fde1a638e6541aab048fcdacfb834324b",
+    "resumeNote": "Valmadrera delta receipt and DB reconciliation are complete. Do not repeat the 10-row delta or historical 3,336 classification baseline.",
+    "lastRegionalAttempt": {
+      "runId": "cai-20261022-lombardia-cernusco02",
+      "status": "rejected-cache-version",
+      "sourceId": "cai-cernusco-sul-naviglio-9216051",
+      "documentSha256": "654a51f8d310cd6b65ad6e99a5a74ef05165a18d6e6411f6e21e9389720aa291",
+      "sourceStatus": "partial; 36 documents and 3 historical issues preserved",
+      "collection": "partial",
+      "files": "ready but rejected; false OCR candidate was reintroduced",
+      "database": "pending; no DB writes",
+      "oldExtractionCachePath": "backend/node_modules/.cache/cai/events-392f980c46fba9e4f53542b372927fd918df7b6a018f120da436c5a6885bf7d6.json",
+      "rootCause": "Parser correction changed behavior without bumping deterministic VERSION 11, so the cached extracted output containing the false OCR ID was reused.",
+      "verifiedBaseline": "The rejected ID cb33842fc3c2 is absent from committed HEAD 010af37.",
+      "next": "Bump VERSION 11→12, test, checkpoint code, restore baseline, rerun once."
+    },
+    "lastCodeCorrection": {
+      "commit": "010af3796a99d01e8081d45ef625b2344ec134c7",
+      "remoteVerified": true,
+      "fixture": "backend/test/fixtures/cai-cernusco-2026-ocr-cross-column.json",
+      "tests": {
+        "focused": "38/38",
+        "backend": "196/196"
+      },
+      "corrections": [
+        "scoped cross-column OCR false duplicate",
+        "preserve administrative and geographic enrichment including explicit nulls",
+        "preserve prior source document history and keep scoped continuation partial"
+      ]
+    },
+    "latestRegionalRun": {
+      "runId": "cai-20261022-lombardia-cernusco03",
+      "sourceId": "cai-cernusco-sul-naviglio-9216051",
+      "collection": "partial",
+      "files": "ready",
+      "database": "pending",
+      "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-cernusco03/manifest.json",
+      "manifestSha256": "c9164d3839dd1abebc62e9262fb40aca590fe7812e4f7c33e8a76c35ea2bba14",
+      "statePath": "backend/data/agent-runs/cai-20261022-lombardia-cernusco03/state.json",
+      "stateSha256": "218b54ee8afce0a9bb4dd1113715668165bf3eeb6b9adf7006f441bfffe6b7c2",
+      "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-cernusco03/collection-report.md",
+      "reportSha256": "d2a14c92fc8a918596d6ab6e68044b28b0278d857805fc874f067f5a4863068a",
+      "sourceStatus": "partial",
+      "sourceDocumentsRetained": 36,
+      "sourceIssuesRetained": 3,
+      "documentsRead": 1,
+      "extractedPdfEvents": 8,
+      "catalogBefore": 3359,
+      "catalogAfter": 3359,
+      "newIds": 0,
+      "removedIds": 0,
+      "changedRows": 1,
+      "changedRow": "cai-cernusco-sul-naviglio-9216051-61c82c9856f6",
+      "changedFields": [
+        "description"
+      ],
+      "falseOcrIdAbsent": true,
+      "duplicateIdsExcluded": 0,
+      "dbWrites": 0,
+      "collectorQa": "PASS: v12 official PDF cache reprocessed; clean Alpe Devero 25 October; false OCR candidate absent.",
+      "importerQa": "PASS: hashes and admin/geographic fields verified; no DB delivery warranted."
     }
   },
-  "repositoryCommit": "d45f27136177ce05181d69f87e00a8d7bb96a3cb",
+  "repositoryCommit": "a015865283f0097d22036a9d75f4e0e17cd94bbb",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -886,14 +950,20 @@
     "writes": 0
   },
   "tests": {
-    "backend": "npm test: 186 passed, 0 failed (after Valmadrera run05; catalog/frontend hashes verified unchanged by tests)",
+    "backend": "npm test: 197 passed, 0 failed after run cai-20261022-lombardia-cernusco03; all four catalog/status backend/frontend hashes unchanged by tests.",
     "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
-    "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
+    "catalogHashes": {
+      "backendExcursions": "ce930618a8e0e925f43703b5a5f10347312fea602843aab77f6136b191c895a1",
+      "frontendExcursions": "ce930618a8e0e925f43703b5a5f10347312fea602843aab77f6136b191c895a1",
+      "backendScrapeStatus": "0cddc15b8f41a6220d96ffec93096dba608d24fd7b042e4e915666cf7565a4bd",
+      "frontendScrapeStatus": "0cddc15b8f41a6220d96ffec93096dba608d24fd7b042e4e915666cf7565a4bd",
+      "copiesIdentical": true
+    }
   },
-  "updatedAt": "2026-10-22T20:15:58Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T20:15:58Z",
-  "regionCurrent": "Lombardia — Valmadrera parser correction committed and remote-verified at 75be6e65b19a727250346c5e1c4e3c4287f9b277; fixture tests 20/20, backend 187/187. Source re-evaluation remains.",
-  "regionNext": "Run exactly one bounded orchestrator continuation for the Valmadrera 2026 PDF using the already verified local cache and parser VERSION 11; no live fetch if cache succeeds. QA manifest/output, then classify new IDs through Mercury before deciding on DB import.",
+  "updatedAt": "2026-10-22T21:16:29Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T21:14:00Z",
+  "regionCurrent": "Lombardia — Cernusco03 corrected OCR and preserved 36-document history; files verified, no event delta, no DB write. Broader region remains open.",
+  "regionNext": "Publish run03 report/manifest/catalog/status checkpoint and verify remote. Then select a different Lombardia source with an official current calendar and bounded source scope; keep Brescia/Varese cooldowns.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
     "sourceId": "cai-varese-9216009",
@@ -920,7 +990,7 @@
   "deltaDelivery": {
     "regionalRunId": "cai-20261022-lombardia-valmadrera07",
     "classificationRunId": "cai-map-20261022-valmadrera01",
-    "status": "completed-10-row-delta-awaiting-receipt-checkpoint",
+    "status": "completed-10-row-delta-reconciled-and-receipt-published",
     "candidateIds": 10,
     "confirmedDuplicatesExcluded": 2,
     "probableDuplicatesHeld": 2,
@@ -932,7 +1002,7 @@
     },
     "coordinatesAdded": 0,
     "writeContract": "insert-only places + missing classifications; conflict-ignore; no deletes/updates",
-    "next": "push the migration compatibility fix and test; apply the corrected additive migration; then recheck target IDs and editorial digest and import the 10-row sealed delta",
+    "next": "No replay. Receipt b9b8a5fdcabc12f94f5aeeb39fec4e03b375098bb32837942b8c598f0cdf7cf7 and DB reconciliation are complete at remote commit 50352f7fde1a638e6541aab048fcdacfb834324b; proceed with separate Lombardia source coverage.",
     "databaseReceipt": {
       "path": "backend/data/agent-runs/cai-map-20261022-valmadrera01/delta-import-receipt.json",
       "sha256": "b9b8a5fdcabc12f94f5aeeb39fec4e03b375098bb32837942b8c598f0cdf7cf7",
@@ -982,6 +1052,54 @@
       "confirmedOriginalIdsPresent": 2,
       "probableComparisonIdsPresent": 2,
       "noRowsChanged": true
-    }
+    },
+    "completedAt": "2026-10-22T20:34:53.834321Z"
+  },
+  "lastCodeCorrection": {
+    "commit": "a015865283f0097d22036a9d75f4e0e17cd94bbb",
+    "remoteVerified": true,
+    "correction": "deterministic extraction VERSION 11→12 invalidates stale OCR event cache without deleting old cache",
+    "test": "backend/test/deterministic.test.js: v11 stale extraction ignored and v12 cache written",
+    "focused": "22/22",
+    "backend": "197/197",
+    "independentImporterQa": "PASS"
+  },
+  "lastRegionalAttempt": {
+    "runId": "cai-20261022-lombardia-cernusco03",
+    "status": "file-checkpoint-ready-no-db-delta",
+    "sourceId": "cai-cernusco-sul-naviglio-9216051",
+    "documentSha256": "654a51f8d310cd6b65ad6e99a5a74ef05165a18d6e6411f6e21e9389720aa291",
+    "sourceStatus": "partial; 36 documents and 3 issues retained",
+    "collection": "partial",
+    "files": "ready; pending Git checkpoint",
+    "database": "pending; no IDs/classification to deliver; no DB operation",
+    "catalog": "3359 before/after; 0 added, 0 removed, 1 description-only change",
+    "staleOcrId": "cb33842fc3c2 absent",
+    "manifestSha256": "c9164d3839dd1abebc62e9262fb40aca590fe7812e4f7c33e8a76c35ea2bba14",
+    "stateSha256": "218b54ee8afce0a9bb4dd1113715668165bf3eeb6b9adf7006f441bfffe6b7c2",
+    "reportSha256": "d2a14c92fc8a918596d6ab6e68044b28b0278d857805fc874f067f5a4863068a",
+    "test": "backend npm test 197/197; four public catalog/status hashes unchanged by tests",
+    "next": "Publish verified file checkpoint, then bounded preflight/run on a different workable Lombardia source."
+  },
+  "regionalCoverage": {
+    "region": "Lombardia",
+    "status": "open; Cernusco03 corrected stale OCR cache and retained source history; many other Lombardia sources remain partial/unverified.",
+    "currentRunCounts": {
+      "sectionsChecked": 1,
+      "complete": 0,
+      "partial": 1,
+      "unreachable": 0,
+      "verifiedExistingEvents": 4,
+      "newEvents": 0,
+      "exactDuplicateIdsExcluded": 0,
+      "failuresResolved": [
+        "Stale OCR event extraction cache from deterministic v11 bypassed after VERSION 12; false ID absent; Cernusco source history restored/preserved."
+      ],
+      "failuresOpen": [
+        "Cernusco remains partial with three historical issues; broader Lombardia coverage remains incomplete."
+      ]
+    },
+    "historicalSnapshot": {},
+    "historicalSnapshotNote": "Historical handoff only; current sample covers Cernusco alone; no Lombardia-wide recount."
   }
 }

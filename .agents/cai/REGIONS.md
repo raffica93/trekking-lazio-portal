@@ -122,3 +122,12 @@ Prossimo: checkpoint codice/fixture/test, poi un solo run orchestrato max 1 docu
 Confronto con checkpoint `e65379e4791bddbb92f8898767f0951135a04173`: 3.345→3.359 ID unici, +14, 0 rimossi, 0 record esistenti modificati. Tutti i nuovi record citano il PDF ufficiale; restano `Località da verificare`, senza coordinate o attribuzioni inventate. Importer QA PASS, suite backend 187/187, copie backend/frontend di catalogo e scrape-status byte-identiche e invariate dopo i test. Il report non dichiara il codice HTTP: una sola GET condizionale ha avuto successo, 304 dedotto dai timestamp cache invariati. Nessuna query/import DB.
 
 Report SHA `66cfdef7a09d8b998a4da3dc50625b11493968ed0bece873191651518b5873ca`; manifest SHA `80338c4a5952334c28cb8dc7ce436e6b0d8ea0aea9309046356e7909bc3a9335`; state SHA `f54437f765a93c5affb604b478f5c778bec07f4152308e069b2ba4ed63564140`. Il conteggio di copertura complessivo della Lombardia non è stato ricalcolato.
+
+
+## CAI Cernusco bounded continuation 03 — 22 ottobre 2026
+
+| Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| `cai-20261022-lombardia-cernusco03` — CAI Cernusco sul Naviglio | 1 PDF ufficiale | 0 | 1 | 0 | 4 ID sezione già presenti; zero nuovi; 8 righe estratte dal PDF | 0 | Cache estrazione OCR v11 invalidata con VERSION 12; falso ID `cb33842fc3c2` assente; record Alpe Devero esistente confermato | 3 issue storiche restano, 36 documenti di fonte preservati; regione ancora incompleta | Pubblicare il checkpoint file; poi valutare una diversa fonte Lombardia circoscritta |
+
+Catalogo: 3.359→3.359 ID, zero aggiunti/rimossi, una sola descrizione aggiunta al record 13 dicembre; campi amministrati e geografici invariati. Copie backend/frontend identiche. Report SHA `d2a14c92fc8a918596d6ab6e68044b28b0278d857805fc874f067f5a4863068a`; manifest SHA `c9164d3839dd1abebc62e9262fb40aca590fe7812e4f7c33e8a76c35ea2bba14`; stato run SHA prima dell'aggiornamento report `218b54ee8afce0a9bb4dd1113715668165bf3eeb6b9adf7006f441bfffe6b7c2`. Backend npm test 197/197 dopo raccolta, hash dei quattro file pubblici invariati dai test. Nessuna classificazione o scrittura DB; `database=pending` descrive solo che il run non ha richiesto delivery, non un import incompleto. I totali Lombardia complessivi restano lo snapshot storico del 20 ottobre e non sono query correnti.

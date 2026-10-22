@@ -10466,7 +10466,7 @@
     "cai-desenzano-9216136": "46131413f8d0092f14199e2f0df19b90e8d9cb28b1a81006037dab708fe0c2c2",
     "cai-gallarate-9216015": "3d217bc6a53196ad9903355c716ebbc0b6b716fb1ac4866840c9dbdbbb611ea7",
     "cai-fermo-9228004": "e8e464427f2cfec34b0f17402b8f50634b4c7c37053c6e72749dcdc04c699d52",
-    "cai-cernusco-sul-naviglio-9216051": "a6fe8b15b335fc155999e56a29637c58294dae4f2aa87bd0b8c0a0d4cd44dbf4",
+    "cai-cernusco-sul-naviglio-9216051": "ed37623abbc5c0ebc370593730afcabcfad80cc6ffd654ca62531033b36d8510",
     "cai-ancona-9228001": "d391dd4dd88da9d5180a2627c6fe789eb16544695c03bd1aea409c8c79d15671",
     "cai-sarnano-9228011": "264ad7dbab73f46423d80471781087f4c866ffb5fe73b74f78d70e0085c74a88",
     "cai-macerata-9228008": "7b62a2ffaecc2d3f0e1bbf9c288bbc3546de23bf1136ee75b85dbce9dfc268e3",
@@ -10773,7 +10773,7 @@
     "cai-busca-9112010": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967",
     "cai-dronero-9112012": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967"
   },
-  "generatedAt": "2026-10-22T20:09:25.177Z",
+  "generatedAt": "2026-10-22T21:15:12.867Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
@@ -78427,13 +78427,14 @@
       "time": "Vedi sito",
       "privateCar": null,
       "coordinatesQuality": "unknown",
-      "lat": null,
-      "lng": null,
       "locationSource": "supabase-recovery",
       "sourceDocument": "https://organizzazione.cai.it/sez-cernusco-sul-naviglio/wp-content/uploads/sites/19/2025/12/Locandina-programma-2026.pdf",
+      "description": "PROGRAMMA Accompagnamento durante le escursioni, 13 Dicembre - Giornata della Montagna",
       "status": "published",
       "coverImagePath": null,
-      "databaseId": "9554946a-2576-421e-b902-239df5fe2a60"
+      "databaseId": "9554946a-2576-421e-b902-239df5fe2a60",
+      "lat": null,
+      "lng": null
     },
     {
       "id": "cai-napoli-9238001-5003fe04db49",
