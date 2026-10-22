@@ -400,3 +400,12 @@ Il flyer puntuale `Rifugio Somma - Blinnenhorn (EE)` è registrato nella registr
 ### Correzione target Somma prima del fetch
 
 Il primo `orchestrate init` sull’host apex è stato rifiutato prima della rete: il validator richiede `www.caisomma.it`. Nessun run, lock o request è stato creato. Offline registry conferma `source.website=https://www.caisomma.it/` e `calendarEvidence` registra il medesimo path flyer sull’apex; la variante www same-path è assente da cache/status/FAILURES. Dopo checkpoint, un solo fetch www bounded; risposta/redirect ancora non verificati.
+
+
+## Lombardia — CAI Somma Lombardo Blinnenhorn01 (22 ottobre 2026)
+
+| Regione / run | Sezioni controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| `cai-20261022-lombardia-somma-blinnenhorn01`, Somma Lombardo | 1 PDF puntuale | 0 | 1 | 0 | 0 eventi completi; flyer attesta itinerario EE ma non data dell’uscita; scadenza iscrizione 25/07/2026 esclusa | 0 | Nessuno | SIEL full-PDF download-aborted; scheda riepilogativa size-limit; Varese endpoint 503 | Checkpoint e poi preflight offline altra fonte Lombardia distinta |
+
+Il catalogo resta 3.371 ID; 14 righe Somma invariate. No coordinates, classification, query or DB write. Importer QA PASS; backend tests 205/205; sei public JSON stabili.

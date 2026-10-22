@@ -1,6 +1,6 @@
 # Piano di passaggio al lavoro interamente cloud
 
-Stato aggiornato al 22 ottobre 2026: dopo Sesto01 checkpointato (`c8abab2`), è stato selezionato offline il flyer specifico Somma/Blinnenhorn. L’init apex è stato rifiutato dal validatore prima della rete perché la fonte usa `www.caisomma.it`; nessun run/lock/fetch. Registry attesta il medesimo path flyer sull’apex e il website ufficiale www. Dopo checkpoint della variante www, un solo fetch max1/120s/concurrency1. No retry dei PDF bloccati.
+Stato aggiornato al 22 ottobre 2026: Sesto01 checkpointato `c8abab2`; Somma Blinnenhorn01 ha letto un singolo PDF, senza data dell’uscita e senza eventi inferibili; catalogo invariato, QA importer PASS, backend test 205/205. Pubblicare/verificare il PDF/evidence/report/status; poi preflight offline di altra fonte Lombardia distinta. Restano bloccati SIEL, summary PDF e Varese 503; non ritentare.
 
 ## Sequenza
 

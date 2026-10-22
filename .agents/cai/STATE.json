@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "lombardia-somma-blinnenhorn-www-preflight-selected",
+  "phase": "lombardia-somma-blinnenhorn01-no-event-qa-tested-checkpoint-pending",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -398,11 +398,16 @@
     },
     {
       "id": "S43",
+      "status": "completed",
+      "result": "Somma Blinnenhorn01 collected after cdfae59; one PDF 760092B, pdf-text, zero event date/candidates; enrollment deadline not treated as outing date. 14 rows and 3,371 IDs unchanged. Importer QA PASS, backend 205/205, six public JSON hashes stable, no DB."
+    },
+    {
+      "id": "S44",
       "status": "in_progress",
-      "result": "Prima init con apex caisomma.it rifiutata offline dal validator host (trusted website www.caisomma.it); nessuna rete/run/lock. Offline registry conferma website www e calendarEvidence path identico sull’apex. Dopo checkpoint, consentita una sola variante www sullo stesso path, max1/120s/concurrency1."
+      "result": "Checkpoint Somma files and handoff, then offline preflight a distinct workable Lombardia source; no retry of SIEL/summary/Varese blockers."
     }
   ],
-  "nextAction": "Checkpoint remoto della URL corretta www attestata dalla website registry. Poi un solo run cai-20261022-lombardia-somma-blinnenhorn01, path PDF esatto, max1 documento/120s/concurrency1. Il precedente init apex è stato rifiutato prima della rete per host mismatch; nessun run/lock o fetch. Non ritentare SIEL/summary/Varese.",
+  "nextAction": "Checkpoint remoto del run Somma (PDF/evidence/report/catalog/status e QA/test). Poi preflight offline della prossima fonte Lombardia distinta; nessuna classificazione o import per Somma perché manca la data dell’uscita.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -411,45 +416,46 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "15793cb31010f8eecb0d61bfa48091e1a3612aa1",
+    "branchHead": "cdfae59e84e793091d11ab199612561dcaf6224c",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
-      "runId": "cai-20261022-lombardia-sesto01",
+      "runId": "cai-20261022-lombardia-somma-blinnenhorn01",
       "collection": "partial",
       "files": "ready",
-      "database": "not-applicable-no-delta",
-      "sourceId": "cai-sesto-calende-9216044",
-      "sourceUrl": "https://caisestocalende.it/calendario-sezionale/",
-      "documentsRead": 1,
-      "documentBytes": 121924,
-      "documentSha256": "28e233dbfc840dca1b19c3eaf849daef385651d7a9fbea71b7f04b2f9b43bde8",
-      "cacheKey": "acb375feb79fc9914cb75d845b2376df21e192219ba44815e41de8b8a9b20aa3",
-      "extractorMethod": null,
-      "rowsExtracted": 0,
-      "sectionRowsBefore": 18,
-      "sectionRowsAfter": 18,
+      "database": "not-applicable-no-complete-event-candidate",
+      "sourceId": "cai-somma-lombardo-9216065",
+      "sourceUrl": "https://www.caisomma.it/wp-content/uploads/pdf/Escursioni/2026/Rifugio%20Somma%20-%20Blinnenhorn%20(EE).pdf",
+      "documentBytes": 760092,
+      "documentSha256": "c9f7cab19bc7993fb7e3db8e4dc39ebb8aa29039c98cc27dd3a1cc016af4e1af",
+      "method": "pdf-text",
+      "finalUrl": "not exposed by cache metadata; requested URL retained",
+      "eventsExtracted": 0,
+      "eventDateFound": false,
+      "registrationDeadline": "2026-07-25 (not an outing date)",
+      "sectionRowsBefore": 14,
+      "sectionRowsAfter": 14,
       "catalogIdsBefore": 3371,
       "catalogIdsAfter": 3371,
       "added": 0,
       "removed": 0,
       "changed": 0,
-      "canonicalSectionRowsSha256": "ca5c58cb7feb133ece4c08bbd3f6e484e8730734adce3a8edbc7d5830ad2a0bc",
-      "bodyArtifact": "backend/data/agent-runs/cai-20261022-lombardia-sesto01/source-page.html",
-      "manifestSha256": "813864b712c7a5fc04b0c44f9ea7433654fb57737674fd11616a6582c5c8af36",
-      "stateSha256": "25fae0f0ea28be8d8ef658498c9d062ef96df5c8304bcbbefbb14f2f2b248648",
-      "reportSha256": "3c675e7495680726e419e9ac03b7d9461c679cf8b979c008da893b48074053da",
+      "manifestSha256": "7d1be91a308365001813f21ec6456613d2db20d444dc02e5df5c9851f60a34e7",
+      "stateSha256": "2a566c12e6b65783580ff469bd9b08cd2d60aa6bdc86f0eb37d756a0a3a50e4f",
+      "reportSha256": "6c12db4ad10596ca74db8b5c4a4f0a629b81d3e05fe7e1d89604e1b90ac54b11",
+      "evidenceSha256": "a737ab7c993163ea37d2e7316763799c04ccddd0f97b76801748fd6799f5a3d8",
+      "importerQa": "PASS; official flyer and route/difficulty verified, no outing date, zero event rows",
+      "backendTests": "205/205 after collection; six public JSON hashes unchanged",
       "coordinatesAdded": 0,
+      "dbWrites": 0,
       "openIssues": [
-        "annual PDF already consumed with 29 extracted rows and manual-QA issue; do not retry",
-        "HTML discovery-limit 1 with exact child URL not persisted"
-      ],
-      "importerQa": "PASS read-only; mirrors, 18 section rows, fields, manifest/body verified",
-      "backendTests": "205/205 after collection; six public JSON SHA-256 stable",
-      "dbWrites": 0
+        "prior SIEL programme download-aborted remains open; not retried",
+        "summary PDF size-limit remains open",
+        "Varese 503 on separate endpoint"
+      ]
     },
-    "nextAction": "Checkpoint remoto della URL corretta www attestata dalla website registry. Poi un solo run cai-20261022-lombardia-somma-blinnenhorn01, path PDF esatto, max1 documento/120s/concurrency1. Il precedente init apex è stato rifiutato prima della rete per host mismatch; nessun run/lock o fetch. Non ritentare SIEL/summary/Varese."
+    "nextAction": "Checkpoint remoto del run Somma (PDF/evidence/report/catalog/status e QA/test). Poi preflight offline della prossima fonte Lombardia distinta; nessuna classificazione o import per Somma perché manca la data dell’uscita."
   },
-  "repositoryCommit": "15793cb31010f8eecb0d61bfa48091e1a3612aa1",
+  "repositoryCommit": "cdfae59e84e793091d11ab199612561dcaf6224c",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -472,10 +478,10 @@
     }
   },
   "tests": "After the Castrovillari01 collection finished, backend npm test passed 205/205; SHA-256 for six public JSON files was identical before/after. No tests were run concurrently with collection.",
-  "updatedAt": "2026-10-22T23:49:23.428928+00:00",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:39:00Z",
-  "regionCurrent": "Lombardia — Sesto Calende: pagina ufficiale partial, 0 estrazioni; 18 ID invariati; test/QA PASS; checkpoint c8abab2.",
-  "regionNext": "Lombardia — CAI Somma Lombardo, stesso flyer e path puntuale sul dominio ufficiale www della registry; il fetch è ancora da fare dopo checkpoint.",
+  "updatedAt": "2026-10-22T23:52:05.184423+00:00",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:52:00Z",
+  "regionCurrent": "Lombardia — CAI Somma Lombardo: flyer specifico letto, PDF-text 0 candidati evento; data uscita assente, solo scadenza iscrizione; 14 righe esistenti invarianti. Test/QA PASS, no DB.",
+  "regionNext": "Lombardia — dopo checkpoint Somma, preflight offline di una distinta fonte ufficiale ancora aperta; rispettare cooldown/503 e non ripetere SIEL o scheda riepilogativa bloccati.",
   "preflight": {
     "at": "2026-10-22T23:28:13Z",
     "sourceId": "cai-pavullo-nel-frignano-9224020",
@@ -505,12 +511,12 @@
     "writePerformed": false
   },
   "deltaDelivery": {
-    "regionalRunId": "cai-20261022-lombardia-sesto01",
-    "status": "not-applicable-no-new-event-candidates",
+    "regionalRunId": "cai-20261022-lombardia-somma-blinnenhorn01",
+    "status": "not-applicable-no-complete-event-candidate",
     "candidateIds": 0,
     "databaseQueryPerformed": false,
     "databaseWritePerformed": false,
-    "reason": "Official calendar index extraction method null and zero events; 18 existing Sesto event rows verified unchanged."
+    "reason": "PDF contains route information and registration deadline only; no outing date. No complete event can be safely formed."
   },
   "lastCodeCorrection": {
     "commit": "d16ebc0ea29118199f6deb3e9821ee3d4efef191",
@@ -522,25 +528,24 @@
     "independentImporterQa": "PASS"
   },
   "lastRegionalAttempt": {
-    "runId": "cai-20261022-lombardia-sesto01",
+    "runId": "cai-20261022-lombardia-somma-blinnenhorn01",
     "region": "Lombardia",
-    "sourceId": "cai-sesto-calende-9216044",
-    "requestedUrl": "https://caisestocalende.it/calendario-sezionale/",
+    "sourceId": "cai-somma-lombardo-9216065",
+    "requestedUrl": "https://www.caisomma.it/wp-content/uploads/pdf/Escursioni/2026/Rifugio%20Somma%20-%20Blinnenhorn%20(EE).pdf",
     "collection": "partial",
     "files": "ready; importer QA PASS; backend tests 205/205 after collection; six public JSON hashes unchanged; checkpoint pending",
-    "database": "not applicable: no new event candidates",
-    "baselineCommit": "bab39a8f1d25d5554ad3922ff872878557f79c10",
-    "runFolder": "backend/data/agent-runs/cai-20261022-lombardia-sesto01",
-    "manifestSha256": "813864b712c7a5fc04b0c44f9ea7433654fb57737674fd11616a6582c5c8af36",
-    "runStateSha256": "25fae0f0ea28be8d8ef658498c9d062ef96df5c8304bcbbefbb14f2f2b248648",
-    "reportSha256": "3c675e7495680726e419e9ac03b7d9461c679cf8b979c008da893b48074053da",
-    "bodySha256": "28e233dbfc840dca1b19c3eaf849daef385651d7a9fbea71b7f04b2f9b43bde8",
+    "database": "not applicable; no event date/candidate",
+    "baselineCommit": "cdfae59e84e793091d11ab199612561dcaf6224c",
+    "runFolder": "backend/data/agent-runs/cai-20261022-lombardia-somma-blinnenhorn01",
+    "manifestSha256": "7d1be91a308365001813f21ec6456613d2db20d444dc02e5df5c9851f60a34e7",
+    "runStateSha256": "2a566c12e6b65783580ff469bd9b08cd2d60aa6bdc86f0eb37d756a0a3a50e4f",
+    "reportSha256": "6c12db4ad10596ca74db8b5c4a4f0a629b81d3e05fe7e1d89604e1b90ac54b11",
+    "evidenceSha256": "a737ab7c993163ea37d2e7316763799c04ccddd0f97b76801748fd6799f5a3d8",
+    "bodySha256": "c9f7cab19bc7993fb7e3db8e4dc39ebb8aa29039c98cc27dd3a1cc016af4e1af",
     "catalogBefore": 3371,
     "catalogAfter": 3371,
-    "sourceRowsBefore": 18,
-    "sourceRowsAfter": 18,
-    "sourceRowsSelector": "event.id prefix cai-sesto-calende-9216044-",
-    "sourceRowsCanonicalSha256": "ca5c58cb7feb133ece4c08bbd3f6e484e8730734adce3a8edbc7d5830ad2a0bc",
+    "sourceRowsBefore": 14,
+    "sourceRowsAfter": 14,
     "added": 0,
     "removed": 0,
     "changed": 0,
@@ -553,28 +558,39 @@
     "coordinatesAdded": 0,
     "failuresResolved": [],
     "failuresOpen": [
-      "PDF annuale historical already read and manual-QA issue remains",
-      "HTML index discovery-limit 1; exact queued child URL not persisted"
+      "historical SIEL full-programme PDF download-aborted issue",
+      "historical summary PDF size-limit issue",
+      "Varese 503 separate source/endpoint"
     ],
-    "collectorQa": "report/body/catalog/status and source title/context verified",
-    "importerQa": "PASS independent; 18 rows field-by-field unchanged, mirrors/hash verified",
+    "collectorQa": "official source flyer, document body and date semantics checked",
+    "importerQa": "PASS independent; 14 source rows unchanged, artifact hashes and mirrors valid",
     "backendTests": "205/205 after collection; six public hashes stable",
     "dbWrites": 0
   },
   "regionalCoverage": {
     "region": "Lombardia",
-    "scope": "Sesto Calende index checkpointed; next one source-specific Somma flyer selected offline",
-    "status": "open",
+    "scope": "Sesto index and Somma flyer sampled; no region-wide fresh count",
+    "status": "open; several known partial/blocked sources remain",
     "currentRunCounts": {
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
-      "eventsVerified": 0,
+      "sourceRowsVerified": 14,
+      "eventsExtracted": 0,
       "newIds": 0,
-      "dbPlacesInserted": 0,
-      "dbClassificationsInserted": 0,
-      "nextStep": "Checkpoint Somma preflight; then one exact PDF fetch."
+      "removedIds": 0,
+      "changedRows": 0,
+      "placesInserted": 0,
+      "classificationsInserted": 0,
+      "coordinatesAdded": 0,
+      "failuresResolved": [],
+      "failuresOpen": [
+        "Somma SIEL full programme download-aborted",
+        "Somma summary PDF size-limit",
+        "Varese 503 endpoint"
+      ],
+      "nextStep": "Publish Somma artifact checkpoint, then offline preflight another distinct Lombardia source."
     },
     "historicalSnapshot": {
       "asOf": "2026-10-20",
@@ -706,13 +722,8 @@
   ],
   "nextSourcePreflight": {
     "region": "Lombardia",
-    "sourceId": "cai-somma-lombardo-9216065",
-    "sourceName": "CAI Somma Lombardo",
-    "url": "https://www.caisomma.it/wp-content/uploads/pdf/Escursioni/2026/Rifugio%20Somma%20-%20Blinnenhorn%20(EE).pdf",
-    "status": "offline selected; corrected hostname must be checkpointed before fetch",
-    "evidence": "source.website is https://www.caisomma.it/ (host accepted by validateSourceUrls); calendarEvidence attests same exact flyer path on apex caisomma.it; same official-site attribution. Variant www absent from status, cache and FAILURES; serving/redirect behavior remains unverified until bounded request.",
-    "scope": "one exact same-path flyer URL, max1 document/120s/concurrency1; no SIEL/summary/Varese retries",
-    "networkFetchPerformed": false,
-    "rejectedPriorAttempt": "apex hostname rejected by pre-network host validation; no run directory, lock or fetch"
+    "status": "offline preflight pending after Somma no-event checkpoint",
+    "scope": "review remaining open official URLs vs status/cache/FAILURES/cooldown; select at most one distinct workable target",
+    "networkFetchPerformed": false
   }
 }

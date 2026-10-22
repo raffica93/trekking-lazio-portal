@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-lombardia-somma-blinnenhorn01",
+  "createdAt": "2026-10-22T23:49:40.500Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "e855def2d86a75a6ca4e42244ef0eee676bad554e17c5a4f5d8c051653ec8cbf"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "38974cb253655f582fbc8f21afc232dd5cc9d64a11a34845c4111c5123fe16a6"
+    }
+  ]
+}

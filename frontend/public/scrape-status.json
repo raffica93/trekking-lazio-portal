@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T23:44:40.661Z",
+  "generatedAt": "2026-10-22T23:49:40.304Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -20639,17 +20639,24 @@
       "excursions": 14,
       "error": "aborted",
       "hash": "5e7b6ca52dfab1a1e0f4fdf321b240d4baf6aaf6f3df53a86cf4936911f9ee9e",
-      "updatedAt": "2026-10-20T02:25:51.584Z",
+      "updatedAt": "2026-10-22T23:49:40.304Z",
       "documents": [
         {
           "url": "https://www.caigazzadaschianno.it/images/siel/LibrettoEscursioni2026.pdf",
           "hash": "e9d979ff7ab7e0c5aca375d2e90dc5590c77bdb004319ae53d3b035cfa191761",
           "events": 13,
           "method": "pdf-text-manual-page"
+        },
+        {
+          "url": "https://www.caisomma.it/wp-content/uploads/pdf/Escursioni/2026/Rifugio%20Somma%20-%20Blinnenhorn%20(EE).pdf",
+          "hash": "c9f7cab19bc7993fb7e3db8e4dc39ebb8aa29039c98cc27dd3a1cc016af4e1af",
+          "events": 0,
+          "method": "pdf-text"
         }
       ],
       "methods": [
-        "pdf-text-manual-page"
+        "pdf-text-manual-page",
+        "pdf-text"
       ],
       "issues": [
         {
