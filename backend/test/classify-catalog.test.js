@@ -188,6 +188,41 @@ test('API failures stay invalid, are counted, and resume retries them without ma
   } finally { await fs.rm(temp.root, { recursive: true, force: true }); }
 });
 
+test('HTTP 429 circuit breaker stops new classifier work and leaves the run partial', async () => {
+  const temp = await workspace();
+  const rows = Array.from({ length: 4 }, (_, n) => ({
+    id: `cai-rate-limited-${n}`,
+    title: `Programma da classificare ${n}`,
+    date: '2026-11-01'
+  }));
+  await fs.writeFile(temp.input, JSON.stringify(rows));
+  let calls = 0;
+  try {
+    const state = await runCatalogClassification({
+      input: temp.input,
+      output: temp.output,
+      runId: 'circuit-breaker-429',
+      concurrency: 2,
+      rateLimitMs: 100,
+      cacheDir: temp.cache,
+      env: { OPENROUTER_API_KEY: 'secret-fixture', MERCURY_DECIDE_ENABLED: '1', OPENROUTER_ALLOWED_HOSTS: 'openrouter.ai' },
+      fetchImpl: async () => { calls += 1; return { ok: false, status: 429 }; }
+    });
+
+    assert.equal(calls, 1);
+    assert.equal(state.status, 'partial');
+    assert.equal(state.completed, 0);
+    assert.equal(state.processed, 1);
+    assert.equal(state.errors.length, 1);
+    assert.equal(state.errors[0].code, 'mercury-http-429');
+    assert.match(state.errors[0].message, /HTTP 429/);
+    assert.doesNotMatch(state.errors[0].message, /secret-fixture/);
+    const output = JSON.parse(await fs.readFile(path.join(temp.output, OUTPUT_NAME), 'utf8'));
+    assert.equal(output.length, rows.length);
+    assert.ok(output.every((row) => row.classification === undefined));
+  } finally { await fs.rm(temp.root, { recursive: true, force: true }); }
+});
+
 test('catalog CLI preflight blocks offline fallback without writing files or calling fetch', async () => {
   const temp = await workspace();
   await fs.writeFile(temp.input, JSON.stringify([{ id: 'cai-rule-1', title: 'Escursione al rifugio', date: '2026-12-01' }]));

@@ -216,11 +216,15 @@ test('classification contract is persisted separately and is keyed to the same s
   });
   const row = classificationToRow(event.id, event.classification);
   assert.deepEqual(Object.keys(row).sort(), [
-    'category', 'confidence', 'decision', 'evidence_original', 'fingerprint', 'method',
+    'candidate_category', 'candidate_decision', 'category', 'confidence', 'decision', 'evidence_original', 'fingerprint', 'method',
     'model_attested', 'model_requested', 'model_version', 'policy_version', 'probability',
-    'rationale', 'response_model', 'source_id'
+    'rationale', 'response_model', 'review_metadata', 'source_id'
   ]);
   assert.equal(row.decision, 'trekking');
+  assert.equal(row.category, 'a piedi');
+  assert.equal(row.candidate_decision, 'trekking');
+  assert.equal(row.candidate_category, 'a piedi');
+  assert.equal(row.review_metadata, null);
   const unverifiedMercury = classificationToRow(event.id, {
     ...event.classification,
     decision: 'da_verificare', category: 'altro', method: 'mercury-decide',
@@ -240,6 +244,51 @@ test('classification contract is persisted separately and is keyed to the same s
   assert.equal(verifiedSnapshot.response_model, 'inception/mercury-decide-20260930');
   assert.equal(verifiedSnapshot.model_attested, true);
   assert.equal(verifiedSnapshot.model_version, 'inception/mercury-decide-20260930');
+  const reviewCases = [
+    {
+      sourceId: 'cai-sacile-9222024-79e8babd63a6', candidateDecision: 'non_trekking', candidateCategory: 'altro',
+      finalDecision: 'da_verificare', evidenceUrl: 'https://example.org/sacile-calendar'
+    },
+    {
+      sourceId: 'alatri-087dc800cef1', candidateDecision: 'trekking', candidateCategory: 'a piedi',
+      finalDecision: 'da_verificare', evidenceUrl: 'https://example.org/alatri-calendar'
+    },
+    {
+      sourceId: 'cai-omegna-9212020-0ca017a0e469', candidateDecision: 'da_verificare', candidateCategory: 'altro',
+      finalDecision: 'trekking', finalCategory: 'a piedi', evidenceUrl: 'https://example.org/omegna-programma.pdf'
+    }
+  ];
+  for (const { sourceId, candidateDecision, candidateCategory, finalDecision, finalCategory, evidenceUrl } of reviewCases) {
+    const reviewed = classificationToRow(sourceId, {
+      ...event.classification,
+      source_id: sourceId,
+      decision: candidateDecision,
+      category: candidateCategory,
+      method: 'mercury-decide', modelRequested: 'inception/mercury-decide',
+      responseModel: 'inception/mercury-decide-20260930', modelAttested: true,
+      modelVersion: 'inception/mercury-decide-20260930',
+      review: {
+        decision: finalDecision, ...(finalCategory ? { category: finalCategory } : {}), reviewerRole: 'cai-collector',
+        reason: `Revisione QA per ${sourceId}: evidenza insufficiente per mantenere la decisione candidata.`,
+        evidenceUrl, evidence: 'La fonte ufficiale non consente di verificare questa attribuzione.'
+      }
+    });
+    assert.equal(reviewed.decision, finalDecision);
+    assert.equal(reviewed.candidate_decision, candidateDecision);
+    assert.equal(reviewed.candidate_category, candidateCategory);
+    assert.equal(reviewed.category, finalCategory ?? candidateCategory);
+    assert.equal(reviewed.review_metadata.final_decision, finalDecision);
+    assert.equal(reviewed.review_metadata.final_category, finalCategory ?? null);
+    assert.equal(reviewed.review_metadata.reviewer_role, 'cai-collector');
+  }
+  assert.throws(() => classificationToRow(event.id, {
+    ...event.classification,
+    review: { decision: 'da_verificare', reviewerRole: 'cai-collector', reason: '', evidenceUrl: 'not a URL', evidence: '' }
+  }), /invalid QA review metadata/);
+  assert.throws(() => classificationToRow(event.id, {
+    ...event.classification,
+    review: { decision: 'da_verificare', category: 'not-a-category', reviewerRole: 'orchestrator', reason: 'review', evidenceUrl: 'https://example.org/evidence', evidence: 'Verified source excerpt.' }
+  }), /invalid QA review metadata/);
   assert.throws(() => classificationToRow(event.id, {
     ...event.classification,
     method: 'mercury-decide', modelRequested: 'inception/mercury-decide',
@@ -274,14 +323,26 @@ test('classification contract is persisted separately and is keyed to the same s
 
 test('classification-only insertion preserves conflicts, reconciles new rows, and never writes places', async () => {
   const first = {
-    source_id: 'preexisting-source', decision: 'non_trekking', category: 'corso/riunione',
+    source_id: 'preexisting-source', decision: 'non_trekking', candidate_decision: 'non_trekking', candidate_category: 'corso/riunione', review_metadata: null, category: 'corso/riunione',
     confidence: 0.91, probability: null, rationale: 'Admin-reviewed', evidence_original: 'admin',
     fingerprint: 'admin-fingerprint', method: 'rules-v1', model_requested: null,
     response_model: null, model_attested: false, policy_version: 'admin-policy', model_version: null
   };
   const supabase = createFakeSupabase({ existingClassificationRows: [first] });
-  const conflict = { ...first, decision: 'trekking', category: 'a piedi', rationale: 'New classifier proposal' };
-  const newRow = { ...first, source_id: 'new-source', decision: 'trekking', fingerprint: 'new-fingerprint' };
+  const conflict = {
+    ...first,
+    decision: 'da_verificare',
+    candidate_decision: 'non_trekking',
+    category: 'altro',
+    candidate_category: 'altro',
+    review_metadata: {
+      final_decision: 'da_verificare', reviewer_role: 'cai-collector',
+      reason: 'QA candidate for an ambiguous source.',
+      evidence_url: 'https://example.org/calendar', evidence: 'Source did not verify an exclusion.'
+    },
+    rationale: 'New QA-reviewed proposal'
+  };
+  const newRow = { ...first, source_id: 'new-source', decision: 'trekking', candidate_decision: 'trekking', category: 'a piedi', candidate_category: 'a piedi', fingerprint: 'new-fingerprint' };
   const result = await insertMissingClassifications({ supabase, rows: [conflict, newRow] });
   assert.equal(result.attempted, 2);
   assert.equal(result.insertAttempts, 1);
@@ -291,6 +352,9 @@ test('classification-only insertion preserves conflicts, reconciles new rows, an
   assert.deepEqual(result.mismatchedSourceIds, ['preexisting-source']);
   assert.equal(supabase.classificationRows.length, 2);
   assert.equal(supabase.classificationRows[0].rationale, 'Admin-reviewed');
+  assert.equal(supabase.classificationRows[0].decision, 'non_trekking');
+  assert.equal(supabase.classificationRows[0].candidate_decision, 'non_trekking');
+  assert.equal(supabase.classificationRows[0].review_metadata, null);
   assert.equal(supabase.classificationRows[1].source_id, 'new-source');
   assert.equal(supabase.inserts.length, 0);
   assert.equal(supabase.updates.length, 0);
@@ -307,13 +371,25 @@ test('classification-only CLI verifies a sealed classifier run and touches only 
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const runDir = path.join(root, 'backend', 'data', 'agent-runs', 'real-batch-01');
   fs.mkdirSync(runDir, { recursive: true });
-  const source = { id: 'classification-only-source', title: 'Escursione al rifugio', date: '2026-11-02' };
+  const source = { id: 'cai-sacile-9222024-79e8babd63a6', title: 'AG 2026 – Castagnata in Casera Ceresera', date: '2026-11-02' };
   const input = { excursions: [source] };
   const inputBytes = Buffer.from(JSON.stringify(input));
   const inputPath = path.join(runDir, 'input.json');
   fs.writeFileSync(inputPath, inputBytes);
   const inputSha256 = crypto.createHash('sha256').update(inputBytes).digest('hex');
-  const classified = { excursions: [{ ...source, classification: classifyRules(source) }] };
+  const classified = { excursions: [{ ...source, classification: {
+    ...classifyRules(source),
+    decision: 'non_trekking',
+    category: 'altro',
+    mapEligible: false,
+    review: {
+      decision: 'da_verificare',
+      reviewerRole: 'cai-collector',
+      reason: 'Il 404 della pagina non prova che l’evento non sia escursionistico.',
+      evidenceUrl: 'https://example.org/sacile-calendar',
+      evidence: 'La pagina ufficiale non è disponibile; mantenere il candidato originale per verifica.'
+    }
+  } }] };
   const outputBytes = Buffer.from(JSON.stringify(classified));
   fs.writeFileSync(path.join(runDir, 'classified-catalog.json'), outputBytes);
   const state = {
@@ -347,7 +423,10 @@ test('classification-only CLI verifies a sealed classifier run and touches only 
   assert.equal(receipt.status, 'completed');
   assert.equal(receipt.classifications.input, 1);
   assert.equal(receipt.classifications.inserted, 1);
-  assert.equal(receipt.classifications.byDecision.trekking, 1);
+  assert.equal(receipt.classifications.byDecision.da_verificare, 1);
+  assert.equal(supabase.classificationRows[0].decision, 'da_verificare');
+  assert.equal(supabase.classificationRows[0].candidate_decision, 'non_trekking');
+  assert.equal(supabase.classificationRows[0].review_metadata.final_decision, 'da_verificare');
   assert.equal(receipt.placesTouched, false);
   assert.equal(receipt.sectionsTouched, false);
 
@@ -372,6 +451,12 @@ test('classification-only CLI verifies a sealed classifier run and touches only 
 test('classification migration protects place rows and accepts only verified Mercury snapshot identity', () => {
   const migration = fs.readFileSync(path.join(__dirname, '../../supabase/migrations/20261021090000_place_classifications.sql'), 'utf8');
   assert.match(migration, /references public\.places\(source_id\) on delete restrict/i);
+  assert.match(migration, /candidate_decision text not null/i);
+  assert.match(migration, /candidate_category text not null/i);
+  assert.match(migration, /review_metadata jsonb/i);
+  assert.match(migration, /review_metadata ->> 'final_decision' = decision/i);
+  assert.match(migration, /review_metadata ->> 'final_category'/i);
+  assert.match(migration, /category = candidate_category/i);
   assert.match(migration, /in \('inception\/mercury-decide', 'inception\/mercury-decide-20260930'\)/);
   assert.doesNotMatch(migration, /on delete cascade/i);
 });

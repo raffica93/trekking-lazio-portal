@@ -204,6 +204,7 @@ const CLASSIFICATION_CATEGORIES = new Set([
   'sociale/culturale', 'corso/riunione', 'altro'
 ]);
 const CLASSIFICATION_METHODS = new Set(['rules-v1', 'mercury-decide']);
+const CLASSIFICATION_REVIEWER_ROLES = new Set(['cai-collector', 'orchestrator']);
 
 function classificationToRow(sourceId, classification) {
   if (!classification || typeof classification !== 'object') return null;
@@ -218,6 +219,16 @@ function classificationToRow(sourceId, classification) {
     policyVersion, modelVersion, rationale, evidenceOriginal,
     fingerprint
   } = classification;
+  const review = classification.review ?? null;
+  if (review !== null && (!review || typeof review !== 'object' || Array.isArray(review)
+    || !CLASSIFICATION_DECISIONS.has(review.decision)
+    || (review.category !== undefined && !CLASSIFICATION_CATEGORIES.has(review.category))
+    || !CLASSIFICATION_REVIEWER_ROLES.has(review.reviewerRole)
+    || typeof review.reason !== 'string' || !review.reason.trim()
+    || typeof review.evidence !== 'string' || !review.evidence.trim()
+    || !isHttpUrl(review.evidenceUrl))) {
+    throw new Error(`Excursion ${sourceId} has invalid QA review metadata`);
+  }
   if (method === 'mercury-decide'
     && typeof rationale === 'string'
     && rationale.startsWith('Classificazione automatica non disponibile;')) {
@@ -256,8 +267,18 @@ function classificationToRow(sourceId, classification) {
   }
   return {
     source_id: sourceId,
-    decision,
-    category: category.trim(),
+    decision: review?.decision ?? decision,
+    category: review?.category ?? category.trim(),
+    candidate_decision: decision,
+    candidate_category: category.trim(),
+    review_metadata: review ? {
+      final_decision: review.decision,
+      final_category: review.category ?? null,
+      reviewer_role: review.reviewerRole.trim(),
+      reason: review.reason.trim(),
+      evidence_url: review.evidenceUrl.trim(),
+      evidence: review.evidence.trim()
+    } : null,
     confidence,
     probability,
     rationale: rationale.trim(),
@@ -270,6 +291,23 @@ function classificationToRow(sourceId, classification) {
     policy_version: policyVersion.trim(),
     model_version: modelVersion?.trim() ?? null
   };
+}
+
+function isHttpUrl(value) {
+  try {
+    const url = new URL(value);
+    return (url.protocol === 'https:' || url.protocol === 'http:') && Boolean(url.hostname);
+  } catch {
+    return false;
+  }
+}
+
+function stableJson(value) {
+  if (Array.isArray(value)) return `[${value.map(stableJson).join(',')}]`;
+  if (value && typeof value === 'object') {
+    return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${stableJson(value[key])}`).join(',')}}`;
+  }
+  return JSON.stringify(value);
 }
 
 function prepareClassifications(excursions) {
@@ -330,7 +368,7 @@ async function insertMissingClassifications({ supabase, rows = [] }) {
 
 async function reconcileClassifications({ supabase, excursions = [], rows = prepareClassifications(excursions).rows }) {
   const expected = rows;
-  const fields = 'source_id, decision, category, confidence, probability, rationale, evidence_original, fingerprint, method, model_requested, response_model, model_attested, policy_version, model_version';
+  const fields = 'source_id, decision, candidate_decision, category, candidate_category, review_metadata, confidence, probability, rationale, evidence_original, fingerprint, method, model_requested, response_model, model_attested, policy_version, model_version';
   const found = new Map();
   for (const batch of chunk(expected.map((row) => row.source_id))) {
     const { data, error } = await supabase.from('place_classifications').select(fields).in('source_id', batch);
@@ -341,7 +379,13 @@ async function reconcileClassifications({ supabase, excursions = [], rows = prep
   const fieldsToCompare = fields.split(', ');
   for (const expectedRow of expected) {
     const row = found.get(expectedRow.source_id);
-    if (!row || fieldsToCompare.some((field) => (row[field] ?? null) !== (expectedRow[field] ?? null))) {
+    if (!row || fieldsToCompare.some((field) => {
+      const actual = row[field] ?? null;
+      const expectedValue = expectedRow[field] ?? null;
+      return actual && expectedValue && typeof actual === 'object' && typeof expectedValue === 'object'
+        ? stableJson(actual) !== stableJson(expectedValue)
+        : actual !== expectedValue;
+    })) {
       mismatchedSourceIds.push(expectedRow.source_id);
     }
   }

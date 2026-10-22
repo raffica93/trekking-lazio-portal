@@ -4,6 +4,12 @@
 create table public.place_classifications (
   source_id text primary key references public.places(source_id) on delete restrict,
   decision text not null check (decision in ('trekking', 'non_trekking', 'da_verificare')),
+  candidate_decision text not null check (candidate_decision in ('trekking', 'non_trekking', 'da_verificare')),
+  candidate_category text not null check (candidate_category in (
+    'a piedi', 'ciaspole', 'alpinismo/ferrata', 'bici', 'sci',
+    'sociale/culturale', 'corso/riunione', 'altro'
+  )),
+  review_metadata jsonb,
   category text not null check (category in (
     'a piedi', 'ciaspole', 'alpinismo/ferrata', 'bici', 'sci',
     'sociale/culturale', 'corso/riunione', 'altro'
@@ -20,6 +26,19 @@ create table public.place_classifications (
   policy_version text not null check (length(trim(policy_version)) > 0),
   model_version text,
   classified_at timestamptz not null default now(),
+  check (
+    case when review_metadata is null then decision = candidate_decision and category = candidate_category
+    else coalesce((
+      jsonb_typeof(review_metadata) = 'object'
+      and review_metadata ->> 'final_decision' = decision
+      and coalesce(review_metadata ->> 'final_category', candidate_category) = category
+      and review_metadata ->> 'reviewer_role' in ('cai-collector', 'orchestrator')
+      and length(trim(coalesce(review_metadata ->> 'reason', ''))) > 0
+      and review_metadata ->> 'evidence_url' ~ '^https?://[^[:space:]]+$'
+      and length(trim(coalesce(review_metadata ->> 'evidence', ''))) > 0
+    ), false)
+    end
+  ),
   check (
     (
       method = 'mercury-decide'
