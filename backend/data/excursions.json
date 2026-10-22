@@ -10401,7 +10401,7 @@
     "cai-brugherio-9216072": "05e20b4ebec9a8c0a88a9d5f80d774405f0db318a28fd4d2f7820346149b24d0",
     "cai-sacile-9222024": "0e0153f3328338c136aa0aea7ab6263e5bd820a9b1565ce80138d69d237456b1",
     "cai-bovisio-masciago-9216082": "e32465b832beba61442240c91cf55d668da85902b9d75a142a3bf7e6fb92d4e3",
-    "cai-busto-arsizio-9216014": "778edeefc4a36342e550c443c9364322ea03087dc6a16bc348a0959ad27bed3d",
+    "cai-busto-arsizio-9216014": "e589e603a539ab5367885b7d86eace75b4228337beff624645b5af451bbc23e7",
     "cai-cantu-9216050": "98d936b38c7ea04017f2713e141baa6519b1e09b8c14713f2c95686cf9e09ff6",
     "cai-castiglione-stiviere-9216096": "df41943d6361f0edf74345be21f943dbf029fad98afb87936de1701f4442da4a",
     "cai-sappada-9220033": "8c8197e8fda0e556f16a2f538c0b759cc8e8ab4eee0cb730f06ac4e5ccf2dc8d",
@@ -10773,12 +10773,12 @@
     "cai-busca-9112010": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967",
     "cai-dronero-9112012": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967"
   },
-  "generatedAt": "2026-10-22T21:36:16.252Z",
+  "generatedAt": "2026-10-22T21:40:32.497Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
+    "withEvents": 1,
     "parsed": 0,
     "unsupported": 1,
     "failed": 0,

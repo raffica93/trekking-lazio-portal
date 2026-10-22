@@ -167,3 +167,12 @@ Catalogo: 3.359→3.359 ID unici; zero aggiunti, rimossi o righe evento cambiate
 | `cai-20261022-lombardia-missaglia01` — CAI Missaglia | 1 URL ufficiale | 0 | 1 | 0 | 0 correnti; 1 riga 2024 estratta e filtrata come passata | 0 ID duplicati catalogo | `gite.php` letto e parsato; discovery 41→1 | Pagina vecchia (2014/2024); 1 candidato non visitato; errore OCR pagina 21 conservato, manual QA = testo corso non calendario | Checkpoint 7968b4e verificato; poi Busto Arsizio bounded max1 sul calendario invernale ufficiale |
 
 Catalogo 3.359→3.359 ID; zero aggiunti/rimossi/cambiati. Fonte `partial`; zero righe correnti non prova un calendario completo. Importer QA PASS read-only, backend npm test 201/201 dopo raccolta, mirror backend/frontend identici, nessun import DB. Report SHA `701f74343c3a479de34dc9285f296129753241da53b42ddbdfe83ad693bcf56c`; manifest SHA `9f73e0a51f0cec7a7794e14b943ec9e235d7b50ecac93acf274d09e4a4d92b04`; state SHA `cfac59d0bae4ad27bc47aaec354b5b11848b20f51bb0c37f913f6293c5f5eb4b`. Conteggi globali regionali non ricalcolati.
+
+
+## CAI Busto Arsizio bounded continuation 01 — 22 ottobre 2026
+
+| Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| `cai-20261022-lombardia-busto01` — CAI Busto Arsizio | 1 URL ufficiale → canonical same-host | 0 | 1 | 0 | 1 evento preesistente conservato; pagina 2026 elenca solo date passate, nessun calendario 2027 | 0 ID duplicati | Target ufficiale letto via redirect; oEmbed storici esclusi | Discovery-limit: 1 candidato residuo; “altre uscite” future non pubblicate nel campione | Checkpoint file; poi preflight read-only su fonte distinta, senza ripetere pagina scaduta |
+
+Catalogo 3.359→3.359 ID; zero aggiunti/rimossi/cambiati. Fonte `partial`; attività elencate 2025-12-07→2026-03-22 sono tutte passate al 2026-10-22. Importer QA PASS read-only, backend npm test 201/201 dopo raccolta, copie identiche, nessun import DB. Report SHA `47959134cd4b0aff118dec3f190454c4d049b239c323f04cd951389f07c34a32`; manifest SHA `471ae7a692b8a09a00d899e225fe0f544f930c31290a9c2fc1222a37c90fe791`; state SHA `6a75dd045b4277b36b8d55577c8d9434776c8b8d0427205aa21ec28a4d4f1dd5`. Nessun ricalcolo dei totali Lombardia.

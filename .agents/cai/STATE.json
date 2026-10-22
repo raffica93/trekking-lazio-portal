@@ -224,8 +224,8 @@
     }
   ],
   "nextAction": {
-    "step": "LOMBARDIA-BUSTO-ARSIZIO-BOUNDED-01",
-    "instruction": "Missaglia01 file checkpoint is published and verified at 7968b4eb6221dfd2d6406c640e408ac7d291181d. Run one bounded sample on official CAI Busto Arsizio calendar https://www.caibustoarsizio.it/attivita-invernali/ (cai-busto-arsizio-9216014), max 1 document/120 s/concurrency 1. Leave partial/unsupported unless current calendar coverage is actually proved."
+    "step": "CHECKPOINT-BUSTO-01",
+    "instruction": "Publish the Busto01 report, state, manifest and catalog/status files on origin and verify all remote Git blobs. Then have cai-collector do a read-only preflight for the next distinct workable source; do not repeat Busto page or other queues without a new target."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -235,7 +235,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "7968b4eb6221dfd2d6406c640e408ac7d291181d",
+    "branchHead": "5807cf69bd6808d53707a498053c2a0e4448b653",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -369,23 +369,22 @@
     },
     "regionalCoverage": {
       "region": "Lombardia",
-      "status": "open; Missaglia is partial on a stale calendar page and residual discovery; broader source coverage remains.",
+      "status": "open; Busto page is expired 2026 winter programme with one residual candidate; S.E.M. and Missaglia remain partial; regional coverage not recounted.",
       "currentRunCounts": {
         "sectionsChecked": 1,
         "complete": 0,
         "partial": 1,
         "unreachable": 0,
         "verifiedNewEvents": 0,
-        "pastRowsExtracted": 1,
-        "sourceEvents": 0,
-        "documentExtractions": 1,
+        "sourceEvents": 1,
+        "documentExtractions": 2,
         "exactDuplicateIdsExcluded": 0,
-        "semanticDuplicates": "No catalog ID duplicates; 2024 source row filtered as past.",
+        "semanticDuplicates": "No catalog ID duplicates; one source event remains unchanged.",
         "failuresResolved": [
-          "Official gite.php page fetched and parsed; discovery backlog reduced 41→1; stale 2024 event filtered."
+          "Official Busto winter page read through same-host canonical redirect; all listed dates are past and obsolete oEmbed candidates remain excluded."
         ],
         "failuresOpen": [
-          "Missaglia current calendar not found; one discovery candidate remains; page-21 OCR failure persists but manual QA identifies non-calendar course text. Broader Lombardia remains open."
+          "Busto has one unvisited discovery candidate; no 2027 calendar visible. Broader Lombardia coverage remains open."
         ]
       },
       "historicalSnapshot": {
@@ -396,7 +395,7 @@
         "unreachable": 1,
         "unchecked": 104
       },
-      "historicalSnapshotNote": "Historical handoff only; current sample covers Missaglia alone; no Lombardia-wide recount."
+      "historicalSnapshotNote": "Historical handoff only; current sample covers Busto Arsizio alone; no Lombardia-wide recount."
     },
     "ocrItalian": false,
     "agentStatus": {
@@ -420,8 +419,8 @@
       "writes": 0
     },
     "tests": "After run07 stopped, backend npm test passed 187/187. Backend/frontend excursions SHA256 6e46cec85daae67e6da0a98afb36d4fbf72b3790b2246dfcdf3837ea9a0ff99b and scrape-status SHA256 da7fa46626cfd3c7e29cc59e0eb66c85f2374a70d0d325a68caba38308dd8450 remained byte-identical after tests.",
-    "regionCurrent": "Lombardia — Missaglia run01 read one official page headed Edizione 2014; parser extracted a single 2024 past event, zero current events, one discovery candidate remaining; source partial.",
-    "regionNext": "Missaglia01 checkpoint 7968b4e is published/verified. Next is one bounded Busto Arsizio sample on the official winter-activities calendar; leave partial/unsupported absent full-calendar proof.",
+    "regionCurrent": "Lombardia — Busto01 followed official URL to same-host canonical page; 2026 winter activities end March 22, all past; one discovery candidate remains; source partial.",
+    "regionNext": "Checkpoint Busto01, then collector read-only preflight for a distinct workable official source; do not repeat the expired winter page.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
     "remoteCheckpointVerifiedAt": "2026-10-22T19:25:20Z",
@@ -947,35 +946,37 @@
     "receiptCheckpoint": "50352f7fde1a638e6541aab048fcdacfb834324b",
     "resumeNote": "Valmadrera delta receipt and DB reconciliation are complete. Do not repeat the 10-row delta or historical 3,336 classification baseline.",
     "lastRegionalAttempt": {
-      "runId": "cai-20261022-lombardia-missaglia01",
-      "sourceId": "cai-missaglia-9216150",
-      "sourceName": "CAI Missaglia",
+      "runId": "cai-20261022-lombardia-busto01",
+      "sourceId": "cai-busto-arsizio-9216014",
+      "sourceName": "CAI Busto Arsizio",
+      "requestedUrl": "https://www.caibustoarsizio.it/attivita-invernali/",
+      "canonicalUrl": "https://www.caibustoarsizio.it/attivita-invernali-2-2/",
       "collection": "partial",
-      "files": "ready; checkpoint published and verified",
-      "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-missaglia01/manifest.json",
-      "manifestSha256": "9f73e0a51f0cec7a7794e14b943ec9e235d7b50ecac93acf274d09e4a4d92b04",
-      "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-missaglia01/collection-report.md",
-      "reportSha256": "701f74343c3a479de34dc9285f296129753241da53b42ddbdfe83ad693bcf56c",
-      "stateSha256": "cfac59d0bae4ad27bc47aaec354b5b11848b20f51bb0c37f913f6293c5f5eb4b",
+      "files": "ready; file checkpoint pending",
+      "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-busto01/manifest.json",
+      "manifestSha256": "471ae7a692b8a09a00d899e225fe0f544f930c31290a9c2fc1222a37c90fe791",
+      "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-busto01/collection-report.md",
+      "reportSha256": "47959134cd4b0aff118dec3f190454c4d049b239c323f04cd951389f07c34a32",
+      "stateSha256": "6a75dd045b4277b36b8d55577c8d9434776c8b8d0427205aa21ec28a4d4f1dd5",
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
-      "sourceEvents": 0,
-      "pastRowsExtracted": 1,
+      "sourceEvents": 1,
+      "documentExtractions": 2,
       "newIds": 0,
       "removedIds": 0,
       "changedEventRows": 0,
       "duplicateIdsExcluded": 0,
       "discoveryLimitRemaining": 1,
-      "ocrIssue": "page 21 failure/timeout retained; prior manual QA identifies first-aid training text, not a calendar",
+      "calendarEvidence": "Same-host canonical page titled Attività invernali 2026; dates end 2026-03-22, all past on run date; states more outings will be planned, no 2027 calendar visible.",
       "database": "pending; no DB access/write at zero event delta",
-      "collectorQa": "PASS: HTML is stale 2014/2024; one past event correctly filtered; zero current events is not completeness",
-      "importerQa": "PASS read-only; manifest matches; only Missaglia source status changed",
-      "backendTest": "201/201 after collection; canonical files still match manifest",
-      "sourceCommit": "7204642efea0630bed21f6db1d7a576f1db71b15",
-      "fileCheckpointCommit": "7968b4eb6221dfd2d6406c640e408ac7d291181d",
-      "remoteVerified": true
+      "collectorQa": "PASS as partial sample; URL redirect, content and cache hash verified offline",
+      "importerQa": "PASS read-only; manifest/hash mirrors and zero event-row delta",
+      "backendTest": "201/201 after collection; manifest hashes still match",
+      "sourceCommit": "5807cf69bd6808d53707a498053c2a0e4448b653",
+      "fileCheckpointCommit": "pending",
+      "remoteVerified": false
     },
     "lastCodeCorrection": {
       "commit": "010af3796a99d01e8081d45ef625b2344ec134c7",
@@ -992,37 +993,40 @@
       ]
     },
     "latestRegionalRun": {
-      "runId": "cai-20261022-lombardia-missaglia01",
-      "sourceId": "cai-missaglia-9216150",
-      "sourceName": "CAI Missaglia",
+      "runId": "cai-20261022-lombardia-busto01",
+      "sourceId": "cai-busto-arsizio-9216014",
+      "sourceName": "CAI Busto Arsizio",
+      "requestedUrl": "https://www.caibustoarsizio.it/attivita-invernali/",
+      "canonicalUrl": "https://www.caibustoarsizio.it/attivita-invernali-2-2/",
       "collection": "partial",
-      "files": "ready; checkpoint published and verified",
-      "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-missaglia01/manifest.json",
-      "manifestSha256": "9f73e0a51f0cec7a7794e14b943ec9e235d7b50ecac93acf274d09e4a4d92b04",
-      "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-missaglia01/collection-report.md",
-      "reportSha256": "701f74343c3a479de34dc9285f296129753241da53b42ddbdfe83ad693bcf56c",
-      "stateSha256": "cfac59d0bae4ad27bc47aaec354b5b11848b20f51bb0c37f913f6293c5f5eb4b",
+      "files": "ready; file checkpoint pending",
+      "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-busto01/manifest.json",
+      "manifestSha256": "471ae7a692b8a09a00d899e225fe0f544f930c31290a9c2fc1222a37c90fe791",
+      "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-busto01/collection-report.md",
+      "reportSha256": "47959134cd4b0aff118dec3f190454c4d049b239c323f04cd951389f07c34a32",
+      "stateSha256": "6a75dd045b4277b36b8d55577c8d9434776c8b8d0427205aa21ec28a4d4f1dd5",
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
-      "sourceEvents": 0,
-      "pastRowsExtracted": 1,
+      "sourceEvents": 1,
+      "documentExtractions": 2,
       "newIds": 0,
       "removedIds": 0,
       "changedEventRows": 0,
       "duplicateIdsExcluded": 0,
       "discoveryLimitRemaining": 1,
-      "ocrIssue": "page 21 failure/timeout retained; prior manual QA identifies first-aid training text, not a calendar",
+      "calendarEvidence": "Same-host canonical page titled Attività invernali 2026; dates end 2026-03-22, all past on run date; states more outings will be planned, no 2027 calendar visible.",
       "database": "pending; no DB access/write at zero event delta",
-      "collectorQa": "PASS: HTML is stale 2014/2024; one past event correctly filtered; zero current events is not completeness",
-      "importerQa": "PASS read-only; manifest matches; only Missaglia source status changed",
-      "backendTest": "201/201 after collection; canonical files still match manifest",
-      "sourceCommit": "7204642efea0630bed21f6db1d7a576f1db71b15",
-      "fileCheckpointCommit": "7968b4eb6221dfd2d6406c640e408ac7d291181d",
-      "remoteVerified": true
+      "collectorQa": "PASS as partial sample; URL redirect, content and cache hash verified offline",
+      "importerQa": "PASS read-only; manifest/hash mirrors and zero event-row delta",
+      "backendTest": "201/201 after collection; manifest hashes still match",
+      "sourceCommit": "5807cf69bd6808d53707a498053c2a0e4448b653",
+      "fileCheckpointCommit": "pending",
+      "remoteVerified": false
     },
-    "nextSourcePreflight": {
+    "nextSourcePreflight": null,
+    "lastSourcePreflight": {
       "sourceId": "cai-busto-arsizio-9216014",
       "url": "https://www.caibustoarsizio.it/attivita-invernali/",
       "basis": "official registry calendar URL linked from section homepage, absent from current source history; current status unsupported with one existing event and only oEmbed skipped links; no HTTP failure/cooldown recorded for target",
@@ -1031,7 +1035,7 @@
       "mode": "read-only"
     }
   },
-  "repositoryCommit": "7968b4eb6221dfd2d6406c640e408ac7d291181d",
+  "repositoryCommit": "5807cf69bd6808d53707a498053c2a0e4448b653",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -1055,10 +1059,10 @@
       "copiesIdentical": true
     }
   },
-  "updatedAt": "2026-10-22T21:40:00Z",
+  "updatedAt": "2026-10-22T21:40:32.521Z",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T21:40:00Z",
-  "regionCurrent": "Lombardia — Missaglia run01 read one official page headed Edizione 2014; parser extracted a single 2024 past event, zero current events, one discovery candidate remaining; source partial.",
-  "regionNext": "Missaglia01 checkpoint 7968b4e is published/verified. Next is one bounded Busto Arsizio sample on the official winter-activities calendar; leave partial/unsupported absent full-calendar proof.",
+  "regionCurrent": "Lombardia — Busto01 followed official URL to same-host canonical page; 2026 winter activities end March 22, all past; one discovery candidate remains; source partial.",
+  "regionNext": "Checkpoint Busto01, then collector read-only preflight for a distinct workable official source; do not repeat the expired winter page.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
     "sourceId": "cai-varese-9216009",
@@ -1160,55 +1164,56 @@
     "independentImporterQa": "PASS"
   },
   "lastRegionalAttempt": {
-    "runId": "cai-20261022-lombardia-missaglia01",
-    "sourceId": "cai-missaglia-9216150",
-    "sourceName": "CAI Missaglia",
+    "runId": "cai-20261022-lombardia-busto01",
+    "sourceId": "cai-busto-arsizio-9216014",
+    "sourceName": "CAI Busto Arsizio",
+    "requestedUrl": "https://www.caibustoarsizio.it/attivita-invernali/",
+    "canonicalUrl": "https://www.caibustoarsizio.it/attivita-invernali-2-2/",
     "collection": "partial",
-    "files": "ready; checkpoint published and verified",
-    "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-missaglia01/manifest.json",
-    "manifestSha256": "9f73e0a51f0cec7a7794e14b943ec9e235d7b50ecac93acf274d09e4a4d92b04",
-    "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-missaglia01/collection-report.md",
-    "reportSha256": "701f74343c3a479de34dc9285f296129753241da53b42ddbdfe83ad693bcf56c",
-    "stateSha256": "cfac59d0bae4ad27bc47aaec354b5b11848b20f51bb0c37f913f6293c5f5eb4b",
+    "files": "ready; file checkpoint pending",
+    "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-busto01/manifest.json",
+    "manifestSha256": "471ae7a692b8a09a00d899e225fe0f544f930c31290a9c2fc1222a37c90fe791",
+    "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-busto01/collection-report.md",
+    "reportSha256": "47959134cd4b0aff118dec3f190454c4d049b239c323f04cd951389f07c34a32",
+    "stateSha256": "6a75dd045b4277b36b8d55577c8d9434776c8b8d0427205aa21ec28a4d4f1dd5",
     "sectionsChecked": 1,
     "complete": 0,
     "partial": 1,
     "unreachable": 0,
-    "sourceEvents": 0,
-    "pastRowsExtracted": 1,
+    "sourceEvents": 1,
+    "documentExtractions": 2,
     "newIds": 0,
     "removedIds": 0,
     "changedEventRows": 0,
     "duplicateIdsExcluded": 0,
     "discoveryLimitRemaining": 1,
-    "ocrIssue": "page 21 failure/timeout retained; prior manual QA identifies first-aid training text, not a calendar",
+    "calendarEvidence": "Same-host canonical page titled Attività invernali 2026; dates end 2026-03-22, all past on run date; states more outings will be planned, no 2027 calendar visible.",
     "database": "pending; no DB access/write at zero event delta",
-    "collectorQa": "PASS: HTML is stale 2014/2024; one past event correctly filtered; zero current events is not completeness",
-    "importerQa": "PASS read-only; manifest matches; only Missaglia source status changed",
-    "backendTest": "201/201 after collection; canonical files still match manifest",
-    "sourceCommit": "7204642efea0630bed21f6db1d7a576f1db71b15",
-    "fileCheckpointCommit": "7968b4eb6221dfd2d6406c640e408ac7d291181d",
-    "remoteVerified": true
+    "collectorQa": "PASS as partial sample; URL redirect, content and cache hash verified offline",
+    "importerQa": "PASS read-only; manifest/hash mirrors and zero event-row delta",
+    "backendTest": "201/201 after collection; manifest hashes still match",
+    "sourceCommit": "5807cf69bd6808d53707a498053c2a0e4448b653",
+    "fileCheckpointCommit": "pending",
+    "remoteVerified": false
   },
   "regionalCoverage": {
     "region": "Lombardia",
-    "status": "open; Missaglia is partial on a stale calendar page and residual discovery; broader source coverage remains.",
+    "status": "open; Busto page is expired 2026 winter programme with one residual candidate; S.E.M. and Missaglia remain partial; regional coverage not recounted.",
     "currentRunCounts": {
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
       "verifiedNewEvents": 0,
-      "pastRowsExtracted": 1,
-      "sourceEvents": 0,
-      "documentExtractions": 1,
+      "sourceEvents": 1,
+      "documentExtractions": 2,
       "exactDuplicateIdsExcluded": 0,
-      "semanticDuplicates": "No catalog ID duplicates; 2024 source row filtered as past.",
+      "semanticDuplicates": "No catalog ID duplicates; one source event remains unchanged.",
       "failuresResolved": [
-        "Official gite.php page fetched and parsed; discovery backlog reduced 41→1; stale 2024 event filtered."
+        "Official Busto winter page read through same-host canonical redirect; all listed dates are past and obsolete oEmbed candidates remain excluded."
       ],
       "failuresOpen": [
-        "Missaglia current calendar not found; one discovery candidate remains; page-21 OCR failure persists but manual QA identifies non-calendar course text. Broader Lombardia remains open."
+        "Busto has one unvisited discovery candidate; no 2027 calendar visible. Broader Lombardia coverage remains open."
       ]
     },
     "historicalSnapshot": {
@@ -1219,6 +1224,6 @@
       "unreachable": 1,
       "unchecked": 104
     },
-    "historicalSnapshotNote": "Historical handoff only; current sample covers Missaglia alone; no Lombardia-wide recount."
+    "historicalSnapshotNote": "Historical handoff only; current sample covers Busto Arsizio alone; no Lombardia-wide recount."
   }
 }

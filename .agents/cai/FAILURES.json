@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T21:40:00Z",
-  "repositoryCommit": "7968b4eb6221dfd2d6406c640e408ac7d291181d",
+  "generatedAt": "2026-10-22T21:40:32.521Z",
+  "repositoryCommit": "5807cf69bd6808d53707a498053c2a0e4448b653",
   "baseline": {
     "commit": "9919927d4cbef6d154c4dae1441d64cd01c70ad4",
     "runId": "cai-20261020-piemonte-01"
@@ -17,7 +17,7 @@
   },
   "distribution": {
     "phases": {
-      "discovery": 279,
+      "discovery": 280,
       "http": 346,
       "quality-review": 5,
       "attribution": 41,
@@ -29,7 +29,7 @@
       "discovery-status-merge": 1
     },
     "classes": {
-      "discovery-budget-exhausted": 193,
+      "discovery-budget-exhausted": 194,
       "network-policy-denied": 162,
       "http-resource-removed": 106,
       "non-calendar-candidate-skipped": 86,
@@ -23200,7 +23200,7 @@
       "failureClass": "non-calendar-candidate-skipped",
       "httpStatus": null,
       "firstObservedAt": "2026-10-20T01:10:20.456Z",
-      "lastObservedAt": "2026-10-20T08:08:31.672Z",
+      "lastObservedAt": "2026-10-22T21:40:32.521Z",
       "observationBasis": "timestamps from persisted run/source status snapshots; not request timestamps",
       "history": {
         "runIds": [
@@ -23219,14 +23219,16 @@
           "cai-20261020-lombardia-deep-14",
           "cai-20261020-lombardia-deep-15",
           "cai-20261020-piemonte-01",
-          "cai-20261020-piemonte-ocr-01"
+          "cai-20261020-piemonte-ocr-01",
+          "cai-20261022-lombardia-busto01"
         ],
-        "snapshotCopies": 16,
+        "snapshotCopies": 17,
         "issueCodes": [
           "non-calendar-link-skipped"
         ],
         "sourceStatuses": [
-          "unsupported"
+          "unsupported",
+          "partial"
         ]
       },
       "attempts": {
@@ -23245,7 +23247,8 @@
         "sourceUpdatedAt": [
           "2026-10-20T01:19:56.146Z",
           "2026-10-20T01:24:22.166Z",
-          "2026-10-20T03:56:36.792Z"
+          "2026-10-20T03:56:36.792Z",
+          "2026-10-22T21:40:32.521Z"
         ]
       },
       "strategy": "Classify evidence, preserve valid cache, then retry/re-discover with a bounded policy appropriate to the class.",
@@ -35674,7 +35677,7 @@
       "failureClass": "non-calendar-candidate-skipped",
       "httpStatus": null,
       "firstObservedAt": "2026-10-20T01:10:20.456Z",
-      "lastObservedAt": "2026-10-20T08:08:31.672Z",
+      "lastObservedAt": "2026-10-22T21:40:32.521Z",
       "observationBasis": "timestamps from persisted run/source status snapshots; not request timestamps",
       "history": {
         "runIds": [
@@ -35693,14 +35696,16 @@
           "cai-20261020-lombardia-deep-14",
           "cai-20261020-lombardia-deep-15",
           "cai-20261020-piemonte-01",
-          "cai-20261020-piemonte-ocr-01"
+          "cai-20261020-piemonte-ocr-01",
+          "cai-20261022-lombardia-busto01"
         ],
-        "snapshotCopies": 16,
+        "snapshotCopies": 17,
         "issueCodes": [
           "non-calendar-link-skipped"
         ],
         "sourceStatuses": [
-          "unsupported"
+          "unsupported",
+          "partial"
         ]
       },
       "attempts": {
@@ -35719,7 +35724,8 @@
         "sourceUpdatedAt": [
           "2026-10-20T01:19:56.146Z",
           "2026-10-20T01:24:22.166Z",
-          "2026-10-20T03:56:36.792Z"
+          "2026-10-20T03:56:36.792Z",
+          "2026-10-22T21:40:32.521Z"
         ]
       },
       "strategy": "Classify evidence, preserve valid cache, then retry/re-discover with a bounded policy appropriate to the class.",
@@ -44452,6 +44458,67 @@
         "commit": "c43b32101de52739bab3237f5bddf3eb343b788b"
       },
       "policyStatus": "verified"
+    },
+    {
+      "id": "CAI-F-2b7fa4a4607fdb34",
+      "sourceId": "cai-busto-arsizio-9216014",
+      "url": "https://www.caibustoarsizio.it/attivita-invernali-2-2/",
+      "phase": "discovery",
+      "failureClass": "discovery-budget-exhausted",
+      "httpStatus": null,
+      "firstObservedAt": "2026-10-22T21:40:32.521Z",
+      "lastObservedAt": "2026-10-22T21:40:32.521Z",
+      "observationBasis": "orchestrator state timestamp; requested page was followed to same-host canonical URL, exact request count not separately logged",
+      "history": {
+        "runIds": [
+          "cai-20261022-lombardia-busto01"
+        ],
+        "snapshotCopies": 1,
+        "issueCodes": [
+          "discovery-limit"
+        ],
+        "sourceStatuses": [
+          "partial"
+        ]
+      },
+      "attempts": {
+        "actualHistoricalRequests": "unknown",
+        "currentCycleRequests": "one explicit target URL; redirects/fetch count not independently persisted",
+        "recoveryAttempts": [
+          {
+            "at": "2026-10-22T21:40:32.521Z",
+            "method": "bounded orchestrator same-host continuation of official winter-activities page",
+            "outcome": "canonical page lists activities through 2026-03-22 and says more trips will be planned; one discovery candidate remains, no 2027 calendar"
+          }
+        ]
+      },
+      "cooldown": {
+        "policy": "Do not repeat this page; next step must target the remaining distinct candidate or another source",
+        "nextEligibleAt": null
+      },
+      "evidence": {
+        "representativeMessages": [
+          "Discovery budget reached; 1 candidate documents remain.",
+          "Official page says “Altre uscite verranno programmate in seguito”; no 2027 calendar visible."
+        ],
+        "sourceUpdatedAt": [
+          "2026-10-22T21:40:32.521Z"
+        ]
+      },
+      "strategy": "Inspect the one residual candidate from persisted cache or choose another official section; do not infer future events from the expired 2026 programme.",
+      "status": "recheck_open",
+      "owner": "cai-collector",
+      "outcome": "Partial sample only; current events not proven absent because programme period is past and one candidate remains.",
+      "correctionRef": null,
+      "testRefs": [],
+      "resolutionCheck": {
+        "runId": "cai-20261022-lombardia-busto01",
+        "manifestSha256": "471ae7a692b8a09a00d899e225fe0f544f930c31290a9c2fc1222a37c90fe791",
+        "reportSha256": "47959134cd4b0aff118dec3f190454c4d049b239c323f04cd951389f07c34a32",
+        "remainingCandidates": 1,
+        "databaseWrites": 0
+      },
+      "policyStatus": "candidate_pending_test"
     }
   ],
   "schema": {

@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-22T21:36:16.277Z",
+  "generatedAt": "2026-10-22T21:40:32.521Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
+    "withEvents": 1,
     "parsed": 0,
     "unsupported": 1,
     "failed": 0,
@@ -29363,7 +29363,7 @@
       "directoryId": "9216014",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "unsupported",
+      "status": "partial",
       "url": "https://www.caibustoarsizio.it/attivita-invernali-2-2/",
       "kind": "html",
       "template": "html-calendar",
@@ -29372,11 +29372,11 @@
       "excursions": 1,
       "error": null,
       "hash": "778edeefc4a36342e550c443c9364322ea03087dc6a16bc348a0959ad27bed3d",
-      "updatedAt": "2026-10-20T03:56:36.792Z",
+      "updatedAt": "2026-10-22T21:40:32.521Z",
       "documents": [
         {
           "url": "https://www.caibustoarsizio.it/attivita-invernali-2-2/",
-          "hash": "4c863d687a434f712ad7971bfbdb0013afc008019f47c40dd53b8d22c9468f16",
+          "hash": "b2aac6385f990517826d45c218588f34875b1e2a6e0a01c650f59520e771acc6",
           "events": 1,
           "method": "html-calendar"
         },
@@ -29391,18 +29391,6 @@
           "hash": "bdb2d427ab5bd214cfc16cc559910efabc8c51643000787b704d7c1fb9282b11",
           "events": 0,
           "method": null
-        },
-        {
-          "url": "https://www.caibustoarsizio.it/escursioni-del-mercoledi/",
-          "hash": "91de91b16003ad332d1c4535412edcd0c4f6346ec29e664976ac7f09dc2b4546",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caibustoarsizio.it/attivita-invernali-2-2/",
-          "hash": "2ff535a8c90b8281b7a9768024dfe9c93ffaec044c82772a1c653899db09bb45",
-          "events": 1,
-          "method": "html-calendar"
         },
         {
           "url": "https://www.caibustoarsizio.it/escursioni-del-mercoledi/",
@@ -29430,6 +29418,11 @@
           "url": "https://www.caibustoarsizio.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caibustoarsizio.it%2Fattivita-invernali-2-2%2F&format=xml",
           "code": "non-calendar-link-skipped",
           "message": "Skipped social, feed, metadata, sharing, or unrelated image URL."
+        },
+        {
+          "url": "https://www.caibustoarsizio.it/attivita-invernali-2-2/",
+          "message": "Discovery budget reached; 1 candidate documents remain.",
+          "code": "discovery-limit"
         }
       ],
       "extractedEvents": 2
