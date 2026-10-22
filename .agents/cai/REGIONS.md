@@ -377,3 +377,12 @@ Il campione è parziale. La pagina ufficiale restituisce 23 righe; catalogo 3.36
 | Lombardia, `cai-sesto-calende-9216044` | 1 URL in sola lettura offline | 0 | fonte già parziale, 0 nuovi fetch | 0 | 0 nel preflight | n/a | PDF annuale con OCR/dimensione bloccata | Dopo checkpoint, un solo fetch pagina HTML max1/120s/concurrency1; non ripetere PDF annuale |
 
 La URL `https://caisestocalende.it/calendario-sezionale/` è collegata alla fonte da `calendarUrls`/`calendarEvidence`, assente da status, cache e FAILURES; nessun cooldown specifico. Nessun evento o stato calendario dedotto dall’indice non letto. Nessuna rete nel preflight.
+
+
+## Lombardia — CAI Sesto Calende Sesto01 (22 ottobre 2026)
+
+| Regione / run | Sezioni controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| `cai-20261022-lombardia-sesto01`, CAI Sesto Calende | 1 pagina HTML | 0 | 1 | 0 | 0 estratti; 18 record Sesto esistenti invariati | 0 | Nessuno | PDF annuale storico (29 righe, manual-QA), index discovery-limit 1 | Dopo checkpoint, preflight offline prossima fonte Lombardia distinta |
+
+La pagina HTML ufficiale è 121.924 byte, hash `28e233db…bde8`; `method=null`, quindi zero estrazioni non prova calendario vuoto. Il PDF collegato è già stato letto e non è stato ritentato. Catalogo 3.371 ID invariati. Importer QA PASS; backend 205/205; sei JSON pubblici stabili; nessuna scrittura DB.

@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-22T23:31:16.780Z",
+  "generatedAt": "2026-10-22T23:44:40.661Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 1,
-    "parsed": 1,
-    "unsupported": 0,
+    "parsed": 0,
+    "unsupported": 1,
     "failed": 0,
     "located": 548
   },
@@ -20263,13 +20263,19 @@
       "excursions": 18,
       "error": null,
       "hash": "a6893326cce9a8a8a0d545687053f2c220937146beb4538cf8463c7715115ee6",
-      "updatedAt": "2026-10-20T02:25:51.584Z",
+      "updatedAt": "2026-10-22T23:44:40.661Z",
       "documents": [
         {
           "url": "https://caisestocalende.it/wp-content/uploads/2026/01/Libretto-Programma-2026-CAI-SESTO-CALENDE.pdf",
           "hash": "785e71ad46f017e80463b170589024c97f5636dfb28486efdf110cbc874f98c9",
           "events": 29,
           "method": "pdf-ocr"
+        },
+        {
+          "url": "https://caisestocalende.it/calendario-sezionale/",
+          "hash": "28e233dbfc840dca1b19c3eaf849daef385651d7a9fbea71b7f04b2f9b43bde8",
+          "events": 0,
+          "method": null
         }
       ],
       "methods": [
@@ -20280,6 +20286,11 @@
           "url": "https://caisestocalende.it/wp-content/uploads/2026/01/Libretto-Programma-2026-CAI-SESTO-CALENDE.pdf",
           "code": "manual-qa",
           "message": "Original PDF pages 17–24 were OCR-rendered within the 8-page cap and visually reviewed; page 25 was checked by pdftotext and render (cover/contact page, no event text). Nine Sesto events were manually corrected from pages 21 and 23. Other standalone calendar URLs in calendarUrls are outside this bounded run."
+        },
+        {
+          "url": "https://caisestocalende.it/calendario-sezionale/",
+          "message": "Discovery budget reached; 1 candidate documents remain.",
+          "code": "discovery-limit"
         }
       ],
       "extractedEvents": 29

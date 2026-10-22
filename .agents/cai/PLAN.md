@@ -1,6 +1,6 @@
 # Piano di passaggio al lavoro interamente cloud
 
-Stato aggiornato al 22 ottobre 2026: delta Pavullo consegnato con ricevuta remota `3d28e26` (1 place +1 classification, 4 hold). Prossimo lavoro Lombardia: preflightato offline un solo URL calendario ufficiale distinto CAI Sesto Calende; dopo checkpoint, una richiesta bounded max1/120s/concurrency1. Il PDF annuale bloccato non si ritenta. Test backend 205/205 dopo l’ultima raccolta; nessun test è stato eseguito in parallelo alla raccolta.
+Stato aggiornato al 22 ottobre 2026: Pavullo delta è consegnato (ricevuta remota `3d28e26`). Lombardia Sesto01 ha letto una pagina, 0 estrazioni/method=null, 18 righe invariate, fonte partial; test backend 205/205 e importer QA PASS. Ora pubblicare/verificare il run Sesto e preflightare offline una diversa fonte Lombardia, senza ripetere il PDF annuale bloccato.
 
 ## Sequenza
 

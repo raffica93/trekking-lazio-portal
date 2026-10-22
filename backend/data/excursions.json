@@ -10440,7 +10440,7 @@
     "cai-nerviano-9216100": "ab5bd9f1e05f3d03f4f5c8e678f04589e6e6b2b40e15f57adaa194a961dfabf5",
     "cai-s-e-m-9216028": "4280b8229c0765f12c6a412067267238e9c7031a0c77f682ed3317610675a6ac",
     "cai-seregno-9216016": "7f748d355ccc0d097d8ecb9c5f20c37078d34a01c0f89bddfa274fd99b7c5ccc",
-    "cai-sesto-calende-9216044": "a6893326cce9a8a8a0d545687053f2c220937146beb4538cf8463c7715115ee6",
+    "cai-sesto-calende-9216044": "fb5f945c81730f365f2fee4f4c91a9ff0ea9e7c3af935402d7b3c6d6ab992177",
     "cai-sesto-s-giovanni-9216020": "6b1c7e3fe336215efaa3bc41aabf2866e67143d79f7ff92823b0c00945c4a5f6",
     "cai-trezzo-sull-adda-9216156": "4c74505e37343cd25da5d8d69f6516d8964090062a5f28ffb0f9ebf63c242644",
     "cai-brescia-9216005": "8c3531eb0b31a41cbcbb5cf7a8667a3d0019b500cf8192519f95faf83d8de71f",
@@ -10773,14 +10773,14 @@
     "cai-busca-9112010": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967",
     "cai-dronero-9112012": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967"
   },
-  "generatedAt": "2026-10-22T23:31:16.755Z",
+  "generatedAt": "2026-10-22T23:44:40.632Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 1,
-    "parsed": 1,
-    "unsupported": 0,
+    "parsed": 0,
+    "unsupported": 1,
     "failed": 0,
     "located": 548
   },

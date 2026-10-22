@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-lombardia-sesto01",
+  "createdAt": "2026-10-22T23:44:40.886Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "fe97cc678c460b12a70974c40704cde60603c95bdcd471eafc6d1a82948b13d0"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "ca73169ddd2203b1e6ab2fe61a4ca4f2f8384ae3544166386601135aa8c2dad7"
+    }
+  ]
+}
