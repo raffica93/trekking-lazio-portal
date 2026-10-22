@@ -47,7 +47,7 @@ Test backend 205/205 sono passati dopo la raccolta Penne e i sei hash dei JSON p
 
 Orchestratore e due ruoli cai-collector/cai-importer sono richiesti/configurati GPT-6 Luna high; l'UI conferma la selezione dell'orchestratore, ma la telemetria runtime non attesta il modello effettivo. `OPENROUTER_API_KEY` è stata controllata solo come presenza booleana, senza lettura del valore, per il solo host `openrouter.ai`. Mercury non è stato chiamato nel campione Penne. Nessun merge, deploy, cron o cancellazione DB.
 
-Il preflight read-only propone come prossimo campione una pagina ufficiale CAI L'Aquila, Abruzzo, max 1 documento/120 secondi/concurrency 1; esiste rischio 403 su una pagina sorella e il campione deve arrestarsi al primo 403. Avviare soltanto dopo che Penne e il registro aggiornato sono checkpointati e verificati su origin.
+Dopo Penne il run CAI L'Aquila `cai-20261022-abruzzo-laquila01` ha provato una sola URL ufficiale e ricevuto HTTP 403; stop immediato, nessun retry/body/cache, nessun delta o DB. Il report chiarisce che lo status source-level mantiene la sorella `?commissioni=legale`; l'URL tentata è attestata dai sidecar. Il risultato L'Aquila/registro è in checkpoint pending; poi il collector preflighta un'altra fonte distinta, senza replay.
 
 ## Responsabilità
 

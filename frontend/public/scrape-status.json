@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-22T22:38:41.425Z",
+  "generatedAt": "2026-10-22T22:46:12.099Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 1,
+    "withEvents": 0,
     "parsed": 0,
-    "unsupported": 1,
-    "failed": 0,
+    "unsupported": 0,
+    "failed": 1,
     "located": 548
   },
   "sources": [
@@ -22895,7 +22895,7 @@
       "excursions": 0,
       "error": "Request failed with status code 403",
       "hash": null,
-      "updatedAt": "2026-10-19T18:24:35.762Z",
+      "updatedAt": "2026-10-22T22:46:12.099Z",
       "documents": [],
       "methods": [],
       "issues": [],

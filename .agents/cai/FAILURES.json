@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T22:33:30.892756Z",
-  "repositoryCommit": "d16ebc0",
+  "generatedAt": "2026-10-22T22:48:05.619Z",
+  "repositoryCommit": "9853c72a5b04fae05994828bb85a9686ed74b674",
   "baseline": {
     "commit": "9919927d4cbef6d154c4dae1441d64cd01c70ad4",
     "runId": "cai-20261020-piemonte-01"
@@ -44674,6 +44674,66 @@
         "deletes": 0
       },
       "policyStatus": "verified"
+    },
+    {
+      "id": "CAI-F-172c3c3a69bfbbc7",
+      "sourceId": "cai-l-aquila-9234002",
+      "url": "https://cailaquila.it/le-attivita-del-cai/programma-2026/?commissioni=escursionismo",
+      "phase": "http",
+      "failureClass": "http-access-denied",
+      "httpStatus": 403,
+      "firstObservedAt": "2026-10-22T22:46:12.099Z",
+      "lastObservedAt": "2026-10-22T22:46:12.099Z",
+      "observationBasis": "bounded orchestrator run state/report; timestamp is persisted source-state update, not the HTTP request timestamp",
+      "history": {
+        "runIds": [
+          "cai-20261022-abruzzo-laquila01"
+        ],
+        "snapshotCopies": 1,
+        "issueCodes": [
+          "http-403"
+        ],
+        "sourceStatuses": [
+          "failed"
+        ]
+      },
+      "attempts": {
+        "actualHistoricalRequests": "unknown",
+        "currentCycleRequests": 1,
+        "recoveryAttempts": [
+          {
+            "runId": "cai-20261022-abruzzo-laquila01",
+            "scope": "one explicitly approved URL, max1 document/120s/concurrency1",
+            "httpStatus": 403,
+            "retryCount": 0,
+            "bodyCaptured": false,
+            "cacheFallback": false,
+            "outcome": "stopped immediately; no body, canonical URL, content-type or hash; no retry or expansion"
+          }
+        ]
+      },
+      "cooldown": {
+        "policy": "Do not retry this URL in the current cycle; reconsider only with a new bounded plan or evidence of source/access change",
+        "nextEligibleAt": null
+      },
+      "evidence": {
+        "representativeMessages": [
+          "Request failed with status code 403"
+        ],
+        "requestedUrl": "https://cailaquila.it/le-attivita-del-cai/programma-2026/?commissioni=escursionismo",
+        "sourceStatusUrlStillConfigured": "https://cailaquila.it/le-attivita-del-cai/programma-2026/?commissioni=legale",
+        "runReportPath": "backend/data/agent-runs/cai-20261022-abruzzo-laquila01/collection-report.md",
+        "sourceEvidencePath": "backend/data/agent-runs/cai-20261022-abruzzo-laquila01/source-evidence.json",
+        "bodyAvailable": false
+      },
+      "strategy": "Avoid retrying the exact denied URL or widening the queue. Seek a distinct enabled official source; preserve no-cache state and retain the 403 observation.",
+      "status": "recheck_open",
+      "owner": "cai-collector",
+      "outcome": "One bounded request was denied with HTTP 403. No cache/body was available. The section has no parsed events; this does not establish an empty calendar.",
+      "correctionRef": null,
+      "testRefs": [],
+      "resolutionCheck": null,
+      "policyStatus": "observed_open"
     }
   ],
   "schema": {

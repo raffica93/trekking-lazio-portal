@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261022-abruzzo-laquila01",
+  "sourceId": "cai-l-aquila-9234002",
+  "requestedUrl": "https://cailaquila.it/le-attivita-del-cai/programma-2026/?commissioni=escursionismo",
+  "canonicalUrl": null,
+  "httpStatus": 403,
+  "httpStatusEvidence": "orchestrator collect output: Request failed with status code 403",
+  "contentType": null,
+  "bodyBytes": null,
+  "bodySha256": null,
+  "rawBodyPath": null,
+  "cache": {
+    "available": false,
+    "entryCreated": false
+  },
+  "extraction": {
+    "method": null,
+    "events": 0,
+    "documentRecorded": false
+  },
+  "catalogDelta": {
+    "sourceRowsBefore": 0,
+    "sourceRowsAfter": 0,
+    "added": 0,
+    "removed": 0,
+    "sourceRowsCanonicalSha256Before": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "sourceRowsCanonicalSha256After": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "fullExcursionsSha256Before": "dd756f6f775b3d9dd3de2165ef880910ffbcfdb82b6a8de981da02c6e035822e",
+    "fullExcursionsSha256After": "dd756f6f775b3d9dd3de2165ef880910ffbcfdb82b6a8de981da02c6e035822e"
+  },
+  "collection": {
+    "status": "partial",
+    "files": "ready",
+    "database": "pending",
+    "retryCount": 0,
+    "additionalUrls": 0
+  },
+  "interpretation": "403/no response body is not evidence of an empty or complete calendar"
+}

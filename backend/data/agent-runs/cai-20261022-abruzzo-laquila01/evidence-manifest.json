@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261022-abruzzo-laquila01",
+  "files": [
+    {
+      "path": "source-evidence.json",
+      "bytes": 1359,
+      "sha256": "8fd0c2d3a51aa616103c418199ba8c42e2b1bdef65119eaf7151f388b30b2b9d"
+    },
+    {
+      "path": "collection-report.md",
+      "bytes": 2481,
+      "sha256": "b3b15f1af73988430f5d3153e361725f4c9c2d5aac38211dca468edccd2cb834"
+    }
+  ],
+  "outputSnapshot": {
+    "baselineCommit": "9853c72a5b04fae05994828bb85a9686ed74b674",
+    "catalogs": {
+      "excursions": {
+        "sha256Before": "dd756f6f775b3d9dd3de2165ef880910ffbcfdb82b6a8de981da02c6e035822e",
+        "sha256After": "dd756f6f775b3d9dd3de2165ef880910ffbcfdb82b6a8de981da02c6e035822e",
+        "rowsUnchanged": true
+      },
+      "sections": {
+        "sha256Before": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+        "sha256After": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+        "rowsUnchanged": true
+      },
+      "scrapeStatus": {
+        "sha256After": "1c4c6c3b8557d5fee550d6b6fdeb055d049eca3bd55cefcf4714bdd4742c4ce8",
+        "note": "source-level failed/403; status url remains configured ?commissioni=legale and does not tie the 403 to requested ?commissioni=escursionismo; exact attempted URL is evidenced by run state scrapeArgs/sourceUrlContinuation and collect output; backend/frontend mirrors match"
+      }
+    }
+  }
+}
