@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-22T23:25:05.804Z",
+  "generatedAt": "2026-10-22T23:31:16.780Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 1,
-    "parsed": 0,
-    "unsupported": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 548
   },
@@ -26141,10 +26141,10 @@
       "template": "icalendar",
       "extractor": "deterministic",
       "enabled": true,
-      "excursions": 17,
+      "excursions": 22,
       "error": null,
       "hash": "748b84094b7801b315a99f8df211f871f80246982065defa3bf49fe88a0c838a",
-      "updatedAt": "2026-10-19T18:24:35.762Z",
+      "updatedAt": "2026-10-22T23:31:16.780Z",
       "documents": [
         {
           "url": "https://www.caipavullo.it/wp-content/uploads/2025/12/CaiPavullo2026.ics",
@@ -26163,11 +26163,18 @@
           "hash": "d8ff8dafb2ddc3047f55244b125be6a68cc2b049934215946d1b12d914faf18b",
           "events": 7,
           "method": "pdf-ocr"
+        },
+        {
+          "url": "https://www.caipavullo.it/calendario-2026/",
+          "hash": "dec0ec970504f29cd15a1b9b3949d613e9834bb42ae000b39128793d5e7ff138",
+          "events": 23,
+          "method": "html-calendar"
         }
       ],
       "methods": [
         "ics",
-        "pdf-ocr"
+        "pdf-ocr",
+        "html-calendar"
       ],
       "issues": [
         {
@@ -26178,9 +26185,14 @@
           "url": "https://www.caipavullo.it/wp-content/uploads/2025/12/CaiPavullo2026.ics",
           "message": "Discovery budget reached; 5 candidate documents remain.",
           "code": "discovery-limit"
+        },
+        {
+          "url": "https://www.caipavullo.it/calendario-2026/",
+          "message": "Discovery budget reached; 1 candidate documents remain.",
+          "code": "discovery-limit"
         }
       ],
-      "extractedEvents": 85
+      "extractedEvents": 108
     },
     {
       "id": "cai-piacenza-9224007",

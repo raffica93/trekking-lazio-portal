@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-emilia-pavullo-calendar01",
+  "createdAt": "2026-10-22T23:31:16.980Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "2ccd818d964d938b0e480e4aee62410c1991b7b9220a32727d7798aebfeb920d"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "62915cc7f83687e8e00d0158249df10ab6421555cbb13ff2282de29bfd0f719e"
+    }
+  ]
+}

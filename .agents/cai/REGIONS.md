@@ -354,3 +354,12 @@ Run partial, file ready, DB pending. Il catalogo ha 3.366 ID prima/dopo, 0 add/r
 | Emilia-Romagna, `cai-20261022-emilia-cesena-escursionismo01` | 1 | 0 | 1 | 0 | 0 record completi; poster OCR con date 2026 non abbinate a titoli/destinazioni; 6 righe Cesena preesistenti invariate | 0 | 0 | annual PDF discovery7; PDF giovani OCR failure; index discovery1 | Dopo checkpoint remoto `b23dea1`, CAI Pavullo: un URL ufficiale calendario 2026, max1/120s/concurrency1 |
 
 Il JPEG ufficiale 2026 pesa 685.319 byte (SHA `6c11893a0b371c51650c39a8275a777d13bc06f29dc0f9204fd6aaf6bc72702c`), OCR `image-ocr`; il poster elenca date future ma non titoli o destinazioni per singola escursione. Non sono stati prodotti eventi o coordinate. Catalogo nazionale 3.366→3.366 ID; zero add/remove/change, sei righe Cesena invariate. Fonte partial. QA importer PASS; backend test 205/205 e sei JSON pubblici invariati. Nessuna classificazione/DB. Prossimo target offline: CAI Pavullo `https://www.caipavullo.it/calendario-2026/`, URL ufficiale same-host non visitato né in cache/failure; altre issue Pavullo sono su URL distinti e non si ripetono. Cumulativi regionali in testa restano storico del 20 ottobre.
+
+
+## Emilia-Romagna — CAI Pavullo calendario01 (22 ottobre 2026)
+
+| Regione / fonte | Sezioni controllate | Complete | Parziali | Irraggiungibili | Eventi estratti / approvati / hold | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---|---|---|---|
+| Emilia-Romagna, `cai-pavullo-nel-frignano-9224020` | 1 URL | 0 | 1 | 0 | 5 ID nuovi estratti; 1 approvato per consegna; 4 `da_verificare` per possibile sovrapposizione o categoria incoerente | Conteggio semantico esatto non persistito | Nessuno | PDF legacy timeout; iCal discovery5; calendario continuation1; incongruenza header anno | Dopo checkpoint e consegna mirata Hoabonti, preflight offline della successiva URL distinta lavorabile |
+
+Il campione è parziale. La pagina ufficiale restituisce 23 righe; catalogo 3.366→3.371 ID, zero rimozioni/modifiche alle righe esistenti. Mercury richiesto `inception/mercury-decide`, risposta attestata `inception/mercury-decide-20260930`, 5/5 senza errori. La review approva solo Monte Hoabonti/Monte Cola (EE), categoria effettiva `a piedi`; holds: Spigolo Bianco, Anello dei Colli, Lago Terzo, Giro del Colbricon. Nessuna coordinata. Test backend 205/205 dopo raccolta, sei JSON pubblici invariati. Preflight DB: 4.422 places, Hoabonti assente, tabella classification presente, FK RESTRICT; scrittura ancora pending.

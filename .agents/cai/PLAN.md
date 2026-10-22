@@ -1,6 +1,6 @@
 # Piano di passaggio al lavoro interamente cloud
 
-Stato aggiornato al 22 ottobre 2026: classificazione completa e delta già consegnati restano chiusi; non ripetere batch storici o import completati. Lavoro corrente: Cesena index01 e il successivo poster Escursionismo Adattato01 sono raccolti, QA importer PASS e backend test 205/205. Entrambi i campioni lasciano 3.366 ID invariati e nessun import DB; il poster fornisce date non abbinate a destinazioni/titoli. Il checkpoint remoto del secondo campione è verificato al commit `b23dea1`; ora un solo URL calendario ufficiale CAI Pavullo, max1 documento/120s/concurrency1. I piani sottostanti che descrivono lotti già consegnati sono storici.
+Stato aggiornato al 22 ottobre 2026: catalogo classification e delta già consegnati restano chiusi; non ripetere batch storici. Emilia-Romagna: Cesena index e poster sono checkpointati; Pavullo calendar01 ha aggiunto 5 ID, Mercury 5/5, review/importer QA consente un solo delta Hoabonti e trattiene quattro possibili duplicati. Backend test 205/205 dopo raccolta. File del run e manifest isolato di consegna devono essere checkpointati prima dell’import mirato; poi query/ricevuta e successivo preflight di fonte distinta. Le tabelle di piano sottostanti che descrivono lotti già consegnati sono storiche.
 
 ## Sequenza
 
