@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "runId": "cai-map-20261022-pinasca02",
+  "createdAt": "2026-10-22T22:11:35.222Z",
+  "input": {
+    "path": "backend/data/agent-runs/cai-20261022-piemonte-pinasca02/candidate-input.json",
+    "sha256": "85b20198a72956266751a9b13ca86fd9b6e59b3b3a1db4d342d108432f460edf"
+  },
+  "files": [
+    {
+      "path": "classified-catalog.json",
+      "sha256": "133d5a7b7aba43ebd27b51481a128fb6d80b2f591fdad525c2f8d8779883fdae",
+      "bytes": 7947
+    },
+    {
+      "path": "state.json",
+      "sha256": "d2a8e8a5f5d153df6816c70bd4b03df6d2e19088117746fa170022178cf03ccd",
+      "bytes": 892
+    }
+  ]
+}

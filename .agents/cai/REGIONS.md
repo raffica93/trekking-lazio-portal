@@ -197,3 +197,11 @@ Il delta separato `cai-map-20261022-stradastorta02` ha 1 classificazione `da_ver
 ### Prossima regione
 
 Preflight Lombardia: nessun target nuovo tra i candidati verificati offline (Sesto Calende già visitata; Carate PDF duplicato; Legnano pagina datata; Aldo Mantovani senza calendario). Non è una dichiarazione di copertura completa; problemi aperti di Lombardia restano registrati. Prossimo campione Piemonte: CAI Pinasca, URL ufficiale `https://www.caipinasca.it/index.php/calendario-gite`, fonte `unsupported` con PDF precedente non leggibile via OCR. Target URL non visitata, campione futuro max 1 documento/120 s.
+
+## CAI Pinasca bounded sample 02 — Piemonte, 22 ottobre 2026
+
+| Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| `cai-20261022-piemonte-pinasca02` — CAI Pinasca | 1 URL ufficiale | 0 | 1 | 0 | 27 righe HTML estratte, 4 nuove righe nel catalogo | 0 ID duplicati | Contatore merged `extractedEvents` corretto e testato nel checkpoint codice `4175eb9`; catalogo/parser QA PASS | PDF OCR fallito; discovery-limit 1 candidato residuo | Checkpoint file remoto e delivery esatta dei 4 ID, poi fonte regionale diversa |
+
+Catalogo 3.360→3.364 ID unici; +4, 0 rimossi, 0 record preesistenti cambiati. Classificazione QA PASS: 2 trekking, 2 non trekking, 0 dubbi/errori. Mercury richiesto `inception/mercury-decide`; risposta attestata `inception/mercury-decide-20260930` per 4/4. Località non verificate, coordinate assenti. Source `partial`; raccolta e classificazione non equivalgono alla copertura completa della sezione. Backend test 204/204 dopo il run; sei hash JSON pubblici invariati. Report raccolta SHA `eadb956d7859be058db76842cc326822a2a9b35f9688966be3efd02292a27125`; manifest SHA `4bec0f0bf1067f7ef6b1075b7d9341892e8c7bc2b6df9d0b4f4857b5d9848182`; classificazione manifest SHA `3dd59a810621ede84d09b4b3bb7bed0b0c766bc1c215f86ef2245defd881ffd5`. DB ancora pending: nessuna query/scrittura. I record del 3 e 18 ottobre sono passati alla data del campione e non sono indicati come eventi imminenti.

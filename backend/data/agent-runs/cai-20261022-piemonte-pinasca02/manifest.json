@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-piemonte-pinasca02",
+  "createdAt": "2026-10-22T22:09:30.099Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "d8063c5ea5f51e3ffe6a809c9e6a41686986f3023ad8ab8798b2c59f575e5c91"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "c341dcc7789be59e3e6a3d5173be86b61f970e207a384c785e4852b27b366d23"
+    }
+  ]
+}

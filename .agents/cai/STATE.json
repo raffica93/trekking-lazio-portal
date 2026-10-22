@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "lombardia-source-coverage",
+  "phase": "piemonte-pinasca-delta-checkpoint",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -230,8 +230,8 @@
     }
   ],
   "nextAction": {
-    "step": "PIEMONTE-PINASCA-BOUNDED-PROBE",
-    "instruction": "La ricevuta delta Strada Storta è pubblicata/verificata al commit 2ac9c8bbe148ae070e16f095e048b5412f57b05a. Nessun target Lombardia nuovo nei candidati offline selezionati (Sesto già visitato, Carate duplicato, Legnano datato, Aldo Mantovani senza calendario); non dichiarare Lombardia completa. Passa al Piemonte con CAI Pinasca, URL calendario ufficiale non visitata, run univoco cai-20261022-piemonte-pinasca01, solo 1 URL, 1 doc/120s/concurrency1. Source unsupported e leggibilità da provare, mantieni parziale se non viene riconosciuta."
+    "step": "PUBLISH-PINASCA02-FILES-THEN-DELIVER-DELTA",
+    "instruction": "Pinasca02 ha 4 nuovi ID e classificazione QA PASS; backend npm test 204/204, hash dei sei JSON pubblici invariati. Prima pushare manifest, report, input/output di classificazione, cataloghi e stato; verificare blob/hash dal remoto. Solo dopo importer può fare query esatta sui 4 ID e insert-only idempotente di places/classificazioni mancanti, conflitti preservati, zero update/delete, poi query post e ricevuta. Nessun import generale o replay dei 3336 record storici. Fonti Pinasca: HTML ufficiale letto, PDF OCR fallito, discovery-limit 1 aperto; non dichiarare completa la sezione."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -1257,7 +1257,7 @@
       "receiptCheckpointSha256": "bef3ff50b4266d0486eb343f9c281fdb96ea3a14b2f6a07727be57e2d00acf32"
     }
   },
-  "repositoryCommit": "2ac9c8bbe148ae070e16f095e048b5412f57b05a",
+  "repositoryCommit": "4175eb9702021e9d6fda771db82bee5122bf8bd4",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -1270,11 +1270,11 @@
     "classificationTablesFound": false,
     "writes": 0
   },
-  "tests": "After Strada Storta run02, backend npm test passed 202/202; focused parser fixture 2/2 and cache invalidation 1/1; six public JSON hashes matched before/after tests.",
-  "updatedAt": "2026-10-22T22:03:30Z",
+  "tests": "After Pinasca02 collection, backend npm test 204/204. Six public catalog/status JSON SHA-256 values were unchanged before/after the test run.",
+  "updatedAt": "2026-10-22T22:12:59.096Z",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T22:02:50Z",
-  "regionCurrent": "Lombardia — Strada Storta run02: 1 nuovo candidato consegnato e riconciliato; file/receipt remoto verificati. Nessun target Lombardia inedito tra i candidati offline selezionati; restano discovery-limit e attribuzione luogo da verificare, quindi nessuna copertura regionale completa dichiarata.",
-  "regionNext": "Piemonte — preflight read-only seleziona CAI Pinasca, URL ufficiale calendario non visitata, fonte unsupported con precedente issue OCR sul PDF; eseguire un campione HTML singolo limitato a 1 documento/120s.",
+  "regionCurrent": "Piemonte — CAI Pinasca run02: raccolta parziale ma leggibile; 4 nuove righe verificate, classificate 2 trekking/2 non trekking; QA importer PASS. DB ancora pending fino al checkpoint file remoto.",
+  "regionNext": "Dopo ricevuta DB Pinasca02, riprendere una fonte Piemonte diversa o un candidato Pinasca recuperabile senza ripetere l’HTML già letto; quindi passare alla regione con fonti lavorabili. Lombardia resta aperta: nessuna copertura totale dichiarata.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
     "sourceId": "cai-varese-9216009",
@@ -1342,127 +1342,83 @@
     "independentImporterQa": "PASS"
   },
   "lastRegionalAttempt": {
-    "runId": "cai-20261022-lombardia-stradastorta02",
-    "sourceId": "cai-strada-storta-9116052",
-    "sourceName": "CAI Strada Storta",
-    "region": "Lombardia",
-    "requestedUrl": "https://stradastorta.it/new/eventi/",
-    "canonicalUrl": "https://stradastorta.it/eventi/",
+    "runId": "cai-20261022-piemonte-pinasca02",
+    "sourceId": "cai-pinasca-9212062",
+    "sourceName": "CAI Pinasca",
+    "region": "Piemonte",
+    "requestedUrl": "https://www.caipinasca.it/index.php/calendario-gite",
     "collection": "partial",
-    "files": "ready; checkpoint published and remote verified",
-    "database": "completed; exact-ID before/after reconciled; receipt pending checkpoint",
-    "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-stradastorta02/manifest.json",
-    "manifestSha256": "dd28cd5f998acc65a20fd1043d5434c78652fe7fb527f9a1fd1b2febe15e3f10",
-    "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-stradastorta02/collection-report.md",
-    "reportSha256": "e91612883e3373f69e794ef8cec6c70ed549f2275f29e00afc9576693b1b80b3",
-    "stateSha256": "3264c604e7fa6c723b91e1658808bbec8acde298e215c259056562b40413e06e",
+    "files": "ready; collection/classification QA PASS; checkpoint pending",
+    "database": "pending; no query/write yet",
+    "manifestPath": "backend/data/agent-runs/cai-20261022-piemonte-pinasca02/manifest.json",
+    "manifestSha256": "4bec0f0bf1067f7ef6b1075b7d9341892e8c7bc2b6df9d0b4f4857b5d9848182",
+    "collectionReportPath": "backend/data/agent-runs/cai-20261022-piemonte-pinasca02/collection-report.md",
+    "collectionReportSha256": "eadb956d7859be058db76842cc326822a2a9b35f9688966be3efd02292a27125",
+    "classificationRunId": "cai-map-20261022-pinasca02",
+    "classificationManifestSha256": "3dd59a810621ede84d09b4b3bb7bed0b0c766bc1c215f86ef2245defd881ffd5",
+    "candidateInputSha256": "85b20198a72956266751a9b13ca86fd9b6e59b3b3a1db4d342d108432f460edf",
+    "classifiedOutputSha256": "133d5a7b7aba43ebd27b51481a128fb6d80b2f591fdad525c2f8d8779883fdae",
     "sectionsChecked": 1,
     "complete": 0,
     "partial": 1,
     "unreachable": 0,
-    "sourceEvents": 7,
-    "documentExtractions": 6,
-    "newIds": 1,
+    "extractedRows": 27,
+    "verifiedCandidates": 4,
+    "newIds": 4,
     "removedIds": 0,
-    "changedEventRows": 5,
-    "changedFields": "sourceDocument and/or description only",
+    "changedExistingRows": 0,
     "duplicateIdsExcluded": 0,
-    "discoveryLimitRemaining": 1,
-    "newId": "cai-strada-storta-9116052-01a8ce10aa39",
-    "newEvent": "Monte Pisello – Rifugio Alpe Piazza; 2026-10-25; official page says destination changed; no verified location or coordinates",
-    "cacheBytes": 215977,
-    "cacheSha256": "2ef8ff6949919ba58b018f056f4e2250bd8cfc4ea4915a3328ca69ca7519c90d",
-    "httpStatus": "not persisted; identical body/cache does not prove 304 vs 200",
-    "collectorQa": "PASS parser v13; six card titles/dates from cached official HTML; no invented location/coordinates",
-    "importerQa": "PASS independent manifest/delta/admin-field QA; one-ID classification manifest validation PASS",
-    "backendTest": "202/202 after collection; six public JSON hashes unchanged during tests",
-    "sourceCommit": "4313f5159231874d59bbbc41ac641fbdb6087313",
-    "fileCheckpointCommit": "12b073fb469a209217ed149c00657a1f7e19e0a3",
-    "remoteVerified": true,
-    "classification": {
-      "runId": "cai-map-20261022-stradastorta02",
-      "status": "ready; remote checkpoint pending",
-      "inputSha256": "339bac6cd1e4a8cd4e42cb0a1f8f83015d13a27ccbc465925279961bd22af076",
-      "manifestSha256": "bbee2f819c7841796d44a301934c5ef8fb62171d08fdafd0817908a1422fc1f2",
-      "stateSha256": "7633506ce5df59f489b171b9feed821eeaed0b295e507b30dcae39e548746d3a",
-      "outputSha256": "1cdf39c31f0b7c6ff8fa213072a6b1d03ce50c4d36ae205c6ca1ed181ac68e50",
-      "reportPath": "backend/data/agent-runs/cai-map-20261022-stradastorta02/classification-report.md",
-      "reportSha256": "1d68459391c098f794795f08c9e8fbc4cdeb8984498ca0d787ec14c0caadc07b",
-      "inputIds": 1,
-      "errors": 0,
-      "decisionCounts": {
-        "trekking": 0,
-        "non_trekking": 0,
-        "da_verificare": 1
-      },
-      "effectiveDecision": "da_verificare",
-      "effectiveCategory": "altro",
-      "confidence": 0.7486867849562652,
-      "probability": 0.8324578566375102,
-      "requestedModel": "inception/mercury-decide",
-      "responseModel": "inception/mercury-decide-20260930",
-      "modelVersion": "inception/mercury-decide-20260930",
-      "modelAttested": true,
-      "policyVersion": "cai-trekking-v2",
-      "qa": "PASS: importer verifyReadyClassificationRun; no DB access/write"
+    "classificationCounts": {
+      "trekking": 2,
+      "non_trekking": 2,
+      "da_verificare": 0,
+      "errors": 0
     },
-    "databaseReceipt": {
-      "path": "backend/data/agent-runs/cai-map-20261022-stradastorta02/delta-import-receipt.json",
-      "sha256": "bef3ff50b4266d0486eb343f9c281fdb96ea3a14b2f6a07727be57e2d00acf32",
-      "reportPath": "backend/data/agent-runs/cai-map-20261022-stradastorta02/delta-import-report.md",
-      "reportSha256": "71d75fe727139578825bdf959a019dfdebf4fa1426b6ec8d393f9bd8ab6cb470",
-      "verifiedAt": "2026-10-22T21:59:44Z",
-      "placesInserted": 1,
-      "classificationsInserted": 1,
-      "targetBefore": {
-        "places": 0,
-        "classifications": 0
-      },
-      "targetAfter": {
-        "places": 1,
-        "classifications": 1,
-        "joinedRows": 1
-      },
-      "mismatches": 0,
-      "updates": 0,
-      "deletes": 0
-    }
+    "modelRequested": "inception/mercury-decide",
+    "responseModelAttested": "inception/mercury-decide-20260930",
+    "modelAttested": true,
+    "databaseInserted": null,
+    "openFailures": [
+      "Official calendar PDF OCR failed; one discovery candidate remains."
+    ],
+    "sourceCache": {
+      "bytes": 45803,
+      "sha256": "523217b200fbcd9dedff73699ef0416fa336c754b1f775c26d2a8e09312bda5a",
+      "httpStatus": "not persisted"
+    },
+    "coordinatesAdded": 0,
+    "backendTests": "204/204; six public JSON hashes unchanged"
   },
   "regionalCoverage": {
-    "region": "Lombardia",
-    "status": "Lombardia resta aperta; Strada Storta partial con discovery-limit e destinazione non verificata. Il preflight limitato non ha trovato altri target Lombardia nuovi fra i candidati esaminati; la copertura totale non è stata ricalcolata. La sequenza prosegue in Piemonte.",
+    "region": "Piemonte",
+    "status": "Campione Pinasca02: 1 sezione controllata, partial; 4 eventi nuovi candidati con file e classificazione pronti ma DB non ancora interrogato. Nessun conteggio regionale complessivo ricalcolato; Lombardia resta aperta.",
     "currentRunCounts": {
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
-      "verifiedNewEventCandidates": 1,
-      "catalogNewIds": 1,
-      "existingRowsWithProvenanceOnly": 5,
+      "extractedRows": 27,
+      "verifiedNewEventCandidates": 4,
+      "catalogNewIds": 4,
       "removedIds": 0,
-      "documentCardsExtracted": 6,
+      "changedEventRows": 0,
       "exactDuplicateIdsExcluded": 0,
       "classificationCounts": {
-        "trekking": 0,
-        "non_trekking": 0,
-        "da_verificare": 1
+        "trekking": 2,
+        "non_trekking": 2,
+        "da_verificare": 0,
+        "errors": 0
       },
       "databaseInserted": null,
       "failuresResolved": [
-        "Parser v13 fixture-backed correction recognizes all six Event Manager cards; rerun parsed cached official HTML."
+        "Scrape-status partial continuation recomputes extractedEvents across merged documents; fixture-backed correction at 4175eb9702021e9d6fda771db82bee5122bf8bd4, test included in 204/204."
       ],
       "failuresOpen": [
-        "One discovery-limit candidate remains; Monte Pisello destination change is documented but final location is unverified."
+        "Official calendar PDF OCR failed; discovery-limit has 1 candidate remaining."
       ],
-      "nextStep": "Piemonte — preflight read-only seleziona CAI Pinasca, URL ufficiale calendario non visitata, fonte unsupported con precedente issue OCR sul PDF; eseguire un campione HTML singolo limitato a 1 documento/120s.",
-      "deliveredPlaces": 1,
-      "deliveredClassifications": 1,
-      "databaseTargetMissingAfter": 0,
-      "databaseMismatches": 0,
-      "databaseUpdates": 0,
-      "databaseDeletes": 0,
-      "receiptPath": "backend/data/agent-runs/cai-map-20261022-stradastorta02/delta-import-receipt.json",
-      "receiptSha256": "bef3ff50b4266d0486eb343f9c281fdb96ea3a14b2f6a07727be57e2d00acf32"
+      "nextStep": "Remote checkpoint of Pinasca02 files, then exact-ID DB delivery and receipt; after that continue to a different workable regional source.",
+      "deliveredPlaces": null,
+      "deliveredClassifications": null
     },
     "historicalSnapshot": {
       "sections": 229,

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T21:51:08.589Z",
+  "generatedAt": "2026-10-22T22:09:29.921Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -10054,26 +10054,33 @@
       "directoryId": "9212062",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "unsupported",
+      "status": "partial",
       "url": "https://www.caipinasca.it/images/Calendario/PDF/CalendarioGite2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "gemini",
       "enabled": true,
-      "excursions": 0,
+      "excursions": 4,
       "error": null,
       "hash": "1d18d50d39de2db7df13424f6c0a34107ac91f30ce68efe56717824347144951",
-      "updatedAt": "2026-10-20T08:06:41.363Z",
+      "updatedAt": "2026-10-22T22:09:29.921Z",
       "documents": [
         {
           "url": "https://www.caipinasca.it/images/Calendario/PDF/CalendarioGite2026.pdf",
           "hash": "08b76aaf989a00904b33519c21ee5bf8bf22d5f27a178ec1bcd8980684af4617",
           "events": 0,
           "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caipinasca.it/index.php/calendario-gite",
+          "hash": "523217b200fbcd9dedff73699ef0416fa336c754b1f775c26d2a8e09312bda5a",
+          "events": 27,
+          "method": "html-calendar"
         }
       ],
       "methods": [
-        "pdf-text"
+        "pdf-text",
+        "html-calendar"
       ],
       "issues": [
         {
@@ -10082,11 +10089,11 @@
         },
         {
           "url": "https://www.caipinasca.it/images/Calendario/PDF/CalendarioGite2026.pdf",
-          "message": "Discovery budget reached; 5 candidate documents remain.",
+          "message": "Discovery budget reached; 1 candidate documents remain.",
           "code": "discovery-limit"
         }
       ],
-      "extractedEvents": 0
+      "extractedEvents": 27
     },
     {
       "id": "cai-susa-9212004",
