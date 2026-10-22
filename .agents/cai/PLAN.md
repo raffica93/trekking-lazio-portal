@@ -1,6 +1,6 @@
 # Piano di passaggio al lavoro interamente cloud
 
-Stato aggiornato al 22 ottobre 2026: classificazione completa del catalogo e delta Valmadrera sono già importati e riconciliati; Pinasca02 è anch'esso consegnato con ricevuta. Attività corrente: Campobasso, file/classificazione pubblicati e 2 nuovi ID consegnati al DB con riconciliazione finale 2/2; il checkpoint remoto della ricevuta è il prossimo gate. Poi ripresa regionale per fonti lavorabili. Le sezioni operative più sotto che indicano batch o lotti già consegnati come prossimi passi sono storiche.
+Stato aggiornato al 22 ottobre 2026: classificazione completa e delta già consegnati restano chiusi; non ripetere batch storici o import completati. Lavoro corrente: CAI Cesena index01 ha verificato una pagina ufficiale senza estrazioni, 3.366 ID invariati, QA importer PASS e backend test 205/205. È pending il checkpoint remoto dei file/report e handoff; poi un solo JPEG ufficiale di escursionismo già linkato dall’indice, max1 documento/120s/concurrency1. Sezione partial; nessun import DB. I piani sottostanti che descrivono lotti già consegnati sono storici.
 
 ## Sequenza
 

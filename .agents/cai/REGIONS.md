@@ -336,3 +336,12 @@ Checkpoint Scalambra01, PDF fonte, report, evidence, catalog/status e registro c
 | Emilia-Romagna, CAI Cesena `cai-cesena-9224012` | 1 target selezionato | 0 nuove | Fonte `unsupported`; annual PDF ha discovery-limit7; PDF giovani distinto ha OCR failure | 0 nuove | Nessuno: URL non ancora letta | 0 | Annual discovery7 e PDF giovani OCR issue restano aperti, nessun cooldown sull'indice | Dopo checkpoint remoto, un solo `https://www.caicesena.com/index.php/programma-attivita`, max1/120s/concurrency1 |
 
 L'indice Cesena è registrato e same-host; assente da status documents, cache e FAILURES. Preflight non ha fatto richieste. Nessun evento o stato di completezza è dedotto da un indice non ancora letto; i conteggi cumulativi regionali restano storico 20 ottobre.
+
+
+## Emilia-Romagna — CAI Cesena index01 (22 ottobre 2026)
+
+| Regione / run | Sezioni controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| Emilia-Romagna, `cai-20261022-emilia-cesena-index01` | 1 | 0 | 1 | 0 | 6 record esistenti verificati invariati; indice: 0 estratti con `method=null`, nessuna inferenza di calendario vuoto | 0 | 0 | annual PDF discovery7; PDF giovani OCR failure; indice discovery1 | Checkpoint file; poi un singolo JPEG ufficiale di escursionismo 2026 linkato dall’indice |
+
+Run partial, file ready, DB pending. Il catalogo ha 3.366 ID prima/dopo, 0 add/remove/change; nessuna classificazione/import. L’unico documento HTML pesa 33.413 byte (SHA `292708d5ddddb26a9e412d30777ac7bfb47efc22fc51af71ea27c5642b8bc9c9`); la pagina presenta “Prossimi eventi - link calendario attività”, ma il parser restituisce method null. QA importer PASS, backend test 205/205 e sei JSON pubblici invariati durante la suite. Prossimo target già preflightato offline: `https://www.caicesena.com/images/download/2026/programma_2026_escursionismo_adattato_cai_cesena.jpg`; non risulta visitato né in cache/failure. Cumulativi regionali in testa rimangono snapshot storico 20 ottobre.
