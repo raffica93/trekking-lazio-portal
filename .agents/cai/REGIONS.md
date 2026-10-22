@@ -173,6 +173,14 @@ Catalogo 3.359→3.359 ID; zero aggiunti/rimossi/cambiati. Fonte `partial`; zero
 
 | Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
 |---|---:|---:|---:|---:|---|---:|---|---|---|
-| `cai-20261022-lombardia-busto01` — CAI Busto Arsizio | 1 URL ufficiale → canonical same-host | 0 | 1 | 0 | 1 evento preesistente conservato; pagina 2026 elenca solo date passate, nessun calendario 2027 | 0 ID duplicati | Target ufficiale letto via redirect; oEmbed storici esclusi | Discovery-limit: 1 candidato residuo; “altre uscite” future non pubblicate nel campione | Checkpoint file; poi preflight read-only su fonte distinta, senza ripetere pagina scaduta |
+| `cai-20261022-lombardia-busto01` — CAI Busto Arsizio | 1 URL ufficiale → canonical same-host | 0 | 1 | 0 | 1 evento preesistente conservato; pagina 2026 elenca solo date passate, nessun calendario 2027 | 0 ID duplicati | Target ufficiale letto via redirect; oEmbed storici esclusi | Discovery-limit: 1 candidato residuo; “altre uscite” future non pubblicate nel campione | Checkpoint `a83d607` verificato; poi preflight read-only su fonte distinta, senza ripetere pagina scaduta |
 
 Catalogo 3.359→3.359 ID; zero aggiunti/rimossi/cambiati. Fonte `partial`; attività elencate 2025-12-07→2026-03-22 sono tutte passate al 2026-10-22. Importer QA PASS read-only, backend npm test 201/201 dopo raccolta, copie identiche, nessun import DB. Report SHA `47959134cd4b0aff118dec3f190454c4d049b239c323f04cd951389f07c34a32`; manifest SHA `471ae7a692b8a09a00d899e225fe0f544f930c31290a9c2fc1222a37c90fe791`; state SHA `6a75dd045b4277b36b8d55577c8d9434776c8b8d0427205aa21ec28a4d4f1dd5`. Nessun ricalcolo dei totali Lombardia.
+
+## Campioni live 22 ottobre 2026 — sequenza corrente
+
+I totali regionali della tabella iniziale restano lo snapshot storico 2026-10-20; i campioni seguenti sono osservazioni circoscritte e non ricalcolano tutta la Lombardia.
+
+| Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| `cai-20261022-lombardia-stradastorta01` — CAI Strada Storta (preflight) | 1 target URL selezionato, non ancora raccolto | 0 | 1 fonte | 0 | Non ancora verificati | — | Target ufficiale assente dai 19 documenti, senza issue/cooldown/cache | Calendario e parser da verificare nel run | Un solo documento, 120 s, concurrency 1; aggiornare la riga con il risultato verificato |

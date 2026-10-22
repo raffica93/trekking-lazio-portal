@@ -224,8 +224,8 @@
     }
   ],
   "nextAction": {
-    "step": "CHECKPOINT-BUSTO-01",
-    "instruction": "Publish the Busto01 report, state, manifest and catalog/status files on origin and verify all remote Git blobs. Then have cai-collector do a read-only preflight for the next distinct workable source; do not repeat Busto page or other queues without a new target."
+    "step": "LOMBARDIA-STRADA-STORTA-01-COLLECT",
+    "instruction": "Busto01 è checkpointato e verificato su origin a83d607. Preflight read-only collector: CAI Strada Storta (cai-strada-storta-9116052), https://stradastorta.it/new/eventi/, target ufficiale assente dai 19 documenti, nessun cooldown/issue, cache assente. Avvia un run nuovo, solo questo source/url, concurrency 1, max 1 documento, 120000 ms. Mantieni parziale salvo evidenza completa."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -235,7 +235,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "5807cf69bd6808d53707a498053c2a0e4448b653",
+    "branchHead": "a83d607f345eed2a46f0d438925930c6f4f0b788",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -399,13 +399,13 @@
     },
     "ocrItalian": false,
     "agentStatus": {
-      "caiCollector": "completed bounded run05; both residuals reached; section remains partial on cooldown-only URLs",
-      "caiImporter": "independent read-only QA PASS for run05",
+      "caiCollector": "preflight Lombardia Strada Storta PASS; bounded run pending",
+      "caiImporter": "available for independent read-only QA after collection",
       "agentRequestedModel": "gpt-6-luna",
       "agentRequestedEffort": "high",
       "effectiveModelTelemetry": "not exposed"
     },
-    "nextPhase": "Preflight CAI Varese prior 503 endpoint and ensure the collector can skip it safely; only then run one bounded Varese sample. If it cannot be skipped, keep source blocked and choose another eligible Lombardia source.",
+    "nextPhase": "Busto01 è checkpointato e verificato su origin a83d607. Preflight read-only collector: CAI Strada Storta (cai-strada-storta-9116052), https://stradastorta.it/new/eventi/, target ufficiale assente dai 19 documenti, nessun cooldown/issue, cache assente. Avvia un run nuovo, solo questo source/url, concurrency 1, max 1 documento, 120000 ms. Mantieni parziale salvo evidenza completa.",
     "databaseReadOnlyObservation": {
       "observedAt": "2026-10-22T18:12:15.676Z",
       "source": "authorized Supabase read-only SQL and map predicate",
@@ -420,7 +420,7 @@
     },
     "tests": "After run07 stopped, backend npm test passed 187/187. Backend/frontend excursions SHA256 6e46cec85daae67e6da0a98afb36d4fbf72b3790b2246dfcdf3837ea9a0ff99b and scrape-status SHA256 da7fa46626cfd3c7e29cc59e0eb66c85f2374a70d0d325a68caba38308dd8450 remained byte-identical after tests.",
     "regionCurrent": "Lombardia — Busto01 followed official URL to same-host canonical page; 2026 winter activities end March 22, all past; one discovery candidate remains; source partial.",
-    "regionNext": "Checkpoint Busto01, then collector read-only preflight for a distinct workable official source; do not repeat the expired winter page.",
+    "regionNext": "Avvia cai-20261022-lombardia-stradastorta01 sul singolo URL ufficiale preflightato; max 1 documento/120 s/concurrency 1. Fonte parziale senza prova di calendario completo.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
     "remoteCheckpointVerifiedAt": "2026-10-22T19:25:20Z",
@@ -952,7 +952,7 @@
       "requestedUrl": "https://www.caibustoarsizio.it/attivita-invernali/",
       "canonicalUrl": "https://www.caibustoarsizio.it/attivita-invernali-2-2/",
       "collection": "partial",
-      "files": "ready; file checkpoint pending",
+      "files": "ready; checkpoint published and verified",
       "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-busto01/manifest.json",
       "manifestSha256": "471ae7a692b8a09a00d899e225fe0f544f930c31290a9c2fc1222a37c90fe791",
       "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-busto01/collection-report.md",
@@ -975,8 +975,8 @@
       "importerQa": "PASS read-only; manifest/hash mirrors and zero event-row delta",
       "backendTest": "201/201 after collection; manifest hashes still match",
       "sourceCommit": "5807cf69bd6808d53707a498053c2a0e4448b653",
-      "fileCheckpointCommit": "pending",
-      "remoteVerified": false
+      "fileCheckpointCommit": "a83d607f345eed2a46f0d438925930c6f4f0b788",
+      "remoteVerified": true
     },
     "lastCodeCorrection": {
       "commit": "010af3796a99d01e8081d45ef625b2344ec134c7",
@@ -999,7 +999,7 @@
       "requestedUrl": "https://www.caibustoarsizio.it/attivita-invernali/",
       "canonicalUrl": "https://www.caibustoarsizio.it/attivita-invernali-2-2/",
       "collection": "partial",
-      "files": "ready; file checkpoint pending",
+      "files": "ready; checkpoint published and verified",
       "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-busto01/manifest.json",
       "manifestSha256": "471ae7a692b8a09a00d899e225fe0f544f930c31290a9c2fc1222a37c90fe791",
       "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-busto01/collection-report.md",
@@ -1022,20 +1022,41 @@
       "importerQa": "PASS read-only; manifest/hash mirrors and zero event-row delta",
       "backendTest": "201/201 after collection; manifest hashes still match",
       "sourceCommit": "5807cf69bd6808d53707a498053c2a0e4448b653",
-      "fileCheckpointCommit": "pending",
-      "remoteVerified": false
+      "fileCheckpointCommit": "a83d607f345eed2a46f0d438925930c6f4f0b788",
+      "remoteVerified": true
     },
-    "nextSourcePreflight": null,
+    "nextSourcePreflight": {
+      "sourceId": "cai-strada-storta-9116052",
+      "sourceName": "CAI Strada Storta",
+      "region": "Lombardia",
+      "url": "https://stradastorta.it/new/eventi/",
+      "evidence": "Programma collegato dalla pagina ufficiale /eventi/60-strada-storta/; assente dai 19 documenti dello status, nessuna issue/cooldown per host/percorso, cache locale assente.",
+      "mode": "read-only completed by cai-collector",
+      "selectedRun": "cai-20261022-lombardia-stradastorta01",
+      "limits": {
+        "sourceUrlCount": 1,
+        "maxDocuments": 1,
+        "timeoutMs": 120000,
+        "concurrency": 1
+      }
+    },
     "lastSourcePreflight": {
-      "sourceId": "cai-busto-arsizio-9216014",
-      "url": "https://www.caibustoarsizio.it/attivita-invernali/",
-      "basis": "official registry calendar URL linked from section homepage, absent from current source history; current status unsupported with one existing event and only oEmbed skipped links; no HTTP failure/cooldown recorded for target",
-      "scope": "one URL, max 1 document, budget 120 s, concurrency 1",
-      "observedAt": "2026-10-22T21:36:16Z",
-      "mode": "read-only"
+      "sourceId": "cai-strada-storta-9116052",
+      "sourceName": "CAI Strada Storta",
+      "region": "Lombardia",
+      "url": "https://stradastorta.it/new/eventi/",
+      "evidence": "Programma collegato dalla pagina ufficiale /eventi/60-strada-storta/; assente dai 19 documenti dello status, nessuna issue/cooldown per host/percorso, cache locale assente.",
+      "mode": "read-only completed by cai-collector",
+      "selectedRun": "cai-20261022-lombardia-stradastorta01",
+      "limits": {
+        "sourceUrlCount": 1,
+        "maxDocuments": 1,
+        "timeoutMs": 120000,
+        "concurrency": 1
+      }
     }
   },
-  "repositoryCommit": "5807cf69bd6808d53707a498053c2a0e4448b653",
+  "repositoryCommit": "a83d607f345eed2a46f0d438925930c6f4f0b788",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -1059,10 +1080,10 @@
       "copiesIdentical": true
     }
   },
-  "updatedAt": "2026-10-22T21:40:32.521Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T21:40:00Z",
+  "updatedAt": "2026-10-22T21:44:21Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T21:45:00Z",
   "regionCurrent": "Lombardia — Busto01 followed official URL to same-host canonical page; 2026 winter activities end March 22, all past; one discovery candidate remains; source partial.",
-  "regionNext": "Checkpoint Busto01, then collector read-only preflight for a distinct workable official source; do not repeat the expired winter page.",
+  "regionNext": "Avvia cai-20261022-lombardia-stradastorta01 sul singolo URL ufficiale preflightato; max 1 documento/120 s/concurrency 1. Fonte parziale senza prova di calendario completo.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
     "sourceId": "cai-varese-9216009",
@@ -1170,7 +1191,7 @@
     "requestedUrl": "https://www.caibustoarsizio.it/attivita-invernali/",
     "canonicalUrl": "https://www.caibustoarsizio.it/attivita-invernali-2-2/",
     "collection": "partial",
-    "files": "ready; file checkpoint pending",
+    "files": "ready; checkpoint published and verified",
     "manifestPath": "backend/data/agent-runs/cai-20261022-lombardia-busto01/manifest.json",
     "manifestSha256": "471ae7a692b8a09a00d899e225fe0f544f930c31290a9c2fc1222a37c90fe791",
     "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-busto01/collection-report.md",
@@ -1193,8 +1214,8 @@
     "importerQa": "PASS read-only; manifest/hash mirrors and zero event-row delta",
     "backendTest": "201/201 after collection; manifest hashes still match",
     "sourceCommit": "5807cf69bd6808d53707a498053c2a0e4448b653",
-    "fileCheckpointCommit": "pending",
-    "remoteVerified": false
+    "fileCheckpointCommit": "a83d607f345eed2a46f0d438925930c6f4f0b788",
+    "remoteVerified": true
   },
   "regionalCoverage": {
     "region": "Lombardia",
