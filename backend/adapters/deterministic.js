@@ -13,7 +13,7 @@ const { ocrPdfLines, ocrPdfPageLines, ocrPdfFilePages, ocrImageLines } = require
 const { parseCaiRomaHtml, stableId, tripDays, parseDistanceKm, parseDurationHours } = require('../scraper');
 
 // Bump this when deterministic extraction changes so cached documents are reparsed.
-const VERSION = 12;
+const VERSION = 13;
 const MONTHS = { gennaio: 1, febbraio: 2, marzo: 3, aprile: 4, maggio: 5, giugno: 6, luglio: 7, agosto: 8, settembre: 9, ottobre: 10, novembre: 11, dicembre: 12 };
 const MONTH_PATTERN = Object.keys(MONTHS).join('|');
 const REGIONS = ['Abruzzo', 'Basilicata', 'Calabria', 'Campania', 'Emilia-Romagna', 'Friuli-Venezia Giulia', 'Lazio', 'Liguria', 'Lombardia', 'Marche', 'Molise', 'Piemonte', 'Puglia', 'Sardegna', 'Sicilia', 'Toscana', 'Trentino-Alto Adige', 'Umbria', "Valle d'Aosta", 'Veneto'];
@@ -77,6 +77,11 @@ function parseDates(input, year, month) {
     dateEnd: range[2] ? validDate(range[4] || year, MONTHS[range[3]], range[2]) : undefined,
     matched: range[0]
   };
+  // Event Manager renders localized dates as "Ottobre 25, 2026" (month first).
+  // Keep the year explicit when this pattern is used so a listing cannot inherit
+  // an unrelated publication year from its page title.
+  range = value.match(new RegExp(`\\b(${MONTH_PATTERN})\\s+(\\d{1,2}),?\\s+(20\\d{2})\\b`, 'i'));
+  if (range) return { date: validDate(range[3], MONTHS[range[1]], range[2]), matched: range[0] };
   let match = value.match(/\b(20\d{2})-(\d{2})-(\d{2})\b/);
   if (match) return { date: validDate(match[1], match[2], match[3]), matched: match[0] };
   match = value.match(/\b(\d{1,2})[/.](\d{1,2})[/.](20\d{2}|\d{2})\b/);
@@ -454,10 +459,16 @@ function parseHtmlCalendar(html, source, url, now) {
   // Event-specific date attributes are admissible; WordPress publication <time> is not.
   $('[itemtype$="/Event"],.tribe-events-calendar-list__event,.tribe-events-list-event,.mec-event-article,.eventon_list_event,.em-event,.eventlist-event').each((_index, element) => {
     const block = $(element);
-    const titleEl = block.find('[itemprop="name"],h2,h3,h4,.mec-event-title,.evcal_event_title').first();
+    const eventManager = block.hasClass('em-event')
+      && block.find('.em-item-title').length > 0
+      && block.find('.em-event-date').length > 0;
+    const titleEl = block.find(eventManager
+      ? '.em-item-title'
+      : '[itemprop="name"],h2,h3,h4,.mec-event-title,.evcal_event_title').first();
     const dateValue = block.find('[itemprop="startDate"]').attr('content') || block.find('[itemprop="startDate"]').attr('datetime') || block.find('[datetime]').first().attr('datetime');
-    const dates = dateValue ? { date: dateValue } : parseDates(block.text(), year);
-    const event = normalizeEvent({ title: titleEl.text(), ...dates, link: titleEl.find('a').attr('href') || titleEl.attr('href'), location: block.find('[itemprop="location"],.tribe-events-venue-details,.mec-event-loc-place').first().text(), description: block.text() }, source, url, 'html-event');
+    const dates = dateValue ? { date: dateValue } : parseDates(eventManager ? block.find('.em-event-date').first().text() : block.text(), year);
+    const description = eventManager ? block.find('.em-item-desc').first().text() : block.text();
+    const event = normalizeEvent({ title: titleEl.text(), ...dates, link: titleEl.find('a').attr('href') || titleEl.attr('href'), location: block.find('[itemprop="location"],.tribe-events-venue-details,.mec-event-loc-place').first().text(), description }, source, url, 'html-event');
     if (event) { events.push(event); recognized = true; }
   });
   if (CALENDAR_WORDS.test(`${url} ${$('title,h1,h2').text()}`)) {

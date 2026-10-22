@@ -20,6 +20,7 @@ test('calendar floor follows Rome across UTC month boundary and has no future ca
   assert.equal(parseDates('12/10 Monte Rosa')?.date, undefined);
   assert.equal(parseDates('31/02/2026 Monte Rosa', 2026).date, null);
   assert.equal(parseDates('5-6 settembre 2026', 2026).dateEnd, '2026-09-06');
+  assert.equal(parseDates('Ottobre 25, 2026', 2026).date, '2026-10-25');
 });
 
 test('ICS unfolds text and converts exclusive all-day end, without invented recurring instances', () => {
@@ -62,6 +63,37 @@ test('calendar HTML joins table cells and respects explicit annual context', () 
   assert.equal(parseHtmlCalendar(datedArticle, source, source.url, now).events.length, 0);
 });
 
+test('CAI Strada Storta Event Manager cards preserve visible title/date and do not infer changed destination', async () => {
+  const html = await fs.readFile(path.join(__dirname, 'fixtures', 'cai-strada-storta-2026-event-manager.html'), 'utf8');
+  const stradastorta = {
+    id: 'cai-strada-storta-9116052', organizer: 'CAI Strada Storta', region: 'Lombardia',
+    url: 'https://stradastorta.it/new/eventi/', website: 'https://stradastorta.it/'
+  };
+  const canonicalUrl = 'https://stradastorta.it/eventi/';
+  const result = parseHtmlCalendar(html, stradastorta, canonicalUrl, now);
+  const expected = [
+    ['2026-10-25', 'Monte Pisello – Rifugio Alpe Piazza'],
+    ['2026-10-31', 'Messa In Ricordo Dei Nostri Defunti'],
+    ['2026-11-08', 'Ferrata Medale'],
+    ['2026-11-22', 'Pranzo Sociale'],
+    ['2026-12-13', 'Gita Culturale'],
+    ['2026-12-24', 'Auguri Natalizi']
+  ];
+  assert.equal(result.recognized, true);
+  assert.equal(result.events.length, expected.length);
+  assert.deepEqual(result.events.map(({ date, title }) => [date, title]), expected);
+  const destinationChanged = result.events[0];
+  assert.equal(destinationChanged.description.includes('cambio di destinazione'), true);
+  assert.equal(destinationChanged.link, 'https://stradastorta.it/eventi/pizzo-arera-e-capanna-2000/');
+  assert.equal(destinationChanged.title, 'Monte Pisello – Rifugio Alpe Piazza', 'the stale link slug must not replace the visible current title');
+  for (const event of result.events) {
+    assert.equal(event.sourceDocument, canonicalUrl);
+    assert.equal(event.location, 'Località da verificare');
+    assert.equal(event.lat, undefined);
+    assert.equal(event.lng, undefined);
+  }
+});
+
 test('annual line patterns exclude narrative dates and unknown years', () => {
   assert.equal(parseCalendarLines(['12 settembre Escursione Monte Rosa'], source, source.url, undefined, 'pdf').length, 0);
   assert.equal(parseCalendarLines(['La prima escursione è sabato 12 settembre'], source, source.url, 2026, 'pdf').length, 0);
@@ -87,7 +119,7 @@ test('Cernusco OCR cross-column side-panel text does not contaminate the October
   assert.equal(control[0].title, fixture.expectedControlTitle, 'cleanup must not affect other OCR rows from the same PDF');
 });
 
-test('deterministic parser version invalidates a cached Cernusco PDF extraction from v11', async (t) => {
+test('deterministic parser version invalidates a cached Cernusco PDF extraction from v12', async (t) => {
   const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'cai-parser-version-cache-'));
   t.after(() => fs.rm(tmp, { recursive: true, force: true }));
   const pdfBytes = await fs.readFile(path.join(__dirname, 'fixtures', 'cai-valmadrera-2026-calendar.pdf'));
@@ -99,7 +131,7 @@ test('deterministic parser version invalidates a cached Cernusco PDF extraction 
   const pageRangeKey = JSON.stringify(pageRanges[sourceId] || null);
   const ocrPageKey = JSON.stringify(ocrPages[sourceId] || null);
   const previousKey = crypto.createHash('sha256')
-    .update(`11|${sourceId}|${hash}|${now.year}|${pageRangeKey}|${ocrPageKey}`).digest('hex');
+    .update(`12|${sourceId}|${hash}|${now.year}|${pageRangeKey}|${ocrPageKey}`).digest('hex');
   const previousCachePath = path.join(tmp, `events-${previousKey}.json`);
   const staleEvent = {
     id: `${sourceId}-cb33842fc3c2`,
@@ -129,7 +161,7 @@ test('deterministic parser version invalidates a cached Cernusco PDF extraction 
     })
   });
 
-  assert.equal(VERSION, 12);
+  assert.equal(VERSION, 13);
   assert.equal(result.documents[0].method, 'pdf-text');
   assert.equal(result.excursions.some((event) => event.id === staleEvent.id), false);
   assert.equal(result.excursions.some((event) => event.title === staleEvent.title), false);
