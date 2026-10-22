@@ -90,3 +90,5 @@ Migration `create_place_classifications_20261021090000` registrata dal progetto 
 - Run04 Valmadrera: 40 documenti, 41 estrazioni, 7 eventi esistenti invariati, discovery 23→12, zero errori HTTP e zero delta catalogo. Dopo QA/test/checkpoint, un altro campione delimitato sulla stessa fonte; nessun import a delta zero.
 
 - Run04 leaves 12 known official URLs, and the default 40-document run restarts from the same prefix. Implement and fixture-test a source-scoped, same-host explicit URL continuation option before run05; do not claim completion by repeating the default run.
+
+- Safe continuation correction published in `20dbaf2e1b8a8b6f63c97efe2d3e96c06bc6910c` with URL allowlist, redirect guard, retry-state persistence, 40 focused / 186 full backend tests. Run05 may now target the 12 Valmadrera URLs from run04 via repeated `--source-url`, max20/180s/concurrency1; verify actual reached/remaining URLs and keep DB pending at zero delta.

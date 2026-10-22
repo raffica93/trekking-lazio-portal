@@ -207,7 +207,7 @@
   ],
   "nextAction": {
     "step": "S7",
-    "instruction": "Publish run04 verified files/report; then address the demonstrated replay-of-first-40 limit with an explicit source-scoped, same-host URL target option and tests before the next live collection. No DB import at zero catalog delta."
+    "instruction": "From verified code commit 20dbaf2 and run04 file checkpoint, run one explicit URL continuation over the 12 documented Valmadrera candidates with one source, max 20 documents/180s/concurrency1. Audit URLs reached/remaining; then QA, tests and checkpoint. No DB import unless a verified catalog delta exists."
   },
   "constraints": {
     "recurringSchedules": false,
@@ -217,7 +217,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "c012026eded2265d317c784dcfdced6928f5b90a",
+    "branchHead": "20dbaf2e1b8a8b6f63c97efe2d3e96c06bc6910c",
     "recoverableRemoteCheckpoint": true,
     "codeCheckpoint": "3f93525f4f52dff9dd322278a6b3e4759455648b pushed and fetched from origin/codex/cai-orchestrator-luna",
     "sampleRun": {
@@ -398,14 +398,14 @@
       "writes": 0
     },
     "tests": {
-      "backend": "npm test after Valmadrera run04 collection: 178 passed, 0 failed (2026-10-22).",
-      "publicCatalogTestIsolation": "Tests ran after collection; manifest files remained stable and backend/frontend excursions, cai-sections, scrape-status copies are byte-identical."
+      "backend": "npm test after safe source-url continuation patch: 186 passed, 0 failed; focused tests 40/40.",
+      "publicCatalogTestIsolation": "No collection was active during tests. The last regional manifest/copies remain sealed at run04 checkpoint b6c3dc1."
     },
-    "regionCurrent": "Lombardia — Valmadrera run04 partial; discovery backlog 12; files/report/QA/test ready for checkpoint; catalog delta zero",
-    "regionNext": "Checkpoint run04, then implement and test an explicit same-host source URL continuation option so the next bounded run can reach queued URLs without replaying 40 seeds.",
+    "regionCurrent": "Lombardia — Valmadrera run04 checkpoint published; 12 explicit official URLs remain; continuation fix tested and published at 20dbaf2",
+    "regionNext": "Run05 with the 12 URLs recorded in run04 collection report passed as repeated --source-url flags, single source, max 20 documents and 180 s. Then QA/tests/checkpoint; DB remains pending unless catalog changes.",
     "updatedChatRecipient": null,
     "artifactCheckpointCommit": "0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7",
-    "remoteCheckpointVerifiedAt": "2026-10-22T19:21:20Z",
+    "remoteCheckpointVerifiedAt": "2026-10-22T19:25:20Z",
     "operationalRecovery": {
       "incident": "An intermediate overlay command briefly reduced an uncommitted working output to a one-row transfer fixture. It was recovered from the sealed 3336-row input and existing classifier cache before QA, with no DB writes. The final full output was rebuilt and importer-validated.",
       "status": "recovered-before-checkpoint",
@@ -466,7 +466,7 @@
       "scrapeStatusSha256": "56606a7db99814a06639fb595823fd9ca9b2139893a818d83f842b7068bfff3d",
       "baselineCommit": "c012026eded2265d317c784dcfdced6928f5b90a"
     },
-    "regionalCheckpointCommit": "c012026eded2265d317c784dcfdced6928f5b90a",
+    "regionalCheckpointCommit": "20dbaf2e1b8a8b6f63c97efe2d3e96c06bc6910c",
     "regionalRunHistory": [
       {
         "runId": "cai-20261022-lombardia-brescia02",
@@ -697,11 +697,19 @@
         "baselineCommit": "c012026eded2265d317c784dcfdced6928f5b90a"
       }
     ],
-    "repositoryCheckpointCommit": "c012026eded2265d317c784dcfdced6928f5b90a",
-    "updatedAt": "2026-10-22T19:24:10Z",
-    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:17:43Z"
+    "repositoryCheckpointCommit": "20dbaf2e1b8a8b6f63c97efe2d3e96c06bc6910c",
+    "updatedAt": "2026-10-22T19:25:20Z",
+    "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:17:43Z",
+    "continuationMechanism": {
+      "flag": "--source-url URL (repeatable) with exactly one --source ID",
+      "safety": "Exact official hostname, HTTP(S), no credentials/custom port; redirect guard in continuation mode permits only HTTPS same-host redirects on default/443 without auth. Existing cooldown/cache and bounded document/time limits retained.",
+      "state": "Persisted in orchestrator run state and replayed for the same source on --retry-failed.",
+      "codeCommit": "20dbaf2e1b8a8b6f63c97efe2d3e96c06bc6910c",
+      "focusedTests": "40/40",
+      "backendTests": "186/186"
+    }
   },
-  "repositoryCommit": "9045ec84b981193669deaa2e82dd075c3609cf6d",
+  "repositoryCommit": "20dbaf2e1b8a8b6f63c97efe2d3e96c06bc6910c",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -719,10 +727,10 @@
     "frontend": "43 passed in 11 files; no frontend code changes in this classification checkpoint",
     "catalogHashes": "backend/data/excursions.json and frontend/public/excursions.json both SHA256 1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877"
   },
-  "updatedAt": "2026-10-22T19:24:10Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:21:20Z",
-  "regionCurrent": "Lombardia — Valmadrera run04 partial; discovery backlog 12; files/report/QA/test ready for checkpoint; catalog delta zero",
-  "regionNext": "Checkpoint run04, then implement and test an explicit same-host source URL continuation option so the next bounded run can reach queued URLs without replaying 40 seeds.",
+  "updatedAt": "2026-10-22T19:25:20Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T19:25:20Z",
+  "regionCurrent": "Lombardia — Valmadrera run04 checkpoint published; 12 explicit official URLs remain; continuation fix tested and published at 20dbaf2",
+  "regionNext": "Run05 with the 12 URLs recorded in run04 collection report passed as repeated --source-url flags, single source, max 20 documents and 180 s. Then QA/tests/checkpoint; DB remains pending unless catalog changes.",
   "preflight": {
     "at": "2026-10-22T19:13:02Z",
     "sourceId": "cai-varese-9216009",

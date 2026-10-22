@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-22T19:23:58.474Z",
+  "generatedAt": "2026-10-22T19:25:20Z",
   "repositoryCommit": "cb7148ff0d69944a34fd8e606f3e61ab42238d31",
   "baseline": {
     "commit": "9919927d4cbef6d154c4dae1441d64cd01c70ad4",
@@ -10611,9 +10611,13 @@
       "strategy": "Classify evidence, preserve valid cache, then retry/re-discover with a bounded policy appropriate to the class.",
       "status": "historical_classified_unverified",
       "owner": "cai-collector",
-      "outcome": "Run03 reached 20 documents and left 23 candidates; run04 processed 40, reached date pages through 2026-10-17, and reduced the queue to 12. No HTTP failures; discovery remains open.",
-      "correctionRef": null,
-      "testRefs": [],
+      "outcome": "Run03 reached 20 documents and left 23 candidates; run04 processed 40, reached date pages through 2026-10-17, and reduced the queue to 12. No HTTP failures; discovery remains open. Bounded continuation failure mode (replaying the same seed prefix) is addressed by the tested explicit --source-url option in 20dbaf2e1b8a8b6f63c97efe2d3e96c06bc6910c; 12 queued URLs remain to be verified in the next bounded run.",
+      "correctionRef": "20dbaf2e1b8a8b6f63c97efe2d3e96c06bc6910c",
+      "testRefs": [
+        "backend/test/deterministic.test.js: explicit continuation queue, host validation, redirect guard, cooldown",
+        "backend/test/pipeline.test.js: single-source validation and routing",
+        "backend/test/orchestrate-cai.test.js: continuation state persistence and retry replay"
+      ],
       "resolutionCheck": {
         "checkedAt": "2026-10-22T19:23:58.474Z",
         "runId": "cai-20261022-lombardia-valmadrera04",
