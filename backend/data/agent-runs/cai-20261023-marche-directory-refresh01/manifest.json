@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261023-marche-directory-refresh01",
+  "baseCommit": "b4780ffc29d6b238fc6c72602762a635ec737057",
+  "artifacts": {
+    "directory-refresh-report.json": "523384f0adf6d6d62d1394190d33df72d7e71ccad4630a11a68bb1bb901a5ac1",
+    "backend/data/cai-sections.json": "992e32565ed65031f95873b7dd83fc82b8feba66daa4aebd59cfe6ea277d6100",
+    "frontend/public/cai-sections.json": "992e32565ed65031f95873b7dd83fc82b8feba66daa4aebd59cfe6ea277d6100"
+  },
+  "baseline": {
+    "backend/data/cai-sections.json": "250afdbc6fa8980f076f094c9574b2d77d157e7f34f4dfb9c84a4f09f3166944",
+    "frontend/public/cai-sections.json": "250afdbc6fa8980f076f094c9574b2d77d157e7f34f4dfb9c84a4f09f3166944"
+  },
+  "mirrorEqual": true
+}

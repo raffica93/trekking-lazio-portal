@@ -1,20 +1,23 @@
 # Passaggio operativo CAI — raccolta e delivery regionale
 
-## Ripresa corrente — preflight chiuso, Marche in selezione directory (23 ottobre 2026, 06:47 UTC)
+## Ripresa corrente — Marche directory aggiornata, file QA PASS (23 ottobre 2026, 06:49 UTC)
 
-Branch `codex/cai-orchestrator-luna` verificato a `b4780ffc29d6b238fc6c72602762a635ec737057`; il checkout è pulito dopo il riallineamento. Le modifiche locali della sessione precedente sono conservate nello stash `preserve-local-cai-work-before-remote-sync-20261023`; il remoto contiene già i checkpoint successivi fino a Lovere, quindi non sono state riapplicate. Nessun merge, deploy, cron o DB in questa ripresa.
+Branch `codex/cai-orchestrator-luna` è stato verificato a `651423e3cd45ac263541a3c14644800911b213f8`. I due agenti non sono in attesa: `cai-collector` ha completato un singolo refresh directory-only e `cai-importer` ha validato in sola lettura i file sul checkout corrente. Nessun merge, deploy, cron o accesso DB.
 
-`cai-collector` e `cai-importer` non sono in attesa: entrambi hanno completato. Importer ha PASS sul checkpoint Lovere `8961db1d`. Lovere resta un campione valido soltanto per il feed Tribe Events e il suo intervallo, con `events=[]`; la copertura Lombardia complessiva resta aperta. Il preflight offline Lombardia non trova URL nuova sicura: il PDF ufficiale Gazzada Schianno compare già come `sourceUrl` nel batch `cai-map-20261022-full01` e in record catalogati, quindi non va ripetuto. Altri candidati sono già consumati, in failure/cooldown o senza URL figlia esatta.
+La raccolta file separata `cai-20261023-marche-directory-refresh01` ha letto la directory pubblica ufficiale (528 elementi) e 15 endpoint parent/subsection Marche, tutti parsati, 0 failure. Il registry rimane 837 record/837 ID: 0 addizioni/rimozioni, 0 ambiguità, 0 cambi fuori Marche. Cambiano solo tre campi `website` forniti dalla directory ufficiale: CAI Pesaro, CAI S. Benedetto del Tronto e CAI Sarnano. I nuovi URL non sono stati fetchati né testati; nessuna copertura calendario è dichiarata.
 
-Preflight successivi, solo lettura sul branch `b4780ff`: Emilia-Romagna non ha target safe dopo Cesena/Pavullo (Argenta/Rimini 503, Ravenna 403; restanti URL già lette o non calendario); Lazio non ha URL distinta oltre a Sora già letta (altre fonti hanno URL già in `documents`/status oppure discovery-limit senza target esatto, 403/404 o link social). Nessun fetch, test o DB è stato eseguito in questi preflight; conteggi regionali non ricalcolati.
+Importer QA indipendente PASS: report SHA-256 `523384f0adf6d6d62d1394190d33df72d7e71ccad4630a11a68bb1bb901a5ac1`, manifest `37b05fc642176c8ccb89323042e56a8f72c407462f8858114e2745e9e1de8c1a`, backend/frontend registry mirror identico SHA `992e32565ed65031f95873b7dd83fc82b8feba66daa4aebd59cfe6ea277d6100`. Il manifest è basato su b4780ff, il cui catalogo di partenza coincide con il parent del commit corrente. Caveat: HTTP status/final URL per singola richiesta non è persistito; il completamento è attestato dall'exit 0, selezione regione Marche e 0 subsection failures.
 
-| Regione verificata | Sezioni nello snapshot | Complete / parziali / irraggiungibili ricalcolate | Eventi nuovi verificati | Duplicati esclusi | Fallimenti risolti / aperti | Prossimo passo |
-|---|---:|---|---:|---:|---|---|
-| Lombardia | non ricalcolate | no fetch; copertura resta aperta | 0 | 0 | 0 / URL già consumate, failure/cooldown e discovery senza figlio esatto | Passaggio alla regione successiva |
-| Emilia-Romagna | 29 (14 enabled, 15 disabled; snapshot precedente) | no fetch; non ricalcolate | 0 | 0 | 0 / 503 Argenta-Rimini, 403 Ravenna e URL già consumate | Nessun target sicuro |
-| Lazio | 31 (19 enabled, 12 disabled; snapshot precedente) | no fetch; non ricalcolate | 0 | 0 | 0 / fonti consumate, 403/404 e discovery senza URL esatta | Nessun target sicuro |
+`backend npm test`: 214/214 dopo il run e QA. I sei JSON pubblici (excursions/sections/status nei due mirror) hanno hash identici prima/dopo; in particolare il test non ha scritto `frontend/public/excursions.json`.
 
-Il prossimo passo circoscritto è la directory-only ufficiale per la sola regione Marche, con il merge conservativo già verificato, per trovare eventuali nuove fonti senza ripetere raccolte. Prima del run è richiesta la verifica remota di questo checkpoint; dopo, QA indipendente e `npm test` seriale, quindi un eventuale campione eventi solo su URL nuova e ufficiale. Nessuna scrittura DB in questa fase.
+| Regione / run | Sezioni directory controllate | Complete / parziali / irraggiungibili (calendari) | Eventi verificati | Duplicati esclusi | Fallimenti risolti / aperti | Prossimo passo |
+|---|---|---|---:|---:|---|---|
+| Lombardia | preflight offline; stati non ricalcolati | non ricalcolate | 0 | 0 | 0 / Gazzada già usata nel batch classificazione; altri URL consumati, failure/cooldown o coda senza figlio esatto | Regione resta incompleta |
+| Emilia-Romagna | 29 (14 enabled, 15 disabled; snapshot precedente) | non ricalcolate | 0 | 0 | 0 / 503 Argenta-Rimini, 403 Ravenna; altri URL consumati/non-calendariali | Nessun URL safe |
+| Lazio | 31 (19 enabled, 12 disabled; snapshot precedente) | non ricalcolate | 0 | 0 | 0 / fonti consumate, 403/404 e discovery senza URL esatta | Nessun URL safe distinto da Sora |
+| Marche — `cai-20261023-marche-directory-refresh01` | 15 parent + 15 risposte subsection; 837 record conservati | stati calendario non toccati/ricontati | 0 (directory-only) | 0 | 0 subsection failure; issue calendario precedenti restano aperte | Dopo checkpoint, preflight offline dei tre website aggiornati |
+
+Run report e manifest sono in `backend/data/agent-runs/cai-20261023-marche-directory-refresh01/`. La directory ha cambiato solo website; non si inferisce che i siti siano raggiungibili o che offrano nuovi calendari. Il checkpoint file deve essere pubblicato prima del prossimo fetch.
 
 
 ## Stato corrente — 23 ottobre 2026

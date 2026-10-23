@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-23T06:26:05.177Z",
+  "generatedAt": "2026-10-23T06:48:42.200Z",
   "source": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/",
   "directoryApi": "https://www.cai.it/wp-json/cai-section/v2/sections-list-simple",
   "year": 2026,
@@ -7,7 +7,7 @@
     "officialSectionCount": 528,
     "excludedTestRecords": [],
     "subsectionFailures": [],
-    "selectedRegion": "Lombardia",
+    "selectedRegion": "Marche",
     "directoryMerge": {
       "ambiguities": [],
       "retainedPreviousIds": [
@@ -15,6 +15,7 @@
         "amatrice",
         "antrodoco",
         "aprilia",
+        "cai-abbiategrasso-9216049",
         "cai-acireale-9246009",
         "cai-acqui-terme-9212036",
         "cai-agai-coll-abruzzo-9102007",
@@ -33,33 +34,41 @@
         "cai-agai-coll-veneto-9102006",
         "cai-agliana-9126018",
         "cai-agordo-9220001",
+        "cai-agrate-brianza-9116039",
         "cai-ala-di-stura-9212076",
         "cai-alagna-9112025",
         "cai-alba-9212064",
         "cai-albenga-9210013",
+        "cai-albiate-9216107",
+        "cai-albino-9116003",
         "cai-alcara-li-fusi-9146022",
+        "cai-aldo-mantovani-9116111",
         "cai-alessandria-9212017",
         "cai-almese-9212061",
         "cai-alpago-9220065",
         "cai-alpignano-9212044",
         "cai-alta-valle-dell-aterno-9134015",
+        "cai-alta-valle-seriana-9116133",
         "cai-altare-9210014",
         "cai-altopiano-delle-rocche-9134016",
-        "cai-amandola-9228010",
+        "cai-alzano-lombardo-9116004",
         "cai-anagni-9132011",
-        "cai-ancona-9228001",
         "cai-aosta-9214001",
         "cai-appiano-c-a-i-a-a-9219001",
+        "cai-aprica-9216127",
+        "cai-arcore-9116092",
         "cai-arenzano-9110001",
         "cai-arezzo-9226009",
         "cai-argenta-9224016",
         "cai-arona-9212018",
+        "cai-arosio-9116060",
+        "cai-arsago-seprio-9216153",
         "cai-arsiero-9120006",
         "cai-arsita-9234026",
         "cai-artegna-9122009",
         "cai-arzignano-9220024",
-        "cai-ascoli-piceno-9228002",
         "cai-asiago-9220040",
+        "cai-asso-9216069",
         "cai-assoc-guide-alpine-ital-9200002",
         "cai-asti-9212012",
         "cai-atessa-9234011",
@@ -71,18 +80,33 @@
         "cai-avigliana-9112002",
         "cai-aziendale-lanerossi-9120005",
         "cai-bagnone-9126013",
+        "cai-bagolino-9116018",
+        "cai-ballabio-9116050",
         "cai-bardonecchia-9212052",
         "cai-barga-9226024",
         "cai-barge-9212031",
         "cai-bari-9240002",
+        "cai-barlassina-9216090",
         "cai-barthelemy-9114002",
+        "cai-barzano-9216117",
+        "cai-barzio-9116051",
         "cai-bassano-del-grappa-9220010",
         "cai-baveno-9212032",
+        "cai-bellano-9216102",
         "cai-belluno-9220006",
+        "cai-bellusco-9116082",
         "cai-belpasso-9246010",
         "cai-benevento-9238008",
+        "cai-berbenno-9116142",
+        "cai-bergamo-9216002",
+        "cai-besana-brianza-9216073",
+        "cai-besozzo-superiore-9216026",
+        "cai-biassono-9116033",
         "cai-biella-9212005",
+        "cai-bizzarone-9116119",
+        "cai-boffalora-sopra-ticino-9216114",
         "cai-boiano-9136001",
+        "cai-bollate-9216034",
         "cai-bologna-9224002",
         "cai-bolzaneto-9210018",
         "cai-bolzano-9219002",
@@ -90,39 +114,62 @@
         "cai-borgo-san-dalmazzo-9112040",
         "cai-borgomanero-9212025",
         "cai-borgosesia-9112026",
+        "cai-bormio-9216094",
+        "cai-borno-9216113",
         "cai-bosco-chiesanuova-9220050",
+        "cai-bovegno-9216137",
+        "cai-bovisio-masciago-9216082",
+        "cai-bozzolo-9216140",
         "cai-bra-9212048",
         "cai-brennero-c-a-i-a-a-9219013",
+        "cai-breno-9216129",
+        "cai-brescia-9216005",
         "cai-bressanone-c-a-i-a-a-9219003",
+        "cai-brignano-gera-d-adda-9116120",
         "cai-bronte-9246017",
         "cai-bronzolo-c-a-i-a-a-9219004",
+        "cai-brugherio-9216072",
         "cai-brunico-c-a-i-a-a-9219005",
         "cai-buja-9122003",
+        "cai-burago-molgora-9116134",
         "cai-busca-9112010",
         "cai-bussoleno-9212023",
+        "cai-busto-arsizio-9216014",
         "cai-c-a-a-i-9200001",
         "cai-c-n-s-a-s-9200003",
         "cai-c-r-a-l-c-r-t-9112046",
+        "cai-cabiate-9216080",
         "cai-caccamo-9246020",
         "cai-cagliari-9248001",
         "cai-cai-pacific-northwest-9126022",
         "cai-calalzo-di-cadore-9220035",
+        "cai-calco-9216079",
+        "cai-calolziocorte-9216035",
         "cai-cameri-9212083",
-        "cai-camerino-9228005",
         "cai-campobasso-9236001",
         "cai-camposampiero-9220048",
         "cai-canal-di-brenta-9120022",
         "cai-candiolo-9112053",
+        "cai-cantu-9216050",
+        "cai-canzo-9216095",
+        "cai-capiago-intimiano-9216108",
         "cai-caprile-9220066",
         "cai-caprino-veronese-9220067",
+        "cai-carate-brianza-9216030",
         "cai-carmagnola-9212082",
+        "cai-carnago-9216085",
         "cai-carpi-9224010",
         "cai-carrara-9226005",
         "cai-carsoli-9234024",
         "cai-casale-monferrato-9212015",
+        "cai-casalmaggiore-9116043",
         "cai-caselle-torinese-9212026",
         "cai-caserta-9238006",
+        "cai-caslino-d-erba-9216063",
+        "cai-casorate-sempione-9116045",
+        "cai-cassa-di-risparmio-9116067",
         "cai-cassa-di-risparmio-9126001",
+        "cai-cassano-d-adda-9216088",
         "cai-castel-di-sangro-9234015",
         "cai-castelbuono-9146001",
         "cai-castelfranco-emilia-9224017",
@@ -130,72 +177,111 @@
         "cai-castelgandolfo-9132013",
         "cai-castellammare-del-golfo-9146013",
         "cai-castellammare-di-stabia-9238009",
+        "cai-castellanza-9216036",
         "cai-castelli-9234010",
         "cai-castelnovo-ne-monti-9224013",
         "cai-castelnuovo-garfagnana-9226021",
         "cai-castiglione-pepoli-9124003",
+        "cai-castiglione-stiviere-9216096",
+        "cai-castione-presolana-9116132",
         "cai-castrovillari-9244005",
         "cai-catania-9246001",
         "cai-catanzaro-9244004",
         "cai-cava-dei-tirreni-9238002",
+        "cai-cavenago-brianza-9116136",
         "cai-cavour-9212077",
         "cai-cavriago-9124011",
+        "cai-cedegolo-9216062",
         "cai-cefalu-9246016",
         "cai-celano-9134009",
         "cai-cengio-9110006",
         "cai-cento-9124014",
         "cai-cerchiara-di-calabria-9144003",
+        "cai-cermenate-9216116",
+        "cai-cernusco-sul-naviglio-9216051",
         "cai-cervasca-9212081",
         "cai-cervignano-del-friuli-9222026",
         "cai-cesare-battisti-9220062",
         "cai-cesena-9224012",
         "cai-ceva-9212058",
         "cai-chatillon-9214004",
+        "cai-chiari-9216052",
         "cai-chiavari-9210012",
+        "cai-chiavenna-9216018",
         "cai-chieri-9212084",
         "cai-chieti-9234001",
         "cai-chioggia-9220025",
         "cai-chiomonte-9212059",
         "cai-chiusa-c-a-i-a-a-9219006",
         "cai-chivasso-9212013",
+        "cai-cidneo-o-m-9116019",
         "cai-cigliano-9112008",
         "cai-cimolais-9222016",
+        "cai-cinisello-balsamo-9216098",
         "cai-cirie-9212024",
+        "cai-cisano-9116005",
         "cai-citta-di-castello-9230005",
         "cai-cittadella-9220020",
         "cai-cividale-del-friuli-9222014",
         "cai-claut-9222015",
+        "cai-clusone-9216132",
         "cai-coazze-9212063",
+        "cai-coccaglio-9216139",
+        "cai-codogno-9216071",
         "cai-codroipo-9222027",
+        "cai-colico-9216123",
+        "cai-collebeato-9116110",
+        "cai-collio-9216152",
+        "cai-cologno-monzese-9216038",
+        "cai-comit-9116069",
+        "cai-como-9216006",
+        "cai-concorezzo-9216105",
         "cai-conegliano-9220018",
+        "cai-cornaredo-9216149",
         "cai-cornigliano-9110003",
+        "cai-corsera-9116115",
+        "cai-corsico-9216115",
         "cai-cortina-d-ampezzo-9220011",
         "cai-cosenza-9244002",
+        "cai-crema-9216027",
+        "cai-cremona-9216007",
         "cai-cumiana-9212060",
         "cai-cuneo-9212006",
         "cai-cuorgne-9212072",
+        "cai-cusano-milanino-9116131",
+        "cai-darfo-9116096",
+        "cai-dervio-9216053",
+        "cai-desenzano-9216136",
+        "cai-desio-9216011",
         "cai-dolo-9220031",
         "cai-domegge-di-cadore-9220039",
         "cai-domodossola-9212003",
+        "cai-dongo-9216131",
         "cai-dronero-9112012",
         "cai-dueville-9220057",
+        "cai-edelweiss-9116104",
+        "cai-edolo-9216111",
         "cai-egna-c-a-i-a-a-9219007",
         "cai-emilio-bertini-prato-9226008",
+        "cai-erba-9216099",
         "cai-erice-9246019",
+        "cai-esino-lario-9116099",
         "cai-este-9220032",
-        "cai-fabriano-9228007",
         "cai-faedis-9122021",
         "cai-faenza-9224011",
+        "cai-falc-9116071",
         "cai-famiglia-alpinistica-9120013",
         "cai-fara-s-martino-9234012",
         "cai-farindola-9234008",
         "cai-feltre-9220013",
-        "cai-fermo-9228004",
         "cai-ferrara-9224006",
         "cai-fiamme-gialle-9220053",
         "cai-fidenza-9124013",
+        "cai-figino-serenza-9116032",
         "cai-filattiera-9126008",
         "cai-finale-ligure-9210016",
+        "cai-fino-mornasco-9216086",
+        "cai-fior-di-roccia-9116072",
         "cai-firenze-9226001",
         "cai-fiume-9220064",
         "cai-fivizzano-9226019",
@@ -211,23 +297,37 @@
         "cai-forte-dei-marmi-9226012",
         "cai-fortezza-9119001",
         "cai-fossano-9212034",
+        "cai-g-a-m-9116073",
         "cai-g-alp-giov-mont-9120010",
         "cai-g-alp-scaligero-9120011",
         "cai-g-e-a-t-9112020",
+        "cai-g-e-s-a-9116114",
+        "cai-gallarate-9216015",
         "cai-gallinaro-in-val-di-comino-9232015",
         "cai-gallura-9148002",
+        "cai-garbagnate-milanese-9216066",
+        "cai-gardone-val-trompia-9216054",
         "cai-garessio-9212038",
         "cai-gassino-torinese-9112041",
         "cai-gattinara-9112031",
+        "cai-gavardo-9216154",
+        "cai-gavirate-9216059",
+        "cai-gazzada-schianno-9216148",
+        "cai-gazzaniga-9116008",
         "cai-ge-sestri-diventata-sezione-9110008",
         "cai-gemona-del-friuli-9222007",
         "cai-genzano-9132008",
+        "cai-germignaga-9216031",
+        "cai-gervasutti-9116074",
         "cai-ghemme-9112027",
         "cai-giarre-9246005",
         "cai-giaveno-9212043",
         "cai-giffoni-valle-piana-9138008",
         "cai-gioia-del-colle-9240001",
+        "cai-giussano-9216039",
+        "cai-gorgonzola-9216070",
         "cai-gorizia-9222005",
+        "cai-gorla-minore-9116144",
         "cai-gozzano-9212037",
         "cai-gravellona-toce-9212035",
         "cai-gressoney-9214002",
@@ -245,53 +345,86 @@
         "cai-guidonia-montecelio-9132017",
         "cai-imola-9224005",
         "cai-imperia-9210002",
+        "cai-introbio-9216110",
+        "cai-inverigo-9216091",
+        "cai-inveruno-9216128",
+        "cai-inzago-9216083",
         "cai-ischia-9138002",
+        "cai-iseo-9216157",
         "cai-iseo-diventata-sezione-9116023",
         "cai-isernia-9236002",
         "cai-isola-d-elba-9126023",
         "cai-isola-del-gran-sasso-9234018",
         "cai-ivrea-9212008",
-        "cai-jesi-9228003",
         "cai-l-aquila-9234002",
         "cai-la-spezia-9210004",
         "cai-lagonegro-9242002",
         "cai-laives-9219015",
         "cai-lanciano-9234017",
         "cai-lanzo-torinese-9212047",
+        "cai-laveno-mombello-9216032",
         "cai-lecce-9240005",
+        "cai-lecco-9216004",
+        "cai-leffe-9116009",
         "cai-legnago-9220063",
+        "cai-legnano-9216022",
         "cai-leini-9212039",
         "cai-lendinara-9220038",
+        "cai-lentate-sul-seveso-9116061",
         "cai-ligure-genova-9210001",
         "cai-linguaglossa-9246004",
+        "cai-lissone-9216040",
+        "cai-livigno-9216120",
         "cai-livinallongo-colle-9220044",
         "cai-livorno-9226004",
         "cai-loano-9210015",
+        "cai-lodi-9216017",
         "cai-longarone-9220041",
         "cai-lonigo-9220015",
         "cai-lorenzago-9220049",
         "cai-loreto-aprutino-9234023",
+        "cai-lovere-9216055",
         "cai-lozzo-di-cadore-9220043",
         "cai-lucca-9226006",
         "cai-lugo-9224019",
-        "cai-macerata-9228008",
+        "cai-luino-9216064",
+        "cai-lumezzane-9216144",
+        "cai-macherio-9216119",
         "cai-macugnaga-9212050",
+        "cai-madesimo-9216104",
+        "cai-magenta-9216041",
+        "cai-malnate-9216067",
         "cai-malo-9220046",
+        "cai-mandello-lario-9216019",
+        "cai-manerbio-9116106",
         "cai-maniago-9222008",
+        "cai-mantova-9216025",
         "cai-manzano-9222025",
+        "cai-mariano-comense-9216077",
+        "cai-marone-9116024",
         "cai-marostica-9220026",
+        "cai-maslianico-9116036",
         "cai-massa-9226013",
         "cai-massa-marittima-9126016",
         "cai-matera-9242004",
+        "cai-meda-9216042",
+        "cai-melegnano-9216109",
         "cai-melfi-9242003",
+        "cai-menaggio-9216060",
         "cai-mendicino-9144004",
         "cai-merano-c-a-i-a-a-9219009",
+        "cai-merate-9216023",
+        "cai-merone-9216097",
         "cai-messina-9246006",
         "cai-mestre-9220021",
+        "cai-milano-9216003",
         "cai-milena-9146012",
         "cai-mirano-9220055",
+        "cai-missaglia-9216150",
         "cai-modena-9224003",
         "cai-moggio-udinese-9222013",
+        "cai-molteno-9216074",
+        "cai-moltrasio-9216046",
         "cai-moncalieri-9212079",
         "cai-mondovi-9212010",
         "cai-monfalcone-9222012",
@@ -300,26 +433,41 @@
         "cai-montaquila-9136002",
         "cai-monte-bulgheria-9238010",
         "cai-monte-bulgheria-diventata-sezione-9138006",
+        "cai-monte-olimpino-9116037",
         "cai-montebello-vicentino-9220034",
         "cai-montebelluna-9220019",
         "cai-montecchio-maggiore-9220028",
-        "cai-montefeltro-9228015",
-        "cai-montefortino-9128002",
+        "cai-montedison-9116077",
         "cai-montepiano-9126020",
+        "cai-montevecchia-9216093",
+        "cai-monza-9216008",
+        "cai-morbegno-9216029",
+        "cai-mortara-9216061",
         "cai-motta-di-livenza-9220051",
         "cai-muggia-9122019",
+        "cai-muggio-9216142",
         "cai-napoli-9238001",
+        "cai-nave-9116093",
+        "cai-nembro-9116010",
+        "cai-nerviano-9216100",
         "cai-novara-9212014",
         "cai-novara-di-sicilia-9246018",
+        "cai-novate-mezzola-9216101",
+        "cai-novate-milanese-9216043",
         "cai-novellara-9124016",
         "cai-noventa-vicentina-9120025",
         "cai-novi-ligure-9212054",
         "cai-nuoro-9248002",
         "cai-nusco-9138001",
         "cai-oderzo-9220052",
+        "cai-odolo-9116025",
+        "cai-oggiono-9216143",
         "cai-ogliastra-diventata-sezione-9148001",
         "cai-oleggio-mezzomerico-9112017",
+        "cai-olgiate-comasco-9116135",
+        "cai-olgiate-olona-9216047",
         "cai-omegna-9212020",
+        "cai-oneta-9116139",
         "cai-orbassano-9212075",
         "cai-oriolo-romano-sorgenti-del-mignone-9132019",
         "cai-oristano-9248004",
@@ -327,27 +475,34 @@
         "cai-ortona-9234020",
         "cai-orvieto-9230008",
         "cai-osoppo-9122004",
+        "cai-ostiglia-9216122",
         "cai-ovada-9212068",
+        "cai-paderno-dugnano-9216057",
         "cai-padova-9220008",
+        "cai-paina-9116049",
+        "cai-palazzolo-sull-oglio-9216010",
         "cai-palermo-9246002",
         "cai-pallanza-9212027",
         "cai-palmanova-9122020",
         "cai-pantelleria-9146019",
+        "cai-parabiago-9216138",
         "cai-parma-9224001",
         "cai-pasian-di-prato-9122012",
+        "cai-pavia-9216012",
         "cai-pavullo-nel-frignano-9224020",
         "cai-pedara-9246015",
         "cai-pedemontana-grappa-9120023",
         "cai-penne-9234006",
         "cai-perugia-9230001",
-        "cai-pesaro-9228006",
         "cai-pescara-9234005",
         "cai-pescia-9226026",
         "cai-pescina-9134003",
         "cai-petralia-sottana-9246003",
         "cai-peveragno-9212073",
+        "cai-pezzo-pontedilegno-9216124",
         "cai-piacenza-9224007",
         "cai-pianezza-9212066",
+        "cai-piazza-brembana-9216135",
         "cai-piedimonte-matese-9238005",
         "cai-piedimulera-9212028",
         "cai-pietracamela-9134011",
@@ -358,12 +513,15 @@
         "cai-pinerolo-9212009",
         "cai-pino-torinese-9212078",
         "cai-pisa-9226003",
+        "cai-pisogne-9116027",
         "cai-pistoia-9226007",
         "cai-poggio-bustone-9132016",
         "cai-poggio-mirteto-9132001",
         "cai-polizzi-generosa-9246007",
         "cai-pontassieve-9126015",
+        "cai-ponte-in-valtellina-9116109",
         "cai-ponte-piave-salgareda-9220058",
+        "cai-ponte-san-pietro-9116013",
         "cai-pontebba-9222023",
         "cai-pontedera-9226025",
         "cai-pontremoli-9226017",
@@ -372,7 +530,9 @@
         "cai-porretta-terme-9224018",
         "cai-portogruaro-9220030",
         "cai-potenza-9242001",
-        "cai-potenza-picena-9228014",
+        "cai-premana-9216089",
+        "cai-provaglio-d-iseo-9116123",
+        "cai-quistello-9116059",
         "cai-racconigi-9212046",
         "cai-ragusa-9246014",
         "cai-randazzo-9146015",
@@ -383,12 +543,17 @@
         "cai-recoaro-terme-9220045",
         "cai-reggio-calabria-9244001",
         "cai-reggio-emilia-9224008",
+        "cai-rho-9216021",
         "cai-rimini-9224009",
         "cai-rivarolo-canavese-9212041",
         "cai-rivoli-9212069",
         "cai-roccarainola-9138004",
         "cai-romagnano-9112029",
+        "cai-romano-di-lombardia-9216087",
         "cai-rosciolo-di-magliano-9134012",
+        "cai-rovagnate-9216068",
+        "cai-rovato-9216125",
+        "cai-rovellasca-9216141",
         "cai-rovigo-9220023",
         "cai-rubiera-9124015",
         "cai-s-a-f-udine-9222003",
@@ -480,15 +645,15 @@
         "cai-s-a-t-vezzano-9118071",
         "cai-s-a-t-vigolo-vattaro-9118080",
         "cai-s-a-t-zambana-9118086",
-        "cai-s-benedetto-del-tronto-9228013",
         "cai-s-bonifacio-9220060",
         "cai-s-daniele-del-friuli-9122014",
         "cai-s-dona-di-piave-9220036",
+        "cai-s-e-m-9216028",
+        "cai-s-fruttuoso-9116084",
         "cai-s-ilario-d-enza-9124005",
         "cai-s-pietro-in-cariano-9220059",
         "cai-s-polo-di-piave-9120019",
         "cai-s-salvatore-monferrato-9212051",
-        "cai-s-severino-marche-9228009",
         "cai-s-u-c-a-i-9112023",
         "cai-s-u-c-a-i-9146002",
         "cai-s-vito-al-tagliamento-9222019",
@@ -496,6 +661,7 @@
         "cai-sacile-9222024",
         "cai-salbertrand-9112051",
         "cai-salerno-9238003",
+        "cai-salo-9216076",
         "cai-salorno-c-a-i-a-a-9219014",
         "cai-saluggia-9112009",
         "cai-saluzzo-9212011",
@@ -507,9 +673,10 @@
         "cai-sant-angelo-muxaro-9146010",
         "cai-santa-elisabetta-9146016",
         "cai-santena-9112037",
+        "cai-santicolo-9116029",
         "cai-santo-stefano-quisquina-9146020",
         "cai-sappada-9220033",
-        "cai-sarnano-9228011",
+        "cai-saronno-9216033",
         "cai-sarzana-9210009",
         "cai-sassari-9248003",
         "cai-sassuolo-9224015",
@@ -520,38 +687,53 @@
         "cai-scandicci-9226027",
         "cai-schio-9220007",
         "cai-scopello-9112030",
-        "cai-senigallia-9228012",
+        "cai-seregno-9216016",
         "cai-serra-pedace-9144002",
         "cai-serre-calabre-9144005",
+        "cai-sesto-calende-9216044",
         "cai-sesto-fiorentino-9226011",
+        "cai-sesto-s-giovanni-9216020",
         "cai-sestri-ponente-9210020",
         "cai-settimo-torinese-9112022",
+        "cai-seveso-s-pietro-9216058",
         "cai-sezze-9132007",
         "cai-siena-9226002",
         "cai-siracusa-9246013",
+        "cai-somma-lombardo-9216065",
+        "cai-sondalo-9216118",
         "cai-sori-9110009",
+        "cai-sovico-9216121",
         "cai-sparone-9112033",
         "cai-spilimbergo-9222018",
         "cai-spoleto-9230002",
         "cai-spresiano-9220056",
         "cai-stia-9226028",
+        "cai-strada-storta-9116052",
         "cai-stresa-9212030",
         "cai-subiaco-9132012",
+        "cai-sulbiate-9116121",
         "cai-sulmona-9234004",
         "cai-susa-9212004",
+        "cai-suzzara-9116097",
         "cai-taormina-9146011",
         "cai-tarcento-cai-udine-9122015",
         "cai-tarvisio-9222010",
+        "cai-teglio-9216158",
         "cai-teglio-diventata-sezione-9116143",
         "cai-teramo-9234003",
         "cai-terni-9230003",
         "cai-thiene-9220014",
+        "cai-tirano-9116089",
         "cai-tolmezzo-9222002",
         "cai-torino-9212001",
         "cai-torre-de-passeri-9134014",
         "cai-tortona-9212040",
+        "cai-tradate-9216133",
         "cai-tregnago-9220061",
+        "cai-trescore-valcavallina-9116138",
+        "cai-treviglio-9216045",
         "cai-treviso-9220009",
+        "cai-trezzo-sull-adda-9216156",
         "cai-tricesimo-9222029",
         "cai-trivero-9212080",
         "cai-trofarello-9112049",
@@ -560,8 +742,11 @@
         "cai-u-l-e-genova-9210005",
         "cai-uget-torino-9212019",
         "cai-uget-valpellice-torre-pellice-9212021",
+        "cai-urgnano-9116128",
+        "cai-usmate-9116064",
         "cai-val-badia-c-a-i-a-a-9219010",
         "cai-val-della-torre-9212065",
+        "cai-val-di-scalve-9116014",
         "cai-val-di-vara-riviera-9110004",
         "cai-val-di-viu-9112052",
         "cai-val-di-zoldo-9220037",
@@ -573,19 +758,35 @@
         "cai-valdagno-9220012",
         "cai-valdarno-inferiore-9226018",
         "cai-valdarno-superiore-9226023",
+        "cai-valdidentro-9116140",
         "cai-valenza-9212057",
+        "cai-valfurva-9216106",
+        "cai-valgandino-9116007",
         "cai-valgermanasca-9212049",
         "cai-valgrande-9112050",
+        "cai-valle-imagna-9116095",
+        "cai-valle-intelvi-9216130",
         "cai-valle-roveto-9234019",
         "cai-valle-vigezzo-9212056",
         "cai-vallelonga-coppo-dell-orso-9234025",
+        "cai-valmadrera-9216081",
+        "cai-valmalenco-9216112",
+        "cai-valserina-9116011",
         "cai-valsessera-9212029",
+        "cai-valtellinese-sondrio-9216001",
         "cai-valtramontina-9122018",
         "cai-valvasone-9122007",
+        "cai-vanzago-9116054",
+        "cai-vaprio-d-adda-9116015",
         "cai-varallo-sesia-9212002",
+        "cai-varano-borghi-9116118",
         "cai-varazze-9210007",
+        "cai-varese-9216009",
         "cai-varzo-9212055",
         "cai-vasto-9234022",
+        "cai-vedano-al-lambro-9216075",
+        "cai-vedano-olona-9216078",
+        "cai-veduggio-9216147",
         "cai-velletri-9132003",
         "cai-venaria-reale-9212042",
         "cai-venezia-9220005",
@@ -595,18 +796,28 @@
         "cai-vercelli-9212016",
         "cai-verona-9220003",
         "cai-verres-9214003",
+        "cai-vestone-9216155",
         "cai-vesuvio-9138005",
         "cai-viareggio-9226010",
         "cai-vicenza-9220004",
+        "cai-vigevano-9216013",
         "cai-vigo-di-cadore-9220047",
         "cai-vigone-9212074",
+        "cai-villa-carcina-9216146",
+        "cai-villa-d-alme-9116124",
         "cai-villadossola-9212022",
         "cai-villagrande-ogliastra-9248005",
+        "cai-villasanta-9216126",
+        "cai-vimercate-9216048",
+        "cai-vimodrone-9216151",
         "cai-vipiteno-c-a-i-a-a-9219012",
         "cai-vittorio-veneto-9220017",
+        "cai-vittuone-9216145",
+        "cai-voghera-9216024",
         "cai-volpiano-9212053",
         "cai-xxx-ottobre-9222011",
         "cai-zevio-9120024",
+        "cai-zogno-9116016",
         "cassino",
         "colleferro",
         "esperia",
@@ -626,6 +837,889 @@
     }
   },
   "sections": [
+    {
+      "id": "cai-amandola-9228010",
+      "directoryId": "9228010",
+      "organizer": "CAI Amandola",
+      "region": "Marche",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "municipality": "Amandola",
+      "province": "AP",
+      "headquartersCoordinates": {
+        "latitude": 42.9795536,
+        "longitude": 13.3557024
+      },
+      "website": "https://www.caiamandola.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228010",
+      "url": "https://www.caiamandola.it/",
+      "calendarUrls": [],
+      "kind": "html",
+      "template": "html-calendar",
+      "extractor": "deterministic",
+      "enabled": true,
+      "status": "website-only",
+      "evidenceUrls": [
+        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
+      ],
+      "calendarEvidence": [],
+      "verifiedAt": "2026-09-05T20:27:27.374Z"
+    },
+    {
+      "id": "cai-ancona-9228001",
+      "directoryId": "9228001",
+      "organizer": "CAI Ancona",
+      "region": "Marche",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "municipality": "Ancona",
+      "province": "AN",
+      "headquartersCoordinates": {
+        "latitude": 43.6145182,
+        "longitude": 13.5157338
+      },
+      "website": "https://www.caiancona.org/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228001",
+      "url": "https://www.caiancona.org/news/calendario-regionale-cai-marche",
+      "calendarUrls": [
+        "https://www.caiancona.org/news/calendario-regionale-cai-marche",
+        "https://www.caiancona.org/eventi/escursionismo/20261001lu",
+        "https://www.caiancona.org/eventi/corsi/",
+        "https://www.caiancona.org/eventi/",
+        "https://www.caiancona.org/eventi/alpinismo/",
+        "https://www.caiancona.org/eventi/alpinismo-giovanile/",
+        "https://www.caiancona.org/eventi/arrampicata-libera/",
+        "https://www.caiancona.org/eventi/ciclo-escursionismo/"
+      ],
+      "kind": "html",
+      "template": "html-calendar",
+      "extractor": "deterministic",
+      "enabled": true,
+      "status": "calendar-found",
+      "evidenceUrls": [
+        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
+      ],
+      "calendarEvidence": [
+        {
+          "url": "https://www.caiancona.org/news/calendario-regionale-cai-marche",
+          "label": "",
+          "foundOn": "https://www.caiancona.org/news/calendario-regionale-cai-marche"
+        },
+        {
+          "url": "https://www.caiancona.org/eventi/escursionismo/20261001lu",
+          "label": "",
+          "foundOn": "https://www.caiancona.org/eventi/escursionismo/20261001lu"
+        },
+        {
+          "url": "https://www.caiancona.org/eventi/corsi/",
+          "label": "Corsi",
+          "foundOn": "https://www.caiancona.org/eventi/escursionismo/20261001lu"
+        },
+        {
+          "url": "https://www.caiancona.org/eventi/",
+          "label": "Iniziative",
+          "foundOn": "https://www.caiancona.org/eventi/escursionismo/20261001lu"
+        },
+        {
+          "url": "https://www.caiancona.org/eventi/alpinismo/",
+          "label": "ALPINISMO - GAD GRUPPO ALPINISTICO DORICO",
+          "foundOn": "https://www.caiancona.org/"
+        },
+        {
+          "url": "https://www.caiancona.org/eventi/alpinismo-giovanile/",
+          "label": "ALPINISMO GIOVANILE",
+          "foundOn": "https://www.caiancona.org/"
+        },
+        {
+          "url": "https://www.caiancona.org/eventi/arrampicata-libera/",
+          "label": "ARRAMPICATA LIBERA",
+          "foundOn": "https://www.caiancona.org/"
+        },
+        {
+          "url": "https://www.caiancona.org/eventi/ciclo-escursionismo/",
+          "label": "CICLO ESCURSIONISMO",
+          "foundOn": "https://www.caiancona.org/"
+        }
+      ],
+      "verifiedAt": "2026-09-05T20:27:28.985Z"
+    },
+    {
+      "id": "cai-ascoli-piceno-9228002",
+      "directoryId": "9228002",
+      "organizer": "CAI Ascoli Piceno",
+      "region": "Marche",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "municipality": "Ascoli Piceno",
+      "province": "AP",
+      "headquartersCoordinates": {
+        "latitude": 42.851606,
+        "longitude": 13.5866578
+      },
+      "website": "https://www.caiascoli.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228002",
+      "url": "http://www.caiascoli.it/download/programma-2026.pdf",
+      "calendarUrls": [
+        "http://www.caiascoli.it/download/programma-2026.pdf",
+        "https://www.caiascoli.it/programma-2026/",
+        "https://www.caiascoli.it/programma-2026/feed/",
+        "https://www.caiascoli.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caiascoli.it%2Fprogramma-2026%2F",
+        "https://www.caiascoli.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caiascoli.it%2Fprogramma-2026%2F&format=xml",
+        "https://www.caiascoli.it/corso-e1-2026/",
+        "https://www.caiascoli.it/commissione-escursionismo/",
+        "https://www.caiascoli.it/slow-bike/"
+      ],
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "deterministic",
+      "enabled": true,
+      "status": "calendar-found",
+      "evidenceUrls": [
+        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
+      ],
+      "calendarEvidence": [
+        {
+          "url": "http://www.caiascoli.it/download/programma-2026.pdf",
+          "label": "Scarica programma.",
+          "foundOn": "https://www.caiascoli.it/programma-2026/"
+        },
+        {
+          "url": "https://www.caiascoli.it/programma-2026/",
+          "label": "Programma 2026",
+          "foundOn": "https://www.caiascoli.it/corso-e1-2026/"
+        },
+        {
+          "url": "https://www.caiascoli.it/programma-2026/feed/",
+          "label": "",
+          "foundOn": "https://www.caiascoli.it/programma-2026/"
+        },
+        {
+          "url": "https://www.caiascoli.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caiascoli.it%2Fprogramma-2026%2F",
+          "label": "",
+          "foundOn": "https://www.caiascoli.it/programma-2026/"
+        },
+        {
+          "url": "https://www.caiascoli.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caiascoli.it%2Fprogramma-2026%2F&format=xml",
+          "label": "",
+          "foundOn": "https://www.caiascoli.it/programma-2026/"
+        },
+        {
+          "url": "https://www.caiascoli.it/corso-e1-2026/",
+          "label": "13° Corso di Escursionismo base – E1",
+          "foundOn": "https://www.caiascoli.it/",
+          "verifiedAt": "2026-09-05T20:27:40.778Z"
+        },
+        {
+          "url": "https://www.caiascoli.it/commissione-escursionismo/",
+          "label": "Escursionismo",
+          "foundOn": "https://www.caiascoli.it/corso-e1-2026/"
+        },
+        {
+          "url": "https://www.caiascoli.it/slow-bike/",
+          "label": "Cicloescursionismo (Slow Bike)",
+          "foundOn": "https://www.caiascoli.it/corso-e1-2026/"
+        }
+      ],
+      "verifiedAt": "2026-09-05T20:27:28.771Z"
+    },
+    {
+      "id": "cai-camerino-9228005",
+      "directoryId": "9228005",
+      "organizer": "CAI Camerino",
+      "region": "Marche",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "municipality": "Camerino",
+      "province": "MC",
+      "headquartersCoordinates": {
+        "latitude": 43.1352951,
+        "longitude": 13.0664346
+      },
+      "website": "https://organizzazione.cai.it/sez-camerino/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228005",
+      "url": "https://organizzazione.cai.it/sez-camerino/eventi/?ical=1",
+      "calendarUrls": [
+        "https://organizzazione.cai.it/sez-camerino/eventi/?ical=1",
+        "https://organizzazione.cai.it/sez-camerino/attivita/programma-escursionistico-2024/",
+        "https://organizzazione.cai.it/sez-camerino/attivita/programma-2023/",
+        "https://organizzazione.cai.it/sez-camerino/escursioni/",
+        "https://organizzazione.cai.it/sez-camerino/attivita/",
+        "https://organizzazione.cai.it/sez-camerino/attivita/archivio-programmi/"
+      ],
+      "kind": "ics",
+      "template": "icalendar",
+      "extractor": "deterministic",
+      "enabled": true,
+      "status": "calendar-found",
+      "evidenceUrls": [
+        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
+      ],
+      "calendarEvidence": [
+        {
+          "url": "https://organizzazione.cai.it/sez-camerino/eventi/?ical=1",
+          "label": "",
+          "foundOn": "https://organizzazione.cai.it/sez-camerino/attivita/programma-2023/"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-camerino/attivita/programma-escursionistico-2024/",
+          "label": "Programma Escursionistico 2026",
+          "foundOn": "https://organizzazione.cai.it/sez-camerino/attivita/programma-2023/"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-camerino/attivita/programma-2023/",
+          "label": "Programma di Alpinismo Giovanile 2026",
+          "foundOn": "https://organizzazione.cai.it/sez-camerino/attivita/programma-2023/"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-camerino/escursioni/",
+          "label": "Escursioni in ambiente innevato 2026/27",
+          "foundOn": "https://organizzazione.cai.it/sez-camerino/attivita/programma-2023/"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-camerino/attivita/",
+          "label": "Attività",
+          "foundOn": "https://organizzazione.cai.it/sez-camerino/attivita/programma-2023/"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-camerino/attivita/archivio-programmi/",
+          "label": "Archivio Libretti",
+          "foundOn": "https://organizzazione.cai.it/sez-camerino/attivita/programma-2023/"
+        }
+      ],
+      "verifiedAt": "2026-09-05T20:27:28.819Z"
+    },
+    {
+      "id": "cai-fabriano-9228007",
+      "directoryId": "9228007",
+      "organizer": "CAI Fabriano",
+      "region": "Marche",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "municipality": "Fabriano",
+      "province": "AN",
+      "headquartersCoordinates": {
+        "latitude": 43.3393566,
+        "longitude": 12.9086593
+      },
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228007",
+      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228007",
+      "calendarUrls": [],
+      "kind": "discover",
+      "template": "calendar-discovery",
+      "extractor": "deterministic",
+      "enabled": false,
+      "status": "missing-website",
+      "evidenceUrls": [
+        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
+      ],
+      "calendarEvidence": []
+    },
+    {
+      "id": "cai-fermo-9228004",
+      "directoryId": "9228004",
+      "organizer": "CAI Fermo",
+      "region": "Marche",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "municipality": "Fermo",
+      "province": "FM",
+      "headquartersCoordinates": {
+        "latitude": 43.16172,
+        "longitude": 13.71242
+      },
+      "website": "https://www.caifermo.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228004",
+      "url": "https://www.caifermo.it/wp-content/uploads/2026/01/CAI-FERMO-PROGRAMMA-2026.pdf",
+      "calendarUrls": [
+        "https://www.caifermo.it/wp-content/uploads/2026/01/CAI-FERMO-PROGRAMMA-2026.pdf",
+        "https://www.caifermo.it/calendario-attivita-2026-cai-fermo/",
+        "https://www.caifermo.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caifermo.it%2Fcalendario-attivita-2026-cai-fermo%2F",
+        "https://www.caifermo.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caifermo.it%2Fcalendario-attivita-2026-cai-fermo%2F&format=xml",
+        "https://www.caifermo.it/wp-content/uploads/2026/01/Escursionismo.pdf",
+        "https://www.caifermo.it/escursionismo/",
+        "https://www.caifermo.it/ciclo-escursionismo/",
+        "https://www.caifermo.it/escursionismo-3/"
+      ],
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "deterministic",
+      "enabled": true,
+      "status": "calendar-found",
+      "evidenceUrls": [
+        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
+      ],
+      "calendarEvidence": [
+        {
+          "url": "https://www.caifermo.it/wp-content/uploads/2026/01/CAI-FERMO-PROGRAMMA-2026.pdf",
+          "label": "",
+          "foundOn": "https://www.caifermo.it/calendario-attivita-2026-cai-fermo/"
+        },
+        {
+          "url": "https://www.caifermo.it/calendario-attivita-2026-cai-fermo/",
+          "label": "",
+          "foundOn": "https://www.caifermo.it/calendario-attivita-2026-cai-fermo/"
+        },
+        {
+          "url": "https://www.caifermo.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caifermo.it%2Fcalendario-attivita-2026-cai-fermo%2F",
+          "label": "",
+          "foundOn": "https://www.caifermo.it/calendario-attivita-2026-cai-fermo/"
+        },
+        {
+          "url": "https://www.caifermo.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caifermo.it%2Fcalendario-attivita-2026-cai-fermo%2F&format=xml",
+          "label": "",
+          "foundOn": "https://www.caifermo.it/calendario-attivita-2026-cai-fermo/"
+        },
+        {
+          "url": "https://www.caifermo.it/wp-content/uploads/2026/01/Escursionismo.pdf",
+          "label": "",
+          "foundOn": "https://www.caifermo.it/escursionismo/"
+        },
+        {
+          "url": "https://www.caifermo.it/escursionismo/",
+          "label": "Escursionismo",
+          "foundOn": "https://www.caifermo.it/calendario-attivita-2026-cai-fermo/"
+        },
+        {
+          "url": "https://www.caifermo.it/ciclo-escursionismo/",
+          "label": "Ciclo – Escursionismo",
+          "foundOn": "https://www.caifermo.it/escursionismo/"
+        },
+        {
+          "url": "https://www.caifermo.it/escursionismo-3/",
+          "label": "T.A.M. Tutela Ambiente Montano e Comitato Scientifico",
+          "foundOn": "https://www.caifermo.it/escursionismo/"
+        }
+      ],
+      "verifiedAt": "2026-09-05T20:27:28.684Z"
+    },
+    {
+      "id": "cai-jesi-9228003",
+      "directoryId": "9228003",
+      "organizer": "CAI Jesi",
+      "region": "Marche",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "municipality": "Jesi",
+      "province": "AN",
+      "headquartersCoordinates": {
+        "latitude": 43.5190276,
+        "longitude": 13.2335865
+      },
+      "website": "https://www.caijesi.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228003",
+      "url": "https://www.caijesi.it/?p=10617",
+      "calendarUrls": [
+        "https://www.caijesi.it/?p=10617",
+        "https://www.caijesi.it/?p=10587",
+        "https://www.caijesi.it/?p=10536",
+        "https://www.caijesi.it/?p=9045",
+        "https://www.caijesi.it/?p=10555",
+        "https://www.caijesi.it/?cat=11",
+        "https://www.caijesi.it/?p=7746",
+        "https://www.caijesi.it/?p=10662"
+      ],
+      "kind": "html",
+      "template": "html-calendar",
+      "extractor": "deterministic",
+      "enabled": true,
+      "status": "calendar-found",
+      "evidenceUrls": [
+        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
+      ],
+      "calendarEvidence": [
+        {
+          "url": "https://www.caijesi.it/?p=10617",
+          "label": "PROGRAMMA SENIORES 2026",
+          "foundOn": "https://www.caijesi.it/?p=10587"
+        },
+        {
+          "url": "https://www.caijesi.it/?p=10587",
+          "label": "Il chiodo nella roccia calendario 2026",
+          "foundOn": "https://www.caijesi.it/?p=10587"
+        },
+        {
+          "url": "https://www.caijesi.it/?p=10536",
+          "label": "PROGRAMMA 2026",
+          "foundOn": "https://www.caijesi.it/?p=10587"
+        },
+        {
+          "url": "https://www.caijesi.it/?p=9045",
+          "label": "Calendario delle uscite Seniores",
+          "foundOn": "https://www.caijesi.it/?p=10587"
+        },
+        {
+          "url": "https://www.caijesi.it/?p=10555",
+          "label": "Corso in programma",
+          "foundOn": "https://www.caijesi.it/"
+        },
+        {
+          "url": "https://www.caijesi.it/?cat=11",
+          "label": "Alpinismo Giovanile - uscite in calendario",
+          "foundOn": "https://www.caijesi.it/"
+        },
+        {
+          "url": "https://www.caijesi.it/?p=7746",
+          "label": "Riapertura sede e programmazione attività anche ai non soci",
+          "foundOn": "https://www.caijesi.it/"
+        },
+        {
+          "url": "https://www.caijesi.it/?p=10662",
+          "label": "Cicloescursionismo",
+          "foundOn": "https://www.caijesi.it/?p=10587"
+        }
+      ],
+      "verifiedAt": "2026-09-05T20:27:28.427Z"
+    },
+    {
+      "id": "cai-macerata-9228008",
+      "directoryId": "9228008",
+      "organizer": "CAI Macerata",
+      "region": "Marche",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "municipality": "Macerata",
+      "province": "MC",
+      "headquartersCoordinates": {
+        "latitude": 43.2868192,
+        "longitude": 13.4326328
+      },
+      "website": "https://caimacerata.com/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228008",
+      "url": "https://caimacerata.com/programma-escursioni-e-cicloescursioni",
+      "calendarUrls": [
+        "https://caimacerata.com/programma-escursioni-e-cicloescursioni",
+        "https://drive.google.com/file/d/1Fx6wRM4szvK0rOFKRJ6v1VyR-ocskQkz/view?usp=sharing",
+        "https://caimc.cluster.sistema3.it/calendario-attivita/19-settembre-2026-percorso-olivi-monumentali-rosciola-colli-esini",
+        "https://caimc.cluster.sistema3.it/calendario-attivita/12-13-settembre-2026-valmarecchia-bikepacking",
+        "https://caimc.cluster.sistema3.it/calendario-attivita/8-agosto-2026-una-serata-magica-sui-sibillini-apertura-della-baita-f-lli-cioci",
+        "https://caimc.cluster.sistema3.it/calendario-attivita/25-luglio-2026-monte-cacamillo-direttissima-dalla-costa-dei-frati",
+        "https://caimc.cluster.sistema3.it/calendario-attivita/01-02-agosto-2026-tendata-al-pnalm",
+        "https://caimc.cluster.sistema3.it/calendario-attivita/11-luglio-tramonto-in-vetta-cima-del-redentore"
+      ],
+      "kind": "html",
+      "template": "html-calendar",
+      "extractor": "deterministic",
+      "enabled": true,
+      "status": "calendar-found",
+      "evidenceUrls": [
+        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
+      ],
+      "calendarEvidence": [
+        {
+          "url": "https://caimacerata.com/programma-escursioni-e-cicloescursioni",
+          "label": "Programma escursioni e cicloescursioni 2026",
+          "foundOn": "https://caimacerata.com/calendario-attivita"
+        },
+        {
+          "url": "https://drive.google.com/file/d/1Fx6wRM4szvK0rOFKRJ6v1VyR-ocskQkz/view?usp=sharing",
+          "label": ">> calendario attività 2026",
+          "foundOn": "https://caimacerata.com/programma-escursioni-e-cicloescursioni"
+        },
+        {
+          "url": "https://caimc.cluster.sistema3.it/calendario-attivita/19-settembre-2026-percorso-olivi-monumentali-rosciola-colli-esini",
+          "label": "",
+          "foundOn": "https://caimacerata.com/calendario-attivita"
+        },
+        {
+          "url": "https://caimc.cluster.sistema3.it/calendario-attivita/12-13-settembre-2026-valmarecchia-bikepacking",
+          "label": "",
+          "foundOn": "https://caimacerata.com/calendario-attivita"
+        },
+        {
+          "url": "https://caimc.cluster.sistema3.it/calendario-attivita/8-agosto-2026-una-serata-magica-sui-sibillini-apertura-della-baita-f-lli-cioci",
+          "label": "",
+          "foundOn": "https://caimacerata.com/calendario-attivita"
+        },
+        {
+          "url": "https://caimc.cluster.sistema3.it/calendario-attivita/25-luglio-2026-monte-cacamillo-direttissima-dalla-costa-dei-frati",
+          "label": "",
+          "foundOn": "https://caimacerata.com/calendario-attivita"
+        },
+        {
+          "url": "https://caimc.cluster.sistema3.it/calendario-attivita/01-02-agosto-2026-tendata-al-pnalm",
+          "label": "",
+          "foundOn": "https://caimacerata.com/calendario-attivita"
+        },
+        {
+          "url": "https://caimc.cluster.sistema3.it/calendario-attivita/11-luglio-tramonto-in-vetta-cima-del-redentore",
+          "label": "11 LUGLIO 2026 TRAMONTO IN VETTA CIMA DEL REDENTORE",
+          "foundOn": "https://caimacerata.com/calendario-attivita"
+        }
+      ],
+      "verifiedAt": "2026-09-05T20:27:30.127Z"
+    },
+    {
+      "id": "cai-montefeltro-9228015",
+      "directoryId": "9228015",
+      "organizer": "CAI Montefeltro",
+      "region": "Marche",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "municipality": "Urbino",
+      "province": "PU",
+      "headquartersCoordinates": {
+        "latitude": 43.7264268,
+        "longitude": 12.6374448
+      },
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228015",
+      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228015",
+      "calendarUrls": [],
+      "kind": "discover",
+      "template": "calendar-discovery",
+      "extractor": "deterministic",
+      "enabled": false,
+      "status": "missing-website",
+      "evidenceUrls": [
+        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
+      ],
+      "calendarEvidence": []
+    },
+    {
+      "id": "cai-montefortino-9128002",
+      "directoryId": "9128002",
+      "organizer": "CAI Montefortino",
+      "region": "Marche",
+      "sectionType": "subsection",
+      "parentSectionId": "cai-fermo-9228004",
+      "municipality": "Montefortino",
+      "province": "FM",
+      "headquartersCoordinates": {
+        "latitude": 42.98072165,
+        "longitude": 13.357463712523028
+      },
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228004",
+      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9128002",
+      "calendarUrls": [],
+      "kind": "discover",
+      "template": "calendar-discovery",
+      "extractor": "deterministic",
+      "enabled": false,
+      "status": "missing-website",
+      "evidenceUrls": [
+        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
+      ],
+      "calendarEvidence": []
+    },
+    {
+      "id": "cai-pesaro-9228006",
+      "directoryId": "9228006",
+      "organizer": "CAI Pesaro",
+      "region": "Marche",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "municipality": "Pesaro",
+      "province": "PU",
+      "headquartersCoordinates": {
+        "latitude": 43.89126,
+        "longitude": 12.9231
+      },
+      "website": "https://caipesaro.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228006",
+      "url": "http://www.caipesaro.it/",
+      "calendarUrls": [],
+      "kind": "html",
+      "template": "html-calendar",
+      "extractor": "deterministic",
+      "enabled": true,
+      "status": "website-only",
+      "evidenceUrls": [
+        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
+      ],
+      "calendarEvidence": [],
+      "verifiedAt": "2026-09-05T20:27:29.206Z"
+    },
+    {
+      "id": "cai-potenza-picena-9228014",
+      "directoryId": "9228014",
+      "organizer": "CAI Potenza Picena",
+      "region": "Marche",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "municipality": "Porto Potenza Picena",
+      "province": "MC",
+      "headquartersCoordinates": {
+        "latitude": 43.359455,
+        "longitude": 13.6974192
+      },
+      "website": "https://www.caipotenzapicena.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228014",
+      "url": "https://www.caipotenzapicena.it/attivita2026",
+      "calendarUrls": [
+        "https://www.caipotenzapicena.it/attivita2026",
+        "https://www.escursionicai.it/",
+        "https://www.caipotenzapicena.it/attivita-temp",
+        "https://areariservata.escursionicai.it/login",
+        "https://www.escursionicai.it/download-locandina/1716",
+        "https://www.escursionicai.it/download-locandina/2058",
+        "https://www.escursionicai.it/download-locandina/2182",
+        "https://www.escursionicai.it/download-locandina/1643"
+      ],
+      "kind": "html",
+      "template": "html-calendar",
+      "extractor": "deterministic",
+      "enabled": true,
+      "status": "calendar-found",
+      "evidenceUrls": [
+        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
+      ],
+      "calendarEvidence": [
+        {
+          "url": "https://www.caipotenzapicena.it/attivita2026",
+          "label": "2026",
+          "foundOn": "https://www.caipotenzapicena.it/attivita-temp"
+        },
+        {
+          "url": "https://www.escursionicai.it/",
+          "label": "",
+          "foundOn": "https://www.escursionicai.it/"
+        },
+        {
+          "url": "https://www.caipotenzapicena.it/attivita-temp",
+          "label": "",
+          "foundOn": "https://www.caipotenzapicena.it/attivita-temp"
+        },
+        {
+          "url": "https://areariservata.escursionicai.it/login",
+          "label": "Area Riservata",
+          "foundOn": "https://www.escursionicai.it/"
+        },
+        {
+          "url": "https://www.escursionicai.it/download-locandina/1716",
+          "label": "Locandina",
+          "foundOn": "https://www.escursionicai.it/"
+        },
+        {
+          "url": "https://www.escursionicai.it/download-locandina/2058",
+          "label": "Locandina",
+          "foundOn": "https://www.escursionicai.it/"
+        },
+        {
+          "url": "https://www.escursionicai.it/download-locandina/2182",
+          "label": "Locandina",
+          "foundOn": "https://www.escursionicai.it/"
+        },
+        {
+          "url": "https://www.escursionicai.it/download-locandina/1643",
+          "label": "Locandina",
+          "foundOn": "https://www.escursionicai.it/"
+        }
+      ],
+      "verifiedAt": "2026-09-05T20:27:30.563Z"
+    },
+    {
+      "id": "cai-s-benedetto-del-tronto-9228013",
+      "directoryId": "9228013",
+      "organizer": "CAI S.benedetto Del Tronto",
+      "region": "Marche",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "municipality": "S.benedetto Del Tronto",
+      "province": "AP",
+      "headquartersCoordinates": {
+        "latitude": 42.94785,
+        "longitude": 13.87976
+      },
+      "website": "https://www.caisanbenedettodeltronto.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228013",
+      "url": "https://caisanbenedettodeltronto.it/site/wp-content/uploads/2025/12/programma2026_web.pdf",
+      "calendarUrls": [
+        "https://caisanbenedettodeltronto.it/site/wp-content/uploads/2025/12/programma2026_web.pdf",
+        "https://caisanbenedettodeltronto.it/site/programma-annuale/",
+        "https://twitter.com/intent/tweet?text=Check%20out%20this%20article:%20Programma%202026%20-%20https://caisanbenedettodeltronto.it/site/programma-annuale/",
+        "https://pinterest.com/pin/create/button/?url=https://caisanbenedettodeltronto.it/site/programma-annuale/&media=&description=Programma%202026",
+        "https://caisanbenedettodeltronto.it/site/calendario-escursionistico-regionale/",
+        "https://caisanbenedettodeltronto.it/site/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcaisanbenedettodeltronto.it%2Fsite%2Fprogramma-annuale%2F",
+        "https://caisanbenedettodeltronto.it/site/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcaisanbenedettodeltronto.it%2Fsite%2Fprogramma-annuale%2F&format=xml",
+        "https://plus.google.com/share?url=https://caisanbenedettodeltronto.it/site/programma-annuale/"
+      ],
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "deterministic",
+      "enabled": true,
+      "status": "calendar-found",
+      "evidenceUrls": [
+        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
+      ],
+      "calendarEvidence": [
+        {
+          "url": "https://caisanbenedettodeltronto.it/site/wp-content/uploads/2025/12/programma2026_web.pdf",
+          "label": "SCARICA IL PROGRAMMA 2026 IN FORMATO PDF",
+          "foundOn": "https://caisanbenedettodeltronto.it/site/programma-annuale/"
+        },
+        {
+          "url": "https://caisanbenedettodeltronto.it/site/programma-annuale/",
+          "label": "<img src=\"https://caisanbenedettodeltronto.it/site/wp-content/uploads/2025/12/banner2026-600x100.png\" alt=\"Banner\" />",
+          "foundOn": "https://caisanbenedettodeltronto.it/site/calendario-escursionistico-regionale/"
+        },
+        {
+          "url": "https://twitter.com/intent/tweet?text=Check%20out%20this%20article:%20Programma%202026%20-%20https://caisanbenedettodeltronto.it/site/programma-annuale/",
+          "label": "Twitter",
+          "foundOn": "https://caisanbenedettodeltronto.it/site/programma-annuale/"
+        },
+        {
+          "url": "https://pinterest.com/pin/create/button/?url=https://caisanbenedettodeltronto.it/site/programma-annuale/&media=&description=Programma%202026",
+          "label": "Pinterest",
+          "foundOn": "https://caisanbenedettodeltronto.it/site/programma-annuale/"
+        },
+        {
+          "url": "https://caisanbenedettodeltronto.it/site/calendario-escursionistico-regionale/",
+          "label": "",
+          "foundOn": "https://caisanbenedettodeltronto.it/site/calendario-escursionistico-regionale/"
+        },
+        {
+          "url": "https://caisanbenedettodeltronto.it/site/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcaisanbenedettodeltronto.it%2Fsite%2Fprogramma-annuale%2F",
+          "label": "",
+          "foundOn": "https://caisanbenedettodeltronto.it/site/programma-annuale/"
+        },
+        {
+          "url": "https://caisanbenedettodeltronto.it/site/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcaisanbenedettodeltronto.it%2Fsite%2Fprogramma-annuale%2F&format=xml",
+          "label": "",
+          "foundOn": "https://caisanbenedettodeltronto.it/site/programma-annuale/"
+        },
+        {
+          "url": "https://plus.google.com/share?url=https://caisanbenedettodeltronto.it/site/programma-annuale/",
+          "label": "Google +",
+          "foundOn": "https://caisanbenedettodeltronto.it/site/programma-annuale/"
+        }
+      ],
+      "verifiedAt": "2026-09-05T20:27:31.451Z"
+    },
+    {
+      "id": "cai-s-severino-marche-9228009",
+      "directoryId": "9228009",
+      "organizer": "CAI S.severino Marche",
+      "region": "Marche",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "municipality": "San Severino Marche",
+      "province": "MC",
+      "headquartersCoordinates": {
+        "latitude": 43.2309674,
+        "longitude": 13.1787715
+      },
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228009",
+      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228009",
+      "calendarUrls": [],
+      "kind": "discover",
+      "template": "calendar-discovery",
+      "extractor": "deterministic",
+      "enabled": false,
+      "status": "missing-website",
+      "evidenceUrls": [
+        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
+      ],
+      "calendarEvidence": []
+    },
+    {
+      "id": "cai-sarnano-9228011",
+      "directoryId": "9228011",
+      "organizer": "CAI Sarnano",
+      "region": "Marche",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "municipality": "Sarnano",
+      "province": "MC",
+      "headquartersCoordinates": {
+        "latitude": 43.0352804,
+        "longitude": 13.3008867
+      },
+      "website": "https://caisarnano.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228011",
+      "url": "https://www.caisarnano.it/",
+      "calendarUrls": [],
+      "kind": "html",
+      "template": "html-calendar",
+      "extractor": "deterministic",
+      "enabled": true,
+      "status": "website-only",
+      "evidenceUrls": [
+        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
+      ],
+      "calendarEvidence": [],
+      "verifiedAt": "2026-09-05T20:27:30.922Z"
+    },
+    {
+      "id": "cai-senigallia-9228012",
+      "directoryId": "9228012",
+      "organizer": "CAI Senigallia",
+      "region": "Marche",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "municipality": "Senigallia",
+      "province": "AN",
+      "headquartersCoordinates": {
+        "latitude": 43.678856,
+        "longitude": 13.188154
+      },
+      "website": "https://www.caisenigallia.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228012",
+      "url": "https://www.caisenigallia.it/calendario-eventi/?ical=1",
+      "calendarUrls": [
+        "https://www.caisenigallia.it/calendario-eventi/?ical=1",
+        "https://www.caisenigallia.it/calendario-eventi/mese/?ical=1",
+        "https://www.caisenigallia.it/?post_type=tribe_events&ical=1&eventDisplay=list",
+        "https://www.caisenigallia.it/calendario-2026/",
+        "https://www.caisenigallia.it/calendario-2026/feed/",
+        "https://www.caisenigallia.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F",
+        "https://www.caisenigallia.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F&format=xml",
+        "https://twitter.com/intent/tweet?text=Calendario+2026+-+Club+Alpino+Italiano+-+Sezione+di+Senigallia.+https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F"
+      ],
+      "kind": "ics",
+      "template": "icalendar",
+      "extractor": "deterministic",
+      "enabled": true,
+      "status": "calendar-found",
+      "evidenceUrls": [
+        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
+      ],
+      "calendarEvidence": [
+        {
+          "url": "https://www.caisenigallia.it/calendario-eventi/?ical=1",
+          "label": "",
+          "foundOn": "https://www.caisenigallia.it/calendario-eventi/"
+        },
+        {
+          "url": "https://www.caisenigallia.it/calendario-eventi/mese/?ical=1",
+          "label": "Esporta il file .ics",
+          "foundOn": "https://www.caisenigallia.it/calendario-eventi/"
+        },
+        {
+          "url": "https://www.caisenigallia.it/?post_type=tribe_events&ical=1&eventDisplay=list",
+          "label": "iCalendar",
+          "foundOn": "https://www.caisenigallia.it/calendario-eventi/"
+        },
+        {
+          "url": "https://www.caisenigallia.it/calendario-2026/",
+          "label": "",
+          "foundOn": "https://www.caisenigallia.it/calendario-2026/"
+        },
+        {
+          "url": "https://www.caisenigallia.it/calendario-2026/feed/",
+          "label": "",
+          "foundOn": "https://www.caisenigallia.it/calendario-2026/"
+        },
+        {
+          "url": "https://www.caisenigallia.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F",
+          "label": "",
+          "foundOn": "https://www.caisenigallia.it/calendario-2026/"
+        },
+        {
+          "url": "https://www.caisenigallia.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F&format=xml",
+          "label": "",
+          "foundOn": "https://www.caisenigallia.it/calendario-2026/"
+        },
+        {
+          "url": "https://twitter.com/intent/tweet?text=Calendario+2026+-+Club+Alpino+Italiano+-+Sezione+di+Senigallia.+https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F",
+          "label": "",
+          "foundOn": "https://www.caisenigallia.it/calendario-2026/"
+        }
+      ],
+      "verifiedAt": "2026-09-05T20:27:31.693Z"
+    },
     {
       "id": "cai-abbiategrasso-9216049",
       "directoryId": "9216049",
@@ -18352,889 +19446,6 @@
       "calendarEvidence": []
     },
     {
-      "id": "cai-amandola-9228010",
-      "directoryId": "9228010",
-      "organizer": "CAI Amandola",
-      "region": "Marche",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "municipality": "Amandola",
-      "province": "AP",
-      "headquartersCoordinates": {
-        "latitude": 42.9795536,
-        "longitude": 13.3557024
-      },
-      "website": "https://www.caiamandola.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228010",
-      "url": "https://www.caiamandola.it/",
-      "calendarUrls": [],
-      "kind": "html",
-      "template": "html-calendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "status": "website-only",
-      "evidenceUrls": [
-        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
-      ],
-      "calendarEvidence": [],
-      "verifiedAt": "2026-09-05T20:27:27.374Z"
-    },
-    {
-      "id": "cai-ancona-9228001",
-      "directoryId": "9228001",
-      "organizer": "CAI Ancona",
-      "region": "Marche",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "municipality": "Ancona",
-      "province": "AN",
-      "headquartersCoordinates": {
-        "latitude": 43.6145182,
-        "longitude": 13.5157338
-      },
-      "website": "https://www.caiancona.org/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228001",
-      "url": "https://www.caiancona.org/news/calendario-regionale-cai-marche",
-      "calendarUrls": [
-        "https://www.caiancona.org/news/calendario-regionale-cai-marche",
-        "https://www.caiancona.org/eventi/escursionismo/20261001lu",
-        "https://www.caiancona.org/eventi/corsi/",
-        "https://www.caiancona.org/eventi/",
-        "https://www.caiancona.org/eventi/alpinismo/",
-        "https://www.caiancona.org/eventi/alpinismo-giovanile/",
-        "https://www.caiancona.org/eventi/arrampicata-libera/",
-        "https://www.caiancona.org/eventi/ciclo-escursionismo/"
-      ],
-      "kind": "html",
-      "template": "html-calendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "status": "calendar-found",
-      "evidenceUrls": [
-        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
-      ],
-      "calendarEvidence": [
-        {
-          "url": "https://www.caiancona.org/news/calendario-regionale-cai-marche",
-          "label": "",
-          "foundOn": "https://www.caiancona.org/news/calendario-regionale-cai-marche"
-        },
-        {
-          "url": "https://www.caiancona.org/eventi/escursionismo/20261001lu",
-          "label": "",
-          "foundOn": "https://www.caiancona.org/eventi/escursionismo/20261001lu"
-        },
-        {
-          "url": "https://www.caiancona.org/eventi/corsi/",
-          "label": "Corsi",
-          "foundOn": "https://www.caiancona.org/eventi/escursionismo/20261001lu"
-        },
-        {
-          "url": "https://www.caiancona.org/eventi/",
-          "label": "Iniziative",
-          "foundOn": "https://www.caiancona.org/eventi/escursionismo/20261001lu"
-        },
-        {
-          "url": "https://www.caiancona.org/eventi/alpinismo/",
-          "label": "ALPINISMO - GAD GRUPPO ALPINISTICO DORICO",
-          "foundOn": "https://www.caiancona.org/"
-        },
-        {
-          "url": "https://www.caiancona.org/eventi/alpinismo-giovanile/",
-          "label": "ALPINISMO GIOVANILE",
-          "foundOn": "https://www.caiancona.org/"
-        },
-        {
-          "url": "https://www.caiancona.org/eventi/arrampicata-libera/",
-          "label": "ARRAMPICATA LIBERA",
-          "foundOn": "https://www.caiancona.org/"
-        },
-        {
-          "url": "https://www.caiancona.org/eventi/ciclo-escursionismo/",
-          "label": "CICLO ESCURSIONISMO",
-          "foundOn": "https://www.caiancona.org/"
-        }
-      ],
-      "verifiedAt": "2026-09-05T20:27:28.985Z"
-    },
-    {
-      "id": "cai-ascoli-piceno-9228002",
-      "directoryId": "9228002",
-      "organizer": "CAI Ascoli Piceno",
-      "region": "Marche",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "municipality": "Ascoli Piceno",
-      "province": "AP",
-      "headquartersCoordinates": {
-        "latitude": 42.851606,
-        "longitude": 13.5866578
-      },
-      "website": "https://www.caiascoli.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228002",
-      "url": "http://www.caiascoli.it/download/programma-2026.pdf",
-      "calendarUrls": [
-        "http://www.caiascoli.it/download/programma-2026.pdf",
-        "https://www.caiascoli.it/programma-2026/",
-        "https://www.caiascoli.it/programma-2026/feed/",
-        "https://www.caiascoli.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caiascoli.it%2Fprogramma-2026%2F",
-        "https://www.caiascoli.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caiascoli.it%2Fprogramma-2026%2F&format=xml",
-        "https://www.caiascoli.it/corso-e1-2026/",
-        "https://www.caiascoli.it/commissione-escursionismo/",
-        "https://www.caiascoli.it/slow-bike/"
-      ],
-      "kind": "pdf",
-      "template": "pdf-programma",
-      "extractor": "deterministic",
-      "enabled": true,
-      "status": "calendar-found",
-      "evidenceUrls": [
-        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
-      ],
-      "calendarEvidence": [
-        {
-          "url": "http://www.caiascoli.it/download/programma-2026.pdf",
-          "label": "Scarica programma.",
-          "foundOn": "https://www.caiascoli.it/programma-2026/"
-        },
-        {
-          "url": "https://www.caiascoli.it/programma-2026/",
-          "label": "Programma 2026",
-          "foundOn": "https://www.caiascoli.it/corso-e1-2026/"
-        },
-        {
-          "url": "https://www.caiascoli.it/programma-2026/feed/",
-          "label": "",
-          "foundOn": "https://www.caiascoli.it/programma-2026/"
-        },
-        {
-          "url": "https://www.caiascoli.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caiascoli.it%2Fprogramma-2026%2F",
-          "label": "",
-          "foundOn": "https://www.caiascoli.it/programma-2026/"
-        },
-        {
-          "url": "https://www.caiascoli.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caiascoli.it%2Fprogramma-2026%2F&format=xml",
-          "label": "",
-          "foundOn": "https://www.caiascoli.it/programma-2026/"
-        },
-        {
-          "url": "https://www.caiascoli.it/corso-e1-2026/",
-          "label": "13° Corso di Escursionismo base – E1",
-          "foundOn": "https://www.caiascoli.it/",
-          "verifiedAt": "2026-09-05T20:27:40.778Z"
-        },
-        {
-          "url": "https://www.caiascoli.it/commissione-escursionismo/",
-          "label": "Escursionismo",
-          "foundOn": "https://www.caiascoli.it/corso-e1-2026/"
-        },
-        {
-          "url": "https://www.caiascoli.it/slow-bike/",
-          "label": "Cicloescursionismo (Slow Bike)",
-          "foundOn": "https://www.caiascoli.it/corso-e1-2026/"
-        }
-      ],
-      "verifiedAt": "2026-09-05T20:27:28.771Z"
-    },
-    {
-      "id": "cai-camerino-9228005",
-      "directoryId": "9228005",
-      "organizer": "CAI Camerino",
-      "region": "Marche",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "municipality": "Camerino",
-      "province": "MC",
-      "headquartersCoordinates": {
-        "latitude": 43.1352951,
-        "longitude": 13.0664346
-      },
-      "website": "https://organizzazione.cai.it/sez-camerino/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228005",
-      "url": "https://organizzazione.cai.it/sez-camerino/eventi/?ical=1",
-      "calendarUrls": [
-        "https://organizzazione.cai.it/sez-camerino/eventi/?ical=1",
-        "https://organizzazione.cai.it/sez-camerino/attivita/programma-escursionistico-2024/",
-        "https://organizzazione.cai.it/sez-camerino/attivita/programma-2023/",
-        "https://organizzazione.cai.it/sez-camerino/escursioni/",
-        "https://organizzazione.cai.it/sez-camerino/attivita/",
-        "https://organizzazione.cai.it/sez-camerino/attivita/archivio-programmi/"
-      ],
-      "kind": "ics",
-      "template": "icalendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "status": "calendar-found",
-      "evidenceUrls": [
-        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
-      ],
-      "calendarEvidence": [
-        {
-          "url": "https://organizzazione.cai.it/sez-camerino/eventi/?ical=1",
-          "label": "",
-          "foundOn": "https://organizzazione.cai.it/sez-camerino/attivita/programma-2023/"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-camerino/attivita/programma-escursionistico-2024/",
-          "label": "Programma Escursionistico 2026",
-          "foundOn": "https://organizzazione.cai.it/sez-camerino/attivita/programma-2023/"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-camerino/attivita/programma-2023/",
-          "label": "Programma di Alpinismo Giovanile 2026",
-          "foundOn": "https://organizzazione.cai.it/sez-camerino/attivita/programma-2023/"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-camerino/escursioni/",
-          "label": "Escursioni in ambiente innevato 2026/27",
-          "foundOn": "https://organizzazione.cai.it/sez-camerino/attivita/programma-2023/"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-camerino/attivita/",
-          "label": "Attività",
-          "foundOn": "https://organizzazione.cai.it/sez-camerino/attivita/programma-2023/"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-camerino/attivita/archivio-programmi/",
-          "label": "Archivio Libretti",
-          "foundOn": "https://organizzazione.cai.it/sez-camerino/attivita/programma-2023/"
-        }
-      ],
-      "verifiedAt": "2026-09-05T20:27:28.819Z"
-    },
-    {
-      "id": "cai-fabriano-9228007",
-      "directoryId": "9228007",
-      "organizer": "CAI Fabriano",
-      "region": "Marche",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "municipality": "Fabriano",
-      "province": "AN",
-      "headquartersCoordinates": {
-        "latitude": 43.3393566,
-        "longitude": 12.9086593
-      },
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228007",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228007",
-      "calendarUrls": [],
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "status": "missing-website",
-      "evidenceUrls": [
-        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
-      ],
-      "calendarEvidence": []
-    },
-    {
-      "id": "cai-fermo-9228004",
-      "directoryId": "9228004",
-      "organizer": "CAI Fermo",
-      "region": "Marche",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "municipality": "Fermo",
-      "province": "FM",
-      "headquartersCoordinates": {
-        "latitude": 43.16172,
-        "longitude": 13.71242
-      },
-      "website": "https://www.caifermo.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228004",
-      "url": "https://www.caifermo.it/wp-content/uploads/2026/01/CAI-FERMO-PROGRAMMA-2026.pdf",
-      "calendarUrls": [
-        "https://www.caifermo.it/wp-content/uploads/2026/01/CAI-FERMO-PROGRAMMA-2026.pdf",
-        "https://www.caifermo.it/calendario-attivita-2026-cai-fermo/",
-        "https://www.caifermo.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caifermo.it%2Fcalendario-attivita-2026-cai-fermo%2F",
-        "https://www.caifermo.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caifermo.it%2Fcalendario-attivita-2026-cai-fermo%2F&format=xml",
-        "https://www.caifermo.it/wp-content/uploads/2026/01/Escursionismo.pdf",
-        "https://www.caifermo.it/escursionismo/",
-        "https://www.caifermo.it/ciclo-escursionismo/",
-        "https://www.caifermo.it/escursionismo-3/"
-      ],
-      "kind": "pdf",
-      "template": "pdf-programma",
-      "extractor": "deterministic",
-      "enabled": true,
-      "status": "calendar-found",
-      "evidenceUrls": [
-        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
-      ],
-      "calendarEvidence": [
-        {
-          "url": "https://www.caifermo.it/wp-content/uploads/2026/01/CAI-FERMO-PROGRAMMA-2026.pdf",
-          "label": "",
-          "foundOn": "https://www.caifermo.it/calendario-attivita-2026-cai-fermo/"
-        },
-        {
-          "url": "https://www.caifermo.it/calendario-attivita-2026-cai-fermo/",
-          "label": "",
-          "foundOn": "https://www.caifermo.it/calendario-attivita-2026-cai-fermo/"
-        },
-        {
-          "url": "https://www.caifermo.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caifermo.it%2Fcalendario-attivita-2026-cai-fermo%2F",
-          "label": "",
-          "foundOn": "https://www.caifermo.it/calendario-attivita-2026-cai-fermo/"
-        },
-        {
-          "url": "https://www.caifermo.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caifermo.it%2Fcalendario-attivita-2026-cai-fermo%2F&format=xml",
-          "label": "",
-          "foundOn": "https://www.caifermo.it/calendario-attivita-2026-cai-fermo/"
-        },
-        {
-          "url": "https://www.caifermo.it/wp-content/uploads/2026/01/Escursionismo.pdf",
-          "label": "",
-          "foundOn": "https://www.caifermo.it/escursionismo/"
-        },
-        {
-          "url": "https://www.caifermo.it/escursionismo/",
-          "label": "Escursionismo",
-          "foundOn": "https://www.caifermo.it/calendario-attivita-2026-cai-fermo/"
-        },
-        {
-          "url": "https://www.caifermo.it/ciclo-escursionismo/",
-          "label": "Ciclo – Escursionismo",
-          "foundOn": "https://www.caifermo.it/escursionismo/"
-        },
-        {
-          "url": "https://www.caifermo.it/escursionismo-3/",
-          "label": "T.A.M. Tutela Ambiente Montano e Comitato Scientifico",
-          "foundOn": "https://www.caifermo.it/escursionismo/"
-        }
-      ],
-      "verifiedAt": "2026-09-05T20:27:28.684Z"
-    },
-    {
-      "id": "cai-jesi-9228003",
-      "directoryId": "9228003",
-      "organizer": "CAI Jesi",
-      "region": "Marche",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "municipality": "Jesi",
-      "province": "AN",
-      "headquartersCoordinates": {
-        "latitude": 43.5190276,
-        "longitude": 13.2335865
-      },
-      "website": "https://www.caijesi.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228003",
-      "url": "https://www.caijesi.it/?p=10617",
-      "calendarUrls": [
-        "https://www.caijesi.it/?p=10617",
-        "https://www.caijesi.it/?p=10587",
-        "https://www.caijesi.it/?p=10536",
-        "https://www.caijesi.it/?p=9045",
-        "https://www.caijesi.it/?p=10555",
-        "https://www.caijesi.it/?cat=11",
-        "https://www.caijesi.it/?p=7746",
-        "https://www.caijesi.it/?p=10662"
-      ],
-      "kind": "html",
-      "template": "html-calendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "status": "calendar-found",
-      "evidenceUrls": [
-        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
-      ],
-      "calendarEvidence": [
-        {
-          "url": "https://www.caijesi.it/?p=10617",
-          "label": "PROGRAMMA SENIORES 2026",
-          "foundOn": "https://www.caijesi.it/?p=10587"
-        },
-        {
-          "url": "https://www.caijesi.it/?p=10587",
-          "label": "Il chiodo nella roccia calendario 2026",
-          "foundOn": "https://www.caijesi.it/?p=10587"
-        },
-        {
-          "url": "https://www.caijesi.it/?p=10536",
-          "label": "PROGRAMMA 2026",
-          "foundOn": "https://www.caijesi.it/?p=10587"
-        },
-        {
-          "url": "https://www.caijesi.it/?p=9045",
-          "label": "Calendario delle uscite Seniores",
-          "foundOn": "https://www.caijesi.it/?p=10587"
-        },
-        {
-          "url": "https://www.caijesi.it/?p=10555",
-          "label": "Corso in programma",
-          "foundOn": "https://www.caijesi.it/"
-        },
-        {
-          "url": "https://www.caijesi.it/?cat=11",
-          "label": "Alpinismo Giovanile - uscite in calendario",
-          "foundOn": "https://www.caijesi.it/"
-        },
-        {
-          "url": "https://www.caijesi.it/?p=7746",
-          "label": "Riapertura sede e programmazione attività anche ai non soci",
-          "foundOn": "https://www.caijesi.it/"
-        },
-        {
-          "url": "https://www.caijesi.it/?p=10662",
-          "label": "Cicloescursionismo",
-          "foundOn": "https://www.caijesi.it/?p=10587"
-        }
-      ],
-      "verifiedAt": "2026-09-05T20:27:28.427Z"
-    },
-    {
-      "id": "cai-macerata-9228008",
-      "directoryId": "9228008",
-      "organizer": "CAI Macerata",
-      "region": "Marche",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "municipality": "Macerata",
-      "province": "MC",
-      "headquartersCoordinates": {
-        "latitude": 43.2868192,
-        "longitude": 13.4326328
-      },
-      "website": "https://caimacerata.com/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228008",
-      "url": "https://caimacerata.com/programma-escursioni-e-cicloescursioni",
-      "calendarUrls": [
-        "https://caimacerata.com/programma-escursioni-e-cicloescursioni",
-        "https://drive.google.com/file/d/1Fx6wRM4szvK0rOFKRJ6v1VyR-ocskQkz/view?usp=sharing",
-        "https://caimc.cluster.sistema3.it/calendario-attivita/19-settembre-2026-percorso-olivi-monumentali-rosciola-colli-esini",
-        "https://caimc.cluster.sistema3.it/calendario-attivita/12-13-settembre-2026-valmarecchia-bikepacking",
-        "https://caimc.cluster.sistema3.it/calendario-attivita/8-agosto-2026-una-serata-magica-sui-sibillini-apertura-della-baita-f-lli-cioci",
-        "https://caimc.cluster.sistema3.it/calendario-attivita/25-luglio-2026-monte-cacamillo-direttissima-dalla-costa-dei-frati",
-        "https://caimc.cluster.sistema3.it/calendario-attivita/01-02-agosto-2026-tendata-al-pnalm",
-        "https://caimc.cluster.sistema3.it/calendario-attivita/11-luglio-tramonto-in-vetta-cima-del-redentore"
-      ],
-      "kind": "html",
-      "template": "html-calendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "status": "calendar-found",
-      "evidenceUrls": [
-        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
-      ],
-      "calendarEvidence": [
-        {
-          "url": "https://caimacerata.com/programma-escursioni-e-cicloescursioni",
-          "label": "Programma escursioni e cicloescursioni 2026",
-          "foundOn": "https://caimacerata.com/calendario-attivita"
-        },
-        {
-          "url": "https://drive.google.com/file/d/1Fx6wRM4szvK0rOFKRJ6v1VyR-ocskQkz/view?usp=sharing",
-          "label": ">> calendario attività 2026",
-          "foundOn": "https://caimacerata.com/programma-escursioni-e-cicloescursioni"
-        },
-        {
-          "url": "https://caimc.cluster.sistema3.it/calendario-attivita/19-settembre-2026-percorso-olivi-monumentali-rosciola-colli-esini",
-          "label": "",
-          "foundOn": "https://caimacerata.com/calendario-attivita"
-        },
-        {
-          "url": "https://caimc.cluster.sistema3.it/calendario-attivita/12-13-settembre-2026-valmarecchia-bikepacking",
-          "label": "",
-          "foundOn": "https://caimacerata.com/calendario-attivita"
-        },
-        {
-          "url": "https://caimc.cluster.sistema3.it/calendario-attivita/8-agosto-2026-una-serata-magica-sui-sibillini-apertura-della-baita-f-lli-cioci",
-          "label": "",
-          "foundOn": "https://caimacerata.com/calendario-attivita"
-        },
-        {
-          "url": "https://caimc.cluster.sistema3.it/calendario-attivita/25-luglio-2026-monte-cacamillo-direttissima-dalla-costa-dei-frati",
-          "label": "",
-          "foundOn": "https://caimacerata.com/calendario-attivita"
-        },
-        {
-          "url": "https://caimc.cluster.sistema3.it/calendario-attivita/01-02-agosto-2026-tendata-al-pnalm",
-          "label": "",
-          "foundOn": "https://caimacerata.com/calendario-attivita"
-        },
-        {
-          "url": "https://caimc.cluster.sistema3.it/calendario-attivita/11-luglio-tramonto-in-vetta-cima-del-redentore",
-          "label": "11 LUGLIO 2026 TRAMONTO IN VETTA CIMA DEL REDENTORE",
-          "foundOn": "https://caimacerata.com/calendario-attivita"
-        }
-      ],
-      "verifiedAt": "2026-09-05T20:27:30.127Z"
-    },
-    {
-      "id": "cai-montefeltro-9228015",
-      "directoryId": "9228015",
-      "organizer": "CAI Montefeltro",
-      "region": "Marche",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "municipality": "Urbino",
-      "province": "PU",
-      "headquartersCoordinates": {
-        "latitude": 43.7264268,
-        "longitude": 12.6374448
-      },
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228015",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228015",
-      "calendarUrls": [],
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "status": "missing-website",
-      "evidenceUrls": [
-        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
-      ],
-      "calendarEvidence": []
-    },
-    {
-      "id": "cai-montefortino-9128002",
-      "directoryId": "9128002",
-      "organizer": "CAI Montefortino",
-      "region": "Marche",
-      "sectionType": "subsection",
-      "parentSectionId": "cai-fermo-9228004",
-      "municipality": "Montefortino",
-      "province": "FM",
-      "headquartersCoordinates": {
-        "latitude": 42.98072165,
-        "longitude": 13.357463712523028
-      },
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228004",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9128002",
-      "calendarUrls": [],
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "status": "missing-website",
-      "evidenceUrls": [
-        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
-      ],
-      "calendarEvidence": []
-    },
-    {
-      "id": "cai-pesaro-9228006",
-      "directoryId": "9228006",
-      "organizer": "CAI Pesaro",
-      "region": "Marche",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "municipality": "Pesaro",
-      "province": "PU",
-      "headquartersCoordinates": {
-        "latitude": 43.89126,
-        "longitude": 12.9231
-      },
-      "website": "http://www.caipesaro.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228006",
-      "url": "http://www.caipesaro.it/",
-      "calendarUrls": [],
-      "kind": "html",
-      "template": "html-calendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "status": "website-only",
-      "evidenceUrls": [
-        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
-      ],
-      "calendarEvidence": [],
-      "verifiedAt": "2026-09-05T20:27:29.206Z"
-    },
-    {
-      "id": "cai-potenza-picena-9228014",
-      "directoryId": "9228014",
-      "organizer": "CAI Potenza Picena",
-      "region": "Marche",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "municipality": "Porto Potenza Picena",
-      "province": "MC",
-      "headquartersCoordinates": {
-        "latitude": 43.359455,
-        "longitude": 13.6974192
-      },
-      "website": "https://www.caipotenzapicena.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228014",
-      "url": "https://www.caipotenzapicena.it/attivita2026",
-      "calendarUrls": [
-        "https://www.caipotenzapicena.it/attivita2026",
-        "https://www.escursionicai.it/",
-        "https://www.caipotenzapicena.it/attivita-temp",
-        "https://areariservata.escursionicai.it/login",
-        "https://www.escursionicai.it/download-locandina/1716",
-        "https://www.escursionicai.it/download-locandina/2058",
-        "https://www.escursionicai.it/download-locandina/2182",
-        "https://www.escursionicai.it/download-locandina/1643"
-      ],
-      "kind": "html",
-      "template": "html-calendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "status": "calendar-found",
-      "evidenceUrls": [
-        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
-      ],
-      "calendarEvidence": [
-        {
-          "url": "https://www.caipotenzapicena.it/attivita2026",
-          "label": "2026",
-          "foundOn": "https://www.caipotenzapicena.it/attivita-temp"
-        },
-        {
-          "url": "https://www.escursionicai.it/",
-          "label": "",
-          "foundOn": "https://www.escursionicai.it/"
-        },
-        {
-          "url": "https://www.caipotenzapicena.it/attivita-temp",
-          "label": "",
-          "foundOn": "https://www.caipotenzapicena.it/attivita-temp"
-        },
-        {
-          "url": "https://areariservata.escursionicai.it/login",
-          "label": "Area Riservata",
-          "foundOn": "https://www.escursionicai.it/"
-        },
-        {
-          "url": "https://www.escursionicai.it/download-locandina/1716",
-          "label": "Locandina",
-          "foundOn": "https://www.escursionicai.it/"
-        },
-        {
-          "url": "https://www.escursionicai.it/download-locandina/2058",
-          "label": "Locandina",
-          "foundOn": "https://www.escursionicai.it/"
-        },
-        {
-          "url": "https://www.escursionicai.it/download-locandina/2182",
-          "label": "Locandina",
-          "foundOn": "https://www.escursionicai.it/"
-        },
-        {
-          "url": "https://www.escursionicai.it/download-locandina/1643",
-          "label": "Locandina",
-          "foundOn": "https://www.escursionicai.it/"
-        }
-      ],
-      "verifiedAt": "2026-09-05T20:27:30.563Z"
-    },
-    {
-      "id": "cai-s-benedetto-del-tronto-9228013",
-      "directoryId": "9228013",
-      "organizer": "CAI S.benedetto Del Tronto",
-      "region": "Marche",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "municipality": "S.benedetto Del Tronto",
-      "province": "AP",
-      "headquartersCoordinates": {
-        "latitude": 42.94785,
-        "longitude": 13.87976
-      },
-      "website": "https://caisanbenedettodeltronto.it/site/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228013",
-      "url": "https://caisanbenedettodeltronto.it/site/wp-content/uploads/2025/12/programma2026_web.pdf",
-      "calendarUrls": [
-        "https://caisanbenedettodeltronto.it/site/wp-content/uploads/2025/12/programma2026_web.pdf",
-        "https://caisanbenedettodeltronto.it/site/programma-annuale/",
-        "https://twitter.com/intent/tweet?text=Check%20out%20this%20article:%20Programma%202026%20-%20https://caisanbenedettodeltronto.it/site/programma-annuale/",
-        "https://pinterest.com/pin/create/button/?url=https://caisanbenedettodeltronto.it/site/programma-annuale/&media=&description=Programma%202026",
-        "https://caisanbenedettodeltronto.it/site/calendario-escursionistico-regionale/",
-        "https://caisanbenedettodeltronto.it/site/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcaisanbenedettodeltronto.it%2Fsite%2Fprogramma-annuale%2F",
-        "https://caisanbenedettodeltronto.it/site/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcaisanbenedettodeltronto.it%2Fsite%2Fprogramma-annuale%2F&format=xml",
-        "https://plus.google.com/share?url=https://caisanbenedettodeltronto.it/site/programma-annuale/"
-      ],
-      "kind": "pdf",
-      "template": "pdf-programma",
-      "extractor": "deterministic",
-      "enabled": true,
-      "status": "calendar-found",
-      "evidenceUrls": [
-        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
-      ],
-      "calendarEvidence": [
-        {
-          "url": "https://caisanbenedettodeltronto.it/site/wp-content/uploads/2025/12/programma2026_web.pdf",
-          "label": "SCARICA IL PROGRAMMA 2026 IN FORMATO PDF",
-          "foundOn": "https://caisanbenedettodeltronto.it/site/programma-annuale/"
-        },
-        {
-          "url": "https://caisanbenedettodeltronto.it/site/programma-annuale/",
-          "label": "<img src=\"https://caisanbenedettodeltronto.it/site/wp-content/uploads/2025/12/banner2026-600x100.png\" alt=\"Banner\" />",
-          "foundOn": "https://caisanbenedettodeltronto.it/site/calendario-escursionistico-regionale/"
-        },
-        {
-          "url": "https://twitter.com/intent/tweet?text=Check%20out%20this%20article:%20Programma%202026%20-%20https://caisanbenedettodeltronto.it/site/programma-annuale/",
-          "label": "Twitter",
-          "foundOn": "https://caisanbenedettodeltronto.it/site/programma-annuale/"
-        },
-        {
-          "url": "https://pinterest.com/pin/create/button/?url=https://caisanbenedettodeltronto.it/site/programma-annuale/&media=&description=Programma%202026",
-          "label": "Pinterest",
-          "foundOn": "https://caisanbenedettodeltronto.it/site/programma-annuale/"
-        },
-        {
-          "url": "https://caisanbenedettodeltronto.it/site/calendario-escursionistico-regionale/",
-          "label": "",
-          "foundOn": "https://caisanbenedettodeltronto.it/site/calendario-escursionistico-regionale/"
-        },
-        {
-          "url": "https://caisanbenedettodeltronto.it/site/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcaisanbenedettodeltronto.it%2Fsite%2Fprogramma-annuale%2F",
-          "label": "",
-          "foundOn": "https://caisanbenedettodeltronto.it/site/programma-annuale/"
-        },
-        {
-          "url": "https://caisanbenedettodeltronto.it/site/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcaisanbenedettodeltronto.it%2Fsite%2Fprogramma-annuale%2F&format=xml",
-          "label": "",
-          "foundOn": "https://caisanbenedettodeltronto.it/site/programma-annuale/"
-        },
-        {
-          "url": "https://plus.google.com/share?url=https://caisanbenedettodeltronto.it/site/programma-annuale/",
-          "label": "Google +",
-          "foundOn": "https://caisanbenedettodeltronto.it/site/programma-annuale/"
-        }
-      ],
-      "verifiedAt": "2026-09-05T20:27:31.451Z"
-    },
-    {
-      "id": "cai-s-severino-marche-9228009",
-      "directoryId": "9228009",
-      "organizer": "CAI S.severino Marche",
-      "region": "Marche",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "municipality": "San Severino Marche",
-      "province": "MC",
-      "headquartersCoordinates": {
-        "latitude": 43.2309674,
-        "longitude": 13.1787715
-      },
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228009",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228009",
-      "calendarUrls": [],
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "status": "missing-website",
-      "evidenceUrls": [
-        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
-      ],
-      "calendarEvidence": []
-    },
-    {
-      "id": "cai-sarnano-9228011",
-      "directoryId": "9228011",
-      "organizer": "CAI Sarnano",
-      "region": "Marche",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "municipality": "Sarnano",
-      "province": "MC",
-      "headquartersCoordinates": {
-        "latitude": 43.0352804,
-        "longitude": 13.3008867
-      },
-      "website": "https://www.caisarnano.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228011",
-      "url": "https://www.caisarnano.it/",
-      "calendarUrls": [],
-      "kind": "html",
-      "template": "html-calendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "status": "website-only",
-      "evidenceUrls": [
-        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
-      ],
-      "calendarEvidence": [],
-      "verifiedAt": "2026-09-05T20:27:30.922Z"
-    },
-    {
-      "id": "cai-senigallia-9228012",
-      "directoryId": "9228012",
-      "organizer": "CAI Senigallia",
-      "region": "Marche",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "municipality": "Senigallia",
-      "province": "AN",
-      "headquartersCoordinates": {
-        "latitude": 43.678856,
-        "longitude": 13.188154
-      },
-      "website": "https://www.caisenigallia.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228012",
-      "url": "https://www.caisenigallia.it/calendario-eventi/?ical=1",
-      "calendarUrls": [
-        "https://www.caisenigallia.it/calendario-eventi/?ical=1",
-        "https://www.caisenigallia.it/calendario-eventi/mese/?ical=1",
-        "https://www.caisenigallia.it/?post_type=tribe_events&ical=1&eventDisplay=list",
-        "https://www.caisenigallia.it/calendario-2026/",
-        "https://www.caisenigallia.it/calendario-2026/feed/",
-        "https://www.caisenigallia.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F",
-        "https://www.caisenigallia.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F&format=xml",
-        "https://twitter.com/intent/tweet?text=Calendario+2026+-+Club+Alpino+Italiano+-+Sezione+di+Senigallia.+https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F"
-      ],
-      "kind": "ics",
-      "template": "icalendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "status": "calendar-found",
-      "evidenceUrls": [
-        "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
-      ],
-      "calendarEvidence": [
-        {
-          "url": "https://www.caisenigallia.it/calendario-eventi/?ical=1",
-          "label": "",
-          "foundOn": "https://www.caisenigallia.it/calendario-eventi/"
-        },
-        {
-          "url": "https://www.caisenigallia.it/calendario-eventi/mese/?ical=1",
-          "label": "Esporta il file .ics",
-          "foundOn": "https://www.caisenigallia.it/calendario-eventi/"
-        },
-        {
-          "url": "https://www.caisenigallia.it/?post_type=tribe_events&ical=1&eventDisplay=list",
-          "label": "iCalendar",
-          "foundOn": "https://www.caisenigallia.it/calendario-eventi/"
-        },
-        {
-          "url": "https://www.caisenigallia.it/calendario-2026/",
-          "label": "",
-          "foundOn": "https://www.caisenigallia.it/calendario-2026/"
-        },
-        {
-          "url": "https://www.caisenigallia.it/calendario-2026/feed/",
-          "label": "",
-          "foundOn": "https://www.caisenigallia.it/calendario-2026/"
-        },
-        {
-          "url": "https://www.caisenigallia.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F",
-          "label": "",
-          "foundOn": "https://www.caisenigallia.it/calendario-2026/"
-        },
-        {
-          "url": "https://www.caisenigallia.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F&format=xml",
-          "label": "",
-          "foundOn": "https://www.caisenigallia.it/calendario-2026/"
-        },
-        {
-          "url": "https://twitter.com/intent/tweet?text=Calendario+2026+-+Club+Alpino+Italiano+-+Sezione+di+Senigallia.+https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F",
-          "label": "",
-          "foundOn": "https://www.caisenigallia.it/calendario-2026/"
-        }
-      ],
-      "verifiedAt": "2026-09-05T20:27:31.693Z"
-    },
-    {
       "id": "cai-boiano-9136001",
       "directoryId": "9136001",
       "organizer": "CAI Boiano",
@@ -35495,9 +35706,9 @@
     "regions": 20,
     "enabled": 292,
     "statuses": {
+      "website-only": 20,
       "calendar-found": 270,
       "missing-website": 520,
-      "website-only": 20,
       "unreachable": 24,
       "social-only": 2,
       "pending-discovery": 1

@@ -1,16 +1,17 @@
 # Avanzamento regionale CAI
 
-## Ripresa post-Lovere — preflight Lombardia / Emilia-Romagna / Lazio (23 ottobre 2026)
+## Ripresa Lombardia → Marche — directory-only Marche verificata (23 ottobre 2026)
 
-Il branch remoto è `b4780ffc29d6b238fc6c72602762a635ec737057`. I risultati qui sotto sono controlli offline; non aggiornano la copertura aggregata e non costituiscono query live.
+Questi preflight sono separati dalle statistiche nazionali storiche: nessuno ha ricalcolato gli stati evento regionali.
 
-| Regione | Sezioni controllate/complete/parziali/irraggiungibili | Eventi nuovi verificati | Duplicati esclusi | Fallimenti risolti / aperti | Prossimo passo |
-|---|---|---:|---:|---|---|
-| Lombardia | Stati non ricalcolati; nessun fetch | 0 | 0 | 0 / Gazzada è già presente nel batch classificazione; altri target consumati, in cooldown o senza URL esatta | Regione resta incompleta; nessun URL sicuro in questa snapshot |
-| Emilia-Romagna | Snapshot precedente: 29 sezioni, 14 enabled e 15 disabled; stati non ricalcolati | 0 | 0 | 0 / Argenta 503, Rimini 503, Ravenna 403; altri URL consumati o non calendari | Nessun URL sicuro dopo Cesena/Pavullo |
-| Lazio | Snapshot precedente: 31 sezioni, 19 enabled e 12 disabled; stati non ricalcolati | 0 | 0 | 0 / URL consumate, 403/404 e code senza URL figlia esatta | Nessun target distinto oltre Sora già campionata |
+| Regione / run | Sezioni controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti / aperti | Prossimo passo |
+|---|---:|---|---|---|---:|---:|---|---|
+| Lombardia, offline dopo Lovere | target aperti consultati; conteggio non ricalcolato | non ricalcolate | non ricalcolate | non ricalcolate | 0 nuovi | 0 | 0 / Gazzada è nel batch classificazione; restanti candidati consumati, cooldown o senza URL esatta | Lombardia resta incompleta; passare a regione successiva |
+| Emilia-Romagna, offline dopo Cesena/Pavullo | 29 da snapshot (14 enabled, 15 disabled) | non ricalcolate | non ricalcolate | non ricalcolate | 0 nuovi | 0 | 0 / Argenta e Rimini 503, Ravenna 403; gli altri candidati sono URL già lette o non calendari | Nessun URL safe in questa snapshot |
+| Lazio, offline dopo i due run Sora | 31 da snapshot (19 enabled, 12 disabled) | non ricalcolate | non ricalcolate | non ricalcolate | 0 nuovi | 0 | 0 / URL consumate, 403/404, code senza figlio esatto; nessun retry | Nessun target distinto da Sora |
+| Marche, `cai-20261023-marche-directory-refresh01` | 15 parent + 15 risposte subsection; registry finale 837 record | Calendari non ricontati | Calendari non ricontati | Calendari non ricontati | 0 (nessuna raccolta eventi) | 0 | 0 failure subsection; issue calendario non toccate | Checkpoint file, poi selezione offline di un solo URL evento fra i tre siti aggiornati |
 
-Per evitare replay, Gazzada non è selezionata benché il documento non compaia nella lista `scrape-status.documents`: il batch `cai-map-20261022-full01` e i record catalogati la collegano già al PDF. In questi preflight non sono stati letti calendari né fatti test o scritture DB. La prossima azione è il refresh directory-only della sola Marche; eventuali URL eventi vanno selezionate solo dopo verifica dell'output e checkpoint remoto.
+Directory Marche: 528 elementi ufficiali restituiti; 0 subsection failure, 0 ID aggiunti/rimossi, 0 ambiguità, 0 modifiche fuori regione; solo `website` è cambiato per Pesaro, S. Benedetto del Tronto e Sarnano. Output/mirror SHA-256 `992e32565ed65031f95873b7dd83fc82b8feba66daa4aebd59cfe6ea277d6100`. QA importer PASS; backend test 214/214; hash sei JSON pubblici invariati dai test. Report SHA `523384f0adf6d6d62d1394190d33df72d7e71ccad4630a11a68bb1bb901a5ac1`, manifest SHA `37b05fc642176c8ccb89323042e56a8f72c407462f8858114e2745e9e1de8c1a`. Nessun fetch calendario o DB.
 
 
 ## Ultimo checkpoint operativo — 23 ottobre 2026

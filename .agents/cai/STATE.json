@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "marche-directory-refresh-selected-checkpoint-pending",
+  "phase": "marche-directory-files-qa-tested-checkpoint-pending",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -77,14 +77,14 @@
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "official source QA, bounded provider circuit breaker, adapter/tests",
-      "status": "Lombardia: preflight no-target; Gazzada esclusa perché già usata nel batch classificazione. Emilia-Romagna e Lazio: nessun nuovo URL sicuro nelle snapshot. Nessun fetch o modifica."
+      "status": "Directory-only Marche completata: 15 parent e 15 subsection response, 0 failure; tre website ufficiali aggiornati, nessun evento/calendar fetch. Report/manifest preparati; prossima selezione URL solo dopo checkpoint remoto."
     },
     "importer": {
       "name": "cai-importer",
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "classification manifest validator, candidate/effective QA schema, conflicts/reconciliation and DB safety",
-      "status": "PASS sul checkpoint Lovere 8961db1d; nessun delta DB in questo checkpoint. Prossimo gate read-only sul solo output regionale Marche, dopo il refresh."
+      "status": "PASS indipendente sul refresh Marche: manifest/output/mirror, 837 ID, 0 add/remove e tre soli website fields verificati. Backend npm test 214/214, hash dei sei JSON pubblici identici pre/post. Nessun DB."
     }
   },
   "baseline": {
@@ -875,12 +875,18 @@
     },
     {
       "id": "S122",
-      "status": "pending",
+      "status": "completed",
       "owner": "orchestrator",
-      "result": "Checkpointare la selezione della directory ufficiale CAI per la sola regione Marche; dopo push/verifica, refresh directory-only con --region Marche per aggiornare il registro e identificare eventuali fonti ufficiali nuove. Nessun run eventi o DB finché l'output non è verificato."
+      "result": "Directory-only CAI Marche eseguita nel checkout isolato del collector sul codice b4780ff, poi trasferita nel checkout corrente 651423e dopo verifica baseline: 528 elementi directory, 15 parent/15 risposte sottosezione, 0 failure; registry 837 record e 837 ID, 0 add/remove/ambiguity/out-of-region, tre soli website Marche cambiati. Importer QA PASS indipendente; backend npm test 214/214, sei hash JSON pubblici identici pre/post. Nessun evento/fetch calendario/DB. Report SHA 523384f0…1a5ac1, manifest SHA 37b05fc6…e8c1a, mirror SHA 992e3256…7d6100."
+    },
+    {
+      "id": "S123",
+      "status": "pending",
+      "owner": "cai-collector",
+      "result": "Dopo checkpoint remoto del refresh, preflight offline del solo registro Marche aggiornato: confrontare le tre website URL modificate (Pesaro, S. Benedetto del Tronto, Sarnano) con sources/status/FAILURES/run artifacts e selezionare al massimo una fonte/URL official-host nuova e non consumata; niente fetch finché non è checkpointata la selezione."
     }
   ],
-  "nextAction": "Pubblicare questo handoff; poi, dopo verifica del checkpoint remoto, aggiornare la directory ufficiale CAI soltanto per Marche con il merge regionale conservativo già testato. Verificare fixture/QA e npm test in sequenza dopo il run; selezionare un URL eventi solo se il registro aggiornato ne offre uno distinto e ufficiale. Nessun DB in questo passo.",
+  "nextAction": "Pubblicare registry Marche, report/manifest, stato e handoff e verificare il ref remoto. Dopo il checkpoint, collector fa preflight offline SOLO sui tre siti con website aggiornato, distinguendo URL registrata dalla homepage; un eventuale run eventi sarà max1 documento/120s/concurrency1 e avrà un nuovo checkpoint prima del fetch. Nessun DB finché non esiste delta file verificato.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
