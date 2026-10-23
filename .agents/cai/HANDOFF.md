@@ -2,7 +2,7 @@
 
 ## Stato corrente — 23 ottobre 2026
 
-Branch remoto `codex/cai-orchestrator-luna` verificato a `6fcd4dab3d00bd97e70f406aa252217fd4f181dc`, discendente del checkpoint Valmadrera `50352f7fde1a638e6541aab048fcdacfb834324b`. Valmadrera07 (14 eventi + 14 classificazioni) e Fivizzano calendar01 (+4 places +4 classificazioni) sono già riconciliati: non ripeterli, né ripetere il batch storico 3.336.
+Branch remoto `codex/cai-orchestrator-luna` verificato a `71a6e18fc51d8838f028fe6e58e548776f1c297d` (run Cesena e handoff pubblicati; il commit precedente era `6fcd4dab3d00bd97e70f406aa252217fd4f181dc`), discendente del checkpoint Valmadrera `50352f7fde1a638e6541aab048fcdacfb834324b`. Valmadrera07 (14 eventi + 14 classificazioni) e Fivizzano calendar01 (+4 places +4 classificazioni) sono già riconciliati: non ripeterli, né ripetere il batch storico 3.336.
 
 Ultimo run: `cai-20261023-emilia-romagna-cesena-attivita01`, CAI Cesena `cai-cesena-9224012`, URL richiesta `https://www.caicesena.com/index.php/attivita`, un documento massimo, budget120s, concurrency1, no discovery. Orchestratore: `partial / files ready / database pending`; status associa la URL a hash `63bd28…237bc`, `events=0`, `method=null`, ma body/cache, HTTP status e content type non sono recuperabili. Importer QA: integrità manifest/cataloghi/mirror PASS, attribuzione contenuto HOLD. Zero estrazioni non prova un calendario vuoto; nessun evento verificato, classificazione, query o scrittura DB. Catalogo file 3.376→3.376, sei righe Cesena invariate, 0 add/remove/change. Quattro issue Cesena restano aperte (OCR PDF giovani, discovery-limit7 PDF annuale, discovery-limit1 programma e attività).
 

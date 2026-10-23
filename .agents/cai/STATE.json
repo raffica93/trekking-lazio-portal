@@ -679,10 +679,10 @@
       "id": "S89",
       "status": "pending",
       "owner": "cai-collector",
-      "result": "After this checkpoint, offline-only preflight next canonical region Friuli-Venezia Giulia. Select exact official unconsumed target or pass to next region; no fetch until selection checkpoint."
+      "result": "Cesena checkpoint 71a6e18 published and remotely verified. cai-collector is performing the offline-only Friuli-Venezia Giulia preflight; no fetch or file/DB writes."
     }
   ],
-  "nextAction": "Publish and verify the Cesena run artifacts, report, evidence, public mirrors and state on codex/cai-orchestrator-luna. After remote verification, have cai-collector perform offline-only preflight of Friuli-Venezia Giulia and select one exact official unconsumed URL, or document why to pass to the next region. No fetch until that selection is checkpointed.",
+  "nextAction": "cai-collector performs offline-only preflight of Friuli-Venezia Giulia; choose one exact official unconsumed URL outside cooldown or document no target. No fetch until target selection is committed and remotely verified.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -692,7 +692,7 @@
     "proposedRunId": null
   },
   "currentWork": {
-    "branchHead": "6fcd4dab3d00bd97e70f406aa252217fd4f181dc",
+    "branchHead": "71a6e18fc51d8838f028fe6e58e548776f1c297d",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
       "runId": "cai-20261023-emilia-romagna-cesena-attivita01",
@@ -700,7 +700,7 @@
       "sourceId": "cai-cesena-9224012",
       "requestedUrl": "https://www.caicesena.com/index.php/attivita",
       "collection": "partial; status records 0 extracted and method=null; no body/HTTP metadata, therefore content attribution HOLD",
-      "files": "manifest/state/report/source evidence/evidence manifest prepared; importer integrity PASS; checkpoint pending",
+      "files": "report, source evidence, manifest/evidence-manifest, state and catalog mirrors committed and verified remotely at 71a6e18",
       "database": "no candidate; no classification, query or write",
       "counts": {
         "catalogBefore": 3376,
@@ -720,7 +720,7 @@
       "tests": "backend npm test 206/206 after collection; six public JSON hashes stable pre/post"
     }
   },
-  "repositoryCommit": "6fcd4dab3d00bd97e70f406aa252217fd4f181dc",
+  "repositoryCommit": "71a6e18fc51d8838f028fe6e58e548776f1c297d",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -743,8 +743,8 @@
     }
   },
   "tests": "After Cesena collection: backend npm test 206/206 serially; six public JSON hashes unchanged pre/post and all mirrors byte-identical.",
-  "updatedAt": "2026-10-23T01:27:16Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T01:27:16Z",
+  "updatedAt": "2026-10-23T01:28:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T01:28:00Z",
   "regionCurrent": "Emilia-Romagna — CAI Cesena bounded route sample; 1 source checked, partial/unsupported, content HOLD; 3,376 catalog IDs before/after, six Cesena rows unchanged, 0 new/removed/changed/verified events; 0 DB. Four source issues remain open (OCR failure and three discovery limits).",
   "regionNext": "Friuli-Venezia Giulia — offline-only source preflight pending after Cesena checkpoint; no URL selected yet.",
   "preflight": {
@@ -999,7 +999,7 @@
   ],
   "nextSourcePreflight": {
     "region": "Friuli-Venezia Giulia",
-    "status": "pending offline-only scan after remote checkpoint",
+    "status": "offline-only scan in progress after verified Cesena checkpoint 71a6e18",
     "networkFetchPerformed": false,
     "scope": "registry, scrape status, FAILURES/cooldown, run artifacts and cache only if actually available",
     "target": null
@@ -1047,7 +1047,7 @@
     "runId": "cai-20261023-emilia-romagna-cesena-attivita01",
     "path": "backend/data/agent-runs/cai-20261023-emilia-romagna-cesena-attivita01",
     "collection": "partial",
-    "files": "ready; evidence manifest pending final hash refresh after state update",
+    "files": "ready; report/source evidence/evidence manifest committed and verified at 71a6e18",
     "database": "pending-no-delta",
     "requestedUrl": "https://www.caicesena.com/index.php/attivita",
     "attribution": "hold",
