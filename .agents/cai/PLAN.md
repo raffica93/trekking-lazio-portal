@@ -1,6 +1,6 @@
 # Piano di passaggio al lavoro interamente cloud
 
-Stato aggiornato al 23 ottobre 2026: branch remoto verificato a `54f89ba2e57e5da2f24202be5cbcd4b55f52cc6e`. Cesena e Sora programma01 sono checkpointati senza delta; il feed iCal Sora è stato letto correttamente (VCALENDAR 2.0, 0 VEVENT), quindi vuoto per quello specifico feed, mentre la sezione intera resta partial per PDF OCR/discovery e annuncio discovery. Importer PASS, nessun DB; backend test 206/206. Pubblicare il report/evidenza iCal in preparazione; poi preflight offline Liguria, selezione esatta e checkpoint prima di un eventuale fetch. Non ripetere Valmadrera, Fivizzano o batch storico 3.336. I passi S0–S7 sotto sono piano storico, non affermazioni sul completamento nazionale.
+Stato aggiornato al 23 ottobre 2026: branch remoto verificato a `b143fe5cd7dd5b4a91869d8fcf6e0ed59f300478`. Cesena e Sora programma01 sono checkpointati senza delta; il feed iCal Sora è stato letto correttamente (VCALENDAR 2.0, 0 VEVENT), quindi vuoto per quello specifico feed, mentre la sezione intera resta partial per PDF OCR/discovery e annuncio discovery. Importer PASS, nessun DB; backend test 206/206. Report/evidenza iCal pubblicati a `b143fe5`; ora preflight offline Liguria, selezione esatta e checkpoint prima di un eventuale fetch. Non ripetere Valmadrera, Fivizzano o batch storico 3.336. I passi S0–S7 sotto sono piano storico, non affermazioni sul completamento nazionale.
 
 ## Sequenza
 

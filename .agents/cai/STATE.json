@@ -764,7 +764,7 @@
     "proposedRunId": null
   },
   "currentWork": {
-    "branchHead": "54f89ba2e57e5da2f24202be5cbcd4b55f52cc6e",
+    "branchHead": "b143fe5cd7dd5b4a91869d8fcf6e0ed59f300478",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
       "runId": "cai-20261023-lazio-sora-ical01",
@@ -772,7 +772,7 @@
       "sourceId": "sora",
       "requestedUrl": "https://www.caisora.it/sito/events/?ical=1",
       "collection": "partial source; exact ICS feed verified empty",
-      "files": "run artifacts/report/source evidence/evidence manifest and public mirrors prepared; checkpoint pending",
+      "files": "run artifacts/report/source evidence/evidence manifest and public mirrors committed and remotely verified at b143fe5",
       "database": "no candidate; no classification/query/write",
       "counts": {
         "catalogBefore": 3376,
@@ -790,7 +790,7 @@
       "tests": "backend npm test 206/206 after collection; six public JSON hashes unchanged"
     }
   },
-  "repositoryCommit": "54f89ba2e57e5da2f24202be5cbcd4b55f52cc6e",
+  "repositoryCommit": "b143fe5cd7dd5b4a91869d8fcf6e0ed59f300478",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -813,8 +813,8 @@
     }
   },
   "tests": "After Sora iCal collection: backend npm test 206/206 serially; six public JSON hashes unchanged pre/post; backend/frontend mirrors identical.",
-  "updatedAt": "2026-10-23T01:53:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T01:53:00Z",
+  "updatedAt": "2026-10-23T01:56:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T01:56:00Z",
   "regionCurrent": "Lazio — CAI Sora iCal feed read correctly and empty: one `VCALENDAR`, zero `VEVENT`, feed `no-upcoming` supported. Whole source remains partial for PDF OCR/discovery and announcement discovery. 10 existing IDs unchanged, 0 delta/DB.",
   "regionNext": "Liguria — offline-only preflight after Sora iCal checkpoint; no source URL selected yet.",
   "preflight": {
@@ -1067,7 +1067,7 @@
   ],
   "nextSourcePreflight": {
     "region": "Liguria",
-    "status": "pending offline-only scan after current checkpoint",
+    "status": "offline-only preflight in progress after Sora iCal checkpoint b143fe5",
     "scope": "registry, status/document history, FAILURES/cooldown, run artifacts and cache if actually available",
     "networkFetchPerformed": false,
     "target": null
@@ -1113,7 +1113,7 @@
     "runId": "cai-20261023-lazio-sora-ical01",
     "path": "backend/data/agent-runs/cai-20261023-lazio-sora-ical01",
     "collection": "partial",
-    "files": "ready; evidence-manifest pending final checkpoint",
+    "files": "ready; evidence manifest and catalog/status mirrors remotely verified at b143fe5",
     "database": "pending-no-delta",
     "requestedUrl": "https://www.caisora.it/sito/events/?ical=1",
     "bodySha256": "0346bed3656c05f04bea29859d384ae9f97a835cd7cac16082f98d3738977906",
