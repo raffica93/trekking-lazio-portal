@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-23T01:30:41.238Z",
+  "generatedAt": "2026-10-23T01:36:34.613Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 1,
-    "parsed": 0,
-    "unsupported": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 548
   },
@@ -826,7 +826,7 @@
       "excursions": 10,
       "error": null,
       "hash": "c42b13ef2d1c3f9977dff7544d4eaf90232c1c65584f796b6699da700bb47fd6",
-      "updatedAt": "2026-10-23T01:30:41.238Z",
+      "updatedAt": "2026-10-23T01:36:34.613Z",
       "documents": [
         {
           "url": "https://www.caisora.it/sito/wp-content/uploads/2026/02/2026.pdf",
@@ -839,10 +839,17 @@
           "hash": "59df2257b67d462f64ffe2eee243f28c02310d0ec52c135349bed3576c9ea742",
           "events": 0,
           "method": null
+        },
+        {
+          "url": "https://www.caisora.it/sito/events/?ical=1",
+          "hash": "0346bed3656c05f04bea29859d384ae9f97a835cd7cac16082f98d3738977906",
+          "events": 0,
+          "method": "ics"
         }
       ],
       "methods": [
-        "pdf-text"
+        "pdf-text",
+        "ics"
       ],
       "issues": [
         {

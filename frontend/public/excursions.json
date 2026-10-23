@@ -10329,7 +10329,7 @@
     "tivoli": "5f3f80ac1840460cd544d07406102005e3db8351353d743af0fd067da9603b7e",
     "rieti": "8e529c1411b8fa2278c988cc8acb34eca23ab066045118a92daa1ea5d2269390",
     "leonessa": "10afab476e23bc4c275ed76bebf435e8e8d290a45e950084818dee9c562660f4",
-    "sora": "f8c3cc7e373afa7286f5d00a60cac777c559a9676aaaa893097aa1a1fe809868",
+    "sora": "dc34e4765c5b4afb22e9cc8044b8f5e019d974edb09aee055e9268d51640c51e",
     "amatrice": "1ff987f249d9ba46ad6c16dac41ac438efac885e02304437a5fe2e911c31929c",
     "alatri": "fcc3e452183f29a4fea6d43f1a4c610c1048bf5d855f79d817c021f8efa915a5",
     "colleferro": "d305286d0c4f515a7f67cea22350d779bbdf06ebd5df308219c9cf05582f72a5",
@@ -10773,14 +10773,14 @@
     "cai-busca-9112010": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967",
     "cai-dronero-9112012": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967"
   },
-  "generatedAt": "2026-10-23T01:30:41.211Z",
+  "generatedAt": "2026-10-23T01:36:34.560Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 1,
-    "parsed": 0,
-    "unsupported": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 548
   },

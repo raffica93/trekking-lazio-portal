@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "lazio-sora-ical-selection-checkpoint-pending",
+  "phase": "lazio-sora-ical-verified-empty-feed-next-region-preflight",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -77,14 +77,14 @@
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "official source QA, bounded provider circuit breaker, adapter/tests",
-      "status": "Offline Lazio scan: 31 sections, 19 enabled/12 disabled; no new target among other enabled sources. One distinct exact registry Sora ICS URL selected; no fetch."
+      "status": "Sora iCal01 completed; valid 271-byte VCALENDAR 2.0 with zero VEVENT, no-upcoming supported for feed. Section remains partial due PDF OCR/discovery and announcement discovery issues."
     },
     "importer": {
       "name": "cai-importer",
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "classification manifest validator, candidate/effective QA schema, conflicts/reconciliation and DB safety",
-      "status": "Independent Sora QA: manifest/catalog/mirror PASS, 10 existing rows unchanged; the page is a dated announcement, not the linked calendar. Coverage HOLD; no DB."
+      "status": "Independent QA PASS: exact URL/body hash/content type/ICS parse match; feed-level no-upcoming supported, section coverage HOLD; 10 rows unchanged, no DB."
     }
   },
   "baseline": {
@@ -728,9 +728,33 @@
       "status": "pending",
       "owner": "orchestrator",
       "result": "Publish and verify the Sora ICS target selection; then one bounded iCal request, max1/120s/concurrency1/no discovery."
+    },
+    {
+      "id": "S98",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Sora iCal01 completed after selection checkpoint 54f89ba. Exact URL cache body 271 B text/calendar SHA 0346bed3…; valid VCALENDAR 2.0 METHOD:PUBLISH, one calendar, zero VEVENT; status method=ics/events=0/no-upcoming. Source remains partial for PDF OCR/discovery and announcement discovery; no retries."
+    },
+    {
+      "id": "S99",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Backend npm test 206/206 serially; six public JSON hashes unchanged pre/post collection test."
+    },
+    {
+      "id": "S100",
+      "status": "completed",
+      "owner": "cai-importer",
+      "result": "Independent cache/body/manifest/catalog/mirror QA PASS. Feed-level no-upcoming supported, whole source coverage HOLD; 10 existing Sora IDs unchanged and 0 delta. No DB."
+    },
+    {
+      "id": "S101",
+      "status": "pending",
+      "owner": "orchestrator",
+      "result": "Publish and verify Sora iCal artifacts/report/evidence/status. After checkpoint pass from Lazio to offline-only preflight of Liguria, because all other Lazio enabled URL candidates are already represented; no fetch until next target checkpoint."
     }
   ],
-  "nextAction": "Publish and verify the single CAI Sora iCal target selection at https://www.caisora.it/sito/events/?ical=1 on codex/cai-orchestrator-luna. After remote verification run cai-20261023-lazio-sora-ical01 with max1 document/120s/concurrency1/no discovery; do not retry the distinct PDF or re-fetch the announcement page.",
+  "nextAction": "Publish and verify Sora iCal run artifacts, evidence/report, status/catalog mirrors and handoff on codex/cai-orchestrator-luna. After remote verification, pass to offline-only preflight of Liguria; Lazio has no additional exact URL among other enabled source candidates. Select one new target and checkpoint before fetch.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -740,15 +764,15 @@
     "proposedRunId": null
   },
   "currentWork": {
-    "branchHead": "42eb02ab109a2f44878c38b29d5d991be8965269",
+    "branchHead": "54f89ba2e57e5da2f24202be5cbcd4b55f52cc6e",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
-      "runId": "cai-20261023-lazio-sora-programma01",
+      "runId": "cai-20261023-lazio-sora-ical01",
       "region": "Lazio",
       "sourceId": "sora",
-      "requestedUrl": "https://www.caisora.it/sito/programma-escursionistico-2026-2/",
-      "collection": "partial; announcement page read, underlying PDF/calendar remains unresolved",
-      "files": "report/source evidence/manifest/evidence-manifest/state and public status/catalog mirrors committed and remotely verified at 10a4de9",
+      "requestedUrl": "https://www.caisora.it/sito/events/?ical=1",
+      "collection": "partial source; exact ICS feed verified empty",
+      "files": "run artifacts/report/source evidence/evidence manifest and public mirrors prepared; checkpoint pending",
       "database": "no candidate; no classification/query/write",
       "counts": {
         "catalogBefore": 3376,
@@ -758,15 +782,15 @@
         "added": 0,
         "removed": 0,
         "changed": 0,
-        "verifiedEvents": 0,
+        "feedEventsVerified": 0,
         "semanticDuplicatesExcluded": 0,
         "failuresResolved": 0,
         "failuresOpen": 3
       },
-      "tests": "backend npm test 206/206 after collection; public mirrors stable"
+      "tests": "backend npm test 206/206 after collection; six public JSON hashes unchanged"
     }
   },
-  "repositoryCommit": "42eb02ab109a2f44878c38b29d5d991be8965269",
+  "repositoryCommit": "54f89ba2e57e5da2f24202be5cbcd4b55f52cc6e",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -788,11 +812,11 @@
       "afterQueryAt": "2026-10-22T22:33:30.892756Z"
     }
   },
-  "tests": "After Sora collection: backend npm test 206/206 serially; six public JSON hashes unchanged pre/post; all backend/frontend mirrors byte-identical.",
-  "updatedAt": "2026-10-23T01:47:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T01:47:00Z",
-  "regionCurrent": "Lazio — CAI Sora announcement sample: one URL read, source partial, 0 verified events, 10 existing IDs unchanged, 0 new/removed/changed; 0 DB. The cached page is an announcement linking to the already OCR-failed PDF, so calendar coverage remains unresolved.",
-  "regionNext": "Lazio — CAI Sora exact iCal `https://www.caisora.it/sito/events/?ical=1`, registered in calendarUrls/calendarEvidence and exact official host; selected for one bounded run after checkpoint.",
+  "tests": "After Sora iCal collection: backend npm test 206/206 serially; six public JSON hashes unchanged pre/post; backend/frontend mirrors identical.",
+  "updatedAt": "2026-10-23T01:53:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T01:53:00Z",
+  "regionCurrent": "Lazio — CAI Sora iCal feed read correctly and empty: one `VCALENDAR`, zero `VEVENT`, feed `no-upcoming` supported. Whole source remains partial for PDF OCR/discovery and announcement discovery. 10 existing IDs unchanged, 0 delta/DB.",
+  "regionNext": "Liguria — offline-only preflight after Sora iCal checkpoint; no source URL selected yet.",
   "preflight": {
     "at": "2026-10-23T01:27:16Z",
     "sourceId": "cai-cesena-9224012",
@@ -856,28 +880,24 @@
     "independentImporterQa": "PASS file seals/catalog mirrors; HOLD import eligibility because corrected record is past/no catalog delta"
   },
   "lastRegionalAttempt": {
-    "runId": "cai-20261023-lazio-sora-programma01",
+    "runId": "cai-20261023-lazio-sora-ical01",
     "region": "Lazio",
     "sourceId": "sora",
-    "requestedUrl": "https://www.caisora.it/sito/programma-escursionistico-2026-2/",
-    "collection": "partial; cached article read, not the calendar; method=null and zero event rows do not prove schedule empty",
-    "files": "run manifest/state/report/source-evidence/evidence manifest prepared; importer integrity and catalog PASS; checkpoint pending",
-    "database": "no classification candidates; no query/write",
-    "baselineCommit": "312a682dd30fc3189ac0e5d7466572001b1574c9",
-    "runFolder": "backend/data/agent-runs/cai-20261023-lazio-sora-programma01",
-    "bodyContentType": "text/html",
-    "bodyBytes": 75149,
-    "bodySha256": "59df2257b67d462f64ffe2eee243f28c02310d0ec52c135349bed3576c9ea742",
+    "requestedUrl": "https://www.caisora.it/sito/events/?ical=1",
+    "collection": "partial source; this iCal feed itself was read correctly and is empty (VCALENDAR 2.0, 0 VEVENT); source overall still has open PDF/announcement issues",
+    "files": "manifest/state/source evidence/report/evidence manifest prepared; importer PASS feed/body/catalog; checkpoint pending",
+    "database": "no candidates; no classification/query/write",
+    "baselineCommit": "54f89ba2e57e5da2f24202be5cbcd4b55f52cc6e",
+    "runFolder": "backend/data/agent-runs/cai-20261023-lazio-sora-ical01",
+    "bodyContentType": "text/calendar; charset=UTF-8",
+    "bodyBytes": 271,
+    "bodySha256": "0346bed3656c05f04bea29859d384ae9f97a835cd7cac16082f98d3738977906",
     "httpStatus": "not persisted",
     "finalUrl": "not persisted",
-    "requestedPageContent": "dated 17 Jan 2026 announcement of programme; links QUI to already OCR-failed http://www.caisora.it/sito/wp-content/uploads/2026/02/2026.pdf",
-    "catalogBefore": 3376,
-    "catalogAfter": 3376,
-    "sourceRowsBefore": 10,
-    "sourceRowsAfter": 10,
-    "added": 0,
-    "removed": 0,
-    "changed": 0,
+    "icalVersion": "2.0",
+    "icalMethod": "PUBLISH",
+    "calendarComponents": 1,
+    "eventComponents": 0,
     "eventsExtracted": 0,
     "eventsVerified": 0,
     "sectionsChecked": 1,
@@ -886,13 +906,14 @@
     "unreachable": 0,
     "failuresResolved": 0,
     "failuresOpen": [
-      "programme PDF OCR failure",
-      "programme PDF discovery-limit 9",
-      "announcement URL discovery-limit 1"
+      "annual PDF OCR failure",
+      "annual PDF discovery-limit 9",
+      "programme announcement discovery-limit 1"
     ],
     "coordinatesAdded": 0,
-    "collectorQa": "bounded run completed; cache body SHA matches status metadata; no linked PDF retry",
-    "importerQa": "manifest/catalog/mirrors PASS; event coverage HOLD",
+    "duplicatesExcluded": 0,
+    "collectorQa": "feed parsed and empty, no retry of linked PDF",
+    "importerQa": "PASS body/source/manifest/catalog; feed-level no-upcoming supported; section coverage HOLD",
     "backendTests": "206/206; six public JSON hashes unchanged pre/post"
   },
   "regionalCoverage": {
@@ -1045,43 +1066,31 @@
     }
   ],
   "nextSourcePreflight": {
-    "region": "Lazio",
-    "sourceId": "sora",
-    "sourceName": "CAI Sora",
-    "url": "https://www.caisora.it/sito/events/?ical=1",
-    "status": "selected offline; selection checkpoint pending",
-    "evidence": "exact URL in registry calendarUrls/calendarEvidence, foundOn the official programme announcement; not represented in status URL/documents, FAILURES or run request fields reviewed",
-    "scope": "one exact URL, max 1 document, 120 seconds, concurrency 1, no child URLs",
+    "region": "Liguria",
+    "status": "pending offline-only scan after current checkpoint",
+    "scope": "registry, status/document history, FAILURES/cooldown, run artifacts and cache if actually available",
     "networkFetchPerformed": false,
-    "exclude": [
-      "Sora 2026 PDF: OCR failure and discovery-limit 9",
-      "Sora announcement page just read"
-    ],
-    "proposedRunId": "cai-20261023-lazio-sora-ical01"
+    "target": null
   },
   "currentRun": {
-    "runId": "cai-20261023-lazio-sora-programma01",
+    "runId": "cai-20261023-lazio-sora-ical01",
     "region": "Lazio",
     "sourceId": "sora",
-    "requestedUrl": "https://www.caisora.it/sito/programma-escursionistico-2026-2/",
-    "collection": "partial; cached article read, not the calendar; method=null and zero event rows do not prove schedule empty",
-    "files": "run manifest/state/report/source-evidence/evidence manifest prepared; importer integrity and catalog PASS; checkpoint pending",
-    "database": "no classification candidates; no query/write",
-    "baselineCommit": "312a682dd30fc3189ac0e5d7466572001b1574c9",
-    "runFolder": "backend/data/agent-runs/cai-20261023-lazio-sora-programma01",
-    "bodyContentType": "text/html",
-    "bodyBytes": 75149,
-    "bodySha256": "59df2257b67d462f64ffe2eee243f28c02310d0ec52c135349bed3576c9ea742",
+    "requestedUrl": "https://www.caisora.it/sito/events/?ical=1",
+    "collection": "partial source; this iCal feed itself was read correctly and is empty (VCALENDAR 2.0, 0 VEVENT); source overall still has open PDF/announcement issues",
+    "files": "manifest/state/source evidence/report/evidence manifest prepared; importer PASS feed/body/catalog; checkpoint pending",
+    "database": "no candidates; no classification/query/write",
+    "baselineCommit": "54f89ba2e57e5da2f24202be5cbcd4b55f52cc6e",
+    "runFolder": "backend/data/agent-runs/cai-20261023-lazio-sora-ical01",
+    "bodyContentType": "text/calendar; charset=UTF-8",
+    "bodyBytes": 271,
+    "bodySha256": "0346bed3656c05f04bea29859d384ae9f97a835cd7cac16082f98d3738977906",
     "httpStatus": "not persisted",
     "finalUrl": "not persisted",
-    "requestedPageContent": "dated 17 Jan 2026 announcement of programme; links QUI to already OCR-failed http://www.caisora.it/sito/wp-content/uploads/2026/02/2026.pdf",
-    "catalogBefore": 3376,
-    "catalogAfter": 3376,
-    "sourceRowsBefore": 10,
-    "sourceRowsAfter": 10,
-    "added": 0,
-    "removed": 0,
-    "changed": 0,
+    "icalVersion": "2.0",
+    "icalMethod": "PUBLISH",
+    "calendarComponents": 1,
+    "eventComponents": 0,
     "eventsExtracted": 0,
     "eventsVerified": 0,
     "sectionsChecked": 1,
@@ -1090,50 +1099,45 @@
     "unreachable": 0,
     "failuresResolved": 0,
     "failuresOpen": [
-      "programme PDF OCR failure",
-      "programme PDF discovery-limit 9",
-      "announcement URL discovery-limit 1"
+      "annual PDF OCR failure",
+      "annual PDF discovery-limit 9",
+      "programme announcement discovery-limit 1"
     ],
     "coordinatesAdded": 0,
-    "collectorQa": "bounded run completed; cache body SHA matches status metadata; no linked PDF retry",
-    "importerQa": "manifest/catalog/mirrors PASS; event coverage HOLD",
+    "duplicatesExcluded": 0,
+    "collectorQa": "feed parsed and empty, no retry of linked PDF",
+    "importerQa": "PASS body/source/manifest/catalog; feed-level no-upcoming supported; section coverage HOLD",
     "backendTests": "206/206; six public JSON hashes unchanged pre/post"
   },
   "latestRun": {
-    "runId": "cai-20261023-lazio-sora-programma01",
-    "path": "backend/data/agent-runs/cai-20261023-lazio-sora-programma01",
+    "runId": "cai-20261023-lazio-sora-ical01",
+    "path": "backend/data/agent-runs/cai-20261023-lazio-sora-ical01",
     "collection": "partial",
-    "files": "ready; run artifacts and catalog/status mirror blobs remotely verified at 10a4de9",
+    "files": "ready; evidence-manifest pending final checkpoint",
     "database": "pending-no-delta",
-    "requestedUrl": "https://www.caisora.it/sito/programma-escursionistico-2026-2/",
-    "bodySha256": "59df2257b67d462f64ffe2eee243f28c02310d0ec52c135349bed3576c9ea742",
-    "bodyBytes": 75149,
-    "attribution": "cache body matches requested URL status record; HTTP status/final URL not persisted",
-    "pageType": "dated programme announcement, links to OCR-failed PDF",
-    "extractedRows": 0,
+    "requestedUrl": "https://www.caisora.it/sito/events/?ical=1",
+    "bodySha256": "0346bed3656c05f04bea29859d384ae9f97a835cd7cac16082f98d3738977906",
+    "bodyBytes": 271,
+    "contentType": "text/calendar; charset=UTF-8",
+    "icalValid": true,
+    "icalEventComponents": 0,
+    "feedStatus": "no-upcoming",
+    "wholeSectionStatus": "partial",
     "catalogBefore": 3376,
     "catalogAfter": 3376,
-    "soraRowsBefore": 10,
-    "soraRowsAfter": 10,
+    "sourceRowsBefore": 10,
+    "sourceRowsAfter": 10,
     "added": 0,
     "removed": 0,
     "changed": 0,
-    "verifiedEvents": 0,
+    "verifiedFeedEvents": 0,
     "backendTests": "206/206 passed after collection",
     "databaseQueryOrWrite": false
   },
   "proposedTarget": {
-    "region": "Lazio",
-    "sourceId": "sora",
-    "sourceName": "CAI Sora",
-    "url": "https://www.caisora.it/sito/events/?ical=1",
-    "reason": "exact official-host calendar feed in registry calendarUrls/calendarEvidence, unrepresented among reviewed source documents/failures/run requests",
-    "sample": {
-      "documents": 1,
-      "seconds": 120,
-      "concurrency": 1,
-      "discovery": false
-    },
+    "region": "Liguria",
+    "status": "pending offline preflight after Sora iCal checkpoint",
+    "url": null,
     "fetchStarted": false
   }
 }

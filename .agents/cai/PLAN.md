@@ -1,6 +1,6 @@
 # Piano di passaggio al lavoro interamente cloud
 
-Stato aggiornato al 23 ottobre 2026: branch remoto verificato a `42eb02ab109a2f44878c38b29d5d991be8965269`. Cesena e Sora-annuncio sono file-checkpointed senza delta; Sora non ha letto il calendario (linka al PDF già OCR-failed), importer integrità PASS/copertura HOLD, test backend 206/206. FVG non ha target URL nuovo nella snapshot; Lazio ha selezionato l’iCal official-host CAI Sora `https://www.caisora.it/sito/events/?ical=1`, selezione da pubblicare/verificare prima di un solo run max1/120s/concurrency1/no discovery. Non ripetere Valmadrera, Fivizzano già consegnato o batch storico 3.336. I passi S0–S7 sotto sono piano storico di qualifica, non affermazioni sul completamento nazionale.
+Stato aggiornato al 23 ottobre 2026: branch remoto verificato a `54f89ba2e57e5da2f24202be5cbcd4b55f52cc6e`. Cesena e Sora programma01 sono checkpointati senza delta; il feed iCal Sora è stato letto correttamente (VCALENDAR 2.0, 0 VEVENT), quindi vuoto per quello specifico feed, mentre la sezione intera resta partial per PDF OCR/discovery e annuncio discovery. Importer PASS, nessun DB; backend test 206/206. Pubblicare il report/evidenza iCal in preparazione; poi preflight offline Liguria, selezione esatta e checkpoint prima di un eventuale fetch. Non ripetere Valmadrera, Fivizzano o batch storico 3.336. I passi S0–S7 sotto sono piano storico, non affermazioni sul completamento nazionale.
 
 ## Sequenza
 

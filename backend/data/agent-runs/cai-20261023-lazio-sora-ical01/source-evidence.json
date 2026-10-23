@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261023-lazio-sora-ical01",
+  "source": {
+    "sourceId": "sora",
+    "organizer": "CAI Sora",
+    "region": "Lazio",
+    "requestedUrl": "https://www.caisora.it/sito/events/?ical=1",
+    "registeredIn": [
+      "calendarUrls",
+      "calendarEvidence"
+    ],
+    "officialHost": "www.caisora.it"
+  },
+  "observation": {
+    "cacheKeySha256": "b6ea35e260bfc4266c16c0b5a01f6d5f43548206191f5a0c949b49a9ae059585",
+    "cachePath": "backend/node_modules/.cache/cai/b6ea35e260bfc4266c16c0b5a01f6d5f43548206191f5a0c949b49a9ae059585.bin",
+    "contentType": "text/calendar; charset=UTF-8",
+    "bodyBytes": 271,
+    "bodySha256": "0346bed3656c05f04bea29859d384ae9f97a835cd7cac16082f98d3738977906",
+    "statusDocumentHash": "0346bed3656c05f04bea29859d384ae9f97a835cd7cac16082f98d3738977906",
+    "httpStatus": null,
+    "finalUrl": null,
+    "format": "iCalendar VCALENDAR 2.0",
+    "method": "PUBLISH",
+    "calendarName": "CAI - Sezione di Sora",
+    "calendarDescription": "Eventi per CAI - Sezione di Sora",
+    "beginCalendarCount": 1,
+    "endCalendarCount": 1,
+    "beginEventCount": 0,
+    "endEventCount": 0,
+    "parserMethod": "ics",
+    "extractedEvents": 0
+  },
+  "interpretation": {
+    "feedReadSuccessfully": true,
+    "feedIsEmpty": true,
+    "feedStatus": "no-upcoming",
+    "entireSectionCalendarCoverage": "HOLD: annual PDF remains unread due OCR failure and discovery-limit; programme page discovery-limit 1",
+    "verifiedEvents": 0,
+    "newCatalogIds": 0,
+    "classificationCandidates": 0,
+    "databaseDeltaApplicable": false,
+    "duplicatesExcluded": 0
+  },
+  "limitations": [
+    "HTTP status and redirect/final URL were not persisted.",
+    "This proves the requested ICS feed currently contains no VEVENT; it does not prove the entire CAI Sora 2026 programme is empty.",
+    "The distinct annual programme PDF still has OCR failure/discovery-limit 9 and was not fetched.",
+    "The programme announcement has discovery-limit 1 and remains unresolved."
+  ]
+}

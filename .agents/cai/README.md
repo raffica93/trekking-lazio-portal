@@ -23,11 +23,11 @@ Punto di ingresso per riprendere il progetto da una sessione cloud nuova, senza 
 
 ## Passaggio corrente — 23 ottobre 2026
 
-Branch `codex/cai-orchestrator-luna` verificato a `42eb02ab109a2f44878c38b29d5d991be8965269` (discendente da `50352f7`). I delta Valmadrera07 e Fivizzano già riconciliati non vanno ripetuti; non ripetere il batch storico 3.336.
+Branch `codex/cai-orchestrator-luna` verificato a `54f89ba2e57e5da2f24202be5cbcd4b55f52cc6e`. I delta Valmadrera07 e Fivizzano sono già riconciliati; non ripeterli né ripetere il batch storico 3.336. Cesena è checkpointato a `71a6e18` senza delta; FVG resta incompleta e senza URL nuova selezionabile nella snapshot.
 
-Run Sora programma01 ha letto una pagina annuncio cached (75.149 B, SHA `59df2257b67d462f64ffe2eee243f28c02310d0ec52c135349bed3576c9ea742`), non il calendario; collegava a un PDF già fallito OCR. Dieci ID Sora invariati, zero delta/DB; importer integrity PASS e coverage HOLD, backend test 206/206. Prove checkpointate a `10a4de9` e handoff a `42eb02a`.
+Lazio Sora: programma01 ha letto solo un articolo annuncio, non l’intero programma; il PDF OCR-failed è stato escluso. iCal01 ha verificato il feed esatto `https://www.caisora.it/sito/events/?ical=1`, 271 B, `VCALENDAR` valido e zero `VEVENT`; feed-level `no-upcoming` supportato. La sezione resta partial per i problemi del PDF/annuncio; 10 record invariati, zero DB. Importer PASS, copertura nazionale non ricalcolata; backend `npm test` 206/206. I report iCal sono preparati localmente e attendono il checkpoint.
 
-FVG resta incompleta senza target URL nuovo dalla snapshot. Lazio: target successivo CAI Sora iCal `https://www.caisora.it/sito/events/?ical=1`, URL official-host esatta in `calendarUrls`/`calendarEvidence` e non presente negli status/failure/run requests esaminati. Selezione in attesa del checkpoint; poi un solo run max1/120s/concurrency1/no discovery. Non ritentare il PDF 2026 OCR-failed. Runtime/ruoli richiesti GPT-6 Luna high, telemetria effettiva non disponibile.
+Dopo push/verifica del run, procedere al preflight offline Liguria; nessun fetch finché un URL exact-host viene selezionato e checkpointato. Runtime/ruoli richiesti GPT-6 Luna high, telemetria effettiva non disponibile.
 
 ## Responsabilità
 
