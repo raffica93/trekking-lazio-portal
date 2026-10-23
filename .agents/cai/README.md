@@ -23,11 +23,11 @@ Punto di ingresso per riprendere il progetto da una sessione cloud nuova, senza 
 
 ## Passaggio corrente — 23 ottobre 2026
 
-Branch `codex/cai-orchestrator-luna` verificato a `b143fe5cd7dd5b4a91869d8fcf6e0ed59f300478`. I delta Valmadrera07 e Fivizzano sono già riconciliati; non ripeterli né ripetere il batch storico 3.336. Cesena è checkpointato a `71a6e18` senza delta; FVG resta incompleta e senza URL nuova selezionabile nella snapshot.
+Branch `codex/cai-orchestrator-luna` verificato a `9f99117fb676a74630084b51f644d9924e74c863`. I delta Valmadrera07 e Fivizzano sono già riconciliati; non ripeterli né ripetere il batch storico 3.336. Cesena è checkpointato a `71a6e18` senza delta; FVG resta incompleta e senza URL nuova selezionabile nella snapshot.
 
 Lazio Sora: programma01 ha letto solo un articolo annuncio, non l’intero programma; il PDF OCR-failed è stato escluso. iCal01 ha verificato il feed esatto `https://www.caisora.it/sito/events/?ical=1`, 271 B, `VCALENDAR` valido e zero `VEVENT`; feed-level `no-upcoming` supportato. La sezione resta partial per i problemi del PDF/annuncio; 10 record invariati, zero DB. Importer PASS, copertura nazionale non ricalcolata; backend `npm test` 206/206. Report/evidence iCal e mirror sono checkpointati e verificati a `b143fe5`.
 
-Dopo push/verifica del run, procedere al preflight offline Liguria; nessun fetch finché un URL exact-host viene selezionato e checkpointato. Runtime/ruoli richiesti GPT-6 Luna high, telemetria effettiva non disponibile.
+Il preflight Liguria ha trovato 0 URL nuove tra 5 fonti enabled/26 sezioni; le failure sono discovery-limit senza URL figlia. Nessun cache miss attestato, regione incompleta. Lombardia post-Carate e Marche/Molise/Puglia/Sardegna/Calabria/Campania sono già state preflightate senza target; non ripetere. Prossimo: preflight offline Emilia-Romagna per fonti diverse da Cesena/Pavullo, nessun fetch senza checkpoint della selezione. Runtime/ruoli richiesti GPT-6 Luna high, telemetria effettiva non disponibile.
 
 ## Responsabilità
 

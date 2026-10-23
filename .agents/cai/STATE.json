@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "lazio-sora-ical-verified-empty-feed-next-region-preflight",
+  "phase": "liguria-preflight-no-target-next-emilia-preflight",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -752,9 +752,27 @@
       "status": "pending",
       "owner": "orchestrator",
       "result": "Publish and verify Sora iCal artifacts/report/evidence/status. After checkpoint pass from Lazio to offline-only preflight of Liguria, because all other Lazio enabled URL candidates are already represented; no fetch until next target checkpoint."
+    },
+    {
+      "id": "S102",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Liguria offline review: 26 sections, 5 enabled/21 disabled; all exact-host calendar URLs for enabled sources are in current status/documents. Three registry failures are documented discovery-limits (Ligure7, Loano ICS46, ULE ICS37), with no exact child URL; no new HTTP cooldown. Cache unavailable, no cache miss attested. Region incomplete, no target."
+    },
+    {
+      "id": "S103",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Lombardia already has a documented post-Carate offline preflight with no safe exact URL; do not repeat its queues/cooldowns. Subsequent recorded scans Marche, Molise, Puglia, Sardegna, Calabria and Campania also found no new exact targets. Continue to Emilia-Romagna for a new offline audit of remaining enabled sources after Cesena."
+    },
+    {
+      "id": "S104",
+      "status": "pending",
+      "owner": "cai-collector",
+      "result": "Offline-only preflight remaining Emilia-Romagna sources; no network. Select one exact, unconsumed URL or pass to next region if none."
     }
   ],
-  "nextAction": "Publish and verify Sora iCal run artifacts, evidence/report, status/catalog mirrors and handoff on codex/cai-orchestrator-luna. After remote verification, pass to offline-only preflight of Liguria; Lazio has no additional exact URL among other enabled source candidates. Select one new target and checkpoint before fetch.",
+  "nextAction": "After this Liguria checkpoint, cai-collector performs offline-only preflight of remaining enabled Emilia-Romagna sources, excluding already sampled Cesena/Pavullo URLs and known failures. If no exact target is available, pass to the next region. No fetch before a target-selection checkpoint.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -764,7 +782,7 @@
     "proposedRunId": null
   },
   "currentWork": {
-    "branchHead": "b143fe5cd7dd5b4a91869d8fcf6e0ed59f300478",
+    "branchHead": "9f99117fb676a74630084b51f644d9924e74c863",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
       "runId": "cai-20261023-lazio-sora-ical01",
@@ -790,7 +808,7 @@
       "tests": "backend npm test 206/206 after collection; six public JSON hashes unchanged"
     }
   },
-  "repositoryCommit": "b143fe5cd7dd5b4a91869d8fcf6e0ed59f300478",
+  "repositoryCommit": "9f99117fb676a74630084b51f644d9924e74c863",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -813,10 +831,10 @@
     }
   },
   "tests": "After Sora iCal collection: backend npm test 206/206 serially; six public JSON hashes unchanged pre/post; backend/frontend mirrors identical.",
-  "updatedAt": "2026-10-23T01:56:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T01:56:00Z",
-  "regionCurrent": "Lazio — CAI Sora iCal feed read correctly and empty: one `VCALENDAR`, zero `VEVENT`, feed `no-upcoming` supported. Whole source remains partial for PDF OCR/discovery and announcement discovery. 10 existing IDs unchanged, 0 delta/DB.",
-  "regionNext": "Liguria — offline-only preflight after Sora iCal checkpoint; no source URL selected yet.",
+  "updatedAt": "2026-10-23T02:00:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T02:00:00Z",
+  "regionCurrent": "Liguria — 26 sections; 5 enabled/21 disabled. All exact-host registry calendar URLs represented in status/documents; 3 discovery-limit failures without exact child URLs. No safe target, no network, cache miss not attested. Region remains incomplete.",
+  "regionNext": "Emilia-Romagna — offline preflight remaining enabled sources after Cesena/Pavullo; do not repeat consumed URLs.",
   "preflight": {
     "at": "2026-10-23T01:27:16Z",
     "sourceId": "cai-cesena-9224012",
@@ -1066,9 +1084,9 @@
     }
   ],
   "nextSourcePreflight": {
-    "region": "Liguria",
-    "status": "offline-only preflight in progress after Sora iCal checkpoint b143fe5",
-    "scope": "registry, status/document history, FAILURES/cooldown, run artifacts and cache if actually available",
+    "region": "Emilia-Romagna",
+    "status": "pending offline-only scan after verified Sora iCal checkpoint",
+    "scope": "registry exact-host calendarUrls, status/documents, FAILURES/cooldown, run artifacts; exclude sampled Cesena and Pavullo targets",
     "networkFetchPerformed": false,
     "target": null
   },
@@ -1135,8 +1153,8 @@
     "databaseQueryOrWrite": false
   },
   "proposedTarget": {
-    "region": "Liguria",
-    "status": "pending offline preflight after Sora iCal checkpoint",
+    "region": "Emilia-Romagna",
+    "status": "offline preflight pending",
     "url": null,
     "fetchStarted": false
   }
