@@ -602,3 +602,14 @@ La rilettura offline del body cached produce titolo fedele, 2026-07-04..2026-07-
 Test backend dopo raccolta/fix 206/206; sei JSON pubblici invariati durante i test. Non c’è raccolta in corso. Dopo checkpoint di fix/report/registri, una nuova preflight Lombardia offline; se non restano fonti lavorabili, registrare i blocchi e passare alla regione successiva. Mercury non è stato chiamato perché nessun nuovo evento corrente è risultato importabile.
 
 Report, manifest, state, cataloghi e copertura Carate sono pubblicati al commit verificato `6d7ba7e60f5829e92b6cc90b435db57145e77036` (tree `a9f2c84f74c5601f004e60b978339c0992fd762f`). Il fix parser/fixture è già al commit remoto `e277de52b9d311edc7b46b40512a6ee59f6d1901`. La prossima preflight Lombardia è solo lettura e non avvia una raccolta fino a nuovo checkpoint della fonte scelta.
+
+
+## Stato passaggio — preflight Sicilia Belpasso (23 ottobre 2026)
+
+Il checkpoint Carate è completo: file/report/codice e registri sono remoti; il parser fix è al commit `e277de52b9d311edc7b46b40512a6ee59f6d1901`, i file Carate al `6d7ba7e60f5829e92b6cc90b435db57145e77036`, e lo stato/handoff verificato a `1091905710a785526ccf9560df213805d3acb3b2`. Il fetch corrente ha confermato `FETCH_HEAD == HEAD == 1091905710a785526ccf9560df213805d3acb3b2`. Nessuna raccolta o import Carate va ripetuta.
+
+Il preflight offline ha concluso che in questa selezione non rimangono URL Lombardia official-host nuovi e utili: Varese 503 e discovery-limit 93, Brescia 403/404 in cooldown, altre fonti provate o residui non produttivi. Lombardia resta parziale: non è una dichiarazione di copertura completa e i totali storici del 20 ottobre non sono stati ricalcolati. Marche, Molise, Piemonte, Puglia e Sardegna non presentano un nuovo URL host-exact lavorabile dopo aver escluso alias già letti, pagine passate e failure/coda già consumate.
+
+Primo target distinto: CAI Belpasso (`cai-belpasso-9246010`, Sicilia), URL ufficiale `https://organizzazione.cai.it/sez-belpasso/programma-attivita-sociale-2026/`, etichetta registry “Programma 2026”, collegata dalla pagina attività CAI. È assente da documenti/failure specifici/cache/run artifacts; il PDF Brochure 2026 ha OCR issue e l’iCal ha discovery-limit 7, su URL differenti. Dopo il checkpoint di selezione, eseguire soltanto questo URL: un documento, 120 secondi, concurrency 1, senza discovery expansion e senza fetch di PDF/iCal.
+
+Nessuna rete, raccolta, test o DB è avvenuta nel preflight. Runtime/configurazione richiesta: orchestratore e i due ruoli sono GPT-6 Luna high, ma telemetria runtime non attesta identità/effort effettivi.

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedOn": "2026-10-22",
+  "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "lombardia-carate-review-checkpoint",
+  "phase": "sicilia-belpasso-preflight-checkpoint",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -441,9 +441,15 @@
       "status": "completed",
       "owner": "cai-collector",
       "result": "Fix parser stretto DD/DD-meseAbbrev: 04/05-lug → 2026-07-04..05; ordinary 12/10 remains 12 October. Deterministic VERSION 14; real-line fixture/test; focused 2/2, backend 206/206; cached PDF re-evaluated offline; commit e277de52b9d311edc7b46b40512a6ee59f6d1901 pushed and fetch/tree verified."
+    },
+    {
+      "id": "S51",
+      "status": "completed",
+      "owner": "orchestrator + cai-collector",
+      "result": "Preflight offline Lombardia concluso senza nuovi target host-exact utili; Marche, Molise, Piemonte, Puglia e Sardegna saltate per URL già consumate/alias, passate o failure. Primo URL distinto selezionato in Sicilia: CAI Belpasso Programma 2026. Nessuna rete, raccolta, test o DB; checkpoint di selezione richiesto prima del run."
     }
   ],
-  "nextAction": "Checkpoint remoto di report Carate, run artifacts, catalog mirrors e registri. Poi continua preflight offline Lombardia; se restano fonti lavorabili prosegui con un URL alla volta, altrimenti passa alla regione successiva.",
+  "nextAction": "Checkpoint remoto di questo preflight e selezione Belpasso; poi un solo run orchestrato CAI Belpasso max1/120s/concurrency1. Nessun fetch delle code iCal o PDF OCR già fallite.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -452,7 +458,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "6d7ba7e60f5829e92b6cc90b435db57145e77036",
+    "branchHead": "1091905710a785526ccf9560df213805d3acb3b2",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
       "runId": "cai-20261023-lombardia-carate-corsoalpinismo01",
@@ -510,9 +516,9 @@
       "dbWrites": 0,
       "filesCheckpointCommit": "6d7ba7e60f5829e92b6cc90b435db57145e77036"
     },
-    "nextAction": "Checkpoint remoto di report Carate, run artifacts, catalog mirrors e registri. Poi continua preflight offline Lombardia; se restano fonti lavorabili prosegui con un URL alla volta, altrimenti passa alla regione successiva."
+    "nextAction": "Checkpoint remoto di questo preflight e selezione Belpasso; poi un solo run orchestrato CAI Belpasso max1/120s/concurrency1. Nessun fetch delle code iCal o PDF OCR già fallite."
   },
-  "repositoryCommit": "6d7ba7e60f5829e92b6cc90b435db57145e77036",
+  "repositoryCommit": "1091905710a785526ccf9560df213805d3acb3b2",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -535,10 +541,10 @@
     }
   },
   "tests": "After Carate01 collection and parser fix: backend npm test 206/206; six public JSON hashes identical before/after, including frontend/public/excursions.json.",
-  "updatedAt": "2026-10-23T00:04:30Z",
+  "updatedAt": "2026-10-23T00:20:00Z",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T00:04:30Z",
-  "regionCurrent": "Lombardia — Carate Brianza: flyer ufficiale del corso verificato; parser ha corretto 04/05-lug in 4–5 luglio. Evento passato, fonte final document già nota; 0 nuovi eventi futuri/ID, 6 righe Carate invariate. Nessun Mercury/DB.",
-  "regionNext": "Lombardia — cai-collector sta preflightando offline una fonte distinta; escludere Carate alias già osservato, Varese stantia/iCal, Lissone host/duplicato, e code non produttive. Passare regione solo dopo esaurimento fonti lavorabili.",
+  "regionCurrent": "Lombardia — preflight offline concluso dopo Carate: in questa selezione non restano URL official-host nuovi/lavorabili. Varese 503+iCal discovery 93; Brescia 403/404 in cooldown; Valmadrera/Sesto/Somma/Carate già letti; Livigno/Calco/Legnano residui non produttivi. Regione ancora parziale, non dichiarata completa; nessun nuovo conteggio regionale.",
+  "regionNext": "Sicilia — CAI Belpasso, un solo URL ufficiale programma-attivita-sociale-2026 non presente in documents/cache/failure URL/run artifacts. Campione da 1 documento/120s/concurrency1 dopo checkpoint.",
   "preflight": {
     "at": "2026-10-23T00:00:18Z",
     "sourceId": "cai-carate-brianza-9216030",
@@ -785,13 +791,21 @@
     }
   ],
   "nextSourcePreflight": {
-    "region": "Lombardia",
-    "sourceId": null,
-    "sourceName": null,
-    "url": null,
-    "status": "offline scan in progress after Carate01",
-    "evidence": "cai-collector is checking registry/cache/status/FAILURES/run history; do not retry backlog or duplicate source URLs.",
-    "scope": "one official exact-host URL, max1 document/120s/concurrency1 after checkpoint; advance region if no workable targets remain",
-    "networkFetchPerformed": false
+    "region": "Sicilia",
+    "sourceId": "cai-belpasso-9246010",
+    "sourceName": "CAI Belpasso",
+    "url": "https://organizzazione.cai.it/sez-belpasso/programma-attivita-sociale-2026/",
+    "status": "selected; waiting for selection checkpoint before bounded collection",
+    "evidence": "Official calendarEvidence label Programma 2026; exact official host matches website; URL absent from source documents, deterministic cache, URL failures, and run artifacts. Existing PDF OCR failure and iCal discovery-limit are separate URLs and excluded.",
+    "scope": "one exact URL, max1 document, 120 seconds, concurrency1; no discovery expansion/fetch of child PDF/iCal",
+    "networkFetchPerformed": false,
+    "preflightSkippedRegions": [
+      "Marche",
+      "Molise",
+      "Piemonte",
+      "Puglia",
+      "Sardegna"
+    ],
+    "preflightSkipReason": "No new workable official-host target remained after excluding visited aliases, past pages, consumed or failed URLs; first distinct candidate found in Sicilia."
   }
 }

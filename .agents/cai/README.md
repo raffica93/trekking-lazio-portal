@@ -39,11 +39,13 @@ Una modifica non committata non è un checkpoint condiviso. Un commit locale non
 è pubblicato finché il push non è confermato. La persistenza della stessa chat
 non dimostra che una chat nuova possa recuperare il lavoro.
 
-## Stato di questo passaggio — 22 ottobre 2026
+## Stato di questo passaggio — 23 ottobre 2026
 
-Branch `codex/cai-orchestrator-luna`; ultimo checkpoint remoto verificato `cd98b54dd29eebbdeb4f1bdbdc11ad315713f32a`. Classificazione completa e delta precedenti sono chiusi; non ripetere i batch/import storici.
+Branch `codex/cai-orchestrator-luna`; checkpoint remoto verificato `1091905710a785526ccf9560df213805d3acb3b2`. I delta e la classificazione storici sono chiusi; non ripetere batch/import già completati.
 
-Cesena index01 e poster Escursionismo Adattato01 hanno verificato due fonti ufficiali; entrambe restano partial. Il poster elenca date 2026 senza abbinarle a titoli/destinazioni, quindi nessun evento completo o coordinata è stato inferito. 3.366 ID unici invariati, nessun DB. Importer QA PASS e backend test 205/205, sei JSON pubblici stabili. Il checkpoint del secondo run è pubblicato e verificato a `b23dea1`. Preflight offline seleziona CAI Pavullo, `https://www.caipavullo.it/calendario-2026/`, max1 documento/120s/concurrency1; issues ICS/PDF già note sono su URL distinti e non vanno ripetute.
+Lombardia resta parziale ma il preflight corrente non ha trovato un altro URL host-exact lavorabile: Varese 503/iCal discovery 93, Brescia 403/404 in cooldown e altre fonti già campionate o con code non produttive. Marche, Molise, Piemonte, Puglia e Sardegna non hanno offerto un target distinto lavorabile dopo aver escluso URL passate, alias o fallite. Primo target nuovo è CAI Belpasso, Sicilia: `https://organizzazione.cai.it/sez-belpasso/programma-attivita-sociale-2026/`, un solo documento/120s/concurrency1 dopo checkpoint. Le issue della brochure PDF OCR e dell’iCal sono su URL distinti e non vanno ritentate in questo campione.
+
+Carate01 è chiuso senza delta: il parser fix fixture-backed è pubblicato a `e277de52b9d311edc7b46b40512a6ee59f6d1901`; manifest/report e catalog mirrors al `6d7ba7e60f5829e92b6cc90b435db57145e77036`; handoff/stato al commit corrente sopra. Suite backend 206/206, JSON pubblici invariati. Nessun DB per Carate.
 
 Orchestratore e ruoli `cai-collector`/`cai-importer` sono richiesti/configurati GPT-6 Luna high; telemetria runtime non attesta identità/effort effettivi. Nessun merge, deploy, cron o cancellazione DB.
 
