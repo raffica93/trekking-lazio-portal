@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "sicilia-belpasso-review-checkpoint",
+  "phase": "toscana-preflight-checkpoint",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -465,9 +465,15 @@
       "status": "completed",
       "owner": "cai-collector",
       "result": "Review del body HTML Belpasso esistente esclusivamente offline: articolo informativo senza date, righe evento, markup calendario o JSON-LD Event; metodo unsupported/null corretto. Nessuna patch, rete, test o file modificato; procedere al preflight di diversa fonte Sicilia."
+    },
+    {
+      "id": "S55",
+      "status": "completed",
+      "owner": "orchestrator + cai-collector",
+      "result": "Preflight offline Sicilia: 4 sezioni abilitate riesaminate (1 stato no-upcoming, 3 partial, 0 nuove irraggiungibili); nessun nuovo URL host-exact e selezionabile. Cefalù/Erice discovery-limit senza URL residua persistita; 25 disabilitate (24 senza website, Catania unreachable). 0 eventi o duplicati, 0 failure risolti; regione rimane aperta, prossima Toscana."
     }
   ],
-  "nextAction": "Checkpoint remoto report/file Belpasso; poi preflight offline di un URL Sicilia distinto. La pagina cache è informativa e non contiene date/eventi parsabili; nessuna patch necessaria. Non ritentare PDF/iCal.",
+  "nextAction": "Checkpoint remoto del preflight Sicilia che registra code non selezionabili e sezioni disabilitate; poi preflight offline Toscana. Nessuna raccolta finché non è selezionato e checkpointato un URL distinto.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -476,7 +482,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "1695a0864d3c51625b5f984bc71f9a44dbd8e3c2",
+    "branchHead": "1695955b084b5cd343f29584e52067e7d572deb3",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
       "runId": "cai-20261023-sicilia-belpasso-programma01",
@@ -522,9 +528,9 @@
       "coordinatesAdded": 0,
       "dbWrites": 0
     },
-    "nextAction": "Checkpoint remoto report/file Belpasso; poi preflight offline di un URL Sicilia distinto. La pagina cache è informativa e non contiene date/eventi parsabili; nessuna patch necessaria. Non ritentare PDF/iCal."
+    "nextAction": "Checkpoint remoto del preflight Sicilia che registra code non selezionabili e sezioni disabilitate; poi preflight offline Toscana. Nessuna raccolta finché non è selezionato e checkpointato un URL distinto."
   },
-  "repositoryCommit": "1695a0864d3c51625b5f984bc71f9a44dbd8e3c2",
+  "repositoryCommit": "1695955b084b5cd343f29584e52067e7d572deb3",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -547,10 +553,10 @@
     }
   },
   "tests": "After Belpasso collection: backend npm test 206/206; six public JSON hashes unchanged before/after and backend/frontend mirrors match. No test ran during collection.",
-  "updatedAt": "2026-10-23T00:32:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T00:18:00Z",
-  "regionCurrent": "Sicilia — CAI Belpasso programma01: pagina HTML informativa, schede dettagliate rinviate a bacheca/gruppi/mail; nessuna data o riga evento. method=null corretto, no parser fix. Catalogo 3371 ID, zero delta, fonte complessiva resta parziale per issue brochure/iCal.",
-  "regionNext": "Dopo checkpoint del report, cai-collector seleziona offline un URL Sicilia official-host distinto da page Belpasso/PDF OCR/iCal. Un solo URL max1/120s/concurrency1 dopo checkpoint.",
+  "updatedAt": "2026-10-23T00:36:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T00:34:00Z",
+  "regionCurrent": "Sicilia — preflight offline completato. 4 sezioni enabled riesaminate: Giarre no-upcoming senza issue registrate, Belpasso/Cefalù/Erice restano parziali. Nessun target host-exact nuovo e selezionabile; le discovery-limit Cefalù/Erice non salvano URL residui. 25 sezioni disabilitate (24 missing website, Catania unreachable). Non è copertura completa.",
+  "regionNext": "Toscana — avviare preflight offline della prossima regione canonica; un solo URL host-exact non consumato dopo selezione e checkpoint.",
   "preflight": {
     "at": "2026-10-23T00:00:18Z",
     "sourceId": "cai-carate-brianza-9216030",
@@ -643,26 +649,30 @@
   },
   "regionalCoverage": {
     "region": "Sicilia",
-    "scope": "one official URL per run; Belpasso program page bounded to one document; regional total not re-queried",
-    "status": "open",
+    "scope": "offline review of all four enabled sections after Belpasso bounded sample; no regional aggregate query",
+    "status": "open; no further safely selectable target",
     "currentRunCounts": {
-      "sectionsChecked": 1,
-      "complete": 0,
-      "partial": 1,
+      "sectionsChecked": 4,
+      "complete": 1,
+      "partial": 3,
       "unreachable": 0,
+      "disabledSections": 25,
+      "disabledMissingWebsite": 24,
+      "disabledUnreachable": 1,
       "eventsVerified": 0,
       "duplicateIdsExcluded": 0,
       "failuresResolved": 0,
-      "failuresOpen": 3,
+      "failuresOpen": 5,
       "newIds": 0,
       "filesReady": 1,
       "dbPlacesInserted": 0,
       "dbClassificationsInserted": 0,
-      "nextStep": "Checkpoint report and preflight a distinct Sicilia official URL; Belpasso page is informational, not proof of empty annual coverage."
+      "nextStep": "Advance to Toscana; retain Sicilia discovery queues without exact URLs and disabled sections as open."
     },
+    "countBasis": "Section completeness/partial statuses are persisted registry/source-status observations; this preflight verified URL availability offline and generated no new event evidence.",
     "historicalSnapshot": {
       "asOf": "2026-10-20",
-      "note": "Historical only; not a current query. Sicily historical section counts were not refreshed by this sample."
+      "note": "Historical only; not a current query. Sicily regional counts were not recalculated."
     }
   },
   "deltaDeliveryHistory": [
@@ -789,13 +799,13 @@
     }
   ],
   "nextSourcePreflight": {
-    "region": "Sicilia",
-    "sourceId": "cai-belpasso-9246010",
-    "sourceName": "CAI Belpasso",
-    "url": "https://organizzazione.cai.it/sez-belpasso/programma-attivita-sociale-2026/",
-    "status": "Belpasso page reviewed offline; next distinct Sicilia source preflight pending",
-    "evidence": "Body 153764 B SHA 03521e393d4f0245db58098b3a6e273c43f5db9370f19840248fc0823f31eca3; requested=final. Worker returned method=null/unsupported; no HTTP status persisted. Offline review confirmed an informational article with no dates/event rows/calendar markup/JSON-LD Event; no parser gap.",
-    "scope": "Offline registry/status/cache/FAILURES/run scan for a distinct Sicilia official-host URL; no network, tests, DB, or child-link fetch. Checkpoint source selection before collection.",
+    "region": "Toscana",
+    "sourceId": null,
+    "sourceName": null,
+    "url": null,
+    "status": "pending offline preflight after Sicilia no-target checkpoint",
+    "evidence": "Sicilia has no additional exact safe URL among four enabled sections; Cefalu/Erice discovery-limit entries have no persisted child URL; Giarre is no-upcoming/no-issue; 25 other sections disabled (24 missing website, Catania unreachable).",
+    "scope": "offline only, select next distinct exact official-host URL; no fetch/test/DB; checkpoint selection before one bounded collection.",
     "networkFetchPerformed": false
   }
 }

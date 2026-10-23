@@ -461,3 +461,13 @@ Catalogo da checkpoint remoto `1695a08`: 3.371→3.371 ID unici; Belpasso 0→0,
 
 
 Diagnosi offline del body: articolo informativo sul programma 2026, senza date/event rows/calendar markup/JSON-LD Event; metodo `unsupported` corretto, nessun parser fix. Nessuna raccolta ulteriore in parallelo.
+
+
+## Preflight Sicilia completato — passaggio Toscana (23 ottobre 2026)
+
+| Regione / ambito | Sezioni controllate | Complete (stato registrato) | Parziali (stato registrato) | Irraggiungibili | Eventi verificati nel preflight | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---:|---:|---:|---|---|
+| Sicilia, sezioni abilitate | 4 | 1 `no-upcoming` (Giarre, stato persistito) | 3 (Belpasso, Cefalù, Erice) | 0 nuove | 0 | 0 | 0 | Belpasso brochure OCR/iCal; Cefalù e Erice discovery-limit senza URL residua persistita | Regione incompleta ma senza ulteriore target esatto selezionabile; passare Toscana |
+| Sicilia, sezioni disabilitate | 25 | n/a | n/a | 1 Catania | 0 | 0 | 0 | 24 missing-website; 1 unreachable | Conservare come non verificate/irraggiungibili, nessuna URL inventata |
+
+I conteggi `complete/partial` riflettono gli stati persistiti, non nuovi test di rete né un ricalcolo regionale. Il preflight non ha aggiunto eventi e non ha interrogato o scritto DB. I totali nazionali in testa restano snapshot storico 2026-10-20.

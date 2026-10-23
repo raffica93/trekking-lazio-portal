@@ -625,3 +625,8 @@ Manifest SHA `7d6bfb50ddd7030dd3d8223e77a57554436829df6da94d1280228fa07cc8e435`;
 
 
 **Diagnosi Belpasso conclusa:** il body HTML già in cache è un articolo informativo “Programma attività sociale 2026”; descrive categorie di attività e rinvia le schede dettagliate delle singole uscite ai canali di comunicazione/pubblicazione successivi. Nessuna data o riga evento, calendario o JSON-LD `Event`; `method=null` è appropriato. Non serve patch del parser. Il risultato non prova che brochure o intero calendario annuale siano vuoti. Dopo il checkpoint remoto, selezionare offline un URL Sicilia official-host distinto; un solo documento/120s/concurrency1 e senza PDF/iCal già falliti.
+
+
+## Preflight Sicilia completato — prossima Toscana (23 ottobre 2026)
+
+Offline review delle quattro sezioni abilitate: Belpasso/Cefalù/Erice sono ancora `partial`, Giarre risulta `no-upcoming` senza issue registrate. Cefalù ed Erice hanno discovery-limit ma lo status non conserva URL figlio esatto selezionabile; non ricostruire o indovinare URL. Belpasso e le sue URL PDF OCR/iCal già escluse restano documentate sopra. Le altre 25 sezioni sono disabilitate (24 `missing-website`, Catania `unreachable`). Nessun target aggiuntivo host-exact utile, rete, test, evento o DB in questo preflight. Sicilia resta incompleta. Dopo il checkpoint di questo riepilogo, procedere con preflight offline della regione canonica successiva, Toscana.
