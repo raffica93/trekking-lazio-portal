@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "lombardia-directory-refreshed-pending-bounded-source-run",
+  "phase": "lombardia-lovere-bounded-discovery-ready",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -815,12 +815,18 @@
     },
     {
       "id": "S112",
-      "status": "in_progress",
+      "status": "completed",
       "owner": "cai-importer",
-      "result": "Independent remote QA of checkpoint 25999cffecb6830765f954aba7fc729c3bb17ed3: verify artifact hashes, 837 IDs, regional-only diff, Lovere activation contract and no catalog/DB write. No collection until PASS."
+      "result": "Importer final QA PASS on remote branch at 5f82449bc802a8c7cb0d0907c9967c9ebe7612b8. Manifest/report/output SHA verified; 837 IDs, 0 add/remove, regional-only 9 website changes plus Lovere activation; sources.js/enabledSources exposes Lovere as deterministic discover. No network, tests, edits, or DB by importer."
+    },
+    {
+      "id": "S113",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Selected exactly one official new target in Lombardia: cai-lovere-9216055 / https://organizzazione.cai.it/sez-lovere/. No event/calendar response or cache exists in current scrape status. Planned bounded run cai-20261023-lombardia-lovere01: one source, concurrency 1, max 8 documents, source budget 120000 ms via SCRAPE_MAX_DOCUMENTS=8 and SCRAPE_SOURCE_BUDGET_MS=120000. No --source-url continuation; homepage is the official directory URL. Checkpoint this selection before network."
     }
   ],
-  "nextAction": "Wait for cai-importer read-only QA on remote checkpoint 25999cffecb6830765f954aba7fc729c3bb17ed3. If PASS, start one bounded Lombardia discovery run for cai-lovere-9216055 via existing orchestrator, with no DB import until files are verified and a delta exists.",
+  "nextAction": "Commit/push this exact-source, single-run bounds checkpoint before any network collection. Then execute only the bounded orchestrator init/collect for CAI Lovere. QA sealed files before considering DB; no tests in parallel.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -856,7 +862,7 @@
       "tests": "backend npm test 206/206 after collection; six public JSON hashes unchanged"
     }
   },
-  "repositoryCommit": "25999cffecb6830765f954aba7fc729c3bb17ed3",
+  "repositoryCommit": "5f82449bc802a8c7cb0d0907c9967c9ebe7612b8",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -879,7 +885,7 @@
     }
   },
   "tests": "After Sora iCal collection: backend npm test 206/206 serially; six public JSON hashes unchanged pre/post; backend/frontend mirrors identical.",
-  "updatedAt": "2026-10-23T06:39:30Z",
+  "updatedAt": "2026-10-23T06:43:00Z",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T06:39:30Z",
   "regionCurrent": "Lombardia directory refresh completed. The official listing added a website for CAI Lovere; tested offline reconciliation now marks it enabled/pending-discovery. No calendar source was fetched yet and regional event coverage is unassessed.",
   "regionNext": "Lombardia — checkpoint refreshed registry and report, then one bounded discovery from the exact official CAI Lovere website; only after it is read can event/source coverage be assessed.",
@@ -1133,12 +1139,12 @@
   ],
   "nextSourcePreflight": {
     "region": "Lombardia",
-    "status": "exact official website selected after directory refresh; pending remote checkpoint",
-    "scope": "single-source bounded discovery only after checkpoint",
+    "status": "selected; importer PASS on current remote checkpoint; selection will be published before collection",
+    "scope": "single-source official homepage discovery, max 8 docs, 120s source budget, concurrency 1",
     "networkFetchPerformed": false,
     "sourceId": "cai-lovere-9216055",
     "target": "https://organizzazione.cai.it/sez-lovere/",
-    "basis": "Official CAI section directory row 9216055; fetch/content not yet verified"
+    "basis": "Official CAI section directory row 9216055; no source calendar/event content has been fetched"
   },
   "currentRun": {
     "runId": "cai-20261023-lazio-sora-ical01",
@@ -1205,16 +1211,21 @@
   "proposedTarget": {
     "region": "Lombardia",
     "sourceId": "cai-lovere-9216055",
-    "status": "pending-discovery; not an event/calendar coverage result",
+    "status": "pending-discovery; exact homepage selected, not fetched",
     "url": "https://organizzazione.cai.it/sez-lovere/",
     "runId": "cai-20261023-lombardia-lovere01",
+    "limits": {
+      "maxDocuments": 8,
+      "sourceBudgetMs": 120000,
+      "concurrency": 1
+    },
     "fetchStarted": false
   },
   "directoryRefresh": {
     "runId": "cai-20261023-lombardia-directory-refresh01",
     "region": "Lombardia",
     "collection": "not performed; directory-only run",
-    "files": "committed and remotely verified at 25999cffecb6830765f954aba7fc729c3bb17ed3; awaiting importer final QA",
+    "files": "committed at 25999cf; importer PASS confirmed against 5f82449; selection checkpoint for next run pending",
     "database": "no read/write/import",
     "rootSectionsSelected": 152,
     "subsectionFailures": 0,
@@ -1233,7 +1244,7 @@
     "finalCatalogSha256": "250afdbc6fa8980f076f094c9574b2d77d157e7f34f4dfb9c84a4f09f3166944",
     "reportPath": "backend/data/agent-runs/cai-20261023-lombardia-directory-refresh01/directory-refresh-report.json",
     "manifestPath": "backend/data/agent-runs/cai-20261023-lombardia-directory-refresh01/manifest.json",
-    "lovere": "official website listed by CAI directory; pending discovery, not yet fetched",
+    "lovere": "official site listed by CAI directory; importer confirmed enabled discovery target; no fetch/calendar/event verification yet",
     "reportSha256": "c5dbbff7ee45615405e090fc400c45f88fe282946274c8ed21a1371004e2c232",
     "manifestSha256": "f038795275c2855746f80659fe3254ccd8551a6d3827444f2ca4ee713f40a256"
   }
