@@ -7,6 +7,9 @@ const path = require('node:path');
 const os = require('node:os');
 const crypto = require('node:crypto');
 const cheerio = require('cheerio');
+const { assertCompleteSubsections, mergeDirectorySections } = require('./cai-directory-merge');
+const { canonicalRegion, directoryOnlyRegion, directorySubsectionTargets, selectDirectoryRegion } = require('./cai-directory-region');
+const { writeRegistryPair } = require('./cai-registry-write');
 const ROOT = path.resolve(__dirname, '../..');
 const API = 'https://www.cai.it/wp-json/cai-section/v2';
 const DIRECTORY = 'https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/';
@@ -71,10 +74,6 @@ async function pool(items, concurrency, work) {
     while (cursor < items.length) { const index = cursor++; result[index] = await work(items[index], index); }
   }));
   return result;
-}
-function canonicalRegion(raw) {
-  const region = title(raw).replace('Valle D\'aosta', "Valle d'Aosta");
-  return region === 'Extra Regione' ? 'Nazionale' : region;
 }
 function sectionRecord(raw, parent = null, overrides = []) {
   const shortName = raw.name.replace(/^(?:S\.SEZ\.|SEZ\.)\s*/i, '').trim();
@@ -171,25 +170,37 @@ function writeRegistry(registry) {
     enabled: registry.sections.filter(x => x.enabled).length,
     statuses: registry.sections.reduce((acc, x) => { acc[x.status] = (acc[x.status] || 0) + 1; return acc; }, {})
   };
-  for (const file of ['backend/data/cai-sections.json', 'frontend/public/cai-sections.json']) {
-    const absolute = path.join(ROOT, file); fs.mkdirSync(path.dirname(absolute), {recursive:true});
-    fs.writeFileSync(absolute, JSON.stringify(registry, null, 2) + '\n');
-  }
+  const files = ['backend/data/cai-sections.json', 'frontend/public/cai-sections.json'].map(file => path.join(ROOT, file));
+  writeRegistryPair(files, JSON.stringify(registry, null, 2) + '\n');
 }
 async function main() {
+  const directoryOnly = process.argv.includes('--directory-only');
+  const requestedRegion = directoryOnly ? directoryOnlyRegion(process.argv) : null;
   const oldSources = require('../sources').SOURCES.filter(x => x.extractor !== 'deterministic');
+  const previousRegistry = directoryOnly
+    ? JSON.parse(fs.readFileSync(path.join(ROOT, 'backend/data/cai-sections.json'), 'utf8'))
+    : null;
   let registry;
   if (process.argv.includes('--websites-only') || process.argv.includes('--sanitize-only')) registry = JSON.parse(fs.readFileSync(path.join(ROOT,'backend/data/cai-sections.json'),'utf8'));
   else {
     const directory = JSON.parse((await fetchPage(`${API}/sections-list-simple`, {json:true})).body);
     if (!Array.isArray(directory) || directory.length < 400) throw new Error('Official directory returned incomplete data; existing registry retained');
     const excluded = directory.filter(raw => !raw.region || /SEZ\. PROVA/.test(raw.name));
-    const sections = directory.filter(raw => !excluded.includes(raw)).map(raw => sectionRecord(raw,null,oldSources));
+    let sections = directory.filter(raw => !excluded.includes(raw)).map(raw => sectionRecord(raw,null,oldSources));
+    let selectedRegion = null;
+    let subsectionParents = sections;
+    if (directoryOnly) {
+      const selection = selectDirectoryRegion(sections, requestedRegion);
+      selectedRegion = selection.region;
+      sections = selection.sections;
+      subsectionParents = directorySubsectionTargets(selection.sections);
+      console.log(`Directory-only region: ${selectedRegion}, ${selection.parents.length} parent sections`);
+    }
     registry = { generatedAt: new Date().toISOString(), source: DIRECTORY, directoryApi: `${API}/sections-list-simple`, year: YEAR,
-      completeness: { officialSectionCount: directory.length, excludedTestRecords: excluded.map(x => ({code:x.code,name:x.name})), subsectionFailures: [] }, sections };
+      completeness: { officialSectionCount: directory.length, excludedTestRecords: excluded.map(x => ({code:x.code,name:x.name})), subsectionFailures: [], ...(selectedRegion ? { selectedRegion } : {}) }, sections };
     console.log(`Directory: ${sections.length} real sections, ${excluded.length} test records excluded`);
-    writeRegistry(registry);
-    const subsectionSets = await pool([...sections], 4, async (parent,index) => {
+    if (!directoryOnly) writeRegistry(registry);
+    const subsectionSets = await pool([...subsectionParents], 4, async (parent,index) => {
       try {
         const response = await fetchPage(`${API}/sections/${parent.directoryId}/sub-sections-map`, {json:true});
         const raw = JSON.parse(response.body);
@@ -200,6 +211,17 @@ async function main() {
     });
     sections.push(...subsectionSets.flat());
     registry.sections = [...new Map(sections.map(x => [x.directoryId,x])).values()].sort((a,b) => a.region.localeCompare(b.region,'it') || a.organizer.localeCompare(b.organizer,'it'));
+    if (directoryOnly) {
+      assertCompleteSubsections(registry.completeness.subsectionFailures);
+      const result = mergeDirectorySections(registry.sections, previousRegistry.sections || [], { scopeRegion: selectedRegion });
+      registry.sections = result.sections;
+      registry.completeness.directoryMerge = {
+        ambiguities: result.ambiguities,
+        retainedPreviousIds: result.retainedPreviousIds,
+        ambiguousPreviousIds: result.ambiguousPreviousIds
+      };
+      if (result.ambiguities.length) console.warn(`Directory merge left ${result.ambiguities.length} ambiguous identity match(es) untouched`);
+    }
     writeRegistry(registry);
   }
   if (process.argv.includes('--sanitize-only')) {

@@ -1,0 +1,130 @@
+{
+  "previous": [
+    {
+      "id": "cai-example-curated",
+      "directoryId": "9234999",
+      "organizer": "CAI Sezione Curata",
+      "region": "Liguria",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "municipality": "Vecchia Località",
+      "province": "GE",
+      "headquartersCoordinates": { "latitude": 44.4, "longitude": 9.1 },
+      "website": "https://cai-curated.example/",
+      "directoryUrl": "https://www.cai.it/sezione/?codice=9234999",
+      "url": "https://cai-curated.example/calendario-2026.pdf",
+      "calendarUrls": ["https://cai-curated.example/calendario-2026.pdf"],
+      "calendarEvidence": [{ "url": "https://cai-curated.example/calendario-2026.pdf", "label": "Programma 2026" }],
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "deterministic",
+      "enabled": true,
+      "status": "calendar-found",
+      "legacyId": "cai-example-curated",
+      "customConfig": { "rateLimitMs": 1250 }
+    },
+    {
+      "id": "old-ambiguous-a",
+      "directoryId": "old-a",
+      "organizer": "CAI Identità Ambigua",
+      "region": "Liguria",
+      "calendarUrls": ["https://ambiguous-a.example/calendar/"],
+      "calendarEvidence": [{ "url": "https://ambiguous-a.example/calendar/", "label": "Programma" }],
+      "status": "calendar-found",
+      "customConfig": { "extractor": "curated" }
+    },
+    {
+      "id": "old-orphan",
+      "directoryId": "9234888",
+      "organizer": "CAI Sezione Non Più Elencata",
+      "region": "Liguria",
+      "calendarUrls": ["https://orphan.example/programma.ics"],
+      "calendarEvidence": [{ "url": "https://orphan.example/programma.ics", "label": "Calendario" }],
+      "kind": "ics",
+      "enabled": true,
+      "status": "calendar-found",
+      "headquartersCoordinates": { "latitude": 44.8, "longitude": 9.8 }
+    }
+  ],
+  "fresh": [
+    {
+      "id": "generated-curated",
+      "directoryId": "9234999",
+      "organizer": "CAI Sezione Curata",
+      "region": "Liguria",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "municipality": "Località Aggiornata",
+      "province": "GE",
+      "headquartersCoordinates": { "latitude": 44.5, "longitude": 9.2 },
+      "website": "https://directory-site.example/",
+      "directoryUrl": "https://www.cai.it/sezione/?codice=9234999",
+      "url": "https://directory-site.example/",
+      "calendarUrls": [],
+      "calendarEvidence": [],
+      "kind": "discover",
+      "template": "calendar-discovery",
+      "extractor": "deterministic",
+      "enabled": true,
+      "status": "pending-discovery",
+      "evidenceUrls": ["https://www.cai.it/sezioni-territoriali/"]
+    },
+    {
+      "id": "new-section",
+      "directoryId": "9234000",
+      "organizer": "CAI Nuova Sezione",
+      "region": "Liguria",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "municipality": "Nuovo Comune",
+      "province": "SV",
+      "headquartersCoordinates": null,
+      "website": "https://cai-new.example/",
+      "directoryUrl": "https://www.cai.it/sezione/?codice=9234000",
+      "url": "https://www.cai.it/sezione/?codice=9234000",
+      "calendarUrls": [],
+      "calendarEvidence": [],
+      "kind": "discover",
+      "template": "calendar-discovery",
+      "extractor": "deterministic",
+      "enabled": true,
+      "status": "pending-discovery"
+    },
+    {
+      "id": "generated-ambiguous-a",
+      "directoryId": "new-a",
+      "organizer": "CAI Identità Ambigua",
+      "region": "Liguria",
+      "calendarUrls": [],
+      "status": "pending-discovery"
+    },
+    {
+      "id": "generated-ambiguous-b",
+      "directoryId": "new-b",
+      "organizer": "CAI Identità Ambigua",
+      "region": "Liguria",
+      "calendarUrls": [],
+      "status": "pending-discovery"
+    }
+  ],
+  "regionFilter": {
+    "directory": [
+      { "id": "liguria-parent", "directoryId": "1", "region": "LIGURIA", "sectionType": "section", "parentSectionId": null },
+      { "id": "lombardia-parent", "directoryId": "2", "region": "LOMBARDIA", "sectionType": "section", "parentSectionId": null },
+      { "id": "liguria-child", "directoryId": "3", "region": "Liguria", "sectionType": "subsection", "parentSectionId": "liguria-parent" }
+    ],
+    "previous": [
+      { "id": "curated-liguria", "directoryId": "1", "organizer": "CAI Liguria", "region": "Liguria", "calendarUrls": ["https://liguria.example/calendar/"], "status": "calendar-found" },
+      { "id": "curated-lombardia", "directoryId": "2", "organizer": "CAI Lombardia", "region": "Lombardia", "calendarUrls": ["https://lombardia.example/calendar/"], "status": "calendar-found", "customConfig": { "concurrency": 2 } },
+      { "id": "old-lombardia-section", "directoryId": "22", "organizer": "CAI Altra Lombardia", "region": "Lombardia", "calendarUrls": ["https://other.example/program.pdf"], "status": "calendar-found" }
+    ]
+  },
+  "crossRegionCollision": {
+    "fresh": [
+      { "id": "fresh-liguria", "directoryId": "shared-123", "organizer": "CAI Sezione Ligure", "region": "Liguria", "calendarUrls": [], "status": "pending-discovery" }
+    ],
+    "previous": [
+      { "id": "curated-lombardia-shared", "directoryId": "shared-123", "organizer": "CAI Sezione Lombarda", "region": "Lombardia", "calendarUrls": ["https://lombardia.example/annual.pdf"], "calendarEvidence": [{ "url": "https://lombardia.example/annual.pdf", "label": "Calendario Lombardia" }], "status": "calendar-found", "customConfig": { "extractor": "pdf" } }
+    ]
+  }
+}

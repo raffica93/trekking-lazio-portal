@@ -631,3 +631,6 @@ Liguria preflight: 26 sezioni, 5 enabled e 21 disabled. Ogni URL calendariale ex
 
 
 Preflight Emilia-Romagna successivo al checkpoint 181968b: 29 sezioni, 14 enabled e 15 disabled. Cesena/Pavullo escluse; le URL residue exact-host sono già documentate o consumate. Restano 403/503 con cooldown e discovery-limit senza URL figlia; la variante Modena `?share=facebook` identifica il pulsante social. Nessuna rete, raccolta, test o DB; cache non accessibile, nessun cache miss attestato. Nessun target sicuro selezionato.
+
+
+Ricerca offline successiva al checkpoint 3c0b490: nessun URL non consumato plausibile nelle candidate Piemonte/Trentino/Veneto. Pinasca pubblica solo articoli di luglio 2026 già passati e Cuneo `/la_baita` è la pagina di un coro; l’allegato Bronzolo è il PDF già letto; Conegliano iCal duplica la categoria/eventi già letta; Fiume è un alias della pagina assicurazione. Nessuna rete, test o scrittura. Come prossimo passo di discovery, valutare il workflow ufficiale directory-only CAI, separato dagli eventi, senza dichiarare copertura completa.

@@ -773,12 +773,24 @@
     },
     {
       "id": "S105",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Offline frontier check after Emilia reviewed persisted evidence in candidate regions excluding prior exhausted queues: Piemonte candidates are July-only/past or non-calendar; Trentino Bronzolo attachment aliases a PDF already read; Veneto Conegliano iCal duplicates the already-read category feed and Fiume is an insurance-page alias. No exact-host plausible unconsumed target; cache unavailable, no cache miss attested; no network/test/catalog/DB changes."
+    },
+    {
+      "id": "S106",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Fixed unsafe directory-only refresh: unambiguous merge preserves curated source metadata and unmatched prior sections; subsection API failures abort before catalog writes; backend/frontend pair writes stage both and roll back on caught rename errors; directory-only requires exactly one known --region and only schedules its parent subsection endpoints. Collector focused 7/7, importer independent QA PASS, backend npm test 213/213. No network/catalog/DB run."
+    },
+    {
+      "id": "S107",
       "status": "pending",
       "owner": "orchestrator",
-      "result": "Resume collection only when a new exact official-host URL is recoverable from current registry/evidence or an existing discovery failure is safely resolved; do not replay the exhausted national queues or infer a child URL."
+      "result": "After this code/selection checkpoint is verified remotely, run documented CAI directory refresh only for Lombardia using --directory-only --region Lombardia. Record pre/post hashes and merge completeness; no event collection or DB. If new exact-host calendars emerge, verify/select/checkpoint one before the bounded orchestrate run."
     }
   ],
-  "nextAction": "Emilia-Romagna is exhausted for safe URL selection in the current persisted snapshot. Resume with one bounded run only after a new exact official-host URL is evidenced and checkpointed; otherwise resolve an existing open discovery failure without retrying known 403/503 cooldowns. No network fetch or DB write is currently justified.",
+  "nextAction": "Publish and verify the conservative directory-refresh fix plus this Lombardia selection. Then run the documented official CAI directory refresh for Lombardia only (`discover-cai-sections.js --directory-only --region Lombardia`); record before/after hashes, merge ambiguities/retained IDs and mirror equality. This discovery is separate from event collection. Only after that checkpoint select one new exact-host calendar and run one bounded orchestrate lot.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -788,7 +800,7 @@
     "proposedRunId": null
   },
   "currentWork": {
-    "branchHead": "181968b0c7f96ee0e95b4b0a0de2e37c0da6c37c",
+    "branchHead": "3c0b490db69a161c402f78e0bfb8ae83302b0f23",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
       "runId": "cai-20261023-lazio-sora-ical01",
@@ -814,7 +826,7 @@
       "tests": "backend npm test 206/206 after collection; six public JSON hashes unchanged"
     }
   },
-  "repositoryCommit": "181968b0c7f96ee0e95b4b0a0de2e37c0da6c37c",
+  "repositoryCommit": "3c0b490db69a161c402f78e0bfb8ae83302b0f23",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -837,10 +849,10 @@
     }
   },
   "tests": "After Sora iCal collection: backend npm test 206/206 serially; six public JSON hashes unchanged pre/post; backend/frontend mirrors identical.",
-  "updatedAt": "2026-10-23T01:41:54Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T01:41:54Z",
-  "regionCurrent": "Emilia-Romagna — offline review 29 sections, 14 enabled; no safe unconsumed target after excluding Cesena/Pavullo. 403/503 cooldowns and discovery queues without exact child URLs remain; Modena share link is social, not calendar.",
-  "regionNext": "No region with a new exact URL is selected in the current persisted snapshot; resume only on new official URL evidence or safe resolution of an existing open failure.",
+  "updatedAt": "2026-10-23T02:02:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T02:02:00Z",
+  "regionCurrent": "National offline frontier found no safe event URL in Piemonte/Trentino/Veneto candidates. Conservative region-scoped official-directory refresh is now ready to discover changed Lombardia sources; no event run or DB action yet.",
+  "regionNext": "Lombardia — refresh official CAI directory and subsections for this region only; then checkpoint a newly evidenced exact-host calendar before collection.",
   "preflight": {
     "at": "2026-10-23T01:27:16Z",
     "sourceId": "cai-cesena-9224012",
@@ -1090,11 +1102,11 @@
     }
   ],
   "nextSourcePreflight": {
-    "region": "Emilia-Romagna",
-    "status": "completed: no safe unconsumed exact-host URL",
-    "scope": "29 sections, 14 enabled; Cesena/Pavullo excluded; current registry/status/failures/run artifacts reviewed",
+    "region": "Lombardia",
+    "status": "selection ready; code and handoff checkpoint pending",
+    "scope": "official CAI directory plus subsection API for Lombardia only; merge with prior registry and preserve other regions",
     "networkFetchPerformed": false,
-    "target": null
+    "target": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
   },
   "currentRun": {
     "runId": "cai-20261023-lazio-sora-ical01",
@@ -1159,9 +1171,9 @@
     "databaseQueryOrWrite": false
   },
   "proposedTarget": {
-    "region": null,
-    "status": "blocked: no exact unconsumed URL evidenced",
-    "url": null,
+    "region": "Lombardia",
+    "status": "selected official-directory discovery, not event source; run after checkpoint",
+    "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/",
     "fetchStarted": false
   }
 }
