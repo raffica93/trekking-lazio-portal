@@ -10,7 +10,7 @@ Il run `cai-20261023-marche-pesaro-homepage01` è terminato sulla sola URL seed 
 | Campione Pesaro — raccolta | `partial`; 0 eventi | URL seed singola e budget limitato; redirect bloccato, dettagli HTTP/body assenti |
 | File | report/diagnostica e manifest coerenti; catalogo invariato | importer PASS integrità, HOLD sulla prova risposta del run iniziale; alias Pesaro source-specific fixture-backed; report SHA-256 `cf2b40e7e441b76e8df41013f254c476ec7ae26af7597f71f48a695341a03b4a` |
 | Test | PASS | backend `npm test` 214/214 dopo la raccolta; 216/216 dopo la patch alias; sei hash JSON invariati |
-| Commit/push | verificato remoto | `24e48e9070ea96added7bf0e5c7580e5a8ca5025` su `codex/cai-orchestrator-luna`; branch ref riletto |
+| Commit/push codice alias + diagnostica | verificato remoto | `9336988f54f6bec0ed3b0ddf1a451748de23065b` su `codex/cai-orchestrator-luna`; branch ref riletto |
 | Database | non avviato | 0 delta, nessuna query/import/receipt |
 
 Gli artefatti sono in `backend/data/agent-runs/cai-20261023-marche-pesaro-homepage01/`; manifest SHA-256 `7bec2799fcf3791d0004e9577334621e6161f2b7b1061e7d703cd4e928a10267`, state SHA-256 `9703deff0e9dbda34557e43b0e6105203c138631827e653d51b5ed3f3d5125e4`. Lo status target registra Pesaro `failed`; S. Benedetto e Sarnano differiscono solo nei website già aggiornati dal refresh directory. I mirror `scrape-status.json` coincidono (SHA `5cc2ae7caefa2f9f8c7876f433a7516423e6ebe9bbd05ce99903feb05f7b5391`), mentre `excursions.json` backend/frontend resta SHA `10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7`.
@@ -21,7 +21,9 @@ Alias configurato in `backend/sources.js` soltanto per `cai-pesaro-9228006`; `pi
 
 QA finale importer: PASS su contratto alias, manifest/hash, report/diagnostica e conteggi; nessun DB.
 
-Prossimo: checkpoint remoto di codice/fixture e rapporto; poi un run nuovo, limitato a `https://www.caipesaro.it/`. Non seguire redirect HTTP né inferire che la pagina sia un calendario; nessun import del run iniziale. Finché non si legge correttamente un calendario/feed, Pesaro resta partial e non si importa nulla. Nessun merge, deploy o cron.
+Checkpoint codice/fixture e diagnostica verificato a `9336988f54f6bec0ed3b0ddf1a451748de23065b`.
+
+Prossimo: run nuovo `cai-20261023-marche-pesaro-homepage02`, limitato a `https://www.caipesaro.it/`, max 1 documento/120s/concurrency1; poi fermarsi per QA importer e suite seriale. Non seguire redirect HTTP né inferire che la pagina sia un calendario; nessun import del run iniziale. Finché non si legge correttamente un calendario/feed, Pesaro resta partial e non si importa nulla. Nessun merge, deploy o cron.
 
 ## Stato corrente — 23 ottobre 2026
 

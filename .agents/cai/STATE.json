@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "marche-pesaro-alias-patch-checkpoint-pending",
+  "phase": "marche-pesaro-alias-patch-checkpointed",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -926,9 +926,15 @@
       "status": "completed",
       "owner": "cai-importer",
       "result": "Final read-only QA PASS after source alias patch and report/hash updates. Alias limited to Pesaro HTTPS; HTTP/arbitrary hosts denied; run manifest/report/diagnostic/state hashes and all mirrors valid; documentation/status consistent. No DB."
+    },
+    {
+      "id": "S131",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Source-specific HTTPS Pesaro alias patch, fixture/tests, redirect diagnostic, report and state checkpoint committed/pushed and verified at 9336988f54f6bec0ed3b0ddf1a451748de23065b. No merge/deploy/DB."
     }
   ],
-  "nextAction": "Commit and push the fixture-backed source-specific Pesaro HTTPS alias, diagnostic evidence/report, STATE/HANDOFF/REGIONS updates on codex/cai-orchestrator-luna; verify exact remote SHA and clean checkout. Then launch one new orchestrated bounded run on https://www.caipesaro.it/ (max1 document, 120s, concurrency1); preserve partial unless the body/calendar is readable. Do not import the failed first run.",
+  "nextAction": "Avviare `cai-20261023-marche-pesaro-homepage02` tramite orchestratore, solo fonte `cai-pesaro-9228006`, `--source-url https://www.caipesaro.it/`, concurrency 1, max1 documento, budget 120000 ms. Dopo la raccolta fermarsi; importer QA read-only, poi npm test backend seriale e verifica dei sei JSON. Non importare senza nuovo delta file verificato/classificato e checkpoint remoto.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -938,7 +944,7 @@
     "proposedRunId": null
   },
   "currentWork": {
-    "branchHead": "e22e1d2947e579c53c53bebd3fedd6edb6e04a21",
+    "branchHead": "9336988f54f6bec0ed3b0ddf1a451748de23065b",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
       "runId": "cai-20261023-marche-pesaro-homepage01",
@@ -986,7 +992,7 @@
     "sourceAliasPatch": "fixture-backed code ready, importer QA/checkpoint pending",
     "database": "no reads, writes, imports, migrations or receipts"
   },
-  "repositoryCommit": "24e48e9070ea96added7bf0e5c7580e5a8ca5025",
+  "repositoryCommit": "9336988f54f6bec0ed3b0ddf1a451748de23065b",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -1009,10 +1015,10 @@
     }
   },
   "tests": "Backend npm test 214/214 after original collection; 216/216 after source-specific HTTPS alias patch. Targeted node --test test/pipeline.test.js test/deterministic.test.js 39/39. Six public JSON hashes unchanged pre/post full suite.",
-  "updatedAt": "2026-10-23T07:08:17Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T07:00:23Z",
+  "updatedAt": "2026-10-23T07:08:39Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T07:08:39Z",
   "regionCurrent": "Marche: directory refresh completed, then one CAI Pesaro homepage URL seed was sampled. Redirect was blocked before body capture; 1 source partial, 0 complete, 0 HTTP-unreachable attested, 0 events verified. This is not an empty-calendar result and not a regional audit.",
-  "regionNext": "Marche remains open. A source-specific HTTPS alias is fixture-backed; after importer QA and remote checkpoint, retry only the official www HTTPS homepage with one-document budget. Do not declare zero events unless a calendar is successfully read.",
+  "regionNext": "Marche remains open. After checkpoint 9336988, run a single bounded homepage sample at the verified HTTPS alias www.caipesaro.it. Stop after one URL; if no readable calendar, retain partial and select the next official Marche source only after reviewing the returned evidence.",
   "preflight": {
     "at": "2026-10-23T01:27:16Z",
     "sourceId": "cai-cesena-9224012",
@@ -1257,12 +1263,12 @@
   ],
   "nextSourcePreflight": {
     "region": "Marche",
-    "status": "source-specific alias patch tested; importer QA/checkpoint pending",
-    "scope": "Only Pesaro explicit alias https://www.caipesaro.it/, max1 document/120s/concurrency1 after remote checkpoint; do not follow plain HTTP redirect or expand to another host.",
+    "status": "bounded Pesaro homepage02 selected after redirect patch checkpoint",
+    "scope": "one URL https://www.caipesaro.it/; max1 document; budget 120000ms; concurrency 1; inspect body/calendar then stop",
     "networkFetchPerformed": false,
     "previousSourceId": "cai-pesaro-9228006",
-    "previousSourceStatus": "partial; redirect blocked before response body; calendar presence unknown",
-    "nextTarget": null
+    "previousSourceStatus": "first homepage run partial: apex redirect to plain HTTP blocked; no body, calendar evidence unknown",
+    "nextTarget": "cai-pesaro-9228006 https://www.caipesaro.it/"
   },
   "currentRun": {
     "runId": "cai-20261023-marche-pesaro-homepage01",
