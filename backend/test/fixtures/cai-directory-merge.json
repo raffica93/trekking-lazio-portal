@@ -126,5 +126,54 @@
     "previous": [
       { "id": "curated-lombardia-shared", "directoryId": "shared-123", "organizer": "CAI Sezione Lombarda", "region": "Lombardia", "calendarUrls": ["https://lombardia.example/annual.pdf"], "calendarEvidence": [{ "url": "https://lombardia.example/annual.pdf", "label": "Calendario Lombardia" }], "status": "calendar-found", "customConfig": { "extractor": "pdf" } }
     ]
+  },
+  "newOfficialWebsite": {
+    "fresh": [
+      {
+        "id": "cai-lovere-9216055",
+        "directoryId": "9216055",
+        "organizer": "CAI Lovere",
+        "region": "Lombardia",
+        "sectionType": "section",
+        "parentSectionId": null,
+        "municipality": "Lovere",
+        "province": "BG",
+        "headquartersCoordinates": { "latitude": 45.8152103, "longitude": 10.0729322 },
+        "website": "https://organizzazione.cai.it/sez-lovere/",
+        "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9216055",
+        "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9216055",
+        "calendarUrls": [],
+        "calendarEvidence": [],
+        "kind": "discover",
+        "template": "calendar-discovery",
+        "extractor": "deterministic",
+        "enabled": true,
+        "status": "pending-discovery"
+      }
+    ],
+    "previous": [
+      {
+        "id": "cai-lovere-9216055",
+        "directoryId": "9216055",
+        "organizer": "CAI Lovere",
+        "region": "Lombardia",
+        "sectionType": "section",
+        "parentSectionId": null,
+        "municipality": "Lovere",
+        "province": "BG",
+        "headquartersCoordinates": { "latitude": 45.8152103, "longitude": 10.0729322 },
+        "website": null,
+        "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9216055",
+        "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9216055",
+        "calendarUrls": [],
+        "calendarEvidence": [],
+        "kind": "discover",
+        "template": "calendar-discovery",
+        "extractor": "deterministic",
+        "enabled": false,
+        "status": "missing-website",
+        "evidenceUrls": ["https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"]
+      }
+    ]
   }
 }

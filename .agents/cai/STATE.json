@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "liguria-preflight-no-target-next-emilia-preflight",
+  "phase": "lombardia-directory-refreshed-pending-bounded-source-run",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -785,18 +785,36 @@
     },
     {
       "id": "S107",
-      "status": "pending",
+      "status": "completed",
       "owner": "orchestrator",
-      "result": "After this code/selection checkpoint is verified remotely, run documented CAI directory refresh only for Lombardia using --directory-only --region Lombardia. Record pre/post hashes and merge completeness; no event collection or DB. If new exact-host calendars emerge, verify/select/checkpoint one before the bounded orchestrate run."
+      "result": "Directory refresh code is verified remotely at fcf7f901f8ee34ce83f34f619814ab740cf65522; the official directory refresh was then executed with the region filter and bounded to Lombardia."
     },
     {
       "id": "S108",
-      "status": "pending",
+      "status": "completed",
       "owner": "orchestrator",
-      "result": "Run ID cai-20261023-lombardia-directory-refresh01 reserved for the official, region-scoped directory refresh after code checkpoint 6b4cdf1. Exact command: NODE_USE_ENV_PROXY=1 node scripts/discover-cai-sections.js --directory-only --region Lombardia. Capture pre/post catalog SHA256, mirror equality, completeness, retained IDs and ambiguities; no event collection or DB."
+      "result": "Run cai-20261023-lombardia-directory-refresh01 completed. 152 root sections selected; zero subsection response failures; 837 records before/after, zero ID additions/removals, zero ambiguous IDs, zero other-region changes; nine Lombardia website fields changed. Output from first merge SHA 2216dea5e80881d99e5a72e421175d3fe373fd923d911514b498b65473a82ae9, mirrors equal. Collector found missing-website -> website was not activating new sources; fixture-backed fix makes only a strictly unconfigured record pending-discovery and uses website as initial URL; Lovere enabled after local deterministic remerge. No event scrape or DB. Full suite 214/214 before the final catalog hash refresh; rerun required before checkpoint."
+    },
+    {
+      "id": "S109",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Corrected new official-website promotion in the regional directory merge. Fixture sets stale directory detail URL separately from the official website and asserts pending-discovery url=website. Focused merge tests 7/7; full backend test initially 214/214. Helper/test/fixture hashes recorded in collector handoff."
+    },
+    {
+      "id": "S110",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Final offline merge applied using the corrected helper: only Lovere url/enabled/status promotion beyond nine directory website updates; 837 records, 0 IDs added/removed, 0 ambiguities, 608 previous IDs retained, no other-region changes. Backend npm test 214/214 after final catalog and merge fix; backend/frontend catalog hash stayed 250afdbc6fa8980f076f094c9574b2d77d157e7f34f4dfb9c84a4f09f3166944. No event scrape or DB."
+    },
+    {
+      "id": "S111",
+      "status": "in_progress",
+      "owner": "orchestrator",
+      "result": "Commit/push final code, fixture, registry mirrors, report/manifest and handoff; verify origin branch. Importer then rechecks final remote state before the next source run."
     }
   ],
-  "nextAction": "After this run-ID checkpoint, execute exactly `NODE_USE_ENV_PROXY=1 node scripts/discover-cai-sections.js --directory-only --region Lombardia` from backend as `cai-20261023-lombardia-directory-refresh01`. Capture baseline hashes first, then inspect output, mirror equality, merge completeness, retained IDs and ambiguities; checkpoint registry output before selecting any event URL. No DB or event collection during directory refresh.",
+  "nextAction": "Commit and push the verified directory refresh, merge fix, fixture/test, report/manifest and updated STATE/HANDOFF to codex/cai-orchestrator-luna without force; verify remote HEAD, then obtain importer read-only QA on the final committed artifacts before any event collection.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -832,7 +850,7 @@
       "tests": "backend npm test 206/206 after collection; six public JSON hashes unchanged"
     }
   },
-  "repositoryCommit": "6b4cdf151a2f162612597b0d09083a17b40899df",
+  "repositoryCommit": "fcf7f901f8ee34ce83f34f619814ab740cf65522",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -855,10 +873,10 @@
     }
   },
   "tests": "After Sora iCal collection: backend npm test 206/206 serially; six public JSON hashes unchanged pre/post; backend/frontend mirrors identical.",
-  "updatedAt": "2026-10-23T02:07:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T02:07:00Z",
-  "regionCurrent": "National offline frontier found no safe event URL in Piemonte/Trentino/Veneto candidates. Conservative region-scoped official-directory refresh is now ready to discover changed Lombardia sources; no event run or DB action yet.",
-  "regionNext": "Lombardia — refresh official CAI directory and subsections for this region only; then checkpoint a newly evidenced exact-host calendar before collection.",
+  "updatedAt": "2026-10-23T06:38:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T06:27:00Z",
+  "regionCurrent": "Lombardia directory refresh completed. The official listing added a website for CAI Lovere; tested offline reconciliation now marks it enabled/pending-discovery. No calendar source was fetched yet and regional event coverage is unassessed.",
+  "regionNext": "Lombardia — checkpoint refreshed registry and report, then one bounded discovery from the exact official CAI Lovere website; only after it is read can event/source coverage be assessed.",
   "preflight": {
     "at": "2026-10-23T01:27:16Z",
     "sourceId": "cai-cesena-9224012",
@@ -1109,10 +1127,12 @@
   ],
   "nextSourcePreflight": {
     "region": "Lombardia",
-    "status": "selected; run ID reserved; remote code checkpoint verified",
-    "scope": "official CAI directory plus subsection API for Lombardia only; merge with prior registry and preserve other regions",
+    "status": "exact official website selected after directory refresh; pending remote checkpoint",
+    "scope": "single-source bounded discovery only after checkpoint",
     "networkFetchPerformed": false,
-    "target": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
+    "sourceId": "cai-lovere-9216055",
+    "target": "https://organizzazione.cai.it/sez-lovere/",
+    "basis": "Official CAI section directory row 9216055; fetch/content not yet verified"
   },
   "currentRun": {
     "runId": "cai-20261023-lazio-sora-ical01",
@@ -1178,9 +1198,37 @@
   },
   "proposedTarget": {
     "region": "Lombardia",
-    "status": "official directory refresh selected; no event URL selected yet",
-    "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/",
-    "runId": "cai-20261023-lombardia-directory-refresh01",
+    "sourceId": "cai-lovere-9216055",
+    "status": "pending-discovery; not an event/calendar coverage result",
+    "url": "https://organizzazione.cai.it/sez-lovere/",
+    "runId": "cai-20261023-lombardia-lovere01",
     "fetchStarted": false
+  },
+  "directoryRefresh": {
+    "runId": "cai-20261023-lombardia-directory-refresh01",
+    "region": "Lombardia",
+    "collection": "not performed; directory-only run",
+    "files": "local report/manifest/catalog and mirrors finalized; backend tests 214/214; commit/push and importer final QA pending",
+    "database": "no read/write/import",
+    "rootSectionsSelected": 152,
+    "subsectionFailures": 0,
+    "recordsBefore": 837,
+    "recordsAfter": 837,
+    "idsAdded": 0,
+    "idsRemoved": 0,
+    "ambiguousPreviousIds": 0,
+    "websiteChangedRecords": 9,
+    "otherRegionChanges": 0,
+    "calendarSectionsChecked": "not assessed",
+    "eventsVerified": 0,
+    "duplicatesExcluded": "not assessed",
+    "failuresResolved": "not assessed",
+    "failuresOpen": "not assessed",
+    "finalCatalogSha256": "250afdbc6fa8980f076f094c9574b2d77d157e7f34f4dfb9c84a4f09f3166944",
+    "reportPath": "backend/data/agent-runs/cai-20261023-lombardia-directory-refresh01/directory-refresh-report.json",
+    "manifestPath": "backend/data/agent-runs/cai-20261023-lombardia-directory-refresh01/manifest.json",
+    "lovere": "official website listed by CAI directory; pending discovery, not yet fetched",
+    "reportSha256": "c5dbbff7ee45615405e090fc400c45f88fe282946274c8ed21a1371004e2c232",
+    "manifestSha256": "f038795275c2855746f80659fe3254ccd8551a6d3827444f2ca4ee713f40a256"
   }
 }

@@ -97,6 +97,21 @@ function mergeDirectorySections(freshSections, previousSections, { scopeRegion =
     result.website = fresh.website || previous.website || null;
     // Preserve curated identifiers, calendar configuration/status, and coordinates from `previous`.
     result.id = previous.id;
+    const hasCuratedCalendar = (previous.calendarUrls || []).length > 0 || (previous.calendarEvidence || []).length > 0;
+    const wasUnconfiguredWithoutWebsite = !previous.website
+      && previous.status === 'missing-website'
+      && previous.enabled === false
+      && previous.kind === 'discover'
+      && previous.template === 'calendar-discovery'
+      && !hasCuratedCalendar;
+    if (fresh.website && wasUnconfiguredWithoutWebsite) {
+      // A newly supplied official website makes this section a pending discovery target.
+      result.url = fresh.website;
+      result.kind = fresh.kind || 'discover';
+      result.template = fresh.template || 'calendar-discovery';
+      result.enabled = true;
+      result.status = 'pending-discovery';
+    }
     result.parentSectionId = fresh.parentSectionId
       ? freshToMergedId.get(fresh.parentSectionId) || fresh.parentSectionId
       : previous.parentSectionId;

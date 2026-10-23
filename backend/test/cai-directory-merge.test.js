@@ -98,6 +98,29 @@ test('regional directory merge cannot match a cross-region directoryId collision
   assert.deepEqual(ambiguousPreviousIds, ['curated-lombardia-shared']);
 });
 
+test('fresh official website promotes only an unconfigured missing-website section to pending discovery', () => {
+  const previous = fixture.newOfficialWebsite.previous[0];
+  const previousBefore = structuredClone(previous);
+  const { sections, ambiguities } = mergeDirectorySections(
+    fixture.newOfficialWebsite.fresh,
+    fixture.newOfficialWebsite.previous,
+    { scopeRegion: 'Lombardia' }
+  );
+  const lovere = sections.find(section => section.id === 'cai-lovere-9216055');
+  assert.equal(ambiguities.length, 0);
+  assert.equal(lovere.website, 'https://organizzazione.cai.it/sez-lovere/');
+  assert.equal(lovere.url, 'https://organizzazione.cai.it/sez-lovere/');
+  assert.equal(lovere.enabled, true);
+  assert.equal(lovere.status, 'pending-discovery');
+  assert.equal(lovere.kind, 'discover');
+  assert.equal(lovere.template, 'calendar-discovery');
+  assert.equal(lovere.extractor, previous.extractor);
+  assert.deepEqual(lovere.calendarUrls, previous.calendarUrls);
+  assert.deepEqual(lovere.calendarEvidence, previous.calendarEvidence);
+  assert.deepEqual(lovere.headquartersCoordinates, previous.headquartersCoordinates);
+  assert.deepEqual(previous, previousBefore);
+});
+
 test('directory-only region rejects absent, unknown, and parentless selections', () => {
   assert.throws(() => directoryOnlyRegion(['node', 'script', '--directory-only']), /requires exactly one --region/i);
   assert.throws(() => directoryOnlyRegion(['node', 'script', '--directory-only', '--region']), /non-empty --region/i);

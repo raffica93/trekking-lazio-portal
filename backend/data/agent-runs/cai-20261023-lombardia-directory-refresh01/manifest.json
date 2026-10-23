@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261023-lombardia-directory-refresh01",
+  "baseCommit": "fcf7f901f8ee34ce83f34f619814ab740cf65522",
+  "artifacts": {
+    "directory-refresh-report.json": "c5dbbff7ee45615405e090fc400c45f88fe282946274c8ed21a1371004e2c232",
+    "backend/data/cai-sections.json": "250afdbc6fa8980f076f094c9574b2d77d157e7f34f4dfb9c84a4f09f3166944",
+    "frontend/public/cai-sections.json": "250afdbc6fa8980f076f094c9574b2d77d157e7f34f4dfb9c84a4f09f3166944"
+  },
+  "baseline": {
+    "backend/data/cai-sections.json": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+  },
+  "intermediateNetworkOutputSha256": "2216dea5e80881d99e5a72e421175d3fe373fd923d911514b498b65473a82ae9",
+  "mirrorEqual": true
+}
