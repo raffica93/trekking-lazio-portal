@@ -498,3 +498,8 @@ Delta file contro checkpoint remoto `316f03b`: 3371→3376 ID unici, +5/0 remove
 | Toscana — `cai-fivizzano-9226019`, `calendar01` | 1 | 0 | 1 | 0 | 10 righe di calendario; 4 nuovi ID non duplicati candidati | 1 | 0 | PDF annuale OCR failure/discovery-limit 8; pagina discovery-limit 1 | Classificazione isolata sospesa finché il runtime non torna online; poi QA/import mirato |
 
 Raccolta/file: 3.371→3.376 ID unici, +5 raw, 0 rimossi; 2 record esistenti cambiano solo `sourceDocument` e non fanno parte del delta DB. Database: 0 inserimenti, 0 classificazioni, nessuna query o write in questo passaggio. Il duplicato `5b1c92eec5ec` resta escluso in favore di `b759d3dd85b0`; 4 ID attendono classificazione. I conteggi nazionali sono snapshot storici, non una query corrente. Runtime `connectivity=offline`; si riprende dopo preflight online, senza ripetere raccolta.
+
+
+### Aggiornamento operativo — dopo checkpoint remoto Fivizzano
+
+Il delta file e input di classificazione sono recuperabili dal branch a `3341fc9`; 4 ID attendono Mercury, 1 duplicato escluso, nessun evento/classificazione scritto nel DB. Il runtime è ora `connected` e `openrouter.ai` consentito; prossimo passo: run Mercury circoscritto, QA importer, checkpoint e import mirato. Toscana resta parziale: non confondere il singolo campione con copertura regionale completa.

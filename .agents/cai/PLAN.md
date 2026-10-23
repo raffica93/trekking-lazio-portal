@@ -1,6 +1,6 @@
 # Piano di passaggio al lavoro interamente cloud
 
-Stato aggiornato al 23 ottobre 2026: run Fivizzano calendar01 file-checkpointato a `28ccac9`, 10 righe verificate, 4 nuovi ID classificabili dopo esclusione di un duplicato semantico. L’input isolato di quattro ID è preparato ma attende checkpoint remoto; il runtime corrente è offline/unavailable, quindi classificazione Mercury e DB restano pending. Dopo ripristino rete: classificazione col solo modello `inception/mercury-decide`, QA importer, checkpoint output e delivery mirato con ricevuta; poi riprendere fonti Toscana. I punti S0–S7 sotto sono piano storico della qualifica, con completamenti registrati nei checkpoint e non una dichiarazione di runtime online.
+Stato aggiornato al 23 ottobre 2026: run Fivizzano calendar01 file-checkpointato a `28ccac9`; input classificazione dei quattro candidati e prove al checkpoint remoto `3341fc9`. Sono state verificate 10 righe, con un duplicato semantico escluso. Runtime corrente connesso e host OpenRouter consentito; Mercury sul delta è prossimo, DB ancora pending. Dopo classificazione: QA importer, checkpoint output e delivery mirato con ricevuta; poi riprendere fonti Toscana. I punti S0–S7 sotto sono piano storico di qualifica, non affermazioni sul completamento di questo lotto.
 
 ## Sequenza
 
