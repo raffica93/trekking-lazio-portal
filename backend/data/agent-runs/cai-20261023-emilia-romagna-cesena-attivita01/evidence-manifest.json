@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261023-emilia-romagna-cesena-attivita01",
+  "files": [
+    {
+      "path": "manifest.json",
+      "bytes": 570,
+      "sha256": "fac455d43a27e0c481290615a3fa0fcb6fc51b59395643f80676562aba2fd8d6"
+    },
+    {
+      "path": "state.json",
+      "bytes": 404769,
+      "sha256": "1459a291193ec93e6443cc5089d9bab9a80599284a4155d3887a1d808032ef75"
+    },
+    {
+      "path": "source-evidence.json",
+      "bytes": 1627,
+      "sha256": "2819264d155fb072f9134cffa56b276221fab86759ba3ff28b57c32ef73b7f19"
+    },
+    {
+      "path": "collection-report.md",
+      "bytes": 2583,
+      "sha256": "db7e883c60fa8bc5f49009f38f0faa0ccfff39b6fad07b60fb802971cb388b89"
+    }
+  ],
+  "publicMirrors": [
+    {
+      "backendPath": "backend/data/excursions.json",
+      "frontendPath": "frontend/public/excursions.json",
+      "backendSha256": "d46ab729d0622ada4690df4a3ff80a55b33156db011010160538ad42913db180",
+      "frontendSha256": "d46ab729d0622ada4690df4a3ff80a55b33156db011010160538ad42913db180",
+      "byteIdentical": true,
+      "bytes": 3635435
+    },
+    {
+      "backendPath": "backend/data/cai-sections.json",
+      "frontendPath": "frontend/public/cai-sections.json",
+      "backendSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+      "frontendSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+      "byteIdentical": true,
+      "bytes": 1459342
+    },
+    {
+      "backendPath": "backend/data/scrape-status.json",
+      "frontendPath": "frontend/public/scrape-status.json",
+      "backendSha256": "594840969f883b3bdb98d9bef311fe986843c3c414e0efe81c67f638451204ce",
+      "frontendSha256": "594840969f883b3bdb98d9bef311fe986843c3c414e0efe81c67f638451204ce",
+      "byteIdentical": true,
+      "bytes": 2077617
+    }
+  ],
+  "catalogDelta": {
+    "totalRowsBefore": 3376,
+    "totalRowsAfter": 3376,
+    "sourceIdPrefix": "cai-cesena-9224012-",
+    "sourceRowsBefore": 6,
+    "sourceRowsAfter": 6,
+    "added": 0,
+    "removed": 0,
+    "changed": 0,
+    "sortedRowsHashAlgorithm": "Select rows whose id starts with cai-cesena-9224012-, sort ascending by id, serialize resulting array with Node.js JSON.stringify, UTF-8 encode, then SHA-256.",
+    "sortedSourceRowsSha256Before": "35c5ef388c346150eb5974def5e7a79cf215084c228e3a8edbc7d5830ad2a0bc",
+    "sortedSourceRowsSha256After": "35c5ef388c346150eb5974def5e7a79cf215084c228e3a8edbc7d5830ad2a0bc"
+  },
+  "qa": {
+    "importer": "file integrity PASS; source attribution HOLD",
+    "backendTests": "206/206 passed after collection",
+    "publicFilesStableAcrossTests": true,
+    "databaseQueries": 0,
+    "databaseWrites": 0
+  }
+}

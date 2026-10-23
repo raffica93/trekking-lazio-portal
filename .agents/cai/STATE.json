@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "emilia-romagna-cesena-candidate-checkpoint-pending",
+  "phase": "emilia-romagna-cesena-sample-held-next-region-preflight",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -77,14 +77,14 @@
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "official source QA, bounded provider circuit breaker, adapter/tests",
-      "status": "Emilia-Romagna offline scan selected CAI Cesena candidate; awaiting remote selection checkpoint before any fetch"
+      "status": "Cesena Attivita01 completed: one bounded URL; partial/unsupported, zero extracted; catalog unchanged; source content attribution HOLD because body/cache/HTTP metadata are not persisted."
     },
     "importer": {
       "name": "cai-importer",
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "classification manifest validator, candidate/effective QA schema, conflicts/reconciliation and DB safety",
-      "status": "independent Alpago artifact/catalog QA complete: integrity PASS, URL attribution HOLD; no DB access or writes"
+      "status": "Independent Cesena QA complete: manifest/catalog/mirrors PASS; source attribution HOLD; zero new IDs; no DB query/write."
     }
   },
   "baseline": {
@@ -659,105 +659,68 @@
     },
     {
       "id": "S86",
-      "status": "pending",
+      "status": "completed",
       "owner": "orchestrator",
-      "result": "Checkpoint Alpago artifacts, catalog/status mirrors and Cesena target selection to codex/cai-orchestrator-luna; verify remote ref and blobs before starting run cai-20261023-emilia-romagna-cesena-attivita01."
+      "result": "Checkpoint 6fcd4da verified before the bounded Cesena run. Run cai-20261023-emilia-romagna-cesena-attivita01 completed: partial/files ready/database pending; requested URL status has hash 63bd28… but no body or HTTP metadata; zero extracted is not an empty-calendar result. Catalog 3376→3376, 0 add/remove/change, 6 Cesena rows unchanged. Importer file-integrity PASS and source attribution HOLD; no classification/DB."
+    },
+    {
+      "id": "S87",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Backend npm test 206/206 after collection, serially. Six public JSON hashes stable pre/post; backend/frontend mirrors identical."
+    },
+    {
+      "id": "S88",
+      "status": "completed",
+      "owner": "cai-importer",
+      "result": "Independent QA: manifest paths/hashes and mirrors PASS; 6 existing Cesena rows unchanged, 0 new candidates; attribution HOLD because body/cache/status/content type unavailable. No DB query/write."
+    },
+    {
+      "id": "S89",
+      "status": "pending",
+      "owner": "cai-collector",
+      "result": "After this checkpoint, offline-only preflight next canonical region Friuli-Venezia Giulia. Select exact official unconsumed target or pass to next region; no fetch until selection checkpoint."
     }
   ],
-  "nextAction": "Publish and verify the Alpago run artifacts/catalog mirrors plus the one-URL Cesena selection. Only after remote verification, run cai-20261023-emilia-romagna-cesena-attivita01 on one official URL, max 120 seconds, concurrency 1, no discovery.",
+  "nextAction": "Publish and verify the Cesena run artifacts, report, evidence, public mirrors and state on codex/cai-orchestrator-luna. After remote verification, have cai-collector perform offline-only preflight of Friuli-Venezia Giulia and select one exact official unconsumed URL, or document why to pass to the next region. No fetch until that selection is checkpointed.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
     "implicitDeploy": false,
     "secretsInGit": false,
     "databaseDeletes": false,
-    "proposedRunId": "cai-20261023-emilia-romagna-cesena-attivita01"
+    "proposedRunId": null
   },
   "currentWork": {
-    "branchHead": "f8bfe2a4bd0748b17b282ebfdff975ce707a637a",
+    "branchHead": "6fcd4dab3d00bd97e70f406aa252217fd4f181dc",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
-      "runId": "cai-20261023-toscana-fivizzano-attivita01",
-      "region": "Toscana",
-      "sourceId": "cai-fivizzano-9226019",
-      "requestedUrl": "https://www.caifivizzano.it/attivita/",
-      "collection": "partial; landing page, method=null, zero dated rows recognized",
-      "files": "artifacts sealed locally and importer QA PASS; remote checkpoint pending",
-      "database": "no delta/candidate; no DB operation",
-      "baselineCommit": "f8bfe2a4bd0748b17b282ebfdff975ce707a637a",
-      "runFolder": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-attivita01",
-      "bodySha256": "604cf46e065b652ead0d4a894369733eaa94f7456a84a35fa6ffbf61b9c4ab0d",
-      "catalogRows": 3376,
-      "sourceRows": 12,
-      "added": 0,
-      "removed": 0,
-      "changed": 0,
-      "manifestSha256": "3f9a56fdc9f28b94aafacc157be1f76be02354fa0c051a99c448170c3a447da9",
-      "stateSha256": "2b0b7763f73082cb400a7d39c55ac1634727249a2f152939d4adb29759be63a9",
-      "sourceEvidenceSha256": "af9262ccdb00a2be6604234400c8598d694d6db58acc2de58da4aceb871e7e86",
-      "reportSha256": "282d511e91a3b836589a4c1c32ed42706b569804908fecb363abdc7b31066b1f",
-      "evidenceManifestSha256": "6d923cb920bf8856e1b225400f65a5435c7e483ea7021e0d749ec13608545d59",
-      "collectorQa": "PASS",
-      "importerQa": "PASS",
-      "backendTests": "206/206, public JSON unchanged by tests"
-    },
-    "nextAction": "Pubblicare e verificare checkpoint del run Fivizzano attivita01, cataloghi/status e passaggio Toscana→Veneto. Poi eseguire un singolo run cai-20261023-veneto-alpago-programma01 sulla URL esatta https://www.caialpago.it/programma-2/, max1/120s/concurrency1/no discovery.",
-    "classificationFilesCheckpointed": true,
-    "runtimeNetworkStatus": {
-      "connectivity": "connected",
-      "managedEnvironment": "running",
-      "openrouterSecretPresent": true,
-      "secretValueRead": false,
-      "openrouterAllowed": true,
-      "requestedModel": "inception/mercury-decide",
-      "liveRequestMade": true,
-      "note": "OPENROUTER_API_KEY presence only; value not read. Network request succeeded through allowed proxy to openrouter.ai.",
-      "liveRequestResult": "4/4 Decisions API success, zero errors; response model exact verified snapshot inception/mercury-decide-20260930 attested by Inception"
-    },
-    "modelTelemetry": {
-      "orchestratorRequested": "gpt-6-luna",
-      "effortRequested": "high",
-      "effectiveModelAttested": false,
-      "note": "Session/agent telemetry does not expose effective model or effort; UI setting was reported by user."
-    },
-    "classificationFilesCheckpoint": {
-      "inputCheckpointCommit": "3341fc9f4862bdb17a3592ba30111d422d5e1d26",
-      "classificationOutputCheckpointCommit": "2179e0c644c0af0031ebe0b22c256820a671d93f",
-      "inputSha256": "1aba5906e6a743318ecb63b82b733deca9263759e943710308352901e3b33334",
-      "evidenceManifestSha256": "161b4f1edd896f86493d9cfc69be51cf1c14d9b289cb4a5d056decec0045f4fc",
-      "classifiedCatalogSha256": "d07dfc27108dc38eee95ae35fac95e9ab66041806375db18968a522667c3d337",
-      "classifierManifestSha256": "0bbe6dea10f07ded946bf19af714d6306ab1cc098b3c239361007d3fffc82b8b",
-      "classifierStateSha256": "f0857553e5d2c80788839a8cf64d2f326ca3a6e699e99c6c00298980b347122d",
-      "classificationReportSha256": "15bb131d2775d3b655f87b154692841802a9fafa587edcfe8c85d7465596161c",
-      "rawCandidateCounts": {
-        "trekking": 3,
-        "non_trekking": 0,
-        "da_verificare": 1,
-        "errors": 0
+      "runId": "cai-20261023-emilia-romagna-cesena-attivita01",
+      "region": "Emilia-Romagna",
+      "sourceId": "cai-cesena-9224012",
+      "requestedUrl": "https://www.caicesena.com/index.php/attivita",
+      "collection": "partial; status records 0 extracted and method=null; no body/HTTP metadata, therefore content attribution HOLD",
+      "files": "manifest/state/report/source evidence/evidence manifest prepared; importer integrity PASS; checkpoint pending",
+      "database": "no candidate; no classification, query or write",
+      "counts": {
+        "catalogBefore": 3376,
+        "catalogAfter": 3376,
+        "uniqueBefore": 3376,
+        "uniqueAfter": 3376,
+        "sourceRowsBefore": 6,
+        "sourceRowsAfter": 6,
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "verifiedEvents": 0,
+        "semanticDuplicatesExcluded": 0,
+        "failuresResolved": 0,
+        "failuresOpen": 4
       },
-      "effectiveCountsAfterReview": {
-        "trekking": 2,
-        "non_trekking": 0,
-        "da_verificare": 2,
-        "errors": 0
-      },
-      "importerQa": "PASS independent final review; delta-only ready; zero DB access/write"
-    },
-    "databasePreflight": {
-      "observedAt": "2026-10-23T00:34:58.379392Z",
-      "placesCountBefore": 4423,
-      "classificationsCountBefore": 3354,
-      "targetPlacesPresentBefore": 0,
-      "targetClassificationsPresentBefore": 0,
-      "targetPlacesInserted": 4,
-      "targetClassificationsInserted": 4,
-      "placesCountAfter": 4427,
-      "classificationsCountAfter": 3358,
-      "reconciledAt": "2026-10-23T00:35:17.325134Z",
-      "status": "verified"
+      "tests": "backend npm test 206/206 after collection; six public JSON hashes stable pre/post"
     }
   },
-  "repositoryCommit": "f8bfe2a4bd0748b17b282ebfdff975ce707a637a",
+  "repositoryCommit": "6fcd4dab3d00bd97e70f406aa252217fd4f181dc",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -779,19 +742,19 @@
       "afterQueryAt": "2026-10-22T22:33:30.892756Z"
     }
   },
-  "tests": "After miniera01 collection: backend npm test 206/206; six public JSON hashes unchanged pre/post test and all mirrors byte-identical.",
-  "updatedAt": "2026-10-23",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23",
-  "regionCurrent": "Toscana — Fivizzano miniera01: 1 evento scaduto (06-09-2026, Expired) escluso; escursionismo01: 1 evento futuro corroborato con ID esistente cai-fivizzano-9226019-2d592e7a1731; attivita01: landing informativa senza righe datate, zero estrazioni non prova calendario vuoto. Catalogo 3376, 12 righe Fivizzano invariate; nessun delta DB in questi tre run. Fonte partial, 5 documenti, 12 eventi in storico estratto; PDF OCR/discovery e discovery-limit multipli ancora aperti.",
-  "regionNext": "Veneto — CAI Alpago (`cai-alpago-9220065`), pagina ufficiale https://www.caialpago.it/programma-2/, link dalla homepage e URL registrata, non in documents/cache/FAILURES. La fonte è partial per backlog su un URL distinto; max 1 doc/120s/concurrency1.",
+  "tests": "After Cesena collection: backend npm test 206/206 serially; six public JSON hashes unchanged pre/post and all mirrors byte-identical.",
+  "updatedAt": "2026-10-23T01:27:16Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T01:27:16Z",
+  "regionCurrent": "Emilia-Romagna — CAI Cesena bounded route sample; 1 source checked, partial/unsupported, content HOLD; 3,376 catalog IDs before/after, six Cesena rows unchanged, 0 new/removed/changed/verified events; 0 DB. Four source issues remain open (OCR failure and three discovery limits).",
+  "regionNext": "Friuli-Venezia Giulia — offline-only source preflight pending after Cesena checkpoint; no URL selected yet.",
   "preflight": {
-    "at": "2026-10-23T00:00:18Z",
-    "sourceId": "cai-carate-brianza-9216030",
-    "scope": "offline registry, status/document history, cache, FAILURES/cooldown and run history",
-    "result": "one official host-exact flyer URL selected for bounded sample",
-    "reason": "calendarEvidence identifies 63rd alpinism course flyer linked from official homepage; exact URL and aliases absent from status (18 docs), cache, failures and prior runs; host exactly matches official website and is allowlisted. Separate annual PDF discovery-limit 344 and gym-page timeout are out of scope.",
-    "next": "after remote checkpoint, one explicit URL max1 document/120s/concurrency1; treat as alpinism course, not regional hiking calendar coverage",
-    "networkFetchPerformed": false
+    "at": "2026-10-23T01:27:16Z",
+    "sourceId": "cai-cesena-9224012",
+    "scope": "one explicit exact official-host URL, max 1 document/120 s/concurrency 1/no discovery; importer checked status and cache availability",
+    "result": "collection partial; status records the URL and metadata hash but there is no response body, cache object, HTTP status or content type in this checkout",
+    "reason": "content attribution is HOLD; zero extracted rows do not establish calendar emptiness; no repeat of prior programme route",
+    "networkFetchPerformed": true,
+    "selectedUrl": "https://www.caicesena.com/index.php/attivita"
   },
   "databasePreflight": {
     "observedAt": "2026-10-23T00:34:58.379392Z",
@@ -847,61 +810,48 @@
     "independentImporterQa": "PASS file seals/catalog mirrors; HOLD import eligibility because corrected record is past/no catalog delta"
   },
   "lastRegionalAttempt": {
-    "runId": "cai-20261023-toscana-fivizzano-attivita01",
-    "region": "Toscana",
-    "sourceId": "cai-fivizzano-9226019",
-    "requestedUrl": "https://www.caifivizzano.it/attivita/",
-    "collection": "partial; cached HTML landing, method=null, zero recognized dated rows; not proof calendar empty",
-    "files": "report, source evidence, manifest/evidence manifest and state QA PASS locally; remote checkpoint pending",
-    "database": "no candidate/delta; no classification/query/write",
-    "baselineCommit": "f8bfe2a4bd0748b17b282ebfdff975ce707a637a",
-    "runFolder": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-attivita01",
-    "contentType": "text/html; charset=UTF-8",
-    "bodyBytes": 120061,
-    "bodySha256": "604cf46e065b652ead0d4a894369733eaa94f7456a84a35fa6ffbf61b9c4ab0d",
+    "runId": "cai-20261023-emilia-romagna-cesena-attivita01",
+    "region": "Emilia-Romagna",
+    "sourceId": "cai-cesena-9224012",
+    "requestedUrl": "https://www.caicesena.com/index.php/attivita",
+    "collection": "partial; status events=0/method=null; no body/cache or HTTP metadata, not evidence of an empty calendar",
+    "files": "manifest/state/report/source-evidence/evidence-manifest prepared; importer integrity PASS and content attribution HOLD; checkpoint pending",
+    "database": "no delta; no classification/query/write",
+    "baselineCommit": "6fcd4dab3d00bd97e70f406aa252217fd4f181dc",
+    "runFolder": "backend/data/agent-runs/cai-20261023-emilia-romagna-cesena-attivita01",
+    "recordedDocumentHash": "63bd28a27c8e0f85b5b431c1e8dd88dd0ecb41d09ba4fed5c166a48a924237bc",
     "httpStatus": "not persisted",
+    "contentType": "not persisted",
+    "bodyEvidence": "unavailable",
     "catalogBefore": 3376,
     "catalogAfter": 3376,
-    "sourceRowsBefore": 12,
-    "sourceRowsAfter": 12,
+    "sourceRowsBefore": 6,
+    "sourceRowsAfter": 6,
     "added": 0,
     "removed": 0,
     "changed": 0,
     "eventsExtracted": 0,
+    "eventsVerified": 0,
     "sectionsChecked": 1,
     "complete": 0,
     "partial": 1,
     "unreachable": 0,
     "failuresResolved": 0,
     "failuresOpen": [
-      "annual PDF OCR failure",
-      "annual PDF discovery-limit 8",
-      "calendar discovery-limit 1",
-      "miniera discovery-limit 1",
-      "escursionismo discovery-limit 1",
-      "attivita discovery-limit 1"
+      "youth PDF OCR failure",
+      "annual PDF discovery-limit 7",
+      "programme route discovery-limit 1",
+      "activity route discovery-limit 1"
     ],
     "coordinatesAdded": 0,
-    "collectorQa": "PASS landing page locators and no-event interpretation",
-    "importerQa": "PASS; no new catalog row / candidate",
+    "collectorQa": "PASS for bounded run execution; source body attribution HOLD",
+    "importerQa": "manifest/catalog/mirror PASS; source-content HOLD; no candidates",
     "backendTests": "206/206; six public JSON hashes unchanged pre/post"
   },
   "regionalCoverage": {
-    "region": "Toscana",
-    "scope": "fresh persisted join after Fivizzano attivita01; collector also performed offline scan for next distinct source",
+    "region": "Emilia-Romagna",
+    "scope": "bounded CAI Cesena source run; not regional completeness audit",
     "status": "open",
-    "persistedStatusSnapshot": {
-      "asOf": "2026-10-23T00:42:23.832Z",
-      "sectionsRegistered": 37,
-      "enabled": 17,
-      "partial": 9,
-      "unsupported": 4,
-      "failed": 2,
-      "ok": 1,
-      "noUpcoming": 1,
-      "eventsInPersistedStatus": 90,
-      "note": "Persisted regional status, not current external coverage. Fivizzano has five source documents and 12 historical extracted events; latest landing has no dated event rows. Toscana has no additional safe exact URL in current scan."
-    },
     "currentRunCounts": {
       "sectionsChecked": 1,
       "complete": 0,
@@ -916,8 +866,8 @@
       "dbClassificationsInserted": 0,
       "existingRowsChanged": 0,
       "failuresResolved": 0,
-      "failuresOpen": 6,
-      "nextStep": "Toscana has no further safe exact URL: only unvisited page is an already-reviewed semantic duplicate; Pescia timed out and remaining enabled sources are consumed, failed, or lack exact URL. Proceed to Veneto Alpago after checkpoint."
+      "failuresOpen": 4,
+      "nextStep": "Checkpoint this held sample; offline preflight Friuli-Venezia Giulia. No DB delta and no event coverage is claimed."
     },
     "historicalSnapshot": {
       "asOf": "2026-10-20",
@@ -1048,51 +998,79 @@
     }
   ],
   "nextSourcePreflight": {
-    "region": "Veneto",
-    "sourceId": "cai-alpago-9220065",
-    "sourceName": "CAI Alpago",
-    "url": "https://www.caialpago.it/programma-2/",
-    "status": "selected offline; awaiting remote checkpoint before fetch",
-    "evidence": "Collector post-Attivita01 offline scan: official registry URL linked from Alpago homepage; exact target absent from source documents, cache and FAILURES. Existing partial status refers to separate URL backlog.",
-    "scope": "one exact URL, max 1 document, 120 seconds, concurrency 1, no child URLs",
+    "region": "Friuli-Venezia Giulia",
+    "status": "pending offline-only scan after remote checkpoint",
     "networkFetchPerformed": false,
-    "proposedRunId": "cai-20261023-veneto-alpago-programma01"
+    "scope": "registry, scrape status, FAILURES/cooldown, run artifacts and cache only if actually available",
+    "target": null
   },
-  "currentRun": null,
-  "latestRun": {
-    "runId": "cai-20261023-veneto-alpago-programma01",
-    "path": "backend/data/agent-runs/cai-20261023-veneto-alpago-programma01",
-    "collection": "partial",
-    "files": "ready",
-    "database": "pending-no-delta",
-    "requestedUrl": "https://www.caialpago.it/programma-2/",
-    "attribution": "hold",
-    "rawRows": 3,
-    "attributableRows": 0,
-    "newIds": 0,
-    "verifiedCoverageEvents": 0,
-    "existingRowsWithSupportedSourceReferenceUpdates": 2,
-    "possibleSemanticDuplicateIdsInReview": [
-      "cai-alpago-9220065-2660f5d809cc",
-      "cai-alpago-9220065-c11f9b42bf19"
+  "currentRun": {
+    "runId": "cai-20261023-emilia-romagna-cesena-attivita01",
+    "region": "Emilia-Romagna",
+    "sourceId": "cai-cesena-9224012",
+    "requestedUrl": "https://www.caicesena.com/index.php/attivita",
+    "collection": "partial; status events=0/method=null; no body/cache or HTTP metadata, not evidence of an empty calendar",
+    "files": "manifest/state/report/source-evidence/evidence-manifest prepared; importer integrity PASS and content attribution HOLD; checkpoint pending",
+    "database": "no delta; no classification/query/write",
+    "baselineCommit": "6fcd4dab3d00bd97e70f406aa252217fd4f181dc",
+    "runFolder": "backend/data/agent-runs/cai-20261023-emilia-romagna-cesena-attivita01",
+    "recordedDocumentHash": "63bd28a27c8e0f85b5b431c1e8dd88dd0ecb41d09ba4fed5c166a48a924237bc",
+    "httpStatus": "not persisted",
+    "contentType": "not persisted",
+    "bodyEvidence": "unavailable",
+    "catalogBefore": 3376,
+    "catalogAfter": 3376,
+    "sourceRowsBefore": 6,
+    "sourceRowsAfter": 6,
+    "added": 0,
+    "removed": 0,
+    "changed": 0,
+    "eventsExtracted": 0,
+    "eventsVerified": 0,
+    "sectionsChecked": 1,
+    "complete": 0,
+    "partial": 1,
+    "unreachable": 0,
+    "failuresResolved": 0,
+    "failuresOpen": [
+      "youth PDF OCR failure",
+      "annual PDF discovery-limit 7",
+      "programme route discovery-limit 1",
+      "activity route discovery-limit 1"
     ],
+    "coordinatesAdded": 0,
+    "collectorQa": "PASS for bounded run execution; source body attribution HOLD",
+    "importerQa": "manifest/catalog/mirror PASS; source-content HOLD; no candidates",
+    "backendTests": "206/206; six public JSON hashes unchanged pre/post"
+  },
+  "latestRun": {
+    "runId": "cai-20261023-emilia-romagna-cesena-attivita01",
+    "path": "backend/data/agent-runs/cai-20261023-emilia-romagna-cesena-attivita01",
+    "collection": "partial",
+    "files": "ready; evidence manifest pending final hash refresh after state update",
+    "database": "pending-no-delta",
+    "requestedUrl": "https://www.caicesena.com/index.php/attivita",
+    "attribution": "hold",
+    "recordedDocumentHash": "63bd28a27c8e0f85b5b431c1e8dd88dd0ecb41d09ba4fed5c166a48a924237bc",
+    "bodyEvidenceAvailable": false,
+    "extractedRows": 0,
+    "catalogBefore": 3376,
+    "catalogAfter": 3376,
+    "sourceRowsBefore": 6,
+    "sourceRowsAfter": 6,
+    "added": 0,
+    "removed": 0,
+    "changed": 0,
+    "verifiedEvents": 0,
+    "semanticDuplicatesExcluded": 0,
     "backendTests": "206/206 passed after collection",
     "databaseQueryOrWrite": false
   },
   "proposedTarget": {
-    "region": "Emilia-Romagna",
-    "sourceId": "cai-cesena-9224012",
-    "url": "https://www.caicesena.com/index.php/attivita",
-    "registryLabel": "Attività",
-    "linkedFrom": "https://www.caicesena.com/index.php/programma-attivita",
-    "reason": "exact official-host URL absent from status/FAILURES/run artifacts; generic page merits bounded content check",
-    "sample": {
-      "documents": 1,
-      "seconds": 120,
-      "concurrency": 1,
-      "discovery": false
-    },
-    "fetchStarted": false,
-    "collectorCacheAvailable": false
+    "region": "Friuli-Venezia Giulia",
+    "status": "offline preflight pending after current checkpoint",
+    "url": null,
+    "reason": "continue region-by-region without selecting an unverified URL",
+    "networkFetchPerformed": false
   }
 }

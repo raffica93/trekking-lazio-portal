@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261023-emilia-romagna-cesena-attivita01",
+  "source": {
+    "sourceId": "cai-cesena-9224012",
+    "organizer": "CAI Cesena",
+    "region": "Emilia-Romagna",
+    "registryUrl": "https://www.caicesena.com/index.php/attivita",
+    "hostMatchesRegisteredWebsite": true,
+    "routeDistinctFromPreviouslyRead": "https://www.caicesena.com/index.php/programma-attivita"
+  },
+  "observation": {
+    "sourceStatus": "partial",
+    "extractedEvents": 0,
+    "parserMethod": null,
+    "recordedDocumentUrl": "https://www.caicesena.com/index.php/attivita",
+    "recordedDocumentHash": "63bd28a27c8e0f85b5b431c1e8dd88dd0ecb41d09ba4fed5c166a48a924237bc",
+    "httpStatus": null,
+    "contentType": null,
+    "bodyBytes": null,
+    "bodySha256": null,
+    "bodyEvidenceAvailable": false,
+    "cacheBodyAvailable": false
+  },
+  "interpretation": {
+    "attribution": "HOLD: status associates a document record with the requested URL but persisted source body and response metadata are unavailable for independent content verification",
+    "calendarReadSuccessfully": false,
+    "zeroRowsMeansEmptyCalendar": false,
+    "verifiedEvents": 0,
+    "newCatalogIds": 0,
+    "dbDeltaApplicable": false
+  },
+  "limitations": [
+    "No source body or cache object is available in this checkout or the sibling cache location checked by importer.",
+    "The recorded document hash is retained as status metadata; it is not represented as a verified body SHA-256.",
+    "No HTTP status/content type persisted.",
+    "method=null and zero extracted rows do not prove a calendar was read correctly or empty."
+  ]
+}

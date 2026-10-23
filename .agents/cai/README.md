@@ -1,27 +1,14 @@
 # Spazio operativo degli agenti CAI
 
-Punto di ingresso per riprendere il progetto da una sessione cloud nuova,
-senza dipendere dal PC o dai file non pubblicati di una chat precedente.
+Punto di ingresso per riprendere il progetto da una sessione cloud nuova, senza dipendere dal PC o dai file non pubblicati di una chat precedente.
 
-**Visibilità:** questo spazio eredita quella del repository, attualmente pubblico.
-Non è un archivio privato. Conserva solo contesto di progetto ed evidenze pubbliche;
-credenziali, `.env`, cookie e conversazioni personali restano fuori da Git.
+**Visibilità:** questo spazio eredita quella del repository, attualmente pubblico. Non è un archivio privato. Conserva solo contesto di progetto ed evidenze pubbliche; credenziali, `.env`, cookie e conversazioni personali restano fuori da Git.
 
-## Leggere all'avvio
+## Leggere all’avvio
 
-1. [Obiettivi](OBJECTIVES.md): risultato da ottenere e criteri misurabili.
-2. [Piano](PLAN.md): passi ordinati, dipendenze e impedimenti osservati.
-3. [Stato](STATE.json): fase attuale e riferimenti alla baseline verificata.
-4. [Passaggio di consegne](HANDOFF.md): istruzioni per la prossima sessione cloud.
-5. [Decisioni](DECISIONS.md): regole condivise da non riscoprire ogni volta.
-6. [Registro errori](FAILURES.json): fonti/fasi osservate, tentativi effettivi
-   quando noti, cooldown candidati e verifiche risolutive.
-7. [Avanzamento regionale](REGIONS.md): stato aggregato dell'ultimo snapshot,
-   con limiti e prossima regione da lavorare.
-8. [Soluzioni verificate](LEARNINGS.md): solo correzioni con test e commit.
-
-Completano il contesto `AGENTS.md`, `docs/orchestratore-cai.md`,
-`docs/cai-italia.md` e `docs/procedura-pdf-cai.md`.
+1. [Obiettivi](OBJECTIVES.md), [Piano](PLAN.md), [Stato](STATE.json) e [Passaggio](HANDOFF.md).
+2. [Decisioni](DECISIONS.md), [Registro errori](FAILURES.json), [Avanzamento regionale](REGIONS.md) e [Soluzioni verificate](LEARNINGS.md).
+3. `AGENTS.md`, `docs/orchestratore-cai.md`, `docs/cai-italia.md` e `docs/procedura-pdf-cai.md`.
 
 ## Dove risiede ogni informazione
 
@@ -31,25 +18,17 @@ Completano il contesto `AGENTS.md`, `docs/orchestratore-cai.md`,
 | Stato e prove di un lotto | `backend/data/agent-runs/<run-id>/` |
 | Catalogo corrente e copia statica | `backend/data/` e `frontend/public/` |
 | Eventi effettivamente importati | Supabase, verificato con query e ricevuta |
-| Rete, strumenti e accessi della sessione | Osservazioni del runtime cloud corrente |
-| Segreti | Configurazione autorizzata dell'ambiente o connessioni già autorizzate |
-| Cache e temporanei OCR | Ricostruibili; non sono l'unica copia di una prova |
+| Rete, strumenti e accessi | Osservazioni del runtime cloud corrente |
+| Segreti | Configurazione autorizzata dell’ambiente o connessioni già autorizzate |
 
-Una modifica non committata non è un checkpoint condiviso. Un commit locale non
-è pubblicato finché il push non è confermato. La persistenza della stessa chat
-non dimostra che una chat nuova possa recuperare il lavoro.
+## Passaggio corrente — 23 ottobre 2026
 
-## Stato di questo passaggio — 23 ottobre 2026
+Branch `codex/cai-orchestrator-luna` verificato a `6fcd4dab3d00bd97e70f406aa252217fd4f181dc` (discendente da `50352f7`). Valmadrera07 (14 eventi + 14 classificazioni) e Fivizzano calendar01 (+4 +4) sono già consegnati; non ripetere i delta o il batch storico 3.336.
 
-Branch `codex/cai-orchestrator-luna`, ultimo ref remoto verificato `f95b9e519f6b45cc9708bed205892434d0f1e587`, discendente del checkpoint Valmadrera DB `50352f7fde1a638e6541aab048fcdacfb834324b`. Il delta Valmadrera07 è già consegnato: 14 eventi e classificazioni riconciliati; non ripetere quel run né i batch storici.
+Cesena Attività01 è stato raccolto su una sola URL. Stato `partial / files ready / database pending`; il manifest e i mirror sono coerenti, catalogo 3.376→3.376, sei righe Cesena invariate. L’attribuzione del contenuto è HOLD: mancano body/cache e metadati HTTP, `method=null` e zero righe estratte non provano calendario vuoto. Importer ha dato PASS all’integrità, HOLD all’attribuzione. Nessun nuovo evento, classificazione o DB; quattro issue Cesena restano aperte. Backend `npm test` 206/206 dopo il run e sei JSON pubblici stabili.
 
-Il tentativo Alpago `cai-20261023-veneto-alpago-programma01` è stato completato ma non attribuibile alla URL richiesta `/programma-2/`: 0 nuovi ID e 0 nuova copertura verificata. Importer QA ha passato integrità e confronto, tenendo HOLD sull’attribuzione; due modifiche `link`/`sourceDocument` sono sostenute dal body preesistente `/programma-2-2/`. I due record Lastoi restano separati e dubbi. Nessuna classificazione o scrittura DB. Backend `npm test` 206/206 dopo la raccolta; sei mirror pubblici invariati dai test e backend/frontend identici.
+Il prossimo passo, dopo checkpoint remoto degli artefatti Cesena, è il preflight offline Friuli-Venezia Giulia. Solo un URL esatto, official-host e fuori cooldown può essere selezionato; checkpoint della selezione prima di un nuovo fetch. Runtime ha richiesto GPT-6 Luna high per orchestratore e i due ruoli esistenti cai-collector/cai-importer; telemetria effettiva non attesta modello/effort. Nessun DB accesso per Cesena, cron, merge, deploy o coordinate inventate.
 
-Il catalogo file del checkpoint contiene 3.376 ID; questo non è un conteggio DB corrente. Fivizzano `calendar01` è già consegnato (+4 places +4 classificazioni draft, ricevuta pubblicata a `52c9cd3a36e3128932fc4d140def45d01a021936`); non ripetere quel delta, il batch storico 3.336 o altri import già riconciliati.
-
-I preflight offline Lombardia, Marche, Molise, Puglia, Sardegna, Calabria e Campania non hanno trovato URL esatti sicuri selezionabili dalla documentazione disponibile; le regioni restano incomplete salvo lo stato registrato per la singola fonte. In Emilia-Romagna è stato selezionato come candidato bounded CAI Cesena, `https://www.caicesena.com/index.php/attivita`, URL esatta registry non presente in status/FAILURES/run artifacts. È una pagina generica di Attività e non si presume contenga eventi; la cache di raccolta manca, quindi l’assenza da cache non è attestata. Il run `cai-20261023-emilia-romagna-cesena-attivita01` (un URL, 120 s, concurrency 1, no discovery) attende il checkpoint remoto della selezione. I conteggi regionali nel registro restano snapshot storici del 20 ottobre, non audit live.
-
-Runtime e ruoli sono richiesti GPT-6 Luna high; telemetria effettiva non esposta. Restano esattamente cai-collector e cai-importer. Mercury usa solo `inception/mercury-decide` via Decisions API. Nessun cron, merge, deploy o cancellazione DB.
 
 ## Responsabilità
 

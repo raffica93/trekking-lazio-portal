@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-23T01:03:35.222Z",
+  "generatedAt": "2026-10-23T01:24:22.175Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 1,
-    "parsed": 1,
-    "unsupported": 0,
+    "parsed": 0,
+    "unsupported": 1,
     "failed": 0,
     "located": 548
   },
@@ -25381,7 +25381,7 @@
       "excursions": 6,
       "error": null,
       "hash": "28d4cc1070b27109d9959c165cec9451bc5d1b2e72b85d2de8d97ec8a3cb4812",
-      "updatedAt": "2026-10-22T23:25:05.804Z",
+      "updatedAt": "2026-10-23T01:24:22.175Z",
       "documents": [
         {
           "url": "https://www.caicesena.com/images/download/2026/calendario_2026_apz_cai_cesena.pdf",
@@ -25406,6 +25406,12 @@
           "hash": "6c11893a0b371c51650c39a8275a777d13bc06f29dc0f9204fd6aaf6bc72702c",
           "events": 0,
           "method": "image-ocr"
+        },
+        {
+          "url": "https://www.caicesena.com/index.php/attivita",
+          "hash": "63bd28a27c8e0f85b5b431c1e8dd88dd0ecb41d09ba4fed5c166a48a924237bc",
+          "events": 0,
+          "method": null
         }
       ],
       "methods": [
@@ -25425,6 +25431,11 @@
         },
         {
           "url": "https://www.caicesena.com/index.php/programma-attivita",
+          "message": "Discovery budget reached; 1 candidate documents remain.",
+          "code": "discovery-limit"
+        },
+        {
+          "url": "https://www.caicesena.com/index.php/attivita",
           "message": "Discovery budget reached; 1 candidate documents remain.",
           "code": "discovery-limit"
         }
