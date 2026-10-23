@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-23T06:35:05.839Z",
+  "generatedAt": "2026-10-23T06:55:19.925Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 0,
-    "parsed": 1,
+    "parsed": 0,
     "unsupported": 0,
-    "failed": 0,
+    "failed": 1,
     "located": 548
   },
   "sources": [
@@ -22369,6 +22369,1164 @@
       "extractedEvents": 0
     },
     {
+      "id": "cai-amandola-9228010",
+      "organizer": "CAI Amandola",
+      "region": "Marche",
+      "website": "https://www.caiamandola.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228010",
+      "calendarUrls": [],
+      "directoryId": "9228010",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "unsupported",
+      "url": "https://www.caiamandola.it/",
+      "kind": "html",
+      "template": "html-calendar",
+      "extractor": "deterministic",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": "40e8c24e7c8bda5b1fe31b1dad29c09ae2efcbd8d33cc0b8c3fffbe4ee6d6a38",
+      "updatedAt": "2026-10-19T18:24:35.762Z",
+      "documents": [
+        {
+          "url": "https://www.caiamandola.it/",
+          "hash": "643bb9450401287bcad59e1725cb2e19cbd8e2ba24495f78be78ba14a81fa07e",
+          "events": 0,
+          "method": null
+        }
+      ],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": 0
+    },
+    {
+      "id": "cai-ancona-9228001",
+      "organizer": "CAI Ancona",
+      "region": "Marche",
+      "website": "https://www.caiancona.org/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228001",
+      "calendarUrls": [
+        "https://www.caiancona.org/news/calendario-regionale-cai-marche",
+        "https://www.caiancona.org/eventi/escursionismo/20261001lu",
+        "https://www.caiancona.org/eventi/corsi/",
+        "https://www.caiancona.org/eventi/",
+        "https://www.caiancona.org/eventi/alpinismo/",
+        "https://www.caiancona.org/eventi/alpinismo-giovanile/",
+        "https://www.caiancona.org/eventi/arrampicata-libera/",
+        "https://www.caiancona.org/eventi/ciclo-escursionismo/"
+      ],
+      "directoryId": "9228001",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "unsupported",
+      "url": "https://www.caiancona.org/news/calendario-regionale-cai-marche",
+      "kind": "html",
+      "template": "html-calendar",
+      "extractor": "deterministic",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": "d391dd4dd88da9d5180a2627c6fe789eb16544695c03bd1aea409c8c79d15671",
+      "updatedAt": "2026-10-19T18:24:35.762Z",
+      "documents": [
+        {
+          "url": "https://www.caiancona.org/news/calendario-regionale-cai-marche",
+          "hash": "f41805b30d4a44cacd9ed4e060539f8a49e9aea2e271cc5924ec241d61a216d7",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caiancona.org/eventi/corsi/",
+          "hash": "09218a10afc703d3f45f80532d09e05f5fc9202b2a1ea8a6d57439217b9121b2",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caiancona.org/eventi/",
+          "hash": "f53f1af3f6f7c639b1186d68a0575936571d831f754d9f2c866f6c5a5d7c5570",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caiancona.org/eventi/alpinismo/",
+          "hash": "4dc5b9a76ccc2329fe6d73ea04654a5fe89d18e9a0d3df2f8d86ebe6c341ee91",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caiancona.org/eventi/alpinismo-giovanile/",
+          "hash": "a8e600b96e6a2df7ad0cc354dfc88b7f0cdf1b6146182698a71be7ba2d646e58",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caiancona.org/eventi/arrampicata-libera/",
+          "hash": "0110947817efd9c169b12cfd63752cc99f3a94bd75abd7455c24b43f22d02daa",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caiancona.org/eventi/ciclo-escursionismo/",
+          "hash": "c118f9727c479baacde2cb20bb1189229e6c7aaea267db61693dd3d69bcdff76",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caiancona.org/",
+          "hash": "1857b86b881461a6bf507efb888e47ff43e661a59917568b279d8d02ffb8cc3b",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caiancona.org/eventi/corsi/261022fi",
+          "hash": "fe769bd38d9e2341800d9dcd1a0616f4d9fd25b89f25c9c52a6389387c5d3011",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caiancona.org/eventi/corsi/261022fi-2",
+          "hash": "b5b09d797e0daaee3c3bbbd7036ec5d6a7862a8f6e560d376ff4e4e51a8a4305",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caiancona.org/eventi/corsi/261022fi-3",
+          "hash": "bc7a289644315ed9daa7b58f94560f6d61e8dea699136937285fbc588817b206",
+          "events": 0,
+          "method": null
+        }
+      ],
+      "methods": [],
+      "issues": [
+        {
+          "url": "https://www.caiancona.org/eventi/escursionismo/20261001lu",
+          "message": "Request failed with status code 404"
+        },
+        {
+          "url": "https://www.caiancona.org/news/calendario-regionale-cai-marche",
+          "message": "Discovery budget reached; 51 candidate documents remain.",
+          "code": "discovery-limit"
+        }
+      ],
+      "extractedEvents": 0
+    },
+    {
+      "id": "cai-ascoli-piceno-9228002",
+      "organizer": "CAI Ascoli Piceno",
+      "region": "Marche",
+      "website": "https://www.caiascoli.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228002",
+      "calendarUrls": [
+        "http://www.caiascoli.it/download/programma-2026.pdf",
+        "https://www.caiascoli.it/programma-2026/",
+        "https://www.caiascoli.it/programma-2026/feed/",
+        "https://www.caiascoli.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caiascoli.it%2Fprogramma-2026%2F",
+        "https://www.caiascoli.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caiascoli.it%2Fprogramma-2026%2F&format=xml",
+        "https://www.caiascoli.it/corso-e1-2026/",
+        "https://www.caiascoli.it/commissione-escursionismo/",
+        "https://www.caiascoli.it/slow-bike/"
+      ],
+      "directoryId": "9228002",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "ok",
+      "url": "http://www.caiascoli.it/download/programma-2026.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "deterministic",
+      "enabled": true,
+      "excursions": 9,
+      "error": null,
+      "hash": "1309e2d22d5418d52762533478ad3ce6949a522c7dd6db958bdbd6300d192b24",
+      "updatedAt": "2026-10-19T18:24:35.762Z",
+      "documents": [
+        {
+          "url": "http://www.caiascoli.it/download/programma-2026.pdf",
+          "hash": "a7e6e1118f87f464f07f307c2f64eb64169aae442b6eeb3f5306fe6f101aa0e2",
+          "events": 42,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caiascoli.it/programma-2026/",
+          "hash": "e61b5fc62f78510fd064cefcafed150fc1f36f544b8dfd966b87640661579fe1",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caiascoli.it/programma-2026/feed/",
+          "hash": "ed4276c09bd12fbe0c5fd645e3848dd63a8dbf7515a4a582ff4ff27340fcd12e",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caiascoli.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caiascoli.it%2Fprogramma-2026%2F",
+          "hash": "97d999c51e227eb1e5a10a613a72f91f5c1e723e08e82e31fed1dd50d79a0157",
+          "events": 0,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://www.caiascoli.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caiascoli.it%2Fprogramma-2026%2F&format=xml",
+          "hash": "06ec40a2e9167e82d39abe43a4fae348becf3d02a09d6804c526505f9936706e",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caiascoli.it/corso-e1-2026/",
+          "hash": "2dceaab15444a913fbd04f5a26db164bdbdbda99152286547ed71a440896c523",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caiascoli.it/commissione-escursionismo/",
+          "hash": "91d9f0f09738f93c1445c5e10c42eae76faea56b2d367a7198b4f57253aaaae0",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caiascoli.it/slow-bike/",
+          "hash": "7cacdbd9d09c5fa98fd728328409427bb8a818395b08768634b1bd28dca5676c",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caiascoli.it/",
+          "hash": "d33dbecb18ef708de4af29a9f01255736aa656ffb8dd349dcda40d78473da657",
+          "events": 0,
+          "method": null
+        }
+      ],
+      "methods": [
+        "pdf-text",
+        "wordpress-events"
+      ],
+      "issues": [],
+      "extractedEvents": 42
+    },
+    {
+      "id": "cai-camerino-9228005",
+      "organizer": "CAI Camerino",
+      "region": "Marche",
+      "website": "https://organizzazione.cai.it/sez-camerino/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228005",
+      "calendarUrls": [
+        "https://organizzazione.cai.it/sez-camerino/eventi/?ical=1",
+        "https://organizzazione.cai.it/sez-camerino/attivita/programma-escursionistico-2024/",
+        "https://organizzazione.cai.it/sez-camerino/attivita/programma-2023/",
+        "https://organizzazione.cai.it/sez-camerino/escursioni/",
+        "https://organizzazione.cai.it/sez-camerino/attivita/",
+        "https://organizzazione.cai.it/sez-camerino/attivita/archivio-programmi/"
+      ],
+      "directoryId": "9228005",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "ok",
+      "url": "https://organizzazione.cai.it/sez-camerino/eventi/?ical=1",
+      "kind": "ics",
+      "template": "icalendar",
+      "extractor": "deterministic",
+      "enabled": true,
+      "excursions": 1,
+      "error": null,
+      "hash": "c03240b002c0afb9011c40256b91434b3d800f8f235a35067a3f5ef73ba40f54",
+      "updatedAt": "2026-10-19T18:24:35.762Z",
+      "documents": [
+        {
+          "url": "https://organizzazione.cai.it/sez-camerino/eventi/?ical=1",
+          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-camerino/attivita/programma-escursionistico-2024/",
+          "hash": "917473d9341549c4eea9791cca51a610fee6a7a5d615caa9263bc9060c3d413c",
+          "events": 9,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-camerino/attivita/programma-2023/",
+          "hash": "21ec86dc015631b99977f40333c212e3630acf54457c9e120744456b72242c20",
+          "events": 2,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-camerino/escursioni/",
+          "hash": "45ea7b6227531740501b88490bdb8881d2d09cc265b8b69cc922d486a5581708",
+          "events": 3,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-camerino/attivita/",
+          "hash": "134c7b94969419dcf7c3abd6eb1b11bf5873fdb7628ca1d391e5bf1f938d1709",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-camerino/attivita/archivio-programmi/",
+          "hash": "3379f35b4caccc12a87143b6bc266bbe41c49794bd57b3b30e770c07bcfd16bd",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-camerino/",
+          "hash": "d26679e264ad333f4fee6dc30ab90495267ee3e3d47cf997e925db1bf073644e",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-10-01&per_page=100",
+          "hash": "768b6652c33982dd7f10fadde2f101ca0fc6bd309343e69f9ff846c9ff98150c",
+          "events": 0,
+          "method": "wordpress-events"
+        }
+      ],
+      "methods": [
+        "html-calendar",
+        "wordpress-events"
+      ],
+      "issues": [],
+      "extractedEvents": 14
+    },
+    {
+      "id": "cai-fabriano-9228007",
+      "organizer": "CAI Fabriano",
+      "region": "Marche",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228007",
+      "calendarUrls": [],
+      "directoryId": "9228007",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "disabled",
+      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228007",
+      "kind": "discover",
+      "template": "calendar-discovery",
+      "extractor": "deterministic",
+      "enabled": false,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-fermo-9228004",
+      "organizer": "CAI Fermo",
+      "region": "Marche",
+      "website": "https://www.caifermo.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228004",
+      "calendarUrls": [
+        "https://www.caifermo.it/wp-content/uploads/2026/01/CAI-FERMO-PROGRAMMA-2026.pdf",
+        "https://www.caifermo.it/calendario-attivita-2026-cai-fermo/",
+        "https://www.caifermo.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caifermo.it%2Fcalendario-attivita-2026-cai-fermo%2F",
+        "https://www.caifermo.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caifermo.it%2Fcalendario-attivita-2026-cai-fermo%2F&format=xml",
+        "https://www.caifermo.it/wp-content/uploads/2026/01/Escursionismo.pdf",
+        "https://www.caifermo.it/escursionismo/",
+        "https://www.caifermo.it/ciclo-escursionismo/",
+        "https://www.caifermo.it/escursionismo-3/"
+      ],
+      "directoryId": "9228004",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "partial",
+      "url": "https://www.caifermo.it/wp-content/uploads/2026/01/CAI-FERMO-PROGRAMMA-2026.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "deterministic",
+      "enabled": true,
+      "excursions": 11,
+      "error": null,
+      "hash": "e8e464427f2cfec34b0f17402b8f50634b4c7c37053c6e72749dcdc04c699d52",
+      "updatedAt": "2026-10-19T18:24:35.762Z",
+      "documents": [
+        {
+          "url": "https://www.caifermo.it/wp-content/uploads/2026/01/CAI-FERMO-PROGRAMMA-2026.pdf",
+          "hash": "4753c32f12e75f785c25ac8512f3c99f5e4a485fa1811ed59e426f6ee075db39",
+          "events": 33,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caifermo.it/calendario-attivita-2026-cai-fermo/",
+          "hash": "cb4a04699337932e83820ba4c34037ba4050f54193083bc005c619e94f2cd17c",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caifermo.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caifermo.it%2Fcalendario-attivita-2026-cai-fermo%2F",
+          "hash": "8400536ef6870e18a2bf2560b4f3145b3a918a01363477dd7ab104f631be208b",
+          "events": 0,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://www.caifermo.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caifermo.it%2Fcalendario-attivita-2026-cai-fermo%2F&format=xml",
+          "hash": "d8571262d0238b323b990cc2db1e6aaa9eb89501700844e89f84aad5a081b5aa",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caifermo.it/wp-content/uploads/2026/01/Escursionismo.pdf",
+          "hash": "6044aba3333e1811b9b23e382ee8acdeedeb78c6d1c6a8e51e7a356e0f22440c",
+          "events": 3,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caifermo.it/escursionismo/",
+          "hash": "1990f8cf5c46231c4587fbc9295f3fbd80c60330833c2e76e0643330277525e8",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caifermo.it/ciclo-escursionismo/",
+          "hash": "bad28d8b74ebf023a6a83f3c6c34c18ac8f920e8d3c1570544d18d7b60a1c885",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caifermo.it/escursionismo-3/",
+          "hash": "34fe4f16bdc37378c1df98b941f3fe398adcfdcd73c3de1b467e18ae7b4963d7",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caifermo.it/",
+          "hash": "90c26e079ac3b90f821e32b2b4d1e06a80d759fda0ceee1239b4373ea8ea8f34",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caifermo.it/wp-content/uploads/2026/01/ciclo-escursionismo.pdf",
+          "hash": "653e63556f706c50fdf962dd15aa3ea4b5c870d963209bbb16ad7faea87e4a94",
+          "events": 4,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caifermo.it/7-corso-di-escursionismo-avanzato-e2/",
+          "hash": "439a27cff2987574cd0fac3f2fcc16a3b4850905c21fd6ec99b9fd470e51dc55",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caifermo.it/2-corso-specialistico-tecnico-per-lescursionismo-avanzato/",
+          "hash": "6273425cc7132c52f564d4fcbad4c87087fe45fb5874f463a6a06319a3294159",
+          "events": 0,
+          "method": null
+        }
+      ],
+      "methods": [
+        "pdf-text",
+        "wordpress-events"
+      ],
+      "issues": [
+        {
+          "url": "https://www.caifermo.it/wp-content/uploads/2026/01/CAI-FERMO-PROGRAMMA-2026.pdf",
+          "message": "Discovery budget reached; 8 candidate documents remain.",
+          "code": "discovery-limit"
+        }
+      ],
+      "extractedEvents": 40
+    },
+    {
+      "id": "cai-jesi-9228003",
+      "organizer": "CAI Jesi",
+      "region": "Marche",
+      "website": "https://www.caijesi.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228003",
+      "calendarUrls": [
+        "https://www.caijesi.it/?p=10617",
+        "https://www.caijesi.it/?p=10587",
+        "https://www.caijesi.it/?p=10536",
+        "https://www.caijesi.it/?p=9045",
+        "https://www.caijesi.it/?p=10555",
+        "https://www.caijesi.it/?cat=11",
+        "https://www.caijesi.it/?p=7746",
+        "https://www.caijesi.it/?p=10662"
+      ],
+      "directoryId": "9228003",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "unsupported",
+      "url": "https://www.caijesi.it/?p=10617",
+      "kind": "html",
+      "template": "html-calendar",
+      "extractor": "deterministic",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": "50bc2046caadca764fc46f11abba2c00aa80b6870f7c99b002f059c8c8e9f81f",
+      "updatedAt": "2026-10-19T18:24:35.762Z",
+      "documents": [
+        {
+          "url": "https://www.caijesi.it/?p=10617",
+          "hash": "370b2d1c3682b9ed65e293ba11b8bd88f733c37f526cda0bd8af62ad76b99aad",
+          "events": 1,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://www.caijesi.it/?p=10587",
+          "hash": "e18d7233eef3d9b34d3dbca04f7fb6068d365590d8c4cc3a14e824404fdf26a7",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caijesi.it/?p=10536",
+          "hash": "66231c9b756aaae0e6c711c2e33fc995da6ef5f5b9cace237940f25c8d61c318",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caijesi.it/?p=9045",
+          "hash": "cc2f28ea9a4bf9f86dfde3f2acc945d3b49fad6b911720d39700cb8707e8e6b9",
+          "events": 1,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://www.caijesi.it/?p=10555",
+          "hash": "2950a8d0c9f6bd0375f70ebcb4fe0fdd8bdfad5a90cdf1db9e95ad0e9f32195d",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caijesi.it/?cat=11",
+          "hash": "844dd9b6d2c51bc518e2ade374ac42597c4bedf6f1f732d44bf807068238e734",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caijesi.it/?p=7746",
+          "hash": "598fbf947c85c31f65feac43a93601abd9ca2246abbcb5c58882a3a3e463ac1d",
+          "events": 1,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://www.caijesi.it/?p=10662",
+          "hash": "ccf38fb7da1411d095fb57233678197b4e78f881c1c560030e63439b87b435fa",
+          "events": 1,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://www.caijesi.it/",
+          "hash": "f0561bd3dbcd493969bfbaef56dcd5387e0818bed3e366860abc085d5386c422",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caijesi.it/?cat=15",
+          "hash": "c0dc0c0743ace9351a0feb91ddff38d15f3b1c03e42e6bc4ad34329f97321176",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caijesi.it/?page_id=6958",
+          "hash": "89193f880499790126f20441303f9ca6e6363ec78cb37f2f67cbd621defc86fa",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caijesi.it/?page_id=6970",
+          "hash": "3efa5140d66ffa4827b9984706734739f6664fd95b4c9938b02dca19abffd366",
+          "events": 0,
+          "method": null
+        }
+      ],
+      "methods": [
+        "html-calendar"
+      ],
+      "issues": [
+        {
+          "url": "https://www.caijesi.it/?p=10617",
+          "message": "Discovery budget reached; 70 candidate documents remain.",
+          "code": "discovery-limit"
+        }
+      ],
+      "extractedEvents": 4
+    },
+    {
+      "id": "cai-macerata-9228008",
+      "organizer": "CAI Macerata",
+      "region": "Marche",
+      "website": "https://caimacerata.com/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228008",
+      "calendarUrls": [
+        "https://caimacerata.com/programma-escursioni-e-cicloescursioni",
+        "https://drive.google.com/file/d/1Fx6wRM4szvK0rOFKRJ6v1VyR-ocskQkz/view?usp=sharing",
+        "https://caimc.cluster.sistema3.it/calendario-attivita/19-settembre-2026-percorso-olivi-monumentali-rosciola-colli-esini",
+        "https://caimc.cluster.sistema3.it/calendario-attivita/12-13-settembre-2026-valmarecchia-bikepacking",
+        "https://caimc.cluster.sistema3.it/calendario-attivita/8-agosto-2026-una-serata-magica-sui-sibillini-apertura-della-baita-f-lli-cioci",
+        "https://caimc.cluster.sistema3.it/calendario-attivita/25-luglio-2026-monte-cacamillo-direttissima-dalla-costa-dei-frati",
+        "https://caimc.cluster.sistema3.it/calendario-attivita/01-02-agosto-2026-tendata-al-pnalm",
+        "https://caimc.cluster.sistema3.it/calendario-attivita/11-luglio-tramonto-in-vetta-cima-del-redentore"
+      ],
+      "directoryId": "9228008",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "partial",
+      "url": "https://caimacerata.com/programma-escursioni-e-cicloescursioni",
+      "kind": "html",
+      "template": "html-calendar",
+      "extractor": "deterministic",
+      "enabled": true,
+      "excursions": 4,
+      "error": null,
+      "hash": "7b62a2ffaecc2d3f0e1bbf9c288bbc3546de23bf1136ee75b85dbce9dfc268e3",
+      "updatedAt": "2026-10-19T18:24:35.762Z",
+      "documents": [
+        {
+          "url": "https://caimacerata.com/programma-escursioni-e-cicloescursioni",
+          "hash": "f7afde483f537bd27f93198351c5de2df4589e018b34da3377dfba3309986334",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://drive.google.com/file/d/1Fx6wRM4szvK0rOFKRJ6v1VyR-ocskQkz/view?usp=sharing",
+          "hash": "eeafc1fa7b05cdb3fb4cdd41eb1d920702a54fcd537d2522a696e726e09b2e96",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://caimacerata.com/calendario-attivita/19-settembre-2026-percorso-olivi-monumentali-rosciola-colli-esini",
+          "hash": "c91a82a9244c78fd903166b9fe50a89a89279ae1442844a2e73d6259bfc1d638",
+          "events": 1,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://caimacerata.com/calendario-attivita/12-13-settembre-2026-valmarecchia-bikepacking",
+          "hash": "80f940837ee33ba9254c83971ba755291fcaace28d2d21c6b5561490a6f0d701",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://caimacerata.com/calendario-attivita/8-agosto-2026-una-serata-magica-sui-sibillini-apertura-della-baita-f-lli-cioci",
+          "hash": "c5d0a7708572c7dab87727fb1abe38953fd72bd0f07591fe3954803fbb479082",
+          "events": 1,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://caimacerata.com/calendario-attivita/25-luglio-2026-monte-cacamillo-direttissima-dalla-costa-dei-frati",
+          "hash": "de1fa5fb5f5a5fed58dbeb106a58cc41057b7fb1760df7f576f529d9a0c379e4",
+          "events": 1,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://caimacerata.com/calendario-attivita/01-02-agosto-2026-tendata-al-pnalm",
+          "hash": "838b1f647b4b72ec472f915d9d9d10e15c35249be02d3967058beff9ced194c0",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://caimacerata.com/calendario-attivita/11-luglio-tramonto-in-vetta-cima-del-redentore",
+          "hash": "b6beebcff49e56850f1484946d9af836fb0d30b82f2d77eb95c8ff7b890fb20e",
+          "events": 1,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://caimacerata.com/",
+          "hash": "adc337dcd9d229703703c9e5dcb9f4776097266efd029d21d4b7612b1e6979c9",
+          "events": 33,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://caimacerata.com/calendario-attivita",
+          "hash": "dfaa3a65addcbfb0808c4e9b2225af7b897869fe2b08d0e80ed93a377ee14b4b",
+          "events": 52,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://caimacerata.com/calendario-corsi",
+          "hash": "bcf48fadb66c73ad02e03cfc53cb621b592cbbc9a26efb98673bd6cc40f37be5",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://caimacerata.com/escursionismo-cicloescursionismo",
+          "hash": "65c1fc81c16d13e021797958478a0c157ad2aa91107a016f0acfa08618778fe2",
+          "events": 0,
+          "method": null
+        }
+      ],
+      "methods": [
+        "html-calendar"
+      ],
+      "issues": [
+        {
+          "url": "https://caimacerata.com/programma-escursioni-e-cicloescursioni",
+          "message": "Discovery budget reached; 2 candidate documents remain.",
+          "code": "discovery-limit"
+        }
+      ],
+      "extractedEvents": 89
+    },
+    {
+      "id": "cai-montefeltro-9228015",
+      "organizer": "CAI Montefeltro",
+      "region": "Marche",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228015",
+      "calendarUrls": [],
+      "directoryId": "9228015",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "disabled",
+      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228015",
+      "kind": "discover",
+      "template": "calendar-discovery",
+      "extractor": "deterministic",
+      "enabled": false,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-montefortino-9128002",
+      "organizer": "CAI Montefortino",
+      "region": "Marche",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228004",
+      "calendarUrls": [],
+      "directoryId": "9128002",
+      "sectionType": "subsection",
+      "parentSectionId": "cai-fermo-9228004",
+      "status": "disabled",
+      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9128002",
+      "kind": "discover",
+      "template": "calendar-discovery",
+      "extractor": "deterministic",
+      "enabled": false,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-pesaro-9228006",
+      "organizer": "CAI Pesaro",
+      "region": "Marche",
+      "website": "https://caipesaro.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228006",
+      "calendarUrls": [],
+      "directoryId": "9228006",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "failed",
+      "url": "http://www.caipesaro.it/",
+      "kind": "html",
+      "template": "html-calendar",
+      "extractor": "deterministic",
+      "enabled": true,
+      "excursions": 0,
+      "error": "Redirected request failed: Blocked redirect outside official HTTPS host caipesaro.it",
+      "hash": "e504aa0df4d756fa9025774832c1cfa61f83a13bd94285913df6972215bf76db",
+      "updatedAt": "2026-10-23T06:55:19.925Z",
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-potenza-picena-9228014",
+      "organizer": "CAI Potenza Picena",
+      "region": "Marche",
+      "website": "https://www.caipotenzapicena.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228014",
+      "calendarUrls": [
+        "https://www.caipotenzapicena.it/attivita2026",
+        "https://www.escursionicai.it/",
+        "https://www.caipotenzapicena.it/attivita-temp",
+        "https://areariservata.escursionicai.it/login",
+        "https://www.escursionicai.it/download-locandina/1716",
+        "https://www.escursionicai.it/download-locandina/2058",
+        "https://www.escursionicai.it/download-locandina/2182",
+        "https://www.escursionicai.it/download-locandina/1643"
+      ],
+      "directoryId": "9228014",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "partial",
+      "url": "https://www.caipotenzapicena.it/attivita2026",
+      "kind": "html",
+      "template": "html-calendar",
+      "extractor": "deterministic",
+      "enabled": true,
+      "excursions": 1,
+      "error": null,
+      "hash": "53fb61d39684d531cfd2779ecba7609a3daa0cd45a2a0435b43d50dfc105f3c3",
+      "updatedAt": "2026-10-22T22:17:34.055Z",
+      "documents": [
+        {
+          "url": "https://www.caipotenzapicena.it/attivita-temp",
+          "hash": "410c8d0f4dba157c141e7a56029ad32fd7ff9852dd217395895b637d14a4b96d",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.escursionicai.it/",
+          "hash": "cf0c1015fee839cf43e1e4f7988a043889ac68947b57e371854dcff0a456b033",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://areariservata.escursionicai.it/login",
+          "hash": "265fcefca5ee4b8940939d5b5627a500663329d312ecd76f75757333e5073bed",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.escursionicai.it/download-locandina/1716",
+          "hash": "2647a4e8de8bce14641bdf3bd14272184ac114a14d167bcd41e0e253d44c89f2",
+          "events": 0,
+          "method": "pdf-ocr"
+        },
+        {
+          "url": "https://www.escursionicai.it/download-locandina/2058",
+          "hash": "473f6b1ab7c2d8e20df61147eb3bb8037c724e09fcf0bbc240abf997bf08125e",
+          "events": 1,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.escursionicai.it/download-locandina/2182",
+          "hash": "958a5ad0b46c96801cb30dd85bb010a95db4b32f021016043844d52e6cbf2994",
+          "events": 0,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.escursionicai.it/download-locandina/1643",
+          "hash": "70e9eb11119b58068842ff8f4f94f5985c747ec91a5ef6f5a8d4f663546e7f43",
+          "events": 0,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caipotenzapicena.it/",
+          "hash": "69b24c674789003fb9f9e9d701bf74f08d4fbc436cd48b0c046e25569f69c1e2",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.escursionicai.it/download-locandina/2221",
+          "hash": "bb5891077966347a823c0911cbf135c00cc928691bff2e5e836530f087751c45",
+          "events": 0,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.escursionicai.it/download-locandina/2183",
+          "hash": "9db405d3c6991bdcfc66124a5be961168244cee89e8ee7e50e2648d10b46325f",
+          "events": 0,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://www.escursionicai.it/download-locandina/2203",
+          "hash": "8ed5931a0660da22f5d724014f2f0ea3caab838b3c31b46d86a2b4e78e819a99",
+          "events": 1,
+          "method": "pdf-text"
+        }
+      ],
+      "methods": [
+        "pdf-ocr",
+        "pdf-text"
+      ],
+      "issues": [
+        {
+          "url": "https://www.caipotenzapicena.it/attivita2026",
+          "message": "Discovery budget reached; 11 candidate documents remain.",
+          "code": "discovery-limit"
+        }
+      ],
+      "extractedEvents": 2
+    },
+    {
+      "id": "cai-s-benedetto-del-tronto-9228013",
+      "organizer": "CAI S.benedetto Del Tronto",
+      "region": "Marche",
+      "website": "https://www.caisanbenedettodeltronto.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228013",
+      "calendarUrls": [
+        "https://caisanbenedettodeltronto.it/site/wp-content/uploads/2025/12/programma2026_web.pdf",
+        "https://caisanbenedettodeltronto.it/site/programma-annuale/",
+        "https://twitter.com/intent/tweet?text=Check%20out%20this%20article:%20Programma%202026%20-%20https://caisanbenedettodeltronto.it/site/programma-annuale/",
+        "https://pinterest.com/pin/create/button/?url=https://caisanbenedettodeltronto.it/site/programma-annuale/&media=&description=Programma%202026",
+        "https://caisanbenedettodeltronto.it/site/calendario-escursionistico-regionale/",
+        "https://caisanbenedettodeltronto.it/site/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcaisanbenedettodeltronto.it%2Fsite%2Fprogramma-annuale%2F",
+        "https://caisanbenedettodeltronto.it/site/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcaisanbenedettodeltronto.it%2Fsite%2Fprogramma-annuale%2F&format=xml",
+        "https://plus.google.com/share?url=https://caisanbenedettodeltronto.it/site/programma-annuale/"
+      ],
+      "directoryId": "9228013",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "unsupported",
+      "url": "https://caisanbenedettodeltronto.it/site/wp-content/uploads/2025/12/programma2026_web.pdf",
+      "kind": "pdf",
+      "template": "pdf-programma",
+      "extractor": "deterministic",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": "ba0f71af0d71942f61545f0118eb04688122181061274a90fee74bb2f0d2ed73",
+      "updatedAt": "2026-10-19T18:24:35.762Z",
+      "documents": [
+        {
+          "url": "https://caisanbenedettodeltronto.it/site/wp-content/uploads/2025/12/programma2026_web.pdf",
+          "hash": "0ac2432b7f82446283da1a1a499dec66baa0ecc92e1c762b39e7cd5acf5ee0d5",
+          "events": 0,
+          "method": "pdf-text"
+        },
+        {
+          "url": "https://caisanbenedettodeltronto.it/site/programma-annuale/",
+          "hash": "76ae11fcc286b76f0895cd3ec5a65b7f1b47a44a5b881df8236e78b49fe3f5a8",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://caisanbenedettodeltronto.it/site/calendario-escursionistico-regionale/",
+          "hash": "6bb52b9ff8f42a21e2b36faad98d6abe3b6295ca27254deee10c51ba7ec300ec",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://caisanbenedettodeltronto.it/site/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcaisanbenedettodeltronto.it%2Fsite%2Fprogramma-annuale%2F",
+          "hash": "bf1be38cb5408da6a252a0bf4f3221c91d4c4db9d4bd2d2d8f038d1cfd9a3154",
+          "events": 0,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://caisanbenedettodeltronto.it/site/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcaisanbenedettodeltronto.it%2Fsite%2Fprogramma-annuale%2F&format=xml",
+          "hash": "64c8b6827fdcc1462c67f683d31c9f82b25f2e1d353df351d67d876742caf68b",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://caisanbenedettodeltronto.it/site/",
+          "hash": "aa525c7384ac306c8f790dfffee69e527e0810516d12464afbcf5e9c103198df",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://caisanbenedettodeltronto.it/site/dal-7-aprile-al-10-maggio-2026-7-corso-di-escursionismo-base-e1/",
+          "hash": "7496387ae6dc9dc8d3b6b4b2ad3097b0393708949386777fb26125790a3abdb5",
+          "events": 4,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://caisanbenedettodeltronto.it/site/domenica-19-luglio-2026-9-escursione-in-ricordo-di-padre-alfredo-lanello-del-banditello/",
+          "hash": "3b968009abbe7f0d336f8562998d8051a64a1a9ca8155be212908e3945a86a4a",
+          "events": 3,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://caisanbenedettodeltronto.it/site/dal-7-aprile-al-10-maggio-2026-7-corso-di-escursionismo-base-e1/?replytocom=3824",
+          "hash": "f7b1721a3e1de16c5b54262291b2a446235d03c277fa320efc646919927dd54d",
+          "events": 7,
+          "method": "html-calendar"
+        }
+      ],
+      "methods": [
+        "pdf-text",
+        "wordpress-events",
+        "html-calendar"
+      ],
+      "issues": [
+        {
+          "url": "https://twitter.com/intent/tweet?text=Check%20out%20this%20article:%20Programma%202026%20-%20https://caisanbenedettodeltronto.it/site/programma-annuale/",
+          "message": "Failed to establish tunnel to twitter.com:443 via http://proxy:8080: HTTP/1.1 403 Forbidden"
+        },
+        {
+          "url": "https://pinterest.com/pin/create/button/?url=https://caisanbenedettodeltronto.it/site/programma-annuale/&media=&description=Programma%202026",
+          "message": "Failed to establish tunnel to pinterest.com:443 via http://proxy:8080: HTTP/1.1 403 Forbidden"
+        },
+        {
+          "url": "https://plus.google.com/share?url=https://caisanbenedettodeltronto.it/site/programma-annuale/",
+          "message": "Failed to establish tunnel to plus.google.com:443 via http://proxy:8080: HTTP/1.1 403 Forbidden"
+        },
+        {
+          "url": "https://caisanbenedettodeltronto.it/site/wp-content/uploads/2025/12/programma2026_web.pdf",
+          "message": "Discovery budget reached; 38 candidate documents remain.",
+          "code": "discovery-limit"
+        }
+      ],
+      "extractedEvents": 14
+    },
+    {
+      "id": "cai-s-severino-marche-9228009",
+      "organizer": "CAI S.severino Marche",
+      "region": "Marche",
+      "website": null,
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228009",
+      "calendarUrls": [],
+      "directoryId": "9228009",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "disabled",
+      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228009",
+      "kind": "discover",
+      "template": "calendar-discovery",
+      "extractor": "deterministic",
+      "enabled": false,
+      "excursions": 0,
+      "error": null,
+      "hash": null,
+      "updatedAt": null,
+      "documents": [],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": null
+    },
+    {
+      "id": "cai-sarnano-9228011",
+      "organizer": "CAI Sarnano",
+      "region": "Marche",
+      "website": "https://caisarnano.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228011",
+      "calendarUrls": [],
+      "directoryId": "9228011",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "unsupported",
+      "url": "https://www.caisarnano.it/",
+      "kind": "html",
+      "template": "html-calendar",
+      "extractor": "deterministic",
+      "enabled": true,
+      "excursions": 0,
+      "error": null,
+      "hash": "264ad7dbab73f46423d80471781087f4c866ffb5fe73b74f78d70e0085c74a88",
+      "updatedAt": "2026-10-19T18:24:35.762Z",
+      "documents": [
+        {
+          "url": "https://www.caisarnano.it/",
+          "hash": "0c54c336b1dbdb434bed771546f9b2ffdf461b47ac89efff5ab9a7669918317f",
+          "events": 0,
+          "method": null
+        }
+      ],
+      "methods": [],
+      "issues": [],
+      "extractedEvents": 0
+    },
+    {
+      "id": "cai-senigallia-9228012",
+      "organizer": "CAI Senigallia",
+      "region": "Marche",
+      "website": "https://www.caisenigallia.it/",
+      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228012",
+      "calendarUrls": [
+        "https://www.caisenigallia.it/calendario-eventi/?ical=1",
+        "https://www.caisenigallia.it/calendario-eventi/mese/?ical=1",
+        "https://www.caisenigallia.it/?post_type=tribe_events&ical=1&eventDisplay=list",
+        "https://www.caisenigallia.it/calendario-2026/",
+        "https://www.caisenigallia.it/calendario-2026/feed/",
+        "https://www.caisenigallia.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F",
+        "https://www.caisenigallia.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F&format=xml",
+        "https://twitter.com/intent/tweet?text=Calendario+2026+-+Club+Alpino+Italiano+-+Sezione+di+Senigallia.+https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F"
+      ],
+      "directoryId": "9228012",
+      "sectionType": "section",
+      "parentSectionId": null,
+      "status": "partial",
+      "url": "https://www.caisenigallia.it/calendario-eventi/?ical=1",
+      "kind": "ics",
+      "template": "icalendar",
+      "extractor": "deterministic",
+      "enabled": true,
+      "excursions": 9,
+      "error": null,
+      "hash": "44c781df89842b09c02308f2f528bcfc45df1a845b5620681a3d15c5fb0ec039",
+      "updatedAt": "2026-10-19T18:24:35.762Z",
+      "documents": [
+        {
+          "url": "https://www.caisenigallia.it/calendario-eventi/?ical=1",
+          "hash": "a4ea18992ebc5d070bd1c60ec044ce0d9e834c58dab20024dc8d21fd6fe688e3",
+          "events": 2,
+          "method": "ics"
+        },
+        {
+          "url": "https://www.caisenigallia.it/calendario-eventi/mese/?ical=1",
+          "hash": "34ba27a982534493cc88afd6907765d161cfeb8868aaee136a3b036c474c1c43",
+          "events": 2,
+          "method": "ics"
+        },
+        {
+          "url": "https://www.caisenigallia.it/?post_type=tribe_events&ical=1&eventDisplay=list",
+          "hash": "4d04ee8754c5bbf2d36683f2e6282bbd527ad813453e2e99ec60b404db21f36c",
+          "events": 3,
+          "method": "ics"
+        },
+        {
+          "url": "https://www.caisenigallia.it/calendario-2026/",
+          "hash": "88e5116dd29c2e79a1620adf226da692ca1018a9619acc24a853ae27368dd821",
+          "events": 3,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://www.caisenigallia.it/calendario-2026/feed/",
+          "hash": "08a09f12a54b74c8af7d72f88b6c859593811fc5ce0a086be840087b66decfcc",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caisenigallia.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F",
+          "hash": "04885261316146a265106311885ef9a816065ac92fc99d656d67cc71d7c3cdb5",
+          "events": 0,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://www.caisenigallia.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F&format=xml",
+          "hash": "910aa0877af04cb44d55d782308e5fa35accd2a5bcf3a5c34a0a5edd113abae8",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caisenigallia.it/",
+          "hash": "b68c61a113437c3b2f7b8c2b9e05ec2e6a868f26a7c1c0a329f06ea2b9850f86",
+          "events": 0,
+          "method": null
+        },
+        {
+          "url": "https://www.caisenigallia.it/wp-json/tribe/events/v1/events?start_date=2026-10-01&per_page=100",
+          "hash": "5601c780c41bbcbf26051ef9860319cd3d0e8f48832866aae884550edbd99469",
+          "events": 8,
+          "method": "wordpress-events"
+        },
+        {
+          "url": "https://www.caisenigallia.it/calendario-eventi/",
+          "hash": "72d767c2106f4c5b889c5a7cffb8f8150e9044907a5ca18d52f68bfd100c82e6",
+          "events": 10,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://www.caisenigallia.it/calendario-eventi/mese/?outlook-ical=1",
+          "hash": "1947b6b614018c74d872486081d97b6ead8e3bb9be3b1b6b660fe34357d0f51e",
+          "events": 2,
+          "method": "ics"
+        }
+      ],
+      "methods": [
+        "ics",
+        "html-calendar",
+        "wordpress-events"
+      ],
+      "issues": [
+        {
+          "url": "https://twitter.com/intent/tweet?text=Calendario+2026+-+Club+Alpino+Italiano+-+Sezione+di+Senigallia.+https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F",
+          "message": "Failed to establish tunnel to twitter.com:443 via http://proxy:8080: HTTP/1.1 403 Forbidden"
+        },
+        {
+          "url": "https://www.caisenigallia.it/calendario-eventi/?ical=1",
+          "message": "Discovery budget reached; 27 candidate documents remain.",
+          "code": "discovery-limit"
+        }
+      ],
+      "extractedEvents": 30
+    },
+    {
       "id": "cai-abbiategrasso-9216049",
       "organizer": "CAI Abbiategrasso",
       "region": "Lombardia",
@@ -35997,1171 +37155,6 @@
       "methods": [],
       "issues": [],
       "extractedEvents": null
-    },
-    {
-      "id": "cai-amandola-9228010",
-      "organizer": "CAI Amandola",
-      "region": "Marche",
-      "website": "https://www.caiamandola.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228010",
-      "calendarUrls": [],
-      "directoryId": "9228010",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "unsupported",
-      "url": "https://www.caiamandola.it/",
-      "kind": "html",
-      "template": "html-calendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 0,
-      "error": null,
-      "hash": "40e8c24e7c8bda5b1fe31b1dad29c09ae2efcbd8d33cc0b8c3fffbe4ee6d6a38",
-      "updatedAt": "2026-10-19T18:24:35.762Z",
-      "documents": [
-        {
-          "url": "https://www.caiamandola.it/",
-          "hash": "643bb9450401287bcad59e1725cb2e19cbd8e2ba24495f78be78ba14a81fa07e",
-          "events": 0,
-          "method": null
-        }
-      ],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": 0
-    },
-    {
-      "id": "cai-ancona-9228001",
-      "organizer": "CAI Ancona",
-      "region": "Marche",
-      "website": "https://www.caiancona.org/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228001",
-      "calendarUrls": [
-        "https://www.caiancona.org/news/calendario-regionale-cai-marche",
-        "https://www.caiancona.org/eventi/escursionismo/20261001lu",
-        "https://www.caiancona.org/eventi/corsi/",
-        "https://www.caiancona.org/eventi/",
-        "https://www.caiancona.org/eventi/alpinismo/",
-        "https://www.caiancona.org/eventi/alpinismo-giovanile/",
-        "https://www.caiancona.org/eventi/arrampicata-libera/",
-        "https://www.caiancona.org/eventi/ciclo-escursionismo/"
-      ],
-      "directoryId": "9228001",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "unsupported",
-      "url": "https://www.caiancona.org/news/calendario-regionale-cai-marche",
-      "kind": "html",
-      "template": "html-calendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 0,
-      "error": null,
-      "hash": "d391dd4dd88da9d5180a2627c6fe789eb16544695c03bd1aea409c8c79d15671",
-      "updatedAt": "2026-10-19T18:24:35.762Z",
-      "documents": [
-        {
-          "url": "https://www.caiancona.org/news/calendario-regionale-cai-marche",
-          "hash": "f41805b30d4a44cacd9ed4e060539f8a49e9aea2e271cc5924ec241d61a216d7",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caiancona.org/eventi/corsi/",
-          "hash": "09218a10afc703d3f45f80532d09e05f5fc9202b2a1ea8a6d57439217b9121b2",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caiancona.org/eventi/",
-          "hash": "f53f1af3f6f7c639b1186d68a0575936571d831f754d9f2c866f6c5a5d7c5570",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caiancona.org/eventi/alpinismo/",
-          "hash": "4dc5b9a76ccc2329fe6d73ea04654a5fe89d18e9a0d3df2f8d86ebe6c341ee91",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caiancona.org/eventi/alpinismo-giovanile/",
-          "hash": "a8e600b96e6a2df7ad0cc354dfc88b7f0cdf1b6146182698a71be7ba2d646e58",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caiancona.org/eventi/arrampicata-libera/",
-          "hash": "0110947817efd9c169b12cfd63752cc99f3a94bd75abd7455c24b43f22d02daa",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caiancona.org/eventi/ciclo-escursionismo/",
-          "hash": "c118f9727c479baacde2cb20bb1189229e6c7aaea267db61693dd3d69bcdff76",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caiancona.org/",
-          "hash": "1857b86b881461a6bf507efb888e47ff43e661a59917568b279d8d02ffb8cc3b",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caiancona.org/eventi/corsi/261022fi",
-          "hash": "fe769bd38d9e2341800d9dcd1a0616f4d9fd25b89f25c9c52a6389387c5d3011",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caiancona.org/eventi/corsi/261022fi-2",
-          "hash": "b5b09d797e0daaee3c3bbbd7036ec5d6a7862a8f6e560d376ff4e4e51a8a4305",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caiancona.org/eventi/corsi/261022fi-3",
-          "hash": "bc7a289644315ed9daa7b58f94560f6d61e8dea699136937285fbc588817b206",
-          "events": 0,
-          "method": null
-        }
-      ],
-      "methods": [],
-      "issues": [
-        {
-          "url": "https://www.caiancona.org/eventi/escursionismo/20261001lu",
-          "message": "Request failed with status code 404"
-        },
-        {
-          "url": "https://www.caiancona.org/news/calendario-regionale-cai-marche",
-          "message": "Discovery budget reached; 51 candidate documents remain.",
-          "code": "discovery-limit"
-        }
-      ],
-      "extractedEvents": 0
-    },
-    {
-      "id": "cai-ascoli-piceno-9228002",
-      "organizer": "CAI Ascoli Piceno",
-      "region": "Marche",
-      "website": "https://www.caiascoli.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228002",
-      "calendarUrls": [
-        "http://www.caiascoli.it/download/programma-2026.pdf",
-        "https://www.caiascoli.it/programma-2026/",
-        "https://www.caiascoli.it/programma-2026/feed/",
-        "https://www.caiascoli.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caiascoli.it%2Fprogramma-2026%2F",
-        "https://www.caiascoli.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caiascoli.it%2Fprogramma-2026%2F&format=xml",
-        "https://www.caiascoli.it/corso-e1-2026/",
-        "https://www.caiascoli.it/commissione-escursionismo/",
-        "https://www.caiascoli.it/slow-bike/"
-      ],
-      "directoryId": "9228002",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "ok",
-      "url": "http://www.caiascoli.it/download/programma-2026.pdf",
-      "kind": "pdf",
-      "template": "pdf-programma",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 9,
-      "error": null,
-      "hash": "1309e2d22d5418d52762533478ad3ce6949a522c7dd6db958bdbd6300d192b24",
-      "updatedAt": "2026-10-19T18:24:35.762Z",
-      "documents": [
-        {
-          "url": "http://www.caiascoli.it/download/programma-2026.pdf",
-          "hash": "a7e6e1118f87f464f07f307c2f64eb64169aae442b6eeb3f5306fe6f101aa0e2",
-          "events": 42,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caiascoli.it/programma-2026/",
-          "hash": "e61b5fc62f78510fd064cefcafed150fc1f36f544b8dfd966b87640661579fe1",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caiascoli.it/programma-2026/feed/",
-          "hash": "ed4276c09bd12fbe0c5fd645e3848dd63a8dbf7515a4a582ff4ff27340fcd12e",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caiascoli.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caiascoli.it%2Fprogramma-2026%2F",
-          "hash": "97d999c51e227eb1e5a10a613a72f91f5c1e723e08e82e31fed1dd50d79a0157",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://www.caiascoli.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caiascoli.it%2Fprogramma-2026%2F&format=xml",
-          "hash": "06ec40a2e9167e82d39abe43a4fae348becf3d02a09d6804c526505f9936706e",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caiascoli.it/corso-e1-2026/",
-          "hash": "2dceaab15444a913fbd04f5a26db164bdbdbda99152286547ed71a440896c523",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caiascoli.it/commissione-escursionismo/",
-          "hash": "91d9f0f09738f93c1445c5e10c42eae76faea56b2d367a7198b4f57253aaaae0",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caiascoli.it/slow-bike/",
-          "hash": "7cacdbd9d09c5fa98fd728328409427bb8a818395b08768634b1bd28dca5676c",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caiascoli.it/",
-          "hash": "d33dbecb18ef708de4af29a9f01255736aa656ffb8dd349dcda40d78473da657",
-          "events": 0,
-          "method": null
-        }
-      ],
-      "methods": [
-        "pdf-text",
-        "wordpress-events"
-      ],
-      "issues": [],
-      "extractedEvents": 42
-    },
-    {
-      "id": "cai-camerino-9228005",
-      "organizer": "CAI Camerino",
-      "region": "Marche",
-      "website": "https://organizzazione.cai.it/sez-camerino/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228005",
-      "calendarUrls": [
-        "https://organizzazione.cai.it/sez-camerino/eventi/?ical=1",
-        "https://organizzazione.cai.it/sez-camerino/attivita/programma-escursionistico-2024/",
-        "https://organizzazione.cai.it/sez-camerino/attivita/programma-2023/",
-        "https://organizzazione.cai.it/sez-camerino/escursioni/",
-        "https://organizzazione.cai.it/sez-camerino/attivita/",
-        "https://organizzazione.cai.it/sez-camerino/attivita/archivio-programmi/"
-      ],
-      "directoryId": "9228005",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "ok",
-      "url": "https://organizzazione.cai.it/sez-camerino/eventi/?ical=1",
-      "kind": "ics",
-      "template": "icalendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 1,
-      "error": null,
-      "hash": "c03240b002c0afb9011c40256b91434b3d800f8f235a35067a3f5ef73ba40f54",
-      "updatedAt": "2026-10-19T18:24:35.762Z",
-      "documents": [
-        {
-          "url": "https://organizzazione.cai.it/sez-camerino/eventi/?ical=1",
-          "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-camerino/attivita/programma-escursionistico-2024/",
-          "hash": "917473d9341549c4eea9791cca51a610fee6a7a5d615caa9263bc9060c3d413c",
-          "events": 9,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-camerino/attivita/programma-2023/",
-          "hash": "21ec86dc015631b99977f40333c212e3630acf54457c9e120744456b72242c20",
-          "events": 2,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-camerino/escursioni/",
-          "hash": "45ea7b6227531740501b88490bdb8881d2d09cc265b8b69cc922d486a5581708",
-          "events": 3,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-camerino/attivita/",
-          "hash": "134c7b94969419dcf7c3abd6eb1b11bf5873fdb7628ca1d391e5bf1f938d1709",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-camerino/attivita/archivio-programmi/",
-          "hash": "3379f35b4caccc12a87143b6bc266bbe41c49794bd57b3b30e770c07bcfd16bd",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/sez-camerino/",
-          "hash": "d26679e264ad333f4fee6dc30ab90495267ee3e3d47cf997e925db1bf073644e",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-10-01&per_page=100",
-          "hash": "768b6652c33982dd7f10fadde2f101ca0fc6bd309343e69f9ff846c9ff98150c",
-          "events": 0,
-          "method": "wordpress-events"
-        }
-      ],
-      "methods": [
-        "html-calendar",
-        "wordpress-events"
-      ],
-      "issues": [],
-      "extractedEvents": 14
-    },
-    {
-      "id": "cai-fabriano-9228007",
-      "organizer": "CAI Fabriano",
-      "region": "Marche",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228007",
-      "calendarUrls": [],
-      "directoryId": "9228007",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228007",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
-      "id": "cai-fermo-9228004",
-      "organizer": "CAI Fermo",
-      "region": "Marche",
-      "website": "https://www.caifermo.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228004",
-      "calendarUrls": [
-        "https://www.caifermo.it/wp-content/uploads/2026/01/CAI-FERMO-PROGRAMMA-2026.pdf",
-        "https://www.caifermo.it/calendario-attivita-2026-cai-fermo/",
-        "https://www.caifermo.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caifermo.it%2Fcalendario-attivita-2026-cai-fermo%2F",
-        "https://www.caifermo.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caifermo.it%2Fcalendario-attivita-2026-cai-fermo%2F&format=xml",
-        "https://www.caifermo.it/wp-content/uploads/2026/01/Escursionismo.pdf",
-        "https://www.caifermo.it/escursionismo/",
-        "https://www.caifermo.it/ciclo-escursionismo/",
-        "https://www.caifermo.it/escursionismo-3/"
-      ],
-      "directoryId": "9228004",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "partial",
-      "url": "https://www.caifermo.it/wp-content/uploads/2026/01/CAI-FERMO-PROGRAMMA-2026.pdf",
-      "kind": "pdf",
-      "template": "pdf-programma",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 11,
-      "error": null,
-      "hash": "e8e464427f2cfec34b0f17402b8f50634b4c7c37053c6e72749dcdc04c699d52",
-      "updatedAt": "2026-10-19T18:24:35.762Z",
-      "documents": [
-        {
-          "url": "https://www.caifermo.it/wp-content/uploads/2026/01/CAI-FERMO-PROGRAMMA-2026.pdf",
-          "hash": "4753c32f12e75f785c25ac8512f3c99f5e4a485fa1811ed59e426f6ee075db39",
-          "events": 33,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caifermo.it/calendario-attivita-2026-cai-fermo/",
-          "hash": "cb4a04699337932e83820ba4c34037ba4050f54193083bc005c619e94f2cd17c",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caifermo.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caifermo.it%2Fcalendario-attivita-2026-cai-fermo%2F",
-          "hash": "8400536ef6870e18a2bf2560b4f3145b3a918a01363477dd7ab104f631be208b",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://www.caifermo.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caifermo.it%2Fcalendario-attivita-2026-cai-fermo%2F&format=xml",
-          "hash": "d8571262d0238b323b990cc2db1e6aaa9eb89501700844e89f84aad5a081b5aa",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caifermo.it/wp-content/uploads/2026/01/Escursionismo.pdf",
-          "hash": "6044aba3333e1811b9b23e382ee8acdeedeb78c6d1c6a8e51e7a356e0f22440c",
-          "events": 3,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caifermo.it/escursionismo/",
-          "hash": "1990f8cf5c46231c4587fbc9295f3fbd80c60330833c2e76e0643330277525e8",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caifermo.it/ciclo-escursionismo/",
-          "hash": "bad28d8b74ebf023a6a83f3c6c34c18ac8f920e8d3c1570544d18d7b60a1c885",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caifermo.it/escursionismo-3/",
-          "hash": "34fe4f16bdc37378c1df98b941f3fe398adcfdcd73c3de1b467e18ae7b4963d7",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caifermo.it/",
-          "hash": "90c26e079ac3b90f821e32b2b4d1e06a80d759fda0ceee1239b4373ea8ea8f34",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caifermo.it/wp-content/uploads/2026/01/ciclo-escursionismo.pdf",
-          "hash": "653e63556f706c50fdf962dd15aa3ea4b5c870d963209bbb16ad7faea87e4a94",
-          "events": 4,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caifermo.it/7-corso-di-escursionismo-avanzato-e2/",
-          "hash": "439a27cff2987574cd0fac3f2fcc16a3b4850905c21fd6ec99b9fd470e51dc55",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caifermo.it/2-corso-specialistico-tecnico-per-lescursionismo-avanzato/",
-          "hash": "6273425cc7132c52f564d4fcbad4c87087fe45fb5874f463a6a06319a3294159",
-          "events": 0,
-          "method": null
-        }
-      ],
-      "methods": [
-        "pdf-text",
-        "wordpress-events"
-      ],
-      "issues": [
-        {
-          "url": "https://www.caifermo.it/wp-content/uploads/2026/01/CAI-FERMO-PROGRAMMA-2026.pdf",
-          "message": "Discovery budget reached; 8 candidate documents remain.",
-          "code": "discovery-limit"
-        }
-      ],
-      "extractedEvents": 40
-    },
-    {
-      "id": "cai-jesi-9228003",
-      "organizer": "CAI Jesi",
-      "region": "Marche",
-      "website": "https://www.caijesi.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228003",
-      "calendarUrls": [
-        "https://www.caijesi.it/?p=10617",
-        "https://www.caijesi.it/?p=10587",
-        "https://www.caijesi.it/?p=10536",
-        "https://www.caijesi.it/?p=9045",
-        "https://www.caijesi.it/?p=10555",
-        "https://www.caijesi.it/?cat=11",
-        "https://www.caijesi.it/?p=7746",
-        "https://www.caijesi.it/?p=10662"
-      ],
-      "directoryId": "9228003",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "unsupported",
-      "url": "https://www.caijesi.it/?p=10617",
-      "kind": "html",
-      "template": "html-calendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 0,
-      "error": null,
-      "hash": "50bc2046caadca764fc46f11abba2c00aa80b6870f7c99b002f059c8c8e9f81f",
-      "updatedAt": "2026-10-19T18:24:35.762Z",
-      "documents": [
-        {
-          "url": "https://www.caijesi.it/?p=10617",
-          "hash": "370b2d1c3682b9ed65e293ba11b8bd88f733c37f526cda0bd8af62ad76b99aad",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://www.caijesi.it/?p=10587",
-          "hash": "e18d7233eef3d9b34d3dbca04f7fb6068d365590d8c4cc3a14e824404fdf26a7",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caijesi.it/?p=10536",
-          "hash": "66231c9b756aaae0e6c711c2e33fc995da6ef5f5b9cace237940f25c8d61c318",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caijesi.it/?p=9045",
-          "hash": "cc2f28ea9a4bf9f86dfde3f2acc945d3b49fad6b911720d39700cb8707e8e6b9",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://www.caijesi.it/?p=10555",
-          "hash": "2950a8d0c9f6bd0375f70ebcb4fe0fdd8bdfad5a90cdf1db9e95ad0e9f32195d",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caijesi.it/?cat=11",
-          "hash": "844dd9b6d2c51bc518e2ade374ac42597c4bedf6f1f732d44bf807068238e734",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caijesi.it/?p=7746",
-          "hash": "598fbf947c85c31f65feac43a93601abd9ca2246abbcb5c58882a3a3e463ac1d",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://www.caijesi.it/?p=10662",
-          "hash": "ccf38fb7da1411d095fb57233678197b4e78f881c1c560030e63439b87b435fa",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://www.caijesi.it/",
-          "hash": "f0561bd3dbcd493969bfbaef56dcd5387e0818bed3e366860abc085d5386c422",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caijesi.it/?cat=15",
-          "hash": "c0dc0c0743ace9351a0feb91ddff38d15f3b1c03e42e6bc4ad34329f97321176",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caijesi.it/?page_id=6958",
-          "hash": "89193f880499790126f20441303f9ca6e6363ec78cb37f2f67cbd621defc86fa",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caijesi.it/?page_id=6970",
-          "hash": "3efa5140d66ffa4827b9984706734739f6664fd95b4c9938b02dca19abffd366",
-          "events": 0,
-          "method": null
-        }
-      ],
-      "methods": [
-        "html-calendar"
-      ],
-      "issues": [
-        {
-          "url": "https://www.caijesi.it/?p=10617",
-          "message": "Discovery budget reached; 70 candidate documents remain.",
-          "code": "discovery-limit"
-        }
-      ],
-      "extractedEvents": 4
-    },
-    {
-      "id": "cai-macerata-9228008",
-      "organizer": "CAI Macerata",
-      "region": "Marche",
-      "website": "https://caimacerata.com/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228008",
-      "calendarUrls": [
-        "https://caimacerata.com/programma-escursioni-e-cicloescursioni",
-        "https://drive.google.com/file/d/1Fx6wRM4szvK0rOFKRJ6v1VyR-ocskQkz/view?usp=sharing",
-        "https://caimc.cluster.sistema3.it/calendario-attivita/19-settembre-2026-percorso-olivi-monumentali-rosciola-colli-esini",
-        "https://caimc.cluster.sistema3.it/calendario-attivita/12-13-settembre-2026-valmarecchia-bikepacking",
-        "https://caimc.cluster.sistema3.it/calendario-attivita/8-agosto-2026-una-serata-magica-sui-sibillini-apertura-della-baita-f-lli-cioci",
-        "https://caimc.cluster.sistema3.it/calendario-attivita/25-luglio-2026-monte-cacamillo-direttissima-dalla-costa-dei-frati",
-        "https://caimc.cluster.sistema3.it/calendario-attivita/01-02-agosto-2026-tendata-al-pnalm",
-        "https://caimc.cluster.sistema3.it/calendario-attivita/11-luglio-tramonto-in-vetta-cima-del-redentore"
-      ],
-      "directoryId": "9228008",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "partial",
-      "url": "https://caimacerata.com/programma-escursioni-e-cicloescursioni",
-      "kind": "html",
-      "template": "html-calendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 4,
-      "error": null,
-      "hash": "7b62a2ffaecc2d3f0e1bbf9c288bbc3546de23bf1136ee75b85dbce9dfc268e3",
-      "updatedAt": "2026-10-19T18:24:35.762Z",
-      "documents": [
-        {
-          "url": "https://caimacerata.com/programma-escursioni-e-cicloescursioni",
-          "hash": "f7afde483f537bd27f93198351c5de2df4589e018b34da3377dfba3309986334",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://drive.google.com/file/d/1Fx6wRM4szvK0rOFKRJ6v1VyR-ocskQkz/view?usp=sharing",
-          "hash": "eeafc1fa7b05cdb3fb4cdd41eb1d920702a54fcd537d2522a696e726e09b2e96",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://caimacerata.com/calendario-attivita/19-settembre-2026-percorso-olivi-monumentali-rosciola-colli-esini",
-          "hash": "c91a82a9244c78fd903166b9fe50a89a89279ae1442844a2e73d6259bfc1d638",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://caimacerata.com/calendario-attivita/12-13-settembre-2026-valmarecchia-bikepacking",
-          "hash": "80f940837ee33ba9254c83971ba755291fcaace28d2d21c6b5561490a6f0d701",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://caimacerata.com/calendario-attivita/8-agosto-2026-una-serata-magica-sui-sibillini-apertura-della-baita-f-lli-cioci",
-          "hash": "c5d0a7708572c7dab87727fb1abe38953fd72bd0f07591fe3954803fbb479082",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://caimacerata.com/calendario-attivita/25-luglio-2026-monte-cacamillo-direttissima-dalla-costa-dei-frati",
-          "hash": "de1fa5fb5f5a5fed58dbeb106a58cc41057b7fb1760df7f576f529d9a0c379e4",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://caimacerata.com/calendario-attivita/01-02-agosto-2026-tendata-al-pnalm",
-          "hash": "838b1f647b4b72ec472f915d9d9d10e15c35249be02d3967058beff9ced194c0",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://caimacerata.com/calendario-attivita/11-luglio-tramonto-in-vetta-cima-del-redentore",
-          "hash": "b6beebcff49e56850f1484946d9af836fb0d30b82f2d77eb95c8ff7b890fb20e",
-          "events": 1,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://caimacerata.com/",
-          "hash": "adc337dcd9d229703703c9e5dcb9f4776097266efd029d21d4b7612b1e6979c9",
-          "events": 33,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://caimacerata.com/calendario-attivita",
-          "hash": "dfaa3a65addcbfb0808c4e9b2225af7b897869fe2b08d0e80ed93a377ee14b4b",
-          "events": 52,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://caimacerata.com/calendario-corsi",
-          "hash": "bcf48fadb66c73ad02e03cfc53cb621b592cbbc9a26efb98673bd6cc40f37be5",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://caimacerata.com/escursionismo-cicloescursionismo",
-          "hash": "65c1fc81c16d13e021797958478a0c157ad2aa91107a016f0acfa08618778fe2",
-          "events": 0,
-          "method": null
-        }
-      ],
-      "methods": [
-        "html-calendar"
-      ],
-      "issues": [
-        {
-          "url": "https://caimacerata.com/programma-escursioni-e-cicloescursioni",
-          "message": "Discovery budget reached; 2 candidate documents remain.",
-          "code": "discovery-limit"
-        }
-      ],
-      "extractedEvents": 89
-    },
-    {
-      "id": "cai-montefeltro-9228015",
-      "organizer": "CAI Montefeltro",
-      "region": "Marche",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228015",
-      "calendarUrls": [],
-      "directoryId": "9228015",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228015",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
-      "id": "cai-montefortino-9128002",
-      "organizer": "CAI Montefortino",
-      "region": "Marche",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228004",
-      "calendarUrls": [],
-      "directoryId": "9128002",
-      "sectionType": "subsection",
-      "parentSectionId": "cai-fermo-9228004",
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9128002",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
-      "id": "cai-pesaro-9228006",
-      "organizer": "CAI Pesaro",
-      "region": "Marche",
-      "website": "http://www.caipesaro.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228006",
-      "calendarUrls": [],
-      "directoryId": "9228006",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "unsupported",
-      "url": "http://www.caipesaro.it/",
-      "kind": "html",
-      "template": "html-calendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 0,
-      "error": null,
-      "hash": "e504aa0df4d756fa9025774832c1cfa61f83a13bd94285913df6972215bf76db",
-      "updatedAt": "2026-10-19T18:24:35.762Z",
-      "documents": [
-        {
-          "url": "http://www.caipesaro.it/",
-          "hash": "10d0ae34ff9a919419c514cd2c0fb1cf13aab83d5876d9bbd78b6aa3a97b9df0",
-          "events": 0,
-          "method": null
-        }
-      ],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": 0
-    },
-    {
-      "id": "cai-potenza-picena-9228014",
-      "organizer": "CAI Potenza Picena",
-      "region": "Marche",
-      "website": "https://www.caipotenzapicena.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228014",
-      "calendarUrls": [
-        "https://www.caipotenzapicena.it/attivita2026",
-        "https://www.escursionicai.it/",
-        "https://www.caipotenzapicena.it/attivita-temp",
-        "https://areariservata.escursionicai.it/login",
-        "https://www.escursionicai.it/download-locandina/1716",
-        "https://www.escursionicai.it/download-locandina/2058",
-        "https://www.escursionicai.it/download-locandina/2182",
-        "https://www.escursionicai.it/download-locandina/1643"
-      ],
-      "directoryId": "9228014",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "partial",
-      "url": "https://www.caipotenzapicena.it/attivita2026",
-      "kind": "html",
-      "template": "html-calendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 1,
-      "error": null,
-      "hash": "53fb61d39684d531cfd2779ecba7609a3daa0cd45a2a0435b43d50dfc105f3c3",
-      "updatedAt": "2026-10-22T22:17:34.055Z",
-      "documents": [
-        {
-          "url": "https://www.caipotenzapicena.it/attivita-temp",
-          "hash": "410c8d0f4dba157c141e7a56029ad32fd7ff9852dd217395895b637d14a4b96d",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.escursionicai.it/",
-          "hash": "cf0c1015fee839cf43e1e4f7988a043889ac68947b57e371854dcff0a456b033",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://areariservata.escursionicai.it/login",
-          "hash": "265fcefca5ee4b8940939d5b5627a500663329d312ecd76f75757333e5073bed",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.escursionicai.it/download-locandina/1716",
-          "hash": "2647a4e8de8bce14641bdf3bd14272184ac114a14d167bcd41e0e253d44c89f2",
-          "events": 0,
-          "method": "pdf-ocr"
-        },
-        {
-          "url": "https://www.escursionicai.it/download-locandina/2058",
-          "hash": "473f6b1ab7c2d8e20df61147eb3bb8037c724e09fcf0bbc240abf997bf08125e",
-          "events": 1,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.escursionicai.it/download-locandina/2182",
-          "hash": "958a5ad0b46c96801cb30dd85bb010a95db4b32f021016043844d52e6cbf2994",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.escursionicai.it/download-locandina/1643",
-          "hash": "70e9eb11119b58068842ff8f4f94f5985c747ec91a5ef6f5a8d4f663546e7f43",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.caipotenzapicena.it/",
-          "hash": "69b24c674789003fb9f9e9d701bf74f08d4fbc436cd48b0c046e25569f69c1e2",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.escursionicai.it/download-locandina/2221",
-          "hash": "bb5891077966347a823c0911cbf135c00cc928691bff2e5e836530f087751c45",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.escursionicai.it/download-locandina/2183",
-          "hash": "9db405d3c6991bdcfc66124a5be961168244cee89e8ee7e50e2648d10b46325f",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://www.escursionicai.it/download-locandina/2203",
-          "hash": "8ed5931a0660da22f5d724014f2f0ea3caab838b3c31b46d86a2b4e78e819a99",
-          "events": 1,
-          "method": "pdf-text"
-        }
-      ],
-      "methods": [
-        "pdf-ocr",
-        "pdf-text"
-      ],
-      "issues": [
-        {
-          "url": "https://www.caipotenzapicena.it/attivita2026",
-          "message": "Discovery budget reached; 11 candidate documents remain.",
-          "code": "discovery-limit"
-        }
-      ],
-      "extractedEvents": 2
-    },
-    {
-      "id": "cai-s-benedetto-del-tronto-9228013",
-      "organizer": "CAI S.benedetto Del Tronto",
-      "region": "Marche",
-      "website": "https://caisanbenedettodeltronto.it/site/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228013",
-      "calendarUrls": [
-        "https://caisanbenedettodeltronto.it/site/wp-content/uploads/2025/12/programma2026_web.pdf",
-        "https://caisanbenedettodeltronto.it/site/programma-annuale/",
-        "https://twitter.com/intent/tweet?text=Check%20out%20this%20article:%20Programma%202026%20-%20https://caisanbenedettodeltronto.it/site/programma-annuale/",
-        "https://pinterest.com/pin/create/button/?url=https://caisanbenedettodeltronto.it/site/programma-annuale/&media=&description=Programma%202026",
-        "https://caisanbenedettodeltronto.it/site/calendario-escursionistico-regionale/",
-        "https://caisanbenedettodeltronto.it/site/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcaisanbenedettodeltronto.it%2Fsite%2Fprogramma-annuale%2F",
-        "https://caisanbenedettodeltronto.it/site/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcaisanbenedettodeltronto.it%2Fsite%2Fprogramma-annuale%2F&format=xml",
-        "https://plus.google.com/share?url=https://caisanbenedettodeltronto.it/site/programma-annuale/"
-      ],
-      "directoryId": "9228013",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "unsupported",
-      "url": "https://caisanbenedettodeltronto.it/site/wp-content/uploads/2025/12/programma2026_web.pdf",
-      "kind": "pdf",
-      "template": "pdf-programma",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 0,
-      "error": null,
-      "hash": "ba0f71af0d71942f61545f0118eb04688122181061274a90fee74bb2f0d2ed73",
-      "updatedAt": "2026-10-19T18:24:35.762Z",
-      "documents": [
-        {
-          "url": "https://caisanbenedettodeltronto.it/site/wp-content/uploads/2025/12/programma2026_web.pdf",
-          "hash": "0ac2432b7f82446283da1a1a499dec66baa0ecc92e1c762b39e7cd5acf5ee0d5",
-          "events": 0,
-          "method": "pdf-text"
-        },
-        {
-          "url": "https://caisanbenedettodeltronto.it/site/programma-annuale/",
-          "hash": "76ae11fcc286b76f0895cd3ec5a65b7f1b47a44a5b881df8236e78b49fe3f5a8",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://caisanbenedettodeltronto.it/site/calendario-escursionistico-regionale/",
-          "hash": "6bb52b9ff8f42a21e2b36faad98d6abe3b6295ca27254deee10c51ba7ec300ec",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://caisanbenedettodeltronto.it/site/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcaisanbenedettodeltronto.it%2Fsite%2Fprogramma-annuale%2F",
-          "hash": "bf1be38cb5408da6a252a0bf4f3221c91d4c4db9d4bd2d2d8f038d1cfd9a3154",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://caisanbenedettodeltronto.it/site/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcaisanbenedettodeltronto.it%2Fsite%2Fprogramma-annuale%2F&format=xml",
-          "hash": "64c8b6827fdcc1462c67f683d31c9f82b25f2e1d353df351d67d876742caf68b",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://caisanbenedettodeltronto.it/site/",
-          "hash": "aa525c7384ac306c8f790dfffee69e527e0810516d12464afbcf5e9c103198df",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://caisanbenedettodeltronto.it/site/dal-7-aprile-al-10-maggio-2026-7-corso-di-escursionismo-base-e1/",
-          "hash": "7496387ae6dc9dc8d3b6b4b2ad3097b0393708949386777fb26125790a3abdb5",
-          "events": 4,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://caisanbenedettodeltronto.it/site/domenica-19-luglio-2026-9-escursione-in-ricordo-di-padre-alfredo-lanello-del-banditello/",
-          "hash": "3b968009abbe7f0d336f8562998d8051a64a1a9ca8155be212908e3945a86a4a",
-          "events": 3,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://caisanbenedettodeltronto.it/site/dal-7-aprile-al-10-maggio-2026-7-corso-di-escursionismo-base-e1/?replytocom=3824",
-          "hash": "f7b1721a3e1de16c5b54262291b2a446235d03c277fa320efc646919927dd54d",
-          "events": 7,
-          "method": "html-calendar"
-        }
-      ],
-      "methods": [
-        "pdf-text",
-        "wordpress-events",
-        "html-calendar"
-      ],
-      "issues": [
-        {
-          "url": "https://twitter.com/intent/tweet?text=Check%20out%20this%20article:%20Programma%202026%20-%20https://caisanbenedettodeltronto.it/site/programma-annuale/",
-          "message": "Failed to establish tunnel to twitter.com:443 via http://proxy:8080: HTTP/1.1 403 Forbidden"
-        },
-        {
-          "url": "https://pinterest.com/pin/create/button/?url=https://caisanbenedettodeltronto.it/site/programma-annuale/&media=&description=Programma%202026",
-          "message": "Failed to establish tunnel to pinterest.com:443 via http://proxy:8080: HTTP/1.1 403 Forbidden"
-        },
-        {
-          "url": "https://plus.google.com/share?url=https://caisanbenedettodeltronto.it/site/programma-annuale/",
-          "message": "Failed to establish tunnel to plus.google.com:443 via http://proxy:8080: HTTP/1.1 403 Forbidden"
-        },
-        {
-          "url": "https://caisanbenedettodeltronto.it/site/wp-content/uploads/2025/12/programma2026_web.pdf",
-          "message": "Discovery budget reached; 38 candidate documents remain.",
-          "code": "discovery-limit"
-        }
-      ],
-      "extractedEvents": 14
-    },
-    {
-      "id": "cai-s-severino-marche-9228009",
-      "organizer": "CAI S.severino Marche",
-      "region": "Marche",
-      "website": null,
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228009",
-      "calendarUrls": [],
-      "directoryId": "9228009",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "disabled",
-      "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228009",
-      "kind": "discover",
-      "template": "calendar-discovery",
-      "extractor": "deterministic",
-      "enabled": false,
-      "excursions": 0,
-      "error": null,
-      "hash": null,
-      "updatedAt": null,
-      "documents": [],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": null
-    },
-    {
-      "id": "cai-sarnano-9228011",
-      "organizer": "CAI Sarnano",
-      "region": "Marche",
-      "website": "https://www.caisarnano.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228011",
-      "calendarUrls": [],
-      "directoryId": "9228011",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "unsupported",
-      "url": "https://www.caisarnano.it/",
-      "kind": "html",
-      "template": "html-calendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 0,
-      "error": null,
-      "hash": "264ad7dbab73f46423d80471781087f4c866ffb5fe73b74f78d70e0085c74a88",
-      "updatedAt": "2026-10-19T18:24:35.762Z",
-      "documents": [
-        {
-          "url": "https://www.caisarnano.it/",
-          "hash": "0c54c336b1dbdb434bed771546f9b2ffdf461b47ac89efff5ab9a7669918317f",
-          "events": 0,
-          "method": null
-        }
-      ],
-      "methods": [],
-      "issues": [],
-      "extractedEvents": 0
-    },
-    {
-      "id": "cai-senigallia-9228012",
-      "organizer": "CAI Senigallia",
-      "region": "Marche",
-      "website": "https://www.caisenigallia.it/",
-      "directoryUrl": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9228012",
-      "calendarUrls": [
-        "https://www.caisenigallia.it/calendario-eventi/?ical=1",
-        "https://www.caisenigallia.it/calendario-eventi/mese/?ical=1",
-        "https://www.caisenigallia.it/?post_type=tribe_events&ical=1&eventDisplay=list",
-        "https://www.caisenigallia.it/calendario-2026/",
-        "https://www.caisenigallia.it/calendario-2026/feed/",
-        "https://www.caisenigallia.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F",
-        "https://www.caisenigallia.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F&format=xml",
-        "https://twitter.com/intent/tweet?text=Calendario+2026+-+Club+Alpino+Italiano+-+Sezione+di+Senigallia.+https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F"
-      ],
-      "directoryId": "9228012",
-      "sectionType": "section",
-      "parentSectionId": null,
-      "status": "partial",
-      "url": "https://www.caisenigallia.it/calendario-eventi/?ical=1",
-      "kind": "ics",
-      "template": "icalendar",
-      "extractor": "deterministic",
-      "enabled": true,
-      "excursions": 9,
-      "error": null,
-      "hash": "44c781df89842b09c02308f2f528bcfc45df1a845b5620681a3d15c5fb0ec039",
-      "updatedAt": "2026-10-19T18:24:35.762Z",
-      "documents": [
-        {
-          "url": "https://www.caisenigallia.it/calendario-eventi/?ical=1",
-          "hash": "a4ea18992ebc5d070bd1c60ec044ce0d9e834c58dab20024dc8d21fd6fe688e3",
-          "events": 2,
-          "method": "ics"
-        },
-        {
-          "url": "https://www.caisenigallia.it/calendario-eventi/mese/?ical=1",
-          "hash": "34ba27a982534493cc88afd6907765d161cfeb8868aaee136a3b036c474c1c43",
-          "events": 2,
-          "method": "ics"
-        },
-        {
-          "url": "https://www.caisenigallia.it/?post_type=tribe_events&ical=1&eventDisplay=list",
-          "hash": "4d04ee8754c5bbf2d36683f2e6282bbd527ad813453e2e99ec60b404db21f36c",
-          "events": 3,
-          "method": "ics"
-        },
-        {
-          "url": "https://www.caisenigallia.it/calendario-2026/",
-          "hash": "88e5116dd29c2e79a1620adf226da692ca1018a9619acc24a853ae27368dd821",
-          "events": 3,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://www.caisenigallia.it/calendario-2026/feed/",
-          "hash": "08a09f12a54b74c8af7d72f88b6c859593811fc5ce0a086be840087b66decfcc",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caisenigallia.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F",
-          "hash": "04885261316146a265106311885ef9a816065ac92fc99d656d67cc71d7c3cdb5",
-          "events": 0,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://www.caisenigallia.it/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F&format=xml",
-          "hash": "910aa0877af04cb44d55d782308e5fa35accd2a5bcf3a5c34a0a5edd113abae8",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caisenigallia.it/",
-          "hash": "b68c61a113437c3b2f7b8c2b9e05ec2e6a868f26a7c1c0a329f06ea2b9850f86",
-          "events": 0,
-          "method": null
-        },
-        {
-          "url": "https://www.caisenigallia.it/wp-json/tribe/events/v1/events?start_date=2026-10-01&per_page=100",
-          "hash": "5601c780c41bbcbf26051ef9860319cd3d0e8f48832866aae884550edbd99469",
-          "events": 8,
-          "method": "wordpress-events"
-        },
-        {
-          "url": "https://www.caisenigallia.it/calendario-eventi/",
-          "hash": "72d767c2106f4c5b889c5a7cffb8f8150e9044907a5ca18d52f68bfd100c82e6",
-          "events": 10,
-          "method": "html-calendar"
-        },
-        {
-          "url": "https://www.caisenigallia.it/calendario-eventi/mese/?outlook-ical=1",
-          "hash": "1947b6b614018c74d872486081d97b6ead8e3bb9be3b1b6b660fe34357d0f51e",
-          "events": 2,
-          "method": "ics"
-        }
-      ],
-      "methods": [
-        "ics",
-        "html-calendar",
-        "wordpress-events"
-      ],
-      "issues": [
-        {
-          "url": "https://twitter.com/intent/tweet?text=Calendario+2026+-+Club+Alpino+Italiano+-+Sezione+di+Senigallia.+https%3A%2F%2Fwww.caisenigallia.it%2Fcalendario-2026%2F",
-          "message": "Failed to establish tunnel to twitter.com:443 via http://proxy:8080: HTTP/1.1 403 Forbidden"
-        },
-        {
-          "url": "https://www.caisenigallia.it/calendario-eventi/?ical=1",
-          "message": "Discovery budget reached; 27 candidate documents remain.",
-          "code": "discovery-limit"
-        }
-      ],
-      "extractedEvents": 30
     },
     {
       "id": "cai-boiano-9136001",

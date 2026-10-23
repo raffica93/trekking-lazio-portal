@@ -1,11 +1,16 @@
 # Avanzamento regionale CAI
 
-## Ripresa Lombardia → Marche — directory e selezione fonte (23 ottobre 2026)
+## Marche — refresh directory e campione Pesaro (23 ottobre 2026)
 
-Il refresh directory Marche `cai-20261023-marche-directory-refresh01` è completato: 528 elementi ufficiali letti, 15 parent e 15 endpoint subsection, zero failure; 837 record e ID invariati, 0 add/remove/ambiguity/out-of-region; solo i website di Pesaro, S. Benedetto e Sarnano sono cambiati. SHA mirror `992e32565ed65031f95873b7dd83fc82b8feba66daa4aebd59cfe6ea277d6100`; report `523384f0adf6d6d62d1394190d33df72d7e71ccad4630a11a68bb1bb901a5ac1`; manifest `37b05fc642176c8ccb89323042e56a8f72c407462f8858114e2745e9e1de8c1a`. Importer PASS; test backend 214/214 senza cambiare i sei JSON pubblici. Nessun fetch calendario o DB.
+Il refresh directory `cai-20261023-marche-directory-refresh01` ha letto 528 elementi ufficiali (15 parent e 15 risposte subsection), senza failure. Registry: 837 record e ID invariati, 0 aggiunte/rimozioni/ambiguità/out-of-region; tre sole modifiche website per Pesaro, S. Benedetto e Sarnano. Hash mirror registry `992e32565ed65031f95873b7dd83fc82b8feba66daa4aebd59cfe6ea277d6100`; importer PASS e backend `npm test` 214/214 sul checkpoint directory.
 
-Preflight delle tre homepage: San Benedetto ha solo calendario/PDF già in documents e failure già registrati; Pesaro e Sarnano sono website officiali senza calendarUrls/evidence. Selezionata la sola homepage Pesaro `https://caipesaro.it/` per discovery limitata, una fonte e un documento/120s/concurrency1, dopo checkpoint. Stato raccolta: 0 eventi; duplicati: 0; database: 0. La selezione non attesta presenza di calendario, e il run non è ancora partito.
+Campione `cai-20261023-marche-pesaro-homepage01`, fonte `cai-pesaro-9228006`, URL seed ufficiale `https://caipesaro.it/`. Perimetro dichiarato: una URL, max1 documento, 120s, concurrency1. Il run è `partial`; il redirect è stato bloccato prima di salvare body o dettaglio della risposta. HTTP status, final URL/destinazione e body assenti; non è attestabile il numero di richieste nella catena. Zero eventi estratti/verificati non prova che il calendario sia vuoto. Nessun duplicato o fallimento risolto; resta aperto un blocco redirect/host. Nessun import o query DB.
 
+| Run / fonte | Sezioni controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---:|---:|---:|---|---|
+| `cai-20261023-marche-pesaro-homepage01` / Pesaro | 1 source, 1 URL seed | 0 | 1 | 0 attestati | 0 (pagina non acquisita) | 0 | 0 | redirect fuori host bloccato; risposta HTTP non registrata | checkpoint report/file; documentare destinazione ufficiale, poi rivalutare un singolo sample; non chiamare il calendario vuoto |
+
+Catalogo eventi prima/dopo: 3.376 ID unici, +0/-0/modificati 0; SHA backend/frontend `10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7`. Registry backend/frontend SHA `992e32565ed65031f95873b7dd83fc82b8feba66daa4aebd59cfe6ea277d6100`; status mirror SHA `831ae8755a5bcaa4941d4a90a0b2414b61e9b859c9da206a936169b02d29d8f8`. QA importer PASS per integrità e delta; HOLD perché manifest/report non attestano status HTTP, final URL o body. Backend test 214/214 dopo la raccolta. I totali regionali storici nella tabella seguente restano lo snapshot del 20 ottobre, non una query corrente.
 
 ## Ultimo checkpoint operativo — 23 ottobre 2026
 

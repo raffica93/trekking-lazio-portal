@@ -1,21 +1,21 @@
 # Passaggio operativo CAI — raccolta e delivery regionale
 
-## Ripresa corrente — selezione campione Pesaro dopo il refresh Marche (23 ottobre 2026)
+## Ripresa corrente — campione homepage CAI Pesaro (23 ottobre 2026)
 
-Il checkpoint directory è pubblicato e verificato a `82eb9a4fcd7e131712e8531078453c3c632a8eb7`; QA importer PASS e backend `npm test` 214/214, sei hash JSON pubblici stabili. Nessun DB, merge, deploy o cron.
-
-Il run `cai-20261023-marche-directory-refresh01` ha aggiornato dal CAI ufficiale tre soli campi website Marche, senza toccare calendario/eventi. Il successivo preflight offline conferma: San Benedetto ha URL/PDF già letti; Pesaro e Sarnano hanno homepage ufficiali aggiornate, `calendarUrls`/evidence vuote. Nessun URL calendario nuovo è attestato. Per progredire senza ripetere fonti, è selezionata soltanto la homepage ufficiale di Pesaro `https://caipesaro.it/` come campione di discovery: `cai-pesaro-9228006`, host exact presente nel registry aggiornato e consentito dal runtime, diverso dalla homepage legacy in status. Non si presuppone che la pagina contenga un calendario.
+Il run `cai-20261023-marche-pesaro-homepage01` è terminato sulla sola URL seed ufficiale `https://caipesaro.it/`, con limite max1 documento/120s/concurrency1. Il collector segnala `collection=partial`, `files=ready`, `database=pending`: il redirect è stato bloccato dal controllo di host prima che il body fosse conservato. HTTP status, destinazione/final URL e body non sono persistiti; il conteggio delle richieste nella catena redirect non è attestabile. Non è prova che il calendario sia vuoto. Lo status conserva il vecchio `url=http://www.caipesaro.it/`; non inferire che sia la destinazione del redirect.
 
 | Fase | Stato | Prova/limite |
 |---|---|---|
-| Raccolta directory Marche | completata | 15 parent + 15 risposte, 0 failure; output SHA `992e3256…7d6100` |
-| Verifica file | PASS importer | 837 ID, 0 add/remove, 3 website-only changes |
-| Checkpoint | remoto | `82eb9a4fcd7e131712e8531078453c3c632a8eb7` |
-| Raccolta eventi Pesaro | selezione checkpoint da pubblicare | una homepage ufficiale, max1 doc/120s/concurrency1; nessun fetch ancora |
-| Database | non avviato | nessun evento candidato né scrittura |
+| Directory Marche | completata e checkpointata | `cai-20261023-marche-directory-refresh01`; 837 ID invariati; tre soli website aggiornati; commit `82eb9a4` |
+| Campione Pesaro — raccolta | `partial`; 0 eventi | URL seed singola e budget limitato; redirect bloccato, dettagli HTTP/body assenti |
+| File | manifest/state presenti; catalogo invariato | importer PASS su integrità/hash; HOLD sull’evidenza della richiesta; report `collection-report.md` SHA-256 `cdc520f565e9c9bc2a23e927156848d1dc77feb61c788c45cfc524505c3796e9` |
+| Test | PASS | backend `npm test` 214/214 dopo la raccolta; catalogo/registry mirrors invariati |
+| Commit/push | da completare | nessuna scrittura DB |
+| Database | non avviato | 0 delta, nessuna query/import/receipt |
 
-Dopo il checkpoint della selezione, il collector eseguirà il run orchestrato `cai-20261023-marche-pesaro-homepage01` con la sola continuation URL `https://caipesaro.it/`. Se non emergono eventi datati o una fonte leggibile, il report resterà `partial`; 0 righe non prova calendario vuoto. Poi QA importer e test backend in sequenza; import DB solo per delta nuovo verificato e classificato.
+Gli artefatti sono in `backend/data/agent-runs/cai-20261023-marche-pesaro-homepage01/`; manifest SHA-256 `187a7954974ce8a9c38d9e513aa1a027fe790c94e943dd79ef58790515368933`, state SHA-256 `9703deff0e9dbda34557e43b0e6105203c138631827e653d51b5ed3f3d5125e4`. Lo status target registra Pesaro `failed`; S. Benedetto e Sarnano differiscono solo nei website già aggiornati dal refresh directory. I mirror `scrape-status.json` coincidono (SHA `831ae8755a5bcaa4941d4a90a0b2414b61e9b859c9da206a936169b02d29d8f8`), mentre `excursions.json` backend/frontend resta SHA `10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7`.
 
+Prossimo: checkpointare report, stato e run artifacts; poi identificare la destinazione con evidenza ufficiale e correggere il perimetro host prima di qualunque nuovo campione limitato. Finché non si legge correttamente un calendario/feed, Pesaro resta partial e non si importa nulla. Nessun merge, deploy o cron.
 
 ## Stato corrente — 23 ottobre 2026
 

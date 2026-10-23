@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "marche-pesaro-homepage-selected-checkpoint-pending",
+  "phase": "marche-pesaro-homepage-sample-partial-checkpoint-pending",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -887,12 +887,24 @@
     },
     {
       "id": "S124",
-      "status": "pending",
+      "status": "completed",
       "owner": "orchestrator",
-      "result": "Checkpointare la selezione del campione homepage Pesaro e verificare il branch remoto. Solo dopo, assegnare al collector il run orchestrato nuovo `cai-20261023-marche-pesaro-homepage01`, un documento/120s/concurrency1; non seguire link fuori dal budget. Nessuna scrittura DB senza delta file verificato."
+      "result": "Homepage Pesaro selection and exact single-source scope checkpointed remotely at 71c750075eaae6e661753a62325c0cea91f87cbb; sample collection completed under a new run."
+    },
+    {
+      "id": "S125",
+      "status": "completed",
+      "owner": "cai-collector + orchestrator",
+      "result": "Run cai-20261023-marche-pesaro-homepage01: one official URL seed https://caipesaro.it/, SCRAPE_MAX_DOCUMENTS=1, budget 120s, concurrency 1. Redirect rejected outside registered HTTPS host before body capture; HTTP status/final URL/body and redirect exchange count are not persisted. Collection partial, 0 extracted/verified events, 0 catalog delta; no DB."
+    },
+    {
+      "id": "S126",
+      "status": "completed",
+      "owner": "cai-importer + orchestrator",
+      "result": "Importer read-only QA PASS manifest/hash, mirror and catalog integrity; HOLD request evidence (no body/status/final URL). Backend npm test 214/214 after collection. No import/DB. Report committed as run artifact in pending checkpoint; report SHA-256 cdc520f565e9c9bc2a23e927156848d1dc77feb61c788c45cfc524505c3796e9."
     }
   ],
-  "nextAction": "Pubblicare la selezione della sola homepage ufficiale Pesaro. Dopo verifica remota, eseguire init/collect tramite orchestratore con `--source cai-pesaro-9228006 --source-url https://caipesaro.it/ --concurrency 1`, budget un documento/120s. La pagina è un target di discovery, non un calendario attestato; preservare status partial se non trova evidenza. Poi importer QA e npm test seriale.",
+  "nextAction": "Commit and push the Pesaro homepage sample report, run artifacts, scraper status mirrors, STATE/HANDOFF/REGIONS updates; verify the remote SHA. Then, read-only, establish the official redirect destination/host evidence before deciding whether to run one new bounded sample. No import or claim of empty calendar.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -928,7 +940,7 @@
       "tests": "backend npm test 206/206 after collection; six public JSON hashes unchanged"
     }
   },
-  "repositoryCommit": "8961db1d5c90baa94af336931bbcaca9e9ed2d2f",
+  "repositoryCommit": "71c750075eaae6e661753a62325c0cea91f87cbb",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -950,11 +962,11 @@
       "afterQueryAt": "2026-10-22T22:33:30.892756Z"
     }
   },
-  "tests": "After Sora iCal collection: backend npm test 206/206 serially; six public JSON hashes unchanged pre/post; backend/frontend mirrors identical.",
-  "updatedAt": "2026-10-23T06:39:19Z",
+  "tests": "After Pesaro homepage collection: backend npm test 214/214; checked excursions and registry backend/frontend mirrors remain byte-identical and unchanged from the run manifest; no test/catalog changes are present.",
+  "updatedAt": "2026-10-23T06:58:00Z",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T06:39:19Z",
-  "regionCurrent": "Lombardia: one newly listed source CAI Lovere was checked. Its WordPress Events API returned valid JSON with zero events for 2026-10-01 through 2028-10-23. This is a feed-level no-upcoming result, not a full regional audit. 229 directory entries; one checked this run.",
-  "regionNext": "Lombardia remains open. After the Lovere file checkpoint, inspect partial/open sources and exact official URLs offline, respect recorded cooldowns, and select one distinct bounded source; do not repeat completed sources.",
+  "regionCurrent": "Marche: directory refresh completed, then one CAI Pesaro homepage URL seed was sampled. Redirect was blocked before body capture; 1 source partial, 0 complete, 0 HTTP-unreachable attested, 0 events verified. This is not an empty-calendar result and not a regional audit.",
+  "regionNext": "Marche remains open. First checkpoint Pesaro artifacts; then establish the exact official redirect destination/allowed host from evidence. If the guard cannot be safely resolved, preserve partial status and continue only to another official, bounded source without repeating completed work.",
   "preflight": {
     "at": "2026-10-23T01:27:16Z",
     "sourceId": "cai-cesena-9224012",
@@ -1018,66 +1030,58 @@
     "independentImporterQa": "PASS file seals/catalog mirrors; HOLD import eligibility because corrected record is past/no catalog delta"
   },
   "lastRegionalAttempt": {
-    "runId": "cai-20261023-lazio-sora-ical01",
-    "region": "Lazio",
-    "sourceId": "sora",
-    "requestedUrl": "https://www.caisora.it/sito/events/?ical=1",
-    "collection": "partial source; this iCal feed itself was read correctly and is empty (VCALENDAR 2.0, 0 VEVENT); source overall still has open PDF/announcement issues",
-    "files": "manifest/state/source evidence/report/evidence manifest prepared; importer PASS feed/body/catalog; checkpoint pending",
-    "database": "no candidates; no classification/query/write",
-    "baselineCommit": "54f89ba2e57e5da2f24202be5cbcd4b55f52cc6e",
-    "runFolder": "backend/data/agent-runs/cai-20261023-lazio-sora-ical01",
-    "bodyContentType": "text/calendar; charset=UTF-8",
-    "bodyBytes": 271,
-    "bodySha256": "0346bed3656c05f04bea29859d384ae9f97a835cd7cac16082f98d3738977906",
-    "httpStatus": "not persisted",
-    "finalUrl": "not persisted",
-    "icalVersion": "2.0",
-    "icalMethod": "PUBLISH",
-    "calendarComponents": 1,
-    "eventComponents": 0,
-    "eventsExtracted": 0,
-    "eventsVerified": 0,
+    "runId": "cai-20261023-marche-pesaro-homepage01",
+    "region": "Marche",
+    "sourceId": "cai-pesaro-9228006",
+    "requestedUrl": "https://caipesaro.it/",
+    "collection": "partial; official-host redirect rejected before body capture; zero events is not evidence of empty calendar",
+    "files": "manifest/state/collection report and scraper status mirrors; importer integrity PASS, request evidence HOLD; remote checkpoint pending",
+    "database": "0 reads, migrations, writes, imports or receipts; no delta",
     "sectionsChecked": 1,
     "complete": 0,
     "partial": 1,
     "unreachable": 0,
+    "eventsVerified": 0,
+    "duplicatesExcluded": 0,
     "failuresResolved": 0,
     "failuresOpen": [
-      "annual PDF OCR failure",
-      "annual PDF discovery-limit 9",
-      "programme announcement discovery-limit 1"
+      "redirect guard blocked response; HTTP status, final URL and body unavailable"
     ],
-    "coordinatesAdded": 0,
-    "duplicatesExcluded": 0,
-    "collectorQa": "feed parsed and empty, no retry of linked PDF",
-    "importerQa": "PASS body/source/manifest/catalog; feed-level no-upcoming supported; section coverage HOLD",
-    "backendTests": "206/206; six public JSON hashes unchanged pre/post"
+    "catalogBefore": 3376,
+    "catalogAfter": 3376,
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "reportSha256": "cdc520f565e9c9bc2a23e927156848d1dc77feb61c788c45cfc524505c3796e9",
+    "backendTests": "214/214"
   },
   "regionalCoverage": {
-    "region": "Emilia-Romagna",
-    "scope": "bounded CAI Cesena source run; not regional completeness audit",
+    "region": "Marche",
+    "scope": "directory refresh plus one bounded Pesaro official-homepage discovery sample; not a regional completeness audit",
     "status": "open",
     "currentRunCounts": {
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
-      "eventsExtracted": 0,
       "eventsVerified": 0,
-      "newRawIds": 0,
-      "existingRowsCorroborated": 0,
-      "semanticDuplicatesExcluded": 0,
-      "dbPlacesInserted": 0,
-      "dbClassificationsInserted": 0,
-      "existingRowsChanged": 0,
+      "duplicatesExcluded": 0,
       "failuresResolved": 0,
-      "failuresOpen": 4,
-      "nextStep": "Checkpoint this held sample; offline preflight Friuli-Venezia Giulia. No DB delta and no event coverage is claimed."
+      "failuresOpen": 1,
+      "databasePlacesInserted": 0,
+      "databaseClassificationsInserted": 0,
+      "nextStep": "Publish file/report checkpoint, then establish redirect target from official evidence before any new bounded sample; do not treat zero extracted rows as an empty calendar."
+    },
+    "catalogDelta": {
+      "before": 3376,
+      "after": 3376,
+      "added": 0,
+      "removed": 0,
+      "modified": 0
     },
     "historicalSnapshot": {
       "asOf": "2026-10-20",
-      "note": "Historical only; not a current DB query."
+      "note": "Historical only; no current national or regional aggregate query was made."
     }
   },
   "deltaDeliveryHistory": [
@@ -1204,67 +1208,63 @@
     }
   ],
   "nextSourcePreflight": {
-    "region": "Lombardia",
-    "status": "offline preflight pending",
-    "scope": "remaining partial/open Lombardia sources only; no repeated completed sources and respect cooldown",
+    "region": "Marche",
+    "status": "redirect diagnosis pending after file checkpoint",
+    "scope": "read-only official evidence for Pesaro redirect and host policy; do not infer Location from legacy HTTP url; next request only after exact destination/host is confirmed",
     "networkFetchPerformed": false,
-    "previousSourceId": "cai-lovere-9216055",
-    "previousSourceStatus": "no-upcoming for valid WordPress API range; source task complete",
+    "previousSourceId": "cai-pesaro-9228006",
+    "previousSourceStatus": "partial; redirect blocked before response body; calendar presence unknown",
     "nextTarget": null
   },
   "currentRun": {
-    "runId": "cai-20261023-lombardia-lovere01",
-    "region": "Lombardia",
-    "sourceId": "cai-lovere-9216055",
-    "requestedUrl": "https://organizzazione.cai.it/sez-lovere/",
-    "collection": "selected source task done/no-upcoming; run-level collection partial because this run is bounded and not a national/regional audit",
-    "files": "ready; original manifest sealed and importer PASS; report/audit manifest prepared for checkpoint",
-    "database": "pending-no-delta; 0 DB reads/writes/imports",
-    "runFolder": "backend/data/agent-runs/cai-20261023-lombardia-lovere01",
-    "documentsRead": 3,
-    "documentHashes": [
-      "32356f88a834b518be1b40b255111d1955aadfff7a04fda793263e990f69131c",
-      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "0bc4aaa7d2d24c47f5f293ddd5679b59e47bf80446da287078dcc0ca878b867e"
-    ],
-    "eventsVerified": 0,
-    "selectedSourceStatus": "no-upcoming",
-    "validApiZeroResult": true,
-    "iCalEvidence": "empty body, HTML content-type; not relied upon",
+    "runId": "cai-20261023-marche-pesaro-homepage01",
+    "region": "Marche",
+    "sourceId": "cai-pesaro-9228006",
+    "requestedUrl": "https://caipesaro.it/",
+    "collection": "partial; redirect blocked by registered-host guard before response body capture; do not treat as an empty calendar",
+    "files": "manifest/state/status mirrors present; importer integrity PASS, request-evidence HOLD; report SHA-256 cdc520f565e9c9bc2a23e927156848d1dc77feb61c788c45cfc524505c3796e9; checkpoint pending",
+    "database": "pending-no-delta; no DB query, migration, write, import or receipt",
+    "runFolder": "backend/data/agent-runs/cai-20261023-marche-pesaro-homepage01",
+    "sourceUrlSeeds": 1,
+    "maxDocuments": 1,
+    "sourceBudgetMs": 120000,
+    "concurrency": 1,
+    "requestCount": "not independently attestable; redirect details were not persisted",
     "httpStatus": "not persisted",
     "finalUrl": "not persisted",
-    "sectionsChecked": 1,
-    "completeForParsedApiRange": 1,
-    "partial": 0,
-    "unreachable": 0,
+    "responseBody": "not persisted",
+    "eventsExtracted": 0,
+    "eventsVerified": 0,
     "duplicatesExcluded": 0,
     "failuresResolved": 0,
-    "failuresOpen": 0,
-    "evidenceGaps": [
-      "HTTP status and final URL were not persisted"
+    "failuresOpen": [
+      "official-host redirect rejected; response metadata/body absent"
     ],
-    "catalogBefore": 3376,
-    "catalogAfter": 3376,
+    "catalogRowsBefore": 3376,
+    "catalogRowsAfter": 3376,
     "uniqueIds": 3376,
     "added": 0,
     "removed": 0,
     "modified": 0,
     "backendExcursionsSha256": "10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7",
     "frontendExcursionsSha256": "10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7",
-    "backendStatusSha256": "4bfee84744d44a7ce91a5797fa7ebba00a08819be7cd491f99c91e3f21a2c8a7",
-    "tests": "backend npm test 214/214 after collection",
-    "reportSha256": "d06a418666e9125536684b4d1c6b2d199657e86ccfd1a628577e5b38b0eb7605",
-    "auditManifestSha256": "a487e5fefa9ede8794061883daae763e7d3e37436a0a94ac4ba030659973d127"
+    "backendRegistrySha256": "992e32565ed65031f95873b7dd83fc82b8feba66daa4aebd59cfe6ea277d6100",
+    "backendStatusSha256": "831ae8755a5bcaa4941d4a90a0b2414b61e9b859c9da206a936169b02d29d8f8",
+    "frontendStatusSha256": "831ae8755a5bcaa4941d4a90a0b2414b61e9b859c9da206a936169b02d29d8f8",
+    "manifestSha256": "187a7954974ce8a9c38d9e513aa1a027fe790c94e943dd79ef58790515368933",
+    "stateSha256": "9703deff0e9dbda34557e43b0e6105203c138631827e653d51b5ed3f3d5125e4",
+    "reportSha256": "cdc520f565e9c9bc2a23e927156848d1dc77feb61c788c45cfc524505c3796e9",
+    "importerQa": "PASS file/catalog integrity; HOLD HTTP request evidence",
+    "backendTests": "npm test 214/214 after collection; catalog/registry mirrors unchanged"
   },
   "latestRun": {
-    "runId": "cai-20261023-lombardia-lovere01",
-    "path": "backend/data/agent-runs/cai-20261023-lombardia-lovere01",
-    "collection": "partial (bounded source run)",
-    "files": "ready; files pass importer QA",
-    "database": "pending-no-delta",
-    "sourceId": "cai-lovere-9216055",
-    "sourceStatus": "no-upcoming for parsed API interval",
-    "documentsRead": 3,
+    "runId": "cai-20261023-marche-pesaro-homepage01",
+    "path": "backend/data/agent-runs/cai-20261023-marche-pesaro-homepage01",
+    "region": "Marche",
+    "sourceId": "cai-pesaro-9228006",
+    "collection": "partial; redirect blocked before body capture, no empty-calendar conclusion",
+    "files": "ready/integrity PASS; evidence HOLD; report SHA-256 cdc520f565e9c9bc2a23e927156848d1dc77feb61c788c45cfc524505c3796e9",
+    "database": "pending-no-delta; no DB read/write/import",
     "eventsExtracted": 0,
     "eventsVerified": 0,
     "catalogRowsBefore": 3376,
@@ -1273,9 +1273,10 @@
     "removed": 0,
     "modified": 0,
     "databaseTouched": false,
-    "reportSha256": "d06a418666e9125536684b4d1c6b2d199657e86ccfd1a628577e5b38b0eb7605",
-    "manifestSha256": "6d3ad42ea07a29dbed6c340468000ae63055d73f0b60f40969cab9a6ca477d41",
-    "tests": "214/214 after run"
+    "manifestSha256": "187a7954974ce8a9c38d9e513aa1a027fe790c94e943dd79ef58790515368933",
+    "stateSha256": "9703deff0e9dbda34557e43b0e6105203c138631827e653d51b5ed3f3d5125e4",
+    "importerQa": "PASS integrity; HOLD request evidence",
+    "tests": "backend npm test 214/214 after collection"
   },
   "proposedTarget": null,
   "directoryRefresh": {
