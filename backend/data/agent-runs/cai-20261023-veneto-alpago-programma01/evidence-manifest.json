@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261023-veneto-alpago-programma01",
+  "files": [
+    {
+      "path": "manifest.json",
+      "bytes": 563,
+      "sha256": "4b167038289f6ec79ff31566de291835cd90769c409dc586e0c8a4b506f5dd91"
+    },
+    {
+      "path": "state.json",
+      "bytes": 406355,
+      "sha256": "d3d8184d20ee5c86a7e968b645cab044950281340f226a28c203ebb00ee2c995"
+    },
+    {
+      "path": "source-evidence.json",
+      "bytes": 9197,
+      "sha256": "e3681f74b91ec4ddd93884f81d2da8f028af499455f66d88556ac5f2d7f83856"
+    },
+    {
+      "path": "collection-report.md",
+      "bytes": 4844,
+      "sha256": "b57ec4667bb1794b6a95ea1c8b7bd98a360656cfd29878fff063ec7ec1e18591"
+    }
+  ],
+  "publicMirrors": [
+    {
+      "backendPath": "backend/data/excursions.json",
+      "frontendPath": "frontend/public/excursions.json",
+      "backendSha256": "15bea073870174d2bdabb197efa87442e420863aaab0a44b738358036ed18f0f",
+      "frontendSha256": "15bea073870174d2bdabb197efa87442e420863aaab0a44b738358036ed18f0f",
+      "byteIdentical": true,
+      "bytes": 3635435
+    },
+    {
+      "backendPath": "backend/data/cai-sections.json",
+      "frontendPath": "frontend/public/cai-sections.json",
+      "backendSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+      "frontendSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+      "byteIdentical": true,
+      "bytes": 1459342
+    },
+    {
+      "backendPath": "backend/data/scrape-status.json",
+      "frontendPath": "frontend/public/scrape-status.json",
+      "backendSha256": "1b838428e048acef4c44b80eda0beffbd9583a916614632153feb1fcbd2f6903",
+      "frontendSha256": "1b838428e048acef4c44b80eda0beffbd9583a916614632153feb1fcbd2f6903",
+      "byteIdentical": true,
+      "bytes": 2077195
+    }
+  ],
+  "catalogDelta": {
+    "catalogBeforeRunSha256": "c66e963a9d025dfb1184492362cd3235051f04e0318f88f1985b0d81951e2f03",
+    "catalogAfterRunSha256": "15bea073870174d2bdabb197efa87442e420863aaab0a44b738358036ed18f0f",
+    "catalogRowsBefore": 3376,
+    "catalogRowsAfter": 3376,
+    "sourceIdPrefix": "cai-alpago-9220065-",
+    "sourceRowsBefore": 3,
+    "sourceRowsAfter": 3,
+    "addedIds": [],
+    "removedIds": [],
+    "idsPresentBefore": [
+      "cai-alpago-9220065-2660f5d809cc",
+      "cai-alpago-9220065-36b7beda85b7",
+      "cai-alpago-9220065-c11f9b42bf19"
+    ],
+    "idsPresentAfter": [
+      "cai-alpago-9220065-2660f5d809cc",
+      "cai-alpago-9220065-36b7beda85b7",
+      "cai-alpago-9220065-c11f9b42bf19"
+    ],
+    "baselineSnapshot": "saved cai-map-20261022-full01/input.json contains the same three IDs before this run",
+    "baselineRowsSha256": "5b58d54b0700b2fe2df99ad22d411185116a6d663c37e97b4c2752dddb16dfbf",
+    "afterRowsSha256": "65e28549165c3b5c959340091cf8192a569bef8230a6547a7f2bc7c571a86e07",
+    "changedFieldsVsBaseline": [
+      {
+        "id": "cai-alpago-9220065-36b7beda85b7",
+        "changedFields": [
+          {
+            "field": "link",
+            "before": "https://www.caialpago.it/programma-2-3/",
+            "after": "https://www.caialpago.it/programma-2-2/"
+          },
+          {
+            "field": "sourceDocument",
+            "before": "https://www.caialpago.it/programma-2-3/",
+            "after": "https://www.caialpago.it/programma-2-2/"
+          }
+        ]
+      },
+      {
+        "id": "cai-alpago-9220065-c11f9b42bf19",
+        "changedFields": [
+          {
+            "field": "link",
+            "before": "https://www.caialpago.it/programma-2-3/",
+            "after": "https://www.caialpago.it/programma-2-2/"
+          },
+          {
+            "field": "sourceDocument",
+            "before": "https://www.caialpago.it/programma-2-3/",
+            "after": "https://www.caialpago.it/programma-2-2/"
+          }
+        ]
+      }
+    ],
+    "fieldComparisonNote": "Importer QA against the remote catalog baseline confirms descriptions were already identical and are not deltas. The only verified field changes on two existing rows are link and sourceDocument, corroborated by cards in the pre-existing /programma-2-2/ body. The requested /programma-2/ response is unattributed, so these changes do not establish new coverage or new IDs.",
+    "newVerifiedCoverageEvents": 0,
+    "updatedExistingRows": 2,
+    "updatedExistingRowFields": {
+      "cai-alpago-9220065-36b7beda85b7": [
+        "link",
+        "sourceDocument"
+      ],
+      "cai-alpago-9220065-c11f9b42bf19": [
+        "link",
+        "sourceDocument"
+      ]
+    },
+    "requestedUrlAttribution": "unconfirmed; no distinct persisted response/document record",
+    "relatedPreExistingDocument": "https://www.caialpago.it/programma-2-2/",
+    "descriptionsAreDeltas": false
+  },
+  "verification": {
+    "importerQA": "PASS; URL attribution HOLD; no new verified IDs",
+    "backendTests": "206/206 passed after collection; public hashes unchanged",
+    "database": "no query or write"
+  }
+}

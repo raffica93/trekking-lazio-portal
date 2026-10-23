@@ -10563,7 +10563,7 @@
     "cai-villagrande-ogliastra-9248005": "eeff83b19d1b94f1b5a7f1f7a9e618457f515a5cf3b73f114ec2a7ff9d0f94dd",
     "cai-bosco-chiesanuova-9220050": "5de3ebfc3114ebd94aaeeae5b5ab134e32337fa3958eeb6a0677ae64c3f46501",
     "cai-brunico-c-a-i-a-a-9219005": "140d9601c769ec5adf1a2004a8715f5f9ab39f04eafbc8dd07c778b9b05c24a4",
-    "cai-alpago-9220065": "7c0353a681cffb7a732687351075c1fe50e425607c2e71db13278860bb13caa8",
+    "cai-alpago-9220065": "f9c625ca2a44443ac71448ad7377ffb2c851646b99aa3752b29de9e82e070631",
     "cai-cortina-d-ampezzo-9220011": "c4c7026f30dc6c45a25e8e679a8c39552183a567346b3a2351ee16b51dbaecf3",
     "cai-caprino-veronese-9220067": "6684db271881e98f4edc1d862145864ab3b51f89ab4069efbfb3490688bca9f4",
     "cai-dolo-9220031": "3eea60128fb44611d1210b41bd5566f3f4f2c47c24072611ea1a867c6af3acd7",
@@ -10773,14 +10773,14 @@
     "cai-busca-9112010": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967",
     "cai-dronero-9112012": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967"
   },
-  "generatedAt": "2026-10-23T00:58:28.583Z",
+  "generatedAt": "2026-10-23T01:03:35.198Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 1,
-    "parsed": 0,
-    "unsupported": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 548
   },
@@ -34554,7 +34554,7 @@
       "dateEnd": "2026-10-17",
       "days": 1,
       "category": "Attività CAI",
-      "link": "https://www.caialpago.it/programma-2-3/",
+      "link": "https://www.caialpago.it/programma-2-2/",
       "organizer": "CAI Alpago",
       "organizerRegion": "Veneto",
       "location": "Località da verificare",
@@ -34564,7 +34564,7 @@
       "privateCar": null,
       "coordinatesQuality": "unknown",
       "locationSource": "html-calendar",
-      "sourceDocument": "https://www.caialpago.it/programma-2-3/",
+      "sourceDocument": "https://www.caialpago.it/programma-2-2/",
       "description": "Sabato 17 Ottobre 2026 Escursione ai Lastoi de Formin (2657)"
     },
     {
@@ -46656,7 +46656,7 @@
       "dateEnd": "2026-10-25",
       "days": 1,
       "category": "Attività CAI",
-      "link": "https://www.caialpago.it/programma-2-3/",
+      "link": "https://www.caialpago.it/programma-2-2/",
       "organizer": "CAI Alpago",
       "organizerRegion": "Veneto",
       "location": "Località da verificare",
@@ -46666,7 +46666,7 @@
       "privateCar": null,
       "coordinatesQuality": "unknown",
       "locationSource": "html-calendar",
-      "sourceDocument": "https://www.caialpago.it/programma-2-3/",
+      "sourceDocument": "https://www.caialpago.it/programma-2-2/",
       "description": "Domenica 25 Ottobre 2026 Castagnata"
     },
     {

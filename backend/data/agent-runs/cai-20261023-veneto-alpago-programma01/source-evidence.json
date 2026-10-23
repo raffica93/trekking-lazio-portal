@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261023-veneto-alpago-programma01",
+  "sourceId": "cai-alpago-9220065",
+  "requestedUrl": "https://www.caialpago.it/programma-2/",
+  "requestedUrlDocumentRecord": "The requested /programma-2/ request is not attributable to any persisted response/document record. The only body evidence below is a pre-existing /programma-2-2/ cache/status document from baseline f95b9e5; it does not prove a new fetch for this run.",
+  "cache": {
+    "bodyPath": "backend/node_modules/.cache/cai/259727cd0fe7a614c1d515370ab6c74cf8c6293f6fad7192274df402cf44b599.bin",
+    "metadataPath": "backend/node_modules/.cache/cai/259727cd0fe7a614c1d515370ab6c74cf8c6293f6fad7192274df402cf44b599.json",
+    "keySha256": "259727cd0fe7a614c1d515370ab6c74cf8c6293f6fad7192274df402cf44b599",
+    "metadataUrl": "https://www.caialpago.it/programma-2-2/",
+    "contentType": "text/html; charset=UTF-8",
+    "bodyBytes": 67920,
+    "bodySha256": "9d452cd1f3ddd48c805eb3789dfd965fbb9f26d814f26b9293bbe8b7c203079b",
+    "metadataMatchesBody": true,
+    "associationNote": "This /programma-2-2/ body and cache entry predate this run and are present in baseline f95b9e5. They evidence only that pre-existing document; they are not a response mapping for the requested /programma-2/ URL and do not establish new coverage."
+  },
+  "runOutput": {
+    "command": "SCRAPE_MAX_DOCUMENTS=1 SCRAPE_SOURCE_BUDGET_MS=120000 npm run orchestrate -- collect --run cai-20261023-veneto-alpago-programma01",
+    "output": "cai-alpago-9220065: partial (3 excursions); Status: 110 ok, 15 failed; Updated cache with 3376 upcoming excursions",
+    "runState": {
+      "collection": "partial",
+      "files": "ready",
+      "database": "pending"
+    },
+    "assessment": {
+      "collectorReportedEvents": 3,
+      "eventsAttributedToRequestedUrl": 0,
+      "newVerifiedCoverage": 0,
+      "reason": "The requested URL has no distinct persisted document/response record; the related /programma-2-2/ body is pre-existing baseline evidence."
+    }
+  },
+  "extraction": {
+    "requestedUrlMethod": "unattributed; no distinct persisted document entry",
+    "relatedStatusDocument": {
+      "url": "https://www.caialpago.it/programma-2-2/",
+      "hash": "9d452cd1f3ddd48c805eb3789dfd965fbb9f26d814f26b9293bbe8b7c203079b",
+      "method": "html-calendar",
+      "events": 3,
+      "provenance": "pre-existing baseline document/cache; not attributable to this run request"
+    },
+    "sourceExtractedEvents": 15,
+    "catalogSourceRows": 3,
+    "runReportedEvents": 3,
+    "eventsAttributedToRequestedUrl": 0,
+    "newVerifiedCoverage": 0,
+    "sourceExtractedEventsNote": "15 is the merged source-level status count, not a count attributable to this one-URL continuation."
+  },
+  "cachedDocumentEvidence": {
+    "locator": "zero-based UTF-8 byte offset in cached body for the existing status document URL /programma-2-2/",
+    "excerpts": [
+      {
+        "label": "cached-page-title",
+        "byteOffset": 208,
+        "excerpt": "<title>Programma &#8211; CAI Alpago</title>"
+      },
+      {
+        "label": "cached-page-heading",
+        "byteOffset": 35520,
+        "excerpt": "<h1 class=\"page-title\">Programma</h1>"
+      },
+      {
+        "label": "cached-card-2026-10-25",
+        "byteOffset": 40781,
+        "excerpt": "<a href=\"https://www.caialpago.it/2026/10/18/20261025/\">Domenica 25 Ottobre 2026  Castagnata</a>"
+      },
+      {
+        "label": "cached-card-2026-10-17",
+        "byteOffset": 40958,
+        "excerpt": "<a href=\"https://www.caialpago.it/2026/10/09/20261017/\">Sabato 17 Ottobre 2026  Escursione ai Lastoi de Formin (2657)</a>"
+      }
+    ]
+  },
+  "catalogEvidence": {
+    "catalogBeforeRunSha256": "c66e963a9d025dfb1184492362cd3235051f04e0318f88f1985b0d81951e2f03",
+    "catalogAfterRunSha256": "15bea073870174d2bdabb197efa87442e420863aaab0a44b738358036ed18f0f",
+    "catalogRowsBefore": 3376,
+    "catalogRowsAfter": 3376,
+    "sourceIdPrefix": "cai-alpago-9220065-",
+    "sourceRowsBefore": 3,
+    "sourceRowsAfter": 3,
+    "addedIds": [],
+    "removedIds": [],
+    "idsPresentBefore": [
+      "cai-alpago-9220065-2660f5d809cc",
+      "cai-alpago-9220065-36b7beda85b7",
+      "cai-alpago-9220065-c11f9b42bf19"
+    ],
+    "idsPresentAfter": [
+      "cai-alpago-9220065-2660f5d809cc",
+      "cai-alpago-9220065-36b7beda85b7",
+      "cai-alpago-9220065-c11f9b42bf19"
+    ],
+    "baselineSnapshot": "saved cai-map-20261022-full01/input.json contains the same three IDs before this run",
+    "baselineRowsSha256": "5b58d54b0700b2fe2df99ad22d411185116a6d663c37e97b4c2752dddb16dfbf",
+    "afterRowsSha256": "65e28549165c3b5c959340091cf8192a569bef8230a6547a7f2bc7c571a86e07",
+    "changedFieldsVsBaseline": [
+      {
+        "id": "cai-alpago-9220065-36b7beda85b7",
+        "changedFields": [
+          {
+            "field": "link",
+            "before": "https://www.caialpago.it/programma-2-3/",
+            "after": "https://www.caialpago.it/programma-2-2/"
+          },
+          {
+            "field": "sourceDocument",
+            "before": "https://www.caialpago.it/programma-2-3/",
+            "after": "https://www.caialpago.it/programma-2-2/"
+          }
+        ]
+      },
+      {
+        "id": "cai-alpago-9220065-c11f9b42bf19",
+        "changedFields": [
+          {
+            "field": "link",
+            "before": "https://www.caialpago.it/programma-2-3/",
+            "after": "https://www.caialpago.it/programma-2-2/"
+          },
+          {
+            "field": "sourceDocument",
+            "before": "https://www.caialpago.it/programma-2-3/",
+            "after": "https://www.caialpago.it/programma-2-2/"
+          }
+        ]
+      }
+    ],
+    "fieldComparisonNote": "Importer QA against the remote catalog baseline confirms descriptions were already identical and are not deltas. The only verified field changes on two existing rows are link and sourceDocument, corroborated by cards in the pre-existing /programma-2-2/ body. The requested /programma-2/ response is unattributed, so these changes do not establish new coverage or new IDs.",
+    "newVerifiedCoverageEvents": 0,
+    "updatedExistingRows": 2,
+    "updatedExistingRowFields": {
+      "cai-alpago-9220065-36b7beda85b7": [
+        "link",
+        "sourceDocument"
+      ],
+      "cai-alpago-9220065-c11f9b42bf19": [
+        "link",
+        "sourceDocument"
+      ]
+    }
+  },
+  "statusEvidence": {
+    "status": "partial",
+    "configuredUrl": "https://www.caialpago.it/programma-2-3/",
+    "extractedEvents": 15,
+    "issues": [
+      {
+        "url": "https://www.caialpago.it/programma-2-3/",
+        "message": "Discovery budget reached; 72 candidate documents remain.",
+        "code": "discovery-limit"
+      },
+      {
+        "url": "https://www.caialpago.it/programma-2-2/",
+        "message": "Discovery budget reached; 1 candidate documents remain.",
+        "code": "discovery-limit"
+      }
+    ],
+    "documentsCount": 11,
+    "requestedUrlFound": false,
+    "requestedUrlAttribution": "unconfirmed; no requested-URL document/response record"
+  },
+  "preRunHashes": {
+    "catalogSha256": "c66e963a9d025dfb1184492362cd3235051f04e0318f88f1985b0d81951e2f03",
+    "statusSha256": "ac2d38e59aa5d00633cd2090e50b1cb265238b4fa4a5f25bc137c36a94bc9e0b",
+    "sectionsSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+  },
+  "publicMirrors": [
+    {
+      "backendPath": "backend/data/excursions.json",
+      "frontendPath": "frontend/public/excursions.json",
+      "backendSha256": "15bea073870174d2bdabb197efa87442e420863aaab0a44b738358036ed18f0f",
+      "frontendSha256": "15bea073870174d2bdabb197efa87442e420863aaab0a44b738358036ed18f0f",
+      "byteIdentical": true,
+      "bytes": 3635435
+    },
+    {
+      "backendPath": "backend/data/cai-sections.json",
+      "frontendPath": "frontend/public/cai-sections.json",
+      "backendSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+      "frontendSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+      "byteIdentical": true,
+      "bytes": 1459342
+    },
+    {
+      "backendPath": "backend/data/scrape-status.json",
+      "frontendPath": "frontend/public/scrape-status.json",
+      "backendSha256": "1b838428e048acef4c44b80eda0beffbd9583a916614632153feb1fcbd2f6903",
+      "frontendSha256": "1b838428e048acef4c44b80eda0beffbd9583a916614632153feb1fcbd2f6903",
+      "byteIdentical": true,
+      "bytes": 2077195
+    }
+  ],
+  "database": {
+    "written": false
+  },
+  "limitations": [
+    "No HTTP status or canonical/final URL for the explicit /programma-2/ request is retained; its direct response cannot be attributed.",
+    "The /programma-2-2/ body/cache is pre-existing in baseline f95b9e5 and is not evidence of a new fetch or new coverage in this run.",
+    "No new event IDs or verified coverage are established. Two existing rows have only link/sourceDocument changes corroborated by the pre-existing /programma-2-2/ cards; descriptions were identical in the remote baseline and are not deltas.",
+    "The two 2026-10-17 Lastoi records remain separate IDs in review as a possible semantic duplicate; do not merge without stronger evidence."
+  ]
+}

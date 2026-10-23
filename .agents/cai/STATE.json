@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "toscana-closed-for-current-exact-urls-veneto-alpago-selected-checkpoint-pending",
+  "phase": "emilia-romagna-cesena-candidate-checkpoint-pending",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -12,8 +12,8 @@
   "coordinationSpace": ".agents/cai",
   "planningExecutionScope": "remote-cloud-checkout",
   "runtimeReadiness": {
-    "status": "current-runtime-observed-and-live-sample-verified",
-    "observedAt": "2026-10-22T23:57:59Z",
+    "status": "current-runtime-observed",
+    "observedAt": "2026-10-23T01:20:20Z",
     "connectivity": "connected",
     "desiredPhase": "running",
     "observationsCurrent": true,
@@ -63,7 +63,12 @@
       "providerErrors": 0,
       "classificationPolicyVersion": "cai-trekking-v2"
     },
-    "effectiveModelTelemetry": "not exposed by runtime; requested GPT-6 Luna high only"
+    "effectiveModelTelemetry": "not exposed; GPT-6 Luna high requested, not runtime-attested",
+    "rolesAvailable": [
+      "cai-collector",
+      "cai-importer"
+    ],
+    "secretValueRead": false
   },
   "roles": {
     "orchestrator": "coordination-and-checkpoints; sole writer for run logs and acceptance",
@@ -72,14 +77,14 @@
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "official source QA, bounded provider circuit breaker, adapter/tests",
-      "status": "Fivizzano calendar01 collected one page; 10 rows, 5 raw IDs; source evidence sidecar verified, 1 semantic duplicate flagged; no code changes."
+      "status": "Emilia-Romagna offline scan selected CAI Cesena candidate; awaiting remote selection checkpoint before any fetch"
     },
     "importer": {
       "name": "cai-importer",
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "classification manifest validator, candidate/effective QA schema, conflicts/reconciliation and DB safety",
-      "status": "Fivizzano independent QA PASS; 4 nonduplicate candidates, 1 semantic duplicate excluded, 2 sourceDocument-only updates; no DB."
+      "status": "independent Alpago artifact/catalog QA complete: integrity PASS, URL attribution HOLD; no DB access or writes"
     }
   },
   "baseline": {
@@ -591,15 +596,82 @@
       "status": "completed",
       "owner": "cai-collector",
       "result": "Post-run offline source scan: Toscana has no further safe exact URL; only unvisited Fivizzano URL is semantic duplicate previously reviewed; Pescia timeout and other enabled pages consumed/failed/backlog without exact URL. Trentino also lacks safe URL; Umbria and Valle d’Aosta none. Selected Veneto CAI Alpago official /programma-2/, absent from status/cache/FAILURES; one page/120s/concurrency1."
+    },
+    {
+      "id": "S76",
+      "status": "completed",
+      "owner": "orchestrator + cai-collector + cai-importer",
+      "result": "Run cai-20261023-veneto-alpago-programma01 completed as partial/files ready/database pending. Requested /programma-2/ response is not attributable to persisted /programma-2-2/ body: 3 raw rows, 0 attributable events, 0 new IDs/verified coverage. Catalog 3,376 rows before and after; two existing rows changed only link/sourceDocument based on the pre-existing /programma-2-2/ body. Importer integrity/catalog QA PASS, attribution HOLD; Lastoi pair remains unmerged. No classification or DB query/write."
+    },
+    {
+      "id": "S77",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Backend npm test on checkpoint f95b9e5 passed 206/206 after collection. All six public JSON hashes identical pre/post; backend/frontend mirrors byte-identical."
+    },
+    {
+      "id": "S78",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline Lombardia scan complete: no exact official-host safe target in current status/FAILURES/run-artifact snapshot. Candidate URLs Busto, Carate, Legnano, Livigno, Missaglia, Sesto, Strada Storta and Varese were already consumed/past/failed/cooldown or lacked exact persisted child URLs. Collector cache is absent in this checkout, so no cache miss is asserted. Region remains incomplete."
+    },
+    {
+      "id": "S79",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline Marche scan: 12 enabled sections have status; exact-host calendar URLs already represented in status/FAILURES/run artifacts; 4 disabled without sites. No safe target from documentation; cache absent, no cache miss asserted; region remains incomplete."
+    },
+    {
+      "id": "S80",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline Molise scan: Campobasso is the sole enabled section; its registered URLs already appear in status/FAILURES, with two discovery-limit queues lacking exact child URLs. Three disabled without sites. No safe target; cache absent, region incomplete."
+    },
+    {
+      "id": "S81",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline Puglia scan: five sections have status, four enabled. All enabled exact calendar URLs already represented in status/FAILURES/run artifacts; Grottaglie is no-upcoming. No safe target; cache absent, region not declared complete."
+    },
+    {
+      "id": "S82",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline Sardegna scan: 7 sources, 4 enabled; calendar URLs for enabled sources already represented in status/FAILURES/run artifacts; Cagliari/Nuoro/Oristano partial, Villagrande no-upcoming. No safe target; external Google Calendar 403 not selected. Cache absent, region incomplete."
+    },
+    {
+      "id": "S83",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline Calabria scan: 9 sections, 3 enabled (Castrovillari, Catanzaro, Reggio Calabria), 6 disabled. No exact official-host safe target: URLs already read, insufficiently attributed, or discovery queues without exact child URL; Google Drive 403 not selected. Collector cache absent, no cache miss asserted; Calabria remains incomplete."
+    },
+    {
+      "id": "S84",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline Campania scan: 17 sections, 7 enabled (Caserta, Monte Bulgheria, Napoli, Piedimonte Matese, Roccarainola, Salerno, Vesuvio), 10 disabled. No safe exact target in current status/FAILURES/run artifacts. Caserta La Laghetta/badia di cava are metadata-only with no current calendar/date evidence. Cache absent, no cache miss asserted; Campania remains incomplete."
+    },
+    {
+      "id": "S85",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline Emilia-Romagna preflight found one candidate official exact URL for CAI Cesena, cai-cesena-9224012: https://www.caicesena.com/index.php/attivita. Registry calendarUrls/calendarEvidence label it “Attività” and link it from official /programma-attivita; host matches source.website. Not found in status documents/issues, FAILURES, or run artifacts. Current program is partial/method=null with discovery-limit 1 and PDF issues. Collector cache absent, so cache miss is not attested. No fetch performed."
+    },
+    {
+      "id": "S86",
+      "status": "pending",
+      "owner": "orchestrator",
+      "result": "Checkpoint Alpago artifacts, catalog/status mirrors and Cesena target selection to codex/cai-orchestrator-luna; verify remote ref and blobs before starting run cai-20261023-emilia-romagna-cesena-attivita01."
     }
   ],
-  "nextAction": "Pubblicare e verificare checkpoint del run Fivizzano attivita01, cataloghi/status e passaggio Toscana→Veneto. Poi eseguire un singolo run cai-20261023-veneto-alpago-programma01 sulla URL esatta https://www.caialpago.it/programma-2/, max1/120s/concurrency1/no discovery.",
+  "nextAction": "Publish and verify the Alpago run artifacts/catalog mirrors plus the one-URL Cesena selection. Only after remote verification, run cai-20261023-emilia-romagna-cesena-attivita01 on one official URL, max 120 seconds, concurrency 1, no discovery.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
     "implicitDeploy": false,
     "secretsInGit": false,
-    "databaseDeletes": false
+    "databaseDeletes": false,
+    "proposedRunId": "cai-20261023-emilia-romagna-cesena-attivita01"
   },
   "currentWork": {
     "branchHead": "f8bfe2a4bd0748b17b282ebfdff975ce707a637a",
@@ -986,5 +1058,41 @@
     "networkFetchPerformed": false,
     "proposedRunId": "cai-20261023-veneto-alpago-programma01"
   },
-  "currentRun": null
+  "currentRun": null,
+  "latestRun": {
+    "runId": "cai-20261023-veneto-alpago-programma01",
+    "path": "backend/data/agent-runs/cai-20261023-veneto-alpago-programma01",
+    "collection": "partial",
+    "files": "ready",
+    "database": "pending-no-delta",
+    "requestedUrl": "https://www.caialpago.it/programma-2/",
+    "attribution": "hold",
+    "rawRows": 3,
+    "attributableRows": 0,
+    "newIds": 0,
+    "verifiedCoverageEvents": 0,
+    "existingRowsWithSupportedSourceReferenceUpdates": 2,
+    "possibleSemanticDuplicateIdsInReview": [
+      "cai-alpago-9220065-2660f5d809cc",
+      "cai-alpago-9220065-c11f9b42bf19"
+    ],
+    "backendTests": "206/206 passed after collection",
+    "databaseQueryOrWrite": false
+  },
+  "proposedTarget": {
+    "region": "Emilia-Romagna",
+    "sourceId": "cai-cesena-9224012",
+    "url": "https://www.caicesena.com/index.php/attivita",
+    "registryLabel": "Attività",
+    "linkedFrom": "https://www.caicesena.com/index.php/programma-attivita",
+    "reason": "exact official-host URL absent from status/FAILURES/run artifacts; generic page merits bounded content check",
+    "sample": {
+      "documents": 1,
+      "seconds": 120,
+      "concurrency": 1,
+      "discovery": false
+    },
+    "fetchStarted": false,
+    "collectorCacheAvailable": false
+  }
 }

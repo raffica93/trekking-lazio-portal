@@ -1,3 +1,15 @@
+# Passaggio operativo CAI — raccolta e delivery regionale
+
+## Stato corrente — 23 ottobre 2026
+
+Il branch remoto `codex/cai-orchestrator-luna` è verificato a `f95b9e519f6b45cc9708bed205892434d0f1e587`, discendente da `50352f7fde1a638e6541aab048fcdacfb834324b`. Il delta Lombardia Valmadrera07 è già consegnato con 14 eventi e 14 classificazioni riconciliati; non ripeterlo. Il batch storico 3.336 e il delta Fivizzano già consegnato non vanno reimportati.
+
+Ultimo tentativo: run `cai-20261023-veneto-alpago-programma01`, una URL richiesta `/programma-2/`. La risposta non ha una documentazione persistita che consenta di attribuirla al body `/programma-2-2/`: 0 nuovi ID e 0 eventi di copertura verificati. I due aggiornamenti esistenti di `link` e `sourceDocument` sono supportati dal body preesistente `/programma-2-2/`; restano file-only e non sono importabili tramite delta-only. Importer QA PASS sull’integrità e confronto, HOLD sull’attribuzione; i due record Lastoi restano distinti e in revisione. Nessuna classificazione, query o scrittura DB.
+
+La suite backend `npm test` è stata eseguita dopo la raccolta: 206/206. Tutti i sei JSON pubblici sono rimasti invariati durante i test e i mirror backend/frontend sono identici. Artefatti/hash del run sono in `backend/data/agent-runs/cai-20261023-veneto-alpago-programma01/`; il checkpoint del run e di questo handoff è in corso.
+
+Il preflight offline Lombardia è concluso: nessun URL ufficiale esatto è emerso come target sicuro nella snapshot. Busto, Carate, Legnano, Livigno, Missaglia, Sesto, Strada Storta e Varese hanno URL già campionati/consumati, contenuti passati, errori o cooldown; non ripetere le rispettive code senza nuovo URL persistito. La cache di raccolta non è presente in questo checkout, quindi il preflight non attesta assenza dalla cache. Lombardia resta incompleta; la tabella storica non è stata ricalcolata. Marche, Molise, Puglia, Sardegna, Calabria e Campania non offrono target selezionabili dalla documentazione disponibile. Campania ha 17 sezioni, 7 enabled e 10 disabled; i PDF extra Caserta sono solo riferimenti metadata senza contesto di calendario/data. Nessuna cache miss è attestata e nessuna di queste regioni è dichiarata completa. Emilia-Romagna ha invece un candidato da verificare: CAI Cesena `https://www.caicesena.com/index.php/attivita`, label registry «Attività» collegata a `programma-attivita`, URL exact-host non presente in status/FAILURES/run artifacts. La fonte è partial con programma `method=null`, discovery-limit 1 e issue PDF; cache di raccolta non disponibile. Target proposto per un solo run `cai-20261023-emilia-romagna-cesena-attivita01`, max1/120s/concurrency1/no discovery, dopo checkpoint remoto della selezione; la pagina è generica e non presuppone eventi. Nessuna coordinata senza fonte, nessun reimport già riconciliato, nessun cron, merge o deploy.
+
 # Passaggio operativo CAI — classificazione catalogo mappa
 
 ## Stato al 22 ottobre 2026 — storico fino alla classificazione completa

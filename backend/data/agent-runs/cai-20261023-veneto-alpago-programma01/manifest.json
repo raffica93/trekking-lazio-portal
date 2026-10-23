@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261023-veneto-alpago-programma01",
+  "createdAt": "2026-10-23T01:03:35.396Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "15bea073870174d2bdabb197efa87442e420863aaab0a44b738358036ed18f0f"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "1b838428e048acef4c44b80eda0beffbd9583a916614632153feb1fcbd2f6903"
+    }
+  ]
+}
