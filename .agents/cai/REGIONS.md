@@ -471,3 +471,12 @@ Diagnosi offline del body: articolo informativo sul programma 2026, senza date/e
 | Sicilia, sezioni disabilitate | 25 | n/a | n/a | 1 Catania | 0 | 0 | 0 | 24 missing-website; 1 unreachable | Conservare come non verificate/irraggiungibili, nessuna URL inventata |
 
 I conteggi `complete/partial` riflettono gli stati persistiti, non nuovi test di rete né un ricalcolo regionale. Il preflight non ha aggiunto eventi e non ha interrogato o scritto DB. I totali nazionali in testa restano snapshot storico 2026-10-20.
+
+
+## Preflight Toscana — CAI Fivizzano (23 ottobre 2026)
+
+| Regione / sezione | Controllate offline | Complete | Parziali (stato registrato) | Irraggiungibili | Eventi verificati nel preflight | Duplicati esclusi | Fallimenti risolti/aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---:|---:|---|---|
+| Toscana — CAI Fivizzano `cai-fivizzano-9226019` | 1 URL selezionato | 0 nuove verifiche | 1 fonte `unsupported` nello stato persistito | 0 nuove | 0 (URL non letta) | 0 | Nessuno risolto; PDF annuale OCR failure e discovery-limit 8 restano aperti su URL separata | Dopo checkpoint, campione singolo `https://www.caifivizzano.it/calendario-uscite/`, max1/120s/concurrency1 |
+
+Il target pagina è nuovo rispetto a documenti/status/cache/FAILURES/run artifacts; non implica calendario vuoto o completo. Nessuna raccolta/DB avvenuta.

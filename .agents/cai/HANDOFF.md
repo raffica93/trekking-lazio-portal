@@ -630,3 +630,8 @@ Manifest SHA `7d6bfb50ddd7030dd3d8223e77a57554436829df6da94d1280228fa07cc8e435`;
 ## Preflight Sicilia completato — prossima Toscana (23 ottobre 2026)
 
 Offline review delle quattro sezioni abilitate: Belpasso/Cefalù/Erice sono ancora `partial`, Giarre risulta `no-upcoming` senza issue registrate. Cefalù ed Erice hanno discovery-limit ma lo status non conserva URL figlio esatto selezionabile; non ricostruire o indovinare URL. Belpasso e le sue URL PDF OCR/iCal già escluse restano documentate sopra. Le altre 25 sezioni sono disabilitate (24 `missing-website`, Catania `unreachable`). Nessun target aggiuntivo host-exact utile, rete, test, evento o DB in questo preflight. Sicilia resta incompleta. Dopo il checkpoint di questo riepilogo, procedere con preflight offline della regione canonica successiva, Toscana.
+
+
+## Toscana — selezione CAI Fivizzano (23 ottobre 2026)
+
+Dopo checkpoint remoto del preflight Sicilia, il collector ha selezionato CAI Fivizzano (`cai-fivizzano-9226019`), URL `https://www.caifivizzano.it/calendario-uscite/`, etichetta registry “Calendario 2026” e link dalla pagina ufficiale `/attivita/`; l'host corrisponde esattamente al sito registrato. La pagina non è nei documenti di status, cache, failure URL o run artifacts. La fonte conserva un issue separato sul PDF annuale con OCR failure e `discovery-limit` 8: non ritentarlo né seguire la coda per questo sample. Dopo il checkpoint di selezione, un solo URL, max1 documento/120s/concurrency1, senza discovery expansion. Nessun fetch, test o DB nel preflight.

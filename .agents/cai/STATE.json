@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "toscana-preflight-checkpoint",
+  "phase": "toscana-fivizzano-preflight-checkpoint",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -471,9 +471,15 @@
       "status": "completed",
       "owner": "orchestrator + cai-collector",
       "result": "Preflight offline Sicilia: 4 sezioni abilitate riesaminate (1 stato no-upcoming, 3 partial, 0 nuove irraggiungibili); nessun nuovo URL host-exact e selezionabile. Cefalù/Erice discovery-limit senza URL residua persistita; 25 disabilitate (24 senza website, Catania unreachable). 0 eventi o duplicati, 0 failure risolti; regione rimane aperta, prossima Toscana."
+    },
+    {
+      "id": "S56",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Toscana offline preflight: selezionata pagina ufficiale CAI Fivizzano Calendario 2026, host-exact e non visitata/status/cache/FAILURES/run; distinto dal PDF annuale OCR failure con discovery-limit 8. Nessuna rete/test/DB; singolo target dopo checkpoint."
     }
   ],
-  "nextAction": "Checkpoint remoto del preflight Sicilia che registra code non selezionabili e sezioni disabilitate; poi preflight offline Toscana. Nessuna raccolta finché non è selezionato e checkpointato un URL distinto.",
+  "nextAction": "Checkpoint remoto selezione Fivizzano; poi raccolta orchestrata singolo URL calendario-uscite, max1 doc/120s/concurrency1. Non ripetere PDF annuale OCR-failed né discovery queue.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -482,7 +488,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "1695955b084b5cd343f29584e52067e7d572deb3",
+    "branchHead": "cbf1d575b58e281bae5a8ef79b464a2e3f598342",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
       "runId": "cai-20261023-sicilia-belpasso-programma01",
@@ -528,9 +534,9 @@
       "coordinatesAdded": 0,
       "dbWrites": 0
     },
-    "nextAction": "Checkpoint remoto del preflight Sicilia che registra code non selezionabili e sezioni disabilitate; poi preflight offline Toscana. Nessuna raccolta finché non è selezionato e checkpointato un URL distinto."
+    "nextAction": "Checkpoint remoto selezione Fivizzano; poi raccolta orchestrata singolo URL calendario-uscite, max1 doc/120s/concurrency1. Non ripetere PDF annuale OCR-failed né discovery queue."
   },
-  "repositoryCommit": "1695955b084b5cd343f29584e52067e7d572deb3",
+  "repositoryCommit": "cbf1d575b58e281bae5a8ef79b464a2e3f598342",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -553,10 +559,10 @@
     }
   },
   "tests": "After Belpasso collection: backend npm test 206/206; six public JSON hashes unchanged before/after and backend/frontend mirrors match. No test ran during collection.",
-  "updatedAt": "2026-10-23T00:36:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T00:34:00Z",
-  "regionCurrent": "Sicilia — preflight offline completato. 4 sezioni enabled riesaminate: Giarre no-upcoming senza issue registrate, Belpasso/Cefalù/Erice restano parziali. Nessun target host-exact nuovo e selezionabile; le discovery-limit Cefalù/Erice non salvano URL residui. 25 sezioni disabilitate (24 missing website, Catania unreachable). Non è copertura completa.",
-  "regionNext": "Toscana — avviare preflight offline della prossima regione canonica; un solo URL host-exact non consumato dopo selezione e checkpoint.",
+  "updatedAt": "2026-10-23T00:42:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T00:40:00Z",
+  "regionCurrent": "Sicilia — preflight terminato senza altri target esatti lavorabili; 4 sezioni abilitate osservate, 25 disabilitate. Regione resta incompleta.",
+  "regionNext": "Toscana — CAI Fivizzano `cai-fivizzano-9226019`, pagina ufficiale “Calendario 2026” non visitata; dopo checkpoint un singolo URL max1 documento/120s/concurrency1. PDF annuale OCR failure e discovery-limit8 esclusi.",
   "preflight": {
     "at": "2026-10-23T00:00:18Z",
     "sourceId": "cai-carate-brianza-9216030",
@@ -800,12 +806,12 @@
   ],
   "nextSourcePreflight": {
     "region": "Toscana",
-    "sourceId": null,
-    "sourceName": null,
-    "url": null,
-    "status": "pending offline preflight after Sicilia no-target checkpoint",
-    "evidence": "Sicilia has no additional exact safe URL among four enabled sections; Cefalu/Erice discovery-limit entries have no persisted child URL; Giarre is no-upcoming/no-issue; 25 other sections disabled (24 missing website, Catania unreachable).",
-    "scope": "offline only, select next distinct exact official-host URL; no fetch/test/DB; checkpoint selection before one bounded collection.",
+    "sourceId": "cai-fivizzano-9226019",
+    "sourceName": "CAI Fivizzano",
+    "url": "https://www.caifivizzano.it/calendario-uscite/",
+    "status": "selected; waiting for selection checkpoint before bounded collection",
+    "evidence": "Registry calendarEvidence labels this Calendario 2026, linked from https://www.caifivizzano.it/attivita/; exact host matches registered website; page absent from status documents, run artifacts, cache and failures. Existing annual PDF OCR failure/discovery-limit 8 is a separate URL and excluded.",
+    "scope": "one exact official URL, max1 document, 120 seconds, concurrency1; no discovery expansion/child fetch; no tests during live collection",
     "networkFetchPerformed": false
   }
 }
