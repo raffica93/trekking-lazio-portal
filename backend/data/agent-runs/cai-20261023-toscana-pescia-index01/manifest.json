@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261023-toscana-pescia-index01",
+  "createdAt": "2026-10-23T00:42:24.570Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "92eb1e16428787e068b77a872cd1301218f71b3c000a803f395f7f6963bda3c8"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "687b6babc658b9ebcc232d27a1829a2ded8a9fc123f13447dc67db0900e94108"
+    }
+  ]
+}

@@ -531,3 +531,14 @@ La ricevuta del delta Fivizzano, lo stato database completato e l’evidence sea
 Dopo aver chiuso il delta Fivizzano, il primo URL esatto e distinto work-ready è `https://www.caipescia.it/cp/calendario-attivita-cai-pescia/`, sezione `cai-pescia-9226026`. È elencato nel registry come URL di calendario ufficiale e collegato dalla homepage; la validazione locale di host e URL per lo scraper è PASS. Questa URL non compare in status documents, cache, run artifacts o FAILURES. La sorella mensile `?mo=8&yr=2026` ha un `discovery-budget-exhausted`: non ritentarla e non seguire link dal nuovo campione. Dopo checkpoint remoto selezione, max 1 documento/120s/concurrency 1.
 
 Contesto Toscana da scrape-status persistito (non ricalcolato live): 37 registrate, 17 enabled — 9 partial, 5 unsupported, 1 failed, 1 ok, 1 no-upcoming — e 90 eventi nel catalogo locale. Fivizzano: +5 raw IDs, 1 duplicato escluso, 4 delivered places + 4 classifications in draft; 2 sourceDocument-only non consegnati. Restano aperti i tre failure Fivizzano.
+
+
+## Toscana — Pescia index01 e selezione successiva (23 ottobre 2026)
+
+| Regione / run | Sezioni controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| Toscana, `cai-20261023-toscana-pescia-index01`, CAI Pescia | 1 URL `/cp/calendario-attivita-cai-pescia/` tentata | 0 | 1 (esito di run `failed`, regione ancora aperta) | 0 osservati; errore client timeout | 0; nessun body/status HTTP/cache, non implica calendario vuoto | 0 | regressione di status riparata, conservati 12 documenti e discovery-limit agosto | timeout 8.000 ms su `/cp/`; issue mensile agosto resta separata | pubblicare checkpoint e passare a singolo URL Fivizzano miniera |
+
+Catalogo 3.376→3.376, 0 add/remove/change; nessuna classification/import/DB. QA importer PASS; manifest `c5e3e308...dd74c81`, state `afae40f6...cc9db1`, report `e9a5d66e...4905b49`. FAILURES 716→717 con record `CAI-F-6ccdc9044ca287f1`. Suite backend 206/206 dopo la raccolta e la riparazione; sei JSON pubblici invariati e mirror identici. Fresh join dello status toscano persistito alle 00:42:23Z: 37 sezioni, 17 enabled (9 partial, 4 unsupported, 2 failed, 1 ok, 1 no-upcoming), 90 eventi; non è audit di rete.
+
+Collector ha fatto preflight offline senza richieste/test/scritture. Prossimo singolo target: CAI Fivizzano, `https://www.caifivizzano.it/eventi/le-miniere-di-calcaferro/`, URL ufficiale distinta presente nel registro ma assente da status/cache/FAILURES; fonte ancora partial con errori PDF/discovery separati. Run proposto `cai-20261023-toscana-fivizzano-miniere01`, max1 documento/120s/concurrency1/no discovery, solo dopo checkpoint remoto. Nessun conteggio storico nazionale presentato come query attuale.

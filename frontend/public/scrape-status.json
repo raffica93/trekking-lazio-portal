@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-23T00:14:13.129Z",
+  "generatedAt": "2026-10-23T00:42:23.832Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -41820,16 +41820,16 @@
       "directoryId": "9226026",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "unsupported",
+      "status": "failed",
       "url": "https://www.caipescia.it/calendario-attivita-cai-pescia/?mo=8&yr=2026",
       "kind": "html",
       "template": "html-calendar",
       "extractor": "deterministic",
       "enabled": true,
       "excursions": 0,
-      "error": null,
+      "error": "timeout of 8000ms exceeded on the exact continuation URL https://www.caipescia.it/cp/calendario-attivita-cai-pescia/; HTTP status not observed; no body/cache was produced.",
       "hash": "0bf7fcd8523d7652cab5427cb57b7a8680c99129bb62f42fb77190763ec82844",
-      "updatedAt": "2026-10-19T18:24:35.762Z",
+      "updatedAt": "2026-10-23T00:42:23.832Z",
       "documents": [
         {
           "url": "https://www.caipescia.it/calendario-attivita-cai-pescia/?mo=8&yr=2026",
@@ -41912,6 +41912,11 @@
           "url": "https://www.caipescia.it/calendario-attivita-cai-pescia/?mo=8&yr=2026",
           "message": "Discovery budget reached; 96 candidate documents remain.",
           "code": "discovery-limit"
+        },
+        {
+          "url": "https://www.caipescia.it/cp/calendario-attivita-cai-pescia/",
+          "message": "Fetch timeout after 8000 ms; no HTTP status/body/cache observed. No retry in this run.",
+          "code": "fetch-timeout"
         }
       ],
       "extractedEvents": 0

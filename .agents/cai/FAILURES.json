@@ -44794,6 +44794,55 @@
       "testRefs": [],
       "resolutionCheck": null,
       "policyStatus": "observed_open"
+    },
+    {
+      "id": "CAI-F-6ccdc9044ca287f1",
+      "sourceId": "cai-pescia-9226026",
+      "url": "https://www.caipescia.it/cp/calendario-attivita-cai-pescia/",
+      "phase": "fetch",
+      "failureClass": "request-timeout",
+      "httpStatus": null,
+      "firstObservedAt": "2026-10-23T00:42:23.832Z",
+      "lastObservedAt": "2026-10-23T00:42:23.832Z",
+      "observationBasis": "timestamp from persisted orchestrator run state; no HTTP response was observed",
+      "history": {
+        "runIds": [
+          "cai-20261023-toscana-pescia-index01"
+        ],
+        "snapshotCopies": 1,
+        "issueCodes": [
+          "fetch-timeout"
+        ],
+        "sourceStatuses": [
+          "failed"
+        ]
+      },
+      "attempts": {
+        "actualHistoricalRequests": "unknown",
+        "currentCycleRequests": 1,
+        "recoveryAttempts": []
+      },
+      "cooldown": {
+        "policy": "No retry in this cycle; no automatic retry until a distinct bounded strategy is assigned",
+        "nextEligibleAt": null
+      },
+      "evidence": {
+        "representativeMessages": [
+          "timeout of 8000ms exceeded"
+        ],
+        "sourceUpdatedAt": [
+          "2026-10-23T00:42:23.832Z"
+        ],
+        "bodyOrCacheProduced": false
+      },
+      "strategy": "Preserve prior cache and document history; avoid retries on this exact URL until a new bounded network strategy is documented.",
+      "status": "observed_unresolved",
+      "owner": "cai-collector",
+      "outcome": "No HTTP status/body/cache; zero new rows. The prior source-level discovery-limit on the August sibling URL remains open and distinct.",
+      "correctionRef": null,
+      "testRefs": [],
+      "resolutionCheck": null,
+      "policyStatus": "candidate_pending_test"
     }
   ],
   "schema": {

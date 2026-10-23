@@ -205,3 +205,10 @@ La ricevuta del delta Fivizzano, lo stato database completato e l’evidence sea
 Dopo aver chiuso il delta Fivizzano, il primo URL esatto e distinto work-ready è `https://www.caipescia.it/cp/calendario-attivita-cai-pescia/`, sezione `cai-pescia-9226026`. È elencato nel registry come URL di calendario ufficiale e collegato dalla homepage; la validazione locale di host e URL per lo scraper è PASS. Questa URL non compare in status documents, cache, run artifacts o FAILURES. La sorella mensile `?mo=8&yr=2026` ha un `discovery-budget-exhausted`: non ritentarla e non seguire link dal nuovo campione. Dopo checkpoint remoto selezione, max 1 documento/120s/concurrency 1.
 
 Contesto Toscana da scrape-status persistito (non ricalcolato live): 37 registrate, 17 enabled — 9 partial, 5 unsupported, 1 failed, 1 ok, 1 no-upcoming — e 90 eventi nel catalogo locale. Fivizzano: +5 raw IDs, 1 duplicato escluso, 4 delivered places + 4 classifications in draft; 2 sourceDocument-only non consegnati. Restano aperti i tre failure Fivizzano.
+
+
+## Stato operativo aggiornato — Pescia chiuso senza delta; Fivizzano miniera selezionata (23 ottobre 2026)
+
+Run `cai-20261023-toscana-pescia-index01`: timeout di 8.000 ms sulla URL `/cp/`, senza risposta HTTP/body/cache, retry, estrazioni o delta DB. Registro e cache storici sono preservati: 12 documenti e discovery-limit agosto, più un distinto `fetch-timeout`; QA importer PASS. Catalogo resta a 3.376 ID. Test backend 206/206 eseguiti in sequenza dopo raccolta e riparazione; i sei JSON pubblici sono rimasti stabili.
+
+Il preflight offline toscano non ha trovato altri link sicuri oltre alla nuova pagina ufficiale Fivizzano `/eventi/le-miniere-di-calcaferro/`. Selezionata unicamente per 1 documento/120 s/concurrency 1/no discovery. Dopo commit e verifica dei file, eseguire quel run; poi fermare la raccolta, fare QA importer e test soltanto se necessari, checkpoint file, e procedere a classificazione/import solo se esiste delta verificato. Pescia resta esclusa senza una strategia di timeout distinta. Totali di raccolta, file e DB restano separati; niente run storico o reimport.

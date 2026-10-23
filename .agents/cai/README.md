@@ -41,11 +41,13 @@ non dimostra che una chat nuova possa recuperare il lavoro.
 
 ## Stato di questo passaggio — 23 ottobre 2026
 
-Branch `codex/cai-orchestrator-luna`, ref remoto verificato `28ccac97502f0d48233b5f88b8d099803b94de37`. Delta Valmadrera07, Campobasso e Pinasca già chiusi con ricevute; non ripeterli. Toscana/Fivizzano `cai-20261023-toscana-fivizzano-calendar01`: una pagina letta, 10 righe verificate, 5 nuovi ID grezzi, un duplicato semantico escluso, 4 candidati non duplicati. La fonte resta partial per PDF OCR/discovery e coda residua. Catalogo e manifest raccolta sono a `28ccac9`; input isolato e prove sono checkpointati al commit `3341fc9`. Nessuna classificazione live o scrittura DB è ancora avvenuta. Il controllo runtime più recente ora è `connected`, con host `openrouter.ai` consentito e secret pronto; eseguire il run isolato, non ampliare la raccolta.
+Branch `codex/cai-orchestrator-luna`, ultimo ref remoto verificato `90715a2b3868b8ad6395e497446c706d3268605c`. Il delta Valmadrera e il lotto Fivizzano calendar01 sono già consegnati e non vanno ripetuti. Fivizzano ha inserito 4 nuovi `places` e 4 classificazioni (`draft`), con query dopo a 4.427/3.358; receipt verificata. Restano due modifiche `sourceDocument` escluse dall’import e la fonte Fivizzano è ancora `partial`.
 
-Il runtime è tornato `connectivity=connected`; il secret OpenRouter risulta presente/pronto per il solo dominio autorizzato e il valore non è stato letto. Questa osservazione abilita il tentativo HTTP previsto, non garantisce l’esito della richiesta. Modello richiesto resta esclusivamente `inception/mercury-decide` via Decisions API.
+L’ultimo run è `cai-20261023-toscana-pescia-index01`: la sola URL `https://www.caipescia.it/cp/calendario-attivita-cai-pescia/` è scaduta dopo 8.000 ms, senza status HTTP, body, cache o eventi e senza retry. L’errore è distinto dalla discovery-limit mensile di agosto. Sono preservati i 12 documenti precedenti. Catalogo invariato a 3.376 ID; nessuna classificazione o scrittura DB. Il checkpoint Pescia riparato e verificato dall’importer è in attesa di pubblicazione, insieme alla selezione del prossimo campione.
 
-Orchestratore e ruoli `cai-collector`/`cai-importer` richiesti GPT-6 Luna high; i due agenti esistenti hanno completato il lavoro su Fivizzano. Telemetria corrente non attesta modello/effort effettivi. Nessun merge, deploy, cron o cancellazione DB.
+Il preflight offline toscano conta 37 sezioni registrate, 17 enabled (9 partial, 4 unsupported, 2 failed, 1 ok, 1 no-upcoming) e 90 eventi nello status persistito; non è un audit di rete completo. Prossimo target: un singolo documento CAI Fivizzano, URL ufficiale `https://www.caifivizzano.it/eventi/le-miniere-di-calcaferro/`, assente da status/cache/FAILURES, massimo 1 documento/120 s/concurrency 1 e senza discovery, dopo checkpoint remoto. Pescia `/cp/` resta esclusa senza strategia distinta.
+
+Il runtime e i ruoli sono richiesti GPT-6 Luna high; per questa sessione la telemetria non attesta il modello effettivo. I due agenti esistenti hanno terminato la QA; nessun agente aggiuntivo. Mercury resta `inception/mercury-decide` via Decisions API. Nessun cron, merge, deploy o cancellazione DB.
 
 ## Responsabilità
 

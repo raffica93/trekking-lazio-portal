@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "toscana-pescia-selection-checkpoint-ready",
+  "phase": "toscana-pescia-timeout-repaired-fivizzano-miniere-checkpoint-pending",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -537,9 +537,21 @@
       "status": "completed",
       "owner": "orchestrator + cai-collector",
       "result": "Preflight offline dopo delivery Fivizzano: Toscana scrape-status snapshot 37 sezioni/17 enabled: 9 partial, 5 unsupported, 1 failed, 1 ok, 1 no-upcoming; 90 eventi registrati (persisted snapshot). Pescia cai-pescia-9226026 selezionata su URL ufficiale cp/calendario-attivita-cai-pescia/ presente in registry homepage, esatta non consumata/cache/failure. URL mensile fratello ha discovery-budget-exhausted; non ritentare, max1 page/120s/concurrency1/no discovery. Validazione host/url locale PASS."
+    },
+    {
+      "id": "S67",
+      "status": "completed",
+      "owner": "orchestrator + cai-collector + cai-importer",
+      "result": "Run cai-20261023-toscana-pescia-index01: exact /cp/ URL timed out at client 8000 ms; no status/body/cache/retry/events. Collector first erased old source history; orchestrator repaired from remote 90715a2, retaining 12 documents and August discovery-limit, adding distinct fetch-timeout issue/CAI-F-6ccdc9044ca287f1. Importer QA PASS; 3376 catalog IDs unchanged; all six public mirrors stable; backend test 206/206 after collection. No DB."
+    },
+    {
+      "id": "S68",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline Toscana scan: 17 enabled = 9 partial, 4 unsupported, 2 failed, 1 ok, 1 no-upcoming; persisted status sum 90 events. Pescia excluded after timeout; no other distinct Toscana URL remained safely selectable except new official Fivizzano page /eventi/le-miniere-di-calcaferro/, absent from status/cache/failures. Selected one-document bounded sample; no network/test/file edits."
     }
   ],
-  "nextAction": "Checkpoint remoto della selezione CAI Pescia e delle correzioni STATE/REGIONS/HANDOFF. Verificato il branch, eseguire un solo run CAI Pescia, URL esatta cp/calendario-attivita-cai-pescia, max 1 documento/120 s/concurrency 1/no discovery; non ritentare il sibling mensile con discovery-budget-exhausted.",
+  "nextAction": "Pubblicare il checkpoint completo del timeout Pescia riparato e della selezione Fivizzano miniera; verificare ref e blob remoti. Solo dopo, avviare il singolo run cai-20261023-toscana-fivizzano-miniere01 sulla URL esatta, max1/120s/concurrency1/no discovery. Non ritentare Pescia /cp/ né sibling mensile agosto.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -684,7 +696,7 @@
       "status": "verified"
     }
   },
-  "repositoryCommit": "52c9cd3a36e3128932fc4d140def45d01a021936",
+  "repositoryCommit": "90715a2b3868b8ad6395e497446c706d3268605c",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -708,9 +720,9 @@
   },
   "tests": "After Fivizzano collection: backend npm test 206/206; all six public JSON files byte-stable before/after; backend/frontend mirrors equal.",
   "updatedAt": "2026-10-23",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23",
-  "regionCurrent": "Toscana — Fivizzano calendar01: 10 eventi verificati da una fonte ancora partial; +5 raw ID, 1 duplicato escluso, 4 ID classificati e consegnati (4 places + 4 classifications, stato draft); 2 sourceDocument-only non importati. DB query dopo 4427 places/3358 classifications; nessun aggiornamento/cancellazione/coordinata.",
-  "regionNext": "Toscana — CAI Pescia (`cai-pescia-9226026`), preflight-only target: https://www.caipescia.it/cp/calendario-attivita-cai-pescia/. Official-host URL exact and in registry calendarUrls; this distinct page is not in cache/history or a failure row. A sibling monthly URL has discovery-budget-exhausted, so one document only, 120s/concurrency 1, no discovery expansion.",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T00:40:54Z",
+  "regionCurrent": "Toscana — Fivizzano calendar01 consegnato: 10 righe verificate, +5 ID raw, 1 duplicato escluso, 4 places + 4 classificazioni draft riconciliati; 2 sourceDocument-only non importati. Pescia index01 ha avuto timeout 8000 ms senza HTTP status/body/cache/eventi; catalogo 3376→3376. 12 documenti storici e discovery-limit agosto preservati, timeout distinto in FAILURES; nessun DB.",
+  "regionNext": "Toscana — CAI Fivizzano (cai-fivizzano-9226019), pagina ufficiale distinta https://www.caifivizzano.it/eventi/le-miniere-di-calcaferro/, preflight offline PASS: presente nel registry, non in scrape-status/cache/FAILURES. Un solo documento/120s/concurrency1, senza seguire link. Eseguire dopo checkpoint remoto della selezione.",
   "preflight": {
     "at": "2026-10-23T00:00:18Z",
     "sourceId": "cai-carate-brianza-9216030",
@@ -774,101 +786,64 @@
     "independentImporterQa": "PASS file seals/catalog mirrors; HOLD import eligibility because corrected record is past/no catalog delta"
   },
   "lastRegionalAttempt": {
-    "runId": "cai-20261023-toscana-fivizzano-calendar01",
+    "runId": "cai-20261023-toscana-pescia-index01",
     "region": "Toscana",
-    "sourceId": "cai-fivizzano-9226019",
-    "requestedUrl": "https://www.caifivizzano.it/calendario-uscite/",
-    "finalUrl": "https://www.caifivizzano.it/calendario-uscite/",
-    "collection": "partial; method=html-calendar; 10 extracted rows",
-    "files": "classification-input, source evidence, report ed evidence manifest checkpointed e verificati a 3341fc9",
-    "database": "pending; classificazione live appena abilitata dal runtime connesso; nessuna query/write DB",
-    "baselineCommit": "316f03b2b98ef56f2222b37f816180992d5b54e4",
-    "runFolder": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-calendar01",
-    "contentType": "text/html; charset=UTF-8",
-    "bodyBytes": 148307,
-    "bodySha256": "a4e350268783bc1fe3a0ed37a1e75269d8559fd53e204ca9194c21250e3d11f0",
-    "httpStatus": "not persisted; no 200/304 assertion",
-    "catalogBefore": 3371,
+    "sourceId": "cai-pescia-9226026",
+    "requestedUrl": "https://www.caipescia.it/cp/calendario-attivita-cai-pescia/",
+    "collection": "partial; client timeout after 8000 ms, no HTTP status/body/cache; no retry",
+    "files": "manifest/state/report and corrected source status, failure log, mirrors present locally; checkpoint pending",
+    "database": "no candidates; no query/write",
+    "baselineCommit": "90715a2b3868b8ad6395e497446c706d3268605c",
+    "runFolder": "backend/data/agent-runs/cai-20261023-toscana-pescia-index01",
+    "catalogBefore": 3376,
     "catalogAfter": 3376,
-    "uniqueIdsAfter": 3376,
-    "addedRaw": 5,
+    "added": 0,
     "removed": 0,
-    "changedExisting": 2,
-    "changedExistingFields": "sourceDocument only for ...-8cf43c159190 and ...-fc2dd59b3a86",
-    "acceptedNewIds": [
-      "cai-fivizzano-9226019-25b520da9498",
-      "cai-fivizzano-9226019-4ac183446fc1",
-      "cai-fivizzano-9226019-9ad6725f7fbe",
-      "cai-fivizzano-9226019-eba39ba9cdc6"
-    ],
-    "semanticDuplicateExcluded": {
-      "id": "cai-fivizzano-9226019-5b1c92eec5ec",
-      "duplicateOf": "cai-fivizzano-9226019-b759d3dd85b0",
-      "reason": "same date/link/description; punctuation-only title difference"
-    },
-    "eventsExtracted": 10,
-    "eventsVerified": 10,
-    "duplicateIdsExact": 0,
-    "semanticDuplicatesExcluded": 1,
+    "changedExisting": 0,
+    "eventsExtracted": 0,
     "sectionsChecked": 1,
     "complete": 0,
     "partial": 1,
     "unreachable": 0,
-    "failuresResolved": [],
-    "failuresOpen": [
-      "annual PDF OCR failure",
-      "annual PDF discovery-limit 8",
-      "calendar page discovery-limit 1"
-    ],
-    "coordinatesAdded": 0,
-    "newCoordinatesVerified": 0,
-    "collectorQa": "HTML calendar cards/JSON-LD verified via exact body evidence sidecar; source remains partial.",
-    "importerQa": "PASS manifest, mirrors, 5 raw adds, one semantic duplicate exclusion, 4 classification candidates, 2 sourceDocument-only updates; no DB.",
-    "backendTests": "206/206 after collection; all six public JSON hashes stable before/after.",
-    "manifestSha256": "ef3c89c5388536e5c83b349bcd948c3f1301457fba948a8bc38445fb877356d0",
-    "runStateSha256": "1193e2e49852690eb3ccb3fc04779501fa95fc9300f6ab85d9848077631a26c9",
-    "sourceEvidencePath": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-calendar01/source-evidence.json",
-    "sourceEvidenceSha256": "271b59accbe13aaede80d87640467f4564db27a62d9fc57fd810574757ea7709",
-    "reportPath": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-calendar01/collection-report.md",
-    "reportSha256": "b6fa73f1cad475428f0db67767be52dd3f5e43f1ee0ef23ae7d2a06415f497e2",
-    "dbWrites": 0,
-    "classificationInputPath": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-calendar01/classification-input.json",
-    "classificationInputSha256": "1aba5906e6a743318ecb63b82b733deca9263759e943710308352901e3b33334",
-    "evidenceManifestPath": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-calendar01/evidence-manifest.json",
-    "evidenceManifestSha256": "86d3d0a0f2ccde9a1edf0b10edb9b1b3107bacc847f7a75f76c2221ed82c6123"
+    "sourceDocumentsPreserved": 12,
+    "previousDiscoveryIssuePreserved": true,
+    "timeoutFailureRecord": "CAI-F-6ccdc9044ca287f1",
+    "failureRecordsBefore": 716,
+    "failureRecordsAfter": 717,
+    "importerQa": "PASS; mirrors and run evidence hashes verified; no DB candidates",
+    "backendTests": "206/206 serial after collection/status repair; public JSON hashes stable"
   },
   "regionalCoverage": {
     "region": "Toscana",
-    "scope": "persisted source status across 37 registry rows; no live regional requery",
+    "scope": "fresh join of 37 Toscana registry rows to persisted scrape-status at 2026-10-23T00:42:23.832Z; offline source audit has no new network coverage",
     "status": "open",
     "persistedStatusSnapshot": {
-      "asOf": "2026-10-23T00:14:13Z",
+      "asOf": "2026-10-23T00:42:23.832Z",
       "sectionsRegistered": 37,
       "enabled": 17,
       "partial": 9,
-      "unsupported": 5,
-      "failed": 1,
+      "unsupported": 4,
+      "failed": 2,
       "ok": 1,
       "noUpcoming": 1,
       "eventsInPersistedStatus": 90,
-      "note": "Counts reflect scrape-status snapshot after Fivizzano; not a fresh external-source audit. Historical national snapshot 2026-10-20 remains separate."
+      "note": "Fresh local join after Pescia timeout repair; source states/counts are persisted status, not a new region-wide source fetch. National historical snapshots are not current queries."
     },
     "currentRunCounts": {
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
-      "eventsExtracted": 10,
-      "eventsVerified": 10,
-      "newRawIds": 5,
-      "semanticDuplicatesExcluded": 1,
-      "classificationEligibleIds": 4,
-      "dbPlacesInserted": 4,
-      "dbClassificationsInserted": 4,
-      "existingRowsSourceDocumentOnly": 2,
+      "eventsExtracted": 0,
+      "eventsVerified": 0,
+      "newRawIds": 0,
+      "semanticDuplicatesExcluded": 0,
+      "dbPlacesInserted": 0,
+      "dbClassificationsInserted": 0,
+      "existingRowsChanged": 0,
       "failuresResolved": 0,
-      "failuresOpen": 3,
-      "nextStep": "Checkpoint selection, then bounded single-page CAI Pescia sample; preserve monthly sibling discovery failure and do not expand."
+      "failuresOpen": 2,
+      "nextStep": "Checkpoint Pescia failed attempt and Fivizzano miniera selection; run one bounded exact URL after remote verification."
     },
     "historicalSnapshot": {
       "asOf": "2026-10-20",
@@ -1000,12 +975,14 @@
   ],
   "nextSourcePreflight": {
     "region": "Toscana",
-    "sourceId": "cai-pescia-9226026",
-    "sourceName": "CAI Pescia",
-    "url": "https://www.caipescia.it/cp/calendario-attivita-cai-pescia/",
-    "status": "selected; waiting for remote selection checkpoint before bounded fetch",
-    "evidence": "Official registry calendarUrls entry linked from caipescia.it homepage, verified 2026-09-05. Exact URL absent from persisted scrape documents, run artifacts, cache and FAILURES. Separate monthly sibling ?mo=8&yr=2026 has discovery-budget-exhausted; do not retry it or expand discovery.",
-    "scope": "one exact official page only, max 1 document, 120 seconds, concurrency 1, no child URLs",
-    "networkFetchPerformed": false
-  }
+    "sourceId": "cai-fivizzano-9226019",
+    "sourceName": "CAI Fivizzano",
+    "url": "https://www.caifivizzano.it/eventi/le-miniere-di-calcaferro/",
+    "status": "selected offline; awaiting remote checkpoint before fetch",
+    "evidence": "Collector offline preflight: exact calendarUrls URL linked from official Fivizzano calendar; absent from scrape-status documents, local cache and FAILURES. Different from the consumed calendar page; source still partial due annual PDF OCR/discovery failures.",
+    "scope": "one exact URL, max 1 document, 120 seconds, concurrency 1, no child URLs",
+    "networkFetchPerformed": false,
+    "proposedRunId": "cai-20261023-toscana-fivizzano-miniere01"
+  },
+  "currentRun": null
 }
