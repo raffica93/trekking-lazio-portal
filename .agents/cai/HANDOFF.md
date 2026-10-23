@@ -8,12 +8,12 @@ Il run `cai-20261023-marche-pesaro-homepage01` è terminato sulla sola URL seed 
 |---|---|---|
 | Directory Marche | completata e checkpointata | `cai-20261023-marche-directory-refresh01`; 837 ID invariati; tre soli website aggiornati; commit `82eb9a4` |
 | Campione Pesaro — raccolta | `partial`; 0 eventi | URL seed singola e budget limitato; redirect bloccato, dettagli HTTP/body assenti |
-| File | manifest/state presenti; catalogo invariato | importer PASS su integrità/hash; HOLD sull’evidenza della richiesta; report `collection-report.md` SHA-256 `cdc520f565e9c9bc2a23e927156848d1dc77feb61c788c45cfc524505c3796e9` |
+| File | manifest/state presenti; catalogo invariato | importer PASS su integrità/hash; HOLD sull’evidenza della richiesta; report `collection-report.md` SHA-256 `efbdee72f3a9a75c80ddec66fd39205b31e3cc9e3b455859defa5b41be5c7c06` |
 | Test | PASS | backend `npm test` 214/214 dopo la raccolta; catalogo/registry mirrors invariati |
 | Commit/push | da completare | nessuna scrittura DB |
 | Database | non avviato | 0 delta, nessuna query/import/receipt |
 
-Gli artefatti sono in `backend/data/agent-runs/cai-20261023-marche-pesaro-homepage01/`; manifest SHA-256 `187a7954974ce8a9c38d9e513aa1a027fe790c94e943dd79ef58790515368933`, state SHA-256 `9703deff0e9dbda34557e43b0e6105203c138631827e653d51b5ed3f3d5125e4`. Lo status target registra Pesaro `failed`; S. Benedetto e Sarnano differiscono solo nei website già aggiornati dal refresh directory. I mirror `scrape-status.json` coincidono (SHA `831ae8755a5bcaa4941d4a90a0b2414b61e9b859c9da206a936169b02d29d8f8`), mentre `excursions.json` backend/frontend resta SHA `10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7`.
+Gli artefatti sono in `backend/data/agent-runs/cai-20261023-marche-pesaro-homepage01/`; manifest SHA-256 `7bec2799fcf3791d0004e9577334621e6161f2b7b1061e7d703cd4e928a10267`, state SHA-256 `9703deff0e9dbda34557e43b0e6105203c138631827e653d51b5ed3f3d5125e4`. Lo status target registra Pesaro `failed`; S. Benedetto e Sarnano differiscono solo nei website già aggiornati dal refresh directory. I mirror `scrape-status.json` coincidono (SHA `5cc2ae7caefa2f9f8c7876f433a7516423e6ebe9bbd05ce99903feb05f7b5391`), mentre `excursions.json` backend/frontend resta SHA `10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7`.
 
 Prossimo: checkpointare report, stato e run artifacts; poi identificare la destinazione con evidenza ufficiale e correggere il perimetro host prima di qualunque nuovo campione limitato. Finché non si legge correttamente un calendario/feed, Pesaro resta partial e non si importa nulla. Nessun merge, deploy o cron.
 

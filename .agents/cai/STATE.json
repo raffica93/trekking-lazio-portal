@@ -901,7 +901,7 @@
       "id": "S126",
       "status": "completed",
       "owner": "cai-importer + orchestrator",
-      "result": "Importer read-only QA PASS manifest/hash, mirror and catalog integrity; HOLD request evidence (no body/status/final URL). Backend npm test 214/214 after collection. No import/DB. Report committed as run artifact in pending checkpoint; report SHA-256 cdc520f565e9c9bc2a23e927156848d1dc77feb61c788c45cfc524505c3796e9."
+      "result": "Importer read-only QA PASS manifest/hash, mirror and catalog integrity; HOLD request evidence (no body/status/final URL). Backend npm test 214/214 after collection. No import/DB. Report committed as run artifact in pending checkpoint; report SHA-256 efbdee72f3a9a75c80ddec66fd39205b31e3cc9e3b455859defa5b41be5c7c06."
     }
   ],
   "nextAction": "Commit and push the Pesaro homepage sample report, run artifacts, scraper status mirrors, STATE/HANDOFF/REGIONS updates; verify the remote SHA. Then, read-only, establish the official redirect destination/host evidence before deciding whether to run one new bounded sample. No import or claim of empty calendar.",
@@ -1052,7 +1052,7 @@
     "added": 0,
     "removed": 0,
     "modified": 0,
-    "reportSha256": "cdc520f565e9c9bc2a23e927156848d1dc77feb61c788c45cfc524505c3796e9",
+    "reportSha256": "efbdee72f3a9a75c80ddec66fd39205b31e3cc9e3b455859defa5b41be5c7c06",
     "backendTests": "214/214"
   },
   "regionalCoverage": {
@@ -1222,7 +1222,7 @@
     "sourceId": "cai-pesaro-9228006",
     "requestedUrl": "https://caipesaro.it/",
     "collection": "partial; redirect blocked by registered-host guard before response body capture; do not treat as an empty calendar",
-    "files": "manifest/state/status mirrors present; importer integrity PASS, request-evidence HOLD; report SHA-256 cdc520f565e9c9bc2a23e927156848d1dc77feb61c788c45cfc524505c3796e9; checkpoint pending",
+    "files": "manifest/state/status mirrors present; importer integrity PASS, request-evidence HOLD; report SHA-256 efbdee72f3a9a75c80ddec66fd39205b31e3cc9e3b455859defa5b41be5c7c06; checkpoint pending",
     "database": "pending-no-delta; no DB query, migration, write, import or receipt",
     "runFolder": "backend/data/agent-runs/cai-20261023-marche-pesaro-homepage01",
     "sourceUrlSeeds": 1,
@@ -1249,11 +1249,11 @@
     "backendExcursionsSha256": "10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7",
     "frontendExcursionsSha256": "10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7",
     "backendRegistrySha256": "992e32565ed65031f95873b7dd83fc82b8feba66daa4aebd59cfe6ea277d6100",
-    "backendStatusSha256": "831ae8755a5bcaa4941d4a90a0b2414b61e9b859c9da206a936169b02d29d8f8",
-    "frontendStatusSha256": "831ae8755a5bcaa4941d4a90a0b2414b61e9b859c9da206a936169b02d29d8f8",
-    "manifestSha256": "187a7954974ce8a9c38d9e513aa1a027fe790c94e943dd79ef58790515368933",
+    "backendStatusSha256": "5cc2ae7caefa2f9f8c7876f433a7516423e6ebe9bbd05ce99903feb05f7b5391",
+    "frontendStatusSha256": "5cc2ae7caefa2f9f8c7876f433a7516423e6ebe9bbd05ce99903feb05f7b5391",
+    "manifestSha256": "7bec2799fcf3791d0004e9577334621e6161f2b7b1061e7d703cd4e928a10267",
     "stateSha256": "9703deff0e9dbda34557e43b0e6105203c138631827e653d51b5ed3f3d5125e4",
-    "reportSha256": "cdc520f565e9c9bc2a23e927156848d1dc77feb61c788c45cfc524505c3796e9",
+    "reportSha256": "efbdee72f3a9a75c80ddec66fd39205b31e3cc9e3b455859defa5b41be5c7c06",
     "importerQa": "PASS file/catalog integrity; HOLD HTTP request evidence",
     "backendTests": "npm test 214/214 after collection; catalog/registry mirrors unchanged"
   },
@@ -1263,7 +1263,7 @@
     "region": "Marche",
     "sourceId": "cai-pesaro-9228006",
     "collection": "partial; redirect blocked before body capture, no empty-calendar conclusion",
-    "files": "ready/integrity PASS; evidence HOLD; report SHA-256 cdc520f565e9c9bc2a23e927156848d1dc77feb61c788c45cfc524505c3796e9",
+    "files": "ready/integrity PASS; evidence HOLD; report SHA-256 efbdee72f3a9a75c80ddec66fd39205b31e3cc9e3b455859defa5b41be5c7c06",
     "database": "pending-no-delta; no DB read/write/import",
     "eventsExtracted": 0,
     "eventsVerified": 0,
@@ -1273,7 +1273,7 @@
     "removed": 0,
     "modified": 0,
     "databaseTouched": false,
-    "manifestSha256": "187a7954974ce8a9c38d9e513aa1a027fe790c94e943dd79ef58790515368933",
+    "manifestSha256": "7bec2799fcf3791d0004e9577334621e6161f2b7b1061e7d703cd4e928a10267",
     "stateSha256": "9703deff0e9dbda34557e43b0e6105203c138631827e653d51b5ed3f3d5125e4",
     "importerQa": "PASS integrity; HOLD request evidence",
     "tests": "backend npm test 214/214 after collection"

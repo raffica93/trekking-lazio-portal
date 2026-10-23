@@ -10,7 +10,7 @@ Campione `cai-20261023-marche-pesaro-homepage01`, fonte `cai-pesaro-9228006`, UR
 |---|---:|---:|---:|---:|---:|---:|---:|---|---|
 | `cai-20261023-marche-pesaro-homepage01` / Pesaro | 1 source, 1 URL seed | 0 | 1 | 0 attestati | 0 (pagina non acquisita) | 0 | 0 | redirect fuori host bloccato; risposta HTTP non registrata | checkpoint report/file; documentare destinazione ufficiale, poi rivalutare un singolo sample; non chiamare il calendario vuoto |
 
-Catalogo eventi prima/dopo: 3.376 ID unici, +0/-0/modificati 0; SHA backend/frontend `10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7`. Registry backend/frontend SHA `992e32565ed65031f95873b7dd83fc82b8feba66daa4aebd59cfe6ea277d6100`; status mirror SHA `831ae8755a5bcaa4941d4a90a0b2414b61e9b859c9da206a936169b02d29d8f8`. QA importer PASS per integrità e delta; HOLD perché manifest/report non attestano status HTTP, final URL o body. Backend test 214/214 dopo la raccolta. I totali regionali storici nella tabella seguente restano lo snapshot del 20 ottobre, non una query corrente.
+Catalogo eventi prima/dopo: 3.376 ID unici, +0/-0/modificati 0; SHA backend/frontend `10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7`. Registry backend/frontend SHA `992e32565ed65031f95873b7dd83fc82b8feba66daa4aebd59cfe6ea277d6100`; status mirror SHA `5cc2ae7caefa2f9f8c7876f433a7516423e6ebe9bbd05ce99903feb05f7b5391`. QA importer PASS per integrità e delta; HOLD perché manifest/report non attestano status HTTP, final URL o body. Backend test 214/214 dopo la raccolta. I totali regionali storici nella tabella seguente restano lo snapshot del 20 ottobre, non una query corrente.
 
 ## Ultimo checkpoint operativo — 23 ottobre 2026
 
