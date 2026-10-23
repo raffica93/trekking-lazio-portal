@@ -715,10 +715,10 @@
       "id": "S95",
       "status": "pending",
       "owner": "orchestrator",
-      "result": "Checkpoint Sora artifacts/report/evidence and status updates, then offline-only preflight for another Lazio source. Do not repeat Sora PDF OCR failure."
+      "result": "Sora run checkpoint published and remotely verified at 10a4de9. After this handoff, cai-collector performs offline-only preflight for a different Lazio source; no repeat of the Sora PDF failure."
     }
   ],
-  "nextAction": "Publish and verify Sora run artifacts, report/source evidence/evidence-manifest, status mirrors and handoff on codex/cai-orchestrator-luna. After remote verification, cai-collector performs offline-only preflight for another Lazio source; if none, pass to the next region. No fetch until a new exact target is checkpointed.",
+  "nextAction": "cai-collector performs offline-only preflight for another distinct exact official Lazio URL. Exclude the Sora programme PDF OCR failure. If no safe target exists, pass to the next region. No fetch before a new target checkpoint.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -728,7 +728,7 @@
     "proposedRunId": null
   },
   "currentWork": {
-    "branchHead": "312a682dd30fc3189ac0e5d7466572001b1574c9",
+    "branchHead": "10a4de97597650f787a3a4bb630b2a32a419c202",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
       "runId": "cai-20261023-lazio-sora-programma01",
@@ -736,7 +736,7 @@
       "sourceId": "sora",
       "requestedUrl": "https://www.caisora.it/sito/programma-escursionistico-2026-2/",
       "collection": "partial; announcement page read, underlying PDF/calendar remains unresolved",
-      "files": "source evidence, report, manifest/evidence-manifest and public mirrors prepared; checkpoint pending",
+      "files": "report/source evidence/manifest/evidence-manifest/state and public status/catalog mirrors committed and remotely verified at 10a4de9",
       "database": "no candidate; no classification/query/write",
       "counts": {
         "catalogBefore": 3376,
@@ -754,7 +754,7 @@
       "tests": "backend npm test 206/206 after collection; public mirrors stable"
     }
   },
-  "repositoryCommit": "312a682dd30fc3189ac0e5d7466572001b1574c9",
+  "repositoryCommit": "10a4de97597650f787a3a4bb630b2a32a419c202",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -777,8 +777,8 @@
     }
   },
   "tests": "After Sora collection: backend npm test 206/206 serially; six public JSON hashes unchanged pre/post; all backend/frontend mirrors byte-identical.",
-  "updatedAt": "2026-10-23T01:40:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T01:40:00Z",
+  "updatedAt": "2026-10-23T01:43:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T01:43:00Z",
   "regionCurrent": "Lazio — CAI Sora announcement sample: one URL read, source partial, 0 verified events, 10 existing IDs unchanged, 0 new/removed/changed; 0 DB. The cached page is an announcement linking to the already OCR-failed PDF, so calendar coverage remains unresolved.",
   "regionNext": "Lazio — offline preflight for a distinct exact official URL; exclude Sora 2026.pdf (OCR failure/discovery-limit 9), then pass to next region if no safe target.",
   "preflight": {
@@ -1034,7 +1034,7 @@
   ],
   "nextSourcePreflight": {
     "region": "Lazio",
-    "status": "pending offline-only source scan after current checkpoint",
+    "status": "offline-only scan in progress after verified Sora checkpoint 10a4de9",
     "scope": "registry, scrape-status URL/documents, FAILURES/cooldown, existing run artifacts and cache if available",
     "networkFetchPerformed": false,
     "exclude": [
@@ -1086,7 +1086,7 @@
     "runId": "cai-20261023-lazio-sora-programma01",
     "path": "backend/data/agent-runs/cai-20261023-lazio-sora-programma01",
     "collection": "partial",
-    "files": "ready; evidence-manifest pending final checkpoint",
+    "files": "ready; run artifacts and catalog/status mirror blobs remotely verified at 10a4de9",
     "database": "pending-no-delta",
     "requestedUrl": "https://www.caisora.it/sito/programma-escursionistico-2026-2/",
     "bodySha256": "59df2257b67d462f64ffe2eee243f28c02310d0ec52c135349bed3576c9ea742",
