@@ -452,8 +452,8 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "e277de52b9d311edc7b46b40512a6ee59f6d1901",
-    "recoverableRemoteCheckpoint": false,
+    "branchHead": "6d7ba7e60f5829e92b6cc90b435db57145e77036",
+    "recoverableRemoteCheckpoint": true,
     "sampleRun": {
       "runId": "cai-20261023-lombardia-carate-corsoalpinismo01",
       "region": "Lombardia",
@@ -507,11 +507,12 @@
       "reportPath": "backend/data/agent-runs/cai-20261023-lombardia-carate-corsoalpinismo01/collection-report.md",
       "reportSha256": "ca32d56a0d914670aca0a41fd65379ec02758d4db3876dac8e86bf076407c450",
       "coordinatesAdded": 0,
-      "dbWrites": 0
+      "dbWrites": 0,
+      "filesCheckpointCommit": "6d7ba7e60f5829e92b6cc90b435db57145e77036"
     },
     "nextAction": "Checkpoint remoto di report Carate, run artifacts, catalog mirrors e registri. Poi continua preflight offline Lombardia; se restano fonti lavorabili prosegui con un URL alla volta, altrimenti passa alla regione successiva."
   },
-  "repositoryCommit": "e277de52b9d311edc7b46b40512a6ee59f6d1901",
+  "repositoryCommit": "6d7ba7e60f5829e92b6cc90b435db57145e77036",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -534,8 +535,8 @@
     }
   },
   "tests": "After Carate01 collection and parser fix: backend npm test 206/206; six public JSON hashes identical before/after, including frontend/public/excursions.json.",
-  "updatedAt": "2026-10-23T00:04:04Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T00:04:04Z",
+  "updatedAt": "2026-10-23T00:04:30Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T00:04:30Z",
   "regionCurrent": "Lombardia — Carate Brianza: flyer ufficiale del corso verificato; parser ha corretto 04/05-lug in 4–5 luglio. Evento passato, fonte final document già nota; 0 nuovi eventi futuri/ID, 6 righe Carate invariate. Nessun Mercury/DB.",
   "regionNext": "Lombardia — cai-collector sta preflightando offline una fonte distinta; escludere Carate alias già osservato, Varese stantia/iCal, Lissone host/duplicato, e code non produttive. Passare regione solo dopo esaurimento fonti lavorabili.",
   "preflight": {
@@ -637,7 +638,8 @@
     "reportPath": "backend/data/agent-runs/cai-20261023-lombardia-carate-corsoalpinismo01/collection-report.md",
     "reportSha256": "ca32d56a0d914670aca0a41fd65379ec02758d4db3876dac8e86bf076407c450",
     "coordinatesAdded": 0,
-    "dbWrites": 0
+    "dbWrites": 0,
+    "filesCheckpointCommit": "6d7ba7e60f5829e92b6cc90b435db57145e77036"
   },
   "regionalCoverage": {
     "region": "Lombardia",
