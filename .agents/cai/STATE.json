@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "marche-pesaro-homepage-sample-partial-checkpoint-pending",
+  "phase": "marche-pesaro-homepage-sample-checkpointed",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -902,9 +902,15 @@
       "status": "completed",
       "owner": "cai-importer + orchestrator",
       "result": "Importer read-only QA PASS manifest/hash, mirror and catalog integrity; HOLD request evidence (no body/status/final URL). Backend npm test 214/214 after collection. No import/DB. Report committed as run artifact in pending checkpoint; report SHA-256 efbdee72f3a9a75c80ddec66fd39205b31e3cc9e3b455859defa5b41be5c7c06."
+    },
+    {
+      "id": "S127",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Pesaro report/state/status checkpoint and manifest verified on origin at 24e48e9070ea96added7bf0e5c7580e5a8ca5025; selected run artifact status mirrors were normalized to preserve baseline source ordering. No merge/deploy/DB."
     }
   ],
-  "nextAction": "Commit and push the Pesaro homepage sample report, run artifacts, scraper status mirrors, STATE/HANDOFF/REGIONS updates; verify the remote SHA. Then, read-only, establish the official redirect destination/host evidence before deciding whether to run one new bounded sample. No import or claim of empty calendar.",
+  "nextAction": "Eseguire una diagnosi HTTP read-only con redirect disabilitato solo sugli host CAI ufficiali già autorizzati per individuare la destinazione del redirect Pesaro; non seguire la catena né acquisire eventi. Se la destinazione è confermata come host ufficiale, scegliere un nuovo run bounded con un URL; altrimenti mantenere la fonte partial e selezionare un’altra fonte ufficiale Marche work-ready. Nessun import per questo run.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -940,7 +946,7 @@
       "tests": "backend npm test 206/206 after collection; six public JSON hashes unchanged"
     }
   },
-  "repositoryCommit": "71c750075eaae6e661753a62325c0cea91f87cbb",
+  "repositoryCommit": "24e48e9070ea96added7bf0e5c7580e5a8ca5025",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -963,8 +969,8 @@
     }
   },
   "tests": "After Pesaro homepage collection: backend npm test 214/214; checked excursions and registry backend/frontend mirrors remain byte-identical and unchanged from the run manifest; no test/catalog changes are present.",
-  "updatedAt": "2026-10-23T06:58:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T06:39:19Z",
+  "updatedAt": "2026-10-23T07:00:23Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T07:00:23Z",
   "regionCurrent": "Marche: directory refresh completed, then one CAI Pesaro homepage URL seed was sampled. Redirect was blocked before body capture; 1 source partial, 0 complete, 0 HTTP-unreachable attested, 0 events verified. This is not an empty-calendar result and not a regional audit.",
   "regionNext": "Marche remains open. First checkpoint Pesaro artifacts; then establish the exact official redirect destination/allowed host from evidence. If the guard cannot be safely resolved, preserve partial status and continue only to another official, bounded source without repeating completed work.",
   "preflight": {
@@ -1035,7 +1041,7 @@
     "sourceId": "cai-pesaro-9228006",
     "requestedUrl": "https://caipesaro.it/",
     "collection": "partial; official-host redirect rejected before body capture; zero events is not evidence of empty calendar",
-    "files": "manifest/state/collection report and scraper status mirrors; importer integrity PASS, request evidence HOLD; remote checkpoint pending",
+    "files": "manifest/state/collection report and scraper status mirrors; importer integrity PASS, request evidence HOLD; remote checkpoint verified at 24e48e9070ea96added7bf0e5c7580e5a8ca5025",
     "database": "0 reads, migrations, writes, imports or receipts; no delta",
     "sectionsChecked": 1,
     "complete": 0,
@@ -1209,8 +1215,8 @@
   ],
   "nextSourcePreflight": {
     "region": "Marche",
-    "status": "redirect diagnosis pending after file checkpoint",
-    "scope": "read-only official evidence for Pesaro redirect and host policy; do not infer Location from legacy HTTP url; next request only after exact destination/host is confirmed",
+    "status": "read-only redirect destination diagnosis pending",
+    "scope": "Issue a bounded HTTP request without following redirects, only to authorized official CAI hosts; inspect Location and stop. Do not infer destination from legacy HTTP url, fetch target, or follow external links.",
     "networkFetchPerformed": false,
     "previousSourceId": "cai-pesaro-9228006",
     "previousSourceStatus": "partial; redirect blocked before response body; calendar presence unknown",
@@ -1222,7 +1228,7 @@
     "sourceId": "cai-pesaro-9228006",
     "requestedUrl": "https://caipesaro.it/",
     "collection": "partial; redirect blocked by registered-host guard before response body capture; do not treat as an empty calendar",
-    "files": "manifest/state/status mirrors present; importer integrity PASS, request-evidence HOLD; report SHA-256 efbdee72f3a9a75c80ddec66fd39205b31e3cc9e3b455859defa5b41be5c7c06; checkpoint pending",
+    "files": "manifest/state/status mirrors present; importer integrity PASS, request-evidence HOLD; report SHA-256 efbdee72f3a9a75c80ddec66fd39205b31e3cc9e3b455859defa5b41be5c7c06; checkpoint remoto verificato a 24e48e9070ea96added7bf0e5c7580e5a8ca5025",
     "database": "pending-no-delta; no DB query, migration, write, import or receipt",
     "runFolder": "backend/data/agent-runs/cai-20261023-marche-pesaro-homepage01",
     "sourceUrlSeeds": 1,
