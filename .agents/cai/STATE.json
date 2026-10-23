@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "emilia-romagna-cesena-sample-held-next-region-preflight",
+  "phase": "lazio-sora-selection-checkpoint-pending",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -77,7 +77,7 @@
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "official source QA, bounded provider circuit breaker, adapter/tests",
-      "status": "Cesena Attivita01 completed: one bounded URL; partial/unsupported, zero extracted; catalog unchanged; source content attribution HOLD because body/cache/HTTP metadata are not persisted."
+      "status": "Offline FVG preflight complete: 0 exact same-host calendar URLs unrepresented across 12 enabled sources/81 URLs; no cache miss attested. Selected exact official CAI Sora URL for one bounded sample; awaiting remote selection checkpoint."
     },
     "importer": {
       "name": "cai-importer",
@@ -677,12 +677,24 @@
     },
     {
       "id": "S89",
-      "status": "pending",
+      "status": "completed",
       "owner": "cai-collector",
-      "result": "Cesena checkpoint 71a6e18 published and remotely verified. cai-collector is performing the offline-only Friuli-Venezia Giulia preflight; no fetch or file/DB writes."
+      "result": "Offline scan: FVG has 39 sections, 12 enabled and 27 disabled; 81 exact same-host calendar URLs for enabled sources are already represented in status, FAILURES or 250 run-artifact files reviewed. No cache miss attested. Region remains incomplete; next canonical candidate is Lazio."
+    },
+    {
+      "id": "S90",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline exact-URL preflight selected CAI Sora (`sora`, Lazio): https://www.caisora.it/sito/programma-escursionistico-2026-2/, registry calendarUrls/calendarEvidence same-host; not represented in status URL/documents, FAILURES or reviewed run artifacts. Existing PDF OCR/discovery issue is a distinct URL and will not be retried. No network/test/DB."
+    },
+    {
+      "id": "S91",
+      "status": "pending",
+      "owner": "orchestrator",
+      "result": "Publish and verify the Sora target selection and latest handoff; only then run one URL max1/120s/concurrency1/no discovery."
     }
   ],
-  "nextAction": "cai-collector performs offline-only preflight of Friuli-Venezia Giulia; choose one exact official unconsumed URL outside cooldown or document no target. No fetch until target selection is committed and remotely verified.",
+  "nextAction": "Publish and verify the one-URL CAI Sora selection on codex/cai-orchestrator-luna. After remote verification run cai-20261023-lazio-sora-programma01 with max1 document/120s/concurrency1/no discovery; do not retry the distinct OCR-failed PDF. Stop collection before tests/QA.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -692,7 +704,7 @@
     "proposedRunId": null
   },
   "currentWork": {
-    "branchHead": "71a6e18fc51d8838f028fe6e58e548776f1c297d",
+    "branchHead": "05302dac460737aa7d07d238d709b7b812377762",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
       "runId": "cai-20261023-emilia-romagna-cesena-attivita01",
@@ -720,7 +732,7 @@
       "tests": "backend npm test 206/206 after collection; six public JSON hashes stable pre/post"
     }
   },
-  "repositoryCommit": "71a6e18fc51d8838f028fe6e58e548776f1c297d",
+  "repositoryCommit": "05302dac460737aa7d07d238d709b7b812377762",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -743,10 +755,10 @@
     }
   },
   "tests": "After Cesena collection: backend npm test 206/206 serially; six public JSON hashes unchanged pre/post and all mirrors byte-identical.",
-  "updatedAt": "2026-10-23T01:28:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T01:28:00Z",
+  "updatedAt": "2026-10-23T01:31:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T01:31:00Z",
   "regionCurrent": "Emilia-Romagna — CAI Cesena bounded route sample; 1 source checked, partial/unsupported, content HOLD; 3,376 catalog IDs before/after, six Cesena rows unchanged, 0 new/removed/changed/verified events; 0 DB. Four source issues remain open (OCR failure and three discovery limits).",
-  "regionNext": "Friuli-Venezia Giulia — offline-only source preflight pending after Cesena checkpoint; no URL selected yet.",
+  "regionNext": "Lazio — CAI Sora (`sora`), selected exact official URL https://www.caisora.it/sito/programma-escursionistico-2026-2/; one document max, 120 seconds, concurrency 1, no discovery after selection checkpoint.",
   "preflight": {
     "at": "2026-10-23T01:27:16Z",
     "sourceId": "cai-cesena-9224012",
@@ -998,11 +1010,15 @@
     }
   ],
   "nextSourcePreflight": {
-    "region": "Friuli-Venezia Giulia",
-    "status": "offline-only scan in progress after verified Cesena checkpoint 71a6e18",
+    "region": "Lazio",
+    "sourceId": "sora",
+    "sourceName": "CAI Sora",
+    "url": "https://www.caisora.it/sito/programma-escursionistico-2026-2/",
+    "status": "selected offline; selection checkpoint pending",
+    "evidence": "exact HTTPS same-host URL in registry calendarUrls and calendarEvidence; absent from status url/documents, FAILURES and 250 reviewed run-artifact files; distinct source PDF has OCR failure and discovery-limit 9 and will not be repeated",
+    "scope": "one URL, max 1 document, 120 seconds, concurrency 1, no child URLs",
     "networkFetchPerformed": false,
-    "scope": "registry, scrape status, FAILURES/cooldown, run artifacts and cache only if actually available",
-    "target": null
+    "proposedRunId": "cai-20261023-lazio-sora-programma01"
   },
   "currentRun": {
     "runId": "cai-20261023-emilia-romagna-cesena-attivita01",
@@ -1067,10 +1083,17 @@
     "databaseQueryOrWrite": false
   },
   "proposedTarget": {
-    "region": "Friuli-Venezia Giulia",
-    "status": "offline preflight pending after current checkpoint",
-    "url": null,
-    "reason": "continue region-by-region without selecting an unverified URL",
-    "networkFetchPerformed": false
+    "region": "Lazio",
+    "sourceId": "sora",
+    "sourceName": "CAI Sora",
+    "url": "https://www.caisora.it/sito/programma-escursionistico-2026-2/",
+    "reason": "exact official HTTPS same-host URL from registry calendar evidence, not represented in reviewed status/failure/run history",
+    "sample": {
+      "documents": 1,
+      "seconds": 120,
+      "concurrency": 1,
+      "discovery": false
+    },
+    "fetchStarted": false
   }
 }
