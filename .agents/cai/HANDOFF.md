@@ -1,23 +1,20 @@
 # Passaggio operativo CAI — raccolta e delivery regionale
 
-## Ripresa corrente — Marche directory aggiornata, file QA PASS (23 ottobre 2026, 06:49 UTC)
+## Ripresa corrente — selezione campione Pesaro dopo il refresh Marche (23 ottobre 2026)
 
-Branch `codex/cai-orchestrator-luna` è stato verificato a `651423e3cd45ac263541a3c14644800911b213f8`. I due agenti non sono in attesa: `cai-collector` ha completato un singolo refresh directory-only e `cai-importer` ha validato in sola lettura i file sul checkout corrente. Nessun merge, deploy, cron o accesso DB.
+Il checkpoint directory è pubblicato e verificato a `82eb9a4fcd7e131712e8531078453c3c632a8eb7`; QA importer PASS e backend `npm test` 214/214, sei hash JSON pubblici stabili. Nessun DB, merge, deploy o cron.
 
-La raccolta file separata `cai-20261023-marche-directory-refresh01` ha letto la directory pubblica ufficiale (528 elementi) e 15 endpoint parent/subsection Marche, tutti parsati, 0 failure. Il registry rimane 837 record/837 ID: 0 addizioni/rimozioni, 0 ambiguità, 0 cambi fuori Marche. Cambiano solo tre campi `website` forniti dalla directory ufficiale: CAI Pesaro, CAI S. Benedetto del Tronto e CAI Sarnano. I nuovi URL non sono stati fetchati né testati; nessuna copertura calendario è dichiarata.
+Il run `cai-20261023-marche-directory-refresh01` ha aggiornato dal CAI ufficiale tre soli campi website Marche, senza toccare calendario/eventi. Il successivo preflight offline conferma: San Benedetto ha URL/PDF già letti; Pesaro e Sarnano hanno homepage ufficiali aggiornate, `calendarUrls`/evidence vuote. Nessun URL calendario nuovo è attestato. Per progredire senza ripetere fonti, è selezionata soltanto la homepage ufficiale di Pesaro `https://caipesaro.it/` come campione di discovery: `cai-pesaro-9228006`, host exact presente nel registry aggiornato e consentito dal runtime, diverso dalla homepage legacy in status. Non si presuppone che la pagina contenga un calendario.
 
-Importer QA indipendente PASS: report SHA-256 `523384f0adf6d6d62d1394190d33df72d7e71ccad4630a11a68bb1bb901a5ac1`, manifest `37b05fc642176c8ccb89323042e56a8f72c407462f8858114e2745e9e1de8c1a`, backend/frontend registry mirror identico SHA `992e32565ed65031f95873b7dd83fc82b8feba66daa4aebd59cfe6ea277d6100`. Il manifest è basato su b4780ff, il cui catalogo di partenza coincide con il parent del commit corrente. Caveat: HTTP status/final URL per singola richiesta non è persistito; il completamento è attestato dall'exit 0, selezione regione Marche e 0 subsection failures.
+| Fase | Stato | Prova/limite |
+|---|---|---|
+| Raccolta directory Marche | completata | 15 parent + 15 risposte, 0 failure; output SHA `992e3256…7d6100` |
+| Verifica file | PASS importer | 837 ID, 0 add/remove, 3 website-only changes |
+| Checkpoint | remoto | `82eb9a4fcd7e131712e8531078453c3c632a8eb7` |
+| Raccolta eventi Pesaro | selezione checkpoint da pubblicare | una homepage ufficiale, max1 doc/120s/concurrency1; nessun fetch ancora |
+| Database | non avviato | nessun evento candidato né scrittura |
 
-`backend npm test`: 214/214 dopo il run e QA. I sei JSON pubblici (excursions/sections/status nei due mirror) hanno hash identici prima/dopo; in particolare il test non ha scritto `frontend/public/excursions.json`.
-
-| Regione / run | Sezioni directory controllate | Complete / parziali / irraggiungibili (calendari) | Eventi verificati | Duplicati esclusi | Fallimenti risolti / aperti | Prossimo passo |
-|---|---|---|---:|---:|---|---|
-| Lombardia | preflight offline; stati non ricalcolati | non ricalcolate | 0 | 0 | 0 / Gazzada già usata nel batch classificazione; altri URL consumati, failure/cooldown o coda senza figlio esatto | Regione resta incompleta |
-| Emilia-Romagna | 29 (14 enabled, 15 disabled; snapshot precedente) | non ricalcolate | 0 | 0 | 0 / 503 Argenta-Rimini, 403 Ravenna; altri URL consumati/non-calendariali | Nessun URL safe |
-| Lazio | 31 (19 enabled, 12 disabled; snapshot precedente) | non ricalcolate | 0 | 0 | 0 / fonti consumate, 403/404 e discovery senza URL esatta | Nessun URL safe distinto da Sora |
-| Marche — `cai-20261023-marche-directory-refresh01` | 15 parent + 15 risposte subsection; 837 record conservati | stati calendario non toccati/ricontati | 0 (directory-only) | 0 | 0 subsection failure; issue calendario precedenti restano aperte | Dopo checkpoint, preflight offline dei tre website aggiornati |
-
-Run report e manifest sono in `backend/data/agent-runs/cai-20261023-marche-directory-refresh01/`. La directory ha cambiato solo website; non si inferisce che i siti siano raggiungibili o che offrano nuovi calendari. Il checkpoint file deve essere pubblicato prima del prossimo fetch.
+Dopo il checkpoint della selezione, il collector eseguirà il run orchestrato `cai-20261023-marche-pesaro-homepage01` con la sola continuation URL `https://caipesaro.it/`. Se non emergono eventi datati o una fonte leggibile, il report resterà `partial`; 0 righe non prova calendario vuoto. Poi QA importer e test backend in sequenza; import DB solo per delta nuovo verificato e classificato.
 
 
 ## Stato corrente — 23 ottobre 2026

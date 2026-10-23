@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "marche-directory-files-qa-tested-checkpoint-pending",
+  "phase": "marche-pesaro-homepage-selected-checkpoint-pending",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -77,14 +77,14 @@
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "official source QA, bounded provider circuit breaker, adapter/tests",
-      "status": "Directory-only Marche completata: 15 parent e 15 subsection response, 0 failure; tre website ufficiali aggiornati, nessun evento/calendar fetch. Report/manifest preparati; prossima selezione URL solo dopo checkpoint remoto."
+      "status": "Directory Marche QA PASS e remoto a 82eb9a4. Preflight sulle tre website modificate: S. Benedetto URL già consumate; Pesaro/Sarnano senza calendarUrls. Homepage Pesaro scelta per un solo sample dopo selection checkpoint; nessun fetch ancora."
     },
     "importer": {
       "name": "cai-importer",
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "classification manifest validator, candidate/effective QA schema, conflicts/reconciliation and DB safety",
-      "status": "PASS indipendente sul refresh Marche: manifest/output/mirror, 837 ID, 0 add/remove e tre soli website fields verificati. Backend npm test 214/214, hash dei sei JSON pubblici identici pre/post. Nessun DB."
+      "status": "PASS refresh directory Marche e 214/214 backend test; nessuna scrittura DB. Attendere i file del singolo sample Pesaro per gate read-only."
     }
   },
   "baseline": {
@@ -881,12 +881,18 @@
     },
     {
       "id": "S123",
-      "status": "pending",
+      "status": "completed",
       "owner": "cai-collector",
-      "result": "Dopo checkpoint remoto del refresh, preflight offline del solo registro Marche aggiornato: confrontare le tre website URL modificate (Pesaro, S. Benedetto del Tronto, Sarnano) con sources/status/FAILURES/run artifacts e selezionare al massimo una fonte/URL official-host nuova e non consumata; niente fetch finché non è checkpointata la selezione."
+      "result": "Preflight offline Marche sul checkout remoto 82eb9a4: nessun URL calendario nuovo. S. Benedetto del Tronto ha URL/PDF già letti; Pesaro e Sarnano hanno homepage ufficiali aggiornate dal CAI ma calendarUrls/evidence vuote. Selezionata solo la homepage Pesaro `https://caipesaro.it/` come campione di discovery, non come calendario attestato; host esatto registrato e consentito, non presente in status/cache/run docs. Nessun fetch/test/DB."
+    },
+    {
+      "id": "S124",
+      "status": "pending",
+      "owner": "orchestrator",
+      "result": "Checkpointare la selezione del campione homepage Pesaro e verificare il branch remoto. Solo dopo, assegnare al collector il run orchestrato nuovo `cai-20261023-marche-pesaro-homepage01`, un documento/120s/concurrency1; non seguire link fuori dal budget. Nessuna scrittura DB senza delta file verificato."
     }
   ],
-  "nextAction": "Pubblicare registry Marche, report/manifest, stato e handoff e verificare il ref remoto. Dopo il checkpoint, collector fa preflight offline SOLO sui tre siti con website aggiornato, distinguendo URL registrata dalla homepage; un eventuale run eventi sarà max1 documento/120s/concurrency1 e avrà un nuovo checkpoint prima del fetch. Nessun DB finché non esiste delta file verificato.",
+  "nextAction": "Pubblicare la selezione della sola homepage ufficiale Pesaro. Dopo verifica remota, eseguire init/collect tramite orchestratore con `--source cai-pesaro-9228006 --source-url https://caipesaro.it/ --concurrency 1`, budget un documento/120s. La pagina è un target di discovery, non un calendario attestato; preservare status partial se non trova evidenza. Poi importer QA e npm test seriale.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
