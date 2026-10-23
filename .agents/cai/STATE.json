@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "lombardia-varese-review-checkpoint",
+  "phase": "lombardia-carate-preflight-checkpoint",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -416,10 +416,22 @@
       "id": "S46",
       "status": "completed",
       "owner": "cai-collector",
-      "result": "Offline preflight dopo Varese seleziona CAI Lissone cai-lissone-9216040, https://cai-lissone.it/escursionismo/: URL esatta assente da status/cache/FAILURES/run history; host consentito; fonte partial con backlog discovery distinto num=255 (65 candidati), da non seguire."
+      "result": "Lissone disqualificata prima del run: target apex non passa source host validator e variante www già consumata nel run cai-20261020-lombardia-deep-11. Nessuna rete."
+    },
+    {
+      "id": "S47",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Preflight offline: Lissone non eleggibile; cai-lissone.it/escursionismo non supera hostname esatto www.cai-lissone.it; variante www già nello status/run deep-11 (html-calendar, 24 eventi, hash 60696821c6dead1eb316ec198706d1c42d48b774747646ed50d04a0375c13d9b). Nessuna rete o run."
+    },
+    {
+      "id": "S48",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Preflight offline Carate Brianza: selezionato un URL nuovo host-exact official per flyer corso alpinismo 2026; assente da 18 source docs/status, cache exact+alias, FAILURES e run history; discovery-limit annuale 344 e timeout palestra restano esclusi."
     }
   ],
-  "nextAction": "Checkpoint remoto del report e dei file Varese; poi un solo run cai-20261022-lombardia-lissone-escursionismo01 sulla URL ufficiale https://cai-lissone.it/escursionismo/, max1 documento/120s/concurrency1. Non seguire la discovery-limit su num=255.",
+  "nextAction": "Checkpoint remoto della correzione preflight Lissone/Carate. Poi un solo run cai-20261023-lombardia-carate-corsoalpinismo01 sul volantino ufficiale CAI Carate, max1 documento/120s/concurrency1; non seguire discovery-limit 344 né retry della pagina palestra.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -475,7 +487,7 @@
       "reportSha256": "ae28e7dc12f8b086649987afdc7be91b32bf81e72692d5059f5cdb9bf5144012",
       "filesCheckpointCommit": "7b063750be774219c6c3406d780b45ca29a841e9"
     },
-    "nextAction": "Checkpoint remoto del report e dei file Varese; poi un solo run cai-20261022-lombardia-lissone-escursionismo01 sulla URL ufficiale https://cai-lissone.it/escursionismo/, max1 documento/120s/concurrency1. Non seguire la discovery-limit su num=255."
+    "nextAction": "Checkpoint remoto della correzione preflight Lissone/Carate. Poi un solo run cai-20261023-lombardia-carate-corsoalpinismo01 sul volantino ufficiale CAI Carate, max1 documento/120s/concurrency1; non seguire discovery-limit 344 né retry della pagina palestra."
   },
   "repositoryCommit": "7b063750be774219c6c3406d780b45ca29a841e9",
   "databaseReadOnlyObservation": {
@@ -500,17 +512,17 @@
     }
   },
   "tests": "After Varese collection: backend npm test 205/205; six public JSON SHA-256 values identical before/after (including frontend/public/excursions.json).",
-  "updatedAt": "2026-10-22T23:58:45Z",
+  "updatedAt": "2026-10-23T00:00:18Z",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:58:45Z",
   "regionCurrent": "Lombardia — Varese calendarannual: richiesta risolta a PDF 2025 già presente, 0 delta; freshness non attestata perché cache non registra HTTP status; fonte resta partial. 3.371 catalog IDs e 58 Varese rows invariati. Nessun DB.",
-  "regionNext": "Lombardia — CAI Lissone (`cai-lissone-9216040`), URL Escursionismo preflightata offline e distinta; dopo checkpoint Varese, una pagina sola max1/120s/concurrency1.",
+  "regionNext": "Lombardia — CAI Carate Brianza, volantino corso alpinismo nuovo e host esatto; dopo checkpoint, campione singolo. Non equivale a copertura del calendario escursionistico.",
   "preflight": {
-    "at": "2026-10-22T23:58:30Z",
-    "sourceId": "cai-lissone-9216040",
-    "scope": "offline registry, status/document history, cache, FAILURES/cooldown, run history",
-    "result": "one exact official same-host Escursionismo URL selected for a bounded sample",
-    "reason": "registry calendarEvidence labels Escursionismo and links from official activities page; exact target absent from status/cache/FAILURES/run history. Hosts cai-lissone.it/www are allowlisted. Source partial with 40 documents; separate discovery-limit 65 on num=255 is not followed.",
-    "next": "after remote Varese files/report checkpoint, one explicit target only, max1 document/120s/concurrency1; do not claim zero-event completion absent a legible calendar",
+    "at": "2026-10-23T00:00:18Z",
+    "sourceId": "cai-carate-brianza-9216030",
+    "scope": "offline registry, status/document history, cache, FAILURES/cooldown and run history",
+    "result": "one official host-exact flyer URL selected for bounded sample",
+    "reason": "calendarEvidence identifies 63rd alpinism course flyer linked from official homepage; exact URL and aliases absent from status (18 docs), cache, failures and prior runs; host exactly matches official website and is allowlisted. Separate annual PDF discovery-limit 344 and gym-page timeout are out of scope.",
+    "next": "after remote checkpoint, one explicit URL max1 document/120s/concurrency1; treat as alpinism course, not regional hiking calendar coverage",
     "networkFetchPerformed": false
   },
   "databasePreflight": {
@@ -740,12 +752,12 @@
   ],
   "nextSourcePreflight": {
     "region": "Lombardia",
-    "sourceId": "cai-lissone-9216040",
-    "sourceName": "CAI Lissone",
-    "url": "https://cai-lissone.it/escursionismo/",
-    "status": "offline selected; bounded sample pending Varese remote checkpoint",
-    "evidence": "CalendarEvidence label Escursionismo and official same-source activity page link; exact URL absent from status documents/issues, cache, FAILURES, and prior runs. Allowlisted host; source partial 40 docs and separate discovery-limit 65 on num=255.",
-    "scope": "one explicit URL, max1 document/120s/concurrency1; no discovery follow-up",
+    "sourceId": "cai-carate-brianza-9216030",
+    "sourceName": "CAI Carate Brianza",
+    "url": "https://www.caicaratebrianza.it/download/5-scuola-di-alpinismo/7-corsi-di-alpinismo?download=609:volantino-63-corso-di-alpinismo-2026",
+    "status": "offline selected; bounded sample pending remote preflight-correction checkpoint",
+    "evidence": "Official calendarEvidence label 63rd alpinism course flyer; exact host matches source.website and allowlist. URL/alias absent from source status (18 documents), cache, FAILURES, and run history.",
+    "scope": "one explicit URL, max1 document/120s/concurrency1; no annual PDF/discovery expansion; no gym timeout retry",
     "networkFetchPerformed": false
   }
 }
