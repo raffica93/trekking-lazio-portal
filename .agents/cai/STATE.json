@@ -788,9 +788,15 @@
       "status": "pending",
       "owner": "orchestrator",
       "result": "After this code/selection checkpoint is verified remotely, run documented CAI directory refresh only for Lombardia using --directory-only --region Lombardia. Record pre/post hashes and merge completeness; no event collection or DB. If new exact-host calendars emerge, verify/select/checkpoint one before the bounded orchestrate run."
+    },
+    {
+      "id": "S108",
+      "status": "pending",
+      "owner": "orchestrator",
+      "result": "Run ID cai-20261023-lombardia-directory-refresh01 reserved for the official, region-scoped directory refresh after code checkpoint 6b4cdf1. Exact command: NODE_USE_ENV_PROXY=1 node scripts/discover-cai-sections.js --directory-only --region Lombardia. Capture pre/post catalog SHA256, mirror equality, completeness, retained IDs and ambiguities; no event collection or DB."
     }
   ],
-  "nextAction": "Publish and verify the conservative directory-refresh fix plus this Lombardia selection. Then run the documented official CAI directory refresh for Lombardia only (`discover-cai-sections.js --directory-only --region Lombardia`); record before/after hashes, merge ambiguities/retained IDs and mirror equality. This discovery is separate from event collection. Only after that checkpoint select one new exact-host calendar and run one bounded orchestrate lot.",
+  "nextAction": "After this run-ID checkpoint, execute exactly `NODE_USE_ENV_PROXY=1 node scripts/discover-cai-sections.js --directory-only --region Lombardia` from backend as `cai-20261023-lombardia-directory-refresh01`. Capture baseline hashes first, then inspect output, mirror equality, merge completeness, retained IDs and ambiguities; checkpoint registry output before selecting any event URL. No DB or event collection during directory refresh.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -800,7 +806,7 @@
     "proposedRunId": null
   },
   "currentWork": {
-    "branchHead": "3c0b490db69a161c402f78e0bfb8ae83302b0f23",
+    "branchHead": "6b4cdf151a2f162612597b0d09083a17b40899df",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
       "runId": "cai-20261023-lazio-sora-ical01",
@@ -826,7 +832,7 @@
       "tests": "backend npm test 206/206 after collection; six public JSON hashes unchanged"
     }
   },
-  "repositoryCommit": "3c0b490db69a161c402f78e0bfb8ae83302b0f23",
+  "repositoryCommit": "6b4cdf151a2f162612597b0d09083a17b40899df",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -849,8 +855,8 @@
     }
   },
   "tests": "After Sora iCal collection: backend npm test 206/206 serially; six public JSON hashes unchanged pre/post; backend/frontend mirrors identical.",
-  "updatedAt": "2026-10-23T02:02:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T02:02:00Z",
+  "updatedAt": "2026-10-23T02:07:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T02:07:00Z",
   "regionCurrent": "National offline frontier found no safe event URL in Piemonte/Trentino/Veneto candidates. Conservative region-scoped official-directory refresh is now ready to discover changed Lombardia sources; no event run or DB action yet.",
   "regionNext": "Lombardia — refresh official CAI directory and subsections for this region only; then checkpoint a newly evidenced exact-host calendar before collection.",
   "preflight": {
@@ -1103,7 +1109,7 @@
   ],
   "nextSourcePreflight": {
     "region": "Lombardia",
-    "status": "selection ready; code and handoff checkpoint pending",
+    "status": "selected; run ID reserved; remote code checkpoint verified",
     "scope": "official CAI directory plus subsection API for Lombardia only; merge with prior registry and preserve other regions",
     "networkFetchPerformed": false,
     "target": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/"
@@ -1172,8 +1178,9 @@
   },
   "proposedTarget": {
     "region": "Lombardia",
-    "status": "selected official-directory discovery, not event source; run after checkpoint",
+    "status": "official directory refresh selected; no event URL selected yet",
     "url": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/",
+    "runId": "cai-20261023-lombardia-directory-refresh01",
     "fetchStarted": false
   }
 }
