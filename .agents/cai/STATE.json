@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "fivizzano-classification-ready-live-run-pending",
+  "phase": "fivizzano-classified-output-checkpoint-ready-db-preflight",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -507,9 +507,15 @@
       "status": "completed",
       "owner": "orchestrator",
       "result": "Checkpoint isolato dei file Fivizzano pubblicato e verificato a 3341fc9: otto blob (docs/state, report, input, evidence manifest) corrispondono ai git blob locali. Successivo environment_status ha ristabilito connectivity=connected, segreto ready e host openrouter.ai consentito; nessuna POST ancora."
+    },
+    {
+      "id": "S62",
+      "status": "completed",
+      "owner": "orchestrator + cai-importer",
+      "result": "Mercury run cai-map-20261023-fivizzano01 completato sui 4 soli ID: 4/4, richiesto inception/mercury-decide, risposte attestate inception/mercury-decide-20260930/Inception; raw 3 trekking/0 non_trekking/1 da_verificare, 0 errori. Review QA Lago Padule mantiene raw candidate trekking ma effective da_verificare per evidenza ufficiale insufficiente. Importer verifica indipendente finale PASS per 4/4; delta-only ready, no updates/deletes. Nessuna query o write DB."
     }
   ],
-  "nextAction": "Il checkpoint remoto 3341fc9 e i blob sono verificati. Eseguire ora il run Mercury isolato cai-map-20261023-fivizzano01 sui quattro ID, col solo inception/mercury-decide via Decisions API; poi QA indipendente importer e checkpoint output prima di query/write DB.",
+  "nextAction": "Pubblicare e verificare il checkpoint remoto del run cai-map-20261023-fivizzano01 e dei documenti aggiornati. Poi fare preflight DB read-only sui quattro source_id, verificando schema/FK, righe places esistenti, conflitti e digest editoriale; solo dopo autorizzare importer delta-only e riconciliare ricevuta.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -518,7 +524,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "3341fc9f4862bdb17a3592ba30111d422d5e1d26",
+    "branchHead": "b2d64f8dcbce1746d3aa54a76838887fe89c66f8",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
       "runId": "cai-20261023-toscana-fivizzano-calendar01",
@@ -527,8 +533,8 @@
       "requestedUrl": "https://www.caifivizzano.it/calendario-uscite/",
       "finalUrl": "https://www.caifivizzano.it/calendario-uscite/",
       "collection": "partial; method=html-calendar; 10 extracted rows",
-      "files": "Fivizzano collection and four-ID isolated classification input/evidence checkpointed and verified on remote branch commit 3341fc9",
-      "database": "pending; Mercury run not yet executed; no DB query/write",
+      "files": "Collection/evidence/input at 3341fc9; classified output pending checkpoint, importer final QA PASS.",
+      "database": "pending; DB has not been queried or written. Checkpoint output then read-only preflight of four IDs/schema/editorial protection.",
       "baselineCommit": "316f03b2b98ef56f2222b37f816180992d5b54e4",
       "runFolder": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-calendar01",
       "contentType": "text/html; charset=UTF-8",
@@ -582,10 +588,11 @@
       "classificationInputPath": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-calendar01/classification-input.json",
       "classificationInputSha256": "1aba5906e6a743318ecb63b82b733deca9263759e943710308352901e3b33334",
       "evidenceManifestPath": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-calendar01/evidence-manifest.json",
-      "evidenceManifestSha256": "161b4f1edd896f86493d9cfc69be51cf1c14d9b289cb4a5d056decec0045f4fc"
+      "evidenceManifestSha256": "161b4f1edd896f86493d9cfc69be51cf1c14d9b289cb4a5d056decec0045f4fc",
+      "classification": "4/4 completed; raw candidates 3 trekking, 0 non_trekking, 1 da_verificare; after Lago Padule review override, effective 2 trekking, 0 non_trekking, 2 da_verificare; 0 errors."
     },
-    "nextAction": "Il checkpoint remoto 3341fc9 e i blob sono verificati. Eseguire ora il run Mercury isolato cai-map-20261023-fivizzano01 sui quattro ID, col solo inception/mercury-decide via Decisions API; poi QA indipendente importer e checkpoint output prima di query/write DB.",
-    "classificationFilesCheckpointed": true,
+    "nextAction": "Pubblicare e verificare il checkpoint remoto del run cai-map-20261023-fivizzano01 e dei documenti aggiornati. Poi fare preflight DB read-only sui quattro source_id, verificando schema/FK, righe places esistenti, conflitti e digest editoriale; solo dopo autorizzare importer delta-only e riconciliare ricevuta.",
+    "classificationFilesCheckpointed": false,
     "runtimeNetworkStatus": {
       "connectivity": "connected",
       "managedEnvironment": "running",
@@ -593,8 +600,9 @@
       "secretValueRead": false,
       "openrouterAllowed": true,
       "requestedModel": "inception/mercury-decide",
-      "liveRequestMade": false,
-      "note": "Environment status is connected and the runtime secret is ready; no provider request has been executed yet."
+      "liveRequestMade": true,
+      "note": "OPENROUTER_API_KEY presence only; value not read. Network request succeeded through allowed proxy to openrouter.ai.",
+      "liveRequestResult": "4/4 Decisions API success, zero errors; response model exact verified snapshot inception/mercury-decide-20260930 attested by Inception"
     },
     "modelTelemetry": {
       "orchestratorRequested": "gpt-6-luna",
@@ -603,13 +611,30 @@
       "note": "Session/agent telemetry does not expose effective model or effort; UI setting was reported by user."
     },
     "classificationFilesCheckpoint": {
-      "commit": "3341fc9f4862bdb17a3592ba30111d422d5e1d26",
+      "inputCheckpointCommit": "3341fc9f4862bdb17a3592ba30111d422d5e1d26",
+      "classificationOutputCheckpointCommit": null,
       "inputSha256": "1aba5906e6a743318ecb63b82b733deca9263759e943710308352901e3b33334",
       "evidenceManifestSha256": "161b4f1edd896f86493d9cfc69be51cf1c14d9b289cb4a5d056decec0045f4fc",
-      "reportSha256": "665d2ffdc84524430318b9b94975ccfd16107ead9f5055b9593d5696805498c0"
+      "classifiedCatalogSha256": "d07dfc27108dc38eee95ae35fac95e9ab66041806375db18968a522667c3d337",
+      "classifierManifestSha256": "0bbe6dea10f07ded946bf19af714d6306ab1cc098b3c239361007d3fffc82b8b",
+      "classifierStateSha256": "f0857553e5d2c80788839a8cf64d2f326ca3a6e699e99c6c00298980b347122d",
+      "classificationReportSha256": "0daf0d88b61af1905b43ebe055c9ea9e9470912df0c59e76e7e6452e0f24fab5",
+      "rawCandidateCounts": {
+        "trekking": 3,
+        "non_trekking": 0,
+        "da_verificare": 1,
+        "errors": 0
+      },
+      "effectiveCountsAfterReview": {
+        "trekking": 2,
+        "non_trekking": 0,
+        "da_verificare": 2,
+        "errors": 0
+      },
+      "importerQa": "PASS independent final review; delta-only ready; zero DB access/write"
     }
   },
-  "repositoryCommit": "3341fc9f4862bdb17a3592ba30111d422d5e1d26",
+  "repositoryCommit": "b2d64f8dcbce1746d3aa54a76838887fe89c66f8",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -632,8 +657,8 @@
     }
   },
   "tests": "After Fivizzano collection: backend npm test 206/206; all six public JSON files byte-stable before/after; backend/frontend mirrors equal.",
-  "updatedAt": "2026-10-23T00:27:36Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T00:26:00Z",
+  "updatedAt": "2026-10-23",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23",
   "regionCurrent": "Toscana — CAI Fivizzano calendario-uscite: 10 righe estratte, fonte partial; 5 nuovi ID raw, 1 duplicato semantico escluso, 4 candidati residui; 2 record esistenti aggiornati solo sourceDocument. 3371→3376 ID unici; nessun DB.",
   "regionNext": "Eseguire Mercury sul delta isolato dei quattro ID e fare QA importer; checkpoint output remoto prima di DB. Poi riprendere fonti Toscana ancora lavorabili.",
   "preflight": {

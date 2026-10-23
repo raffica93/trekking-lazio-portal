@@ -66,3 +66,9 @@ Aggiornare stato e prossimo passo, salvare i file necessari, eseguire commit e
 push sul branch di lavoro e verificare il commit remoto. Se il push fallisce,
 registrare il blocco e conservare un artifact recuperabile; non chiamare il lavoro
 "online". Nessun cron, nessun merge o deploy implicito.
+
+## Stato operativo corrente — Fivizzano classification-ready (23 ottobre 2026)
+
+Il run `cai-map-20261023-fivizzano01` è concluso sui soli quattro nuovi ID sigillati. Mercury richiesto `inception/mercury-decide`; tutte le quattro risposte attestano provider Inception e `response.model=inception/mercury-decide-20260930`. Conteggi grezzi: 3 trekking, 0 non trekking, 1 da verificare, 0 errori. Dopo QA semantica indipendente: 2 trekking, 0 non trekking, 2 da verificare; Lago Padule resta in revisione per mancanza di evidenza sul modo/itinerario. Importer PASS per delta-only, senza update/delete. Nessuna query o scrittura DB.
+
+Input collection/evidence checkpointati al commit `3341fc9f4862bdb17a3592ba30111d422d5e1d26`; output classificato e documenti correnti sono in attesa del commit verificato dal branch dopo `b2d64f8dcbce1746d3aa54a76838887fe89c66f8`. Prossimo: pubblicare/verificare output, poi query read-only su schema/FK e quattro `source_id`, controlli conflitti e digest editoriale. Solo dopo il gate, import mirato e ricevuta. Raccolta Toscana resta parziale (10 righe, 4 ID candidati, un duplicato escluso); non inferire completezza o coordinate.

@@ -177,3 +177,9 @@ Scalambra01 è checkpointato e verificato al commit remoto `ae663ecfe2e1b7bb8218
 ### Emilia-Romagna — CAI Cesena
 
 Campania resta parziale; preflight offline non ha trovato URL distinta sicura oltre alle code già viste/issue note. Target Cesena `cai-cesena-9224012`, indice ufficiale registrato `https://www.caicesena.com/index.php/programma-attivita`, assente da documents/cache/FAILURES. Dopo push/verifica del checkpoint di selezione, un solo run explicit URL max1/120s/concurrency1. Non ritentare annual PDF discovery7 né il distinto PDF giovani con OCR failure; l'indice non consente di dichiarare calendario completo.
+
+## Stato operativo corrente — Fivizzano classification-ready (23 ottobre 2026)
+
+Il run `cai-map-20261023-fivizzano01` è concluso sui soli quattro nuovi ID sigillati. Mercury richiesto `inception/mercury-decide`; tutte le quattro risposte attestano provider Inception e `response.model=inception/mercury-decide-20260930`. Conteggi grezzi: 3 trekking, 0 non trekking, 1 da verificare, 0 errori. Dopo QA semantica indipendente: 2 trekking, 0 non trekking, 2 da verificare; Lago Padule resta in revisione per mancanza di evidenza sul modo/itinerario. Importer PASS per delta-only, senza update/delete. Nessuna query o scrittura DB.
+
+Input collection/evidence checkpointati al commit `3341fc9f4862bdb17a3592ba30111d422d5e1d26`; output classificato e documenti correnti sono in attesa del commit verificato dal branch dopo `b2d64f8dcbce1746d3aa54a76838887fe89c66f8`. Prossimo: pubblicare/verificare output, poi query read-only su schema/FK e quattro `source_id`, controlli conflitti e digest editoriale. Solo dopo il gate, import mirato e ricevuta. Raccolta Toscana resta parziale (10 righe, 4 ID candidati, un duplicato escluso); non inferire completezza o coordinate.
