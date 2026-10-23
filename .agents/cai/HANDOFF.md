@@ -684,3 +684,9 @@ Conteggi copertura Toscana: raccolta 10 righe verificate da 1 fonte ancora parti
 ## Ricevuta DB checkpointata e stato successivo
 
 La ricevuta del delta Fivizzano, lo stato database completato e l’evidence seal aggiornato sono pubblicati a `52c9cd3a36e3128932fc4d140def45d01a021936`; ref remoto e 8 blob del commit verificati, manifest delle 5 prove passa hash/byte. Regione Toscana ancora partial per PDF OCR/discovery 8 e pagina discovery 1. Dopo questo checkpoint, il collector esistente esegue soltanto preflight offline per un target diverso già registrato come sicuro; niente replay del run Fivizzano.
+
+## Preflight offline successivo — CAI Pescia (Toscana, 23 ottobre 2026)
+
+Dopo aver chiuso il delta Fivizzano, il primo URL esatto e distinto work-ready è `https://www.caipescia.it/cp/calendario-attivita-cai-pescia/`, sezione `cai-pescia-9226026`. È elencato nel registry come URL di calendario ufficiale e collegato dalla homepage; la validazione locale di host e URL per lo scraper è PASS. Questa URL non compare in status documents, cache, run artifacts o FAILURES. La sorella mensile `?mo=8&yr=2026` ha un `discovery-budget-exhausted`: non ritentarla e non seguire link dal nuovo campione. Dopo checkpoint remoto selezione, max 1 documento/120s/concurrency 1.
+
+Contesto Toscana da scrape-status persistito (non ricalcolato live): 37 registrate, 17 enabled — 9 partial, 5 unsupported, 1 failed, 1 ok, 1 no-upcoming — e 90 eventi nel catalogo locale. Fivizzano: +5 raw IDs, 1 duplicato escluso, 4 delivered places + 4 classifications in draft; 2 sourceDocument-only non consegnati. Restano aperti i tre failure Fivizzano.
