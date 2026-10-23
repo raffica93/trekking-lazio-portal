@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-23T00:08:48.180Z",
+  "generatedAt": "2026-10-23T00:14:13.129Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 0,
-    "parsed": 0,
-    "unsupported": 1,
+    "withEvents": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 548
   },
@@ -41289,26 +41289,33 @@
       "directoryId": "9226019",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "unsupported",
+      "status": "partial",
       "url": "https://www.caifivizzano.it/wp-content/uploads/2026/02/Calendario-CAI-2026_compressed.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
       "extractor": "deterministic",
       "enabled": true,
-      "excursions": 7,
+      "excursions": 12,
       "error": null,
       "hash": "5bdd318d5d83ff8df96c14be678870fe81f7fa5bf5d78b077f56e6e221f2b9e4",
-      "updatedAt": "2026-10-19T18:24:35.762Z",
+      "updatedAt": "2026-10-23T00:14:13.129Z",
       "documents": [
         {
           "url": "https://www.caifivizzano.it/wp-content/uploads/2026/02/Calendario-CAI-2026_compressed.pdf",
           "hash": "cdb7ba15526f2667e1c770541b4007d7415e50846ec6c562a9c4a3d574f109fc",
           "events": 0,
           "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caifivizzano.it/calendario-uscite/",
+          "hash": "a4e350268783bc1fe3a0ed37a1e75269d8559fd53e204ca9194c21250e3d11f0",
+          "events": 10,
+          "method": "html-calendar"
         }
       ],
       "methods": [
-        "pdf-text"
+        "pdf-text",
+        "html-calendar"
       ],
       "issues": [
         {
@@ -41319,9 +41326,14 @@
           "url": "https://www.caifivizzano.it/wp-content/uploads/2026/02/Calendario-CAI-2026_compressed.pdf",
           "message": "Discovery budget reached; 8 candidate documents remain.",
           "code": "discovery-limit"
+        },
+        {
+          "url": "https://www.caifivizzano.it/calendario-uscite/",
+          "message": "Discovery budget reached; 1 candidate documents remain.",
+          "code": "discovery-limit"
         }
       ],
-      "extractedEvents": 0
+      "extractedEvents": 10
     },
     {
       "id": "cai-flog-9126002",

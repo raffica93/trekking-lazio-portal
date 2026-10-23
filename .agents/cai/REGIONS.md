@@ -480,3 +480,12 @@ I conteggi `complete/partial` riflettono gli stati persistiti, non nuovi test di
 | Toscana — CAI Fivizzano `cai-fivizzano-9226019` | 1 URL selezionato | 0 nuove verifiche | 1 fonte `unsupported` nello stato persistito | 0 nuove | 0 (URL non letta) | 0 | Nessuno risolto; PDF annuale OCR failure e discovery-limit 8 restano aperti su URL separata | Dopo checkpoint, campione singolo `https://www.caifivizzano.it/calendario-uscite/`, max1/120s/concurrency1 |
 
 Il target pagina è nuovo rispetto a documenti/status/cache/FAILURES/run artifacts; non implica calendario vuoto o completo. Nessuna raccolta/DB avvenuta.
+
+
+## Toscana — CAI Fivizzano calendar01 (23 ottobre 2026)
+
+| Regione / run | Sezioni controllate | Complete | Parziali | Irraggiungibili | Eventi estratti/verificati | Duplicati semantici esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---:|---:|---:|---|---|
+| Toscana, `cai-20261023-toscana-fivizzano-calendar01` | 1 | 0 | 1 | 0 | 10 righe documento; 5 nuovi ID grezzi, di cui 4 classificabili | 1 escluso (`5b1c92eec5ec` → esistente `b759d3dd85b0`) | 0 | Annual PDF OCR failure/discovery 8; pagina calendario discovery 1 | Checkpoint file, classificare solo 4 ID; QA e checkpoint batch, poi import mirato/receipt |
+
+Delta file contro checkpoint remoto `316f03b`: 3371→3376 ID unici, +5/0 remove/2 existing updates (solo `sourceDocument`). Due righe esistenti non vanno aggiornate in DB. Nuovi eventi senza coordinate verificate. Run `partial/files ready/database pending`; importer QA PASS; test 206/206, sei JSON pubblici stabili pre/post. DB inseriti: 0; classificazioni: 0 (ancora pending). I totali Toscana nazionali restano lo snapshot storico 2026-10-20, non una query corrente.

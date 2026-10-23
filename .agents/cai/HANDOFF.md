@@ -635,3 +635,14 @@ Offline review delle quattro sezioni abilitate: Belpasso/Cefalù/Erice sono anco
 ## Toscana — selezione CAI Fivizzano (23 ottobre 2026)
 
 Dopo checkpoint remoto del preflight Sicilia, il collector ha selezionato CAI Fivizzano (`cai-fivizzano-9226019`), URL `https://www.caifivizzano.it/calendario-uscite/`, etichetta registry “Calendario 2026” e link dalla pagina ufficiale `/attivita/`; l'host corrisponde esattamente al sito registrato. La pagina non è nei documenti di status, cache, failure URL o run artifacts. La fonte conserva un issue separato sul PDF annuale con OCR failure e `discovery-limit` 8: non ritentarlo né seguire la coda per questo sample. Dopo il checkpoint di selezione, un solo URL, max1 documento/120s/concurrency1, senza discovery expansion. Nessun fetch, test o DB nel preflight.
+
+
+## Toscana — CAI Fivizzano calendar01, file QA completata (23 ottobre 2026)
+
+Run `cai-20261023-toscana-fivizzano-calendar01`, iniziato dopo selection checkpoint `316f03b2b98ef56f2222b37f816180992d5b54e4`: sola URL `https://www.caifivizzano.it/calendario-uscite/`, `html-calendar`, 10 righe estratte, un documento. Body 148.307 B SHA `a4e350268783bc1fe3a0ed37a1e75269d8559fd53e204ca9194c21250e3d11f0`; status HTTP non persistito. La fonte resta partial, annual PDF OCR failure + discovery-limit 8 e pagina discovery-limit 1; non è copertura completa.
+
+Catalogo: 3.371→3.376 ID unici, +5 raw/0 rimozioni; 2 record esistenti cambiano solo `sourceDocument`. Importer ha confrontato il duplicato semantico `...-5b1c92eec5ec` con `...-b759d3dd85b0` (stessa data, link, descrizione; varia solo punteggiatura titolo): escludere il primo da classificazione e DB, conservare il record esistente. Quattro ID in lista classificabile: `...-25b520da9498` (Monte Sumbra), `...-4ac183446fc1` (Mont’Alto/Sullioni), `...-9ad6725f7fbe` (Lago Padule, dettagli scarsi da verificare), `...-eba39ba9cdc6` (Climbing Day). Ogni nuovo ID ha lat/lng null, `Località da verificare`; non inferire coordinate. Le due modifiche sourceDocument-only non sono un delta DB.
+
+Source evidence sidecar: `source-evidence.json`, SHA `271b59accbe13aaede80d87640467f4564db27a62d9fc57fd810574757ea7709`; contiene body hash, card/JSON-LD/description excerpts e locator corretti. Il body completo resta nella cache locale, non nel run; HTTP status non registrato. Collection report, manifest e state nella stessa directory run. Importer QA PASS, manifest/mirror verificati. Backend `npm test` 206/206 dopo raccolta; sei JSON pubblici invariati pre/post e mirror identici. Nessuna classification Mercury o DB ancora.
+
+Dopo checkpoint remoto dei file/report/evidence, classificare solo i quattro ID non duplicati in run isolato con modello richiesto `inception/mercury-decide`/Decisions API; importer QA del batch e checkpoint remoto prima di ogni query/write DB. Import mirato insert-only e receipt solo dopo gate. Non ripetere i 3.371 record, non aggiornare righe esistenti, non importare il duplicato.
