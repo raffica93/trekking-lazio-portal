@@ -809,12 +809,18 @@
     },
     {
       "id": "S111",
-      "status": "in_progress",
+      "status": "completed",
       "owner": "orchestrator",
-      "result": "Commit/push final code, fixture, registry mirrors, report/manifest and handoff; verify origin branch. Importer then rechecks final remote state before the next source run."
+      "result": "Checkpoint pushed and remote-verified at 25999cffecb6830765f954aba7fc729c3bb17ed3 on codex/cai-orchestrator-luna. Final catalog/output, report+manifest, merge fix and tests are now recoverable from GitHub. Await only importer read-only QA of this final checkpoint before any event request."
+    },
+    {
+      "id": "S112",
+      "status": "in_progress",
+      "owner": "cai-importer",
+      "result": "Independent remote QA of checkpoint 25999cffecb6830765f954aba7fc729c3bb17ed3: verify artifact hashes, 837 IDs, regional-only diff, Lovere activation contract and no catalog/DB write. No collection until PASS."
     }
   ],
-  "nextAction": "Commit and push the verified directory refresh, merge fix, fixture/test, report/manifest and updated STATE/HANDOFF to codex/cai-orchestrator-luna without force; verify remote HEAD, then obtain importer read-only QA on the final committed artifacts before any event collection.",
+  "nextAction": "Wait for cai-importer read-only QA on remote checkpoint 25999cffecb6830765f954aba7fc729c3bb17ed3. If PASS, start one bounded Lombardia discovery run for cai-lovere-9216055 via existing orchestrator, with no DB import until files are verified and a delta exists.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -850,7 +856,7 @@
       "tests": "backend npm test 206/206 after collection; six public JSON hashes unchanged"
     }
   },
-  "repositoryCommit": "fcf7f901f8ee34ce83f34f619814ab740cf65522",
+  "repositoryCommit": "25999cffecb6830765f954aba7fc729c3bb17ed3",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -873,8 +879,8 @@
     }
   },
   "tests": "After Sora iCal collection: backend npm test 206/206 serially; six public JSON hashes unchanged pre/post; backend/frontend mirrors identical.",
-  "updatedAt": "2026-10-23T06:38:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T06:27:00Z",
+  "updatedAt": "2026-10-23T06:39:30Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T06:39:30Z",
   "regionCurrent": "Lombardia directory refresh completed. The official listing added a website for CAI Lovere; tested offline reconciliation now marks it enabled/pending-discovery. No calendar source was fetched yet and regional event coverage is unassessed.",
   "regionNext": "Lombardia — checkpoint refreshed registry and report, then one bounded discovery from the exact official CAI Lovere website; only after it is read can event/source coverage be assessed.",
   "preflight": {
@@ -1208,7 +1214,7 @@
     "runId": "cai-20261023-lombardia-directory-refresh01",
     "region": "Lombardia",
     "collection": "not performed; directory-only run",
-    "files": "local report/manifest/catalog and mirrors finalized; backend tests 214/214; commit/push and importer final QA pending",
+    "files": "committed and remotely verified at 25999cffecb6830765f954aba7fc729c3bb17ed3; awaiting importer final QA",
     "database": "no read/write/import",
     "rootSectionsSelected": 152,
     "subsectionFailures": 0,

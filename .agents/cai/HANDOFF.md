@@ -2,7 +2,7 @@
 
 ## Stato corrente — 23 ottobre 2026
 
-Repository `raffica93/trekking-lazio-portal`, branch `codex/cai-orchestrator-luna`; base remoto verificato `fcf7f901f8ee34ce83f34f619814ab740cf65522`. Il lavoro successivo a quel commit è locale e non va considerato condiviso fino a push verificato. Nessun merge o deploy.
+Repository `raffica93/trekking-lazio-portal`, branch `codex/cai-orchestrator-luna`; checkpoint directory refresh, correzione e report verificato su origin a `25999cffecb6830765f954aba7fc729c3bb17ed3`. Nessun merge o deploy.
 
 Il refresh ufficiale directory-only Lombardia `cai-20261023-lombardia-directory-refresh01` è terminato alle 06:26Z. Comando: `NODE_USE_ENV_PROXY=1 node scripts/discover-cai-sections.js --directory-only --region Lombardia`. Ha selezionato 152 sezioni radice, zero fallimenti di risposta sottosezione, 837 record prima/dopo, zero ID aggiunti/rimossi/ambigui e zero cambi fuori Lombardia. L’output del primo merge era SHA `2216dea5e80881d99e5a72e421175d3fe373fd923d911514b498b65473a82ae9`; nove record hanno ricevuto un sito dal registro ufficiale. Il report segnala che non è conservato un ledger per singolo HTTP status/final URL.
 
@@ -10,7 +10,7 @@ QA indipendente importer sul primo output: PASS per integrità e diff; HOLD circ
 
 Output finale catalogo/backend/frontend SHA `250afdbc6fa8980f076f094c9574b2d77d157e7f34f4dfb9c84a4f09f3166944`, report SHA `c5dbbff7ee45615405e090fc400c45f88fe282946274c8ed21a1371004e2c232` e manifest SHA `f038795275c2855746f80659fe3254ccd8551a6d3827444f2ca4ee713f40a256` sono in `backend/data/agent-runs/cai-20261023-lombardia-directory-refresh01/`; il report distingue l’output rete dalla promozione locale. Copertura calendario: non valutata, nessun evento estratto/verificato, nessun duplicato o fallimento fonte conteggiato e nessun DB query/write/import. La regione conta attualmente 229 record di directory in questa snapshot, ma il refresh non è un audit di copertura eventi.
 
-Test completo e isolamento file conclusi; copie speculari identiche. Prossimo passo: commit/push verificato e QA importer read-only del checkpoint remoto finale. Solo dopo il checkpoint e tale QA, un singolo run limitato di discovery sul sito CAI Lovere; non dichiarare eventi o calendario vuoto finché la fonte non è stata letta. Run ID riservato `cai-20261023-lombardia-lovere01`. Nessun batch/import DB in corso. Runtime con rete HTTP ristretta e `OPENROUTER_API_KEY` osservata `ready` per `openrouter.ai`; modello/effort Luna restano richiesti dall’utente ma non attestati dalla telemetria runtime.
+Test completo e isolamento file conclusi; copie speculari identiche. Il checkpoint finale è remoto a `25999cffecb6830765f954aba7fc729c3bb17ed3`; prossimo passo: QA importer read-only di questo commit. Solo dopo tale QA, un singolo run limitato di discovery sul sito CAI Lovere; non dichiarare eventi o calendario vuoto finché la fonte non è stata letta. Run ID riservato `cai-20261023-lombardia-lovere01`. Nessun batch/import DB in corso. Runtime con rete HTTP ristretta e `OPENROUTER_API_KEY` osservata `ready` per `openrouter.ai`; modello/effort Luna restano richiesti dall’utente ma non attestati dalla telemetria runtime.
 
 # Passaggio operativo CAI — classificazione catalogo mappa
 
