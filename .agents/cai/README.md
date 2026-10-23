@@ -41,13 +41,11 @@ non dimostra che una chat nuova possa recuperare il lavoro.
 
 ## Stato di questo passaggio — 23 ottobre 2026
 
-Branch `codex/cai-orchestrator-luna`; checkpoint remoto verificato `1091905710a785526ccf9560df213805d3acb3b2`. I delta e la classificazione storici sono chiusi; non ripetere batch/import già completati.
+Branch `codex/cai-orchestrator-luna`, ref remoto verificato `28ccac97502f0d48233b5f88b8d099803b94de37`. Delta Valmadrera07, Campobasso e Pinasca già chiusi con ricevute; non ripeterli. Toscana/Fivizzano `cai-20261023-toscana-fivizzano-calendar01`: una pagina letta, 10 righe verificate, 5 nuovi ID grezzi, un duplicato semantico escluso, 4 candidati non duplicati. La fonte resta partial per PDF OCR/discovery e coda residua. Catalogo e manifest della raccolta sono checkpointati a `28ccac9`; input classificazione dei quattro ID e relative prove sono preparati ma attendono checkpoint remoto. Nessuna classificazione live o scrittura DB in questa sessione.
 
-Lombardia resta parziale ma il preflight corrente non ha trovato un altro URL host-exact lavorabile: Varese 503/iCal discovery 93, Brescia 403/404 in cooldown e altre fonti già campionate o con code non produttive. Marche, Molise, Piemonte, Puglia e Sardegna non hanno offerto un target distinto lavorabile dopo aver escluso URL passate, alias o fallite. Primo target nuovo è CAI Belpasso, Sicilia: `https://organizzazione.cai.it/sez-belpasso/programma-attivita-sociale-2026/`, un solo documento/120s/concurrency1 dopo checkpoint. Le issue della brochure PDF OCR e dell’iCal sono su URL distinti e non vanno ritentate in questo campione.
+Il runtime riferisce `connectivity=offline` e ambiente gestito `unavailable`; il secret OpenRouter risulta presente/pronto per dominio autorizzato ma il valore non è stato letto. Non invocare Mercury finché la rete runtime non torna disponibile. Modello richiesto resta esclusivamente `inception/mercury-decide` via Decisions API.
 
-Carate01 è chiuso senza delta: il parser fix fixture-backed è pubblicato a `e277de52b9d311edc7b46b40512a6ee59f6d1901`; manifest/report e catalog mirrors al `6d7ba7e60f5829e92b6cc90b435db57145e77036`; handoff/stato al commit corrente sopra. Suite backend 206/206, JSON pubblici invariati. Nessun DB per Carate.
-
-Orchestratore e ruoli `cai-collector`/`cai-importer` sono richiesti/configurati GPT-6 Luna high; telemetria runtime non attesta identità/effort effettivi. Nessun merge, deploy, cron o cancellazione DB.
+Orchestratore e ruoli `cai-collector`/`cai-importer` richiesti GPT-6 Luna high; i due agenti esistenti hanno completato il lavoro su Fivizzano. Telemetria corrente non attesta modello/effort effettivi. Nessun merge, deploy, cron o cancellazione DB.
 
 ## Responsabilità
 

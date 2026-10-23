@@ -1,6 +1,6 @@
 # Piano di passaggio al lavoro interamente cloud
 
-Stato aggiornato al 22 ottobre 2026: Sesto01 e Somma Blinnenhorn01 checkpointati; Lombardia ha 0 nuovi delta in questi campioni, Sommà flyer senza data. QA importer PASS e backend test 205/205 su ciascun run. Prossimo preflight selezionato: calendario annuale ufficiale CAI Varese, distinto dall’endpoint iCal 503/cooldown ormai trascorso; dopo checkpoint una sola URL max1/120s/concurrency1, senza seguire iCal.
+Stato aggiornato al 23 ottobre 2026: run Fivizzano calendar01 file-checkpointato a `28ccac9`, 10 righe verificate, 4 nuovi ID classificabili dopo esclusione di un duplicato semantico. L’input isolato di quattro ID è preparato ma attende checkpoint remoto; il runtime corrente è offline/unavailable, quindi classificazione Mercury e DB restano pending. Dopo ripristino rete: classificazione col solo modello `inception/mercury-decide`, QA importer, checkpoint output e delivery mirato con ricevuta; poi riprendere fonti Toscana. I punti S0–S7 sotto sono piano storico della qualifica, con completamenti registrati nei checkpoint e non una dichiarazione di runtime online.
 
 ## Sequenza
 

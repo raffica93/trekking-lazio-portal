@@ -33,10 +33,12 @@ The evidence sidecar `source-evidence.json` records the cached URL/body hash, ex
 
 ## Tests and delivery state
 
+Isolated classification input `classification-input.json` contains exactly the four nonduplicate IDs above, the source catalog/evidence hashes, and no semantic duplicate or sourceDocument-only updates. Input SHA-256 `1aba5906e6a743318ecb63b82b733deca9263759e943710308352901e3b33334`; an evidence manifest seals it with the collection manifest/state, report, and source sidecar. It is staged for the remote checkpoint before any Mercury call; the classifier has not been called.
+
 Backend `npm test`: 206/206 passed after collection. SHA-256 values of all six backend/frontend public JSON files were identical before and after the test suite; mirror copies match. No DB query/write occurred. Mercury has not yet been called. The classification, QA, remote checkpoint, targeted DB delivery, reconciliation and receipt are separate pending stages.
 
 Run status: `collection=partial`, `files=ready`, `database=pending`. Collection manifest SHA-256 `ef3c89c5388536e5c83b349bcd948c3f1301457fba948a8bc38445fb877356d0`; run state SHA-256 `1193e2e49852690eb3ccb3fc04779501fa95fc9300f6ab85d9848077631a26c9`.
 
 ## Next step
 
-Checkpoint catalog, status, manifest, report and evidence sidecar to the remote branch. Then classify only the four nonduplicate IDs in an isolated run using requested model `inception/mercury-decide` via the Decisions API. Importer must independently validate the sealed classification output. Do not import until that output and this file checkpoint are remote; use targeted insert-only delta import, preserve all existing/admin fields, then reconcile and publish a receipt. Keep Fivizzano partial until its annual PDF/candidate queue is resolved; zero extracted rows in that separate failed PDF would not prove complete coverage.
+The collection catalog, status, manifest, report, source evidence and isolated four-ID input are checkpointed to the remote branch. Then classify only the four nonduplicate IDs in an isolated run using requested model `inception/mercury-decide` via the Decisions API. Importer must independently validate the sealed classification output. Do not import until that output and this file checkpoint are remote; use targeted insert-only delta import, preserve all existing/admin fields, then reconcile and publish a receipt. Keep Fivizzano partial until its annual PDF/candidate queue is resolved; zero extracted rows in that separate failed PDF would not prove complete coverage.

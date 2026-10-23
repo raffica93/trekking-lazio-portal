@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "toscana-fivizzano-file-checkpoint",
+  "phase": "fivizzano-classification-files-checkpoint-pending-runtime-offline",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -489,9 +489,21 @@
       "status": "completed",
       "owner": "cai-importer + orchestrator",
       "result": "QA indipendente PASS; source-evidence con locator corretti SHA 271b59…7709; un duplicato semantico escluso (5b1→b759), quattro ID classificabili; due aggiornamenti sourceDocument-only protetti. Backend npm test 206/206, sei JSON pubblici stabili. Zero DB; collection report pronto."
+    },
+    {
+      "id": "S59",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Prepared isolated classification-input of exactly four nonduplicate IDs; excluded semantic duplicate and two sourceDocument-only updates. Input SHA and evidence manifest generated. Runtime boolean preflight: API key present, classifier enabled, openrouter.ai allowed, proxy configured; required model from code inception/mercury-decide. No POST yet."
+    },
+    {
+      "id": "S60",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Preflight ripreso: runtime cloud connectivity offline/unavailable; segreto Mercury solo stato ready/presente, nessun valore letto e nessuna richiesta live. Input isolato e evidence seal validati localmente; aggiornato report per non dichiarare commit non avvenuto. Checkpoint remoto via GitHub connector da completare; Mercury sospeso finché il runtime non torna online."
     }
   ],
-  "nextAction": "Checkpoint remoto dei file Fivizzano; quindi classificazione Mercury isolata dei 4 soli nonduplicati, QA importer e checkpoint remoto. Non includere il duplicato o le due righe sourceDocument-only nel delta DB.",
+  "nextAction": "Pubblicare via GitHub il checkpoint dei file di classificazione isolati (4 ID) e stato/handoff. Dopo conferma e solo quando il runtime cloud torna online, invocare Mercury Decisions col modello richiesto inception/mercury-decide; se offline, mantenere DB pending e non simulare il risultato.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -500,7 +512,7 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "316f03b2b98ef56f2222b37f816180992d5b54e4",
+    "branchHead": "28ccac97502f0d48233b5f88b8d099803b94de37",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
       "runId": "cai-20261023-toscana-fivizzano-calendar01",
@@ -509,8 +521,8 @@
       "requestedUrl": "https://www.caifivizzano.it/calendario-uscite/",
       "finalUrl": "https://www.caifivizzano.it/calendario-uscite/",
       "collection": "partial; method=html-calendar; 10 extracted rows",
-      "files": "ready; manifest and source-evidence independently verified; report/test complete, pending remote file checkpoint",
-      "database": "pending; no DB query/write; classification of four nonduplicate IDs pending",
+      "files": "collection checkpoint 28ccac9 remote; isolated classification input/evidence seal ready locally; remote checkpoint pending; classification not run",
+      "database": "pending; no classification call/query/write in this phase",
       "baselineCommit": "316f03b2b98ef56f2222b37f816180992d5b54e4",
       "runFolder": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-calendar01",
       "contentType": "text/html; charset=UTF-8",
@@ -559,12 +571,32 @@
       "sourceEvidencePath": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-calendar01/source-evidence.json",
       "sourceEvidenceSha256": "271b59accbe13aaede80d87640467f4564db27a62d9fc57fd810574757ea7709",
       "reportPath": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-calendar01/collection-report.md",
-      "reportSha256": "d60ace25fc053235e0c4362a20d109d3e267dea1b6ae44cc77d0c5063106cf4a",
-      "dbWrites": 0
+      "reportSha256": "665d2ffdc84524430318b9b94975ccfd16107ead9f5055b9593d5696805498c0",
+      "dbWrites": 0,
+      "classificationInputPath": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-calendar01/classification-input.json",
+      "classificationInputSha256": "1aba5906e6a743318ecb63b82b733deca9263759e943710308352901e3b33334",
+      "evidenceManifestPath": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-calendar01/evidence-manifest.json",
+      "evidenceManifestSha256": "161b4f1edd896f86493d9cfc69be51cf1c14d9b289cb4a5d056decec0045f4fc"
     },
-    "nextAction": "Checkpoint remoto dei file Fivizzano; quindi classificazione Mercury isolata dei 4 soli nonduplicati, QA importer e checkpoint remoto. Non includere il duplicato o le due righe sourceDocument-only nel delta DB."
+    "nextAction": "Pubblicare via GitHub il checkpoint dei file di classificazione isolati (4 ID) e stato/handoff. Dopo conferma e solo quando il runtime cloud torna online, invocare Mercury Decisions col modello richiesto inception/mercury-decide; se offline, mantenere DB pending e non simulare il risultato.",
+    "classificationFilesCheckpointed": false,
+    "runtimeNetworkStatus": {
+      "connectivity": "offline",
+      "managedEnvironment": "unavailable",
+      "openrouterSecretPresent": true,
+      "secretValueRead": false,
+      "requestedModel": "inception/mercury-decide",
+      "liveRequestMade": false,
+      "note": "Environment status has offline connectivity; secret readiness alone is not proof of outbound API access."
+    },
+    "modelTelemetry": {
+      "orchestratorRequested": "gpt-6-luna",
+      "effortRequested": "high",
+      "effectiveModelAttested": false,
+      "note": "Session/agent telemetry does not expose effective model or effort; UI setting was reported by user."
+    }
   },
-  "repositoryCommit": "316f03b2b98ef56f2222b37f816180992d5b54e4",
+  "repositoryCommit": "28ccac97502f0d48233b5f88b8d099803b94de37",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -587,10 +619,10 @@
     }
   },
   "tests": "After Fivizzano collection: backend npm test 206/206; all six public JSON files byte-stable before/after; backend/frontend mirrors equal.",
-  "updatedAt": "2026-10-23T01:02:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T00:40:00Z",
+  "updatedAt": "2026-10-23T00:24:19Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T00:20:00Z",
   "regionCurrent": "Toscana — CAI Fivizzano calendario-uscite: 10 righe estratte, fonte partial; 5 nuovi ID raw, 1 duplicato semantico escluso, 4 candidati residui; 2 record esistenti aggiornati solo sourceDocument. 3371→3376 ID unici; nessun DB.",
-  "regionNext": "Fivizzano: checkpoint remoto file/report/evidence, classificare i soli 4 ID non duplicati con Mercury, QA importer e checkpoint classification; poi delivery idempotente mirato e ricevuta. Nessun altro scrape fino a conclusione del delta.",
+  "regionNext": "Completare checkpoint remoto dei file Fivizzano; Mercury live solo se runtime online, QA importer e checkpoint output; delivery mirato/ricevuta. Poi continuare Toscana per fonti lavorabili.",
   "preflight": {
     "at": "2026-10-23T00:00:18Z",
     "sourceId": "cai-carate-brianza-9216030",
@@ -644,8 +676,8 @@
     "requestedUrl": "https://www.caifivizzano.it/calendario-uscite/",
     "finalUrl": "https://www.caifivizzano.it/calendario-uscite/",
     "collection": "partial; method=html-calendar; 10 extracted rows",
-    "files": "ready; manifest and source-evidence independently verified; report/test complete, pending remote file checkpoint",
-    "database": "pending; no DB query/write; classification of four nonduplicate IDs pending",
+    "files": "collection checkpoint remoto 28ccac9; classification-input/evidence manifest preparati localmente, checkpoint remoto pending",
+    "database": "pending; runtime offline, nessuna classificazione o query/write DB",
     "baselineCommit": "316f03b2b98ef56f2222b37f816180992d5b54e4",
     "runFolder": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-calendar01",
     "contentType": "text/html; charset=UTF-8",
@@ -694,8 +726,12 @@
     "sourceEvidencePath": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-calendar01/source-evidence.json",
     "sourceEvidenceSha256": "271b59accbe13aaede80d87640467f4564db27a62d9fc57fd810574757ea7709",
     "reportPath": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-calendar01/collection-report.md",
-    "reportSha256": "d60ace25fc053235e0c4362a20d109d3e267dea1b6ae44cc77d0c5063106cf4a",
-    "dbWrites": 0
+    "reportSha256": "b6fa73f1cad475428f0db67767be52dd3f5e43f1ee0ef23ae7d2a06415f497e2",
+    "dbWrites": 0,
+    "classificationInputPath": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-calendar01/classification-input.json",
+    "classificationInputSha256": "1aba5906e6a743318ecb63b82b733deca9263759e943710308352901e3b33334",
+    "evidenceManifestPath": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-calendar01/evidence-manifest.json",
+    "evidenceManifestSha256": "86d3d0a0f2ccde9a1edf0b10edb9b1b3107bacc847f7a75f76c2221ed82c6123"
   },
   "regionalCoverage": {
     "region": "Toscana",
@@ -716,7 +752,7 @@
       "failuresOpen": 3,
       "dbPlacesInserted": 0,
       "dbClassificationsInserted": 0,
-      "nextStep": "Checkpoint files, classify four nonduplicate IDs, then QA/checkpoint/targeted DB import and receipt."
+      "nextStep": "Checkpoint remoto input 4 ID; se runtime online eseguire Mercury; altrimenti mantenere pending e registrare blocco."
     },
     "historicalSnapshot": {
       "asOf": "2026-10-20",
@@ -851,7 +887,7 @@
     "sourceId": "cai-fivizzano-9226019",
     "sourceName": "CAI Fivizzano",
     "url": "https://www.caifivizzano.it/calendario-uscite/",
-    "status": "collection files ready; paused until isolated classification, QA and delta delivery are complete",
+    "status": "collection complete; isolated four-ID classification input prepared, awaiting remote checkpoint and Mercury QA before DB",
     "evidence": "Run cai-20261023-toscana-fivizzano-calendar01; no further fetch while this delta is active. PDF OCR/discovery issues remain separate.",
     "scope": "classify only the four nonduplicate source IDs; exclude semantic duplicate and sourceDocument-only updates from DB insert manifest.",
     "networkFetchPerformed": true

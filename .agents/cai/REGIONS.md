@@ -489,3 +489,12 @@ Il target pagina è nuovo rispetto a documenti/status/cache/FAILURES/run artifac
 | Toscana, `cai-20261023-toscana-fivizzano-calendar01` | 1 | 0 | 1 | 0 | 10 righe documento; 5 nuovi ID grezzi, di cui 4 classificabili | 1 escluso (`5b1c92eec5ec` → esistente `b759d3dd85b0`) | 0 | Annual PDF OCR failure/discovery 8; pagina calendario discovery 1 | Checkpoint file, classificare solo 4 ID; QA e checkpoint batch, poi import mirato/receipt |
 
 Delta file contro checkpoint remoto `316f03b`: 3371→3376 ID unici, +5/0 remove/2 existing updates (solo `sourceDocument`). Due righe esistenti non vanno aggiornate in DB. Nuovi eventi senza coordinate verificate. Run `partial/files ready/database pending`; importer QA PASS; test 206/206, sei JSON pubblici stabili pre/post. DB inseriti: 0; classificazioni: 0 (ancora pending). I totali Toscana nazionali restano lo snapshot storico 2026-10-20, non una query corrente.
+
+
+## Toscana — stato Fivizzano al 23 ottobre 2026
+
+| Regione / fonte | Sezioni controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---:|---:|---:|---|---|
+| Toscana — `cai-fivizzano-9226019`, `calendar01` | 1 | 0 | 1 | 0 | 10 righe di calendario; 4 nuovi ID non duplicati candidati | 1 | 0 | PDF annuale OCR failure/discovery-limit 8; pagina discovery-limit 1 | Classificazione isolata sospesa finché il runtime non torna online; poi QA/import mirato |
+
+Raccolta/file: 3.371→3.376 ID unici, +5 raw, 0 rimossi; 2 record esistenti cambiano solo `sourceDocument` e non fanno parte del delta DB. Database: 0 inserimenti, 0 classificazioni, nessuna query o write in questo passaggio. Il duplicato `5b1c92eec5ec` resta escluso in favore di `b759d3dd85b0`; 4 ID attendono classificazione. I conteggi nazionali sono snapshot storici, non una query corrente. Runtime `connectivity=offline`; si riprende dopo preflight online, senza ripetere raccolta.
