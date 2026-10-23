@@ -2,7 +2,7 @@
 
 ## Stato corrente — 23 ottobre 2026
 
-Repository `raffica93/trekking-lazio-portal`, branch `codex/cai-orchestrator-luna`; il checkpoint di selezione `4de739d1355cdef52570cf133f3e9b49017f9b3a` è stato verificato remoto prima del run. I nuovi file locali di run e report devono ancora essere pubblicati. Nessun merge o deploy.
+Repository `raffica93/trekking-lazio-portal`, branch `codex/cai-orchestrator-luna`; il checkpoint della raccolta Lovere e del report è verificato remoto a `8961db1d5c90baa94af336931bbcaca9e9ed2d2f`. Importer QA finale PASS. Nessun merge o deploy.
 
 ### Copertura Lombardia
 
@@ -18,7 +18,7 @@ Il catalogo eventi resta a 3.376 ID unici, 0 aggiunte, 0 rimozioni, 0 righe camb
 
 Manifest orchestratore `6d3ad42ea07a29dbed6c340468000ae63055d73f0b60f40969cab9a6ca477d41`, state `5d19a0ead4b820a820fc9853c5fbe8c8b0b4082dcdcc85819567c715d53f82ff`, excurs catalog backend/frontend `10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7`, status backend/frontend `4bfee84744d44a7ce91a5797fa7ebba00a08819be7cd491f99c91e3f21a2c8a7`. Il report e l’audit manifest aggiuntivo sono nella cartella run. Importer QA PASS con caveat dichiarato; `npm test` backend 214/214 dopo il run. SHA di `frontend/public/excursions.json` prima/dopo test uguale (`10e8…ad2c7`), quindi i test non hanno riscritto il catalogo pubblico.
 
-Prossimo: checkpoint GitHub dei file/report/manifest e aggiornamento STATE/HANDOFF, poi controllo offline delle fonti Lombardia partial/open per selezionare una sola URL ufficiale distinta senza ripetere code in cooldown. Nessun import DB, dato geografico aggiunto o attribuzione nuova. Il refresh directory precedente è pubblicato e la correzione Lovere è fixture-backed; dettaglio e hash nella sezione storica di seguito.
+Prossimo: controllo offline collector delle fonti Lombardia partial/open dopo Lovere, usando cache, cronologia e FAILURES; selezionare al massimo una URL ufficiale distinta senza ripetere code in cooldown. Nessun import DB, dato geografico aggiunto o attribuzione nuova. Il refresh directory precedente è pubblicato e la correzione Lovere è fixture-backed; dettaglio e hash nella sezione storica di seguito.
 
 # Passaggio operativo CAI — classificazione catalogo mappa
 

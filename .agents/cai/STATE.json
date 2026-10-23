@@ -845,12 +845,24 @@
     },
     {
       "id": "S117",
-      "status": "in_progress",
+      "status": "completed",
       "owner": "orchestrator",
-      "result": "Publish the verified no-delta run files and report; remote file checkpoint pending. DB remains pending-no-delta and untouched."
+      "result": "No-upcoming run, collection report/audit manifest, mirrors and state are remote and verified at 8961db1d5c90baa94af336931bbcaca9e9ed2d2f. Importer final QA PASS; catalog stays 3376 unique IDs with zero delta; no DB import required."
+    },
+    {
+      "id": "S118",
+      "status": "completed",
+      "owner": "cai-importer",
+      "result": "Read-only QA PASS on remote 8961db1d. Report/audit manifest/orchestrator manifest/state hashes cross-check; six output hashes pass; all three public data mirrors are byte-identical; 3376 event IDs unchanged; status diffs consist of Lovere run and eight directory-only website metadata; feed-level zero is supported by parsed WordPress Events JSON, iCal is non-probative, HTTP/final URL gap stated. No DB."
+    },
+    {
+      "id": "S119",
+      "status": "in_progress",
+      "owner": "cai-collector",
+      "result": "Offline-only Lombardia preflight of remaining open/partial enabled sources after Lovere. Use existing run history, scrape-status, cache and FAILURES; no network, collection, tests or writes. Return at most one exact official URL not consumed/in cooldown, or document no target and recommend next region."
     }
   ],
-  "nextAction": "Commit and push cai-20261023-lombardia-lovere01 state/manifest/report, public mirrors, and updated STATE/HANDOFF on codex/cai-orchestrator-luna. Verify the remote. No DB import: the catalog has no event delta.",
+  "nextAction": "Publish this QA/state note, then complete collector offline preflight of remaining Lombardia open/partial sources. Do not issue requests until one distinct exact URL is supported by existing evidence.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -886,7 +898,7 @@
       "tests": "backend npm test 206/206 after collection; six public JSON hashes unchanged"
     }
   },
-  "repositoryCommit": "4de739d1355cdef52570cf133f3e9b49017f9b3a",
+  "repositoryCommit": "8961db1d5c90baa94af336931bbcaca9e9ed2d2f",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -909,8 +921,8 @@
     }
   },
   "tests": "After Sora iCal collection: backend npm test 206/206 serially; six public JSON hashes unchanged pre/post; backend/frontend mirrors identical.",
-  "updatedAt": "2026-10-23T06:49:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T06:43:00Z",
+  "updatedAt": "2026-10-23T06:39:19Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T06:39:19Z",
   "regionCurrent": "Lombardia: one newly listed source CAI Lovere was checked. Its WordPress Events API returned valid JSON with zero events for 2026-10-01 through 2028-10-23. This is a feed-level no-upcoming result, not a full regional audit. 229 directory entries; one checked this run.",
   "regionNext": "Lombardia remains open. After the Lovere file checkpoint, inspect partial/open sources and exact official URLs offline, respect recorded cooldowns, and select one distinct bounded source; do not repeat completed sources.",
   "preflight": {
@@ -1163,11 +1175,11 @@
   ],
   "nextSourcePreflight": {
     "region": "Lombardia",
-    "status": "Lovere run completed; next exact URL not selected",
-    "scope": "offline inspection of open/partial sources after checkpoint",
+    "status": "offline preflight pending",
+    "scope": "remaining partial/open Lombardia sources only; no repeated completed sources and respect cooldown",
     "networkFetchPerformed": false,
     "previousSourceId": "cai-lovere-9216055",
-    "previousSourceStatus": "no-upcoming on parsed WordPress Events API; no event delta",
+    "previousSourceStatus": "no-upcoming for valid WordPress API range; source task complete",
     "nextTarget": null
   },
   "currentRun": {
@@ -1240,7 +1252,7 @@
     "runId": "cai-20261023-lombardia-directory-refresh01",
     "region": "Lombardia",
     "collection": "not performed; directory-only run",
-    "files": "committed at 25999cf; importer PASS confirmed against 5f82449; selection checkpoint for next run pending",
+    "files": "published with Lovere run at 8961db1; importer final QA PASS",
     "database": "no read/write/import",
     "rootSectionsSelected": 152,
     "subsectionFailures": 0,
