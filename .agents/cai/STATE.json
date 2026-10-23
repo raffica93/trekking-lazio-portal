@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "lazio-sora-announcement-held-next-lazio-preflight",
+  "phase": "lazio-sora-ical-selection-checkpoint-pending",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -77,7 +77,7 @@
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "official source QA, bounded provider circuit breaker, adapter/tests",
-      "status": "Sora programme-announcement run completed: cached HTML verified (75,149 bytes; SHA 59df2257…c9ea742), article links to prior OCR-failed PDF; no event rows/delta. No PDF retry."
+      "status": "Offline Lazio scan: 31 sections, 19 enabled/12 disabled; no new target among other enabled sources. One distinct exact registry Sora ICS URL selected; no fetch."
     },
     "importer": {
       "name": "cai-importer",
@@ -716,9 +716,21 @@
       "status": "pending",
       "owner": "orchestrator",
       "result": "Sora run checkpoint published and remotely verified at 10a4de9. After this handoff, cai-collector performs offline-only preflight for a different Lazio source; no repeat of the Sora PDF failure."
+    },
+    {
+      "id": "S96",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline Lazio preflight: 31 sections, 19 enabled and 12 disabled. Other enabled URL candidates represented in status/failures. One distinct CAI Sora exact URL https://www.caisora.it/sito/events/?ical=1 is listed in calendarUrls/calendarEvidence, linked from the just-read official announcement, not represented in status/FAILURES/run requests. No cache miss attested. Sora PDF failure remains excluded."
+    },
+    {
+      "id": "S97",
+      "status": "pending",
+      "owner": "orchestrator",
+      "result": "Publish and verify the Sora ICS target selection; then one bounded iCal request, max1/120s/concurrency1/no discovery."
     }
   ],
-  "nextAction": "cai-collector performs offline-only preflight for another distinct exact official Lazio URL. Exclude the Sora programme PDF OCR failure. If no safe target exists, pass to the next region. No fetch before a new target checkpoint.",
+  "nextAction": "Publish and verify the single CAI Sora iCal target selection at https://www.caisora.it/sito/events/?ical=1 on codex/cai-orchestrator-luna. After remote verification run cai-20261023-lazio-sora-ical01 with max1 document/120s/concurrency1/no discovery; do not retry the distinct PDF or re-fetch the announcement page.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -728,7 +740,7 @@
     "proposedRunId": null
   },
   "currentWork": {
-    "branchHead": "a05ea2ae60e01b7b3f96f81f94b6f800a210e32b",
+    "branchHead": "42eb02ab109a2f44878c38b29d5d991be8965269",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
       "runId": "cai-20261023-lazio-sora-programma01",
@@ -754,7 +766,7 @@
       "tests": "backend npm test 206/206 after collection; public mirrors stable"
     }
   },
-  "repositoryCommit": "a05ea2ae60e01b7b3f96f81f94b6f800a210e32b",
+  "repositoryCommit": "42eb02ab109a2f44878c38b29d5d991be8965269",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -777,10 +789,10 @@
     }
   },
   "tests": "After Sora collection: backend npm test 206/206 serially; six public JSON hashes unchanged pre/post; all backend/frontend mirrors byte-identical.",
-  "updatedAt": "2026-10-23T01:44:30Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T01:44:30Z",
+  "updatedAt": "2026-10-23T01:47:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T01:47:00Z",
   "regionCurrent": "Lazio — CAI Sora announcement sample: one URL read, source partial, 0 verified events, 10 existing IDs unchanged, 0 new/removed/changed; 0 DB. The cached page is an announcement linking to the already OCR-failed PDF, so calendar coverage remains unresolved.",
-  "regionNext": "Lazio — offline preflight for a distinct exact official URL; exclude Sora 2026.pdf (OCR failure/discovery-limit 9), then pass to next region if no safe target.",
+  "regionNext": "Lazio — CAI Sora exact iCal `https://www.caisora.it/sito/events/?ical=1`, registered in calendarUrls/calendarEvidence and exact official host; selected for one bounded run after checkpoint.",
   "preflight": {
     "at": "2026-10-23T01:27:16Z",
     "sourceId": "cai-cesena-9224012",
@@ -1034,13 +1046,18 @@
   ],
   "nextSourcePreflight": {
     "region": "Lazio",
-    "status": "offline-only scan in progress after verified Sora checkpoint 10a4de9",
-    "scope": "registry, scrape-status URL/documents, FAILURES/cooldown, existing run artifacts and cache if available",
+    "sourceId": "sora",
+    "sourceName": "CAI Sora",
+    "url": "https://www.caisora.it/sito/events/?ical=1",
+    "status": "selected offline; selection checkpoint pending",
+    "evidence": "exact URL in registry calendarUrls/calendarEvidence, foundOn the official programme announcement; not represented in status URL/documents, FAILURES or run request fields reviewed",
+    "scope": "one exact URL, max 1 document, 120 seconds, concurrency 1, no child URLs",
     "networkFetchPerformed": false,
     "exclude": [
-      "Sora 2026.pdf: prior OCR failure/discovery-limit 9"
+      "Sora 2026 PDF: OCR failure and discovery-limit 9",
+      "Sora announcement page just read"
     ],
-    "target": null
+    "proposedRunId": "cai-20261023-lazio-sora-ical01"
   },
   "currentRun": {
     "runId": "cai-20261023-lazio-sora-programma01",
@@ -1107,8 +1124,16 @@
   },
   "proposedTarget": {
     "region": "Lazio",
-    "status": "offline preflight pending after Sora run checkpoint",
-    "url": null,
+    "sourceId": "sora",
+    "sourceName": "CAI Sora",
+    "url": "https://www.caisora.it/sito/events/?ical=1",
+    "reason": "exact official-host calendar feed in registry calendarUrls/calendarEvidence, unrepresented among reviewed source documents/failures/run requests",
+    "sample": {
+      "documents": 1,
+      "seconds": 120,
+      "concurrency": 1,
+      "discovery": false
+    },
     "fetchStarted": false
   }
 }
