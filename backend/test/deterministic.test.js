@@ -100,6 +100,29 @@ test('annual line patterns exclude narrative dates and unknown years', () => {
   assert.equal(parseCalendarLines(['SETTEMBRE', '12 Escursionismo'], source, source.url, 2026, 'pdf').length, 0);
 });
 
+test('Carate course flyer parses an abbreviated month range without changing numeric day/month dates', async () => {
+  const fixture = JSON.parse(await fs.readFile(
+    path.join(__dirname, 'fixtures', 'cai-carate-2026-course-date-abbreviation.json'), 'utf8'
+  ));
+  const section = {
+    id: fixture.sourceId,
+    organizer: 'CAI Carate Brianza',
+    region: 'Lombardia'
+  };
+  const events = parseCalendarLines([fixture.extractedLine], section, fixture.officialPdfUrl, 2026, 'pdf-text');
+  assert.equal(events.length, 1);
+  assert.equal(events[0].title, fixture.expectedTitle);
+  assert.equal(events[0].date, fixture.expectedDate);
+  assert.equal(events[0].dateEnd, fixture.expectedDateEnd);
+  assert.equal(events[0].days, 2);
+  assert.equal(events[0].description, fixture.extractedLine);
+  assert.equal(events[0].sourceDocument, fixture.officialPdfUrl);
+  assert.equal(events[0].lat, undefined);
+  assert.equal(events[0].lng, undefined);
+  assert.equal(parseDates('12/10 Monte Rosa', 2026).date, '2026-10-12');
+  assert.equal(parseDates('12/10 Monte Rosa', 2026).dateEnd, undefined);
+});
+
 test('Cernusco OCR cross-column side-panel text does not contaminate the October event', async () => {
   const fixture = JSON.parse(await fs.readFile(
     path.join(__dirname, 'fixtures', 'cai-cernusco-2026-ocr-cross-column.json'), 'utf8'
@@ -119,7 +142,7 @@ test('Cernusco OCR cross-column side-panel text does not contaminate the October
   assert.equal(control[0].title, fixture.expectedControlTitle, 'cleanup must not affect other OCR rows from the same PDF');
 });
 
-test('deterministic parser version invalidates a cached Cernusco PDF extraction from v12', async (t) => {
+test('deterministic parser version invalidates an extraction cached by the preceding version', async (t) => {
   const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'cai-parser-version-cache-'));
   t.after(() => fs.rm(tmp, { recursive: true, force: true }));
   const pdfBytes = await fs.readFile(path.join(__dirname, 'fixtures', 'cai-valmadrera-2026-calendar.pdf'));
@@ -130,8 +153,9 @@ test('deterministic parser version invalidates a cached Cernusco PDF extraction 
   const ocrPages = JSON.parse(process.env.SCRAPE_PDF_OCR_PAGES || '{}');
   const pageRangeKey = JSON.stringify(pageRanges[sourceId] || null);
   const ocrPageKey = JSON.stringify(ocrPages[sourceId] || null);
+  const previousVersion = VERSION - 1;
   const previousKey = crypto.createHash('sha256')
-    .update(`12|${sourceId}|${hash}|${now.year}|${pageRangeKey}|${ocrPageKey}`).digest('hex');
+    .update(`${previousVersion}|${sourceId}|${hash}|${now.year}|${pageRangeKey}|${ocrPageKey}`).digest('hex');
   const previousCachePath = path.join(tmp, `events-${previousKey}.json`);
   const staleEvent = {
     id: `${sourceId}-cb33842fc3c2`,
@@ -161,7 +185,7 @@ test('deterministic parser version invalidates a cached Cernusco PDF extraction 
     })
   });
 
-  assert.equal(VERSION, 13);
+  assert.equal(VERSION, 14);
   assert.equal(result.documents[0].method, 'pdf-text');
   assert.equal(result.excursions.some((event) => event.id === staleEvent.id), false);
   assert.equal(result.excursions.some((event) => event.title === staleEvent.title), false);

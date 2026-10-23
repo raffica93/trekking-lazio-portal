@@ -13,8 +13,9 @@ const { ocrPdfLines, ocrPdfPageLines, ocrPdfFilePages, ocrImageLines } = require
 const { parseCaiRomaHtml, stableId, tripDays, parseDistanceKm, parseDurationHours } = require('../scraper');
 
 // Bump this when deterministic extraction changes so cached documents are reparsed.
-const VERSION = 13;
+const VERSION = 14;
 const MONTHS = { gennaio: 1, febbraio: 2, marzo: 3, aprile: 4, maggio: 5, giugno: 6, luglio: 7, agosto: 8, settembre: 9, ottobre: 10, novembre: 11, dicembre: 12 };
+const MONTH_ABBREVIATIONS = { gen: 'gennaio', feb: 'febbraio', mar: 'marzo', apr: 'aprile', mag: 'maggio', giu: 'giugno', lug: 'luglio', ago: 'agosto', set: 'settembre', sett: 'settembre', ott: 'ottobre', nov: 'novembre', dic: 'dicembre' };
 const MONTH_PATTERN = Object.keys(MONTHS).join('|');
 const REGIONS = ['Abruzzo', 'Basilicata', 'Calabria', 'Campania', 'Emilia-Romagna', 'Friuli-Venezia Giulia', 'Lazio', 'Liguria', 'Lombardia', 'Marche', 'Molise', 'Piemonte', 'Puglia', 'Sardegna', 'Sicilia', 'Toscana', 'Trentino-Alto Adige', 'Umbria', "Valle d'Aosta", 'Veneto'];
 const CACHE_DIR = path.join(__dirname, '..', 'node_modules', '.cache', 'cai');
@@ -32,8 +33,7 @@ const digest = (value) => crypto.createHash('sha256').update(value).digest('hex'
 const clean = (value) => cheerio.load(String(value || '')).text().replace(/\s+/g, ' ').trim();
 
 function normalizeMonthAbbreviations(value) {
-  const aliases = { gen: 'gennaio', feb: 'febbraio', mar: 'marzo', apr: 'aprile', mag: 'maggio', giu: 'giugno', lug: 'luglio', ago: 'agosto', set: 'settembre', sett: 'settembre', ott: 'ottobre', nov: 'novembre', dic: 'dicembre' };
-  return String(value || '').replace(/\b(gen|feb|mar|apr|mag|giu|lug|ago|sett?|ott|nov|dic)\.(?=\s|$)/gi, (match) => aliases[match.slice(0, -1).toLowerCase()]);
+  return String(value || '').replace(/\b(gen|feb|mar|apr|mag|giu|lug|ago|sett?|ott|nov|dic)\.(?=\s|$)/gi, (match) => MONTH_ABBREVIATIONS[match.slice(0, -1).toLowerCase()]);
 }
 
 function isNonCalendarUrl(value) {
@@ -64,6 +64,19 @@ function validDate(year, month, day) {
 
 function parseDates(input, year, month) {
   const value = clean(input).toLowerCase();
+  // Course flyers may write a same-month range as "04/05-lug": both numbers
+  // are days and the trailing abbreviated month applies to each. Keep this
+  // narrowly scoped so ordinary numeric dates such as "12/10" stay day/month.
+  const abbreviatedMonthRange = value.match(new RegExp(`\\b(\\d{1,2})\\s*\\/\\s*(\\d{1,2})\\s*[-–]\\s*(${Object.keys(MONTH_ABBREVIATIONS).join('|')})\\b`, 'i'));
+  if (abbreviatedMonthRange) {
+    const rangeMonth = MONTHS[MONTH_ABBREVIATIONS[abbreviatedMonthRange[3].toLowerCase()]];
+    const rangeYear = Number(year);
+    return {
+      date: validDate(rangeYear, rangeMonth, abbreviatedMonthRange[1]),
+      dateEnd: validDate(rangeYear, rangeMonth, abbreviatedMonthRange[2]),
+      matched: abbreviatedMonthRange[0]
+    };
+  }
   let range = value.match(new RegExp(`\\b(\\d{1,2})\\s+(${MONTH_PATTERN})(?:\\s+(20\\d{2}))?\\s*(?:[-–—]|al|a)\\s*(\\d{1,2})\\s+(${MONTH_PATTERN})(?:\\s+(20\\d{2}))?\\b`, 'i'));
   if (range) {
     const firstYear = Number(range[3] || year);
