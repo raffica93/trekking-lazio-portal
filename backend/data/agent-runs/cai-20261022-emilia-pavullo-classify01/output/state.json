@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-emilia-pavullo-classify01",
+  "status": "ready",
+  "input": "backend/data/agent-runs/cai-20261022-emilia-pavullo-classify01/input.json",
+  "inputSha256": "68df90eadf95b3acdd5521741f1e3805b3bde2ad2905dd81e06db41fd75a6144",
+  "modelRequested": "inception/mercury-decide",
+  "policyVersion": "cai-trekking-v2",
+  "createdAt": "2026-10-22T23:35:29.702Z",
+  "updatedAt": "2026-10-22T23:35:31.807Z",
+  "concurrency": 4,
+  "rateLimitMs": 200,
+  "total": 5,
+  "completed": 5,
+  "processed": 5,
+  "counts": {
+    "total": 5,
+    "byDecision": {
+      "trekking": 3,
+      "non_trekking": 0,
+      "da_verificare": 2
+    },
+    "byCategory": {
+      "a piedi": 1,
+      "ciaspole": 0,
+      "alpinismo/ferrata": 1,
+      "bici": 0,
+      "sci": 2,
+      "sociale/culturale": 0,
+      "corso/riunione": 0,
+      "altro": 1
+    },
+    "errors": 0
+  },
+  "errors": []
+}

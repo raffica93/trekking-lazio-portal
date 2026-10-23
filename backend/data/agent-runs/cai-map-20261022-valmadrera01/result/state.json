@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "runId": "cai-map-20261022-valmadrera01",
+  "status": "ready",
+  "input": "backend/data/agent-runs/cai-map-20261022-valmadrera01/input.json",
+  "inputSha256": "287911693fde8f58a2d2f09b9ab4f645efff624682ff6dc1a72410dfbb59c363",
+  "modelRequested": "inception/mercury-decide",
+  "policyVersion": "cai-trekking-v2",
+  "createdAt": "2026-10-22T20:19:23.494Z",
+  "updatedAt": "2026-10-22T20:19:25.943Z",
+  "concurrency": 4,
+  "rateLimitMs": 200,
+  "total": 10,
+  "completed": 10,
+  "processed": 10,
+  "counts": {
+    "total": 10,
+    "byDecision": {
+      "trekking": 0,
+      "non_trekking": 8,
+      "da_verificare": 2
+    },
+    "byCategory": {
+      "a piedi": 0,
+      "ciaspole": 0,
+      "alpinismo/ferrata": 6,
+      "bici": 0,
+      "sci": 0,
+      "sociale/culturale": 2,
+      "corso/riunione": 2,
+      "altro": 0
+    },
+    "errors": 0
+  },
+  "errors": []
+}

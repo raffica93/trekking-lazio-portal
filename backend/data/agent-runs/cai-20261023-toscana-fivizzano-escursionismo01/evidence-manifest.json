@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261023-toscana-fivizzano-escursionismo01",
+  "files": [
+    {
+      "path": "manifest.json",
+      "bytes": 571,
+      "sha256": "4a5dbfb5675dc1aaab04737ff1931107ada03046e6cd4bf7ecd0b3694f58becc"
+    },
+    {
+      "path": "state.json",
+      "bytes": 406368,
+      "sha256": "165182f64d68ffd278f036a31300fd33ee6ef2db87761d451ad7abfc07fdc93a"
+    },
+    {
+      "path": "source-evidence.json",
+      "bytes": 4901,
+      "sha256": "13620f84dcac4cffd4b3d1f9fd48b1765a325439610fbd070cd7d18f3b8f8696"
+    },
+    {
+      "path": "collection-report.md",
+      "bytes": 3642,
+      "sha256": "8171f910dbec36d1ae479bc904f5d799fac2d948d495bc757086937b23706c61"
+    }
+  ],
+  "publicMirrors": [
+    {
+      "backendPath": "backend/data/excursions.json",
+      "frontendPath": "frontend/public/excursions.json",
+      "backendSha256": "d02a525382f6d7b31c571a49c0ced7c9ed292b5e67ba138ee060b4adbca4fa83",
+      "frontendSha256": "d02a525382f6d7b31c571a49c0ced7c9ed292b5e67ba138ee060b4adbca4fa83",
+      "byteIdentical": true
+    },
+    {
+      "backendPath": "backend/data/cai-sections.json",
+      "frontendPath": "frontend/public/cai-sections.json",
+      "backendSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+      "frontendSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+      "byteIdentical": true
+    },
+    {
+      "backendPath": "backend/data/scrape-status.json",
+      "frontendPath": "frontend/public/scrape-status.json",
+      "backendSha256": "7124e29edc1af941451e3e757b4fca4b5dc868ebc6d60b846a523c69a0270e49",
+      "frontendSha256": "7124e29edc1af941451e3e757b4fca4b5dc868ebc6d60b846a523c69a0270e49",
+      "byteIdentical": true
+    }
+  ],
+  "catalogDelta": {
+    "totalRowsBefore": 3376,
+    "totalRowsAfter": 3376,
+    "sourceIdPrefix": "cai-fivizzano-9226019-",
+    "sourceRowsBefore": 12,
+    "sourceRowsAfter": 12,
+    "added": 0,
+    "removed": 0,
+    "changed": 0,
+    "sortedRowsHashAlgorithm": "Select rows whose id starts with cai-fivizzano-9226019-, sort ascending by id, serialize the resulting array with Node.js JSON.stringify, UTF-8 encode, then SHA-256.",
+    "sortedSourceRowsSha256Before": "052158f0d916607fe02a746b29c0027d44a39239fd6a16fa282d1c48a04c9905",
+    "sortedSourceRowsSha256After": "052158f0d916607fe02a746b29c0027d44a39239fd6a16fa282d1c48a04c9905",
+    "existingEventRowId": "cai-fivizzano-9226019-2d592e7a1731",
+    "existingEventRowSha256Before": "1b23109177824b6f4f830f8d3baf96175009e7985666e80a1bf831a238a574ea",
+    "existingEventRowSha256After": "1b23109177824b6f4f830f8d3baf96175009e7985666e80a1bf831a238a574ea"
+  }
+}

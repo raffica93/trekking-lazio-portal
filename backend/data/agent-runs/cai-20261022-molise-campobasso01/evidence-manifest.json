@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261022-molise-campobasso01",
+  "files": [
+    {
+      "path": "source-index.html",
+      "bytes": 252380,
+      "sha256": "5b97e1aa0639efcebafbba3153c03dc0ee00d432b527f276c4d0dc08ee2363ed"
+    },
+    {
+      "path": "source-evidence.json",
+      "bytes": 1001,
+      "sha256": "7042a498eb9911ffaee2f1f5e40dafbeed829346536622167944cbd7f73ab0ad"
+    },
+    {
+      "path": "candidate-input.json",
+      "bytes": 1634,
+      "sha256": "a0cab9771df021bd96c7baca7fcab0c170bab0cf1137cba1a7bded35ef14d700"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "runId": "cai-map-20261022-stradastorta02",
+  "createdAt": "2026-10-22T21:53:37.287Z",
+  "input": {
+    "path": "backend/data/agent-runs/cai-20261022-lombardia-stradastorta02/candidate-input.json",
+    "sha256": "339bac6cd1e4a8cd4e42cb0a1f8f83015d13a27ccbc465925279961bd22af076"
+  },
+  "files": [
+    {
+      "path": "classified-catalog.json",
+      "sha256": "1cdf39c31f0b7c6ff8fa213072a6b1d03ce50c4d36ae205c6ca1ed181ac68e50",
+      "bytes": 2183
+    },
+    {
+      "path": "state.json",
+      "sha256": "7633506ce5df59f489b171b9feed821eeaed0b295e507b30dcae39e548746d3a",
+      "bytes": 903
+    }
+  ]
+}

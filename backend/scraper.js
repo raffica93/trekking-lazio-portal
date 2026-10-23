@@ -166,25 +166,25 @@ function parseDurationHours(values) {
     if (!/\bore\b|\d\s*h\b/i.test(value)) continue;
 
     // Bind matches to "ore" / "h" so phone numbers and elevations are not durations.
-    const withMinutes = value.match(/(\d{1,2})\s*h\s*(\d{1,2})\b/i);
+    const withMinutes = value.match(/(?<!\d)(\d{1,2})\s*h\s*(\d{1,2})\b/i);
     if (withMinutes) {
       const hours = plausibleDurationHours(Number(withMinutes[1]) + Number(withMinutes[2]) / 60);
       if (hours != null) return hours;
     }
 
-    const range = value.match(/(\d{1,2}(?:[.,]\d+)?)\s*[/\u2013-]\s*(\d{1,2}(?:[.,]\d+)?)\s*(?:ore\b|h\b)/i);
+    const range = value.match(/(?<!\d)(\d{1,2}(?:[.,]\d+)?)\s*[/\u2013-]\s*(\d{1,2}(?:[.,]\d+)?)\s*(?:ore\b|h\b)/i);
     if (range) {
       const hours = plausibleDurationHours(hoursFromToken(range[2]));
       if (hours != null) return hours;
     }
 
-    const clock = value.match(/(\d{1,2}[.,]\d{2})\s*(?:ore\b|h\b)/i);
+    const clock = value.match(/(?<!\d)(\d{1,2}[.,]\d{2})\s*(?:ore\b|h\b)/i);
     if (clock) {
       const hours = plausibleDurationHours(hoursFromToken(clock[1]));
       if (hours != null) return hours;
     }
 
-    const simple = value.match(/(\d{1,2}(?:[.,]\d+)?)\s*(?:ore\b|h\b)/i);
+    const simple = value.match(/(?<!\d)(\d{1,2}(?:[.,]\d+)?)\s*(?:ore\b|h\b)/i);
     if (simple) {
       const hours = plausibleDurationHours(hoursFromToken(simple[1]));
       if (hours != null) return hours;

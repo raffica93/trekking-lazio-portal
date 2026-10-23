@@ -29,11 +29,23 @@ function catalogRow(source, extras = {}) {
   };
 }
 
+function discoveryQueueComplete(run) {
+  const discovery = run?.discovery;
+  return discovery?.complete === true
+    && Number.isInteger(discovery.knownCandidates)
+    && Number.isInteger(discovery.visitedCandidates)
+    && Number.isInteger(discovery.remainingCandidates)
+    && discovery.remainingCandidates === 0
+    && discovery.visitedCandidates >= discovery.knownCandidates;
+}
+
 function buildScrapeStatus({
   sources = SOURCES,
   existingStatus = {},
   result = null,
   excursions = [],
+  continuationSourceId = null,
+  continuationSourceUrls = [],
   generatedAt = new Date().toISOString()
 } = {}) {
   const previous = new Map(
@@ -53,15 +65,91 @@ function buildScrapeStatus({
     const prior = previous.get(source.id) || {};
     const run = resultsById.get(source.id);
     if (run) {
+      if (source.id === continuationSourceId) {
+        const requested = new Set((continuationSourceUrls || []).map((url) => String(url)));
+        const currentDocuments = Array.isArray(run.documents) ? run.documents : [];
+        const priorDocuments = Array.isArray(prior.documents) ? prior.documents : [];
+        const documentsByUrl = new Map();
+        for (const document of priorDocuments) {
+          if (document?.url) documentsByUrl.set(document.url, document);
+        }
+        for (const document of currentDocuments) {
+          if (document?.url) documentsByUrl.set(document.url, document);
+        }
+        const documents = [...documentsByUrl.values()];
+        const currentIssues = Array.isArray(run.issues) ? run.issues : [];
+        const successfulUrls = new Set(currentDocuments.map((document) => document?.url).filter(Boolean));
+        // Ordinary URL-scoped failures clear when explicitly retried. A
+        // discovery-limit is different: re-reading its URL through a bounded
+        // --source-url continuation does not traverse the old candidate queue.
+        // Only a normal full-source run can clear it, by replacing the issue
+        // list with its current result below.
+        const retainedIssues = (Array.isArray(prior.issues) ? prior.issues : [])
+          .filter((issue) => issue?.code === 'discovery-limit'
+            || !issue?.url
+            || !requested.has(issue.url)
+            || !successfulUrls.has(issue.url));
+        const mergedIssues = new Map();
+        for (const issue of [...retainedIssues, ...currentIssues]) {
+          const key = `${issue?.code || ''}\u0000${issue?.url || ''}`;
+          // Prefer the latest issue for the same code and URL, including an
+          // updated remaining-candidate count.
+          mergedIssues.set(key, issue);
+        }
+        const issues = [...mergedIssues.values()];
+        // A continuation's run-level total only describes the documents it
+        // visited. Prefer the per-document counts from the merged history so
+        // a partial refresh cannot keep a stale source total (for example, a
+        // failed OCR PDF with 0 events followed by a parsed HTML calendar).
+        const hasDocumentEventCounts = documents.length > 0 && documents.every((document) => (
+          Number.isFinite(document?.events) && document.events >= 0
+        ));
+        const mergedExtractedEvents = hasDocumentEventCounts
+          ? documents.reduce((total, document) => (
+            total + (Number.isFinite(document?.events) && document.events >= 0 ? document.events : 0)
+          ), 0)
+          : null;
+        const unvisitedPriorDocuments = priorDocuments.some((document) => (
+          document?.url && !requested.has(document.url)
+        ));
+        const incomplete = unvisitedPriorDocuments || retainedIssues.length > 0
+          || (prior.status === 'partial' && currentDocuments.length < priorDocuments.length);
+        const methods = [...new Set([
+          ...(Array.isArray(prior.methods) ? prior.methods : []),
+          ...(Array.isArray(run.methods) ? run.methods : [])
+        ])];
+        return catalogRow(source, {
+          status: incomplete ? 'partial' : run.status,
+          excursions: run.excursions.length,
+          error: failuresById.get(source.id) || (issues.length ? prior.error || null : null),
+          hash: incomplete ? prior.hash || run.hash || null : run.hash || null,
+          updatedAt: generatedAt,
+          documents,
+          methods,
+          issues,
+          extractedEvents: mergedExtractedEvents
+            ?? (incomplete ? prior.extractedEvents ?? run.extractedEvents : run.extractedEvents)
+        });
+      }
+      const currentIssues = Array.isArray(run.issues) ? run.issues : [];
+      const retainedDiscoveryIssues = discoveryQueueComplete(run)
+        ? []
+        : (Array.isArray(prior.issues) ? prior.issues : []).filter((issue) => issue?.code === 'discovery-limit');
+      const mergedIssues = new Map();
+      for (const issue of [...retainedDiscoveryIssues, ...currentIssues]) {
+        const key = `${issue?.code || ''}\u0000${issue?.url || ''}`;
+        mergedIssues.set(key, issue);
+      }
+      const issues = [...mergedIssues.values()];
       return catalogRow(source, {
-        status: run.status,
+        status: issues.length && run.status !== 'failed' ? 'partial' : run.status,
         excursions: run.excursions.length,
-        error: failuresById.get(source.id) || null,
+        error: failuresById.get(source.id) || (issues.length ? prior.error || null : null),
         hash: run.hash || null,
         updatedAt: generatedAt,
         documents: run.documents,
         methods: run.methods,
-        issues: run.issues,
+        issues,
         extractedEvents: run.extractedEvents
       });
     }

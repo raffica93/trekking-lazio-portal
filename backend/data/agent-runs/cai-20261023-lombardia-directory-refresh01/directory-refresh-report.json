@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261023-lombardia-directory-refresh01",
+  "type": "official-directory-refresh",
+  "status": "completed-with-tested-local-reconciliation",
+  "region": "Lombardia",
+  "generatedAt": "2026-10-23T06:26:05.177Z",
+  "executedAt": "2026-10-23T06:26:05Z",
+  "command": "NODE_USE_ENV_PROXY=1 node scripts/discover-cai-sections.js --directory-only --region Lombardia",
+  "source": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/",
+  "scope": "Official directory roots and child-section API responses for Lombardia; no event/calendar crawling.",
+  "requests": {
+    "rootSectionsSelected": 152,
+    "subsectionResponsesFailed": 0,
+    "allSelectedResponsesParsed": true,
+    "httpStatusPerRequestPersisted": false
+  },
+  "merge": {
+    "baseCommit": "fcf7f901f8ee34ce83f34f619814ab740cf65522",
+    "baselineBackendSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+    "networkOutputBackendSha256": "2216dea5e80881d99e5a72e421175d3fe373fd923d911514b498b65473a82ae9",
+    "finalBackendSha256": "250afdbc6fa8980f076f094c9574b2d77d157e7f34f4dfb9c84a4f09f3166944",
+    "finalFrontendSha256": "250afdbc6fa8980f076f094c9574b2d77d157e7f34f4dfb9c84a4f09f3166944",
+    "backendFrontendMirrorEqual": true,
+    "recordsBefore": 837,
+    "recordsAfter": 837,
+    "idsAdded": 0,
+    "idsRemoved": 0,
+    "ambiguousPreviousIds": 0,
+    "changedRecords": 9,
+    "fieldChanges": [
+      {
+        "id": "cai-barzano-9216117",
+        "organizer": "CAI Barzano'",
+        "changes": {
+          "website": {
+            "before": "https://www.caibarzano.it/wp-content/cache/all/index.html",
+            "after": "http://www.caibarzano.it/"
+          }
+        }
+      },
+      {
+        "id": "cai-cernusco-sul-naviglio-9216051",
+        "organizer": "CAI Cernusco Sul Naviglio",
+        "changes": {
+          "website": {
+            "before": "https://organizzazione.cai.it/sez-cernusco-sul-naviglio/",
+            "after": "https://organizzazione.cai.it/sez-cernusco-sul-naviglio"
+          }
+        }
+      },
+      {
+        "id": "cai-lovere-9216055",
+        "organizer": "CAI Lovere",
+        "changes": {
+          "enabled": {
+            "before": false,
+            "after": true
+          },
+          "status": {
+            "before": "missing-website",
+            "after": "pending-discovery"
+          },
+          "url": {
+            "before": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/sezione/?codice=9216055",
+            "after": "https://organizzazione.cai.it/sez-lovere/"
+          },
+          "website": {
+            "before": null,
+            "after": "https://organizzazione.cai.it/sez-lovere/"
+          }
+        }
+      },
+      {
+        "id": "cai-menaggio-9216060",
+        "organizer": "CAI Menaggio",
+        "changes": {
+          "website": {
+            "before": "https://organizzazione.cai.it/sez-menaggio/",
+            "after": "https://organizzazione.cai.it/sez-menaggio"
+          }
+        }
+      },
+      {
+        "id": "cai-s-fruttuoso-9116084",
+        "organizer": "CAI S.fruttuoso",
+        "changes": {
+          "website": {
+            "before": "https://www.caisanfru.it/",
+            "after": "http://www.caisanfru.it/"
+          }
+        }
+      },
+      {
+        "id": "cai-sesto-calende-9216044",
+        "organizer": "CAI Sesto Calende",
+        "changes": {
+          "website": {
+            "before": "https://caisestocalende.it/",
+            "after": "https://www.caisestocalende.it/"
+          }
+        }
+      },
+      {
+        "id": "cai-strada-storta-9116052",
+        "organizer": "CAI Strada Storta",
+        "changes": {
+          "website": {
+            "before": "https://stradastorta.it/",
+            "after": "https://www.stradastorta.it/"
+          }
+        }
+      },
+      {
+        "id": "cai-veduggio-9216147",
+        "organizer": "CAI Veduggio",
+        "changes": {
+          "website": {
+            "before": "https://organizzazione.cai.it/sez-veduggio/",
+            "after": "https://www.caiveduggio.it/"
+          }
+        }
+      },
+      {
+        "id": "cai-vestone-9216155",
+        "organizer": "CAI Vestone",
+        "changes": {
+          "website": {
+            "before": "https://www.caivestone.it/it/",
+            "after": "https://www.caivestone.it/it"
+          }
+        }
+      }
+    ],
+    "otherRegionChanges": 0,
+    "lombardiaRecords": 229,
+    "lombardiaEnabledAfter": 80,
+    "finalStats": {
+      "total": 837,
+      "sections": 525,
+      "subsections": 309,
+      "national": 3,
+      "regions": 20,
+      "enabled": 292,
+      "statuses": {
+        "calendar-found": 270,
+        "missing-website": 520,
+        "website-only": 20,
+        "unreachable": 24,
+        "social-only": 2,
+        "pending-discovery": 1
+      }
+    }
+  },
+  "localReconciliation": {
+    "basis": "Reapplied the tested merge helper offline to the already refreshed Lombardia rows and the Git baseline; no additional network calls.",
+    "codeFix": "When an official website appears for a strictly unconfigured missing-website record, the section becomes enabled/pending-discovery and its initial URL is the new official website, not a stale directory detail URL.",
+    "fixture": "backend/test/fixtures/cai-directory-merge.json",
+    "test": "backend/test/cai-directory-merge.test.js — 7/7 focused; backend npm test 214/214",
+    "reconciledRecord": "cai-lovere-9216055",
+    "fieldsChangedByReconciliation": [
+      "url",
+      "enabled",
+      "status"
+    ],
+    "preserved": [
+      "ID",
+      "coordinate data",
+      "calendar URLs/evidence",
+      "extractor",
+      "other curated configuration"
+    ]
+  },
+  "limitations": [
+    "The directory refresh output does not persist a per-request HTTP status/final-URL ledger; the command completed with zero subsection failures and all selected responses parsed.",
+    "The new Lovere homepage is officially listed but has not yet been fetched or verified as a working calendar; it is only pending-discovery.",
+    "Other website field changes are sourced from the official directory but were not separately fetched; Barzano and S. Fruttuoso changed from HTTPS to HTTP and remain outside the next bounded collection."
+  ],
+  "regionalCoverage": {
+    "sectionsInDirectory": 229,
+    "calendarSectionsChecked": 0,
+    "complete": 0,
+    "partial": 0,
+    "unreachable": 0,
+    "eventsExtracted": 0,
+    "eventsVerified": 0,
+    "duplicatesExcluded": 0,
+    "failuresResolved": "not assessed",
+    "failuresOpen": "not assessed",
+    "note": "Directory-only operation. Calendar coverage, source complete/partial/unreachable counts, event verification, duplicate counts, and source failures were not assessed."
+  },
+  "eventsCollected": 0,
+  "databaseReads": 0,
+  "databaseWrites": 0,
+  "imported": 0,
+  "nextGate": "Checkpoint the tested code, corrected registry, mirror, report and manifest remotely. Then run one bounded source discovery at the new official CAI Lovere website; source coverage remains unknown until read."
+}

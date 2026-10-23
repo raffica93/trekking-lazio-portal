@@ -1,0 +1,390 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261023-toscana-fivizzano-calendar01",
+  "sourceId": "cai-fivizzano-9226019",
+  "requestedUrl": "https://www.caifivizzano.it/calendario-uscite/",
+  "canonicalUrl": "https://www.caifivizzano.it/calendario-uscite/",
+  "httpStatus": "not persisted",
+  "contentType": "text/html; charset=UTF-8",
+  "bodyBytes": 148307,
+  "bodySha256": "a4e350268783bc1fe3a0ed37a1e75269d8559fd53e204ca9194c21250e3d11f0",
+  "rawBodyPath": null,
+  "cache": {
+    "available": true,
+    "metadataPath": "backend/node_modules/.cache/cai/2e6dd75bd63407d285d4b0fd4ae911bb1b7b4d6af26033010c9ab1fd0597296c.json",
+    "bodyPath": "backend/node_modules/.cache/cai/2e6dd75bd63407d285d4b0fd4ae911bb1b7b4d6af26033010c9ab1fd0597296c.bin",
+    "keySha256": "2e6dd75bd63407d285d4b0fd4ae911bb1b7b4d6af26033010c9ab1fd0597296c",
+    "metadataMatchesBody": true
+  },
+  "extraction": {
+    "method": "html-calendar",
+    "events": 10,
+    "evidenceSource": "scrape-status.json document entry"
+  },
+  "catalogEvidence": [
+    {
+      "catalogId": "cai-fivizzano-9226019-25b520da9498",
+      "disposition": "new",
+      "title": "Monte Sumbra da Capanne di Careggine",
+      "date": "2026-10-25",
+      "eventUrl": "https://www.caifivizzano.it/eventi/monte-sumbra-da-capanne-di-careggine/",
+      "sourceEvidence": {
+        "calendarCard": {
+          "locator": {
+            "line": 150,
+            "byteOffset": 84891,
+            "dateCellLine": 150,
+            "dateCellByteOffset": 83807
+          },
+          "dateCell": "data-mec-cell=\"20261025\"",
+          "titleAnchorExcerpt": "<a class=\"mec-color-hover\" data-event-id=\"2535\" href=\"https://www.caifivizzano.it/eventi/monte-sumbra-da-capanne-di-careggine/\" target=\"_blank\" rel=\"noopener\">Monte Sumbra da Capanne di Careggine</a>"
+        },
+        "jsonLd": {
+          "locator": {
+            "scriptStartLine": 525,
+            "dateLine": 530,
+            "nameLine": 557,
+            "scriptStartByteOffset": 136044
+          },
+          "startDateExcerpt": "\"startDate\": \"2026-10-25\"",
+          "nameExcerpt": "\"name\": \"Monte Sumbra da Capanne di Careggine\"",
+          "descriptionEvidence": {
+            "locator": {
+              "scriptStartLine": 525,
+              "scriptStartByteOffset": 136044,
+              "descriptionFieldLine": 555,
+              "descriptionFieldByteOffset": 137299,
+              "descriptionValueStartByteOffset": 137315
+            },
+            "excerpts": [
+              {
+                "text": "la salita alla Penna di Sumbra (1765 m) partendo dal versante della Garfagnana!",
+                "locator": {
+                  "line": 555,
+                  "byteOffset": 137482
+                },
+                "note": "describes the hike and destination"
+              },
+              {
+                "text": "Percorso: Partenza dal parcheggio di Capanne di Careggine (Ristorante Ceragetta, mslm 800)",
+                "locator": {
+                  "line": 555,
+                  "byteOffset": 137770
+                },
+                "note": "describes the stated route start"
+              },
+              {
+                "text": "Difficoltà e requisiti: E - Escursionistica.",
+                "locator": {
+                  "line": 555,
+                  "byteOffset": 137997
+                },
+                "note": "states the difficulty"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "catalogId": "cai-fivizzano-9226019-4ac183446fc1",
+      "disposition": "new",
+      "title": "Anello del Mont’Alto per cresta Sud e Monte Sullioni per cresta Sud-Est",
+      "date": "2026-11-01",
+      "eventUrl": "https://www.caifivizzano.it/eventi/anello-del-montalto-per-cresta-sud-e-monte-sullioni-per-cresta-sud-est/",
+      "sourceEvidence": {
+        "calendarCard": {
+          "locator": {
+            "line": 156,
+            "byteOffset": 89688,
+            "dateCellLine": 156,
+            "dateCellByteOffset": 88710
+          },
+          "dateCell": "data-mec-cell=\"20261101\"",
+          "titleAnchorExcerpt": "<a class=\"mec-color-hover\" data-event-id=\"2537\" href=\"https://www.caifivizzano.it/eventi/anello-del-montalto-per-cresta-sud-e-monte-sullioni-per-cresta-sud-est/\" target=\"_blank\" rel=\"noopener\">Anello del Mont&#8217;Alto per cresta Sud e Monte Sullioni per cresta Sud-Est</a>"
+        },
+        "jsonLd": {
+          "locator": {
+            "scriptStartLine": 603,
+            "dateLine": 608,
+            "nameLine": 635,
+            "scriptStartByteOffset": 143300
+          },
+          "startDateExcerpt": "\"startDate\": \"2026-11-01\"",
+          "nameExcerpt": "\"name\": \"Anello del Mont&#8217;Alto per cresta Sud e Monte Sullioni per cresta Sud-Est\"",
+          "descriptionEvidence": {
+            "locator": {
+              "scriptStartLine": 603,
+              "scriptStartByteOffset": 143300,
+              "descriptionFieldLine": 633,
+              "descriptionFieldByteOffset": 144589,
+              "descriptionValueStartByteOffset": 144605
+            },
+            "excerpts": [
+              {
+                "text": "Dal paese di Volegno 447 mt, imbocchiamo il sentiero SAV direzione Retignano",
+                "locator": {
+                  "line": 633,
+                  "byteOffset": 144834
+                },
+                "note": "describes the route start"
+              },
+              {
+                "text": "Difficoltà: EE+",
+                "locator": {
+                  "line": 633,
+                  "byteOffset": 145773
+                },
+                "note": "states the difficulty"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "catalogId": "cai-fivizzano-9226019-5b1c92eec5ec",
+      "disposition": "semantic-duplicate-excluded",
+      "title": "Sentieristica per tutti – LUNIGIANA SKYRACE",
+      "date": "2026-10-17",
+      "eventUrl": "https://www.caifivizzano.it/eventi/sentieristica-per-tutti-2026-792/",
+      "sourceEvidence": {
+        "calendarCard": {
+          "locator": {
+            "line": 144,
+            "byteOffset": 79770,
+            "dateCellLine": 144,
+            "dateCellByteOffset": 78521
+          },
+          "dateCell": "data-mec-cell=\"20261017\"",
+          "titleAnchorExcerpt": "<a class=\"mec-color-hover\" data-event-id=\"3577\" href=\"https://www.caifivizzano.it/eventi/sentieristica-per-tutti-2026-792/\" target=\"_blank\" rel=\"noopener\">Sentieristica per tutti &#8211; LUNIGIANA SKYRACE</a>"
+        },
+        "jsonLd": {
+          "locator": {
+            "scriptStartLine": 447,
+            "dateLine": 452,
+            "nameLine": 465,
+            "scriptStartByteOffset": 131997
+          },
+          "startDateExcerpt": "\"startDate\": \"2026-10-17\"",
+          "nameExcerpt": "\"name\": \"Gruppo Sentieristica\"",
+          "descriptionEvidence": {
+            "locator": {
+              "scriptStartLine": 447,
+              "scriptStartByteOffset": 131997,
+              "descriptionFieldLine": 477,
+              "descriptionFieldByteOffset": 133268,
+              "descriptionValueStartByteOffset": 133284
+            },
+            "excerpts": [
+              {
+                "text": "Cari soci/e, in vista della LUNIGIANA SKYRACE Sabato andremo a sistemare il sentiero della corsa dal Passo Cadin direzione Monte Tondo.",
+                "locator": {
+                  "line": 477,
+                  "byteOffset": 133284
+                },
+                "note": "describes trail maintenance ahead of the race"
+              }
+            ]
+          }
+        }
+      },
+      "duplicateOf": "cai-fivizzano-9226019-b759d3dd85b0",
+      "duplicateReason": "Date, event URL, and description match the existing row exactly; the title differs only by en dash versus hyphen.",
+      "baselineMatch": {
+        "descriptionExactMatchWithDuplicateOf": true
+      }
+    },
+    {
+      "catalogId": "cai-fivizzano-9226019-9ad6725f7fbe",
+      "disposition": "new",
+      "title": "Lago Padule al Passo del Cerreto",
+      "date": "2026-10-10",
+      "eventUrl": "https://www.caifivizzano.it/eventi/lago-padule-al-passo-del-cerreto/",
+      "sourceEvidence": {
+        "calendarCard": {
+          "locator": {
+            "line": 138,
+            "byteOffset": 74848,
+            "dateCellLine": 138,
+            "dateCellByteOffset": 73749
+          },
+          "dateCell": "data-mec-cell=\"20261010\"",
+          "titleAnchorExcerpt": "<a class=\"mec-color-hover\" data-event-id=\"2529\" href=\"https://www.caifivizzano.it/eventi/lago-padule-al-passo-del-cerreto/\" target=\"_blank\" rel=\"noopener\">Lago Padule al Passo del Cerreto</a>"
+        },
+        "jsonLd": {
+          "locator": {
+            "scriptStartLine": 369,
+            "dateLine": 374,
+            "nameLine": 387,
+            "scriptStartByteOffset": 128261
+          },
+          "startDateExcerpt": "\"startDate\": \"2026-10-10\"",
+          "nameExcerpt": "\"name\": \"Gruppo Montagnaterapia\"",
+          "descriptionEvidence": {
+            "locator": {
+              "scriptStartLine": 369,
+              "scriptStartByteOffset": 128261,
+              "descriptionFieldLine": 399,
+              "descriptionFieldByteOffset": 129534,
+              "descriptionValueStartByteOffset": 129550
+            },
+            "excerpts": [
+              {
+                "text": "Uscita del gruppo Montagnaterapia con la Casa Cardinale Maffi di Fivizzano",
+                "locator": {
+                  "line": 399,
+                  "byteOffset": 129550
+                },
+                "note": "the source description is limited to this activity/group statement; it gives no route, destination details, or difficulty"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "catalogId": "cai-fivizzano-9226019-eba39ba9cdc6",
+      "disposition": "new",
+      "title": "CLIMBING DAY – INAUGURAZIONE FALESIA ANTIPASTO",
+      "date": "2026-10-31",
+      "eventUrl": "https://www.caifivizzano.it/eventi/climbing-day-inaugurazione-falesia-antipasto/",
+      "sourceEvidence": {
+        "calendarCard": {
+          "locator": {
+            "line": 153,
+            "byteOffset": 88201,
+            "dateCellLine": 153,
+            "dateCellByteOffset": 86956
+          },
+          "dateCell": "data-mec-cell=\"20261031\"",
+          "titleAnchorExcerpt": "<a class=\"mec-color-hover\" data-event-id=\"3753\" href=\"https://www.caifivizzano.it/eventi/climbing-day-inaugurazione-falesia-antipasto/\" target=\"_blank\" rel=\"noopener\">CLIMBING DAY &#8211; INAUGURAZIONE FALESIA ANTIPASTO</a>"
+        },
+        "jsonLd": {
+          "locator": {
+            "scriptStartLine": 564,
+            "dateLine": 569,
+            "nameLine": 596,
+            "scriptStartByteOffset": 139855
+          },
+          "startDateExcerpt": "\"startDate\": \"2026-10-31T09:00:00+01:00\"",
+          "nameExcerpt": "\"name\": \"CLIMBING DAY &#8211; INAUGURAZIONE FALESIA ANTIPASTO\"",
+          "descriptionEvidence": {
+            "locator": {
+              "scriptStartLine": 564,
+              "scriptStartByteOffset": 139855,
+              "descriptionFieldLine": 594,
+              "descriptionFieldByteOffset": 141148,
+              "descriptionValueStartByteOffset": 141164
+            },
+            "excerpts": [
+              {
+                "text": "giornata di inaugurazione della prima falesia riattrezzata con il contributo del Comune di Fivizzano",
+                "locator": {
+                  "line": 594,
+                  "byteOffset": 141296
+                },
+                "note": "describes the climbing-wall inauguration activity"
+              },
+              {
+                "text": "Dove: Falesia Antipasto, Monzone Alto",
+                "locator": {
+                  "line": 594,
+                  "byteOffset": 141713
+                },
+                "note": "states the venue"
+              },
+              {
+                "text": "Le vie: 20 monotiri con difficoltà dal 5 al 7B",
+                "locator": {
+                  "line": 594,
+                  "byteOffset": 141809
+                },
+                "note": "states the climbing routes and grades"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "catalogId": "cai-fivizzano-9226019-8cf43c159190",
+      "disposition": "existing-record-sourceDocument-updated",
+      "title": "Il sentiero dei Briganti da Resceto",
+      "date": "2026-10-18",
+      "eventUrl": "https://www.caifivizzano.it/eventi/il-sentiero-dei-briganti-da-resceto/",
+      "sourceEvidence": {
+        "calendarCard": {
+          "locator": {
+            "line": 147,
+            "byteOffset": 81405,
+            "dateCellLine": 147,
+            "dateCellByteOffset": 80264
+          },
+          "dateCell": "data-mec-cell=\"20261018\"",
+          "titleAnchorExcerpt": "<a class=\"mec-color-hover\" data-event-id=\"2533\" href=\"https://www.caifivizzano.it/eventi/il-sentiero-dei-briganti-da-resceto/\" target=\"_blank\" rel=\"noopener\">Il sentiero dei Briganti da Resceto</a>"
+        },
+        "jsonLd": {
+          "locator": {
+            "scriptStartLine": 486,
+            "dateLine": 491,
+            "nameLine": 504,
+            "scriptStartByteOffset": 133947
+          },
+          "startDateExcerpt": "\"startDate\": \"2026-10-18\"",
+          "nameExcerpt": "\"name\": \"Gruppo Escursionismo\""
+        }
+      },
+      "baselineMatch": {
+        "sameCatalogIdTitleAndDate": true,
+        "changedFields": [
+          "sourceDocument"
+        ],
+        "priorSourceDocument": "https://www.caifivizzano.it/escursionismo/",
+        "currentSourceDocument": "https://www.caifivizzano.it/calendario-uscite/"
+      }
+    },
+    {
+      "catalogId": "cai-fivizzano-9226019-fc2dd59b3a86",
+      "disposition": "existing-record-sourceDocument-updated",
+      "title": "Monterosso-Santuario Soviore-Vernazza",
+      "date": "2026-10-11",
+      "eventUrl": "https://www.caifivizzano.it/eventi/monterosso-santuario-soviore-vernazza/",
+      "sourceEvidence": {
+        "calendarCard": {
+          "locator": {
+            "line": 141,
+            "byteOffset": 76454,
+            "dateCellLine": 141,
+            "dateCellByteOffset": 75325
+          },
+          "dateCell": "data-mec-cell=\"20261011\"",
+          "titleAnchorExcerpt": "<a class=\"mec-color-hover\" data-event-id=\"2531\" href=\"https://www.caifivizzano.it/eventi/monterosso-santuario-soviore-vernazza/\" target=\"_blank\" rel=\"noopener\">Monterosso-Santuario Soviore-Vernazza</a>"
+        },
+        "jsonLd": {
+          "locator": {
+            "scriptStartLine": 408,
+            "dateLine": 413,
+            "nameLine": 426,
+            "scriptStartByteOffset": 129951
+          },
+          "startDateExcerpt": "\"startDate\": \"2026-10-11\"",
+          "nameExcerpt": "\"name\": \"Gruppo Escursionismo\""
+        }
+      },
+      "baselineMatch": {
+        "sameCatalogIdTitleAndDate": true,
+        "changedFields": [
+          "sourceDocument"
+        ],
+        "priorSourceDocument": "https://www.caifivizzano.it/escursionismo/",
+        "currentSourceDocument": "https://www.caifivizzano.it/calendario-uscite/"
+      }
+    }
+  ],
+  "evidenceLimitations": [
+    "The orchestrator/cache metadata does not persist an HTTP status code or a separate redirect chain.",
+    "Only short title/date excerpts are included; the cached HTML body is not copied into the run directory.",
+    "One apparent new row is marked semantic-duplicate-excluded against the stated existing catalog record; this sidecar documents QA only and does not alter catalog data."
+  ]
+}

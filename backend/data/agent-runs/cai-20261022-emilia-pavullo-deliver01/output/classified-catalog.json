@@ -1,0 +1,49 @@
+[
+  {
+    "id": "cai-pavullo-nel-frignano-9224020-195cdeaaefee",
+    "sourceId": "cai-pavullo-nel-frignano-9224020",
+    "title": "MONTE HOABONTI E MONTE COLA DE. L.Toni – G.Boilini EE",
+    "date": "2026-10-04",
+    "dateEnd": "2026-10-04",
+    "days": 1,
+    "category": "E",
+    "link": "https://www.caipavullo.it/calendario-2026/",
+    "organizer": "CAI Pavullo Nel Frignano",
+    "organizerRegion": "Emilia-Romagna",
+    "location": "Località da verificare",
+    "region": "Altro",
+    "cost": "Vedi sito",
+    "time": "Vedi sito",
+    "privateCar": null,
+    "coordinatesQuality": "unknown",
+    "locationSource": "html-table",
+    "sourceDocument": "https://www.caipavullo.it/calendario-2026/",
+    "description": "DOM 04/10 MONTE HOABONTI E MONTE COLA DE. L.Toni – G.Boilini EE",
+    "classification": {
+      "decision": "trekking",
+      "category": "altro",
+      "confidence": 0.9254953344270682,
+      "probability": 0.9503302229513788,
+      "rationale": "Mercury Decide: trekking; categoria da verificare.",
+      "evidenceOriginal": "{\"title\":\"MONTE HOABONTI E MONTE COLA DE. L.Toni – G.Boilini EE\",\"description\":\"DOM 04/10 MONTE HOABONTI E MONTE COLA DE. L.Toni – G.Boilini EE\",\"organizer\":\"CAI Pavullo Nel Frignano\",\"location\":\"Località da verificare\",\"date\":\"2026-10-04\",\"dateEnd\":\"2026-10-04\",\"category\":\"E\",\"sourceEvidence\":\"https://www.caipavullo.it/calendario-2026/\"}",
+      "source_id": "cai-pavullo-nel-frignano-9224020-195cdeaaefee",
+      "fingerprint": "5af589b23f73ed2618b0f2f5795296e39efbeaaf423088522fc3d6efb76881f0",
+      "model": "inception/mercury-decide-20260930",
+      "modelRequested": "inception/mercury-decide",
+      "responseModel": "inception/mercury-decide-20260930",
+      "modelAttested": true,
+      "method": "mercury-decide",
+      "policyVersion": "cai-trekking-v2",
+      "modelVersion": "inception/mercury-decide-20260930",
+      "mapEligible": true,
+      "review": {
+        "decision": "trekking",
+        "category": "a piedi",
+        "reviewerRole": "orchestrator",
+        "reason": "La decisione trekking Mercury è coerente con il titolo di due cime e difficoltà EE; la categoria candidata “altro” è incoerente con l’attività escursionistica attestata. La data del 4 ottobre 2026 è già passata ma ricade nel mese ancora incluso nel catalogo; anno 2026 supportato dal titolo/calendario e dai giorni della settimana, con caveat dell’intestazione tabellare 2025. Nessuna località o coordinata aggiunta.",
+        "evidenceUrl": "https://www.caipavullo.it/calendario-2026/",
+        "evidence": "La pagina ufficiale è “Calendario 2026”, la riga cita “MONTE HOABONTI E MONTE COLA” e difficoltà EE; il weekday DOM 04/10 corrisponde al 2026. Nessun record preesistente semanticamente simile è stato individuato nel catalogo."
+      }
+    }
+  }
+]

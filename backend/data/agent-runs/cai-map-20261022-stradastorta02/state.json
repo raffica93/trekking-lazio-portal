@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "runId": "cai-map-20261022-stradastorta02",
+  "status": "ready",
+  "input": "backend/data/agent-runs/cai-20261022-lombardia-stradastorta02/candidate-input.json",
+  "inputSha256": "339bac6cd1e4a8cd4e42cb0a1f8f83015d13a27ccbc465925279961bd22af076",
+  "modelRequested": "inception/mercury-decide",
+  "policyVersion": "cai-trekking-v2",
+  "createdAt": "2026-10-22T21:53:36.776Z",
+  "updatedAt": "2026-10-22T21:53:37.285Z",
+  "concurrency": 1,
+  "rateLimitMs": 1000,
+  "total": 1,
+  "completed": 1,
+  "processed": 1,
+  "counts": {
+    "total": 1,
+    "byDecision": {
+      "trekking": 0,
+      "non_trekking": 0,
+      "da_verificare": 1
+    },
+    "byCategory": {
+      "a piedi": 0,
+      "ciaspole": 0,
+      "alpinismo/ferrata": 0,
+      "bici": 0,
+      "sci": 0,
+      "sociale/culturale": 0,
+      "corso/riunione": 0,
+      "altro": 1
+    },
+    "errors": 0
+  },
+  "errors": []
+}

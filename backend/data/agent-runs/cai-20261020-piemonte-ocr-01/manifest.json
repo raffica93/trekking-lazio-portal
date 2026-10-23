@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261020-piemonte-ocr-01",
+  "createdAt": "2026-10-20T08:09:26.893Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "0de3932d2520f9ed4803499aa0dcf7632b144db5075313dfcf012adf647d5db7"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "1391077f24d1859c67ab86a197900884b94544142e05d23d61d6b9543017858e"
+    }
+  ]
+}

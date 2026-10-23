@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-lombardia-busto01",
+  "createdAt": "2026-10-22T21:40:32.695Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "80501ddeab33afdb2e4ebe6ac1a88cf1331f1d10c1a290d7977cce2dde1dabd9"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "0375ef0629248d84e5ba81d26b966f056b5570523b65a94f372cd1985d0eab45"
+    }
+  ]
+}

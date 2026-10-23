@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261023-lazio-sora-programma01",
+  "files": [
+    {
+      "path": "manifest.json",
+      "bytes": 560,
+      "sha256": "dc7f33fc5539548b66ff4aad9d494520df6a4dd50e37cfbb651430eb22a1dad7"
+    },
+    {
+      "path": "state.json",
+      "bytes": 404970,
+      "sha256": "75f503ae185ee9738852eb89e903b7842b3314f8512d7a4501a0edb424098637"
+    },
+    {
+      "path": "source-evidence.json",
+      "bytes": 1974,
+      "sha256": "ec52d8929e3702d09c7455025995d51426d0e4ca241e53365535017e958f1837"
+    },
+    {
+      "path": "collection-report.md",
+      "bytes": 2658,
+      "sha256": "8714a941ec1910f33d478dfceea8949c548e0c8e423ee276de969273fa059dcb"
+    }
+  ],
+  "publicMirrors": [
+    {
+      "backendPath": "backend/data/excursions.json",
+      "frontendPath": "frontend/public/excursions.json",
+      "backendSha256": "8b85cc89fab45cfe8cfd8ab87b98ed1d4d23eda55a9d9f616747524e10207717",
+      "frontendSha256": "8b85cc89fab45cfe8cfd8ab87b98ed1d4d23eda55a9d9f616747524e10207717",
+      "byteIdentical": true,
+      "bytes": 3635435
+    },
+    {
+      "backendPath": "backend/data/cai-sections.json",
+      "frontendPath": "frontend/public/cai-sections.json",
+      "backendSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+      "frontendSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+      "byteIdentical": true,
+      "bytes": 1459342
+    },
+    {
+      "backendPath": "backend/data/scrape-status.json",
+      "frontendPath": "frontend/public/scrape-status.json",
+      "backendSha256": "17878e18154e304fb603fd630b9514c2b82311b49a038c15f6f8b16eca5f486f",
+      "frontendSha256": "17878e18154e304fb603fd630b9514c2b82311b49a038c15f6f8b16eca5f486f",
+      "byteIdentical": true,
+      "bytes": 2078069
+    }
+  ],
+  "catalogDelta": {
+    "totalRowsBefore": 3376,
+    "totalRowsAfter": 3376,
+    "sourceIdPrefix": "sora-",
+    "sourceRowsBefore": 10,
+    "sourceRowsAfter": 10,
+    "added": 0,
+    "removed": 0,
+    "changed": 0,
+    "sortedRowsHashAlgorithm": "Select rows whose id starts with sora-, sort ascending by id, serialize resulting array with Node.js JSON.stringify, UTF-8 encode, then SHA-256.",
+    "sortedSourceRowsSha256Before": "57a2e514ff0b3b8686cb3a989db56d14a16d1c501c8d4e8b38a9dae29f98e302",
+    "sortedSourceRowsSha256After": "57a2e514ff0b3b8686cb3a989db56d14a16d1c501c8d4e8b38a9dae29f98e302"
+  },
+  "qa": {
+    "importer": "integrity/catalog PASS; event coverage HOLD",
+    "backendTests": "206/206 passed after collection",
+    "publicFilesStableAcrossTests": true,
+    "databaseQueries": 0,
+    "databaseWrites": 0
+  }
+}

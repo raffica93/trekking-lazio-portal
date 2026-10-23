@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-abruzzo-penne01",
+  "createdAt": "2026-10-22T22:38:41.633Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "dd756f6f775b3d9dd3de2165ef880910ffbcfdb82b6a8de981da02c6e035822e"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "a639341c1367905dffe952d7916d3368502f027e5b67ee01a3e897d9a485bd2e"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "runId": "cai-20261022-molise-campobasso01",
+  "requestedUrl": "https://caicampobasso.it/calendario-delle-attivita/",
+  "canonicalUrl": "https://caicampobasso.it/calendario-delle-attivita/",
+  "contentType": "text/html; charset=UTF-8",
+  "httpStatus": "not persisted",
+  "bodyBytes": 252380,
+  "bodySha256": "5b97e1aa0639efcebafbba3153c03dc0ee00d432b527f276c4d0dc08ee2363ed",
+  "rawBodyPath": "backend/data/agent-runs/cai-20261022-molise-campobasso01/source-index.html",
+  "candidateIds": [
+    "cai-campobasso-9236001-8e0c09de00c9",
+    "cai-campobasso-9236001-a99c427d4321"
+  ],
+  "candidateEvidence": [
+    {
+      "id": "cai-campobasso-9236001-8e0c09de00c9",
+      "htmlLine": 2906,
+      "visibleText": "16-18 OTTOBRE – PARCO NAZIONALE DELLA SILA: I Giganti della Sila, Lago Ariamàcina e Pietra dell’Altare"
+    },
+    {
+      "id": "cai-campobasso-9236001-a99c427d4321",
+      "htmlLine": 3179,
+      "visibleText": "6 Dicembre – PNALM: Lago Vivo – Fonte degli Uccelli"
+    }
+  ]
+}

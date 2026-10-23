@@ -33,10 +33,23 @@ function preserveEnrichment(scrapedList, existingList = []) {
   const existingById = new Map((existingList || []).map((item) => [item.id, item]));
   return scrapedList.map((scraped) => {
     const existing = existingById.get(scraped.id);
-    if (isReusableEnrichment(scraped, existing)) {
-      return mergeEnrichment(scraped, existing);
+    const merged = isReusableEnrichment(scraped, existing)
+      ? mergeEnrichment(scraped, existing)
+      : scraped;
+    if (!existing) return merged;
+
+    // Scraping refreshes source evidence, but must not erase values curated or
+    // administered outside the collector. Preserve explicit nulls as well.
+    const protectedFields = [
+      'title', 'status', 'coverImagePath', 'databaseId',
+      'lat', 'lng', 'location', 'locationSource', 'region', 'startPlace', 'mountainGroup', 'coordinatesQuality',
+      'geoEvidence', 'geoPointType', 'geoPrecision', 'geoReviewState'
+    ];
+    const preserved = { ...merged };
+    for (const field of protectedFields) {
+      if (Object.prototype.hasOwnProperty.call(existing, field)) preserved[field] = existing[field];
     }
-    return scraped;
+    return preserved;
   });
 }
 
@@ -47,7 +60,7 @@ function sortExcursions(excursions) {
 }
 
 function parseScrapeArgs(argv) {
-  const args = { dryRun: false, sources: [] };
+  const args = { dryRun: false, sources: [], sourceUrls: [] };
   for (let index = 0; index < argv.length; index += 1) {
     const token = argv[index];
     if (token === '--dry-run') {
@@ -69,6 +82,15 @@ function parseScrapeArgs(argv) {
       index += 1;
     } else if (token.startsWith('--source=')) {
       args.sources.push(...token.slice('--source='.length).split(',').map((value) => value.trim()));
+    } else if (token === '--source-url') {
+      const value = String(argv[index + 1] || '').trim();
+      if (!value) throw new Error('Missing value for --source-url');
+      args.sourceUrls.push(value);
+      index += 1;
+    } else if (token.startsWith('--source-url=')) {
+      const value = token.slice('--source-url='.length).trim();
+      if (!value) throw new Error('Missing value for --source-url');
+      args.sourceUrls.push(value);
     } else if (token === '--help' || token === '-h') {
       args.help = true;
     } else {
@@ -78,7 +100,40 @@ function parseScrapeArgs(argv) {
   args.sources = args.sources.filter(Boolean);
   if (args.concurrency !== undefined && (!Number.isInteger(args.concurrency) || args.concurrency < 1 || args.concurrency > 24)) throw new Error('Concurrency must be an integer from 1 to 24');
   if (args.all && args.sources.length) throw new Error('Use --all or --source, not both');
+  if (args.sourceUrls.length && (args.sources.length !== 1 || args.region || args.all)) {
+    throw new Error('--source-url requires exactly one --source and cannot be combined with --all or --region');
+  }
   return args;
+}
+
+function validateSourceUrls(source, sourceUrls) {
+  if (!sourceUrls?.length) return [];
+  let officialHost;
+  try {
+    const officialUrl = new URL(source.website || source.url);
+    if (!['http:', 'https:'].includes(officialUrl.protocol)) throw new Error();
+    officialHost = officialUrl.hostname.toLowerCase();
+  } catch {
+    throw new Error(`Cannot validate --source-url for ${source.id}: source has no valid official website URL`);
+  }
+  // Redirect/continuation aliases must be explicit source metadata. An alias
+  // is HTTPS-only; never infer a www/non-www pair from the primary host.
+  const officialHttpsAliases = new Set((source.officialHttpsHostAliases || [])
+    .map((host) => String(host).trim().toLowerCase())
+    .filter((host) => /^[a-z0-9.-]+$/.test(host)));
+  return sourceUrls.map((value) => {
+    let candidate;
+    try { candidate = new URL(value); } catch {
+      throw new Error(`Invalid --source-url for ${source.id}: ${value}`);
+    }
+    const host = candidate.hostname.toLowerCase();
+    const alias = officialHttpsAliases.has(host);
+    if (!['http:', 'https:'].includes(candidate.protocol) || candidate.username || candidate.password || candidate.port
+      || (host !== officialHost && !alias) || (alias && candidate.protocol !== 'https:')) {
+      throw new Error(`--source-url host must match ${officialHost}${officialHttpsAliases.size ? ` or an approved HTTPS alias` : ''}: ${value}`);
+    }
+    return candidate.href;
+  });
 }
 
 function selectSources(allSources, ids, region) {
@@ -115,18 +170,20 @@ async function scrapeSource(source, {
   fetchDoc = fetchDocument,
   deterministic = false,
   adapter = runSourceProcess,
+  sourceUrls = [],
   log = console
 } = {}) {
   const cached = existing.filter((item) => belongingTo(source, item));
 
   // National collector sets deterministic=true, but pdf-programma / gemini sources
   // must still go through fetchDocument + extractFromSource when a key is present.
-  const useDeterministicAdapter = deterministic && !(usesGeminiExtractor(source) && apiKey);
+  const useDeterministicAdapter = deterministic && (sourceUrls.length > 0 || !(usesGeminiExtractor(source) && apiKey));
   if (useDeterministicAdapter) {
     const result = await adapter(source, {
       now,
-      budgetMs: Number(process.env.SCRAPE_SOURCE_BUDGET_MS || 60_000),
-      maxDocuments: Number(process.env.SCRAPE_MAX_DOCUMENTS || 12)
+      budgetMs: Math.max(1_000, Math.min(240_000, Number(process.env.SCRAPE_SOURCE_BUDGET_MS) || 60_000)),
+      maxDocuments: Math.max(1, Math.min(40, Number(process.env.SCRAPE_MAX_DOCUMENTS) || 12)),
+      initialUrls: sourceUrls
     });
     const extracted = preserveEnrichment(result.excursions, existing);
     // Homepages and paginated calendars are partial views. Missing rows are never proof of cancellation.
@@ -184,6 +241,7 @@ async function scrapeAll({
   sources = SOURCES,
   existingPayload = {},
   sourceIds,
+  sourceUrls,
   region,
   concurrency = Number(process.env.SCRAPE_CONCURRENCY || 8),
   adapter,
@@ -197,6 +255,13 @@ async function scrapeAll({
 } = {}) {
   const selected = selectSources(sources, sourceIds, region);
   const deterministic = Boolean(adapter) || (!scrapeRoma && !extract && !fetchDoc);
+  if (sourceUrls?.length && selected.length !== 1) {
+    throw new Error('--source-url continuation requires exactly one selected source');
+  }
+  const validatedSourceUrls = sourceUrls?.length ? validateSourceUrls(selected[0], sourceUrls) : [];
+  if (validatedSourceUrls.length && (!deterministic || selected[0].id === 'roma' || isCheerioSource(selected[0]))) {
+    throw new Error('--source-url continuation requires exactly one deterministic non-cheerio source');
+  }
   const existing = Array.isArray(existingPayload.excursions) ? existingPayload.excursions : [];
   const hashes = existingPayload.sourceHashes && typeof existingPayload.sourceHashes === 'object'
     ? { ...existingPayload.sourceHashes }
@@ -205,11 +270,11 @@ async function scrapeAll({
   const geminiSelected = selected.some((source) => usesGeminiExtractor(source) && !isCheerioSource(source));
   // Resolve Gemini even when the national collector runs in deterministic mode,
   // otherwise extractor:'gemini' sources are forced through pdf-text and yield 0 events.
-  const resolvedKey = (deterministic && !geminiSelected) ? null : apiKey === undefined
+  const resolvedKey = validatedSourceUrls.length || (deterministic && !geminiSelected) ? null : apiKey === undefined
     ? resolveGeminiKey({ env: process.env })
     : apiKey;
 
-  if (geminiSelected || (!deterministic && selected.some((source) => !isCheerioSource(source)))) {
+  if (!validatedSourceUrls.length && (geminiSelected || (!deterministic && selected.some((source) => !isCheerioSource(source))))) {
     if (resolvedKey) {
       log.log('Using GEMINI_KEY with gemini-3.5-flash');
     } else {
@@ -239,6 +304,7 @@ async function scrapeAll({
         fetchDoc,
         deterministic,
         adapter,
+        sourceUrls: validatedSourceUrls,
         log
       });
       results.push(result);
@@ -332,6 +398,7 @@ module.exports = {
   belongingTo,
   buildPayload,
   parseScrapeArgs,
+  validateSourceUrls,
   preserveEnrichment,
   scrapeAll,
   scrapeSource,

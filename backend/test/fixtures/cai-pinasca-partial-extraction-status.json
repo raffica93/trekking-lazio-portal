@@ -1,0 +1,85 @@
+{
+  "sourceId": "cai-pinasca-9212062",
+  "prior": {
+    "status": "partial",
+    "extractedEvents": 0,
+    "documents": [
+      {
+        "url": "https://www.caipinasca.it/images/Calendario/PDF/CalendarioGite2026.pdf",
+        "method": "pdf-ocr",
+        "status": "error",
+        "events": 0
+      }
+    ],
+    "issues": [
+      {
+        "url": "https://www.caipinasca.it/images/Calendario/PDF/CalendarioGite2026.pdf",
+        "message": "OCR extraction failed",
+        "code": "ocr-error"
+      },
+      {
+        "url": "https://www.caipinasca.it/images/Calendario/PDF/CalendarioGite2026.pdf",
+        "message": "Discovery budget reached; 1 candidate document remains.",
+        "code": "discovery-limit"
+      }
+    ]
+  },
+  "current": {
+    "status": "partial",
+    "documents": [
+      {
+        "url": "https://www.caipinasca.it/images/Calendario/PDF/CalendarioGite2026.pdf",
+        "method": "pdf-ocr",
+        "status": "error",
+        "events": 0
+      },
+      {
+        "url": "https://www.caipinasca.it/index.php/calendario-gite",
+        "method": "html-calendar",
+        "status": "ok",
+        "events": 27
+      }
+    ],
+    "extractedEvents": 27,
+    "issues": []
+  },
+  "mixedLegacy": {
+    "prior": {
+      "status": "partial",
+      "extractedEvents": 8,
+      "documents": [
+        {
+          "url": "https://www.caipinasca.it/archive/2025-calendar.html",
+          "method": "html-calendar",
+          "status": "ok",
+          "events": 2
+        },
+        {
+          "url": "https://www.caipinasca.it/archive/legacy-calendar.html",
+          "method": "html-calendar",
+          "status": "ok"
+        }
+      ],
+      "issues": [
+        {
+          "url": "https://www.caipinasca.it/archive/2025-calendar.html",
+          "message": "Discovery budget reached; 1 candidate document remains.",
+          "code": "discovery-limit"
+        }
+      ]
+    },
+    "current": {
+      "status": "partial",
+      "documents": [
+        {
+          "url": "https://www.caipinasca.it/index.php/calendario-gite",
+          "method": "html-calendar",
+          "status": "ok",
+          "events": 27
+        }
+      ],
+      "extractedEvents": 27,
+      "issues": []
+    }
+  }
+}

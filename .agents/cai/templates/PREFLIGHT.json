@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "status": "template-not-executed",
+  "sessionId": null,
+  "observedAt": null,
+  "executionScope": "not_verified",
+  "repositoryRoot": null,
+  "branch": null,
+  "sourceCommit": null,
+  "environmentObservationsCurrent": null,
+  "checks": {
+    "repositoryAvailable": "not_checked",
+    "remoteCheckpointReadable": "not_checked",
+    "baselineManifestMatchesWorkingBytes": "not_checked",
+    "runtimeVersion": "not_checked",
+    "proxyAndTls": "not_checked",
+    "sourceHtmlThroughWorker": "not_checked",
+    "sourcePdfThroughWorker": "not_checked",
+    "ocrItalianAndEnglish": "not_checked",
+    "twoLunaAgents": "not_checked",
+    "databaseReadAccess": "not_checked",
+    "databaseImportMethod": "not_checked",
+    "testOutputIsolation": "not_checked"
+  },
+  "blockers": []
+}

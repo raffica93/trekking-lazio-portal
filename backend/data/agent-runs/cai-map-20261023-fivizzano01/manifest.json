@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "runId": "cai-map-20261023-fivizzano01",
+  "createdAt": "2026-10-23T00:28:37.807Z",
+  "input": {
+    "path": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-calendar01/classification-input.json",
+    "sha256": "1aba5906e6a743318ecb63b82b733deca9263759e943710308352901e3b33334"
+  },
+  "files": [
+    {
+      "path": "classified-catalog.json",
+      "sha256": "d07dfc27108dc38eee95ae35fac95e9ab66041806375db18968a522667c3d337",
+      "bytes": 17983
+    },
+    {
+      "path": "state.json",
+      "sha256": "f0857553e5d2c80788839a8cf64d2f326ca3a6e699e99c6c00298980b347122d",
+      "bytes": 1644
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-campania-caserta-scalambra01",
+  "createdAt": "2026-10-22T23:07:24.599Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "bd876be48ceb6e34333bd1de425e06b76caeab2b6bd54b1533c5c7ecdfd7c5c7"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "32de30e2a1cacb1fc1095b9aa02675538abe318a3cfd487e94ce3e2cd58d5567"
+    }
+  ]
+}

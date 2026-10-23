@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261023-emilia-romagna-cesena-attivita01",
+  "createdAt": "2026-10-23T01:24:22.378Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "d46ab729d0622ada4690df4a3ff80a55b33156db011010160538ad42913db180"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "594840969f883b3bdb98d9bef311fe986843c3c414e0efe81c67f638451204ce"
+    }
+  ]
+}

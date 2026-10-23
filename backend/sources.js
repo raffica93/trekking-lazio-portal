@@ -2991,6 +2991,10 @@ const overrideIds = new Set([
 
 // Override scrape fields (url/kind/template/extractor/enabled) must win over
 // registry discovery metadata. Registry still contributes website/directoryUrl/etc.
+const SOURCE_SPECIFIC_METADATA = Object.freeze({
+  'cai-pesaro-9228006': { officialHttpsHostAliases: ['www.caipesaro.it'] }
+});
+
 const SOURCES = [
   ...LAZIO_SOURCES.map(source => mergeOverrideSource(source, {
     defaultRegion: 'Lazio',
@@ -3043,7 +3047,10 @@ const SOURCES = [
   ...NATIONAL_REGISTRY.sections.filter(source =>
     !overrideIds.has(source.id) && !(source.legacyId && overrideIds.has(source.legacyId))
   )
-];
+].map((source) => {
+  const metadata = SOURCE_SPECIFIC_METADATA[source.id];
+  return metadata ? { ...source, ...metadata } : source;
+});
 
 function enabledSources(list = SOURCES) {
   return list.filter((source) => source.enabled);
@@ -3061,6 +3068,7 @@ function sourceMeta(source) {
     website: source.website || null,
     directoryUrl: source.directoryUrl || null,
     calendarUrls: source.calendarUrls || [source.url],
+    ...(source.officialHttpsHostAliases?.length ? { officialHttpsHostAliases: source.officialHttpsHostAliases } : {}),
     directoryId: source.directoryId || null,
     sectionType: source.sectionType || 'section',
     parentSectionId: source.parentSectionId || null,

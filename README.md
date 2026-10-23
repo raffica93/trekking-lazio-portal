@@ -40,6 +40,14 @@ la cache JSON delle escursioni. La struttura principale è:
 
 ## Aggiornamento dati
 
+Per il coordinamento con **due agenti Codex Luna**, raccolta tramite scraping/OCR,
+passaggio verificato dei file e importazione DB separata, vedere
+[Orchestratore CAI](docs/orchestratore-cai.md). La configurazione degli agenti e
+lo script di setup per Codex Cloud sono in `.codex/`; ogni lotto conserva stato e
+attività da riprendere in `backend/data/agent-runs/`. L'avvio resta manuale.
+Obiettivi, piano full cloud, baseline e consegne tra sessioni sono nello
+[spazio operativo degli agenti](.agents/cai/README.md), versionato nel repository.
+
 ```bash
 cd backend
 npm ci

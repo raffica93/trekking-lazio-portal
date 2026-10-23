@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261022-abruzzo-penne01",
+  "files": [
+    {
+      "path": "source-page.html",
+      "bytes": 70625,
+      "sha256": "d875735a03ff8004a547ae9aedacf414d0695b268e07abba0e60919e74ca5a70"
+    },
+    {
+      "path": "source-evidence.json",
+      "bytes": 1965,
+      "sha256": "477c50b3eb1ff39fbe01718eb89fe3aee9791744250e7d7758b5b304bb2569f1"
+    },
+    {
+      "path": "collection-report.md",
+      "bytes": 3420,
+      "sha256": "4fed13dd8d782ff0fddeff8547763e7c8ef125b003377930e094e9bae9f9c0ce"
+    }
+  ],
+  "catalogComparison": {
+    "baselineCommit": "805d90922c605a5893edb6a20629c1c00f18647c",
+    "path": "backend/data/excursions.json",
+    "fullFileSha256Before": "243cdf4c96379eb31e1cfc2285327fa3ba686d93113779e42a98be9ca021342d",
+    "fullFileSha256After": "dd756f6f775b3d9dd3de2165ef880910ffbcfdb82b6a8de981da02c6e035822e",
+    "penneSourceId": "cai-penne-9234006",
+    "eventRowsBefore": 8,
+    "eventRowsAfter": 8,
+    "canonicalRowsSortedByIdSha256Before": "2e6e61eb7229ec3fa46580d0de75a7c83bba17c5ba95f6af6367266afa064960",
+    "canonicalRowsSortedByIdSha256After": "2e6e61eb7229ec3fa46580d0de75a7c83bba17c5ba95f6af6367266afa064960",
+    "rowsByteIdentical": true,
+    "generatedAtBefore": "2026-10-22T22:22:15.215Z",
+    "generatedAtAfter": "2026-10-22T22:38:41.397Z",
+    "coverageBefore": {
+      "parsed": 1,
+      "unsupported": 0
+    },
+    "coverageAfter": {
+      "parsed": 0,
+      "unsupported": 1
+    },
+    "penneSourceHashBefore": "565c6e5defe61349ce5b3a6dc358855fc8edaa723851a816f9c1531b3e25830e",
+    "penneSourceHashAfter": "8db43b30a20166697fecead336459a876b111c24a11d472cd201eb726b0c2369",
+    "metadataRegenerated": true
+  }
+}

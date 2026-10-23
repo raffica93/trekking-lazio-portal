@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "mode": "delta-only",
+  "status": "completed",
+  "runId": "cai-map-20261022-valmadrera01",
+  "regionalRunId": "cai-20261022-lombardia-valmadrera07",
+  "projectRef": "snwzxegtqnnuvlawnpgl",
+  "writer": "authorized Supabase MCP execute_sql bridge; rows produced by importer verifyReadyClassificationRun, validateImportEvents, toPlaceRow, and classificationToRow; ON CONFLICT DO NOTHING",
+  "sourceCommit": "1914bcaeb593167c05b85a6bfcec61e775ff638c",
+  "remoteCheckpointVerified": true,
+  "manifestPath": "backend/data/agent-runs/cai-map-20261022-valmadrera01/result/manifest.json",
+  "manifestSha256": "0ba0b96a07b648940a4d928087bd3e6d9dcd7cf6ffce9f2a0502e0eb216652ff",
+  "inputSha256": "287911693fde8f58a2d2f09b9ab4f645efff624682ff6dc1a72410dfbb59c363",
+  "outputSha256": "e827a123629e43022e050bea22686ed4b4febf1dab98d0016fbe7b818a1c602e",
+  "migration": {
+    "name": "20261022200000_places_geo_evidence",
+    "commit": "1914bcaeb593167c05b85a6bfcec61e775ff638c",
+    "status": "applied",
+    "appliedBeforeDelta": true,
+    "effects": "nullable provenance column and validation check; no backfill"
+  },
+  "preImportQuery": {
+    "observedAt": "2026-10-22T20:33:42.003837Z",
+    "placesTotal": 4405,
+    "publishedTotal": 4346,
+    "mapCandidates": 3336,
+    "classificationsTotal": 3336,
+    "targetPlacesPresent": 0,
+    "targetClassificationsPresent": 0,
+    "editorialDigest": "b52a6bcc1c0d4779ffeb112e5547c891",
+    "placesLastUpdated": "2026-10-20T11:51:23.239637Z"
+  },
+  "places": {
+    "input": 10,
+    "inserted": 10,
+    "insertedSourceIds": [
+      "cai-valmadrera-9216081-10a7c964644a",
+      "cai-valmadrera-9216081-4d26b7d6c929",
+      "cai-valmadrera-9216081-6975b0f54bff",
+      "cai-valmadrera-9216081-7df15329595b",
+      "cai-valmadrera-9216081-7ee9657bb99a",
+      "cai-valmadrera-9216081-a3ea38de9baf",
+      "cai-valmadrera-9216081-c6ae7cf56593",
+      "cai-valmadrera-9216081-d13c059bceac",
+      "cai-valmadrera-9216081-d55106a9ebce",
+      "cai-valmadrera-9216081-f703dad1d860"
+    ],
+    "existingPreserved": 0,
+    "missing": [],
+    "skipped": 0,
+    "updated": 0,
+    "deleted": 0,
+    "protectedFieldMismatches": 0,
+    "coordinatesAdded": 0,
+    "allStatus": "published"
+  },
+  "classifications": {
+    "input": 10,
+    "inserted": 10,
+    "insertedSourceIds": [
+      "cai-valmadrera-9216081-10a7c964644a",
+      "cai-valmadrera-9216081-4d26b7d6c929",
+      "cai-valmadrera-9216081-6975b0f54bff",
+      "cai-valmadrera-9216081-7df15329595b",
+      "cai-valmadrera-9216081-7ee9657bb99a",
+      "cai-valmadrera-9216081-a3ea38de9baf",
+      "cai-valmadrera-9216081-c6ae7cf56593",
+      "cai-valmadrera-9216081-d13c059bceac",
+      "cai-valmadrera-9216081-d55106a9ebce",
+      "cai-valmadrera-9216081-f703dad1d860"
+    ],
+    "preexistingPreserved": 0,
+    "matched": 10,
+    "mismatched": [],
+    "skipped": 0,
+    "updated": 0,
+    "deleted": 0,
+    "byDecision": {
+      "trekking": 0,
+      "non_trekking": 8,
+      "da_verificare": 2
+    },
+    "modelRequested": "inception/mercury-decide",
+    "responseModel": "inception/mercury-decide-20260930",
+    "modelAttested": true
+  },
+  "candidateDisposition": {
+    "newCandidates": 14,
+    "inserted": 10,
+    "confirmedDuplicatesExcluded": 2,
+    "confirmedDuplicateIds": [
+      "cai-valmadrera-9216081-b371db7515b3",
+      "cai-valmadrera-9216081-ad57bfc6c54c"
+    ],
+    "probableDuplicatesHeld": 2,
+    "probableDuplicateIds": [
+      "cai-valmadrera-9216081-6442e365d70b",
+      "cai-valmadrera-9216081-ddb3aaccfc1a"
+    ],
+    "duplicateOriginalsVerifiedInPlaces": {
+      "queriedAt": "2026-10-22T20:36:22.256568Z",
+      "confirmed": [
+        {
+          "source_id": "cai-valmadrera-9216081-08f80e8dc9a5",
+          "title": "6° Appuntamento rassegna Raccontami la Montagna 2026",
+          "status": "published",
+          "classification": "da_verificare"
+        },
+        {
+          "source_id": "cai-valmadrera-9216081-e2177dd44e1a",
+          "title": "Vivi Il Moregallo 2026",
+          "status": "published",
+          "classification": "da_verificare"
+        }
+      ],
+      "probable": [
+        {
+          "source_id": "cai-valmadrera-9216081-93f8dd640820",
+          "title": "ESCURSIONE MEDIA MONTAGNA: RIFUGIO OLMO PRESOLANA",
+          "status": "published",
+          "classification": "trekking"
+        },
+        {
+          "source_id": "cai-valmadrera-9216081-07c7e327bb27",
+          "title": "GITA SOCIALE",
+          "status": "published",
+          "classification": "da_verificare"
+        }
+      ]
+    }
+  },
+  "verification": {
+    "observedAt": "2026-10-22T20:34:53.834321Z",
+    "placesTotal": 4415,
+    "publishedTotal": 4356,
+    "mapCandidates": 3346,
+    "classificationsTotal": 3346,
+    "targetPlacesPresent": 10,
+    "targetPlacesMissing": 0,
+    "targetPlaceFieldMismatches": 0,
+    "targetClassificationsPresent": 10,
+    "targetClassificationsMissing": 0,
+    "targetClassificationFieldMismatches": 0,
+    "classificationsByDecision": {
+      "trekking": 969,
+      "non_trekking": 17,
+      "da_verificare": 2360
+    },
+    "defaultMapVisibleRows": 3329,
+    "validNonTrekkingExcluded": 17,
+    "uncertainRetained": 2360,
+    "allTargetRowsExact": true,
+    "allTargetCoordinatesNull": true,
+    "editorialDigestAfterAllPlaces": "5a46c6acc142617aeae86d49a31c3f26",
+    "preexistingEditorialDigestAfter": "b52a6bcc1c0d4779ffeb112e5547c891",
+    "preexistingEditorialDigestMatchesBefore": true,
+    "preexistingPlacesCount": 4405,
+    "preexistingLatestUpdatedAt": "2026-10-20T11:51:23.239637Z",
+    "latestPlacesUpdatedAtAfter": "2026-10-22T20:34:14.952724Z"
+  },
+  "remoteReceiptCommit": null
+}

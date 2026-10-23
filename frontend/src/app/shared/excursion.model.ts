@@ -27,4 +27,25 @@ export interface Excursion {
   activityType?: string;
   terrain?: string;
   difficultyNote?: string;
+  classification?: ExcursionClassification;
+}
+
+export type ExcursionClassificationDecision = 'trekking' | 'non_trekking' | 'da_verificare';
+
+export interface ExcursionClassification {
+  valid?: boolean;
+  decision: ExcursionClassificationDecision;
+  category: string;
+  confidence: number | null;
+  probability: number | null;
+  rationale: string;
+  evidenceOriginal: string;
+  fingerprint: string;
+  method: 'rules-v1' | 'mercury-decide';
+  modelRequested: string | null;
+  responseModel: string | null;
+  modelAttested: boolean;
+  policyVersion: string;
+  modelVersion: string | null;
+  mapEligible: boolean;
 }

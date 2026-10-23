@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261020-lombardia-01",
+  "createdAt": "2026-10-20T00:47:33.849Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "a73ad056fcfeeeb181985163770c59bba0c337b359f0f0f325843fb9a948cc18"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "853a327b90fdb8fc3bec729711e084a4fcda6c0a9d8bd7fda458d1503c512e43"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "fcdd69fc97cde33a454990cc11bcbbae0aa1af5dbdfc163c000d23eb837c62f4"
+    }
+  ]
+}

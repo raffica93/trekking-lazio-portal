@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "runId": "cai-map-20261022-campobasso01",
+  "createdAt": "2026-10-22T22:28:26.300Z",
+  "input": {
+    "path": "backend/data/agent-runs/cai-20261022-molise-campobasso01/candidate-input.json",
+    "sha256": "a0cab9771df021bd96c7baca7fcab0c170bab0cf1137cba1a7bded35ef14d700"
+  },
+  "files": [
+    {
+      "path": "classified-catalog.json",
+      "sha256": "d6e54aa214d648b4b6d9351d417a0dd7fb10fe01ea80e0bae0dd148b863038fd",
+      "bytes": 4083
+    },
+    {
+      "path": "state.json",
+      "sha256": "e9b49c80570b73daee570e0e7a8d5adf131a97837fb69cbf2a34689efe946c67",
+      "bytes": 896
+    }
+  ]
+}

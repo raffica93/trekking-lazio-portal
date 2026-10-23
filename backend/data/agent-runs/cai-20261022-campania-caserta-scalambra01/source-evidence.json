@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261022-campania-caserta-scalambra01",
+  "sourceId": "cai-caserta-9238006",
+  "requestedUrl": "https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf",
+  "canonicalUrl": "https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf",
+  "contentType": "application/pdf",
+  "httpStatus": "not persisted",
+  "bodyBytes": 244304,
+  "bodySha256": "d239fdc33cf9583b292bf84189c0c3b2dce0532a289b660b133e420a62142b9b",
+  "rawBodyPath": "backend/data/agent-runs/cai-20261022-campania-caserta-scalambra01/source-document.pdf",
+  "cache": {
+    "keySha256": "5635a0bd620cd92cf3b58a01b570d762ec0b39fb16118d59dc8fe087da45f4a0",
+    "lastModified": "Tue, 13 Oct 2026 16:56:40 GMT"
+  },
+  "productionExtraction": {
+    "method": "pdf-text",
+    "events": 0,
+    "interpretation": "parser emitted no candidate; independent text evidence corroborates an existing catalog record, not a new row"
+  },
+  "documentMetadata": {
+    "pdfInfoTitle": "Microsoft Word - 20 - Capin di Ponente da Camporosso.doc",
+    "author": "Tricesimo1",
+    "warning": "PDF file metadata differs from its body; attribution relies on the actual body and official CAI Caserta link, not the document-property title/author."
+  },
+  "textEvidence": {
+    "extraction": "pdftotext -layout on exact cached PDF bytes",
+    "excerpts": [
+      "Domenica 25 ottobre 2026",
+      "C.A.I. Caserta",
+      "Anello del Monte Scalambra (1420 m)",
+      "E/Escursionistica",
+      "Partenza escursione ore 9:00",
+      "comune di Serrone",
+      "Eremo di San Michele Arcangelo",
+      "catena dei Monti Ernici"
+    ],
+    "result": "PDF body independently confirms 2026-10-25, CAI Caserta, the outing, category and Serrone/Monte Scalambra/Eremo route.",
+    "coordinatePairFound": false,
+    "coordinateNote": "No latitude/longitude pair was found in the extracted text; existing catalog coordinates remain curated and are not verified by this PDF."
+  },
+  "existingCatalogRecord": {
+    "selection": "exact event id",
+    "rowBefore": {
+      "id": "cai-caserta-9238006-8ca304031e6a",
+      "title": "Da Serrone al Monte Scalambra (1420 m) per l’Eremo di San Michele Arcangelo",
+      "date": "2026-10-25",
+      "dateEnd": "2026-10-25",
+      "organizer": "CAI Caserta",
+      "location": "Monti Ernici",
+      "region": "Lazio",
+      "lat": 41.802,
+      "lng": 13.486,
+      "coordinatesQuality": "massif"
+    },
+    "rowAfter": {
+      "id": "cai-caserta-9238006-8ca304031e6a",
+      "title": "Da Serrone al Monte Scalambra (1420 m) per l’Eremo di San Michele Arcangelo",
+      "date": "2026-10-25",
+      "dateEnd": "2026-10-25",
+      "organizer": "CAI Caserta",
+      "location": "Monti Ernici",
+      "region": "Lazio",
+      "lat": 41.802,
+      "lng": 13.486,
+      "coordinatesQuality": "massif"
+    },
+    "rowSha256Before": "b517322f48fc25483b6f180c8045e7a399b8e0a5239b4ab4b753848ddd3babb9",
+    "rowSha256After": "b517322f48fc25483b6f180c8045e7a399b8e0a5239b4ab4b753848ddd3babb9",
+    "rowsUnchanged": true,
+    "assessment": "PDF corroborates the existing 2026-10-25 CAI Caserta event; no duplicate row or field edit."
+  },
+  "catalogDelta": {
+    "rowSelector": "event.id startsWith cai-caserta-9238006-",
+    "sourceRowsBefore": 50,
+    "sourceRowsAfter": 50,
+    "added": 0,
+    "removed": 0,
+    "changed": 0,
+    "rowsUnchanged": true,
+    "canonicalRowsSortedByIdSha256Before": "1bc3d52b28218c621596dfbeb21e00a7b90bdb9fa2b0e0c4b405557498cb3b74",
+    "canonicalRowsSortedByIdSha256After": "1bc3d52b28218c621596dfbeb21e00a7b90bdb9fa2b0e0c4b405557498cb3b74",
+    "catalogSha256Before": "d3e8e73a66063319c606fbe921695f08f4336ca50dc0ebfb3f69cd29d34f426f",
+    "catalogSha256After": "bd876be48ceb6e34333bd1de425e06b76caeab2b6bd54b1533c5c7ecdfd7c5c7",
+    "totalCatalogRowsBefore": 3366,
+    "totalCatalogRowsAfter": 3366
+  },
+  "coverage": {
+    "statusBefore": "partial",
+    "statusAfter": "partial",
+    "documentsBefore": 5,
+    "documentsAfter": 6,
+    "sourceRowsBefore": 50,
+    "sourceRowsAfter": 50,
+    "extractedEventsBefore": 126,
+    "extractedEventsAfter": 126,
+    "issuesBefore": [
+      {
+        "url": "https://www.caicaserta.it/escursioni/Via_Francigena_Castelli_Romani.pdf",
+        "message": "PDF OCR unavailable or failed: Command failed: pdftoppm -f 1 -l 11 -r 160 -png -gray /tmp/cai-pdf-ocr-x5G0RD/source.pdf /tmp/cai-pdf-ocr-x5G0RD/page\n"
+      },
+      {
+        "url": "https://www.caicaserta.it/documenti/Calendario%20escursionistico%202026.pdf",
+        "message": "Discovery budget reached; 5 candidate documents remain.",
+        "code": "discovery-limit"
+      },
+      {
+        "url": "https://www.caicaserta.it/escursioni.html",
+        "message": "Discovery budget reached; 1 candidate documents remain.",
+        "code": "discovery-limit"
+      }
+    ],
+    "issuesAfter": [
+      {
+        "url": "https://www.caicaserta.it/escursioni/Via_Francigena_Castelli_Romani.pdf",
+        "message": "PDF OCR unavailable or failed: Command failed: pdftoppm -f 1 -l 11 -r 160 -png -gray /tmp/cai-pdf-ocr-x5G0RD/source.pdf /tmp/cai-pdf-ocr-x5G0RD/page\n"
+      },
+      {
+        "url": "https://www.caicaserta.it/documenti/Calendario%20escursionistico%202026.pdf",
+        "message": "Discovery budget reached; 5 candidate documents remain.",
+        "code": "discovery-limit"
+      },
+      {
+        "url": "https://www.caicaserta.it/escursioni.html",
+        "message": "Discovery budget reached; 1 candidate documents remain.",
+        "code": "discovery-limit"
+      }
+    ],
+    "note": "Annual PDF discovery-limit (5), index continuation discovery-limit (1), and Francigena OCR failure remain open; only the targeted PDF was added to document history."
+  },
+  "database": {
+    "status": "pending",
+    "writes": 0
+  }
+}

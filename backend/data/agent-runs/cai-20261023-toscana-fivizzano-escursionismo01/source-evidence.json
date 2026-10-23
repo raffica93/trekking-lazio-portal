@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261023-toscana-fivizzano-escursionismo01",
+  "sourceId": "cai-fivizzano-9226019",
+  "requestedUrl": "https://www.caifivizzano.it/escursionismo/",
+  "canonicalUrl": "not persisted; cache metadata records the requested URL only",
+  "httpStatus": "not persisted",
+  "contentType": "text/html; charset=UTF-8",
+  "bodyBytes": 138701,
+  "bodySha256": "a78ad2e426a35f61944ea0768217a3ebf260b7bcf77632ceab896e5eb4b6490e",
+  "rawBodyPath": null,
+  "cache": {
+    "available": true,
+    "metadataPath": "backend/node_modules/.cache/cai/e8dd7b1792c8e97b68d5170340517afa1ead44edaa09194253fa17b0433ca133.json",
+    "bodyPath": "backend/node_modules/.cache/cai/e8dd7b1792c8e97b68d5170340517afa1ead44edaa09194253fa17b0433ca133.bin",
+    "keySha256": "e8dd7b1792c8e97b68d5170340517afa1ead44edaa09194253fa17b0433ca133",
+    "metadataMatchesBody": true
+  },
+  "extraction": {
+    "method": "html-calendar",
+    "events": 1,
+    "evidenceSource": "scrape-status.json document entry"
+  },
+  "eventEvidence": {
+    "catalogId": "cai-fivizzano-9226019-2d592e7a1731",
+    "disposition": "exact-existing-row-corroborated; no new ID or duplicate exclusion",
+    "title": "Anello Zanego – La Serra- Tellaro",
+    "date": "2026-11-15",
+    "dateEnd": "2026-11-15",
+    "organizer": "Gruppo Escursionismo (JSON-LD); catalog organizer CAI Fivizzano",
+    "descriptionExcerpt": "Escursione nel levante ligure fra nel Parco naturale Montemarcello, fra la vegetazione tipica della zona, passando i borghi di Zanego e Tellaro e La Serra a due passi dal mare, con sguardo vesto tutta la costa ligure con incredibili panorami. Difficoltà: E; dislivello D+ 300 m; lunghezza 9 km; tempo 4 ore.",
+    "locationInSource": "JSON-LD place name/address are empty; description names Zanego, Tellaro and La Serra in the Parco naturale Montemarcello.",
+    "catalogLocation": "Località da verificare",
+    "coordinates": null,
+    "eventDetailChildUrl": "https://www.caifivizzano.it/eventi/anello-zanego-la-serra-tellaro/",
+    "childFetched": false
+  },
+  "sourceEvidence": {
+    "pageHeading": {"locator": {"htmlElement": "h1"}, "excerpt": "Escursionismo"},
+    "calendarHeading": {"locator": {"htmlText": "Calendario Uscite ed Iniziative 2026"}, "excerpt": "Calendario Uscite ed Iniziative 2026"},
+    "calendarCard": {
+      "title": {
+        "locator": {"line": 132},
+        "excerpt": "<h4 class=\"mec-event-title\"><a class=\"mec-color-hover\" data-event-id=\"2543\" href=\"https://www.caifivizzano.it/eventi/anello-zanego-la-serra-tellaro/\" target=\"_self\" rel=\"noopener\">Anello Zanego &#8211; La Serra- Tellaro</a></h4>"
+      },
+      "date": {"locator": {"line": 126}, "excerpt": "<span class=\"mec-start-date-label\">15 Novembre</span>"}
+    },
+    "jsonLd": {
+      "startDate": {"locator": {"line": 251}, "excerpt": "\"startDate\": \"2026-11-15\""},
+      "endDate": {"locator": {"line": 252}, "excerpt": "\"endDate\": \"2026-11-15\""},
+      "organizer": {"locator": {"line": 264}, "excerpt": "\"name\": \"Gruppo Escursionismo\""},
+      "description": {"locator": {"line": 276}, "excerpt": "Escursione nel levante ligure fra nel Parco naturale Montemarcello, fra la vegetazione tipica della zona, passando i borghi di Zanego e Tellaro e La Serra a due passi dal mare, con sguardo vesto tutta la costa ligure con incredibili panorami. Referente: Walter Vegnuti; Difficoltà: E; Dislivello: D+ 300 m; Lunghezza: 9 km; Tempo di cammini effettivo: 4 ore."},
+      "name": {"locator": {"line": 278}, "excerpt": "\"name\": \"Anello Zanego &#8211; La Serra- Tellaro\""},
+      "url": {"locator": {"line": 279}, "excerpt": "\"url\": \"https://www.caifivizzano.it/eventi/anello-zanego-la-serra-tellaro/\""}
+    }
+  },
+  "catalogEvidence": {
+    "baselineRun": "cai-20261023-toscana-fivizzano-miniere01",
+    "baselineCatalogSha256": "4ae1e9adcc484df585fa81b24313780172ef381c149a921dd2a13a541d84a197",
+    "currentCatalogSha256": "d02a525382f6d7b31c571a49c0ced7c9ed292b5e67ba138ee060b4adbca4fa83",
+    "rowsBefore": 3376,
+    "rowsAfter": 3376,
+    "fivizzanoIdPrefix": "cai-fivizzano-9226019-",
+    "fivizzanoRowsBefore": 12,
+    "fivizzanoRowsAfter": 12,
+    "added": 0,
+    "removed": 0,
+    "changed": 0,
+    "sortedRowsHashAlgorithm": "Select rows whose id starts with cai-fivizzano-9226019-, sort ascending by id, serialize the resulting array with Node.js JSON.stringify, UTF-8 encode, then SHA-256.",
+    "sortedFivizzanoRowsSha256Before": "052158f0d916607fe02a746b29c0027d44a39239fd6a16fa282d1c48a04c9905",
+    "sortedFivizzanoRowsSha256After": "052158f0d916607fe02a746b29c0027d44a39239fd6a16fa282d1c48a04c9905",
+    "existingEventRowSha256Before": "1b23109177824b6f4f830f8d3baf96175009e7985666e80a1bf831a238a574ea",
+    "existingEventRowSha256After": "1b23109177824b6f4f830f8d3baf96175009e7985666e80a1bf831a238a574ea",
+    "coordinatesOrAdministrativeFieldsChanged": false
+  }
+}

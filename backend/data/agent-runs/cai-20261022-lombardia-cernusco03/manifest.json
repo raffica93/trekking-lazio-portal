@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-lombardia-cernusco03",
+  "createdAt": "2026-10-22T21:15:13.076Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "ce930618a8e0e925f43703b5a5f10347312fea602843aab77f6136b191c895a1"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "0cddc15b8f41a6220d96ffec93096dba608d24fd7b042e4e915666cf7565a4bd"
+    }
+  ]
+}

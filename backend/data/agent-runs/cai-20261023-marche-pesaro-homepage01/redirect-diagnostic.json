@@ -1,0 +1,21 @@
+{
+  "observedAt": "2026-10-23T07:00:23Z",
+  "method": "GET response headers only via inherited HTTP proxy; TLS verification enabled; redirects disabled; response bodies not read",
+  "requests": [
+    {
+      "url": "https://caipesaro.it/",
+      "status": 301,
+      "location": "http://www.caipesaro.it/",
+      "bodyRead": false
+    },
+    {
+      "url": "https://www.caipesaro.it/",
+      "status": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "contentLength": 117,
+      "location": null,
+      "bodyRead": false
+    }
+  ],
+  "limits": "No redirect followed and no page body inspected; this does not establish calendar presence or absence. The HTTP 301 to plain HTTP remains blocked by collector policy."
+}

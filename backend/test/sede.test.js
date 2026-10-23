@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 const os = require('node:os');
 const path = require('node:path');
 const fs = require('node:fs/promises');
+const crypto = require('node:crypto');
 const { parseSedeArgv, runSede } = require('../scripts/sede');
 const { runScrape } = require('../scripts/scrape');
 const { SOURCES } = require('../sources');
@@ -69,6 +70,8 @@ test('runScrape writes scrape-status.json for the selected sede', async () => {
   const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'sede-scrape-'));
   const dataPath = path.join(dir, 'excursions.json');
   const statusFile = path.join(dir, 'scrape-status.json');
+  const publicData = path.join(__dirname, '..', '..', 'frontend', 'public', 'excursions.json');
+  const publicHashBefore = crypto.createHash('sha256').update(await fs.readFile(publicData)).digest('hex');
 
   const result = await runScrape({
     argv: ['--source', 'roma'],
@@ -100,4 +103,6 @@ test('runScrape writes scrape-status.json for the selected sede', async () => {
   const status = JSON.parse(await fs.readFile(statusFile, 'utf8'));
   assert.equal(status.sources.find((row) => row.id === 'roma').status, 'ok');
   assert.equal(status.sources.find((row) => row.id === 'roma').excursions, 1);
+  const publicHashAfter = crypto.createHash('sha256').update(await fs.readFile(publicData)).digest('hex');
+  assert.equal(publicHashAfter, publicHashBefore, 'isolated output paths must not rewrite the public catalog');
 });

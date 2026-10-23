@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261023-toscana-fivizzano-attivita01",
+  "createdAt": "2026-10-23T00:58:28.791Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "c66e963a9d025dfb1184492362cd3235051f04e0318f88f1985b0d81951e2f03"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "ac2d38e59aa5d00633cd2090e50b1cb265238b4fa4a5f25bc137c36a94bc9e0b"
+    }
+  ]
+}

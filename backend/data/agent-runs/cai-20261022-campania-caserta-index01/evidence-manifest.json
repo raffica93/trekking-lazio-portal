@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261022-campania-caserta-index01",
+  "files": [
+    {
+      "path": "source-page.html",
+      "bytes": 7179,
+      "sha256": "bb3bf1b613641c692e434db5496e461858509686bd2600b0cf299b80dd6ce039"
+    },
+    {
+      "path": "source-evidence.json",
+      "bytes": 3390,
+      "sha256": "2a0f7fc8a5ce9d550eb176c1764cc1c246467019a21317444f8b8f5cb47bc9fd"
+    },
+    {
+      "path": "collection-report.md",
+      "bytes": 3686,
+      "sha256": "8d56fff3be08537228d3ace4817ac205cff982973b600c4e7be0f64a68aadb34"
+    }
+  ],
+  "orchestratorArtifacts": {
+    "manifest": {
+      "path": "manifest.json",
+      "sha256": "66d063ef486f6713669ae41b164678ee508f3be0b8369a742153d9b51f6ad24c"
+    },
+    "state": {
+      "path": "state.json",
+      "sha256": "ec85f72e3bf66489c4ffa2c2db468324b741d6525bbbf275eee5b70b69e81493"
+    }
+  },
+  "outputSnapshot": {
+    "baselineCommit": "16204f085ae88c110fde2d5335bec7c228e074e4",
+    "catalogs": {
+      "excursions": {
+        "sha256Before": "704ea8322b02b6ce479338df3855da7974ed25d94bfabffe5536d721b3bb88d2",
+        "sha256After": "d3e8e73a66063319c606fbe921695f08f4336ca50dc0ebfb3f69cd29d34f426f",
+        "totalRowsBefore": 3366,
+        "totalRowsAfter": 3366,
+        "sourceRowsBefore": 50,
+        "sourceRowsAfter": 50,
+        "rowSelector": "event.id startsWith cai-caserta-9238006-",
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "canonicalRowsSortedByIdSha256Before": "1bc3d52b28218c621596dfbeb21e00a7b90bdb9fa2b0e0c4b405557498cb3b74",
+        "canonicalRowsSortedByIdSha256After": "1bc3d52b28218c621596dfbeb21e00a7b90bdb9fa2b0e0c4b405557498cb3b74",
+        "rowsUnchanged": true
+      },
+      "sections": {
+        "sha256Before": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+        "sha256After": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+        "rowsUnchanged": true
+      },
+      "scrapeStatus": {
+        "sha256Before": "a58baf3e0e6d71730a6ecc70bbbbd85215d531afe5f57508647fa98d59cbad71",
+        "sha256After": "dfd5fd676ec87d5b3e4897cbd067ed86875707ec6fb326364609e0dca3adc3e3",
+        "sourceStatusBefore": "partial",
+        "sourceStatusAfter": "partial",
+        "documentsBefore": 4,
+        "documentsAfter": 5
+      }
+    }
+  },
+  "collection": {
+    "requestedUrls": [
+      "https://www.caicaserta.it/escursioni.html"
+    ],
+    "documentsProcessed": 1,
+    "documentMethod": null,
+    "extractedEventCandidates": 0,
+    "databaseWrites": 0,
+    "result": "partial"
+  }
+}

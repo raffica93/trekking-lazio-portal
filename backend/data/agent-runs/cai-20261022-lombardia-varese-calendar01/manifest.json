@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-lombardia-varese-calendar01",
+  "createdAt": "2026-10-22T23:54:44.097Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "97743da9536cc552db3caf6e11c0762ab3598dd330e185cd2a8a76a851fd1c0b"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "f8a5ea5622deb843e352a930a9c7e3a171bb5cb625ed091d16a213bdc615577e"
+    }
+  ]
+}

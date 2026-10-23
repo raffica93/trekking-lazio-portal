@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261023-lombardia-lovere01",
+  "region": "Lombardia",
+  "sourceId": "cai-lovere-9216055",
+  "organizer": "CAI Lovere",
+  "status": "no-upcoming-for-parsed-events-api; regional coverage remains open",
+  "runtime": {
+    "orchestratorModelRecorded": "gpt-6-luna",
+    "concurrency": 1,
+    "maxDocuments": 8,
+    "sourceBudgetMs": 120000,
+    "documentsRead": 3,
+    "lockReleased": true
+  },
+  "source": {
+    "officialHomepage": "https://organizzazione.cai.it/sez-lovere/",
+    "dateRangeStart": "2026-10-01",
+    "dateRangeEnd": "2028-10-23",
+    "calendarUrlsConfigured": [],
+    "sourceStatus": "no-upcoming",
+    "enabled": true,
+    "error": null,
+    "issues": [],
+    "eventsExtracted": 0,
+    "statusTimestamp": "2026-10-23T06:35:05.839Z"
+  },
+  "documents": [
+    {
+      "url": "https://organizzazione.cai.it/sez-lovere/",
+      "sha256": "32356f88a834b518be1b40b255111d1955aadfff7a04fda793263e990f69131c",
+      "method": null,
+      "events": 0,
+      "interpretation": "Homepage read; no event rows directly parsed."
+    },
+    {
+      "url": "https://organizzazione.cai.it/sez-lovere/eventi/?ical=1",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "method": null,
+      "events": 0,
+      "contentType": "text/html",
+      "interpretation": "Empty body with HTML content type; not evidence of an empty calendar."
+    },
+    {
+      "url": "https://organizzazione.cai.it/wp-json/tribe/events/v1/events?start_date=2026-10-01&per_page=100",
+      "sha256": "0bc4aaa7d2d24c47f5f293ddd5679b59e47bf80446da287078dcc0ca878b867e",
+      "method": "wordpress-events",
+      "events": 0,
+      "apiEvidence": {
+        "validJson": true,
+        "events": [],
+        "total": 0,
+        "totalPages": 0,
+        "startDate": "2026-10-01",
+        "endDate": "2028-10-23"
+      },
+      "interpretation": "Parsed event API supports zero upcoming records for the requested range."
+    }
+  ],
+  "verification": {
+    "orchestratorStateSha256": "5d19a0ead4b820a820fc9853c5fbe8c8b0b4082dcdcc85819567c715d53f82ff",
+    "orchestratorManifestSha256": "6d3ad42ea07a29dbed6c340468000ae63055d73f0b60f40969cab9a6ca477d41",
+    "importerQa": "PASS with caveat; valid WordPress Events JSON establishes zero for that API/range, iCal does not. HTTP status/final URL are not persisted.",
+    "collectorQa": "single source only; max 8 docs; no retry or expansion",
+    "backendEventsBeforeSha256": "39bd8040370ba9b069bd2d0e318e8542ad78d0be0a297de60f0bc6fb62813c59",
+    "frontendEventsBeforeSha256": "39bd8040370ba9b069bd2d0e318e8542ad78d0be0a297de60f0bc6fb62813c59",
+    "backendEventsAfterSha256": "10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7",
+    "frontendEventsAfterSha256": "10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7",
+    "backendFrontendMirrorsEqual": true,
+    "catalogRowsBefore": 3376,
+    "catalogRowsAfter": 3376,
+    "uniqueIdsBefore": 3376,
+    "uniqueIdsAfter": 3376,
+    "idsAdded": 0,
+    "idsRemoved": 0,
+    "rowsModified": 0,
+    "otherSourcesCollected": 0,
+    "databaseRead": false,
+    "databaseWrite": false,
+    "imported": 0
+  },
+  "coverage": {
+    "lombardiaDirectoryEntries": 229,
+    "sectionsCheckedThisRun": 1,
+    "completeForParsedApiRange": 1,
+    "partial": 0,
+    "unreachable": 0,
+    "eventsVerified": 0,
+    "duplicatesExcluded": 0,
+    "failuresResolved": 0,
+    "failuresOpen": 0,
+    "evidenceGaps": [
+      "HTTP status and final URL are not persisted; only the parser method/body hashes are retained."
+    ],
+    "regionStatus": "open; this single-source run is not a regional coverage audit."
+  },
+  "testVerification": {
+    "command": "npm test (backend)",
+    "result": "214/214 passed after collection",
+    "preTestBackendPublicExcursionsSha256": "10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7",
+    "postTestBackendPublicExcursionsSha256": "10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7",
+    "postTestFrontendPublicExcursionsSha256": "10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7",
+    "testWroteFrontendPublicExcursions": false
+  },
+  "database": {
+    "status": "pending-no-delta",
+    "reason": "No new/changed events; do not import or reimport any catalog rows."
+  },
+  "nextStep": "Publish this run and report. Then inspect the remaining Lombardia partial/open sources offline, respect cooldown, and select at most one distinct exact official URL."
+}

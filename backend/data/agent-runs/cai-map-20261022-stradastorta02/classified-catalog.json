@@ -1,0 +1,42 @@
+[
+  {
+    "id": "cai-strada-storta-9116052-01a8ce10aa39",
+    "sourceId": "cai-strada-storta-9116052",
+    "title": "Monte Pisello – Rifugio Alpe Piazza",
+    "date": "2026-10-25",
+    "dateEnd": "2026-10-25",
+    "days": 1,
+    "category": "Attività CAI",
+    "link": "https://stradastorta.it/eventi/pizzo-arera-e-capanna-2000/",
+    "organizer": "CAI Strada Storta",
+    "organizerRegion": "Lombardia",
+    "location": "Località da verificare",
+    "region": "Altro",
+    "cost": "Vedi sito",
+    "time": "Vedi sito",
+    "privateCar": null,
+    "coordinatesQuality": "unknown",
+    "locationSource": "html-event",
+    "sourceDocument": "https://stradastorta.it/eventi/",
+    "description": "A causa della chiusura del rifugio Capanna 2000 (in ristrutturazione) è stato deciso un cambio di destinazione per l’uscita in programma per domenica 25 ottobre […]",
+    "classification": {
+      "decision": "da_verificare",
+      "category": "altro",
+      "confidence": 0.7486867849562652,
+      "probability": 0.8324578566375102,
+      "rationale": "La risposta del classificatore è incompleta o sotto la soglia di confidenza; serve verifica.",
+      "evidenceOriginal": "{\"title\":\"Monte Pisello – Rifugio Alpe Piazza\",\"description\":\"A causa della chiusura del rifugio Capanna 2000 (in ristrutturazione) è stato deciso un cambio di destinazione per l’uscita in programma per domenica 25 ottobre […]\",\"organizer\":\"CAI Strada Storta\",\"location\":\"Località da verificare\",\"date\":\"2026-10-25\",\"dateEnd\":\"2026-10-25\",\"category\":\"Attività CAI\",\"sourceEvidence\":\"https://stradastorta.it/eventi/\"}",
+      "source_id": "cai-strada-storta-9116052-01a8ce10aa39",
+      "fingerprint": "881cfbd8d2df9e36664b0db142d0a6921b7f00da1e00cb361400f01bf790f31d",
+      "model": "inception/mercury-decide-20260930",
+      "modelRequested": "inception/mercury-decide",
+      "responseModel": "inception/mercury-decide-20260930",
+      "modelAttested": true,
+      "method": "mercury-decide",
+      "policyVersion": "cai-trekking-v2",
+      "modelVersion": "inception/mercury-decide-20260930",
+      "mapEligible": false,
+      "stopBatch": false
+    }
+  }
+]

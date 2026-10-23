@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "runId": "cai-map-20261022-pinasca02",
+  "status": "ready",
+  "input": "backend/data/agent-runs/cai-20261022-piemonte-pinasca02/candidate-input.json",
+  "inputSha256": "85b20198a72956266751a9b13ca86fd9b6e59b3b3a1db4d342d108432f460edf",
+  "modelRequested": "inception/mercury-decide",
+  "policyVersion": "cai-trekking-v2",
+  "createdAt": "2026-10-22T22:11:31.818Z",
+  "updatedAt": "2026-10-22T22:11:35.219Z",
+  "concurrency": 1,
+  "rateLimitMs": 1000,
+  "total": 4,
+  "completed": 4,
+  "processed": 4,
+  "counts": {
+    "total": 4,
+    "byDecision": {
+      "trekking": 2,
+      "non_trekking": 2,
+      "da_verificare": 0
+    },
+    "byCategory": {
+      "a piedi": 2,
+      "ciaspole": 0,
+      "alpinismo/ferrata": 0,
+      "bici": 0,
+      "sci": 0,
+      "sociale/culturale": 2,
+      "corso/riunione": 0,
+      "altro": 0
+    },
+    "errors": 0
+  },
+  "errors": []
+}

@@ -1,0 +1,10 @@
+{
+  "sourceId": "cai-cernusco-sul-naviglio-9216051",
+  "officialPdf": "https://organizzazione.cai.it/sez-cernusco-sul-naviglio/wp-content/uploads/sites/19/2025/12/Locandina-programma-2026.pdf",
+  "method": "pdf-ocr",
+  "ocrLine": "25 Ottobre - Alpe Devero (VB) j Cesare Andreoni 2026 Feigao ae SS a",
+  "controlLine": "26 Ottobre - Sentiero dei Fiori j Cesare Andreoni 2026 controllo",
+  "expectedDate": "2026-10-25",
+  "expectedTitle": "Alpe Devero (VB)",
+  "expectedControlTitle": "Sentiero dei Fiori j Cesare Andreoni 2026 controllo"
+}

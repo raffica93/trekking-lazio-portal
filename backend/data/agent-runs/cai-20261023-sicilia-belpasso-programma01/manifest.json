@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261023-sicilia-belpasso-programma01",
+  "createdAt": "2026-10-23T00:08:48.380Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "69763ba43b0fa94e1327c8d55dcd906b57e37a542e518f8b62aa4c1f02143b2b"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "8514b0407f9e23b5ae535c360017eeb5316f02638f686a29712da58633fd1c5b"
+    }
+  ]
+}

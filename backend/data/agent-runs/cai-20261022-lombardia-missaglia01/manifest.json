@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-lombardia-missaglia01",
+  "createdAt": "2026-10-22T21:36:16.456Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "75c4589194ece0d1903d57b64577e3409e687a0b319311e6eb86786d60df6005"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "0e46945422b5c247eaf443c28fdb4c7134451f645919f9ea745876c55998b34a"
+    }
+  ]
+}

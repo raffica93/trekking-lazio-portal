@@ -63,6 +63,44 @@ describe('App', () => {
     TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({ excursions: [] });
   });
 
+  it('excludes only valid non-trekking decisions from the default map and keeps review cases visible', async () => {
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    TestBed.inject(HttpTestingController).expectOne('excursions.json').flush({ excursions: [
+      {
+        id: 'classified-trek', title: 'Sentiero confermato', date: dateInMonth(0, 1), category: 'E',
+        link: 'https://cai.it/trek', organizer: 'CAI Roma', location: 'Roma', cost: '', time: '',
+        classification: { decision: 'trekking', category: 'a piedi', confidence: 0.9, probability: 0.95, rationale: 'Sentiero', evidenceOriginal: 'Escursione', fingerprint: 'fp-1', method: 'rules-v1', modelRequested: null, responseModel: null, modelAttested: false, policyVersion: 'cai-v1', modelVersion: null, mapEligible: true }
+      },
+      {
+        id: 'classified-non-trek', title: 'Cena sociale', date: dateInMonth(0, 2), category: 'E',
+        link: 'https://cai.it/cena', organizer: 'CAI Roma', location: 'Roma', cost: '', time: '',
+        classification: { decision: 'non_trekking', category: 'sociale/culturale', confidence: 0.95, probability: 0.92, rationale: 'Evento sociale', evidenceOriginal: 'Cena sociale', fingerprint: 'fp-2', method: 'rules-v1', modelRequested: null, responseModel: null, modelAttested: false, policyVersion: 'cai-v1', modelVersion: null, mapEligible: false }
+      },
+      {
+        id: 'needs-review', title: 'Programma da verificare', date: dateInMonth(0, 3), category: 'E',
+        link: 'https://cai.it/review', organizer: 'CAI Roma', location: 'Roma', cost: '', time: '',
+        classification: { decision: 'da_verificare', category: 'altro', confidence: null, probability: null, rationale: 'Evidenza insufficiente', evidenceOriginal: 'Programma', fingerprint: 'fp-3', method: 'rules-v1', modelRequested: null, responseModel: null, modelAttested: false, policyVersion: 'cai-v1', modelVersion: null, mapEligible: false }
+      },
+      {
+        id: 'invalid-non-trek', title: 'Risposta provider non valida', date: dateInMonth(0, 4), category: 'E',
+        link: 'https://cai.it/error', organizer: 'CAI Roma', location: 'Roma', cost: '', time: '',
+        classification: { valid: false, decision: 'non_trekking', category: 'altro', confidence: null, probability: null, rationale: 'Errore provider', evidenceOriginal: '', fingerprint: '', method: 'mercury-decide', modelRequested: 'inception/mercury-decide', responseModel: 'unknown/model', modelAttested: false, policyVersion: 'cai-v2', modelVersion: null, mapEligible: false }
+      },
+      { id: 'unclassified', title: 'Evento senza classificazione', date: dateInMonth(0, 5), category: 'E', link: 'https://cai.it/unknown', organizer: 'CAI Roma', location: 'Roma', cost: '', time: '' }
+    ] });
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const app = fixture.componentInstance;
+    expect(app.excursions.map((event) => event.id)).toEqual([
+      'classified-trek', 'classified-non-trek', 'needs-review', 'invalid-non-trek', 'unclassified'
+    ]);
+    expect(app.mapExcursions.map((event) => event.id)).toEqual([
+      'classified-trek', 'needs-review', 'invalid-non-trek', 'unclassified'
+    ]);
+  });
+
   it('should switch views, filter by difficulty and secure detail links', async () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();

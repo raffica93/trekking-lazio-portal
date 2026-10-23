@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-lombardia-premana02",
+  "createdAt": "2026-10-22T21:23:01.896Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "7b28f14459cda764b2d8dae3b8691c4048a8afb904fc604d62db607d57a7c0ae"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "f9f5f280d77847f7bff5c53d5333a788b8adac397027fb9bd32f6e3fbaad3384"
+    }
+  ]
+}

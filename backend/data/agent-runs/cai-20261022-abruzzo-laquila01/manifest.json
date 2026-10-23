@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-abruzzo-laquila01",
+  "createdAt": "2026-10-22T22:46:12.252Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "dd756f6f775b3d9dd3de2165ef880910ffbcfdb82b6a8de981da02c6e035822e"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "1c4c6c3b8557d5fee550d6b6fdeb055d049eca3bd55cefcf4714bdd4742c4ce8"
+    }
+  ]
+}

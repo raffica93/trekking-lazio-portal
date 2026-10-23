@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-molise-campobasso01",
+  "createdAt": "2026-10-22T22:22:15.421Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "243cdf4c96379eb31e1cfc2285327fa3ba686d93113779e42a98be9ca021342d"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "5d3025ae9475185258e7ad679058d4889eb835f19743fdb1b79524c790cea824"
+    }
+  ]
+}

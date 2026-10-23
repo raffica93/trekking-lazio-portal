@@ -1,5 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
 const { DateTime } = require('luxon');
 const {
   DEFAULT_COORDS,
@@ -126,6 +128,17 @@ test('parseDurationHours reads CAI hour formats', () => {
   assert.equal(parseDurationHours(['max 5/6 ore']), 6);
   assert.equal(parseDurationHours(["ore 6h 30'"]), 6.5);
   assert.equal(parseDurationHours(['Vedi sito']), undefined);
+});
+
+test('parseDurationHours does not read the tail of a year as duration before a clock time', () => {
+  const fixture = JSON.parse(fs.readFileSync(
+    path.join(__dirname, 'fixtures', 'cai-brescia-cinema-time.json'),
+    'utf8'
+  ));
+
+  assert.equal(parseDurationHours([fixture.description]) ?? null, fixture.expectedDurationHours);
+  assert.equal(parseDurationHours(['2026 ore 20,45']), undefined);
+  assert.equal(parseDurationHours(['Durata: 6 ore, ritrovo alle ore 20,45']), 6);
 });
 
 test('parseDurationHours ignores phone numbers and elevations in the same text', () => {

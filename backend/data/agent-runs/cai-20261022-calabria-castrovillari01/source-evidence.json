@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261022-calabria-castrovillari01",
+  "sourceId": "cai-castrovillari-9244005",
+  "requestedUrl": "https://www.caicastrovillari.it/prog.php",
+  "canonicalUrl": "https://www.caicastrovillari.it/prog.php",
+  "contentType": "text/html",
+  "httpStatus": "not persisted",
+  "bodyBytes": 9830,
+  "bodySha256": "4cf633e1d05adefd69e52b79ab517cc842a5f7d72b545281b54b2f3169e70c3b",
+  "rawBodyPath": "backend/data/agent-runs/cai-20261022-calabria-castrovillari01/source-page.html",
+  "cache": {
+    "keySha256": "2933c92526a2e2aaa102c2d88e6d7a8d22e9995cad0584bec4b4ed39f0b45543",
+    "lastModified": null
+  },
+  "extraction": {
+    "method": null,
+    "events": 0
+  },
+  "visibleEvidence": {
+    "title": "Club Alpino Italiano Sezione di Castrovillari",
+    "heading": "Programma attività 2026",
+    "links": [
+      "https://www.caicastrovillari.it/images/programma2026.pdf",
+      "https://www.caicastrovillari.it/images/programmacoro26.pdf",
+      "https://www.caicastrovillari.it/images/programmacerchiara26.pdf",
+      "https://www.caicastrovillari.it/images/proposta25.pdf"
+    ]
+  },
+  "catalogDelta": {
+    "rowSelector": "event.id startsWith cai-castrovillari-9244005-",
+    "sourceRowsBefore": 12,
+    "sourceRowsAfter": 12,
+    "added": 0,
+    "removed": 0,
+    "changed": 0,
+    "rowsUnchanged": true,
+    "canonicalRowsSortedByIdSha256Before": "bc44d552e7eaf43748fcea8849a6d5d13ec383115fd06cb0ee3b14cdcaa52407",
+    "canonicalRowsSortedByIdSha256After": "bc44d552e7eaf43748fcea8849a6d5d13ec383115fd06cb0ee3b14cdcaa52407",
+    "catalogSha256Before": "dd756f6f775b3d9dd3de2165ef880910ffbcfdb82b6a8de981da02c6e035822e",
+    "catalogSha256After": "704ea8322b02b6ce479338df3855da7974ed25d94bfabffe5536d721b3bb88d2"
+  },
+  "coverage": {
+    "status": "partial",
+    "excursions": 12,
+    "extractedEvents": 0,
+    "issues": [
+      {
+        "url": "https://www.caicastrovillari.it/images/programma2026.pdf",
+        "message": "PDF OCR unavailable or failed: Command failed: tesseract /tmp/cai-pdf-ocr-SLMMES/page-2.png stdout -l ita+eng --psm 6\n"
+      },
+      {
+        "url": "https://www.caicastrovillari.it/images/programma2026.pdf",
+        "message": "Discovery budget reached; 8 candidate documents remain.",
+        "code": "discovery-limit"
+      },
+      {
+        "url": "https://www.caicastrovillari.it/prog.php",
+        "message": "Discovery budget reached; 1 candidate documents remain.",
+        "code": "discovery-limit"
+      }
+    ]
+  },
+  "database": {
+    "status": "pending",
+    "writes": 0
+  }
+}

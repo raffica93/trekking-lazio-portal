@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-lombardia-stradastorta02",
+  "createdAt": "2026-10-22T21:51:08.776Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "052c4369dec21e21c7192334f26715bfbdbb452a1853a6f759a5818c9d6e2b69"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "0468b20fe63c3fc947a11d749504a94560b52276370188eb0f6446de224db4e6"
+    }
+  ]
+}

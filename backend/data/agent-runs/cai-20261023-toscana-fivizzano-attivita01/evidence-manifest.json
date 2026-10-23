@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261023-toscana-fivizzano-attivita01",
+  "files": [
+    {
+      "path": "manifest.json",
+      "bytes": 566,
+      "sha256": "3f9a56fdc9f28b94aafacc157be1f76be02354fa0c051a99c448170c3a447da9"
+    },
+    {
+      "path": "state.json",
+      "bytes": 404354,
+      "sha256": "2b0b7763f73082cb400a7d39c55ac1634727249a2f152939d4adb29759be63a9"
+    },
+    {
+      "path": "source-evidence.json",
+      "bytes": 6935,
+      "sha256": "af9262ccdb00a2be6604234400c8598d694d6db58acc2de58da4aceb871e7e86"
+    },
+    {
+      "path": "collection-report.md",
+      "bytes": 2991,
+      "sha256": "282d511e91a3b836589a4c1c32ed42706b569804908fecb363abdc7b31066b1f"
+    }
+  ],
+  "publicMirrors": [
+    {
+      "backendPath": "backend/data/excursions.json",
+      "frontendPath": "frontend/public/excursions.json",
+      "backendSha256": "c66e963a9d025dfb1184492362cd3235051f04e0318f88f1985b0d81951e2f03",
+      "frontendSha256": "c66e963a9d025dfb1184492362cd3235051f04e0318f88f1985b0d81951e2f03",
+      "byteIdentical": true,
+      "bytes": 3635435
+    },
+    {
+      "backendPath": "backend/data/cai-sections.json",
+      "frontendPath": "frontend/public/cai-sections.json",
+      "backendSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+      "frontendSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+      "byteIdentical": true,
+      "bytes": 1459342
+    },
+    {
+      "backendPath": "backend/data/scrape-status.json",
+      "frontendPath": "frontend/public/scrape-status.json",
+      "backendSha256": "ac2d38e59aa5d00633cd2090e50b1cb265238b4fa4a5f25bc137c36a94bc9e0b",
+      "frontendSha256": "ac2d38e59aa5d00633cd2090e50b1cb265238b4fa4a5f25bc137c36a94bc9e0b",
+      "byteIdentical": true,
+      "bytes": 2077224
+    }
+  ],
+  "catalogDelta": {
+    "catalogBeforeRunSha256": "d02a525382f6d7b31c571a49c0ced7c9ed292b5e67ba138ee060b4adbca4fa83",
+    "catalogAfterRunSha256": "c66e963a9d025dfb1184492362cd3235051f04e0318f88f1985b0d81951e2f03",
+    "rowsBeforeRun": 3376,
+    "rowsAfterRun": 3376,
+    "sourceIdPrefix": "cai-fivizzano-9226019-",
+    "sourceRowsBefore": 12,
+    "sourceRowsAfter": 12,
+    "added": 0,
+    "removed": 0,
+    "changed": 0,
+    "sortedRowsHashAlgorithm": "Filter rows by ID prefix, sort ascending by id, serialize the resulting array with Node.js JSON.stringify, UTF-8 encode and SHA-256.",
+    "sortedSourceRowsSha256Before": "052158f0d916607fe02a746b29c0027d44a39239fd6a16fa282d1c48a04c9905",
+    "sortedSourceRowsSha256After": "052158f0d916607fe02a746b29c0027d44a39239fd6a16fa282d1c48a04c9905",
+    "interpretation": "The accepted prior source-row hash is unchanged. This run added no extracted row; the collection writer refreshed generated catalog metadata/source hashes and coverage."
+  }
+}

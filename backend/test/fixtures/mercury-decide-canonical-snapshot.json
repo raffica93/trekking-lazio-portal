@@ -1,0 +1,20 @@
+{
+  "fixture_scope": "Minimized sanitized extract of the real diagnostic; only fields explicitly reported are included.",
+  "diagnostic_sha256": "eaf1aff4c20d9b5e67634c24423dcc26a69855a785bd9a7988ca72f3e564430f",
+  "source_id": "alatri-6535fc1bf5da",
+  "requested_model": "inception/mercury-decide",
+  "response": {
+    "provider": "Inception",
+    "model": "inception/mercury-decide-20260930",
+    "answers": {
+      "decision": {
+        "choice": "trekking",
+        "confidence": 0.9063821012510593
+      },
+      "category": {
+        "choice": "a piedi",
+        "confidence": 0.6743453648546985
+      }
+    }
+  }
+}

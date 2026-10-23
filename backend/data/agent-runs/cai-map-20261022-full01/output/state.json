@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "runId": "cai-map-20261022-full01",
+  "status": "ready",
+  "input": "/workspace/trekking-lazio-portal-cai/backend/data/agent-runs/cai-map-20261022-full01/input.json",
+  "inputSha256": "2963f287c4ccedb20a70068b2551dad3565b264d871194ec91324d0f98bb0687",
+  "modelRequested": "inception/mercury-decide",
+  "policyVersion": "cai-trekking-v2",
+  "createdAt": "2026-10-22T17:30:17.530Z",
+  "updatedAt": "2026-10-22T18:07:36.000Z",
+  "concurrency": 4,
+  "rateLimitMs": 200,
+  "total": 3336,
+  "completed": 3336,
+  "processed": 3336,
+  "counts": {
+    "total": 3336,
+    "byDecision": {
+      "trekking": 973,
+      "non_trekking": 478,
+      "da_verificare": 1885
+    },
+    "byCategory": {
+      "a piedi": 539,
+      "ciaspole": 8,
+      "alpinismo/ferrata": 271,
+      "bici": 46,
+      "sci": 88,
+      "sociale/culturale": 433,
+      "corso/riunione": 106,
+      "altro": 1845
+    },
+    "errors": 0
+  },
+  "errors": [],
+  "independentSourceQa": {
+    "status": "completed-conservative",
+    "sourceReviewedRows": 157,
+    "originalCandidateRows": 462,
+    "reviewedGroups": 11,
+    "directConfirmedNonTrekking": 8,
+    "falseNegativeOverridesToTrekking": 5,
+    "explicitMixedOrAttributionAmbiguity": 27,
+    "reviewedWithoutIndividualConclusion": 117,
+    "notIndividuallyReviewed": 305,
+    "currentBatchCandidateCounts": {
+      "trekking": 973,
+      "non_trekking": 478,
+      "da_verificare": 1885
+    },
+    "currentBatchEffectiveCounts": {
+      "trekking": 969,
+      "non_trekking": 9,
+      "da_verificare": 2358
+    },
+    "currentBatchConservativeNonTrekkingToDv": 437,
+    "qaReport": "qa-report.md",
+    "rule": "Keep only exact official-source matches excluded; retain all other non_trekking candidates as da_verificare.",
+    "sampleEvidenceOverrides": 6,
+    "candidateCountsAfterRecovery": {
+      "trekking": 973,
+      "non_trekking": 478,
+      "da_verificare": 1885
+    },
+    "effectiveCountsAfterAllReviews": {
+      "trekking": 969,
+      "non_trekking": 9,
+      "da_verificare": 2358
+    },
+    "reviewCountsAfterAllReviews": {
+      "trekking": 6,
+      "non_trekking": 9,
+      "da_verificare": 481
+    },
+    "sampleQaTransferred": {
+      "reviewedRows": 6,
+      "verifiedNonTrekking": 1,
+      "verifiedTrekking": 1,
+      "ambiguousOrUnverifiable": 4
+    },
+    "catalogRecovery": {
+      "sameRunIdAndInput": true,
+      "reason": "output regenerated from the committed input and response cache after corrupted local catalog artifact",
+      "candidateCountsChangedBetweenAttempts": true,
+      "databaseWrites": 0
+    }
+  }
+}

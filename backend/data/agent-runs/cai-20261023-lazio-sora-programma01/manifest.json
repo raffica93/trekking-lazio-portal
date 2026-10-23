@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261023-lazio-sora-programma01",
+  "createdAt": "2026-10-23T01:30:41.427Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "8b85cc89fab45cfe8cfd8ab87b98ed1d4d23eda55a9d9f616747524e10207717"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "17878e18154e304fb603fd630b9514c2b82311b49a038c15f6f8b16eca5f486f"
+    }
+  ]
+}

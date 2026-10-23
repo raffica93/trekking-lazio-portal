@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-marche-potenzapicena01",
+  "createdAt": "2026-10-22T22:17:34.233Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "163cd1b6bdcaa397f6c295e21c8e1f2256daf8508b4dfc94d421c9e23a9a7272"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "8f679a56555de7ce8fe5ef799ae6039de8902e8eecd81763924d580cc46584f8"
+    }
+  ]
+}

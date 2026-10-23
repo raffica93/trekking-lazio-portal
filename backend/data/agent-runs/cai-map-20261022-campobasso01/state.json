@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "runId": "cai-map-20261022-campobasso01",
+  "status": "ready",
+  "input": "backend/data/agent-runs/cai-20261022-molise-campobasso01/candidate-input.json",
+  "inputSha256": "a0cab9771df021bd96c7baca7fcab0c170bab0cf1137cba1a7bded35ef14d700",
+  "modelRequested": "inception/mercury-decide",
+  "policyVersion": "cai-trekking-v2",
+  "createdAt": "2026-10-22T22:28:25.014Z",
+  "updatedAt": "2026-10-22T22:28:26.299Z",
+  "concurrency": 1,
+  "rateLimitMs": 1000,
+  "total": 2,
+  "completed": 2,
+  "processed": 2,
+  "counts": {
+    "total": 2,
+    "byDecision": {
+      "trekking": 1,
+      "non_trekking": 0,
+      "da_verificare": 1
+    },
+    "byCategory": {
+      "a piedi": 0,
+      "ciaspole": 0,
+      "alpinismo/ferrata": 0,
+      "bici": 0,
+      "sci": 0,
+      "sociale/culturale": 0,
+      "corso/riunione": 0,
+      "altro": 2
+    },
+    "errors": 0
+  },
+  "errors": []
+}

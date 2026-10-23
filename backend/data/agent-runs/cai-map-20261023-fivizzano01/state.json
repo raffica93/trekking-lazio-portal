@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "runId": "cai-map-20261023-fivizzano01",
+  "status": "ready",
+  "input": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-calendar01/classification-input.json",
+  "inputSha256": "1aba5906e6a743318ecb63b82b733deca9263759e943710308352901e3b33334",
+  "modelRequested": "inception/mercury-decide",
+  "policyVersion": "cai-trekking-v2",
+  "createdAt": "2026-10-23T00:28:36.409Z",
+  "updatedAt": "2026-10-23T00:28:37.806Z",
+  "concurrency": 2,
+  "rateLimitMs": 200,
+  "total": 4,
+  "completed": 4,
+  "processed": 4,
+  "counts": {
+    "total": 4,
+    "byDecision": {
+      "trekking": 3,
+      "non_trekking": 0,
+      "da_verificare": 1
+    },
+    "byCategory": {
+      "a piedi": 2,
+      "ciaspole": 0,
+      "alpinismo/ferrata": 1,
+      "bici": 0,
+      "sci": 0,
+      "sociale/culturale": 0,
+      "corso/riunione": 0,
+      "altro": 1
+    },
+    "errors": 0
+  },
+  "errors": [],
+  "qaReview": {
+    "reviewedBy": "orchestrator",
+    "overrides": [
+      {
+        "sourceId": "cai-fivizzano-9226019-9ad6725f7fbe",
+        "candidateDecision": "trekking",
+        "effectiveDecision": "da_verificare",
+        "reason": "La scheda ufficiale riporta soltanto un’uscita del gruppo Montagnaterapia; senza itinerario o modalità a piedi non confermo la candidata trekking.",
+        "evidenceUrl": "https://www.caifivizzano.it/eventi/lago-padule-al-passo-del-cerreto/"
+      }
+    ],
+    "effectiveCounts": {
+      "trekking": 2,
+      "non_trekking": 0,
+      "da_verificare": 2,
+      "errors": 0
+    },
+    "modelCandidateCounts": {
+      "trekking": 3,
+      "non_trekking": 0,
+      "da_verificare": 1
+    }
+  }
+}

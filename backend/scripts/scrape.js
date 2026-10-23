@@ -10,7 +10,7 @@ const frontendPublic = path.join(__dirname, '..', '..', 'frontend', 'public');
 
 function usage() {
   return [
-    'Usage: npm run scrape -- [--all | --source id] [--region "Lazio"] [--concurrency 8] [--dry-run] [--strict]',
+    'Usage: npm run scrape -- [--all | --source id] [--source-url URL ...] [--region "Lazio"] [--concurrency 8] [--dry-run] [--strict]',
     '       npm run scrape:roma',
     '       node scripts/sede.js <id|all> [--dry-run]',
     '',
@@ -18,6 +18,7 @@ function usage() {
     'Public JSON-LD, ICS, WordPress calendars, HTML and annual PDFs; no AI key required.',
     'Previous-month events are excluded dynamically in Europe/Rome; future months have no upper limit.',
     'Incomplete sources keep their valid cache and are reported in scrape-status.json.',
+    '--source-url replaces the initial queue for exactly one deterministic --source; each URL must use that source official host.',
     '--strict exits with an error when a source fails with no cache.'
   ].join('\n');
 }
@@ -51,6 +52,8 @@ async function persistStatus({
   existingStatus,
   dryRun,
   log,
+  continuationSourceId = null,
+  continuationSourceUrls = [],
   statusFile = statusPath,
   copyFrontend = true
 }) {
@@ -60,6 +63,8 @@ async function persistStatus({
     existingStatus: existingStatus || {},
     result,
     excursions: result.excursions,
+    continuationSourceId,
+    continuationSourceUrls,
     generatedAt
   });
   if (!dryRun) {
@@ -77,6 +82,7 @@ async function runScrape({
   argv = process.argv.slice(2),
   dataPath = outputPath,
   statusFile = statusPath,
+  copyFrontend = dataPath === outputPath,
   sources = SOURCES,
   scrapeAllImpl = scrapeAll,
   log = console
@@ -93,6 +99,7 @@ async function runScrape({
     sources,
     existingPayload: existing || {},
     sourceIds: args.sources.length > 0 ? args.sources : undefined,
+    sourceUrls: args.sourceUrls,
     region: args.region,
     concurrency: args.concurrency,
     log
@@ -108,8 +115,10 @@ async function runScrape({
     existingStatus,
     dryRun: args.dryRun,
     log,
+    continuationSourceId: args.sourceUrls.length ? args.sources[0] : null,
+    continuationSourceUrls: args.sourceUrls,
     statusFile,
-    copyFrontend: statusFile === statusPath
+    copyFrontend: copyFrontend && statusFile === statusPath
   });
 
   const hardFail = Boolean(args.strict && (result.hardFailures || []).length > 0);
@@ -125,7 +134,7 @@ async function runScrape({
   }
 
   await writeJsonAtomic(dataPath, payload);
-  await copyToFrontend('excursions.json', payload);
+  if (copyFrontend) await copyToFrontend('excursions.json', payload);
   log.log(`Updated cache with ${payload.excursions.length} upcoming excursions`);
   return { args, result, wrote: true, payload, status, hardFail };
 }

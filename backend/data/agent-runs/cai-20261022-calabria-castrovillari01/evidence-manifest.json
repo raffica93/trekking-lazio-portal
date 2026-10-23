@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261022-calabria-castrovillari01",
+  "files": [
+    {
+      "path": "source-page.html",
+      "bytes": 9830,
+      "sha256": "4cf633e1d05adefd69e52b79ab517cc842a5f7d72b545281b54b2f3169e70c3b"
+    },
+    {
+      "path": "source-evidence.json",
+      "bytes": 2560,
+      "sha256": "2423054adb95f017c6a6eca67f3229a51b85827352f8657706055cf4c449114e"
+    },
+    {
+      "path": "collection-report.md",
+      "bytes": 3111,
+      "sha256": "0b11de62b8b37ce49fc03ef11626320c4d626ecfd58c6b86bdfd9b0703ad2194"
+    }
+  ],
+  "outputSnapshot": {
+    "baselineCommit": "1f8616499731aa067198da7432dc4587c43002a7",
+    "catalogs": {
+      "excursions": {
+        "sha256Before": "dd756f6f775b3d9dd3de2165ef880910ffbcfdb82b6a8de981da02c6e035822e",
+        "sha256After": "704ea8322b02b6ce479338df3855da7974ed25d94bfabffe5536d721b3bb88d2",
+        "sourceRowsBefore": 12,
+        "sourceRowsAfter": 12,
+        "rowsUnchanged": true,
+        "rowSelector": "event.id startsWith cai-castrovillari-9244005-",
+        "added": 0,
+        "removed": 0,
+        "changed": 0,
+        "canonicalRowsSortedByIdSha256Before": "bc44d552e7eaf43748fcea8849a6d5d13ec383115fd06cb0ee3b14cdcaa52407",
+        "canonicalRowsSortedByIdSha256After": "bc44d552e7eaf43748fcea8849a6d5d13ec383115fd06cb0ee3b14cdcaa52407"
+      },
+      "sections": {
+        "sha256Before": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+        "sha256After": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+        "rowsUnchanged": true
+      },
+      "scrapeStatus": {
+        "sha256After": "a58baf3e0e6d71730a6ecc70bbbbd85215d531afe5f57508647fa98d59cbad71",
+        "sourceStatus": "partial",
+        "issues": [
+          "official PDF OCR failure and discovery-limit 8 remain",
+          "explicit HTML continuation discovery-limit 1"
+        ]
+      }
+    }
+  },
+  "catalogRowSelection": {
+    "selector": "event.id startsWith cai-castrovillari-9244005-",
+    "sourceRowsBefore": 12,
+    "sourceRowsAfter": 12,
+    "added": 0,
+    "removed": 0,
+    "changed": 0,
+    "canonicalRowsSortedByIdSha256Before": "bc44d552e7eaf43748fcea8849a6d5d13ec383115fd06cb0ee3b14cdcaa52407",
+    "canonicalRowsSortedByIdSha256After": "bc44d552e7eaf43748fcea8849a6d5d13ec383115fd06cb0ee3b14cdcaa52407"
+  }
+}

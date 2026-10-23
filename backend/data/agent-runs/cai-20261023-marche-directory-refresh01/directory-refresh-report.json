@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261023-marche-directory-refresh01",
+  "type": "official-directory-refresh",
+  "status": "completed-awaiting-independent-QA",
+  "region": "Marche",
+  "generatedAt": "2026-10-23T06:48:42.200Z",
+  "executedAt": "2026-10-23T06:48:42Z",
+  "command": "NODE_USE_ENV_PROXY=1 node scripts/discover-cai-sections.js --directory-only --region Marche",
+  "scope": "Official CAI directory records and subsection API responses for Marche only. No event/calendar website discovery, event collection, tests, or database access.",
+  "source": "https://www.cai.it/sezioni-territoriali/sezioni-e-sottosezioni/",
+  "requests": {
+    "rootDirectoryItems": 528,
+    "selectedRegionalParentSections": 15,
+    "subsectionResponsesAttempted": 15,
+    "subsectionResponsesFailed": 0,
+    "allSelectedResponsesParsed": true,
+    "httpStatusPerRequestPersisted": false
+  },
+  "baseline": {
+    "commit": "b4780ffc29d6b238fc6c72602762a635ec737057",
+    "backendSha256": "250afdbc6fa8980f076f094c9574b2d77d157e7f34f4dfb9c84a4f09f3166944",
+    "frontendSha256": "250afdbc6fa8980f076f094c9574b2d77d157e7f34f4dfb9c84a4f09f3166944"
+  },
+  "outputs": {
+    "backendSha256": "992e32565ed65031f95873b7dd83fc82b8feba66daa4aebd59cfe6ea277d6100",
+    "frontendSha256": "992e32565ed65031f95873b7dd83fc82b8feba66daa4aebd59cfe6ea277d6100",
+    "backendFrontendMirrorEqual": true
+  },
+  "merge": {
+    "recordsBefore": 837,
+    "recordsAfter": 837,
+    "idsAdded": 0,
+    "idsRemoved": 0,
+    "ambiguousMatches": 0,
+    "retainedPreviousIds": 821,
+    "changedRecords": 3,
+    "changedOutsideRegion": 0,
+    "fieldChanges": [
+      {
+        "id": "cai-pesaro-9228006",
+        "directoryId": "9228006",
+        "organizer": "CAI Pesaro",
+        "region": "Marche",
+        "fields": {
+          "website": {
+            "before": "http://www.caipesaro.it/",
+            "after": "https://caipesaro.it/"
+          }
+        }
+      },
+      {
+        "id": "cai-s-benedetto-del-tronto-9228013",
+        "directoryId": "9228013",
+        "organizer": "CAI S.benedetto Del Tronto",
+        "region": "Marche",
+        "fields": {
+          "website": {
+            "before": "https://caisanbenedettodeltronto.it/site/",
+            "after": "https://www.caisanbenedettodeltronto.it/"
+          }
+        }
+      },
+      {
+        "id": "cai-sarnano-9228011",
+        "directoryId": "9228011",
+        "organizer": "CAI Sarnano",
+        "region": "Marche",
+        "fields": {
+          "website": {
+            "before": "https://www.caisarnano.it/",
+            "after": "https://caisarnano.it/"
+          }
+        }
+      }
+    ]
+  },
+  "regionalSnapshot": {
+    "recordsBefore": 16,
+    "recordsAfter": 16,
+    "sectionsAfter": 15,
+    "subsectionsAfter": 1,
+    "enabledAfter": 12,
+    "failures": [],
+    "ambiguities": [],
+    "addedIds": [],
+    "removedIds": []
+  },
+  "finalStats": {
+    "total": 837,
+    "sections": 525,
+    "subsections": 309,
+    "national": 3,
+    "regions": 20,
+    "enabled": 292,
+    "statuses": {
+      "website-only": 20,
+      "calendar-found": 270,
+      "missing-website": 520,
+      "unreachable": 24,
+      "social-only": 2,
+      "pending-discovery": 1
+    }
+  },
+  "limitations": [
+    "The collector did not persist per-request HTTP status/final URL; completion is evidenced by successful process exit, selectedRegion=Marche, and zero subsectionFailures.",
+    "This is directory-only evidence; it does not establish calendar coverage, source availability, event counts, or regional completeness.",
+    "Changes to websites are from the official directory response and were not fetched or tested in this run."
+  ],
+  "eventsCollected": 0,
+  "databaseReads": 0,
+  "databaseWrites": 0,
+  "imported": 0,
+  "nextGate": "Independent importer QA of the directory report and mirrored registry before any checkpoint."
+}

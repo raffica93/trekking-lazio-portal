@@ -1,0 +1,50 @@
+{
+  "runId": "cai-map-20261022-full01",
+  "candidateCounts": {
+    "trekking": 973,
+    "non_trekking": 478,
+    "da_verificare": 1885
+  },
+  "effectiveCounts": {
+    "trekking": 969,
+    "non_trekking": 9,
+    "da_verificare": 2358
+  },
+  "verifiedNonTrekking": {
+    "cai-savona-9210003-46c83f7cbb6c": "https://www.caisavona.it/wp-content/uploads/2025/12/Programma-CAI-SV-2026_Pagine.pdf",
+    "cai-savona-9210003-6663f3a833fd": "https://www.caisavona.it/wp-content/uploads/2025/12/Programma-CAI-SV-2026_Pagine.pdf",
+    "cai-savona-9210003-7702fffd00b7": "https://www.caisavona.it/wp-content/uploads/2025/12/Programma-CAI-SV-2026_Pagine.pdf",
+    "cai-savona-9210003-80f85d421135": "https://www.caisavona.it/wp-content/uploads/2025/12/Programma-CAI-SV-2026_Pagine.pdf",
+    "cai-savona-9210003-a47958720745": "https://www.caisavona.it/wp-content/uploads/2025/12/Programma-CAI-SV-2026_Pagine.pdf",
+    "cai-savona-9210003-c30482f52835": "https://www.caisavona.it/wp-content/uploads/2025/12/Programma-CAI-SV-2026_Pagine.pdf",
+    "cai-savona-9210003-d0f877962984": "https://www.caisavona.it/wp-content/uploads/2025/12/Programma-CAI-SV-2026_Pagine.pdf",
+    "cai-chiari-9216052-fbc26182e8f4": "https://www.caichiari.it/images/documenti/2026/2026_libretto.pdf",
+    "cai-vimodrone-9216151-6a2006f41532": "https://www.caivimodrone.it/deposito/File/2026/CaiVimo2026.pdf.pdf"
+  },
+  "verifiedTrekking": {
+    "cai-famiglia-alpinistica-9120013-6de8a44fca66": "https://www.famigliaalpinistica.it/media/attachments/2025/11/28/calendario-f.a.-2026-senza-capo-gita.pdf",
+    "cai-famiglia-alpinistica-9120013-8883aae3231b": "https://www.famigliaalpinistica.it/media/attachments/2025/11/28/calendario-f.a.-2026-senza-capo-gita.pdf",
+    "cai-famiglia-alpinistica-9120013-c5fb8dcb7bc3": "https://www.famigliaalpinistica.it/media/attachments/2025/11/28/calendario-f.a.-2026-senza-capo-gita.pdf",
+    "cai-barlassina-9216090-694302697f06": "https://www.caibarlassina.org/uploads/9/5/4/2/95425450/locandina_gite_sociali_2026.pdf",
+    "cai-maniago-9222008-ba6c9dd1c438": "https://organizzazione.cai.it/sez-maniago/wp-content/uploads/sites/28/2026/01/Guida-CAI-2026-compresso.pdf",
+    "cai-omegna-9212020-0ca017a0e469": "https://www.estmonterosa.it/images/documenti/estmonterosa-programma-escursioni-2026.pdf"
+  },
+  "additionalReviewed": {
+    "alatri-087dc800cef1": {
+      "decision": "da_verificare",
+      "evidenceUrl": "https://www.caialatri.it/calendario-escursioni/"
+    },
+    "cai-arosio-9116060-98ca2b6604b3": {
+      "decision": "da_verificare",
+      "evidenceUrl": "http://www.caimariano.it/wp-content/uploads/2025/12/LibretttoCAI-2026.pdf"
+    },
+    "cai-valle-vigezzo-9212056-3567350ddc7a": {
+      "decision": "da_verificare",
+      "evidenceUrl": "https://www.estmonterosa.it/images/documenti/estmonterosa-programma-escursioni-2026.pdf"
+    },
+    "cai-sacile-9222024-79e8babd63a6": {
+      "decision": "da_verificare",
+      "evidenceUrl": "https://organizzazione.cai.it/sez-sacile/evento/ag-2026-castagnata-in-casera-ceresera/"
+    }
+  }
+}

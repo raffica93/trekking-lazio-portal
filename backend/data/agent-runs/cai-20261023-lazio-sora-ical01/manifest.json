@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261023-lazio-sora-ical01",
+  "createdAt": "2026-10-23T01:36:35.001Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "39bd8040370ba9b069bd2d0e318e8542ad78d0be0a297de60f0bc6fb62813c59"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "df67b57057fe2da239fd5d4d49e0a4dda7c01fd29e717d4604f0ada5c386b0d7"
+    }
+  ]
+}

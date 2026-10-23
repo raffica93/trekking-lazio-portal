@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-emilia-cesena-index01",
+  "createdAt": "2026-10-22T23:18:05.609Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "8a6c0c12565be024e083282691e9108b022e6710663a3f01d45cd12f93ce2f82"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "1c9e7d46ada4e2ce9ace39125c28219d103c428e725aedd26fe2c9686a11ecc8"
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-map-20261022-sample02",
+  "reviewedAt": "2026-10-22T17:27:21.366Z",
+  "scope": {
+    "sampleSize": 20,
+    "officialLinksResponsive": 18,
+    "officialLinks404": 2,
+    "failedSourceIds": [
+      "cai-s-a-t-cavalese-9118022-1555753870db",
+      "cai-sacile-9222024-79e8babd63a6"
+    ]
+  },
+  "candidateCounts": {
+    "trekking": 5,
+    "non_trekking": 5,
+    "da_verificare": 10
+  },
+  "finalCounts": {
+    "trekking": 5,
+    "non_trekking": 3,
+    "da_verificare": 12
+  },
+  "finalCategories": {
+    "a piedi": 5,
+    "sociale/culturale": 8,
+    "altro": 6,
+    "alpinismo/ferrata": 1
+  },
+  "reviewed": [
+    {
+      "source_id": "cai-sacile-9222024-79e8babd63a6",
+      "title": "AG 2026 – Castagnata in Casera Ceresera",
+      "candidate": {
+        "decision": "non_trekking",
+        "category": "altro"
+      },
+      "final": {
+        "decision": "da_verificare",
+        "category": "altro"
+      },
+      "evidenceUrl": "https://organizzazione.cai.it/sez-sacile/evento/ag-2026-castagnata-in-casera-ceresera/",
+      "reason": "Il collegamento ufficiale restituisce 404; il titolo non basta a escludere una camminata in Casera.",
+      "evidence": "La pagina CAI Sacile del record è irraggiungibile (404); senza programma recuperabile l’esclusione non è verificata."
+    },
+    {
+      "source_id": "alatri-087dc800cef1",
+      "title": "SANTUARIO DI MONTE TRANQUILLO",
+      "candidate": {
+        "decision": "trekking",
+        "category": "a piedi"
+      },
+      "final": {
+        "decision": "da_verificare",
+        "category": "a piedi"
+      },
+      "evidenceUrl": "https://www.caialatri.it/calendario-escursioni/",
+      "reason": "La pagina ufficiale riporta un evento con titolo simile il 22 febbraio, mentre il record è datato 10 ottobre.",
+      "evidence": "Il calendario CAI Alatri elenca Santuario di Monte Tranquillo il 22 febbraio 2026; identità e data del record non corrispondono con certezza."
+    },
+    {
+      "source_id": "cai-arosio-9116060-98ca2b6604b3",
+      "title": "Pranzo sociale CAI Seregno",
+      "candidate": {
+        "decision": "non_trekking",
+        "category": "sociale/culturale"
+      },
+      "final": {
+        "decision": "da_verificare",
+        "category": "sociale/culturale"
+      },
+      "evidenceUrl": "http://www.caimariano.it/wp-content/uploads/2025/12/LibretttoCAI-2026.pdf",
+      "reason": "Il PDF supporta il pranzo sociale ma lo attribuisce a CAI Seregno, non CAI Arosio come nel record.",
+      "evidence": "Il programma CAI Mariano nomina CAI Seregno per il pranzo; l’attribuzione al record CAI Arosio resta da verificare."
+    },
+    {
+      "source_id": "cai-valle-vigezzo-9212056-3567350ddc7a",
+      "title": "Castagnata a Crocette",
+      "candidate": {
+        "decision": "non_trekking",
+        "category": "sociale/culturale"
+      },
+      "final": {
+        "decision": "da_verificare",
+        "category": "sociale/culturale"
+      },
+      "evidenceUrl": "https://www.estmonterosa.it/images/documenti/estmonterosa-programma-escursioni-2026.pdf",
+      "reason": "Il PDF supporta la castagnata a Crocette ma la attribuisce a CAI Piedimulera, non CAI Valle Vigezzo come nel record.",
+      "evidence": "Il programma Est Monte Rosa nomina CAI Piedimulera; il collegamento ufficiale del record è 404 e l’attribuzione alla Valle Vigezzo resta da verificare."
+    },
+    {
+      "source_id": "cai-omegna-9212020-0ca017a0e469",
+      "title": "Gruppo Giovani - Escursione con i mezzi pubblici - località da definire",
+      "candidate": {
+        "decision": "da_verificare",
+        "category": "altro"
+      },
+      "final": {
+        "decision": "trekking",
+        "category": "a piedi"
+      },
+      "evidenceUrl": "https://www.estmonterosa.it/images/documenti/estmonterosa-programma-escursioni-2026.pdf",
+      "reason": "Il PDF ufficiale indica “Escursione con i mezzi pubblici”, difficoltà E, il 14 novembre; la località resta da definire.",
+      "evidence": "Il programma Est Monte Rosa conferma un’escursione a piedi con difficoltà E; il luogo non è definito e le coordinate restano null."
+    },
+    {
+      "source_id": "cai-vimodrone-9216151-6a2006f41532",
+      "title": "PARETE DI ARRAMPICATA",
+      "candidate": {
+        "decision": "da_verificare",
+        "category": "alpinismo/ferrata"
+      },
+      "final": {
+        "decision": "non_trekking",
+        "category": "alpinismo/ferrata"
+      },
+      "evidenceUrl": "https://www.caivimodrone.it/deposito/File/2026/CaiVimo2026.pdf.pdf",
+      "reason": "Il PDF ufficiale descrive la parete come attività settimanale in palestra, non come uscita su itinerario.",
+      "evidence": "Il programma CAI Vimodrone identifica una parete di arrampicata indoor settimanale."
+    }
+  ],
+  "notes": [
+    "Candidate classifications remain in each classification object; review decision/category are separately recorded and sealed in the classified output.",
+    "No title, status, image, location, latitude, or longitude was changed.",
+    "Monte Gemma, Napoli, Varese, and Padova have official event evidence; Padova has no point-level route location in this row.",
+    "Alatri Monte Tranquillo has an event-date mismatch; exact coordinates are not confirmed by the source.",
+    "Omegna is confirmed as trekking/a piedi but the official PDF says the locality is undefined; no coordinates were created.",
+    "The two 404s are Lago di Limo (SAT Cavalese) and Casera Ceresera (CAI Sacile)."
+  ]
+}

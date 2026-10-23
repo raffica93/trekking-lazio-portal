@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "runId": "cai-20261022-emilia-pavullo-classify01",
+  "createdAt": "2026-10-22T23:35:31.808Z",
+  "input": {
+    "path": "backend/data/agent-runs/cai-20261022-emilia-pavullo-classify01/input.json",
+    "sha256": "68df90eadf95b3acdd5521741f1e3805b3bde2ad2905dd81e06db41fd75a6144"
+  },
+  "files": [
+    {
+      "path": "classified-catalog.json",
+      "sha256": "c53478b4b13b4de142242b697f768bc72fc8226a384b6af573d0715c0f06da27",
+      "bytes": 14119
+    },
+    {
+      "path": "state.json",
+      "sha256": "6202d29610102097e2ac5996a15dc21f7a1de06ea618296b260199fd2c2d2026",
+      "bytes": 900
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 const { fork } = require('node:child_process');
 const path = require('node:path');
 
-function runSourceProcess(source, { now, budgetMs = 60_000, maxDocuments = 12 } = {}) {
+function runSourceProcess(source, { now, budgetMs = 60_000, maxDocuments = 12, initialUrls = [] } = {}) {
   return new Promise((resolve, reject) => {
     const child = fork(path.join(__dirname, '..', 'scripts', 'source-worker.js'), [], {
       stdio: ['ignore', 'ignore', 'ignore', 'ipc'], windowsHide: true,
@@ -19,7 +19,7 @@ function runSourceProcess(source, { now, budgetMs = 60_000, maxDocuments = 12 } 
     child.on('message', (message) => finish(message.ok ? null : Object.assign(new Error(message.error), { details: message.details }), message.result));
     child.on('error', (error) => finish(error));
     child.on('exit', (code) => { if (!settled) finish(new Error(`Section worker exited without a result (${code})`)); });
-    child.send({ source, options: { now: typeof now === 'string' ? now : now?.toISO(), budgetMs, maxDocuments } });
+    child.send({ source, options: { now: typeof now === 'string' ? now : now?.toISO(), budgetMs, maxDocuments, initialUrls } });
   });
 }
 

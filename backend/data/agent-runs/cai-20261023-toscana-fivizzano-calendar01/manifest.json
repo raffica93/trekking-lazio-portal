@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261023-toscana-fivizzano-calendar01",
+  "createdAt": "2026-10-23T00:14:13.318Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "92eb1e16428787e068b77a872cd1301218f71b3c000a803f395f7f6963bda3c8"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "f08e418e99218858a25c6df324f3bd68ae630a1e1aa8852bb4b4da1aee29439c"
+    }
+  ]
+}

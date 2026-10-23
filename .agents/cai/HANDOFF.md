@@ -1,0 +1,771 @@
+# Passaggio operativo CAI — raccolta e delivery regionale
+
+## Ripresa corrente — campione homepage CAI Pesaro (23 ottobre 2026)
+
+Il run `cai-20261023-marche-pesaro-homepage01` è terminato sulla sola URL seed ufficiale `https://caipesaro.it/`, con limite max1 documento/120s/concurrency1. Il collector segnala `collection=partial`, `files=ready`, `database=pending`: il redirect è stato bloccato dal controllo di host prima che il body fosse conservato. HTTP status, destinazione/final URL e body non sono persistiti; il conteggio delle richieste nella catena redirect non è attestabile. Non è prova che il calendario sia vuoto. Lo status conserva il vecchio `url=http://www.caipesaro.it/`; non inferire che sia la destinazione del redirect.
+
+| Fase | Stato | Prova/limite |
+|---|---|---|
+| Directory Marche | completata e checkpointata | `cai-20261023-marche-directory-refresh01`; 837 ID invariati; tre soli website aggiornati; commit `82eb9a4` |
+| Campione Pesaro — raccolta | `partial`; 0 eventi | URL seed singola e budget limitato; redirect bloccato, dettagli HTTP/body assenti |
+| File | report/diagnostica e manifest coerenti; catalogo invariato | importer PASS integrità, HOLD sulla prova risposta del run iniziale; alias Pesaro source-specific fixture-backed; report SHA-256 `cf2b40e7e441b76e8df41013f254c476ec7ae26af7597f71f48a695341a03b4a` |
+| Test | PASS | backend `npm test` 214/214 dopo la raccolta; 216/216 dopo la patch alias; sei hash JSON invariati |
+| Commit/push codice alias + diagnostica | verificato remoto | `9336988f54f6bec0ed3b0ddf1a451748de23065b` su `codex/cai-orchestrator-luna`; branch ref riletto |
+| Database | non avviato | 0 delta, nessuna query/import/receipt |
+
+Gli artefatti sono in `backend/data/agent-runs/cai-20261023-marche-pesaro-homepage01/`; manifest SHA-256 `7bec2799fcf3791d0004e9577334621e6161f2b7b1061e7d703cd4e928a10267`, state SHA-256 `9703deff0e9dbda34557e43b0e6105203c138631827e653d51b5ed3f3d5125e4`. Lo status target registra Pesaro `failed`; S. Benedetto e Sarnano differiscono solo nei website già aggiornati dal refresh directory. I mirror `scrape-status.json` coincidono (SHA `5cc2ae7caefa2f9f8c7876f433a7516423e6ebe9bbd05ce99903feb05f7b5391`), mentre `excursions.json` backend/frontend resta SHA `10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7`.
+
+Diagnosi redirect separata, solo header HTTPX via proxy e senza follow/body: `https://caipesaro.it/` ha restituito 301 con `Location: http://www.caipesaro.it/`; una GET diretta a `https://www.caipesaro.it/` ha restituito 200 `text/html`, 117 byte dichiarati. Evidenza `redirect-diagnostic.json` SHA-256 `6a7688d6c388a2f829501c6564f1101c5d41bcc51322ed155ffead81580098f0`; body mai letto, nessuna conclusione sul calendario.
+
+Alias configurato in `backend/sources.js` soltanto per `cai-pesaro-9228006`; `pipeline.js` e l’adapter accettano `https://www.caipesaro.it/`, rifiutano l’alias HTTP e gli host arbitrari. Fixture/test mirati 39/39; suite backend completa 216/216 e sei JSON invariati.
+
+QA finale importer: PASS su contratto alias, manifest/hash, report/diagnostica e conteggi; nessun DB.
+
+Checkpoint codice/fixture e diagnostica verificato a `9336988f54f6bec0ed3b0ddf1a451748de23065b`.
+
+Prossimo: run nuovo `cai-20261023-marche-pesaro-homepage02`, limitato a `https://www.caipesaro.it/`, max 1 documento/120s/concurrency1; poi fermarsi per QA importer e suite seriale. Non seguire redirect HTTP né inferire che la pagina sia un calendario; nessun import del run iniziale. Finché non si legge correttamente un calendario/feed, Pesaro resta partial e non si importa nulla. Nessun merge, deploy o cron.
+
+## Stato corrente — 23 ottobre 2026
+
+Repository `raffica93/trekking-lazio-portal`, branch `codex/cai-orchestrator-luna`; il checkpoint della raccolta Lovere e del report è verificato remoto a `8961db1d5c90baa94af336931bbcaca9e9ed2d2f`. Importer QA finale PASS. Nessun merge o deploy.
+
+### Copertura Lombardia
+
+| Sezioni controllate | Complete per il feed letto | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti / aperti |
+|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 1 | 0 | 0 | 0 | 0 | 0 / 0 |
+
+La snapshot contiene 229 voci di directory in Lombardia; questo run copre solo una fonte e non è un audit regionale. La copertura della regione resta aperta.
+
+Run `cai-20261023-lombardia-lovere01`, fonte `cai-lovere-9216055`, homepage ufficiale `https://organizzazione.cai.it/sez-lovere/`; limite 8 documenti, 120 s, concurrency 1. Il crawler ha letto tre URL same-host: homepage, `/eventi/?ical=1` e API ufficiale Tribe Events. L’API ha restituito JSON valido con `events=[]`, `total=0`, `total_pages=0` per `2026-10-01`–`2028-10-23`; lo zero è supportato per quel feed/intervallo. L’iCal ha body vuoto e content-type HTML, quindi non è stato usato come prova di calendario vuoto. Lo status non registra HTTP status né URL finale. Fonte `no-upcoming`, zero errori/issue.
+
+Il catalogo eventi resta a 3.376 ID unici, 0 aggiunte, 0 rimozioni, 0 righe cambiate; 0 eventi estratti/verificati e 0 duplicati esclusi. Il run è `collection=partial` a livello complessivo perché è un campione circoscritto, `files=ready`, database `pending-no-delta`; nessuna query o scrittura DB. Gli altri otto cambiamenti website nel mirror scrape-status provengono dal refresh directory precedente; non sono fonti raccolte in questo run.
+
+Manifest orchestratore `6d3ad42ea07a29dbed6c340468000ae63055d73f0b60f40969cab9a6ca477d41`, state `5d19a0ead4b820a820fc9853c5fbe8c8b0b4082dcdcc85819567c715d53f82ff`, excurs catalog backend/frontend `10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7`, status backend/frontend `4bfee84744d44a7ce91a5797fa7ebba00a08819be7cd491f99c91e3f21a2c8a7`. Il report e l’audit manifest aggiuntivo sono nella cartella run. Importer QA PASS con caveat dichiarato; `npm test` backend 214/214 dopo il run. SHA di `frontend/public/excursions.json` prima/dopo test uguale (`10e8…ad2c7`), quindi i test non hanno riscritto il catalogo pubblico.
+
+Prossimo: controllo offline collector delle fonti Lombardia partial/open dopo Lovere, usando cache, cronologia e FAILURES; selezionare al massimo una URL ufficiale distinta senza ripetere code in cooldown. Nessun import DB, dato geografico aggiunto o attribuzione nuova. Il refresh directory precedente è pubblicato e la correzione Lovere è fixture-backed; dettaglio e hash nella sezione storica di seguito.
+
+# Passaggio operativo CAI — classificazione catalogo mappa
+
+## Stato al 22 ottobre 2026 — storico fino alla classificazione completa
+
+Branch `codex/cai-orchestrator-luna`, repository `raffica93/trekking-lazio-portal`. Il checkpoint precedente è stato recuperato e il branch remoto aggiornato. I commit di codice `902a180` e `3f93525` sono stati pushati e letti di nuovo da origin. Non sono state fatte scritture DB.
+
+La sessione ha usato l’orchestratore GPT-6 Luna high richiesto; l’utente ha confermato la selezione UI. L’API di stato cloud mostra runtime connesso, rete enforced, osservazioni correnti e segreto `OPENROUTER_API_KEY` pronto solo per `openrouter.ai`. La chiave non è stata letta o stampata. Per Mercury si usa soltanto POST `https://openrouter.ai/api/alpha/decisions`, modello richiesto `inception/mercury-decide`; il campione ha ricevuto e attestato `inception/mercury-decide-20260930`. L’identità/effort runtime di Luna non è esposta dalla telemetria.
+
+I due soli agenti autorizzati, `cai-collector` e `cai-importer`, entrambi configurati Luna high, hanno completato i compiti indicati sotto. Tesseract 5 dispone solo di `eng` e `osd`; OCR italiano resta indisponibile. Nessun cron, merge o deploy.
+
+## Codice e test
+
+- Commit `902a180`: arresto del lotto su HTTP 401/402/403/429 e risposta con modello non verificato; attese in corso concluse ma non si avviano nuove POST. Gli errori restano sanitizzati e il run parziale/non importabile.
+- Commit `3f93525`: l’import classification-only conserva `candidate_decision`/`candidate_category` Mercury e registra `decision`/`category` effettive più `review_metadata`; primo caricamento preserva conflitti, migration usa FK `ON DELETE RESTRICT`, RLS/ruoli restano abilitati.
+- Backend `npm test`: 173/173; test specifici importer 28/28. Frontend 43/43 su 11 file dopo le modifiche mappa già presenti nel commit precedente. Cataloghi pubblici invariati: entrambi SHA-256 `1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877`.
+
+## Campione reale e QA
+
+Run `cai-map-20261022-sample02`: 20 righe, 20 HTTP success, 0 errori, modello attestato per le risposte. Input SHA-256 `7b6cc657343149a10dad55faab3928cef35049638dada7f08da301b1021c6631`. Catalogo dopo QA SHA-256 `4c6fee6b09bf6f5cba10dc627e3dd53494ed0098a4fa230b6555b48a35c9c760`; stato SHA-256 `12f3c02e4d7b1a2f9cec1562a7848fcf1466573f60602772ece2c64e281efe5a`; manifest SHA-256 `1ca628106e2af3b12143c786a0886df842d65398463c4b875ca74a186ca9a7bc`; report QA SHA-256 `0ebedcc73665812e413fc331cbc4107dd14468079aeec8639f89d09019b7a509`.
+
+Il collector ha verificato 18 fonti su 20; i due link 404 sono Lago di Limo (SAT Cavalese) e Castagnata in Casera Ceresera (CAI Sacile). I 6 override tracciati nel catalogo sigillato sono: Sacile non provato → `da_verificare`; Santuario di Monte Tranquillo ad Alatri → `da_verificare` per data non corrispondente (record 10 ottobre vs calendario 22 febbraio); pranzo attribuito ad Arosio → `da_verificare` perché il PDF attribuisce a Seregno; Castagnata a Crocette → `da_verificare` perché il PDF attribuisce a Piedimulera; Omegna → `trekking/a piedi` in base al PDF Est Monte Rosa (difficoltà E), con luogo indefinito e coordinate nulle; parete CAI Vimodrone → `non_trekking` perché il PDF la descrive come attività indoor settimanale. Rimangono intatti i candidati Mercury originali. Alatri Monte Gemma, Napoli, Varese e Padova hanno riscontro ufficiale; i punti di partenza/itinerari non deducibili restano senza coordinate nuove.
+
+Esito effettivo campione: 5 trekking, 3 non-trekking, 12 da verificare. Il QA ha escluso soltanto attività sociali o indoor supportate; i casi con fonte 404 o attribuzione dubbia non sono esclusioni. L’importer ha validato le 20 righe dal manifest. DB non toccato.
+
+## Input completo e prossimi passi
+
+Query Supabase osservata il 22 ottobre 2026 alle 17:27:56 UTC: 4.346 pubblicati totali; 3.307 con `date >= 2026-10-01`; 3.300 con `date_end >= 2026-10-01`; 3.336 unici soddisfano l’OR effettivo; tabella `place_classifications` assente. Export via Data API osservato alle 17:25:59 UTC: 3.336 righe, 3.336 source ID univoci, SHA-256 `2963f287c4ccedb20a70068b2551dad3565b264d871194ec91324d0f98bb0687` in `backend/data/agent-runs/cai-map-20261022-full01/input.json`. La query e l’export sono distinti per osservazione e metodo; i conteggi sono osservazioni correnti, non la baseline storica.
+
+Piano iniziale completato e superato: `cai-map-20261022-full01` è stato sigillato, verificato, importato classification-only e riconciliato. La ricevuta DB e i conteggi osservati sono nella sezione successiva; non usare questo paragrafo come istruzione operativa corrente.
+
+La migration è stata applicata e verificata nella ricevuta successiva. Il sito live non è stato controllato/aggiornato; le modifiche frontend mappa non sono state deployate. Il codice sul branch non equivale al comportamento in produzione.
+
+## Baseline distinta
+
+La baseline storica resta run `cai-20261020-piemonte-01`, commit `9919927`, 3.337 ID e 40 nuovi eventi Piemonte. `cai-20261020-piemonte-ocr-01` è un run OCR pending, non baseline da reimportare. Lombardia rimane la regione aperta; ultimo handoff storico: 229 sezioni, 125 controllate, 56 complete, 68 parziali, 1 irraggiungibile, 104 non verificate e 69 fonti parziali/irraggiungibili. Questi sono conteggi storici, non risultati query attuali.
+
+
+## Checkpoint classificazione completa — 22 ottobre 2026
+
+Il run `cai-map-20261022-full01` è completo e pronto per checkpoint/import: input da 3.336 candidati effettivi della mappa, 3.336 ID univoci e allineati, 0 errori. Query di sola lettura Supabase alle 18:12:15.676 UTC: 4.405 `places`, 4.346 pubblicati, 3.336 nella mappa con predicate `published AND (date >= 2026-10-01 OR date_end >= 2026-10-01)`, tabella classificazioni assente. Latest `places.updated_at` osservato: 2026-10-20 11:51:23.239637 UTC. Nessuna scrittura DB.
+
+Modello richiesto `inception/mercury-decide`, risposta attestata `inception/mercury-decide-20260930`, policy `cai-trekking-v2`. Run 4 concurrency / 200 ms, una ripresa idempotente; il final output rigenerato sullo stesso input ha 0 errori. Mercury è non deterministico: i valori da usare sono quelli nel manifest finale, non i conteggi della prima generazione.
+
+| Classificazione | Candidati Mercury | Valore effettivo dopo QA |
+|---|---:|---:|
+| Trekking | 973 | 969 |
+| Non trekking | 478 | 9 |
+| Da verificare | 1.885 | 2.358 |
+
+QA collector indipendente: 157 dei 462 candidati `non_trekking` originari revisionati in 11 gruppi fonte; 8 esclusioni con riscontro diretto, 5 falsi negativi corretti a trekking, 27 righe miste/mismatch e 117 inconclusive mantenute `da_verificare`; 305 non esaminate puntualmente. Gli altri candidati non trekking senza prova individuale sono conservati come `da_verificare`. 43 overlay di gruppo conservativi e 6 riscontri dal campione reale (conteggi review totali 496). Importer ha indipendentemente PASS-validato manifest, conteggi, unicità/allineamento, alias/snapshot e override.
+
+Artifact da pubblicare: input `2963f287c4ccedb20a70068b2551dad3565b264d871194ec91324d0f98bb0687`; catalogo effettivo `e3c5d5b09d268bdc43fdeff4a91b67054fd9e8d75e04eeb00042bfe75969aa5c`; stato run `180c28394488e942d7c31b5715b7103d2ce5f1105aef718b6a03d054586fbf10`; manifest `5d7b2423edcad5f116c6e375bc8897139cba371e3bbae525ac24a0f74d83ce98`; QA report `0f828750cda80138c2d32599be0154e80033a6938601692e40ffc22152cb310a`. Fixture QA: `backend/test/fixtures/cai-map-20261022-full01-source-qa.json`; test: `backend/test/full-classification-source-qa.test.js`. Backend `npm test`: 174/174; cataloghi backend/frontend invariati, SHA256 `1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877`.
+
+Un artefatto intermedio dell’overlay si è ridotto a un record per errore di preparazione input. È stato ripristinato dall’input completo e dalla cache prima del QA, rigenerato e poi verificato dall’importer; non è avvenuta alcuna scrittura DB. I due backup corrotti sono stati rimossi.
+
+**Gate:** nessuna migration o import prima che commit e push del checkpoint file siano riletti su `origin/codex/cai-orchestrator-luna`. Dopo il push, applicare solo la migration `place_classifications` e inserire record classificazione mancanti; conflitti preesistenti restano intatti, nessuna UPDATE/DELETE su `places`. Usare Supabase MCP perché `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` non sono presenti nel runtime backend. Fare query digest/invarianti immediatamente prima e dopo, salvare ricevuta recuperabile in un checkpoint successivo, poi soltanto riprendere Lombardia. Nessun deploy, merge o scheduler.
+
+
+## Ricevuta database e ripresa Lombardia — 22 ottobre 2026
+
+Dopo il checkpoint remoto `0ae5b14e61b0dd8b49fa503ee08eedc13696b2e7`, applicata via Supabase MCP migration `create_place_classifications_20261021090000`, migration version `20261022181444`. La tabella era vuota alla verifica 18:15:02 UTC. Sono stati inseriti 3.336/3.336 record classificazione, con `ON CONFLICT DO NOTHING`; conflitti preservati: 0. L’import è classification-only: nessun `UPDATE`/`DELETE` o altra write su `places`.
+
+La riconciliazione post-import ha confrontato ogni colonna applicativa della tabella con l’output sigillato in 84 batch SQL: 3.336 matched, 0 mismatches. Query fresca 18:20:59.696 UTC: 4.405 places, 4.346 published, 3.336 righe nella mappa (3.336 source ID univoci), 3.336 classificate. Valori effettivi: 969 trekking, 9 non trekking validi, 2.358 da verificare; review metadata su 496. Il default app rende visibili 3.327 righe (trekking + dubbi), esclude soltanto 9 non trekking confermati; 0 righe senza classificazione. Modello richiesto `inception/mercury-decide`; tutte le 3.336 righe sono attestate come `inception/mercury-decide-20260930`. RLS attivo e FK `ON DELETE RESTRICT`.
+
+Invarianti editoriali prima/dopo: digest ordinato di `id,title,status,cover_image_path` identico `5ed97ae6d6fa8274e66663ba66f28a45`; max `places.updated_at` identico `2026-10-20T11:51:23.239637Z`. Nessuna modifica a titolo, stato, foto, località o coordinate. Nessun delete. Nessun deploy: codice filtro mappa è sul branch ma il sito live non è stato aggiornato. Nessun merge, cron o deploy.
+
+Il checkpoint DB è registrato in `.agents/cai/STATE.json`; prossimo passo riprende Lombardia, ultima regione aperta, a campioni circoscritti e una sezione per volta. Storico handoff: 229 sezioni, 125 controllate, 56 complete, 68 parziali, 1 irraggiungibile, 104 non verificate; sono valori storici, non una query attuale. Nessuna raccolta si è sovrapposta al batch o import.
+
+
+## Ripresa operativa — Lombardia/Brescia, 22 ottobre 2026
+
+Il checkpoint classificazione è chiuso e riconciliato nel DB come riportato sopra. L’istanza cloud corrente è connessa, rete enforced, `OPENROUTER_API_KEY` presente e limitata a `openrouter.ai` (controllo booleano; il valore non è stato letto). La UI conferma GPT-6 Luna high per orchestratore/agenti, ma la telemetria runtime non attesta il modello effettivo. Mercury resta separato dalla raccolta geografica.
+
+Run `cai-20261022-lombardia-brescia02` (source `cai-brescia-9216005`): `collection=partial`, `files=ready`, `database=pending`. Sono stati osservati 12 URL, una sola sezione, 44 eventi risultanti e 93 estrazioni documentali registrate; restano 14 candidati discovery. Il run non ha aggiunto nuovi ID rispetto al risultato corretto: nel confronto con il checkpoint `6d0bd13`, il catalogo ha un solo nuovo ID Brescia (`cai-brescia-9216005-3badd4cc403c`), 0 rimozioni, 0 modifiche esistenti e 3.338 ID unici. La card CAI ufficiale attesta una serata cinema il 21 ottobre; è stato rimosso il falso `durationHours=26`, senza inferire luogo o coordinate. Questo evento resta fuori dal DB finché la classificazione e il trattamento sicuro non siano definiti.
+
+Il bug del parser era il match del suffisso `26 ore` dentro `2026 ore 20,45`. La regex ora richiede un confine numerico a sinistra. Fixture `backend/test/fixtures/cai-brescia-cinema-time.json`, test `backend/test/scraper.test.js`; suite backend completa 175/175. QA read-only indipendente importer: PASS, manifest/hash/copie backend-frontend corretti, nessuna modifica alle righe esistenti. Manifest SHA `092ad634fd84e60a307349661026423e18a2fd1e75c4422f5b936ab973dded77`; report SHA `7c65412514a18d03cc08c230e5fca09bfc8d1ddc8afd8351f1c91453abe1d852`. Run01 è uno snapshot superato e non importabile.
+
+Le 13 occorrenze `previous-unavailable-skipped` del report rappresentano 2 URL storici HTTP 403 (12 voci Scuola Adamello e 1 archivio), saltati per cooldown e non ritentati. Resta inoltre un problema discovery-limit con 14 documenti. Nessuna raccolta su altre sezioni. Il pipeline ha aggiornato anche alcuni contatori derivati nello stato globale: ciò non significa che quelle fonti siano state ricontrollate. La tabella `REGIONS.md` distingue questi dati dal conteggio storico.
+
+**Passi separati:** raccolta completa solo per il perimetro limitato del run; file pronti/verificati; test passati; commit/push da completare; import DB in attesa e da non eseguire per il record cinema senza classificazione; copertura Lombardia ancora aperta (1 parziale, 0 complete, 0 irraggiungibili nel campione corrente). Prossimo: pubblicare il checkpoint, poi un nuovo run circoscritto ai residui Brescia, senza ampliare la regione. Nessun merge, deploy o cron.
+
+## Run03 — campione Brescia e correzione parser, 22 ottobre 2026
+
+Run `cai-20261022-lombardia-brescia03` ha ricontrollato una sola sezione (CAI Brescia) con 26 documenti, 51 eventi di sezione e 136 righe estratte. Esito `collection=partial`, `files=ready`, `database=pending`: +7 ID, 0 modifiche e 0 rimozioni; totale catalogo 3.345 ID unici. Il manifest SHA-256 è `17106240bf08667584315cb48922060c00c673e265c7cc898adfaf57a75f3ec3`, il report SHA-256 `d4dec037f4c99b299b9d3c0ea64c92dd21432213d9264e9af22fba5f28f54388`. Le copie backend/frontend di `excursions.json` e `scrape-status.json` coincidono byte per byte. Importer QA indipendente: PASS; nessuna query o scrittura DB.
+
+Il run ha raggiunto 14 URL oltre i 12 già osservati; la discovery si è fermata con 13 candidati residui. Le 42 voci di cooldown sono due URL distinti già soggetti a HTTP 403 (41 + 1), senza nuovi tentativi. L'errore parser sul suffisso dell'anno è risolto e coperto da fixture, test e commit `cb7148f`. Non sono stati identificati duplicati per ID; il report non consente una misura affidabile di sovrapposizione semantica.
+
+I sette nuovi eventi provengono da pagine CAI ufficiali, ma non attestano coordinate di partenza/cima/area escursionistica. Due citano la sede come sala d'incontro: non è stata usata come destinazione. Coordinate assenti e posizione da verificare. La patch importer aggiunge provenienza geospaziale strutturata, conserva coordinate curate/parziali e salta nuovi eventi senza classificazione valida; fixture e suite backend `178/178` passano. La migration `20261022200000_places_geo_evidence.sql` è soltanto nel checkpoint proposto e non è applicata al DB.
+
+**Stati indipendenti:** raccolta parziale; file pronti e verificati; commit/push del run03 e patch importer in attesa; import DB pending e non avviato; copertura corrente = Lombardia 1 sezione controllata, 0 complete, 1 partial, 0 irraggiungibili. Il checkpoint remoto `831e031808af7bdd01508e83afd023b02f6ae7d5` è stato verificato. Prossimo: solo run04 limitato ai 13 residui Brescia. Nessun merge, deploy o cron.
+
+## Run04 — aggiornamento Brescia, 22 ottobre 2026
+
+Checkpoint di partenza `c46f8c8064795204ddec37f8e05f730b11d47194`, checkout remoto verificato. Un solo `init` e una sola `collect` per `cai-brescia-9216005`, concurrency 1, massimo 39 documenti e 240 s. Esito `collection=partial`, `files=ready`, `database=pending`. Il confronto indipendente di due report trova 38 URL completati: 26 sovrapposti al run03, 12 nuovi; 143 estrazioni contro 136 del run03. Brescia resta partial con 51 eventi in status e 2 candidati residui. Report SHA `5fd661f1ad357553cf8e7c4945da1be935845b56b7786f0ea8d8cd564a6b24b6`; manifest SHA `97ee22d3b78840a6327b7869bbad8139481457239cbf6b9282bbdde688a10ff5`.
+
+Delta catalogo rispetto al checkpoint: 3.345 ID unici prima e dopo, 0 aggiunte, 0 rimozioni, 0 modifiche; nessun nuovo punto geografico da classificare o geolocalizzare. Sezione: 1 controllata, 0 complete, 1 partial, 0 unreachable; nuovi eventi verificati 0, duplicati ID esclusi 0, duplicati semantici non stabiliti. Issue: 66 skip cooldown ripetuti su 2 URL storici HTTP 403 (nessun retry); un URL annuale di GGS ha restituito HTTP 404 e resta senza sostituto accertato; discovery-limit con 2 residui. Importer QA indipendente PASS, senza DB; backend `npm test` dopo la raccolta 178/178; copie backend/frontend e catalogo invariati dopo i test.
+
+**Stati indipendenti:** raccolta parziale; file pronti/verificati; checkpoint run04 `1d73684492ffdf330f7ac8bb43b39d16ddcf096b` pushato e verificato; DB pending e non scritto; copertura Lombardia limitata a Brescia, ancora parziale. Prossimo: ricostruire offline i due URL residui e svolgere run05 solo su Brescia, evitando retry dei due URL 403.
+
+## Run05 — esaurimento coda Brescia, 22 ottobre 2026
+
+Run `cai-20261022-lombardia-brescia05`, una sola collect e solo la sezione `cai-brescia-9216005`, concurrency 1, massimo 40 documenti/240 s, nessun retry-failed. Il checkpoint di partenza era `273fcb67894a192895cc688e27675abe3843156b`. Sono stati registrati 40 documenti e 143 estrazioni; i due residui run04 sono stati entrambi raggiunti. Esito `collection=partial`, `files=ready`, `database=pending`; discovery-limit assente. Il catalogo resta a 3.345 ID: 0 aggiunte, 0 modifiche e 0 rimozioni. QA importer indipendente PASS; nessun accesso o scrittura DB.
+
+Il PDF ufficiale “Programma escursioni 2026” del fondo è stato estratto (una pagina, 40 righe) e verificato manualmente: le sole date riportate sono 1 febbraio, 5–8 febbraio, 22 febbraio e 8 marzo 2026, tutte passate al 22 ottobre. Lo zero di eventi futuri è quindi un calendario letto correttamente. La pagina `/category/attivita/` non ha parser; il suo zero estrazioni non viene trattato come calendario vuoto. Nessun nuovo evento o punto geografico è stato creato.
+
+La sezione Brescia resta parziale esclusivamente per 3 URL distinti già non disponibili: 2 con storico HTTP 403 e il permalink GGS con HTTP 404 nel run04. Run05 contiene 69 voci `previous-unavailable-skipped` (1 archivio 403, 67 scuola 403, 1 permalink GGS 404); non è stato ritentato nessun URL. Il parser discovery non segnala più candidati. Il report sigillato con la verifica manuale ha SHA `315eda0b3c37eae0e5d2e5e693729f7f1d7d1c8b3233f131d9c08d77f2409ee2`; il manifest è `d3088019fa7840f7002b472611207356e237b662350c135d7861cd4475fc17e6`.
+
+**Stati indipendenti:** raccolta parziale per cooldown; file pronti/verificati; checkpoint run05 `92ac86393416325560e753e43b8bd022741cb708` pubblicato e verificato; DB pending e non toccato; Lombardia resta la regione corrente. Run05 `92ac86393416325560e753e43b8bd022741cb708` è pubblicato e verificato. Preflight 2026-10-22: CAI Varese (`cai-varese-9216009`) resta bloccata: l’endpoint storico 503 è di nuovo eleggibile dopo il cooldown e verrebbe pianificato dal collector standard; non c’è esclusione puntuale. Nessuna richiesta è stata fatta. Scegliere un’altra fonte ufficiale in Lombardia dopo preflight della sua coda. I 3 URL Brescia restano in cooldown. Suite backend dopo raccolta: 178/178; copie backend/frontend identiche.
+
+
+## Run Valmadrera — `cai-20261022-lombardia-valmadrera01`
+
+Dopo il preflight read-only che ha bloccato Varese per il retry 503, è stato eseguito un singolo campione CAI Valmadrera, run ID univoco, concurrency 1, massimo 12 documenti e 120 s. Stato `collection=partial`, `files=ready`, `database=pending`; una sezione controllata: 0 complete, 1 parziale, 0 irraggiungibili. Sono state elaborate 12 fonti/documenti; la sezione riporta 7 eventi e 8 estrazioni per documento. Tutti i 7 record erano già presenti identici al baseline Git; delta catalogo 0 aggiunte/rimozioni/modifiche su 3.345 ID unici. Il conteggio di duplicati tra estrazioni non è disponibile nel rapporto sorgente; nessun nuovo punto o attribuzione geografica. La discovery è scesa da 24 a 7 candidati; zero errori HTTP osservati nel campione, ma i 7 candidati residui restano da verificare, quindi non dichiarare calendario vuoto.
+
+Backend `npm test` dopo la raccolta: 178/178. Manifest `0156a229ef3e776af9f1b373d9e355e93960ae062249df11cb45d1dc97d0271a`, report `7862920ad009f600de515810382dd3f72a9d15b4c70b604eaa868386e657d02d`. Copie backend/frontend dei tre file sigillati identiche. Nessun accesso DB e nessun import, coerentemente con delta catalogo zero. File/report pronti per checkpoint Git; poi un altro campione Valmadrera circoscritto. I conteggi regionali complessivi sono ancora lo snapshot del 20 ottobre.
+
+Il checkpoint Valmadrera è stato pubblicato e verificato su `origin/codex/cai-orchestrator-luna` al commit `a6c27b5a5e835a6f3ac2ef3b525acf2162d6bdc0` alle 2026-10-22T19:17:43Z. Prossimo passo: un solo campione Valmadrera delimitato a 12 documenti/120 s, poi QA indipendente e test backend dopo la raccolta.
+
+
+## Run Valmadrera 03 — `cai-20261022-lombardia-valmadrera03`
+
+Campione bounded: 20 documenti/180 s, concurrency1, 19 righe estratte per documento, 7 eventi fonte già esistenti, delta catalogo 0 su 3.345 ID. Cinque dei sette candidati residui precedenti sono stati raggiunti; rimangono non visitati `/eventi/oggi/` e `/eventi/elenco/?eventDisplay=past`. La navigazione ha scoperto ulteriori pagine e lascia 23 candidati: la sezione è ancora partial, senza errori HTTP nel campione. L’esatta deduplicazione tra righe estratte non è esposta; report non inventa un conteggio. Run02 aveva ripetuto i primi 12 documenti senza progresso e non è un checkpoint autonomo; run03 contiene la fotografia valida per il prossimo checkpoint. Import DB non necessario a delta zero. Report SHA `befb8a7914e6d6dbe835b9d56678a22e8c3f984bcb132a23ffd8e3d2ec61b255`, manifest SHA `5370bb422bcb39ef0b44a31f1379f98d066aaaeb49a311d0f9bcd3eb45466897`. Prossimo passo dopo QA e test: run04 max40 documenti/240 s sulla stessa fonte; verificare l’URL effettivamente raggiunto e non assumere esaurita la coda.
+
+Run03 file/report checkpoint verificato su `origin/codex/cai-orchestrator-luna` al commit `9045ec84b981193669deaa2e82dd075c3609cf6d`. QA importer PASS; backend tests 178/178 dopo la raccolta. Ora procede run04 Valmadrera, singola sezione, massimo 40 documenti/240 s/concurrency1.
+
+
+## Run Valmadrera 04 — `cai-20261022-lombardia-valmadrera04`
+
+Campione da 40 documenti/240 s, concurrency 1. Sono state trattate 40 pagine e registrate 41 estrazioni; i 7 eventi di sezione restano invariati e il catalogo è 3.345 ID unici, delta 0. Le pagine giornaliere fino al 17 ottobre sono state raggiunte; la coda discovery scende da 23 a 12. Nessun errore HTTP osservato, ma la fonte resta partial e le 12 candidate non visitate non sono considerate vuote. Nessuna geolocalizzazione, query o scrittura DB. Report SHA `fd1776b3354afaa3575c048d8db5a421dec2b45180fa2305ba9948c7081d709b`, manifest SHA `e7df409743d2265e64d0862abfcd24d4be02c8e9a01e9690f6ff97385cd6c6f6`. Prossimo passo: QA/test/checkpoint, poi un unico campione bounded sulla stessa fonte se utile.
+
+Run04 importer QA PASS; backend npm test 178/178 after collection. The default crawl restarts at the same 40-document prefix, so run05 must wait for a tested, explicit same-host URL continuation mechanism; do not repeat the same prefix or call the queue complete.
+
+Continuation correction checkpoint: commit `20dbaf2e1b8a8b6f63c97efe2d3e96c06bc6910c` adds repeated `--source-url` scoped to exactly one source, official-host/redirect validation, and persisted retry state. Focused tests 40/40; backend suite 186/186. It has not yet been used on a live regional collection. Next run05 applies only the 12 URLs documented in the run04 report, max20 documents/180s/concurrency1; no DB import at zero catalog delta.
+
+
+## Run Valmadrera 05 — `cai-20261022-lombardia-valmadrera05`
+
+Run limitato a una sezione, 20 documenti/180 s, concurrency 1, con 12 URL ufficiali passati esplicitamente tramite `--source-url`. Tutti i 12 target sono stati raggiunti; 8 documenti ICS aggiuntivi sono stati scoperti e letti, per 20 documenti e 34 righe estratte. Il calendario restituisce 7 eventi già noti. Sezione `partial`: restano 38 candidati discovery. Non ci sono errori HTTP nel run; non dichiarare la fonte completa o vuota.
+
+Confronto file con `c5036ff`: catalogo 3.345 ID unici, 0 aggiunti, 0 rimossi, 5 record esistenti modificati. Le modifiche sono limitate a URL `sourceDocument` ufficiali e descrizioni più brevi in due record (367→209 e 357→200 caratteri Unicode); titoli, date, stato editoriale, copertine e campi geografici sono invariati. Zero ID duplicati nel catalogo; sovrapposizione/deduplica delle righe documentali non esposta dal collector. Nessuna nuova coordinata o attribuzione; nessuna query o scrittura DB. Non serve reimportare classificazioni già complete.
+
+Manifest SHA `f88571727bbbcda6dceec0c5205f3da7dfdc95c4c1a70897444daf33f092e2a2`, report SHA `cc50445c9c91cedef90a672e4f0809ac7074fe6275b787ab8154f74e142cfb25`. Hash cataloghi backend/frontend identici e stabili dopo `npm test` backend 186/186. QA indipendente importer PASS; nessuna operazione DB. Stato separato: raccolta parziale, file pronti, database pending/non necessario per delta eventi zero.
+
+Ricostruzione offline della discovery dai 20 body cache conferma i 38 candidati residui. Sono identificati feed calendario correnti/futuri e categorie `/attivita/escursioni/`, `/attivita/gite-sociali-di-scialpinismo/`; candidati da lasciare fuori: API root con attribuzione incerta, archivio esplicitamente passato, programma 2024 e quattro feed iCal di escursioni datate nel passato. `/attivita/valma-street-block-2026/` resta incerta. Dopo il checkpoint run05, il prossimo campione sarà limitato a massimo 8 documenti sui soli feed correnti/futuri e categorie pertinenti, senza candidati storici o di attribuzione incerta. Varese resta bloccata per cooldown 503 scaduto; nessuna richiesta è stata fatta. Lombardia rimane la sola regione attiva.
+
+
+## Run Valmadrera 06 — `cai-20261022-lombardia-valmadrera06`
+
+Dopo checkpoint remoto run05 `f00a1e4eb4eaea4a2eb916578ba1d6dce7e3d377`, è stata eseguita una sola fonte Valmadrera con 8 URL espliciti, concurrency 1, massimo 8 documenti e budget 180 s. Tutti gli URL sono stati raggiunti; 8 righe estratte sono state riconciliate a 7 eventi unici, con 1 riga duplicata esclusa. Il run resta `collection=partial`, `files=ready`, `database=pending`: discovery-limit lascia 19 candidati associati al calendario PDF ufficiale. Nessun errore HTTP della fonte nel run e nessun'altra sezione tentata.
+
+Confronto catalogo: 3.345 ID unici, 0 aggiunti, 0 rimossi, 5 record esistenti cambiati. Quattro cambi solo `sourceDocument`; Moregallo `e2177dd44e1a` ha inoltre descrizione più completa. Titoli, date, fine date, stato, foto, località e coordinate sono invariati. Nessun dato geografico aggiunto, nessuna query o scrittura DB; non si reimportano classificazioni già complete. Importer QA PASS; backend `npm test` 186/186; copie backend/frontend identiche e stabili dopo i test.
+
+Report SHA `42837b9104b440128911a879b2a0b9adcda54699eaf5983835f7b4f5dc0ff082`; manifest SHA `f673039b1a8b2286067637a9ddb524c04868656bc1a6e6505b2ac6252934d64d`. Il report dettaglia gli otto URL e gli hash dei body. Prossimo passo, dopo checkpoint remoto: valutare una sola richiesta esplicita al PDF ufficiale 2026 se distinto e non ancora visitato; massimo 1 documento, mantenendo cache in caso di errore. Varese e altri run restano fermi.
+
+
+## Problema parser calendario CAI Valmadrera — aperto, 22 ottobre 2026
+
+Il preflight read-only del residuo run06 ha confermato che il PDF ufficiale 2026 è già nella cache, quindi non è stato creato un nuovo run né fatta rete. Il body corrisponde a PDF di 375.821 byte, SHA `f3939cb69b55824e4db4026d989acea993a58e7fa81671d8c7a3093d3b4103e9`, 12 pagine; l’estrattore di testo `pdftotext -layout` legge il calendario da gennaio a dicembre. La cache parser corrente però restituisce `pdf-text`, `recognized=false`, zero eventi, zero issue. Il testo leggibile mostra voci future al 22 ottobre, incluse Gita sociale media montagna a Valmalenco il 1 novembre e Gita culturale enogastronomica il 22 novembre, oltre a corsi e una cena a dicembre. Non trattare lo zero del parser come calendario vuoto.
+
+FAILURES registra il difetto `official-calendar-grid-unrecognized`, fase `parsing`, stato `open`, owner `cai-collector`. Prossimo ciclo: analisi offline del testo cache, fixture fedele alle pagine calendario, correzione minima del parsing data/cella e test che attestino eventi/data senza inventare luogo o coordinate. Conservare separatamente i record di natura trekking e non trekking perché la classificazione Mercury è distinta. Solo dopo test/verifica creare un run cache-backed, bounded a questo PDF, e checkpointare file/report. Nessuna raccolta di rete, DB, import o geolocalizzazione avvenuta per questa diagnosi.
+
+
+## Correzione candidata parser griglia PDF — Valmadrera, 22 ottobre 2026
+
+Il collector ha portato la diagnosi a una correzione fixture-backed. Il PDF ufficiale in cache è un calendario mensile a griglia: il parser lineare perdeva le attività perché numeri giorno e testo attività sono in colonne/celle distinte, e pdf.js separa talvolta la domenica sulla riga successiva. La nuova logica usa header mese, ancora giorno 1 e colonne weekday; unisce riga data incompleta e token separato solo quando gli X completano sette celle. `VERSION` deterministica passa da 10 a 11 per invalidare le estrazioni parser cache obsolete.
+
+Dal PDF sono verificati 14 eventi tra ottobre e dicembre: 4/10 e 10/10 Scuola PIACCO; 11/10 Gita sociale media montagna Presolana; 17/10 Raccontami la Montagna e Alp. Giovanile; 18/10 Vivi il Moregallo e Alp. Giovanile; 25/10 Scuola PIACCO; 1/11 Gita sociale media montagna Valmalenco; 8/11, 14/11, 15/11 Scuola PIACCO; 22/11 Gita culturale enogastronomica; 4/12 Cena sociale. La cella del 24 ottobre è vuota; non traslare la Scuola PIACCO dal 25 al 24. Tutti i record hanno URL PDF ufficiale, località da verificare e coordinate assenti.
+
+Fixture end-to-end: PDF ufficiale da cache, 12 pagine, SHA `f3939cb69b55824e4db4026d989acea993a58e7fa81671d8c7a3093d3b4103e9`; fixture testo pdf.js SHA `38af603c521ed5c5f64c1bc0e856ad545d853bc57dfb7287af8eb031a34bd911`. Test focalizzati 20/20; backend `npm test` 187/187. QA importer PASS sui confini geo/editoriali/DB. Copie backend/frontend identiche e hash invariati dopo i test. Correzione pubblicata e verificata su `origin/codex/cai-orchestrator-luna` al commit `75be6e65b19a727250346c5e1c4e3c4287f9b277`; il difetto resta open solo fino al run orchestrato cache-backed, massimo un documento. Nessuna rete, catalogo o DB toccati.
+
+## Run Valmadrera 07 — parser PDF rielaborato e checkpoint file pending
+
+Dopo il checkpoint codice `e65379e4791bddbb92f8898767f0951135a04173`, il run `cai-20261022-lombardia-valmadrera07` ha eseguito una sola collect sulla URL ufficiale del calendario 2026, `SCRAPE_MAX_DOCUMENTS=1`, budget 180 s e concurrency 1. Il run è terminato in 8 secondi: 65 righe estratte, 21 eventi futuri riconciliati (7 esistenti +14 nuovi), zero rimozioni e zero modifiche agli ID esistenti. La fonte selezionata è `ok` senza issue; il run complessivo rimane `collection=partial`, `files=ready`, `database=pending` per altre fonti incomplete, non per un errore di questa PDF.
+
+La PDF ufficiale SHA `f3939cb69b55824e4db402d989acea993a58e7fa81671d8c7a3093d3b4103e9` è rimasta invariata. Una GET condizionale ha avuto esito positivo attraverso il proxy ereditato; i timestamp del body/cache non sono cambiati, quindi 304 è un’inferenza: il run state non registra il codice HTTP. Le 14 nuove righe hanno titoli/date attestati dal calendario, URL ufficiale, `Località da verificare` e coordinate assenti. Nessuna geolocalizzazione o scrittura DB.
+
+Importer QA indipendente PASS: conteggio catalogo locale 3.345→3.359, 14 ID aggiunti, zero duplicati ID, rimozioni o cambi record esistenti; tutti gli hash del manifest e le copie backend/frontend verificati. Test backend `npm test`: 187/187 dopo la raccolta, hash di catalogo e status rimasti identici dopo il test. Report SHA `66cfdef7a09d8b998a4da3dc50625b11493968ed0bece873191651518b5873ca`; manifest SHA `80338c4a5952334c28cb8dc7ce436e6b0d8ea0aea9309046356e7909bc3a9335`; run state SHA `f54437f765a93c5affb604b478f5c778bec07f4152308e069b2ba4ed63564140`. Il report completo è in `backend/data/agent-runs/cai-20261022-lombardia-valmadrera07/collection-report.md`.
+
+Il difetto `official-calendar-grid-unrecognized` passa a `recheck_resolved` grazie al run con parser VERSION 11 e fixture PDF reale. Stato separato: raccolta di questa PDF ok, checkpoint file ancora da pushare, classificazione dei 14 nuovi ID pending, DB non scritto. Prossimo: checkpoint remoto dei file/report; poi classificare solo i 14 nuovi ID con Mercury in run isolato, QA e checkpoint remoto prima di ogni upsert classification-only. Nessun reimport dei 3.336 record già presenti; nessuna scrittura a `places`.
+
+
+## Consegna delta run07 — 22 ottobre 2026
+
+Il checkpoint file della raccolta `cai-20261022-lombardia-valmadrera07` è già pubblicato nei commit `d45f27136177ce05181d69f87e00a8d7bb96a3cb` e `ce8bfdb759ae470bcf9340fb198c5c91c740e464`; non ripetere scrape o checkpoint. I 14 ID nuovi hanno richiesto deduplicazione semantica: 2 duplicati confermati esclusi preservando gli originali, 2 probabili duplicati trattenuti per revisione, 10 candidati indipendenti. La classificazione Mercury `cai-map-20261022-valmadrera01` è pronta 10/10 senza errori: 8 non trekking con riscontro nel PDF, 2 uscite giovanili `da_verificare`, 0 trekking. Le coordinate restano assenti. QA semantica collector e integrità/schema importer PASS; dettagli in `classification-qa.md` e `duplicate-review.json`.
+
+Il nuovo contratto delta verificato opera solo sugli eventi del manifest (massimo 500), inserisce `places` mancanti e classificazioni mancanti con conflict-ignore, non aggiorna né cancella righe e preserva titolo/stato/foto/coordinate e classificazioni preesistenti. La FK è `place_classifications.source_id -> places.source_id ON DELETE RESTRICT`. La vecchia restrizione classification-only riguardava il batch completo 3.336, che non viene reimportato; il delta corrente usa l'importer mirato autorizzato e non chiama l'import generale. Ricevute `partial` e run interrotti restano riprendibili sullo stesso manifest sealed. Input path nuovi sono repo-relative; il verifier rebasa solo i legacy assoluti riconosciuti e verifica SHA.
+
+Query Supabase read-only `2026-10-22 20:28:47.638735+00`: 4.405 places, 4.346 published, 3.336 candidati mappa correnti (`status=published AND (date >= 2026-10-01 OR date_end >= 2026-10-01)`), 3.336 classificazioni; i 10 source ID delta erano assenti da entrambe le tabelle. `places.updated_at` massimo `2026-10-20 11:51:23.239637+00`; digest editoriale nello stesso controllo `b52a6bcc1c0d4779ffeb112e5547c891`. Sono valori osservati a quell'ora, non una query presente al momento della prossima scrittura. Nessuna scrittura DB è ancora avvenuta.
+
+`backend npm test` dopo la patch e il batch passa 193/193; `git diff --check` pulito. Stato distinto: raccolta file completa per la fonte ufficiale ma regione Lombardia ancora parziale; file/classificazione pronti; checkpoint delta di codice+artefatti da pubblicare; import DB pending. Prossimo: push del checkpoint, verifica remota, nuova query read-only immediatamente prima dell'import, esecuzione esplicita con status `published`, poi ricevuta/query after e nuovo checkpoint. Nessun altro scrape durante il delivery, nessun import degli altri 3.336 ID, nessun merge, cron o deploy.
+
+
+### Blocco schema rilevato prima del delta
+
+Dopo il checkpoint codice `5f1908d632f8d52969e859422fb119944df52187`, la prima applicazione della migration `20261022200000_places_geo_evidence.sql` è fallita perché il server non espone `jsonb_object_length(jsonb)`. La verifica read-only successiva ha confermato che la transazione non ha aggiunto la colonna né registrato la migration; nessuna riga evento è stata scritta. La correzione sostituisce il conteggio chiavi con controllo di insieme esatto tramite sottrazione JSONB e aggiunge una fixture di regression. Test importer 34/34 PASS. La migration corretta deve essere checkpointata e verificata sul branch prima di applicarla.
+
+
+### Esito delivery delta — 22 ottobre 2026
+
+La migration corretta `20261022200000_places_geo_evidence` è stata applicata dopo il checkpoint remoto `1914bcaeb593167c05b85a6bfcec61e775ff638c`. La CLI importer non aveva le credenziali Supabase locali; il writer autorizzato è stato quindi il connettore Supabase `execute_sql`, usando esclusivamente le 10 righe validate dal manifest con `verifyReadyClassificationRun`, `validateImportEvents`, `toPlaceRow` e `classificationToRow`, e clausole `ON CONFLICT DO NOTHING`. Non è stato eseguito l'import generale. Inseriti 10 `places` `published` e 10 record `place_classifications`; nessun update/delete, nessun conflitto, 0 mancanti, 0 mismatch. Il run esterno registra `database=completed` per il preciso manifest a 10 righe; la raccolta regione resta parziale e i due probabili duplicati restano pending review.
+
+Query fresca pre-import `2026-10-22 20:33:42.003837+00`: 4.405 places, 4.346 published, 3.336 map candidates, 3.336 classifications, target IDs presenti 0, digest editoriale `b52a6bcc1c0d4779ffeb112e5547c891`. Verifica post `20:34:53.834321+00`: 4.415 places, 4.356 published, 3.346 map candidates, 3.346 classifications; 10/10 place e classification rows esatte. Decisioni totali DB: 969 trekking, 17 non trekking, 2.360 da verificare. Il default mappa sul branch rende visibili 3.329 righe e esclude i 17 non trekking validi; i due nuovi record dubbi restano reviewable. I loro punti non hanno coordinate documentate; nessuna coordinata è stata aggiunta. Digest di tutte le righe preesistenti ricalcolato escludendo i 10 nuovi uguale al pre-import (`b52a6bcc1c0d4779ffeb112e5547c891`); ultimo `updated_at` delle 4.405 righe preesistenti resta `2026-10-20 11:51:23.239637+00`. Digest complessivo dopo insert `5a46c6acc142617aeae86d49a31c3f26`.
+
+Esito completo dei 14 nuovi candidati: 10 inseriti/classificati; 2 ID duplicati confermati esclusi mantenendo i record originali; 2 probabili duplicati non importati finché non risolti. Ricevuta recuperabile `backend/data/agent-runs/cai-map-20261022-valmadrera01/delta-import-receipt.json`; hash SHA-256 `ae54bac51dfb7c2ff76a135be65a2432a91822c5eb34dde660ee866d53b5f423`. Il sito live non è stato deployato: il checkpoint aggiorna branch/DB, non la distribuzione frontend. Prossimo passo non è ripetere questo delta; Lombardia resta aperta per fonti parziali, ma nessun nuovo scrape finché questo receipt checkpoint non è pushato e verificato.
+
+
+La query read-only `2026-10-22 20:36:22.256568+00` ha inoltre confermato tutti e quattro gli originali usati nel controllo duplicati già presenti e published: i due confermati sono `...-08f80e8dc9a5` e `...-e2177dd44e1a`; i due match probabili sono `...-93f8dd640820` e `...-07c7e327bb27`. La receipt è stata aggiornata per registrare questi confronti senza alcuna fusione o sovrascrittura.
+
+
+## Ripresa orchestratore dopo delivery — 22 ottobre 2026 20:58 UTC
+
+Il checkpoint remoto effettivo del branch `codex/cai-orchestrator-luna` è `50352f7fde1a638e6541aab048fcdacfb834324b`; il delta Valmadrera non è in attesa di commit. La ricevuta pubblicata ha SHA-256 `b9b8a5fdcabc12f94f5aeeb39fec4e03b375098bb32837942b8c598f0cdf7cf7` e la query post-import registrata ha riconciliato 10/10 places e 10/10 classificazioni, zero mancanti/mismatch, senza update o delete. Non ripetere quel delta né la baseline storica da 3.336 righe. Due duplicati Valmadrera probabili restano in revisione: l'evidenza PDF/data è forte ma non identifica senza ambiguità la stessa uscita; preservare entrambe le righe.
+
+Questa sessione ha aggiornato `STATE.json` a `phase=lombardia-source-coverage`; la prossima attività è il run `cai-20261022-lombardia-cernusco01`, limitato alla sola PDF ufficiale 2026 della sezione `cai-cernusco-sul-naviglio-9216051`, `SCRAPE_MAX_DOCUMENTS=1`, budget 120000 ms, concurrency 1. Escludere l'ICS storico timeout. Lombardia resta aperta; i totali di copertura regionale in `REGIONS.md` sono snapshot storici e non query aggiornate.
+
+Il run untracked `cai-20261022-lombardia-valmadrera02` e le cache non tracciate sono stati solo ispezionati e preservati: il run non ha report e gli hash correnti di `excursions.json` e `scrape-status.json` divergono dal manifest. Non è un input consegnabile. Nessun agente ha modificato tali file. I due ruoli sono riattivati: il profilo richiesto è GPT-6 Luna high, ma la telemetria runtime disponibile non attesta il modello effettivamente eseguito. In questa sessione il runtime orchestratore è connected/running, rete enforced, e `OPENROUTER_API_KEY` risulta ready/presente solo per `openrouter.ai`; il valore non è stato letto.
+
+
+## Gate di qualità fallito — Cernusco run01, 22 ottobre 2026
+
+Il run `cai-20261022-lombardia-cernusco01` non è un checkpoint accettato e non è importabile. Il PDF `Locandina-programma-2026.pdf` (SHA-256 `654a51f8d310cd6b65ad6e99a5a74ef05165a18d6e6411f6e21e9389720aa291`) è stato l'unico documento letto. La visualizzazione della pagina 2 conferma “25 Ottobre - Alpe Devero (VB)” nella colonna escursionistica e “11 APRILE … Corso di Alpinismo Giovanile Cesare Andreoni 2026” in una colonna diversa. Il testo OCR ha fuso le due colonne creando `...cb33842fc3c2`; è un falso duplicato e non deve essere classificato né importato. L'evento pulito `...e564f9cc5caf` resta invariato.
+
+QA importer ha rilevato inoltre che lo status corrente sostituisce la cronologia dei documenti Cernusco (36→1) e marca la fonte `ok` dopo una singola URL, mentre calendario e altri link registrati non sono stati esauriti. L'evento del 13 dicembre `...61c82c9856f6` ha perso i campi già presenti `lat`, `lng`, `status`, `coverImagePath`, `databaseId` e ha cambiato locationSource. La suite backend `npm test` è passata 193/193 e gli hash backend/frontend sono rimasti invariati prima/dopo i test; ciò non risolve questi difetti del risultato di raccolta. Report SHA `77f0a14fe4a5ff865b4f6d609b443924f23012289a86f4156afd69de004fa4a4`; manifest SHA `30a8289d8fc9a1af6b37dd9401bb5eb076cc0d2d14203d22d9e81d473d53d1ea`. Nessuna classificazione, import, query o scrittura DB.
+
+Il collector ha ownership di una correzione fixture-backed per contaminazione OCR, preservazione dei campi preesistenti e merge document-history/status nelle continuazioni. Finché la correzione non passa i test e ha un checkpoint remoto, non rilanciare questo run né checkpointare i cataloghi qui prodotti. `valmadrera02` e le cache untracked restano preservati.
+
+
+## Correzione Cernusco pubblicata — 22 ottobre 2026 21:09 UTC
+
+QA importer indipendente ha approvato il patch del collector con due restrizioni aggiunte. Il commit `010af3796a99d01e8081d45ef625b2344ec134c7` è stato pushato e verificato sul branch. La fixture `backend/test/fixtures/cai-cernusco-2026-ocr-cross-column.json` prova la trasformazione parser-side e la riga di controllo; test mirati 38/38 e `backend npm test` 196/196. Il patch limita la pulizia OCR alla riga specifica 25 ottobre/Alpe Devero, preserva titoli/stato/foto/database/geografia esistenti inclusi null espliciti, e mantiene cronologia/issue e stato parziale nelle continuazioni URL circoscritte. Nessun DB o catalogo modificato dal commit codice.
+
+Run01 è respinto e resta senza classification/import. I soli quattro JSON globali generati dal run01 (cataloghi backend/frontend `excursions.json` e `scrape-status.json`) vengono ripristinati selettivamente al baseline del commit pubblicato `010af37`: ciò rimuove dal working catalog il falso ID OCR e ripristina i campi precedenti. Il report/manifest del run01 restano nel workspace come diagnosi non checkpointata; l'output era già dichiarato non consegnabile. Cache OCR e run `valmadrera02` restano intatti. Prossimo run nuovo: `cai-20261022-lombardia-cernusco02`, solo PDF ufficiale dalla cache, max 1 documento/120 s/concurrency 1.
+
+
+## Cernusco run02 fermato per cache parser obsoleta — 22 ottobre 2026 21:12 UTC
+
+Il run `cai-20261022-lombardia-cernusco02` è stato fermato prima dei test/classificazione/import. Il corpo PDF resta SHA `654a51f8d310cd6b65ad6e99a5a74ef05165a18d6e6411f6e21e9389720aa291`; la fonte risulta `partial` con 36 documenti e 3 issue conservate, e i campi preesistenti del record 13 dicembre sono preservati. Tuttavia il falso ID `...cb33842fc3c2` è riapparso. Diagnosi read-only del collector: `backend/node_modules/.cache/cai/events-392f980c46fba9e4f53542b372927fd918df7b6a018f120da436c5a6885bf7d6.json` conserva l'estrazione contaminata; il parser è stato corretto senza incrementare `deterministic.VERSION`, rimasto 11, quindi l'estrazione cache è stata riutilizzata. L'ID falso non esiste nel baseline remoto `010af37`. Nessun test dopo la raccolta, nessuna classification, nessun DB o push di artefatti.
+
+Prossimo: bump VERSION 11→12 con la fixture OCR già pubblicata/aggiunta, test mirati e backend dopo collection già terminata, verifica hash cataloghi invariati, commit/push del codice. Poi restore selettivo dei quattro JSON globali al nuovo HEAD e una sola nuova esecuzione limitata alla PDF; accettare solo se la cache di estrazione viene ricalcolata e il falso ID non compare, con cronologia/status/campi esistenti preservati. Non usare cataloghi dei run01/02 respinti.
+
+## Cernusco run03 — cache correction verified, no DB delta — 22 ottobre 2026
+
+Il branch pubblicato `a015865283f0097d22036a9d75f4e0e17cd94bbb` incrementa `deterministic.VERSION` 11→12. Il run bounded `cai-20261022-lombardia-cernusco03` ha riletto un solo PDF ufficiale (SHA `654a51f8d310cd6b65ad6e99a5a74ef05165a18d6e6411f6e21e9389720aa291`, 5.853.583 byte) usando il nuovo fingerprint cache `cf273a867bdc9017520ba45384febe343ae377ee2ecb7b2fd467326f042f08b2`. L’estrazione `pdf-ocr` è riconosciuta e contiene 8 righe; il 25 ottobre è il record già esistente “Alpe Devero (VB)” (`...e564f9cc5caf`), e il falso ID OCR `...cb33842fc3c2` è assente. Il vecchio file cache v11 è stato preservato, non riusato né cancellato.
+
+La fonte resta `partial`: sono conservati 36 documenti e le 3 issue storiche. Il catalogo resta 3.359 ID: 0 aggiunti, 0 rimossi, un solo cambiamento descrittivo al record `...61c82c9856f6`; nessuna variazione a titolo, stato, foto, database ID, coordinate, locationSource o regione. Copie backend/frontend identiche. Il run non ha nuovo source ID né classificazioni da inviare: nessuna query o scrittura DB; non va chiamato l’importer su questo output.
+
+Collector e importer hanno dato QA indipendente PASS. Dopo la raccolta, `backend npm test` ha passato 197/197 e i quattro hash di catalogo/status sono rimasti invariati durante i test. Report `backend/data/agent-runs/cai-20261022-lombardia-cernusco03/collection-report.md` SHA `d2a14c92fc8a918596d6ab6e68044b28b0278d857805fc874f067f5a4863068a`; manifest SHA `c9164d3839dd1abebc62e9262fb40aca590fe7812e4f7c33e8a76c35ea2bba14`. Il checkpoint file del run è pubblicato e verificato su origin/codex/cai-orchestrator-luna al commit dcbee9e305c0e0ad0a5dc950a8fd67b339134e3c; i blob di manifest, report, stato e cataloghi sono stati riletti e gli hash corrispondono. Nessun deploy.
+
+Il checkpoint file è stato pubblicato e verificato al commit dcbee9e305c0e0ad0a5dc950a8fd67b339134e3c (ref remoto uguale). Prossimo: selezionare una diversa fonte Lombardia lavorabile e verificarla in un singolo campione delimitato. Non ripetere run01/run02 né ritentare l’URL storico in timeout; rispettare i cooldown noti di Brescia/Varese.
+
+## Premana run01 — coda discovery ridotta, nessun delta DB — 22 ottobre 2026
+
+Dopo il checkpoint Cernusco `dcbee9e305c0e0ad0a5dc950a8fd67b339134e3c`, il run `cai-20261022-lombardia-premana01` ha controllato una sola pagina ufficiale della sezione CAI Premana (`cai-premana-9216089`): `https://organizzazione.cai.it/sez-premana/eventi/elenco/`, max 12 documenti, budget 120 s, concurrency 1. L’HTML in cache è SHA `bb4917edd3d73e08bf1ad047b79b27dac503b10f853e83a5ee0d7b8e66c6a3c`; il JSON-LD ufficiale attesta “CENA SOCIALE”, 24 ottobre 2026, località PREMANA. Nessuna coordinata aggiunta.
+
+La coda è avanzata da 10 candidati residui a 2; la fonte rimane partial. Quaranta URL e la cronologia documentale sono mantenuti, con tre issue (feed escluso dal parser e limiti discovery residui). Il catalogo ha 3.359 ID prima/dopo, zero aggiunte/rimozioni; l’unica differenza all’evento esistente `...b4e7ad624a0a` è `sourceDocument`, aggiornato dall’ICS ufficiale alla pagina HTML ufficiale. Nessun ID nuovo, duplicato o classificazione da consegnare; nessuna query/scrittura DB. Collector e importer QA PASS. Test backend successivi alla raccolta: 197/197, hash dei cataloghi/status invariati nei test.
+
+Report: `backend/data/agent-runs/cai-20261022-lombardia-premana01/collection-report.md`; manifest SHA `abf50e4b5e4cd5532755beb85c9446836c03b26b7bead244e42e5ce4e868f6d4`; stato run SHA `383dab5910e8f7420b1df83bca9d864579f5de5c94f0cec674b620670257a652`. Il checkpoint Premana01 è pubblicato e verificato su origin/codex/cai-orchestrator-luna al commit ba079704bac2524f87a22140d59b390ff30f8e5c. Prima di un altro run, identificare dai soli artefatti/cache locali gli esatti due URL rimanenti: riprendere Premana solo se la coda può essere mirata senza ripetere gli stessi URL; altrimenti documentare il limite e passare a un’altra fonte Lombardia lavorabile.
+
+## Premana run02 — residui non mirabili, fonte in pausa — 22 ottobre 2026
+
+Run `cai-20261022-lombardia-premana02` ha letto solo i due residui ufficiali già identificati: `/eventi/oggi/` (0 eventi) e `/eventi/elenco/?eventDisplay=past` (9 eventi passati). Gli hash dei corpi sono cambiati, mentre i 40 documenti storici restano presenti senza URL aggiunti/rimossi. La coda discovery indicata è passata da 2 a 4; i nuovi quattro URL non sono persistiti, quindi un altro scrape ampio rischia il replay. Il record esistente “CENA SOCIALE” rimane invariato; catalogo 3.359 ID, zero righe evento aggiunte/rimosse/modificate. Nessuna classificazione o DB write.
+
+La CLI di raccolta sul sottoinsieme ha stampato `unsupported` perché le due pagine non contengono eventi futuri; lo stato del run orchestrato e della sezione rimane `partial`, preservando le 40 URL e gli issue. Non va trattato come calendario completo né come errore fonte irraggiungibile. QA collector e importer PASS; suite backend 197/197 dopo la raccolta; hash dei quattro file pubblici invariati durante i test. Report `backend/data/agent-runs/cai-20261022-lombardia-premana02/collection-report.md` SHA `88e6e56c0da6a4d89da4212015886dba6fcef4cc1f05cbf25e7b78cdfa067551`; manifest SHA `4b00cb7e88e787e93cf47d08960c80ecf48dfc8e1e42d11cc29669070206990d`; run-state SHA `4e6c2a3aa9b93dfb6413f6045458254105ce0bb346e73a815062a79b605b99e6`.
+
+Il checkpoint file è stato pubblicato e verificato su origin/codex/cai-orchestrator-luna al commit 10178cd4c78fa4f0d74fda7ee87a5ca6b65cbc52. Premana resta partial e in pausa; passare a una diversa fonte Lombardia selezionata con preflight locale/ufficiale, senza ripetere la medesima coda finché i quattro URL non siano recuperabili.
+
+
+## S.E.M. status regression and bounded continuation 02 — 22 ottobre 2026
+
+Il primo run `cai-20261022-lombardia-sem01` ha riletto il PDF ufficiale S.E.M. ma il merge dello status ha rimosso erroneamente il `discovery-limit` storico (12 candidati) perché la URL richiesta ha risposto. Quel run non è un checkpoint di copertura e non è importabile; il suo stato/manifest conservati nel workspace non corrispondono più ai file canonici ripristinati.
+
+La correzione fixture-backed è stata pubblicata al commit `c43b32101de52739bab3237f5bddf3eb343b788b` e verificata sul branch. Il collector aggiunge prova strutturata di coda completa; lo status conserva i limiti precedenti per le continuazioni esplicite e per run completi senza prova di esaurimento; un retry ordinario risolve l'errore URL solo quando il documento compare tra i risultati letti con successo. I test coprono coda incompleta, continuazione, nuovo conteggio, retry ordinario riuscito/fallito. Test mirati 30/30, suite backend 201/201, `git diff --check` pulito.
+
+Il run nuovo `cai-20261022-lombardia-sem02`, dopo il commit di codice, ha letto un solo PDF ufficiale S.E.M. (`https://www.caisem.org/sezione/gitesociali/pdf/GiteSEM2026.pdf?ed1601`), max 1 documento/120 s/concurrency 1. Il parser ha prodotto 33 righe, riconciliate a 14 eventi già presenti. Catalogo 3.359→3.359 ID: zero aggiunti, rimossi o righe evento cambiate; nessun duplicato ID. La fonte resta `partial`, 40 documenti storici conservati, issue esatto `discovery-limit` mantenuto con 12 candidati. Stato run: raccolta `partial`, file `ready`, database `pending`; importer QA PASS sul manifest e stato. Il database non è stato interrogato o modificato poiché il delta eventi è zero. Report `backend/data/agent-runs/cai-20261022-lombardia-sem02/collection-report.md`; manifest SHA `cc2edad797f5ced938dbad2ebf013a14504c1eecd0681f7026dfc3216357485f`; stato SHA `9668cdaf1cb18c2251be3c603527f505ceb4372f2c9dfd85c4afaa893f867a12`. Il checkpoint file/report/cataloghi è pubblicato e verificato su origin/codex/cai-orchestrator-luna al commit `3553eb6464bca382d6611709666045ce326d9cc1`; manifest, report, state e i quattro blob canonici sono stati riletti e hanno SHA-256 corrispondente.
+
+La issue `bounded-continuation-cleared-discovery-limit` è registrata come risolta con test e commit in `FAILURES.json`. S.E.M. resta parziale: non ripetere il medesimo PDF per dichiarare coperta la coda. Prossimo passo: preflight read-only per una diversa fonte ufficiale Lombardia, evitando Brescia/Varese in cooldown e tutte le sezioni già campionate senza una nuova lista mirata recuperabile.
+
+Preflight collector completato in sola lettura: prossimo target CAI Missaglia (`cai-missaglia-9216150`), pagina ufficiale `https://www.caimissaglia.it/gite.php`. La pagina non compare tra i documenti correnti visitati; il singolo documento storico è il manuale di alpinismo giovanile, e la failure registry riporta per `gite.php` soltanto discovery-limit storico (41 candidati), senza status HTTP o cooldown noto. Eseguire un solo fetch bounded max 1 documento/120 s/concurrency 1 dopo questo checkpoint; un campione pagina non prova da solo la completezza della sezione.
+
+
+## Missaglia bounded continuation 01 — 22 ottobre 2026
+
+Run `cai-20261022-lombardia-missaglia01` ha raggiunto la URL ufficiale `https://www.caimissaglia.it/gite.php` con max 1 documento/120 s/concurrency 1. L'HTML letto è 27.983 byte, SHA `7d79468fa1afc8e581eb032c7492424b54bc4cac63a1633cd635f54717f9451c`. Il contenuto è obsoleto: intestazione “Edizione 2014”, link e notizie 2024. Il parser HTML di produzione riconosce un record del 15 giugno 2024 (“Vacanza-Trekking Sardegna”), correttamente filtrato perché passato. Quindi zero eventi correnti non significa calendario corrente vuoto.
+
+Status di fonte: `partial`, 0 eventi correnti e 1 riga storica filtrata; la coda scende da 41 a 1 candidato non visitato. Sono preservati il PDF/manuale di alpinismo giovanile e le issue: OCR pagina 21 fallito/timeout, con precedente revisione che identifica testo di primo soccorso e non un calendario; un candidato discovery resta. Nessun nuovo evento, ID duplicato, coordinata o import DB. Catalogo 3.359→3.359, zero righe evento cambiate. Importer QA PASS read-only, manifest hash corrispondenti e copie backend/frontend identiche. Suite backend 201/201 dopo la raccolta, hash del manifest ancora validi. Run `collection=partial`, `files=ready`, `database=pending`.
+
+Report `backend/data/agent-runs/cai-20261022-lombardia-missaglia01/collection-report.md`; SHA report `701f74343c3a479de34dc9285f296129753241da53b42ddbdfe83ad693bcf56c`, manifest `9f73e0a51f0cec7a7794e14b943ec9e235d7b50ecac93acf274d09e4a4d92b04`, stato `cfac59d0bae4ad27bc47aaec354b5b11848b20f51bb0c37f913f6293c5f5eb4b`. Il file checkpoint è pubblicato e verificato su origin/codex/cai-orchestrator-luna al commit `7968b4eb6221dfd2d6406c640e408ac7d291181d`; manifest, stato, report e quattro blob canonici verificati dal commit remoto. Il campione resta parziale e non completa la fonte.
+
+Preflight collector read-only per il passo successivo: CAI Busto Arsizio (`cai-busto-arsizio-9216014`), URL ufficiale non presente nello status `https://www.caibustoarsizio.it/attivita-invernali/`. La directory CAI la registra come calendario e collega dalla homepage; lo status contiene altre pagine e un evento, ma nessun errore HTTP/cooldown per questo URL. Dopo checkpoint Missaglia `7968b4e`, un solo fetch max 1 documento/120 s/concurrency 1; mantenere `partial` o `unsupported` salvo prova dell'intero calendario.
+
+
+## Busto Arsizio bounded continuation 01 — 22 ottobre 2026
+
+Run `cai-20261022-lombardia-busto01` ha usato un solo target ufficiale (`https://www.caibustoarsizio.it/attivita-invernali/`), max 1 documento/120 s/concurrency 1. La pagina ha reindirizzato sullo stesso host alla URL canonica `/attivita-invernali-2-2/`; il body cache è HTML, 84.865 byte, SHA `b2aac6385f990517826d45c218588f34875b1e2a6e0a01c650f59520e771acc6`. Il titolo è “Attività invernali 2026 - CAI”, con attività dal 7 dicembre 2025 al 22 marzo 2026, tutte passate alla data del run. In fondo dichiara che altre uscite verranno programmate; non mostra un calendario 2027. Lo zero di eventi futuri non prova un calendario corrente vuoto.
+
+Fonte `partial`, un discovery candidate residuo; i due oEmbed storici non-calendario sono preservati. Catalogo 3.359→3.359: una riga Busto prima/dopo, zero aggiunte/rimozioni/cambiamenti; zero duplicati ID. Stato run `collection=partial`, `files=ready`, `database=pending`; nessuna coordinata, classificazione o scrittura DB. QA importer PASS read-only su manifest, mirrors e campi amministrati. Backend test 201/201 dopo raccolta, hash del manifest invariati. Report `backend/data/agent-runs/cai-20261022-lombardia-busto01/collection-report.md` SHA `47959134cd4b0aff118dec3f190454c4d049b239c323f04cd951389f07c34a32`; manifest SHA `471ae7a692b8a09a00d899e225fe0f544f930c31290a9c2fc1222a37c90fe791`; stato SHA `6a75dd045b4277b36b8d55577c8d9434776c8b8d0427205aa21ec28a4d4f1dd5`. File checkpoint pubblicato e verificato su origin/codex/cai-orchestrator-luna al commit `a83d607f345eed2a46f0d438925930c6f4f0b788`; manifest, stato, report e cataloghi sono stati riletti dal ref remoto e gli hash coincidono.
+
+Next: dopo il checkpoint, collector farà preflight read-only di una fonte distinta. Non ripetere la pagina invernale scaduta; non chiudere Busto finché il candidato residuo o un calendario corrente non siano verificati.
+
+## Prossimo campione Lombardia — preflight completato, 22 ottobre 2026 21:44 UTC
+
+Il checkpoint Busto01 è già pubblicato e verificato su `origin/codex/cai-orchestrator-luna` al commit `a83d607f345eed2a46f0d438925930c6f4f0b788`; non va ripetuto. Il collector ha svolto solo preflight in lettura e selezionato CAI Strada Storta (`cai-strada-storta-9116052`), URL ufficiale `https://stradastorta.it/new/eventi/`, collegato come “Programma” dalla pagina ufficiale `/eventi/60-strada-storta/`. La fonte è `partial`, 6 eventi e 19 documenti nello status. Il target non è tra i 19, non ha issue/cooldown e non è presente in cache. Procedere con il nuovo run `cai-20261022-lombardia-stradastorta01`, un solo `--source-url`, `--source`, `--concurrency 1`, `SCRAPE_MAX_DOCUMENTS=1`, timeout 120000 ms. Importare solo se emerge un delta verificato e dopo QA; non dichiarare completa la fonte senza evidenza di calendario esaurito.
+
+
+## CAI Strada Storta bounded sample 02 e delta classification — 22 ottobre 2026
+
+Il patch fixture-backed del parser è sul branch al commit `4313f5159231874d59bbbc41ac641fbdb6087313`: supporta le card `.em-event` con titolo `.em-item-title` e data `.em-event-date` (formato italiano esplicito `Ottobre 25, 2026`), descrizione conservata e cache extraction `VERSION 12→13`. Importer review PASS. Backend suite 202/202 dopo il run; sei hash JSON pubblici invariati durante i test.
+
+Run `cai-20261022-lombardia-stradastorta02`, avviato da quel commit, ha usato un solo URL della fonte `cai-strada-storta-9116052`: `https://stradastorta.it/new/eventi/`, canonical `https://stradastorta.it/eventi/`; max 1 documento, concurrency 1, budget 120 s. Il body riusato/invariato è 215.977 byte, SHA `2ef8ff6949919ba58b018f056f4e2250bd8cfc4ea4915a3328ca69ca7519c90d`. Gli artefatti non persistono lo status HTTP, quindi non si afferma se l’esito cache fosse 304 o 200 identico. Il parser estrae 6 card; catalogo 3.359→3.360, un solo ID nuovo `cai-strada-storta-9116052-01a8ce10aa39` (Monte Pisello – Rifugio Alpe Piazza, 25 ottobre 2026), zero rimossi, 5 righe esistenti con soli aggiornamenti di `sourceDocument` e/o `description`. Nessun campo admin/geografico modificato, nessuna coordinata aggiunta. Una discovery-limit resta e la fonte è `partial`; non è copertura completa. Manifest `dd28cd5f998acc65a20fd1043d5434c78652fe7fb527f9a1fd1b2febe15e3f10`, state `3264c604e7fa6c723b91e1658808bbec8acde298e215c259056562b40413e06e`, report `e91612883e3373f69e794ef8cec6c70ed549f2275f29e00afc9576693b1b80b3`.
+
+Il solo nuovo ID è stato classificato in run isolato `cai-map-20261022-stradastorta02`; Mercury richiesto `inception/mercury-decide`, risposta attestata `inception/mercury-decide-20260930`, policy `cai-trekking-v2`. Risultato valido ma da verificare: `da_verificare` / `altro`, confidence 0.7486867849562652, probability 0.8324578566375102. Il testo della pagina attesta data/uscita e un cambio di destinazione, ma non chiarisce il luogo finale; il link ha uno slug con destinazione precedente. Coordinate nulle, nessun override. Importer ha verificato il run sigillato (input hash `339bac6cd1e4a8cd4e42cb0a1f8f83015d13a27ccbc465925279961bd22af076`, output `1cdf39c31f0b7c6ff8fa213072a6b1d03ce50c4d36ae205c6ca1ed181ac68e50`, manifest `bbee2f819c7841796d44a301934c5ef8fb62171d08fdafd0817908a1422fc1f2`) e contratto delta-only.
+
+**Stato delivery:** file raccolti/classificati e QA PASS; DB non ancora interrogato o modificato. Prima pubblicare e verificare tutti gli artefatti di run02 e il delta canonico. Solo dopo il checkpoint remoto, importer farà query pre-write per il singolo ID e potrà invocare `npm run import:supabase -- --delta-only --manifest ...` sul manifest classificazione. L’upsert deve inserire solo i record mancanti, conflitti ignorati e riconciliati, 0 update/0 delete; non chiamare import generale e non toccare i cinque record esistenti. Pubblicare ricevuta con query prima/dopo, run/commit/hash. Quindi continuare il preflight di una fonte Lombardia diversa senza replay della stessa coda.
+
+
+## Strada Storta02 — delivery DB verificato, ricevuta da checkpointare
+
+Dopo il checkpoint remoto file `12b073fb469a209217ed149c00657a1f7e19e0a3`, importer ha usato il connettore Supabase autorizzato perché il CLI delta non poteva creare il client (`SUPABASE_URL` assente nel runtime; nessun DML dal CLI). Il manifest/input/output restano quelli sealed e l’import è limitato a `cai-strada-storta-9116052-01a8ce10aa39`. La pre-query esatta prima del DML ha trovato `places=0`, `place_classifications=0`; il CTE atomico conflict-ignore ha inserito un place e una classificazione. Il joined post-query delle 21:59:44 UTC ha trovato 1 place + 1 classificazione, con tutti i campi sealed corrispondenti: decision `da_verificare`, category `altro`, alias richiesto/risposta Mercury attestata, status `published`, location non verificata, lat/lng/coordinates/geo evidence null. Inseriti 1+1; existing 0; mismatches 0; updates 0; deletes 0. Il primo statement tentato aveva arità SQL errata ed è fallito prima di mutazioni; la seconda pre-query è rimasta vuota. Il report spiega anche la semantica snapshot del CTE: il conteggio classification nella stessa statement non vede la riga appena scritta; il successivo SELECT separato la riconcilia.
+
+Ricevuta `backend/data/agent-runs/cai-map-20261022-stradastorta02/delta-import-receipt.json`, SHA `bef3ff50b4266d0486eb343f9c281fdb96ea3a14b2f6a07727be57e2d00acf32`; report `delta-import-report.md`, SHA `71d75fe727139578825bdf959a019dfdebf4fa1426b6ec8d393f9bd8ab6cb470`. Ricevuta e report DB sono creati ma devono essere aggiunti e pushati in un checkpoint dedicato; poi rileggere gli hash remoti. La fonte resta partial: non fare altri replay Strada Storta finché il discovery-limit e la destinazione dubbia non sono affrontati. Dopo checkpoint ricevuta, preflight read-only di una fonte Lombardia diversa.
+
+
+## Ricevuta Strada Storta pubblicata; passaggio Piemonte — 22 ottobre 2026 22:03 UTC
+
+La ricevuta e il report DB del run `cai-map-20261022-stradastorta02` sono pubblicati e verificati dal remoto al commit `2ac9c8bbe148ae070e16f095e048b5412f57b05a`; receipt SHA `bef3ff50b4266d0486eb343f9c281fdb96ea3a14b2f6a07727be57e2d00acf32`, report SHA `71d75fe727139578825bdf959a019dfdebf4fa1426b6ec8d393f9bd8ab6cb470`. Risultato: place 1/1 e classification 1/1, mismatch 0, update/delete 0. Il record resta `da_verificare`; posizione non attestata.
+
+Il preflight collector in sola lettura non trova nuovi target Lombardia fra i candidati esaminati: Sesto Calende già visitata, PDF alternativo Carate duplicato, Legnano pagina datata, Aldo Mantovani senza calendario; non si dichiara Lombardia completa. Marche/Molise non hanno trovato URL calendario registrate aperte fuori da status/cache/failure. Prossimo campione è Piemonte, CAI Pinasca (`cai-pinasca-9212062`), `https://www.caipinasca.it/index.php/calendario-gite`, URL ufficiale in `calendarUrls`, host registrato, target esatto assente da documenti/status/report/FAILURES/cache. La fonte è unsupported e l’HTML non è ancora provato; il PDF annuale già visitato ha OCR fallito e discovery-limit 5. Dopo checkpoint di questa selezione, run nuovo `cai-20261022-piemonte-pinasca01`, solo tale URL, un documento, 120 s, concurrency 1. Mantenere lo stato parziale se il parser non riconosce il calendario; nessun retry più ampio senza prova di progresso.
+
+
+## CAI Pinasca bounded sample 02 — 22 ottobre 2026
+
+Run `cai-20261022-piemonte-pinasca02` ha letto un solo URL ufficiale (`https://www.caipinasca.it/index.php/calendario-gite`), max 1 documento/120 s/concurrency 1. HTML cached: 45.803 byte, SHA `523217b200fbcd9dedff73699ef0416fa336c754b1f775c26d2a8e09312bda5a`; status HTTP non persistito. Il parser ha estratto 27 righe, aggregate correttamente da PDF=0 + HTML=27; quattro record cadono nella finestra del catalogo. Il catalogo è passato da 3.360 a 3.364 ID: +4/0/0, zero duplicati ID. I due eventi di ottobre 3 e 18 sono già passati al momento del run e non sono presentati come prossimi eventi. Nessuna coordinata è stata aggiunta. Source `partial`: l’HTML non dimostra esaurimento; OCR PDF ancora fallito e discovery-limit 1 restano aperti.
+
+La classificazione isolata `cai-map-20261022-pinasca02` è completa 4/4, errori 0: 2 trekking/a piedi e 2 non_trekking/sociale-culturale. Mercury richiesto `inception/mercury-decide`; tutti e quattro i risultati attestano `inception/mercury-decide-20260930`. Importer QA indipendente PASS: `verifyReadyClassificationRun` conferma 4 input/output allineati, univoci e base fields invariati; location non verificata e coordinate assenti. I report sono `backend/data/agent-runs/cai-20261022-piemonte-pinasca02/collection-report.md` (SHA `eadb956d7859be058db76842cc326822a2a9b35f9688966be3efd02292a27125`) e `backend/data/agent-runs/cai-map-20261022-pinasca02/classification-report.md`. Backend npm test 204/204 dopo la raccolta; hash dei sei JSON pubblici invariati.
+
+Il run è `collection=partial`, `files=ready`, `database=pending`. Nessuna query o scrittura DB è avvenuta. Prossimo gate: commit/push e rilettura remota di manifest, report, candidate input, classification manifest/output e quattro file catalogo/status; quindi query esatta dei quattro ID e import idempotente solo per le righe mancanti, classificazioni mancanti, zero update/delete. Registrare query/ricevuta. Riferimenti Pinasca: manifest `4bec0f0bf1067f7ef6b1075b7d9341892e8c7bc2b6df9d0b4f4857b5d9848182`; classification manifest `3dd59a810621ede84d09b4b3bb7bed0b0c766bc1c215f86ef2245defd881ffd5`; output SHA `133d5a7b7aba43ebd27b51481a128fb6d80b2f591fdad525c2f8d8779883fdae`.
+
+### Pinasca02 DB delivery e ricevuta — 22 ottobre 2026
+
+Dopo verifica remota del checkpoint file `90f7f7a41d6896ccf154d67c66b0399e5dcd1240`, l’importer ha validato nuovamente il batch sealed (4/4) ed eseguito il delta esatto. Prima del DML tutti i 4 source ID erano assenti da `places` e `place_classifications`; timestamp del SELECT preflight non fornito da Supabase MCP. Il primo CTE è fallito per inferenza `text` su campo JSONB nullo, senza mutazione; una nuova pre-query ha confermato ancora 4/4 assenti. Il CTE corretto con cast JSONB esplicito ha inserito 4 place + 4 classificazioni via `ON CONFLICT DO NOTHING`. SELECT joined separata alle `2026-10-22 22:15:18.267267+00` ha trovato 4/4, tutti i campi sealed corrispondenti, zero missing/mismatch; updates/deletes 0. Tutti pubblicati, località non verificata e campi coordinate/geografia null. Write `2026-10-22 22:14:25.13088+00`. Receipt SHA `7baeb4307d6d8ef91d2dfd42a05f84e936ff9126dee9c83ba379ae99c2d3d41a`; report SHA `0d384f9cbe614b480d8b1d37708efcbaf49adc1287550dcdf7a54064a4ce4422`. Le copie receipt/report sono uguali nei run collection e classification. Rimane da pubblicare/verificare il checkpoint receipt.
+
+Prossima fonte: CAI Potenza Picena (`cai-potenza-picena-9228014`, Marche), URL ufficiale `https://www.caipotenzapicena.it/attivita2026`, link calendario 2026 sulla pagina CAI ufficiale; source partial con storico discovery-limit 11, nessun HTTP status/cooldown e target non presente in cache/documenti. Dopo il checkpoint receipt, run nuovo `cai-20261022-marche-potenzapicena01`, solo URL esplicita, un documento/120 s/concurrency 1. Non trattare il campione come completo senza prova. Lombardia resta aperta ma nessun target nuovo mirabile verificato nell’ultimo preflight.
+
+Ricevuta Pinasca02 pubblicata e verificata dal remoto al commit `0d5f978`; receipt/report e state hanno blob SHA corrispondenti (receipt `7baeb4307d6d8ef91d2dfd42a05f84e936ff9126dee9c83ba379ae99c2d3d41a`, report `0d384f9cbe614b480d8b1d37708efcbaf49adc1287550dcdf7a54064a4ce4422`). Delivery Pinasca è chiuso: 4 place + 4 classificazioni, 4/4 query post riconciliate, 0 update/delete. Prossimo campione: `cai-20261022-marche-potenzapicena01`, CAI Potenza Picena, URL ufficiale `https://www.caipotenzapicena.it/attivita2026`, max 1 documento/120 s/concurrency 1.
+
+
+## CAI Potenza Picena bounded sample 01 — 22 ottobre 2026
+
+Run `cai-20261022-marche-potenzapicena01` read one official URL (`https://www.caipotenzapicena.it/attivita2026`), max 1 doc/120 s/concurrency 1. It redirected same-host to `/attivita-temp`, an HTML Wix generic page, 654,389 bytes, SHA `410c8d0f4dba157c141e7a56029ad32fd7ff9852dd217395895b637d14a4b96d`; HTTP status not persisted. Extractor `method=null`, events 0; this does not establish an empty calendar. Source remains partial and `discovery-limit` 11 remains. Catalog event rows: 3,364→3,364, +0/-0/changed0/duplicates0. Existing Ferrata “Bertona” row unchanged, location unverified/no coordinates. Importer QA PASS read-only. No classification, DB query/write, retry or import. Backend tests after collection 204/204; six public JSON hashes unchanged. Manifest `2d5dd8ebca32ea25fdf52a84679cf553f42475d4791845cf875b509dfed39fa1`, state `5ec1fc1d2d3b4667a7e2bc1d1231130c2efdb1c99afc045e976fbad57a663a84`, report `28df16309f4e8a296020f5d37b7153a276faa3ad8b1525ac35030ebf8ade7b3a`. Registry failure `CAI-F-77b28a5069589e8d` updated with this one non-resolving bounded attempt; no cooldown reset or retry scheduled.
+
+
+### Preflight Molise dopo Potenza Picena — 22 ottobre 2026
+
+Le Marche non hanno restituito un URL ufficiale inedito mirabile; i calendari attivi noti sono già visitati o conservano una coda discovery senza URL stabili. Potenza Picena `/attivita2026` non è stato riletto: il campione appena verificato termina su pagina Wix generica e rimane `method=null`. In Molise solo CAI Campobasso (`cai-campobasso-9236001`) è enabled. Le 12 URL nel suo status risultano visitate, ma il calendario HTML ufficiale `https://caicampobasso.it/calendario-delle-attivita/` è una pagina indice da 118 righe estratte, body hash storico `ce4421de6c30de30d0d50ce79627b65f6e62932ca519cb0c5e03ad4dea7acbbc`; status snapshot 19 ottobre, fonte partial con discovery-limit 37 sull’URL del PDF annuale. Si autorizza un solo refresh bounded di tale indice al run nuovo `cai-20261022-molise-campobasso01`, max1 URL/doc, 120s, concurrency1 per verificare aggiornamenti recenti. Non dichiarare complete la fonte; se il body non cambia/nessun delta, non ripetere e passare oltre.
+
+
+## Stato operativo corrente — Campobasso delta, 22 ottobre 2026
+
+Sostituisce le prossime azioni operative più vecchie sopra: i run successivi sono stati chiusi o messi in pausa come indicato nei rispettivi rapporti. La correzione fixture-backed per lo scope delle continuation è pubblicata a `d16ebc0ea29118199f6deb3e9821ee3d4efef191`. Il checkpoint file Campobasso è remoto a `31d81eafdb6def6b9cb376b575f194ca92b87612`; la ricevuta DB e lo stato riconciliato sono pubblicati e verificati al commit corrente `9bc54c562c56a9ebe0b9c68e728e51a650584222`. Il riferimento locale `origin/...` era stantio prima del fetch esplicito. Test mirati `scrape-status` 11/11 e backend `npm test` 205/205 sono terminati dopo la raccolta; i sei JSON pubblici sono rimasti stabili durante i test.
+
+### Campobasso: raccolta, file, classificazione, DB
+
+Run raccolta `cai-20261022-molise-campobasso01`: una sola pagina indice ufficiale aggiornata, SHA body `5b97e1aa0639efcebafbba3153c03dc0ee00d432b527f276c4d0dc08ee2363ed`, 127 righe fonte. Il catalogo è passato da 3.364 a 3.366 ID: due nuovi ID, zero rimozioni, una riga preesistente aggiornata solo nei campi source/link/description; campi editoriali e coordinate amministrati invariati. Nessuna coordinata nuova; entrambi i nuovi luoghi restano da verificare. La fonte è `partial`, non un calendario completo.
+
+Gli artefatti sono nel run: manifest `be53777def101bac5f73e37aeca8b96b72c637c85a64e657723c48b3762fa667`; report raccolta `cbe1cac905b10f0d8a9264714f19c55b9195397effd34104a58b19a71cdf7340`; input candidati (2 ID) `a0cab9771df021bd96c7baca7fcab0c170bab0cf1137cba1a7bded35ef14d700`; evidence manifest `2acd0a294dd98b4a5f7564bf1edff2a3cc0632f27791c8f230305b6364545cd3`. La correzione del contatore, verificata al commit `d16ebc0`, distingue il residuo della pagina HTML (1 candidato non salvato con URL) dalla coda del PDF annuale (37). Entrambe restano aperte e la sezione resta partial.
+
+Run classificazione `cai-map-20261022-campobasso01`: QA indipendente importer PASS, 2/2, zero errori. Manifest SHA `80d7f646b0c12cdd35943248429243fad7c364c554f4c03e0dfce52d84733925`, output SHA `d6e54aa214d648b4b6d9351d417a0dd7fb10fe01ea80e0bae0dd148b863038fd`, report SHA `226b6b6b9f3e129a43084c03d3e0f8decd8fdb152acf5734846804fd1a3959b4`. Conteggi: 1 `trekking/altro`, 1 `da_verificare/altro`, 0 `non_trekking`, 0 errori. Modello richiesto `inception/mercury-decide`; modello risposta/versione attestato `inception/mercury-decide-20260930`. L’evento Sila è datato 16–18 ottobre (passato alla data della raccolta), Lago Vivo 6 dicembre. Entrambi mantengono luogo non verificato e coordinate nulle. Nessuna query/scrittura DB inclusa nel checkpoint.
+
+Stato separato: raccolta `partial`; file/classificazione pronti con QA; consegna DB `pending`. L’importer esegue ora solo query preimport e verifica FK sugli esatti due source ID. Prossimo gate: commit/push dei file e verifica remota dei blob; quindi import insert-only mirato, con conflitti preservati e zero update/delete, query post-import e ricevuta. Non usare l’import generale o riclassificare il batch storico.
+
+### Regione successiva
+
+Dopo la ricevuta Campobasso, selezionare in sola lettura la prossima fonte ufficiale non esaurita; evitare il replay della pagina Campobasso e del PDF senza URL residui stabili. In Molise è abilitata una sola sezione nota. Conservare separati conteggi del campione, conteggi di raccolta, file e righe DB; i totali di copertura storici del 20 ottobre non sono query attuali.
+
+
+### Esito import Campobasso — 22 ottobre 2026, 22:33 UTC
+
+Import exact delta completato via Supabase MCP dopo checkpoint file remoto. Preflight immediato: 0/2 `places`, 0/2 classificazioni, nessun conflitto ID/slug. La CTE insert-only ha creato 2 place (`published`) e 2 classificazioni. La prima query ha trovato il fingerprint Lago Vivo troncato, dovuto a trascrizione del payload: un precheck read-only ha verificato tutti gli altri campi della classificazione, `review_metadata` nullo e place corretto. Un singolo CAS ha modificato soltanto quel fingerprint al valore sealato. Query joined finale alle `22:33:30.892756Z`: 2/2 place e 2/2 classificazioni corrispondenti, 0 missing/mismatch, 0 update place, 0 delete; località ancora da verificare e coordinate/geoevidence nulle. Ricevuta SHA `134ff85bba4c35c7312597a57b2320bfe9c69eb7ec5117d992a874a2be551715`, report SHA `cf778a3c77a45c55ec8af0b570d6d50eced1d3b69ccc405d4ab67ed20263e265`; pubblicati e verificati al commit `9bc54c562c56a9ebe0b9c68e728e51a650584222`. La raccolta rimane partial con backlog distinto: PDF 37, HTML continuation 1 senza URL esatto.
+
+
+## Passaggio a una nuova regione — preflight offline CAI Penne, 22 ottobre 2026
+
+Campobasso resta `partial` ma non ha un residuo nuovo mirabile: i 37 discovery PDF sono solo un conteggio senza URL figlie persistite e il PDF non è in cache; l’unico HTML residuale ricostruito dalla history/cache è `https://caicampobasso.it/17-gennaio-2026-lescursione-del-fuoco-a-vastogirardi/`, già letto (body hash storico `61447a1b…`), quindi non ripetere. Il delta Campobasso è completamente consegnato e la ricevuta è remota a `9bc54c5`.
+
+Preflight collector read-only seleziona la regione successiva: CAI Penne (`cai-penne-9234006`, Abruzzo), singolo URL ufficiale non presente nei 12 documenti visitati: `https://caipenne.it/2026/03/09/programma-sezionale-2026/`. La fonte già contiene un PDF con discovery-limit 60, ma non risultano failure HTTP o cooldown. L’articolo può duplicare il programma del 7 marzo/PDF già letti; usare solo un run max1 documento, 120 s, concurrency1 per verifica e non presumere un delta. Non usare la continuazione automatica oltre questo target. Se body/parser non sono interpretabili, conservare partial/cache e passare oltre senza replay.
+
+## Stato operativo corrente — Abruzzo, CAI Penne bounded sample (22 ottobre 2026, 22:43 UTC)
+
+Il checkpoint precedente è `805d90922c605a5893edb6a20629c1c00f18647c` sul branch `codex/cai-orchestrator-luna`; fetch esplicito da origin ha restituito lo stesso commit. La sessione usa i due ruoli esistenti cai-collector/cai-importer configurati GPT-6 Luna high; UI conferma Luna high per l'orchestratore, mentre il runtime non espone attestazione telemetrica del modello effettivo. La chiave OpenRouter è stata controllata solo come presenza booleana nell'ambiente, limitata a `openrouter.ai`, senza leggerne o stamparne il valore. Mercury non è stato usato in questo campione.
+
+Run `cai-20261022-abruzzo-penne01`, una sola URL ufficiale con limite 1 documento/120 s/concurrency 1. La pagina del 9 marzo ha canonizzato sulla pagina già nota del 7 marzo: body SHA `d875735a03ff8004a547ae9aedacf414d0695b268e07abba0e60919e74ca5a70`, identico alla history. Codice HTTP non persistito. `method=null`, 0 estrazioni; ciò non prova calendario vuoto. Otto righe Penne presenti prima/dopo sono byte-identiche (SHA canonico ordinato `2e6e61eb7229ec3fa46580d0de75a7c83bba17c5ba95f6af6367266afa064960`), zero ID aggiunti/rimossi e zero righe evento cambiate. Nessuna coordinata o dato amministrato modificato.
+
+Il file excursions ha tuttavia cambiato metadati generati: SHA completo `243cdf4c…`→`dd756f6f…`, generatedAt `2026-10-22T22:22:15.215Z`→`2026-10-22T22:38:41.397Z`, coverage parsed 1/unsupported 0→parsed 0/unsupported 1 e hash sorgente Penne `565c6e5d…`→`8db43b30…`. Il report/evidence manifest documentano questa differenza; non è un cambiamento alle righe evento. Gli hash completi sono nel report del run. Report SHA `4fed13dd8d782ff0fddeff8547763e7c8ef125b003377930e094e9bae9f9c0ce`, evidence-manifest SHA `14810335e8adc5676c02a67fdad96d9cb4d5e651529ed9b0846d52f924916f38`; manifest orchestratore SHA `7d56c8295209f5dd4616289461e1c2e7952323272c90d849cd57934f2a23d2c3`, state run SHA `072caf6dac18664b1a2baa68c21e4a8b7a6aaa42b3662d8fcfebbb23dc1612ef`. Importer QA PASS sui manifest, report, sidecars, catalog mirror e righe invarianti. Backend `npm test` 205/205 dopo la raccolta; i sei JSON pubblici sono rimasti stabili durante i test. Nessun candidato nuovo, nessuna classificazione, query DB o scrittura. Stato corrente: collection `partial`, files `ready`, database `not-applicable-no-delta`.
+
+La fonte Penne resta parziale: discovery del PDF annuale 60, continuation HTML 1; il tentativo non ha risolto nessuno dei due. Il registro `FAILURES.json` è stato aggiornato. Il preflight collector è offline/read-only e seleziona come prossimo singolo target in Abruzzo CAI L'Aquila (`cai-l-aquila-9234002`), URL ufficiale `https://cailaquila.it/le-attivita-del-cai/programma-2026/?commissioni=escursionismo`, non letto e non in cache. Limite proposto 1 documento/120 s/concurrency 1. È documentato un precedente 403 solo sulla pagina sorella `?commissioni=legale`; il rischio resta, quindi arrestare il campione al primo 403 senza retry o espansione. Nessuna raccolta parte finché questo checkpoint Penne non è pubblicato/verificato. Se l'esito non produce evidenza, mantenere la cache valida, registrare il blocco e scegliere un'altra fonte/regione senza replay.
+
+## Campione successivo — CAI L'Aquila, HTTP 403 (22 ottobre 2026, 22:46 UTC)
+
+Dopo Penne01, checkpoint e docs erano verificati al commit `9853c72a5b04fae05994828bb85a9686ed74b674`. Run `cai-20261022-abruzzo-laquila01` ha eseguito solo l'URL ufficiale `https://cailaquila.it/le-attivita-del-cai/programma-2026/?commissioni=escursionismo`, max1 documento/120s/concurrency1. HTTP 403, zero retry e stop immediato. Nessun body, canonical, content-type, hash o fallback cache; non esiste `source-page.html`. `method=null`, 0 eventi: non equivale a calendario vuoto. Catalogo 3366 ID prima/dopo, L'Aquila 0 righe; nessun candidato, classificazione, DB query o write. Excursions e sezioni sono identici al commit base 9853c72; solo scrape-status è cambiato, con mirror backend/frontend identici.
+
+QA indipendente importer PASS su manifest e sidecar. Nota: lo scrape-status ha status failed/errore 403 a livello sezione, ma mantiene come `url` configurato la pagina sorella `?commissioni=legale`, e `issues`/`documents` sono vuoti; l'URL escursionismo effettivamente provato e il suo 403 sono attestati nel report e nel source-evidence del run. Non presentare lo status come registrazione specifica dell'URL richiesto. Registro `FAILURES.json` aggiunge il 403 esatto e vieta replay nel ciclo corrente.
+
+Il report originario ha SHA `88b17e4f2e8ab05adfed045b55f316f2697ebe81f2a9c5bd48824425b9805dbe`; source-evidence `8fd0c2d3a51aa616103c418199ba8c42e2b1bdef65119eaf7151f388b30b2b9d`; manifest orchestratore `6b11181be1a701a8e9d03171c8b26c4cde4df9ef34b07fda2adfd115b4617687`. Dopo la correzione terminologica report/evidence-manifest e gli altri hash vanno sigillati nel checkpoint. Nessun test è stato lanciato in parallelo alla raccolta; backend 205/205 dal campione Penne, codice invariato.
+
+Il checkpoint Penne precedente resta a `1954838`; il checkpoint L’Aquila e il registro 403 sono pubblicati/verificati al commit `d9fbdca0ab0cafdc4e8ca1c91c534df4a026b7cf`. Prossimo: preflight offline una fonte ufficiale distinta senza retry della pagina negata; il collector è attivo in sola lettura. Se non c'è target lavorabile in Abruzzo, registrare i blocchi e passare alla regione successiva.
+
+## Verifica test dopo L'Aquila01
+
+Il backend `npm test` è stato eseguito serialmente dopo la fine delle raccolte Penne01 e L'Aquila01 (nessun lock attivo): 205/205, 0 fail. Hash SHA-256 di `backend/data/` e `frontend/public/` per `excursions.json`, `cai-sections.json` e `scrape-status.json` identici prima/dopo. Nessuna modifica codice, scrittura DB o import.
+
+## Passaggio Abruzzo → Calabria dopo preflight offline (22 ottobre 2026)
+
+L'Abruzzo non è completo: Penne resta `partial` con PDF discovery 60 e HTML continuation 1 senza URL distinta; il campione ha ripetuto canonicalmente la pagina nota e non ha prodotto estrazioni. CAI L'Aquila ha un 403 esatto registrato sul target `commissioni=escursionismo`; non riprovare né allargare la coda sorella. Il collector ha controllato offline registry, storico source documents, cache e failure/cooldown: altre fonti Abruzzo non offrono URL distinta sicura (replay canonical, URL consumate o issue/cooldown aperti). Anche la regione Basilicata non ha un target current unvisited: i residui sono non persistiti, alias canonical già letti, `no-upcoming` o vecchi programmi archiviati. Si passa quindi alla prima fonte ufficiale work-ready Calabria senza dichiarare Abruzzo/Basilicata complete.
+
+Preflight selezionato: CAI Castrovillari (`cai-castrovillari-9244005`), URL ufficiale registrata `https://www.caicastrovillari.it/prog.php`, “Programma escursioni” linkato da `https://www.caicastrovillari.it/racc.php`; non compare in `status.documents`, cache o FAILURES. Il PDF 2026 della fonte è già visitato ma resta unsupported (OCR failure e discovery-limit 8). Usare un nuovo run una URL/max1 documento/120s/concurrency1; il delta è incerto e un `method=null` non prova calendario vuoto. Checkpoint preflight da verificare prima di partire; no test in parallelo, no import senza delta classificato e file checkpointati.
+
+## CAI Castrovillari bounded sample — Calabria (22 ottobre 2026)
+
+Dopo il checkpoint preflight `1f86164`, run `cai-20261022-calabria-castrovillari01` ha letto una sola URL ufficiale `https://www.caicastrovillari.it/prog.php`, max1 documento/120s/concurrency1. Body HTML 9.830 byte, SHA `4cf633e1d05adefd69e52b79ab517cc842a5f7d72b545281b54b2f3169e70c3b`, stessa URL canonical, content-type text/html; status HTTP non persistito. La pagina è un indice del programma 2026 e linka PDF ufficiali; parser `method=null`, 0 eventi, 1 discovery HTML residua. Non inferire calendario vuoto.
+
+Confronto per prefisso evento ID `cai-castrovillari-9244005-`: 12 righe catalogo prima/dopo, 0 add/remove/change; hash canonico ordinato `bc44d552e7eaf43748fcea8849a6d5d13ec383115fd06cb0ee3b14cdcaa52407` uguale. Catalogo completo 3366 ID prima/dopo; full excursions SHA `dd756f6f…`→`704ea832…` solo per generatedAt/sourceHashes. Sections invariata. Nessuna coordinata, classificazione, query/write DB. Collection partial; files ready; DB non applicabile a delta zero.
+
+Il source-evidence iniziale aveva selezionato male con il campo `sourceId` mancante; prima del checkpoint è stato corretto in modo verificabile con prefisso `event.id`, insieme a report e evidence-manifest. Tutti e tre ora concordano sui 12 record invariati e sui rispettivi hash. Il PDF annuale esistente conserva OCR failure pagina 2 e discovery-limit 8; l'HTML indice conserva discovery-limit 1. Nessun PDF è stato ripetuto. Backend `npm test` dopo il run: 205/205; i sei JSON pubblici sono identici ai rispettivi hash pre-test.
+
+Hash: manifest orchestratore `f1f94985198a5a919f01d960cbcac0e1193a3fa43487a6ccc11f2fa6eb1a4a2f`, state run `41e25eb0b655de478fce3ea286eeba5fbcbbce55593b07f9eab0999cd31946cc`, report aggiornato `0b11de62b8b37ce49fc03ef11626320c4d626ecfd58c6b86bdfd9b0703ad2194`, source-evidence aggiornato `2423054adb95f017c6a6eca67f3229a51b85827352f8657706055cf4c449114e`, evidence manifest aggiornato `73948631bca5bd9011893065a38224f756c14772b82d42a416a8f1aff0070820`. QA importer PASS sui tre artefatti e sulle righe del catalogo.
+
+Prossimo dopo il checkpoint: preflight offline dei link PDF ufficiali appena emersi, senza ripetere il PDF principale o allargare la coda. Selezionare massimo un target distinto rispetto a history/cache/failure.
+
+## Preflight Calabria concluso — nessun target sicuro; passaggio a Campania (22 ottobre 2026)
+
+Il collector ha confrontato offline tutti i quattro link visibili nell'indice ufficiale Castrovillari con registry, history, cache e FAILURES. `programmacerchiara26.pdf` è già stato letto sotto la fonte CAI Cerchiara (0 estrazioni, 5 record storici): niente replay. `programmacoro26.pdf` è intestato a Corigliano/Rossano ma nel registry non c'è una fonte/sezione che autorizzi l'attribuzione: non raccogliere sotto Castrovillari. `familycaimorano.pdf` ha solo un'etichetta generica e non una fonte CAI Morano registrata: il nome file non basta. `proposta25.pdf` è una scheda di proposta attività, non un calendario. Nessun link distinto e sicuro ha cooldown/cache utile; non sono state fatte richieste di rete, test, raccolte o scritture DB. Calabria resta parziale con gli issue Castrovillari preesistenti aperti.
+
+La coda sicura Castrovillari è esaurita per ora; non significa regione completa. Si passa al preflight offline della Campania, partendo dal PDF CAI Caserta che ha già un `discovery-limit` aperto. Il collector deve prima verificare se c'è un target figlio esatto, distinto e non letto; in caso contrario non ripete la stessa fonte e segnala la prossima regione lavorabile. Solo dopo preflight e checkpoint remoto si autorizza un run limitato. L'agente cai-collector è l'agente esistente, nessun terzo agente.
+
+## Campania preflight — Caserta official index selected (22 ottobre 2026)
+
+Il preflight offline di cai-collector ha confermato che il PDF annuale `https://www.caicaserta.it/documenti/Calendario%20escursionistico%202026.pdf` resta escluso da retry automatico: issue `CAI-F-d8cbb0f4bd01c6f5` (`discovery-budget-exhausted`), status parziale e cinque candidati residui; la policy richiede una strategia circoscritta. È invece eleggibile una singola pagina indice figlia, `https://www.caicaserta.it/escursioni.html`, già registrata in `calendarUrls`/`calendarEvidence` della fonte `cai-caserta-9238006`, same-host e non presente in `status.documents`, history dei run, cache o FAILURES. La cache SHA-key `f6c3e236…d7cb96f` non ha body/meta; l'unico cooldown OCR Caserta riguarda un PDF diverso. Altre fonti Campania risultano già consumate o con discovery residua non persistita e non sono selezionate.
+
+Dopo il checkpoint remoto di questo passaggio, l'unico run consentito è una nuova run ID con `npm run orchestrate`, un URL (`/escursioni.html`), max1 documento, 120s, concurrency1. Non espandere automaticamente sui PDF dell'indice in questo run e non ritentare il PDF annuale. Il collector non ha effettuato rete nel preflight.
+
+### Correzione source ID Caserta prima del run
+
+Il tentativo di avvio è stato fermato prima di `init`: il checkpoint indicava erroneamente `cai-caserta-9245001`, inesistente. Verificato che registry `cai-sections.json`, `scrape-status.json` e `FAILURES.json` riportano `cai-caserta-9238006` come unica fonte Caserta. Il collector non ha creato run o lock, né effettuato richieste. È stato corretto l'ID nel piano e nelle righe di copertura; serve ripubblicare e verificare questo checkpoint aggiornato prima di riprendere lo stesso run bounded sull'indice, senza cambiare URL o limiti.
+
+## Campania — CAI Caserta index01, raccolta conclusa (22 ottobre 2026)
+
+Dopo checkpoint remoto `16204f0` è stato eseguito un solo run, `cai-20261022-campania-caserta-index01`, source `cai-caserta-9238006`, URL esatta `https://www.caicaserta.it/escursioni.html`, max1 documento/120s/concurrency1. Nessun link figlio o PDF è stato seguito. La pagina ufficiale (titolo “Cai Caserta - Club Alpino Italiano”, heading “Escursioni, avvisi, programmi”) è 7.179 byte, body SHA-256 `bb3bf1b613641c692e434db5496e461858509686bd2600b0cf299b80dd6ce039`. Il parser ha `method=null`, zero candidati: ciò non dimostra che il calendario sia vuoto o completo. La sezione resta `partial`: status conserva 4 documenti precedenti + indice (5), annual PDF discovery-limit 5, failure OCR sul PDF Francigena e nuova discovery-limit 1 dell'indice. Il summary CLI stampava “unsupported (50 excursions)” ma lo status persistito resta `partial` e questo è il valore riportato.
+
+Confronto catalogo con commit base `16204f085ae88c110fde2d5335bec7c228e074e4`: 3.366 ID totali invariati; prefisso `cai-caserta-9238006-` 50→50, 0 add/remove/change, SHA canonico `1bc3d52b28218c621596dfbeb21e00a7b90bdb9fa2b0e0c4b405557498cb3b74`. Nessuna coordinata o campo evento cambiato. Excursions SHA `704ea8322b02b6ce479338df3855da7974ed25d94bfabffe5536d721b3bb88d2`→`d3e8e73a66063319c606fbe921695f08f4336ca50dc0ebfb3f69cd29d34f426f` solo per generatedAt/source hash; sections invariato `f0245e11…2fa48b`; scrape-status `a58baf3e…cbad71`→`dfd5fd676ec87d5b3e4897cbd067ed86875707ec6fb326364609e0dca3adc3e3`. Mirror backend/frontend byte-identical. Importer QA PASS su manifest, sidecar, hash, URL e righe. Nessuna classificazione o DB.
+
+Dopo la fine della raccolta, `npm test` backend ha passato 205/205. I sei JSON pubblici post-test corrispondono agli hash sigillati nel run e i mirror sono byte-identici. Hash run: manifest `66d063ef486f6713669ae41b164678ee508f3be0b8369a742153d9b51f6ad24c`; state `ec85f72e3bf66489c4ffa2c2db468324b741d6525bbbf275eee5b70b69e81493`; report `8d56fff3be08537228d3ace4817ac205cff982973b600c4e7be0f64a68aadb34`; source-evidence `2a0f7fc8a5ce9d550eb176c1764cc1c246467019a21317444f8b8f5cb47bc9fd`; evidence-manifest `71c8b354bd6f24174c87d583fedc3cc6156dbb20406b0199c5ae2bf69f6f2e13`.
+
+Prossimo passo, solo dopo checkpoint remoto di file e handoff: preflight offline dei link esatti mostrati dall'indice, confrontati con storico/cache/FAILURES; selezionare al massimo un URL figlio distinto e sicuro. Nessun run figlio automatico.
+
+### Checkpoint remoto Caserta index01 verificato
+
+Il pacchetto di run e il handoff sono ora pubblicati sul branch `codex/cai-orchestrator-luna` al commit `52deb84835e47a355d66da4662dc7e9a877f2ab4`; ref remoto, tree `0af2ec2ab5aacec18ec799d0876910a1f85a6d93` e SHA dei blob corrispondono ai file QA-validati localmente. Il vecchio riferimento “serve ripubblicare” è soddisfatto. Dopo questa prova, cai-collector sta controllando offline i link figli della pagina salvata: nessun fetch finché non viene selezionato e checkpointato un singolo target distinto.
+
+## Preflight offline CAI Caserta — scheda Monte Scalambra selezionata
+
+Dopo che l'indice index01 è remoto, il collector ha esaminato offline i link presenti nella pagina salvata (body SHA `bb3bf1b6…dd6ce039`). Un unico target è futuro e direttamente attribuibile: `https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf`, link “Scheda dettagliata” adiacente al testo ufficiale “domenica 25 ottobre: Da Serrone al Monte Scalambra per l'Eremo di San Michele Arcangelo”. Il contesto della pagina è il programma 2026; l'anno non è ripetuto accanto alla data, quindi il PDF deve confermare data e attribuzione prima di qualsiasi evento/file delta. L'URL non compare in `status.documents`, history run, cache con body/meta, FAILURES o cooldown; appartiene direttamente alla fonte Caserta per link e contesto della pagina ufficiale. La discovery annuale bloccata resta intatta.
+
+Gli altri link evento dettaglio sono del 17 e 18 ottobre (già passati al 22/10); il programma giovani è archivio 2025, Lifestyle è flyer senza data visibile, e regolamento non è calendario. Nessun fetch/test/DB nel preflight. Dopo checkpoint remoto di questo preflight, eseguire solo `cai-20261022-campania-caserta-scalambra01`, una URL esplicita, max1 documento/120s/concurrency1, senza discovery follow-up; poi fermarsi per QA e test seriali.
+
+## CAI Caserta — Scalambra01, campione documento concluso
+
+Run `cai-20261022-campania-caserta-scalambra01`, dopo checkpoint remoto `775d360`, ha letto un solo PDF ufficiale `https://www.caicaserta.it/escursioni/Monte%20Scalambra.pdf` (244.304 byte, body SHA-256 `d239fdc33cf9583b292bf84189c0c3b2dce0532a289b660b133e420a62142b9b`), `pdf-text`, 0 candidati parser. L'estrazione indipendente del corpo conferma “Domenica 25 ottobre 2026”, C.A.I. Caserta, Anello del Monte Scalambra (1420 m), difficoltà E, e Serrone/Eremo/Monti Ernici. Corrobora l'evento già presente `cai-caserta-9238006-8ca304031e6a` (titolo/data/organizer/location coerenti), non genera un nuovo ID. Le proprietà del PDF mostrano un titolo “20 - Capin di Ponente da Camporosso.doc” e autore “Tricesimo1”: incongruenza registrata; l'attribuzione si basa sul corpo specifico e sul link catturato nella pagina ufficiale Caserta.
+
+PDF senza coordinate. La riga esistente, inclusi coordinate curate `41.802, 13.486` qualità `massif`, resta intatta e non viene presentata come verificata dal documento. Catalogo 3366→3366 ID; 50 record Caserta invariati, 0 add/remove/change, hash canonico `1bc3d52b28218c621596dfbeb21e00a7b90bdb9fa2b0e0c4b405557498cb3b74`. Il body conferma 1 evento già esistente; duplicati esclusi 0, nessuna correzione manuale o DB.
+
+La sezione rimane parziale: sei documenti ora registrati; annual PDF discovery 5, indice discovery 1 e OCR error del diverso PDF Francigena restano aperti. Public JSON SHA: excursions `d3e8e73a…d34f426f`→`bd876be4…dfd7c5c7` per generatedAt/source hash; sections invariato `f0245e11…2fa48b`; scrape-status `dfd5fd67…adc3e3`→`32de30e2…d58d5567`. Mirror backend/frontend byte-identici. Importer QA PASS. `npm test` backend 205/205; hash pre/post test dei sei JSON pubblici identici. Nessuna scrittura DB.
+
+Run hashes: manifest `b2510facb3519a65fed6917dca1999a3fcbfb53022556530d79ee06e729254fa`; state `9495c9bc8f2962a1a98ee9c36bb6fbde3d5a82586e500c7e93cc163fc4d6b448`; report `e60b808582ba71f6e863716a8b6fce749bd67d3028e89b4ad34b47c271c2babb`; source-evidence `14561ac657a43824b7c513fb4580dc1013a76d42b038034582437ba2881ff667`; evidence-manifest `ce2df0686c76db00be47252792a11bfb130ad80de359239b15b9369b686fc6e7`.
+
+Dopo il checkpoint remoto corrente, preflight offline delle altre fonti Campania parziali abilitate; Caserta non ha un altro link futuro attribuito dalla pagina, mentre i blocchi annuale/OCR/discovery restano registrati. Non avviare retry automatico o dichiarare completa la sezione/regione.
+
+### Scalambra01 checkpoint remoto verificato
+
+Run, PDF, report, evidence, catalog/status e coverage sono pubblicati al commit remoto `ae663ecfe2e1b7bb821832cf8f1b0e6bac6a94d3`; fetch e API ref concordano e tree/blob corrispondono ai file QA-validati. Test 205/205 e hash pubblici invariati durante i test. La scheda corrobora un record esistente, non modifica coordinate né crea delta; DB non applicabile. Il collector preflighta offline le altre fonti Campania. Nessuna nuova richiesta live prima della selezione e del checkpoint esatto.
+
+## Passaggio Campania → Emilia-Romagna dopo preflight offline
+
+Campania non è completa, ma non offre ora un altro campione distinto e sicuro: Monte Bulgheria è `ok` con 6/6 documenti già visti; Napoli, Piedimonte Matese, Roccarainola, Salerno e Vesuvio hanno gli URL configurati consumati o residui legati a discovery-limit/cooldown. Caserta rimane partial con annual discovery 5, index continuation 1 e OCR failure Francigena; non ripetere automaticamente.
+
+Il primo target offline sicuro successivo è CAI Cesena `cai-cesena-9224012`, Emilia-Romagna: `https://www.caicesena.com/index.php/programma-attivita`, same-host e attribuito da `calendarUrls`/`calendarEvidence` (“Programma attività”). Non compare nei 2 documenti/status della fonte, nella cache URL-key (`1b0e89a5…`) o in FAILURES/cooldown. Cesena è attualmente `unsupported`, con PDF annuale già affetto da discovery-limit 7; l’errore OCR riguarda invece il distinto PDF `calendario-2-sem-2026-cai-giovani-cesena.pdf`: non ripetere il PDF. Dopo checkpoint remoto di questo preflight, eseguire un solo run esplicito dell'indice, max1 documento/120s/concurrency1. `method=null` o zero righe non proveranno calendario vuoto. Preflight senza rete/test/DB.
+
+
+## Emilia-Romagna — CAI Cesena index01 (22 ottobre 2026)
+
+| Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| `cai-20261022-emilia-cesena-index01` — CAI Cesena | 1 URL | 0 | 1 | 0 | 6 record di catalogo preesistenti invariati; pagina indice 0 estrazioni, `method=null` e non dimostra calendario vuoto | 0 | 0 | Annual PDF discovery-limit 7; PDF giovani OCR failure; indice continuation discovery-limit 1 | Checkpoint file, poi un solo JPEG ufficiale 2026 di escursionismo linkato dall’indice, max1 documento/120s/concurrency1 |
+
+Indice ufficiale `https://www.caicesena.com/index.php/programma-attivita`, 33.413 byte, SHA-256 `292708d5ddddb26a9e412d30777ac7bfb47efc22fc51af71ea27c5642b8bc9c9`; intestazione “Prossimi eventi - link calendario attività”. La fonte resta partial; status HTTP non è persistito e il parser non ha riconosciuto contenuti evento. Run `collection=partial`, `files=ready`, `database=pending`. Catalogo nazionale 3.366→3.366 ID unici; 0 add/remove/change. I sei record Cesena sono invariati (row-set SHA `ff8b9405e05ba9a21605ec569f20f5c9b559977035e2194d93985eca21da61fb`). Nessuna query o scrittura DB, classificazione o geolocalizzazione.
+
+Importer QA PASS: manifest SHA `e373ca59a7c19fdbeda66cae44c0a7d7b4575fbaaa920b5a3ed9a91441f00041`, report SHA `2d73af59a93adc8154ee6f59798ecad3b1c531fe9f8b5d464f82aa4f54f137de`, state run SHA `f23d9c5d5df718d256bf9febd153298b4bffbea027c10b8deddb79a398c842a8`; excursioni `8a6c0c12565be024e083282691e9108b022e6710663a3f01d45cd12f93ce2f82`, status `1c9e7d46ada4e2ce9ace39125c28219d103c428e725aedd26fe2c9686a11ecc8`, sections `f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b`. Backend `npm test` 205/205; sei JSON pubblici hanno mantenuto gli hash pre-test e i mirror coincidono.
+
+Preflight offline della pagina cached: un candidato distinto e direttamente linkato, `https://www.caicesena.com/images/download/2026/programma_2026_escursionismo_adattato_cai_cesena.jpg`. Il filename identifica un programma escursionistico 2026; URL same-host assente da history, status, cache e FAILURES. Il parser supporta JPEG via `image-ocr`. Dopo questo checkpoint, un solo fetch max1/120s/concurrency1; non ritentare annual PDF né PDF giovani e non inferire date o punti prima di vedere la fonte.
+
+
+## Emilia-Romagna — CAI Cesena Escursionismo Adattato01 (22 ottobre 2026)
+
+| Run / sezione | Controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| `cai-20261022-emilia-cesena-escursionismo01` — CAI Cesena | 1 JPEG ufficiale | 0 | 1 | 0 | 0 record completi; poster 2026 elenca date ma non abbina titoli/destinazioni; 6 record preesistenti restano invariati | 0 | 0 | Annual PDF discovery7; PDF giovani OCR failure; indice discovery1 | Dopo checkpoint, un solo target distinto CAI Pavullo, URL calendario 2026, max1 documento/120s/concurrency1 |
+
+Immagine ufficiale same-host, 685.319 byte, SHA-256 `6c11893a0b371c51650c39a8275a777d13bc06f29dc0f9204fd6aaf6bc72702c`; `image-ocr`, immagine intestata “Sezione C.A.I. di Cesena — Escursionismo Adattato”, Gruppo Montagnaterapia Diego Brighi. Le date 24 ottobre, 7 novembre e 21 novembre 2026 non sono associate a destinazione/titolo per uscita; nessun evento o coordinata viene inferito. Nessuna altra URL seguita. Stato run `partial/ready/pending`; source partial, storico delle tre issue Cesena preservato.
+
+Catalogo nazionale 3.366→3.366 ID unici; add/remove/change 0; sei record Cesena invariati (row-set SHA `35c5ef388c346150eb5974def5e7a79cf215084c228b5761728f44d84c18ade6`). Importer QA PASS, manifest SHA `8caa9bc863d6f8be297e6eff362ddcb43eecc2413700a577da048d7b447f6925`, report SHA `174b8146e0ff7d306bd3cf4f52b72770c5eb18818ee644f0deff806a92522fcb`, run state SHA `87056fdf3c04fa24806d4ccba42c9bec4953074f54c8ba3970b1978c2e2e34d1`. Backend `npm test` 205/205 dopo la raccolta; i sei JSON pubblici sono rimasti byte-identici durante i test. Nessuna query/scrittura DB o classificazione.
+
+Preflight offline Emilia-Romagna seleziona ora `https://www.caipavullo.it/calendario-2026/`, CAI Pavullo nel Frignano (`cai-pavullo-nel-frignano-9224020`). La registry lo attribuisce direttamente con label “Calendario 2026”; URL same-host assente da status, history, cache e FAILURES. Massimo un documento/120s/concurrency1 dopo il checkpoint. Non ripetere l’ICS con discovery5, il PDF culturale in timeout o altri documenti già consumati della sezione.
+
+
+Checkpoint del run `cai-20261022-emilia-cesena-escursionismo01` pubblicato e verificato al commit `b23dea1e53aee7a108da05b4cae3b1622497985f`; albero remoto identico al checkout. Prossimo sample autorizzato e preflightato: CAI Pavullo nel Frignano, URL `https://www.caipavullo.it/calendario-2026/`, max1 documento/120s/concurrency1.
+
+
+## Emilia-Romagna — CAI Pavullo calendar01 and isolated delivery QA (22 ottobre 2026)
+
+Run `cai-20261022-emilia-pavullo-calendar01`, baseline `8df4daca5ae92193da9e40e9e8821267eb0c8bf3`: una sola URL ufficiale `https://www.caipavullo.it/calendario-2026/`, max1 documento/120s/concurrency1. HTML 109.118 byte, SHA-256 `dec0ec970504f29cd15a1b9b3949d613e9834bb42ae000b39128793d5e7ff138`; parser `html-calendar`, 23 righe. La sezione Pavullo passa da 17 a 22 ID: +5, 0 rimossi, 0 cambiati; catalogo nazionale 3.366→3.371 ID. La fonte resta partial: calendario legacy PDF timeout, iCal discovery 5 e nuova continuation 1; la tabella dice 2025 mentre titolo/pagina e weekdays puntano a 2026. Nessuna coordinata aggiunta. Conteggio esatto dei duplicati semantici esclusi non persistito.
+
+Mercury ha classificato 5/5, zero errori: modello richiesto `inception/mercury-decide`, snapshot attestato `inception/mercury-decide-20260930`, policy `cai-trekking-v2`. L’importer ha QA-validato il run completo. Una revisione isolata approva soltanto `cai-pavullo-nel-frignano-9224020-195cdeaaefee` (Monte Hoabonti/Monte Cola, EE) come trekking/a piedi: titolo e difficoltà supportano l'attività; la categoria candidata Mercury `altro` è corretta manualmente; nessun punto o coordinata inventato. Quattro righe restano `da_verificare` e non vanno consegnate: possibili sovrapposizioni dello Spigolo Bianco, Anello dei Colli, Lago Terzo e Colbricon, oltre a classificazioni/category Mercury incoerenti. Il run isolato `cai-20261022-emilia-pavullo-deliver01` contiene solo l'ID approvato e usa il record Mercury originale con override review tracciato; manifest SHA `8adc520ba07591f3e00c815579c4157a3a8027e8d3ab1fc1d11108d7f55ca24e`. Verifica indipendente dell'importer sul subset in corso.
+
+Il backend `npm test` ha passato 205/205 dopo la raccolta e non in parallelo ad essa; i sei JSON pubblici sono rimasti stabili. La query Supabase read-only ha osservato 4.422 places e nessuna riga con source_id Hoabonti; `place_classifications` esiste e la FK `source_id` è `ON DELETE RESTRICT`. Nessuna scrittura DB finora. Gate successivo: checkpoint remoto di run, classificazione, subset, report e stato; poi nuova prequery puntuale; solo se ancora assente e con importer QA PASS, eseguire `--delta-only` sul manifest isolato, verificare post-query/ricevuta e registrare conteggi inseriti/esistenti/skipped.
+
+Artefatti principali: collection manifest `d62d10c601192773fa611f2eeaf955198ca5d417fb597c5fb0e23f4ba8004686`; collection state `4dbc20630333abb003e9728b197ee75f00c8c5a763f5a66454e52d412d75ffff`; report `a145de9ea35d01ad4edfadce8b8777af462e1868b11712d25eea7e64974f03c7`; classified output overlay `c53478b4b13b4de142242b697f768bc72fc8226a384b6af573d0715c0f06da27`; classification manifest `5e49109e3f4aaa75d7114f7911a460c24c2918fa2c8a63e1a7c08f3216da0e70`; QA review `9c8bec3468a86d9aa712af10ba386b005468ff9e14326599f438239faa57ecb4`.
+
+
+### Pavullo delta delivery completed
+
+The sealed one-row run was importer-QA PASS and its manifest was remote-verified at source checkpoint `5697dcd688a6217a6cc98e1a8794540c8ddeab13`. Supabase read-only prequery at 2026-10-22 23:40:29 UTC found 4,422 places and no Hoabonti place or classification; FK is RESTRICT. The local importer CLI exited before connection (`SUPABASE_URL` absent, no DB mutation). The approved connector bridge then executed the importer-generated 35-field place and 17-field classification mappings with conflict-ignore semantics. It inserted exactly 1 place + 1 classification for `cai-pavullo-nel-frignano-9224020-195cdeaaefee`; no skips, existing rows, updates or deletes. Post-query at 23:41 UTC found 4,423 places and joined 1/1; all 52 mapped fields matched, with no cover or coordinates. Receipt SHA-256 `c30639803362854c9f9c5f778fd2b4d9291a22e06852c326005171c67a56a3cc`. Other four candidates remain held and untouched. Next action: offline preflight a distinct eligible Emilia-Romagna source; do not retry holds or blocked Pavullo sources absent new evidence.
+
+
+## Lombardia preflight — CAI Sesto Calende calendar (22 ottobre 2026)
+
+Dopo la ricevuta Pavullo `3d28e263703b1b1c7bb49e83094669103a40b1ce`, cai-collector ha esaminato offline registry, status, cache e FAILURES. Target: `cai-sesto-calende-9216044`, pagina ufficiale `https://caisestocalende.it/calendario-sezionale/`, label di registry “Calendario Sezionale” e contesto di link sulla pagina escursionistica ufficiale. URL assente dai documenti status e dalla cache deterministica; nessun failure/cooldown specifico per questa pagina. La sezione è partial; il suo PDF annuale ha issue OCR/dimensione già note e non verrà ripetuto automaticamente. Nessuna rete, raccolta, test o DB nel preflight.
+
+Dopo questo checkpoint remoto, un solo run `cai-20261022-lombardia-sesto01`, max1 URL/documento, budget120s, concurrency1. Nessun child fetch automatico; se la pagina rimanda al PDF annuale già visto, registrare il link e fermarsi senza ripetere il file bloccato.
+
+
+## Lombardia — CAI Sesto Calende Sesto01, raccolta e QA completati (22 ottobre 2026)
+
+Run `cai-20261022-lombardia-sesto01`, baseline remoto `bab39a8f1d25d5554ad3922ff872878557f79c10`. Una sola URL ufficiale, max1 doc/120s/concurrency1: `https://caisestocalende.it/calendario-sezionale/`. Body HTML 121.924 byte, SHA-256 `28e233dbfc840dca1b19c3eaf849daef385651d7a9fbea71b7f04b2f9b43bde8`, cache-key `acb375feb79fc9914cb75d845b2376df21e192219ba44815e41de8b8a9b20aa3`. La pagina elenca Family CAI 25 ottobre, film 21 ottobre, Escursionismo&Yoga 10 ottobre e linka il PDF ufficiale annuale. Il parser deterministic ha `method=null`, zero estrazioni: non viene dichiarato calendario vuoto. Il PDF annuale è già storico, con 29 righe e issue QA manuale; non è stato scaricato/ritentato. Status partial conserva discovery-limit 1 sulla pagina; non è stato dimostrato che il candidato esatto sia il PDF.
+
+Catalogo 3.371→3.371; prefisso Sesto 18→18, 0 add/remove/change. SHA-256 delle righe canoniche ordinate per id (JSON compatto) `ca5c58cb7feb133ece4c08bbd3f6e484e8730734adce3a8edbc7d5830ad2a0bc` sia prima sia dopo, verificato da orchestratore e confronto campo per campo importer. Mirror backend/frontend identici. Source report SHA `3c675e7495680726e419e9ac03b7d9461c679cf8b979c008da893b48074053da`; manifest `813864b712c7a5fc04b0c44f9ea7433654fb57737674fd11616a6582c5c8af36`; run state `25fae0f0ea28be8d8ef658498c9d062ef96df5c8304bcbbefbb14f2f2b248648`. Importer QA PASS. Backend test 205/205 dopo la raccolta; hash dei sei JSON pubblici identici pre/post test. Nessun candidato, classificazione, query o write DB.
+
+Checkpoint file ancora da pubblicare. Dopo la verifica remota, preflight offline delle altre fonti Lombardia aperte e selezione di un solo URL non consumato e fuori cooldown; non ripetere PDF annuale già letto.
+
+
+### Sesto Calende canonical digest note
+
+The independently emitted `de3eec…` was produced with Python `json.dumps(ensure_ascii=True)` and is not the digest format used in the report. The canonical comparison for Sesto is compact `JSON.stringify(rows sorted by id)`, SHA `ca5c58cb7feb133ece4c08bbd3f6e484e8730734adce3a8edbc7d5830ad2a0bc`; it matches baseline and post-run, with all 18 rows byte-identical.
+
+## Lombardia offline preflight — CAI Somma Lombardo flyer (22 ottobre 2026)
+
+After remote checkpoint `c8abab216a36c4d96e2e5d6052e47bc302c79437`, cai-collector selected one exact source-specific URL: `https://caisomma.it/wp-content/uploads/pdf/Escursioni/2026/Rifugio%20Somma%20-%20Blinnenhorn%20(EE).pdf`, section `cai-somma-lombardo-9216065`. Registry `calendarEvidence` attributes it directly to official `https://www.caisomma.it/`; absent from status documents/issues, deterministic cache and FAILURES; no cooldown. The section is partial and currently has a distinct SIEL booklet copied from CAI Gazzada, 13 events, including future Nov/Dec dates; this proposed flyer is specific to the Rifugio Somma/Blinnenhorn excursion, not the general calendar. Data/date must be supported by the PDF before any event is accepted.
+
+Do not retry the SIEL full programme (historical download-aborted/size-limit/discovery/OCR issues), summary sheet (FAILURES size-limit), or Varese endpoint (503). After this preflight is checkpointed, run one exact PDF, max1 doc/120s/concurrency1; no child fetch or retry. No network/test/DB occurred during preflight.
+
+
+### Somma Lombardo hostname correction before fetch
+
+The first `orchestrate init` for the apex URL `https://caisomma.it/.../Rifugio%20Somma%20-%20Blinnenhorn%20(EE).pdf` was rejected by `validateSourceUrls` because the source website host is `www.caisomma.it`. Rejection occurred before network: no run directory, lock, fetch, test or database action. Collector’s offline check confirms `source.website=https://www.caisomma.it/`; `calendarEvidence` records the same exact PDF path on the apex, and the `www` same-path URL is absent from status/cache/FAILURES. The same-path official `www` URL is the corrected target, but its response/redirect is unverified. Checkpoint this selection first; then one bounded request max1 document/120s/concurrency1. No retry of SIEL/summary or Varese 503.
+
+
+## Lombardia — CAI Somma Lombardo Blinnenhorn01, raccolta e QA conclusi (22 ottobre 2026)
+
+Run `cai-20261022-lombardia-somma-blinnenhorn01`, iniziato dopo checkpoint corretto `cdfae59e84e793091d11ab199612561dcaf6224c`. Un solo PDF ufficiale same-path su host `www` della registry: `https://www.caisomma.it/wp-content/uploads/pdf/Escursioni/2026/Rifugio%20Somma%20-%20Blinnenhorn%20(EE).pdf`, 760.092 byte, SHA-256 `c9f7cab19bc7993fb7e3db8e4dc39ebb8aa29039c98cc27dd3a1cc016af4e1af`, `pdf-text`. La cache non espone status HTTP o final/redirect URL. Il flyer intitolato Rifugio CAI Somma–Blinnenhorn attesta partenza Riale, Alta Val Formazza, itinerario EE di due giorni/25 km; non contiene la data dell’uscita. “Entro e non oltre 25 luglio 2026” è solo scadenza iscrizione. Nessun evento completo, classificazione o coordinata è inferito.
+
+Fonte/status resta partial; issue storica sul programma SIEL completo download-aborted resta intatta. La scheda riepilogativa size-limit e Varese 503 sono issue separate e non ripetute. Catalogo 3.371→3.371; prefisso Somma 14→14, 0 add/remove/change. Mirror backend/frontend identici. Manifest `7d1be91a308365001813f21ec6456613d2db20d444dc02e5df5c9851f60a34e7`; state `2a566c12e6b65783580ff469bd9b08cd2d60aa6bdc86f0eb37d756a0a3a50e4f`; report `6c12db4ad10596ca74db8b5c4a4f0a629b81d3e05fe7e1d89604e1b90ac54b11`; source evidence `a737ab7c993163ea37d2e7316763799c04ccddd0f97b76801748fd6799f5a3d8`. Importer QA PASS. Backend test 205/205 dopo la collection; sei hash JSON pubblici invariati. Nessun DB query/write. Stato files ready, database non applicabile per delta zero. Dopo checkpoint, preflight offline di un'altra fonte Lombardia distinta e fuori cooldown.
+
+
+## Lombardia offline preflight — CAI Varese annual calendar (22 ottobre 2026)
+
+After remote Somma checkpoint `46a7c853d363eb40bc7ae99547f44f6e7c478cd9`, cai-collector selected one distinct official URL: `https://www.caivarese.it/calendarioannuale`, source `cai-varese-9216009`, registry label “Calendario annuale” and linked from the official Escursionismo page. It is absent from status documents/issues, deterministic cache, URL-specific failures and prior runs. The source is partial with 39 documents and two issues. The known 503 and six-hour cooldown belong to a different iCal URL; cooldown elapsed. Do not retry that iCal endpoint or follow its `discovery-limit`.
+
+After this checkpoint, one fetch of the annual page only, max1 document/120s/concurrency1. No network/test/DB during preflight.
+
+## Lombardia — CAI Varese calendarannual01, revisione esito (22 ottobre 2026)
+
+Run `cai-20261022-lombardia-varese-calendar01`, dopo checkpoint remoto `2c3a5d82304c63b1277a91e08df7bf2edd441951`: continuation esplicita sulla sola URL `https://www.caivarese.it/calendarioannuale`, max1 documento/120s/concurrency1. Stato orchestratore `collection=partial`, `files=ready`, `database=pending`; il run dir contiene manifest, state e report ma non una copia body. Il catalogo è rimasto a 3.371 ID unici; i 58 record Varese sono invariati, zero aggiunte/rimozioni/modifiche.
+
+Il collector ha verificato la cache indicizzata dalla URL richiesta: final URL `https://www.caivarese.it/wp-content/uploads/2025/02/A4-CAI_Calendar2025.pdf`, PDF 3.208.298 byte, body SHA `ce93c4c3b0cfeff2da1f94641a43dc698920c7440ef959e4af5812ae285f09ce`. Questa final URL era già associata nello status al metodo `pdf-text` e a 58 estrazioni. La cache non conserva status HTTP né prova se il body sia stato trasferito con 200 o validato con 304; pertanto non si dichiara letto il calendario annuale 2026 né un successo a zero eventi. La fonte resta partial e non c’è delta da classificare/importare.
+
+Importer QA indipendente: integrità manifest/state e mirror PASS; accettazione della freschezza fonte HOLD. Test backend dopo raccolta: 205/205 PASS; hash dei sei JSON pubblici identici prima/dopo i test. Nessuna classificazione o scrittura DB. Manifest SHA `c4e31bb73fc0a1417d9fc0efe7a87a901974ad4d32dd84d72369c49a8b8b45ae`; state SHA `535f0bf825e9b07b9e56da7e64371e142d4fa23cf8597a9574cc1efd97cbc69f`; report in `backend/data/agent-runs/cai-20261022-lombardia-varese-calendar01/collection-report.md`.
+
+Issue aperte distinte: iCal MTB Varese HTTP 503 e coda iCal eventi con discovery-limit 93; nessuna è stata ritentata. Dopo il checkpoint del report, preflight offline di una diversa fonte lavorabile in Lombardia, senza ripetere gli URL già consumati. Un nuovo tentativo su calendarannual richiede test e strumentazione che conservino URL richiesta/finale, status HTTP (compreso 304) e hash body nel run.
+
+### Correzione preflight Lissone e prossimo campione — CAI Carate Brianza
+
+Lissone è stata esclusa prima di `init`: il target apex `https://cai-lissone.it/escursionismo/` non supera il validator che richiede hostname esatto `www.cai-lissone.it`; la variante same-path `www` è già presente nello status/run `cai-20261020-lombardia-deep-11` (`html-calendar`, 24 eventi, hash `60696821c6dead1eb316ec198706d1c42d48b774747646ed50d04a0375c13d9b`). Nessuna richiesta è stata fatta.
+
+Nuovo preflight offline collector: CAI Carate Brianza `cai-carate-brianza-9216030`, un solo volantino ufficiale del 63° Corso di Alpinismo: `https://www.caicaratebrianza.it/download/5-scuola-di-alpinismo/7-corsi-di-alpinismo?download=609:volantino-63-corso-di-alpinismo-2026`. L’host coincide esattamente con `source.website` ed è consentito; la voce calendarEvidence lo collega alla homepage ufficiale. URL e alias del volantino sono assenti da status (18 documenti), cache, FAILURES e run history. La fonte resta partial con discovery-limit 344 sul PDF annuale e timeout separato della pagina palestra: non seguire né ritentare quelle code. Dopo checkpoint di questa correzione, un solo run explicit continuation max1 documento/120s/concurrency1; è un corso, non copertura del calendario escursionistico.
+
+Il report, manifest, stato run, cataloghi aggiornati e registro Varese sono pubblicati e verificati al commit `7b063750be774219c6c3406d780b45ca29a841e9` (tree `85f44bedaa770ec71275da8efe4f3b22bba97a22`), con handoff remoto aggiornato a `a9de793aadf43cffb8c38b6198a54765c78fd59c`. Nessuna collection è in corso al checkpoint.
+
+## Lombardia — CAI Carate Brianza corsoalpinismo01 e fix parser (23 ottobre 2026)
+
+Run `cai-20261023-lombardia-carate-corsoalpinismo01`, baseline checkpoint `6b2852264cbdae4134d2cf071cf0473fb3d92a5b`: un solo PDF official host-exact, 928.543 byte, SHA `05117835947e634494ceea7eea854398af8e3f839a62cce9fc55d8c5e8edfd8c`; la richiesta termina nel PDF `Volantino 63 Corso Alpinismo 2026 Rev.03.pdf`. HTTP status non registrato. La riga `04/05-lug Arrampicata in ambiente ...` era stata letta dal parser come 4 maggio, senza fine; il testo del PDF indica invece il range 4–5 luglio. Correzione stretta con fixture e test accettata nel commit `e277de52b9d311edc7b46b40512a6ee59f6d1901`: deterministic VERSION 14, 2/2 test mirati e suite backend 206/206. Il formato numerico `12/10` resta giorno/mese.
+
+La rilettura offline del body cached produce titolo fedele, 2026-07-04..2026-07-05, 2 giorni e zero coordinate; il corso è passato al 2026-10-23. Il PDF e una riga `pdf-text` erano già documentati alla baseline; non esiste nuovo record Carate sigillato nel run. Catalogo nazionale 3.371 ID; sei righe Carate prima/dopo, 0 add/remove/change; zero nuovi eventi futuri, nessuna classificazione, nessun import o query DB. QA importer: integrità dei manifest/mirror PASS, contenuto/import HOLD/no delta. La fonte resta partial con discovery-limit 344 sul programma annuale e timeout separato della pagina palestra. Report e hash nel run directory.
+
+Test backend dopo raccolta/fix 206/206; sei JSON pubblici invariati durante i test. Non c’è raccolta in corso. Dopo checkpoint di fix/report/registri, una nuova preflight Lombardia offline; se non restano fonti lavorabili, registrare i blocchi e passare alla regione successiva. Mercury non è stato chiamato perché nessun nuovo evento corrente è risultato importabile.
+
+Report, manifest, state, cataloghi e copertura Carate sono pubblicati al commit verificato `6d7ba7e60f5829e92b6cc90b435db57145e77036` (tree `a9f2c84f74c5601f004e60b978339c0992fd762f`). Il fix parser/fixture è già al commit remoto `e277de52b9d311edc7b46b40512a6ee59f6d1901`. La prossima preflight Lombardia è solo lettura e non avvia una raccolta fino a nuovo checkpoint della fonte scelta.
+
+
+## Stato passaggio — preflight Sicilia Belpasso (23 ottobre 2026)
+
+Il checkpoint Carate è completo: file/report/codice e registri sono remoti; il parser fix è al commit `e277de52b9d311edc7b46b40512a6ee59f6d1901`, i file Carate al `6d7ba7e60f5829e92b6cc90b435db57145e77036`, e lo stato/handoff verificato a `1091905710a785526ccf9560df213805d3acb3b2`. Il fetch corrente ha confermato `FETCH_HEAD == HEAD == 1091905710a785526ccf9560df213805d3acb3b2`. Nessuna raccolta o import Carate va ripetuta.
+
+Il preflight offline ha concluso che in questa selezione non rimangono URL Lombardia official-host nuovi e utili: Varese 503 e discovery-limit 93, Brescia 403/404 in cooldown, altre fonti provate o residui non produttivi. Lombardia resta parziale: non è una dichiarazione di copertura completa e i totali storici del 20 ottobre non sono stati ricalcolati. Marche, Molise, Piemonte, Puglia e Sardegna non presentano un nuovo URL host-exact lavorabile dopo aver escluso alias già letti, pagine passate e failure/coda già consumate.
+
+Primo target distinto: CAI Belpasso (`cai-belpasso-9246010`, Sicilia), URL ufficiale `https://organizzazione.cai.it/sez-belpasso/programma-attivita-sociale-2026/`, etichetta registry “Programma 2026”, collegata dalla pagina attività CAI. È assente da documenti/failure specifici/cache/run artifacts; il PDF Brochure 2026 ha OCR issue e l’iCal ha discovery-limit 7, su URL differenti. Dopo il checkpoint di selezione, eseguire soltanto questo URL: un documento, 120 secondi, concurrency 1, senza discovery expansion e senza fetch di PDF/iCal.
+
+Nessuna rete, raccolta, test o DB è avvenuta nel preflight. Runtime/configurazione richiesta: orchestratore e i due ruoli sono GPT-6 Luna high, ma telemetria runtime non attesta identità/effort effettivi.
+
+
+## Sicilia — CAI Belpasso programma01 (23 ottobre 2026)
+
+Dopo il checkpoint selezione `1695a0864d3c51625b5f984bc71f9a44dbd8e3c2`, il run `cai-20261023-sicilia-belpasso-programma01` ha letto soltanto `https://organizzazione.cai.it/sez-belpasso/programma-attivita-sociale-2026/` (max 1 doc/120 s/concurrency 1; nessun link figlio). URL richiesta e finale coincidono; cache osservata `text/html; charset=UTF-8`, 153.764 B, SHA `03521e393d4f0245db58098b3a6e273c43f5db9370f19840248fc0823f31eca3`. Il run non registra status HTTP. Il worker restituisce `unsupported`, `method=null`, 0 righe e discovery-limit 1: non è prova di calendario vuoto. Brochure PDF OCR-failure e iCal discovery-limit 7 restano aperti e non sono stati richiesti.
+
+Catalogo prima/dopo: 3.371 righe/ID unici; Belpasso 0→0; 0 aggiunte, rimozioni o modifiche evento, 0 duplicati esclusi. Cambiano soltanto metadati di generazione/source hash/copertura. Nessun titolo/stato/foto/località/coordinata toccato. Importer QA indipendente PASS su manifest e mirror. Backend `npm test` 206/206; i sei JSON pubblici sono rimasti byte-identici tra inizio e fine test. Nessun Mercury, query o import DB.
+
+Manifest SHA `7d6bfb50ddd7030dd3d8223e77a57554436829df6da94d1280228fa07cc8e435`; state SHA `75cf015e1b34bdf490fc2ff36291b02d64b2b4e423d1db1996d71f284d08ca07`; report SHA `59a9db8789e0c44d7fadd8659b7cfb779e9eeaabf2cf3a28ea3e95667988f8ea`. Il report è in `backend/data/agent-runs/cai-20261023-sicilia-belpasso-programma01/collection-report.md`. QA file PASS, copertura fonte HOLD/partial; il checkpoint report è il prossimo atto. Dopo push, collector ispeziona solo il body HTML già in cache, senza rete: se non mostra eventi strutturati parsabili, proseguire con una diversa fonte Sicilia; non ripetere PDF/iCal.
+
+
+**Diagnosi Belpasso conclusa:** il body HTML già in cache è un articolo informativo “Programma attività sociale 2026”; descrive categorie di attività e rinvia le schede dettagliate delle singole uscite ai canali di comunicazione/pubblicazione successivi. Nessuna data o riga evento, calendario o JSON-LD `Event`; `method=null` è appropriato. Non serve patch del parser. Il risultato non prova che brochure o intero calendario annuale siano vuoti. Dopo il checkpoint remoto, selezionare offline un URL Sicilia official-host distinto; un solo documento/120s/concurrency1 e senza PDF/iCal già falliti.
+
+
+## Preflight Sicilia completato — prossima Toscana (23 ottobre 2026)
+
+Offline review delle quattro sezioni abilitate: Belpasso/Cefalù/Erice sono ancora `partial`, Giarre risulta `no-upcoming` senza issue registrate. Cefalù ed Erice hanno discovery-limit ma lo status non conserva URL figlio esatto selezionabile; non ricostruire o indovinare URL. Belpasso e le sue URL PDF OCR/iCal già escluse restano documentate sopra. Le altre 25 sezioni sono disabilitate (24 `missing-website`, Catania `unreachable`). Nessun target aggiuntivo host-exact utile, rete, test, evento o DB in questo preflight. Sicilia resta incompleta. Dopo il checkpoint di questo riepilogo, procedere con preflight offline della regione canonica successiva, Toscana.
+
+
+## Toscana — selezione CAI Fivizzano (23 ottobre 2026)
+
+Dopo checkpoint remoto del preflight Sicilia, il collector ha selezionato CAI Fivizzano (`cai-fivizzano-9226019`), URL `https://www.caifivizzano.it/calendario-uscite/`, etichetta registry “Calendario 2026” e link dalla pagina ufficiale `/attivita/`; l'host corrisponde esattamente al sito registrato. La pagina non è nei documenti di status, cache, failure URL o run artifacts. La fonte conserva un issue separato sul PDF annuale con OCR failure e `discovery-limit` 8: non ritentarlo né seguire la coda per questo sample. Dopo il checkpoint di selezione, un solo URL, max1 documento/120s/concurrency1, senza discovery expansion. Nessun fetch, test o DB nel preflight.
+
+
+## Toscana — CAI Fivizzano calendar01, file QA completata (23 ottobre 2026)
+
+Run `cai-20261023-toscana-fivizzano-calendar01`, iniziato dopo selection checkpoint `316f03b2b98ef56f2222b37f816180992d5b54e4`: sola URL `https://www.caifivizzano.it/calendario-uscite/`, `html-calendar`, 10 righe estratte, un documento. Body 148.307 B SHA `a4e350268783bc1fe3a0ed37a1e75269d8559fd53e204ca9194c21250e3d11f0`; status HTTP non persistito. La fonte resta partial, annual PDF OCR failure + discovery-limit 8 e pagina discovery-limit 1; non è copertura completa.
+
+Catalogo: 3.371→3.376 ID unici, +5 raw/0 rimozioni; 2 record esistenti cambiano solo `sourceDocument`. Importer ha confrontato il duplicato semantico `...-5b1c92eec5ec` con `...-b759d3dd85b0` (stessa data, link, descrizione; varia solo punteggiatura titolo): escludere il primo da classificazione e DB, conservare il record esistente. Quattro ID in lista classificabile: `...-25b520da9498` (Monte Sumbra), `...-4ac183446fc1` (Mont’Alto/Sullioni), `...-9ad6725f7fbe` (Lago Padule, dettagli scarsi da verificare), `...-eba39ba9cdc6` (Climbing Day). Ogni nuovo ID ha lat/lng null, `Località da verificare`; non inferire coordinate. Le due modifiche sourceDocument-only non sono un delta DB.
+
+Source evidence sidecar: `source-evidence.json`, SHA `271b59accbe13aaede80d87640467f4564db27a62d9fc57fd810574757ea7709`; contiene body hash, card/JSON-LD/description excerpts e locator corretti. Il body completo resta nella cache locale, non nel run; HTTP status non registrato. Collection report, manifest e state nella stessa directory run. Importer QA PASS, manifest/mirror verificati. Backend `npm test` 206/206 dopo raccolta; sei JSON pubblici invariati pre/post e mirror identici. Nessuna classification Mercury o DB ancora.
+
+Dopo checkpoint remoto dei file/report/evidence, classificare solo i quattro ID non duplicati in run isolato con modello richiesto `inception/mercury-decide`/Decisions API; importer QA del batch e checkpoint remoto prima di ogni query/write DB. Import mirato insert-only e receipt solo dopo gate. Non ripetere i 3.371 record, non aggiornare righe esistenti, non importare il duplicato.
+
+
+## Passaggio aggiornato — classificazione Fivizzano sospesa per rete (23 ottobre 2026)
+
+Il branch remoto è stato letto tramite GitHub API a `28ccac97502f0d48233b5f88b8d099803b94de37`; coincideva con il checkout. La raccolta Fivizzano e i test seriali 206/206 erano già checkpointati. Il collector e l’importer esistenti hanno concluso la QA: restano quattro ID non duplicati e un duplicato escluso. `classification-input.json` contiene soltanto i quattro candidati (SHA `1aba5906e6a743318ecb63b82b733deca9263759e943710308352901e3b33334`); `source-evidence.json` è SHA `271b59accbe13aaede80d87640467f4564db27a62d9fc57fd810574757ea7709`. L’evidence manifest è stato rigenerato dopo aver corretto il report: sigilla manifest, state run, source evidence, report e input; verificare i nuovi SHA nel checkpoint remoto.
+
+Preflight runtime corrente: `cloud_environment.environment_status` ha riportato `connectivity=offline`, ambiente gestito `unavailable`, secret `OPENROUTER_API_KEY` `ready` e variabile runtime `openrouter` `ready`. Il valore del segreto non è stato letto/stampato. L’osservazione non prova accesso HTTP; nessuna chiamata Mercury è stata fatta. L’orchestratore/ruoli sono richiesti GPT-6 Luna high, ma telemetria effettiva non esposta; i due agenti esistenti sono completati e non sono stati creati altri agenti.
+
+**Prossimo passo:** pubblicare atomicamente su questo branch il solo aggiornamento documentale/stato e i file input/evidence sopra, verificare il nuovo ref e i blob. Poi attendere una nuova osservazione del runtime: se ancora offline, niente classificazione/DB; se online, usare solo `inception/mercury-decide` via Decisions API sul delta isolato, importer QA, checkpoint dei risultati e poi import mirato/ricevuta. Nessun nuovo scrape, cron, merge o deploy durante il blocco.
+
+
+## Checkpoint Fivizzano pubblicato e runtime riconnesso — 23 ottobre 2026
+
+Aggiorna la sezione precedente: i file isolati sono stati pubblicati e verificati nel commit remoto `3341fc9f4862bdb17a3592ba30111d422d5e1d26`, parent `28ccac97502f0d48233b5f88b8d099803b94de37`. Il commit contiene i cinque file di coordinamento, il report corretto e i due artefatti `classification-input.json` (SHA `1aba5906e6a743318ecb63b82b733deca9263759e943710308352901e3b33334`) ed `evidence-manifest.json` (SHA `161b4f1edd896f86493d9cfc69be51cf1c14d9b289cb4a5d056decec0045f4fc`). Gli otto blob SHA Git remoti combaciano con `git hash-object` locale. Il manifest sigilla source catalog, state del run, sidecar, report e input; QA l’ha convalidato prima del checkpoint.
+
+Un nuovo `cloud_environment.environment_status` ha riportato `connectivity=connected`, ambiente running, `OPENROUTER_API_KEY=ready` e dominio `openrouter.ai` autorizzato. Nessun valore è stato letto e nessuna chiamata al provider è ancora avvenuta. Prossima azione: il run `cai-map-20261023-fivizzano01` sui soli quattro ID del file checkpointato, modello richiesto `inception/mercury-decide` via Decisions API; registrare risposta/attestazione esattamente come ricevute. Importer verifica il batch prima del suo checkpoint, poi preflight DB e delivery mirato.
+
+## Stato operativo corrente — Fivizzano classification-ready (23 ottobre 2026)
+
+Il run `cai-map-20261023-fivizzano01` è concluso sui soli quattro nuovi ID sigillati. Mercury richiesto `inception/mercury-decide`; tutte le quattro risposte attestano provider Inception e `response.model=inception/mercury-decide-20260930`. Conteggi grezzi: 3 trekking, 0 non trekking, 1 da verificare, 0 errori. Dopo QA semantica indipendente: 2 trekking, 0 non trekking, 2 da verificare; Lago Padule resta in revisione per mancanza di evidenza sul modo/itinerario. Importer PASS per delta-only, senza update/delete. Nessuna query o scrittura DB.
+
+Input collection/evidence checkpointati al commit `3341fc9f4862bdb17a3592ba30111d422d5e1d26`; output classificato e documenti correnti sono in attesa del commit verificato dal branch dopo `b2d64f8dcbce1746d3aa54a76838887fe89c66f8`. Prossimo: pubblicare/verificare output, poi query read-only su schema/FK e quattro `source_id`, controlli conflitti e digest editoriale. Solo dopo il gate, import mirato e ricevuta. Raccolta Toscana resta parziale (10 righe, 4 ID candidati, un duplicato escluso); non inferire completezza o coordinate.
+
+## Fivizzano classification checkpoint e preflight DB (23 ottobre 2026)
+
+Output Mercury e QA indipendente sono pubblicati nel commit `2179e0c644c0af0031ebe0b22c256820a671d93f` (parent `b2d64f8dcbce1746d3aa54a76838887fe89c66f8`); branch e nove blob verificati. Run `cai-map-20261023-fivizzano01`, manifest `0bbe6dea10f07ded946bf19af714d6306ab1cc098b3c239361007d3fffc82b8b`, input `1aba5906e6a743318ecb63b82b733deca9263759e943710308352901e3b33334`, output `d07dfc27108dc38eee95ae35fac95e9ab66041806375db18968a522667c3d337`. Quattro ID classificati senza errori: candidati grezzi 3 trekking/0 non trekking/1 da verificare; dopo revisione 2 trekking/0 non trekking/2 da verificare. QA importer finale PASS.
+
+Il preflight read-only Supabase del `2026-10-23T00:33:32.978008Z` ha osservato 4/4 target assenti sia in `places` sia in `place_classifications` (conteggi tabella: 4.423 places, 3.354 classifications). FK `place_classifications.source_id` punta a `places.source_id`; `places.geo_evidence` è presente. Nessun write eseguito. Prossimo passo: nuovo preflight immediato, poi eseguire soltanto `orchestrate import --delta-only --manifest` per questi quattro ID; importer inserisce eventi nuovi e classificazioni con conflitti ignorati, riconcilia titolo/stato/foto/coordinate e produce ricevuta. Non usare classifications-only: i place non esistono ancora.
+
+## Delivery DB Fivizzano — 23 ottobre 2026
+
+Preflight read-only aveva trovato 0/4 ID presenti. Dopo gate importer PASS, il canale Supabase MCP ha eseguito insert `ON CONFLICT DO NOTHING` applicando i row builder del repository: **4 places inseriti e 4 classificazioni inserite**, 0 conflitti, 0 update/delete, 0 coordinate. Query dopo: 4/4 places e classificazioni riconciliati; contatori DB 4.427 / 3.358 alle `2026-10-23T00:35:17.325134Z`. Record nuovi in stato `draft`; la mappa pubblica non è stata aggiornata né è avvenuto deploy. Receipt `backend/data/agent-runs/cai-map-20261023-fivizzano01/import-receipt.json`; source state ed evidence-manifest sono stati aggiornati per rendere il passaggio riprendibile.
+
+Conteggi copertura Toscana: raccolta 10 righe verificate da 1 fonte ancora partial; +5 ID grezzi, 1 duplicato semantico escluso; classificazioni effective 2 trekking, 0 non trekking, 2 da verificare; database 4 inseriti/4 classificazioni. Due aggiornamenti sourceDocument-only non sono stati consegnati al DB. Fonti aperte: PDF annuale OCR/discovery 8, pagina calendario discovery 1. Nessun altro fetch in questo lotto.
+
+## Ricevuta DB checkpointata e stato successivo
+
+La ricevuta del delta Fivizzano, lo stato database completato e l’evidence seal aggiornato sono pubblicati a `52c9cd3a36e3128932fc4d140def45d01a021936`; ref remoto e 8 blob del commit verificati, manifest delle 5 prove passa hash/byte. Regione Toscana ancora partial per PDF OCR/discovery 8 e pagina discovery 1. Dopo questo checkpoint, il collector esistente esegue soltanto preflight offline per un target diverso già registrato come sicuro; niente replay del run Fivizzano.
+
+## Preflight offline successivo — CAI Pescia (Toscana, 23 ottobre 2026)
+
+Dopo aver chiuso il delta Fivizzano, il primo URL esatto e distinto work-ready è `https://www.caipescia.it/cp/calendario-attivita-cai-pescia/`, sezione `cai-pescia-9226026`. È elencato nel registry come URL di calendario ufficiale e collegato dalla homepage; la validazione locale di host e URL per lo scraper è PASS. Questa URL non compare in status documents, cache, run artifacts o FAILURES. La sorella mensile `?mo=8&yr=2026` ha un `discovery-budget-exhausted`: non ritentarla e non seguire link dal nuovo campione. Dopo checkpoint remoto selezione, max 1 documento/120s/concurrency 1.
+
+Contesto Toscana da scrape-status persistito (non ricalcolato live): 37 registrate, 17 enabled — 9 partial, 5 unsupported, 1 failed, 1 ok, 1 no-upcoming — e 90 eventi nel catalogo locale. Fivizzano: +5 raw IDs, 1 duplicato escluso, 4 delivered places + 4 classifications in draft; 2 sourceDocument-only non consegnati. Restano aperti i tre failure Fivizzano.
+
+
+## Passaggio corrente — Pescia timeout e prossimo campione Fivizzano (23 ottobre 2026)
+
+Il ref remoto base è `90715a2b3868b8ad6395e497446c706d3268605c`. Fivizzano `cai-20261023-toscana-fivizzano-calendar01` è già completamente consegnato: +4 places e +4 classificazioni, tutti `draft`, 0 update/delete/coordinate, query dopo 4.427/3.358 e receipt remota al commit `52c9cd3a36e3128932fc4d140def45d01a021936`. Non reimportare né la baseline 3.336 né il delta Fivizzano già riconciliato.
+
+`cai-20261023-toscana-pescia-index01` ha avuto timeout client di 8.000 ms sull’URL esatta `/cp/calendario-attivita-cai-pescia/`: nessuno status HTTP, body, cache, evento, retry o candidato DB. Il primo output aveva perso 12 documenti e l’issue mensile `discovery-limit`; lo status è stato riparato recuperando il ref remoto `90715a2`, mantenendo la storia e aggiungendo il distinto `fetch-timeout`. FAILURES passa 716→717 record con `CAI-F-6ccdc9044ca287f1`. Importer QA PASS; catalogo 3.376→3.376; backend test 206/206 successivi alla raccolta e alla riparazione; sei mirror pubblici coerenti. Run state: `partial / files ready / database pending`; nessun accesso DB per Pescia. Hash: manifest `c5e3e308fcf7beebc2ef7890aec8bf671caee14d77f64996eb93da957dd74c81`, state `afae40f6180f9b1745142e00895f7fe2a508a7443c9d7084b439eaf18ccc9db1`, report `e9a5d66e5f8f25e1f74a4607e30058bb1e2be47ec68eb2f9fd9d9a8194905b49`, FAILURES `45216a105e715738d26cb37d9b98436a5a753a1c249696f58fa91bc393b34c96`, scrape-status backend/frontend `687b6babc658b9ebcc232d27a1829a2ded8a9fc123f13447dc67db0900e94108`. Catalog/mirror excursions SHA `92eb1e16428787e068b77a872cd1301218f71b3c000a803f395f7f6963bda3c8`.
+
+Il preflight offline collector ha escluso altri target toscani distinti sicuri tra quelli abilitati; ha trovato una sola pagina ufficiale Fivizzano nuova: `https://www.caifivizzano.it/eventi/le-miniere-di-calcaferro/`, collegata dal registro/calendario, assente da status/cache/FAILURES. La sezione resta parziale per errori PDF e discovery già registrati. Selezionata per un solo documento, 120 s, concurrency 1, senza seguire link. Prossima azione: pubblicare e verificare il checkpoint del run Pescia riparato e della selezione Fivizzano; poi avviare `cai-20261023-toscana-fivizzano-miniere01`. Nessuna raccolta Pescia aggiuntiva.
+
+
+## Aggiornamento successivo — Fivizzano miniera01 verificato, Escursionismo selezionato (23 ottobre 2026)
+
+Il Pescia status repair e la nuova selezione erano già checkpointati a `e8e0ce196be8b7237f0383378e83e706450f55ec`. Run `cai-20261023-toscana-fivizzano-miniere01` ha letto il body cached di 78.848 byte, SHA `964450e315da16e5a176b174462eac8b9f446b9475222ea766cb0756749e3b27`, da `https://www.caifivizzano.it/eventi/le-miniere-di-calcaferro/`. Una riga `Le miniere di Calcaferro`, 06-09-2026, pagina marcata `Expired!`; scaduta al 23 ottobre, quindi 1 verificata nella fonte, 0 nuovi ID, zero DB. Status HTTP e final URL non persistiti. Catalogo 3.376→3.376, righe fonte 12→12 e row hash invariato; nessun campo amministrativo/geografico cambiato. Source status `partial`; restano PDF OCR failure, discovery-limit PDF 8, calendario 1 e pagina miniera 1.
+
+Hash run: manifest `c27f809abe968cd89fe7a2873cb13cbca7f41df729cde0e3c345c6b28cd403b5`; state `144177e4db3c5db3b371f32d16d376b168fc1c139e0257d174c932e040075c73`; source evidence `e91de12eefecb9d8120fca977e185806de98ff81fa45078d268718472c01b8fe`; report `cc96bebdb020890019419fa711b8610023a66ef3749aeb27458d227fee4d5884`; evidence-manifest `8cae9ff4a0f4231b113025e68945efe55402315c86a5d35ae303e635d3d7b8a3`. Backend tests 206/206, sei hash pubblici stabili; importer QA independent in corso, nessuna importazione appropriata perché non c’è delta.
+
+Dopo il run, collector ha selezionato offline un’altra URL ufficiale Fivizzano, `https://www.caifivizzano.it/escursionismo/`, label registry “Escursionismo”, collegata da `/attivita/`, assente da documents/cache/FAILURES. È una pagina categoria e il risultato è incerto; non inferire un calendario. Proposta `cai-20261023-toscana-fivizzano-escursionismo01`, max1/120s/concurrency1/no discovery. Prima pubblicare il presente checkpoint e verificarne i blob; poi eseguire il singolo run.
+
+
+## Aggiornamento — Escursionismo01 senza delta; selezionata landing attività (23 ottobre 2026)
+
+Checkpoint base verificato: `c45cf1fa0113e74dba04a0695124f6ea96009298`. Run `cai-20261023-toscana-fivizzano-escursionismo01`, URL `https://www.caifivizzano.it/escursionismo/`, body cached 138.701 B SHA `a78ad2e426a35f61944ea0768217a3ebf260b7bcf77632ceab896e5eb4b6490e`. Una riga calendario per Anello Zanego – La Serra- Tellaro, 15 novembre 2026; luogo non coordinato, place JSON-LD vuoto, nessuna coordinata aggiunta e link dettaglio non seguito. ID/campi corrispondono esattamente a `cai-fivizzano-9226019-2d592e7a1731`; row SHA `1b23109177824b6f4f830f8d3baf96175009e7985666e80a1bf831a238a574ea` invariato. Catalogo 3.376→3.376, Fivizzano 12→12, 0 add/remove/change. Status partial; issues precedenti aperti, più discovery-limit 1 sulla categoria. Nessun Mercury/import/DB. QA importer PASS. Test backend 206/206 dopo la raccolta; hash pre/post: excursions `d02a525382f6d7b31c571a49c0ced7c9ed292b5e67ba138ee060b4adbca4fa83`, sections `f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b`, status `7124e29edc1af941451e3e757b4fca4b5dc868ebc6d60b846a523c69a0270e49`; mirror backend/frontend byte-identical. Hash artefatti: manifest `4a5dbfb5675dc1aaab04737ff1931107ada03046e6cd4bf7ecd0b3694f58becc`, state `165182f64d68ffd278f036a31300fd33ee6ef2db87761d451ad7abfc07fdc93a`, source evidence `13620f84dcac4cffd4b3d1f9fd48b1765a325439610fbd070cd7d18f3b8f8696`, report `8171f910dbec36d1ae479bc904f5d799fac2d948d495bc757086937b23706c61`, evidence manifest `58739cd12a28a7320b7ecda6c09ccb1614ea49151cd9909ceb44551b14220565`.
+
+Preflight offline successivo: target ufficiale Fivizzano `https://www.caifivizzano.it/attivita/`, registrato ma assente da documents/cache/FAILURES, landing generica. Selezionato `cai-20261023-toscana-fivizzano-attivita01`, max1 doc/120s/concurrency1/no discovery. Pubblicare prima questo run zero-delta e la selezione; verificare il ref/blob e solo dopo raccogliere.
+
+
+## Passaggio regionale — Toscana senza URL sicuri, selezionato Alpago (23 ottobre 2026)
+
+Run corrente `cai-20261023-toscana-fivizzano-attivita01`, body 120.061 B SHA `604cf46e065b652ead0d4a894369733eaa94f7456a84a35fa6ffbf61b9c4ab0d`, è una landing senza eventi datati riconosciuti (`method=null`); zero estrazioni non equivale a calendario vuoto. Nessun link figlio seguito, nessun evento/coordinate inventati. Catalogo 3.376 righe, 12 Fivizzano, zero delta. Importer QA PASS. Backend 206/206 dopo la raccolta; hash pre/post identici per excursions `c66e963a9d025dfb1184492362cd3235051f04e0318f88f1985b0d81951e2f03`, sections `f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b`, status `ac2d38e59aa5d00633cd2090e50b1cb265238b4fa4a5f25bc137c36a94bc9e0b`; mirror byte-identici. Run file: manifest `3f9a56fdc9f28b94aafacc157be1f76be02354fa0c051a99c448170c3a447da9`, state `2b0b7763f73082cb400a7d39c55ac1634727249a2f152939d4adb29759be63a9`, source evidence `af9262ccdb00a2be6604234400c8598d694d6db58acc2de58da4aceb871e7e86`, report `282d511e91a3b836589a4c1c32ed42706b569804908fecb363abdc7b31066b1f`, evidence manifest `6d923cb920bf8856e1b225400f65a5435c7e483ea7021e0d749ec13608545d59`.
+
+Preflight offline: Toscana non offre altri URL sicuri distinti; rimangono PDF Fivizzano OCR/discovery, Pescia timeout, fonti già consumate/failed/backlog senza URL esatto. Prossimo target Veneto: CAI Alpago `cai-alpago-9220065`, URL ufficiale `https://www.caialpago.it/programma-2/`, link homepage, assente da status/cache/FAILURES; partial status dovuto a coda su URL differente. Run proposto `cai-20261023-veneto-alpago-programma01`, max1/120s/concurrency1/no discovery. Prima pubblicare questo checkpoint e verificare branch/blob; poi eseguire solo quel campione.

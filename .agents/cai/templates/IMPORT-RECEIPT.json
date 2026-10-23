@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "status": "template-not-a-receipt",
+  "runId": null,
+  "projectRef": null,
+  "method": null,
+  "sourceCommit": null,
+  "manifestPath": null,
+  "manifestSha256": null,
+  "verifiedAt": null,
+  "verificationEvidencePath": null,
+  "inserted": null,
+  "existingPreserved": null,
+  "updatedMetadata": null,
+  "registrySyncPerformed": null,
+  "verification": {
+    "expectedSourceIds": null,
+    "matchedSourceIds": null,
+    "publishedSourceIds": null,
+    "missingSourceIds": null,
+    "protectedFieldsChanged": null
+  },
+  "remoteReceiptCommit": null
+}

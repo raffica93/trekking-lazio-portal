@@ -1,0 +1,1380 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-10-23",
+  "timezone": "Europe/Rome",
+  "phase": "marche-pesaro-alias-patch-checkpointed",
+  "fullCloudQualified": true,
+  "repository": {
+    "name": "raffica93/trekking-lazio-portal",
+    "visibility": "public",
+    "branch": "codex/cai-orchestrator-luna"
+  },
+  "coordinationSpace": ".agents/cai",
+  "planningExecutionScope": "remote-cloud-checkout",
+  "runtimeReadiness": {
+    "status": "current-runtime-observed",
+    "observedAt": "2026-10-23T01:20:20Z",
+    "connectivity": "connected",
+    "desiredPhase": "running",
+    "observationsCurrent": true,
+    "networkPolicy": "enforced",
+    "openRouterHostAllowed": true,
+    "openRouterApiKeyPresent": true,
+    "openRouterApiKeyReadable": false,
+    "openRouterAllowedDomains": [
+      "openrouter.ai"
+    ],
+    "runtimeVariableOpenrouter": "ready",
+    "sessionModel": {
+      "requested": "gpt-6-luna",
+      "effort": "high",
+      "selection": "user-confirmed GPT-6 Luna high UI; current runtime telemetry does not attest effective model identity"
+    },
+    "node": "v24.19.0",
+    "pdftoppm": true,
+    "tesseract": {
+      "version": "5",
+      "languages": [
+        "eng",
+        "osd"
+      ],
+      "italian": false
+    },
+    "agentProfiles": {
+      "caiCollector": {
+        "configuredModel": "gpt-6-luna",
+        "configuredEffort": "high",
+        "status": "role available and used; effective model/effort telemetry not exposed"
+      },
+      "caiImporter": {
+        "configuredModel": "gpt-6-luna",
+        "configuredEffort": "high",
+        "status": "role available and used; effective model/effort telemetry not exposed"
+      }
+    },
+    "effectiveAllowedHostCount": 822,
+    "mercury": {
+      "endpoint": "https://openrouter.ai/api/alpha/decisions",
+      "requestedModel": "inception/mercury-decide",
+      "responseModel": "inception/mercury-decide-20260930",
+      "modelAttested": true,
+      "liveSampleRequests": 20,
+      "httpSuccess": 20,
+      "providerErrors": 0,
+      "classificationPolicyVersion": "cai-trekking-v2"
+    },
+    "effectiveModelTelemetry": "not exposed; GPT-6 Luna high requested, not runtime-attested",
+    "rolesAvailable": [
+      "cai-collector",
+      "cai-importer"
+    ],
+    "secretValueRead": false
+  },
+  "roles": {
+    "orchestrator": "coordination-and-checkpoints; sole writer for run logs and acceptance",
+    "collector": {
+      "name": "cai-collector",
+      "model": "gpt-6-luna",
+      "reasoningEffort": "high",
+      "ownership": "official source QA, bounded provider circuit breaker, adapter/tests",
+      "status": "Directory Marche QA PASS e remoto a 82eb9a4. Preflight sulle tre website modificate: S. Benedetto URL già consumate; Pesaro/Sarnano senza calendarUrls. Homepage Pesaro scelta per un solo sample dopo selection checkpoint; nessun fetch ancora."
+    },
+    "importer": {
+      "name": "cai-importer",
+      "model": "gpt-6-luna",
+      "reasoningEffort": "high",
+      "ownership": "classification manifest validator, candidate/effective QA schema, conflicts/reconciliation and DB safety",
+      "status": "PASS refresh directory Marche e 214/214 backend test; nessuna scrittura DB. Attendere i file del singolo sample Pesaro per gate read-only."
+    }
+  },
+  "baseline": {
+    "commit": "9919927d4cbef6d154c4dae1441d64cd01c70ad4",
+    "runId": "cai-20261020-piemonte-01",
+    "runPath": "backend/data/agent-runs/cai-20261020-piemonte-01",
+    "catalogEvents": 3337,
+    "uniqueSourceIds": 3337,
+    "collection": "partial",
+    "files": "ready",
+    "database": "completed",
+    "verificationScope": "git-blobs-at-baseline-commit",
+    "manifestPath": "backend/data/agent-runs/cai-20261020-piemonte-01/manifest.json",
+    "manifestSha256": "3824c028aea07417f599e6317cc845bf891f355b677289ed10821ec291aed7c6",
+    "allManifestGitBlobsVerified": true,
+    "manifestFiles": [
+      {
+        "path": "backend/data/excursions.json",
+        "sha256": "1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877",
+        "gitBlobVerified": true,
+        "workingTreeVerified": false
+      },
+      {
+        "path": "backend/data/cai-sections.json",
+        "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+        "gitBlobVerified": true,
+        "workingTreeVerified": false
+      },
+      {
+        "path": "backend/data/scrape-status.json",
+        "sha256": "d97a57f0a73a6e56a268df0a7d499d16030b3a07d0456a28624a12513a71aed7",
+        "gitBlobVerified": true,
+        "workingTreeVerified": false
+      },
+      {
+        "path": "frontend/public/excursions.json",
+        "sha256": "1200e9a3921b606f341de413e34665b29fe91b5f6f86c5090c21d18effd12877",
+        "gitBlobVerified": true,
+        "workingTreeVerified": false
+      },
+      {
+        "path": "frontend/public/cai-sections.json",
+        "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+        "gitBlobVerified": true,
+        "workingTreeVerified": false
+      },
+      {
+        "path": "frontend/public/scrape-status.json",
+        "sha256": "d97a57f0a73a6e56a268df0a7d499d16030b3a07d0456a28624a12513a71aed7",
+        "gitBlobVerified": true,
+        "workingTreeVerified": false
+      }
+    ],
+    "reportPath": "backend/data/agent-runs/cai-20261020-piemonte-01/collection-report.md",
+    "reportGitBlobVerified": true,
+    "recordedDatabaseVerification": {
+      "observedAt": "2026-10-20T11:52:28.269Z",
+      "method": "authorized-supabase-mcp",
+      "places": 4405,
+      "cai_sections": 837,
+      "matchedSourceIds": 3337,
+      "publishedRunSourceIds": 3337,
+      "draftRunSourceIds": 0,
+      "missingSourceIds": 0,
+      "deltaMatched": 40,
+      "deltaPublished": 40,
+      "deltaDraft": 0,
+      "deltaFieldMismatches": 0,
+      "projectRef": "snwzxegtqnnuvlawnpgl",
+      "inserted": 40
+    },
+    "databaseRequeriedDuringPlanning": false
+  },
+  "excludedAsBaseline": [
+    {
+      "runId": "cai-20261020-piemonte-ocr-01",
+      "reason": "files-and-database-pending"
+    }
+  ],
+  "steps": [
+    {
+      "id": "S0",
+      "status": "completed",
+      "result": "checkpoint c177672 handoff accepted; branch recovered in isolated worktree and latest code commits verified remotely"
+    },
+    {
+      "id": "S1",
+      "status": "completed",
+      "result": "runtime/model/network preflight; sample02 processed 20/20; candidate/output files sealed; independent source QA and review overrides added; importer validates 20 rows"
+    },
+    {
+      "id": "S2",
+      "status": "completed",
+      "result": "backend npm test 173/173; catalog public hashes unchanged; code commits 902a180 and 3f93525 pushed and read back"
+    },
+    {
+      "id": "S3",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Full classification ready 3336/3336, one bounded resume recovered three transient failures; zero final errors."
+    },
+    {
+      "id": "S4",
+      "status": "completed",
+      "owner": "cai-collector + cai-importer",
+      "result": "Final sealed run 3336/3336; independent QA checked 157/462 original non-trekking candidates from 11 source groups, with 8 evidence-backed exclusions, 5 trekking false negatives corrected, 27 mixed/mismatched and 117 unresolved retained for review; importer independently PASS-validated all rows and model attestation."
+    },
+    {
+      "id": "S5",
+      "status": "completed",
+      "owner": "cai-importer",
+      "result": "Migration applied via authorized Supabase MCP after remote file checkpoint; classification-only inserts completed with ON CONFLICT DO NOTHING. 3336 rows inserted, no preexisting conflicts."
+    },
+    {
+      "id": "S6",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Fresh after-query: 3336/3336 map rows classified, exact field-by-field reconciliation 3336 rows / 0 mismatches; map eligibility counts 969 trekking visible, 9 verified non-trekking excluded, 2358 doubtful visible. Editorial digest and latest places.updated_at unchanged."
+    },
+    {
+      "id": "S7",
+      "status": "completed",
+      "owner": "orchestrator + cai-collector + cai-importer",
+      "result": "Run cai-20261022-lombardia-valmadrera07 reprocessed the single official 2026 PDF with deterministic parser VERSION 11: 65 document rows reconciled to 21 future catalog events (7 existing + 14 new), with 0 existing-row changes/removals. Parser failure resolved by the source run. One conditional GET succeeded through the inherited proxy; exact HTTP status is not persisted (304 inferred from unchanged cache mtimes). Independent importer QA PASS; backend tests 187/187. Files are ready, database pending classification of the 14 new IDs."
+    },
+    {
+      "id": "S8",
+      "status": "completed",
+      "owner": "collector + importer + orchestrator",
+      "result": "Run07 semantic duplicate review excluded 2 confirmed and held 2 probable duplicates; Mercury batch cai-map-20261022-valmadrera01 classified the remaining 10 (8 non_trekking supported by official PDF, 2 da_verificare, 0 trekking, 0 errors). Collector QA and importer schema/integrity QA PASS. Added insert-only bounded delta importer, resumable partial receipt state, and portable repo-relative input paths; backend npm test 193/193. No DB writes."
+    },
+    {
+      "id": "S9",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "The checkpointed geo-evidence migration was attempted after schema inspection; DB rejected jsonb_object_length(jsonb), which is unavailable. Read-only verification confirmed the failed DDL transaction added neither column nor migration record, and no event data was written. Replaced object-length check with exact-key JSONB subtraction expression and added migration regression assertions; importer suite 34/34 passes. Fix awaits a new remote checkpoint before retrying DDL."
+    },
+    {
+      "id": "S10",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Corrected additive geo evidence migration was checkpointed at 1914bca and applied successfully before data writes. Fresh preimport query confirmed all 10 approved IDs absent and editorial digest unchanged. Insert-only MCP SQL bridge used rows validated/transformed by the committed importer: 10 published places and 10 missing classifications inserted, conflict-ignore. After query: 10/10 exact, zero missing/mismatch; existing-row editorial digest still exactly matches preimport value, prior max updated_at unchanged. Two confirmed duplicates excluded; two probable duplicates held. Receipt awaits file checkpoint."
+    },
+    {
+      "id": "S11",
+      "status": "completed",
+      "owner": "cai-collector + cai-importer + orchestrator",
+      "result": "Strada Storta02 parser v13 fixture-backed; 6 official HTML cards extracted; catalog +1/5 provenance-description-only/0 removed, classified only new ID with Mercury (da_verificare/altro), importer QA PASS. File checkpoint 12b073f remote verified; delta-only MCP insert 1 place+1 classification, before 0/0 after 1/1, mismatches 0, updates/deletes 0; receipt awaits checkpoint. Receipt/report published and remote blobs verified at 2ac9c8b."
+    },
+    {
+      "id": "S12",
+      "status": "completed",
+      "owner": "orchestrator + cai-collector + cai-importer",
+      "result": "Campobasso bounded refresh: 2 new IDs, collection partial; Mercury 1 trekking + 1 da_verificare. Files remote-verified at 31d81ea. Importer read-only QA/preflight PASS; exact delta inserted 2 places + 2 classes, then caught and CAS-corrected only one manually truncated fingerprint. Final joined query 2/2, zero missing/mismatches; place updates/deletes 0, class corrective fingerprint update 1. Receipt awaits a separate remote checkpoint."
+    },
+    {
+      "id": "S13",
+      "status": "completed",
+      "owner": "cai-collector + orchestrator",
+      "result": "Preflight Penne01 completed: one bounded request canonicalized to existing March 7 page, no extraction/delta, PDF discovery 60 remains open. Files QA complete; see S14."
+    },
+    {
+      "id": "S14",
+      "status": "completed",
+      "owner": "cai-collector + cai-importer + orchestrator",
+      "result": "CAI Penne bounded run cai-20261022-abruzzo-penne01 checked one official URL. It canonicalized to the byte-identical known March 7 page (body SHA d875735a…); method=null, zero extracted rows, so no empty-calendar conclusion. Eight Penne catalog rows were unchanged, no new/removed/changed rows or coordinates. Source remains partial (PDF discovery 60 + HTML continuation 1). Importer file QA PASS; no classification, DB query or write."
+    },
+    {
+      "id": "S15",
+      "status": "completed",
+      "owner": "orchestrator + cai-collector",
+      "result": "Penne artifacts, public mirrors and register committed/pushed; remote branch fetch returned 19548380898b52fcf867b6f9e3943d2556351ce4 and sealed blobs matched all recorded SHA-256 values."
+    },
+    {
+      "id": "S16",
+      "status": "completed",
+      "owner": "cai-collector + orchestrator",
+      "result": "One exact CAI L’Aquila commissioni=escursionismo URL attempted after the Penne checkpoint. HTTP 403; immediate stop, zero retries/expansion, no body/cache, no event rows. Source-level scrape-status remains failed/partial; this is not evidence of an empty calendar."
+    },
+    {
+      "id": "S17",
+      "status": "completed",
+      "owner": "orchestrator + cai-collector + cai-importer",
+      "result": "L’Aquila01 report/evidence correction verified by importer; backend npm test 205/205 after both runs and six public JSON hashes stable. Status/report/failure docs pushed and remotely verified at d9fbdca; remote blobs match manifest SHA."
+    },
+    {
+      "id": "S18",
+      "status": "completed",
+      "owner": "cai-collector + orchestrator",
+      "result": "Collector offline preflight found no safe, distinct enabled source in Abruzzo: remaining URLs are canonical replays, consumed, or have active failures/cooldowns. Basilicata also has no current unvisited target; first work-ready next region is Calabria, CAI Castrovillari official /prog.php, bounded one document."
+    },
+    {
+      "id": "S19",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Calabria source run completed: Castrovillari official HTML index reached; 12 existing organizer-ID-prefix rows unchanged; zero HTML extractions, 1 HTML continuation, prior PDF OCR page2 issue + discovery8 retained. Importer final QA PASS after correcting all three evidence artifacts."
+    },
+    {
+      "id": "S20",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Backend npm test passed 205/205 after Castrovillari01; all six public JSON hashes stable. Corrected collection report, source-evidence, and evidence-manifest are cross-hash verified; importer QA PASS."
+    },
+    {
+      "id": "S21",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Run artifacts, catalog generated metadata/status, failure records and state committed/pushed; remote fetch verified at 6e10ae12b6d521c6035de81b9c5cbf1c1dd2f18e; manifest, corrected evidence and catalog blobs SHA-256 match."
+    },
+    {
+      "id": "S22",
+      "status": "completed",
+      "owner": "cai-collector + orchestrator",
+      "result": "Offline preflight dei quattro link ufficiali emersi da Castrovillari /prog.php: Cerchiara già letto (nessun replay); Corigliano/Rossano e Morano non hanno fonte registrata per attribuzione; proposta25.pdf è proposta, non calendario. Nessun fetch, test, run o DB."
+    },
+    {
+      "id": "S23",
+      "status": "completed",
+      "owner": "cai-collector + orchestrator",
+      "result": "Preflight offline Campania completato: il PDF annuale Caserta resta bloccato da discovery-budget-exhausted CAI-F-d8cbb0f4bd01c6f5; selezionata una sola pagina figlia ufficiale, https://www.caicaserta.it/escursioni.html, registrata in calendarUrls/calendarEvidence e assente da documents/history/cache/FAILURES. Nessun fetch nel preflight."
+    },
+    {
+      "id": "S24",
+      "status": "completed",
+      "owner": "cai-collector + orchestrator",
+      "result": "Bounded Caserta index run completed using cai-caserta-9238006. One official HTML document (7179 bytes), method=null, 0 event candidates, source remains partial; no child PDF, tests, classification or DB during collection. Importer QA PASS."
+    },
+    {
+      "id": "S25",
+      "status": "completed",
+      "result": "After the collection stopped, backend npm test passed 205/205. Post-test six catalog hashes match the sealed run hashes; backend/frontend mirrors are byte-identical."
+    },
+    {
+      "id": "S26",
+      "status": "completed",
+      "result": "Caserta index run artifacts, exact catalog/status mirrors, and regional docs are recoverably published and independently verified at remote commit 52deb84835e47a355d66da4662dc7e9a877f2ab4; tree and all changed blob SHAs match local."
+    },
+    {
+      "id": "S27",
+      "status": "completed",
+      "result": "Offline preflight of the checkpointed Caserta index found one eligible future event detail PDF: Monte Scalambra, linked adjacent to official text 'domenica 25 ottobre: Da Serrone al Monte Scalambra per l'Eremo di San Michele Arcangelo'. URL absent from source documents/run history/cache/FAILURES; attribution directly to CAI Caserta. Other detail pages are past-dated, archived, undated flyer or non-calendar. No network or writes."
+    },
+    {
+      "id": "S28",
+      "status": "completed",
+      "result": "Caserta Scalambra01 completed using one explicit PDF URL. Body independently attests 25-Oct-2026 and the existing CAI Caserta outing; metadata title/author conflict logged. Parser 0 candidates; 50 rows unchanged; no DB."
+    },
+    {
+      "id": "S29",
+      "status": "completed",
+      "result": "Importer QA PASS; backend npm test 205/205 after collection and all six catalog JSON hashes byte-identical before/after tests."
+    },
+    {
+      "id": "S30",
+      "status": "completed",
+      "result": "Scalambra01 PDF/report/evidence/catalog/status and regional handoff published and remote-verified at ae663ecfe2e1b7bb821832cf8f1b0e6bac6a94d3; tree and all changed blobs match the importer-validated files."
+    },
+    {
+      "id": "S31",
+      "status": "completed",
+      "result": "Campania offline preflight: nessun URL distinto lavorabile senza replay di code già consumate/bloccate; passaggio a Emilia-Romagna CAI Cesena, pagina ufficiale registrata non visitata."
+    },
+    {
+      "id": "S32",
+      "status": "completed",
+      "result": "Run cai-20261022-emilia-cesena-index01: un solo fetch HTTP via pipeline dell’indice ufficiale CAI Cesena (33.413 byte, body SHA 292708d5ddddb26a9e412d30777ac7bfb47efc22fc51af71ea27c5642b8bc9c9). method=null, 0 estrazioni non significa calendario vuoto. Sei eventi esistenti, 3.366 ID unici prima/dopo, 0 add/remove/change; source partial, database pending."
+    },
+    {
+      "id": "S33",
+      "status": "completed",
+      "result": "QA importer PASS; npm test backend 205/205 dopo raccolta. Sei JSON pubblici invariati durante la suite; nessun DB, classificazione o import (delta zero)."
+    },
+    {
+      "id": "S34",
+      "status": "completed",
+      "result": "Checkpoint Cesena index01 remoto verificato cd98b54; una successiva preflight offline ha selezionato il JPEG ufficiale Escursionismo Adattato 2026, distinto dai PDF bloccati."
+    },
+    {
+      "id": "S35",
+      "status": "completed",
+      "result": "Cesena escursionismo01: un singolo JPEG ufficiale (685,319 B, SHA 6c11893a0b371c51650c39a8275a777d13bc06f29dc0f9204fd6aaf6bc72702c) elaborato image-ocr. Poster conferma programma 2026 e date future, ma non associa titoli/destinazioni; 0 record estratti/inferiti. Sei record Cesena invariati; 3.366 ID unici, 0 add/remove/change; fonte partial."
+    },
+    {
+      "id": "S36",
+      "status": "completed",
+      "result": "Importer QA PASS; npm test backend 205/205 dopo la raccolta; sei JSON pubblici invariati nei test. Nessuna query/scrittura DB o import, delta zero."
+    },
+    {
+      "id": "S37",
+      "status": "completed",
+      "result": "Cesena escursionismo01 file/report/catalogo/manifest e copertura pubblicati e verificati al commit remoto b23dea1e53aee7a108da05b4cae3b1622497985f; tree locale/remoto identico."
+    },
+    {
+      "id": "S38",
+      "status": "completed",
+      "result": "Pavullo bounded calendar01 completed: 1 HTML, 23 rows, +5 IDs (3,366→3,371), no removals/changes; collection partial. Backend tests passed 205/205 after collection, mirrors/public hashes stable. Classification Mercury 5/5; QA overlay approves Hoabonti only and holds four uncertain records. Isolated one-row delivery manifest created. Await remote file checkpoint/importer subset PASS before DB."
+    },
+    {
+      "id": "S39",
+      "status": "completed",
+      "result": "Pavullo delta checkpoint remote-verified at 5697dcd. Read-only prequery: 4,422 places, Hoabonti absent, classification absent, RESTRICT FK. Authorized MCP insert: 1 place +1 classification, 0 skipped/update/delete. Joined post-query exact match against 35 place and 17 classification fields; place count 4,423. Receipt recorded. CLI importer attempted but stopped before connection due missing SUPABASE_URL; bridge used after QA PASS."
+    },
+    {
+      "id": "S40",
+      "status": "completed",
+      "result": "Preflight offline Lombardia: CAI Sesto Calende (cai-sesto-calende-9216044) ha URL calendario sezionale ufficiale non presente in status, cache o FAILURES; nessun cooldown specifico. PDF annuale resta bloccato, nessun retry. Nessuna rete/collection/test."
+    },
+    {
+      "id": "S41",
+      "status": "completed",
+      "result": "Sesto01 raccolto e QA PASS; 1 pagina, 0 estrazioni, method=null, fonte partial e PDF annuale non ripetuto. 3.371 ID invariati, 18 righe Sesto field-by-field uguali; importer PASS; backend tests 205/205; sei hash pubblici stabili; nessuna query/write DB."
+    },
+    {
+      "id": "S42",
+      "status": "completed",
+      "result": "Sesto01 files published and remote verified at c8abab2; body/report/manifest, importer PASS, tests 205/205, public hashes stable. Lombardia next offline preflight selected Somma Lombardo specific flyer PDF, no fetch yet."
+    },
+    {
+      "id": "S43",
+      "status": "completed",
+      "result": "Somma Blinnenhorn01 collected after cdfae59; one PDF 760092B, pdf-text, zero event date/candidates; enrollment deadline not treated as outing date. 14 rows and 3,371 IDs unchanged. Importer QA PASS, backend 205/205, six public JSON hashes stable, no DB."
+    },
+    {
+      "id": "S44",
+      "status": "completed",
+      "result": "Somma flyer checkpointed e remote-verified 46a7c85; no events/no DB. Offline Lombardia preflight selects distinct official Varese calendarannual page; known 503/cooldown is a different iCal endpoint, elapsed, not to retry."
+    },
+    {
+      "id": "S45",
+      "status": "completed",
+      "result": "Varese calendarannual01 concluso max1: richiesta mappata dalla cache al PDF annuale 2025 già noto (3,208,298 B, SHA ce93c4c3…); cache non conserva status 200/304. Nessun nuovo ID, fonte resta partial, nessun DB. Importer QA catalogo PASS/evidenza freschezza HOLD; backend 205/205 e sei JSON pubblici stabili."
+    },
+    {
+      "id": "S46",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Lissone disqualificata prima del run: target apex non passa source host validator e variante www già consumata nel run cai-20261020-lombardia-deep-11. Nessuna rete."
+    },
+    {
+      "id": "S47",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Preflight offline: Lissone non eleggibile; cai-lissone.it/escursionismo non supera hostname esatto www.cai-lissone.it; variante www già nello status/run deep-11 (html-calendar, 24 eventi, hash 60696821c6dead1eb316ec198706d1c42d48b774747646ed50d04a0375c13d9b). Nessuna rete o run."
+    },
+    {
+      "id": "S48",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Preflight URL alias CAI Carate selezionata su host esatto. La URL richiesta era nuova ma il PDF final URL/hash risultava già nello status baseline: il bounded sample ha verificato alias/estrazione, non aggiunto una nuova fonte documentale."
+    },
+    {
+      "id": "S49",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Carate01: una sola URL; cache final PDF 928543 B SHA 05117835947e634494ceea7eea854398af8e3f839a62cce9fc55d8c5e8edfd8c. Estratto da PDF “04/05-lug Arrampicata in ambiente…” parser v13 errato 2026-05-04 senza intervallo. PDF finale già nello status baseline; nessun candidate row nuovo, catalogo 3371 IDs / 6 Carate invariati."
+    },
+    {
+      "id": "S50",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Fix parser stretto DD/DD-meseAbbrev: 04/05-lug → 2026-07-04..05; ordinary 12/10 remains 12 October. Deterministic VERSION 14; real-line fixture/test; focused 2/2, backend 206/206; cached PDF re-evaluated offline; commit e277de52b9d311edc7b46b40512a6ee59f6d1901 pushed and fetch/tree verified."
+    },
+    {
+      "id": "S51",
+      "status": "completed",
+      "owner": "orchestrator + cai-collector",
+      "result": "Preflight offline Lombardia concluso senza nuovi target host-exact utili; Marche, Molise, Piemonte, Puglia e Sardegna saltate per URL già consumate/alias, passate o failure. Primo URL distinto selezionato in Sicilia: CAI Belpasso Programma 2026. Nessuna rete, raccolta, test o DB; checkpoint di selezione richiesto prima del run."
+    },
+    {
+      "id": "S52",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Belpasso programma01: una URL official-host; 153764 B HTML SHA 03521e393d4f0245db58098b3a6e273c43f5db9370f19840248fc0823f31eca3, status HTTP non registrato, method=null/unsupported e zero righe. Catalogo 3371 ID, 0 delta; source partial. Nessun DB o Mercury."
+    },
+    {
+      "id": "S53",
+      "status": "completed",
+      "owner": "cai-importer + orchestrator",
+      "result": "Importer QA PASS manifest/mirror e zero delta; backend npm test 206/206. Sei JSON pubblici byte-stabili prima/dopo test. Report pronto, nessun candidato/import; body HTML va diagnosticato solo offline."
+    },
+    {
+      "id": "S54",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Review del body HTML Belpasso esistente esclusivamente offline: articolo informativo senza date, righe evento, markup calendario o JSON-LD Event; metodo unsupported/null corretto. Nessuna patch, rete, test o file modificato; procedere al preflight di diversa fonte Sicilia."
+    },
+    {
+      "id": "S55",
+      "status": "completed",
+      "owner": "orchestrator + cai-collector",
+      "result": "Preflight offline Sicilia: 4 sezioni abilitate riesaminate (1 stato no-upcoming, 3 partial, 0 nuove irraggiungibili); nessun nuovo URL host-exact e selezionabile. Cefalù/Erice discovery-limit senza URL residua persistita; 25 disabilitate (24 senza website, Catania unreachable). 0 eventi o duplicati, 0 failure risolti; regione rimane aperta, prossima Toscana."
+    },
+    {
+      "id": "S56",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Toscana offline preflight: selezionata pagina ufficiale CAI Fivizzano Calendario 2026, host-exact e non visitata/status/cache/FAILURES/run; distinto dal PDF annuale OCR failure con discovery-limit 8. Nessuna rete/test/DB; singolo target dopo checkpoint."
+    },
+    {
+      "id": "S57",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Fivizzano calendar01: un URL, 10 righe; 5 nuovi ID raw, 0 rimossi, due sourceDocument-only changes; 3371→3376. Body 148307 B SHA a4e350…11f0; status HTTP non registrato; source partial."
+    },
+    {
+      "id": "S58",
+      "status": "completed",
+      "owner": "cai-importer + orchestrator",
+      "result": "QA indipendente PASS; source-evidence con locator corretti SHA 271b59…7709; un duplicato semantico escluso (5b1→b759), quattro ID classificabili; due aggiornamenti sourceDocument-only protetti. Backend npm test 206/206, sei JSON pubblici stabili. Zero DB; collection report pronto."
+    },
+    {
+      "id": "S59",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Prepared isolated classification-input of exactly four nonduplicate IDs; excluded semantic duplicate and two sourceDocument-only updates. Input SHA and evidence manifest generated. Runtime boolean preflight: API key present, classifier enabled, openrouter.ai allowed, proxy configured; required model from code inception/mercury-decide. No POST yet."
+    },
+    {
+      "id": "S60",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Preflight ripreso: runtime cloud connectivity offline/unavailable; segreto Mercury solo stato ready/presente, nessun valore letto e nessuna richiesta live. Input isolato e evidence seal validati localmente; aggiornato report per non dichiarare commit non avvenuto. Checkpoint remoto via GitHub connector da completare; Mercury sospeso finché il runtime non torna online."
+    },
+    {
+      "id": "S61",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Checkpoint isolato dei file Fivizzano pubblicato e verificato a 3341fc9: otto blob (docs/state, report, input, evidence manifest) corrispondono ai git blob locali. Successivo environment_status ha ristabilito connectivity=connected, segreto ready e host openrouter.ai consentito; nessuna POST ancora."
+    },
+    {
+      "id": "S62",
+      "status": "completed",
+      "owner": "orchestrator + cai-importer",
+      "result": "Mercury run cai-map-20261023-fivizzano01 completato sui 4 soli ID: 4/4, richiesto inception/mercury-decide, risposte attestate inception/mercury-decide-20260930/Inception; raw 3 trekking/0 non_trekking/1 da_verificare, 0 errori. Review QA Lago Padule mantiene raw candidate trekking ma effective da_verificare per evidenza ufficiale insufficiente. Importer verifica indipendente finale PASS per 4/4; delta-only ready, no updates/deletes. Nessuna query o write DB."
+    },
+    {
+      "id": "S63",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Classified-output checkpoint published and verified at 2179e0c644c0af0031ebe0b22c256820a671d93f (parent b2d64f8); nine blobs match local git object hashes. Read-only Supabase preflight at 2026-10-23T00:33:32.978008Z found all four target IDs absent from places/classifications; schema shows place_classifications FK to places.source_id and geo_evidence column available. No writes. Exact rows are ready via importer delta-only; require independent importer gate and immediate fresh preflight."
+    },
+    {
+      "id": "S64",
+      "status": "completed",
+      "owner": "orchestrator + cai-importer",
+      "result": "Supabase read-only preflight found all 4 target IDs missing, FK classification->places validated and exact place/classification rows contract-checked. Inserted 4 new places (draft) then 4 classifications via authorized Supabase MCP execute_sql using rows generated by published importer validators; ON CONFLICT DO NOTHING. After query reconciled all 4, counts 4427 places/3358 classifications; 0 updates/deletes, 0 coordinates. Receipt/state/evidence seal prepared for remote checkpoint. Importer agent final gate PASS."
+    },
+    {
+      "id": "S65",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Receipt, stato importer e evidence seal aggiornati e checkpointati in commit 52c9cd3a36e3128932fc4d140def45d01a021936. Branch remoto verificato sullo stesso SHA; 8 blob changed paths allineati a git hash-object locale; evidence-manifest PASS su 5 file."
+    },
+    {
+      "id": "S66",
+      "status": "completed",
+      "owner": "orchestrator + cai-collector",
+      "result": "Preflight offline dopo delivery Fivizzano: Toscana scrape-status snapshot 37 sezioni/17 enabled: 9 partial, 5 unsupported, 1 failed, 1 ok, 1 no-upcoming; 90 eventi registrati (persisted snapshot). Pescia cai-pescia-9226026 selezionata su URL ufficiale cp/calendario-attivita-cai-pescia/ presente in registry homepage, esatta non consumata/cache/failure. URL mensile fratello ha discovery-budget-exhausted; non ritentare, max1 page/120s/concurrency1/no discovery. Validazione host/url locale PASS."
+    },
+    {
+      "id": "S67",
+      "status": "completed",
+      "owner": "orchestrator + cai-collector + cai-importer",
+      "result": "Run cai-20261023-toscana-pescia-index01: exact /cp/ URL timed out at client 8000 ms; no status/body/cache/retry/events. Collector first erased old source history; orchestrator repaired from remote 90715a2, retaining 12 documents and August discovery-limit, adding distinct fetch-timeout issue/CAI-F-6ccdc9044ca287f1. Importer QA PASS; 3376 catalog IDs unchanged; all six public mirrors stable; backend test 206/206 after collection. No DB."
+    },
+    {
+      "id": "S68",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline Toscana scan: 17 enabled = 9 partial, 4 unsupported, 2 failed, 1 ok, 1 no-upcoming; persisted status sum 90 events. Pescia excluded after timeout; no other distinct Toscana URL remained safely selectable except new official Fivizzano page /eventi/le-miniere-di-calcaferro/, absent from status/cache/failures. Selected one-document bounded sample; no network/test/file edits."
+    },
+    {
+      "id": "S69",
+      "status": "completed",
+      "owner": "cai-collector + orchestrator",
+      "result": "Run cai-20261023-toscana-fivizzano-miniere01, selected after e8e0ce1 checkpoint: one cached official HTML page, one row Le miniere di Calcaferro dated 2026-09-06 and marked Expired; excluded as past. Catalog 3376→3376, Fivizzano 12→12 unchanged. Source remains partial; open PDF OCR/discovery and page/calendar discovery queues. Artifacts and evidence hashes verified; no DB."
+    },
+    {
+      "id": "S70",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline preflight after miniera01 selected Fivizzano official category URL /escursionismo/, exact target absent from documents/cache/failure; category content uncertain. Skipped oEmbed metadata and already-known semantic duplicate. Next one document max120s after remote checkpoint."
+    },
+    {
+      "id": "S71",
+      "status": "completed",
+      "owner": "cai-importer",
+      "result": "Independent QA initially held the incorrect Fivizzano sorted-row hash 0ea00c...; collector replaced it with a defined algorithm (filter 12 rows, sort by id, Node JSON.stringify UTF-8, SHA-256), correct 052158f0... independently reproduced on HEAD baseline and current catalog. Re-QA PASS: evidence manifest byte/hash entries valid, all three public file hashes and mirrors correct, expired event excluded, zero catalog delta, previous source issues preserved. No DB."
+    },
+    {
+      "id": "S72",
+      "status": "completed",
+      "owner": "cai-collector + cai-importer + orchestrator",
+      "result": "Run cai-20261023-toscana-fivizzano-escursionismo01: one official category page, 1 verified future event on 2026-11-15 exactly equal to existing ID cai-fivizzano-9226019-2d592e7a1731; no new ID, duplicate exclusion, row changes or coordinates. Catalog 3376→3376, Fivizzano 12→12. Independent importer PASS and backend tests 206/206 after collection; public hashes unchanged by tests, mirrors byte-identical. No classification/DB."
+    },
+    {
+      "id": "S73",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline Toscana scan after Escursionismo01: selected registered official CAI Fivizzano /attivita/ landing page, absent from status/cache/FAILURES; generic landing, one-page bounded sample, no event assumption. Pescia timeout and Fivizzano PDF OCR/discovery issues remain."
+    },
+    {
+      "id": "S74",
+      "status": "completed",
+      "owner": "cai-collector + cai-importer + orchestrator",
+      "result": "Run cai-20261023-toscana-fivizzano-attivita01: official landing page cached and evidence locators checked; method=null/events=0 is informational landing, not empty calendar; no child followed. Catalog 3376 rows and 12 Fivizzano unchanged. Source partial and prior issues preserved, own discovery-limit added. Importer PASS; backend 206/206 after collection; hashes stable and mirrors byte-identical. No DB."
+    },
+    {
+      "id": "S75",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Post-run offline source scan: Toscana has no further safe exact URL; only unvisited Fivizzano URL is semantic duplicate previously reviewed; Pescia timeout and other enabled pages consumed/failed/backlog without exact URL. Trentino also lacks safe URL; Umbria and Valle d’Aosta none. Selected Veneto CAI Alpago official /programma-2/, absent from status/cache/FAILURES; one page/120s/concurrency1."
+    },
+    {
+      "id": "S76",
+      "status": "completed",
+      "owner": "orchestrator + cai-collector + cai-importer",
+      "result": "Run cai-20261023-veneto-alpago-programma01 completed as partial/files ready/database pending. Requested /programma-2/ response is not attributable to persisted /programma-2-2/ body: 3 raw rows, 0 attributable events, 0 new IDs/verified coverage. Catalog 3,376 rows before and after; two existing rows changed only link/sourceDocument based on the pre-existing /programma-2-2/ body. Importer integrity/catalog QA PASS, attribution HOLD; Lastoi pair remains unmerged. No classification or DB query/write."
+    },
+    {
+      "id": "S77",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Backend npm test on checkpoint f95b9e5 passed 206/206 after collection. All six public JSON hashes identical pre/post; backend/frontend mirrors byte-identical."
+    },
+    {
+      "id": "S78",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline Lombardia scan complete: no exact official-host safe target in current status/FAILURES/run-artifact snapshot. Candidate URLs Busto, Carate, Legnano, Livigno, Missaglia, Sesto, Strada Storta and Varese were already consumed/past/failed/cooldown or lacked exact persisted child URLs. Collector cache is absent in this checkout, so no cache miss is asserted. Region remains incomplete."
+    },
+    {
+      "id": "S79",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline Marche scan: 12 enabled sections have status; exact-host calendar URLs already represented in status/FAILURES/run artifacts; 4 disabled without sites. No safe target from documentation; cache absent, no cache miss asserted; region remains incomplete."
+    },
+    {
+      "id": "S80",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline Molise scan: Campobasso is the sole enabled section; its registered URLs already appear in status/FAILURES, with two discovery-limit queues lacking exact child URLs. Three disabled without sites. No safe target; cache absent, region incomplete."
+    },
+    {
+      "id": "S81",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline Puglia scan: five sections have status, four enabled. All enabled exact calendar URLs already represented in status/FAILURES/run artifacts; Grottaglie is no-upcoming. No safe target; cache absent, region not declared complete."
+    },
+    {
+      "id": "S82",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline Sardegna scan: 7 sources, 4 enabled; calendar URLs for enabled sources already represented in status/FAILURES/run artifacts; Cagliari/Nuoro/Oristano partial, Villagrande no-upcoming. No safe target; external Google Calendar 403 not selected. Cache absent, region incomplete."
+    },
+    {
+      "id": "S83",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline Calabria scan: 9 sections, 3 enabled (Castrovillari, Catanzaro, Reggio Calabria), 6 disabled. No exact official-host safe target: URLs already read, insufficiently attributed, or discovery queues without exact child URL; Google Drive 403 not selected. Collector cache absent, no cache miss asserted; Calabria remains incomplete."
+    },
+    {
+      "id": "S84",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline Campania scan: 17 sections, 7 enabled (Caserta, Monte Bulgheria, Napoli, Piedimonte Matese, Roccarainola, Salerno, Vesuvio), 10 disabled. No safe exact target in current status/FAILURES/run artifacts. Caserta La Laghetta/badia di cava are metadata-only with no current calendar/date evidence. Cache absent, no cache miss asserted; Campania remains incomplete."
+    },
+    {
+      "id": "S85",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline Emilia-Romagna preflight found one candidate official exact URL for CAI Cesena, cai-cesena-9224012: https://www.caicesena.com/index.php/attivita. Registry calendarUrls/calendarEvidence label it “Attività” and link it from official /programma-attivita; host matches source.website. Not found in status documents/issues, FAILURES, or run artifacts. Current program is partial/method=null with discovery-limit 1 and PDF issues. Collector cache absent, so cache miss is not attested. No fetch performed."
+    },
+    {
+      "id": "S86",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Checkpoint 6fcd4da verified before the bounded Cesena run. Run cai-20261023-emilia-romagna-cesena-attivita01 completed: partial/files ready/database pending; requested URL status has hash 63bd28… but no body or HTTP metadata; zero extracted is not an empty-calendar result. Catalog 3376→3376, 0 add/remove/change, 6 Cesena rows unchanged. Importer file-integrity PASS and source attribution HOLD; no classification/DB."
+    },
+    {
+      "id": "S87",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Backend npm test 206/206 after collection, serially. Six public JSON hashes stable pre/post; backend/frontend mirrors identical."
+    },
+    {
+      "id": "S88",
+      "status": "completed",
+      "owner": "cai-importer",
+      "result": "Independent QA: manifest paths/hashes and mirrors PASS; 6 existing Cesena rows unchanged, 0 new candidates; attribution HOLD because body/cache/status/content type unavailable. No DB query/write."
+    },
+    {
+      "id": "S89",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline scan: FVG has 39 sections, 12 enabled and 27 disabled; 81 exact same-host calendar URLs for enabled sources are already represented in status, FAILURES or 250 run-artifact files reviewed. No cache miss attested. Region remains incomplete; next canonical candidate is Lazio."
+    },
+    {
+      "id": "S90",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline exact-URL preflight selected CAI Sora (`sora`, Lazio): https://www.caisora.it/sito/programma-escursionistico-2026-2/, registry calendarUrls/calendarEvidence same-host; not represented in status URL/documents, FAILURES or reviewed run artifacts. Existing PDF OCR/discovery issue is a distinct URL and will not be retried. No network/test/DB."
+    },
+    {
+      "id": "S91",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Sora target selection was published and remotely verified at 312a682 before the fetch."
+    },
+    {
+      "id": "S92",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Bounded run cai-20261023-lazio-sora-programma01 read the exact announcement URL, one document/120s/concurrency1/no discovery. Cache HTML 75,149 B SHA 59df2257…c9ea742 matches status document hash. Article dated 17 Jan 2026 links to the distinct OCR-failed 2026.pdf; not followed. Parser method=null, 0 rows; this does not establish an empty calendar."
+    },
+    {
+      "id": "S93",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Backend npm test 206/206 serially after collection; six public JSON files unchanged pre/post."
+    },
+    {
+      "id": "S94",
+      "status": "completed",
+      "owner": "cai-importer",
+      "result": "Independent QA PASS on manifest hashes, catalog diff and mirrors. 3,376 rows, 10 Sora rows unchanged; 0 delta. Content is an announcement, not the schedule; event coverage HOLD. No DB."
+    },
+    {
+      "id": "S95",
+      "status": "pending",
+      "owner": "orchestrator",
+      "result": "Sora run checkpoint published and remotely verified at 10a4de9. After this handoff, cai-collector performs offline-only preflight for a different Lazio source; no repeat of the Sora PDF failure."
+    },
+    {
+      "id": "S96",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Offline Lazio preflight: 31 sections, 19 enabled and 12 disabled. Other enabled URL candidates represented in status/failures. One distinct CAI Sora exact URL https://www.caisora.it/sito/events/?ical=1 is listed in calendarUrls/calendarEvidence, linked from the just-read official announcement, not represented in status/FAILURES/run requests. No cache miss attested. Sora PDF failure remains excluded."
+    },
+    {
+      "id": "S97",
+      "status": "pending",
+      "owner": "orchestrator",
+      "result": "Publish and verify the Sora ICS target selection; then one bounded iCal request, max1/120s/concurrency1/no discovery."
+    },
+    {
+      "id": "S98",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Sora iCal01 completed after selection checkpoint 54f89ba. Exact URL cache body 271 B text/calendar SHA 0346bed3…; valid VCALENDAR 2.0 METHOD:PUBLISH, one calendar, zero VEVENT; status method=ics/events=0/no-upcoming. Source remains partial for PDF OCR/discovery and announcement discovery; no retries."
+    },
+    {
+      "id": "S99",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Backend npm test 206/206 serially; six public JSON hashes unchanged pre/post collection test."
+    },
+    {
+      "id": "S100",
+      "status": "completed",
+      "owner": "cai-importer",
+      "result": "Independent cache/body/manifest/catalog/mirror QA PASS. Feed-level no-upcoming supported, whole source coverage HOLD; 10 existing Sora IDs unchanged and 0 delta. No DB."
+    },
+    {
+      "id": "S101",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Sora iCal artifacts, report/evidence and mirrors verified remotely at b143fe5; follow-up Liguria preflight found no safe target."
+    },
+    {
+      "id": "S102",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Liguria offline review: 26 sections, 5 enabled/21 disabled; all exact-host calendar URLs for enabled sources are in current status/documents. Three registry failures are documented discovery-limits (Ligure7, Loano ICS46, ULE ICS37), with no exact child URL; no new HTTP cooldown. Cache unavailable, no cache miss attested. Region incomplete, no target."
+    },
+    {
+      "id": "S103",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Lombardia already has a documented post-Carate offline preflight with no safe exact URL; do not repeat its queues/cooldowns. Subsequent recorded scans Marche, Molise, Puglia, Sardegna, Calabria and Campania also found no new exact targets. Continue to Emilia-Romagna for a new offline audit of remaining enabled sources after Cesena."
+    },
+    {
+      "id": "S104",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Emilia-Romagna offline review: 29 sections, 14 enabled/15 disabled; Cesena/Pavullo excluded. No safe unconsumed exact-host URL. Remaining candidates are represented/consumed URLs, 403/503 cooldowns or discovery limits without child URL. Modena ?share=facebook is social tracking, not calendar. Cache unavailable, no cache miss attested. No network/tests/DB."
+    },
+    {
+      "id": "S105",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Offline frontier check after Emilia reviewed persisted evidence in candidate regions excluding prior exhausted queues: Piemonte candidates are July-only/past or non-calendar; Trentino Bronzolo attachment aliases a PDF already read; Veneto Conegliano iCal duplicates the already-read category feed and Fiume is an insurance-page alias. No exact-host plausible unconsumed target; cache unavailable, no cache miss attested; no network/test/catalog/DB changes."
+    },
+    {
+      "id": "S106",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Fixed unsafe directory-only refresh: unambiguous merge preserves curated source metadata and unmatched prior sections; subsection API failures abort before catalog writes; backend/frontend pair writes stage both and roll back on caught rename errors; directory-only requires exactly one known --region and only schedules its parent subsection endpoints. Collector focused 7/7, importer independent QA PASS, backend npm test 213/213. No network/catalog/DB run."
+    },
+    {
+      "id": "S107",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Directory refresh code is verified remotely at fcf7f901f8ee34ce83f34f619814ab740cf65522; the official directory refresh was then executed with the region filter and bounded to Lombardia."
+    },
+    {
+      "id": "S108",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Run cai-20261023-lombardia-directory-refresh01 completed. 152 root sections selected; zero subsection response failures; 837 records before/after, zero ID additions/removals, zero ambiguous IDs, zero other-region changes; nine Lombardia website fields changed. Output from first merge SHA 2216dea5e80881d99e5a72e421175d3fe373fd923d911514b498b65473a82ae9, mirrors equal. Collector found missing-website -> website was not activating new sources; fixture-backed fix makes only a strictly unconfigured record pending-discovery and uses website as initial URL; Lovere enabled after local deterministic remerge. No event scrape or DB. Full suite 214/214 before the final catalog hash refresh; rerun required before checkpoint."
+    },
+    {
+      "id": "S109",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Corrected new official-website promotion in the regional directory merge. Fixture sets stale directory detail URL separately from the official website and asserts pending-discovery url=website. Focused merge tests 7/7; full backend test initially 214/214. Helper/test/fixture hashes recorded in collector handoff."
+    },
+    {
+      "id": "S110",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Final offline merge applied using the corrected helper: only Lovere url/enabled/status promotion beyond nine directory website updates; 837 records, 0 IDs added/removed, 0 ambiguities, 608 previous IDs retained, no other-region changes. Backend npm test 214/214 after final catalog and merge fix; backend/frontend catalog hash stayed 250afdbc6fa8980f076f094c9574b2d77d157e7f34f4dfb9c84a4f09f3166944. No event scrape or DB."
+    },
+    {
+      "id": "S111",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Checkpoint pushed and remote-verified at 25999cffecb6830765f954aba7fc729c3bb17ed3 on codex/cai-orchestrator-luna. Final catalog/output, report+manifest, merge fix and tests are now recoverable from GitHub. Await only importer read-only QA of this final checkpoint before any event request."
+    },
+    {
+      "id": "S112",
+      "status": "completed",
+      "owner": "cai-importer",
+      "result": "Importer final QA PASS on remote branch at 5f82449bc802a8c7cb0d0907c9967c9ebe7612b8. Manifest/report/output SHA verified; 837 IDs, 0 add/remove, regional-only 9 website changes plus Lovere activation; sources.js/enabledSources exposes Lovere as deterministic discover. No network, tests, edits, or DB by importer."
+    },
+    {
+      "id": "S113",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Selected exactly one official new target in Lombardia: cai-lovere-9216055 / https://organizzazione.cai.it/sez-lovere/. No event/calendar response or cache exists in current scrape status. Planned bounded run cai-20261023-lombardia-lovere01: one source, concurrency 1, max 8 documents, source budget 120000 ms via SCRAPE_MAX_DOCUMENTS=8 and SCRAPE_SOURCE_BUDGET_MS=120000. No --source-url continuation; homepage is the official directory URL. Checkpoint this selection before network."
+    },
+    {
+      "id": "S114",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Executed only cai-lovere-9216055 using run cai-20261023-lombardia-lovere01, max 8 docs/120s/concurrency1. Three same-host docs; parsed WordPress Events API JSON valid with events=[], total=0, total_pages=0 over 2026-10-01..2028-10-23. Empty iCal body is HTML and not used as proof. Source status no-upcoming, no error/issues. Catalog rows/IDs 3376 before/after; 0 adds/removes/modifications; no other sources fetched; no DB."
+    },
+    {
+      "id": "S115",
+      "status": "completed",
+      "owner": "cai-importer",
+      "result": "Independent read-only QA PASS with evidence caveat: sealed manifest/state hashes match; backend/frontend public JSON mirrors byte-identical; 3376 unique IDs unchanged. WordPress Events JSON parsed to empty for requested range, so feed-level zero is supported; no HTTP status/final URL persisted. iCal alone does not prove empty. No DB read/write, no import required."
+    },
+    {
+      "id": "S116",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Backend npm test 214/214 after collection. Public excursions hash before and after tests is 10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7 for both backend and frontend; tests did not write frontend/public/excursions.json."
+    },
+    {
+      "id": "S117",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "No-upcoming run, collection report/audit manifest, mirrors and state are remote and verified at 8961db1d5c90baa94af336931bbcaca9e9ed2d2f. Importer final QA PASS; catalog stays 3376 unique IDs with zero delta; no DB import required."
+    },
+    {
+      "id": "S118",
+      "status": "completed",
+      "owner": "cai-importer",
+      "result": "Read-only QA PASS on remote 8961db1d. Report/audit manifest/orchestrator manifest/state hashes cross-check; six output hashes pass; all three public data mirrors are byte-identical; 3376 event IDs unchanged; status diffs consist of Lovere run and eight directory-only website metadata; feed-level zero is supported by parsed WordPress Events JSON, iCal is non-probative, HTTP/final URL gap stated. No DB."
+    },
+    {
+      "id": "S119",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Preflight offline collector su Lombardia dopo Lovere: nessun URL exact-host selezionabile. Il PDF CAI Gazzada Schianno è ufficiale ma compare già come sourceUrl in cai-map-20261022-full01 e in record catalogati; HOLD per evitare replay. Altri residui sono già consumati, failure/cooldown o code senza URL figlia persistita. Nessun fetch/test/file/DB."
+    },
+    {
+      "id": "S120",
+      "status": "completed",
+      "owner": "cai-collector + orchestrator",
+      "result": "Preflight offline Emilia-Romagna sul branch b4780ff dopo Cesena/Pavullo: nessun target exact-host sicuro. Argenta e Rimini hanno 503, Ravenna 403; restanti URL consumed o non-calendario/terze parti. 29 sezioni (14 enabled/15 disabled) da snapshot REGIONS; stati/eventi non ricalcolati, 0 fetch/eventi/duplicati/failure risolti, nessun DB."
+    },
+    {
+      "id": "S121",
+      "status": "completed",
+      "owner": "cai-collector + orchestrator",
+      "result": "Preflight offline Lazio sul branch b4780ff: nessun target nuovo oltre Sora programma/iCal già letti; altre fonti enabled hanno URL in documents/status o discovery-limit senza figlio esatto, con blocchi 403/404 o social. Snapshot: 31 sezioni (19 enabled/12 disabled); stati non ricalcolati, 0 fetch/eventi/duplicati/failure risolti, nessun DB."
+    },
+    {
+      "id": "S122",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Directory-only CAI Marche eseguita nel checkout isolato del collector sul codice b4780ff, poi trasferita nel checkout corrente 651423e dopo verifica baseline: 528 elementi directory, 15 parent/15 risposte sottosezione, 0 failure; registry 837 record e 837 ID, 0 add/remove/ambiguity/out-of-region, tre soli website Marche cambiati. Importer QA PASS indipendente; backend npm test 214/214, sei hash JSON pubblici identici pre/post. Nessun evento/fetch calendario/DB. Report SHA 523384f0…1a5ac1, manifest SHA 37b05fc6…e8c1a, mirror SHA 992e3256…7d6100."
+    },
+    {
+      "id": "S123",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Preflight offline Marche sul checkout remoto 82eb9a4: nessun URL calendario nuovo. S. Benedetto del Tronto ha URL/PDF già letti; Pesaro e Sarnano hanno homepage ufficiali aggiornate dal CAI ma calendarUrls/evidence vuote. Selezionata solo la homepage Pesaro `https://caipesaro.it/` come campione di discovery, non come calendario attestato; host esatto registrato e consentito, non presente in status/cache/run docs. Nessun fetch/test/DB."
+    },
+    {
+      "id": "S124",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Homepage Pesaro selection and exact single-source scope checkpointed remotely at 71c750075eaae6e661753a62325c0cea91f87cbb; sample collection completed under a new run."
+    },
+    {
+      "id": "S125",
+      "status": "completed",
+      "owner": "cai-collector + orchestrator",
+      "result": "Run cai-20261023-marche-pesaro-homepage01: one official URL seed https://caipesaro.it/, SCRAPE_MAX_DOCUMENTS=1, budget 120s, concurrency 1. Redirect rejected outside registered HTTPS host before body capture; HTTP status/final URL/body and redirect exchange count are not persisted. Collection partial, 0 extracted/verified events, 0 catalog delta; no DB."
+    },
+    {
+      "id": "S126",
+      "status": "completed",
+      "owner": "cai-importer + orchestrator",
+      "result": "Initial run file QA: importer PASS on manifest/catalog integrity and HOLD on absent response evidence; backend npm test 214/214 after collection. No DB. A later source-specific alias patch and full-suite verification are recorded in S128-S129."
+    },
+    {
+      "id": "S127",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Pesaro report/state/status checkpoint and manifest verified on origin at 24e48e9070ea96added7bf0e5c7580e5a8ca5025; selected run artifact status mirrors were normalized to preserve baseline source ordering. No merge/deploy/DB. Separate header-only HTTPX diagnosis: apex returned 301 to http://www.caipesaro.it/; direct https://www.caipesaro.it/ returned 200 text/html length 117; no body read. Diagnostic SHA 6a7688d6c388a2f829501c6564f1101c5d41bcc51322ed155ffead81580098f0."
+    },
+    {
+      "id": "S128",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Source-specific Pesaro alias patch: only cai-pesaro-9228006 accepts official HTTPS www.caipesaro.it in explicit source URL and redirect policy; HTTP alias and arbitrary hosts rejected. Fixture tests cover allow/deny; targeted 39/39. No collection/DB."
+    },
+    {
+      "id": "S129",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "After alias patch/refactor, backend npm test 216/216 passed; six hashes (backend/frontend excursions, cai-sections, scrape-status) unchanged. Existing run manifest remains valid; registry mirror equal."
+    },
+    {
+      "id": "S130",
+      "status": "completed",
+      "owner": "cai-importer",
+      "result": "Final read-only QA PASS after source alias patch and report/hash updates. Alias limited to Pesaro HTTPS; HTTP/arbitrary hosts denied; run manifest/report/diagnostic/state hashes and all mirrors valid; documentation/status consistent. No DB."
+    },
+    {
+      "id": "S131",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Source-specific HTTPS Pesaro alias patch, fixture/tests, redirect diagnostic, report and state checkpoint committed/pushed and verified at 9336988f54f6bec0ed3b0ddf1a451748de23065b. No merge/deploy/DB."
+    }
+  ],
+  "nextAction": "Avviare `cai-20261023-marche-pesaro-homepage02` tramite orchestratore, solo fonte `cai-pesaro-9228006`, `--source-url https://www.caipesaro.it/`, concurrency 1, max1 documento, budget 120000 ms. Dopo la raccolta fermarsi; importer QA read-only, poi npm test backend seriale e verifica dei sei JSON. Non importare senza nuovo delta file verificato/classificato e checkpoint remoto.",
+  "constraints": {
+    "recurringSchedules": false,
+    "implicitMerge": false,
+    "implicitDeploy": false,
+    "secretsInGit": false,
+    "databaseDeletes": false,
+    "proposedRunId": null
+  },
+  "currentWork": {
+    "branchHead": "9336988f54f6bec0ed3b0ddf1a451748de23065b",
+    "recoverableRemoteCheckpoint": true,
+    "sampleRun": {
+      "runId": "cai-20261023-marche-pesaro-homepage01",
+      "region": "Marche",
+      "sourceId": "cai-pesaro-9228006",
+      "requestedUrl": "https://caipesaro.it/",
+      "collection": "partial; redirect blocked by registered-host guard before response body capture; do not treat as an empty calendar",
+      "files": "run manifest/status/report/redirect diagnostic verified; source-specific alias code + tests ready, importer final QA and remote checkpoint pending; report SHA-256 cf2b40e7e441b76e8df41013f254c476ec7ae26af7597f71f48a695341a03b4a",
+      "database": "pending-no-delta; no DB query, migration, write, import or receipt",
+      "runFolder": "backend/data/agent-runs/cai-20261023-marche-pesaro-homepage01",
+      "sourceUrlSeeds": 1,
+      "maxDocuments": 1,
+      "sourceBudgetMs": 120000,
+      "concurrency": 1,
+      "requestCount": "not independently attestable; redirect details were not persisted",
+      "httpStatus": "not persisted",
+      "finalUrl": "not persisted",
+      "responseBody": "not persisted",
+      "eventsExtracted": 0,
+      "eventsVerified": 0,
+      "duplicatesExcluded": 0,
+      "failuresResolved": 0,
+      "failuresOpen": [
+        "official-host redirect rejected; response metadata/body absent"
+      ],
+      "catalogRowsBefore": 3376,
+      "catalogRowsAfter": 3376,
+      "uniqueIds": 3376,
+      "added": 0,
+      "removed": 0,
+      "modified": 0,
+      "backendExcursionsSha256": "10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7",
+      "frontendExcursionsSha256": "10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7",
+      "backendRegistrySha256": "992e32565ed65031f95873b7dd83fc82b8feba66daa4aebd59cfe6ea277d6100",
+      "backendStatusSha256": "5cc2ae7caefa2f9f8c7876f433a7516423e6ebe9bbd05ce99903feb05f7b5391",
+      "frontendStatusSha256": "5cc2ae7caefa2f9f8c7876f433a7516423e6ebe9bbd05ce99903feb05f7b5391",
+      "manifestSha256": "7bec2799fcf3791d0004e9577334621e6161f2b7b1061e7d703cd4e928a10267",
+      "stateSha256": "9703deff0e9dbda34557e43b0e6105203c138631827e653d51b5ed3f3d5125e4",
+      "reportSha256": "cf2b40e7e441b76e8df41013f254c476ec7ae26af7597f71f48a695341a03b4a",
+      "importerQa": "PASS file/catalog integrity; HOLD HTTP request evidence",
+      "backendTests": "npm test 214/214 after collection; catalog/registry mirrors unchanged",
+      "redirectDiagnosticSha256": "6a7688d6c388a2f829501c6564f1101c5d41bcc51322ed155ffead81580098f0",
+      "patchTests": "targeted 39/39; backend npm test 216/216; six JSON hashes unchanged"
+    },
+    "sourceAliasPatch": "fixture-backed code ready, importer QA/checkpoint pending",
+    "database": "no reads, writes, imports, migrations or receipts"
+  },
+  "repositoryCommit": "9336988f54f6bec0ed3b0ddf1a451748de23065b",
+  "databaseReadOnlyObservation": {
+    "observedAt": "2026-10-22T18:12:15.676Z",
+    "source": "authorized Supabase read-only SQL and map predicate",
+    "projectRef": "snwzxegtqnnuvlawnpgl",
+    "placesTotal": 4405,
+    "published": 4346,
+    "mapCandidates": 3336,
+    "uniqueMapSourceIds": 3336,
+    "latestPlacesUpdatedAt": "2026-10-20T11:51:23.239637Z",
+    "classificationTablesFound": false,
+    "writes": 0,
+    "status": "Historical observation only; superseded by later Campobasso inserts. No DB query was run for Penne because there was no event delta.",
+    "supersededBy": {
+      "runId": "cai-map-20261022-campobasso01",
+      "receiptPath": "backend/data/agent-runs/cai-map-20261022-campobasso01/delta-import-receipt.json",
+      "receiptSha256": "134ff85bba4c35c7312597a57b2320bfe9c69eb7ec5117d992a874a2be551715",
+      "placesInserted": 2,
+      "classificationsInserted": 2,
+      "afterQueryAt": "2026-10-22T22:33:30.892756Z"
+    }
+  },
+  "tests": "Backend npm test 214/214 after original collection; 216/216 after source-specific HTTPS alias patch. Targeted node --test test/pipeline.test.js test/deterministic.test.js 39/39. Six public JSON hashes unchanged pre/post full suite.",
+  "updatedAt": "2026-10-23T07:08:39Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T07:08:39Z",
+  "regionCurrent": "Marche: directory refresh completed, then one CAI Pesaro homepage URL seed was sampled. Redirect was blocked before body capture; 1 source partial, 0 complete, 0 HTTP-unreachable attested, 0 events verified. This is not an empty-calendar result and not a regional audit.",
+  "regionNext": "Marche remains open. After checkpoint 9336988, run a single bounded homepage sample at the verified HTTPS alias www.caipesaro.it. Stop after one URL; if no readable calendar, retain partial and select the next official Marche source only after reviewing the returned evidence.",
+  "preflight": {
+    "at": "2026-10-23T01:27:16Z",
+    "sourceId": "cai-cesena-9224012",
+    "scope": "one explicit exact official-host URL, max 1 document/120 s/concurrency 1/no discovery; importer checked status and cache availability",
+    "result": "collection partial; status records the URL and metadata hash but there is no response body, cache object, HTTP status or content type in this checkout",
+    "reason": "content attribution is HOLD; zero extracted rows do not establish calendar emptiness; no repeat of prior programme route",
+    "networkFetchPerformed": true,
+    "selectedUrl": "https://www.caicesena.com/index.php/attivita"
+  },
+  "databasePreflight": {
+    "observedAt": "2026-10-23T00:34:58.379392Z",
+    "method": "authorized-supabase-mcp-read-only",
+    "projectRef": "snwzxegtqnnuvlawnpgl",
+    "scopeSourceIds": [
+      "cai-fivizzano-9226019-25b520da9498",
+      "cai-fivizzano-9226019-4ac183446fc1",
+      "cai-fivizzano-9226019-9ad6725f7fbe",
+      "cai-fivizzano-9226019-eba39ba9cdc6"
+    ],
+    "targetPlacesBefore": 0,
+    "targetClassificationsBefore": 0,
+    "placesCountBefore": 4423,
+    "classificationsCountBefore": 3354,
+    "placesInserted": 4,
+    "classificationsInserted": 4,
+    "placesCountAfter": 4427,
+    "classificationsCountAfter": 3358,
+    "schema": {
+      "placesSourceId": "UNIQUE",
+      "classificationSourceId": "PRIMARY KEY",
+      "classificationForeignKey": "place_classifications.source_id -> places.source_id ON DELETE RESTRICT",
+      "placesGeoEvidence": "jsonb nullable",
+      "unlocatedCoordinates": "nullable"
+    },
+    "writePerformed": true,
+    "receiptCommit": "52c9cd3a36e3128932fc4d140def45d01a021936"
+  },
+  "deltaDelivery": {
+    "regionalRunId": "cai-20261023-toscana-fivizzano-calendar01",
+    "status": "completed",
+    "candidateIds": 4,
+    "databaseQueryPerformed": true,
+    "databaseWritePerformed": true,
+    "placesInserted": 4,
+    "classificationsInserted": 4,
+    "existingPreserved": 0,
+    "skipped": 0,
+    "updated": 0,
+    "deleted": 0,
+    "receipt": "backend/data/agent-runs/cai-map-20261023-fivizzano01/import-receipt.json",
+    "receiptCommit": "52c9cd3a36e3128932fc4d140def45d01a021936",
+    "visibility": "draft"
+  },
+  "lastCodeCorrection": {
+    "commit": "e277de52b9d311edc7b46b40512a6ee59f6d1901",
+    "remoteVerified": true,
+    "correction": "Parser riconosce la forma stretta DD/DD-meseAbbrev (04/05-lug -> 4–5 luglio) senza alterare 12/10; extraction cache VERSION 14.",
+    "fixture": "backend/test/fixtures/cai-carate-2026-course-date-abbreviation.json",
+    "test": "backend/test/deterministic.test.js: Carate range + numeric day/month regression; focused 2/2",
+    "backend": "206/206 after collection and fix; six public JSON hashes unchanged during test suite",
+    "independentImporterQa": "PASS file seals/catalog mirrors; HOLD import eligibility because corrected record is past/no catalog delta"
+  },
+  "lastRegionalAttempt": {
+    "runId": "cai-20261023-marche-pesaro-homepage01",
+    "region": "Marche",
+    "sourceId": "cai-pesaro-9228006",
+    "requestedUrl": "https://caipesaro.it/",
+    "collection": "partial; official-host redirect rejected before body capture; zero events is not evidence of empty calendar",
+    "files": "run artifacts + redirect diagnosis; source-specific alias patch tested and importer QA PASS; code/evidence checkpoint pending; report SHA-256 cf2b40e7e441b76e8df41013f254c476ec7ae26af7597f71f48a695341a03b4a",
+    "database": "0 reads, migrations, writes, imports or receipts; no delta",
+    "sectionsChecked": 1,
+    "complete": 0,
+    "partial": 1,
+    "unreachable": 0,
+    "eventsVerified": 0,
+    "duplicatesExcluded": 0,
+    "failuresResolved": 0,
+    "failuresOpen": [
+      "redirect guard blocked response; HTTP status, final URL and body unavailable"
+    ],
+    "catalogBefore": 3376,
+    "catalogAfter": 3376,
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "reportSha256": "cf2b40e7e441b76e8df41013f254c476ec7ae26af7597f71f48a695341a03b4a",
+    "backendTests": "214/214",
+    "redirectDiagnosticSha256": "6a7688d6c388a2f829501c6564f1101c5d41bcc51322ed155ffead81580098f0",
+    "importerQa": "PASS read-only; report/manifest/diagnostic hashes and source-specific alias contract verified"
+  },
+  "regionalCoverage": {
+    "region": "Marche",
+    "scope": "directory refresh plus one bounded Pesaro official-homepage discovery sample; not a regional completeness audit",
+    "status": "open",
+    "currentRunCounts": {
+      "sectionsChecked": 1,
+      "complete": 0,
+      "partial": 1,
+      "unreachable": 0,
+      "eventsVerified": 0,
+      "duplicatesExcluded": 0,
+      "failuresResolved": 0,
+      "failuresOpen": 1,
+      "databasePlacesInserted": 0,
+      "databaseClassificationsInserted": 0,
+      "nextStep": "Publish file/report checkpoint, then establish redirect target from official evidence before any new bounded sample; do not treat zero extracted rows as an empty calendar."
+    },
+    "catalogDelta": {
+      "before": 3376,
+      "after": 3376,
+      "added": 0,
+      "removed": 0,
+      "modified": 0
+    },
+    "historicalSnapshot": {
+      "asOf": "2026-10-20",
+      "note": "Historical only; no current national or regional aggregate query was made."
+    }
+  },
+  "deltaDeliveryHistory": [
+    {
+      "regionalRunId": "cai-20261022-lombardia-valmadrera07",
+      "classificationRunId": "cai-map-20261022-valmadrera01",
+      "status": "completed-10-row-delta-reconciled-and-receipt-published",
+      "candidateIds": 10,
+      "confirmedDuplicatesExcluded": 2,
+      "probableDuplicatesHeld": 2,
+      "classificationCounts": {
+        "trekking": 0,
+        "non_trekking": 8,
+        "da_verificare": 2,
+        "errors": 0
+      },
+      "coordinatesAdded": 0,
+      "writeContract": "insert-only places + missing classifications; conflict-ignore; no deletes/updates",
+      "next": "No replay. Receipt b9b8a5fdcabc12f94f5aeeb39fec4e03b375098bb32837942b8c598f0cdf7cf7 and DB reconciliation are complete at remote commit 50352f7fde1a638e6541aab048fcdacfb834324b; proceed with separate Lombardia source coverage.",
+      "databaseReceipt": {
+        "path": "backend/data/agent-runs/cai-map-20261022-valmadrera01/delta-import-receipt.json",
+        "sha256": "b9b8a5fdcabc12f94f5aeeb39fec4e03b375098bb32837942b8c598f0cdf7cf7",
+        "placesInserted": 10,
+        "classificationsInserted": 10,
+        "missing": 0,
+        "mismatches": 0,
+        "candidateDisposition": {
+          "newCandidates": 14,
+          "inserted": 10,
+          "confirmedDuplicatesExcluded": 2,
+          "probableDuplicatesHeld": 2
+        }
+      },
+      "preImportQuery": {
+        "observedAt": "2026-10-22T20:33:42.003837Z",
+        "placesTotal": 4405,
+        "publishedTotal": 4346,
+        "mapCandidates": 3336,
+        "classificationsTotal": 3336,
+        "targetPlacesPresent": 0,
+        "targetClassificationsPresent": 0,
+        "editorialDigest": "b52a6bcc1c0d4779ffeb112e5547c891"
+      },
+      "afterQuery": {
+        "observedAt": "2026-10-22T20:34:53.834321Z",
+        "placesTotal": 4415,
+        "publishedTotal": 4356,
+        "mapCandidates": 3346,
+        "classificationsTotal": 3346,
+        "targetPlacesPresent": 10,
+        "targetPlacesMissing": 0,
+        "targetFieldMismatches": 0,
+        "targetClassificationsPresent": 10,
+        "targetClassificationMismatches": 0,
+        "classificationsByDecision": {
+          "trekking": 969,
+          "non_trekking": 17,
+          "da_verificare": 2360
+        },
+        "defaultMapVisibleRows": 3329,
+        "preexistingEditorialDigestMatchesBefore": true,
+        "preexistingLatestUpdatedAtUnchanged": true
+      },
+      "duplicateMatchQuery": {
+        "observedAt": "2026-10-22T20:36:22.256568Z",
+        "confirmedOriginalIdsPresent": 2,
+        "probableComparisonIdsPresent": 2,
+        "noRowsChanged": true
+      },
+      "completedAt": "2026-10-22T20:34:53.834321Z"
+    },
+    {
+      "regionalRunId": "cai-20261022-piemonte-pinasca02",
+      "classificationRunId": "cai-map-20261022-pinasca02",
+      "status": "completed-receipt-remote-verified",
+      "candidateIds": 4,
+      "classificationCounts": {
+        "trekking": 2,
+        "non_trekking": 2,
+        "da_verificare": 0,
+        "errors": 0
+      },
+      "databaseReceiptSha256": "7baeb4307d6d8ef91d2dfd42a05f84e936ff9126dee9c83ba379ae99c2d3d41a",
+      "placesInserted": 4,
+      "classificationsInserted": 4,
+      "missing": 0,
+      "mismatches": 0,
+      "updates": 0,
+      "deletes": 0,
+      "preflightTimestamp": null,
+      "writeTimestamp": "2026-10-22 22:14:25.13088+00",
+      "postQueryTimestamp": "2026-10-22 22:15:18.267267+00",
+      "receiptCheckpointCommit": "0d5f978"
+    },
+    {
+      "regionalRunId": "cai-20261022-molise-campobasso01",
+      "classificationRunId": "cai-map-20261022-campobasso01",
+      "status": "completed-reconciled-receipt-remote-verified",
+      "candidateIds": 2,
+      "classificationCounts": {
+        "trekking": 1,
+        "non_trekking": 0,
+        "da_verificare": 1,
+        "errors": 0
+      },
+      "modelRequested": "inception/mercury-decide",
+      "responseModel": "inception/mercury-decide-20260930",
+      "modelAttested": true,
+      "placesInserted": 2,
+      "classificationsInserted": 2,
+      "missing": 0,
+      "mismatches": 0,
+      "updates": 0,
+      "deletes": 0,
+      "receipt": null,
+      "filesCheckpointCommit": null,
+      "note": "No DB mutation before remote file checkpoint; exact-ID importer read-only preflight pending.",
+      "placeUpdates": 0,
+      "classificationFingerprintCorrections": 1,
+      "databaseReceiptSha256": "134ff85bba4c35c7312597a57b2320bfe9c69eb7ec5117d992a874a2be551715",
+      "databaseReportSha256": "cf778a3c77a45c55ec8af0b570d6d50eced1d3b69ccc405d4ab67ed20263e265",
+      "afterQueryAt": "2026-10-22T22:33:30.892756Z",
+      "receiptCheckpointCommit": "9bc54c562c56a9ebe0b9c68e728e51a650584222"
+    }
+  ],
+  "nextSourcePreflight": {
+    "region": "Marche",
+    "status": "bounded Pesaro homepage02 selected after redirect patch checkpoint",
+    "scope": "one URL https://www.caipesaro.it/; max1 document; budget 120000ms; concurrency 1; inspect body/calendar then stop",
+    "networkFetchPerformed": false,
+    "previousSourceId": "cai-pesaro-9228006",
+    "previousSourceStatus": "first homepage run partial: apex redirect to plain HTTP blocked; no body, calendar evidence unknown",
+    "nextTarget": "cai-pesaro-9228006 https://www.caipesaro.it/"
+  },
+  "currentRun": {
+    "runId": "cai-20261023-marche-pesaro-homepage01",
+    "region": "Marche",
+    "sourceId": "cai-pesaro-9228006",
+    "requestedUrl": "https://caipesaro.it/",
+    "collection": "partial; redirect blocked by registered-host guard before response body capture; do not treat as an empty calendar",
+    "files": "run manifest/status/report/redirect diagnostic verified; source-specific alias code + tests ready, importer QA PASS; remote code/evidence checkpoint pending; report SHA-256 cf2b40e7e441b76e8df41013f254c476ec7ae26af7597f71f48a695341a03b4a",
+    "database": "pending-no-delta; no DB query, migration, write, import or receipt",
+    "runFolder": "backend/data/agent-runs/cai-20261023-marche-pesaro-homepage01",
+    "sourceUrlSeeds": 1,
+    "maxDocuments": 1,
+    "sourceBudgetMs": 120000,
+    "concurrency": 1,
+    "requestCount": "not independently attestable; redirect details were not persisted",
+    "httpStatus": "not persisted",
+    "finalUrl": "not persisted",
+    "responseBody": "not persisted",
+    "eventsExtracted": 0,
+    "eventsVerified": 0,
+    "duplicatesExcluded": 0,
+    "failuresResolved": 0,
+    "failuresOpen": [
+      "official-host redirect rejected; response metadata/body absent"
+    ],
+    "catalogRowsBefore": 3376,
+    "catalogRowsAfter": 3376,
+    "uniqueIds": 3376,
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "backendExcursionsSha256": "10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7",
+    "frontendExcursionsSha256": "10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7",
+    "backendRegistrySha256": "992e32565ed65031f95873b7dd83fc82b8feba66daa4aebd59cfe6ea277d6100",
+    "backendStatusSha256": "5cc2ae7caefa2f9f8c7876f433a7516423e6ebe9bbd05ce99903feb05f7b5391",
+    "frontendStatusSha256": "5cc2ae7caefa2f9f8c7876f433a7516423e6ebe9bbd05ce99903feb05f7b5391",
+    "manifestSha256": "7bec2799fcf3791d0004e9577334621e6161f2b7b1061e7d703cd4e928a10267",
+    "stateSha256": "9703deff0e9dbda34557e43b0e6105203c138631827e653d51b5ed3f3d5125e4",
+    "reportSha256": "cf2b40e7e441b76e8df41013f254c476ec7ae26af7597f71f48a695341a03b4a",
+    "importerQa": "PASS read-only; report/manifest/diagnostic hashes and source-specific alias contract verified",
+    "backendTests": "npm test 214/214 after collection; catalog/registry mirrors unchanged",
+    "redirectDiagnosticSha256": "6a7688d6c388a2f829501c6564f1101c5d41bcc51322ed155ffead81580098f0",
+    "patchTests": "targeted 39/39; backend npm test 216/216; six JSON hashes unchanged"
+  },
+  "latestRun": {
+    "runId": "cai-20261023-marche-pesaro-homepage01",
+    "path": "backend/data/agent-runs/cai-20261023-marche-pesaro-homepage01",
+    "region": "Marche",
+    "sourceId": "cai-pesaro-9228006",
+    "collection": "partial; redirect blocked before body capture, no empty-calendar conclusion",
+    "files": "run artifacts integrity PASS; response evidence HOLD; source-specific HTTPS alias fixture patch QA PASS; checkpoint pending; report SHA-256 cf2b40e7e441b76e8df41013f254c476ec7ae26af7597f71f48a695341a03b4a",
+    "database": "pending-no-delta; no DB read/write/import",
+    "eventsExtracted": 0,
+    "eventsVerified": 0,
+    "catalogRowsBefore": 3376,
+    "catalogRowsAfter": 3376,
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "databaseTouched": false,
+    "manifestSha256": "7bec2799fcf3791d0004e9577334621e6161f2b7b1061e7d703cd4e928a10267",
+    "stateSha256": "9703deff0e9dbda34557e43b0e6105203c138631827e653d51b5ed3f3d5125e4",
+    "importerQa": "PASS read-only; report/manifest/diagnostic hashes and source-specific alias contract verified",
+    "tests": "backend npm test 216/216 after alias patch; six JSON hashes unchanged",
+    "reportSha256": "cf2b40e7e441b76e8df41013f254c476ec7ae26af7597f71f48a695341a03b4a",
+    "redirectDiagnosticSha256": "6a7688d6c388a2f829501c6564f1101c5d41bcc51322ed155ffead81580098f0"
+  },
+  "proposedTarget": null,
+  "directoryRefresh": {
+    "runId": "cai-20261023-lombardia-directory-refresh01",
+    "region": "Lombardia",
+    "collection": "not performed; directory-only run",
+    "files": "published with Lovere run at 8961db1; importer final QA PASS",
+    "database": "no read/write/import",
+    "rootSectionsSelected": 152,
+    "subsectionFailures": 0,
+    "recordsBefore": 837,
+    "recordsAfter": 837,
+    "idsAdded": 0,
+    "idsRemoved": 0,
+    "ambiguousPreviousIds": 0,
+    "websiteChangedRecords": 9,
+    "otherRegionChanges": 0,
+    "calendarSectionsChecked": "not assessed",
+    "eventsVerified": 0,
+    "duplicatesExcluded": "not assessed",
+    "failuresResolved": "not assessed",
+    "failuresOpen": "not assessed",
+    "finalCatalogSha256": "250afdbc6fa8980f076f094c9574b2d77d157e7f34f4dfb9c84a4f09f3166944",
+    "reportPath": "backend/data/agent-runs/cai-20261023-lombardia-directory-refresh01/directory-refresh-report.json",
+    "manifestPath": "backend/data/agent-runs/cai-20261023-lombardia-directory-refresh01/manifest.json",
+    "lovere": "official site listed by CAI directory; importer confirmed enabled discovery target; no fetch/calendar/event verification yet",
+    "reportSha256": "c5dbbff7ee45615405e090fc400c45f88fe282946274c8ed21a1371004e2c232",
+    "manifestSha256": "f038795275c2855746f80659fe3254ccd8551a6d3827444f2ca4ee713f40a256"
+  },
+  "lombardiaCoverage": {
+    "directoryEntries": 229,
+    "sourcesCheckedThisRun": 1,
+    "completeForFeedRange": 1,
+    "partial": 0,
+    "unreachable": 0,
+    "eventsVerified": 0,
+    "duplicatesExcluded": 0,
+    "failuresResolved": 0,
+    "failuresOpen": 0,
+    "status": "region open; one source/feed only, not a regional audit",
+    "evidenceGap": "HTTP status/final URL are not persisted; parsed WordPress API provides valid zero result. Empty iCal response is not used as calendar evidence."
+  }
+}
