@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "toscana-fivizzano-escursionismo-files-ready-qa-passed-checkpoint-pending",
+  "phase": "toscana-closed-for-current-exact-urls-veneto-alpago-selected-checkpoint-pending",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -579,9 +579,21 @@
       "status": "completed",
       "owner": "cai-collector",
       "result": "Offline Toscana scan after Escursionismo01: selected registered official CAI Fivizzano /attivita/ landing page, absent from status/cache/FAILURES; generic landing, one-page bounded sample, no event assumption. Pescia timeout and Fivizzano PDF OCR/discovery issues remain."
+    },
+    {
+      "id": "S74",
+      "status": "completed",
+      "owner": "cai-collector + cai-importer + orchestrator",
+      "result": "Run cai-20261023-toscana-fivizzano-attivita01: official landing page cached and evidence locators checked; method=null/events=0 is informational landing, not empty calendar; no child followed. Catalog 3376 rows and 12 Fivizzano unchanged. Source partial and prior issues preserved, own discovery-limit added. Importer PASS; backend 206/206 after collection; hashes stable and mirrors byte-identical. No DB."
+    },
+    {
+      "id": "S75",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Post-run offline source scan: Toscana has no further safe exact URL; only unvisited Fivizzano URL is semantic duplicate previously reviewed; Pescia timeout and other enabled pages consumed/failed/backlog without exact URL. Trentino also lacks safe URL; Umbria and Valle d’Aosta none. Selected Veneto CAI Alpago official /programma-2/, absent from status/cache/FAILURES; one page/120s/concurrency1."
     }
   ],
-  "nextAction": "Dopo checkpoint remoto del run escursionismo01 e della selezione attivita01, verificare branch e blob, poi eseguire un solo run cai-20261023-toscana-fivizzano-attivita01 sulla URL esatta, max1/120s/concurrency1/no discovery.",
+  "nextAction": "Pubblicare e verificare checkpoint del run Fivizzano attivita01, cataloghi/status e passaggio Toscana→Veneto. Poi eseguire un singolo run cai-20261023-veneto-alpago-programma01 sulla URL esatta https://www.caialpago.it/programma-2/, max1/120s/concurrency1/no discovery.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -590,37 +602,34 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "c45cf1fa0113e74dba04a0695124f6ea96009298",
+    "branchHead": "f8bfe2a4bd0748b17b282ebfdff975ce707a637a",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
-      "runId": "cai-20261023-toscana-fivizzano-escursionismo01",
+      "runId": "cai-20261023-toscana-fivizzano-attivita01",
       "region": "Toscana",
       "sourceId": "cai-fivizzano-9226019",
-      "requestedUrl": "https://www.caifivizzano.it/escursionismo/",
-      "collection": "partial; one future event extracted and exact existing catalog row corroborated",
-      "files": "manifest, source evidence, evidence-manifest, report and state sealed locally; importer QA PASS; remote checkpoint pending",
-      "database": "zero candidate/delta; no DB operation",
-      "baselineCommit": "c45cf1fa0113e74dba04a0695124f6ea96009298",
-      "runFolder": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-escursionismo01",
-      "bodySha256": "a78ad2e426a35f61944ea0768217a3ebf260b7bcf77632ceab896e5eb4b6490e",
+      "requestedUrl": "https://www.caifivizzano.it/attivita/",
+      "collection": "partial; landing page, method=null, zero dated rows recognized",
+      "files": "artifacts sealed locally and importer QA PASS; remote checkpoint pending",
+      "database": "no delta/candidate; no DB operation",
+      "baselineCommit": "f8bfe2a4bd0748b17b282ebfdff975ce707a637a",
+      "runFolder": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-attivita01",
+      "bodySha256": "604cf46e065b652ead0d4a894369733eaa94f7456a84a35fa6ffbf61b9c4ab0d",
       "catalogRows": 3376,
       "sourceRows": 12,
       "added": 0,
       "removed": 0,
       "changed": 0,
-      "existingEventId": "cai-fivizzano-9226019-2d592e7a1731",
-      "existingEventRowSha256": "1b23109177824b6f4f830f8d3baf96175009e7985666e80a1bf831a238a574ea",
-      "prefixRowsSha256": "052158f0d916607fe02a746b29c0027d44a39239fd6a16fa282d1c48a04c9905",
-      "manifestSha256": "4a5dbfb5675dc1aaab04737ff1931107ada03046e6cd4bf7ecd0b3694f58becc",
-      "stateSha256": "165182f64d68ffd278f036a31300fd33ee6ef2db87761d451ad7abfc07fdc93a",
-      "sourceEvidenceSha256": "13620f84dcac4cffd4b3d1f9fd48b1765a325439610fbd070cd7d18f3b8f8696",
-      "reportSha256": "8171f910dbec36d1ae479bc904f5d799fac2d948d495bc757086937b23706c61",
-      "evidenceManifestSha256": "58739cd12a28a7320b7ecda6c09ccb1614ea49151cd9909ceb44551b14220565",
+      "manifestSha256": "3f9a56fdc9f28b94aafacc157be1f76be02354fa0c051a99c448170c3a447da9",
+      "stateSha256": "2b0b7763f73082cb400a7d39c55ac1634727249a2f152939d4adb29759be63a9",
+      "sourceEvidenceSha256": "af9262ccdb00a2be6604234400c8598d694d6db58acc2de58da4aceb871e7e86",
+      "reportSha256": "282d511e91a3b836589a4c1c32ed42706b569804908fecb363abdc7b31066b1f",
+      "evidenceManifestSha256": "6d923cb920bf8856e1b225400f65a5435c7e483ea7021e0d749ec13608545d59",
       "collectorQa": "PASS",
-      "importerQa": "PASS exact existing row/no candidate",
-      "backendTests": "206/206, six public hashes unchanged after tests"
+      "importerQa": "PASS",
+      "backendTests": "206/206, public JSON unchanged by tests"
     },
-    "nextAction": "Dopo checkpoint remoto del run escursionismo01 e della selezione attivita01, verificare branch e blob, poi eseguire un solo run cai-20261023-toscana-fivizzano-attivita01 sulla URL esatta, max1/120s/concurrency1/no discovery.",
+    "nextAction": "Pubblicare e verificare checkpoint del run Fivizzano attivita01, cataloghi/status e passaggio Toscana→Veneto. Poi eseguire un singolo run cai-20261023-veneto-alpago-programma01 sulla URL esatta https://www.caialpago.it/programma-2/, max1/120s/concurrency1/no discovery.",
     "classificationFilesCheckpointed": true,
     "runtimeNetworkStatus": {
       "connectivity": "connected",
@@ -676,7 +685,7 @@
       "status": "verified"
     }
   },
-  "repositoryCommit": "c45cf1fa0113e74dba04a0695124f6ea96009298",
+  "repositoryCommit": "f8bfe2a4bd0748b17b282ebfdff975ce707a637a",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -701,8 +710,8 @@
   "tests": "After miniera01 collection: backend npm test 206/206; six public JSON hashes unchanged pre/post test and all mirrors byte-identical.",
   "updatedAt": "2026-10-23",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-23",
-  "regionCurrent": "Toscana — Fivizzano miniera01: 1 record verificato scaduto (06-09-2026, Expired), 0 nuovi ID. Fivizzano escursionismo01: 1 evento futuro verificato/corroborato dall’ID esistente cai-fivizzano-9226019-2d592e7a1731, 0 delta. Catalogo 3376→3376, 12 righe Fivizzano identiche; nessuna coordinata o campo admin cambiato. Fonte partial con OCR/discovery aperti; nessun DB per questi due run.",
-  "regionNext": "Toscana — CAI Fivizzano (cai-fivizzano-9226019), landing ufficiale https://www.caifivizzano.it/attivita/, URL registrata e non in status/cache/FAILURES. Max 1 documento/120s/concurrency1; contenuto da verificare senza presumere eventi.",
+  "regionCurrent": "Toscana — Fivizzano miniera01: 1 evento scaduto (06-09-2026, Expired) escluso; escursionismo01: 1 evento futuro corroborato con ID esistente cai-fivizzano-9226019-2d592e7a1731; attivita01: landing informativa senza righe datate, zero estrazioni non prova calendario vuoto. Catalogo 3376, 12 righe Fivizzano invariate; nessun delta DB in questi tre run. Fonte partial, 5 documenti, 12 eventi in storico estratto; PDF OCR/discovery e discovery-limit multipli ancora aperti.",
+  "regionNext": "Veneto — CAI Alpago (`cai-alpago-9220065`), pagina ufficiale https://www.caialpago.it/programma-2/, link dalla homepage e URL registrata, non in documents/cache/FAILURES. La fonte è partial per backlog su un URL distinto; max 1 doc/120s/concurrency1.",
   "preflight": {
     "at": "2026-10-23T00:00:18Z",
     "sourceId": "cai-carate-brianza-9216030",
@@ -766,18 +775,18 @@
     "independentImporterQa": "PASS file seals/catalog mirrors; HOLD import eligibility because corrected record is past/no catalog delta"
   },
   "lastRegionalAttempt": {
-    "runId": "cai-20261023-toscana-fivizzano-escursionismo01",
+    "runId": "cai-20261023-toscana-fivizzano-attivita01",
     "region": "Toscana",
     "sourceId": "cai-fivizzano-9226019",
-    "requestedUrl": "https://www.caifivizzano.it/escursionismo/",
-    "collection": "partial; 1 future event corroborated against exact existing catalog ID, no new row",
-    "files": "manifest, source evidence, evidence manifest, report and state verified locally; importer QA PASS; remote checkpoint pending",
-    "database": "no candidate; no classification/query/write",
-    "baselineCommit": "c45cf1fa0113e74dba04a0695124f6ea96009298",
-    "runFolder": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-escursionismo01",
+    "requestedUrl": "https://www.caifivizzano.it/attivita/",
+    "collection": "partial; cached HTML landing, method=null, zero recognized dated rows; not proof calendar empty",
+    "files": "report, source evidence, manifest/evidence manifest and state QA PASS locally; remote checkpoint pending",
+    "database": "no candidate/delta; no classification/query/write",
+    "baselineCommit": "f8bfe2a4bd0748b17b282ebfdff975ce707a637a",
+    "runFolder": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-attivita01",
     "contentType": "text/html; charset=UTF-8",
-    "bodyBytes": 138701,
-    "bodySha256": "a78ad2e426a35f61944ea0768217a3ebf260b7bcf77632ceab896e5eb4b6490e",
+    "bodyBytes": 120061,
+    "bodySha256": "604cf46e065b652ead0d4a894369733eaa94f7456a84a35fa6ffbf61b9c4ab0d",
     "httpStatus": "not persisted",
     "catalogBefore": 3376,
     "catalogAfter": 3376,
@@ -786,13 +795,7 @@
     "added": 0,
     "removed": 0,
     "changed": 0,
-    "eventsExtracted": 1,
-    "existingEventId": "cai-fivizzano-9226019-2d592e7a1731",
-    "existingEventRowSha256Before": "1b23109177824b6f4f830f8d3baf96175009e7985666e80a1bf831a238a574ea",
-    "existingEventRowSha256After": "1b23109177824b6f4f830f8d3baf96175009e7985666e80a1bf831a238a574ea",
-    "sortedSourceRowsAlgorithm": "select source_id prefix rows, sort by id, serialize with Node JSON.stringify UTF-8, SHA-256",
-    "sortedSourceRowsSha256Before": "052158f0d916607fe02a746b29c0027d44a39239fd6a16fa282d1c48a04c9905",
-    "sortedSourceRowsSha256After": "052158f0d916607fe02a746b29c0027d44a39239fd6a16fa282d1c48a04c9905",
+    "eventsExtracted": 0,
     "sectionsChecked": 1,
     "complete": 0,
     "partial": 1,
@@ -803,16 +806,17 @@
       "annual PDF discovery-limit 8",
       "calendar discovery-limit 1",
       "miniera discovery-limit 1",
-      "escursionismo discovery-limit 1"
+      "escursionismo discovery-limit 1",
+      "attivita discovery-limit 1"
     ],
     "coordinatesAdded": 0,
-    "collectorQa": "PASS exact existing row corroborated; source stays partial",
-    "importerQa": "PASS; no new candidates",
-    "backendTests": "206/206 serial; six public JSON stable pre/post"
+    "collectorQa": "PASS landing page locators and no-event interpretation",
+    "importerQa": "PASS; no new catalog row / candidate",
+    "backendTests": "206/206; six public JSON hashes unchanged pre/post"
   },
   "regionalCoverage": {
     "region": "Toscana",
-    "scope": "fresh persisted regional join at status update after Escursionismo01; no new network audit",
+    "scope": "fresh persisted join after Fivizzano attivita01; collector also performed offline scan for next distinct source",
     "status": "open",
     "persistedStatusSnapshot": {
       "asOf": "2026-10-23T00:42:23.832Z",
@@ -824,24 +828,24 @@
       "ok": 1,
       "noUpcoming": 1,
       "eventsInPersistedStatus": 90,
-      "note": "Persisted statuses, not live external coverage. Recent Fivizzano pages added source documents but no catalog rows; one past event excluded and one existing row corroborated."
+      "note": "Persisted regional status, not current external coverage. Fivizzano has five source documents and 12 historical extracted events; latest landing has no dated event rows. Toscana has no additional safe exact URL in current scan."
     },
     "currentRunCounts": {
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
-      "eventsExtracted": 1,
-      "eventsVerified": 1,
+      "eventsExtracted": 0,
+      "eventsVerified": 0,
       "newRawIds": 0,
-      "existingRowsCorroborated": 1,
+      "existingRowsCorroborated": 0,
       "semanticDuplicatesExcluded": 0,
       "dbPlacesInserted": 0,
       "dbClassificationsInserted": 0,
       "existingRowsChanged": 0,
       "failuresResolved": 0,
-      "failuresOpen": 5,
-      "nextStep": "Checkpoint zero-delta Escursionismo run and select the registered /attivita/ landing; one doc/120s after remote verification."
+      "failuresOpen": 6,
+      "nextStep": "Toscana has no further safe exact URL: only unvisited page is an already-reviewed semantic duplicate; Pescia timed out and remaining enabled sources are consumed, failed, or lack exact URL. Proceed to Veneto Alpago after checkpoint."
     },
     "historicalSnapshot": {
       "asOf": "2026-10-20",
@@ -972,15 +976,15 @@
     }
   ],
   "nextSourcePreflight": {
-    "region": "Toscana",
-    "sourceId": "cai-fivizzano-9226019",
-    "sourceName": "CAI Fivizzano",
-    "url": "https://www.caifivizzano.it/attivita/",
+    "region": "Veneto",
+    "sourceId": "cai-alpago-9220065",
+    "sourceName": "CAI Alpago",
+    "url": "https://www.caialpago.it/programma-2/",
     "status": "selected offline; awaiting remote checkpoint before fetch",
-    "evidence": "Collector post-run offline audit: registered official landing URL; exact URL absent from scrape-status documents, cache and FAILURES. Generic landing, no event completeness claim.",
+    "evidence": "Collector post-Attivita01 offline scan: official registry URL linked from Alpago homepage; exact target absent from source documents, cache and FAILURES. Existing partial status refers to separate URL backlog.",
     "scope": "one exact URL, max 1 document, 120 seconds, concurrency 1, no child URLs",
     "networkFetchPerformed": false,
-    "proposedRunId": "cai-20261023-toscana-fivizzano-attivita01"
+    "proposedRunId": "cai-20261023-veneto-alpago-programma01"
   },
   "currentRun": null
 }

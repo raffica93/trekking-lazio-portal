@@ -564,3 +564,14 @@ Preflight offline dopo il run: selezionata `https://www.caifivizzano.it/escursio
 Raccolta/file: 1 evento verificato, 1 esistente corroborato, 0 nuovo ID, 0 aggiornamenti/rimozioni. Catalogo 3.376→3.376, prefix Fivizzano 12→12; riga corroborata SHA `1b23109177824b6f4f830f8d3baf96175009e7985666e80a1bf831a238a574ea` immutata. 0 coordinate nuove. DB: nessuna classificazione/import/query/write. Importer PASS; backend `npm test` 206/206 dopo raccolta e sei hash JSON pubblici identici pre/post; mirror coincidenti. Fonte resta partial.
 
 Preflight offline successivo ha selezionato `https://www.caifivizzano.it/attivita/`, URL landing ufficiale distinta non presente nei documenti status, cache o FAILURES. Un solo run `cai-20261023-toscana-fivizzano-attivita01`, max1 documento/120s/concurrency1/no discovery dopo checkpoint remoto; nessuna aspettativa di calendario fino alla verifica del contenuto.
+
+
+## Toscana — Fivizzano Attività e passaggio a Veneto (23 ottobre 2026)
+
+| Regione / run | Sezioni controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| Toscana, `cai-20261023-toscana-fivizzano-attivita01`, CAI Fivizzano | 1 landing ufficiale | 0 | 1 | 0 | 0 righe datate riconosciute; pagina informativa e link a calendari, zero non significa calendario vuoto | 0 | 0 | PDF annuale OCR; discovery-limit 8 PDF, calendario 1, Miniera 1, Escursionismo 1, Attività 1 | Toscana esaurita per URL esatte sicure; passare a CAI Alpago in Veneto |
+
+Raccolta/file: pagina HTML cached 120.061 B, SHA `604cf46e065b652ead0d4a894369733eaa94f7456a84a35fa6ffbf61b9c4ab0d`; `method=null`, no dated rows. Catalogo totale 3.376, Fivizzano 12, zero add/remove/change; nessuna coordinata. File QA PASS; test backend 206/206 post-run, sei hash pubblici stabili e mirror identici. Database/classificazioni: nessun candidato, nessuna query/write. Fivizzano resta parziale. In sequenza, i due run precedenti sono: Miniera01 (un record passato scaduto, escluso) e Escursionismo01 (una riga futura esattamente corroborata con ID esistente, no delta).
+
+Preflight offline dopo Attività: nessuna ulteriore URL Toscana sicura distinta; unica URL Fivizzano non visitata è già esclusa come duplicato semantico, Pescia è in timeout, le altre URL sono consumate/failed o backlog senza target esatto. Il preflight Trentino non trova URL sicure; Umbria e Valle d’Aosta non hanno URL host-exact nuove. Primo target successivo: CAI Alpago `cai-alpago-9220065`, Veneto, `https://www.caialpago.it/programma-2/`, official-host linked by homepage, assente da status/cache/FAILURES; un solo documento/120s/concurrency1 dopo checkpoint.

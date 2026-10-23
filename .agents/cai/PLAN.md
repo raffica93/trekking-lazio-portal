@@ -226,3 +226,10 @@ Prossimo target offline distinto: la pagina CAI Fivizzano `/escursionismo/`, uff
 La pagina Fivizzano `/escursionismo/` ha restituito una riga futura del 15 novembre 2026, identica all’ID catalogo `cai-fivizzano-9226019-2d592e7a1731`. Nessuna nuova riga, duplicato escluso, coordinata o modifica catalogo; nessun candidato Mercury/DB. QA importer PASS; suite backend 206/206 dopo il run, hash pubblici stabili e mirror identici. La fonte rimane parziale con OCR/discovery PDF e discovery-limit delle pagine visitate.
 
 Il preflight offline ha selezionato la landing ufficiale `/attivita/`, ancora non visitata o in cache/failure. Dopo checkpoint remoto del run corrente e della selezione, fare un singolo fetch max1/120s/concurrency1/no discovery; verificare il contenuto effettivo. Pescia rimane esclusa per timeout senza strategia diversa.
+
+
+## Passaggio a Veneto — Alpago selezionato (23 ottobre 2026)
+
+Le tre pagine Fivizzano lette dopo il calendar01 hanno prodotto: una riga scaduta esclusa, una corrispondenza esatta a evento già catalogato e una landing informativa senza righe datate. Nessun delta catalogo o DB, nessuna coordinata. QA importer PASS; test backend 206/206 dopo le due raccolte più recenti, hash pubblici stabili e mirror identici. Fivizzano resta partial per OCR/discovery. Preflight offline: nessuna altra URL toscana sicura distinta; non ritentare Pescia senza strategia diversa né la URL già valutata come duplicato semantico.
+
+Prossimo singolo target CAI Alpago (Veneto), `https://www.caialpago.it/programma-2/`, ufficiale e non consumato; status partial per un diverso backlog. Dopo checkpoint remoto eseguire `cai-20261023-veneto-alpago-programma01`, max1/120s/concurrency1/no discovery, poi test/QA seriali e solo import se delta verificato.

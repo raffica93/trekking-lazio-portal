@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261023-toscana-fivizzano-attivita01",
+  "sourceId": "cai-fivizzano-9226019",
+  "requestedUrl": "https://www.caifivizzano.it/attivita/",
+  "canonicalUrl": "not persisted; cache metadata records requested URL only",
+  "httpStatus": "not persisted",
+  "contentType": "text/html; charset=UTF-8",
+  "bodyBytes": 120061,
+  "bodySha256": "604cf46e065b652ead0d4a894369733eaa94f7456a84a35fa6ffbf61b9c4ab0d",
+  "rawBodyPath": null,
+  "cache": {
+    "available": true,
+    "metadataPath": "backend/node_modules/.cache/cai/6bf203310c6538dc74cee164b9bdd8d033d922dd6f056ffc8fc1c159a5c7bc01.json",
+    "bodyPath": "backend/node_modules/.cache/cai/6bf203310c6538dc74cee164b9bdd8d033d922dd6f056ffc8fc1c159a5c7bc01.bin",
+    "keySha256": "6bf203310c6538dc74cee164b9bdd8d033d922dd6f056ffc8fc1c159a5c7bc01",
+    "metadataMatchesBody": true
+  },
+  "extraction": {
+    "method": null,
+    "eventRows": 0,
+    "evidenceSource": "backend/data/scrape-status.json document entry"
+  },
+  "pageAssessment": {
+    "classification": "activity landing/navigation page; not a date-bearing event calendar",
+    "basis": "cached HTML contains category and calendar navigation labels but no dated activity rows were recognized; extractor method is null and events is 0",
+    "verifiedDatedEvents": 0,
+    "interpretation": "Zero extracted events is not evidence of an empty calendar; the page points to activity categories and a complete calendar, and this run did not follow any child URL."
+  },
+  "sourceEvidence": {
+    "excerptLocator": "UTF-8 body byte offsets in the cached response; offsets are zero-based",
+    "excerpts": [
+      {
+        "label": "page-title",
+        "byteOffset": 398,
+        "excerpt": "LE ATTIVITÀ- CAI Sezione di Fivizzano, Lunigiana"
+      },
+      {
+        "label": "page-heading",
+        "byteOffset": 45473,
+        "excerpt": "<h1 class=\"fusion-title-heading title-heading-center fusion-responsive-typography-calculated\" style=\"margin:0;text-transform:capitalize;font-size:1em;--fontSize:50;line-height:var(--awb-typography1-line-height);\">Attività</h1>"
+      },
+      {
+        "label": "intro",
+        "byteOffset": 59175,
+        "excerpt": "Scopri le attività della Sezione di Fivizzano, vivi la montagna in diversi modi"
+      },
+      {
+        "label": "navigation-calendar",
+        "byteOffset": 60330,
+        "excerpt": "Calendario completo"
+      },
+      {
+        "label": "navigation-escursionismo",
+        "byteOffset": 38075,
+        "excerpt": "Escursionismo"
+      },
+      {
+        "label": "navigation-sentieristica",
+        "byteOffset": 38325,
+        "excerpt": "Sentieristica"
+      },
+      {
+        "label": "navigation-montagnaterapia",
+        "byteOffset": 86972,
+        "excerpt": "Uscite a scopo terapeutico-riabilitativo con soggetti fragili"
+      }
+    ]
+  },
+  "sourceStatus": {
+    "status": "partial",
+    "configuredUrl": "https://www.caifivizzano.it/wp-content/uploads/2026/02/Calendario-CAI-2026_compressed.pdf",
+    "extractedEvents": 12,
+    "issues": [
+      {
+        "url": "https://www.caifivizzano.it/wp-content/uploads/2026/02/Calendario-CAI-2026_compressed.pdf",
+        "message": "PDF OCR unavailable or failed: Command failed: pdftoppm -f 1 -l 42 -r 160 -png -gray /tmp/cai-pdf-ocr-rDPJpG/source.pdf /tmp/cai-pdf-ocr-rDPJpG/page\n"
+      },
+      {
+        "url": "https://www.caifivizzano.it/wp-content/uploads/2026/02/Calendario-CAI-2026_compressed.pdf",
+        "message": "Discovery budget reached; 8 candidate documents remain.",
+        "code": "discovery-limit"
+      },
+      {
+        "url": "https://www.caifivizzano.it/calendario-uscite/",
+        "message": "Discovery budget reached; 1 candidate documents remain.",
+        "code": "discovery-limit"
+      },
+      {
+        "url": "https://www.caifivizzano.it/eventi/le-miniere-di-calcaferro/",
+        "message": "Discovery budget reached; 1 candidate documents remain.",
+        "code": "discovery-limit"
+      },
+      {
+        "url": "https://www.caifivizzano.it/escursionismo/",
+        "message": "Discovery budget reached; 1 candidate documents remain.",
+        "code": "discovery-limit"
+      },
+      {
+        "url": "https://www.caifivizzano.it/attivita/",
+        "message": "Discovery budget reached; 1 candidate documents remain.",
+        "code": "discovery-limit"
+      }
+    ],
+    "documentsCount": 5
+  },
+  "catalogEvidence": {
+    "catalogBeforeRunSha256": "d02a525382f6d7b31c571a49c0ced7c9ed292b5e67ba138ee060b4adbca4fa83",
+    "catalogAfterRunSha256": "c66e963a9d025dfb1184492362cd3235051f04e0318f88f1985b0d81951e2f03",
+    "rowsBeforeRun": 3376,
+    "rowsAfterRun": 3376,
+    "sourceIdPrefix": "cai-fivizzano-9226019-",
+    "sourceRowsBefore": 12,
+    "sourceRowsAfter": 12,
+    "added": 0,
+    "removed": 0,
+    "changed": 0,
+    "sortedRowsHashAlgorithm": "Filter rows by ID prefix, sort ascending by id, serialize the resulting array with Node.js JSON.stringify, UTF-8 encode and SHA-256.",
+    "sortedSourceRowsSha256Before": "052158f0d916607fe02a746b29c0027d44a39239fd6a16fa282d1c48a04c9905",
+    "sortedSourceRowsSha256After": "052158f0d916607fe02a746b29c0027d44a39239fd6a16fa282d1c48a04c9905",
+    "interpretation": "The accepted prior source-row hash is unchanged. This run added no extracted row; the collection writer refreshed generated catalog metadata/source hashes and coverage."
+  },
+  "preRunHashes": {
+    "catalogSha256": "d02a525382f6d7b31c571a49c0ced7c9ed292b5e67ba138ee060b4adbca4fa83",
+    "statusSha256": "7124e29edc1af941451e3e757b4fca4b5dc868ebc6d60b846a523c69a0270e49",
+    "sectionsSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+    "rowHashBefore": "052158f0d916607fe02a746b29c0027d44a39239fd6a16fa282d1c48a04c9905"
+  },
+  "publicMirrors": [
+    {
+      "backendPath": "backend/data/excursions.json",
+      "frontendPath": "frontend/public/excursions.json",
+      "backendSha256": "c66e963a9d025dfb1184492362cd3235051f04e0318f88f1985b0d81951e2f03",
+      "frontendSha256": "c66e963a9d025dfb1184492362cd3235051f04e0318f88f1985b0d81951e2f03",
+      "byteIdentical": true,
+      "bytes": 3635435
+    },
+    {
+      "backendPath": "backend/data/cai-sections.json",
+      "frontendPath": "frontend/public/cai-sections.json",
+      "backendSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+      "frontendSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+      "byteIdentical": true,
+      "bytes": 1459342
+    },
+    {
+      "backendPath": "backend/data/scrape-status.json",
+      "frontendPath": "frontend/public/scrape-status.json",
+      "backendSha256": "ac2d38e59aa5d00633cd2090e50b1cb265238b4fa4a5f25bc137c36a94bc9e0b",
+      "frontendSha256": "ac2d38e59aa5d00633cd2090e50b1cb265238b4fa4a5f25bc137c36a94bc9e0b",
+      "byteIdentical": true,
+      "bytes": 2077224
+    }
+  ],
+  "database": {
+    "written": false
+  }
+}

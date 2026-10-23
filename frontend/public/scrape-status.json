@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-23T00:54:20.025Z",
+  "generatedAt": "2026-10-23T00:58:28.608Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 1,
-    "parsed": 1,
-    "unsupported": 0,
+    "parsed": 0,
+    "unsupported": 1,
     "failed": 0,
     "located": 548
   },
@@ -41298,7 +41298,7 @@
       "excursions": 12,
       "error": null,
       "hash": "5bdd318d5d83ff8df96c14be678870fe81f7fa5bf5d78b077f56e6e221f2b9e4",
-      "updatedAt": "2026-10-23T00:54:20.025Z",
+      "updatedAt": "2026-10-23T00:58:28.608Z",
       "documents": [
         {
           "url": "https://www.caifivizzano.it/wp-content/uploads/2026/02/Calendario-CAI-2026_compressed.pdf",
@@ -41323,6 +41323,12 @@
           "hash": "a78ad2e426a35f61944ea0768217a3ebf260b7bcf77632ceab896e5eb4b6490e",
           "events": 1,
           "method": "html-calendar"
+        },
+        {
+          "url": "https://www.caifivizzano.it/attivita/",
+          "hash": "604cf46e065b652ead0d4a894369733eaa94f7456a84a35fa6ffbf61b9c4ab0d",
+          "events": 0,
+          "method": null
         }
       ],
       "methods": [
@@ -41351,6 +41357,11 @@
         },
         {
           "url": "https://www.caifivizzano.it/escursionismo/",
+          "message": "Discovery budget reached; 1 candidate documents remain.",
+          "code": "discovery-limit"
+        },
+        {
+          "url": "https://www.caifivizzano.it/attivita/",
           "message": "Discovery budget reached; 1 candidate documents remain.",
           "code": "discovery-limit"
         }

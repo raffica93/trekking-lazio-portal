@@ -41,15 +41,15 @@ non dimostra che una chat nuova possa recuperare il lavoro.
 
 ## Stato di questo passaggio — 23 ottobre 2026
 
-Branch `codex/cai-orchestrator-luna`, ultimo ref remoto verificato `c45cf1fa0113e74dba04a0695124f6ea96009298`. Il delta Fivizzano calendar01 è già consegnato: 4 nuovi `places` + 4 classificazioni `draft`, query dopo 4.427/3.358, receipt verificata.
+Branch `codex/cai-orchestrator-luna`, ultimo ref verificato `f8bfe2a4bd0748b17b282ebfdff975ce707a637a`. Il delta Fivizzano calendar01 è consegnato (4 places + 4 classificazioni `draft`, query dopo 4.427/3.358, receipt pubblicata). Il batch storico 3.336 e il delta già importato non vanno ripetuti.
 
-Pescia `cai-20261023-toscana-pescia-index01` è fallito sul solo URL `/cp/` per timeout client 8.000 ms: nessun status HTTP/body/cache/evento/retry, nessun candidato DB. Sono conservati 12 documenti storici e la discovery-limit mensile di agosto; timeout registrato separatamente. QA importer PASS e checkpoint remoto al commit `e8e0ce1`.
+Pescia index01 ha avuto timeout client 8.000 ms sulla sola URL `/cp/`, senza HTTP status/body/cache/eventi/retry; 12 documenti storici e l’issue mensile agosto sono preservati, con timeout distinto. QA importer PASS e nessun candidato DB.
 
-Fivizzano miniera01 ha verificato un record del 6 settembre 2026 marcato “Expired!”, escluso dal catalogo. Fivizzano escursionismo01 ha verificato l’uscita del 15 novembre 2026 e l’ha riconciliata con l’esistente `cai-fivizzano-9226019-2d592e7a1731`; nessun delta. Catalogo 3.376→3.376, 12 righe Fivizzano senza cambi; nessuna coordinata aggiornata. QA importer PASS dopo correzione indipendente dell’hash. `npm test` backend 206/206 dopo la raccolta; i sei hash JSON pubblici sono stabili prima/dopo e i mirror coincidono. Nessuna scrittura DB per questi due run. La fonte resta partial per PDF OCR e discovery-limit aperte.
+Fivizzano miniera01: un evento del 6 settembre marcato Expired, escluso; escursionismo01: una riga futura del 15 novembre corrisponde esattamente all’ID esistente `cai-fivizzano-9226019-2d592e7a1731`; attivita01: landing generica senza righe datate, `method=null/events=0`, che non prova calendario vuoto. Catalogo attuale 3.376 righe, 12 Fivizzano, nessun delta nei tre run; nessuna coordinata aggiornata. Importer PASS su miniera/hash corretto, match esatto e landing. Backend test 206/206 dopo ciascuna raccolta; sei hash pubblici stabili pre/post e mirror identici. Nessuna classificazione o scrittura DB per questi tre run. La fonte Fivizzano resta partial con OCR e discovery aperti.
 
-Snapshot persistito toscano: 37 sezioni, 17 enabled (9 partial, 4 unsupported, 2 failed, 1 ok, 1 no-upcoming), 90 eventi; non è nuova copertura di rete. Prossimo URL selezionato offline: landing CAI Fivizzano `https://www.caifivizzano.it/attivita/`, ufficiale e non in status/cache/FAILURES. Dopo checkpoint remoto, un solo documento/120s/concurrency1/no discovery; il contenuto va verificato senza presupporre eventi.
+Toscana non ha altri URL esatti sicuri nella scansione offline; restano la coda PDF OCR/discovery Fivizzano, timeout Pescia e fonti consumate/failed/backlog senza URL figlio persistito. Stato toscano persistito: 37 sezioni, 17 enabled (9 partial, 4 unsupported, 2 failed, 1 ok, 1 no-upcoming), 90 eventi; non è copertura live. Prossimo target: CAI Alpago, Veneto, `https://www.caialpago.it/programma-2/`, ufficiale e collegato dalla homepage, assente da status/cache/FAILURES. Dopo checkpoint remoto, un solo documento/120s/concurrency1/no discovery.
 
-Runtime e ruoli sono richiesti GPT-6 Luna high; la telemetria effettiva non è esposta. Restano esattamente i due agenti cai-collector e cai-importer. Mercury usa solo `inception/mercury-decide` via Decisions API. Nessun cron, merge, deploy o cancellazione DB.
+Runtime e ruoli sono richiesti GPT-6 Luna high; telemetria effettiva non esposta. Restano esattamente cai-collector e cai-importer. Mercury usa solo `inception/mercury-decide` via Decisions API. Nessun cron, merge, deploy o cancellazione DB.
 
 ## Responsabilità
 
