@@ -7,7 +7,8 @@ const {
   belongingTo,
   parseScrapeArgs,
   preserveEnrichment,
-  scrapeAll
+  scrapeAll,
+  validateSourceUrls
 } = require('../pipeline');
 const { SOURCES } = require('../sources');
 const { DEFAULT_COORDS } = require('../scraper');
@@ -58,6 +59,15 @@ test('source URL continuation CLI requires one explicit source and preserves rep
   assert.throws(() => parseScrapeArgs(['--source', 'a', '--source', 'b', '--source-url', 'https://example.com/page']), /exactly one --source/);
   assert.throws(() => parseScrapeArgs(['--source', 'a', '--region', 'Lombardia', '--source-url', 'https://example.com/page']), /cannot be combined/);
   assert.throws(() => parseScrapeArgs(['--source', 'a', '--source-url']), /Missing value/);
+});
+
+test('Pesaro continuation accepts only its explicit HTTPS official-host alias', () => {
+  const pesaro = SOURCES.find((source) => source.id === 'cai-pesaro-9228006');
+  assert.ok(pesaro);
+  assert.deepEqual(pesaro.officialHttpsHostAliases, ['www.caipesaro.it']);
+  assert.deepEqual(validateSourceUrls(pesaro, ['https://www.caipesaro.it/']), ['https://www.caipesaro.it/']);
+  assert.throws(() => validateSourceUrls(pesaro, ['http://www.caipesaro.it/']), /approved HTTPS alias/);
+  assert.throws(() => validateSourceUrls(pesaro, ['https://other.example/']), /approved HTTPS alias/);
 });
 
 test('scrapeAll passes only validated continuation URLs to one deterministic source', async () => {

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "marche-pesaro-homepage-sample-checkpointed",
+  "phase": "marche-pesaro-alias-patch-checkpoint-pending",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -901,16 +901,34 @@
       "id": "S126",
       "status": "completed",
       "owner": "cai-importer + orchestrator",
-      "result": "Importer read-only QA PASS manifest/hash, mirror and catalog integrity; HOLD request evidence (no body/status/final URL). Backend npm test 214/214 after collection. No import/DB. Report committed as run artifact in pending checkpoint; report SHA-256 efbdee72f3a9a75c80ddec66fd39205b31e3cc9e3b455859defa5b41be5c7c06."
+      "result": "Initial run file QA: importer PASS on manifest/catalog integrity and HOLD on absent response evidence; backend npm test 214/214 after collection. No DB. A later source-specific alias patch and full-suite verification are recorded in S128-S129."
     },
     {
       "id": "S127",
       "status": "completed",
       "owner": "orchestrator",
-      "result": "Pesaro report/state/status checkpoint and manifest verified on origin at 24e48e9070ea96added7bf0e5c7580e5a8ca5025; selected run artifact status mirrors were normalized to preserve baseline source ordering. No merge/deploy/DB."
+      "result": "Pesaro report/state/status checkpoint and manifest verified on origin at 24e48e9070ea96added7bf0e5c7580e5a8ca5025; selected run artifact status mirrors were normalized to preserve baseline source ordering. No merge/deploy/DB. Separate header-only HTTPX diagnosis: apex returned 301 to http://www.caipesaro.it/; direct https://www.caipesaro.it/ returned 200 text/html length 117; no body read. Diagnostic SHA 6a7688d6c388a2f829501c6564f1101c5d41bcc51322ed155ffead81580098f0."
+    },
+    {
+      "id": "S128",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Source-specific Pesaro alias patch: only cai-pesaro-9228006 accepts official HTTPS www.caipesaro.it in explicit source URL and redirect policy; HTTP alias and arbitrary hosts rejected. Fixture tests cover allow/deny; targeted 39/39. No collection/DB."
+    },
+    {
+      "id": "S129",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "After alias patch/refactor, backend npm test 216/216 passed; six hashes (backend/frontend excursions, cai-sections, scrape-status) unchanged. Existing run manifest remains valid; registry mirror equal."
+    },
+    {
+      "id": "S130",
+      "status": "completed",
+      "owner": "cai-importer",
+      "result": "Final read-only QA PASS after source alias patch and report/hash updates. Alias limited to Pesaro HTTPS; HTTP/arbitrary hosts denied; run manifest/report/diagnostic/state hashes and all mirrors valid; documentation/status consistent. No DB."
     }
   ],
-  "nextAction": "Eseguire una diagnosi HTTP read-only con redirect disabilitato solo sugli host CAI ufficiali già autorizzati per individuare la destinazione del redirect Pesaro; non seguire la catena né acquisire eventi. Se la destinazione è confermata come host ufficiale, scegliere un nuovo run bounded con un URL; altrimenti mantenere la fonte partial e selezionare un’altra fonte ufficiale Marche work-ready. Nessun import per questo run.",
+  "nextAction": "Commit and push the fixture-backed source-specific Pesaro HTTPS alias, diagnostic evidence/report, STATE/HANDOFF/REGIONS updates on codex/cai-orchestrator-luna; verify exact remote SHA and clean checkout. Then launch one new orchestrated bounded run on https://www.caipesaro.it/ (max1 document, 120s, concurrency1); preserve partial unless the body/calendar is readable. Do not import the failed first run.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -920,31 +938,53 @@
     "proposedRunId": null
   },
   "currentWork": {
-    "branchHead": "6b4cdf151a2f162612597b0d09083a17b40899df",
+    "branchHead": "e22e1d2947e579c53c53bebd3fedd6edb6e04a21",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
-      "runId": "cai-20261023-lazio-sora-ical01",
-      "region": "Lazio",
-      "sourceId": "sora",
-      "requestedUrl": "https://www.caisora.it/sito/events/?ical=1",
-      "collection": "partial source; exact ICS feed verified empty",
-      "files": "run artifacts/report/source evidence/evidence manifest and public mirrors committed and remotely verified at b143fe5",
-      "database": "no candidate; no classification/query/write",
-      "counts": {
-        "catalogBefore": 3376,
-        "catalogAfter": 3376,
-        "sourceRowsBefore": 10,
-        "sourceRowsAfter": 10,
-        "added": 0,
-        "removed": 0,
-        "changed": 0,
-        "feedEventsVerified": 0,
-        "semanticDuplicatesExcluded": 0,
-        "failuresResolved": 0,
-        "failuresOpen": 3
-      },
-      "tests": "backend npm test 206/206 after collection; six public JSON hashes unchanged"
-    }
+      "runId": "cai-20261023-marche-pesaro-homepage01",
+      "region": "Marche",
+      "sourceId": "cai-pesaro-9228006",
+      "requestedUrl": "https://caipesaro.it/",
+      "collection": "partial; redirect blocked by registered-host guard before response body capture; do not treat as an empty calendar",
+      "files": "run manifest/status/report/redirect diagnostic verified; source-specific alias code + tests ready, importer final QA and remote checkpoint pending; report SHA-256 cf2b40e7e441b76e8df41013f254c476ec7ae26af7597f71f48a695341a03b4a",
+      "database": "pending-no-delta; no DB query, migration, write, import or receipt",
+      "runFolder": "backend/data/agent-runs/cai-20261023-marche-pesaro-homepage01",
+      "sourceUrlSeeds": 1,
+      "maxDocuments": 1,
+      "sourceBudgetMs": 120000,
+      "concurrency": 1,
+      "requestCount": "not independently attestable; redirect details were not persisted",
+      "httpStatus": "not persisted",
+      "finalUrl": "not persisted",
+      "responseBody": "not persisted",
+      "eventsExtracted": 0,
+      "eventsVerified": 0,
+      "duplicatesExcluded": 0,
+      "failuresResolved": 0,
+      "failuresOpen": [
+        "official-host redirect rejected; response metadata/body absent"
+      ],
+      "catalogRowsBefore": 3376,
+      "catalogRowsAfter": 3376,
+      "uniqueIds": 3376,
+      "added": 0,
+      "removed": 0,
+      "modified": 0,
+      "backendExcursionsSha256": "10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7",
+      "frontendExcursionsSha256": "10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7",
+      "backendRegistrySha256": "992e32565ed65031f95873b7dd83fc82b8feba66daa4aebd59cfe6ea277d6100",
+      "backendStatusSha256": "5cc2ae7caefa2f9f8c7876f433a7516423e6ebe9bbd05ce99903feb05f7b5391",
+      "frontendStatusSha256": "5cc2ae7caefa2f9f8c7876f433a7516423e6ebe9bbd05ce99903feb05f7b5391",
+      "manifestSha256": "7bec2799fcf3791d0004e9577334621e6161f2b7b1061e7d703cd4e928a10267",
+      "stateSha256": "9703deff0e9dbda34557e43b0e6105203c138631827e653d51b5ed3f3d5125e4",
+      "reportSha256": "cf2b40e7e441b76e8df41013f254c476ec7ae26af7597f71f48a695341a03b4a",
+      "importerQa": "PASS file/catalog integrity; HOLD HTTP request evidence",
+      "backendTests": "npm test 214/214 after collection; catalog/registry mirrors unchanged",
+      "redirectDiagnosticSha256": "6a7688d6c388a2f829501c6564f1101c5d41bcc51322ed155ffead81580098f0",
+      "patchTests": "targeted 39/39; backend npm test 216/216; six JSON hashes unchanged"
+    },
+    "sourceAliasPatch": "fixture-backed code ready, importer QA/checkpoint pending",
+    "database": "no reads, writes, imports, migrations or receipts"
   },
   "repositoryCommit": "24e48e9070ea96added7bf0e5c7580e5a8ca5025",
   "databaseReadOnlyObservation": {
@@ -968,11 +1008,11 @@
       "afterQueryAt": "2026-10-22T22:33:30.892756Z"
     }
   },
-  "tests": "After Pesaro homepage collection: backend npm test 214/214; checked excursions and registry backend/frontend mirrors remain byte-identical and unchanged from the run manifest; no test/catalog changes are present.",
-  "updatedAt": "2026-10-23T07:00:23Z",
+  "tests": "Backend npm test 214/214 after original collection; 216/216 after source-specific HTTPS alias patch. Targeted node --test test/pipeline.test.js test/deterministic.test.js 39/39. Six public JSON hashes unchanged pre/post full suite.",
+  "updatedAt": "2026-10-23T07:08:17Z",
   "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T07:00:23Z",
   "regionCurrent": "Marche: directory refresh completed, then one CAI Pesaro homepage URL seed was sampled. Redirect was blocked before body capture; 1 source partial, 0 complete, 0 HTTP-unreachable attested, 0 events verified. This is not an empty-calendar result and not a regional audit.",
-  "regionNext": "Marche remains open. First checkpoint Pesaro artifacts; then establish the exact official redirect destination/allowed host from evidence. If the guard cannot be safely resolved, preserve partial status and continue only to another official, bounded source without repeating completed work.",
+  "regionNext": "Marche remains open. A source-specific HTTPS alias is fixture-backed; after importer QA and remote checkpoint, retry only the official www HTTPS homepage with one-document budget. Do not declare zero events unless a calendar is successfully read.",
   "preflight": {
     "at": "2026-10-23T01:27:16Z",
     "sourceId": "cai-cesena-9224012",
@@ -1041,7 +1081,7 @@
     "sourceId": "cai-pesaro-9228006",
     "requestedUrl": "https://caipesaro.it/",
     "collection": "partial; official-host redirect rejected before body capture; zero events is not evidence of empty calendar",
-    "files": "manifest/state/collection report and scraper status mirrors; importer integrity PASS, request evidence HOLD; remote checkpoint verified at 24e48e9070ea96added7bf0e5c7580e5a8ca5025",
+    "files": "run artifacts + redirect diagnosis; source-specific alias patch tested and importer QA PASS; code/evidence checkpoint pending; report SHA-256 cf2b40e7e441b76e8df41013f254c476ec7ae26af7597f71f48a695341a03b4a",
     "database": "0 reads, migrations, writes, imports or receipts; no delta",
     "sectionsChecked": 1,
     "complete": 0,
@@ -1058,8 +1098,10 @@
     "added": 0,
     "removed": 0,
     "modified": 0,
-    "reportSha256": "efbdee72f3a9a75c80ddec66fd39205b31e3cc9e3b455859defa5b41be5c7c06",
-    "backendTests": "214/214"
+    "reportSha256": "cf2b40e7e441b76e8df41013f254c476ec7ae26af7597f71f48a695341a03b4a",
+    "backendTests": "214/214",
+    "redirectDiagnosticSha256": "6a7688d6c388a2f829501c6564f1101c5d41bcc51322ed155ffead81580098f0",
+    "importerQa": "PASS read-only; report/manifest/diagnostic hashes and source-specific alias contract verified"
   },
   "regionalCoverage": {
     "region": "Marche",
@@ -1215,8 +1257,8 @@
   ],
   "nextSourcePreflight": {
     "region": "Marche",
-    "status": "read-only redirect destination diagnosis pending",
-    "scope": "Issue a bounded HTTP request without following redirects, only to authorized official CAI hosts; inspect Location and stop. Do not infer destination from legacy HTTP url, fetch target, or follow external links.",
+    "status": "source-specific alias patch tested; importer QA/checkpoint pending",
+    "scope": "Only Pesaro explicit alias https://www.caipesaro.it/, max1 document/120s/concurrency1 after remote checkpoint; do not follow plain HTTP redirect or expand to another host.",
     "networkFetchPerformed": false,
     "previousSourceId": "cai-pesaro-9228006",
     "previousSourceStatus": "partial; redirect blocked before response body; calendar presence unknown",
@@ -1228,7 +1270,7 @@
     "sourceId": "cai-pesaro-9228006",
     "requestedUrl": "https://caipesaro.it/",
     "collection": "partial; redirect blocked by registered-host guard before response body capture; do not treat as an empty calendar",
-    "files": "manifest/state/status mirrors present; importer integrity PASS, request-evidence HOLD; report SHA-256 efbdee72f3a9a75c80ddec66fd39205b31e3cc9e3b455859defa5b41be5c7c06; checkpoint remoto verificato a 24e48e9070ea96added7bf0e5c7580e5a8ca5025",
+    "files": "run manifest/status/report/redirect diagnostic verified; source-specific alias code + tests ready, importer QA PASS; remote code/evidence checkpoint pending; report SHA-256 cf2b40e7e441b76e8df41013f254c476ec7ae26af7597f71f48a695341a03b4a",
     "database": "pending-no-delta; no DB query, migration, write, import or receipt",
     "runFolder": "backend/data/agent-runs/cai-20261023-marche-pesaro-homepage01",
     "sourceUrlSeeds": 1,
@@ -1259,9 +1301,11 @@
     "frontendStatusSha256": "5cc2ae7caefa2f9f8c7876f433a7516423e6ebe9bbd05ce99903feb05f7b5391",
     "manifestSha256": "7bec2799fcf3791d0004e9577334621e6161f2b7b1061e7d703cd4e928a10267",
     "stateSha256": "9703deff0e9dbda34557e43b0e6105203c138631827e653d51b5ed3f3d5125e4",
-    "reportSha256": "efbdee72f3a9a75c80ddec66fd39205b31e3cc9e3b455859defa5b41be5c7c06",
-    "importerQa": "PASS file/catalog integrity; HOLD HTTP request evidence",
-    "backendTests": "npm test 214/214 after collection; catalog/registry mirrors unchanged"
+    "reportSha256": "cf2b40e7e441b76e8df41013f254c476ec7ae26af7597f71f48a695341a03b4a",
+    "importerQa": "PASS read-only; report/manifest/diagnostic hashes and source-specific alias contract verified",
+    "backendTests": "npm test 214/214 after collection; catalog/registry mirrors unchanged",
+    "redirectDiagnosticSha256": "6a7688d6c388a2f829501c6564f1101c5d41bcc51322ed155ffead81580098f0",
+    "patchTests": "targeted 39/39; backend npm test 216/216; six JSON hashes unchanged"
   },
   "latestRun": {
     "runId": "cai-20261023-marche-pesaro-homepage01",
@@ -1269,7 +1313,7 @@
     "region": "Marche",
     "sourceId": "cai-pesaro-9228006",
     "collection": "partial; redirect blocked before body capture, no empty-calendar conclusion",
-    "files": "ready/integrity PASS; evidence HOLD; report SHA-256 efbdee72f3a9a75c80ddec66fd39205b31e3cc9e3b455859defa5b41be5c7c06",
+    "files": "run artifacts integrity PASS; response evidence HOLD; source-specific HTTPS alias fixture patch QA PASS; checkpoint pending; report SHA-256 cf2b40e7e441b76e8df41013f254c476ec7ae26af7597f71f48a695341a03b4a",
     "database": "pending-no-delta; no DB read/write/import",
     "eventsExtracted": 0,
     "eventsVerified": 0,
@@ -1281,8 +1325,10 @@
     "databaseTouched": false,
     "manifestSha256": "7bec2799fcf3791d0004e9577334621e6161f2b7b1061e7d703cd4e928a10267",
     "stateSha256": "9703deff0e9dbda34557e43b0e6105203c138631827e653d51b5ed3f3d5125e4",
-    "importerQa": "PASS integrity; HOLD request evidence",
-    "tests": "backend npm test 214/214 after collection"
+    "importerQa": "PASS read-only; report/manifest/diagnostic hashes and source-specific alias contract verified",
+    "tests": "backend npm test 216/216 after alias patch; six JSON hashes unchanged",
+    "reportSha256": "cf2b40e7e441b76e8df41013f254c476ec7ae26af7597f71f48a695341a03b4a",
+    "redirectDiagnosticSha256": "6a7688d6c388a2f829501c6564f1101c5d41bcc51322ed155ffead81580098f0"
   },
   "proposedTarget": null,
   "directoryRefresh": {

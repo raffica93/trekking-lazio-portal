@@ -116,14 +116,21 @@ function validateSourceUrls(source, sourceUrls) {
   } catch {
     throw new Error(`Cannot validate --source-url for ${source.id}: source has no valid official website URL`);
   }
+  // Redirect/continuation aliases must be explicit source metadata. An alias
+  // is HTTPS-only; never infer a www/non-www pair from the primary host.
+  const officialHttpsAliases = new Set((source.officialHttpsHostAliases || [])
+    .map((host) => String(host).trim().toLowerCase())
+    .filter((host) => /^[a-z0-9.-]+$/.test(host)));
   return sourceUrls.map((value) => {
     let candidate;
     try { candidate = new URL(value); } catch {
       throw new Error(`Invalid --source-url for ${source.id}: ${value}`);
     }
+    const host = candidate.hostname.toLowerCase();
+    const alias = officialHttpsAliases.has(host);
     if (!['http:', 'https:'].includes(candidate.protocol) || candidate.username || candidate.password || candidate.port
-      || candidate.hostname.toLowerCase() !== officialHost) {
-      throw new Error(`--source-url host must match ${officialHost}: ${value}`);
+      || (host !== officialHost && !alias) || (alias && candidate.protocol !== 'https:')) {
+      throw new Error(`--source-url host must match ${officialHost}${officialHttpsAliases.size ? ` or an approved HTTPS alias` : ''}: ${value}`);
     }
     return candidate.href;
   });

@@ -644,9 +644,19 @@ function validateRedirectTarget(options, policy) {
   const hostname = String(options.hostname || options.host || '').replace(/:\d+$/, '').toLowerCase();
   const protocol = String(options.protocol || '').toLowerCase();
   const port = String(options.port || '');
-  if (hostname !== policy.host || protocol !== 'https:' || (port && port !== '443') || options.auth) {
-    throw new Error(`Blocked redirect outside official HTTPS host ${policy.host}`);
+  const allowedHosts = (policy.hosts || [policy.host]).filter(Boolean).map((host) => String(host).toLowerCase());
+  if (!allowedHosts.includes(hostname) || protocol !== 'https:' || (port && port !== '443') || options.auth) {
+    throw new Error(`Blocked redirect outside official HTTPS host${allowedHosts.length === 1 ? ` ${allowedHosts[0]}` : ' allowlist'}`);
   }
+}
+
+function officialSourceHosts(source) {
+  const website = new URL(source.website || source.url);
+  // This is a source-specific allowlist. Do not infer www aliases globally.
+  const aliases = (source.officialHttpsHostAliases || [])
+    .map((host) => String(host).trim().toLowerCase())
+    .filter((host) => /^[a-z0-9.-]+$/.test(host));
+  return [website.hostname.toLowerCase(), ...aliases];
 }
 
 async function fetchDocument(url, { timeoutMs = 8000, cacheDir = CACHE_DIR, redirectPolicy } = {}) {
@@ -780,6 +790,9 @@ function validateInitialUrls(source, initialUrls) {
   } catch {
     throw new Error(`Cannot validate continuation URLs for ${source.id}: source has no valid official website URL`);
   }
+  const officialHttpsAliases = new Set((source.officialHttpsHostAliases || [])
+    .map((host) => String(host).trim().toLowerCase())
+    .filter((host) => /^[a-z0-9.-]+$/.test(host)));
   const validated = [];
   const seen = new Set();
   for (const value of initialUrls) {
@@ -787,9 +800,11 @@ function validateInitialUrls(source, initialUrls) {
     try { candidate = new URL(value); } catch {
       throw new Error(`Invalid continuation URL for ${source.id}: ${value}`);
     }
+    const host = candidate.hostname.toLowerCase();
+    const alias = officialHttpsAliases.has(host);
     if (!['http:', 'https:'].includes(candidate.protocol) || candidate.username || candidate.password || candidate.port
-      || candidate.hostname.toLowerCase() !== officialHost) {
-      throw new Error(`Continuation URL host must match ${officialHost}: ${value}`);
+      || (host !== officialHost && !alias) || (alias && candidate.protocol !== 'https:')) {
+      throw new Error(`Continuation URL host must match ${officialHost}${officialHttpsAliases.size ? ' or an approved HTTPS alias' : ''}: ${value}`);
     }
     if (!seen.has(candidate.href)) {
       seen.add(candidate.href);
@@ -811,7 +826,7 @@ async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fe
   try { pdfOcrPages = JSON.parse(process.env.SCRAPE_PDF_OCR_PAGES || '{}'); } catch { throw new Error('SCRAPE_PDF_OCR_PAGES must be valid JSON'); }
   const continuationUrls = validateInitialUrls(source, requestedInitialUrls);
   const continuationHost = continuationUrls.length
-    ? new URL(source.website || source.url).hostname.toLowerCase()
+    ? officialSourceHosts(source)
     : null;
   let candidates = continuationUrls.length
     ? continuationUrls
@@ -886,7 +901,11 @@ async function scrapeDeterministic(source, { now = DateTime.now(), fetchDoc = fe
       const document = await fetchDoc(url, {
         timeoutMs: Math.max(1000, Math.min(documentTimeout, budgetMs - (Date.now() - started))),
         cacheDir,
-        ...(continuationHost ? { redirectPolicy: { host: continuationHost } } : {})
+        ...(continuationHost ? {
+          redirectPolicy: continuationHost.length === 1
+            ? { host: continuationHost[0] }
+            : { hosts: continuationHost }
+        } : {})
       });
       const text = document.buffer?.toString('utf8') ?? document.text ?? '';
       const isPdf = /application\/pdf/i.test(document.contentType) || text.startsWith('%PDF') || Boolean(document.filePath && /\.pdf(?:[?#]|$)/i.test(url));

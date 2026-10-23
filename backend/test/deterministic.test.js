@@ -7,8 +7,9 @@ const http = require('node:http');
 const crypto = require('node:crypto');
 const axios = require('axios');
 const { DateTime } = require('luxon');
-const { VERSION, monthFloor, parseDates, normalizeEvent, parseIcs, parseJsonLd, parseWordPress, parseCalendarLines, parseTivoliPdf, parseHtmlCalendar, discoverLinks, fetchDocument, scrapeDeterministic, pdfText } = require('../adapters/deterministic');
+const { VERSION, monthFloor, parseDates, normalizeEvent, parseIcs, parseJsonLd, parseWordPress, parseCalendarLines, parseTivoliPdf, parseHtmlCalendar, discoverLinks, fetchDocument, scrapeDeterministic, pdfText, validateInitialUrls, validateRedirectTarget } = require('../adapters/deterministic');
 const { parseScrapeArgs, scrapeAll } = require('../pipeline');
+const { SOURCES } = require('../sources');
 const source = { id: 'test-section', organizer: 'CAI Prova', region: 'Lombardia', url: 'https://section.example/calendario-2026/', enabled: true, extractor: 'deterministic' };
 const now = DateTime.fromISO('2026-09-05T12:00:00', { zone: 'Europe/Rome' });
 const quiet = { log() {}, error() {} };
@@ -303,6 +304,39 @@ test('explicit continuation URLs replace source seeds and remain inside the offi
     complete: true, knownCandidates: defaults.calendarUrls.length + 2,
     visitedCandidates: defaults.calendarUrls.length + 2, remainingCandidates: 0
   }, 'full seed traversal with no residual candidates proves the discovered queue was exhausted');
+});
+
+test('Pesaro accepts its source-specific HTTPS host alias for continuation and redirects only', async (t) => {
+  const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'cai-pesaro-host-alias-'));
+  t.after(() => fs.rm(tmp, { recursive: true, force: true }));
+  const pesaro = SOURCES.find((candidate) => candidate.id === 'cai-pesaro-9228006');
+  assert.ok(pesaro);
+  const httpsAlias = 'https://www.caipesaro.it/';
+  assert.deepEqual(validateInitialUrls(pesaro, [httpsAlias]), [httpsAlias]);
+  assert.throws(() => validateInitialUrls(pesaro, ['http://www.caipesaro.it/']), /approved HTTPS alias/);
+  assert.throws(() => validateInitialUrls(pesaro, ['https://unlisted.example/']), /approved HTTPS alias/);
+
+  let requestedPolicy;
+  await scrapeDeterministic(pesaro, {
+    now,
+    cacheDir: tmp,
+    previousStatus: { sources: [] },
+    initialUrls: ['https://caipesaro.it/'],
+    fetchDoc: async (_url, { redirectPolicy }) => {
+      requestedPolicy = redirectPolicy;
+      assert.doesNotThrow(() => validateRedirectTarget({
+        protocol: 'https:', hostname: 'www.caipesaro.it', port: '443'
+      }, redirectPolicy));
+      assert.throws(() => validateRedirectTarget({
+        protocol: 'http:', hostname: 'www.caipesaro.it', port: '80'
+      }, redirectPolicy), /Blocked redirect/);
+      assert.throws(() => validateRedirectTarget({
+        protocol: 'https:', hostname: 'unlisted.example', port: '443'
+      }, redirectPolicy), /Blocked redirect/);
+      return { url: 'https://caipesaro.it/', text: '<h1>CAI Pesaro</h1>', hash: 'fixture', contentType: 'text/html' };
+    }
+  });
+  assert.deepEqual(requestedPolicy, { hosts: ['caipesaro.it', 'www.caipesaro.it'] });
 });
 
 test('continuation fetch blocks a same-host URL redirecting to an external private host', async (t) => {
