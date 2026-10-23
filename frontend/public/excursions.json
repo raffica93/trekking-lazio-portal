@@ -10534,7 +10534,7 @@
     "cai-pisa-9226003": "a628f18e0dd006ceae5bcfa8dbf865cdaf865210ff2df5ac39f942be2b1268c5",
     "cai-gioia-del-colle-9240001": "ee04f6d03d7643687f05407a46ae92f6ecbcea7c9bdab7f7b0cb0f372298d8ff",
     "cai-val-della-torre-9212065": "1b4434106040766bca34d35ac6f45f0ee741c3c5dd86bcd0fccd121cebeb7353",
-    "cai-fivizzano-9226019": "0c36e20931f7aeec6eced9d58a3aafdb7dbb44532b530a35de661fb2d1fb5b97",
+    "cai-fivizzano-9226019": "0f6b43ef9e3315b1bec57cebda8fed31394ef062dab5bf5dc6dd599da958f571",
     "cai-cefalu-9246016": "f714ffe792eca806d2597ed34f18438b71b21b4a6ceeafcb6f3e40cfb4d7cfe4",
     "cai-pistoia-9226007": "388c85c82b4f4979724e100e0912ab131f7f99c08e87f2bbd5d545ee0c1d40a3",
     "cai-sansepolcro-9226022": "430d5c201c6fc566e41e54a9bb1baffe4555b4345ffeb76f6df89f81cdd8a769",
@@ -10773,14 +10773,14 @@
     "cai-busca-9112010": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967",
     "cai-dronero-9112012": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967"
   },
-  "generatedAt": "2026-10-23T00:48:24.532Z",
+  "generatedAt": "2026-10-23T00:54:20.000Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 1,
-    "parsed": 0,
-    "unsupported": 1,
+    "parsed": 1,
+    "unsupported": 0,
     "failed": 0,
     "located": 548
   },

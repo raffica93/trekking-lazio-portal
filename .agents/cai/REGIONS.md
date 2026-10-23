@@ -553,3 +553,14 @@ Collector ha fatto preflight offline senza richieste/test/scritture. Prossimo si
 Raccolta/file: body in cache 78.848 B SHA `964450e315da16e5a176b174462eac8b9f446b9475222ea766cb0756749e3b27`; output conferma 3.376→3.376 catalogo e 12→12 righe Fivizzano, row hash invariato `052158f0d916607fe02a746b29c0027d44a39239fd6a16fa282d1c48a04c9905` (righe per prefix, ordinate per id, Node JSON.stringify UTF-8 SHA-256); nessuna aggiunta/rimozione/modifica. Nessun duplicato o fallimento risolto. DB: 0 eventi, 0 classificazioni, nessuna query/write. Test backend 206/206 dopo raccolta; sei hash JSON pubblici stabili prima/dopo; QA importer PASS dopo correzione hash. Fivizzano resta partial, non completa.
 
 Preflight offline dopo il run: selezionata `https://www.caifivizzano.it/escursionismo/`, URL ufficiale categoria distinta in registry, assente da status/cache/FAILURES; outcome da verificare senza aspettarsi eventi. Proposto run `cai-20261023-toscana-fivizzano-escursionismo01`, max1 documento/120s/concurrency1/no discovery, solo dopo checkpoint remoto.
+
+
+## Toscana — Fivizzano escursionismo01 e selezione landing Attività (23 ottobre 2026)
+
+| Regione / run | Sezioni controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| Toscana, `cai-20261023-toscana-fivizzano-escursionismo01`, CAI Fivizzano | 1 URL ufficiale categoria | 0 | 1 | 0 | 1 evento futuro (15-11-2026), corroborato con esistente `...-2d592e7a1731` | 0; match esatto a riga esistente | 0 | PDF OCR + discovery 8; calendario 1; Miniera 1; Escursionismo 1 | checkpoint file/QA; poi landing `/attivita/` max1/120s/concurrency1 |
+
+Raccolta/file: 1 evento verificato, 1 esistente corroborato, 0 nuovo ID, 0 aggiornamenti/rimozioni. Catalogo 3.376→3.376, prefix Fivizzano 12→12; riga corroborata SHA `1b23109177824b6f4f830f8d3baf96175009e7985666e80a1bf831a238a574ea` immutata. 0 coordinate nuove. DB: nessuna classificazione/import/query/write. Importer PASS; backend `npm test` 206/206 dopo raccolta e sei hash JSON pubblici identici pre/post; mirror coincidenti. Fonte resta partial.
+
+Preflight offline successivo ha selezionato `https://www.caifivizzano.it/attivita/`, URL landing ufficiale distinta non presente nei documenti status, cache o FAILURES. Un solo run `cai-20261023-toscana-fivizzano-attivita01`, max1 documento/120s/concurrency1/no discovery dopo checkpoint remoto; nessuna aspettativa di calendario fino alla verifica del contenuto.

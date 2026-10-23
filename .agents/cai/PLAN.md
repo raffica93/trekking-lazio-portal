@@ -219,3 +219,10 @@ Il preflight offline toscano non ha trovato altri link sicuri oltre alla nuova p
 La pagina `/eventi/le-miniere-di-calcaferro/` ha prodotto un solo record passato (06-09-2026, marcato “Expired!”); nessun nuovo evento catalogo o candidato DB. Catalogo e 12 righe Fivizzano sono invariati. Source partial con PDF OCR failure e discovery-limit PDF 8/calendario 1/pagina 1. Run artifacts/evidence sono localmente sigillati; importer QA read-only è in corso. Test backend 206/206 dopo raccolta, sei JSON pubblici invariati dai test.
 
 Prossimo target offline distinto: la pagina CAI Fivizzano `/escursionismo/`, ufficiale, nel registro e non ancora visitata/cache/failure. Dopo checkpoint remoto del run e della selezione, fare un solo fetch max1/120s/concurrency1/no discovery. Non tornare su Pescia senza strategia diversa; se non produce delta, riportare la regione parziale e proseguire alla prossima fonte sicura.
+
+
+## Aggiornamento successivo — pagina Escursionismo corroborata, nessun delta (23 ottobre 2026)
+
+La pagina Fivizzano `/escursionismo/` ha restituito una riga futura del 15 novembre 2026, identica all’ID catalogo `cai-fivizzano-9226019-2d592e7a1731`. Nessuna nuova riga, duplicato escluso, coordinata o modifica catalogo; nessun candidato Mercury/DB. QA importer PASS; suite backend 206/206 dopo il run, hash pubblici stabili e mirror identici. La fonte rimane parziale con OCR/discovery PDF e discovery-limit delle pagine visitate.
+
+Il preflight offline ha selezionato la landing ufficiale `/attivita/`, ancora non visitata o in cache/failure. Dopo checkpoint remoto del run corrente e della selezione, fare un singolo fetch max1/120s/concurrency1/no discovery; verificare il contenuto effettivo. Pescia rimane esclusa per timeout senza strategia diversa.

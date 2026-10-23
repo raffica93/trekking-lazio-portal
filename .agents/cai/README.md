@@ -41,15 +41,15 @@ non dimostra che una chat nuova possa recuperare il lavoro.
 
 ## Stato di questo passaggio — 23 ottobre 2026
 
-Branch `codex/cai-orchestrator-luna`, ultimo ref remoto verificato `e8e0ce196be8b7237f0383378e83e706450f55ec`. Delta Valmadrera e Fivizzano calendar01 sono già consegnati e non vanno ripetuti. Fivizzano ha inserito 4 nuovi `places` e 4 classificazioni (`draft`), query dopo 4.427/3.358; receipt verificata.
+Branch `codex/cai-orchestrator-luna`, ultimo ref remoto verificato `c45cf1fa0113e74dba04a0695124f6ea96009298`. Il delta Fivizzano calendar01 è già consegnato: 4 nuovi `places` + 4 classificazioni `draft`, query dopo 4.427/3.358, receipt verificata.
 
-Il run Pescia `cai-20261023-toscana-pescia-index01` ha avuto timeout client 8.000 ms sulla sola pagina `/cp/`, senza status HTTP, body, cache o eventi e senza retry. Sono preservati i 12 documenti storici e la discovery-limit mensile agosto; il timeout ha un issue separato. Importer QA PASS, nessun candidato DB.
+Pescia `cai-20261023-toscana-pescia-index01` è fallito sul solo URL `/cp/` per timeout client 8.000 ms: nessun status HTTP/body/cache/evento/retry, nessun candidato DB. Sono conservati 12 documenti storici e la discovery-limit mensile di agosto; timeout registrato separatamente. QA importer PASS e checkpoint remoto al commit `e8e0ce1`.
 
-Il run più recente `cai-20261023-toscana-fivizzano-miniere01` ha letto una pagina ufficiale, con un record “Le miniere di Calcaferro” del 6 settembre 2026 marcato “Expired!”. È scaduto alla data di raccolta, quindi non è entrato nel catalogo. Catalogo 3.376→3.376, righe Fivizzano 12→12 senza cambi. Fonte ancora partial per PDF OCR e discovery aperte. Test backend 206/206 eseguiti dopo la raccolta; i sei JSON pubblici hanno hash identici prima/dopo i test e mirror coincidenti. QA indipendente importer PASS dopo correzione hash; non c’è delta DB.
+Fivizzano miniera01 ha verificato un record del 6 settembre 2026 marcato “Expired!”, escluso dal catalogo. Fivizzano escursionismo01 ha verificato l’uscita del 15 novembre 2026 e l’ha riconciliata con l’esistente `cai-fivizzano-9226019-2d592e7a1731`; nessun delta. Catalogo 3.376→3.376, 12 righe Fivizzano senza cambi; nessuna coordinata aggiornata. QA importer PASS dopo correzione indipendente dell’hash. `npm test` backend 206/206 dopo la raccolta; i sei hash JSON pubblici sono stabili prima/dopo e i mirror coincidono. Nessuna scrittura DB per questi due run. La fonte resta partial per PDF OCR e discovery-limit aperte.
 
-Il preflight toscano locale conta 37 sezioni registrate e 17 enabled (9 partial, 4 unsupported, 2 failed, 1 ok, 1 no-upcoming), con 90 eventi nello status persistito; non è una nuova copertura di rete. Prossimo URL selezionato offline: `https://www.caifivizzano.it/escursionismo/`, collegato nel registry come “Escursionismo” e non ancora letto. Un solo documento/120 s/concurrency 1 e senza discovery, dopo checkpoint remoto. È una pagina di categoria: verificare il suo contenuto senza presupporre eventi.
+Snapshot persistito toscano: 37 sezioni, 17 enabled (9 partial, 4 unsupported, 2 failed, 1 ok, 1 no-upcoming), 90 eventi; non è nuova copertura di rete. Prossimo URL selezionato offline: landing CAI Fivizzano `https://www.caifivizzano.it/attivita/`, ufficiale e non in status/cache/FAILURES. Dopo checkpoint remoto, un solo documento/120s/concurrency1/no discovery; il contenuto va verificato senza presupporre eventi.
 
-Runtime e ruoli sono richiesti GPT-6 Luna high; la telemetria di questa sessione non attesta il modello effettivo. Restano i due agenti cai-collector e cai-importer, senza altri. Mercury usa `inception/mercury-decide` via Decisions API. Nessun cron, merge, deploy o cancellazione DB.
+Runtime e ruoli sono richiesti GPT-6 Luna high; la telemetria effettiva non è esposta. Restano esattamente i due agenti cai-collector e cai-importer. Mercury usa solo `inception/mercury-decide` via Decisions API. Nessun cron, merge, deploy o cancellazione DB.
 
 ## Responsabilità
 

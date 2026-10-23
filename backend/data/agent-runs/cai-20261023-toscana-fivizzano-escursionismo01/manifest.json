@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261023-toscana-fivizzano-escursionismo01",
+  "createdAt": "2026-10-23T00:54:20.240Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "d02a525382f6d7b31c571a49c0ced7c9ed292b5e67ba138ee060b4adbca4fa83"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "7124e29edc1af941451e3e757b4fca4b5dc868ebc6d60b846a523c69a0270e49"
+    }
+  ]
+}
