@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "lazio-sora-selection-checkpoint-pending",
+  "phase": "lazio-sora-announcement-held-next-lazio-preflight",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -77,14 +77,14 @@
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "official source QA, bounded provider circuit breaker, adapter/tests",
-      "status": "Offline FVG preflight complete: 0 exact same-host calendar URLs unrepresented across 12 enabled sources/81 URLs; no cache miss attested. Selected exact official CAI Sora URL for one bounded sample; awaiting remote selection checkpoint."
+      "status": "Sora programme-announcement run completed: cached HTML verified (75,149 bytes; SHA 59df2257…c9ea742), article links to prior OCR-failed PDF; no event rows/delta. No PDF retry."
     },
     "importer": {
       "name": "cai-importer",
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "classification manifest validator, candidate/effective QA schema, conflicts/reconciliation and DB safety",
-      "status": "Independent Cesena QA complete: manifest/catalog/mirrors PASS; source attribution HOLD; zero new IDs; no DB query/write."
+      "status": "Independent Sora QA: manifest/catalog/mirror PASS, 10 existing rows unchanged; the page is a dated announcement, not the linked calendar. Coverage HOLD; no DB."
     }
   },
   "baseline": {
@@ -689,12 +689,36 @@
     },
     {
       "id": "S91",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Sora target selection was published and remotely verified at 312a682 before the fetch."
+    },
+    {
+      "id": "S92",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Bounded run cai-20261023-lazio-sora-programma01 read the exact announcement URL, one document/120s/concurrency1/no discovery. Cache HTML 75,149 B SHA 59df2257…c9ea742 matches status document hash. Article dated 17 Jan 2026 links to the distinct OCR-failed 2026.pdf; not followed. Parser method=null, 0 rows; this does not establish an empty calendar."
+    },
+    {
+      "id": "S93",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Backend npm test 206/206 serially after collection; six public JSON files unchanged pre/post."
+    },
+    {
+      "id": "S94",
+      "status": "completed",
+      "owner": "cai-importer",
+      "result": "Independent QA PASS on manifest hashes, catalog diff and mirrors. 3,376 rows, 10 Sora rows unchanged; 0 delta. Content is an announcement, not the schedule; event coverage HOLD. No DB."
+    },
+    {
+      "id": "S95",
       "status": "pending",
       "owner": "orchestrator",
-      "result": "Publish and verify the Sora target selection and latest handoff; only then run one URL max1/120s/concurrency1/no discovery."
+      "result": "Checkpoint Sora artifacts/report/evidence and status updates, then offline-only preflight for another Lazio source. Do not repeat Sora PDF OCR failure."
     }
   ],
-  "nextAction": "Publish and verify the one-URL CAI Sora selection on codex/cai-orchestrator-luna. After remote verification run cai-20261023-lazio-sora-programma01 with max1 document/120s/concurrency1/no discovery; do not retry the distinct OCR-failed PDF. Stop collection before tests/QA.",
+  "nextAction": "Publish and verify Sora run artifacts, report/source evidence/evidence-manifest, status mirrors and handoff on codex/cai-orchestrator-luna. After remote verification, cai-collector performs offline-only preflight for another Lazio source; if none, pass to the next region. No fetch until a new exact target is checkpointed.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -704,35 +728,33 @@
     "proposedRunId": null
   },
   "currentWork": {
-    "branchHead": "05302dac460737aa7d07d238d709b7b812377762",
+    "branchHead": "312a682dd30fc3189ac0e5d7466572001b1574c9",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
-      "runId": "cai-20261023-emilia-romagna-cesena-attivita01",
-      "region": "Emilia-Romagna",
-      "sourceId": "cai-cesena-9224012",
-      "requestedUrl": "https://www.caicesena.com/index.php/attivita",
-      "collection": "partial; status records 0 extracted and method=null; no body/HTTP metadata, therefore content attribution HOLD",
-      "files": "report, source evidence, manifest/evidence-manifest, state and catalog mirrors committed and verified remotely at 71a6e18",
-      "database": "no candidate; no classification, query or write",
+      "runId": "cai-20261023-lazio-sora-programma01",
+      "region": "Lazio",
+      "sourceId": "sora",
+      "requestedUrl": "https://www.caisora.it/sito/programma-escursionistico-2026-2/",
+      "collection": "partial; announcement page read, underlying PDF/calendar remains unresolved",
+      "files": "source evidence, report, manifest/evidence-manifest and public mirrors prepared; checkpoint pending",
+      "database": "no candidate; no classification/query/write",
       "counts": {
         "catalogBefore": 3376,
         "catalogAfter": 3376,
-        "uniqueBefore": 3376,
-        "uniqueAfter": 3376,
-        "sourceRowsBefore": 6,
-        "sourceRowsAfter": 6,
+        "sourceRowsBefore": 10,
+        "sourceRowsAfter": 10,
         "added": 0,
         "removed": 0,
         "changed": 0,
         "verifiedEvents": 0,
         "semanticDuplicatesExcluded": 0,
         "failuresResolved": 0,
-        "failuresOpen": 4
+        "failuresOpen": 3
       },
-      "tests": "backend npm test 206/206 after collection; six public JSON hashes stable pre/post"
+      "tests": "backend npm test 206/206 after collection; public mirrors stable"
     }
   },
-  "repositoryCommit": "05302dac460737aa7d07d238d709b7b812377762",
+  "repositoryCommit": "312a682dd30fc3189ac0e5d7466572001b1574c9",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -754,11 +776,11 @@
       "afterQueryAt": "2026-10-22T22:33:30.892756Z"
     }
   },
-  "tests": "After Cesena collection: backend npm test 206/206 serially; six public JSON hashes unchanged pre/post and all mirrors byte-identical.",
-  "updatedAt": "2026-10-23T01:31:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T01:31:00Z",
-  "regionCurrent": "Emilia-Romagna — CAI Cesena bounded route sample; 1 source checked, partial/unsupported, content HOLD; 3,376 catalog IDs before/after, six Cesena rows unchanged, 0 new/removed/changed/verified events; 0 DB. Four source issues remain open (OCR failure and three discovery limits).",
-  "regionNext": "Lazio — CAI Sora (`sora`), selected exact official URL https://www.caisora.it/sito/programma-escursionistico-2026-2/; one document max, 120 seconds, concurrency 1, no discovery after selection checkpoint.",
+  "tests": "After Sora collection: backend npm test 206/206 serially; six public JSON hashes unchanged pre/post; all backend/frontend mirrors byte-identical.",
+  "updatedAt": "2026-10-23T01:40:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T01:40:00Z",
+  "regionCurrent": "Lazio — CAI Sora announcement sample: one URL read, source partial, 0 verified events, 10 existing IDs unchanged, 0 new/removed/changed; 0 DB. The cached page is an announcement linking to the already OCR-failed PDF, so calendar coverage remains unresolved.",
+  "regionNext": "Lazio — offline preflight for a distinct exact official URL; exclude Sora 2026.pdf (OCR failure/discovery-limit 9), then pass to next region if no safe target.",
   "preflight": {
     "at": "2026-10-23T01:27:16Z",
     "sourceId": "cai-cesena-9224012",
@@ -822,23 +844,25 @@
     "independentImporterQa": "PASS file seals/catalog mirrors; HOLD import eligibility because corrected record is past/no catalog delta"
   },
   "lastRegionalAttempt": {
-    "runId": "cai-20261023-emilia-romagna-cesena-attivita01",
-    "region": "Emilia-Romagna",
-    "sourceId": "cai-cesena-9224012",
-    "requestedUrl": "https://www.caicesena.com/index.php/attivita",
-    "collection": "partial; status events=0/method=null; no body/cache or HTTP metadata, not evidence of an empty calendar",
-    "files": "manifest/state/report/source-evidence/evidence-manifest prepared; importer integrity PASS and content attribution HOLD; checkpoint pending",
-    "database": "no delta; no classification/query/write",
-    "baselineCommit": "6fcd4dab3d00bd97e70f406aa252217fd4f181dc",
-    "runFolder": "backend/data/agent-runs/cai-20261023-emilia-romagna-cesena-attivita01",
-    "recordedDocumentHash": "63bd28a27c8e0f85b5b431c1e8dd88dd0ecb41d09ba4fed5c166a48a924237bc",
+    "runId": "cai-20261023-lazio-sora-programma01",
+    "region": "Lazio",
+    "sourceId": "sora",
+    "requestedUrl": "https://www.caisora.it/sito/programma-escursionistico-2026-2/",
+    "collection": "partial; cached article read, not the calendar; method=null and zero event rows do not prove schedule empty",
+    "files": "run manifest/state/report/source-evidence/evidence manifest prepared; importer integrity and catalog PASS; checkpoint pending",
+    "database": "no classification candidates; no query/write",
+    "baselineCommit": "312a682dd30fc3189ac0e5d7466572001b1574c9",
+    "runFolder": "backend/data/agent-runs/cai-20261023-lazio-sora-programma01",
+    "bodyContentType": "text/html",
+    "bodyBytes": 75149,
+    "bodySha256": "59df2257b67d462f64ffe2eee243f28c02310d0ec52c135349bed3576c9ea742",
     "httpStatus": "not persisted",
-    "contentType": "not persisted",
-    "bodyEvidence": "unavailable",
+    "finalUrl": "not persisted",
+    "requestedPageContent": "dated 17 Jan 2026 announcement of programme; links QUI to already OCR-failed http://www.caisora.it/sito/wp-content/uploads/2026/02/2026.pdf",
     "catalogBefore": 3376,
     "catalogAfter": 3376,
-    "sourceRowsBefore": 6,
-    "sourceRowsAfter": 6,
+    "sourceRowsBefore": 10,
+    "sourceRowsAfter": 10,
     "added": 0,
     "removed": 0,
     "changed": 0,
@@ -850,14 +874,13 @@
     "unreachable": 0,
     "failuresResolved": 0,
     "failuresOpen": [
-      "youth PDF OCR failure",
-      "annual PDF discovery-limit 7",
-      "programme route discovery-limit 1",
-      "activity route discovery-limit 1"
+      "programme PDF OCR failure",
+      "programme PDF discovery-limit 9",
+      "announcement URL discovery-limit 1"
     ],
     "coordinatesAdded": 0,
-    "collectorQa": "PASS for bounded run execution; source body attribution HOLD",
-    "importerQa": "manifest/catalog/mirror PASS; source-content HOLD; no candidates",
+    "collectorQa": "bounded run completed; cache body SHA matches status metadata; no linked PDF retry",
+    "importerQa": "manifest/catalog/mirrors PASS; event coverage HOLD",
     "backendTests": "206/206; six public JSON hashes unchanged pre/post"
   },
   "regionalCoverage": {
@@ -1011,33 +1034,34 @@
   ],
   "nextSourcePreflight": {
     "region": "Lazio",
-    "sourceId": "sora",
-    "sourceName": "CAI Sora",
-    "url": "https://www.caisora.it/sito/programma-escursionistico-2026-2/",
-    "status": "selected offline; selection checkpoint pending",
-    "evidence": "exact HTTPS same-host URL in registry calendarUrls and calendarEvidence; absent from status url/documents, FAILURES and 250 reviewed run-artifact files; distinct source PDF has OCR failure and discovery-limit 9 and will not be repeated",
-    "scope": "one URL, max 1 document, 120 seconds, concurrency 1, no child URLs",
+    "status": "pending offline-only source scan after current checkpoint",
+    "scope": "registry, scrape-status URL/documents, FAILURES/cooldown, existing run artifacts and cache if available",
     "networkFetchPerformed": false,
-    "proposedRunId": "cai-20261023-lazio-sora-programma01"
+    "exclude": [
+      "Sora 2026.pdf: prior OCR failure/discovery-limit 9"
+    ],
+    "target": null
   },
   "currentRun": {
-    "runId": "cai-20261023-emilia-romagna-cesena-attivita01",
-    "region": "Emilia-Romagna",
-    "sourceId": "cai-cesena-9224012",
-    "requestedUrl": "https://www.caicesena.com/index.php/attivita",
-    "collection": "partial; status events=0/method=null; no body/cache or HTTP metadata, not evidence of an empty calendar",
-    "files": "manifest/state/report/source-evidence/evidence-manifest prepared; importer integrity PASS and content attribution HOLD; checkpoint pending",
-    "database": "no delta; no classification/query/write",
-    "baselineCommit": "6fcd4dab3d00bd97e70f406aa252217fd4f181dc",
-    "runFolder": "backend/data/agent-runs/cai-20261023-emilia-romagna-cesena-attivita01",
-    "recordedDocumentHash": "63bd28a27c8e0f85b5b431c1e8dd88dd0ecb41d09ba4fed5c166a48a924237bc",
+    "runId": "cai-20261023-lazio-sora-programma01",
+    "region": "Lazio",
+    "sourceId": "sora",
+    "requestedUrl": "https://www.caisora.it/sito/programma-escursionistico-2026-2/",
+    "collection": "partial; cached article read, not the calendar; method=null and zero event rows do not prove schedule empty",
+    "files": "run manifest/state/report/source-evidence/evidence manifest prepared; importer integrity and catalog PASS; checkpoint pending",
+    "database": "no classification candidates; no query/write",
+    "baselineCommit": "312a682dd30fc3189ac0e5d7466572001b1574c9",
+    "runFolder": "backend/data/agent-runs/cai-20261023-lazio-sora-programma01",
+    "bodyContentType": "text/html",
+    "bodyBytes": 75149,
+    "bodySha256": "59df2257b67d462f64ffe2eee243f28c02310d0ec52c135349bed3576c9ea742",
     "httpStatus": "not persisted",
-    "contentType": "not persisted",
-    "bodyEvidence": "unavailable",
+    "finalUrl": "not persisted",
+    "requestedPageContent": "dated 17 Jan 2026 announcement of programme; links QUI to already OCR-failed http://www.caisora.it/sito/wp-content/uploads/2026/02/2026.pdf",
     "catalogBefore": 3376,
     "catalogAfter": 3376,
-    "sourceRowsBefore": 6,
-    "sourceRowsAfter": 6,
+    "sourceRowsBefore": 10,
+    "sourceRowsAfter": 10,
     "added": 0,
     "removed": 0,
     "changed": 0,
@@ -1049,51 +1073,42 @@
     "unreachable": 0,
     "failuresResolved": 0,
     "failuresOpen": [
-      "youth PDF OCR failure",
-      "annual PDF discovery-limit 7",
-      "programme route discovery-limit 1",
-      "activity route discovery-limit 1"
+      "programme PDF OCR failure",
+      "programme PDF discovery-limit 9",
+      "announcement URL discovery-limit 1"
     ],
     "coordinatesAdded": 0,
-    "collectorQa": "PASS for bounded run execution; source body attribution HOLD",
-    "importerQa": "manifest/catalog/mirror PASS; source-content HOLD; no candidates",
+    "collectorQa": "bounded run completed; cache body SHA matches status metadata; no linked PDF retry",
+    "importerQa": "manifest/catalog/mirrors PASS; event coverage HOLD",
     "backendTests": "206/206; six public JSON hashes unchanged pre/post"
   },
   "latestRun": {
-    "runId": "cai-20261023-emilia-romagna-cesena-attivita01",
-    "path": "backend/data/agent-runs/cai-20261023-emilia-romagna-cesena-attivita01",
+    "runId": "cai-20261023-lazio-sora-programma01",
+    "path": "backend/data/agent-runs/cai-20261023-lazio-sora-programma01",
     "collection": "partial",
-    "files": "ready; report/source evidence/evidence manifest committed and verified at 71a6e18",
+    "files": "ready; evidence-manifest pending final checkpoint",
     "database": "pending-no-delta",
-    "requestedUrl": "https://www.caicesena.com/index.php/attivita",
-    "attribution": "hold",
-    "recordedDocumentHash": "63bd28a27c8e0f85b5b431c1e8dd88dd0ecb41d09ba4fed5c166a48a924237bc",
-    "bodyEvidenceAvailable": false,
+    "requestedUrl": "https://www.caisora.it/sito/programma-escursionistico-2026-2/",
+    "bodySha256": "59df2257b67d462f64ffe2eee243f28c02310d0ec52c135349bed3576c9ea742",
+    "bodyBytes": 75149,
+    "attribution": "cache body matches requested URL status record; HTTP status/final URL not persisted",
+    "pageType": "dated programme announcement, links to OCR-failed PDF",
     "extractedRows": 0,
     "catalogBefore": 3376,
     "catalogAfter": 3376,
-    "sourceRowsBefore": 6,
-    "sourceRowsAfter": 6,
+    "soraRowsBefore": 10,
+    "soraRowsAfter": 10,
     "added": 0,
     "removed": 0,
     "changed": 0,
     "verifiedEvents": 0,
-    "semanticDuplicatesExcluded": 0,
     "backendTests": "206/206 passed after collection",
     "databaseQueryOrWrite": false
   },
   "proposedTarget": {
     "region": "Lazio",
-    "sourceId": "sora",
-    "sourceName": "CAI Sora",
-    "url": "https://www.caisora.it/sito/programma-escursionistico-2026-2/",
-    "reason": "exact official HTTPS same-host URL from registry calendar evidence, not represented in reviewed status/failure/run history",
-    "sample": {
-      "documents": 1,
-      "seconds": 120,
-      "concurrency": 1,
-      "discovery": false
-    },
+    "status": "offline preflight pending after Sora run checkpoint",
+    "url": null,
     "fetchStarted": false
   }
 }

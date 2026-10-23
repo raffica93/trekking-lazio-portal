@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-23T01:24:22.175Z",
+  "generatedAt": "2026-10-23T01:30:41.238Z",
   "coverage": {
     "total": 838,
     "selected": 1,
@@ -817,7 +817,7 @@
       "directoryId": "9232002",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "unsupported",
+      "status": "partial",
       "url": "https://www.caisora.it/sito/wp-content/uploads/2026/02/2026.pdf",
       "kind": "pdf",
       "template": "pdf-programma",
@@ -826,13 +826,19 @@
       "excursions": 10,
       "error": null,
       "hash": "c42b13ef2d1c3f9977dff7544d4eaf90232c1c65584f796b6699da700bb47fd6",
-      "updatedAt": "2026-10-19T18:24:35.762Z",
+      "updatedAt": "2026-10-23T01:30:41.238Z",
       "documents": [
         {
           "url": "https://www.caisora.it/sito/wp-content/uploads/2026/02/2026.pdf",
           "hash": "f235e791f014f7ded38381e67b0f23f68f68d39e5344af968abab5ee39228ba6",
           "events": 0,
           "method": "pdf-text"
+        },
+        {
+          "url": "https://www.caisora.it/sito/programma-escursionistico-2026-2/",
+          "hash": "59df2257b67d462f64ffe2eee243f28c02310d0ec52c135349bed3576c9ea742",
+          "events": 0,
+          "method": null
         }
       ],
       "methods": [
@@ -846,6 +852,11 @@
         {
           "url": "https://www.caisora.it/sito/wp-content/uploads/2026/02/2026.pdf",
           "message": "Discovery budget reached; 9 candidate documents remain.",
+          "code": "discovery-limit"
+        },
+        {
+          "url": "https://www.caisora.it/sito/programma-escursionistico-2026-2/",
+          "message": "Discovery budget reached; 1 candidate documents remain.",
           "code": "discovery-limit"
         }
       ],

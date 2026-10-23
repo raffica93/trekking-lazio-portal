@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261023-lazio-sora-programma01",
+  "source": {
+    "sourceId": "sora",
+    "organizer": "CAI Sora",
+    "region": "Lazio",
+    "requestedUrl": "https://www.caisora.it/sito/programma-escursionistico-2026-2/",
+    "officialHost": "www.caisora.it",
+    "registryEvidence": "Exact HTTPS URL present in calendarUrls and calendarEvidence; URL foundOn points to this same page."
+  },
+  "observation": {
+    "statusUrl": "https://www.caisora.it/sito/programma-escursionistico-2026-2/",
+    "cachePath": "backend/node_modules/.cache/cai/0147e73dec6033cbae8378d09c0a3ae8d984cfec86b9a9a095b06f5f3fdbb255.bin",
+    "contentType": "text/html",
+    "bodyBytes": 75149,
+    "bodySha256": "59df2257b67d462f64ffe2eee243f28c02310d0ec52c135349bed3576c9ea742",
+    "statusDocumentHash": "59df2257b67d462f64ffe2eee243f28c02310d0ec52c135349bed3576c9ea742",
+    "httpStatus": null,
+    "finalUrl": null,
+    "parserMethod": null,
+    "extractedRows": 0,
+    "bodyExcerpt": "Article title: “Programma Escursionistico 2026”; dated 17 Gennaio 2026; text says the new 2026 hiking program is online and invites readers to click “QUI” for consultation/download. “QUI” links to http://www.caisora.it/sito/wp-content/uploads/2026/02/2026.pdf."
+  },
+  "interpretation": {
+    "pageContentRead": true,
+    "documentType": "dated announcement linking to the actual hiking programme PDF",
+    "calendarReadSuccessfully": false,
+    "zeroRowsMeansEmptyCalendar": false,
+    "verifiedEvents": 0,
+    "newCatalogIds": 0,
+    "classificationCandidates": 0,
+    "databaseDeltaApplicable": false,
+    "linkedPdfFetched": false
+  },
+  "limitations": [
+    "No HTTP status or final URL/redirect information is persisted.",
+    "The linked PDF is a distinct URL with a pre-existing OCR failure and discovery-limit 9; it was not retried.",
+    "The announcement page does not contain the event calendar, so zero extracted rows do not prove an empty schedule."
+  ]
+}
