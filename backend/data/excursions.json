@@ -10569,7 +10569,7 @@
     "cai-dolo-9220031": "3eea60128fb44611d1210b41bd5566f3f4f2c47c24072611ea1a867c6af3acd7",
     "cai-giarre-9246005": "27863d1822f1a7e4a26d5dc3f08f1c0cb9d636f61f16d9d7e6a3af48c4a0e0fc",
     "cai-castelfranco-veneto-9220016": "ea1b3869f18a5ff5efd25e855e01309889bd49d28355a17c452e7efb4548093d",
-    "cai-belpasso-9246010": "92922cb5ba272a7d4711ab0fd9bd6c20f5fa5c17d34a913bb8cade1a2268874a",
+    "cai-belpasso-9246010": "5f63b7a384c3e2c25764a73dc92150a543c81194b7f22c4cee53fd535123c08e",
     "cai-conegliano-9220018": "f24716369e3a5003275aeb6ac4ccc04a3a9e1eb91b92127e799e844762fdd975",
     "cai-agordo-9220001": "54c825a5ac9397241bfc0d9ad070b57ec32f59ce7455668643d830b4ebab4a72",
     "cai-camposampiero-9220048": "c8e6e483cdaeed1377488655c0548230a887b4d251a1c83b56a52d8a6658b9f9",
@@ -10773,14 +10773,14 @@
     "cai-busca-9112010": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967",
     "cai-dronero-9112012": "4a09355ec653fedd1802ce5121d9f62fcb02d6150b90e96ab8821511fa79d967"
   },
-  "generatedAt": "2026-10-23T00:00:50.673Z",
+  "generatedAt": "2026-10-23T00:08:48.154Z",
   "classifiedAt": "2026-08-29T18:27:00.431Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 1,
-    "parsed": 1,
-    "unsupported": 0,
+    "withEvents": 0,
+    "parsed": 0,
+    "unsupported": 1,
     "failed": 0,
     "located": 548
   },

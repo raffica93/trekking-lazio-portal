@@ -449,3 +449,15 @@ Il PDF finale è `Volantino 63 Corso Alpinismo 2026 Rev.03.pdf`, 928.543 byte, S
 | Sicilia — CAI Belpasso `cai-belpasso-9246010` | 1 URL ufficiale distinto, preflightato | 0 (non ancora fetch) | 1 selezionata; issue PDF OCR e iCal discovery sono separate | 0 | 0 (pagina non ancora letta) | 0 | Nessuna nuova failure osservata offline | Dopo checkpoint remoto selezione: run singolo `cai-20261023-sicilia-belpasso-programma01`, URL programma 2026, max1 documento/120s/concurrency1; non seguire PDF/iCal |
 
 I totali regionali nella tabella storica iniziale restano snapshot 2026-10-20; questo preflight non ha interrogato o ricalcolato la copertura aggregata. Conteggi raccolta/file/DB per Belpasso restano 0/0/0 finché il run e l’eventuale delivery non saranno verificati.
+
+
+## Sicilia — CAI Belpasso programma01 (23 ottobre 2026)
+
+| Regione / run | Sezioni controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---:|---:|---:|---|---|
+| Sicilia, `cai-20261023-sicilia-belpasso-programma01` | 1 URL ufficiale | 0 | 1 | 0 | 0 estratti (unsupported/method=null; non equivale a calendario vuoto) | 0 | 0 | Program page discovery-limit 1; brochure PDF OCR failure; iCal discovery-limit 7 | Dopo checkpoint, preflight offline di un URL Sicilia distinto; Belpasso è informativa, non prova di calendario vuoto; non ripetere PDF/iCal |
+
+Catalogo da checkpoint remoto `1695a08`: 3.371→3.371 ID unici; Belpasso 0→0, nessun add/remove/change. File 1 run manifest verificato e pronto, nessun candidato DB; classificazioni/import consegnati: 0. Test backend 206/206, sei JSON pubblici invariati pre/post. I valori regionali storici in testa restano snapshot 2026-10-20 e non sono query correnti.
+
+
+Diagnosi offline del body: articolo informativo sul programma 2026, senza date/event rows/calendar markup/JSON-LD Event; metodo `unsupported` corretto, nessun parser fix. Nessuna raccolta ulteriore in parallelo.

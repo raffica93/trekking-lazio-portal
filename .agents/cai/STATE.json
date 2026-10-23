@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "sicilia-belpasso-preflight-checkpoint",
+  "phase": "sicilia-belpasso-review-checkpoint",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -72,14 +72,14 @@
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "official source QA, bounded provider circuit breaker, adapter/tests",
-      "status": "Cesena escursionismo01 raccolto con image-ocr; date nel poster senza titolo/destinazione, nessuna riga inferita; offline preflight selezionato CAI Pavullo."
+      "status": "Belpasso programma01 collected one official URL; unsupported/method=null, zero extracted rows. Offline cache diagnosis pending."
     },
     "importer": {
       "name": "cai-importer",
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "classification manifest validator, candidate/effective QA schema, conflicts/reconciliation and DB safety",
-      "status": "Cesena escursionismo01 independent QA PASS; nessun delta evento; backend tests 205/205; no DB."
+      "status": "Belpasso programma01 independent manifest/catalog QA PASS; zero event candidates and no DB action."
     }
   },
   "baseline": {
@@ -447,9 +447,27 @@
       "status": "completed",
       "owner": "orchestrator + cai-collector",
       "result": "Preflight offline Lombardia concluso senza nuovi target host-exact utili; Marche, Molise, Piemonte, Puglia e Sardegna saltate per URL già consumate/alias, passate o failure. Primo URL distinto selezionato in Sicilia: CAI Belpasso Programma 2026. Nessuna rete, raccolta, test o DB; checkpoint di selezione richiesto prima del run."
+    },
+    {
+      "id": "S52",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Belpasso programma01: una URL official-host; 153764 B HTML SHA 03521e393d4f0245db58098b3a6e273c43f5db9370f19840248fc0823f31eca3, status HTTP non registrato, method=null/unsupported e zero righe. Catalogo 3371 ID, 0 delta; source partial. Nessun DB o Mercury."
+    },
+    {
+      "id": "S53",
+      "status": "completed",
+      "owner": "cai-importer + orchestrator",
+      "result": "Importer QA PASS manifest/mirror e zero delta; backend npm test 206/206. Sei JSON pubblici byte-stabili prima/dopo test. Report pronto, nessun candidato/import; body HTML va diagnosticato solo offline."
+    },
+    {
+      "id": "S54",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Review del body HTML Belpasso esistente esclusivamente offline: articolo informativo senza date, righe evento, markup calendario o JSON-LD Event; metodo unsupported/null corretto. Nessuna patch, rete, test o file modificato; procedere al preflight di diversa fonte Sicilia."
     }
   ],
-  "nextAction": "Checkpoint remoto di questo preflight e selezione Belpasso; poi un solo run orchestrato CAI Belpasso max1/120s/concurrency1. Nessun fetch delle code iCal o PDF OCR già fallite.",
+  "nextAction": "Checkpoint remoto report/file Belpasso; poi preflight offline di un URL Sicilia distinto. La pagina cache è informativa e non contiene date/eventi parsabili; nessuna patch necessaria. Non ritentare PDF/iCal.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -458,67 +476,55 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "1091905710a785526ccf9560df213805d3acb3b2",
+    "branchHead": "1695a0864d3c51625b5f984bc71f9a44dbd8e3c2",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
-      "runId": "cai-20261023-lombardia-carate-corsoalpinismo01",
-      "region": "Lombardia",
-      "sourceId": "cai-carate-brianza-9216030",
-      "requestedUrl": "https://www.caicaratebrianza.it/download/5-scuola-di-alpinismo/7-corsi-di-alpinismo?download=609:volantino-63-corso-di-alpinismo-2026",
-      "finalUrl": "https://www.caicaratebrianza.it/phocadownload/Scuola_di_alpinismo/2026/Volantino%2063%20Corso%20Alpinismo%202026%20Rev.03.pdf",
-      "collection": "partial",
-      "files": "ready; sealed manifest valid; report pending remote checkpoint",
-      "database": "pending/no delta; event dates 2026-07-04..05 are past at 2026-10-23; no query/write",
-      "baselineCommit": "6b2852264cbdae4134d2cf071cf0473fb3d92a5b",
-      "runFolder": "backend/data/agent-runs/cai-20261023-lombardia-carate-corsoalpinismo01",
-      "contentType": "application/pdf",
-      "bodyBytes": 928543,
-      "bodySha256": "05117835947e634494ceea7eea854398af8e3f839a62cce9fc55d8c5e8edfd8c",
+      "runId": "cai-20261023-sicilia-belpasso-programma01",
+      "region": "Sicilia",
+      "sourceId": "cai-belpasso-9246010",
+      "requestedUrl": "https://organizzazione.cai.it/sez-belpasso/programma-attivita-sociale-2026/",
+      "finalUrl": "https://organizzazione.cai.it/sez-belpasso/programma-attivita-sociale-2026/",
+      "collection": "partial; method=null/unsupported, 0 extracted rows",
+      "files": "ready; manifest and independent integrity QA pass; report created, pending remote checkpoint",
+      "database": "pending/not required; 0 candidate rows, no DB query or write",
+      "baselineCommit": "1695a0864d3c51625b5f984bc71f9a44dbd8e3c2",
+      "runFolder": "backend/data/agent-runs/cai-20261023-sicilia-belpasso-programma01",
+      "contentType": "text/html; charset=UTF-8",
+      "bodyBytes": 153764,
+      "bodySha256": "03521e393d4f0245db58098b3a6e273c43f5db9370f19840248fc0823f31eca3",
       "httpStatus": "not recorded; no 200/304 assertion",
-      "originalParserOutput": "date 2026-05-04; dateEnd missing; not accepted",
-      "correctedOfflineParse": {
-        "title": "Arrampicata in ambiente I.N.A. Colombo Antonio I.A.L. Scotti Matteo",
-        "date": "2026-07-04",
-        "dateEnd": "2026-07-05",
-        "days": 2,
-        "coordinates": null,
-        "correctionCommit": "e277de52b9d311edc7b46b40512a6ee59f6d1901"
-      },
       "catalogBefore": 3371,
       "catalogAfter": 3371,
-      "sourceRowsBefore": 6,
-      "sourceRowsAfter": 6,
+      "sourceRowsBefore": 0,
+      "sourceRowsAfter": 0,
       "added": 0,
       "removed": 0,
       "changed": 0,
-      "eventsVerified": 1,
-      "currentOrNewEvents": 0,
+      "eventsVerified": 0,
       "duplicateIdsExcluded": 0,
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
-      "failuresResolved": [
-        "date range parser regression fixture e277de52b9d311edc7b46b40512a6ee59f6d1901"
-      ],
+      "failuresResolved": [],
       "failuresOpen": [
-        "annual PDF discovery-limit 344",
-        "separate gym page timeout"
+        "Program URL unsupported/method=null, discovery-limit 1",
+        "brochure PDF OCR failure",
+        "iCal discovery-limit 7"
       ],
-      "collectorQa": "official text checked from cached PDF; parser v14 produces past date range and no coords; final PDF already existed at baseline; no delta",
-      "importerQa": "PASS manifest/catalog mirror integrity; HOLD import eligibility/no new row; no DB",
-      "backendTests": "206/206; all six public JSON SHA-256 values unchanged before/after suite",
-      "manifestSha256": "45abd2f4694eae5a01e6367bfddc2a04aab551d59ab38dc6a371ba925d363300",
-      "runStateSha256": "f8872ff3d15ee17665442fddd8df189de43a3de200aaba9700dee93e239a5218",
-      "reportPath": "backend/data/agent-runs/cai-20261023-lombardia-carate-corsoalpinismo01/collection-report.md",
-      "reportSha256": "ca32d56a0d914670aca0a41fd65379ec02758d4db3876dac8e86bf076407c450",
+      "collectorQa": "Offline body review at exact cached SHA: informational article only, no date/event rows/calendar markup/JSON-LD Event; method=null appropriate; no patch/test fixture needed.",
+      "importerQa": "PASS sealed hashes, mirrors and zero delta; no candidate to classify/import; no DB.",
+      "backendTests": "206/206; SHA-256 of all six public JSON files unchanged before/after",
+      "manifestSha256": "7d6bfb50ddd7030dd3d8223e77a57554436829df6da94d1280228fa07cc8e435",
+      "runStateSha256": "75cf015e1b34bdf490fc2ff36291b02d64b2b4e423d1db1996d71f284d08ca07",
+      "reportPath": "backend/data/agent-runs/cai-20261023-sicilia-belpasso-programma01/collection-report.md",
+      "reportSha256": "1c0fdabae842f6c5fcce6caecf623396ff63c90073b74eeee80ffefacdb6acd7",
       "coordinatesAdded": 0,
-      "dbWrites": 0,
-      "filesCheckpointCommit": "6d7ba7e60f5829e92b6cc90b435db57145e77036"
+      "dbWrites": 0
     },
-    "nextAction": "Checkpoint remoto di questo preflight e selezione Belpasso; poi un solo run orchestrato CAI Belpasso max1/120s/concurrency1. Nessun fetch delle code iCal o PDF OCR già fallite."
+    "nextAction": "Checkpoint remoto report/file Belpasso; poi preflight offline di un URL Sicilia distinto. La pagina cache è informativa e non contiene date/eventi parsabili; nessuna patch necessaria. Non ritentare PDF/iCal."
   },
-  "repositoryCommit": "1091905710a785526ccf9560df213805d3acb3b2",
+  "repositoryCommit": "1695a0864d3c51625b5f984bc71f9a44dbd8e3c2",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -540,11 +546,11 @@
       "afterQueryAt": "2026-10-22T22:33:30.892756Z"
     }
   },
-  "tests": "After Carate01 collection and parser fix: backend npm test 206/206; six public JSON hashes identical before/after, including frontend/public/excursions.json.",
-  "updatedAt": "2026-10-23T00:20:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T00:04:30Z",
-  "regionCurrent": "Lombardia — preflight offline concluso dopo Carate: in questa selezione non restano URL official-host nuovi/lavorabili. Varese 503+iCal discovery 93; Brescia 403/404 in cooldown; Valmadrera/Sesto/Somma/Carate già letti; Livigno/Calco/Legnano residui non produttivi. Regione ancora parziale, non dichiarata completa; nessun nuovo conteggio regionale.",
-  "regionNext": "Sicilia — CAI Belpasso, un solo URL ufficiale programma-attivita-sociale-2026 non presente in documents/cache/failure URL/run artifacts. Campione da 1 documento/120s/concurrency1 dopo checkpoint.",
+  "tests": "After Belpasso collection: backend npm test 206/206; six public JSON hashes unchanged before/after and backend/frontend mirrors match. No test ran during collection.",
+  "updatedAt": "2026-10-23T00:32:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T00:18:00Z",
+  "regionCurrent": "Sicilia — CAI Belpasso programma01: pagina HTML informativa, schede dettagliate rinviate a bacheca/gruppi/mail; nessuna data o riga evento. method=null corretto, no parser fix. Catalogo 3371 ID, zero delta, fonte complessiva resta parziale per issue brochure/iCal.",
+  "regionNext": "Dopo checkpoint del report, cai-collector seleziona offline un URL Sicilia official-host distinto da page Belpasso/PDF OCR/iCal. Un solo URL max1/120s/concurrency1 dopo checkpoint.",
   "preflight": {
     "at": "2026-10-23T00:00:18Z",
     "sourceId": "cai-carate-brianza-9216030",
@@ -592,79 +598,71 @@
     "independentImporterQa": "PASS file seals/catalog mirrors; HOLD import eligibility because corrected record is past/no catalog delta"
   },
   "lastRegionalAttempt": {
-    "runId": "cai-20261023-lombardia-carate-corsoalpinismo01",
-    "region": "Lombardia",
-    "sourceId": "cai-carate-brianza-9216030",
-    "requestedUrl": "https://www.caicaratebrianza.it/download/5-scuola-di-alpinismo/7-corsi-di-alpinismo?download=609:volantino-63-corso-di-alpinismo-2026",
-    "finalUrl": "https://www.caicaratebrianza.it/phocadownload/Scuola_di_alpinismo/2026/Volantino%2063%20Corso%20Alpinismo%202026%20Rev.03.pdf",
-    "collection": "partial",
-    "files": "ready; sealed manifest valid; report pending remote checkpoint",
-    "database": "pending/no delta; event dates 2026-07-04..05 are past at 2026-10-23; no query/write",
-    "baselineCommit": "6b2852264cbdae4134d2cf071cf0473fb3d92a5b",
-    "runFolder": "backend/data/agent-runs/cai-20261023-lombardia-carate-corsoalpinismo01",
-    "contentType": "application/pdf",
-    "bodyBytes": 928543,
-    "bodySha256": "05117835947e634494ceea7eea854398af8e3f839a62cce9fc55d8c5e8edfd8c",
+    "runId": "cai-20261023-sicilia-belpasso-programma01",
+    "region": "Sicilia",
+    "sourceId": "cai-belpasso-9246010",
+    "requestedUrl": "https://organizzazione.cai.it/sez-belpasso/programma-attivita-sociale-2026/",
+    "finalUrl": "https://organizzazione.cai.it/sez-belpasso/programma-attivita-sociale-2026/",
+    "collection": "partial; method=null/unsupported, 0 extracted rows",
+    "files": "ready; manifest and independent integrity QA pass; report created, pending remote checkpoint",
+    "database": "pending/not required; 0 candidate rows, no DB query or write",
+    "baselineCommit": "1695a0864d3c51625b5f984bc71f9a44dbd8e3c2",
+    "runFolder": "backend/data/agent-runs/cai-20261023-sicilia-belpasso-programma01",
+    "contentType": "text/html; charset=UTF-8",
+    "bodyBytes": 153764,
+    "bodySha256": "03521e393d4f0245db58098b3a6e273c43f5db9370f19840248fc0823f31eca3",
     "httpStatus": "not recorded; no 200/304 assertion",
-    "originalParserOutput": "date 2026-05-04; dateEnd missing; not accepted",
-    "correctedOfflineParse": {
-      "title": "Arrampicata in ambiente I.N.A. Colombo Antonio I.A.L. Scotti Matteo",
-      "date": "2026-07-04",
-      "dateEnd": "2026-07-05",
-      "days": 2,
-      "coordinates": null,
-      "correctionCommit": "e277de52b9d311edc7b46b40512a6ee59f6d1901"
-    },
     "catalogBefore": 3371,
     "catalogAfter": 3371,
-    "sourceRowsBefore": 6,
-    "sourceRowsAfter": 6,
+    "sourceRowsBefore": 0,
+    "sourceRowsAfter": 0,
     "added": 0,
     "removed": 0,
     "changed": 0,
-    "eventsVerified": 1,
-    "currentOrNewEvents": 0,
+    "eventsVerified": 0,
     "duplicateIdsExcluded": 0,
     "sectionsChecked": 1,
     "complete": 0,
     "partial": 1,
     "unreachable": 0,
-    "failuresResolved": [
-      "date range parser regression fixture e277de52b9d311edc7b46b40512a6ee59f6d1901"
-    ],
+    "failuresResolved": [],
     "failuresOpen": [
-      "annual PDF discovery-limit 344",
-      "separate gym page timeout"
+      "Program URL unsupported/method=null, discovery-limit 1",
+      "brochure PDF OCR failure",
+      "iCal discovery-limit 7"
     ],
-    "collectorQa": "official text checked from cached PDF; parser v14 produces past date range and no coords; final PDF already existed at baseline; no delta",
-    "importerQa": "PASS manifest/catalog mirror integrity; HOLD import eligibility/no new row; no DB",
-    "backendTests": "206/206; all six public JSON SHA-256 values unchanged before/after suite",
-    "manifestSha256": "45abd2f4694eae5a01e6367bfddc2a04aab551d59ab38dc6a371ba925d363300",
-    "runStateSha256": "f8872ff3d15ee17665442fddd8df189de43a3de200aaba9700dee93e239a5218",
-    "reportPath": "backend/data/agent-runs/cai-20261023-lombardia-carate-corsoalpinismo01/collection-report.md",
-    "reportSha256": "ca32d56a0d914670aca0a41fd65379ec02758d4db3876dac8e86bf076407c450",
+    "collectorQa": "Offline body review at exact cached SHA: informational article only, no date/event rows/calendar markup/JSON-LD Event; method=null appropriate; no patch/test fixture needed.",
+    "importerQa": "PASS sealed hashes, mirrors and zero delta; no candidate to classify/import; no DB.",
+    "backendTests": "206/206; SHA-256 of all six public JSON files unchanged before/after",
+    "manifestSha256": "7d6bfb50ddd7030dd3d8223e77a57554436829df6da94d1280228fa07cc8e435",
+    "runStateSha256": "75cf015e1b34bdf490fc2ff36291b02d64b2b4e423d1db1996d71f284d08ca07",
+    "reportPath": "backend/data/agent-runs/cai-20261023-sicilia-belpasso-programma01/collection-report.md",
+    "reportSha256": "1c0fdabae842f6c5fcce6caecf623396ff63c90073b74eeee80ffefacdb6acd7",
     "coordinatesAdded": 0,
-    "dbWrites": 0,
-    "filesCheckpointCommit": "6d7ba7e60f5829e92b6cc90b435db57145e77036"
+    "dbWrites": 0
   },
   "regionalCoverage": {
-    "region": "Lombardia",
-    "scope": "one bounded official URL per run; Sesto/Somma/Varese/Carate sampled, no fresh regional total query",
+    "region": "Sicilia",
+    "scope": "one official URL per run; Belpasso program page bounded to one document; regional total not re-queried",
     "status": "open",
     "currentRunCounts": {
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
-      "eventsVerified": 1,
+      "eventsVerified": 0,
+      "duplicateIdsExcluded": 0,
+      "failuresResolved": 0,
+      "failuresOpen": 3,
       "newIds": 0,
+      "filesReady": 1,
       "dbPlacesInserted": 0,
       "dbClassificationsInserted": 0,
-      "nextStep": "Publish Carate report/code/catalog checkpoint, then finish offline Lombardia source scan; continue one source at a time."
+      "nextStep": "Checkpoint report and preflight a distinct Sicilia official URL; Belpasso page is informational, not proof of empty annual coverage."
     },
     "historicalSnapshot": {
       "asOf": "2026-10-20",
-      "note": "Historical only; not a current query."
+      "note": "Historical only; not a current query. Sicily historical section counts were not refreshed by this sample."
     }
   },
   "deltaDeliveryHistory": [
@@ -795,17 +793,9 @@
     "sourceId": "cai-belpasso-9246010",
     "sourceName": "CAI Belpasso",
     "url": "https://organizzazione.cai.it/sez-belpasso/programma-attivita-sociale-2026/",
-    "status": "selected; waiting for selection checkpoint before bounded collection",
-    "evidence": "Official calendarEvidence label Programma 2026; exact official host matches website; URL absent from source documents, deterministic cache, URL failures, and run artifacts. Existing PDF OCR failure and iCal discovery-limit are separate URLs and excluded.",
-    "scope": "one exact URL, max1 document, 120 seconds, concurrency1; no discovery expansion/fetch of child PDF/iCal",
-    "networkFetchPerformed": false,
-    "preflightSkippedRegions": [
-      "Marche",
-      "Molise",
-      "Piemonte",
-      "Puglia",
-      "Sardegna"
-    ],
-    "preflightSkipReason": "No new workable official-host target remained after excluding visited aliases, past pages, consumed or failed URLs; first distinct candidate found in Sicilia."
+    "status": "Belpasso page reviewed offline; next distinct Sicilia source preflight pending",
+    "evidence": "Body 153764 B SHA 03521e393d4f0245db58098b3a6e273c43f5db9370f19840248fc0823f31eca3; requested=final. Worker returned method=null/unsupported; no HTTP status persisted. Offline review confirmed an informational article with no dates/event rows/calendar markup/JSON-LD Event; no parser gap.",
+    "scope": "Offline registry/status/cache/FAILURES/run scan for a distinct Sicilia official-host URL; no network, tests, DB, or child-link fetch. Checkpoint source selection before collection.",
+    "networkFetchPerformed": false
   }
 }

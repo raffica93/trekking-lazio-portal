@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-23T00:00:50.699Z",
+  "generatedAt": "2026-10-23T00:08:48.180Z",
   "coverage": {
     "total": 838,
     "selected": 1,
-    "withEvents": 1,
-    "parsed": 1,
-    "unsupported": 0,
+    "withEvents": 0,
+    "parsed": 0,
+    "unsupported": 1,
     "failed": 0,
     "located": 548
   },
@@ -39904,7 +39904,7 @@
       "directoryId": "9246010",
       "sectionType": "section",
       "parentSectionId": null,
-      "status": "unsupported",
+      "status": "partial",
       "url": "https://organizzazione.cai.it/sez-belpasso/eventi/?ical=1",
       "kind": "ics",
       "template": "icalendar",
@@ -39913,7 +39913,7 @@
       "excursions": 0,
       "error": null,
       "hash": "92922cb5ba272a7d4711ab0fd9bd6c20f5fa5c17d34a913bb8cade1a2268874a",
-      "updatedAt": "2026-10-19T18:24:35.762Z",
+      "updatedAt": "2026-10-23T00:08:48.180Z",
       "documents": [
         {
           "url": "https://organizzazione.cai.it/sez-belpasso/eventi/?ical=1",
@@ -39926,6 +39926,12 @@
           "hash": "52bce4abc30572fd0585e5673c92ec18aaff900a3b674f2f89cbe8c00823acf7",
           "events": 0,
           "method": "pdf-text"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-belpasso/programma-attivita-sociale-2026/",
+          "hash": "03521e393d4f0245db58098b3a6e273c43f5db9370f19840248fc0823f31eca3",
+          "events": 0,
+          "method": null
         }
       ],
       "methods": [
@@ -39939,6 +39945,11 @@
         {
           "url": "https://organizzazione.cai.it/sez-belpasso/eventi/?ical=1",
           "message": "Discovery budget reached; 7 candidate documents remain.",
+          "code": "discovery-limit"
+        },
+        {
+          "url": "https://organizzazione.cai.it/sez-belpasso/programma-attivita-sociale-2026/",
+          "message": "Discovery budget reached; 1 candidate documents remain.",
           "code": "discovery-limit"
         }
       ],
