@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261023-lombardia-lovere01",
+  "orchestratorManifestSha256": "6d3ad42ea07a29dbed6c340468000ae63055d73f0b60f40969cab9a6ca477d41",
+  "artifacts": {
+    "backend/data/excursions.json": "10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7",
+    "frontend/public/excursions.json": "10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7",
+    "backend/data/cai-sections.json": "250afdbc6fa8980f076f094c9574b2d77d157e7f34f4dfb9c84a4f09f3166944",
+    "frontend/public/cai-sections.json": "250afdbc6fa8980f076f094c9574b2d77d157e7f34f4dfb9c84a4f09f3166944",
+    "backend/data/scrape-status.json": "4bfee84744d44a7ce91a5797fa7ebba00a08819be7cd491f99c91e3f21a2c8a7",
+    "frontend/public/scrape-status.json": "4bfee84744d44a7ce91a5797fa7ebba00a08819be7cd491f99c91e3f21a2c8a7"
+  },
+  "runFiles": {
+    "manifest.json": "6d3ad42ea07a29dbed6c340468000ae63055d73f0b60f40969cab9a6ca477d41",
+    "state.json": "5d19a0ead4b820a820fc9853c5fbe8c8b0b4082dcdcc85819567c715d53f82ff",
+    "collection-report.json": "d06a418666e9125536684b4d1c6b2d199657e86ccfd1a628577e5b38b0eb7605"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261023-lombardia-lovere01",
+  "createdAt": "2026-10-23T06:35:06.074Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "250afdbc6fa8980f076f094c9574b2d77d157e7f34f4dfb9c84a4f09f3166944"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "4bfee84744d44a7ce91a5797fa7ebba00a08819be7cd491f99c91e3f21a2c8a7"
+    }
+  ]
+}

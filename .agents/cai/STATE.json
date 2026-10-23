@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "lombardia-lovere-bounded-discovery-ready",
+  "phase": "lombardia-lovere-no-upcoming-files-ready-checkpoint-pending",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -824,9 +824,33 @@
       "status": "completed",
       "owner": "orchestrator",
       "result": "Selected exactly one official new target in Lombardia: cai-lovere-9216055 / https://organizzazione.cai.it/sez-lovere/. No event/calendar response or cache exists in current scrape status. Planned bounded run cai-20261023-lombardia-lovere01: one source, concurrency 1, max 8 documents, source budget 120000 ms via SCRAPE_MAX_DOCUMENTS=8 and SCRAPE_SOURCE_BUDGET_MS=120000. No --source-url continuation; homepage is the official directory URL. Checkpoint this selection before network."
+    },
+    {
+      "id": "S114",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Executed only cai-lovere-9216055 using run cai-20261023-lombardia-lovere01, max 8 docs/120s/concurrency1. Three same-host docs; parsed WordPress Events API JSON valid with events=[], total=0, total_pages=0 over 2026-10-01..2028-10-23. Empty iCal body is HTML and not used as proof. Source status no-upcoming, no error/issues. Catalog rows/IDs 3376 before/after; 0 adds/removes/modifications; no other sources fetched; no DB."
+    },
+    {
+      "id": "S115",
+      "status": "completed",
+      "owner": "cai-importer",
+      "result": "Independent read-only QA PASS with evidence caveat: sealed manifest/state hashes match; backend/frontend public JSON mirrors byte-identical; 3376 unique IDs unchanged. WordPress Events JSON parsed to empty for requested range, so feed-level zero is supported; no HTTP status/final URL persisted. iCal alone does not prove empty. No DB read/write, no import required."
+    },
+    {
+      "id": "S116",
+      "status": "completed",
+      "owner": "orchestrator",
+      "result": "Backend npm test 214/214 after collection. Public excursions hash before and after tests is 10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7 for both backend and frontend; tests did not write frontend/public/excursions.json."
+    },
+    {
+      "id": "S117",
+      "status": "in_progress",
+      "owner": "orchestrator",
+      "result": "Publish the verified no-delta run files and report; remote file checkpoint pending. DB remains pending-no-delta and untouched."
     }
   ],
-  "nextAction": "Commit/push this exact-source, single-run bounds checkpoint before any network collection. Then execute only the bounded orchestrator init/collect for CAI Lovere. QA sealed files before considering DB; no tests in parallel.",
+  "nextAction": "Commit and push cai-20261023-lombardia-lovere01 state/manifest/report, public mirrors, and updated STATE/HANDOFF on codex/cai-orchestrator-luna. Verify the remote. No DB import: the catalog has no event delta.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -862,7 +886,7 @@
       "tests": "backend npm test 206/206 after collection; six public JSON hashes unchanged"
     }
   },
-  "repositoryCommit": "5f82449bc802a8c7cb0d0907c9967c9ebe7612b8",
+  "repositoryCommit": "4de739d1355cdef52570cf133f3e9b49017f9b3a",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -885,10 +909,10 @@
     }
   },
   "tests": "After Sora iCal collection: backend npm test 206/206 serially; six public JSON hashes unchanged pre/post; backend/frontend mirrors identical.",
-  "updatedAt": "2026-10-23T06:43:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T06:39:30Z",
-  "regionCurrent": "Lombardia directory refresh completed. The official listing added a website for CAI Lovere; tested offline reconciliation now marks it enabled/pending-discovery. No calendar source was fetched yet and regional event coverage is unassessed.",
-  "regionNext": "Lombardia — checkpoint refreshed registry and report, then one bounded discovery from the exact official CAI Lovere website; only after it is read can event/source coverage be assessed.",
+  "updatedAt": "2026-10-23T06:49:00Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T06:43:00Z",
+  "regionCurrent": "Lombardia: one newly listed source CAI Lovere was checked. Its WordPress Events API returned valid JSON with zero events for 2026-10-01 through 2028-10-23. This is a feed-level no-upcoming result, not a full regional audit. 229 directory entries; one checked this run.",
+  "regionNext": "Lombardia remains open. After the Lovere file checkpoint, inspect partial/open sources and exact official URLs offline, respect recorded cooldowns, and select one distinct bounded source; do not repeat completed sources.",
   "preflight": {
     "at": "2026-10-23T01:27:16Z",
     "sourceId": "cai-cesena-9224012",
@@ -1139,88 +1163,79 @@
   ],
   "nextSourcePreflight": {
     "region": "Lombardia",
-    "status": "selected; importer PASS on current remote checkpoint; selection will be published before collection",
-    "scope": "single-source official homepage discovery, max 8 docs, 120s source budget, concurrency 1",
+    "status": "Lovere run completed; next exact URL not selected",
+    "scope": "offline inspection of open/partial sources after checkpoint",
     "networkFetchPerformed": false,
-    "sourceId": "cai-lovere-9216055",
-    "target": "https://organizzazione.cai.it/sez-lovere/",
-    "basis": "Official CAI section directory row 9216055; no source calendar/event content has been fetched"
+    "previousSourceId": "cai-lovere-9216055",
+    "previousSourceStatus": "no-upcoming on parsed WordPress Events API; no event delta",
+    "nextTarget": null
   },
   "currentRun": {
-    "runId": "cai-20261023-lazio-sora-ical01",
-    "region": "Lazio",
-    "sourceId": "sora",
-    "requestedUrl": "https://www.caisora.it/sito/events/?ical=1",
-    "collection": "partial source; this iCal feed itself was read correctly and is empty (VCALENDAR 2.0, 0 VEVENT); source overall still has open PDF/announcement issues",
-    "files": "manifest/state/source evidence/report/evidence manifest checkpointed and verified remotely at b143fe5; importer PASS feed/body/catalog",
-    "database": "no candidates; no classification/query/write",
-    "baselineCommit": "54f89ba2e57e5da2f24202be5cbcd4b55f52cc6e",
-    "runFolder": "backend/data/agent-runs/cai-20261023-lazio-sora-ical01",
-    "bodyContentType": "text/calendar; charset=UTF-8",
-    "bodyBytes": 271,
-    "bodySha256": "0346bed3656c05f04bea29859d384ae9f97a835cd7cac16082f98d3738977906",
-    "httpStatus": "not persisted",
-    "finalUrl": "not persisted",
-    "icalVersion": "2.0",
-    "icalMethod": "PUBLISH",
-    "calendarComponents": 1,
-    "eventComponents": 0,
-    "eventsExtracted": 0,
-    "eventsVerified": 0,
-    "sectionsChecked": 1,
-    "complete": 0,
-    "partial": 1,
-    "unreachable": 0,
-    "failuresResolved": 0,
-    "failuresOpen": [
-      "annual PDF OCR failure",
-      "annual PDF discovery-limit 9",
-      "programme announcement discovery-limit 1"
-    ],
-    "coordinatesAdded": 0,
-    "duplicatesExcluded": 0,
-    "collectorQa": "feed parsed and empty, no retry of linked PDF",
-    "importerQa": "PASS body/source/manifest/catalog; feed-level no-upcoming supported; section coverage HOLD",
-    "backendTests": "206/206; six public JSON hashes unchanged pre/post"
-  },
-  "latestRun": {
-    "runId": "cai-20261023-lazio-sora-ical01",
-    "path": "backend/data/agent-runs/cai-20261023-lazio-sora-ical01",
-    "collection": "partial",
-    "files": "ready; evidence manifest and catalog/status mirrors remotely verified at b143fe5",
-    "database": "pending-no-delta",
-    "requestedUrl": "https://www.caisora.it/sito/events/?ical=1",
-    "bodySha256": "0346bed3656c05f04bea29859d384ae9f97a835cd7cac16082f98d3738977906",
-    "bodyBytes": 271,
-    "contentType": "text/calendar; charset=UTF-8",
-    "icalValid": true,
-    "icalEventComponents": 0,
-    "feedStatus": "no-upcoming",
-    "wholeSectionStatus": "partial",
-    "catalogBefore": 3376,
-    "catalogAfter": 3376,
-    "sourceRowsBefore": 10,
-    "sourceRowsAfter": 10,
-    "added": 0,
-    "removed": 0,
-    "changed": 0,
-    "verifiedFeedEvents": 0,
-    "backendTests": "206/206 passed after collection",
-    "databaseQueryOrWrite": false
-  },
-  "proposedTarget": {
+    "runId": "cai-20261023-lombardia-lovere01",
     "region": "Lombardia",
     "sourceId": "cai-lovere-9216055",
-    "status": "pending-discovery; exact homepage selected, not fetched",
-    "url": "https://organizzazione.cai.it/sez-lovere/",
-    "runId": "cai-20261023-lombardia-lovere01",
-    "limits": {
-      "maxDocuments": 8,
-      "sourceBudgetMs": 120000,
-      "concurrency": 1
-    },
-    "fetchStarted": false
+    "requestedUrl": "https://organizzazione.cai.it/sez-lovere/",
+    "collection": "selected source task done/no-upcoming; run-level collection partial because this run is bounded and not a national/regional audit",
+    "files": "ready; original manifest sealed and importer PASS; report/audit manifest prepared for checkpoint",
+    "database": "pending-no-delta; 0 DB reads/writes/imports",
+    "runFolder": "backend/data/agent-runs/cai-20261023-lombardia-lovere01",
+    "documentsRead": 3,
+    "documentHashes": [
+      "32356f88a834b518be1b40b255111d1955aadfff7a04fda793263e990f69131c",
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "0bc4aaa7d2d24c47f5f293ddd5679b59e47bf80446da287078dcc0ca878b867e"
+    ],
+    "eventsVerified": 0,
+    "selectedSourceStatus": "no-upcoming",
+    "validApiZeroResult": true,
+    "iCalEvidence": "empty body, HTML content-type; not relied upon",
+    "httpStatus": "not persisted",
+    "finalUrl": "not persisted",
+    "sectionsChecked": 1,
+    "completeForParsedApiRange": 1,
+    "partial": 0,
+    "unreachable": 0,
+    "duplicatesExcluded": 0,
+    "failuresResolved": 0,
+    "failuresOpen": 0,
+    "evidenceGaps": [
+      "HTTP status and final URL were not persisted"
+    ],
+    "catalogBefore": 3376,
+    "catalogAfter": 3376,
+    "uniqueIds": 3376,
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "backendExcursionsSha256": "10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7",
+    "frontendExcursionsSha256": "10e8fdbba313be8c8b49d3cf2dd9c465590b0d99986bde45560df0a3ee8ad2c7",
+    "backendStatusSha256": "4bfee84744d44a7ce91a5797fa7ebba00a08819be7cd491f99c91e3f21a2c8a7",
+    "tests": "backend npm test 214/214 after collection",
+    "reportSha256": "d06a418666e9125536684b4d1c6b2d199657e86ccfd1a628577e5b38b0eb7605",
+    "auditManifestSha256": "a487e5fefa9ede8794061883daae763e7d3e37436a0a94ac4ba030659973d127"
   },
+  "latestRun": {
+    "runId": "cai-20261023-lombardia-lovere01",
+    "path": "backend/data/agent-runs/cai-20261023-lombardia-lovere01",
+    "collection": "partial (bounded source run)",
+    "files": "ready; files pass importer QA",
+    "database": "pending-no-delta",
+    "sourceId": "cai-lovere-9216055",
+    "sourceStatus": "no-upcoming for parsed API interval",
+    "documentsRead": 3,
+    "eventsExtracted": 0,
+    "eventsVerified": 0,
+    "catalogRowsBefore": 3376,
+    "catalogRowsAfter": 3376,
+    "added": 0,
+    "removed": 0,
+    "modified": 0,
+    "databaseTouched": false,
+    "reportSha256": "d06a418666e9125536684b4d1c6b2d199657e86ccfd1a628577e5b38b0eb7605",
+    "manifestSha256": "6d3ad42ea07a29dbed6c340468000ae63055d73f0b60f40969cab9a6ca477d41",
+    "tests": "214/214 after run"
+  },
+  "proposedTarget": null,
   "directoryRefresh": {
     "runId": "cai-20261023-lombardia-directory-refresh01",
     "region": "Lombardia",
@@ -1247,5 +1262,18 @@
     "lovere": "official site listed by CAI directory; importer confirmed enabled discovery target; no fetch/calendar/event verification yet",
     "reportSha256": "c5dbbff7ee45615405e090fc400c45f88fe282946274c8ed21a1371004e2c232",
     "manifestSha256": "f038795275c2855746f80659fe3254ccd8551a6d3827444f2ca4ee713f40a256"
+  },
+  "lombardiaCoverage": {
+    "directoryEntries": 229,
+    "sourcesCheckedThisRun": 1,
+    "completeForFeedRange": 1,
+    "partial": 0,
+    "unreachable": 0,
+    "eventsVerified": 0,
+    "duplicatesExcluded": 0,
+    "failuresResolved": 0,
+    "failuresOpen": 0,
+    "status": "region open; one source/feed only, not a regional audit",
+    "evidenceGap": "HTTP status/final URL are not persisted; parsed WordPress API provides valid zero result. Empty iCal response is not used as calendar evidence."
   }
 }
