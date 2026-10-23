@@ -728,7 +728,7 @@
     "proposedRunId": null
   },
   "currentWork": {
-    "branchHead": "10a4de97597650f787a3a4bb630b2a32a419c202",
+    "branchHead": "a05ea2ae60e01b7b3f96f81f94b6f800a210e32b",
     "recoverableRemoteCheckpoint": true,
     "sampleRun": {
       "runId": "cai-20261023-lazio-sora-programma01",
@@ -754,7 +754,7 @@
       "tests": "backend npm test 206/206 after collection; public mirrors stable"
     }
   },
-  "repositoryCommit": "10a4de97597650f787a3a4bb630b2a32a419c202",
+  "repositoryCommit": "a05ea2ae60e01b7b3f96f81f94b6f800a210e32b",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -777,8 +777,8 @@
     }
   },
   "tests": "After Sora collection: backend npm test 206/206 serially; six public JSON hashes unchanged pre/post; all backend/frontend mirrors byte-identical.",
-  "updatedAt": "2026-10-23T01:43:00Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T01:43:00Z",
+  "updatedAt": "2026-10-23T01:44:30Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T01:44:30Z",
   "regionCurrent": "Lazio — CAI Sora announcement sample: one URL read, source partial, 0 verified events, 10 existing IDs unchanged, 0 new/removed/changed; 0 DB. The cached page is an announcement linking to the already OCR-failed PDF, so calendar coverage remains unresolved.",
   "regionNext": "Lazio — offline preflight for a distinct exact official URL; exclude Sora 2026.pdf (OCR failure/discovery-limit 9), then pass to next region if no safe target.",
   "preflight": {

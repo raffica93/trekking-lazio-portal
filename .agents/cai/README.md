@@ -23,7 +23,7 @@ Punto di ingresso per riprendere il progetto da una sessione cloud nuova, senza 
 
 ## Passaggio corrente — 23 ottobre 2026
 
-Branch `codex/cai-orchestrator-luna` verificato a `137180cb5808733dc3afc467b127b8210f317bfe` (discendente da `50352f7`; include run Cesena/Sora e prove). Valmadrera07 (14 eventi + 14 classificazioni) e Fivizzano calendar01 (+4 +4) sono già consegnati; non ripetere i delta o il batch storico 3.336.
+Branch `codex/cai-orchestrator-luna` verificato a `a05ea2ae60e01b7b3f96f81f94b6f800a210e32b` (discendente da `50352f7`; include run Cesena/Sora e prove). Valmadrera07 (14 eventi + 14 classificazioni) e Fivizzano calendar01 (+4 +4) sono già consegnati; non ripetere i delta o il batch storico 3.336.
 
 Cesena Attività01 è stato raccolto su una sola URL. Stato `partial / files ready / database pending`; il manifest e i mirror sono coerenti, catalogo 3.376→3.376, sei righe Cesena invariate. L’attribuzione del contenuto è HOLD: non c’è body/cache né metadata HTTP, `method=null` e zero righe estratte non provano calendario vuoto. Importer ha dato PASS all’integrità, HOLD all’attribuzione. Nessun nuovo evento, classificazione o DB; quattro issue Cesena restano aperte. Backend `npm test` 206/206 dopo il run e sei JSON pubblici stabili.
 
