@@ -1,5 +1,18 @@
 # Avanzamento regionale CAI
 
+## Ripresa post-Lovere — preflight Lombardia / Emilia-Romagna / Lazio (23 ottobre 2026)
+
+Il branch remoto è `b4780ffc29d6b238fc6c72602762a635ec737057`. I risultati qui sotto sono controlli offline; non aggiornano la copertura aggregata e non costituiscono query live.
+
+| Regione | Sezioni controllate/complete/parziali/irraggiungibili | Eventi nuovi verificati | Duplicati esclusi | Fallimenti risolti / aperti | Prossimo passo |
+|---|---|---:|---:|---|---|
+| Lombardia | Stati non ricalcolati; nessun fetch | 0 | 0 | 0 / Gazzada è già presente nel batch classificazione; altri target consumati, in cooldown o senza URL esatta | Regione resta incompleta; nessun URL sicuro in questa snapshot |
+| Emilia-Romagna | Snapshot precedente: 29 sezioni, 14 enabled e 15 disabled; stati non ricalcolati | 0 | 0 | 0 / Argenta 503, Rimini 503, Ravenna 403; altri URL consumati o non calendari | Nessun URL sicuro dopo Cesena/Pavullo |
+| Lazio | Snapshot precedente: 31 sezioni, 19 enabled e 12 disabled; stati non ricalcolati | 0 | 0 | 0 / URL consumate, 403/404 e code senza URL figlia esatta | Nessun target distinto oltre Sora già campionata |
+
+Per evitare replay, Gazzada non è selezionata benché il documento non compaia nella lista `scrape-status.documents`: il batch `cai-map-20261022-full01` e i record catalogati la collegano già al PDF. In questi preflight non sono stati letti calendari né fatti test o scritture DB. La prossima azione è il refresh directory-only della sola Marche; eventuali URL eventi vanno selezionate solo dopo verifica dell'output e checkpoint remoto.
+
+
 ## Ultimo checkpoint operativo — 23 ottobre 2026
 
 I dati aggregati della tabella seguente restano lo snapshot storico del 20 ottobre. Questo aggiornamento separa il risultato degli ultimi controlli circoscritti; non è una nuova query nazionale né un audit complessivo.

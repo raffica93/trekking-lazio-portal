@@ -1,5 +1,22 @@
 # Passaggio operativo CAI — raccolta e delivery regionale
 
+## Ripresa corrente — preflight chiuso, Marche in selezione directory (23 ottobre 2026, 06:47 UTC)
+
+Branch `codex/cai-orchestrator-luna` verificato a `b4780ffc29d6b238fc6c72602762a635ec737057`; il checkout è pulito dopo il riallineamento. Le modifiche locali della sessione precedente sono conservate nello stash `preserve-local-cai-work-before-remote-sync-20261023`; il remoto contiene già i checkpoint successivi fino a Lovere, quindi non sono state riapplicate. Nessun merge, deploy, cron o DB in questa ripresa.
+
+`cai-collector` e `cai-importer` non sono in attesa: entrambi hanno completato. Importer ha PASS sul checkpoint Lovere `8961db1d`. Lovere resta un campione valido soltanto per il feed Tribe Events e il suo intervallo, con `events=[]`; la copertura Lombardia complessiva resta aperta. Il preflight offline Lombardia non trova URL nuova sicura: il PDF ufficiale Gazzada Schianno compare già come `sourceUrl` nel batch `cai-map-20261022-full01` e in record catalogati, quindi non va ripetuto. Altri candidati sono già consumati, in failure/cooldown o senza URL figlia esatta.
+
+Preflight successivi, solo lettura sul branch `b4780ff`: Emilia-Romagna non ha target safe dopo Cesena/Pavullo (Argenta/Rimini 503, Ravenna 403; restanti URL già lette o non calendario); Lazio non ha URL distinta oltre a Sora già letta (altre fonti hanno URL già in `documents`/status oppure discovery-limit senza target esatto, 403/404 o link social). Nessun fetch, test o DB è stato eseguito in questi preflight; conteggi regionali non ricalcolati.
+
+| Regione verificata | Sezioni nello snapshot | Complete / parziali / irraggiungibili ricalcolate | Eventi nuovi verificati | Duplicati esclusi | Fallimenti risolti / aperti | Prossimo passo |
+|---|---:|---|---:|---:|---|---|
+| Lombardia | non ricalcolate | no fetch; copertura resta aperta | 0 | 0 | 0 / URL già consumate, failure/cooldown e discovery senza figlio esatto | Passaggio alla regione successiva |
+| Emilia-Romagna | 29 (14 enabled, 15 disabled; snapshot precedente) | no fetch; non ricalcolate | 0 | 0 | 0 / 503 Argenta-Rimini, 403 Ravenna e URL già consumate | Nessun target sicuro |
+| Lazio | 31 (19 enabled, 12 disabled; snapshot precedente) | no fetch; non ricalcolate | 0 | 0 | 0 / fonti consumate, 403/404 e discovery senza URL esatta | Nessun target sicuro |
+
+Il prossimo passo circoscritto è la directory-only ufficiale per la sola regione Marche, con il merge conservativo già verificato, per trovare eventuali nuove fonti senza ripetere raccolte. Prima del run è richiesta la verifica remota di questo checkpoint; dopo, QA indipendente e `npm test` seriale, quindi un eventuale campione eventi solo su URL nuova e ufficiale. Nessuna scrittura DB in questa fase.
+
+
 ## Stato corrente — 23 ottobre 2026
 
 Repository `raffica93/trekking-lazio-portal`, branch `codex/cai-orchestrator-luna`; il checkpoint della raccolta Lovere e del report è verificato remoto a `8961db1d5c90baa94af336931bbcaca9e9ed2d2f`. Importer QA finale PASS. Nessun merge o deploy.

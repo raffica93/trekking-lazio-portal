@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-23",
   "timezone": "Europe/Rome",
-  "phase": "lombardia-lovere-no-upcoming-files-ready-checkpoint-pending",
+  "phase": "marche-directory-refresh-selected-checkpoint-pending",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -77,14 +77,14 @@
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "official source QA, bounded provider circuit breaker, adapter/tests",
-      "status": "Sora iCal01 completed; valid 271-byte VCALENDAR 2.0 with zero VEVENT, no-upcoming supported for feed. Section remains partial due PDF OCR/discovery and announcement discovery issues."
+      "status": "Lombardia: preflight no-target; Gazzada esclusa perché già usata nel batch classificazione. Emilia-Romagna e Lazio: nessun nuovo URL sicuro nelle snapshot. Nessun fetch o modifica."
     },
     "importer": {
       "name": "cai-importer",
       "model": "gpt-6-luna",
       "reasoningEffort": "high",
       "ownership": "classification manifest validator, candidate/effective QA schema, conflicts/reconciliation and DB safety",
-      "status": "Independent QA PASS: exact URL/body hash/content type/ICS parse match; feed-level no-upcoming supported, section coverage HOLD; 10 rows unchanged, no DB."
+      "status": "PASS sul checkpoint Lovere 8961db1d; nessun delta DB in questo checkpoint. Prossimo gate read-only sul solo output regionale Marche, dopo il refresh."
     }
   },
   "baseline": {
@@ -857,12 +857,30 @@
     },
     {
       "id": "S119",
-      "status": "in_progress",
+      "status": "completed",
       "owner": "cai-collector",
-      "result": "Offline-only Lombardia preflight of remaining open/partial enabled sources after Lovere. Use existing run history, scrape-status, cache and FAILURES; no network, collection, tests or writes. Return at most one exact official URL not consumed/in cooldown, or document no target and recommend next region."
+      "result": "Preflight offline collector su Lombardia dopo Lovere: nessun URL exact-host selezionabile. Il PDF CAI Gazzada Schianno è ufficiale ma compare già come sourceUrl in cai-map-20261022-full01 e in record catalogati; HOLD per evitare replay. Altri residui sono già consumati, failure/cooldown o code senza URL figlia persistita. Nessun fetch/test/file/DB."
+    },
+    {
+      "id": "S120",
+      "status": "completed",
+      "owner": "cai-collector + orchestrator",
+      "result": "Preflight offline Emilia-Romagna sul branch b4780ff dopo Cesena/Pavullo: nessun target exact-host sicuro. Argenta e Rimini hanno 503, Ravenna 403; restanti URL consumed o non-calendario/terze parti. 29 sezioni (14 enabled/15 disabled) da snapshot REGIONS; stati/eventi non ricalcolati, 0 fetch/eventi/duplicati/failure risolti, nessun DB."
+    },
+    {
+      "id": "S121",
+      "status": "completed",
+      "owner": "cai-collector + orchestrator",
+      "result": "Preflight offline Lazio sul branch b4780ff: nessun target nuovo oltre Sora programma/iCal già letti; altre fonti enabled hanno URL in documents/status o discovery-limit senza figlio esatto, con blocchi 403/404 o social. Snapshot: 31 sezioni (19 enabled/12 disabled); stati non ricalcolati, 0 fetch/eventi/duplicati/failure risolti, nessun DB."
+    },
+    {
+      "id": "S122",
+      "status": "pending",
+      "owner": "orchestrator",
+      "result": "Checkpointare la selezione della directory ufficiale CAI per la sola regione Marche; dopo push/verifica, refresh directory-only con --region Marche per aggiornare il registro e identificare eventuali fonti ufficiali nuove. Nessun run eventi o DB finché l'output non è verificato."
     }
   ],
-  "nextAction": "Publish this QA/state note, then complete collector offline preflight of remaining Lombardia open/partial sources. Do not issue requests until one distinct exact URL is supported by existing evidence.",
+  "nextAction": "Pubblicare questo handoff; poi, dopo verifica del checkpoint remoto, aggiornare la directory ufficiale CAI soltanto per Marche con il merge regionale conservativo già testato. Verificare fixture/QA e npm test in sequenza dopo il run; selezionare un URL eventi solo se il registro aggiornato ne offre uno distinto e ufficiale. Nessun DB in questo passo.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
