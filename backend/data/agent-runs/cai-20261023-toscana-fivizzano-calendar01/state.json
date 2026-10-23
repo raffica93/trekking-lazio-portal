@@ -19,7 +19,7 @@
   },
   "collection": "partial",
   "files": "ready",
-  "database": "pending",
+  "database": "completed",
   "sources": [
     {
       "id": "roma",
@@ -11422,9 +11422,88 @@
     {
       "at": "2026-10-23T00:14:13.319Z",
       "event": "files-verified"
+    },
+    {
+      "at": "2026-10-23T00:35:17.325134Z",
+      "event": "database-delta-completed",
+      "details": "4 places and 4 classifications inserted idempotently; receipt linked; no existing values updated/deleted."
     }
   ],
-  "updatedAt": "2026-10-23T00:14:13.319Z",
+  "updatedAt": "2026-10-23T00:35:17.325134Z",
   "manifest": "backend/data/agent-runs/cai-20261023-toscana-fivizzano-calendar01/manifest.json",
-  "events": 3376
+  "events": 3376,
+  "databaseImport": {
+    "mode": "delta-only",
+    "manifestPath": "backend/data/agent-runs/cai-map-20261023-fivizzano01/manifest.json",
+    "manifestSha256": "0bbe6dea10f07ded946bf19af714d6306ab1cc098b3c239361007d3fffc82b8b",
+    "placesInserted": 4,
+    "classificationsInserted": 4,
+    "status": "completed",
+    "receiptPath": "backend/data/agent-runs/cai-map-20261023-fivizzano01/import-receipt.json",
+    "executionChannel": "Supabase MCP execute_sql",
+    "publicStatus": "draft"
+  },
+  "importResult": {
+    "status": "completed",
+    "runId": "cai-map-20261023-fivizzano01",
+    "places": {
+      "input": 4,
+      "inserted": 4,
+      "insertedSourceIds": [
+        "cai-fivizzano-9226019-25b520da9498",
+        "cai-fivizzano-9226019-4ac183446fc1",
+        "cai-fivizzano-9226019-9ad6725f7fbe",
+        "cai-fivizzano-9226019-eba39ba9cdc6"
+      ],
+      "existingPreserved": 0,
+      "concurrentConflictsPreserved": 0,
+      "skipped": 0,
+      "missing": 0,
+      "updated": 0,
+      "deleted": 0,
+      "status": "draft",
+      "protectedFieldsVerified": [
+        "title",
+        "status",
+        "cover_image_path",
+        "latitude",
+        "longitude",
+        "coordinates_quality",
+        "geo_evidence",
+        "location",
+        "organizer_region",
+        "cai_section_id"
+      ],
+      "coordinatesAdded": 0,
+      "geoEvidenceAdded": 0
+    },
+    "classifications": {
+      "input": 4,
+      "eligible": 4,
+      "inserted": 4,
+      "insertedSourceIds": [
+        "cai-fivizzano-9226019-25b520da9498",
+        "cai-fivizzano-9226019-4ac183446fc1",
+        "cai-fivizzano-9226019-9ad6725f7fbe",
+        "cai-fivizzano-9226019-eba39ba9cdc6"
+      ],
+      "preexistingPreserved": 0,
+      "concurrentPreserved": 0,
+      "mismatched": 0,
+      "updated": 0,
+      "deleted": 0,
+      "effectiveCounts": {
+        "trekking": 2,
+        "non_trekking": 0,
+        "da_verificare": 2
+      },
+      "candidateCounts": {
+        "trekking": 3,
+        "non_trekking": 0,
+        "da_verificare": 1
+      }
+    },
+    "receiptPath": "backend/data/agent-runs/cai-map-20261023-fivizzano01/import-receipt.json",
+    "executionChannel": "Supabase MCP execute_sql"
+  }
 }
