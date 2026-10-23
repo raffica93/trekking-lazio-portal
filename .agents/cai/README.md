@@ -27,7 +27,7 @@ Branch `codex/cai-orchestrator-luna` verificato a `9f99117fb676a74630084b51f644d
 
 Lazio Sora: programma01 ha letto solo un articolo annuncio, non l’intero programma; il PDF OCR-failed è stato escluso. iCal01 ha verificato il feed esatto `https://www.caisora.it/sito/events/?ical=1`, 271 B, `VCALENDAR` valido e zero `VEVENT`; feed-level `no-upcoming` supportato. La sezione resta partial per i problemi del PDF/annuncio; 10 record invariati, zero DB. Importer PASS, copertura nazionale non ricalcolata; backend `npm test` 206/206. Report/evidence iCal e mirror sono checkpointati e verificati a `b143fe5`.
 
-Il preflight Liguria ha trovato 0 URL nuove tra 5 fonti enabled/26 sezioni; le failure sono discovery-limit senza URL figlia. Nessun cache miss attestato, regione incompleta. Lombardia post-Carate e Marche/Molise/Puglia/Sardegna/Calabria/Campania sono già state preflightate senza target; non ripetere. Prossimo: preflight offline Emilia-Romagna per fonti diverse da Cesena/Pavullo, nessun fetch senza checkpoint della selezione. Runtime/ruoli richiesti GPT-6 Luna high, telemetria effettiva non disponibile.
+Il preflight Liguria ha trovato 0 URL nuove tra 5 fonti enabled/26 sezioni. Emilia-Romagna è stata poi controllata offline: 29 sezioni, 14 enabled; dopo Cesena/Pavullo non resta un URL sicuro non consumato. Blocchi residui: 403/503 e discovery-limit senza URL figlia; cache non disponibile, nessun cache miss attestato. I preflight regionali già documentati non vanno ripetuti senza nuove evidenze. Prossimo run soltanto con una nuova URL ufficiale exact-host recuperabile e checkpointata. Runtime/ruoli richiesti GPT-6 Luna high, telemetria effettiva non disponibile.
 
 ## Responsabilità
 
