@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedOn": "2026-10-22",
   "timezone": "Europe/Rome",
-  "phase": "lombardia-carate-preflight-checkpoint",
+  "phase": "lombardia-carate-review-checkpoint",
   "fullCloudQualified": true,
   "repository": {
     "name": "raffica93/trekking-lazio-portal",
@@ -428,10 +428,22 @@
       "id": "S48",
       "status": "completed",
       "owner": "cai-collector",
-      "result": "Preflight offline Carate Brianza: selezionato un URL nuovo host-exact official per flyer corso alpinismo 2026; assente da 18 source docs/status, cache exact+alias, FAILURES e run history; discovery-limit annuale 344 e timeout palestra restano esclusi."
+      "result": "Preflight URL alias CAI Carate selezionata su host esatto. La URL richiesta era nuova ma il PDF final URL/hash risultava già nello status baseline: il bounded sample ha verificato alias/estrazione, non aggiunto una nuova fonte documentale."
+    },
+    {
+      "id": "S49",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Carate01: una sola URL; cache final PDF 928543 B SHA 05117835947e634494ceea7eea854398af8e3f839a62cce9fc55d8c5e8edfd8c. Estratto da PDF “04/05-lug Arrampicata in ambiente…” parser v13 errato 2026-05-04 senza intervallo. PDF finale già nello status baseline; nessun candidate row nuovo, catalogo 3371 IDs / 6 Carate invariati."
+    },
+    {
+      "id": "S50",
+      "status": "completed",
+      "owner": "cai-collector",
+      "result": "Fix parser stretto DD/DD-meseAbbrev: 04/05-lug → 2026-07-04..05; ordinary 12/10 remains 12 October. Deterministic VERSION 14; real-line fixture/test; focused 2/2, backend 206/206; cached PDF re-evaluated offline; commit e277de52b9d311edc7b46b40512a6ee59f6d1901 pushed and fetch/tree verified."
     }
   ],
-  "nextAction": "Checkpoint remoto della correzione preflight Lissone/Carate. Poi un solo run cai-20261023-lombardia-carate-corsoalpinismo01 sul volantino ufficiale CAI Carate, max1 documento/120s/concurrency1; non seguire discovery-limit 344 né retry della pagina palestra.",
+  "nextAction": "Checkpoint remoto di report Carate, run artifacts, catalog mirrors e registri. Poi continua preflight offline Lombardia; se restano fonti lavorabili prosegui con un URL alla volta, altrimenti passa alla regione successiva.",
   "constraints": {
     "recurringSchedules": false,
     "implicitMerge": false,
@@ -440,56 +452,66 @@
     "databaseDeletes": false
   },
   "currentWork": {
-    "branchHead": "7b063750be774219c6c3406d780b45ca29a841e9",
-    "recoverableRemoteCheckpoint": true,
+    "branchHead": "e277de52b9d311edc7b46b40512a6ee59f6d1901",
+    "recoverableRemoteCheckpoint": false,
     "sampleRun": {
-      "runId": "cai-20261022-lombardia-varese-calendar01",
+      "runId": "cai-20261023-lombardia-carate-corsoalpinismo01",
       "region": "Lombardia",
-      "sourceId": "cai-varese-9216009",
-      "requestedUrl": "https://www.caivarese.it/calendarioannuale",
+      "sourceId": "cai-carate-brianza-9216030",
+      "requestedUrl": "https://www.caicaratebrianza.it/download/5-scuola-di-alpinismo/7-corsi-di-alpinismo?download=609:volantino-63-corso-di-alpinismo-2026",
+      "finalUrl": "https://www.caicaratebrianza.it/phocadownload/Scuola_di_alpinismo/2026/Volantino%2063%20Corso%20Alpinismo%202026%20Rev.03.pdf",
       "collection": "partial",
-      "files": "ready; importer catalog/manifest QA PASS, source freshness HOLD",
-      "database": "pending; no verified event delta; no query/write",
-      "baselineCommit": "2c3a5d82304c63b1277a91e08df7bf2edd441951",
-      "runFolder": "backend/data/agent-runs/cai-20261022-lombardia-varese-calendar01",
-      "requestedUrlCacheKeySha256": "d0686bc332e9b91ef146fbf163d684572b07c6ede0282ab7d9101eb52b0d3be4",
-      "finalUrl": "https://www.caivarese.it/wp-content/uploads/2025/02/A4-CAI_Calendar2025.pdf",
+      "files": "ready; sealed manifest valid; report pending remote checkpoint",
+      "database": "pending/no delta; event dates 2026-07-04..05 are past at 2026-10-23; no query/write",
+      "baselineCommit": "6b2852264cbdae4134d2cf071cf0473fb3d92a5b",
+      "runFolder": "backend/data/agent-runs/cai-20261023-lombardia-carate-corsoalpinismo01",
       "contentType": "application/pdf",
-      "bodyBytes": 3208298,
-      "bodySha256": "ce93c4c3b0cfeff2da1f94641a43dc698920c7440ef959e4af5812ae285f09ce",
-      "httpStatus": "not recorded; cannot distinguish 200 from 304",
+      "bodyBytes": 928543,
+      "bodySha256": "05117835947e634494ceea7eea854398af8e3f839a62cce9fc55d8c5e8edfd8c",
+      "httpStatus": "not recorded; no 200/304 assertion",
+      "originalParserOutput": "date 2026-05-04; dateEnd missing; not accepted",
+      "correctedOfflineParse": {
+        "title": "Arrampicata in ambiente I.N.A. Colombo Antonio I.A.L. Scotti Matteo",
+        "date": "2026-07-04",
+        "dateEnd": "2026-07-05",
+        "days": 2,
+        "coordinates": null,
+        "correctionCommit": "e277de52b9d311edc7b46b40512a6ee59f6d1901"
+      },
       "catalogBefore": 3371,
       "catalogAfter": 3371,
-      "sourceRowsBefore": 58,
-      "sourceRowsAfter": 58,
+      "sourceRowsBefore": 6,
+      "sourceRowsAfter": 6,
       "added": 0,
       "removed": 0,
       "changed": 0,
-      "eventsVerified": 0,
+      "eventsVerified": 1,
+      "currentOrNewEvents": 0,
       "duplicateIdsExcluded": 0,
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
-      "failuresResolved": [],
-      "failuresOpen": [
-        "Varese iCal MTB HTTP 503",
-        "Varese iCal events discovery-limit 93 candidates"
+      "failuresResolved": [
+        "date range parser regression fixture e277de52b9d311edc7b46b40512a6ee59f6d1901"
       ],
-      "collectorQa": "cache maps requested annual URL to existing 2025 PDF; body/status evidence incomplete for freshness; no report claims empty calendar",
-      "importerQa": "PASS manifest/catalog hashes; HOLD source freshness; no DB",
-      "backendTests": "205/205; all six backend/frontend public JSON hashes unchanged during tests",
-      "manifestSha256": "c4e31bb73fc0a1417d9fc0efe7a87a901974ad4d32dd84d72369c49a8b8b45ae",
-      "runStateSha256": "535f0bf825e9b07b9e56da7e64371e142d4fa23cf8597a9574cc1efd97cbc69f",
-      "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-varese-calendar01/collection-report.md",
+      "failuresOpen": [
+        "annual PDF discovery-limit 344",
+        "separate gym page timeout"
+      ],
+      "collectorQa": "official text checked from cached PDF; parser v14 produces past date range and no coords; final PDF already existed at baseline; no delta",
+      "importerQa": "PASS manifest/catalog mirror integrity; HOLD import eligibility/no new row; no DB",
+      "backendTests": "206/206; all six public JSON SHA-256 values unchanged before/after suite",
+      "manifestSha256": "45abd2f4694eae5a01e6367bfddc2a04aab551d59ab38dc6a371ba925d363300",
+      "runStateSha256": "f8872ff3d15ee17665442fddd8df189de43a3de200aaba9700dee93e239a5218",
+      "reportPath": "backend/data/agent-runs/cai-20261023-lombardia-carate-corsoalpinismo01/collection-report.md",
+      "reportSha256": "ca32d56a0d914670aca0a41fd65379ec02758d4db3876dac8e86bf076407c450",
       "coordinatesAdded": 0,
-      "dbWrites": 0,
-      "reportSha256": "ae28e7dc12f8b086649987afdc7be91b32bf81e72692d5059f5cdb9bf5144012",
-      "filesCheckpointCommit": "7b063750be774219c6c3406d780b45ca29a841e9"
+      "dbWrites": 0
     },
-    "nextAction": "Checkpoint remoto della correzione preflight Lissone/Carate. Poi un solo run cai-20261023-lombardia-carate-corsoalpinismo01 sul volantino ufficiale CAI Carate, max1 documento/120s/concurrency1; non seguire discovery-limit 344 né retry della pagina palestra."
+    "nextAction": "Checkpoint remoto di report Carate, run artifacts, catalog mirrors e registri. Poi continua preflight offline Lombardia; se restano fonti lavorabili prosegui con un URL alla volta, altrimenti passa alla regione successiva."
   },
-  "repositoryCommit": "7b063750be774219c6c3406d780b45ca29a841e9",
+  "repositoryCommit": "e277de52b9d311edc7b46b40512a6ee59f6d1901",
   "databaseReadOnlyObservation": {
     "observedAt": "2026-10-22T18:12:15.676Z",
     "source": "authorized Supabase read-only SQL and map predicate",
@@ -511,11 +533,11 @@
       "afterQueryAt": "2026-10-22T22:33:30.892756Z"
     }
   },
-  "tests": "After Varese collection: backend npm test 205/205; six public JSON SHA-256 values identical before/after (including frontend/public/excursions.json).",
-  "updatedAt": "2026-10-23T00:00:18Z",
-  "repositoryRemoteCheckpointVerifiedAt": "2026-10-22T23:58:45Z",
-  "regionCurrent": "Lombardia — Varese calendarannual: richiesta risolta a PDF 2025 già presente, 0 delta; freshness non attestata perché cache non registra HTTP status; fonte resta partial. 3.371 catalog IDs e 58 Varese rows invariati. Nessun DB.",
-  "regionNext": "Lombardia — CAI Carate Brianza, volantino corso alpinismo nuovo e host esatto; dopo checkpoint, campione singolo. Non equivale a copertura del calendario escursionistico.",
+  "tests": "After Carate01 collection and parser fix: backend npm test 206/206; six public JSON hashes identical before/after, including frontend/public/excursions.json.",
+  "updatedAt": "2026-10-23T00:04:04Z",
+  "repositoryRemoteCheckpointVerifiedAt": "2026-10-23T00:04:04Z",
+  "regionCurrent": "Lombardia — Carate Brianza: flyer ufficiale del corso verificato; parser ha corretto 04/05-lug in 4–5 luglio. Evento passato, fonte final document già nota; 0 nuovi eventi futuri/ID, 6 righe Carate invariate. Nessun Mercury/DB.",
+  "regionNext": "Lombardia — cai-collector sta preflightando offline una fonte distinta; escludere Carate alias già osservato, Varese stantia/iCal, Lissone host/duplicato, e code non produttive. Passare regione solo dopo esaurimento fonti lavorabili.",
   "preflight": {
     "at": "2026-10-23T00:00:18Z",
     "sourceId": "cai-carate-brianza-9216030",
@@ -554,73 +576,83 @@
     "reason": "PDF contains route information and registration deadline only; no outing date. No complete event can be safely formed."
   },
   "lastCodeCorrection": {
-    "commit": "d16ebc0ea29118199f6deb3e9821ee3d4efef191",
+    "commit": "e277de52b9d311edc7b46b40512a6ee59f6d1901",
     "remoteVerified": true,
-    "correction": "Continuation discovery-limit attribution now scopes to the actual originating document URL; an HTML child no longer overwrites the independent annual PDF backlog.",
-    "fixture": "backend/test/fixtures/cai-campobasso-continuation-discovery.json",
-    "test": "backend/test/scrape-status.test.js: 11/11 focused; PDF 37 and HTML 1 remain separate, status partial",
-    "backend": "205/205 after collection; six public JSON hashes stable during tests",
-    "independentImporterQa": "PASS"
+    "correction": "Parser riconosce la forma stretta DD/DD-meseAbbrev (04/05-lug -> 4–5 luglio) senza alterare 12/10; extraction cache VERSION 14.",
+    "fixture": "backend/test/fixtures/cai-carate-2026-course-date-abbreviation.json",
+    "test": "backend/test/deterministic.test.js: Carate range + numeric day/month regression; focused 2/2",
+    "backend": "206/206 after collection and fix; six public JSON hashes unchanged during test suite",
+    "independentImporterQa": "PASS file seals/catalog mirrors; HOLD import eligibility because corrected record is past/no catalog delta"
   },
   "lastRegionalAttempt": {
-    "runId": "cai-20261022-lombardia-varese-calendar01",
+    "runId": "cai-20261023-lombardia-carate-corsoalpinismo01",
     "region": "Lombardia",
-    "sourceId": "cai-varese-9216009",
-    "requestedUrl": "https://www.caivarese.it/calendarioannuale",
+    "sourceId": "cai-carate-brianza-9216030",
+    "requestedUrl": "https://www.caicaratebrianza.it/download/5-scuola-di-alpinismo/7-corsi-di-alpinismo?download=609:volantino-63-corso-di-alpinismo-2026",
+    "finalUrl": "https://www.caicaratebrianza.it/phocadownload/Scuola_di_alpinismo/2026/Volantino%2063%20Corso%20Alpinismo%202026%20Rev.03.pdf",
     "collection": "partial",
-    "files": "ready; importer catalog/manifest QA PASS, source freshness HOLD",
-    "database": "pending; no verified event delta; no query/write",
-    "baselineCommit": "2c3a5d82304c63b1277a91e08df7bf2edd441951",
-    "runFolder": "backend/data/agent-runs/cai-20261022-lombardia-varese-calendar01",
-    "requestedUrlCacheKeySha256": "d0686bc332e9b91ef146fbf163d684572b07c6ede0282ab7d9101eb52b0d3be4",
-    "finalUrl": "https://www.caivarese.it/wp-content/uploads/2025/02/A4-CAI_Calendar2025.pdf",
+    "files": "ready; sealed manifest valid; report pending remote checkpoint",
+    "database": "pending/no delta; event dates 2026-07-04..05 are past at 2026-10-23; no query/write",
+    "baselineCommit": "6b2852264cbdae4134d2cf071cf0473fb3d92a5b",
+    "runFolder": "backend/data/agent-runs/cai-20261023-lombardia-carate-corsoalpinismo01",
     "contentType": "application/pdf",
-    "bodyBytes": 3208298,
-    "bodySha256": "ce93c4c3b0cfeff2da1f94641a43dc698920c7440ef959e4af5812ae285f09ce",
-    "httpStatus": "not recorded; cannot distinguish 200 from 304",
+    "bodyBytes": 928543,
+    "bodySha256": "05117835947e634494ceea7eea854398af8e3f839a62cce9fc55d8c5e8edfd8c",
+    "httpStatus": "not recorded; no 200/304 assertion",
+    "originalParserOutput": "date 2026-05-04; dateEnd missing; not accepted",
+    "correctedOfflineParse": {
+      "title": "Arrampicata in ambiente I.N.A. Colombo Antonio I.A.L. Scotti Matteo",
+      "date": "2026-07-04",
+      "dateEnd": "2026-07-05",
+      "days": 2,
+      "coordinates": null,
+      "correctionCommit": "e277de52b9d311edc7b46b40512a6ee59f6d1901"
+    },
     "catalogBefore": 3371,
     "catalogAfter": 3371,
-    "sourceRowsBefore": 58,
-    "sourceRowsAfter": 58,
+    "sourceRowsBefore": 6,
+    "sourceRowsAfter": 6,
     "added": 0,
     "removed": 0,
     "changed": 0,
-    "eventsVerified": 0,
+    "eventsVerified": 1,
+    "currentOrNewEvents": 0,
     "duplicateIdsExcluded": 0,
     "sectionsChecked": 1,
     "complete": 0,
     "partial": 1,
     "unreachable": 0,
-    "failuresResolved": [],
-    "failuresOpen": [
-      "Varese iCal MTB HTTP 503",
-      "Varese iCal events discovery-limit 93 candidates"
+    "failuresResolved": [
+      "date range parser regression fixture e277de52b9d311edc7b46b40512a6ee59f6d1901"
     ],
-    "collectorQa": "cache maps requested annual URL to existing 2025 PDF; body/status evidence incomplete for freshness; no report claims empty calendar",
-    "importerQa": "PASS manifest/catalog hashes; HOLD source freshness; no DB",
-    "backendTests": "205/205; all six backend/frontend public JSON hashes unchanged during tests",
-    "manifestSha256": "c4e31bb73fc0a1417d9fc0efe7a87a901974ad4d32dd84d72369c49a8b8b45ae",
-    "runStateSha256": "535f0bf825e9b07b9e56da7e64371e142d4fa23cf8597a9574cc1efd97cbc69f",
-    "reportPath": "backend/data/agent-runs/cai-20261022-lombardia-varese-calendar01/collection-report.md",
+    "failuresOpen": [
+      "annual PDF discovery-limit 344",
+      "separate gym page timeout"
+    ],
+    "collectorQa": "official text checked from cached PDF; parser v14 produces past date range and no coords; final PDF already existed at baseline; no delta",
+    "importerQa": "PASS manifest/catalog mirror integrity; HOLD import eligibility/no new row; no DB",
+    "backendTests": "206/206; all six public JSON SHA-256 values unchanged before/after suite",
+    "manifestSha256": "45abd2f4694eae5a01e6367bfddc2a04aab551d59ab38dc6a371ba925d363300",
+    "runStateSha256": "f8872ff3d15ee17665442fddd8df189de43a3de200aaba9700dee93e239a5218",
+    "reportPath": "backend/data/agent-runs/cai-20261023-lombardia-carate-corsoalpinismo01/collection-report.md",
+    "reportSha256": "ca32d56a0d914670aca0a41fd65379ec02758d4db3876dac8e86bf076407c450",
     "coordinatesAdded": 0,
-    "dbWrites": 0,
-    "reportSha256": "ae28e7dc12f8b086649987afdc7be91b32bf81e72692d5059f5cdb9bf5144012",
-    "filesCheckpointCommit": "7b063750be774219c6c3406d780b45ca29a841e9"
+    "dbWrites": 0
   },
   "regionalCoverage": {
     "region": "Lombardia",
-    "scope": "Sesto Calende, Somma Lombardo, Varese sampled one bounded URL at a time; no regional total freshly queried",
+    "scope": "one bounded official URL per run; Sesto/Somma/Varese/Carate sampled, no fresh regional total query",
     "status": "open",
     "currentRunCounts": {
       "sectionsChecked": 1,
       "complete": 0,
       "partial": 1,
       "unreachable": 0,
-      "eventsVerified": 0,
+      "eventsVerified": 1,
       "newIds": 0,
       "dbPlacesInserted": 0,
       "dbClassificationsInserted": 0,
-      "nextStep": "Push Varese review checkpoint, then preflight one distinct workable Lombardia source; keep Varese partial and do not repeat iCal backlog."
+      "nextStep": "Publish Carate report/code/catalog checkpoint, then finish offline Lombardia source scan; continue one source at a time."
     },
     "historicalSnapshot": {
       "asOf": "2026-10-20",
@@ -752,12 +784,12 @@
   ],
   "nextSourcePreflight": {
     "region": "Lombardia",
-    "sourceId": "cai-carate-brianza-9216030",
-    "sourceName": "CAI Carate Brianza",
-    "url": "https://www.caicaratebrianza.it/download/5-scuola-di-alpinismo/7-corsi-di-alpinismo?download=609:volantino-63-corso-di-alpinismo-2026",
-    "status": "offline selected; bounded sample pending remote preflight-correction checkpoint",
-    "evidence": "Official calendarEvidence label 63rd alpinism course flyer; exact host matches source.website and allowlist. URL/alias absent from source status (18 documents), cache, FAILURES, and run history.",
-    "scope": "one explicit URL, max1 document/120s/concurrency1; no annual PDF/discovery expansion; no gym timeout retry",
+    "sourceId": null,
+    "sourceName": null,
+    "url": null,
+    "status": "offline scan in progress after Carate01",
+    "evidence": "cai-collector is checking registry/cache/status/FAILURES/run history; do not retry backlog or duplicate source URLs.",
+    "scope": "one official exact-host URL, max1 document/120s/concurrency1 after checkpoint; advance region if no workable targets remain",
     "networkFetchPerformed": false
   }
 }

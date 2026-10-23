@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261023-lombardia-carate-corsoalpinismo01",
+  "createdAt": "2026-10-23T00:00:50.901Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "418a3b133e4a0107ff2f0725580f220b215f2dca3d876c9b991b8ac9d071b18f"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "c8f8eeedae48eac9db1c6516cc606fd750a7a1964c8d87feb4c28b29aae80057"
+    }
+  ]
+}
