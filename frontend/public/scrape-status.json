@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-23T00:42:23.832Z",
+  "generatedAt": "2026-10-23T00:48:24.556Z",
   "coverage": {
     "total": 838,
     "selected": 1,
     "withEvents": 1,
-    "parsed": 1,
-    "unsupported": 0,
+    "parsed": 0,
+    "unsupported": 1,
     "failed": 0,
     "located": 548
   },
@@ -41298,7 +41298,7 @@
       "excursions": 12,
       "error": null,
       "hash": "5bdd318d5d83ff8df96c14be678870fe81f7fa5bf5d78b077f56e6e221f2b9e4",
-      "updatedAt": "2026-10-23T00:14:13.129Z",
+      "updatedAt": "2026-10-23T00:48:24.556Z",
       "documents": [
         {
           "url": "https://www.caifivizzano.it/wp-content/uploads/2026/02/Calendario-CAI-2026_compressed.pdf",
@@ -41310,6 +41310,12 @@
           "url": "https://www.caifivizzano.it/calendario-uscite/",
           "hash": "a4e350268783bc1fe3a0ed37a1e75269d8559fd53e204ca9194c21250e3d11f0",
           "events": 10,
+          "method": "html-calendar"
+        },
+        {
+          "url": "https://www.caifivizzano.it/eventi/le-miniere-di-calcaferro/",
+          "hash": "964450e315da16e5a176b174462eac8b9f446b9475222ea766cb0756749e3b27",
+          "events": 1,
           "method": "html-calendar"
         }
       ],
@@ -41331,9 +41337,14 @@
           "url": "https://www.caifivizzano.it/calendario-uscite/",
           "message": "Discovery budget reached; 1 candidate documents remain.",
           "code": "discovery-limit"
+        },
+        {
+          "url": "https://www.caifivizzano.it/eventi/le-miniere-di-calcaferro/",
+          "message": "Discovery budget reached; 1 candidate documents remain.",
+          "code": "discovery-limit"
         }
       ],
-      "extractedEvents": 10
+      "extractedEvents": 11
     },
     {
       "id": "cai-flog-9126002",

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261023-toscana-fivizzano-miniere01",
+  "files": [
+    {
+      "path": "manifest.json",
+      "bytes": 565,
+      "sha256": "c27f809abe968cd89fe7a2873cb13cbca7f41df729cde0e3c345c6b28cd403b5"
+    },
+    {
+      "path": "state.json",
+      "bytes": 405985,
+      "sha256": "ce69d3133d04e9bde4dfaebd278e6ea2e0f6dab604dbfcdb300c3a0eb0da8aeb"
+    },
+    {
+      "path": "source-evidence.json",
+      "bytes": 4009,
+      "sha256": "9033dd59a2ae8614d51445855d442a368e33bf9e8ad49550cd59fb81588442da"
+    },
+    {
+      "path": "collection-report.md",
+      "bytes": 3985,
+      "sha256": "76f9e5c6167928a1c9f34fa77942a22acf49ea4438092aa4515e827091c77f50"
+    }
+  ],
+  "publicMirrors": [
+    {
+      "backendPath": "backend/data/excursions.json",
+      "frontendPath": "frontend/public/excursions.json",
+      "backendSha256": "4ae1e9adcc484df585fa81b24313780172ef381c149a921dd2a13a541d84a197",
+      "frontendSha256": "4ae1e9adcc484df585fa81b24313780172ef381c149a921dd2a13a541d84a197",
+      "byteIdentical": true
+    },
+    {
+      "backendPath": "backend/data/cai-sections.json",
+      "frontendPath": "frontend/public/cai-sections.json",
+      "backendSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+      "frontendSha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b",
+      "byteIdentical": true
+    },
+    {
+      "backendPath": "backend/data/scrape-status.json",
+      "frontendPath": "frontend/public/scrape-status.json",
+      "backendSha256": "9cd4cfdf45105b327ab8bfae069ad7cf877bd4e801e911efc8e6cd77af05ad29",
+      "frontendSha256": "9cd4cfdf45105b327ab8bfae069ad7cf877bd4e801e911efc8e6cd77af05ad29",
+      "byteIdentical": true
+    }
+  ],
+  "catalogDelta": {
+    "totalRowsBefore": 3376,
+    "totalRowsAfter": 3376,
+    "sourceIdPrefix": "cai-fivizzano-9226019-",
+    "sourceRowsBefore": 12,
+    "sourceRowsAfter": 12,
+    "added": 0,
+    "removed": 0,
+    "changed": 0,
+    "sortedRowsHashAlgorithm": "Select rows whose id starts with cai-fivizzano-9226019-, sort ascending by id, serialize the resulting array with Node.js JSON.stringify, UTF-8 encode, then SHA-256.",
+    "sortedSourceRowsSha256Before": "052158f0d916607fe02a746b29c0027d44a39239fd6a16fa282d1c48a04c9905",
+    "sortedSourceRowsSha256After": "052158f0d916607fe02a746b29c0027d44a39239fd6a16fa282d1c48a04c9905"
+  }
+}

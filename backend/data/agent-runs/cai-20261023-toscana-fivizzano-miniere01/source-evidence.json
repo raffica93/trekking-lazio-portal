@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "runId": "cai-20261023-toscana-fivizzano-miniere01",
+  "sourceId": "cai-fivizzano-9226019",
+  "requestedUrl": "https://www.caifivizzano.it/eventi/le-miniere-di-calcaferro/",
+  "canonicalUrl": "not persisted; cache metadata records requested URL only",
+  "httpStatus": "not persisted",
+  "contentType": "text/html; charset=UTF-8",
+  "bodyBytes": 78848,
+  "bodySha256": "964450e315da16e5a176b174462eac8b9f446b9475222ea766cb0756749e3b27",
+  "rawBodyPath": null,
+  "cache": {
+    "available": true,
+    "metadataPath": "backend/node_modules/.cache/cai/41390b8421a141ac18b6787d151b75c253b734710d73e498e8b858a7412d23f7.json",
+    "bodyPath": "backend/node_modules/.cache/cai/41390b8421a141ac18b6787d151b75c253b734710d73e498e8b858a7412d23f7.bin",
+    "keySha256": "41390b8421a141ac18b6787d151b75c253b734710d73e498e8b858a7412d23f7",
+    "metadataMatchesBody": true
+  },
+  "extraction": {
+    "method": "html-calendar",
+    "events": 1,
+    "evidenceSource": "backend/data/scrape-status.json document entry"
+  },
+  "candidate": {
+    "disposition": "not-added-expired",
+    "title": "Le miniere di Calcaferro",
+    "date": "2026-09-06",
+    "dateEnd": "2026-09-06",
+    "descriptionExcerpt": "Uscita del gruppo Family CAI alle antiche miniere di Calcaferro, “nel magico mondo dell’acqua”, fra ruscelli, grotte, cascate e antichi strumenti in ferro ormai immersi nella vegetazione. I dettagli saranno condivisi in locandina uscita.",
+    "category": "Family CAI",
+    "organizer": "Family CAI",
+    "location": "not specified",
+    "coordinates": null,
+    "decisionReason": "The event page visibly labels the event ‘Expired!’ and its start/end dates are 2026-09-06, before the 2026-10-23 collection date. No future event was inferred."
+  },
+  "sourceEvidence": {
+    "title": {
+      "locator": {"line": 124},
+      "excerpt": "<h1 class=\"mec-single-title\">Le miniere di Calcaferro</h1>"
+    },
+    "visibleDateAndExpiredState": {
+      "locator": {"line": 167},
+      "dateExcerpt": "<span class=\"mec-start-date-label\">Set 06 2026</span>",
+      "expiredLocator": {"line": 169},
+      "expiredExcerpt": "<span class=\"mec-holding-status mec-holding-status-expired\">Expired!</span>"
+    },
+    "jsonLd": {
+      "startDate": {"locator": {"line": 341}, "excerpt": "\"startDate\": \"2026-09-06\""},
+      "endDate": {"locator": {"line": 342}, "excerpt": "\"endDate\": \"2026-09-06\""},
+      "organizer": {"locator": {"line": 354}, "excerpt": "\"name\": \"Family CAI\""},
+      "description": {"locator": {"line": 366}, "excerpt": "Uscita del gruppo Family CAI alle antiche miniere di Calcaferro, “nel magico mondo dell’acqua”, fra ruscelli, grotte, cascate e antichi strumenti in ferro ormai immersi nella vegetazione. I dettagli saranno condivisi in locandina uscita."},
+      "name": {"locator": {"line": 368}, "excerpt": "\"name\": \"Le miniere di Calcaferro\""},
+      "url": {"locator": {"line": 369}, "excerpt": "\"url\": \"https://www.caifivizzano.it/eventi/le-miniere-di-calcaferro/\""}
+    }
+  },
+  "catalogEvidence": {
+    "baselineCommit": "28ccac97502f0d48233b5f88b8d099803b94de37",
+    "baselineCatalogSha256": "92eb1e16428787e068b77a872cd1301218f71b3c000a803f395f7f6963bda3c8",
+    "currentCatalogSha256": "4ae1e9adcc484df585fa81b24313780172ef381c149a921dd2a13a541d84a197",
+    "rowsBefore": 3376,
+    "rowsAfter": 3376,
+    "fivizzanoIdPrefix": "cai-fivizzano-9226019-",
+    "fivizzanoRowsBefore": 12,
+    "fivizzanoRowsAfter": 12,
+    "added": 0,
+    "removed": 0,
+    "changed": 0,
+    "sortedRowsHashAlgorithm": "Select rows whose id starts with cai-fivizzano-9226019-, sort ascending by id, serialize the resulting array with Node.js JSON.stringify, UTF-8 encode, then SHA-256.",
+    "sortedFivizzanoRowsSha256Before": "052158f0d916607fe02a746b29c0027d44a39239fd6a16fa282d1c48a04c9905",
+    "sortedFivizzanoRowsSha256After": "052158f0d916607fe02a746b29c0027d44a39239fd6a16fa282d1c48a04c9905",
+    "coordinatesOrAdministrativeFieldsChanged": false
+  }
+}

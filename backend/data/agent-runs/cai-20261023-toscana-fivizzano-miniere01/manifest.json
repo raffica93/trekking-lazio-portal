@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runId": "cai-20261023-toscana-fivizzano-miniere01",
+  "createdAt": "2026-10-23T00:48:24.753Z",
+  "files": [
+    {
+      "path": "backend/data/excursions.json",
+      "sha256": "4ae1e9adcc484df585fa81b24313780172ef381c149a921dd2a13a541d84a197"
+    },
+    {
+      "path": "backend/data/cai-sections.json",
+      "sha256": "f0245e11e429ef27913c56d91f37a71e1430f7398592da3e442fa27dff2fa48b"
+    },
+    {
+      "path": "backend/data/scrape-status.json",
+      "sha256": "9cd4cfdf45105b327ab8bfae069ad7cf877bd4e801e911efc8e6cd77af05ad29"
+    }
+  ]
+}

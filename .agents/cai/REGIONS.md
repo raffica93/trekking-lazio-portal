@@ -542,3 +542,14 @@ Contesto Toscana da scrape-status persistito (non ricalcolato live): 37 registra
 Catalogo 3.376→3.376, 0 add/remove/change; nessuna classification/import/DB. QA importer PASS; manifest `c5e3e308...dd74c81`, state `afae40f6...cc9db1`, report `e9a5d66e...4905b49`. FAILURES 716→717 con record `CAI-F-6ccdc9044ca287f1`. Suite backend 206/206 dopo la raccolta e la riparazione; sei JSON pubblici invariati e mirror identici. Fresh join dello status toscano persistito alle 00:42:23Z: 37 sezioni, 17 enabled (9 partial, 4 unsupported, 2 failed, 1 ok, 1 no-upcoming), 90 eventi; non è audit di rete.
 
 Collector ha fatto preflight offline senza richieste/test/scritture. Prossimo singolo target: CAI Fivizzano, `https://www.caifivizzano.it/eventi/le-miniere-di-calcaferro/`, URL ufficiale distinta presente nel registro ma assente da status/cache/FAILURES; fonte ancora partial con errori PDF/discovery separati. Run proposto `cai-20261023-toscana-fivizzano-miniere01`, max1 documento/120s/concurrency1/no discovery, solo dopo checkpoint remoto. Nessun conteggio storico nazionale presentato come query attuale.
+
+
+## Toscana — Fivizzano miniera01 e selezione Escursionismo (23 ottobre 2026)
+
+| Regione / run | Sezioni controllate | Complete | Parziali | Irraggiungibili | Eventi verificati | Duplicati esclusi | Fallimenti risolti | Fallimenti aperti | Prossimo passo |
+|---|---:|---:|---:|---:|---|---:|---|---|---|
+| Toscana, `cai-20261023-toscana-fivizzano-miniere01`, CAI Fivizzano | 1 pagina ufficiale | 0 | 1 | 0 | 1 record verificato, 06-09-2026 “Expired!”, nessun evento futuro importabile | 0 | 0 | PDF OCR; discovery-limit PDF 8, calendario 1, pagina miniera 1 | checkpoint file/QA, poi pagina categoria `/escursionismo/` max1/120s/concurrency1 |
+
+Raccolta/file: body in cache 78.848 B SHA `964450e315da16e5a176b174462eac8b9f446b9475222ea766cb0756749e3b27`; output conferma 3.376→3.376 catalogo e 12→12 righe Fivizzano, row hash invariato `052158f0d916607fe02a746b29c0027d44a39239fd6a16fa282d1c48a04c9905` (righe per prefix, ordinate per id, Node JSON.stringify UTF-8 SHA-256); nessuna aggiunta/rimozione/modifica. Nessun duplicato o fallimento risolto. DB: 0 eventi, 0 classificazioni, nessuna query/write. Test backend 206/206 dopo raccolta; sei hash JSON pubblici stabili prima/dopo; QA importer PASS dopo correzione hash. Fivizzano resta partial, non completa.
+
+Preflight offline dopo il run: selezionata `https://www.caifivizzano.it/escursionismo/`, URL ufficiale categoria distinta in registry, assente da status/cache/FAILURES; outcome da verificare senza aspettarsi eventi. Proposto run `cai-20261023-toscana-fivizzano-escursionismo01`, max1 documento/120s/concurrency1/no discovery, solo dopo checkpoint remoto.

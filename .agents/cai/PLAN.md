@@ -212,3 +212,10 @@ Contesto Toscana da scrape-status persistito (non ricalcolato live): 37 registra
 Run `cai-20261023-toscana-pescia-index01`: timeout di 8.000 ms sulla URL `/cp/`, senza risposta HTTP/body/cache, retry, estrazioni o delta DB. Registro e cache storici sono preservati: 12 documenti e discovery-limit agosto, più un distinto `fetch-timeout`; QA importer PASS. Catalogo resta a 3.376 ID. Test backend 206/206 eseguiti in sequenza dopo raccolta e riparazione; i sei JSON pubblici sono rimasti stabili.
 
 Il preflight offline toscano non ha trovato altri link sicuri oltre alla nuova pagina ufficiale Fivizzano `/eventi/le-miniere-di-calcaferro/`. Selezionata unicamente per 1 documento/120 s/concurrency 1/no discovery. Dopo commit e verifica dei file, eseguire quel run; poi fermare la raccolta, fare QA importer e test soltanto se necessari, checkpoint file, e procedere a classificazione/import solo se esiste delta verificato. Pescia resta esclusa senza una strategia di timeout distinta. Totali di raccolta, file e DB restano separati; niente run storico o reimport.
+
+
+## Stato operativo successivo — Fivizzano miniera01 a delta zero (23 ottobre 2026)
+
+La pagina `/eventi/le-miniere-di-calcaferro/` ha prodotto un solo record passato (06-09-2026, marcato “Expired!”); nessun nuovo evento catalogo o candidato DB. Catalogo e 12 righe Fivizzano sono invariati. Source partial con PDF OCR failure e discovery-limit PDF 8/calendario 1/pagina 1. Run artifacts/evidence sono localmente sigillati; importer QA read-only è in corso. Test backend 206/206 dopo raccolta, sei JSON pubblici invariati dai test.
+
+Prossimo target offline distinto: la pagina CAI Fivizzano `/escursionismo/`, ufficiale, nel registro e non ancora visitata/cache/failure. Dopo checkpoint remoto del run e della selezione, fare un solo fetch max1/120s/concurrency1/no discovery. Non tornare su Pescia senza strategia diversa; se non produce delta, riportare la regione parziale e proseguire alla prossima fonte sicura.
